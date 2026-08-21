@@ -1,0 +1,748 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16933512:
+    script: NPC[288]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16933513:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags:  27
+      name_vis:     112
+      name_prefix:   34
+
+  16933514:
+    script: NPC[28a]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16933515:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16933516:
+    script: NPC[28c]
+    at:     [-520.000, -1.500, -320.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  16933517:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16933519:
+    script: NPC[28f]
+    at:     [560.000, -0.500, 360.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  16933520:
+    script: NPC[290]
+    at:     [-640.000, -1.000, -640.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16933521:
+    script: NPC[291]
+    at:     [640.000, -1.000, -640.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 4
+
+  16933522:
+    script: NPC[292]
+    at:     [-212.000, 0.000, 542.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  16933523:
+    script: NPC[293]
+    at:     [-520.000, -1.500, -320.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  16933524:
+    script: NPC[294]
+    at:     [-560.000, -0.500, 360.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  16933525:
+    script: NPC[295]
+    at:     [520.000, -0.500, -320.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  16933526:
+    script: NPC[296]
+    at:     [560.000, -0.500, 360.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  16933527:
+    script:       Radiant_Aureole
+    display_name: Radiant Aureole
+    at:           [-640.000, -1.000, -640.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16933528:
+    script:       Radiant_Aureole
+    display_name: Radiant Aureole
+    at:           [640.000, -1.000, -640.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16933529:
+    script:       Apollyon_Operator
+    display_name: Apollyon Operator
+    at:           [-212.000, 0.000, 542.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  16933530:
+    script:       Apollyon_Operator
+    display_name: Apollyon Operator
+    at:           [-109.000, 0.000, -429.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  16933531:
+    script:       Apollyon_Operator
+    display_name: Apollyon Operator
+    at:           [214.000, 0.000, 543.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  16933532:
+    script:       Apollyon_Operator
+    display_name: Apollyon Operator
+    at:           [112.000, 0.000, -432.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  16933533:
+    script: NPC[29d]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  16933534:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16933535:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-600.000, -0.500, -600.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    widescan: true
+
+  16933536:
+    script:       Moogle
+    display_name: Moogle
+    at:           [600.000, -0.500, -600.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    widescan: true
+
+  16933537:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-400.000, -0.500, 80.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    widescan: true
+
+  16933538:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-560.000, -0.500, 360.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    widescan: true
+
+  16933539:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-280.000, -0.500, 360.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    widescan: true
+
+  16933540:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-520.000, -0.500, 640.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    widescan: true
+
+  16933541:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-240.000, -0.500, 520.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    widescan: true
+
+  16933542:
+    script:       _127
+    display_name: Swirling Vortex
+    at:           [-600.000, -0.500, -600.000]
+    render:
+      look:
+        type: door
+      door_id:      926036319
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933543:
+    script:       _12i
+    display_name: Swirling Vortex
+    at:           [600.000, -0.500, -600.000]
+    render:
+      look:
+        type: door
+      door_id:      1764897119
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933544:
+    script:       _123
+    display_name: Swirling Vortex
+    at:           [-400.000, -0.500, 80.000]
+    render:
+      look:
+        type: door
+      door_id:      858927455
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933545:
+    script:       _122
+    display_name: Swirling Vortex
+    at:           [-560.000, -0.500, 360.000]
+    render:
+      look:
+        type: door
+      door_id:      842150239
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933546:
+    script:       _124
+    display_name: Swirling Vortex
+    at:           [-280.000, -0.500, 360.000]
+    render:
+      look:
+        type: door
+      door_id:      875704671
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933547:
+    script:       _121
+    display_name: Swirling Vortex
+    at:           [-520.000, -0.500, 640.000]
+    render:
+      look:
+        type: door
+      door_id:      825373023
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933548:
+    script:       _125
+    display_name: Swirling Vortex
+    at:           [-240.000, -0.500, 520.000]
+    render:
+      look:
+        type: door
+      door_id:      892481887
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933549:
+    script:       _128
+    display_name: Swirling Vortex
+    at:           [-400.000, -0.500, -520.000]
+    render:
+      look:
+        type: door
+      door_id:      942813535
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933550:
+    script:       _126
+    display_name: Swirling Vortex
+    at:           [-520.000, -0.500, -320.000]
+    render:
+      look:
+        type: door
+      door_id:      909259103
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933551:
+    script:       _12a
+    display_name: Swirling Vortex
+    at:           [-280.000, -0.500, -280.000]
+    render:
+      look:
+        type: door
+      door_id:      1630679391
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933552:
+    script:       _129
+    display_name: Swirling Vortex
+    at:           [-120.000, -0.500, -440.000]
+    render:
+      look:
+        type: door
+      door_id:      959590751
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933553:
+    script:       _12d
+    display_name: Swirling Vortex
+    at:           [400.000, -0.500, 80.000]
+    render:
+      look:
+        type: door
+      door_id:      1681011039
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933554:
+    script:       _12e
+    display_name: Swirling Vortex
+    at:           [560.000, -0.500, 360.000]
+    render:
+      look:
+        type: door
+      door_id:      1697788255
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933555:
+    script:       _12c
+    display_name: Swirling Vortex
+    at:           [280.000, -0.500, 360.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933556:
+    script:       _12f
+    display_name: Swirling Vortex
+    at:           [520.000, -0.500, 640.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933557:
+    script:       _12b
+    display_name: Swirling Vortex
+    at:           [240.000, -0.500, 520.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933558:
+    script:       _12h
+    display_name: Swirling Vortex
+    at:           [400.000, -0.500, -520.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933559:
+    script:       _12j
+    display_name: Swirling Vortex
+    at:           [520.000, -0.500, -320.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933560:
+    script:       _12k
+    display_name: Swirling Vortex
+    at:           [280.000, -0.500, -280.000]
+    render:
+      look:
+        type:  standard
+        model: 315
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933561:
+    script:       _12g
+    display_name: Swirling Vortex
+    at:           [120.000, -0.500, -440.000]
+    render:
+      look:
+        type:  standard
+        model: 315
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  16933562:
+    script:       Exit
+    display_name: Exit
+    at:           [0.000, 0.000, 200.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags: 27
+      animation:    open_door
+      name_vis:     96
+      name_prefix:  32
+      moving:       7
+    status:   normal
+    widescan: true
+
+  16933563:
+    script:       Apollyon_Coffer_#1
+    display_name: 'Apollyon Coffer #1'
+    at:           [-212.000, 0.000, 542.000, 96]
+    render:
+      look:
+        type:  standard
+        model: 969
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16933564:
+    script:       Apollyon_Coffer_#2
+    display_name: 'Apollyon Coffer #2'
+    at:           [-109.000, 0.000, -429.000, 96]
+    render:
+      look:
+        type:  standard
+        model: 969
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16933565:
+    script:       Apollyon_Coffer_#3
+    display_name: 'Apollyon Coffer #3'
+    at:           [214.000, 0.000, 543.000, 32]
+    render:
+      look:
+        type:  standard
+        model: 969
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16933566:
+    script:       Apollyon_Coffer_#4
+    display_name: 'Apollyon Coffer #4'
+    at:           [112.000, 0.000, -432.000, 32]
+    render:
+      look:
+        type:  standard
+        model: 969
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  TVR
+
+  16933567:
+    script:       Apollyon_Operator
+    display_name: Apollyon Operator
+    at:           [-645.000, 0.000, -597.000]
+    render:
+      look:
+        type:  standard
+        model: 315
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16933568:
+    script:       Apollyon_Operator
+    display_name: Apollyon Operator
+    at:           [634.000, 0.000, -594.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 315
+      moving: 22
+    status:   normal
+    widescan: true
+    content:  TVR
+
+  16933569:
+    script:       Apollyon_Furnace
+    display_name: Apollyon Furnace
+    at:           [-640.000, 0.000, -594.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      animation_sub:  5
+      name_vis:       4
+      moving:        16
+    status:   normal
+    widescan: true
+
+  16933570:
+    script:       Apollyon_Furnace
+    display_name: Apollyon Furnace
+    at:           [644.000, 0.000, -596.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      animation_sub: 5
+      name_vis:      4
+      moving:        7
+    status:   normal
+    widescan: true
+    content:  TVR
+
+  16933571:
+    script:       ticket_w
+    display_name: ticket_w
+    at:           [-673.460, 0.000, -665.370]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  16933572:
+    script:       ticket_r
+    display_name: ticket_r
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true

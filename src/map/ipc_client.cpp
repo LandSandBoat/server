@@ -37,6 +37,7 @@
 #include "unitychat.h"
 
 #include "entities/char_entity.h"
+#include "entities/mob_entity.h"
 
 #include "lua/luautils.h"
 
@@ -848,19 +849,12 @@ void IPCClient::handleMessage_EntityInformationRequest(const IPP& ipp, const ipc
         float y = 0.0f;
         float z = 0.0f;
 
-        if ((message.entityType & TYPE_MOB) && !isSpawned)
+        if (const auto* PMob = dynamic_cast<CMobEntity*>(PEntity); PMob && (message.entityType & TYPE_MOB) && !isSpawned)
         {
-            // If entity not spawned, go to default location as listed in database
-            const auto rset = db::preparedStmt("SELECT pos_x, pos_y, pos_z FROM mob_spawn_points WHERE mobid = ?", PEntity->id);
-            if (rset && rset->rowsCount())
-            {
-                while (rset->next())
-                {
-                    x = rset->get<float>("pos_x");
-                    y = rset->get<float>("pos_y");
-                    z = rset->get<float>("pos_z");
-                }
-            }
+            // Not spawned, so it has no live position: report where it spawns instead.
+            x = PMob->m_SpawnPoint.x;
+            y = PMob->m_SpawnPoint.y;
+            z = PMob->m_SpawnPoint.z;
         }
         else
         {

@@ -1,0 +1,600 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17888105:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888106:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888156:
+    script:       _pi7
+    display_name: NPC
+    at:           [-20.000, 16.652, 200.000]
+    render:
+      look:
+        type: door
+      door_id:      929656927
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17888157:
+    script:       _pi8
+    display_name: NPC
+    at:           [-140.000, 26.598, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      946434143
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17888171:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888172:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888173:
+    script: blank
+    at:     [-20.000, 16.652, 200.000]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17888174:
+    script: blank
+    at:     [-140.000, 26.598, 120.000]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17888175:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888176:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888177:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888178:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888179:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888180:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888181:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888182:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888183:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888184:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888185:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888186:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888187:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888189:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888190:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888191:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888192:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888193:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888194:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888195:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888196:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888197:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888198:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888206:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888207:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888208:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888209:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888210:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888211:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888212:
+    script:       Living_Cairn
+    display_name: Living Cairn
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888213:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888215:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888216:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888217:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888218:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888219:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888220:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888221:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888222:
+    script:       Lorissa
+    display_name: Lorissa
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888223:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888225:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17888226:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17888227:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17888228:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17888229:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17888230:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17888231:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17888232:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17888233:
+    script:       Hollowed_Pathway
+    display_name: Hollowed Pathway
+    at:           [-100.727, 29.696, 216.184, 64]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 112
+      moving:     1
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17888234:
+    script:       Rusted_Transmitter
+    display_name: Rusted Transmitter
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888235:
+    script:       Rusted_Transmitter
+    display_name: Rusted Transmitter
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888236:
+    script:       Rusted_Transmitter
+    display_name: Rusted Transmitter
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888237:
+    script:       Rusted_Transmitter
+    display_name: Rusted Transmitter
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888238:
+    script:       Rusted_Transmitter
+    display_name: Rusted Transmitter
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888239:
+    script:       Rusted_Transmitter
+    display_name: Rusted Transmitter
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17888240:
+    script:       Rusted_Transmitter
+    display_name: Rusted Transmitter
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true

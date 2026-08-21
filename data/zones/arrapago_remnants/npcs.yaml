@@ -1,0 +1,684 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17080586:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [340.000, -8.500, -380.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 961
+      animation_sub: 8
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17080587:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17080588:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17080589:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17080590:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17080591:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17080592:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17080593:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17080594:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17080595:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [329.661, -4.900, 543.067, 126]
+    render:
+      look:
+        type:  standard
+        model: 965
+      name_vis: 4
+    widescan: true
+
+  17080598:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [340.000, -8.500, -380.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags: 1155
+    widescan: true
+
+  17080941:
+    script:       Socket
+    display_name: Socket
+    at:           [260.000, 0.050, -24.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+    content:  TOAU
+
+  17080942:
+    script:       Slot
+    display_name: Slot
+    at:           [420.000, 0.000, -20.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+    content:  TOAU
+
+  17080943:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080944:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080945:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080946:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080947:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080948:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080949:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080950:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080951:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080952:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080953:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080954:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080955:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080956:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080957:
+    script:       Runic_Lamp
+    display_name: Runic Lamp
+    render:
+      look:
+        type:  standard
+        model: 1509
+      name_vis: 32
+    widescan: true
+
+  17080958:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17080966:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17080967:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17080968:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17080969:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17080970:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17080971:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17080972:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17080973:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17080975:
+    script:       _220
+    display_name: Gilded Doors
+    at:           [340.000, -2.000, -280.000]
+    render:
+      look:
+        type: door
+      door_id:      808596063
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080976:
+    script:       _221
+    display_name: Gilded Doors
+    at:           [440.000, -22.000, -379.990]
+    render:
+      look:
+        type: door
+      door_id:      825373279
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080977:
+    script:       _222
+    display_name: Gilded Doors
+    at:           [380.000, -22.000, -520.000]
+    render:
+      look:
+        type: door
+      door_id:      842150495
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080978:
+    script:       _223
+    display_name: Gilded Doors
+    at:           [239.990, -22.000, -460.000]
+    render:
+      look:
+        type: door
+      door_id:      858927711
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080979:
+    script:       _224
+    display_name: Gilded Doors
+    at:           [299.990, -22.000, -319.990]
+    render:
+      look:
+        type: door
+      door_id:      875704927
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080980:
+    script:       _225
+    display_name: Gilded Doors
+    at:           [420.000, -2.000, 119.999]
+    render:
+      look:
+        type: door
+      door_id:      892482143
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080981:
+    script:       _226
+    display_name: Gilded Doors
+    at:           [360.000, -2.000, 19.999]
+    render:
+      look:
+        type: door
+      door_id:      909259359
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080982:
+    script:       _227
+    display_name: Gilded Doors
+    at:           [260.000, -2.000, 80.000]
+    render:
+      look:
+        type: door
+      door_id:      926036575
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080983:
+    script:       _228
+    display_name: Gilded Doors
+    at:           [320.000, -2.000, 180.000]
+    render:
+      look:
+        type: door
+      door_id:      942813791
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080984:
+    script:       _229
+    display_name: Gilded Doors
+    at:           [380.000, -6.000, 399.998]
+    render:
+      look:
+        type: door
+      door_id:      959591007
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080985:
+    script:       _22a
+    display_name: Gilded Doors
+    at:           [299.990, -6.000, 520.000]
+    render:
+      look:
+        type: door
+      door_id:      1630679647
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080986:
+    script:       _22b
+    display_name: Gilded Doors
+    at:           [-380.000, -2.000, -600.000]
+    render:
+      look:
+        type: door
+      door_id:      1647456863
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080987:
+    script:       _22c
+    display_name: Gilded Doors
+    at:           [-299.900, -2.000, -480.000]
+    render:
+      look:
+        type: door
+      door_id:      1664234079
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080988:
+    script:       _22d
+    display_name: Gilded Doors
+    at:           [-360.000, -2.000, -100.000]
+    render:
+      look:
+        type: door
+      door_id:      1681011295
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080989:
+    script:       _22e
+    display_name: Gilded Doors
+    at:           [-320.000, -2.000, -100.000]
+    render:
+      look:
+        type: door
+      door_id:      1697788511
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080990:
+    script:       _22f
+    display_name: Gilded Doors
+    at:           [-339.900, -2.000, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      1714565727
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080991:
+    script:       _22g
+    display_name: Gilded Doors
+    at:           [-340.000, -2.000, 600.000]
+    render:
+      look:
+        type: door
+      door_id:      1731342943
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080992:
+    script:       _22h
+    display_name: _22h
+    at:           [-340.000, -6.000, 560.000]
+    render:
+      look:
+        type: door
+      door_id:      1748120159
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080993:
+    script:       _22i
+    display_name: Gilded Gateway
+    at:           [-340.000, -6.000, 560.000]
+    render:
+      look:
+        type: door
+      door_id:      1764897375
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080994:
+    script:       _22j
+    display_name: Weather
+    at:           [-339.900, -5.000, 491.713]
+    render:
+      look:
+        type: door
+      door_id:      1781674591
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17080995:
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17080996:
+    script: NPC[29f]
+    at:     [340.000, 0.001, -246.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  TOAU

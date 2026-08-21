@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z4g0:
+    from:  [459.971, -17.212, 240.010]
+    to:    temple_of_uggalepih
+    at:    [432.013, 5.353, 216.472, 4.876130]
+    scale: [1.000, 4.000]
+
+  z4g2:
+    from:  [19.987, 2.568, 40.053]
+    to:    temple_of_uggalepih
+    at:    [8.340, 5.039, 15.884, 4.539292]
+    scale: [1.000, 4.000]
+
+  z4g4:
+    from:  [-220.004, 2.818, -79.965]
+    to:    temple_of_uggalepih
+    at:    [-231.602, 5.049, -103.515, 4.511223]
+    scale: [1.000, 4.000]
+
+  z4g6:
+    from:  [-40.012, 2.798, 20.044]
+    to:    temple_of_uggalepih
+    at:    [-16.737, 5.220, 31.905, 3.445684]
+    scale: [1.000, 4.000]
+
+  z4g8:
+    from:  [-104.914, 42.060, 55.960]
+    to:    sacrificial_chamber
+    at:    [316.848, -2.182, 340.030, 3.141593]
+    scale: [1.000, 5.000]
+
+  z4ga:
+    from:  [259.965, -17.295, 323.041]
+    to:    yhoator_jungle
+    at:    [380.798, 6.340, 83.074, 4.712389]
+    scale: [1.000, 4.000]
+
+  z4gc:
+    from:  [200.047, 32.813, -60.079]
+    to:    cloister_of_tides
+    at:    [564.776, 34.297, 500.819]
+    scale: [1.000, 4.000]
+
+  z4ge:
+    from:  [179.971, 13.098, -160.013]
+    to:    cloister_of_tides
+    at:    [-499.996, 14.222, -440.788, 1.570796]
+    scale: [1.000, 4.000]

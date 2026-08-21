@@ -1,0 +1,4 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mogmenu, los_player_block]

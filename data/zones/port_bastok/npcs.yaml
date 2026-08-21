@@ -1,0 +1,5466 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17743873:
+    script:       Argus
+    display_name: Argus
+    at:           [132.157, 8.496, -2.187, 88]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4096
+        body:  8205
+        hands: 12310
+        legs:  16389
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743874:
+    script:       OpeningTest
+    display_name: OpeningTest
+    render:
+      look:
+        type:  standard
+        model: 166
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+
+  17743875:
+    script:       Nicadio
+    display_name: Nicadio
+    at:           [143.408, 8.499, -13.492, 95]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  5
+        head:  4096
+        body:  8197
+        hands: 12310
+        legs:  16389
+        feet:  20487
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743876:
+    script:       Cornelia
+    display_name: Cornelia
+    render:
+      look:
+        type:  standard
+        model: 70
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17743877:
+    script:       Flying_Axe_IM
+    display_name: Flying Axe, I.M.
+    at:           [128.520, 8.496, 1.011, 123]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  9
+        head:  4098
+        body:  8194
+        hands: 12290
+        legs:  16386
+        feet:  20482
+        main:  24654
+        sub:   28702
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743878:
+    script:       Tiger_Tooth
+    display_name: Tiger Tooth
+    at:           [77.151, -2.101, -8.119, 122]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  13
+        head:  4098
+        body:  8194
+        hands: 12310
+        legs:  16386
+        feet:  20482
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17743879:
+    script:       Kagetora
+    display_name: Kagetora
+    at:           [-94.579, -2.299, 30.463, 206]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  14
+        head:  4100
+        body:  8196
+        hands: 12288
+        legs:  16393
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743880:
+    script:       Talib
+    display_name: Talib
+    at:           [-101.133, 4.649, 28.803, 191]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  11
+        head:  4119
+        body:  8201
+        hands: 12288
+        legs:  16405
+        feet:  20501
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17743881:
+    script:       Paujean
+    display_name: Paujean
+    at:           [-93.738, 4.649, 34.373, 191]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  11
+        head:  4119
+        body:  8201
+        hands: 12288
+        legs:  16411
+        feet:  20507
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743882:
+    script:       Jabbar
+    display_name: Jabbar
+    at:           [-99.718, -2.299, 26.027, 242]
+    render:
+      look:
+        type:  standard
+        model: 801
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743883:
+    script:       Silver_Owl
+    display_name: Silver Owl
+    at:           [-99.155, 4.649, 23.292, 243]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  9
+        head:  4119
+        body:  8201
+        hands: 12288
+        legs:  16401
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743884:
+    script:       Carmelo
+    display_name: Carmelo
+    at:           [-146.476, -7.480, 10.889, 25]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  6
+        head:  4114
+        body:  8215
+        hands: 12288
+        legs:  16408
+        feet:  20504
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17743885:
+    script:       Otto
+    display_name: Otto
+    at:           [-145.929, -7.480, 13.701, 108]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  8
+        head:  4096
+        body:  8206
+        hands: 12288
+        legs:  16385
+        feet:  20481
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743886:
+    script:       Powhatan
+    display_name: Powhatan
+    at:           [-152.135, -7.480, 19.014, 255]
+    render:
+      look:
+        type:  standard
+        model: 867
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743887:
+    script:       Sawyer
+    display_name: Sawyer
+    at:           [-160.159, -7.480, 15.809, 33]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  10
+        head:  4096
+        body:  8209
+        hands: 12288
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         6
+    status:   normal
+    widescan: true
+
+  17743888:
+    script:       Melloa
+    display_name: Melloa
+    at:           [-167.619, -7.482, 3.948, 35]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  10
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16401
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags:  4194331
+      animation_sub:       1
+      name_prefix:        32
+      moving:            139
+    status:   normal
+    speed:    13
+    widescan: true
+
+  17743889:
+    script:       Trilok
+    display_name: Trilok
+    at:           [-163.787, -7.482, 5.594, 96]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  3
+        head:  4096
+        body:  8198
+        hands: 12294
+        legs:  16391
+        feet:  20487
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743890:
+    script:       Mustafa
+    display_name: Mustafa
+    at:           [-74.995, 1.896, -12.541, 125]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  2
+        head:  4110
+        body:  8210
+        hands: 12299
+        legs:  16408
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17743891:
+    script:       Bartolomeo
+    display_name: Bartolomeo
+    at:           [-84.967, 1.896, -18.679, 251]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  4
+        head:  4110
+        body:  8210
+        hands: 12299
+        legs:  16408
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743892:
+    script:       Carey
+    display_name: Carey
+    at:           [-72.876, -2.611, -10.872, 200]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  6
+        head:  4110
+        body:  8210
+        hands: 12299
+        legs:  16398
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17743893:
+    script:       Klaus
+    display_name: Klaus
+    at:           [-89.355, -2.611, -15.256, 193]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  6
+        head:  4110
+        body:  8210
+        hands: 12299
+        legs:  16408
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743894:
+    script:       Evrain
+    display_name: Evrain
+    at:           [-83.146, 1.896, -19.917, 72]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  3
+        head:  4096
+        body:  8203
+        hands: 12288
+        legs:  16395
+        feet:  20491
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17743895:
+    script:       Bodaway
+    display_name: Bodaway
+    at:           [-29.579, 7.363, -54.363, 104]
+    render:
+      look:
+        type:  standard
+        model: 836
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17743896:
+    script:       Bruno
+    display_name: Bruno
+    at:           [-98.028, -2.615, -10.733, 130]
+    render:
+      look:
+        type:  standard
+        model: 836
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17743897:
+    script:       Latifah
+    display_name: Latifah
+    at:           [51.241, 7.499, -55.407, 200]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  9
+        head:  4096
+        body:  8197
+        hands: 12310
+        legs:  16389
+        feet:  20487
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743898:
+    script:       Evelyn
+    display_name: Evelyn
+    at:           [57.515, -2.149, -10.290, 201]
+    render:
+      look:
+        type:  standard
+        model: 874
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743899:
+    script:       Rex
+    display_name: Rex
+    at:           [52.405, -2.149, -4.021, 226]
+    render:
+      look:
+        type:  standard
+        model: 114
+      entity_flags: 29
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17743900:
+    script:       Ihsan
+    display_name: Ihsan
+    at:           [-30.728, -3.296, 5.871, 160]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  15
+        head:  4096
+        body:  8197
+        hands: 12310
+        legs:  16389
+        feet:  20485
+        main:  24760
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17743901:
+    script:       Johanna
+    display_name: Johanna
+    at:           [-73.163, -2.101, 7.023, 211]
+    render:
+      look:
+        type:  standard
+        model: 876
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17743902:
+    script:       Agapito
+    display_name: Agapito
+    at:           [-72.093, -2.097, 9.309, 69]
+    render:
+      look:
+        type:  standard
+        model: 866
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743903:
+    script:       Evi
+    display_name: Evi
+    at:           [-4.656, -2.101, 1.664, 73]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  3
+        head:  4096
+        body:  8193
+        hands: 12288
+        legs:  16384
+        feet:  20481
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743904:
+    script:       Rafaela
+    display_name: Rafaela
+    at:           [-3.405, -2.101, 1.528, 64]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  7
+        head:  4096
+        body:  8200
+        hands: 12288
+        legs:  16402
+        feet:  20498
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17743905:
+    script:       Kurando
+    display_name: Kurando
+    at:           [-23.887, 4.898, 0.870, 53]
+    render:
+      look:
+        type:  standard
+        model: 835
+      entity_flags:  27
+      animation_sub:  2
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743906:
+    script:       Galvin
+    display_name: Galvin
+    at:           [-142.631, -1.667, -20.905, 4]
+    render:
+      look:
+        type:  standard
+        model: 101
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743907:
+    script:       Numa
+    display_name: Numa
+    at:           [-135.025, -1.672, -17.078, 112]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  9
+        head:  4096
+        body:  8213
+        hands: 12288
+        legs:  16402
+        feet:  20498
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         7
+    status:   normal
+    widescan: true
+
+  17743908:
+    script:       Belka
+    display_name: Belka
+    at:           [-128.918, -1.672, -14.085, 114]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  9
+        head:  4096
+        body:  8195
+        hands: 12288
+        legs:  16404
+        feet:  20500
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17743909:
+    script:       Ensetsu
+    display_name: Ensetsu
+    at:           [31.966, -6.771, 68.784, 142]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4096
+        body:  8213
+        hands: 12288
+        legs:  16401
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743910:
+    script:       Kaede
+    display_name: Kaede
+    at:           [48.350, -6.872, 69.181, 144]
+    render:
+      look:
+        type:  equipped
+        race:  30
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12289
+        legs:  16385
+        feet:  20481
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743911:
+    script:       Kaede
+    display_name: Kaede
+    at:           [48.350, -6.872, 69.181, 144]
+    render:
+      look:
+        type:  standard
+        model: 119
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+
+  17743912:
+    script:       Steel_Bones
+    display_name: Steel Bones
+    at:           [-185.766, 1.999, -57.631, 171]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  15
+        head:  4101
+        body:  8194
+        hands: 12310
+        legs:  16386
+        feet:  20482
+        main:  24689
+        sub:   28717
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17743913:
+    script:       Domien
+    display_name: Domien
+    at:           [-188.075, 1.999, -57.387, 224]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  5
+        head:  4096
+        body:  8218
+        hands: 12288
+        legs:  16410
+        feet:  20506
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17743914:
+    script:       Zeldaff
+    display_name: Zeldaff
+    at:           [-24.984, 4.898, 46.026, 147]
+    render:
+      look:
+        type:  standard
+        model: 174
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743915:
+    script:       Gudav
+    display_name: Gudav
+    at:           [-3.286, 1.407, 50.591, 120]
+    render:
+      look:
+        type:  standard
+        model: 174
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17743916:
+    script:       Qiji
+    display_name: Qiji
+    at:           [4.257, 4.898, -18.920, 68]
+    render:
+      look:
+        type:  standard
+        model: 849
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17743917:
+    script:       Romilda
+    display_name: Romilda
+    at:           [5.424, 4.898, -18.699, 68]
+    render:
+      look:
+        type:  standard
+        model: 97
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17743918:
+    script:       Tete
+    display_name: Tete
+    at:           [15.249, -2.097, 43.012, 41]
+    render:
+      look:
+        type:  standard
+        model: 855
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743919:
+    script:       Rin
+    display_name: Rin
+    at:           [12.943, -2.101, 40.919, 111]
+    render:
+      look:
+        type:  equipped
+        race:  30
+        face:  0
+        head:  4096
+        body:  8194
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17743920:
+    script:       Ronan
+    display_name: Ronan
+    at:           [84.712, -8.772, 20.301, 112]
+    render:
+      look:
+        type:  standard
+        model: 93
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17743921:
+    script:       Corann
+    display_name: Corann
+    at:           [90.935, -8.772, 32.564, 8]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  7
+        head:  4096
+        body:  8195
+        hands: 12288
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743922:
+    script:       Lone_Horn
+    display_name: Lone Horn
+    at:           [-77.903, 4.649, 22.778, 69]
+    render:
+      look:
+        type:  standard
+        model: 174
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743923:
+    script:       Vattian
+    display_name: Vattian
+    at:           [-81.844, 4.649, 25.531, 224]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  7
+        head:  4098
+        body:  8194
+        hands: 12290
+        legs:  16386
+        feet:  20482
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743924:
+    script:       Eburacon
+    display_name: Eburacon
+    at:           [-78.165, -2.299, 27.216, 61]
+    render:
+      look:
+        type:  standard
+        model: 860
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17743925:
+    script:       Blayne
+    display_name: Blayne
+    at:           [-75.346, 4.649, 31.663, 172]
+    render:
+      look:
+        type:  standard
+        model: 110
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17743926:
+    script:       Mine_Konte
+    display_name: Mine Konte
+    at:           [-168.519, -5.999, -10.370, 149]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  5
+        head:  4096
+        body:  8194
+        hands: 12303
+        legs:  16399
+        feet:  20495
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17743927:
+    script:       Panana
+    display_name: Panana
+    at:           [-169.951, -5.999, -10.044, 2]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  1
+        head:  4096
+        body:  8203
+        hands: 12311
+        legs:  16407
+        feet:  20503
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743928:
+    script:       Dehlner
+    display_name: Dehlner
+    at:           [-4.023, 4.898, 50.129, 215]
+    render:
+      look:
+        type:  standard
+        model: 178
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17743929:
+    script:       Wurteh
+    display_name: Wurteh
+    at:           [72.782, 8.499, -242.102, 184]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  1
+        head:  4096
+        body:  8205
+        hands: 12293
+        legs:  16389
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743930:
+    script:       Benita
+    display_name: Benita
+    at:           [49.692, -4.771, 36.189, 95]
+    render:
+      look:
+        type:  standard
+        model: 878
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743931:
+    script:       Mathurin
+    display_name: Mathurin
+    at:           [-120.893, -1.000, 2.279, 2]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  7
+        head:  4096
+        body:  8197
+        hands: 12310
+        legs:  16389
+        feet:  20485
+        main:  24760
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17743932:
+    script:       Tilian
+    display_name: Tilian
+    at:           [-118.460, 5.999, -68.090, 14]
+    render:
+      look:
+        type:  standard
+        model: 111
+      entity_flags:  27
+      animation_sub:  2
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17743933:
+    script:       Rosswald
+    display_name: Rosswald
+    at:           [49.308, -2.149, -3.088, 223]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  3
+        head:  4096
+        body:  8218
+        hands: 12288
+        legs:  16407
+        feet:  20503
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17743934:
+    script:       Kachada
+    display_name: Kachada
+    at:           [40.693, -2.149, 1.228, 211]
+    render:
+      look:
+        type:  standard
+        model: 848
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743935:
+    script:       Ehrhard
+    display_name: Ehrhard
+    at:           [-70.661, 4.898, 44.886, 221]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  7
+        head:  4101
+        body:  8205
+        hands: 12293
+        legs:  16389
+        feet:  20487
+        main:  24831
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17743936:
+    script:       Hilda
+    display_name: Hilda
+    at:           [-159.641, -10.535, 16.276, 143]
+    render:
+      look:
+        type:  standard
+        model: 879
+      entity_flags: 4194331
+      name_prefix:       32
+      moving:          1591
+    status:          normal
+    speed:           8
+    animation_speed: 24
+    widescan:        true
+
+  17743937:
+    script:       Rajesh
+    display_name: Rajesh
+    at:           [-61.484, 1.907, -10.319, 188]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  10
+        head:  4110
+        body:  8210
+        hands: 12299
+        legs:  16408
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17743938:
+    script:       Varden
+    display_name: Varden
+    at:           [-57.365, 2.390, -4.871, 5]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4110
+        body:  8210
+        hands: 12299
+        legs:  16408
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743939:
+    script:       Aishah
+    display_name: Aishah
+    at:           [-83.038, 2.390, -26.209, 25]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  12
+        head:  4110
+        body:  8210
+        hands: 12299
+        legs:  16398
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17743940:
+    script:       Raibaht
+    display_name: Raibaht
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  14
+        head:  4096
+        body:  8216
+        hands: 12288
+        legs:  16405
+        feet:  20503
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17743941:
+    script:       Fo_Mocorho
+    display_name: Fo Mocorho
+    at:           [73.079, 7.499, -183.717, 223]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  3
+        head:  4096
+        body:  8200
+        hands: 12288
+        legs:  16407
+        feet:  20503
+        main:  24576
+        sub:   28672
+      entity_flags:  29
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743942:
+    script:       Valah_Molkot
+    display_name: Valah Molkot
+    at:           [59.852, 8.499, -221.670, 56]
+    render:
+      look:
+        type:  equipped
+        race:  29
+        face:  3
+        head:  4096
+        body:  8196
+        hands: 12288
+        legs:  16384
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743943:
+    script:       Dulsie
+    display_name: Dulsie
+    at:           [70.255, 7.499, -54.555, 192]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  3
+        head:  4096
+        body:  8197
+        hands: 12310
+        legs:  16389
+        feet:  20487
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743944:
+    script:       HomePoint#1
+    display_name: 'Home Point #1'
+    at:           [126.000, 8.500, 8.000, 224]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17743945:
+    script:       HomePoint#2
+    display_name: 'Home Point #2'
+    at:           [40.000, 8.500, -238.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17743946:
+    script:       HomePoint#3
+    display_name: 'Home Point #3'
+    at:           [-127.000, -6.000, 10.000, 96]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17743947:
+    script:       HomePoint#4
+    display_name: 'Home Point #4'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17743948:
+    script:       HomePoint#5
+    display_name: 'Home Point #5'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17743949:
+    script:       _6k0
+    display_name: Door:"Steaming Sheep"
+    at:           [-152.891, -8.780, 4.752]
+    render:
+      look:
+        type: door
+      door_id:      812332639
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743950:
+    script:       _6k1
+    display_name: Door:Galvin's Gear
+    at:           [-129.275, -2.845, -26.724]
+    render:
+      look:
+        type: door
+      door_id:      829109855
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743951:
+    script:       _6k2
+    display_name: Door:Warehouse 2
+    at:           [-100.000, -3.599, 19.715]
+    render:
+      look:
+        type: door
+      door_id:      845887071
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743952:
+    script:       _6k3
+    display_name: Door:Warehouse 2
+    at:           [-100.000, 1.274, 42.729]
+    render:
+      look:
+        type: door
+      door_id:      862664287
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743953:
+    script:       _6k4
+    display_name: Door:Warehouse 1
+    at:           [-80.113, 1.274, 42.630]
+    render:
+      look:
+        type: door
+      door_id:      879441503
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743954:
+    script:       _6k5
+    display_name: Door:Warehouse 1
+    at:           [-80.113, -3.599, 19.617]
+    render:
+      look:
+        type: door
+      door_id:      896218719
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743955:
+    script:       _6k6
+    display_name: Door:Departures Entrance
+    at:           [-95.845, -3.977, -7.921]
+    render:
+      look:
+        type: door
+      door_id:      912995935
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743956:
+    script:       _6k7
+    display_name: Door:Arrivals Exit
+    at:           [-80.000, -3.977, 4.310]
+    render:
+      look:
+        type: door
+      door_id:      929773151
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743957:
+    script:       _6k8
+    display_name: Door:Departures Exit
+    at:           [-59.260, 0.532, -7.921]
+    render:
+      look:
+        type: door
+      door_id:   946550367
+      animation: close_door
+      moving:    1
+    status: normal
+
+  17743958:
+    script:       _6k9
+    display_name: Door:Arrivals Entrance
+    at:           [-80.000, 0.532, -24.718]
+    render:
+      look:
+        type: door
+      door_id:   963327583
+      animation: close_door
+      moving:    1
+    status: normal
+
+  17743959:
+    script:       _6ka
+    display_name: Door:House
+    at:           [42.003, -7.945, 56.082]
+    render:
+      look:
+        type: door
+      door_id:      1634416223
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743960:
+    script:       _6kb
+    display_name: Door:House
+    at:           [44.314, -5.945, 23.956]
+    render:
+      look:
+        type: door
+      door_id:      1651193439
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743961:
+    script:       _6kc
+    display_name: Door:House
+    at:           [76.073, -9.945, 26.000]
+    render:
+      look:
+        type: door
+      door_id:      1667970655
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743962:
+    script: _6ke
+    at:     [59.999, 3.345, -120.019]
+    render:
+      look:
+        type: door
+      door_id:      1701525087
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17743963:
+    script: _6ks
+    at:     [59.909, 2.350, -80.019]
+    render:
+      look:
+        type: door
+      door_id:      1936406111
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17743964:
+    script: _6kt
+    at:     [59.966, 2.280, -160.036]
+    render:
+      look:
+        type: door
+      door_id:      1953183327
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17743965:
+    script: _6ku
+    at:     [-36.432, 0.000, -60.986]
+    render:
+      look:
+        type: door
+      door_id:      1969960543
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17743966:
+    script:       Valeriano
+    display_name: Valeriano
+    at:           [96.043, 8.499, -61.647, 211]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  13
+        head:  4096
+        body:  8200
+        hands: 12313
+        legs:  16408
+        feet:  20505
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17743967:
+    script:       Dahjal
+    display_name: Dahjal
+    at:           [86.365, 8.499, -60.050, 165]
+    render:
+      look:
+        type:  standard
+        model: 216
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743968:
+    script:       Mokop-Sankop
+    display_name: Mokop-Sankop
+    at:           [104.232, 8.499, -63.834, 204]
+    render:
+      look:
+        type:  standard
+        model: 839
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17743969:
+    script:       Cheh_Raihah
+    display_name: Cheh Raihah
+    at:           [100.581, 8.499, -63.472, 204]
+    render:
+      look:
+        type:  standard
+        model: 220
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743970:
+    script:       Nalta
+    display_name: Nalta
+    at:           [91.397, 8.499, -58.794, 218]
+    render:
+      look:
+        type:  standard
+        model: 205
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17743971:
+    at: [-36.458, 6.365, -77.322, 128]
+    render:
+      look:
+        type: ship
+      door_id:      0
+      entity_flags: 2051
+      animation:    animation_19
+      moving:       32769
+
+  17743972:
+    script: _6kv
+    at:     [-46.891, 3.792, -64.711]
+    render:
+      look:
+        type: door
+      door_id:      1986737759
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17743973:
+    script: _6kw
+    at:     [-25.984, 3.792, -64.789]
+    render:
+      look:
+        type: door
+      door_id:      2003514975
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17743974:
+    script:       Ilita
+    display_name: Ilita
+    at:           [-142.240, -1.667, -25.540, 197]
+    render:
+      look:
+        type:  standard
+        model: 102
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17743975:
+    script:       Denvihr
+    display_name: Denvihr
+    at:           [-49.005, 2.342, -10.523, 130]
+    render:
+      look:
+        type:  standard
+        model: 174
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17743976:
+    script:       Sugandhi
+    display_name: Sugandhi
+    at:           [-50.089, 2.342, 2.226, 100]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  13
+        head:  4096
+        body:  8209
+        hands: 12305
+        legs:  16405
+        feet:  20501
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17743977:
+    script:       Yazan
+    display_name: Yazan
+    at:           [-20.060, -3.300, 24.471, 84]
+    render:
+      look:
+        type:  standard
+        model: 861
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17743978:
+    script:       Moogle
+    display_name: Moogle
+    at:           [0.000, 0.000, 1.500, 64]
+    render:
+      look:
+        type:  standard
+        model: 82
+      animation_sub:     1
+      moving:        32776
+    widescan: true
+
+  17743979:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17743980:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+
+  17743981:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17743982:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+
+  17743983:
+    script:       Symphonic_Curator
+    display_name: Symphonic Curator
+    at:           [2.000, -1.000, -7.500, 64]
+    render:
+      look:
+        type:  standard
+        model: 1847
+      moving: 32769
+    widescan: true
+
+  17743984:
+    script: NPC[70]
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+
+  17743985:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17743986:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17743987:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17743988:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17743989:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17743990:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17743991:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17743992:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17743993:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17743994:
+    script:       Styi_Palneh
+    display_name: Styi Palneh
+    at:           [29.929, 4.898, -17.637, 63]
+    render:
+      look:
+        type:  standard
+        model: 810
+      entity_flags: 27
+      animation:    animation_34
+      name_prefix:  32
+      moving:       8
+    status:   normal
+    widescan: true
+
+  17743995:
+    script:       Flaco
+    display_name: Flaco
+    at:           [-143.832, -6.000, 3.223, 42]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  7
+        head:  4096
+        body:  8213
+        hands: 12309
+        legs:  16405
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17743996:
+    script:       World_Shifter
+    display_name: World Shifter
+    at:           [132.020, 8.499, -73.760, 182]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4126
+        body:  8222
+        hands: 12318
+        legs:  16414
+        feet:  20510
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17743997:
+    script:       Oggbi
+    display_name: Oggbi
+    at:           [-160.604, -7.480, 3.141, 55]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  3
+        head:  4113
+        body:  8209
+        hands: 12305
+        legs:  16401
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17743998:
+    script:       Cornelia
+    display_name: Cornelia
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  15
+        head:  4100
+        body:  8229
+        hands: 12305
+        legs:  16401
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17743999:
+    script:       Michea
+    display_name: Michea
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  7
+        head:  4096
+        body:  8215
+        hands: 12288
+        legs:  16405
+        feet:  20501
+        main:  24576
+        sub:   28672
+      entity_flags:  25
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17744000:
+    script:       Raogrimm
+    display_name: Raogrimm
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  5
+        head:  4116
+        body:  8215
+        hands: 12309
+        legs:  16406
+        feet:  20499
+        main:  24763
+        sub:   28672
+      entity_flags: 29
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744001:
+    script:       Yasin
+    display_name: Yasin
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  9
+        head:  4096
+        body:  8218
+        hands: 12315
+        legs:  16396
+        feet:  20504
+        main:  24761
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744002:
+    script:       Cid
+    display_name: Cid
+    render:
+      look:
+        type:  standard
+        model: 63
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744003:
+    script:       Ayame
+    display_name: Ayame
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  3
+        head:  4113
+        body:  8201
+        hands: 12288
+        legs:  16393
+        feet:  20489
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17744004:
+    script:       Kupalu-Harupalu
+    display_name: Kupalu-Harupalu
+    at:           [66.373, 8.499, -215.620, 184]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  1
+        head:  4098
+        body:  8194
+        hands: 12290
+        legs:  16386
+        feet:  20482
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   cutscene_only
+    widescan: true
+
+  17744005:
+    script:       Zoby_Quhyo
+    display_name: Zoby Quhyo
+    at:           [60.777, -2.101, -17.111, 8]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  1
+        head:  4098
+        body:  8194
+        hands: 12290
+        legs:  16386
+        feet:  20482
+        main:  24579
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17744006:
+    script:       Dhen_Tevryukoh
+    display_name: Dhen Tevryukoh
+    at:           [35.735, -2.101, 2.396, 163]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  6
+        head:  4096
+        body:  8224
+        hands: 12320
+        legs:  16416
+        feet:  20512
+        main:  24608
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17744007:
+    script:       Blabbivix
+    display_name: Blabbivix
+    at:           [-110.209, 4.898, 22.957, 192]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17744008:
+    script:       Juroro
+    display_name: Juroro
+    at:           [32.979, 7.499, -40.841, 204]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  8
+        head:  4096
+        body:  8195
+        hands: 12291
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+
+  17744009:
+    script:       Ferrol
+    display_name: Ferrol
+    at:           [33.708, 7.499, -39.425, 90]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  3
+        head:  4096
+        body:  8233
+        hands: 12329
+        legs:  16425
+        feet:  20521
+        main:  24791
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17744010:
+    script:       qm2
+    display_name: ???
+    at:           [12.640, -22.410, 19.121, 223]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  4
+        head:  4096
+        body:  8238
+        hands: 12334
+        legs:  16430
+        feet:  20526
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status: cutscene_only
+
+  17744011:
+    script:       Talking_Doll
+    display_name: Talking Doll
+    at:           [24.857, -18.308, 30.831, 92]
+    render:
+      look:
+        type:  standard
+        model: 970
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17744012:
+    script:       Carbuncle
+    display_name: Carbuncle
+    at:           [25.904, -23.500, 33.914, 96]
+    render:
+      look:
+        type:  standard
+        model: 791
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17744013:
+    script:       Ildy-Goldy
+    display_name: Ildy-Goldy
+    at:           [43.730, 7.499, -43.380, 138]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  8
+        head:  4125
+        body:  8232
+        hands: 12304
+        legs:  16397
+        feet:  20493
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17744014:
+    script: blank
+    at:     [43.730, 7.499, -43.380, 138]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  8
+        head:  4125
+        body:  8232
+        hands: 12304
+        legs:  16397
+        feet:  20493
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status: cutscene_only
+
+  17744015:
+    script:       Ravorara
+    display_name: Ravorara
+    at:           [-151.062, -6.000, -7.243, 28]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  0
+        head:  4099
+        body:  8195
+        hands: 12291
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17744016:
+    script:       Dalba
+    display_name: Dalba
+    at:           [-174.101, -6.000, -19.611, 58]
+    render:
+      look:
+        type:  standard
+        model: 974
+      entity_flags: 27
+      animation:    animation_34
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17744017:
+    script:       Yomi
+    display_name: Yomi
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  6
+        head:  4100
+        body:  8196
+        hands: 12376
+        legs:  16472
+        feet:  20568
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17744018:
+    script:       Pelinvarde
+    display_name: Pelinvarde
+    at:           [-165.683, -6.000, -18.950, 22]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  15
+        head:  4096
+        body:  8203
+        hands: 12288
+        legs:  16392
+        feet:  20488
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17744019:
+    script:       Gueravrel
+    display_name: Gueravrel
+    at:           [-149.749, -7.480, 9.089, 226]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4096
+        body:  8200
+        hands: 12296
+        legs:  16397
+        feet:  20484
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17744020:
+    script:       Raifa
+    display_name: Raifa
+    at:           [-166.416, -7.480, 7.153, 94]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  7
+        head:  4110
+        body:  8211
+        hands: 12297
+        legs:  16393
+        feet:  20489
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17744021:
+    script:       Nokkhi_Jinjahl
+    display_name: Nokkhi Jinjahl
+    at:           [112.667, 8.455, -46.174, 102]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      animation:    sit
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+    content:  ROTZ
+
+  17744022:
+    script:       Ominous_Cloud
+    display_name: Ominous Cloud
+    at:           [146.962, 8.499, -63.316, 122]
+    render:
+      look:
+        type:  standard
+        model: 146
+      entity_flags:  27
+      animation_sub:  2
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  17744023:
+    script:       Grin
+    display_name: Grin
+    at:           [-56.533, 2.392, -29.432, 187]
+    render:
+      look:
+        type:  standard
+        model: 836
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17744024:
+    script: blank
+    at:     [-56.533, 2.392, -29.432, 187]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  5
+        head:  4131
+        body:  8236
+        hands: 12393
+        legs:  16407
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags: 2051
+      moving:          1
+
+  17744025:
+    script:       Viresefilant
+    display_name: Viresefilant
+    at:           [-100.000, -2.000, 20.000, 62]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  6
+        head:  4096
+        body:  8196
+        hands: 12376
+        legs:  16470
+        feet:  20489
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    widescan: true
+
+  17744026:
+    script: _
+    at:     [-98.000, 5.000, 28.000, 125]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  10
+        head:  4096
+        body:  8210
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+
+  17744027:
+    script:       Pursuivant
+    display_name: Pursuivant
+    at:           [78.887, 7.499, -202.820, 190]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  9
+        head:  4192
+        body:  8236
+        hands: 12346
+        legs:  16442
+        feet:  20538
+        main:  24880
+        sub:   28672
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17744028:
+    script:       Ulmia
+    display_name: Ulmia
+    render:
+      look:
+        type:  standard
+        model: 1472
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+
+  17744029:
+    script:       Prishe
+    display_name: Prishe
+    render:
+      look:
+        type:  standard
+        model: 1446
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 54
+    widescan:        true
+
+  17744030:
+    script:       Louverance
+    display_name: Louverance
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4158
+        body:  8236
+        hands: 12288
+        legs:  16484
+        feet:  20580
+        main:  24640
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744031:
+    script:       Tenzen
+    display_name: Tenzen
+    render:
+      look:
+        type:  standard
+        model: 1442
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744032:
+    script:       Bagnobrok
+    display_name: Bagnobrok
+    at:           [16.038, 4.898, 22.172, 185]
+    render:
+      look:
+        type:  standard
+        model: 983
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+    content:  COP
+
+  17744033:
+    script:       Patient_Wheel
+    display_name: Patient Wheel
+    at:           [-107.988, 4.898, 52.557, 158]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  6
+        head:  4119
+        body:  8201
+        hands: 12288
+        legs:  16401
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags:  29
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+    content:  COP
+
+  17744034:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17744035:
+    script:       Brita
+    display_name: Brita
+    at:           [58.161, -2.101, -6.695, 97]
+    render:
+      look:
+        type:  standard
+        model: 878
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17744036:
+    script:       Rendezvous_Point
+    display_name: Rendezvous Point
+    at:           [55.801, 8.499, -242.680, 191]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17744037:
+    script: blank
+    at:     [55.801, 8.499, -242.680, 191]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+
+  17744038:
+    script:       Gallagher
+    display_name: Gallagher
+    at:           [32.852, 7.500, -177.751, 40]
+    render:
+      look:
+        type:  standard
+        model: 100
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17744039:
+    script:       Alib-Mufalib
+    display_name: Alib-Mufalib
+    at:           [116.080, 8.372, -31.820, 199]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  15
+        head:  4256
+        body:  8351
+        hands: 12447
+        legs:  16543
+        feet:  20639
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17744040:
+    script:       Gwinar
+    display_name: Gwinar
+    at:           [38.349, 8.499, -230.827, 1]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  5
+        head:  4215
+        body:  8326
+        hands: 12288
+        legs:  16478
+        feet:  20574
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17744041:
+    script:       Game_Table
+    display_name: Game Table
+    at:           [-152.266, -8.378, 16.083, 60]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17744042:
+    script:       Game_Table
+    display_name: Game Table
+    at:           [-147.722, -8.378, 13.669, 122]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17744043:
+    script:       Festive_Moogle
+    display_name: Festive Moogle
+    at:           [46.902, 8.499, -242.276, 187]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17744044:
+    script:       Bonanza_Moogle
+    display_name: Bonanza Moogle
+    at:           [153.084, 8.500, -43.089, 128]
+    render:
+      look:
+        type:  standard
+        model: 981
+    status:   cutscene_only
+    widescan: true
+    content:  WOTG
+
+  17744045:
+    script:       Bonanza_Moogle
+    display_name: Bonanza Moogle
+    at:           [153.084, 8.500, -43.089, 128]
+    render:
+      look:
+        type:  standard
+        model: 981
+      moving: 1
+    widescan: true
+    content:  WOTG
+
+  17744046:
+    script:       Dealer_Moogle
+    display_name: Dealer Moogle
+    at:           [153.359, 8.499, -44.523, 129]
+    render:
+      look:
+        type:  standard
+        model: 981
+      moving: 8
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17744047:
+    script:       Dealer_Moogle
+    display_name: Dealer Moogle
+    at:           [153.500, 8.499, -45.931, 129]
+    render:
+      look:
+        type:  standard
+        model: 2364
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  TVR
+
+  17744048:
+    script:       Synergy_Engineer
+    display_name: Synergy Engineer
+    at:           [37.700, 0.700, -50.500, 192]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  5
+        head:  4215
+        body:  8312
+        hands: 12298
+        legs:  16394
+        feet:  20490
+        main:  24576
+        sub:   28672
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17744049:
+    script:       Synergy_Engineer
+    display_name: Synergy Engineer
+    at:           [33.667, 7.500, -33.618]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  2
+        head:  4215
+        body:  8312
+        hands: 12298
+        legs:  16394
+        feet:  20490
+        main:  24576
+        sub:   28672
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17744050:
+    script:       Synergy_Furnace
+    display_name: Synergy Furnace
+    at:           [35.200, 7.500, -53.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  643
+      animation_sub:   5
+      name_vis:       68
+      moving:          1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         WOTG
+
+  17744051:
+    script:       Synergy_Furnace
+    display_name: Synergy Furnace
+    at:           [40.200, 7.500, -53.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  643
+      animation_sub:   5
+      name_vis:       68
+      moving:          1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         WOTG
+
+  17744052:
+    script:       Synergy_Furnace
+    display_name: Synergy Furnace
+    at:           [42.154, 7.500, -37.388, 128]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  643
+      animation_sub:   5
+      name_vis:       68
+      moving:          1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         WOTG
+
+  17744053:
+    script:       Synergy_Furnace
+    display_name: Synergy Furnace
+    at:           [41.790, 7.500, -31.559, 128]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  643
+      animation_sub:   5
+      name_vis:       68
+      moving:          1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         WOTG
+
+  17744054:
+    script:       Synergy_Enthusiast
+    display_name: Synergy Enthusiast
+    at:           [43.000, 7.500, -47.500, 128]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  8
+        head:  4215
+        body:  8312
+        hands: 12298
+        legs:  16394
+        feet:  20490
+        main:  24576
+        sub:   28672
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17744055:
+    script:       Erich
+    display_name: Erich
+    at:           [85.450, 7.499, -177.733, 191]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  8
+        head:  4096
+        body:  8452
+        hands: 12489
+        legs:  16569
+        feet:  20738
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17744056:
+    script:       Ernst
+    display_name: Ernst
+    at:           [86.809, 7.499, -177.898, 195]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  5
+        head:  4096
+        body:  8452
+        hands: 12489
+        legs:  16569
+        feet:  20738
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17744057:
+    script:       Voidwatch_Purveyor
+    display_name: Voidwatch Purveyor
+    at:           [146.500, 8.500, -16.400, 93]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4116
+        body:  8217
+        hands: 12300
+        legs:  16386
+        feet:  20482
+        main:  24576
+        sub:   28672
+      moving: 15
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17744058:
+    script:       Moogle
+    display_name: Moogle
+    at:           [42.861, 8.499, -241.854, 207]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    widescan: true
+
+  17744059:
+    script:       Ake
+    display_name: Ake
+    at:           [81.750, 0.850, -227.500, 127]
+    render:
+      look:
+        type:  standard
+        model: 302
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+
+  17744060:
+    script:       Ome
+    display_name: Ome
+    at:           [81.750, 0.850, -232.500, 127]
+    render:
+      look:
+        type:  standard
+        model: 302
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    widescan: true
+
+  17744061:
+    script: blank
+    at:     [118.000, 9.100, -86.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 759
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744062:
+    script: blank
+    at:     [108.000, 8.400, -33.000, 160]
+    render:
+      look:
+        type:  standard
+        model: 758
+      entity_flags: 2075
+      name_vis:       64
+      name_prefix:    32
+      moving:          8
+
+  17744063:
+    script: blank
+    at:     [123.000, 8.400, -33.000, 224]
+    render:
+      look:
+        type:  standard
+        model: 758
+      entity_flags: 2075
+      name_vis:       64
+      name_prefix:    32
+      moving:          1
+
+  17744064:
+    script: blank
+    at:     [108.000, 8.400, -47.000, 96]
+    render:
+      look:
+        type:  standard
+        model: 758
+      entity_flags: 2075
+      name_vis:       64
+      name_prefix:    32
+      moving:         22
+
+  17744065:
+    script: blank
+    at:     [123.000, 8.400, -47.000, 32]
+    render:
+      look:
+        type:  standard
+        model: 758
+      entity_flags: 2075
+      name_vis:       64
+      name_prefix:    32
+      moving:         15
+
+  17744066:
+    script: blank
+    at:     [74.610, -8.670, -4.854, 96]
+    render:
+      look:
+        type:  standard
+        model: 726
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744067:
+    script: blank
+    at:     [-10.446, -2.620, 5.952, 64]
+    render:
+      look:
+        type:  standard
+        model: 726
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744068:
+    script: blank
+    at:     [-10.069, -2.620, 22.094, 192]
+    render:
+      look:
+        type:  standard
+        model: 726
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744069:
+    script: blank
+    at:     [-23.683, -3.820, 0.536, 58]
+    render:
+      look:
+        type:  standard
+        model: 726
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744070:
+    script: blank
+    at:     [-32.430, -3.820, 0.540, 69]
+    render:
+      look:
+        type:  standard
+        model: 726
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744071:
+    script: blank
+    at:     [-22.225, -3.820, 31.204, 209]
+    render:
+      look:
+        type:  standard
+        model: 726
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744072:
+    script: blank
+    at:     [-33.780, -3.820, 31.161, 174]
+    render:
+      look:
+        type:  standard
+        model: 726
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744073:
+    script: blank
+    at:     [-46.519, -2.620, 22.238, 192]
+    render:
+      look:
+        type:  standard
+        model: 726
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744074:
+    script: blank
+    at:     [57.610, -2.620, -20.472, 96]
+    render:
+      look:
+        type:  standard
+        model: 725
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744075:
+    script: blank
+    at:     [60.919, -8.670, 8.991, 96]
+    render:
+      look:
+        type:  standard
+        model: 725
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744076:
+    script: blank
+    at:     [34.221, -2.620, -6.187, 64]
+    render:
+      look:
+        type:  standard
+        model: 725
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744077:
+    script: blank
+    at:     [8.682, -2.620, 22.054, 192]
+    render:
+      look:
+        type:  standard
+        model: 725
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744078:
+    script: blank
+    at:     [-63.898, -2.620, 22.110, 192]
+    render:
+      look:
+        type:  standard
+        model: 725
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744079:
+    script: blank
+    at:     [5.878, 5.350, -21.730, 64]
+    render:
+      look:
+        type:  standard
+        model: 725
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744080:
+    script: blank
+    at:     [-11.868, 5.350, -21.730, 64]
+    render:
+      look:
+        type:  standard
+        model: 725
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744081:
+    script: blank
+    at:     [-30.040, 5.350, -21.730, 64]
+    render:
+      look:
+        type:  standard
+        model: 725
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744082:
+    script: blank
+    at:     [116.000, 8.510, -40.000]
+    render:
+      look:
+        type:  standard
+        model: 1271
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744083:
+    script: blank
+    at:     [-170.000, -6.000, -16.078]
+    render:
+      look:
+        type:  standard
+        model: 1271
+      entity_flags:  2073
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744084:
+    script: blank
+    at:     [-182.255, -6.000, -12.077]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744085:
+    script: blank
+    at:     [-178.841, -6.000, -7.457]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744086:
+    script: blank
+    at:     [-171.058, -6.000, -0.132]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744087:
+    script: blank
+    at:     [-166.878, -6.000, -4.330]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744088:
+    script: blank
+    at:     [-162.578, -6.000, -8.301]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744089:
+    script: blank
+    at:     [-151.440, -6.000, -2.889]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744090:
+    script: blank
+    at:     [-145.322, -6.000, 3.497]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744091:
+    script: blank
+    at:     [-159.493, -6.000, -29.817]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744092:
+    script: blank
+    at:     [-130.833, -0.999, -41.166]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744093:
+    script: blank
+    at:     [-122.667, -0.999, -33.000]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744094:
+    script: blank
+    at:     [-97.815, -2.100, -13.741]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744095:
+    script: blank
+    at:     [-97.815, -2.100, -2.145]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744096:
+    script: blank
+    at:     [-84.600, -2.100, 6.669]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744097:
+    script: blank
+    at:     [-75.297, -2.100, 6.891]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744098:
+    script: blank
+    at:     [-57.900, -2.100, 8.916]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744099:
+    script: blank
+    at:     [-50.563, -2.100, 8.916]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744100:
+    script: blank
+    at:     [-27.870, -3.300, 3.520]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744101:
+    script: blank
+    at:     [-32.975, -3.300, 28.154]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744102:
+    script: blank
+    at:     [-22.845, -3.300, 27.941]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744103:
+    script: blank
+    at:     [1.973, -2.100, 9.159]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744104:
+    script: blank
+    at:     [17.973, -2.100, 9.159]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744105:
+    script: blank
+    at:     [40.550, -4.100, 25.986]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744106:
+    script: blank
+    at:     [41.467, -4.100, 29.382]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744107:
+    script: blank
+    at:     [43.265, -4.100, 32.067]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744108:
+    script: blank
+    at:     [39.040, -6.100, 54.006]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744109:
+    script: blank
+    at:     [45.016, -6.100, 53.993]
+    render:
+      look:
+        type:  standard
+        model: 1273
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744110:
+    script:       Klaas
+    display_name: Klaas
+    at:           [103.017, 8.499, -64.786, 197]
+    render:
+      look:
+        type:  standard
+        model: 100
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    widescan: true
+
+  17744111:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    status: cutscene_only
+
+  17744112:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    status: cutscene_only
+
+  17744113:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 300
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744114:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 300
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744115:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 300
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744116:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744117:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744118:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744119:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 372
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744120:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 372
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744121:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 372
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744122:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2030
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744123:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2030
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744124:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2030
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744125:
+    script:       Moogle
+    display_name: Moogle
+    at:           [122.139, 8.455, -36.424, 232]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    widescan: true
+
+  17744126:
+    script: Fireworks
+    at:     [-339.560, 7.800, -314.784, 143]
+    render:
+      look:
+        type:  standard
+        model: 327
+      entity_flags:  2075
+      name_prefix:     32
+      moving:       32769
+
+  17744127:
+    script: blank
+    at:     [116.000, 8.510, -40.000]
+    render:
+      look:
+        type:  standard
+        model: 1241
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744128:
+    script: blank
+    at:     [-170.000, -6.000, -16.078]
+    render:
+      look:
+        type:  standard
+        model: 1241
+      entity_flags:  2073
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744129:
+    script: blank
+    at:     [-182.255, -6.000, -12.077]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744130:
+    script: blank
+    at:     [-178.841, -6.000, -7.457]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744131:
+    script: blank
+    at:     [-171.058, -6.000, -0.132]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744132:
+    script: blank
+    at:     [-166.878, -6.000, -4.330]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744133:
+    script: blank
+    at:     [-162.578, -6.000, -8.301]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744134:
+    script: blank
+    at:     [-151.440, -6.000, -2.889]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744135:
+    script: blank
+    at:     [-145.322, -6.000, 3.497]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744136:
+    script: blank
+    at:     [-159.493, -6.000, -29.817]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744137:
+    script: blank
+    at:     [-130.833, -0.999, -41.166]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744138:
+    script: blank
+    at:     [-122.667, -0.999, -33.000]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744139:
+    script: blank
+    at:     [-97.815, -2.100, -13.741]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744140:
+    script: blank
+    at:     [-97.815, -2.100, -2.145]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744141:
+    script: blank
+    at:     [-84.600, -2.100, 6.669]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744142:
+    script: blank
+    at:     [-75.297, -2.100, 6.891]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744143:
+    script: blank
+    at:     [-57.900, -2.100, 8.916]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744144:
+    script: blank
+    at:     [-50.563, -2.100, 8.916]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744145:
+    script: blank
+    at:     [-27.870, -3.300, 3.520]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744146:
+    script: blank
+    at:     [-32.975, -3.300, 28.154]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744147:
+    script: blank
+    at:     [-22.845, -3.300, 27.941]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744148:
+    script: blank
+    at:     [1.973, -2.100, 9.159]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744149:
+    script: blank
+    at:     [17.973, -2.100, 9.159]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744150:
+    script: blank
+    at:     [40.550, -4.100, 25.986]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744151:
+    script: blank
+    at:     [41.467, -4.100, 29.382]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32769
+
+  17744152:
+    script: blank
+    at:     [43.265, -4.100, 32.067]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32790
+
+  17744153:
+    script: blank
+    at:     [39.040, -6.100, 54.006]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32783
+
+  17744154:
+    script: blank
+    at:     [45.016, -6.100, 53.993]
+    render:
+      look:
+        type:  standard
+        model: 1242
+      entity_flags:  2075
+      name_vis:        64
+      name_prefix:     34
+      moving:       32776
+
+  17744155:
+    script:       Klaas
+    display_name: Klaas
+    at:           [103.017, 8.499, -64.786, 197]
+    render:
+      look:
+        type:  standard
+        model: 100
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+
+  17744156:
+    script: blank
+    at:     [-90.000, 4.900, 51.000, 63]
+    render:
+      look:
+        type:  standard
+        model: 962
+    status: cutscene_only
+
+  17744157:
+    script: blank
+    at:     [-88.500, 4.900, 51.000, 63]
+    render:
+      look:
+        type:  standard
+        model: 962
+    status: cutscene_only
+
+  17744158:
+    script: blank
+    at:     [-87.000, 4.900, 51.000, 63]
+    render:
+      look:
+        type:  standard
+        model: 962
+    status: cutscene_only
+
+  17744159:
+    script: blank
+    at:     [-85.500, 4.900, 51.000, 63]
+    render:
+      look:
+        type:  standard
+        model: 962
+    status: cutscene_only
+
+  17744160:
+    script: blank
+    at:     [-84.000, 4.900, 51.000, 63]
+    render:
+      look:
+        type:  standard
+        model: 962
+    status: cutscene_only
+
+  17744161:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1997
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744162:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1997
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744163:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1997
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744164:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  1
+        head:  4236
+        body:  8332
+        hands: 12410
+        legs:  16627
+        feet:  20620
+        main:  25025
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744165:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  2
+        head:  4236
+        body:  8332
+        hands: 12410
+        legs:  16627
+        feet:  20620
+        main:  25025
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744166:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  13
+        head:  4236
+        body:  8332
+        hands: 12410
+        legs:  16627
+        feet:  20620
+        main:  25025
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744167:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  7
+        head:  4236
+        body:  8332
+        hands: 12410
+        legs:  16627
+        feet:  20620
+        main:  25025
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744168:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  8
+        head:  4236
+        body:  8332
+        hands: 12410
+        legs:  16627
+        feet:  20620
+        main:  25025
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744169:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744170:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744171:
+    script: blank
+    at:     [-89.250, 4.900, 51.050, 63]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status: cutscene_only
+
+  17744172:
+    script: blank
+    at:     [-87.750, 4.900, 51.050, 63]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status: cutscene_only
+
+  17744173:
+    script: blank
+    at:     [-86.250, 4.900, 51.050, 63]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status: cutscene_only
+
+  17744174:
+    script: blank
+    at:     [-84.750, 4.900, 51.050, 63]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status: cutscene_only
+
+  17744175:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112
+
+  17744176:
+    script:       Moogle
+    display_name: Moogle
+    at:           [95.000, 8.500, -10.500, 7]
+    render:
+      look:
+        type:  standard
+        model: 82
+    status:   cutscene_only
+    widescan: true
+
+  17744177:
+    script:       Spriggan_Sifter
+    display_name: Spriggan Sifter
+    at:           [95.400, 8.500, -9.100, 7]
+    render:
+      look:
+        type:  standard
+        model: 2432
+      entity_flags: 5
+    status:   cutscene_only
+    widescan: true
+
+  17744178:
+    script:       Spriggan_Crier
+    display_name: Spriggan Crier
+    at:           [94.600, 8.500, -9.700, 7]
+    render:
+      look:
+        type:  standard
+        model: 2440
+      entity_flags: 5
+    status:   cutscene_only
+    widescan: true
+
+  17744179:
+    script:       Spriggan_Graverobber
+    display_name: Spriggan Graverobber
+    at:           [94.700, 8.500, -8.400, 7]
+    render:
+      look:
+        type:  standard
+        model: 2441
+      entity_flags: 5
+    status:   cutscene_only
+    widescan: true
+
+  17744180:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 112
+    status: cutscene_only
+
+  17744181:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 112
+    status: cutscene_only
+
+  17744182:
+    script:       Suspicious_Galka
+    display_name: Suspicious Galka
+    at:           [81.610, 8.499, -229.065, 124]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  30
+        head:  4221
+        body:  8238
+        hands: 12334
+        legs:  16585
+        feet:  20681
+        main:  24576
+        sub:   28672
+      moving: 8
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17744183:
+    script:       Odyssean_Passage
+    display_name: Odyssean Passage
+    at:           [81.578, 8.499, -231.082, 141]
+    render:
+      look:
+        type:  standard
+        model: 2421
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17744184:
+    script:       Raving_Opossum
+    display_name: Raving Opossum
+    at:           [42.141, 7.500, -183.762, 68]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  30
+        head:  4221
+        body:  8195
+        hands: 12291
+        legs:  16585
+        feet:  20681
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17744185:
+    script:       Phantom_gems_Box
+    display_name: Phantom gems Box
+    at:           [43.000, 7.500, -185.550, 128]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+    content:  TVR
+
+  17744186:
+    script:       Greeter_Moogle
+    display_name: Greeter Moogle
+    at:           [40.500, 8.500, -242.276, 187]
+    render:
+      look:
+        type:  standard
+        model: 2419
+      moving: 15
+    widescan: true
+    content:  SOA
+
+  17744187:
+    script:       Mog_Dinghy
+    display_name: Mog Dinghy
+    at:           [81.039, 9.500, -174.014, 187]
+    render:
+      look:
+        type:  standard
+        model: 2784
+      name_vis:    96
+      moving:   32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17744188:
+    script:       Skipper_Moogle
+    display_name: Skipper Moogle
+    at:           [75.313, 7.500, -176.879, 57]
+    render:
+      look:
+        type:  standard
+        model: 2361
+      entity_flags: 259
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17744189:
+    script:       Clarion_Star
+    display_name: Clarion Star
+    at:           [81.478, 7.500, -24.169, 18]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  3
+        head:  4422
+        body:  8216
+        hands: 12370
+        legs:  16568
+        feet:  20613
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+    content:  TRUST_QUESTS
+
+  17744190:
+    script:       Mystic_Retriever
+    display_name: Mystic Retriever
+    at:           [83.330, 7.500, -22.380, 18]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags:    27
+      name_vis:        96
+      name_prefix:     34
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17744191:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17744192:
+    script: NPC[13f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17744193:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17744194:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17744195:
+    script:       Iroha
+    display_name: Iroha
+    at:           [1000.000, 0.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2449
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744196:
+    script:       Lion
+    display_name: Lion
+    render:
+      look:
+        type:  standard
+        model: 60
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744197:
+    script:       Zeid
+    display_name: Zeid
+    render:
+      look:
+        type:  standard
+        model: 830
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744198:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2450
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744199:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1206
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744200:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744201:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744202:
+    script:       Balamor
+    display_name: Balamor
+    render:
+      look:
+        type:  standard
+        model: 2742
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744203:
+    script:       qm3
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 1542
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744204:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17744205:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17744206:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744207:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  2
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744208:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744209:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  4
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744210:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  1
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744211:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  6
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744212:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  4
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744213:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  6
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17744214:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status: cutscene_only
+
+  17744215:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status: cutscene_only
+
+  17744216:
+    script:       Curio_Vendor_Moogle
+    display_name: Curio Vendor Moogle
+    at:           [82.000, 8.500, -241.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17744217:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112
+
+  17744218:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17744219:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17744220:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17744221:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+    status: cutscene_only
+
+  17744222:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+    status: cutscene_only
+
+  17744223:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+    status: cutscene_only
+
+  17744224:
+    script:       Ruenda
+    display_name: Ruenda
+    at:           [-150.000, -6.000, -1.500]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  1
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16401
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:  normal
+    content: TVR
+
+  17744225:
+    script:       Marin
+    display_name: Marin
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  2
+        head:  4096
+        body:  8212
+        hands: 12392
+        legs:  16392
+        feet:  20490
+        main:  24576
+        sub:   28672
+      entity_flags: 2077
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17744226:
+    script:       Ken
+    display_name: Ken
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  6
+        head:  4096
+        body:  8220
+        hands: 12316
+        legs:  16385
+        feet:  20508
+        main:  24576
+        sub:   28672
+      entity_flags: 2073
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17744227:
+    script:       Azima
+    display_name: Azima
+    render:
+      look:
+        type:  standard
+        model: 95
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17744228:
+    script:       Zeid
+    display_name: Zeid
+    render:
+      look:
+        type:  standard
+        model: 830
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17744229:
+    at: [-160.023, -7.480, 9.977, 224]
+    render:
+      look:
+        type: ship
+      door_id:      316
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17744230:
+    at: [-157.478, -7.480, 12.522, 224]
+    render:
+      look:
+        type: ship
+      door_id:      316
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17744231:
+    at: [-160.500, -7.480, 6.500, 160]
+    render:
+      look:
+        type: ship
+      door_id:      375
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17744232:
+    at: [-159.500, -7.480, 5.500, 160]
+    render:
+      look:
+        type: ship
+      door_id:      375
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17744233:
+    at: [-154.000, -7.480, 13.000, 32]
+    render:
+      look:
+        type: ship
+      door_id:      375
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17744234:
+    at: [-153.000, -7.480, 12.000, 32]
+    render:
+      look:
+        type: ship
+      door_id:      375
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17744235:
+    at: [-152.000, -7.480, 11.000, 32]
+    render:
+      look:
+        type: ship
+      door_id:      375
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17744236:
+    script:       AMAN_Liaison
+    display_name: A.M.A.N. Liaison
+    at:           [68.640, 8.500, -221.240, 64]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  12
+        head:  4215
+        body:  8295
+        hands: 12392
+        legs:  16486
+        feet:  20584
+        main:  24576
+        sub:   28672
+      name_vis: 1
+      moving:   1
+    status:  normal
+    content: SOA
+
+  17744237:
+    script: blank
+    at:     [-175.167, -6.000, -17.574, 116]
+    render:
+      look:
+        type:  standard
+        model: 2478
+      entity_flags: 2051
+      name_vis:      112
+      name_prefix:   130
+      moving:          1
+    status: normal
+
+  17744238:
+    script:       Tales_Beginning
+    display_name: Tales' Beginning
+    at:           [-175.167, -6.000, -17.574, 116]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:   1
+      name_vis:      112
+      name_prefix:   130
+      moving:          1
+    status:  normal
+    content: TVR
+
+  17744239:
+    script:       Ancestry_Moogle
+    display_name: Ancestry Moogle
+    at:           [52.000, 8.500, -221.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 8
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17744240:
+    script: blank
+    at:     [150.000, 0.000, -150.000]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17744241:
+    script:       Previous_Race
+    display_name: Previous Race
+    at:           [150.000, 0.000, -150.000]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 25
+      name_prefix:  32
+      moving:        1
+    content: SOA

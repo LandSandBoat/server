@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  198
+  battle_party: 198
+
+zonelines:
+
+  z510:
+    from:  [-700.982, -9.674, -32.345]
+    to:    the_shrine_of_ruavitau
+    at:    [-3.380, 46.326, 59.996, 3.141593]
+    scale: [1.000, 3.000]

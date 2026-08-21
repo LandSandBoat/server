@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, costume, auction_house, yell, los_player_block, assist]
+music:
+  day:          59
+  night:        59
+  battle_solo:  59
+  battle_party: 59
+
+zonelines:
+
+  z742:
+    from:  [-160.300, 0.000, -26.000]
+    to:    ceizak_battlegrounds
+    at:    [431.000, -1.928, 178.000, 3.141593]
+    scale: [1.000, 8.000]
+
+  z744:
+    from:  [180.000, 1.000, -20.000]
+    to:    eastern_adoulin
+    at:    [-150.000, -3.100, -20.000]
+    scale: [2.000, 25.000]
+
+  z746:
+    from:  [74.000, 8.845, -148.000]
+    to:    rala_waterways
+    at:    [-268.000, -7.850, -380.000, 3.141593]
+    scale: [1.000, 3.000]
+
+  z748:
+    from:  [-76.000, 21.051, 114.000]
+    to:    rala_waterways
+    at:    [-612.000, -7.863, 100.000]
+    scale: [1.000, 3.000]
+
+  zms8:
+    from:  [-4.500, -3.308, -146.000]
+    to:    western_adoulin
+    at:    [-1.000, -2.352, -142.500, 5.497787]
+    scale: [1.000, 6.000]
+
+  z74a:
+    from:  [138.000, 16.761, 4.000]
+    to:    rala_waterways
+    at:    [-188.000, -7.815, 60.000, 3.141593]
+    scale: [1.000, 3.000]

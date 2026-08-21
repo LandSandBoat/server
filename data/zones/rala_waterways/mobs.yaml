@@ -1,0 +1,1272 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Awoken_Hakenmann:
+    id:            6108
+    species:       orobon
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 3606
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Baleful_Tarichuk:
+    id:            5041
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1350
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Barnacle_Crab:
+    id:            5047
+    species:       crab
+    type:          [battlefield]
+    spell_list_id: 4
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 358
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Chalybeous_Slime:
+    id:            5043
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 129
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Depthswalker_Crab:
+    id:            5046
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      spawn:
+        respawn: 300
+
+  Duskbringer_Bat:
+    id:            5052
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Duskjaw_Obdella:
+    id:            5049
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Flavescent_Slime:
+    id:            5044
+    species:       clot
+    skill_list_id: 66
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 295
+        entity_flags: 129
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  New_Moon_Bats:
+    id:            5051
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  641
+        animation_sub:   8
+        name_prefix:    64
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Pewter_Diremite:
+    id:            5045
+    species:       diremite
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags: 641
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Plantpassage_Slug:
+    id:            5053
+    species:       slug
+    skill_list_id: 231
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          thunder: -1
+          water:   11
+        rank_status:
+          paralyze: -1
+          bind:     -1
+          poison:   11
+      render:
+        look:
+          type:  standard
+          model: 2021
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Rustwater_Toad:
+    id:      5038
+    species: toad
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2666
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:          6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Skittering_Spider:
+    id:            5050
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 313
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Spoutdrenched_Toad:
+    id:      5037
+    species: toad
+    attributes:
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:          6
+      spawn:
+        respawn: 300
+
+  Stillwater_Funguar:
+    id:            5040
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Unrelenting_Eft:
+    id:            5042
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 1153
+        hitbox:         10
+      spawn:
+        respawn: 300
+
+  Waterway_Pugil:
+    id:            5039
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Weatherworn_Leech:
+    id:            5048
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 641
+        hitbox:         9
+      spawn:
+        respawn: 300
+
+spawns:
+  17833985:
+    script: Sawtooth_Pugil
+    at:     [1.000, 1.000, 1.000]
+  17833986:
+    script: Sawtooth_Pugil
+    at:     [1.000, 1.000, 1.000]
+  17833987:
+    script: Sawtooth_Pugil
+    at:     [1.000, 1.000, 1.000]
+  17833988:
+    script: Waterlogged_Toad
+    at:     [1.000, 1.000, 1.000]
+  17833989:
+    script: Waterlogged_Toad
+    at:     [1.000, 1.000, 1.000]
+  17833990:
+    template: Spoutdrenched_Toad
+    at:       [-416.600, -6.267, -301.900, 151]
+    level:    [99, 107]
+  17833991:
+    template: Spoutdrenched_Toad
+    at:       [-420.200, -6.267, -297.850, 246]
+    level:    [99, 107]
+  17833992:
+    template: Spoutdrenched_Toad
+    at:       [-417.400, -6.267, -295.760, 72]
+    level:    [99, 107]
+  17833993:
+    template: Rustwater_Toad
+    at:       [-418.400, -6.267, -299.830, 65]
+    level:    [99, 107]
+  17833994:
+    template: Waterway_Pugil
+    at:       [-481.700, -1.541, -278.830, 254]
+    level:    [99, 107]
+  17833995:
+    template: Waterway_Pugil
+    at:       [-480.300, -1.549, -284.370, 72]
+    level:    [99, 107]
+  17833996:
+    template: Waterway_Pugil
+    at:       [-468.100, -1.500, -262.750, 192]
+    level:    [99, 107]
+  17833997:
+    template: Waterway_Pugil
+    at:       [-475.200, -1.506, -279.110, 9]
+    level:    [99, 107]
+  17833998:
+    template: Rustwater_Toad
+    at:       [-486.100, -1.503, -279.470, 127]
+    level:    [99, 107]
+  17833999:
+    template: Rustwater_Toad
+    at:       [-482.500, -1.539, -279.660, 253]
+    level:    [99, 107]
+  17834000:
+    template: Rustwater_Toad
+    at:       [-580.300, -8.000, -305.580, 29]
+    level:    [99, 107]
+  17834001:
+    template: Rustwater_Toad
+    at:       [-575.800, -8.000, -298.270, 2]
+    level:    [99, 107]
+  17834002:
+    template: Rustwater_Toad
+    at:       [-578.500, -8.000, -297.310, 67]
+    level:    [99, 107]
+  17834003:
+    template: Spoutdrenched_Toad
+    at:       [-498.400, -6.267, -225.810, 86]
+    level:    [99, 107]
+  17834004:
+    template: Spoutdrenched_Toad
+    at:       [-502.500, -6.267, -225.610, 66]
+    level:    [99, 107]
+  17834005:
+    template: Spoutdrenched_Toad
+    at:       [-498.700, -6.267, -219.600, 219]
+    level:    [99, 107]
+  17834006:
+    template: Rustwater_Toad
+    at:       [-496.600, -6.267, -217.700, 99]
+    level:    [99, 107]
+  17834007:
+    template: Stillwater_Funguar
+    at:       [-548.200, -1.500, -200.010, 168]
+    level:    [99, 107]
+  17834008:
+    template: Stillwater_Funguar
+    at:       [-553.700, -1.498, -213.370, 142]
+    level:    [99, 107]
+  17834009:
+    template: Stillwater_Funguar
+    at:       [-569.800, -1.498, -189.450, 145]
+    level:    [99, 107]
+  17834010:
+    template: Stillwater_Funguar
+    at:       [-550.400, -1.501, -189.900, 20]
+    level:    [99, 107]
+  17834011:
+    template: Spoutdrenched_Toad
+    at:       [-553.100, -1.498, -206.520, 152]
+    level:    [99, 107]
+  17834012:
+    template: Spoutdrenched_Toad
+    at:       [-561.000, -1.498, -207.140, 167]
+    level:    [99, 107]
+  17834013:
+    template: Chalybeous_Slime
+    at:       [-412.800, -8.000, -220.180, 202]
+    level:    [99, 107]
+  17834014:
+    template: Flavescent_Slime
+    at:       [-419.300, -8.000, -214.370, 144]
+    level:    [99, 107]
+  17834015:
+    template: Stillwater_Funguar
+    at:       [-436.500, -1.498, -171.050, 255]
+    level:    [99, 107]
+  17834016:
+    template: Stillwater_Funguar
+    at:       [-444.100, -1.498, -150.130, 241]
+    level:    [99, 107]
+  17834017:
+    template: Stillwater_Funguar
+    at:       [-444.000, -1.498, -154.510, 26]
+    level:    [99, 107]
+  17834018:
+    template: Stillwater_Funguar
+    at:       [-439.900, -1.498, -155.150, 119]
+    level:    [99, 107]
+  17834019:
+    template: Spoutdrenched_Toad
+    at:       [-442.900, -1.498, -165.210, 205]
+    level:    [99, 107]
+  17834020:
+    template: Spoutdrenched_Toad
+    at:       [-444.400, -1.498, -156.410, 229]
+    level:    [99, 107]
+  17834021:
+    template: Chalybeous_Slime
+    at:       [-503.000, -8.000, -140.630, 13]
+    level:    [99, 107]
+  17834022:
+    template: Flavescent_Slime
+    at:       [-499.600, -8.000, -140.500, 14]
+    level:    [99, 107]
+  17834023:
+    template: Baleful_Tarichuk
+    at:       [-524.400, -6.267, -40.249, 41]
+    level:    [99, 107]
+  17834024:
+    template: Baleful_Tarichuk
+    at:       [-522.100, -6.267, -35.876, 155]
+    level:    [99, 107]
+  17834025:
+    template: Unrelenting_Eft
+    at:       [-518.700, -6.267, -48.317, 8]
+    level:    [99, 107]
+  17834026:
+    template: Unrelenting_Eft
+    at:       [-525.700, -6.267, -33.092, 37]
+    level:    [99, 107]
+  17834027:
+    template: Unrelenting_Eft
+    at:       [-510.200, -6.265, -38.500, 67]
+    level:    [99, 107]
+  17834028:
+    template: Unrelenting_Eft
+    at:       [-522.900, -6.267, -50.418, 150]
+    level:    [99, 107]
+  17834029:
+    template: Stillwater_Funguar
+    at:       [-574.000, -6.267, -60.868, 49]
+    level:    [99, 107]
+  17834030:
+    template: Stillwater_Funguar
+    at:       [-583.900, -6.267, -63.365, 198]
+    level:    [99, 107]
+  17834031:
+    template: Spoutdrenched_Toad
+    at:       [-572.900, -6.267, -63.866, 169]
+    level:    [99, 107]
+  17834032:
+    template: Stillwater_Funguar
+    at:       [-421.500, -6.267, -58.312, 138]
+    level:    [99, 107]
+  17834033:
+    template: Stillwater_Funguar
+    at:       [-419.900, -6.267, -54.770, 218]
+    level:    [99, 107]
+  17834034:
+    template: Chalybeous_Slime
+    at:       [-499.900, -8.000, 21.442, 3]
+    level:    [99, 107]
+  17834035:
+    template: Flavescent_Slime
+    at:       [-499.900, -8.000, 15.982, 215]
+    level:    [99, 107]
+  17834036:
+    template: Chalybeous_Slime
+    at:       [-422.900, -8.000, 18.838, 70]
+    level:    [99, 107]
+  17834037:
+    template: Flavescent_Slime
+    at:       [-425.800, -8.000, 17.794, 107]
+    level:    [99, 107]
+  17834038:
+    template: Pewter_Diremite
+    at:       [-417.900, -6.267, 96.100, 151]
+    level:    [99, 107]
+  17834039:
+    template: Pewter_Diremite
+    at:       [-425.600, -6.267, 93.071, 118]
+    level:    [99, 107]
+  17834040:
+    template: Pewter_Diremite
+    at:       [-506.100, -6.267, 99.671, 179]
+    level:    [99, 107]
+  17834041:
+    template: Pewter_Diremite
+    at:       [-494.300, -6.267, 99.969, 230]
+    level:    [99, 107]
+  17834042:
+    template: Pewter_Diremite
+    at:       [-336.500, -6.267, 24.680, 156]
+    level:    [99, 107]
+  17834043:
+    template: Pewter_Diremite
+    at:       [-345.500, -6.267, 22.430, 74]
+    level:    [99, 107]
+  17834044:
+    template: Chalybeous_Slime
+    at:       [-257.200, -8.000, 18.348, 70]
+    level:    [99, 107]
+  17834045:
+    template: Flavescent_Slime
+    at:       [-257.600, -8.000, 24.789, 212]
+    level:    [99, 107]
+  17834046:
+    template: Depthswalker_Crab
+    at:       [-180.400, -6.267, 18.826, 77]
+    level:    [99, 107]
+  17834047:
+    template: Depthswalker_Crab
+    at:       [-170.200, -6.267, 21.705, 132]
+    level:    [99, 107]
+  17834048:
+    template: Barnacle_Crab
+    at:       [-184.900, -6.267, 23.138, 156]
+    level:    [99, 107]
+  17834049:
+    template: Depthswalker_Crab
+    at:       [-148.300, -6.267, 19.332, 89]
+    level:    [99, 107]
+  17834050:
+    template: Depthswalker_Crab
+    at:       [-144.300, -6.267, 21.218, 178]
+    level:    [99, 107]
+  17834051:
+    template: Barnacle_Crab
+    at:       [-157.400, -6.267, 18.463, 132]
+    level:    [99, 107]
+  17834052:
+    template: Depthswalker_Crab
+    at:       [-132.800, -6.267, 26.177, 233]
+    level:    [99, 107]
+  17834053:
+    template: Depthswalker_Crab
+    at:       [-130.800, -6.267, 22.061, 157]
+    level:    [99, 107]
+  17834054:
+    template: Barnacle_Crab
+    at:       [-97.230, -6.267, 20.334, 77]
+    level:    [99, 107]
+  17834055:
+    template: Depthswalker_Crab
+    at:       [-97.010, -6.267, 17.902, 164]
+    level:    [99, 107]
+  17834056:
+    template: Depthswalker_Crab
+    at:       [-97.470, -6.267, 15.317, 99]
+    level:    [99, 107]
+  17834057:
+    template: Barnacle_Crab
+    at:       [-105.363, -6.267, 26.618, 137]
+    level:    [99, 107]
+  17834058:
+    template: Weatherworn_Leech
+    at:       [-23.490, -8.000, 22.714, 243]
+    level:    [99, 107]
+  17834059:
+    template: Duskjaw_Obdella
+    at:       [-19.690, -8.000, 23.181, 13]
+    level:    [99, 107]
+  17834060:
+    template: Skittering_Spider
+    at:       [62.712, -6.267, 22.907, 116]
+    level:    [99, 107]
+  17834061:
+    template: Skittering_Spider
+    at:       [61.193, -6.267, 25.932, 187]
+    level:    [99, 107]
+  17834062:
+    template: Weatherworn_Leech
+    at:       [140.430, -8.000, 22.534, 127]
+    level:    [99, 107]
+  17834063:
+    template: Duskjaw_Obdella
+    at:       [141.640, -8.000, 19.115, 94]
+    level:    [99, 107]
+  17834064:
+    template: Skittering_Spider
+    at:       [199.600, -6.264, -10.482, 2]
+    level:    [99, 107]
+  17834065:
+    template: Skittering_Spider
+    at:       [208.060, -6.268, 7.356, 103]
+    level:    [99, 107]
+  17834066:
+    template: Skittering_Spider
+    at:       [196.220, -6.267, 4.226, 103]
+    level:    [99, 107]
+  17834067:
+    template: Skittering_Spider
+    at:       [186.850, -6.267, -2.796, 47]
+    level:    [99, 107]
+  17834068:
+    template: New_Moon_Bats
+    at:       [207.850, -6.267, -3.126, 38]
+    level:    [99, 107]
+  17834069:
+    template: New_Moon_Bats
+    at:       [189.070, -6.267, -3.140, 77]
+    level:    [99, 107]
+  17834070:
+    template: Duskbringer_Bat
+    at:       [142.030, -6.267, 100.556, 29]
+    level:    [99, 107]
+  17834071:
+    template: Duskbringer_Bat
+    at:       [137.030, -6.267, 99.751, 217]
+    level:    [99, 107]
+  17834072:
+    template: New_Moon_Bats
+    at:       [137.990, -6.267, 93.791, 62]
+    level:    [99, 107]
+  17834073:
+    template: Duskbringer_Bat
+    at:       [217.070, -8.000, 98.130, 41]
+    level:    [99, 107]
+  17834074:
+    template: Duskbringer_Bat
+    at:       [225.820, -8.000, 96.364, 234]
+    level:    [99, 107]
+  17834075:
+    template: New_Moon_Bats
+    at:       [222.700, -8.000, 104.143, 189]
+    level:    [99, 107]
+  17834076:
+    template: Duskbringer_Bat
+    at:       [294.490, -6.267, 98.623, 71]
+    level:    [99, 107]
+  17834077:
+    template: Duskbringer_Bat
+    at:       [295.410, -6.267, 102.099, 101]
+    level:    [99, 107]
+  17834078:
+    template: New_Moon_Bats
+    at:       [304.160, -6.267, 93.593, 115]
+    level:    [99, 107]
+  17834079:
+    template: Skittering_Spider
+    at:       [302.450, -8.000, 16.195, 203]
+    level:    [99, 107]
+  17834080:
+    template: Skittering_Spider
+    at:       [295.660, -8.000, 22.716, 102]
+    level:    [99, 107]
+  17834081:
+    template: Skittering_Spider
+    at:       [302.270, -8.000, 21.413, 237]
+    level:    [99, 107]
+  17834082:
+    template: Skittering_Spider
+    at:       [307.060, -6.267, -60.202, 48]
+    level:    [99, 107]
+  17834083:
+    template: Skittering_Spider
+    at:       [299.190, -6.267, -64.383, 69]
+    level:    [99, 107]
+  17834084:
+    template: Skittering_Spider
+    at:       [294.600, -6.267, -55.978, 75]
+    level:    [99, 107]
+  17834085:
+    template: Weatherworn_Leech
+    at:       [220.980, -8.000, -65.150, 9]
+    level:    [99, 107]
+  17834086:
+    template: Duskjaw_Obdella
+    at:       [215.140, -8.000, -60.269, 107]
+    level:    [99, 107]
+  17834087:
+    template: Duskbringer_Bat
+    at:       [146.550, -6.267, -56.553, 56]
+    level:    [99, 107]
+  17834088:
+    template: New_Moon_Bats
+    at:       [137.170, -6.267, -62.241, 204]
+    level:    [99, 107]
+  17834089:
+    template: New_Moon_Bats
+    at:       [137.190, -6.267, -53.191, 198]
+    level:    [99, 107]
+  17834090:
+    template: Plantpassage_Slug
+    at:       [225.120, -8.000, -139.850, 33]
+    level:    [99, 107]
+  17834091:
+    template: Plantpassage_Slug
+    at:       [216.870, -8.000, -133.550, 217]
+    level:    [99, 107]
+  17834092:
+    template: Duskjaw_Obdella
+    at:       [152.380, -6.265, -159.270, 212]
+    level:    [99, 107]
+  17834093:
+    template: Duskjaw_Obdella
+    at:       [167.860, -6.265, -160.670, 42]
+    level:    [99, 107]
+  17834094:
+    template: Duskjaw_Obdella
+    at:       [158.270, -6.267, -154.750, 7]
+    level:    [99, 107]
+  17834095:
+    template: Plantpassage_Slug
+    at:       [164.510, -6.267, -162.720, 118]
+    level:    [99, 107]
+  17834096:
+    template: Plantpassage_Slug
+    at:       [172.510, -6.271, -156.870, 245]
+    level:    [99, 107]
+  17834097:
+    template: Duskjaw_Obdella
+    at:       [244.560, -6.265, -189.130, 142]
+    level:    [99, 107]
+  17834098:
+    template: Duskjaw_Obdella
+    at:       [244.000, -6.267, -205.790, 155]
+    level:    [99, 107]
+  17834099:
+    template: Duskjaw_Obdella
+    at:       [244.190, -6.267, -195.700, 95]
+    level:    [99, 107]
+  17834100:
+    template: Plantpassage_Slug
+    at:       [247.100, -6.267, -197.410, 2]
+    level:    [99, 107]
+  17834101:
+    template: Plantpassage_Slug
+    at:       [231.510, -6.265, -201.780, 187]
+    level:    [99, 107]
+  17834102:
+    template: Duskjaw_Obdella
+    at:       [300.880, -6.267, -186.270, 50]
+    level:    [99, 107]
+  17834103:
+    template: Duskjaw_Obdella
+    at:       [298.760, -6.267, -179.960, 161]
+    level:    [99, 107]
+  17834104:
+    template: Weatherworn_Leech
+    at:       [302.510, -8.000, -226.390, 88]
+    level:    [99, 107]
+  17834105:
+    template: Weatherworn_Leech
+    at:       [294.070, -8.000, -220.310, 178]
+    level:    [99, 107]
+  17834106:
+    template: Plantpassage_Slug
+    at:       [143.290, -8.000, -215.600, 165]
+    level:    [99, 107]
+  17834107:
+    template: Plantpassage_Slug
+    at:       [146.120, -8.000, -221.860, 31]
+    level:    [99, 107]
+  17834108:
+    template: Waterway_Pugil
+    at:       [194.970, -1.506, -262.990, 135]
+    level:    [99, 107]
+  17834109:
+    template: Waterway_Pugil
+    at:       [199.500, -1.539, -280.360, 255]
+    level:    [99, 107]
+  17834110:
+    template: Waterway_Pugil
+    at:       [206.230, -1.508, -280.260, 246]
+    level:    [99, 107]
+  17834111:
+    template: New_Moon_Bats
+    at:       [201.050, -1.549, -285.010, 75]
+    level:    [99, 107]
+  17834112:
+    template: New_Moon_Bats
+    at:       [199.910, -1.541, -279.770, 254]
+    level:    [99, 107]
+  17834113:
+    template: Waterway_Pugil
+    at:       [-538.000, -6.267, -299.760, 127]
+    level:    [99, 107]
+  17834114:
+    template: Waterway_Pugil
+    at:       [-459.100, -6.267, -218.460, 62]
+    level:    [99, 107]
+  17834115:
+    template: Waterway_Pugil
+    at:       [-533.300, -6.267, -139.430, 129]
+    level:    [99, 107]
+  17834116:
+    template: Unrelenting_Eft
+    at:       [-540.200, -6.267, 20.571]
+    level:    [99, 107]
+  17834117:
+    template: Unrelenting_Eft
+    at:       [-453.500, -6.267, -59.120, 128]
+    level:    [99, 107]
+  17834118:
+    template: Baleful_Tarichuk
+    at:       [-499.700, -6.267, 67.327, 64]
+    level:    [99, 107]
+  17834119:
+    template: Pewter_Diremite
+    at:       [-453.200, -6.267, 21.011, 128]
+    level:    [99, 107]
+  17834120:
+    template: Pewter_Diremite
+    at:       [-420.000, -6.267, 65.251, 191]
+    level:    [99, 107]
+  17834121:
+    template: Pewter_Diremite
+    at:       [-453.700, -6.267, 101.011, 128]
+    level:    [99, 107]
+  17834122:
+    template: Pewter_Diremite
+    at:       [-544.600, -6.267, 100.711, 129]
+    level:    [99, 107]
+  17834123:
+    template: Chalybeous_Slime
+    at:       [-309.500, -6.267, 20.700, 128]
+    level:    [99, 107]
+  17834124:
+    template: Depthswalker_Crab
+    at:       [-221.800, -6.267, 20.521, 2]
+    level:    [99, 107]
+  17834125:
+    template: Depthswalker_Crab
+    at:       [-65.240, -6.267, 20.434, 126]
+    level:    [99, 107]
+  17834126:
+    template: Weatherworn_Leech
+    at:       [20.204, -6.267, 20.406, 127]
+    level:    [99, 107]
+  17834127:
+    template: New_Moon_Bats
+    at:       [139.110, -6.267, 57.444, 191]
+    level:    [99, 107]
+  17834128:
+    template: Duskbringer_Bat
+    at:       [181.470, -6.267, 100.058, 255]
+    level:    [99, 107]
+  17834129:
+    template: Duskbringer_Bat
+    at:       [259.210, -6.267, 96.066, 50]
+    level:    [99, 107]
+  17834130:
+    template: New_Moon_Bats
+    at:       [219.140, -6.267, 58.649, 191]
+    level:    [99, 107]
+  17834131:
+    template: New_Moon_Bats
+    at:       [299.130, -6.267, 66.174, 64]
+    level:    [99, 107]
+  17834132:
+    template: Skittering_Spider
+    at:       [252.840, -6.267, 19.233]
+    level:    [99, 107]
+  17834133:
+    template: Skittering_Spider
+    at:       [299.480, -6.267, -21.764, 191]
+    level:    [99, 107]
+  17834134:
+    template: Depthswalker_Crab
+    at:       [266.160, -6.267, -60.772, 128]
+    level:    [99, 107]
+  17834135:
+    template: Duskbringer_Bat
+    at:       [175.630, -6.267, -60.914, 127]
+    level:    [99, 107]
+  17834136:
+    template: Plantpassage_Slug
+    at:       [180.080, -6.267, -229.790, 64]
+    level:    [99, 107]
+  17834137:
+    template: Awoken_Hakenmann
+    at:       [307.000, -6.270, 107.000, 86]
+    level:    [119, 119]

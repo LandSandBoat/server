@@ -1,0 +1,3772 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Altedour_I_Tavnazia:
+    id:            99
+    species:       shadow
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 552
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp: 20000
+    loot:
+      drops:
+        - chance: always
+          item:   tavnazian_mask
+        - chance: rare
+          item:   revival_tree_root
+
+  Arcus_Blades:
+    id:            6889
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 14
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [blm, whm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 459
+        entity_flags:  131
+        animation_sub:   5
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Australis_Shadow:
+    id:            6894
+    species:       shadow
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 550
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Balayang:
+    id:            6474
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 645
+        model_size:     2
+        hitbox:        14
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+    content: ABYSSEA
+
+  Borealis_Shadow:
+    id:            6893
+    species:       shadow
+    type:          [notorious]
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 549
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Camazotz_FY:
+    id:            6453
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: very_common
+          item:   bat_fang
+        - chance: very_common
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Capricious_Cassie:
+    id:            630
+    species:       morbol
+    type:          [notorious]
+    skill_list_id: 411
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    200
+        dmg_mult: 125
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 381
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 43000
+    loot:
+      drops:
+        - chance: very_common
+          item:   reraiser
+        - chance: very_common
+          item:   vile_elixir
+        - chance: very_common
+          item:   amity_cape
+        - chance: common
+          item:   vile_elixir_+1
+        - chance: common
+          item:   aiming_bracelets
+        - chance: common
+          item:   hi-reraiser
+        - chance: common
+          item:   cassie_earring
+        - chance: uncommon
+          item:   spool_of_malboro_fiber
+      steal: malboro_vine
+
+  Carousing_Celine:
+    id:            6896
+    species:       morbol
+    type:          [notorious]
+    skill_list_id: 411
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 381
+        entity_flags:  159
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      3
+        hitbox:         44
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Clockwork_Pod_FY:
+    id:            744
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 131
+        model_size:     1
+        hitbox:        37
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          item:   piece_of_eastern_pottery
+        - chance: very_rare
+          item:   zircon
+      despoil:
+        magic_pot_shard: 0
+
+  Colossus:
+    id:            770
+    species:       golem
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 4
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_mythril_ore
+        - chance: rare
+          item:   golem_shard
+      despoil:
+        chunk_of_mythril_ore: 0
+        golem_shard:          0
+
+  Dabotzs_Ghost:
+    id:            888
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5400
+        mp: 5400
+
+  Dark_Elemental:
+    id:            913
+    species:       dark_elemental
+    spell_list_id: 18
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        immune_status: [blind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 443
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+
+  Droma_FY:
+    id:            1120
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 133
+        model_size:     2
+        hitbox:        43
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   magic_pot_shard
+        - chance: rare
+          item:   scroll_of_enfire_ii
+        - chance: rare
+          item:   vial_of_mercury
+        - chance: very_rare
+          item:   painite
+      despoil:
+        magic_pot_shard: 0
+
+  Drone:
+    id:            1122
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  131
+        animation_sub:  12
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   doll_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+
+  Eastern_Shadow:
+    id:            1164
+    species:       shadow
+    type:          [notorious]
+    skill_list_id: 223
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 552
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3400
+    loot:
+      drops:
+        - chance: always
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   valis_bow
+
+  Goliath:
+    id:            1754
+    species:       golem
+    type:          [notorious]
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 4
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3500
+    loot:
+      drops:
+        - chance: always
+          item:   slab_of_granite
+        - chance: common
+          item:   chunk_of_mythril_ore
+        - chance: common
+          item:   golem_shard
+
+  Hellish_Weapon:
+    id:            1921
+    species:       evil_weapon
+    spell_list_id: 42
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   scroll_of_reraise_ii
+
+  Ice_Elemental:
+    id:            2043
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 437
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+
+  Jenglot:
+    id:            5324
+    species:       doll
+    type:          [notorious]
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        immune_status: [gravity, bind, slow, light_sleep, dark_sleep]
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 7200
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aptant_of_haelan
+        - chance: uncommon
+          item:   aptant_of_secan
+    content: WOTG
+
+  Killing_Weapon:
+    id:            2231
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Mind_Hoarder:
+    id:            5765
+    species:       magic_pot
+    type:          [notorious]
+    skill_list_id: 2016
+    attributes:
+      combat:
+        skill: scythe
+        delay: 190
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 131
+        model_size:     1
+        hitbox:        37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7100
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lleus_charm
+    content: WOTG
+
+  Miser_Murphy:
+    id:            2678
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+        delay: 200
+      jobs: [rdm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: always
+          item:   antique_coin
+
+  Northern_Shadow:
+    id:            2907
+    species:       shadow
+    type:          [notorious]
+    skill_list_id: 223
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 549
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3500
+    loot:
+      drops:
+        - chance: always
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   executioner
+
+  Occidentalis_Shadow:
+    id:            6895
+    species:       shadow
+    type:          [notorious]
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 551
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ore_Golem:
+    id:            3051
+    species:       golem
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 1153
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 4
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_mythril_ore
+        - chance: rare
+          item:   golem_shard
+        - chance: very_rare
+          item:   feiyin_chest_key
+      despoil:
+        chunk_of_mythril_ore: 0
+        golem_shard:          0
+
+  Orientalis_Shadow:
+    id:            6892
+    species:       shadow
+    type:          [notorious]
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 552
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Revenant_SoZ_ENS_FY:
+    id:            3358
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_silk_cloth: 0
+
+  Sentient_Carafe:
+    id:            6598
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         43
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+      despoil:
+        magic_pot_shard: 0
+    content: ABYSSEA
+
+  Shadow_blm:
+    id:            5317
+    species:       shadow
+    spell_list_id: 21
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 535
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   ingot_of_royal_treasury_gold
+        - chance: rare
+          item:   feiyin_chest_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Shadow_rng:
+    id:            5319
+    species:       shadow
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 543
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   ingot_of_royal_treasury_gold
+        - chance: rare
+          item:   feiyin_chest_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Shadow_thf:
+    id:            5318
+    species:       shadow
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 539
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   ingot_of_royal_treasury_gold
+        - chance: rare
+          item:   feiyin_chest_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Shadow_war:
+    id:            3561
+    species:       shadow
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 531
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   ingot_of_royal_treasury_gold
+        - chance: rare
+          item:   feiyin_chest_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Sluagh:
+    id:            5323
+    species:       ghost
+    type:          [notorious]
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_ensanguined_cloth
+    content: WOTG
+
+  Southern_Shadow:
+    id:            3709
+    species:       shadow
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 223
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 360
+      jobs: [rdm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 550
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3550
+    loot:
+      drops:
+        - chance: always
+          item:   revival_tree_root
+        - chance: common
+          item:   master_shield
+
+  Specter_blm:
+    id:            5320
+    species:       shadow
+    spell_list_id: 21
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 536
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+      despoil:
+        revival_tree_root: 0
+
+  Specter_rng:
+    id:            5322
+    species:       shadow
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 540
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+      despoil:
+        revival_tree_root: 0
+
+  Specter_thf:
+    id:            5321
+    species:       shadow
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 544
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+      despoil:
+        revival_tree_root: 0
+
+  Specter_war:
+    id:            3723
+    species:       shadow
+    skill_list_id: 221
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 532
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+      despoil:
+        revival_tree_root: 0
+
+  Talos:
+    id:            3841
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  133
+        animation_sub:   4
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   doll_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+
+  Undead_Bats_FY:
+    id:            4092
+    display_name:  Undead_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  1667
+        animation_sub:    8
+        name_prefix:     64
+        model_size:       1
+        hitbox:          16
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: common
+          item:   bat_fang
+      despoil:
+        bat_wing: 0
+
+  Underworld_Bats:
+    id:            4098
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  1669
+        animation_sub:    8
+        name_prefix:     64
+        model_size:       2
+        hitbox:          18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   feiyin_chest_key
+        - chance: very_common
+          item:   bat_fang
+        - chance: very_common
+          item:   bat_wing
+        - chance: very_common
+          item:   bat_fang
+      despoil:
+        bat_wing: 0
+
+  Utukku_EN_FY:
+    id:            6512
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1157
+        model_size:      2
+        hitbox:          9
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: rare
+          item:   wandering_bulb
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Vampire_Bat_FY:
+    id:            5132
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Wekufe:
+    id:            6513
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+    content: ABYSSEA
+
+  Western_Shadow:
+    id:            4323
+    species:       shadow
+    type:          [notorious]
+    skill_list_id: 223
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 370
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 551
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3750
+    loot:
+      drops:
+        - chance: always
+          item:   revival_tree_root
+        - chance: common
+          item:   retaliators
+
+spawns:
+  17612801:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-159.400, -24.080, -171.050, 36]
+    level:    [38, 40]
+  17612802:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-155.500, -23.690, -154.960, 254]
+    level:    [38, 40]
+  17612803:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-148.700, -24.050, -164.430, 96]
+    level:    [38, 40]
+  17612804:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-124.200, -24.110, -140.740, 21]
+    level:    [38, 40]
+  17612805:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-101.100, -18.590, -129.830, 176]
+    level:    [38, 40]
+  17612806:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    level:    [40, 42]
+  17612807:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    at:       [-67.810, -16.120, -77.848, 191]
+    level:    [40, 42]
+  17612808:
+    template: Drone
+    at:       [-77.610, -15.530, -80.357, 27]
+    level:    [41, 43]
+  17612809:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-77.560, -15.870, -87.319, 211]
+    level:    [40, 42]
+  17612810:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-77.770, -15.580, -76.382, 89]
+    level:    [40, 42]
+  17612811:
+    template: Sluagh
+    at:       [-45.476, 0.462, 166.588, 12]
+    level:    [77, 77]
+  17612812:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    level:    [40, 42]
+  17612813:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    at:       [-149.700, -16.100, -63.941, 150]
+    level:    [40, 42]
+  17612814:
+    template: Drone
+    at:       [-146.000, -15.530, -79.686, 151]
+    level:    [41, 43]
+  17612815:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-130.200, -15.770, -86.974, 69]
+    level:    [40, 42]
+  17612816:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-138.500, -16.040, -91.292, 160]
+    level:    [40, 42]
+  17612817:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    at:       [-127.300, -15.530, -57.132, 162]
+    level:    [40, 42]
+  17612818:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    at:       [-102.800, -16.060, -55.834, 224]
+    level:    [40, 42]
+  17612819:
+    template: Drone
+    at:       [-129.600, -15.800, -53.706, 167]
+    level:    [41, 43]
+  17612820:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-121.000, -15.530, -54.707, 39]
+    level:    [40, 42]
+  17612821:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-131.500, -16.040, -46.622, 58]
+    level:    [40, 42]
+  17612822:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-220.700, -16.110, -8.371, 205]
+    level:    [38, 40]
+  17612823:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-203.000, -16.110, -19.106, 135]
+    level:    [38, 40]
+  17612824:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-133.200, -16.090, -23.271, 26]
+    level:    [38, 40]
+  17612825:
+    template: Drone
+    at:       [-192.000, -16.110, -10.340, 62]
+    level:    [41, 43]
+  17612826:
+    template: Drone
+    level:    [41, 43]
+  17612827:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-99.080, -16.110, 33.120, 76]
+    level:    [38, 40]
+  17612828:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-98.320, -16.110, 29.501, 130]
+    level:    [38, 40]
+  17612829:
+    template: Drone
+    at:       [-109.000, -16.110, 11.384, 177]
+    level:    [41, 43]
+  17612830:
+    template: Drone
+    level:    [41, 43]
+  17612831:
+    template: Drone
+    level:    [41, 43]
+  17612832:
+    template: Drone
+    at:       [-88.090, -16.110, 33.298, 226]
+    level:    [41, 43]
+  17612833:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    at:       [-54.300, -16.500, 55.810, 91]
+    level:    [40, 42]
+  17612834:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-38.320, -16.070, 34.108, 134]
+    level:    [40, 42]
+  17612835:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-28.460, -15.950, 39.163, 195]
+    level:    [40, 42]
+  17612836:
+    template: Altedour_I_Tavnazia
+    at:       [-52.500, -16.520, 38.000, 95]
+    level:    [65, 65]
+  17612837:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    at:       [13.751, -16.510, 46.638, 150]
+    level:    [40, 42]
+  17612838:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [10.446, -16.350, 45.419, 110]
+    level:    [40, 42]
+  17612839:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-9.081, -15.920, 39.977, 236]
+    level:    [40, 42]
+  17612840:
+    template: Jenglot
+    at:       [12.975, -16.500, 46.591, 164]
+    level:    [73, 73]
+  17612841:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    at:       [-53.830, -16.500, 80.719, 66]
+    level:    [40, 42]
+  17612842:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-40.220, -16.380, 91.236, 203]
+    level:    [40, 42]
+  17612843:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [-28.910, -15.930, 83.269, 75]
+    level:    [40, 42]
+  17612844:
+    template: Revenant_SoZ_ENS_FY
+    script:   Revenant
+    at:       [10.006, -16.420, 79.364, 221]
+    level:    [40, 42]
+  17612845:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [0.706, -15.930, 77.783, 54]
+    level:    [40, 42]
+  17612846:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [0.714, -15.920, 74.658, 199]
+    level:    [40, 42]
+  17612847:
+    template: Clockwork_Pod_FY
+    script:   Clockwork_Pod
+    at:       [-37.460, -16.130, 65.014, 225]
+    level:    [41, 43]
+  17612848:
+    template: Clockwork_Pod_FY
+    script:   Clockwork_Pod
+    at:       [-16.460, -16.130, 43.918, 215]
+    level:    [41, 43]
+  17612849:
+    template: Miser_Murphy
+    at:       [-2.782, -16.430, 48.308, 192]
+    level:    [62, 62]
+  17612850:
+    template: Ore_Golem
+    at:       [-13.060, -16.490, 20.570, 41]
+    level:    [43, 45]
+  17612851:
+    template: Ore_Golem
+    at:       [-28.010, -16.490, 99.679, 118]
+    level:    [43, 45]
+  17612852:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-21.560, -16.110, -4.473, 120]
+    level:    [38, 40]
+  17612853:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-26.410, -16.110, -21.256, 141]
+    level:    [38, 40]
+  17612854:
+    template: Drone
+    level:    [41, 43]
+  17612855:
+    template: Drone
+    at:       [-12.130, -16.110, -30.658, 186]
+    level:    [41, 43]
+  17612856:
+    template: Clockwork_Pod_FY
+    script:   Clockwork_Pod
+    at:       [48.618, -16.120, -49.437, 90]
+    level:    [41, 43]
+  17612857:
+    template: Clockwork_Pod_FY
+    script:   Clockwork_Pod
+    at:       [36.859, -15.590, -40.449, 239]
+    level:    [41, 43]
+  17612858:
+    template: Clockwork_Pod_FY
+    script:   Clockwork_Pod
+    at:       [44.902, -15.950, -49.444, 126]
+    level:    [41, 43]
+  17612859:
+    template: Mind_Hoarder
+    at:       [40.000, -15.500, -38.000, 60]
+    level:    [61, 62]
+  17612860:
+    template: Drone
+    at:       [-27.316, -16.113, -50.322, 83]
+    level:    [41, 43]
+  17612861:
+    template: Drone
+    at:       [-7.513, -16.110, -50.102, 61]
+    level:    [41, 43]
+  17612862:
+    template: Ore_Golem
+    at:       [200.600, -23.760, -47.527, 149]
+    level:    [43, 45]
+  17612863:
+    template: Ore_Golem
+    at:       [193.250, -23.990, -47.166, 122]
+    level:    [43, 45]
+  17612864:
+    template: Drone
+    at:       [222.130, -24.110, 66.380, 166]
+    level:    [41, 43]
+  17612865:
+    template: Drone
+    at:       [219.370, -24.110, 42.759, 158]
+    level:    [41, 43]
+  17612866:
+    template: Ore_Golem
+    at:       [206.990, -23.870, 167.186, 103]
+    level:    [43, 45]
+  17612867:
+    template: Ore_Golem
+    at:       [205.590, -24.070, 150.337, 16]
+    level:    [43, 45]
+  17612868:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [10.383, -16.120, -60.541, 97]
+    level:    [38, 40]
+  17612869:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-48.190, -16.120, -58.236, 180]
+    level:    [38, 40]
+  17612870:
+    template: Shadow_war
+    script:   Shadow
+    at:       [1.234, -16.113, -99.182, 21]
+    level:    [44, 46]
+  17612871:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [-21.320, -16.110, -76.029, 67]
+    level:    [44, 46]
+  17612872:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [-10.301, -16.110, -100.174, 37]
+    level:    [44, 46]
+  17612873:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [17.775, -16.090, -105.290, 132]
+    level:    [44, 46]
+  17612874:
+    template: Shadow_war
+    script:   Shadow
+    at:       [21.215, -16.110, -135.890, 246]
+    level:    [44, 46]
+  17612875:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [53.333, -16.100, -138.760, 55]
+    level:    [44, 46]
+  17612876:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [41.986, -16.110, -137.870, 232]
+    level:    [44, 46]
+  17612877:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [24.289, -16.113, -140.793, 131]
+    level:    [44, 46]
+  17612878:
+    template: Shadow_war
+    script:   Shadow
+    at:       [143.707, -24.500, -98.164, 3]
+    level:    [44, 46]
+  17612879:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [110.540, -22.710, -101.630, 99]
+    level:    [44, 46]
+  17612880:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [130.120, -24.120, -100.530, 242]
+    level:    [44, 46]
+  17612881:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [133.660, -24.120, -100.590, 135]
+    level:    [44, 46]
+  17612882:
+    template: Wekufe
+    at:       [156.910, -23.720, -86.917, 37]
+    level:    [97, 98]
+  17612883:
+    template: Wekufe
+    at:       [155.140, -23.670, -84.502, 164]
+    level:    [97, 99]
+  17612884:
+    template: Wekufe
+    at:       [156.720, -24.100, -68.772, 209]
+    level:    [98, 99]
+  17612885:
+    template: Wekufe
+    at:       [137.290, -24.620, -61.514, 107]
+    level:    [98, 99]
+  17612886:
+    template: Wekufe
+    at:       [126.460, -24.120, -31.284, 165]
+    level:    [97, 99]
+  17612887:
+    template: Wekufe
+    at:       [119.990, -23.920, -38.256, 214]
+    level:    [98, 98]
+  17612888:
+    template: Wekufe
+    at:       [119.340, -23.560, -41.310, 67]
+    level:    [98, 99]
+  17612889:
+    template: Wekufe
+    at:       [116.760, -23.730, -45.855, 220]
+    level:    [97, 99]
+  17612890:
+    template: Shadow_war
+    script:   Shadow
+    at:       [101.860, -24.110, 2.545, 249]
+    level:    [44, 46]
+  17612891:
+    template: Shadow_war
+    script:   Shadow
+    at:       [85.411, -24.080, 19.200, 122]
+    level:    [44, 46]
+  17612892:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [95.426, -24.080, 16.580, 113]
+    level:    [44, 46]
+  17612893:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [99.460, -24.110, -18.889, 167]
+    level:    [44, 46]
+  17612894:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [85.178, -24.110, 18.722, 74]
+    level:    [44, 46]
+  17612895:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [75.204, -22.720, 21.096, 109]
+    level:    [44, 46]
+  17612896:
+    template: Shadow_war
+    script:   Shadow
+    at:       [63.209, -16.100, 90.033, 177]
+    level:    [44, 46]
+  17612897:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [55.674, -16.100, 57.453, 120]
+    level:    [44, 46]
+  17612898:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [57.205, -16.100, 66.684, 215]
+    level:    [44, 46]
+  17612899:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [61.180, -16.110, 42.133, 62]
+    level:    [44, 46]
+  17612900:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [57.681, -16.250, 61.488, 151]
+    level:    [44, 46]
+  17612901:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [61.458, -16.500, 75.670, 81]
+    level:    [44, 46]
+  17612902:
+    template: Wekufe
+    at:       [155.010, -23.820, 6.555, 95]
+    level:    [97, 99]
+  17612903:
+    template: Wekufe
+    at:       [156.800, -23.830, 8.568, 65]
+    level:    [97, 99]
+  17612904:
+    template: Wekufe
+    at:       [164.650, -23.650, -2.242, 252]
+    level:    [97, 99]
+  17612905:
+    template: Wekufe
+    at:       [155.180, -23.980, -6.105, 246]
+    level:    [97, 97]
+  17612906:
+    template: Sentient_Carafe
+    at:       [113.700, -23.660, 45.976, 206]
+    level:    [98, 99]
+  17612907:
+    template: Sentient_Carafe
+    at:       [107.400, -24.380, 51.150, 83]
+    level:    [98, 99]
+  17612908:
+    template: Sentient_Carafe
+    at:       [116.710, -23.670, 56.036, 13]
+    level:    [98, 99]
+  17612909:
+    template: Sentient_Carafe
+    at:       [127.870, -24.490, 95.561, 224]
+    level:    [98, 99]
+  17612910:
+    template: Sentient_Carafe
+    at:       [130.240, -25.180, 55.396, 140]
+    level:    [98, 99]
+  17612911:
+    template: Sentient_Carafe
+    at:       [131.020, -25.160, 59.323, 55]
+    level:    [98, 99]
+  17612912:
+    template: Sentient_Carafe
+    at:       [131.480, -24.100, 73.701, 91]
+    level:    [98, 99]
+  17612913:
+    template: Sentient_Carafe
+    at:       [132.270, -24.130, 79.247, 170]
+    level:    [98, 99]
+  17612914:
+    template: Wekufe
+    at:       [221.060, -23.720, 24.148, 42]
+    level:    [97, 99]
+  17612915:
+    template: Wekufe
+    at:       [198.320, -24.110, 20.162, 95]
+    level:    [97, 99]
+  17612916:
+    template: Wekufe
+    at:       [230.120, -24.090, 23.676, 176]
+    level:    [97, 99]
+  17612917:
+    template: Wekufe
+    at:       [228.650, -24.020, 13.272, 252]
+    level:    [99, 99]
+  17612918:
+    template: Balayang
+    at:       [230.970, -24.100, 96.625, 219]
+    level:    [95, 97]
+  17612919:
+    template: Balayang
+    at:       [218.440, -23.710, 90.029, 119]
+    level:    [95, 97]
+  17612920:
+    template: Balayang
+    at:       [226.160, -23.910, 92.475, 1]
+    level:    [95, 97]
+  17612921:
+    template: Balayang
+    at:       [224.840, -23.740, 98.014, 133]
+    level:    [95, 97]
+  17612922:
+    template: Balayang
+    at:       [219.360, -23.770, 106.105, 76]
+    level:    [95, 97]
+  17612923:
+    template: Balayang
+    at:       [217.580, -24.090, 109.177, 140]
+    level:    [95, 97]
+  17612924:
+    template: Balayang
+    at:       [154.870, -23.850, 113.125, 160]
+    level:    [95, 97]
+  17612925:
+    template: Balayang
+    at:       [160.060, -24.050, 108.533, 36]
+    level:    [95, 97]
+  17612926:
+    template: Balayang
+    at:       [153.480, -24.080, 119.579, 60]
+    level:    [95, 97]
+  17612927:
+    template: Balayang
+    at:       [172.970, -24.130, 122.530, 48]
+    level:    [95, 97]
+  17612928:
+    template: Balayang
+    at:       [167.680, -24.110, 129.615, 25]
+    level:    [95, 97]
+  17612929:
+    template: Balayang
+    at:       [167.720, -23.750, 122.304, 35]
+    level:    [95, 97]
+  17612930:
+    template: Balayang
+    at:       [132.120, -24.110, 155.684, 63]
+    level:    [95, 97]
+  17612931:
+    template: Balayang
+    at:       [120.960, -23.550, 157.865, 12]
+    level:    [95, 97]
+  17612932:
+    template: Balayang
+    at:       [131.500, -24.480, 159.820, 41]
+    level:    [95, 97]
+  17612933:
+    template: Balayang
+    at:       [121.950, -23.700, 166.869, 152]
+    level:    [95, 97]
+  17612934:
+    template: Balayang
+    at:       [114.280, -23.710, 162.458, 39]
+    level:    [95, 97]
+  17612935:
+    template: Balayang
+    at:       [113.540, -23.730, 161.651, 4]
+    level:    [95, 97]
+  17612936:
+    template: Balayang
+    at:       [169.490, -24.020, 196.572, 200]
+    level:    [95, 97]
+  17612937:
+    template: Balayang
+    at:       [162.650, -23.580, 197.634, 101]
+    level:    [95, 97]
+  17612938:
+    template: Balayang
+    at:       [159.460, -24.100, 188.651, 102]
+    level:    [95, 97]
+  17612939:
+    template: Balayang
+    at:       [154.170, -23.660, 201.884, 76]
+    level:    [95, 97]
+  17612940:
+    template: Balayang
+    at:       [152.150, -23.750, 200.567, 6]
+    level:    [95, 97]
+  17612941:
+    template: Balayang
+    at:       [153.790, -24.510, 211.389, 4]
+    level:    [95, 97]
+  17612942:
+    template: Shadow_war
+    script:   Shadow
+    at:       [49.804, -18.570, 221.914, 144]
+    level:    [44, 46]
+  17612943:
+    template: Shadow_war
+    script:   Shadow
+    at:       [58.206, -23.030, 205.438, 197]
+    level:    [44, 46]
+  17612944:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [48.909, -18.410, 218.955, 73]
+    level:    [44, 46]
+  17612945:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [48.597, -18.330, 220.820, 196]
+    level:    [44, 46]
+  17612946:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [67.450, -24.100, 181.294, 168]
+    level:    [44, 46]
+  17612947:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [44.511, -17.290, 221.373, 154]
+    level:    [44, 46]
+  17612948:
+    template: Shadow_war
+    script:   Shadow
+    at:       [17.452, -16.100, 216.813, 91]
+    level:    [44, 46]
+  17612949:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [17.500, -16.110, 203.684, 63]
+    level:    [44, 46]
+  17612950:
+    template: Shadow_blm
+    script:   Shadow
+    at:       [23.629, -16.090, 214.509, 98]
+    level:    [44, 46]
+  17612951:
+    template: Shadow_thf
+    script:   Shadow
+    at:       [16.816, -16.110, 214.363, 48]
+    level:    [44, 46]
+  17612952:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [15.003, -16.110, 218.154, 201]
+    level:    [44, 46]
+  17612953:
+    template: Shadow_rng
+    script:   Shadow
+    at:       [18.864, -16.500, 210.139, 118]
+    level:    [44, 46]
+  17612954:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [38.242, -15.530, 130.348, 86]
+    level:    [40, 42]
+  17612955:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [25.256, -16.110, 151.076, 75]
+    level:    [40, 42]
+  17612956:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [33.423, -15.800, 116.625, 116]
+    level:    [40, 42]
+  17612957:
+    template: Clockwork_Pod_FY
+    script:   Clockwork_Pod
+    at:       [60.483, -16.110, 149.522, 254]
+    level:    [41, 43]
+  17612958:
+    template: Ore_Golem
+    at:       [28.187, -16.110, 128.341, 82]
+    level:    [43, 45]
+  17612959:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [64.374, -15.600, 129.121, 164]
+    level:    [40, 42]
+  17612960:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [58.583, -16.070, 107.277, 196]
+    level:    [40, 42]
+  17612961:
+    template: Vampire_Bat_FY
+    script:   Vampire_Bat
+    at:       [78.649, -15.730, 127.325, 254]
+    level:    [40, 42]
+  17612962:
+    template: Clockwork_Pod_FY
+    script:   Clockwork_Pod
+    at:       [78.761, -16.120, 107.522, 235]
+    level:    [41, 43]
+  17612963:
+    template: Ore_Golem
+    at:       [91.569, -16.130, 115.763, 216]
+    level:    [43, 45]
+  17612964:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [52.294, -15.540, 140.294, 25]
+    level:    [38, 40]
+  17612965:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-18.900, -16.060, 119.684, 182]
+    level:    [38, 40]
+  17612966:
+    template: Undead_Bats_FY
+    script:   Undead_Bats
+    at:       [-11.500, -16.110, 139.505, 18]
+    level:    [38, 40]
+  17612967:
+    template: Underworld_Bats
+    at:       [-47.990, -0.112, 21.130, 3]
+    level:    [50, 52]
+  17612968:
+    template: Underworld_Bats
+    at:       [-87.660, -0.112, 20.644, 245]
+    level:    [50, 52]
+  17612969:
+    template: Talos
+    at:       [-71.840, -0.112, 30.037, 129]
+    level:    [53, 55]
+  17612970:
+    template: Talos
+    at:       [-62.330, -0.500, 19.027, 10]
+    level:    [53, 55]
+  17612971:
+    template: Talos
+    at:       [-51.190, -0.018, 32.207, 251]
+    level:    [53, 55]
+  17612972:
+    template: Talos
+    at:       [-49.720, -0.112, 5.450, 104]
+    level:    [53, 55]
+  17612973:
+    template: Droma_FY
+    script:   Droma
+    at:       [-1.062, 0.275, 46.991, 4]
+    level:    [54, 56]
+  17612974:
+    template: Droma_FY
+    script:   Droma
+    at:       [-3.783, -0.126, 28.435, 18]
+    level:    [54, 56]
+  17612975:
+    template: Droma_FY
+    script:   Droma
+    at:       [1.867, -0.125, 27.342, 10]
+    level:    [54, 56]
+  17612976:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-4.406, 0.340, 40.534, 246]
+    level:    [52, 54]
+  17612977:
+    template: Underworld_Bats
+    at:       [-22.020, -0.112, 124.213, 210]
+    level:    [50, 52]
+  17612978:
+    template: Underworld_Bats
+    at:       [-22.150, -0.112, 90.097, 102]
+    level:    [50, 52]
+  17612979:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-29.880, -0.112, 91.417, 180]
+    level:    [52, 54]
+  17612980:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-30.250, -0.104, 91.487, 223]
+    level:    [52, 54]
+  17612981:
+    template: Camazotz_FY
+    script:   Camazotz
+    level:    [52, 54]
+  17612982:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-29.810, -0.111, 107.843, 61]
+    level:    [52, 54]
+  17612983:
+    template: Underworld_Bats
+    at:       [35.724, -0.112, 99.599, 203]
+    level:    [50, 52]
+  17612984:
+    template: Underworld_Bats
+    at:       [58.511, -0.112, 100.782, 138]
+    level:    [50, 52]
+  17612985:
+    template: Underworld_Bats
+    at:       [26.746, -0.112, 98.575, 18]
+    level:    [50, 52]
+  17612986:
+    template: Utukku_EN_FY
+    script:   Utukku
+    level:    [55, 57]
+  17612987:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [33.566, -0.112, 111.750, 34]
+    level:    [55, 57]
+  17612988:
+    template: Specter_war
+    script:   Specter
+    at:       [71.017, 0.027, 124.227, 93]
+    level:    [55, 57]
+  17612989:
+    template: Specter_blm
+    script:   Specter
+    at:       [77.766, 0.201, 112.620, 28]
+    level:    [55, 57]
+  17612990:
+    template: Specter_rng
+    script:   Specter
+    at:       [74.111, 0.125, 117.187, 28]
+    level:    [55, 57]
+  17612991:
+    template: Specter_thf
+    script:   Specter
+    at:       [72.158, 0.103, 122.129, 233]
+    level:    [55, 57]
+  17612992:
+    template: Underworld_Bats
+    at:       [45.770, -0.112, 138.736, 96]
+    level:    [50, 52]
+  17612993:
+    template: Underworld_Bats
+    at:       [18.677, -0.112, 138.701, 108]
+    level:    [50, 52]
+  17612994:
+    template: Underworld_Bats
+    at:       [19.420, -0.112, 157.449, 82]
+    level:    [50, 52]
+  17612995:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [30.948, -0.112, 131.809, 150]
+    level:    [55, 57]
+  17612996:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [9.837, 0.127, 219.188, 73]
+    level:    [52, 54]
+  17612997:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [8.753, 0.164, 233.335, 38]
+    level:    [52, 54]
+  17612998:
+    template: Droma_FY
+    script:   Droma
+    at:       [6.471, 0.305, 212.119, 208]
+    level:    [54, 56]
+  17612999:
+    template: Droma_FY
+    script:   Droma
+    at:       [12.199, -0.118, 214.406, 82]
+    level:    [54, 56]
+  17613000:
+    template: Colossus
+    at:       [-5.849, 0.108, 192.104, 118]
+    level:    [56, 58]
+  17613001:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-35.960, -0.112, 214.643, 222]
+    level:    [52, 54]
+  17613002:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-37.100, 0.441, 201.876, 28]
+    level:    [52, 54]
+  17613003:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-31.410, 0.462, 186.593, 14]
+    level:    [55, 57]
+  17613004:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-70.010, 0.462, 193.470, 215]
+    level:    [52, 54]
+  17613005:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-83.050, 0.462, 195.764, 62]
+    level:    [52, 54]
+  17613006:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-77.350, -0.109, 214.598, 225]
+    level:    [55, 57]
+  17613007:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-59.940, 0.415, 155.514, 12]
+    level:    [52, 54]
+  17613008:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-49.310, 0.394, 155.546, 226]
+    level:    [52, 54]
+  17613009:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-55.540, 0.460, 160.044, 123]
+    level:    [55, 57]
+  17613010:
+    template: Colossus
+    at:       [-60.290, 0.462, 166.503, 180]
+    level:    [56, 58]
+  17613011:
+    template: Ice_Elemental
+    at:       [-72.430, 0.462, 169.317, 57]
+    level:    [56, 58]
+  17613012:
+    template: Dark_Elemental
+    at:       [-69.180, 0.190, 151.233, 56]
+    level:    [56, 58]
+  17613013:
+    template: Underworld_Bats
+    at:       [-13.555, -0.096, 256.822, 156]
+    level:    [50, 52]
+  17613014:
+    template: Specter_war
+    script:   Specter
+    at:       [-52.390, -0.108, 275.472, 193]
+    level:    [55, 57]
+  17613015:
+    template: Specter_blm
+    script:   Specter
+    at:       [-49.510, -0.409, 275.477, 232]
+    level:    [55, 57]
+  17613016:
+    template: Specter_rng
+    script:   Specter
+    at:       [-48.800, -0.037, 274.089, 56]
+    level:    [55, 57]
+  17613017:
+    template: Specter_thf
+    script:   Specter
+    at:       [-49.900, -0.035, 278.015, 246]
+    level:    [55, 57]
+  17613018:
+    template: Underworld_Bats
+    at:       [21.000, -0.112, 143.000, 127]
+    level:    [50, 52]
+  17613019:
+    template: Specter_war
+    script:   Specter
+    at:       [9.573, 0.232, 207.354, 77]
+    level:    [55, 57]
+  17613020:
+    template: Specter_blm
+    script:   Specter
+    at:       [-5.546, -0.135, 308.832, 166]
+    level:    [55, 57]
+  17613021:
+    template: Specter_rng
+    script:   Specter
+    at:       [10.067, -0.072, 312.463, 16]
+    level:    [55, 57]
+  17613022:
+    template: Specter_thf
+    script:   Specter
+    at:       [-2.872, -0.094, 331.498, 48]
+    level:    [55, 57]
+  17613023:
+    template: Underworld_Bats
+    at:       [21.055, -0.112, 298.605, 110]
+    level:    [50, 52]
+  17613024:
+    template: Specter_war
+    script:   Specter
+    at:       [35.085, -0.024, 289.886, 163]
+    level:    [55, 57]
+  17613025:
+    template: Specter_blm
+    script:   Specter
+    at:       [46.199, 0.242, 284.638, 229]
+    level:    [55, 57]
+  17613026:
+    template: Specter_rng
+    script:   Specter
+    at:       [-2.000, -0.114, 314.000, 127]
+    level:    [55, 57]
+  17613027:
+    template: Specter_thf
+    script:   Specter
+    at:       [38.814, 0.075, 282.233, 59]
+    level:    [55, 57]
+  17613028:
+    template: Killing_Weapon
+    at:       [59.439, -0.114, 245.035, 116]
+    level:    [59, 61]
+  17613029:
+    template: Killing_Weapon
+    at:       [79.296, -0.112, 221.063, 3]
+    level:    [59, 61]
+  17613030:
+    template: Hellish_Weapon
+    at:       [62.979, -0.071, 224.899, 63]
+    level:    [61, 63]
+  17613031:
+    template: Hellish_Weapon
+    at:       [78.752, -0.114, 221.085, 1]
+    level:    [61, 63]
+  17613032:
+    template: Underworld_Bats
+    at:       [-131.900, -0.145, 260.875, 140]
+    level:    [50, 52]
+  17613033:
+    template: Underworld_Bats
+    at:       [-102.800, -0.092, 254.128, 162]
+    level:    [50, 52]
+  17613034:
+    template: Droma_FY
+    script:   Droma
+    at:       [-155.100, 0.212, 235.736, 99]
+    level:    [54, 56]
+  17613035:
+    template: Droma_FY
+    script:   Droma
+    at:       [-164.800, 0.253, 246.227, 65]
+    level:    [54, 56]
+  17613036:
+    template: Droma_FY
+    script:   Droma
+    at:       [-172.500, -0.112, 240.938, 82]
+    level:    [54, 56]
+  17613037:
+    template: Underworld_Bats
+    at:       [-142.500, -0.112, 203.317, 176]
+    level:    [50, 52]
+  17613038:
+    template: Killing_Weapon
+    at:       [-136.500, 0.286, 183.906, 220]
+    level:    [59, 61]
+  17613039:
+    template: Hellish_Weapon
+    at:       [-131.900, 0.154, 180.319, 90]
+    level:    [61, 63]
+  17613040:
+    template: Hellish_Weapon
+    at:       [-141.500, 0.191, 181.302, 139]
+    level:    [61, 63]
+  17613041:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-179.600, -0.112, 218.130, 39]
+    level:    [55, 57]
+  17613042:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-181.700, -0.112, 182.440, 139]
+    level:    [55, 57]
+  17613043:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-179.800, -0.112, 191.188, 162]
+    level:    [55, 57]
+  17613044:
+    template: Colossus
+    level:    [56, 58]
+  17613045:
+    template: Goliath
+    at:       [-165.400, -0.098, 189.481, 187]
+    level:    [62, 62]
+  17613046:
+    template: Colossus
+    at:       [-194.800, -0.097, 169.233, 132]
+    level:    [56, 58]
+  17613047:
+    template: Goliath
+    at:       [-192.400, -0.035, 168.529, 247]
+    level:    [62, 62]
+  17613048:
+    template: Colossus
+    at:       [-110.000, -0.092, 112.000, 127]
+    level:    [56, 58]
+  17613049:
+    template: Colossus
+    at:       [-188.700, -0.092, 149.289, 172]
+    level:    [56, 58]
+  17613050:
+    template: Colossus
+    at:       [-48.000, -0.112, 110.000, 67]
+    level:    [56, 58]
+  17613051:
+    template: Goliath
+    at:       [-165.800, -0.112, 148.027, 142]
+    level:    [62, 62]
+  17613052:
+    template: Colossus
+    at:       [-189.100, -0.112, 127.990, 242]
+    level:    [56, 58]
+  17613053:
+    template: Goliath
+    at:       [-90.000, -0.112, 72.000, 37]
+    level:    [62, 62]
+  17613054:
+    template: Colossus
+    at:       [-90.000, -0.112, 72.000, 37]
+    level:    [56, 58]
+  17613055:
+    template: Underworld_Bats
+    at:       [-116.200, -0.112, 100.966, 225]
+    level:    [50, 52]
+  17613056:
+    template: Underworld_Bats
+    at:       [-69.780, -0.112, 99.504, 149]
+    level:    [50, 52]
+  17613057:
+    template: Underworld_Bats
+    at:       [-168.000, -0.109, 101.500, 18]
+    level:    [50, 52]
+  17613058:
+    template: Underworld_Bats
+    at:       [-130.400, -0.112, 102.685, 2]
+    level:    [50, 52]
+  17613059:
+    template: Talos
+    at:       [-151.900, -0.107, 90.239, 205]
+    level:    [53, 55]
+  17613060:
+    template: Talos
+    at:       [-129.795, -0.500, 96.757, 194]
+    level:    [53, 55]
+  17613061:
+    template: Talos
+    at:       [-109.895, -0.500, 103.436, 35]
+    level:    [53, 55]
+  17613062:
+    template: Talos
+    at:       [-90.480, -0.024, 111.930, 225]
+    level:    [53, 55]
+  17613063:
+    template: Talos
+    at:       [-111.600, -0.500, 91.032, 251]
+    level:    [53, 55]
+  17613064:
+    template: Talos
+    at:       [-87.730, -0.108, 90.366, 172]
+    level:    [53, 55]
+  17613065:
+    template: Underworld_Bats
+    at:       [-132.100, -0.112, 20.676, 135]
+    level:    [50, 52]
+  17613066:
+    template: Underworld_Bats
+    at:       [-100.500, -0.112, 54.796, 196]
+    level:    [50, 52]
+  17613067:
+    template: Underworld_Bats
+    at:       [-61.900, -0.112, 83.463, 167]
+    level:    [50, 52]
+  17613068:
+    template: Underworld_Bats
+    at:       [-129.800, -0.112, 58.345, 122]
+    level:    [50, 52]
+  17613069:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-48.180, -0.019, 110.095, 135]
+    level:    [52, 54]
+  17613070:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-49.150, -0.020, 109.322, 197]
+    level:    [52, 54]
+  17613071:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-50.792, -0.113, 91.763, 187]
+    level:    [52, 54]
+  17613072:
+    template: Camazotz_FY
+    script:   Camazotz
+    at:       [-45.560, -0.112, 90.378, 35]
+    level:    [52, 54]
+  17613073:
+    template: Killing_Weapon
+    at:       [-91.150, -0.500, 68.628, 37]
+    level:    [59, 61]
+  17613074:
+    template: Hellish_Weapon
+    at:       [-90.740, -0.025, 70.508, 196]
+    level:    [61, 63]
+  17613075:
+    template: Killing_Weapon
+    at:       [-113.100, -0.500, 70.530, 24]
+    level:    [59, 61]
+  17613076:
+    template: Hellish_Weapon
+    at:       [-107.900, -0.111, 69.235, 127]
+    level:    [61, 63]
+  17613077:
+    template: Killing_Weapon
+    at:       [-130.900, -0.037, 70.234, 219]
+    level:    [59, 61]
+  17613078:
+    template: Hellish_Weapon
+    at:       [-130.600, -0.430, 70.556, 221]
+    level:    [61, 63]
+  17613079:
+    template: Killing_Weapon
+    at:       [-149.500, -0.107, 68.233, 95]
+    level:    [59, 61]
+  17613080:
+    template: Hellish_Weapon
+    at:       [-147.400, -0.500, 73.491, 79]
+    level:    [61, 63]
+  17613081:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-130.600, -0.021, 7.524, 253]
+    level:    [55, 57]
+  17613082:
+    template: Utukku_EN_FY
+    script:   Utukku
+    level:    [55, 57]
+  17613083:
+    template: Underworld_Bats
+    at:       [-149.600, -0.112, 17.799, 76]
+    level:    [50, 52]
+  17613084:
+    template: Underworld_Bats
+    at:       [-140.800, -0.112, 42.391, 179]
+    level:    [50, 52]
+  17613085:
+    template: Underworld_Bats
+    at:       [-141.400, -0.112, 17.814, 121]
+    level:    [50, 52]
+  17613086:
+    template: Colossus
+    at:       [-204.600, 0.283, 42.832, 14]
+    level:    [56, 58]
+  17613087:
+    template: Colossus
+    at:       [-202.600, 0.209, 46.615, 206]
+    level:    [56, 58]
+  17613088:
+    template: Underworld_Bats
+    at:       [-259.700, -4.374, 102.896, 99]
+    level:    [50, 52]
+  17613089:
+    template: Underworld_Bats
+    at:       [-222.500, -0.086, 95.258, 56]
+    level:    [50, 52]
+  17613090:
+    template: Underworld_Bats
+    at:       [-221.500, -0.079, 96.828, 167]
+    level:    [50, 52]
+  17613091:
+    template: Specter_war
+    script:   Specter
+    at:       [-190.100, -16.340, 120.144, 5]
+    level:    [56, 58]
+  17613092:
+    template: Specter_blm
+    script:   Specter
+    at:       [-204.600, -16.040, 131.182, 151]
+    level:    [56, 58]
+  17613093:
+    template: Specter_rng
+    script:   Specter
+    at:       [-206.300, -16.120, 110.515, 36]
+    level:    [56, 58]
+  17613094:
+    template: Specter_thf
+    script:   Specter
+    at:       [-188.500, -16.520, 123.089, 186]
+    level:    [56, 58]
+  17613095:
+    template: Western_Shadow
+    at:       [-206.600, -16.190, 111.260, 202]
+    level:    [63, 63]
+  17613096:
+    template: Underworld_Bats
+    at:       [-180.900, -16.110, 138.432, 59]
+    level:    [50, 52]
+  17613097:
+    template: Underworld_Bats
+    at:       [-179.100, -16.500, 94.674, 221]
+    level:    [50, 52]
+  17613098:
+    template: Specter_war
+    script:   Specter
+    at:       [-158.900, -16.120, 147.972, 118]
+    level:    [56, 58]
+  17613099:
+    template: Specter_blm
+    script:   Specter
+    at:       [-155.600, -15.950, 158.897, 75]
+    level:    [56, 58]
+  17613100:
+    template: Specter_rng
+    script:   Specter
+    at:       [-171.900, -16.110, 165.473, 194]
+    level:    [56, 58]
+  17613101:
+    template: Specter_thf
+    script:   Specter
+    at:       [-160.500, -15.610, 155.837, 1]
+    level:    [56, 58]
+  17613102:
+    template: Northern_Shadow
+    at:       [-162.000, -15.000, 154.000, 213]
+    level:    [63, 63]
+  17613103:
+    template: Underworld_Bats
+    at:       [-113.200, -16.160, 178.106, 5]
+    level:    [50, 52]
+  17613104:
+    template: Underworld_Bats
+    at:       [-137.000, -16.120, 178.927, 242]
+    level:    [50, 52]
+  17613105:
+    template: Specter_war
+    script:   Specter
+    at:       [-83.880, -15.880, 167.643, 145]
+    level:    [56, 58]
+  17613106:
+    template: Specter_blm
+    script:   Specter
+    at:       [-85.060, -15.990, 159.675, 235]
+    level:    [56, 58]
+  17613107:
+    template: Specter_rng
+    script:   Specter
+    at:       [-89.090, -15.980, 153.927, 76]
+    level:    [56, 58]
+  17613108:
+    template: Specter_thf
+    script:   Specter
+    at:       [-91.500, -16.060, 159.867, 102]
+    level:    [56, 58]
+  17613109:
+    template: Eastern_Shadow
+    at:       [-92.120, -16.520, 160.277, 37]
+    level:    [63, 63]
+  17613110:
+    template: Underworld_Bats
+    at:       [-3.723, -16.110, 220.251, 194]
+    level:    [50, 52]
+  17613111:
+    template: Underworld_Bats
+    at:       [-18.950, -16.110, 203.867, 11]
+    level:    [50, 52]
+  17613112:
+    template: Underworld_Bats
+    at:       [-20.300, -16.110, 219.194, 209]
+    level:    [50, 52]
+  17613113:
+    template: Underworld_Bats
+    at:       [-49.720, -16.170, 140.481, 238]
+    level:    [50, 52]
+  17613114:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-133.600, -16.120, 98.412, 245]
+    level:    [55, 57]
+  17613115:
+    template: Utukku_EN_FY
+    script:   Utukku
+    at:       [-100.300, -16.110, 140.748, 144]
+    level:    [55, 57]
+  17613116:
+    template: Specter_war
+    script:   Specter
+    at:       [-154.900, -15.720, 75.029, 82]
+    level:    [56, 58]
+  17613117:
+    template: Specter_blm
+    script:   Specter
+    at:       [-163.200, -15.620, 77.279, 165]
+    level:    [56, 58]
+  17613118:
+    template: Specter_rng
+    script:   Specter
+    at:       [-164.200, -15.670, 79.657, 150]
+    level:    [56, 58]
+  17613119:
+    template: Specter_thf
+    script:   Specter
+    at:       [-152.400, -16.510, 71.051, 173]
+    level:    [56, 58]
+  17613120:
+    template: Southern_Shadow
+    at:       [-164.600, -16.010, 77.191, 169]
+    level:    [63, 63]
+  17613121:
+    template: Underworld_Bats
+    at:       [-154.700, -16.110, 21.443, 163]
+    level:    [50, 52]
+  17613122:
+    template: Underworld_Bats
+    at:       [-193.000, -16.110, 21.350, 25]
+    level:    [50, 52]
+  17613123:
+    template: Underworld_Bats
+    at:       [-180.700, -16.110, 59.066, 87]
+    level:    [50, 52]
+  17613124:
+    template: Droma_FY
+    script:   Droma
+    at:       [-172.600, -16.090, 8.985, 118]
+    level:    [54, 56]
+  17613125:
+    template: Droma_FY
+    script:   Droma
+    at:       [-187.700, -16.110, 7.022, 61]
+    level:    [54, 56]
+  17613126:
+    template: Underworld_Bats
+    at:       [-218.200, -16.110, 77.000, 6]
+    level:    [50, 52]
+  17613127:
+    template: Underworld_Bats
+    at:       [-218.100, -16.050, 59.667, 57]
+    level:    [50, 52]
+  17613128:
+    template: Dabotzs_Ghost
+    at:       [-169.991, 3.060, 249.480, 31]
+    level:    [53, 53]
+  17613129:
+    template: Capricious_Cassie
+    at:       [-77.430, 0.462, 164.529, 145]
+    level:    [70, 70]
+  17613130:
+    template: Orientalis_Shadow
+    level:    [128, 128]
+  17613131:
+    template: Borealis_Shadow
+    level:    [128, 128]
+  17613132:
+    template: Australis_Shadow
+    level:    [128, 128]
+  17613133:
+    template: Occidentalis_Shadow
+    level:    [128, 128]
+  17613134:
+    template: Orientalis_Shadow
+    at:       [120.612, -23.924, 59.247, 240]
+    level:    [128, 128]
+  17613135:
+    template: Borealis_Shadow
+    at:       [118.072, -23.924, 61.658, 201]
+    level:    [128, 128]
+  17613136:
+    template: Australis_Shadow
+    at:       [123.938, -23.924, 59.411, 157]
+    level:    [128, 128]
+  17613137:
+    template: Occidentalis_Shadow
+    at:       [116.966, -23.924, 59.323, 75]
+    level:    [128, 128]
+  17613138:
+    template: Orientalis_Shadow
+    at:       [-151.574, -16.220, -71.495, 243]
+    level:    [128, 128]
+  17613139:
+    template: Borealis_Shadow
+    at:       [-148.439, -16.508, -65.180, 36]
+    level:    [128, 128]
+  17613140:
+    template: Australis_Shadow
+    at:       [-145.555, -16.516, -62.809, 21]
+    level:    [128, 128]
+  17613141:
+    template: Occidentalis_Shadow
+    at:       [-148.490, -16.356, -69.940, 28]
+    level:    [128, 128]
+  17613142:
+    template: Carousing_Celine
+    at:       [50.284, -16.376, 151.450, 178]
+    level:    [128, 128]
+  17613143:
+    template: Carousing_Celine
+    at:       [136.968, -24.499, 60.558, 31]
+    level:    [128, 128]
+  17613144:
+    template: Carousing_Celine
+    at:       [-148.490, -16.356, -69.940]
+    level:    [128, 128]
+  17613145:
+    template: Arcus_Blades
+    at:       [-109.000, -16.100, 221.000, 60]
+    level:    [125, 125]
+
+slots:
+  - members:
+      17612806: {} # Revenant
+      17612817: {} # Revenant
+  - members:
+      17612812: {} # Revenant
+      17612813: {} # Revenant
+  - members:
+      17612825: {} # Drone
+      17612826: {} # Drone
+  - members:
+      17612829: {} # Drone
+      17612830: {} # Drone
+  - members:
+      17612831: {} # Drone
+      17612832: {} # Drone
+  - members:
+      17612854: {} # Drone
+      17612855: {} # Drone
+  - members:
+      17612860: {} # Drone
+      17612861: {} # Drone
+  - members:
+      17612870: {} # Shadow
+      17612871: {} # Shadow
+  - members:
+      17612872: {} # Shadow
+      17612873: {} # Shadow
+  - members:
+      17612876: {} # Shadow
+      17612877: {} # Shadow
+  - members:
+      17612878: {} # Shadow
+      17612879: {} # Shadow
+  - members:
+      17612891: {} # Shadow
+      17612894: {} # Shadow
+  - members:
+      17612893: {} # Shadow
+      17612895: {} # Shadow
+  - members:
+      17612896: {} # Shadow
+      17612899: {} # Shadow
+  - members:
+      17612897: {} # Shadow
+      17612901: {} # Shadow
+  - members:
+      17612943: {} # Shadow
+      17612944: {} # Shadow
+  - members:
+      17612946: {} # Shadow
+      17612947: {} # Shadow
+  - members:
+      17612948: {} # Shadow
+      17612950: {} # Shadow
+  - members:
+      17612951: {} # Shadow
+      17612953: {} # Shadow
+  - members:
+      17612969: {} # Talos
+      17612970: {} # Talos
+  - members:
+      17612971: {} # Talos
+      17612972: {} # Talos
+  - members:
+      17612979: {} # Camazotz
+      17612981: {} # Camazotz
+  - members:
+      17612986: {} # Utukku
+      17612987: {} # Utukku
+  - members:
+      17612988: {} # Specter
+      17612991: {} # Specter
+  - members:
+      17612989: {} # Specter
+      17612990: {} # Specter
+  - members:
+      17613013: {} # Underworld_Bats
+      17613018: {} # Underworld_Bats
+      17613023: {} # Underworld_Bats
+  - members:
+      17613014: {} # Specter
+      17613015: {} # Specter
+  - members:
+      17613016: {} # Specter
+      17613017: {} # Specter
+  - members:
+      17613019: {} # Specter
+      17613021: {} # Specter
+  - members:
+      17613020: {} # Specter
+      17613022: {} # Specter
+  - members:
+      17613024: {} # Specter
+      17613026: {} # Specter
+  - members:
+      17613025: {} # Specter
+      17613027: {} # Specter
+  - members:
+      17613044: {} # Colossus
+      17613046: {} # Colossus
+      17613048: {} # Colossus
+      17613049: {} # Colossus
+      17613050: {} # Colossus
+      17613052: {} # Colossus
+      17613054: {} # Colossus
+  - members:
+      17613059: {} # Talos
+      17613060: {} # Talos
+  - members:
+      17613061: {} # Talos
+      17613064: {} # Talos
+  - members:
+      17613062: {} # Talos
+      17613063: {} # Talos
+  - members:
+      17613069: {} # Camazotz
+      17613071: {} # Camazotz
+  - members:
+      17613073: {} # Killing_Weapon
+      17613077: {} # Killing_Weapon
+  - members:
+      17613075: {} # Killing_Weapon
+      17613079: {} # Killing_Weapon
+  - members:
+      17613081: {} # Utukku
+      17613082: {} # Utukku
+  - members:
+      17613091: {} # Specter
+      17613092: {} # Specter
+      17613094: {} # Specter
+  - members:
+      17613096: {} # Underworld_Bats
+      17613097: {} # Underworld_Bats
+  - members:
+      17613099: {} # Specter
+      17613100: {} # Specter
+      17613101: {} # Specter
+  - members:
+      17613105: {} # Specter
+      17613106: {} # Specter
+      17613107: {} # Specter
+  - members:
+      17613116: {} # Specter
+      17613118: {} # Specter
+      17613119: {} # Specter

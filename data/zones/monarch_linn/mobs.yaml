@@ -1,0 +1,1059 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Guard_Hippogryph:
+    id:            1834
+    species:       hippogryph
+    type:          [notorious, battlefield]
+    spell_list_id: 554
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [brd, brd]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+
+  Gullin_Baelfyr:
+    id:            6950
+    species:       ice_elemental
+    type:          [battlefield]
+    spell_list_id: 3
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2149
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Gullin_Byrgen:
+    id:            6953
+    species:       dark_elemental
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2148
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Gullin_Gefyrst:
+    id:            6951
+    display_name:  Gefyrst
+    species:       ice_elemental
+    type:          [battlefield]
+    spell_list_id: 3
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Gullin_Ungeweder:
+    id:            6952
+    species:       thunder_elemental
+    type:          [battlefield]
+    spell_list_id: 3
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 2150
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Gullinkambi:
+    id:            6949
+    species:       roc
+    type:          [notorious, battlefield]
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 339
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        64
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Hamadryad:
+    id:            1885
+    species:       flytrap
+    type:          [battlefield]
+    skill_list_id: 114
+    attributes:
+      combat:
+        skill: polearm
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -3
+          ice:   -1
+          wind:   3
+          water:  3
+          light:  3
+          dark:  -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1345
+        entity_flags: 1671
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Hotupuku:
+    id:            1992
+    species:       bugard
+    type:          [battlefield]
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: axe
+        delay: 300
+      jobs: [war, pld]
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Mammet-19_Epsilon:
+    id:            2499
+    species:       mammet
+    type:          [notorious, battlefield]
+    spell_list_id: 29
+    skill_list_id: 503
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          thunder: -1
+      render:
+        look:
+          type:  automaton
+          model: 1005
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_common
+          item:   bottle_of_yellow_liquid
+        - chance: common
+          item:   bottle_of_yellow_liquid
+
+  Mammet-800:
+    id:            2501
+    species:       mammet
+    type:          [battlefield]
+    spell_list_id: 549
+    skill_list_id: 503
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          thunder: -1
+      render:
+        look:
+          type:  automaton
+          model: 1006
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  4150
+        mp: 10000
+    loot:
+      drops:
+        - chance: always
+          item:   bottle_of_yellow_liquid
+        - chance: very_common
+          item:   bottle_of_yellow_liquid
+
+  Mammet_Master:
+    id:            2502
+    species:       mammet
+    type:          [battlefield]
+    skill_list_id: 503
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          thunder: -1
+      render:
+        look:
+          type:  standard
+          model: 1006
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Ouryu:
+    id:            3070
+    species:       earth_wyrm
+    type:          [notorious, battlefield]
+    spell_list_id: 109
+    skill_list_id: 259
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -2
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 610
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         50
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10500
+
+  Ouryu_2:
+    id:            3070
+    display_name:  Ouryu
+    species:       earth_wyrm
+    type:          [notorious, battlefield]
+    spell_list_id: 109
+    skill_list_id: 259
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -2
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 610
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         50
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Razon:
+    id:            3333
+    species:       cluster
+    type:          [battlefield]
+    skill_list_id: 69
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:    -2
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  3
+          water:    3
+          light:    3
+          dark:     3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 290
+        entity_flags:  135
+        animation_sub:  12
+        model_size:      3
+        hitbox:         53
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2100
+
+  Watch_Hippogryph:
+    id:            4304
+    species:       hippogryph
+    type:          [notorious, battlefield]
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+spawns:
+  16904193:
+    template: Mammet-19_Epsilon
+    at:       [-600.000, 81.699, 0.000, 253]
+    level:    [43, 44]
+  16904194:
+    template: Mammet-19_Epsilon
+    at:       [-600.000, 81.900, 5.000, 253]
+    level:    [43, 44]
+  16904195:
+    template: Mammet-19_Epsilon
+    at:       [-600.000, 81.699, -5.000, 253]
+    level:    [43, 44]
+  16904196:
+    template: Mammet-19_Epsilon
+    at:       [0.000, 2.200, 6.176, 253]
+    level:    [43, 44]
+  16904197:
+    template: Mammet-19_Epsilon
+    at:       [0.000, 2.200, -6.176, 253]
+    level:    [43, 44]
+  16904198:
+    template: Mammet-19_Epsilon
+    at:       [0.000, 2.200, 0.000, 253]
+    level:    [43, 44]
+  16904199:
+    template: Mammet-19_Epsilon
+    at:       [600.000, -77.800, 6.176, 253]
+    level:    [43, 44]
+  16904200:
+    template: Mammet-19_Epsilon
+    at:       [600.000, -77.800, -6.176, 253]
+    level:    [43, 44]
+  16904201:
+    template: Mammet-19_Epsilon
+    at:       [600.000, -77.800, 0.000, 253]
+    level:    [43, 44]
+  16904202:
+    template: Ouryu
+    at:       [-605.000, 81.699, 1.000, 1]
+    level:    [54, 55]
+  16904203:
+    template: Ouryu
+    at:       [-1.411, 1.534, 0.574, 1]
+    level:    [54, 55]
+  16904204:
+    template: Ouryu
+    at:       [595.750, -78.254, 1.430, 1]
+    level:    [54, 55]
+  16904205:
+    template: Hamadryad
+    at:       [-599.141, 81.699, -8.370, 189]
+    level:    [40, 40]
+  16904207:
+    template: Hamadryad
+    at:       [2.982, 1.900, 1.882, 50]
+    level:    [40, 40]
+  16904209:
+    template: Hamadryad
+    at:       [595.000, -78.300, 0.000]
+    level:    [40, 40]
+  16904211:
+    template: Razon
+    at:       [-605.000, 82.200, 0.000]
+    level:    [45, 45]
+  16904213:
+    template: Razon
+    at:       [-1.100, 0.700, 0.900]
+    level:    [45, 45]
+  16904215:
+    template: Razon
+    at:       [596.100, -78.900, -1.500]
+    level:    [45, 45]
+  16904217:
+    template: Watch_Hippogryph
+    at:       [-605.000, 81.699, 0.000]
+    level:    [60, 60]
+  16904218:
+    template: Guard_Hippogryph
+    at:       [-608.174, 81.699, -2.483, 244]
+    level:    [55, 55]
+  16904220:
+    template: Watch_Hippogryph
+    at:       [-5.000, 1.700, 0.000]
+    level:    [60, 60]
+  16904221:
+    template: Guard_Hippogryph
+    at:       [-8.174, 1.700, -2.483, 244]
+    level:    [55, 55]
+  16904223:
+    template: Watch_Hippogryph
+    at:       [595.750, -78.254, 0.000]
+    level:    [60, 60]
+  16904224:
+    template: Guard_Hippogryph
+    at:       [592.576, -78.254, -2.483, 244]
+    level:    [55, 55]
+  16904226:
+    template: Hotupuku
+    at:       [-605.000, 81.699, 0.000]
+    level:    [50, 50]
+  16904228:
+    template: Hotupuku
+    at:       [-0.400, 2.200, -0.800]
+    level:    [50, 50]
+  16904230:
+    template: Hotupuku
+    at:       [598.000, -77.800, -1.700]
+    level:    [50, 50]
+  16904232:
+    template: Mammet_Master
+    at:       [-595.000, 82.000, 0.000]
+    level:    [75, 75]
+  16904233:
+    template: Mammet-800
+    at:       [-595.000, 82.000, 0.000]
+    level:    [80, 80]
+  16904234:
+    template: Mammet-800
+    at:       [-600.246, 82.400, 5.214, 3]
+    level:    [80, 80]
+  16904235:
+    template: Mammet-800
+    at:       [-596.103, 82.200, -10.430, 213]
+    level:    [80, 80]
+  16904236:
+    template: Mammet-800
+    at:       [-575.020, 82.225, 9.450, 100]
+    level:    [80, 80]
+  16904237:
+    template: Mammet-800
+    at:       [-611.224, 81.800, -19.871, 220]
+    level:    [80, 80]
+  16904238:
+    template: Mammet-800
+    at:       [-621.744, 81.804, 12.348, 13]
+    level:    [80, 80]
+  16904239:
+    template: Mammet-800
+    at:       [-578.352, 81.842, -12.552, 155]
+    level:    [80, 80]
+  16904240:
+    template: Mammet-800
+    at:       [-588.182, 82.200, 19.998, 71]
+    level:    [80, 80]
+  16904241:
+    template: Mammet-800
+    at:       [-558.682, 80.209, 4.013, 119]
+    level:    [80, 80]
+  16904242:
+    template: Mammet_Master
+    at:       [5.000, 2.000, 0.000]
+    level:    [75, 75]
+  16904243:
+    template: Mammet-800
+    at:       [5.000, 2.000, 0.000]
+    level:    [80, 80]
+  16904244:
+    template: Mammet-800
+    at:       [-0.246, 2.400, 5.214, 3]
+    level:    [80, 80]
+  16904245:
+    template: Mammet-800
+    at:       [3.897, 2.200, -10.430, 213]
+    level:    [80, 80]
+  16904246:
+    template: Mammet-800
+    at:       [24.980, 2.225, 9.450, 100]
+    level:    [80, 80]
+  16904247:
+    template: Mammet-800
+    at:       [-11.224, 1.800, -19.871, 220]
+    level:    [80, 80]
+  16904248:
+    template: Mammet-800
+    at:       [-21.744, 1.804, 12.348, 13]
+    level:    [80, 80]
+  16904249:
+    template: Mammet-800
+    at:       [21.648, 1.842, -12.552, 155]
+    level:    [80, 80]
+  16904250:
+    template: Mammet-800
+    at:       [11.818, 2.200, 19.998, 71]
+    level:    [80, 80]
+  16904251:
+    template: Mammet-800
+    at:       [41.318, 0.209, 4.013, 119]
+    level:    [80, 80]
+  16904252:
+    template: Mammet_Master
+    at:       [605.000, -78.000, 0.000]
+    level:    [75, 75]
+  16904253:
+    template: Mammet-800
+    at:       [605.000, -78.000, 0.000]
+    level:    [80, 80]
+  16904254:
+    template: Mammet-800
+    at:       [599.754, -77.600, 5.214, 3]
+    level:    [80, 80]
+  16904255:
+    template: Mammet-800
+    at:       [603.897, -77.800, -10.430, 213]
+    level:    [80, 80]
+  16904256:
+    template: Mammet-800
+    at:       [624.980, -77.775, 9.450, 100]
+    level:    [80, 80]
+  16904257:
+    template: Mammet-800
+    at:       [588.776, -78.200, -19.871, 220]
+    level:    [80, 80]
+  16904258:
+    template: Mammet-800
+    at:       [578.256, -78.196, 12.348, 13]
+    level:    [80, 80]
+  16904259:
+    template: Mammet-800
+    at:       [621.648, -78.158, -12.552, 155]
+    level:    [80, 80]
+  16904260:
+    template: Mammet-800
+    at:       [611.818, -77.800, 19.998, 71]
+    level:    [80, 80]
+  16904261:
+    template: Mammet-800
+    at:       [641.318, -79.791, 4.013, 119]
+    level:    [80, 80]
+  16904262:
+    template: Gullinkambi
+    at:       [-588.273, 81.500, -11.594, 205]
+  16904263:
+    template: Gullin_Baelfyr
+    at:       [-589.469, 81.699, -6.403, 182]
+  16904264:
+    template: Gullin_Gefyrst
+    at:       [-591.094, 81.474, -8.635, 68]
+  16904265:
+    template: Gullin_Ungeweder
+    at:       [-592.260, 81.699, -7.051, 36]
+  16904266:
+    template: Gullin_Byrgen
+    at:       [-590.857, 81.702, -7.150, 69]
+  16904268:
+    template: Gullinkambi
+    at:       [15.316, 1.335, -12.020, 205]
+  16904269:
+    template: Gullin_Baelfyr
+    at:       [14.120, 1.534, -6.829, 182]
+  16904270:
+    template: Gullin_Gefyrst
+    at:       [12.495, 1.309, -9.061, 68]
+  16904271:
+    template: Gullin_Ungeweder
+    at:       [11.329, 1.534, -7.477, 36]
+  16904272:
+    template: Gullin_Byrgen
+    at:       [12.732, 1.537, -7.576, 69]
+  16904274:
+    template: Gullinkambi
+    at:       [612.477, -78.453, -11.164, 205]
+  16904275:
+    template: Gullin_Baelfyr
+    at:       [611.281, -78.254, -5.973, 182]
+  16904276:
+    template: Gullin_Gefyrst
+    at:       [609.656, -78.479, -8.205, 68]
+  16904277:
+    template: Gullin_Ungeweder
+    at:       [608.490, -78.254, -6.621, 36]
+  16904278:
+    template: Gullin_Byrgen
+    at:       [609.893, -78.251, -6.720, 69]
+  16904280:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904281:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904282:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904283:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904284:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904285:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904286:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904287:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904288:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904289:
+    template: Ouryu_2
+    script:   Ouryu
+    at:       [-602.434, 81.900, 3.414, 24]
+    level:    [99, 99]
+  16904290:
+    template: Earth_Elemental
+    at:       [-602.424, 81.900, 2.578, 47]
+    level:    [99, 99]
+  16904291:
+    template: Earth_Elemental
+    at:       [-602.473, 81.900, 4.761, 46]
+    level:    [99, 99]
+  16904292:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904293:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904294:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904295:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904296:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904297:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904298:
+    template: Ouryu_2
+    script:   Ouryu
+    at:       [-605.000, 81.699, 0.000]
+    level:    [99, 99]
+  16904299:
+    template: Earth_Elemental
+    at:       [-602.019, 81.699, 0.471, 202]
+    level:    [99, 99]
+  16904300:
+    template: Earth_Elemental
+    at:       [-601.674, 81.699, 0.291, 196]
+    level:    [99, 99]
+  16904301:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904302:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904303:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904304:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904305:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904306:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904307:
+    template: Ouryu_2
+    script:   Ouryu
+    at:       [-605.000, 81.699, 0.000]
+    level:    [99, 99]
+  16904308:
+    template: Earth_Elemental
+    at:       [-600.866, 81.857, -0.649, 230]
+    level:    [99, 99]
+  16904309:
+    template: Earth_Elemental
+    at:       [-600.656, 81.859, -0.757, 230]
+    level:    [99, 99]
+  16904310:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904311:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904312:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904313:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904314:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904315:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904316:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904317:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904318:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904319:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904320:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904321:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904322:
+    template: Ouryu_2
+    script:   Ouryu
+    level:    [99, 99]
+  16904323:
+    template: Earth_Elemental
+    level:    [99, 99]
+  16904324:
+    template: Earth_Elemental
+    level:    [99, 99]

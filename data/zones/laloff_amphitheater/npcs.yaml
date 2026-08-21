@@ -1,0 +1,440 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17514785:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17514786:
+    script: NPC[122]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17514787:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17514789:
+    script: NPC[125]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17514790:
+    script: NPC[126]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17514791:
+    script: NPC[127]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17514792:
+    script:       qm1_1
+    display_name: Shimmering Circle
+    at:           [-605.063, -22.681, 483.937, 190]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514793:
+    script:       qm1_2
+    display_name: Shimmering Circle
+    at:           [-264.782, -137.313, 374.516, 115]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514794:
+    script:       qm1_3
+    display_name: Shimmering Circle
+    at:           [14.148, -224.334, 488.125, 166]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514795:
+    script:       qm1_4
+    display_name: Shimmering Circle
+    at:           [235.650, -173.572, 361.266, 217]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514796:
+    script:       qm1_5
+    display_name: Shimmering Circle
+    at:           [555.998, -38.205, 520.627, 11]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514797:
+    script:       qm2
+    display_name: Shimmering Circle
+    at:           [8.116, -33.330, -108.421, 214]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514798:
+    script:       qm2
+    display_name: Shimmering Circle
+    at:           [-540.596, -257.280, -66.026]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514799:
+    script:       qm2
+    display_name: Shimmering Circle
+    at:           [499.384, -332.280, -43.322, 214]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514800:
+    script: NPC[130]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17514801:
+    script: NPC[131]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17514802:
+    script: NPC[132]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17514803:
+    script: NPC[133]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17514804:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17514805:
+    script:       qm0_1
+    display_name: Shimmering Circle
+    at:           [-587.806, -26.180, -626.197, 108]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514806:
+    script:       qm0_2
+    display_name: Shimmering Circle
+    at:           [-302.024, -95.430, -424.504, 109]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514807:
+    script:       qm0_3
+    display_name: Shimmering Circle
+    at:           [17.631, -195.004, -631.091, 113]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514808:
+    script:       qm0_4
+    display_name: Shimmering Circle
+    at:           [353.512, -108.815, -426.487, 109]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514809:
+    script:       qm0_5
+    display_name: Shimmering Circle
+    at:           [630.021, -22.848, -659.709, 67]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17514810:
+    script: NPC[13a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17514811:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17514812:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17514813:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17514814:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17514815:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17514816:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17514817:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17514818:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17514819:
+    script:       Ark_Angel_HM
+    display_name: Ark Angel HM
+    render:
+      look:
+        type:  standard
+        model: 1432
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17514820:
+    script:       Ark_Angel_EV
+    display_name: Ark Angel EV
+    render:
+      look:
+        type:  standard
+        model: 1431
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17514821:
+    script:       Ark_Angel_TT
+    display_name: Ark Angel TT
+    render:
+      look:
+        type:  standard
+        model: 1433
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17514822:
+    script:       Ark_Angel_MR
+    display_name: Ark Angel MR
+    render:
+      look:
+        type:  standard
+        model: 1434
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17514823:
+    script:       Ark_Angel_GK
+    display_name: Ark Angel GK
+    render:
+      look:
+        type:  standard
+        model: 1430
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17514824:
+    script:       _501
+    display_name: Cermet Door
+    at:           [6.718, -22.800, 25.854]
+    render:
+      look:
+        type: door
+      door_id:      825242975
+      entity_flags: 6147
+      animation:    close_door
+    status: cutscene_only
+
+  17514825:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-244.000, -137.000, 400.000, 176]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17514826:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-244.000, -137.000, 400.000, 176]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal

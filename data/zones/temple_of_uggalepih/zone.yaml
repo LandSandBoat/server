@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z4f0:
+    from:  [179.986, -10.897, 44.575]
+    to:    yhoator_jungle
+    at:    [299.997, -5.838, -622.998, 4.712389]
+    scale: [1.000, 3.000]
+
+  z4f2:
+    from:  [60.015, -10.929, 84.513]
+    to:    yhoator_jungle
+    at:    [65.035, -11.628, -503.018, 4.712389]
+    scale: [1.000, 3.000]
+
+  z4f4:
+    from:  [-59.978, -11.206, 84.547]
+    to:    yhoator_jungle
+    at:    [8.004, -11.638, -503.051, 4.712389]
+    scale: [1.000, 3.000]
+
+  z4f6:
+    from:  [195.937, -19.215, 300.014]
+    to:    yhoator_jungle
+    at:    [343.003, -11.650, -168.009, 3.141593]
+    scale: [1.000, 3.000]
+
+  z4f8:
+    from:  [235.933, -11.407, 179.988]
+    to:    yhoator_jungle
+    at:    [342.997, -11.682, -225.007, 3.141593]
+    scale: [1.000, 3.000]
+
+  z4fa:
+    from:  [430.465, 5.268, 213.312]
+    to:    den_of_rancor
+    at:    [460.003, -15.531, 236.893, 1.570796]
+    scale: [1.000, 4.000]
+
+  z4fc:
+    from:  [9.384, 5.085, 13.077]
+    to:    den_of_rancor
+    at:    [20.019, 4.681, 36.936, 1.570796]
+    scale: [1.000, 4.000]
+
+  z4fe:
+    from:  [-230.897, 5.026, -106.535]
+    to:    den_of_rancor
+    at:    [-219.972, 4.738, -83.082, 1.570796]
+    scale: [1.000, 4.000]
+
+  z4fg:
+    from:  [-13.745, 5.181, 30.688]
+    to:    den_of_rancor
+    at:    [-36.018, 5.194, 19.986]
+    scale: [1.000, 4.000]
+
+  z4fi:
+    from:  [-230.364, 3.011, 67.211]
+    to:    sacrificial_chamber
+    at:    [-363.970, -13.233, -341.473, 5.913595]
+    scale: [1.000, 4.000]

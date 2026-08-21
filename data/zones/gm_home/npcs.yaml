@@ -1,0 +1,2133 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17637377:
+    script:       Fame
+    display_name: Fame
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637378:
+    script:       San_dOria
+    display_name: San d'Oria
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637379:
+    script:       Bastok
+    display_name: Bastok
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637380:
+    script:       Windurst
+    display_name: Windurst
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637381:
+    script:       Key_Item
+    display_name: Key Item
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637382:
+    script:       Conquest_Debug
+    display_name: Conquest Debug
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637383:
+    script:       Herald
+    display_name: Herald
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637384:
+    script:       Ballista_Item
+    display_name: Ballista_Item
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637385:
+    script:       Blenner_itembox
+    display_name: Blenner_itembox
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637386:
+    script:       pvp2_itembox_debug
+    display_name: pvp2_itembox_debug
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637387:
+    script:       Selbina/Maura
+    display_name: Selbina/Maura
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637388:
+    script:       Juno_item
+    display_name: Juno_item
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637389:
+    script:       Ex_Scenario
+    display_name: Ex_Scenario
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637390:
+    script:       Party_test
+    display_name: Party_test
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637391:
+    script:       testkun0
+    display_name: testkun0
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637392:
+    script:       ship
+    display_name: ship
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637393:
+    script:       Mannequin
+    display_name: Mannequin
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637394:
+    script:       Swtich_Test
+    display_name: Swtich Test
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637395:
+    script:       Promathia
+    display_name: Promathia
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637396:
+    script:       St_moogle
+    display_name: St_moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637397:
+    script:       Promathia_BattleField
+    display_name: Promathia BattleField
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637398:
+    script:       Fellow
+    display_name: Fellow
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637399:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637400:
+    script:       Fish_selecter
+    display_name: Fish selecter
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637401:
+    script:       Bigfish_Maker
+    display_name: Bigfish Maker
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637402:
+    script:       Ahturhgan
+    display_name: Ahturhgan
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637403:
+    script:       Undef_Item
+    display_name: Undef Item
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637404:
+    script:       Assault
+    display_name: Assault
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637405:
+    script:       Programmer
+    display_name: Programmer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637406:
+    script:       Localize
+    display_name: Localize
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637407:
+    script:       Item_Debug
+    display_name: Item_Debug
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637408:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637409:
+    script:       Lottery-Maker
+    display_name: Lottery-Maker
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637410:
+    script:       Altana
+    display_name: Altana
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637411:
+    script:       Abyssea
+    display_name: Abyssea
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637412:
+    script:       Mogsack_Moogle
+    display_name: Mogsack Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637413:
+    script:       M
+    display_name: M
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637414:
+    script:       L
+    display_name: L
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637415:
+    script:       Adoulin
+    display_name: Adoulin
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637416:
+    script:       Adoulin_Fame
+    display_name: Adoulin Fame
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637417:
+    script:       LinkA
+    display_name: LinkA
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637418:
+    script:       LinkB
+    display_name: LinkB
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637419:
+    script:       MD_POINT
+    display_name: MD_POINT
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637420:
+    script:       TABULA_MAKER
+    display_name: TABULA_MAKER
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637421:
+    script:       Bonanza_Master
+    display_name: Bonanza Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637422:
+    script:       5thTrumpet
+    display_name: 5thTrumpet
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637423:
+    script:       RandomItemMaker
+    display_name: RandomItemMaker
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637424:
+    script:       Dealer_Moogle
+    display_name: Dealer Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637425:
+    script:       Dealer_Moogle
+    display_name: Dealer Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637426:
+    script:       RandomItemDebugger
+    display_name: RandomItemDebugger
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637427:
+    script:       Solo_Hunt_Box
+    display_name: Solo Hunt Box
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637428:
+    script:       Pixie_Quest_Box
+    display_name: Pixie Quest Box
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637429:
+    script:       6thTrumpet
+    display_name: 6thTrumpet
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637430:
+    script:       7thTrumpet
+    display_name: 7thTrumpet
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637431:
+    script:       Synergy_Furnace
+    display_name: Synergy Furnace
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637432:
+    script:       Synergy_Furnace
+    display_name: Synergy Furnace
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637433:
+    script:       Synergy_Furnace
+    display_name: Synergy Furnace
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637434:
+    script:       Synergy_Furnace
+    display_name: Synergy Furnace
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637435:
+    script:       Evorith_Maker
+    display_name: Evorith Maker
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637436:
+    script:       Augment-Test
+    display_name: Augment-Test
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637437:
+    script:       Level-Check
+    display_name: Level-Check
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637438:
+    script:       Porter_Moogle
+    display_name: Porter Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637440:
+    script:       Magian_MoogleHood
+    display_name: Magian MoogleHood
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637441:
+    script:       Atmacite_Refiner
+    display_name: Atmacite Refiner
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637442:
+    script:       Voidwatch_Officer
+    display_name: Voidwatch Officer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637443:
+    script:       Walker
+    display_name: Walker
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637444:
+    script:       Speaker
+    display_name: Speaker
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637445:
+    script:       Listener
+    display_name: Listener
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637446:
+    script:       Poet
+    display_name: Poet
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637447:
+    script:       Volunteer
+    display_name: Volunteer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637448:
+    script:       Changeable
+    display_name: Changeable
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637449:
+    script:       Judge
+    display_name: Judge
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637450:
+    script:       Trader
+    display_name: Trader
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637451:
+    script:       Item_give
+    display_name: Item_give
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637452:
+    script:       Lea_lover
+    display_name: Lea_lover
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637453:
+    script:       Girl
+    display_name: Girl
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637454:
+    script:       Boy
+    display_name: Boy
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637455:
+    script:       Fat
+    display_name: Fat
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637456:
+    script:       Unstable
+    display_name: Unstable
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637457:
+    script:       Janken
+    display_name: Janken
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637458:
+    script:       Yajiuma
+    display_name: Yajiuma
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637459:
+    script:       Map-Change
+    display_name: Map-Change
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637460:
+    script:       nogut
+    display_name: nogut
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637461:
+    script:       Scheck
+    display_name: Scheck
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637462:
+    script:       Emiko
+    display_name: Emiko
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637463:
+    script:       Emio
+    display_name: Emio
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637464:
+    script:       GMBIT_MASTER
+    display_name: GMBIT_MASTER
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637465:
+    script:       GMBIT_0
+    display_name: GMBIT_0
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637466:
+    script:       GMBIT_1
+    display_name: GMBIT_1
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637467:
+    script:       GMBIT_2
+    display_name: GMBIT_2
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637468:
+    script:       GMBIT_3
+    display_name: GMBIT_3
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637469:
+    script:       GMBIT_4
+    display_name: GMBIT_4
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637470:
+    script:       GMBIT_5
+    display_name: GMBIT_5
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637471:
+    script:       GMBIT_6
+    display_name: GMBIT_6
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637472:
+    script:       GMBIT_7
+    display_name: GMBIT_7
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637473:
+    script:       GMBIT_8
+    display_name: GMBIT_8
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637474:
+    script:       GMBIT_9
+    display_name: GMBIT_9
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637475:
+    script:       GMBIT_10
+    display_name: GMBIT_10
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637476:
+    script:       GMBIT_11
+    display_name: GMBIT_11
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637477:
+    script:       GMBIT_12
+    display_name: GMBIT_12
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637478:
+    script:       GMBIT_13
+    display_name: GMBIT_13
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637479:
+    script:       GMBIT_14
+    display_name: GMBIT_14
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637480:
+    script:       GMBIT_15
+    display_name: GMBIT_15
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637481:
+    script:       GMBIT_16
+    display_name: GMBIT_16
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637482:
+    script:       GMBIT_17
+    display_name: GMBIT_17
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637483:
+    script:       GMBIT_18
+    display_name: GMBIT_18
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637484:
+    script:       GMBIT_19
+    display_name: GMBIT_19
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637485:
+    script:       GMBIT_20
+    display_name: GMBIT_20
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637486:
+    script:       GMBIT_21
+    display_name: GMBIT_21
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637487:
+    script:       GMBIT_22
+    display_name: GMBIT_22
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637488:
+    script:       GMBIT_23
+    display_name: GMBIT_23
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637489:
+    script:       GMBIT_24
+    display_name: GMBIT_24
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637490:
+    script:       GMBIT_25
+    display_name: GMBIT_25
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637491:
+    script:       GMBIT_26
+    display_name: GMBIT_26
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637492:
+    script:       GMBIT_27
+    display_name: GMBIT_27
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637493:
+    script:       GMBIT_28
+    display_name: GMBIT_28
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637494:
+    script:       GMBIT_29
+    display_name: GMBIT_29
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637495:
+    script:       GMBIT_30
+    display_name: GMBIT_30
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637496:
+    script:       GMBIT_31
+    display_name: GMBIT_31
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637497:
+    script:       GMBIT_32
+    display_name: GMBIT_32
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637498:
+    script:       GMBIT_33
+    display_name: GMBIT_33
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637499:
+    script:       GMBIT_34
+    display_name: GMBIT_34
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637500:
+    script:       GMBIT_35
+    display_name: GMBIT_35
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637501:
+    script:       GMBIT_36
+    display_name: GMBIT_36
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637502:
+    script:       GMBIT_37
+    display_name: GMBIT_37
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637503:
+    script:       GMBIT_38
+    display_name: GMBIT_38
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637504:
+    script:       GMBIT_39
+    display_name: GMBIT_39
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637505:
+    script:       GMBIT_40
+    display_name: GMBIT_40
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637506:
+    script:       GMBIT_41
+    display_name: GMBIT_41
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637507:
+    script:       GMBIT_42
+    display_name: GMBIT_42
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637508:
+    script:       GMBIT_43
+    display_name: GMBIT_43
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637509:
+    script:       GMBIT_44
+    display_name: GMBIT_44
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637510:
+    script:       GMBIT_45
+    display_name: GMBIT_45
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637511:
+    script:       GMBIT_46
+    display_name: GMBIT_46
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637512:
+    script:       GMBIT_47
+    display_name: GMBIT_47
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637513:
+    script:       GMBIT_48
+    display_name: GMBIT_48
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637514:
+    script:       GMBIT_49
+    display_name: GMBIT_49
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637515:
+    script:       GMBIT_50
+    display_name: GMBIT_50
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637516:
+    script:       GMBIT_51
+    display_name: GMBIT_51
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637517:
+    script:       GMBIT_52
+    display_name: GMBIT_52
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637518:
+    script:       GMBIT_53
+    display_name: GMBIT_53
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637519:
+    script:       GMBIT_54
+    display_name: GMBIT_54
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637520:
+    script:       GMBIT_55
+    display_name: GMBIT_55
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637521:
+    script:       GMBIT_56
+    display_name: GMBIT_56
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637522:
+    script:       GMBIT_57
+    display_name: GMBIT_57
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637523:
+    script:       GMBIT_58
+    display_name: GMBIT_58
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637524:
+    script:       GMBIT_59
+    display_name: GMBIT_59
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637525:
+    script:       GMBIT_60
+    display_name: GMBIT_60
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637526:
+    script:       GMBIT_61
+    display_name: GMBIT_61
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637527:
+    script:       GMBIT_62
+    display_name: GMBIT_62
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637528:
+    script:       GMBIT_63
+    display_name: GMBIT_63
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637529:
+    script:       GMBIT_64
+    display_name: GMBIT_64
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637530:
+    script:       GMBIT_65
+    display_name: GMBIT_65
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637531:
+    script:       GMBIT_66
+    display_name: GMBIT_66
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637532:
+    script:       GMBIT_67
+    display_name: GMBIT_67
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637533:
+    script:       GMBIT_68
+    display_name: GMBIT_68
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637534:
+    script:       GMBIT_69
+    display_name: GMBIT_69
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637535:
+    script:       GMBIT_70
+    display_name: GMBIT_70
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637536:
+    script:       GMBIT_71
+    display_name: GMBIT_71
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637537:
+    script:       GMBIT_72
+    display_name: GMBIT_72
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637538:
+    script:       GMBIT_73
+    display_name: GMBIT_73
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637539:
+    script:       GMBIT_74
+    display_name: GMBIT_74
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637540:
+    script:       GMBIT_75
+    display_name: GMBIT_75
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637541:
+    script:       GMBIT_76
+    display_name: GMBIT_76
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637542:
+    script:       GMBIT_77
+    display_name: GMBIT_77
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637543:
+    script:       GMBIT_78
+    display_name: GMBIT_78
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637544:
+    script:       GMBIT_79
+    display_name: GMBIT_79
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637545:
+    script:       GMBIT_80
+    display_name: GMBIT_80
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637546:
+    script:       GMBIT_81
+    display_name: GMBIT_81
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637547:
+    script:       GMBIT_82
+    display_name: GMBIT_82
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637548:
+    script:       GMBIT_83
+    display_name: GMBIT_83
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637549:
+    script:       GMBIT_84
+    display_name: GMBIT_84
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637550:
+    script:       GMBIT_85
+    display_name: GMBIT_85
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637551:
+    script:       GMBIT_86
+    display_name: GMBIT_86
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637552:
+    script:       GMBIT_87
+    display_name: GMBIT_87
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637553:
+    script:       GMBIT_88
+    display_name: GMBIT_88
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637554:
+    script:       GMBIT_89
+    display_name: GMBIT_89
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637555:
+    script:       GMBIT_90
+    display_name: GMBIT_90
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637556:
+    script:       GMBIT_91
+    display_name: GMBIT_91
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637557:
+    script:       GMBIT_92
+    display_name: GMBIT_92
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637558:
+    script:       GMBIT_93
+    display_name: GMBIT_93
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637559:
+    script:       GMBIT_94
+    display_name: GMBIT_94
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637560:
+    script:       GMBIT_95
+    display_name: GMBIT_95
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637561:
+    script:       GMBIT_96
+    display_name: GMBIT_96
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637562:
+    script:       GMBIT_97
+    display_name: GMBIT_97
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637563:
+    script:       GMBIT_98
+    display_name: GMBIT_98
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637564:
+    script:       GMBIT_99
+    display_name: GMBIT_99
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637565:
+    script:       GMBIT_100
+    display_name: GMBIT_100
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637566:
+    script:       GMBIT_101
+    display_name: GMBIT_101
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637567:
+    script:       GMBIT_102
+    display_name: GMBIT_102
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637568:
+    script:       GMBIT_103
+    display_name: GMBIT_103
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637569:
+    script:       GMBIT_104
+    display_name: GMBIT_104
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637570:
+    script:       GMBIT_105
+    display_name: GMBIT_105
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637571:
+    script:       GMBIT_106
+    display_name: GMBIT_106
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637572:
+    script:       GMBIT_107
+    display_name: GMBIT_107
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637573:
+    script:       GMBIT_108
+    display_name: GMBIT_108
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637574:
+    script:       GMBIT_109
+    display_name: GMBIT_109
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637575:
+    script:       GMBIT_110
+    display_name: GMBIT_110
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637576:
+    script:       GMBIT_111
+    display_name: GMBIT_111
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637577:
+    script:       GMBIT_112
+    display_name: GMBIT_112
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637578:
+    script:       GMBIT_113
+    display_name: GMBIT_113
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637579:
+    script:       GMBIT_114
+    display_name: GMBIT_114
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637580:
+    script:       GMBIT_115
+    display_name: GMBIT_115
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637581:
+    script:       GMBIT_116
+    display_name: GMBIT_116
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637582:
+    script:       GMBIT_117
+    display_name: GMBIT_117
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637583:
+    script:       GMBIT_118
+    display_name: GMBIT_118
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637584:
+    script:       GMBIT_119
+    display_name: GMBIT_119
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637585:
+    script:       GMBIT_120
+    display_name: GMBIT_120
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637586:
+    script:       GMBIT_121
+    display_name: GMBIT_121
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637587:
+    script:       GMBIT_122
+    display_name: GMBIT_122
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637588:
+    script:       GMBIT_123
+    display_name: GMBIT_123
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637589:
+    script:       GMBIT_124
+    display_name: GMBIT_124
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637590:
+    script:       GMBIT_125
+    display_name: GMBIT_125
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637591:
+    script:       GMBIT_126
+    display_name: GMBIT_126
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637592:
+    script:       GMBIT_127
+    display_name: GMBIT_127
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637593:
+    script:       BGM_DEBUG
+    display_name: BGM_DEBUG
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637594:
+    script:       Invincible_Shield
+    display_name: Invincible Shield
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637595:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637596:
+    script:       Embryo
+    display_name: Embryo
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637597:
+    script:       item_work
+    display_name: item_work
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637598:
+    script:       menace_aug
+    display_name: menace_aug
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637599:
+    script:       menace2_aug
+    display_name: menace2_aug
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637600:
+    script:       extend_shop
+    display_name: extend shop
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637601:
+    script:       skirm_aug
+    display_name: skirm_aug
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637602:
+    script:       rod_test
+    display_name: rod_test
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637603:
+    script:       racetest
+    display_name: racetest
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637604:
+    script:       A
+    display_name: A
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637605:
+    script:       B
+    display_name: B
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637606:
+    script:       C
+    display_name: C
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637607:
+    script:       ticket
+    display_name: ticket
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637608:
+    script:       Embryo2
+    display_name: Embryo2
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637609:
+    script:       K
+    display_name: K
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637611:
+    script:       EFFLoadMagic
+    display_name: EFFLoadMagic
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637612:
+    script:       '1'
+    display_name: '1'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637613:
+    script:       '2'
+    display_name: '2'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637614:
+    script:       '3'
+    display_name: '3'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637615:
+    script:       '4'
+    display_name: '4'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637616:
+    script:       '5'
+    display_name: '5'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637617:
+    script:       Debug_MonsterPlay
+    display_name: Debug_MonsterPlay
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637618:
+    script:       Login_Campaign
+    display_name: Login Campaign
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637619:
+    script:       Greeter_Moogle
+    display_name: Greeter Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637620:
+    script:       Abyssea_Campaign
+    display_name: Abyssea Campaign
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637621:
+    script:       Garden_Inviter
+    display_name: Garden Inviter
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637622:
+    script:       TargetName_Tester
+    display_name: TargetName Tester
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637623:
+    script:       Limbus_Operator
+    display_name: Limbus Operator
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637624:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637625:
+    script:       Mog_garden
+    display_name: Mog garden
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637626:
+    script:       Item-Test
+    display_name: Item-Test
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637627:
+    script:       SCitem-Chair
+    display_name: SCitem-Chair
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637628:
+    script:       Mongra-Tester
+    display_name: Mongra-Tester
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637629:
+    script:       Ephemeral_Moogle
+    display_name: Ephemeral Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637630:
+    script:       SE-Tester
+    display_name: SE-Tester
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637631:
+    script:       BGM-Tester
+    display_name: BGM-Tester
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637632:
+    script:       Equip_Navi
+    display_name: Equip Navi
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637633:
+    script:       Hume_m
+    display_name: Hume_m
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637634:
+    script:       Hume_f
+    display_name: Hume_f
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637635:
+    script:       Elvaan_m
+    display_name: Elvaan_m
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637636:
+    script:       Elvaan_f
+    display_name: Elvaan_f
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637637:
+    script:       Tarutaru_m
+    display_name: Tarutaru_m
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637638:
+    script:       Tarutaru_f
+    display_name: Tarutaru_f
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637639:
+    script:       Mithra
+    display_name: Mithra
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637640:
+    script:       Galka
+    display_name: Galka
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637641:
+    script:       Wep-test
+    display_name: Wep-test
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637642:
+    script:       Menumap-Check
+    display_name: Menumap-Check
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637643:
+    script:       Repairer_Moogle
+    display_name: Repairer Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637644:
+    script:       Ancestry_Moogle
+    display_name: Ancestry Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17637646:
+    script:       Previous_Race
+    display_name: Previous Race
+    render:
+      look:
+        type:  standard
+        model: 50

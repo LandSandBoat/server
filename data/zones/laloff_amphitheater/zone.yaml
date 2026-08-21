@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  196
+  battle_party: 196
+
+zonelines:
+
+  z500:
+    from:  [525.982, -42.268, 561.904]
+    to:    ruaun_gardens
+    at:    [333.017, -44.896, -458.350, 4.080132]
+    scale: [1.000, 3.000]
+
+  z502:
+    from:  [186.966, -177.520, 345.600]
+    to:    ruaun_gardens
+    at:    [538.792, -44.896, 175.066, 2.826366]
+    scale: [1.000, 3.000]
+
+  z504:
+    from:  [-605.074, -26.576, 433.148]
+    to:    ruaun_gardens
+    at:    [-0.001, -44.896, 566.523, 1.570796]
+    scale: [1.000, 3.000]
+
+  z506:
+    from:  [62.905, -228.241, 472.507]
+    to:    ruaun_gardens
+    at:    [-538.786, -44.896, 175.059, 0.310969]
+    scale: [1.000, 3.000]
+
+  z508:
+    from:  [-234.934, -141.199, 415.984]
+    to:    ruaun_gardens
+    at:    [-332.991, -44.896, -458.311, 5.333239]
+    scale: [1.000, 3.000]

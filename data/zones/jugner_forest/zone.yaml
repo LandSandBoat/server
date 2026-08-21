@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z2w0:
+    from:  [-599.998, -16.683, -440.077]
+    to:    la_theine_plateau
+    at:    [795.118, 28.221, -39.978, 3.141593]
+    scale: [1.000, 13.000]
+
+  z2w2:
+    from:  [591.936, -15.294, 560.095]
+    to:    batallia_downs
+    at:    [-439.393, -11.765, -239.958]
+    scale: [1.000, 10.000]
+
+  z2w4:
+    from:  [-340.908, -8.244, 465.750]
+    to:    king_ranperres_tomb
+    at:    [242.012, 5.305, 340.059, 3.141593]
+    scale: [1.000, 5.000]
+
+  z2w6:
+    from:  [-240.440, -16.683, -597.493]
+    to:    davoi
+    at:    [218.468, -2.302, -3.871, 1.570796]
+    scale: [1.000, 7.000]
+
+  z2w8:
+    from:  [344.389, -6.769, 8.197]
+    to:    carpenters_landing
+    at:    [6.509, -9.163, -819.333, 5.846853]
+    scale: [1.000, 5.000]
+
+  z2wa:
+    from:  [-538.898, -0.164, 340.548]
+    to:    carpenters_landing
+    at:    [-419.796, -8.943, -554.553, 5.061455]
+    scale: [1.000, 5.000]

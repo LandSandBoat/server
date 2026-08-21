@@ -1,0 +1,3843 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Azrael:
+    id:            6882
+    species:       hecteye
+    type:          [notorious]
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Bifrons_Den_of_Rancor:
+    id:            6585
+    display_name:  Bifrons_DoR
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+        - chance: rare
+          item:   rancor_den_coffer_key
+      steal: bomb_arm
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Bistre-hearted_Malberry:
+    id:            424
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1222
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7400
+        mp: 7400
+    loot:
+      drops:
+        - chance: always
+          item:   tonberry_coat
+        - chance: common
+          item:   tonberry_lantern
+        - chance: uncommon
+          item:   skirnirs_wand
+        - chance: uncommon
+          item:   scroll_of_waterga_iii
+        - chance: rare
+          item:   scroll_of_water_iv
+        - chance: uncommon
+          item:   scroll_of_waterga_ii
+        - chance: rare
+          item:   scroll_of_water_iii
+        - chance: rare
+          item:   scroll_of_flood
+
+  Bloodsucker_fished:
+    id:            6770
+    display_name:  Bloodsucker
+    species:       leech
+    type:          [fished]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 641
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: rare
+          item:   vial_of_beastman_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Bullbeggar:
+    id:            574
+    species:       opo_opo
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags: 133
+        model_size:     2
+        hitbox:        21
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   pebble
+        - chance: uncommon
+          item:   bunch_of_pamamas
+        - chance: rare
+          item:   elshimo_coconut
+        - chance: very_rare
+          item:   bunch_of_wild_pamamas
+      despoil:
+        bunch_of_pamamas: 0
+
+  Carmine-tailed_Janberry:
+    id:            640
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 32
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1225
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 16300
+        mp: 16300
+    loot:
+      drops:
+        - chance: always
+          item:   asklepios
+        - chance: always
+          item:   tonberry_coat
+        - chance: uncommon
+          item:   water_spirit_pact
+        - chance: very_common
+          item:   tonberry_lantern
+        - chance: rare
+          item:   pinch_of_dried_mugwort
+
+  Cave_Worm_DoR:
+    id:            6414
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 425
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   flint_stone
+        - chance: uncommon
+          item:   chunk_of_copper_ore
+        - chance: rare
+          item:   chunk_of_zinc_ore
+        - chance: very_rare
+          item:   chunk_of_iron_ore
+      steal: pebble
+      despoil:
+        chunk_of_copper_ore: 0
+        chunk_of_iron_ore:   0
+        chunk_of_silver_ore: 0
+        chunk_of_zinc_ore:   0
+
+  Celeste-eyed_Tozberry:
+    id:            669
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1200
+        entity_flags:  3
+        model_size:    2
+        hitbox:       11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   kitsutsuki
+        - chance: always
+          item:   tonberry_coat
+        - chance: very_common
+          item:   tonberry_lantern
+        - chance: rare
+          item:   pinch_of_dried_mugwort
+
+  Cutlass_Scorpion_DR:
+    id:            6333
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   scorpion_claw
+        - chance: uncommon
+          item:   scorpion_shell
+        - chance: very_rare
+          item:   high-quality_scorpion_shell
+        - chance: rare
+          item:   rancor_den_coffer_key
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Demonic_Pugil:
+    id:            976
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Den_Scorpion:
+    id:            1000
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   scorpion_claw
+        - chance: uncommon
+          item:   scorpion_shell
+        - chance: very_rare
+          item:   high-quality_scorpion_shell
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Dire_Bat:
+    id:            1044
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Doom_Toad:
+    id:            1086
+    species:       doomed
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   undead_skin
+      despoil:
+        undead_skin: 0
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Friar_Rush:
+    id:            1425
+    species:       bomb
+    type:          [notorious]
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags:  3
+        model_size:    3
+        hitbox:       16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8600
+    loot:
+      drops:
+        - chance: always
+          item:   bomb_core
+        - chance: very_common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      steal: bomb_arm
+
+  Hakutaku:
+    id:            1877
+    species:       hecteye
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 270
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 52000
+        mp: 52000
+    loot:
+      drops:
+        - chance: always
+          item:   optical_hat
+        - chance: very_rare
+          item:   vile_elixir
+        - chance: very_common
+          item:   vile_elixir_+1
+        - chance: very_common
+          item:   hi-reraiser
+        - chance: uncommon
+          item:   scroll_of_fire_iii
+        - chance: uncommon
+          item:   scroll_of_firaga_iii
+        - chance: rare
+          item:   scroll_of_fire_iv
+        - chance: very_rare
+          item:   scroll_of_flare
+
+  Million_Eyes_DR:
+    id:            2662
+    species:       hecteye
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   hecteyes_eye
+        - chance: rare
+          item:   wooden_hakutaku_eye
+        - chance: very_rare
+          item:   scroll_of_firaga_iii
+        - chance: rare
+          item:   scroll_of_fire_iii
+        - chance: very_rare
+          item:   scroll_of_fire_iv
+        - chance: very_rare
+          item:   scroll_of_flare
+      despoil:
+        hecteyes_eye: 0
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   rancor_den_coffer_key
+
+  Mokumokuren:
+    id:            2718
+    species:       hecteye
+    type:          [notorious]
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+
+  Mousse_DoR_PMS:
+    id:            6409
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 643
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   rancor_den_coffer_key
+        - chance: very_common
+          item:   vial_of_slime_oil
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Mousse_fished:
+    id:            6784
+    display_name:  Mousse
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 645
+        model_size:     2
+        hitbox:        27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   rancor_den_coffer_key
+        - chance: very_common
+          item:   vial_of_slime_oil
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Ogama:
+    id:            2948
+    species:       doomed
+    type:          [notorious]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 20000
+    loot:
+      drops:
+        - chance: always
+          item:   amanojaku
+        - chance: very_common
+          item:   undead_skin
+        - chance: common
+          item:   revival_tree_root
+
+  Puck:
+    id:            3217
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   two-leaf_mandragora_bud
+        - chance: rare
+          item:   jug_of_humus
+      despoil:
+        two-leaf_mandragora_bud: 0
+        ball_of_saruta_cotton:   0
+
+  Rancor_Torch:
+    id:            3321
+    species:       bomb
+    type:          [notorious]
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags:  3
+        model_size:    3
+        hitbox:       16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Razorjaw_Pugil_fished:
+    id:            6776
+    display_name:  Razorjaw_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Rock_Crab_fished:
+    id:            6777
+    display_name:  Rock_Crab
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: uncommon
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Sozu_Bliberry:
+    id:            3711
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1251
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 21600
+      stats:
+        hp: 7100
+        mp: 7100
+    loot:
+      drops:
+        - chance: always
+          item:   tonberry_coat
+        - chance: common
+          item:   tonberry_lantern
+        - chance: uncommon
+          item:   scroll_of_waterga_iii
+        - chance: common
+          item:   scroll_of_water_iv
+        - chance: rare
+          item:   pinch_of_dried_mugwort
+      steal: gold_beastcoin
+
+  Succubus_Bats:
+    id:            3806
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   rancor_den_coffer_key
+        - chance: rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Tawny-fingered_Mugberry:
+    id:            3855
+    species:       tonberry
+    type:          [notorious]
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1194
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 5700
+    loot:
+      drops:
+        - chance: always
+          item:   tonberry_coat
+        - chance: very_common
+          item:   tonberry_lantern
+        - chance: always
+          item:   uggalepih_necklace
+        - chance: rare
+          item:   pinch_of_dried_mugwort
+      steal: gold_beastcoin
+
+  Tonberry_Beleaguerer:
+    id:            3949
+    species:       tonberry
+    spell_list_id: 32
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1226
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   summoners_testimony
+        - chance: common
+          item:   tonberry_coat
+        - chance: rare
+          item:   rancor_den_coffer_key
+        - chance: uncommon
+          item:   flask_of_venom_potion
+        - chance: rare
+          item:   water_spirit_pact
+      steal: gold_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Decapitator:
+    id:            3953
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1205
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 1260
+      stats:
+        hp: 4200
+    loot:
+      drops:
+        - chance: very_common
+          item:   ninjas_testimony
+        - chance: always
+          item:   tonberry_coat
+        - chance: very_common
+          item:   tonberry_lantern
+        - chance: very_common
+          item:   manji_shuriken
+        - chance: rare
+          item:   fudo
+        - chance: rare
+          item:   scroll_of_tonko_ni
+        - chance: rare
+          item:   scroll_of_kurayami_ni
+        - chance: very_rare
+          item:   scroll_of_hojo_ni
+        - chance: rare
+          item:   pinch_of_dried_mugwort
+      steal: gold_beastcoin
+
+  Tonberry_Imprecator:
+    id:            3959
+    species:       tonberry
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1212
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   black_mages_testimony
+        - chance: common
+          item:   tonberry_coat
+        - chance: uncommon
+          item:   unlit_lantern
+        - chance: rare
+          item:   scroll_of_thundaga_ii
+        - chance: very_rare
+          item:   scroll_of_thunder_iii
+      steal: gold_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Pontifex:
+    id:            3964
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1221
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 4100
+        mp: 4100
+    loot:
+      drops:
+        - chance: very_common
+          item:   black_mages_testimony
+        - chance: always
+          item:   tonberry_coat
+        - chance: common
+          item:   tonberry_lantern
+        - chance: uncommon
+          item:   scroll_of_waterga_iii
+        - chance: rare
+          item:   scroll_of_water_iv
+        - chance: uncommon
+          item:   scroll_of_waterga_ii
+        - chance: common
+          item:   scroll_of_water_iii
+        - chance: rare
+          item:   scroll_of_flood
+        - chance: very_common
+          item:   platinum_beastcoin
+        - chance: rare
+          item:   pinch_of_dried_mugwort
+      steal: platinum_beastcoin
+
+  Tonberry_Slasher:
+    id:            3967
+    species:       tonberry
+    spell_list_id: 7
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1203
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   ninjas_testimony
+        - chance: common
+          item:   tonberry_coat
+        - chance: rare
+          item:   rancor_den_coffer_key
+        - chance: rare
+          item:   prelate_key
+        - chance: uncommon
+          item:   flask_of_venom_potion
+        - chance: very_rare
+          item:   manji_shuriken
+        - chance: super_rare
+          item:   scroll_of_tonko_ni
+        - chance: ultra_rare
+          item:   scroll_of_kurayami_ni
+        - chance: ultra_rare
+          item:   scroll_of_hojo_ni
+      steal: gold_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Tracker:
+    id:            3972
+    species:       tonberry
+    type:          [notorious]
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1184
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 1560
+      stats:
+        hp: 4200
+    loot:
+      drops:
+        - chance: uncommon
+          item:   thiefs_testimony
+        - chance: common
+          item:   tonberry_coat
+        - chance: uncommon
+          item:   tonberry_lantern
+        - chance: rare
+          item:   thiefs_kote
+        - chance: rare
+          item:   pinch_of_dried_mugwort
+      steal: gold_beastcoin
+
+  Tonberry_Trailer:
+    id:            3973
+    species:       tonberry
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1191
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   tonberry_coat
+        - chance: uncommon
+          item:   flask_of_venom_potion
+        - chance: rare
+          item:   rancor_den_coffer_key
+        - chance: rare
+          item:   tonberry_board
+        - chance: very_rare
+          item:   flickering_lantern
+      steal: thiefs_testimony
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberrys_Elemental:
+    id:            3971
+    species:       fire_elemental
+    type:          [called]
+    spell_list_id: 21
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 8
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Tormentor:
+    id:            3977
+    species:       ash_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 329
+        entity_flags: 133
+        model_size:     2
+        hitbox:        18
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   lizard_tail
+        - chance: uncommon
+          item:   lizard_skin
+        - chance: common
+          item:   lizard_egg
+      despoil:
+        lizard_skin: 0
+        lizard_tail: 0
+        lizard_egg:  0
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+spawns:
+  17432577:
+    template: Rock_Crab_fished
+    script:   Rock_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17432578:
+    template: Razorjaw_Pugil_fished
+    script:   Razorjaw_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17432579:
+    template: Bloodsucker_fished
+    script:   Bloodsucker
+    at:       [1.000, 1.000, 1.000]
+    level:    [58, 60]
+  17432580:
+    template: Mousse_fished
+    script:   Mousse
+    at:       [1.000, 1.000, 1.000]
+    level:    [64, 67]
+  17432581:
+    template: Mousse_fished
+    script:   Mousse
+    at:       [1.000, 1.000, 1.000]
+    level:    [64, 67]
+  17432582:
+    template: Rancor_Torch
+    at:       [119.101, 14.986, -318.679, 157]
+    level:    [69, 73]
+  17432583:
+    template: Mimic
+    at:       [185.654, -28.001, -107.475, 127]
+    level:    [65, 65]
+  17432584:
+    template: Tonberry_Trailer
+    at:       [3.000, 16.000, -31.000, 127]
+    level:    [62, 65]
+  17432585:
+    template: Dire_Bat
+    at:       [-3.824, 15.564, -43.606, 127]
+    level:    [60, 63]
+  17432586:
+    template: Tonberry_Trailer
+    at:       [40.000, 16.000, -33.000, 127]
+    level:    [62, 65]
+  17432587:
+    template: Dire_Bat
+    at:       [8.000, 16.451, -41.000, 127]
+    level:    [60, 63]
+  17432588:
+    template: Dire_Bat
+    at:       [19.825, 16.453, -33.908, 127]
+    level:    [60, 63]
+  17432589:
+    template: Fire_Elemental
+    at:       [14.170, 16.298, -46.964, 216]
+    level:    [70, 72]
+  17432590:
+    template: Tonberry_Imprecator
+    at:       [38.208, 15.843, -46.976, 127]
+    level:    [62, 64]
+  17432591:
+    template: Dire_Bat
+    at:       [35.000, 36.000, -60.000, 127]
+    level:    [60, 63]
+  17432592:
+    template: Tonberry_Trailer
+    at:       [-2.478, 15.667, -42.535, 5]
+    level:    [62, 65]
+  17432593:
+    template: Tonberry_Imprecator
+    at:       [29.000, 16.000, -42.000, 2]
+    level:    [62, 64]
+  17432594:
+    template: Dire_Bat
+    at:       [18.465, 15.362, -69.896, 63]
+    level:    [60, 63]
+  17432595:
+    template: Dire_Bat
+    at:       [0.500, 16.000, -100.000, 25]
+    level:    [60, 63]
+  17432596:
+    template: Dire_Bat
+    at:       [20.000, 16.000, -79.000, 127]
+    level:    [60, 63]
+  17432597:
+    template: Tonberry_Trailer
+    at:       [22.757, 15.738, -102.055, 127]
+    level:    [62, 65]
+  17432598:
+    template: Dire_Bat
+    at:       [-7.000, 16.000, -60.000, 49]
+    level:    [60, 63]
+  17432599:
+    template: Dire_Bat
+    at:       [-19.592, 15.548, -83.703, 73]
+    level:    [60, 63]
+  17432600:
+    template: Dire_Bat
+    at:       [-15.042, 15.690, -94.992, 127]
+    level:    [60, 63]
+  17432601:
+    template: Dire_Bat
+    at:       [39.857, 15.545, -101.641, 127]
+    level:    [60, 63]
+  17432602:
+    template: Dire_Bat
+    at:       [52.693, 15.348, -107.705, 32]
+    level:    [60, 63]
+  17432603:
+    template: Dire_Bat
+    at:       [58.902, 15.249, -70.684, 127]
+    level:    [60, 63]
+  17432604:
+    template: Dire_Bat
+    at:       [61.000, 16.000, -92.000, 127]
+    level:    [60, 63]
+  17432605:
+    template: Dire_Bat
+    at:       [49.000, 16.000, -58.000, 127]
+    level:    [60, 63]
+  17432606:
+    template: Dire_Bat
+    at:       [76.184, 15.092, -61.292, 54]
+    level:    [60, 63]
+  17432607:
+    template: Tonberry_Trailer
+    at:       [104.000, 16.000, -31.000, 127]
+    level:    [62, 65]
+  17432608:
+    template: Tonberry_Imprecator
+    at:       [95.000, 16.000, -33.000, 127]
+    level:    [62, 64]
+  17432609:
+    template: Sozu_Bliberry
+    at:       [98.830, 16.807, -40.687, 127]
+    level:    [65, 66]
+  17432610:
+    template: Dire_Bat
+    at:       [98.000, 15.000, -60.000, 127]
+    level:    [60, 63]
+  17432611:
+    template: Dire_Bat
+    at:       [141.943, 15.780, -45.361, 46]
+    level:    [60, 63]
+  17432612:
+    template: Dire_Bat
+    at:       [115.000, 16.000, -19.000, 23]
+    level:    [60, 63]
+  17432613:
+    template: Dire_Bat
+    at:       [138.706, 15.491, -21.528, 127]
+    level:    [60, 63]
+  17432614:
+    template: Tonberry_Trailer
+    at:       [180.000, 16.000, -74.000, 20]
+    level:    [62, 65]
+  17432615:
+    template: Dire_Bat
+    at:       [159.000, 16.000, -59.000, 127]
+    level:    [60, 63]
+  17432616:
+    template: Dire_Bat
+    at:       [175.000, 15.000, -60.000, 111]
+    level:    [60, 63]
+  17432617:
+    template: Tonberry_Trailer
+    at:       [101.000, 17.000, -45.000, 11]
+    level:    [62, 65]
+  17432618:
+    template: Tonberry_Imprecator
+    at:       [178.000, 16.000, -87.000, 127]
+    level:    [62, 64]
+  17432619:
+    template: Dire_Bat
+    at:       [135.109, 15.709, -65.366, 127]
+    level:    [60, 63]
+  17432620:
+    template: Dire_Bat
+    at:       [124.732, 15.610, -59.721, 127]
+    level:    [60, 63]
+  17432621:
+    template: Tonberry_Trailer
+    at:       [134.000, 16.000, -101.000, 90]
+    level:    [62, 65]
+  17432622:
+    template: Tonberry_Trailer
+    at:       [146.000, 15.412, -102.000, 127]
+    level:    [62, 65]
+  17432623:
+    template: Dire_Bat
+    at:       [141.000, 15.000, -123.000, 76]
+    level:    [60, 63]
+  17432624:
+    template: Celeste-eyed_Tozberry
+    at:       [146.000, 15.412, -102.000, 127]
+    level:    [67, 69]
+  17432625:
+    template: Tonberry_Trailer
+    at:       [145.000, 16.000, -95.000, 127]
+    level:    [62, 65]
+  17432626:
+    template: Dire_Bat
+    at:       [109.478, 15.349, -100.959, 114]
+    level:    [60, 63]
+  17432627:
+    template: Dire_Bat
+    at:       [-29.100, 15.491, -59.534, 114]
+    level:    [60, 63]
+  17432628:
+    template: Tonberry_Slasher
+    at:       [-58.978, 15.486, -72.910, 127]
+    level:    [67, 69]
+  17432629:
+    template: Tonberry_Slasher
+    at:       [-60.000, 16.000, -85.000, 40]
+    level:    [67, 69]
+  17432630:
+    template: Dire_Bat
+    at:       [-62.783, 15.784, -74.063, 127]
+    level:    [60, 63]
+  17432631:
+    template: Fire_Elemental
+    level:    [70, 72]
+  17432632:
+    template: Tonberry_Beleaguerer
+    at:       [-64.433, 15.345, -76.619, 127]
+    level:    [66, 69]
+  17432633:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000, 20]
+    level:    [53, 59]
+  17432634:
+    template: Dire_Bat
+    at:       [-59.125, 15.466, -36.414, 127]
+    level:    [60, 63]
+  17432635:
+    template: Dire_Bat
+    at:       [-60.784, 15.514, -28.653, 127]
+    level:    [60, 63]
+  17432636:
+    template: Dire_Bat
+    at:       [-70.634, 15.822, -54.692, 74]
+    level:    [60, 63]
+  17432637:
+    template: Dire_Bat
+    at:       [-67.000, 15.428, -15.000, 127]
+    level:    [60, 63]
+  17432638:
+    template: Bifrons_Den_of_Rancor
+    script:   Bifrons
+    at:       [-87.587, 15.469, -6.522, 127]
+    level:    [68, 70]
+  17432639:
+    template: Bifrons_Den_of_Rancor
+    script:   Bifrons
+    at:       [-74.000, 16.000, 6.000, 127]
+    level:    [68, 70]
+  17432640:
+    template: Friar_Rush
+    at:       [-86.000, 16.000, 2.000, 35]
+    level:    [70, 70]
+  17432641:
+    template: Dire_Bat
+    at:       [59.000, 16.000, 0.500, 127]
+    level:    [60, 63]
+  17432642:
+    template: Dire_Bat
+    at:       [30.508, 11.490, 24.665, 127]
+    level:    [60, 63]
+  17432643:
+    template: Dire_Bat
+    at:       [74.000, 15.000, 19.000, 127]
+    level:    [60, 63]
+  17432644:
+    template: Dire_Bat
+    at:       [98.466, 25.212, 2.383, 64]
+    level:    [60, 63]
+  17432645:
+    template: Dire_Bat
+    at:       [66.289, 35.479, -20.954, 127]
+    level:    [60, 63]
+  17432646:
+    template: Dire_Bat
+    at:       [96.310, 21.805, 14.483, 127]
+    level:    [60, 63]
+  17432647:
+    template: Tonberry_Imprecator
+    at:       [44.037, 36.243, -52.847, 127]
+    level:    [62, 64]
+  17432648:
+    template: Dire_Bat
+    at:       [40.740, 35.771, -32.911, 127]
+    level:    [60, 63]
+  17432649:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [35.315, 35.537, -45.169, 127]
+    level:    [61, 64]
+  17432650:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [22.000, 36.000, -57.000, 127]
+    level:    [61, 64]
+  17432651:
+    template: Tonberry_Trailer
+    at:       [31.801, 35.508, -90.055, 127]
+    level:    [62, 65]
+  17432652:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [44.000, 36.000, -96.000, 127]
+    level:    [61, 64]
+  17432653:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [46.787, 35.815, -82.452, 127]
+    level:    [61, 64]
+  17432654:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [27.261, 35.652, -72.218, 127]
+    level:    [61, 64]
+  17432655:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [0.020, 35.468, -68.012, 127]
+    level:    [61, 64]
+  17432656:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [-5.459, 35.514, -77.274, 127]
+    level:    [61, 64]
+  17432657:
+    template: Dire_Bat
+    at:       [-3.435, 35.468, -92.258, 124]
+    level:    [60, 63]
+  17432658:
+    template: Dire_Bat
+    at:       [4.481, 35.510, -80.938, 127]
+    level:    [60, 63]
+  17432659:
+    template: Carmine-tailed_Janberry
+    at:       [0.500, 36.000, -87.000, 31]
+    level:    [66, 67]
+  17432660:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432661:
+    template: Tonberry_Imprecator
+    at:       [51.531, 36.125, -105.354, 127]
+    level:    [62, 64]
+  17432662:
+    template: Tonberry_Imprecator
+    at:       [32.000, 36.000, -109.000, 127]
+    level:    [62, 64]
+  17432663:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [38.450, 35.835, -123.768, 84]
+    level:    [61, 64]
+  17432664:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [49.194, 36.411, -107.748, 105]
+    level:    [61, 64]
+  17432665:
+    template: Tonberry_Trailer
+    at:       [42.774, 35.675, -157.454, 33]
+    level:    [62, 65]
+  17432666:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [29.777, 36.128, -147.050, 34]
+    level:    [61, 64]
+  17432667:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [47.107, 36.443, -132.831, 127]
+    level:    [61, 64]
+  17432668:
+    template: Tonberry_Imprecator
+    at:       [-15.819, 35.574, -134.720, 127]
+    level:    [62, 64]
+  17432669:
+    template: Dire_Bat
+    at:       [-26.316, 35.579, -138.970, 127]
+    level:    [60, 63]
+  17432670:
+    template: Tonberry_Trailer
+    at:       [39.019, 35.896, -38.159, 127]
+    level:    [62, 65]
+  17432671:
+    template: Tonberry_Imprecator
+    at:       [39.428, 36.480, -136.605, 127]
+    level:    [62, 64]
+  17432672:
+    template: Dire_Bat
+    at:       [-24.381, 39.820, -28.080, 24]
+    level:    [60, 63]
+  17432673:
+    template: Dire_Bat
+    at:       [-22.115, 35.708, -34.154, 68]
+    level:    [60, 63]
+  17432674:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [-36.897, 44.970, -21.899, 127]
+    level:    [61, 64]
+  17432675:
+    template: Cave_Worm_DoR
+    script:   Cave_Worm
+    at:       [-53.000, 45.000, -19.000, 18]
+    level:    [61, 64]
+  17432676:
+    template: Tonberry_Trailer
+    at:       [-56.660, 45.642, -7.901, 95]
+    level:    [62, 65]
+  17432677:
+    template: Dire_Bat
+    at:       [-56.468, 45.623, -7.522, 12]
+    level:    [60, 63]
+  17432678:
+    template: Dire_Bat
+    at:       [-60.935, 45.382, -8.103, 127]
+    level:    [60, 63]
+  17432679:
+    template: Tonberry_Trailer
+    at:       [-72.978, 45.266, 21.533, 117]
+    level:    [62, 65]
+  17432680:
+    template: Tonberry_Imprecator
+    at:       [-60.807, 45.480, 22.419, 45]
+    level:    [62, 64]
+  17432681:
+    template: Dire_Bat
+    at:       [-61.651, 45.459, 24.353, 121]
+    level:    [60, 63]
+  17432682:
+    template: Dire_Bat
+    at:       [-16.000, 36.000, -55.000, 127]
+    level:    [60, 63]
+  17432683:
+    template: Tonberry_Trailer
+    at:       [-79.935, 45.373, 18.524, 4]
+    level:    [62, 65]
+  17432684:
+    template: Dire_Bat
+    at:       [-82.567, 45.393, 21.987, 127]
+    level:    [60, 63]
+  17432685:
+    template: Tonberry_Imprecator
+    at:       [-36.701, 45.315, 19.801, 65]
+    level:    [62, 64]
+  17432686:
+    template: Dire_Bat
+    at:       [-40.879, 45.440, 21.912, 127]
+    level:    [60, 63]
+  17432687:
+    template: Tormentor
+    at:       [322.000, -3.000, 314.000, 127]
+    level:    [75, 78]
+  17432688:
+    template: Tormentor
+    at:       [313.000, -3.000, 314.000, 92]
+    level:    [75, 78]
+  17432689:
+    template: Tormentor
+    at:       [319.986, -4.212, 326.239, 127]
+    level:    [75, 78]
+  17432690:
+    template: Tormentor
+    at:       [328.000, -3.000, 321.000, 127]
+    level:    [75, 78]
+  17432691:
+    template: Puck
+    at:       [323.838, -4.000, 322.532, 127]
+    level:    [74, 77]
+  17432692:
+    template: Bullbeggar
+    at:       [367.312, -4.837, 339.054, 124]
+    level:    [78, 80]
+  17432693:
+    template: Bullbeggar
+    at:       [355.000, -4.528, 338.000, 127]
+    level:    [78, 80]
+  17432694:
+    template: Bullbeggar
+    at:       [344.000, -4.000, 338.000, 9]
+    level:    [78, 80]
+  17432695:
+    template: Tormentor
+    at:       [341.328, -5.020, 283.824, 127]
+    level:    [75, 78]
+  17432696:
+    template: Tormentor
+    at:       [341.432, -4.585, 280.390, 37]
+    level:    [75, 78]
+  17432697:
+    template: Tormentor
+    at:       [355.917, -4.485, 260.720, 127]
+    level:    [75, 78]
+  17432698:
+    template: Tormentor
+    at:       [341.928, -4.625, 269.246, 55]
+    level:    [75, 78]
+  17432699:
+    template: Puck
+    at:       [342.186, -4.000, 271.980]
+    level:    [74, 77]
+  17432700:
+    template: Puck
+    at:       [387.933, -4.811, 238.677, 127]
+    level:    [74, 77]
+  17432701:
+    template: Puck
+    at:       [390.636, -4.530, 237.156, 68]
+    level:    [74, 77]
+  17432702:
+    template: Puck
+    at:       [393.884, -4.971, 231.768, 127]
+    level:    [74, 77]
+  17432703:
+    template: Puck
+    at:       [401.000, -3.000, 246.000, 127]
+    level:    [74, 77]
+  17432704:
+    template: Puck
+    at:       [404.117, -4.120, 235.828, 127]
+    level:    [74, 77]
+  17432705:
+    template: Tormentor
+    at:       [383.952, -1.659, 289.411, 127]
+    level:    [75, 78]
+  17432706:
+    template: Tormentor
+    at:       [393.675, 3.107, 297.123, 127]
+    level:    [75, 78]
+  17432707:
+    template: Puck
+    at:       [386.735, 1.000, 294.356]
+    level:    [74, 77]
+  17432708:
+    template: Bullbeggar
+    at:       [453.809, 5.898, 299.736, 92]
+    level:    [78, 80]
+  17432709:
+    template: Bullbeggar
+    at:       [435.111, 6.288, 299.550, 64]
+    level:    [78, 80]
+  17432710:
+    template: Bullbeggar
+    at:       [451.030, 5.680, 303.150, 127]
+    level:    [78, 80]
+  17432711:
+    template: Bullbeggar
+    at:       [439.387, 6.627, 298.298, 4]
+    level:    [78, 80]
+  17432712:
+    template: Puck
+    at:       [462.126, 5.432, 318.254, 127]
+    level:    [74, 77]
+  17432713:
+    template: Puck
+    at:       [461.042, 5.446, 315.550, 127]
+    level:    [74, 77]
+  17432714:
+    template: Puck
+    at:       [461.170, 5.173, 327.517, 127]
+    level:    [74, 77]
+  17432715:
+    template: Puck
+    at:       [456.495, 5.013, 324.549, 127]
+    level:    [74, 77]
+  17432716:
+    template: Tormentor
+    at:       [419.000, 26.000, 283.000, 120]
+    level:    [75, 78]
+  17432717:
+    template: Tormentor
+    at:       [421.397, 23.761, 274.775, 35]
+    level:    [75, 78]
+  17432718:
+    template: Tormentor
+    at:       [448.565, 10.772, 261.047, 24]
+    level:    [75, 78]
+  17432719:
+    template: Tormentor
+    at:       [432.000, 18.000, 262.000, 127]
+    level:    [75, 78]
+  17432720:
+    template: Puck
+    at:       [463.000, 5.000, 321.000, 127]
+    level:    [74, 77]
+  17432721:
+    template: Tonberry_Slasher
+    at:       [417.368, 25.726, 304.131, 3]
+    level:    [67, 69]
+  17432722:
+    template: Tonberry_Slasher
+    at:       [415.929, 25.497, 334.798, 127]
+    level:    [67, 69]
+  17432723:
+    template: Tonberry_Beleaguerer
+    at:       [418.611, 25.532, 295.349, 32]
+    level:    [66, 69]
+  17432724:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432725:
+    template: Bullbeggar
+    at:       [382.936, 25.656, 300.346, 127]
+    level:    [78, 80]
+  17432726:
+    template: Bullbeggar
+    at:       [395.000, 26.000, 300.000, 127]
+    level:    [78, 80]
+  17432727:
+    template: Bullbeggar
+    at:       [379.048, 25.128, 304.550, 47]
+    level:    [78, 80]
+  17432728:
+    template: Den_Scorpion
+    at:       [372.000, 26.000, 296.000, 127]
+    level:    [79, 81]
+  17432729:
+    template: Bullbeggar
+    at:       [452.788, 24.222, 294.637, 47]
+    level:    [78, 80]
+  17432730:
+    template: Bullbeggar
+    at:       [453.933, 23.818, 303.310, 127]
+    level:    [78, 80]
+  17432731:
+    template: Bullbeggar
+    at:       [465.648, 24.239, 290.626, 70]
+    level:    [78, 80]
+  17432732:
+    template: Den_Scorpion
+    at:       [469.097, 24.118, 298.746, 216]
+    level:    [79, 81]
+  17432733:
+    template: Tonberry_Slasher
+    at:       [424.000, 26.000, 302.000, 127]
+    level:    [67, 69]
+  17432734:
+    template: Bifrons_Den_of_Rancor
+    script:   Bifrons
+    at:       [401.006, 25.500, 367.180, 127]
+    level:    [68, 70]
+  17432735:
+    template: Bifrons_Den_of_Rancor
+    script:   Bifrons
+    at:       [409.028, 25.478, 357.297, 108]
+    level:    [68, 70]
+  17432736:
+    template: Tormentor
+    at:       [336.014, 13.972, 262.470, 127]
+    level:    [75, 78]
+  17432737:
+    template: Bullbeggar
+    at:       [342.723, 15.533, 267.984, 127]
+    level:    [78, 80]
+  17432738:
+    template: Bullbeggar
+    at:       [346.569, 15.541, 264.690, 5]
+    level:    [78, 80]
+  17432739:
+    template: Tormentor
+    at:       [306.863, 15.438, 261.714, 127]
+    level:    [75, 78]
+  17432740:
+    template: Tormentor
+    at:       [301.642, 15.498, 254.582, 64]
+    level:    [75, 78]
+  17432741:
+    template: Tormentor
+    at:       [301.686, 15.675, 246.266, 127]
+    level:    [75, 78]
+  17432742:
+    template: Puck
+    at:       [308.395, 15.484, 260.147, 240]
+    level:    [74, 77]
+  17432743:
+    template: Tormentor
+    at:       [321.126, 15.561, 221.961, 127]
+    level:    [75, 78]
+  17432744:
+    template: Tormentor
+    at:       [330.195, 14.155, 226.603, 99]
+    level:    [75, 78]
+  17432745:
+    template: Tormentor
+    at:       [320.590, 15.468, 219.446, 28]
+    level:    [75, 78]
+  17432746:
+    template: Puck
+    at:       [337.340, 15.421, 219.902, 77]
+    level:    [74, 77]
+  17432747:
+    template: Puck
+    at:       [304.252, 15.744, 225.500, 127]
+    level:    [74, 77]
+  17432748:
+    template: Puck
+    at:       [297.671, 15.160, 211.494, 44]
+    level:    [74, 77]
+  17432749:
+    template: Den_Scorpion
+    at:       [299.868, 15.576, 217.351, 86]
+    level:    [79, 81]
+  17432750:
+    template: Puck
+    at:       [298.161, 15.558, 216.908, 40]
+    level:    [74, 77]
+  17432751:
+    template: Bullbeggar
+    at:       [264.237, 15.513, 220.816, 127]
+    level:    [78, 80]
+  17432752:
+    template: Bullbeggar
+    at:       [258.328, 15.362, 217.138, 4]
+    level:    [78, 80]
+  17432753:
+    template: Bullbeggar
+    at:       [260.043, 15.304, 216.279, 127]
+    level:    [78, 80]
+  17432754:
+    template: Bullbeggar
+    at:       [293.542, 14.304, 183.582, 111]
+    level:    [78, 80]
+  17432755:
+    template: Bullbeggar
+    at:       [291.233, 15.090, 176.605, 21]
+    level:    [78, 80]
+  17432756:
+    template: Bullbeggar
+    at:       [297.712, 15.496, 181.964, 127]
+    level:    [78, 80]
+  17432757:
+    template: Bullbeggar
+    at:       [254.574, 15.637, 180.203, 45]
+    level:    [78, 80]
+  17432758:
+    template: Bullbeggar
+    at:       [256.488, 14.418, 172.967, 115]
+    level:    [78, 80]
+  17432759:
+    template: Den_Scorpion
+    at:       [256.184, 15.000, 183.434, 127]
+    level:    [79, 81]
+  17432760:
+    template: Tormentor
+    at:       [230.716, 15.939, 181.216, 127]
+    level:    [75, 78]
+  17432761:
+    template: Tormentor
+    at:       [229.259, 15.710, 181.259, 127]
+    level:    [75, 78]
+  17432762:
+    template: Tormentor
+    at:       [242.483, 15.563, 178.874, 5]
+    level:    [75, 78]
+  17432763:
+    template: Puck
+    at:       [227.698, 15.000, 182.723, 127]
+    level:    [74, 77]
+  17432764:
+    template: Tormentor
+    at:       [195.503, 13.635, 175.322, 28]
+    level:    [75, 78]
+  17432765:
+    template: Den_Scorpion
+    at:       [174.244, 12.348, 182.149, 47]
+    level:    [79, 81]
+  17432766:
+    template: Den_Scorpion
+    at:       [190.623, 12.233, 167.173, 33]
+    level:    [79, 81]
+  17432767:
+    template: Den_Scorpion
+    at:       [180.158, 15.380, 174.054, 127]
+    level:    [79, 81]
+  17432768:
+    template: Bullbeggar
+    at:       [261.724, 15.463, 155.192, 127]
+    level:    [78, 80]
+  17432769:
+    template: Bullbeggar
+    at:       [277.583, 15.411, 138.868, 30]
+    level:    [78, 80]
+  17432770:
+    template: Bullbeggar
+    at:       [274.013, 15.559, 141.389, 127]
+    level:    [78, 80]
+  17432771:
+    template: Puck
+    at:       [292.750, 15.288, 138.798, 127]
+    level:    [74, 77]
+  17432772:
+    template: Puck
+    at:       [305.438, 15.573, 139.665, 127]
+    level:    [74, 77]
+  17432773:
+    template: Den_Scorpion
+    at:       [301.739, 15.802, 145.633, 123]
+    level:    [79, 81]
+  17432774:
+    template: Puck
+    at:       [303.871, 15.809, 141.949, 31]
+    level:    [74, 77]
+  17432775:
+    template: Tormentor
+    at:       [378.717, -14.702, 199.982, 80]
+    level:    [75, 78]
+  17432776:
+    template: Tormentor
+    at:       [365.960, -6.487, 183.332, 127]
+    level:    [75, 78]
+  17432777:
+    template: Tormentor
+    at:       [325.623, 12.592, 139.669, 30]
+    level:    [75, 78]
+  17432778:
+    template: Tormentor
+    at:       [325.869, 12.458, 139.686, 70]
+    level:    [75, 78]
+  17432779:
+    template: Tormentor
+    at:       [369.004, -9.859, 180.956, 127]
+    level:    [75, 78]
+  17432780:
+    template: Puck
+    at:       [325.841, 13.000, 142.558, 127]
+    level:    [74, 77]
+  17432781:
+    template: Dire_Bat
+    at:       [33.033, 15.607, -138.219, 21]
+    level:    [60, 63]
+  17432782:
+    template: Dire_Bat
+    at:       [19.274, 15.834, -122.787, 58]
+    level:    [60, 63]
+  17432783:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [32.590, 15.614, -139.314, 2]
+    level:    [64, 67]
+  17432784:
+    template: Tonberry_Slasher
+    at:       [71.000, 16.000, -113.000, 127]
+    level:    [67, 69]
+  17432785:
+    template: Tonberry_Slasher
+    at:       [82.000, 16.000, -126.000, 127]
+    level:    [67, 69]
+  17432786:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [70.494, 16.194, -136.385, 86]
+    level:    [64, 67]
+  17432787:
+    template: Tonberry_Slasher
+    at:       [76.568, 15.606, -165.687, 127]
+    level:    [67, 69]
+  17432788:
+    template: Tonberry_Slasher
+    at:       [70.000, 16.000, -155.000, 39]
+    level:    [67, 69]
+  17432789:
+    template: Tonberry_Beleaguerer
+    at:       [79.000, 16.000, -154.000, 17]
+    level:    [66, 69]
+  17432790:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432791:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [74.600, 16.098, -156.033, 38]
+    level:    [64, 67]
+  17432792:
+    template: Fire_Elemental
+    at:       [78.931, 15.762, -168.618, 234]
+    level:    [70, 72]
+  17432793:
+    template: Tonberry_Slasher
+    at:       [125.000, 16.000, -166.000, 127]
+    level:    [67, 69]
+  17432794:
+    template: Tonberry_Slasher
+    at:       [127.188, 15.306, -154.453, 127]
+    level:    [67, 69]
+  17432795:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [111.306, 16.258, -168.514, 7]
+    level:    [64, 67]
+  17432796:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [99.732, 15.501, -140.500, 65]
+    level:    [64, 67]
+  17432797:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [95.387, 15.629, -145.979, 127]
+    level:    [64, 67]
+  17432798:
+    template: Tawny-fingered_Mugberry
+    at:       [100.000, 17.000, -180.000, 127]
+    level:    [70, 72]
+  17432799:
+    template: Tonberry_Beleaguerer
+    at:       [85.000, 16.000, -113.000, 127]
+    level:    [66, 69]
+  17432800:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432801:
+    template: Tonberry_Slasher
+    at:       [79.018, 15.568, -163.092, 119]
+    level:    [67, 69]
+  17432802:
+    template: Tonberry_Beleaguerer
+    at:       [117.267, 15.619, -156.876, 127]
+    level:    [66, 69]
+  17432803:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432804:
+    template: Dire_Bat
+    at:       [70.000, 16.000, -216.000, 5]
+    level:    [60, 63]
+  17432805:
+    template: Dire_Bat
+    at:       [100.000, 16.000, -197.000, 19]
+    level:    [60, 63]
+  17432806:
+    template: Dire_Bat
+    at:       [90.000, 16.000, -219.000, 50]
+    level:    [60, 63]
+  17432807:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [93.628, 15.635, -217.582, 120]
+    level:    [64, 67]
+  17432808:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [99.415, 15.509, -218.807, 235]
+    level:    [64, 67]
+  17432809:
+    template: Dire_Bat
+    at:       [139.000, 15.000, -192.000, 52]
+    level:    [60, 63]
+  17432810:
+    template: Dire_Bat
+    at:       [-21.178, 15.583, -115.993, 127]
+    level:    [60, 63]
+  17432811:
+    template: Dire_Bat
+    at:       [-27.224, 14.356, -95.793, 127]
+    level:    [60, 63]
+  17432812:
+    template: Dire_Bat
+    at:       [-44.196, 15.733, -98.313, 122]
+    level:    [60, 63]
+  17432813:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-24.137, 15.592, -98.811, 181]
+    level:    [64, 67]
+  17432814:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-27.991, 15.510, -99.665, 102]
+    level:    [64, 67]
+  17432815:
+    template: Dire_Bat
+    at:       [-61.344, 15.310, -160.511, 127]
+    level:    [60, 63]
+  17432816:
+    template: Dire_Bat
+    at:       [-56.219, 15.567, -147.210, 73]
+    level:    [60, 63]
+  17432817:
+    template: Dire_Bat
+    at:       [-60.618, 15.411, -136.884, 127]
+    level:    [60, 63]
+  17432818:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-62.673, 15.526, -141.212, 108]
+    level:    [64, 67]
+  17432819:
+    template: Tonberry_Slasher
+    at:       [-39.000, 16.000, -185.000, 127]
+    level:    [67, 69]
+  17432820:
+    template: Tonberry_Beleaguerer
+    at:       [-48.577, 15.486, -182.078, 97]
+    level:    [66, 69]
+  17432821:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432822:
+    template: Tonberry_Beleaguerer
+    at:       [-32.000, 16.000, -178.000, 127]
+    level:    [66, 69]
+  17432823:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432824:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-28.389, 16.246, -179.900, 57]
+    level:    [64, 67]
+  17432825:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-36.092, 15.267, -186.968, 208]
+    level:    [64, 67]
+  17432826:
+    template: Tonberry_Slasher
+    at:       [-44.078, 16.081, -177.664, 127]
+    level:    [67, 69]
+  17432827:
+    template: Dire_Bat
+    at:       [21.605, 15.513, -145.076, 127]
+    level:    [60, 63]
+  17432828:
+    template: Dire_Bat
+    at:       [-2.000, 16.000, -140.000, 127]
+    level:    [60, 63]
+  17432829:
+    template: Dire_Bat
+    at:       [-7.000, 16.000, -139.000, 127]
+    level:    [60, 63]
+  17432830:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-17.593, 15.497, -160.186, 38]
+    level:    [64, 67]
+  17432831:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-15.108, 15.496, -142.079, 110]
+    level:    [64, 67]
+  17432832:
+    template: Dire_Bat
+    at:       [21.000, 16.000, -162.000, 92]
+    level:    [60, 63]
+  17432833:
+    template: Dire_Bat
+    at:       [32.000, 16.000, -178.000, 127]
+    level:    [60, 63]
+  17432834:
+    template: Dire_Bat
+    at:       [59.000, 15.000, -195.000, 111]
+    level:    [60, 63]
+  17432835:
+    template: Dire_Bat
+    at:       [52.804, 15.431, -171.857, 127]
+    level:    [60, 63]
+  17432836:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [57.550, 15.788, -169.945, 116]
+    level:    [64, 67]
+  17432837:
+    template: Dire_Bat
+    at:       [17.000, 16.000, -217.000, 127]
+    level:    [60, 63]
+  17432838:
+    template: Dire_Bat
+    at:       [-12.000, 15.000, -224.000, 127]
+    level:    [60, 63]
+  17432839:
+    template: Dire_Bat
+    at:       [23.828, 14.180, -191.198, 65]
+    level:    [60, 63]
+  17432840:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [23.852, 14.183, -208.149, 190]
+    level:    [64, 67]
+  17432841:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [13.723, 15.593, -178.858]
+    level:    [64, 67]
+  17432842:
+    template: Dire_Bat
+    at:       [-1.000, 16.000, -218.000, 7]
+    level:    [60, 63]
+  17432843:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-14.302, 14.430, -224.502, 11]
+    level:    [64, 67]
+  17432844:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-13.607, 14.035, -221.351, 199]
+    level:    [64, 67]
+  17432845:
+    template: Bistre-hearted_Malberry
+    at:       [-32.000, 16.000, -178.000, 127]
+    level:    [71, 73]
+  17432846:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-25.880, 15.051, -218.278, 238]
+    level:    [64, 67]
+  17432847:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [-20.373, 15.226, -210.914, 158]
+    level:    [64, 67]
+  17432848:
+    template: Water_Elemental
+    at:       [-24.064, 15.145, -217.639, 99]
+    level:    [68, 73]
+  17432849:
+    template: Tonberry_Slasher
+    at:       [139.000, 16.000, -227.000, 28]
+    level:    [67, 69]
+  17432850:
+    template: Tonberry_Slasher
+    at:       [132.000, 15.000, -217.000, 55]
+    level:    [67, 69]
+  17432851:
+    template: Tonberry_Beleaguerer
+    at:       [142.000, 16.000, -216.000, 127]
+    level:    [66, 69]
+  17432852:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432853:
+    template: Dire_Bat
+    at:       [161.000, 15.000, -260.000, 127]
+    level:    [60, 63]
+  17432854:
+    template: Dire_Bat
+    at:       [139.000, 16.000, -250.000, 71]
+    level:    [60, 63]
+  17432855:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [142.005, 15.718, -258.621, 221]
+    level:    [64, 67]
+  17432856:
+    template: Tonberry_Slasher
+    at:       [176.794, 16.135, -247.532, 77]
+    level:    [67, 69]
+  17432857:
+    template: Tonberry_Beleaguerer
+    at:       [184.000, 16.000, -243.000, 77]
+    level:    [66, 69]
+  17432858:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432859:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [177.079, 15.113, -253.955, 69]
+    level:    [64, 67]
+  17432860:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [178.662, 14.724, -259.357, 80]
+    level:    [64, 67]
+  17432861:
+    template: Tonberry_Beleaguerer
+    at:       [178.342, 16.701, -236.890, 127]
+    level:    [66, 69]
+  17432862:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432863:
+    template: Dire_Bat
+    at:       [101.622, 15.542, -240.184, 64]
+    level:    [60, 63]
+  17432864:
+    template: Dire_Bat
+    at:       [114.019, 15.841, -221.130, 121]
+    level:    [60, 63]
+  17432865:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [101.615, 15.628, -230.654, 89]
+    level:    [64, 67]
+  17432866:
+    template: Dire_Bat
+    at:       [121.000, 16.000, -260.000, 121]
+    level:    [60, 63]
+  17432867:
+    template: Tonberry_Slasher
+    at:       [94.135, 15.775, -255.097, 127]
+    level:    [67, 69]
+  17432868:
+    template: Tonberry_Beleaguerer
+    at:       [96.250, 15.805, -258.654, 99]
+    level:    [66, 69]
+  17432869:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432870:
+    template: Dire_Bat
+    at:       [106.080, 15.419, -301.905, 127]
+    level:    [60, 63]
+  17432871:
+    template: Tonberry_Slasher
+    at:       [104.000, 15.000, -257.000, 47]
+    level:    [67, 69]
+  17432872:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [111.027, 15.508, -317.467, 92]
+    level:    [64, 67]
+  17432873:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [114.101, 15.502, -326.874, 77]
+    level:    [64, 67]
+  17432874:
+    template: Dire_Bat
+    at:       [57.764, 15.624, -265.576, 48]
+    level:    [60, 63]
+  17432875:
+    template: Dire_Bat
+    at:       [68.842, 15.621, -257.319, 127]
+    level:    [60, 63]
+  17432876:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [56.910, 15.424, -271.930, 27]
+    level:    [64, 67]
+  17432877:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [71.382, 15.608, -257.013, 179]
+    level:    [64, 67]
+  17432878:
+    template: Dire_Bat
+    at:       [19.000, 15.000, -235.000, 88]
+    level:    [60, 63]
+  17432879:
+    template: Dire_Bat
+    at:       [19.103, 15.494, -248.172, 67]
+    level:    [60, 63]
+  17432880:
+    template: Dire_Bat
+    at:       [59.271, 15.220, -228.050, 121]
+    level:    [60, 63]
+  17432881:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [57.916, 15.602, -232.516, 76]
+    level:    [64, 67]
+  17432882:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [32.131, 15.327, -260.283, 201]
+    level:    [64, 67]
+  17432883:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [49.733, 14.337, -225.955, 161]
+    level:    [64, 67]
+  17432884:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [54.867, 15.499, -305.471, 207]
+    level:    [64, 67]
+  17432885:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [56.608, 15.151, -300.860, 59]
+    level:    [64, 67]
+  17432886:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [57.499, 15.426, -292.992, 172]
+    level:    [64, 67]
+  17432887:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [56.492, 15.499, -294.066, 98]
+    level:    [64, 67]
+  17432888:
+    template: Dire_Bat
+    at:       [139.137, 15.607, -275.832, 45]
+    level:    [60, 63]
+  17432889:
+    template: Dire_Bat
+    at:       [142.000, 20.000, -301.000, 68]
+    level:    [60, 63]
+  17432890:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [139.616, 15.624, -271.866, 33]
+    level:    [64, 67]
+  17432891:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [139.786, 25.485, -333.702, 202]
+    level:    [64, 67]
+  17432892:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [141.172, 25.495, -333.324, 179]
+    level:    [64, 67]
+  17432893:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [142.428, 19.406, -303.436, 230]
+    level:    [64, 67]
+  17432894:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [146.428, 18.746, -300.306, 236]
+    level:    [64, 67]
+  17432895:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [124.507, 35.786, -71.020, 227]
+    level:    [64, 67]
+  17432896:
+    template: Demonic_Pugil
+    at:       [121.841, 35.681, -87.717, 127]
+    level:    [73, 76]
+  17432897:
+    template: Demonic_Pugil
+    at:       [126.783, 35.368, -77.132, 42]
+    level:    [73, 76]
+  17432898:
+    template: Demonic_Pugil
+    at:       [119.988, 35.577, -80.647, 58]
+    level:    [73, 76]
+  17432899:
+    template: Doom_Toad
+    at:       [109.631, 35.713, -81.879, 36]
+    level:    [75, 78]
+  17432900:
+    template: Demonic_Pugil
+    at:       [140.037, 35.501, -99.992, 127]
+    level:    [73, 76]
+  17432901:
+    template: Demonic_Pugil
+    at:       [156.230, 35.879, -96.370, 109]
+    level:    [73, 76]
+  17432902:
+    template: Demonic_Pugil
+    at:       [160.192, 35.448, -103.326, 127]
+    level:    [73, 76]
+  17432903:
+    template: Doom_Toad
+    at:       [160.794, 35.480, -102.429, 86]
+    level:    [75, 78]
+  17432904:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [154.425, 35.712, -113.867, 18]
+    level:    [64, 67]
+  17432905:
+    template: Demonic_Pugil
+    at:       [161.646, 35.298, -114.791, 127]
+    level:    [73, 76]
+  17432906:
+    template: Demonic_Pugil
+    at:       [150.171, 35.905, -123.389, 127]
+    level:    [73, 76]
+  17432907:
+    template: Demonic_Pugil
+    at:       [150.736, 35.915, -123.950, 37]
+    level:    [73, 76]
+  17432908:
+    template: Doom_Toad
+    at:       [161.607, 35.199, -109.179, 127]
+    level:    [75, 78]
+  17432909:
+    template: Water_Elemental
+    at:       [165.190, 35.999, -80.587, 127]
+    level:    [68, 73]
+  17432910:
+    template: Demonic_Pugil
+    at:       [159.362, 36.079, -72.600, 127]
+    level:    [73, 75]
+  17432911:
+    template: Demonic_Pugil
+    at:       [173.155, 35.951, -94.694, 87]
+    level:    [73, 76]
+  17432912:
+    template: Succubus_Bats
+    at:       [98.628, 25.889, -170.538, 66]
+    level:    [65, 68]
+  17432913:
+    template: Succubus_Bats
+    at:       [125.311, 35.486, -139.173, 127]
+    level:    [65, 68]
+  17432914:
+    template: Tonberry_Slasher
+    at:       [27.715, 35.781, -198.793, 127]
+    level:    [67, 69]
+  17432915:
+    template: Tonberry_Beleaguerer
+    at:       [2.868, 35.489, -189.129, 127]
+    level:    [66, 69]
+  17432916:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432917:
+    template: Succubus_Bats
+    at:       [-9.865, 35.474, -203.177, 69]
+    level:    [65, 68]
+  17432918:
+    template: Succubus_Bats
+    at:       [21.559, 35.648, -211.866, 55]
+    level:    [65, 68]
+  17432919:
+    template: Tonberry_Slasher
+    at:       [67.407, 36.210, -195.970, 50]
+    level:    [67, 69]
+  17432920:
+    template: Tonberry_Slasher
+    at:       [47.220, 35.839, -183.555, 70]
+    level:    [67, 69]
+  17432921:
+    template: Succubus_Bats
+    at:       [78.228, 35.883, -195.024, 109]
+    level:    [65, 68]
+  17432922:
+    template: Succubus_Bats
+    at:       [54.894, 35.540, -174.119, 127]
+    level:    [65, 68]
+  17432923:
+    template: Tonberry_Slasher
+    at:       [63.000, 37.000, -241.000, 106]
+    level:    [67, 69]
+  17432924:
+    template: Tonberry_Beleaguerer
+    at:       [33.939, 35.804, -219.174, 127]
+    level:    [66, 69]
+  17432925:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432926:
+    template: Succubus_Bats
+    at:       [40.414, 36.409, -212.738, 127]
+    level:    [65, 68]
+  17432927:
+    template: Fire_Elemental
+    at:       [33.556, 35.779, -214.908, 77]
+    level:    [70, 72]
+  17432928:
+    template: Tonberry_Slasher
+    at:       [74.599, 36.480, -217.452, 120]
+    level:    [67, 69]
+  17432929:
+    template: Tonberry_Slasher
+    at:       [96.343, 35.548, -215.027, 127]
+    level:    [67, 69]
+  17432930:
+    template: Succubus_Bats
+    at:       [90.262, 35.542, -242.478, 46]
+    level:    [65, 68]
+  17432931:
+    template: Cutlass_Scorpion_DR
+    script:   Cutlass_Scorpion
+    at:       [121.000, 35.654, -236.000, 127]
+    level:    [68, 70]
+  17432932:
+    template: Succubus_Bats
+    at:       [124.571, 35.889, -281.581, 124]
+    level:    [65, 68]
+  17432933:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [111.500, 35.517, -250.675, 137]
+    level:    [64, 67]
+  17432934:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [113.177, 35.910, -285.402, 82]
+    level:    [64, 67]
+  17432935:
+    template: Cutlass_Scorpion_DR
+    script:   Cutlass_Scorpion
+    at:       [114.666, 35.803, -273.323, 127]
+    level:    [68, 70]
+  17432936:
+    template: Tonberry_Beleaguerer
+    at:       [52.761, 36.143, -219.130, 127]
+    level:    [66, 69]
+  17432937:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432938:
+    template: Succubus_Bats
+    at:       [162.284, 35.436, -299.334]
+    level:    [65, 68]
+  17432939:
+    template: Succubus_Bats
+    at:       [149.437, 35.479, -299.221, 127]
+    level:    [65, 68]
+  17432940:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [158.734, 35.459, -298.437, 127]
+    level:    [64, 67]
+  17432941:
+    template: Mousse_DoR_PMS
+    script:   Mousse
+    at:       [206.719, 35.514, -285.343, 23]
+    level:    [64, 67]
+  17432942:
+    template: Bifrons_Den_of_Rancor
+    script:   Bifrons
+    at:       [207.491, 35.504, -285.699, 64]
+    level:    [68, 70]
+  17432943:
+    template: Bifrons_Den_of_Rancor
+    script:   Bifrons
+    at:       [192.356, 35.534, -275.124, 127]
+    level:    [68, 70]
+  17432944:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [101.000, 25.000, -346.000, 127]
+    level:    [73, 76]
+  17432945:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [100.952, 25.789, -336.591, 125]
+    level:    [73, 76]
+  17432946:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [96.601, 25.652, -342.227, 127]
+    level:    [73, 76]
+  17432947:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [101.609, 25.505, -317.571, 36]
+    level:    [73, 76]
+  17432948:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [100.000, 25.000, -301.000, 41]
+    level:    [73, 76]
+  17432949:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [16.937, 25.260, -294.656, 113]
+    level:    [73, 76]
+  17432950:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [27.317, 24.133, -293.822, 12]
+    level:    [73, 76]
+  17432951:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [16.986, 25.446, -306.766, 127]
+    level:    [73, 76]
+  17432952:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [58.204, 24.923, -299.496, 127]
+    level:    [73, 76]
+  17432953:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [28.000, 25.000, -303.000, 127]
+    level:    [73, 76]
+  17432954:
+    template: Tonberry_Slasher
+    at:       [-20.122, 25.261, -294.893, 127]
+    level:    [67, 69]
+  17432955:
+    template: Tonberry_Slasher
+    at:       [-32.897, 25.773, -280.915, 127]
+    level:    [67, 69]
+  17432956:
+    template: Tonberry_Slasher
+    at:       [-38.351, 25.797, -285.935, 91]
+    level:    [67, 69]
+  17432957:
+    template: Tonberry_Beleaguerer
+    at:       [-35.517, 25.899, -281.578, 57]
+    level:    [66, 69]
+  17432958:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432959:
+    template: Tonberry_Slasher
+    at:       [-20.554, 25.456, -251.845, 127]
+    level:    [67, 69]
+  17432960:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [42.000, 26.000, -303.000, 127]
+    level:    [73, 76]
+  17432961:
+    template: Tonberry_Beleaguerer
+    at:       [-58.316, 25.431, -309.361, 127]
+    level:    [66, 69]
+  17432962:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432963:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [42.000, 26.000, -293.000, 113]
+    level:    [73, 76]
+  17432964:
+    template: Tonberry_Slasher
+    at:       [-78.435, 15.436, -221.484, 127]
+    level:    [67, 69]
+  17432965:
+    template: Tonberry_Beleaguerer
+    at:       [-59.361, 24.938, -236.407, 26]
+    level:    [66, 69]
+  17432966:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432967:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [-63.918, 21.624, -225.586, 127]
+    level:    [73, 76]
+  17432968:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [-62.529, 23.176, -233.277, 125]
+    level:    [73, 76]
+  17432969:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [-40.859, 35.731, -365.540, 32]
+    level:    [73, 76]
+  17432970:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [-21.000, 36.000, -349.000, 101]
+    level:    [73, 76]
+  17432971:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [-34.433, 35.838, -350.511, 73]
+    level:    [73, 76]
+  17432972:
+    template: Doom_Toad
+    at:       [-42.913, 35.360, -350.062, 127]
+    level:    [75, 78]
+  17432973:
+    template: Doom_Toad
+    at:       [-42.305, 35.356, -348.654, 133]
+    level:    [75, 78]
+  17432974:
+    template: Ogama
+    at:       [-32.223, 36.078, -369.741, 117]
+    level:    [80, 82]
+  17432975:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [8.104, 33.010, -351.031, 127]
+    level:    [73, 76]
+  17432976:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [-13.768, 36.211, -372.854, 91]
+    level:    [73, 76]
+  17432977:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [-14.259, 36.542, -369.021, 127]
+    level:    [73, 76]
+  17432978:
+    template: Doom_Toad
+    at:       [-2.000, 36.000, -367.000, 58]
+    level:    [75, 78]
+  17432979:
+    template: Doom_Toad
+    at:       [-21.000, 36.000, -351.000, 18]
+    level:    [75, 78]
+  17432980:
+    template: Tonberry_Slasher
+    at:       [-113.000, 6.000, -215.000, 127]
+    level:    [69, 71]
+  17432981:
+    template: Tonberry_Beleaguerer
+    at:       [-124.000, 7.000, -219.000, 127]
+    level:    [69, 72]
+  17432982:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432983:
+    template: Tonberry_Slasher
+    at:       [-139.000, 6.000, -205.000, 55]
+    level:    [69, 71]
+  17432984:
+    template: Tonberry_Slasher
+    at:       [-140.000, 7.000, -193.000, 127]
+    level:    [69, 71]
+  17432985:
+    template: Tonberry_Beleaguerer
+    at:       [-145.220, 5.250, -179.819, 127]
+    level:    [69, 72]
+  17432986:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432987:
+    template: Tonberry_Beleaguerer
+    at:       [-125.000, 5.000, -177.000, 127]
+    level:    [69, 72]
+  17432988:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17432989:
+    template: Tonberry_Decapitator
+    at:       [-149.044, 5.434, -176.297, 90]
+    level:    [72, 74]
+  17432990:
+    template: Doom_Toad
+    at:       [-170.000, 5.479, -179.000, 127]
+    level:    [75, 78]
+  17432991:
+    template: Doom_Toad
+    at:       [-111.213, 5.120, -179.656, 127]
+    level:    [75, 78]
+  17432992:
+    template: Tonberry_Slasher
+    at:       [-141.721, 6.766, -214.374, 45]
+    level:    [69, 71]
+  17432993:
+    template: Water_Elemental
+    at:       [-141.878, 6.745, -216.956, 127]
+    level:    [68, 73]
+  17432994:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [62.381, 35.827, -384.738, 127]
+    level:    [73, 76]
+  17432995:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [84.000, 34.000, -378.000, 127]
+    level:    [73, 76]
+  17432996:
+    template: Million_Eyes_DR
+    script:   Million_Eyes
+    at:       [69.618, 35.820, -381.100, 127]
+    level:    [73, 76]
+  17432997:
+    template: Tonberry_Slasher
+    at:       [-164.833, 15.922, -123.932, 124]
+    level:    [69, 71]
+  17432998:
+    template: Tonberry_Slasher
+    at:       [-161.653, 15.810, -121.665, 95]
+    level:    [69, 71]
+  17432999:
+    template: Tonberry_Beleaguerer
+    at:       [-158.206, 15.636, -123.734, 127]
+    level:    [69, 72]
+  17433000:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 59]
+  17433001:
+    template: Tonberry_Tracker
+    at:       [-167.336, 15.851, -120.259, 100]
+    level:    [72, 74]
+  17433002:
+    template: Tonberry_Decapitator
+    at:       [-165.510, 15.833, -116.849, 124]
+    level:    [72, 74]
+  17433003:
+    template: Tonberry_Pontifex
+    at:       [-164.725, 16.416, -116.191, 19]
+    level:    [75, 75]
+  17433004:
+    template: Tonberry_Tracker
+    at:       [-188.621, 15.588, -100.234, 127]
+    level:    [72, 74]
+  17433005:
+    template: Hakutaku
+    at:       [24.000, 25.000, -306.000, 121]
+    level:    [84, 85]
+  17433006:
+    template: Mokumokuren
+    at:       [118.000, 36.000, -283.000, 127]
+    level:    [80, 82]
+  17433007:
+    template: Azrael
+    at:       [37.509, 35.500, -85.849, 80]
+  17433008:
+    template: Azrael
+    at:       [25.897, 36.303, -196.186, 253]
+  17433009:
+    template: Azrael
+
+slots:
+  - members:
+      17432608: {} # Tonberry_Imprecator
+      17432609: {} # Sozu_Bliberry
+  - members:
+      17432622: {} # Tonberry_Trailer
+      17432625: {} # Tonberry_Trailer
+  - members:
+      17432638: {} # Bifrons
+      17432640: {} # Friar_Rush
+  - members:
+      17432662: {} # Tonberry_Imprecator
+      17432671: {} # Tonberry_Imprecator
+  - members:
+      17432691: {} # Puck
+      17432699: {} # Puck
+      17432707: {} # Puck
+      17432712: {} # Puck
+  - members:
+      17432728: {} # Den_Scorpion
+      17432732: {} # Den_Scorpion
+  - members:
+      17432742: {} # Puck
+      17432746: {} # Puck
+      17432763: {} # Puck
+      17432780: {} # Puck
+  - members:
+      17432749: {} # Den_Scorpion
+      17432773: {} # Den_Scorpion
+  - members:
+      17432759: {} # Den_Scorpion
+      17432767: {} # Den_Scorpion
+  - members:
+      17432787: {} # Tonberry_Slasher
+      17432798: {} # Tawny-fingered_Mugberry
+  - members:
+      17432820: {} # Tonberry_Beleaguerer
+      17432845: {} # Bistre-hearted_Malberry
+  - members:
+      17432910: {} # Demonic_Pugil
+      17432911: {} # Demonic_Pugil
+  - members:
+      17432973: {} # Doom_Toad
+      17432974: {} # Ogama
+      17432979: {} # Doom_Toad
+  - members:
+      17432990: {} # Doom_Toad
+      17432991: {} # Doom_Toad

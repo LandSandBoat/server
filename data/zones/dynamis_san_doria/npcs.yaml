@@ -1,0 +1,220 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17535214:
+    script: NPC[ee]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17535215:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17535216:
+    script: NPC[f0]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17535217:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17535219:
+    script: NPC[f3]
+    at:     [0.000, 1.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17535220:
+    script: NPC[f4]
+    at:     [0.000, 1.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17535221:
+    script: NPC[f5]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17535222:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17535223:
+    script:       Somnial_Threshold
+    display_name: Somnial Threshold
+    at:           [150.000, -2.000, 152.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17535224:
+    script:       qm0
+    display_name: ???
+    at:           [0.000, -2.000, 43.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17535225:
+    script:       qm1
+    display_name: ???
+    at:           [103.000, 1.000, -47.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17535226:
+    script:       qm2
+    display_name: ???
+    at:           [18.316, 2.199, -94.055]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17535227:
+    script:       qm3
+    display_name: ???
+    at:           [-103.000, 1.000, -47.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17535228:
+    script:       qm4
+    display_name: ???
+    at:           [-274.000, -6.199, 98.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17535229:
+    script: NPC[fd]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17535230:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17535231:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17535232:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17535233:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17535234:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17535235:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17535236:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17535237:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307

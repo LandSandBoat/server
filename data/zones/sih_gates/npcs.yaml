@@ -1,0 +1,1548 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17875234:
+    script: NPC[122]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875235:
+    script: NPC[123]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875236:
+    script: NPC[124]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875237:
+    script: NPC[125]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875238:
+    script: NPC[126]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875239:
+    script: NPC[127]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875240:
+    script: NPC[128]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875241:
+    script: NPC[129]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875242:
+    script: NPC[12a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875243:
+    script: NPC[12b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875244:
+    script: NPC[12c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875245:
+    script: NPC[12d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875246:
+    script: NPC[12e]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875247:
+    script: NPC[12f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875248:
+    script: NPC[130]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875249:
+    script:       JGL_BUILD_MASTER_0
+    display_name: JGL_BUILD_MASTER_0
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    widescan: true
+    content:  SOA
+
+  17875250:
+    script:       JGL_BUILD_MASTER_1
+    display_name: JGL_BUILD_MASTER_1
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    widescan: true
+    content:  SOA
+
+  17875251:
+    script:       JGL_BUILD_MASTER_2
+    display_name: JGL_BUILD_MASTER_2
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    widescan: true
+    content:  SOA
+
+  17875252:
+    script:       JGL_BUILD_MASTER_3
+    display_name: JGL_BUILD_MASTER_3
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    widescan: true
+    content:  SOA
+
+  17875253:
+    script:       JGL_BUILD_MASTER_4
+    display_name: JGL_BUILD_MASTER_4
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    widescan: true
+    content:  SOA
+
+  17875254:
+    script:       JGL_BUILD_MASTER_5
+    display_name: JGL_BUILD_MASTER_5
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    widescan: true
+    content:  SOA
+
+  17875255:
+    script: NPC[137]
+    render:
+      look:
+        type:  standard
+        model: 2778
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875256:
+    script: NPC[138]
+    render:
+      look:
+        type:  standard
+        model: 2778
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875257:
+    script: NPC[139]
+    render:
+      look:
+        type:  standard
+        model: 2778
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875258:
+    script: NPC[13a]
+    render:
+      look:
+        type:  standard
+        model: 2778
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875259:
+    script: NPC[13b]
+    render:
+      look:
+        type:  standard
+        model: 2778
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875260:
+    script: NPC[13c]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875261:
+    script: NPC[13d]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875262:
+    script: NPC[13e]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875263:
+    script: NPC[13f]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875264:
+    script: NPC[140]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875265:
+    script: NPC[141]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875266:
+    script: NPC[142]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875267:
+    script: NPC[143]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875268:
+    script: NPC[144]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875269:
+    script: NPC[145]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875270:
+    script: NPC[146]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875271:
+    script: NPC[147]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875272:
+    script: NPC[148]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875273:
+    script: NPC[149]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875274:
+    script: NPC[14a]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875275:
+    script: NPC[14b]
+    render:
+      look:
+        type:  standard
+        model: 2779
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    34
+      moving:          1
+
+  17875276:
+    script: NPC[14c]
+    render:
+      look:
+        type:  standard
+        model: 2411
+      entity_flags:  2075
+      animation_sub:    5
+      name_vis:       104
+      name_prefix:     34
+      moving:           1
+
+  17875277:
+    script: NPC[14d]
+    render:
+      look:
+        type:  standard
+        model: 2411
+      entity_flags:  2075
+      animation_sub:    5
+      name_vis:       104
+      name_prefix:     34
+      moving:           1
+
+  17875278:
+    script: NPC[14e]
+    render:
+      look:
+        type:  standard
+        model: 2411
+      entity_flags:  2075
+      animation_sub:    5
+      name_vis:       104
+      name_prefix:     34
+      moving:           1
+
+  17875279:
+    script: NPC[14f]
+    render:
+      look:
+        type:  standard
+        model: 2411
+      entity_flags:  2075
+      animation_sub:    5
+      name_vis:       104
+      name_prefix:     34
+      moving:           1
+
+  17875280:
+    script: NPC[150]
+    render:
+      look:
+        type:  standard
+        model: 2411
+      entity_flags:  2075
+      animation_sub:    5
+      name_vis:       104
+      name_prefix:     34
+      moving:           1
+
+  17875281:
+    script: NPC[151]
+    render:
+      look:
+        type:  standard
+        model: 2411
+      entity_flags:  2075
+      animation_sub:    5
+      name_vis:       104
+      name_prefix:     34
+      moving:           1
+
+  17875282:
+    script: NPC[152]
+    render:
+      look:
+        type:  standard
+        model: 2411
+      entity_flags:  2075
+      animation_sub:    5
+      name_vis:       104
+      name_prefix:     34
+      moving:           1
+
+  17875283:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [20.800, -2.000, -263.050]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875284:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [109.000, -2.500, -291.000]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875285:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-259.200, -22.000, -336.950]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875286:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-171.000, -12.500, -171.000]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875287:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [56.670, -2.000, -256.000]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875288:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-23.330, -2.000, -256.000]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875289:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [-217.400, -8.900, -317.600]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875290:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [-258.700, -10.350, -270.600]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: SOA
+
+  17875291:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [40.500, -0.350, -444.900]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: SOA
+
+  17875292:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [-255.000, -19.600, -313.200]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875293:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [80.500, 1.000, -177.000]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: SOA
+
+  17875294:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [-346.600, -21.600, -55.070]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:  normal
+    content: SOA
+
+  17875295:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis: 112
+      moving:     7
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875296:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 1382
+      entity_flags: 2051
+      name_vis:      120
+      moving:          7
+    widescan: true
+    content:  SOA
+
+  17875297:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 1382
+      entity_flags: 2051
+      name_vis:      120
+      moving:          6
+    widescan: true
+    content:  SOA
+
+  17875298:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 1382
+      entity_flags: 2051
+      name_vis:      120
+    widescan: true
+    content:  SOA
+
+  17875299:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 1382
+      entity_flags: 2051
+      name_vis:      120
+    widescan: true
+    content:  SOA
+
+  17875300:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 1382
+      entity_flags: 2051
+      name_vis:      120
+    widescan: true
+    content:  SOA
+
+  17875301:
+    script: NPC[165]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875302:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17875303:
+    script: NPC[167]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875304:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17875305:
+    script:       qm
+    display_name: ???
+    at:           [246.970, -10.000, 244.650]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: SOA
+
+  17875307:
+    script: NPC[16b]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17875308:
+    script: NPC[16c]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17875309:
+    script: NPC[16d]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17875310:
+    script: NPC[16e]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875311:
+    script: _7g0
+    at:     [-120.000, -10.500, -100.000]
+    render:
+      look:
+        type: door
+      door_id:      812070751
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17875312:
+    script: _7g1
+    at:     [-120.000, -13.000, -100.000]
+    render:
+      look:
+        type: door
+      door_id:      828847967
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+
+  17875313:
+    script: _7g2
+    at:     [-80.000, -10.500, -260.000]
+    render:
+      look:
+        type: door
+      door_id:      845625183
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17875314:
+    script: _7g3
+    at:     [-80.000, -12.500, -260.000]
+    render:
+      look:
+        type: door
+      door_id:      862402399
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+
+  17875315:
+    script:       Foreboding_Presence
+    display_name: Foreboding Presence
+    at:           [-415.265, -20.648, -55.513, 215]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875316:
+    script:       Shla_Kheefid
+    display_name: Shla Kheefid
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  10
+        head:  4096
+        body:  8235
+        hands: 12312
+        legs:  16407
+        feet:  20642
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17875317:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  29
+        head:  4096
+        body:  8235
+        hands: 12312
+        legs:  16407
+        feet:  20642
+        main:  24736
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17875318:
+    script:       Bilp
+    display_name: Bilp
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  0
+        head:  4096
+        body:  8241
+        hands: 12288
+        legs:  16400
+        feet:  20504
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17875319:
+    script:       Eamonn
+    display_name: Eamonn
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  15
+        head:  4096
+        body:  8307
+        hands: 12288
+        legs:  16486
+        feet:  20614
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17875320:
+    script:       Lhe_Lhangavo
+    display_name: Lhe Lhangavo
+    render:
+      look:
+        type:  standard
+        model: 2714
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17875321:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 2249
+      entity_flags: 27
+      name_prefix:  32
+    status:  cutscene_only
+    content: SOA
+
+  17875322:
+    script:       qm
+    display_name: ???
+    at:           [106.425, -0.444, -220.875]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: SOA
+
+  17875323:
+    script:       Midras
+    display_name: Midras
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  5
+        head:  4331
+        body:  8310
+        hands: 12296
+        legs:  16555
+        feet:  20595
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_vis:      120
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17875324:
+    script:       Hektor
+    display_name: Hektor
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  8
+        head:  4438
+        body:  8534
+        hands: 12608
+        legs:  16726
+        feet:  20719
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_vis:      120
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17875325:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17875326:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-50.974, -26.371, -19.462, 215]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17875327:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-50.974, -26.371, -19.462, 215]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: SOA
+
+  17875328:
+    script:       Ergon_Locus
+    display_name: Ergon Locus
+    at:           [38.500, -0.150, -439.200]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:   112
+      moving:   32790
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875329:
+    script:       Ergon_Locus
+    display_name: Ergon Locus
+    at:           [98.577, -0.255, -135.283]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:   112
+      moving:   32783
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875330:
+    script:       Ergon_Locus
+    display_name: Ergon Locus
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:   112
+      moving:   32769
+    widescan: true
+    content:  SOA
+
+  17875331:
+    script:       Ergon_Locus
+    display_name: Ergon Locus
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:   112
+      moving:   32769
+    widescan: true
+    content:  SOA
+
+  17875332:
+    script:       Lost_Article
+    display_name: Lost Article
+    at:           [-287.098, -20.389, -397.891]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      entity_flags: 387
+      name_vis:      80
+      moving:         6
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         SOA
+
+  17875333:
+    script: NPC[185]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875334:
+    script:       Delivery_Specialist
+    display_name: Delivery Specialist
+    at:           [442.517, -16.000, -326.096, 28]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  11
+        head:  4096
+        body:  8215
+        hands: 12288
+        legs:  16386
+        feet:  20482
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17875335:
+    script:       Castoff_Point
+    display_name: Castoff Point
+    at:           [32.000, 1.500, -440.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875336:
+    script:       Castoff_Point
+    display_name: Castoff Point
+    at:           [17.000, 1.500, -440.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875337:
+    script: blank
+    at:     [-452.000, -46.000, 263.458, 94]
+    render:
+      look:
+        type:  standard
+        model: 2787
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status: cutscene_only
+
+  17875338:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17875339:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags:  2075
+      name_prefix:     34
+      moving:       32768
+
+  17875340:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  10
+        head:  4406
+        body:  8502
+        hands: 12306
+        legs:  16387
+        feet:  20498
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+
+  17875341:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2733
+      entity_flags: 2075
+      name_prefix:    32
+
+  17875342:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  11
+        head:  4097
+        body:  8193
+        hands: 12289
+        legs:  16385
+        feet:  20481
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+
+  17875343:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  11
+        head:  4097
+        body:  8193
+        hands: 12289
+        legs:  16385
+        feet:  20481
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+
+  17875344:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  11
+        head:  4097
+        body:  8193
+        hands: 12289
+        legs:  16385
+        feet:  20481
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+
+  17875345:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  11
+        head:  4097
+        body:  8193
+        hands: 12289
+        legs:  16385
+        feet:  20481
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+
+  17875346:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  11
+        head:  4097
+        body:  8193
+        hands: 12289
+        legs:  16385
+        feet:  20481
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+
+  17875347:
+    script: NPC[193]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17875348:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17875349:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17875350:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17875351:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17875352:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17875353:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17875354:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17875355:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17875356:
+    script:       Scalable_Area
+    display_name: Scalable Area
+    at:           [-220.000, -20.014, -341.272]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:   515
+      name_vis:        32
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875357:
+    script:       Scalable_Area
+    display_name: Scalable Area
+    at:           [-219.758, -9.978, -338.832]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:   515
+      name_vis:        32
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875358:
+    script:       Scalable_Area
+    display_name: Scalable Area
+    at:           [-259.935, -20.014, -301.297]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:   515
+      name_vis:        32
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875359:
+    script:       Scalable_Area
+    display_name: Scalable Area
+    at:           [-259.733, -9.984, -298.817]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:   515
+      name_vis:        32
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17875360:
+    script:       qm
+    display_name: ???
+    at:           [340.058, 9.300, 381.410]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    32
+      moving:   32769
+    status:  normal
+    content: SOA
+
+  17875361:
+    script:       qm
+    display_name: ???
+    at:           [379.967, -20.700, 418.616]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    32
+      moving:   32769
+    status:  normal
+    content: SOA
+
+  17875362:
+    script:       qm2
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    32
+      moving:   32768
+
+  17875363:
+    script:       qm3
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    32
+      moving:   32768
+
+  17875364:
+    script:       qm4
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    32
+      moving:   32768

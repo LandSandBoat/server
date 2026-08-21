@@ -1,0 +1,401 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Duu_Masa_the_Onecut:
+    id:            1145
+    species:       yagudo
+    type:          [notorious]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2078
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Fee_Jugu_the_Ramfist:
+    id:            1320
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 580
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Goo_Pake_the_Bloodhound:
+    id:            1762
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 588
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Kee_Taw_the_Nightingale:
+    id:            2205
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 591
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Laa_Yaku_the_Austere:
+    id:            2309
+    species:       yagudo
+    spell_list_id: 20
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1084
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 2500
+
+  Poo_Yozo_the_Babbler:
+    id:            3175
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 584
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 2500
+
+  Yagudo_Avatar:
+    id:            4408
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 30
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 607
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 7000
+
+  Yagudos_Avatar:
+    id:            4453
+    species:       carbuncle
+    type:          [battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 1500
+
+  Yagudos_Elemental:
+    id:            4454
+    species:       air_elemental
+    spell_list_id: 21
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  129
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+        mp: 1000
+
+spawns:
+  17399809:
+    template: Yagudo_Avatar
+    at:       [-315.000, 23.000, -4.000, 189]
+    level:    [75, 75]
+  17399810:
+    template: Yagudos_Elemental
+    at:       [-315.000, 23.000, -9.000, 189]
+    level:    [60, 60]
+  17399811:
+    template: Yagudos_Avatar
+    at:       [-315.000, 23.000, -4.000, 189]
+    level:    [60, 60]
+  17399812:
+    template: Laa_Yaku_the_Austere
+    at:       [-314.000, 23.000, -6.000, 127]
+    level:    [60, 60]
+  17399813:
+    template: Duu_Masa_the_Onecut
+    at:       [-320.000, 24.000, -8.000, 189]
+    level:    [60, 60]
+  17399814:
+    template: Fee_Jugu_the_Ramfist
+    at:       [-312.000, 24.000, -5.000, 176]
+    level:    [60, 60]
+  17399815:
+    template: Poo_Yozo_the_Babbler
+    at:       [-311.000, 23.000, -9.000, 176]
+    level:    [60, 60]
+  17399816:
+    template: Kee_Taw_the_Nightingale
+    at:       [-327.000, 24.000, -4.000, 221]
+    level:    [60, 60]
+  17399817:
+    template: Goo_Pake_the_Bloodhound
+    at:       [-328.000, 24.000, -7.000, 217]
+    level:    [60, 60]

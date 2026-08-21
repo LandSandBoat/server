@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [fellow, mount, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z2o0:
+    from:  [-576.178, -11.372, -733.593]
+    to:    west_sarutabaruta_s
+    at:    [120.000, -26.001, 640.000, 1.570796]
+    scale: [1.000, 7.000]
+
+  z2o2:
+    from:  [820.000, 23.592, 121.000]
+    to:    meriphataud_mountains_s
+    at:    [540.000, -19.355, -599.000, 4.712389]
+    scale: [1.000, 3.000]
+
+  z2o4:
+    from:  [101.981, -28.619, 375.323]
+    to:    meriphataud_mountains_s
+    at:    [-614.041, -14.181, -416.260, 5.061455]
+    scale: [1.000, 3.000]
+
+  z2o6:
+    from:  [141.722, -24.604, 574.817]
+    to:    meriphataud_mountains_s
+    at:    [-654.060, -20.130, 63.536, 5.061455]
+    scale: [1.000, 3.000]
+
+  z2o8:
+    from:  [105.384, -17.448, 781.756]
+    to:    meriphataud_mountains_s
+    at:    [-652.239, -12.305, 213.951, 1.134464]
+    scale: [1.000, 3.000]

@@ -1,0 +1,1866 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Abject_Acuex:
+    id:      8106
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Abject_Hecteyes:
+    id:      8107
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Abject_Leech:
+    id:      8108
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Abject_Obdella:
+    id:      8109
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Aita:
+    id:      8110
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Aminon:
+    id:      8111
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Air_Elemental:
+    id:      8112
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Dark_Elemental:
+    id:      8113
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Earth_Elemental:
+    id:      8114
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Fire_Elemental:
+    id:      8115
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Ice_Elemental:
+    id:      8116
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Light_Elemental:
+    id:      8117
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Porxie:
+    id:      8118
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Thunder_Elemental:
+    id:      8119
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Umbril:
+    id:      8120
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biune_Water_Elemental:
+    id:      8121
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cachaemic_Bhoot:
+    id:      8122
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cachaemic_Corse:
+    id:      8123
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cachaemic_Ghost:
+    id:      8124
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cachaemic_Ghoul:
+    id:      8125
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cachaemic_Skeleton:
+    id:      8126
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Degei:
+    id:      8127
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Demisang_Black_Mage:
+    id:      8128
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Demisang_Deleterious:
+    id:      8129
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Demisang_Monk:
+    id:      8130
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Demisang_Red_Mage:
+    id:      8131
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Demisang_Thief:
+    id:      8132
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Demisang_Warrior:
+    id:      8133
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Demisang_White_Mage:
+    id:      8134
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dhartok:
+    id:      8135
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dinky_Beetle:
+    id:      7654
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dinky_Funguar:
+    id:      7655
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dinky_Spider:
+    id:      7656
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dinky_Worm:
+    id:      7657
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dreyruk:
+    id:      7658
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Esurient_Botulus:
+    id:      8136
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Esurient_Flan:
+    id:      8137
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Esurient_Slime:
+    id:      8138
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Esurient_Slug:
+    id:      8139
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Faulty_Mine:
+    id:      7659
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fetid_Baelfyr:
+    id:      8140
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fetid_Byrgen:
+    id:      8141
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fetid_Gefyrst:
+    id:      8142
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fetid_Ixion:
+    id:      8143
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fetid_Ungeweder:
+    id:      8144
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fetid_Veela:
+    id:      8145
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gartell:
+    id:      8146
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ghatjot:
+    id:      8147
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gyvewrapped_Dullahan:
+    id:      8148
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gyvewrapped_Hound:
+    id:      8149
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gyvewrapped_Naraka:
+    id:      8150
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gyvewrapped_Vampyr:
+    id:      8151
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Bard:
+    id:      8152
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Beastmaster:
+    id:      8153
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Dark_Knight:
+    id:      8154
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Dragoon:
+    id:      8155
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Ninja:
+    id:      8156
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Paladin:
+    id:      8157
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Ranger:
+    id:      8158
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Samurai:
+    id:      8159
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haughty_Tulittia:
+    id:      8160
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Leshonn:
+    id:      8161
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Malicious_Spire:
+    id:      8162
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Poison_Mist:
+    id:      8163
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Skomora:
+    id:      8164
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Triboulex:
+    id:      8165
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Zisurru:
+    id:      8166
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17903617:
+    script: Acrimonious_Dullahan
+  17903618:
+    script: Cantankerous_Yztarg
+  17903619:
+    script: Impervious_Marolith
+  17903620:
+    script: Shambling_Naraka
+  17903621:
+    script: Watchdog_Orthrus
+  17903622:
+    script: Unwavering_Ironclad
+  17903623:
+    script: Jaunting_Yecuex
+  17903624:
+    script: Tweeting_Caeferli
+  17903625:
+    script: Snorting_Skormoth
+  17903626:
+    script: Wafting_Fluturini
+  17903627:
+    script: Splenetic_Umbril
+  17903628:
+    script: Splenetic_Umbril
+  17903629:
+    script: Splenetic_Umbril
+  17903630:
+    script: Breathless_Clansman
+  17903631:
+    script: Breathless_Clansman
+  17903632:
+    script: Breathless_Clansman
+  17903633:
+    script: Effluvial_Acuex
+  17903634:
+    script: Effluvial_Acuex
+  17903635:
+    script: Effluvial_Acuex
+  17903636:
+    script: Dismal_Djinn
+  17903637:
+    script: Dismal_Djinn
+  17903638:
+    script: Dismal_Djinn
+  17903639:
+    script: Splenetic_Umbril
+  17903640:
+    script: Splenetic_Umbril
+  17903641:
+    script: Splenetic_Umbril
+  17903642:
+    script: Breathless_Clansman
+  17903643:
+    script: Breathless_Clansman
+  17903644:
+    script: Breathless_Clansman
+  17903645:
+    script: Effluvial_Acuex
+  17903646:
+    script: Effluvial_Acuex
+  17903647:
+    script: Effluvial_Acuex
+  17903648:
+    script: Dismal_Djinn
+  17903649:
+    script: Dismal_Djinn
+  17903650:
+    script: Dismal_Djinn
+  17903651:
+    script: Burnished_Mimic
+  17903652:
+    script: Burnished_Mimic
+  17903653:
+    script: Burnished_Mimic
+  17903654:
+    script: Burnished_Mimic
+  17903655:
+    script: Burnished_Mimic
+  17903656:
+    script: Spooked_Heartwing
+  17903657:
+    script: Putraxia
+  17903658:
+    script: Fire_Elemental
+  17903659:
+    script: Ice_Elemental
+  17903660:
+    script: Earth_Elemental
+  17903661:
+    script: Air_Elemental
+  17903662:
+    script: Thunder_Elemental
+  17903663:
+    script: Water_Elemental
+  17903664:
+    script: Light_Elemental
+  17903665:
+    script: Dark_Elemental
+  17903666:
+    script: Fire_Elemental
+  17903667:
+    script: Fire_Elemental
+  17903668:
+    script: Fire_Elemental
+  17903669:
+    script: Fire_Elemental
+  17903670:
+    script: Fire_Elemental
+  17903671:
+    script: Fire_Elemental
+  17903672:
+    script: Fire_Elemental
+  17903673:
+    script: Fire_Elemental
+  17903674:
+    script: Wicked_Baelfyr
+  17903675:
+    script: Ice_Elemental
+  17903676:
+    script: Ice_Elemental
+  17903677:
+    script: Ice_Elemental
+  17903678:
+    script: Ice_Elemental
+  17903679:
+    script: Ice_Elemental
+  17903680:
+    script: Ice_Elemental
+  17903681:
+    script: Ice_Elemental
+  17903682:
+    script: Ice_Elemental
+  17903683:
+    script: Conniving_Gefyrst
+  17903684:
+    script: Earth_Elemental
+  17903685:
+    script: Earth_Elemental
+  17903686:
+    script: Earth_Elemental
+  17903687:
+    script: Earth_Elemental
+  17903688:
+    script: Earth_Elemental
+  17903689:
+    script: Earth_Elemental
+  17903690:
+    script: Earth_Elemental
+  17903691:
+    script: Earth_Elemental
+  17903692:
+    script: Vile_Byrgen
+  17903693:
+    script: Air_Elemental
+  17903694:
+    script: Air_Elemental
+  17903695:
+    script: Air_Elemental
+  17903696:
+    script: Air_Elemental
+  17903697:
+    script: Air_Elemental
+  17903698:
+    script: Air_Elemental
+  17903699:
+    script: Air_Elemental
+  17903700:
+    script: Air_Elemental
+  17903701:
+    script: Reckless_Ungeweder
+  17903702:
+    script: Thunder_Elemental
+  17903703:
+    script: Thunder_Elemental
+  17903704:
+    script: Thunder_Elemental
+  17903705:
+    script: Thunder_Elemental
+  17903706:
+    script: Thunder_Elemental
+  17903707:
+    script: Thunder_Elemental
+  17903708:
+    script: Thunder_Elemental
+  17903709:
+    script: Thunder_Elemental
+  17903710:
+    script: Reckless_Ungeweder
+  17903711:
+    script: Water_Elemental
+  17903712:
+    script: Water_Elemental
+  17903713:
+    script: Water_Elemental
+  17903714:
+    script: Water_Elemental
+  17903715:
+    script: Water_Elemental
+  17903716:
+    script: Water_Elemental
+  17903717:
+    script: Water_Elemental
+  17903718:
+    script: Water_Elemental
+  17903719:
+    script: Conniving_Gefyrst
+  17903720:
+    script: Light_Elemental
+  17903721:
+    script: Light_Elemental
+  17903722:
+    script: Light_Elemental
+  17903723:
+    script: Light_Elemental
+  17903724:
+    script: Light_Elemental
+  17903725:
+    script: Light_Elemental
+  17903726:
+    script: Light_Elemental
+  17903727:
+    script: Light_Elemental
+  17903728:
+    script: Wicked_Baelfyr
+  17903729:
+    script: Dark_Elemental
+  17903730:
+    script: Dark_Elemental
+  17903731:
+    script: Dark_Elemental
+  17903732:
+    script: Dark_Elemental
+  17903733:
+    script: Dark_Elemental
+  17903734:
+    script: Dark_Elemental
+  17903735:
+    script: Dark_Elemental
+  17903736:
+    script: Dark_Elemental
+  17903737:
+    script: Vile_Byrgen
+  17903738:
+    script: Blightslither
+  17903739:
+    script: Spiteful_Byrgen
+  17903740:
+    script: Spiteful_Byrgen
+  17903741:
+    script: Spiteful_Byrgen
+  17903742:
+    script: Spiteful_Byrgen
+  17903743:
+    script: Psychotic_Gefyrst
+  17903744:
+    script: Psychotic_Gefyrst
+  17903745:
+    script: Psychotic_Gefyrst
+  17903746:
+    script: Psychotic_Gefyrst
+  17903747:
+    script: Insidivo
+  17903748:
+    script: Corrupt_Baelfyr
+  17903749:
+    script: Corrupt_Baelfyr
+  17903750:
+    script: Corrupt_Baelfyr
+  17903751:
+    script: Corrupt_Baelfyr
+  17903752:
+    script: Insidious_Ungeweder
+  17903753:
+    script: Insidious_Ungeweder
+  17903754:
+    script: Insidious_Ungeweder
+  17903755:
+    script: Insidious_Ungeweder
+  17903756:
+    script: Rancibus
+  17903762:
+    script: Ravaging_Acuex
+  17903763:
+    script: Ravaging_Acuex
+  17903764:
+    script: Ravaging_Acuex
+  17903765:
+    script: Ravaging_Acuex
+  17903766:
+    script: Ravaging_Acuex
+  17903767:
+    script: Ravaging_Acuex
+  17903768:
+    script: Ravaging_Acuex
+  17903769:
+    script: Gangrenous_Leech
+  17903770:
+    script: Gangrenous_Leech
+  17903771:
+    script: Gangrenous_Leech
+  17903772:
+    script: Gangrenous_Leech
+  17903773:
+    script: Gangrenous_Leech
+  17903774:
+    script: Gangrenous_Leech
+  17903775:
+    script: Gangrenous_Leech
+  17903776:
+    script: Gangrenous_Leech
+  17903777:
+    script: Gangrenous_Leech
+  17903778:
+    script: Gangrenous_Leech
+  17903779:
+    script: Gangrenous_Leech
+  17903780:
+    script: Gangrenous_Leech
+  17903781:
+    script: Gangrenous_Leech
+  17903782:
+    script: Gangrenous_Leech
+  17903783:
+    script: Gangrenous_Leech
+  17903784:
+    script: Gangrenous_Leech
+  17903785:
+    script: Gangrenous_Leech
+  17903786:
+    script: Gangrenous_Leech
+  17903787:
+    script: Dreary_Obdella
+  17903788:
+    script: Dreary_Obdella
+  17903789:
+    script: Dreary_Obdella
+  17903790:
+    script: Dreary_Obdella
+  17903791:
+    script: Dreary_Obdella
+  17903792:
+    script: Dreary_Obdella
+  17903793:
+    script: Unabated_Mush
+  17903794:
+    script: Unabated_Mush
+  17903795:
+    script: Unabated_Mush
+  17903796:
+    script: Unabated_Mush
+  17903797:
+    script: Unabated_Mush
+  17903798:
+    script: Unabated_Mush
+  17903799:
+    script: Unabated_Mush
+  17903800:
+    script: Unabated_Mush
+  17903801:
+    script: Unabated_Mush
+  17903802:
+    script: Unabated_Mush
+  17903803:
+    script: Unabated_Mush
+  17903804:
+    script: Unabated_Mush
+  17903805:
+    script: Unabated_Mush
+  17903806:
+    script: Unabated_Mush
+  17903807:
+    script: Unabated_Mush
+  17903808:
+    script: Unabated_Mush
+  17903809:
+    script: Unabated_Mush
+  17903810:
+    script: Unabated_Mush
+  17903811:
+    script: Jaundiced_Slime
+  17903812:
+    script: Jaundiced_Slime
+  17903813:
+    script: Jaundiced_Slime
+  17903814:
+    script: Jaundiced_Slime
+  17903815:
+    script: Jaundiced_Slime
+  17903816:
+    script: Jaundiced_Slime
+  17903817:
+    script: Ravaging_Acuex
+  17903818:
+    script: Ravaging_Acuex
+  17903819:
+    script: Ravaging_Acuex
+  17903820:
+    script: Ravaging_Acuex
+  17903821:
+    script: Ravaging_Acuex
+  17903822:
+    script: Ravaging_Acuex
+  17903823:
+    script: Ravaging_Acuex
+  17903824:
+    script: Ravaging_Acuex
+  17903825:
+    script: Ravaging_Acuex
+  17903826:
+    script: Ravaging_Acuex
+  17903827:
+    script: Ravaging_Acuex
+  17903828:
+    script: Ravaging_Acuex
+  17903829:
+    script: Ravaging_Acuex
+  17903830:
+    script: Ravaging_Acuex
+  17903831:
+    script: Ravaging_Acuex
+  17903832:
+    script: Murkcrawler
+  17903833:
+    script: Gangrenous_Leech
+  17903834:
+    script: Gangrenous_Leech
+  17903835:
+    script: Gangrenous_Leech
+  17903836:
+    script: Gangrenous_Leech
+  17903837:
+    script: Dreary_Obdella
+  17903838:
+    script: Dreary_Obdella
+  17903839:
+    script: Dreary_Obdella
+  17903840:
+    script: Brimboil
+  17903841:
+    script: Brimboil
+  17903842:
+    script: Brimboil
+  17903843:
+    script: Brimboil
+  17903844:
+    script: Brimboil
+  17903845:
+    script: Brimboil
+  17903846:
+    script: Brimboil
+  17903847:
+    script: Brimboil
+  17903848:
+    script: Brimboil
+  17903849:
+    script: Brimboil
+  17903850:
+    script: Brimboil
+  17903851:
+    script: Unabated_Mush
+  17903852:
+    script: Unabated_Mush
+  17903853:
+    script: Unabated_Mush
+  17903854:
+    script: Unabated_Mush
+  17903855:
+    script: Jaundiced_Slime
+  17903856:
+    script: Jaundiced_Slime
+  17903857:
+    script: Jaundiced_Slime
+  17903858:
+    script: Palloritus
+  17903859:
+    script: Spurned_Saboteur
+  17903860:
+    script: Spurned_Fluteslinger
+  17903861:
+    script: Spurned_Nightstalker
+  17903862:
+    script: Spurned_Deeparrow
+  17903863:
+    script: Spurned_Hexer
+  17903864:
+    script: Spurned_Elementalist
+  17903865:
+    script: Spurned_Engraver
+  17903866:
+    script: Spurned_Valiant
+  17903867:
+    script: Shunned_Saboteur
+  17903868:
+    script: Shunned_Nightstalker
+  17903869:
+    script: Shunned_Deeparrow
+  17903870:
+    script: Shunned_Fluteslinger
+  17903871:
+    script: Shunned_Hexer
+  17903872:
+    script: Shunned_Elementalist
+  17903873:
+    script: Shunned_Engraver
+  17903874:
+    script: Shunned_Valiant
+  17903875:
+    script: Shunned_Saboteur
+  17903876:
+    script: Shunned_Fluteslinger
+  17903877:
+    script: Shunned_Nightstalker
+  17903878:
+    script: Shunned_Deeparrow
+  17903879:
+    script: Shunned_Hexer
+  17903880:
+    script: Shunned_Elementalist
+  17903881:
+    script: Shunned_Engraver
+  17903882:
+    script: Shunned_Valiant
+  17903883:
+    script: Shunned_Saboteur
+  17903884:
+    script: Shunned_Fluteslinger
+  17903885:
+    script: Shunned_Nightstalker
+  17903886:
+    script: Shunned_Deeparrow
+  17903887:
+    script: Shunned_Hexer
+  17903888:
+    script: Shunned_Elementalist
+  17903889:
+    script: Shunned_Engraver
+  17903890:
+    script: Shunned_Valiant
+  17903891:
+    script: Wailing_Corse
+  17903892:
+    script: Wailing_Corse
+  17903893:
+    script: Wailing_Corse
+  17903894:
+    script: Wailing_Corse
+  17903895:
+    script: Wailing_Corse
+  17903896:
+    script: Wailing_Corse
+  17903897:
+    script: Lightreaper
+  17903898:
+    script: Disdained_One
+  17903899:
+    script: Disdained_One
+  17903900:
+    script: Disdained_One
+  17903901:
+    script: Disdaineds_Prime
+  17903902:
+    script: Disdained_One
+  17903903:
+    script: Disdained_One
+  17903904:
+    script: Disdaineds_Hound
+  17903905:
+    script: Disdained_One
+  17903906:
+    script: Disdained_One
+  17903907:
+    script: Disdaineds_Wyvern
+  17903908:
+    script: Disdained_One
+  17903909:
+    script: Disdained_One
+  17903910:
+    script: Disdained_One
+  17903911:
+    script: Disdained_One
+  17903912:
+    script: Luopan
+  17903913:
+    script: Disdained_One
+  17903914:
+    script: Perfidien
+  17903915:
+    script: Plouton

@@ -1,0 +1,315 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17903917:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903918:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903919:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903920:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903921:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903922:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903930:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903931:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903932:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903933:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903934:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903935:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903936:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903937:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903938:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903939:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903947:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903948:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903949:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903950:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903951:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903952:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903953:
+    script:       Anomaly_Trigger_#1
+    display_name: 'Anomaly Trigger #1'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903954:
+    script:       Anomaly_Trigger_#2
+    display_name: 'Anomaly Trigger #2'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903955:
+    script:       Anomaly_Trigger_#3
+    display_name: 'Anomaly Trigger #3'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903956:
+    script:       Anomaly_Trigger_#4
+    display_name: 'Anomaly Trigger #4'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903957:
+    script:       Anomaly_Trigger_#5
+    display_name: 'Anomaly Trigger #5'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903958:
+    script:       Anomaly_Trigger_#6
+    display_name: 'Anomaly Trigger #6'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17903960:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17903961:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17903962:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17903963:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17903964:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17903965:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17903966:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17903967:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA

@@ -1,0 +1,375 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17023010:
+    script:       Ancient_Lockbox
+    display_name: Ancient Lockbox
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  1667
+      animation_sub:    8
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17023024:
+    script:       Ancient_Lockbox
+    display_name: Ancient Lockbox
+    at:           [-2.000, -22.000, 18.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  1667
+      animation_sub:    8
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17023025:
+    script:       Ancient_Lockbox
+    display_name: Ancient Lockbox
+    at:           [2.000, -22.000, 18.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  1667
+      animation_sub:    8
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17023030:
+    script:       Ancient_Lockbox
+    display_name: Ancient Lockbox
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  1667
+      animation_sub:    8
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17023031:
+    script:       Ancient_Lockbox
+    display_name: Ancient Lockbox
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  1667
+      animation_sub:    8
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17023038:
+    script: NPC[38]
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  TOAU
+
+  17023039:
+    script: NPC[39]
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  TOAU
+
+  17023040:
+    script:       Ancient_Lockbox
+    display_name: Ancient Lockbox
+    at:           [0.000, -22.000, 18.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  1667
+      animation_sub:    8
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17023041:
+    script: NPC[3b]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17023042:
+    script: NPC[3c]
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  TOAU
+
+  17023043:
+    script: NPC[3d]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17023044:
+    script: NPC[3e]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17023045:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  TOAU
+
+  17023047:
+    script: NPC[41]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+    widescan: true
+    content:  TOAU
+
+  17023048:
+    script: NPC[42]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  129
+      animation_sub:  16
+      name_vis:       32
+    widescan: true
+    content:  TOAU
+
+  17023049:
+    script: NPC[43]
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  TOAU
+
+  17023050:
+    script: NPC[44]
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  TOAU
+
+  17023051:
+    script: NPC[45]
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  TOAU
+
+  17023053:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17023054:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17023055:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17023056:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17023057:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17023058:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17023059:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17023060:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17023061:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17023062:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+    content:  TOAU
+
+  17023063:
+    script:       qm
+    display_name: ???
+    at:           [-0.345, -22.000, 13.286, 40]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17023064:
+    script:       _1o0
+    display_name: 'Door: Cargo Hold'
+    at:           [-8.004, -24.000, -0.375]
+    render:
+      look:
+        type: door
+      door_id:      812593503
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17023065:
+    script:       _1o1
+    display_name: 'Door: Great Cabin'
+    at:           [0.000, -24.152, -38.000]
+    render:
+      look:
+        type: door
+      door_id:      829370719
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17023066:
+    script:       _1o2
+    display_name: 'Gate: Lifeboat'
+    at:           [15.824, -22.747, -1.999]
+    render:
+      look:
+        type: door
+      door_id:      846147935
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17023067:
+    script:       _1o3
+    display_name: FX_TEST_1o3
+    at:           [17.971, -24.021, 3.625]
+    render:
+      look:
+        type: door
+      door_id:      862925151
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU

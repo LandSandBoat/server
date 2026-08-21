@@ -1,0 +1,594 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Adamantoise:
+    id:            44
+    species:       adamantoise
+    type:          [notorious]
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 400
+        entity_flags:  1153
+        animation_sub:    8
+        hitbox:          27
+      behaviors:
+        aggressive: true
+      mods:
+        regain: 150
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_adaman_ore
+        - chance: very_common
+          item:   chunk_of_adaman_ore
+        - chance: common
+          item:   chunk_of_adaman_ore
+        - chance: common
+          item:   chunk_of_adaman_ore
+        - chance: uncommon
+          item:   sipar
+        - chance: rare
+          item:   heavy_cuirass
+        - chance: rare
+          item:   clump_of_red_pondweed
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+
+  Aspidochelone:
+    id:            268
+    species:       adamantoise
+    type:          [notorious]
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 401
+        entity_flags:  1155
+        animation_sub:    6
+        model_size:       1
+        hitbox:          32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mods:
+        regain: 150
+        regen:   50
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_adaman_ore
+        - chance: very_common
+          item:   chunk_of_adaman_ore
+        - chance: common
+          item:   chunk_of_adaman_ore
+        - chance: common
+          item:   chunk_of_adaman_ore
+        - chance: common
+          item:   adamantoise_shell
+        - chance: very_common
+          item:   adamantoise_egg
+        - chance: uncommon
+          item:   sipar
+        - chance: rare
+          item:   heavy_cuirass
+        - chance: always
+          one_of:
+            aquarian_abjuration_body: 31
+            dryadic_abjuration_feet:  23
+            martial_abjuration_feet:  23
+            wyrmal_abjuration_body:   23
+        - chance: uncommon
+          one_of:
+            aquarian_abjuration_body: 31
+            dryadic_abjuration_feet:  23
+            martial_abjuration_feet:  23
+            wyrmal_abjuration_body:   23
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Peryton:
+    id:            3120
+    species:       roc
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   giant_bird_feather
+        - chance: rare
+          item:   giant_bird_plume
+      despoil:
+        giant_bird_feather: 0
+
+  Skahnowa:
+    id:            3643
+    species:       adamantoise
+    skill_list_id: 2
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 400
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        27
+      spawn:
+        type: [scripted]
+
+  Tolba:
+    id:            6856
+    species:       adamantoise
+    type:          [notorious]
+    spell_list_id: 185
+    skill_list_id: 836
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 401
+        entity_flags:  131
+        animation_sub:   6
+        name_prefix:    32
+        model_size:      1
+        hitbox:         32
+      spawn:
+        type: [scripted]
+
+  Valley_Manticore:
+    id:            4125
+    species:       manticore
+    skill_list_id: 179
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   lock_of_manticore_hair
+        - chance: uncommon
+          item:   manticore_hide
+        - chance: rare
+          item:   manticore_fang
+      despoil:
+        manticore_hide:         0
+        lock_of_manticore_hair: 0
+
+  Velociraptor:
+    id:            4218
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 316
+        entity_flags: 131
+        model_size:     1
+        hitbox:        18
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   raptor_skin
+      despoil:
+        raptor_skin: 0
+
+spawns:
+  17301505:
+    template: Velociraptor
+    at:       [-98.000, -0.050, -39.000, 127]
+    level:    [66, 69]
+  17301506:
+    template: Velociraptor
+    at:       [-121.942, -0.500, 0.131, 127]
+    level:    [66, 69]
+  17301507:
+    template: Peryton
+    at:       [-119.444, -0.270, -26.993, 127]
+    level:    [69, 72]
+  17301508:
+    template: Velociraptor
+    at:       [-72.278, -0.322, -34.654, 79]
+    level:    [66, 69]
+  17301509:
+    template: Velociraptor
+    at:       [-43.079, -0.632, -43.351, 127]
+    level:    [66, 69]
+  17301510:
+    template: Peryton
+    at:       [-51.818, -0.382, -27.562, 127]
+    level:    [69, 72]
+  17301511:
+    template: Velociraptor
+    at:       [-8.000, -0.956, -40.000, 43]
+    level:    [66, 69]
+  17301512:
+    template: Velociraptor
+    at:       [-15.917, -0.563, -24.743, 127]
+    level:    [66, 69]
+  17301513:
+    template: Peryton
+    at:       [-22.182, 0.348, -40.269, 127]
+    level:    [69, 72]
+  17301514:
+    template: Fire_Elemental
+    at:       [-19.868, -0.534, -29.271, 65]
+    level:    [66, 68]
+  17301515:
+    template: Velociraptor
+    at:       [-29.967, -0.207, 3.904, 126]
+    level:    [66, 69]
+  17301516:
+    template: Peryton
+    at:       [-32.410, -0.304, 8.461, 127]
+    level:    [69, 72]
+  17301517:
+    template: Velociraptor
+    at:       [-15.573, 0.004, 46.670, 127]
+    level:    [66, 69]
+  17301518:
+    template: Peryton
+    at:       [-7.207, -0.447, 33.867, 127]
+    level:    [69, 72]
+  17301519:
+    template: Velociraptor
+    at:       [-30.000, -0.297, 27.000, 127]
+    level:    [66, 69]
+  17301520:
+    template: Velociraptor
+    at:       [44.093, -0.720, 33.270, 123]
+    level:    [66, 69]
+  17301521:
+    template: Peryton
+    at:       [46.461, -0.324, 19.126, 127]
+    level:    [69, 72]
+  17301522:
+    template: Air_Elemental
+    at:       [45.504, -0.612, 38.518, 23]
+    level:    [66, 68]
+  17301523:
+    template: Velociraptor
+    at:       [77.066, -0.507, -1.079, 86]
+    level:    [66, 69]
+  17301524:
+    template: Peryton
+    at:       [53.966, -0.079, -8.595, 122]
+    level:    [69, 72]
+  17301525:
+    template: Fire_Elemental
+    at:       [-25.864, -3.904, -64.997, 62]
+    level:    [66, 68]
+  17301526:
+    template: Air_Elemental
+    at:       [-14.432, -4.043, 63.329, 127]
+    level:    [66, 68]
+  17301527:
+    template: Velociraptor
+    at:       [111.527, -0.128, -9.940, 97]
+    level:    [66, 69]
+  17301528:
+    template: Velociraptor
+    at:       [123.000, -0.050, -2.000, 127]
+    level:    [66, 69]
+  17301529:
+    template: Velociraptor
+    at:       [127.000, -0.010, -21.000, 127]
+    level:    [66, 69]
+  17301530:
+    template: Velociraptor
+    at:       [127.000, -0.010, -41.000]
+    level:    [66, 69]
+  17301531:
+    template: Peryton
+    at:       [117.000, -0.050, -32.000, 127]
+    level:    [69, 72]
+  17301532:
+    template: Valley_Manticore
+    at:       [-5.094, -0.389, -3.962, 127]
+    level:    [71, 74]
+  17301533:
+    template: Valley_Manticore
+    at:       [3.000, -0.133, 24.000, 127]
+    level:    [71, 74]
+  17301534:
+    template: Valley_Manticore
+    at:       [13.965, -0.189, -0.102, 127]
+    level:    [71, 74]
+  17301535:
+    template: Velociraptor
+    at:       [-43.000, -0.357, 40.000, 127]
+    level:    [66, 69]
+  17301536:
+    template: Peryton
+    at:       [8.466, -0.336, -23.544, 127]
+    level:    [69, 72]
+  17301537:
+    template: Adamantoise
+    at:       [0.894, 0.021, -35.588, 91]
+    level:    [70, 70]
+  17301538:
+    template: Aspidochelone
+    at:       [0.894, 0.021, -35.588]
+    level:    [85, 85]
+  17301539:
+    template: Skahnowa
+    at:       [44.000, -0.500, 40.000, 160]
+    level:    [1, 1]
+  17301540:
+    template: Tolba
+  17301541:
+    template: Tolba
+    at:       [-126.849, -0.718, -42.619, 32]
+  17301542:
+    template: Tolba

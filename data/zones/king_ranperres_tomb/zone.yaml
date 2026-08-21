@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z5a0:
+    from:  [-130.011, -3.772, 260.750]
+    to:    east_ronfaure
+    at:    [200.015, -3.187, -536.074, 4.712389]
+    scale: [1.000, 6.000]
+
+  z5a2:
+    from:  [59.815, 4.162, 305.710]
+    to:    east_ronfaure
+    at:    [660.078, -21.883, -588.047, 4.712389]
+    scale: [2.000, 6.000]
+
+  z5a4:
+    from:  [250.585, 3.163, 340.224]
+    to:    jugner_forest
+    at:    [-339.471, -6.782, 462.074, 1.047198]
+    scale: [1.000, 4.000]

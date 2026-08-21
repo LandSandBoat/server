@@ -1,0 +1,220 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17547500:
+    script: NPC[ec]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17547501:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17547502:
+    script: NPC[ee]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17547503:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17547505:
+    script: NPC[f1]
+    at:     [0.000, 2.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17547506:
+    script: NPC[f2]
+    at:     [0.000, 2.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17547507:
+    script: NPC[f3]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17547508:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17547509:
+    script:       Somnial_Threshold
+    display_name: Somnial Threshold
+    at:           [55.000, 10.000, -74.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17547510:
+    script:       qm0
+    display_name: ???
+    at:           [0.000, 0.000, -101.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17547511:
+    script:       qm1
+    display_name: ???
+    at:           [0.000, -5.000, 68.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17547512:
+    script:       qm2
+    display_name: ???
+    at:           [-23.000, 2.000, 64.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17547513:
+    script:       qm3
+    display_name: ???
+    at:           [23.000, 2.000, 64.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17547514:
+    script:       qm4
+    display_name: ???
+    at:           [0.000, 2.000, 127.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17547515:
+    script: NPC[fb]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17547516:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17547517:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17547518:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17547519:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17547520:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17547521:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17547522:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17547523:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307

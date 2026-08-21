@@ -19,17 +19,21 @@
 ===========================================================================
 */
 
+#include "common/enum_traits.h"
 #include "data/datasets/catalog.h"
+#include "data/enums/zone.h"
 #include "data/yaml/merge.h"
-#include "data/yaml/schema_annotations.h"
 
 #include <glaze/glaze.hpp>
 
 #include <exception>
+#include <fmt/format.h>
+
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <map>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -59,8 +63,12 @@ auto serializeSchema(glz::generic document, const std::string& id, const std::st
         throw std::runtime_error("dataset schema has no properties");
     }
 
-    properties->erase("meta");
-    (*properties)["meta"]["$ref"] = "_meta.schema.json";
+    // Per-zone files carry no codegen directives, so only re-point a meta block that exists.
+    if (properties->contains("meta"))
+    {
+        properties->erase("meta");
+        (*properties)["meta"]["$ref"] = "_meta.schema.json";
+    }
 
     if (const auto definitions = root->find("$defs"); definitions != root->end())
     {
@@ -147,7 +155,6 @@ void publishOne(const std::filesystem::path& path, const std::string& content)
 {
     if (std::filesystem::exists(path) && readFile(path) == content)
     {
-        std::cout << "unchanged " << path.string() << '\n';
         return;
     }
 
@@ -160,23 +167,90 @@ void publishOne(const std::filesystem::path& path, const std::string& content)
     std::cout << "wrote " << path.string() << '\n';
 }
 
+template <datasets::DatasetDefinition Dataset>
+void verifyZone(const std::filesystem::path& zoneDirectory, std::map<std::string_view, uint32>& counts)
+{
+    const auto path = zoneDirectory / (std::string{ Dataset::kDataPath } + ".yaml");
+    if (!std::filesystem::exists(path))
+    {
+        return;
+    }
+
+    try
+    {
+        const auto records = Dataset::decode(readFile(path));
+        if constexpr (requires { Dataset::verifyZone(records, xi::ZoneId{}); })
+        {
+            Dataset::verifyZone(records, EnumTraits<xi::ZoneId>::fromName(zoneDirectory.filename().generic_string()));
+        }
+
+        ++counts[Dataset::kDataPath];
+    }
+    catch (const std::exception& error)
+    {
+        throw std::runtime_error(path.string() + ": " + error.what());
+    }
+}
+
 void verifyData(const std::filesystem::path& dataDirectory)
 {
     datasets::Catalog::forEach([&]<class Dataset>(std::type_identity<Dataset>)
                                {
                                    verifyOne<Dataset>(dataDirectory);
                                });
+
+    const auto zonesDirectory = dataDirectory / "zones";
+    if (!std::filesystem::is_directory(zonesDirectory))
+    {
+        return;
+    }
+
+    std::map<std::string_view, uint32> counts;
+    uint32                             zones = 0;
+
+    for (const auto& entry : std::filesystem::directory_iterator(zonesDirectory))
+    {
+        if (!entry.is_directory())
+        {
+            continue;
+        }
+
+        ++zones;
+        datasets::ZoneCatalog::forEach(
+            [&]<class Dataset>(std::type_identity<Dataset>)
+            {
+                verifyZone<Dataset>(entry.path(), counts);
+            });
+    }
+
+    uint32      files = 0;
+    std::string summary;
+    for (const auto& [dataset, count] : counts)
+    {
+        files += count;
+        if (!summary.empty())
+        {
+            summary += ", ";
+        }
+
+        summary += fmt::format("{} {}.yaml", count, dataset);
+    }
+
+    std::cout << fmt::format("verified {} files across {} zones ({})\n", files, zones, summary);
 }
 
 void publish(const std::filesystem::path& outputDirectory)
 {
     std::filesystem::create_directories(outputDirectory);
 
-    datasets::Catalog::forEach([&]<class Dataset>(std::type_identity<Dataset>)
-                               {
-                                   const auto path = outputDirectory / (std::string{ Dataset::kDataPath } + ".schema.json");
-                                   publishOne(path, makeDatasetSchema<Dataset>());
-                               });
+    const auto publishSchema = [&]<class Dataset>(std::type_identity<Dataset>)
+    {
+        const auto path = outputDirectory / (std::string{ Dataset::kDataPath } + ".schema.json");
+        publishOne(path, makeDatasetSchema<Dataset>());
+    };
+
+    datasets::Catalog::forEach(publishSchema);
+    datasets::ZoneCatalog::forEach(publishSchema);
 }
 
 } // namespace

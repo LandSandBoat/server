@@ -1,0 +1,714 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ashu_Talif_Captain:
+    id:            262
+    species:       fomor
+    type:          [notorious, battlefield]
+    skill_list_id: 776
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1896
+        entity_flags: 3203
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11800
+
+  Ashu_Talif_Crew_mnk:
+    id:            5430
+    display_name:  Ashu_Talif_Crew
+    species:       fomor
+    type:          [notorious, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1900
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ashu_Talif_Crew_rdm:
+    id:            5431
+    display_name:  Ashu_Talif_Crew
+    species:       fomor
+    type:          [notorious, battlefield]
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1899
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ashu_Talif_Crew_rng:
+    id:            263
+    display_name:  Ashu_Talif_Crew
+    species:       fomor
+    type:          [notorious, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1898
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ashu_Talif_Marine:
+    id:            264
+    species:       fomor
+    type:          [notorious, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1899
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Black_Bartholomew:
+    id:            432
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1897
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Bubbly:
+    id:            550
+    species:       opo_opo
+    type:          [battlefield]
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cutthroat_Kabsalah:
+    id:            873
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1896
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Faluuya:
+    id:            1294
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, thf]
+      render:
+        look:
+          type:  misc
+          model: 1883
+        model_size:  1
+        hitbox:     17
+      spawn:
+        type: [scripted]
+
+  Flan_Princess:
+    id:            7498
+    species:       flan
+    type:          [battlefield]
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gessho:
+    id:            1506
+    species:       yagudo
+    type:          [notorious, battlefield, event]
+    spell_list_id: 7
+    skill_list_id: 777
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1083
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1500
+    allegiance: player
+
+  Gowam:
+    id:            1776
+    species:       humes
+    type:          [notorious, event]
+    spell_list_id: 1
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  equipped
+          race:  8
+          face:  1
+          head:  4261
+          body:  8357
+          hands: 12459
+          legs:  16549
+          feet:  20651
+          main:  24951
+          sub:   28672
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5750
+        mp: 3000
+
+  Swiftwinged_Gekko:
+    id:            3826
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Watch_Imp:
+    id:            4305
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Windjammer_Imp:
+    id:            4348
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yazquhl:
+    id:            4468
+    species:       humes
+    type:          [notorious, event]
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: sword
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  10
+          head:  4096
+          body:  8351
+          hands: 12447
+          legs:  16543
+          feet:  20639
+          main:  24858
+          sub:   28672
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6750
+
+spawns:
+  17022977:
+    template: Gowam
+    at:       [7.000, -22.000, 20.000, 128]
+    level:    [66, 66]
+  17022978:
+    template: Yazquhl
+    at:       [7.000, -22.000, 16.000, 128]
+    level:    [67, 67]
+  17022979:
+    template: Gessho
+    at:       [0.001, -22.500, 22.000, 64]
+    level:    [68, 68]
+  17022980:
+    template: Ashu_Talif_Crew_mnk
+    at:       [0.001, -22.500, 12.000, 192]
+    level:    [60, 60]
+  17022981:
+    template: Ashu_Talif_Crew_rdm
+    at:       [2.000, -22.500, 12.000, 192]
+    level:    [60, 60]
+  17022982:
+    template: Ashu_Talif_Crew_rdm
+    at:       [-2.000, -22.500, 12.000, 192]
+    level:    [60, 60]
+  17022983:
+    template: Ashu_Talif_Crew_rng
+    at:       [4.000, -22.500, 12.000, 192]
+    level:    [60, 60]
+  17022984:
+    template: Ashu_Talif_Crew_rng
+    at:       [-4.000, -22.500, 12.000, 192]
+    level:    [60, 60]
+  17022985:
+    template: Ashu_Talif_Captain
+    at:       [0.001, -28.551, 8.000, 192]
+    level:    [68, 68]
+  17022986:
+    template: Ashu_Talif_Crew_mnk
+    at:       [1.000, -22.500, 15.000, 192]
+    level:    [60, 60]
+  17022987:
+    template: Ashu_Talif_Crew_rdm
+    at:       [-1.000, -22.500, 15.000, 192]
+    level:    [60, 60]
+  17022988:
+    template: Ashu_Talif_Crew_rng
+    at:       [3.000, -22.500, 15.000, 192]
+    level:    [60, 60]
+  17022989:
+    template: Ashu_Talif_Crew_rng
+    at:       [-3.000, -22.500, 15.000, 192]
+    level:    [60, 60]
+  17022990:
+    script: Ashu_Talif_Crew
+  17022991:
+    script: Ashu_Talif_Crew
+  17022992:
+    script: Ashu_Talif_Crew
+  17022993:
+    script: Ashu_Talif_Crew
+  17022994:
+    script: Ashu_Talif_Crew
+  17022995:
+    script: Ashu_Talif_Crew
+  17022996:
+    script: Ashu_Talif_Crew
+  17022997:
+    script: Ashu_Talif_Crew
+  17022998:
+    script: Ashu_Talif_Crew
+  17022999:
+    script: Ashu_Talif_Crew
+  17023000:
+    script: Ashu_Talif_Crew
+  17023001:
+    script: Ashu_Talif_Crew
+  17023002:
+    script: Ashu_Talif_Crew
+  17023003:
+    script: Ashu_Talif_Crew
+  17023004:
+    script: Ashu_Talif_Crew
+  17023005:
+    script: Watch_Imp
+  17023006:
+    script: Watch_Imp
+  17023007:
+    script: Watch_Imp
+  17023008:
+    script: Watch_Imp
+  17023009:
+    script: Swiftwinged_Gekko
+  17023011:
+    script: Faluuya
+  17023012:
+    script: Ashu_Talif_Crew
+  17023013:
+    script: Ashu_Talif_Crew
+  17023014:
+    script: Ashu_Talif_Crew
+  17023015:
+    script: Ashu_Talif_Crew
+  17023016:
+    script: Ashu_Talif_Crew
+  17023017:
+    script: Ashu_Talif_Crew
+  17023018:
+    script: Ashu_Talif_Marine
+  17023019:
+    script: Ashu_Talif_Marine
+  17023020:
+    script: Ashu_Talif_Marine
+  17023021:
+    script: Ashu_Talif_Marine
+  17023022:
+    script: Ashu_Talif_Marine
+  17023023:
+    script: Black_Bartholomew
+  17023026:
+    script: Windjammer_Imp
+  17023027:
+    script: Windjammer_Imp
+  17023028:
+    script: Bubbly
+  17023029:
+    script: Cutthroat_Kabsalah
+  17023032:
+    template: Flan_Princess
+    level:    [139, 139]
+  17023033:
+    template: Flan_Princess
+    level:    [139, 139]
+  17023034:
+    template: Flan_Princess
+    level:    [139, 139]
+  17023035:
+    template: Flan_Princess
+    level:    [139, 139]
+  17023036:
+    template: Flan_Princess
+    level:    [139, 139]
+  17023037:
+    template: Flan_Princess
+    level:    [139, 139]

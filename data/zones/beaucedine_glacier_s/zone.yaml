@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z3s0:
+    from:  [18.084, -4.298, -658.120]
+    to:    batallia_downs_s
+    at:    [-500.451, -39.710, 504.894, 1.119254]
+    scale: [1.000, 4.000]
+
+  z3s2:
+    from:  [-180.000, -86.893, 283.000]
+    to:    xarcabard_s
+    at:    [680.000, -2.495, -300.000, 3.141593]
+    scale: [1.000, 5.000]

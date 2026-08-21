@@ -18,17 +18,10 @@
 
 ===========================================================================
 */
-
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "data/enums/detects.h"
-#include "data/enums/element.h"
-#include "data/enums/mob_mod.h"
-#include "data/enums/mod.h"
-#include "data/enums/stat_rank.h"
-#include "data/yaml/enum_keyed_map.h"
-#include "data/yaml/enum_token.h"
+#include "data/shared_types/mob_attributes/yaml.h"
 #include "data/yaml/schema_annotations.h"
 
 #include <glaze/glaze.hpp>
@@ -36,55 +29,27 @@
 #include <map>
 #include <optional>
 #include <string>
-#include <string_view>
-#include <vector>
 
 namespace xi::data::datasets::ecosystems::wire
 {
 
-struct StatRanks
-{
-    std::optional<yaml::EnumToken<xi::StatRank>> str;
-    std::optional<yaml::EnumToken<xi::StatRank>> dex;
-    std::optional<yaml::EnumToken<xi::StatRank>> vit;
-    std::optional<yaml::EnumToken<xi::StatRank>> agi;
-    std::optional<yaml::EnumToken<xi::StatRank>> intelligence;
-    std::optional<yaml::EnumToken<xi::StatRank>> mnd;
-    std::optional<yaml::EnumToken<xi::StatRank>> chr;
-    std::optional<yaml::EnumToken<xi::StatRank>> def;
-    std::optional<yaml::EnumToken<xi::StatRank>> eva;
-    std::optional<yaml::EnumToken<xi::StatRank>> att;
-    std::optional<yaml::EnumToken<xi::StatRank>> acc;
-};
-
-struct MobAttributes
-{
-    std::optional<yaml::EnumToken<xi::Element>>              element;
-    std::optional<StatRanks>                                 stats;
-    std::optional<std::vector<yaml::EnumToken<xi::Detects>>> detects;
-    std::optional<uint8>                                     speed;
-    std::optional<bool>                                      charmable;
-    std::optional<yaml::EnumKeyedMap<xi::Mod, int16>>        mods;
-    std::optional<yaml::EnumKeyedMap<xi::MobMod, int16>>     mob_mods;
-};
-
 struct Species
 {
-    uint16                       id{};
-    std::optional<MobAttributes> attributes;
+    uint16                               id{};
+    std::optional<shared::MobAttributes> attributes;
 };
 
 struct Family
 {
     uint16                                        id{};
-    std::optional<MobAttributes>                  attributes;
+    std::optional<shared::MobAttributes>          attributes;
     std::optional<std::map<std::string, Species>> species;
 };
 
 struct Ecosystem
 {
     uint8                                        id{};
-    std::optional<MobAttributes>                 attributes;
+    std::optional<shared::MobAttributes>         attributes;
     std::optional<std::map<std::string, Family>> families;
 };
 
@@ -96,55 +61,6 @@ struct Document
 };
 
 } // namespace xi::data::datasets::ecosystems::wire
-
-template <>
-struct glz::meta<xi::data::datasets::ecosystems::wire::StatRanks>
-{
-    using T                                  = xi::data::datasets::ecosystems::wire::StatRanks;
-    static constexpr std::string_view name   = "stat_ranks";
-    static constexpr auto             modify = glz::object("int", &T::intelligence);
-};
-
-template <>
-struct glz::meta<xi::data::datasets::ecosystems::wire::MobAttributes>
-{
-    static constexpr std::string_view name = "mob_attributes";
-};
-
-template <>
-struct glz::json_schema<xi::data::datasets::ecosystems::wire::StatRanks>
-{
-    glz::schema str{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema dex{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema vit{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema agi{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema intelligence{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema mnd{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema chr{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema def{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema eva{ .description = "Inherits when omitted; defaults to c." };
-    glz::schema att{ .description = "Inherits when omitted; defaults to a." };
-    glz::schema acc{ .description = "Inherits when omitted; defaults to a." };
-};
-
-template <>
-struct glz::json_schema<xi::data::datasets::ecosystems::wire::MobAttributes>
-{
-    glz::schema element{ .description = "Elemental affinity override. Omitted values inherit; defaults to none." };
-    glz::schema stats{ .description = "Stat rank overrides from a-g. Lower is better; attack and accuracy only handle a-e. Omitted ranks inherit." };
-    glz::schema detects{
-        .description = "Detection mechanisms. Omitted values inherit; defaults to an empty list. Redefine the entire list when overriding.",
-        .uniqueItems = true,
-    };
-    glz::schema speed{
-        .description = "Movement and animation speed override. Omitted values inherit; defaults to 40. 0 is immobile.",
-        .minimum     = 0L,
-        .maximum     = 255L,
-    };
-    glz::schema charmable{ .description = "Whether the entity can be charmed. Omitted values inherit; defaults to false." };
-    glz::schema mods{ .description = "Modifiers keyed by mod.yaml name, added on top of the entity's own. Merged key by key with the parent's." };
-    glz::schema mob_mods{ .description = "Mob modifiers keyed by mob_mod.yaml name. Merged key by key with the parent's." };
-};
 
 template <>
 struct glz::json_schema<xi::data::datasets::ecosystems::wire::Species>

@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, costume, yell, los_player_block, assist]
+music:
+  day:          107
+  night:        107
+  battle_solo:  107
+  battle_party: 107
+
+zonelines:
+
+  z6f0:
+    from:  [-0.107, -7.068, -36.133]
+    to:    southern_san_doria
+    at:    [-0.004, -4.182, 54.388, 1.570796]
+    scale: [1.000, 6.000]
+
+  z6f2:
+    from:  [-252.158, 1.663, 43.913]
+    to:    west_ronfaure
+    at:    [-172.186, -64.596, 379.998, 3.141593]
+    scale: [3.000, 8.000]
+
+  zmr2:
+    from:  [134.995, -7.068, -8.439]
+    to:    northern_san_doria
+    at:    [132.764, -2.320, -6.178, 3.926991]
+    scale: [1.000, 4.000]
+
+  z6f6:
+    from:  [-123.510, 8.289, 270.516]
+    to:    port_san_doria
+    at:    [-107.682, -10.301, -132.215, 5.497787]
+    scale: [1.000, 4.000]
+
+  z6f8:
+    from:  [-238.702, -9.433, 105.961]
+    to:    west_ronfaure
+    at:    [-180.473, -66.650, 419.995, 3.141593]
+    scale: [1.000, 3.000]
+
+  z6fa:
+    from:  [-123.566, 9.966, 192.841]
+    to:    carpenters_landing
+    at:    [-479.621, -8.141, 665.350, 1.570796]
+    scale: [1.000, 8.000]

@@ -48,28 +48,30 @@ def validate_data_yamls(schemas_dir: Path) -> None:
     """Validate every non-enum data YAML against its matching schema."""
     registry = build_registry(schemas_dir)
 
-    # Every non-enum data file needs a schema.
-    schema_by_data: dict[Path, Path] = {}
+    # A data file is matched to its schema by filename, so per-zone files such as
+    # data/zones/<zone>/zone.yaml all validate against data/schemas/zone.schema.json.
+    schemas: dict[str, tuple[Path, Any]] = {}
     for schema_path in sorted(schemas_dir.glob("*.schema.json")):
-        schema_by_data[
-            ROOT / "data" / f"{schema_path.stem.removesuffix('.schema')}.yaml"
-        ] = schema_path
+        with schema_path.open(encoding="utf-8") as f:
+            schemas[schema_path.stem.removesuffix(".schema")] = (schema_path, json.load(f))
 
+    # Every non-enum data file needs a schema.
+    schema_by_data: dict[Path, Any] = {}
     for data_path in sorted((ROOT / "data").rglob("*.yaml")):
-        if not data_path.is_relative_to(ENUMS_DIR) and data_path not in schema_by_data:
+        if data_path.is_relative_to(ENUMS_DIR):
+            continue
+
+        match = schemas.get(data_path.stem)
+        if match is None:
             raise SystemExit(
                 f"{data_path.relative_to(ROOT).as_posix()}: no schema in data/schemas, so nothing validates it"
             )
+        schema_by_data[data_path] = match[1]
 
     all_errors: list[tuple[Path, int, Any]] = []
-    for data_path, schema_path in sorted(schema_by_data.items()):
-        if not data_path.exists():
-            continue
-
+    for data_path, schema in sorted(schema_by_data.items()):
         rel = data_path.relative_to(ROOT).as_posix()
         print(f"validating {rel} ...", end="", flush=True)
-        with schema_path.open(encoding="utf-8") as f:
-            schema = json.load(f)
         with data_path.open(encoding="utf-8") as f:
             data = YAML_LOADER.load(f)
 

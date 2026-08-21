@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z2v0:
+    from:  [919.212, -4.639, -440.003]
+    to:    konschtat_highlands
+    at:    [-160.124, 68.250, 883.812, 1.570796]
+    scale: [1.000, 8.000]
+
+  z2v2:
+    from:  [758.323, -11.992, 412.168]
+    to:    la_theine_plateau
+    at:    [159.989, 28.406, -760.190, 4.712389]
+    scale: [1.000, 13.000]
+
+  z2v4:
+    from:  [60.003, -7.529, -154.537]
+    to:    selbina
+    at:    [17.981, -16.806, 99.830, 1.570796]
+    scale: [1.000, 5.000]
+
+  z2v6:
+    from:  [-767.866, -11.956, 18.376]
+    to:    gustav_tunnel
+    at:    [280.502, -51.820, 100.019]
+    scale: [1.000, 3.000]

@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/types/maybe.h"
 
 #include "base_entity.h"
 
@@ -66,6 +67,7 @@ public:
 
     xi::EntityFlags m_flags{};
     uint8           name_prefix{};
+    Maybe<uint32>   door_id; // identity the client reads for a door, elevator or ship; unset falls back to the name
 
 private:
     uint8 widescan_    = 1;

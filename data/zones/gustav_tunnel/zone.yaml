@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z5w0:
+    from:  [-260.017, -23.161, -280.011]
+    to:    cape_teriggan
+    at:    [260.398, 5.823, 435.661, 1.570796]
+    scale: [1.000, 4.000]
+
+  z5w2:
+    from:  [276.725, -52.898, 99.985]
+    to:    valkurm_dunes
+    at:    [-772.018, -9.873, 19.101, 3.356547]
+    scale: [1.000, 3.000]

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z470:
+    from:  [-242.002, -3.955, -20.019]
+    to:    meriphataud_mountains
+    at:    [752.632, -33.761, -40.035, 3.141593]
+    scale: [1.000, 4.000]
+
+  z472:
+    from:  [-165.505, 19.887, -140.027]
+    to:    altar_room
+    at:    [-247.998, 12.609, -100.008, 3.141593]
+    scale: [1.000, 4.000]
+
+  z474:
+    from:  [-295.090, -4.001, 180.000]
+    to:    altar_room
+    at:    [-288.028, -1.406, 180.054, 3.141593]
+    scale: [1.000, 4.000]

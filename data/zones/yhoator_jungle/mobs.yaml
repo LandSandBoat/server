@@ -1,0 +1,4833 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Acolnahuacatl:
+    id:            5858
+    species:       coeurl
+    type:          [notorious]
+    skill_list_id: 32
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [war, thf]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 367
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 7700
+    loot:
+      drops:
+        - chance: rare
+          item:   echo_cape
+    content: WOTG
+
+  Anemone:
+    id:            136
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   malboro_vine
+        - chance: common
+          item:   malboro_vine
+        - chance: rare
+          item:   warm_egg
+        - chance: very_rare
+          item:   lacquer_tree_log
+        - chance: uncommon
+          item:   mushroom_locust
+      steal: malboro_vine
+
+  Big_Jaw:
+    id:            5123
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Bisque-heeled_Sunberry:
+    id:            423
+    species:       tonberry
+    type:          [notorious]
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1191
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item:   rancor_handle
+
+  Bright-handed_Kunberry:
+    id:            532
+    species:       tonberry
+    type:          [notorious]
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1177
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5400
+    loot:
+      drops:
+        - chance: very_common
+          item:   resentment_cape
+
+  Clipper_fished:
+    id:            6765
+    display_name:  Clipper
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_rock_salt
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: common
+          item:   crab_shell
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Edacious_Opo-opo:
+    id:            1174
+    species:       opo_opo
+    type:          [notorious]
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags:  3
+        model_size:    2
+        hitbox:       21
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5800
+    loot:
+      drops:
+        - chance: very_common
+          item:   bunch_of_pamamas
+        - chance: uncommon
+          item:   nanban_kariginu
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Goblin_Bouncer:
+    id:            1641
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 503
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+        - chance: very_rare
+          item:   gold_beastcoin
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Digger_jungle:
+    id:            6659
+    display_name:  Goblin_Digger
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 506
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+      steal: [pickaxe, mythril_beastcoin] # audit needed
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Hunter:
+    id:            1677
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 499
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   gold_beastcoin
+      steal: crossbow_bolt
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Pathfinder:
+    id:            1694
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 487
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   handful_of_counterfeit_gil
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   mythril_beastcoin
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Poacher:
+    id:            1701
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 496
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   mythril_beastcoin
+      steal: crossbow_bolt
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Reaper:
+    id:            1705
+    species:       armored_goblin
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 501
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   mythril_beastcoin
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Robber:
+    id:            1709
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 500
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   mythril_beastcoin
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Shaman:
+    id:            1710
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   mythril_beastcoin
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Smithy:
+    id:            1715
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 497
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Trader:
+    id:            1741
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 498
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: ultra_rare
+          item:   square_of_velvet_cloth
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblins_Bee_jungle:
+    id:            6303
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags: 643
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Greater_Pugil_fished:
+    id:            5868
+    display_name:  Greater_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Hoar-knuckled_Rimberry:
+    id:            5857
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 238
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1205
+        name_prefix: 32
+        model_size:   1
+        hitbox:      10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7250
+    loot:
+      drops:
+        - chance: rare
+          item:   sarabande_earring
+    content: WOTG
+
+  Hobgoblin_Beastmaster:
+    id:            1971
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 492
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Black_Mage:
+    id:            1972
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Dark_Knight:
+    id:            1974
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 509
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Ranger:
+    id:            1978
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 499
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Red_Mage:
+    id:            1979
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 504
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Thief:
+    id:            1980
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 485
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Warrior:
+    id:            1983
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 508
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_White_Mage:
+    id:            1984
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 488
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Kappa_Akuso:
+    id:            2186
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: staff
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6100
+
+  Kappa_Biwa:
+    id:            2187
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1338
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5200
+
+  Kappa_Bonze:
+    id:            2188
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1327
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5900
+        mp: 5900
+
+  Kedgebelly_Kate:
+    id:            2201
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 669
+        name_prefix:   32
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Makara_fished:
+    id:            6779
+    display_name:  Makara
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Master_Coeurl:
+    id:            2585
+    species:       coeurl
+    skill_list_id: 71
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 367
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_coeurl_meat
+        - chance: uncommon
+          item:   coeurl_hide
+        - chance: rare
+          item:   coeurl_whisker
+      steal: coeurl_whisker
+      despoil:
+        coeurl_hide:          0
+        slice_of_coeurl_meat: 0
+
+  Noctonberry_Black_Mage:
+    id:            2899
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1212
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Noctonberry_Ninja:
+    id:            2900
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1203
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Noctonberry_Summoner:
+    id:            2901
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 32
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1226
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Noctonberry_Thief:
+    id:            2902
+    species:       tonberry
+    type:          [notorious]
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1191
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Powderer_Penny:
+    id:            5856
+    species:       yellow_bee
+    type:          [notorious]
+    skill_list_id: 311
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags:  667
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+    loot:
+      drops:
+        - chance: common
+          item:   chary_earring
+    content: WOTG
+
+  Puroboros:
+    id:            3232
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [fog]
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Tonberry_Chopper:
+    id:            3950
+    species:       tonberry
+    spell_list_id: 7
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1203
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   ninjas_testimony
+        - chance: common
+          item:   tonberry_coat
+        - chance: uncommon
+          item:   flask_of_venom_potion
+        - chance: rare
+          item:   prelate_key
+        - chance: very_rare
+          item:   manji_shuriken
+        - chance: super_rare
+          item:   scroll_of_tonko_ni
+        - chance: ultra_rare
+          item:   scroll_of_hojo_ni
+      steal: gold_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Creeper:
+    id:            3951
+    species:       tonberry
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1183
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   tonberry_coat
+        - chance: rare
+          item:   tonberry_lantern
+        - chance: uncommon
+          item:   flask_of_poison_potion
+      steal: mythril_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Creeper_2:
+    id:            3951
+    display_name:  Tonberry_Creeper
+    species:       tonberry
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1183
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Tonberry_Decimator:
+    id:            3954
+    species:       tonberry
+    spell_list_id: 7
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1205
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Tonberry_Harasser:
+    id:            3956
+    species:       tonberry
+    spell_list_id: 32
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1223
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   tonberry_coat
+        - chance: rare
+          item:   tonberry_lantern
+        - chance: uncommon
+          item:   flask_of_poison_potion
+        - chance: very_rare
+          item:   water_spirit_pact
+      steal: mythril_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Harasser_2:
+    id:            3956
+    display_name:  Tonberry_Harasser
+    species:       tonberry
+    spell_list_id: 32
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1223
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   tonberry_coat
+        - chance: rare
+          item:   tonberry_lantern
+        - chance: uncommon
+          item:   flask_of_poison_potion
+        - chance: very_rare
+          item:   water_spirit_pact
+      steal: mythril_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Hexer:
+    id:            3958
+    species:       tonberry
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1217
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   tonberry_coat
+        - chance: rare
+          item:   tonberry_lantern
+        - chance: rare
+          item:   flask_of_poison_potion
+        - chance: rare
+          item:   rancor_tank
+      steal: mythril_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Hexer_2:
+    id:            3958
+    display_name:  Tonberry_Hexer
+    species:       tonberry
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1217
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Tonberry_Hexer_3:
+    id:            3958
+    display_name:  Tonberry_Hexer
+    species:       tonberry
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1217
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   tonberry_coat
+        - chance: rare
+          item:   tonberry_lantern
+        - chance: rare
+          item:   flask_of_poison_potion
+        - chance: rare
+          item:   rancor_tank
+      steal: mythril_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Jinxer:
+    id:            3960
+    species:       tonberry
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1212
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   black_mages_testimony
+        - chance: common
+          item:   tonberry_coat
+        - chance: uncommon
+          item:   unlit_lantern
+        - chance: rare
+          item:   scroll_of_thundaga_ii
+        - chance: very_rare
+          item:   scroll_of_thunder_iii
+      steal: gold_beastcoin
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberry_Shadower:
+    id:            3966
+    species:       tonberry
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1191
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   tonberry_coat
+        - chance: uncommon
+          item:   flask_of_venom_potion
+        - chance: rare
+          item:   gold_beastcoin
+        - chance: rare
+          item:   tonberry_board
+      steal: thiefs_testimony
+      despoil:
+        pinch_of_poison_dust: 0
+        pinch_of_venom_dust:  0
+        bag_of_poison_flour:  0
+
+  Tonberrys_Avatar:
+    id:            3970
+    species:       carbuncle
+    type:          [called, battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 129
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Tonberrys_Elemental:
+    id:            3971
+    species:       fire_elemental
+    type:          [called]
+    spell_list_id: 21
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 8
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Vepar:
+    id:            4220
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  White_Lizard:
+    id:            4334
+    species:       ash_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 329
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   lizard_tail
+        - chance: uncommon
+          item:   lizard_egg
+        - chance: rare
+          item:   lizard_skin
+        - chance: very_rare
+          item:   lizard_skin
+        - chance: very_rare
+          item:   lizard_skin
+      despoil:
+        lizard_skin: 0
+        lizard_tail: 0
+        lizard_egg:  0
+
+  Woodland_Sage:
+    id:            4361
+    species:       treant
+    type:          [notorious]
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, war]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 388
+        entity_flags: 133
+        model_size:     2
+        hitbox:        43
+      behaviors:
+        aggressive: true
+      mods:
+        double_attack: 55
+      mob_mods:
+        sound_range: 16
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   sunlight_pole
+        - chance: very_common
+          one_of:
+            rosewood_log: 40
+            ebony_log:    30
+            mahogany_log: 30
+        - chance: very_common
+          one_of:
+            rosewood_log: 40
+            ebony_log:    30
+            mahogany_log: 30
+        - chance: common
+          one_of:
+            rosewood_log:  40
+            mahogany_log:  30
+            petrified_log: 30
+
+  Worker_Crawler:
+    id:            4375
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_crawler_cocoon
+        - chance: rare
+          item:   spool_of_silk_thread
+        - chance: very_rare
+          item:   crawler_egg
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Yhoator_Mandragora:
+    id:            4470
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   two-leaf_mandragora_bud
+        - chance: very_rare
+          item:   jug_of_humus
+      despoil:
+        two-leaf_mandragora_bud: 0
+        ball_of_saruta_cotton:   0
+
+  Yhoator_Wasp:
+    id:            4471
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   pot_of_honey
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   giant_stinger
+      steal: pot_of_honey
+      despoil:
+        beehive_chip:  0
+        giant_stinger: 0
+        pot_of_honey:  0
+
+  Young_Opo-opo:
+    id:            4476
+    species:       opo_opo
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags: 131
+        model_size:     1
+        hitbox:        18
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   pebble
+        - chance: uncommon
+          item:   bunch_of_pamamas
+        - chance: rare
+          item:   elshimo_coconut
+        - chance: very_rare
+          item:   wild_melon
+      steal: bunch_of_pamamas
+      despoil:
+        bunch_of_pamamas: 0
+
+spawns:
+  17285121:
+    template: Greater_Pugil_fished
+    script:   Greater_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17285122:
+    template: Clipper_fished
+    script:   Clipper
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17285123:
+    template: Vepar
+    at:       [1.000, 1.000, 1.000]
+    level:    [36, 37]
+  17285124:
+    template: Vepar
+    at:       [1.000, 1.000, 1.000]
+    level:    [36, 37]
+  17285125:
+    template: Makara_fished
+    script:   Makara
+    at:       [1.000, 1.000, 1.000]
+    level:    [43, 45]
+  17285126:
+    template: Yhoator_Mandragora
+    at:       [-265.635, 2.611, 186.091, 127]
+    level:    [35, 37]
+  17285127:
+    template: Yhoator_Mandragora
+    at:       [-261.665, 2.342, 149.288, 127]
+    level:    [35, 37]
+  17285128:
+    template: White_Lizard
+    at:       [-227.000, 3.000, 140.000, 51]
+    level:    [36, 39]
+  17285129:
+    template: Yhoator_Mandragora
+    at:       [-273.315, 7.379, 101.545]
+    level:    [35, 37]
+  17285130:
+    template: White_Lizard
+    at:       [-254.772, 0.403, 110.178, 127]
+    level:    [36, 39]
+  17285131:
+    template: Yhoator_Mandragora
+    at:       [-294.612, -0.035, 54.204, 36]
+    level:    [35, 37]
+  17285132:
+    template: Yhoator_Mandragora
+    at:       [-308.369, 2.422, 58.629, 127]
+    level:    [35, 37]
+  17285133:
+    template: Yhoator_Mandragora
+    at:       [-257.000, 2.000, 186.000, 96]
+    level:    [35, 37]
+  17285134:
+    template: Goblin_Smithy
+    at:       [-298.991, 0.929, 59.005, 115]
+    level:    [35, 39]
+  17285135:
+    template: Yhoator_Mandragora
+    at:       [-275.709, 0.128, 59.259, 20]
+    level:    [35, 37]
+  17285136:
+    template: Yhoator_Mandragora
+    at:       [-265.232, 3.682, 59.501, 100]
+    level:    [35, 37]
+  17285137:
+    template: Goblin_Smithy
+    at:       [-246.000, 1.000, 61.000, 127]
+    level:    [35, 39]
+  17285138:
+    template: White_Lizard
+    at:       [-243.790, 7.653, 19.459, 2]
+    level:    [36, 39]
+  17285139:
+    template: White_Lizard
+    at:       [-261.648, 7.355, 31.986, 127]
+    level:    [36, 39]
+  17285140:
+    template: Yhoator_Mandragora
+    at:       [-221.471, 0.389, 5.189, 99]
+    level:    [35, 37]
+  17285141:
+    template: Yhoator_Mandragora
+    at:       [-223.544, 3.777, 24.207, 127]
+    level:    [35, 37]
+  17285142:
+    template: Goblin_Pathfinder
+    at:       [-219.350, 0.136, 3.727, 127]
+    level:    [35, 39]
+  17285143:
+    template: Goblins_Bee_jungle
+    script:   Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17285144:
+    template: Yhoator_Mandragora
+    at:       [-297.000, 0.257, 71.000, 9]
+    level:    [35, 37]
+  17285145:
+    template: Yhoator_Mandragora
+    at:       [-354.291, 0.067, 18.022, 30]
+    level:    [35, 37]
+  17285146:
+    template: Goblin_Smithy
+    at:       [-296.230, 0.873, 25.759, 127]
+    level:    [35, 39]
+  17285147:
+    template: White_Lizard
+    at:       [-340.334, 7.806, -5.710, 65]
+    level:    [36, 39]
+  17285148:
+    template: Yhoator_Mandragora
+    at:       [-380.924, -0.151, 4.477, 81]
+    level:    [35, 37]
+  17285149:
+    template: Goblin_Smithy
+    at:       [-382.353, 1.792, 27.801, 91]
+    level:    [35, 39]
+  17285150:
+    template: Goblin_Smithy
+    at:       [-378.965, 0.047, 7.918, 122]
+    level:    [35, 39]
+  17285151:
+    template: Yhoator_Mandragora
+    at:       [-305.000, 3.000, 101.000, 127]
+    level:    [35, 37]
+  17285152:
+    template: Goblin_Smithy
+    at:       [-387.409, 2.621, -20.706, 111]
+    level:    [35, 39]
+  17285153:
+    template: Yhoator_Mandragora
+    at:       [-205.289, -0.170, 178.258, 8]
+    level:    [35, 37]
+  17285154:
+    template: Yhoator_Wasp
+    at:       [-223.232, 2.279, 178.977, 83]
+    level:    [37, 40]
+  17285155:
+    template: Yhoator_Wasp
+    at:       [-207.178, -0.042, 178.363, 115]
+    level:    [37, 40]
+  17285156:
+    template: Goblin_Pathfinder
+    at:       [-207.893, 0.322, 183.825, 127]
+    level:    [35, 39]
+  17285157:
+    template: Goblins_Bee_jungle
+    script:   Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 29]
+  17285158:
+    template: Yhoator_Mandragora
+    at:       [-139.179, 7.639, 123.917, 66]
+    level:    [35, 37]
+  17285159:
+    template: White_Lizard
+    at:       [-164.440, 7.958, 142.136, 127]
+    level:    [36, 39]
+  17285160:
+    template: White_Lizard
+    at:       [-162.275, 7.885, 141.966, 3]
+    level:    [36, 39]
+  17285161:
+    template: Yhoator_Wasp
+    at:       [-182.963, 0.068, 88.284, 35]
+    level:    [37, 40]
+  17285162:
+    template: Goblin_Shaman
+    at:       [-186.373, 0.914, 94.271, 127]
+    level:    [35, 39]
+  17285163:
+    template: Yhoator_Wasp
+    at:       [-177.147, -0.334, 23.289, 127]
+    level:    [37, 40]
+  17285164:
+    template: Goblin_Shaman
+    at:       [-174.016, -0.065, 24.297, 39]
+    level:    [35, 39]
+  17285165:
+    template: Goblin_Shaman
+    at:       [-180.103, -0.451, 29.562, 127]
+    level:    [35, 39]
+  17285166:
+    template: Yhoator_Wasp
+    at:       [-131.153, -2.829, 32.782, 65]
+    level:    [37, 40]
+  17285167:
+    template: Goblin_Shaman
+    at:       [-143.874, -0.042, 10.678, 122]
+    level:    [35, 39]
+  17285168:
+    template: Goblin_Shaman
+    at:       [-139.783, -0.088, 14.904, 100]
+    level:    [35, 39]
+  17285169:
+    template: Yhoator_Wasp
+    at:       [-102.887, -1.711, 25.354, 47]
+    level:    [37, 40]
+  17285170:
+    template: Yhoator_Wasp
+    at:       [-104.866, -2.061, 58.116, 127]
+    level:    [37, 40]
+  17285171:
+    template: Goblin_Shaman
+    at:       [-111.651, -0.292, 25.996, 127]
+    level:    [35, 39]
+  17285172:
+    template: Yhoator_Wasp
+    at:       [-141.006, 9.358, 49.449, 71]
+    level:    [37, 40]
+  17285173:
+    template: Yhoator_Wasp
+    at:       [-113.761, 8.924, 32.051, 127]
+    level:    [37, 40]
+  17285174:
+    template: Yhoator_Wasp
+    at:       [-130.144, 9.356, 47.449, 13]
+    level:    [37, 40]
+  17285175:
+    template: Yhoator_Wasp
+    at:       [-158.532, 9.911, 49.502, 127]
+    level:    [37, 40]
+  17285176:
+    template: Yhoator_Wasp
+    at:       [-149.814, 8.561, 37.555, 127]
+    level:    [37, 40]
+  17285177:
+    template: Yhoator_Wasp
+    at:       [-155.226, 9.211, 39.429, 127]
+    level:    [37, 40]
+  17285178:
+    template: Anemone
+    at:       [-120.886, 9.871, 47.967, 127]
+    level:    [51, 54]
+  17285179:
+    template: Yhoator_Mandragora
+    at:       [-62.060, 0.046, 45.970, 33]
+    level:    [35, 37]
+  17285180:
+    template: Yhoator_Wasp
+    at:       [-70.756, 0.356, 22.190, 127]
+    level:    [37, 40]
+  17285181:
+    template: Yhoator_Wasp
+    at:       [-62.216, 0.199, 10.338, 86]
+    level:    [37, 40]
+  17285182:
+    template: Goblin_Shaman
+    at:       [-84.349, -0.015, 21.716, 127]
+    level:    [35, 39]
+  17285183:
+    template: White_Lizard
+    at:       [-132.806, 1.360, -15.410, 127]
+    level:    [36, 39]
+  17285184:
+    template: White_Lizard
+    at:       [-159.840, 7.884, -19.643, 6]
+    level:    [36, 39]
+  17285185:
+    template: Goblin_Shaman
+    at:       [-152.947, 7.573, -19.639, 127]
+    level:    [35, 39]
+  17285186:
+    template: White_Lizard
+    at:       [-95.496, 11.042, 97.084, 127]
+    level:    [36, 39]
+  17285187:
+    template: Goblin_Shaman
+    at:       [-97.900, 11.654, 84.601, 82]
+    level:    [35, 39]
+  17285188:
+    template: Goblin_Bouncer
+    at:       [-82.778, -0.289, 166.744, 76]
+    level:    [51, 55]
+  17285189:
+    template: Goblin_Bouncer
+    at:       [-92.227, 0.572, 149.116, 76]
+    level:    [51, 55]
+  17285190:
+    template: Goblin_Hunter
+    at:       [-84.715, -0.485, 160.044, 94]
+    level:    [51, 55]
+  17285191:
+    template: Goblin_Hunter
+    at:       [-84.730, -0.499, 242.827, 38]
+    level:    [51, 55]
+  17285192:
+    template: Goblin_Hunter
+    at:       [-83.839, -0.499, 244.845, 67]
+    level:    [51, 55]
+  17285193:
+    template: Goblin_Bouncer
+    at:       [-75.278, -0.635, 246.377, 14]
+    level:    [51, 55]
+  17285194:
+    template: White_Lizard
+    at:       [-14.901, 8.951, 63.171, 122]
+    level:    [36, 39]
+  17285195:
+    template: White_Lizard
+    at:       [-32.624, 7.790, 58.979, 16]
+    level:    [36, 39]
+  17285196:
+    template: Goblin_Shaman
+    at:       [-36.280, 7.893, 60.293, 127]
+    level:    [35, 39]
+  17285197:
+    template: Goblin_Bouncer
+    at:       [38.973, -0.487, 128.226, 127]
+    level:    [51, 55]
+  17285198:
+    template: Goblin_Bouncer
+    at:       [43.044, -0.434, 129.065, 127]
+    level:    [51, 55]
+  17285199:
+    template: Goblin_Hunter
+    at:       [81.795, -0.502, 198.061, 127]
+    level:    [51, 55]
+  17285200:
+    template: Goblin_Hunter
+    at:       [76.209, 0.071, 182.888, 37]
+    level:    [51, 55]
+  17285201:
+    template: Goblin_Bouncer
+    at:       [73.379, -0.499, 203.281, 127]
+    level:    [51, 55]
+  17285202:
+    template: Goblin_Hunter
+    at:       [45.371, -0.465, 229.988, 5]
+    level:    [51, 55]
+  17285203:
+    template: Goblin_Hunter
+    at:       [39.444, -0.014, 251.899, 127]
+    level:    [51, 55]
+  17285204:
+    template: Goblin_Bouncer
+    at:       [41.622, 0.029, 253.242, 124]
+    level:    [51, 55]
+  17285205:
+    template: Worker_Crawler
+    at:       [140.085, 7.327, 126.505, 51]
+    level:    [43, 46]
+  17285206:
+    template: Worker_Crawler
+    at:       [139.154, 7.681, 116.640, 127]
+    level:    [43, 46]
+  17285207:
+    template: Worker_Crawler
+    at:       [139.901, 6.968, 129.011, 127]
+    level:    [43, 46]
+  17285208:
+    template: Goblin_Robber
+    at:       [245.231, -0.470, 84.611, 87]
+    level:    [45, 49]
+  17285209:
+    template: Goblin_Trader
+    at:       [232.770, -0.279, 73.422, 127]
+    level:    [45, 49]
+  17285210:
+    template: Goblins_Bee_jungle
+    script:   Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 39]
+  17285211:
+    template: Goblin_Trader
+    at:       [184.005, 3.206, 102.927, 113]
+    level:    [45, 49]
+  17285212:
+    template: Goblins_Bee_jungle
+    script:   Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17285213:
+    template: Master_Coeurl
+    at:       [215.377, 0.028, 79.638, 127]
+    level:    [47, 50]
+  17285214:
+    template: Goblin_Robber
+    at:       [217.886, -0.207, 45.751, 127]
+    level:    [45, 49]
+  17285215:
+    template: Goblin_Trader
+    at:       [204.760, -0.467, 36.447, 127]
+    level:    [45, 49]
+  17285216:
+    template: Goblins_Bee_jungle
+    script:   Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17285217:
+    template: Goblin_Trader
+    at:       [202.256, -0.377, 45.771, 112]
+    level:    [45, 49]
+  17285218:
+    template: Goblins_Bee_jungle
+    script:   Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17285219:
+    template: Master_Coeurl
+    at:       [197.410, -0.022, 51.679, 127]
+    level:    [47, 50]
+  17285220:
+    template: Woodland_Sage
+    at:       [190.942, 0.345, 94.828, 127]
+    level:    [60, 61]
+  17285221:
+    template: Big_Jaw
+    at:       [205.676, -0.051, 58.883, 127]
+    level:    [43, 47]
+  17285222:
+    template: Big_Jaw
+    at:       [222.315, -0.049, 45.455, 98]
+    level:    [43, 47]
+  17285223:
+    template: Water_Elemental
+    at:       [226.997, -0.234, 47.484, 105]
+    level:    [53, 55]
+  17285224:
+    template: Yhoator_Wasp
+    at:       [-22.212, -0.283, -46.724, 127]
+    level:    [37, 40]
+  17285225:
+    template: Yhoator_Wasp
+    at:       [-19.361, 4.586, -11.370, 127]
+    level:    [37, 40]
+  17285226:
+    template: Goblin_Reaper
+    at:       [-19.542, -0.057, -38.660, 60]
+    level:    [41, 45]
+  17285227:
+    template: Young_Opo-opo
+    at:       [-30.952, -1.296, -63.010, 127]
+    level:    [40, 44]
+  17285228:
+    template: Yhoator_Wasp
+    at:       [-49.269, -0.321, -66.511, 5]
+    level:    [37, 40]
+  17285229:
+    template: Goblin_Reaper
+    at:       [-53.466, -0.122, -65.836, 127]
+    level:    [41, 45]
+  17285230:
+    template: Young_Opo-opo
+    at:       [-52.390, -2.377, -110.872, 127]
+    level:    [40, 44]
+  17285231:
+    template: Yhoator_Wasp
+    at:       [-48.820, -0.744, -129.886, 127]
+    level:    [37, 40]
+  17285232:
+    template: Yhoator_Wasp
+    at:       [-53.821, -0.881, -121.967, 127]
+    level:    [37, 40]
+  17285233:
+    template: Yhoator_Wasp
+    at:       [-37.132, -3.763, -119.165, 25]
+    level:    [37, 40]
+  17285234:
+    template: Yhoator_Wasp
+    at:       [-30.539, -3.155, -118.037, 127]
+    level:    [37, 40]
+  17285235:
+    template: Yhoator_Wasp
+    at:       [-45.202, -3.718, -123.399, 108]
+    level:    [37, 40]
+  17285236:
+    template: Goblin_Reaper
+    at:       [-39.054, -4.160, -110.649, 127]
+    level:    [41, 45]
+  17285237:
+    template: Young_Opo-opo
+    at:       [8.657, -2.440, -89.466, 62]
+    level:    [40, 44]
+  17285238:
+    template: Yhoator_Wasp
+    at:       [0.759, -1.062, -64.695, 30]
+    level:    [37, 40]
+  17285239:
+    template: Yhoator_Wasp
+    at:       [9.240, -2.164, -89.612, 127]
+    level:    [37, 40]
+  17285240:
+    template: Young_Opo-opo
+    at:       [8.480, -0.352, -133.587, 50]
+    level:    [40, 44]
+  17285241:
+    template: Yhoator_Wasp
+    at:       [12.532, -1.531, -116.491, 127]
+    level:    [37, 40]
+  17285242:
+    template: Goblin_Pathfinder
+    at:       [-5.014, -1.235, -138.685, 102]
+    level:    [35, 39]
+  17285243:
+    template: Goblins_Bee_jungle
+    script:   Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17285244:
+    template: Yhoator_Wasp
+    at:       [-6.174, -3.015, -96.012, 127]
+    level:    [37, 40]
+  17285245:
+    template: Yhoator_Wasp
+    at:       [-5.626, -3.377, -74.468, 69]
+    level:    [37, 40]
+  17285246:
+    template: Yhoator_Wasp
+    at:       [-3.043, -3.324, -108.609, 51]
+    level:    [37, 40]
+  17285247:
+    template: Goblin_Reaper
+    at:       [-9.908, -3.051, -73.327, 9]
+    level:    [41, 45]
+  17285248:
+    template: Powderer_Penny
+    at:       [-11.700, -2.531, -123.250, 60]
+    level:    [49, 49]
+  17285249:
+    template: Young_Opo-opo
+    at:       [-23.267, 8.712, -99.830, 13]
+    level:    [40, 44]
+  17285250:
+    template: Yhoator_Wasp
+    at:       [-26.860, 7.297, -91.678, 83]
+    level:    [37, 40]
+  17285251:
+    template: Yhoator_Wasp
+    at:       [-12.858, 8.046, -100.449, 127]
+    level:    [37, 40]
+  17285252:
+    template: Anemone
+    at:       [-12.399, 7.976, -101.049, 127]
+    level:    [51, 54]
+  17285253:
+    template: Young_Opo-opo
+    at:       [-55.460, 8.690, -95.713, 127]
+    level:    [40, 44]
+  17285254:
+    template: Young_Opo-opo
+    at:       [-64.770, 8.987, -101.311, 127]
+    level:    [40, 44]
+  17285255:
+    template: Young_Opo-opo
+    at:       [-104.912, 1.108, -56.207, 127]
+    level:    [40, 44]
+  17285256:
+    template: Young_Opo-opo
+    at:       [-99.207, 2.248, -55.929, 109]
+    level:    [40, 44]
+  17285257:
+    template: Yhoator_Wasp
+    at:       [-20.740, 0.186, -144.909, 127]
+    level:    [37, 40]
+  17285258:
+    template: Yhoator_Wasp
+    at:       [-16.042, -0.844, -148.207, 127]
+    level:    [37, 40]
+  17285259:
+    template: Goblin_Reaper
+    at:       [-22.539, -0.182, -149.411, 127]
+    level:    [41, 45]
+  17285260:
+    template: Young_Opo-opo
+    at:       [-186.693, 8.396, -105.571, 89]
+    level:    [40, 44]
+  17285261:
+    template: Young_Opo-opo
+    at:       [-173.788, 8.841, -96.746, 127]
+    level:    [40, 44]
+  17285262:
+    template: Worker_Crawler
+    at:       [-185.046, 8.627, -103.278, 127]
+    level:    [43, 46]
+  17285263:
+    template: Worker_Crawler
+    at:       [-163.694, 7.915, -98.927, 37]
+    level:    [43, 46]
+  17285264:
+    template: Young_Opo-opo
+    at:       [-98.948, 9.256, -180.880, 65]
+    level:    [40, 44]
+  17285265:
+    template: Young_Opo-opo
+    at:       [-101.483, 9.312, -181.800, 127]
+    level:    [40, 44]
+  17285266:
+    template: Worker_Crawler
+    at:       [-136.872, 8.645, -175.919, 106]
+    level:    [43, 46]
+  17285267:
+    template: Worker_Crawler
+    at:       [-98.905, 9.204, -180.357, 127]
+    level:    [43, 46]
+  17285268:
+    template: Master_Coeurl
+    at:       [-228.308, 1.610, -103.275, 97]
+    level:    [47, 50]
+  17285269:
+    template: Worker_Crawler
+    at:       [-278.464, 0.100, -142.112, 55]
+    level:    [43, 46]
+  17285270:
+    template: Worker_Crawler
+    at:       [-284.669, 0.057, -146.368, 3]
+    level:    [43, 46]
+  17285271:
+    template: Master_Coeurl
+    at:       [-253.496, 0.037, -160.586, 91]
+    level:    [47, 50]
+  17285272:
+    template: Worker_Crawler
+    at:       [-181.551, 3.603, -183.898, 127]
+    level:    [43, 46]
+  17285273:
+    template: Worker_Crawler
+    at:       [-218.490, -0.437, -151.493, 56]
+    level:    [43, 46]
+  17285274:
+    template: Master_Coeurl
+    at:       [-217.503, -0.462, -151.808, 41]
+    level:    [47, 50]
+  17285275:
+    template: Worker_Crawler
+    at:       [-217.345, 8.966, -264.751, 127]
+    level:    [43, 46]
+  17285276:
+    template: Worker_Crawler
+    at:       [-222.386, 8.878, -256.997, 127]
+    level:    [43, 46]
+  17285277:
+    template: Master_Coeurl
+    at:       [-273.297, -0.670, -184.633, 127]
+    level:    [47, 50]
+  17285278:
+    template: Worker_Crawler
+    at:       [-405.793, 7.459, -97.643, 127]
+    level:    [43, 46]
+  17285279:
+    template: Worker_Crawler
+    at:       [-399.022, 7.825, -98.528, 127]
+    level:    [43, 46]
+  17285280:
+    template: Master_Coeurl
+    at:       [-277.869, -0.456, -358.204, 127]
+    level:    [47, 50]
+  17285281:
+    template: Worker_Crawler
+    at:       [-389.230, 7.990, -103.306, 127]
+    level:    [43, 46]
+  17285282:
+    template: Worker_Crawler
+    at:       [-473.243, 0.179, -140.770, 8]
+    level:    [43, 46]
+  17285283:
+    template: Master_Coeurl
+    at:       [-270.218, -0.418, -451.742, 29]
+    level:    [47, 50]
+  17285284:
+    template: Worker_Crawler
+    at:       [-274.844, -0.002, -177.140, 118]
+    level:    [43, 46]
+  17285285:
+    template: Anemone
+    at:       [-231.491, -0.486, -362.584, 53]
+    level:    [51, 54]
+  17285286:
+    template: Worker_Crawler
+    at:       [-506.303, 2.441, -139.962, 127]
+    level:    [43, 46]
+  17285287:
+    template: Worker_Crawler
+    at:       [-497.217, -0.351, -116.024, 127]
+    level:    [43, 46]
+  17285288:
+    template: Worker_Crawler
+    at:       [-461.888, 0.404, -195.221, 127]
+    level:    [43, 46]
+  17285289:
+    template: Worker_Crawler
+    at:       [-457.492, -0.307, -157.121, 127]
+    level:    [43, 46]
+  17285290:
+    template: Worker_Crawler
+    at:       [-382.705, 8.875, -101.914, 96]
+    level:    [43, 46]
+  17285291:
+    template: Young_Opo-opo
+    at:       [-464.742, 0.608, -145.496, 56]
+    level:    [40, 44]
+  17285292:
+    template: Young_Opo-opo
+    at:       [-435.984, -0.044, -140.060, 14]
+    level:    [40, 44]
+  17285293:
+    template: Goblin_Poacher
+    level:    [45, 49]
+  17285294:
+    template: Worker_Crawler
+    at:       [-494.439, 8.435, -183.929, 127]
+    level:    [43, 46]
+  17285295:
+    template: Worker_Crawler
+    at:       [-495.759, 8.412, -183.267, 127]
+    level:    [43, 46]
+  17285296:
+    template: Yhoator_Wasp
+    at:       [-500.443, -0.025, -119.308, 21]
+    level:    [37, 40]
+  17285297:
+    template: Yhoator_Wasp
+    at:       [-504.362, 0.440, -127.460, 127]
+    level:    [37, 40]
+  17285298:
+    template: Goblin_Poacher
+    at:       [-499.902, -0.034, -115.529, 127]
+    level:    [45, 49]
+  17285299:
+    template: Worker_Crawler
+    at:       [-468.152, 1.022, -226.360, 124]
+    level:    [43, 46]
+  17285300:
+    template: Worker_Crawler
+    at:       [-416.384, -0.087, -234.285, 127]
+    level:    [43, 46]
+  17285301:
+    template: Young_Opo-opo
+    at:       [-463.233, 2.423, -190.227, 127]
+    level:    [40, 44]
+  17285302:
+    template: Goblin_Poacher
+    at:       [-461.530, 3.982, -182.784, 127]
+    level:    [48, 48]
+  17285303:
+    template: Worker_Crawler
+    at:       [-418.399, 0.083, -205.477, 127]
+    level:    [43, 46]
+  17285304:
+    template: Worker_Crawler
+    at:       [-461.460, 3.763, -301.840, 127]
+    level:    [43, 46]
+  17285305:
+    template: Worker_Crawler
+    level:    [43, 46]
+  17285306:
+    template: Worker_Crawler
+    at:       [-346.559, 6.614, -217.975, 83]
+    level:    [43, 46]
+  17285307:
+    template: Worker_Crawler
+    at:       [-350.116, 6.953, -219.390, 127]
+    level:    [43, 46]
+  17285308:
+    template: Young_Opo-opo
+    at:       [-457.135, 2.443, -225.992, 127]
+    level:    [40, 44]
+  17285309:
+    template: Goblin_Poacher
+    at:       [-471.870, -0.070, -218.976, 96]
+    level:    [45, 45]
+  17285310:
+    template: Goblin_Poacher
+    at:       [-456.391, 2.274, -223.585, 127]
+    level:    [45, 49]
+  17285311:
+    template: Worker_Crawler
+    at:       [-348.410, 6.308, -214.622, 118]
+    level:    [43, 46]
+  17285312:
+    template: Worker_Crawler
+    at:       [-385.181, 6.350, -304.162, 68]
+    level:    [43, 46]
+  17285313:
+    template: Yhoator_Wasp
+    at:       [-416.608, 1.454, -210.772, 127]
+    level:    [37, 40]
+  17285314:
+    template: Yhoator_Wasp
+    at:       [-418.280, 0.026, -234.524, 127]
+    level:    [37, 40]
+  17285315:
+    template: Goblin_Reaper
+    at:       [-418.165, 0.436, -248.133, 127]
+    level:    [41, 45]
+  17285316:
+    template: Worker_Crawler
+    at:       [-385.048, 6.347, -304.280, 74]
+    level:    [43, 46]
+  17285317:
+    template: Young_Opo-opo
+    at:       [-457.145, 1.718, -309.272, 69]
+    level:    [40, 44]
+  17285318:
+    template: Goblin_Poacher
+    at:       [-457.882, -0.249, -278.698, 17]
+    level:    [45, 49]
+  17285319:
+    template: Worker_Crawler
+    at:       [-385.205, 6.320, -305.034, 76]
+    level:    [43, 46]
+  17285320:
+    template: Worker_Crawler
+    at:       [-284.258, -0.162, -371.337, 127]
+    level:    [43, 46]
+  17285321:
+    template: Young_Opo-opo
+    at:       [-345.519, 6.308, -213.792, 127]
+    level:    [40, 44]
+  17285322:
+    template: Worker_Crawler
+    at:       [-249.064, -0.169, -363.637, 117]
+    level:    [43, 46]
+  17285323:
+    template: Worker_Crawler
+    at:       [-274.461, -0.383, -363.957, 106]
+    level:    [43, 46]
+  17285324:
+    template: Worker_Crawler
+    at:       [-317.265, -0.434, -436.522, 116]
+    level:    [43, 46]
+  17285325:
+    template: Young_Opo-opo
+    at:       [-388.126, 6.414, -304.433, 127]
+    level:    [40, 44]
+  17285326:
+    template: Worker_Crawler
+    at:       [-299.335, 0.079, -441.554, 3]
+    level:    [43, 46]
+  17285327:
+    template: Worker_Crawler
+    at:       [-296.424, -0.036, -432.720, 127]
+    level:    [43, 46]
+  17285328:
+    template: Worker_Crawler
+    at:       [-191.740, -0.448, -440.003, 127]
+    level:    [43, 46]
+  17285329:
+    template: Young_Opo-opo
+    at:       [-200.137, -0.499, -313.580, 127]
+    level:    [40, 44]
+  17285330:
+    template: Young_Opo-opo
+    at:       [-201.749, -0.496, -315.253, 127]
+    level:    [40, 44]
+  17285331:
+    template: Goblin_Robber
+    at:       [-212.108, 0.110, -311.249, 127]
+    level:    [45, 49]
+  17285332:
+    template: Young_Opo-opo
+    at:       [-384.137, 2.468, -387.935, 66]
+    level:    [40, 44]
+  17285333:
+    template: Young_Opo-opo
+    at:       [-368.672, -0.307, -395.562, 65]
+    level:    [40, 44]
+  17285334:
+    template: Goblin_Robber
+    at:       [-363.247, -0.499, -407.371, 127]
+    level:    [45, 49]
+  17285335:
+    template: Worker_Crawler
+    at:       [-195.520, -0.499, -432.647, 127]
+    level:    [43, 46]
+  17285336:
+    template: Worker_Crawler
+    at:       [-281.021, -0.229, -394.676, 231]
+    level:    [43, 46]
+  17285337:
+    template: Worker_Crawler
+    at:       [375.892, 12.686, -502.998, 34]
+    level:    [43, 46]
+  17285338:
+    template: Master_Coeurl
+    at:       [-193.157, -0.057, -454.978, 72]
+    level:    [47, 50]
+  17285339:
+    template: Goblin_Robber
+    at:       [-243.718, -0.412, -364.693, 127]
+    level:    [45, 49]
+  17285340:
+    template: Anemone
+    at:       [-277.393, 0.099, -380.117, 123]
+    level:    [51, 54]
+  17285341:
+    template: Acolnahuacatl
+    at:       [-242.500, 0.000, -400.400, 60]
+    level:    [67, 68]
+  17285342:
+    template: Worker_Crawler
+    at:       [413.703, 12.320, -507.179, 62]
+    level:    [43, 46]
+  17285343:
+    template: Worker_Crawler
+    at:       [-267.497, -0.080, -438.766, 218]
+    level:    [43, 46]
+  17285344:
+    template: Worker_Crawler
+    at:       [65.828, 6.522, -262.021, 97]
+    level:    [43, 46]
+  17285345:
+    template: Master_Coeurl
+    level:    [47, 50]
+  17285346:
+    template: Goblin_Poacher
+    at:       [-275.399, -0.469, -449.129, 3]
+    level:    [45, 49]
+  17285347:
+    template: Anemone
+    at:       [-261.937, 0.046, -438.830, 161]
+    level:    [51, 54]
+  17285348:
+    template: Worker_Crawler
+    at:       [284.997, 7.504, -299.228, 127]
+    level:    [43, 46]
+  17285349:
+    template: Worker_Crawler
+    at:       [258.024, 7.894, -4.218, 127]
+    level:    [43, 46]
+  17285350:
+    template: Worker_Crawler
+    at:       [251.998, 8.275, -12.745, 90]
+    level:    [43, 46]
+  17285351:
+    template: Master_Coeurl
+    at:       [538.635, -0.138, -434.614, 127]
+    level:    [47, 50]
+  17285352:
+    template: Goblin_Robber
+    at:       [-197.087, -0.350, -474.758, 127]
+    level:    [45, 49]
+  17285353:
+    template: Goblin_Robber
+    level:    [45, 49]
+  17285354:
+    template: Anemone
+    at:       [-86.521, -0.480, -320.457, 127]
+    level:    [51, 54]
+  17285355:
+    template: Young_Opo-opo
+    at:       [-172.749, -0.494, -467.085, 127]
+    level:    [40, 44]
+  17285356:
+    template: Young_Opo-opo
+    at:       [-159.032, -0.499, -477.156, 59]
+    level:    [40, 44]
+  17285357:
+    template: Young_Opo-opo
+    at:       [-130.968, 6.930, -419.317, 116]
+    level:    [40, 44]
+  17285358:
+    template: Tonberry_Creeper
+    at:       [-137.463, 6.567, -425.404, 127]
+    level:    [45, 49]
+  17285359:
+    template: Young_Opo-opo
+    at:       [-153.655, 7.842, -341.285, 18]
+    level:    [40, 44]
+  17285360:
+    template: Tonberry_Hexer
+    at:       [-148.326, 8.243, -346.058, 50]
+    level:    [45, 49]
+  17285361:
+    template: Goblin_Reaper
+    at:       [16.210, 8.557, -209.999, 75]
+    level:    [41, 45]
+  17285362:
+    template: Goblin_Reaper
+    at:       [17.289, 9.063, -215.528, 127]
+    level:    [41, 45]
+  17285363:
+    template: Goblin_Reaper
+    at:       [19.447, 7.938, -234.127, 80]
+    level:    [41, 45]
+  17285364:
+    template: Young_Opo-opo
+    at:       [-79.010, 7.815, -220.860, 4]
+    level:    [40, 44]
+  17285365:
+    template: Tonberry_Creeper
+    at:       [-64.365, 8.499, -214.667, 226]
+    level:    [45, 49]
+  17285366:
+    template: Young_Opo-opo
+    at:       [-38.075, -0.372, -287.643, 127]
+    level:    [40, 44]
+  17285367:
+    template: Young_Opo-opo
+    at:       [-61.387, 0.070, -286.287, 127]
+    level:    [40, 44]
+  17285368:
+    template: Tonberry_Creeper
+    at:       [-77.685, -0.493, -329.433, 114]
+    level:    [45, 49]
+  17285369:
+    template: Anemone
+    at:       [271.523, 0.124, -493.666, 127]
+    level:    [51, 54]
+  17285370:
+    template: Young_Opo-opo
+    at:       [-17.081, -0.130, -328.765, 44]
+    level:    [40, 44]
+  17285371:
+    template: Young_Opo-opo
+    at:       [-42.881, 0.086, -340.803, 15]
+    level:    [40, 44]
+  17285372:
+    template: Young_Opo-opo
+    at:       [-31.813, -0.076, -348.300, 127]
+    level:    [40, 44]
+  17285373:
+    template: Tonberry_Hexer
+    at:       [-39.433, -0.051, -332.916, 90]
+    level:    [45, 49]
+  17285374:
+    template: Young_Opo-opo
+    at:       [-31.058, 0.003, -370.522, 76]
+    level:    [40, 44]
+  17285375:
+    template: Young_Opo-opo
+    at:       [-57.188, -0.015, -391.577, 83]
+    level:    [40, 44]
+  17285376:
+    template: Young_Opo-opo
+    at:       [-57.024, -0.071, -399.408, 97]
+    level:    [40, 44]
+  17285377:
+    template: Tonberry_Creeper
+    at:       [-26.058, -0.057, -403.778, 115]
+    level:    [45, 49]
+  17285378:
+    template: Young_Opo-opo
+    at:       [37.509, -0.030, -345.689, 49]
+    level:    [40, 44]
+  17285379:
+    template: Young_Opo-opo
+    at:       [36.568, -0.319, -315.060, 6]
+    level:    [40, 44]
+  17285380:
+    template: Young_Opo-opo
+    at:       [31.694, -0.125, -334.372, 127]
+    level:    [40, 44]
+  17285381:
+    template: Tonberry_Creeper
+    at:       [32.904, -0.045, -353.409, 127]
+    level:    [45, 49]
+  17285382:
+    template: Young_Opo-opo
+    at:       [37.835, 0.060, -383.377, 127]
+    level:    [40, 44]
+  17285383:
+    template: Young_Opo-opo
+    at:       [74.235, -0.346, -405.374, 29]
+    level:    [40, 44]
+  17285384:
+    template: Young_Opo-opo
+    at:       [68.781, -0.642, -387.511, 127]
+    level:    [40, 44]
+  17285385:
+    template: Tonberry_Creeper
+    at:       [54.183, -0.217, -379.144, 101]
+    level:    [45, 49]
+  17285386:
+    template: Young_Opo-opo
+    at:       [-20.162, 0.092, -351.445, 127]
+    level:    [40, 44]
+  17285387:
+    template: Young_Opo-opo
+    at:       [-4.795, -0.354, -400.263, 127]
+    level:    [40, 44]
+  17285388:
+    template: Tonberry_Hexer
+    at:       [14.274, -1.670, -414.336, 18]
+    level:    [45, 49]
+  17285389:
+    template: Tonberry_Creeper
+    at:       [-5.443, -0.332, -399.649, 41]
+    level:    [45, 49]
+  17285390:
+    template: Fire_Elemental
+    at:       [17.238, 0.069, -402.464, 211]
+    level:    [53, 55]
+  17285391:
+    template: Young_Opo-opo
+    at:       [117.237, -0.499, -395.620, 54]
+    level:    [40, 44]
+  17285392:
+    template: Tonberry_Creeper
+    at:       [31.930, 0.201, -407.700, 60]
+    level:    [45, 49]
+  17285393:
+    template: Tonberry_Shadower
+    at:       [24.922, -5.023, -423.784, 19]
+    level:    [61, 63]
+  17285394:
+    template: Hoar-knuckled_Rimberry
+    at:       [24.922, -5.023, -423.784, 19]
+    level:    [73, 73]
+  17285395:
+    template: Tonberry_Jinxer
+    at:       [18.064, -4.500, -431.419, 140]
+    level:    [61, 63]
+  17285396:
+    template: Tonberry_Chopper
+    at:       [-1.346, -4.500, -437.402, 223]
+    level:    [61, 63]
+  17285397:
+    template: Tonberry_Chopper
+    at:       [17.325, -10.500, -454.870, 30]
+    level:    [61, 63]
+  17285398:
+    template: Tonberry_Shadower
+    at:       [48.523, -10.500, -466.110, 32]
+    level:    [61, 63]
+  17285399:
+    template: Tonberry_Chopper
+    at:       [-7.266, -10.500, -464.257, 191]
+    level:    [61, 63]
+  17285400:
+    template: Tonberry_Shadower
+    at:       [56.048, -18.500, -425.292, 19]
+    level:    [61, 63]
+  17285401:
+    template: Tonberry_Jinxer
+    at:       [1.976, -18.383, -435.409, 127]
+    level:    [61, 63]
+  17285402:
+    template: Tonberry_Shadower
+    at:       [20.698, -18.457, -436.720, 62]
+    level:    [61, 63]
+  17285403:
+    template: Tonberry_Chopper
+    at:       [33.748, -18.500, -435.407, 183]
+    level:    [61, 63]
+  17285404:
+    template: Tonberry_Creeper
+    at:       [179.353, 6.741, -452.006, 127]
+    level:    [45, 49]
+  17285405:
+    template: Tonberry_Hexer
+    at:       [177.102, 2.617, -467.835, 59]
+    level:    [45, 49]
+  17285406:
+    template: Young_Opo-opo
+    at:       [262.858, -0.216, -505.492, 127]
+    level:    [40, 44]
+  17285407:
+    template: Young_Opo-opo
+    at:       [200.735, 0.033, -494.608, 102]
+    level:    [40, 44]
+  17285408:
+    template: Young_Opo-opo
+    at:       [250.290, 0.061, -489.007, 127]
+    level:    [40, 44]
+  17285409:
+    template: Tonberry_Hexer
+    at:       [222.923, -0.064, -502.395, 7]
+    level:    [45, 49]
+  17285410:
+    template: Tonberry_Creeper
+    level:    [45, 49]
+  17285411:
+    template: Young_Opo-opo
+    at:       [248.853, -0.220, -404.197, 103]
+    level:    [40, 44]
+  17285412:
+    template: Tonberry_Creeper
+    at:       [278.917, -0.637, -394.534, 229]
+    level:    [45, 49]
+  17285413:
+    template: Young_Opo-opo
+    at:       [317.437, -0.104, -390.890, 27]
+    level:    [40, 44]
+  17285414:
+    template: Tonberry_Hexer
+    at:       [325.771, 0.043, -376.655, 127]
+    level:    [45, 49]
+  17285415:
+    template: Young_Opo-opo
+    at:       [364.333, -0.499, -396.278, 112]
+    level:    [40, 44]
+  17285416:
+    template: Tonberry_Harasser
+    at:       [367.422, -0.495, -397.447, 127]
+    level:    [45, 49]
+  17285417:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 39]
+  17285418:
+    template: Young_Opo-opo
+    at:       [370.715, -0.570, -460.251, 127]
+    level:    [40, 44]
+  17285419:
+    template: Young_Opo-opo
+    at:       [398.912, -0.061, -467.421, 127]
+    level:    [40, 44]
+  17285420:
+    template: Tonberry_Hexer
+    at:       [370.636, -0.463, -469.881, 64]
+    level:    [45, 49]
+  17285421:
+    template: Tonberry_Hexer
+    at:       [369.392, -0.387, -472.908, 127]
+    level:    [45, 49]
+  17285422:
+    template: Young_Opo-opo
+    at:       [418.724, 8.338, -388.449, 127]
+    level:    [40, 44]
+  17285423:
+    template: Tonberry_Creeper
+    level:    [45, 49]
+  17285424:
+    template: Young_Opo-opo
+    at:       [357.485, -0.490, -521.913, 64]
+    level:    [40, 44]
+  17285425:
+    template: Young_Opo-opo
+    at:       [377.239, -0.984, -481.731, 127]
+    level:    [40, 44]
+  17285426:
+    template: Tonberry_Creeper
+    at:       [393.734, -0.408, -525.033, 76]
+    level:    [45, 49]
+  17285427:
+    template: Tonberry_Harasser
+    at:       [362.316, 0.061, -502.583, 53]
+    level:    [45, 49]
+  17285428:
+    template: Tonberrys_Elemental
+    at:       [361.693, 0.071, -501.147, 19]
+    level:    [38, 39]
+  17285429:
+    template: Young_Opo-opo
+    at:       [322.410, 1.169, -495.517, 10]
+    level:    [40, 44]
+  17285430:
+    template: Tonberry_Creeper
+    level:    [45, 49]
+  17285431:
+    template: Anemone
+    at:       [233.223, 0.096, -256.181, 90]
+    level:    [51, 54]
+  17285432:
+    template: Young_Opo-opo
+    at:       [268.948, -0.074, -460.804, 127]
+    level:    [40, 44]
+  17285433:
+    template: Young_Opo-opo
+    at:       [271.018, -0.369, -441.978, 127]
+    level:    [40, 44]
+  17285434:
+    template: Tonberry_Hexer
+    at:       [268.423, 0.089, -450.274, 127]
+    level:    [45, 49]
+  17285435:
+    template: Tonberry_Creeper
+    at:       [262.244, -0.736, -422.638, 34]
+    level:    [45, 49]
+  17285436:
+    template: Young_Opo-opo
+    at:       [322.714, -0.124, -434.205, 127]
+    level:    [40, 44]
+  17285437:
+    template: Young_Opo-opo
+    at:       [335.244, -1.471, -427.168, 127]
+    level:    [40, 44]
+  17285438:
+    template: Tonberry_Hexer
+    at:       [315.801, -1.714, -406.732, 211]
+    level:    [45, 49]
+  17285439:
+    template: Tonberry_Hexer
+    at:       [339.347, -1.530, -432.343, 127]
+    level:    [45, 49]
+  17285440:
+    template: Young_Opo-opo
+    at:       [298.236, -2.304, -445.288, 24]
+    level:    [40, 44]
+  17285441:
+    template: Tonberry_Hexer
+    at:       [305.287, -2.314, -448.882, 92]
+    level:    [45, 49]
+  17285442:
+    template: Young_Opo-opo
+    at:       [157.874, -0.499, -524.097, 24]
+    level:    [40, 44]
+  17285443:
+    template: Tonberry_Creeper
+    at:       [174.418, -0.023, -519.859]
+    level:    [45, 49]
+  17285444:
+    template: Young_Opo-opo
+    at:       [425.257, -2.226, -513.703, 21]
+    level:    [40, 44]
+  17285445:
+    template: Tonberry_Creeper
+    at:       [440.505, -0.504, -517.405, 127]
+    level:    [45, 49]
+  17285446:
+    template: Big_Jaw
+    at:       [284.801, 2.958, -502.966, 127]
+    level:    [43, 47]
+  17285447:
+    template: Big_Jaw
+    level:    [43, 47]
+  17285448:
+    template: Water_Elemental
+    at:       [251.963, -0.128, -526.662, 127]
+    level:    [53, 55]
+  17285449:
+    template: Big_Jaw
+    at:       [335.104, 3.084, -500.759, 36]
+    level:    [43, 47]
+  17285450:
+    template: Big_Jaw
+    at:       [351.259, -0.342, -521.626, 127]
+    level:    [43, 47]
+  17285451:
+    template: Water_Elemental
+    at:       [350.794, -0.365, -519.497, 64]
+    level:    [53, 55]
+  17285452:
+    template: Big_Jaw
+    at:       [319.465, -2.831, -518.956, 123]
+    level:    [43, 47]
+  17285453:
+    template: Tonberry_Creeper
+    at:       [297.891, -4.576, -518.863, 123]
+    level:    [45, 49]
+  17285454:
+    template: Tonberry_Hexer
+    at:       [310.972, -4.500, -574.585, 127]
+    level:    [45, 49]
+  17285455:
+    template: Tonberry_Creeper
+    at:       [348.195, -4.532, -539.337, 127]
+    level:    [45, 49]
+  17285456:
+    template: Tonberry_Hexer
+    at:       [348.056, -11.691, -572.156, 127]
+    level:    [45, 49]
+  17285457:
+    template: Tonberry_Creeper
+    at:       [359.268, -18.649, -541.366, 127]
+    level:    [45, 49]
+  17285458:
+    template: Tonberry_Hexer
+    level:    [45, 49]
+  17285459:
+    template: Tonberry_Creeper
+    level:    [45, 49]
+  17285460:
+    template: Bisque-heeled_Sunberry
+    at:       [296.401, -18.499, -505.720, 91]
+    level:    [57, 59]
+  17285461:
+    template: Tonberry_Hexer
+    level:    [45, 49]
+  17285462:
+    template: Tonberry_Creeper
+    at:       [334.717, -4.500, -556.986, 88]
+    level:    [45, 49]
+  17285463:
+    template: Tonberry_Creeper
+    at:       [347.246, -10.500, -589.040, 4]
+    level:    [45, 49]
+  17285464:
+    template: Tonberry_Hexer
+    at:       [372.810, -10.500, -585.154, 217]
+    level:    [45, 49]
+  17285465:
+    template: Tonberry_Creeper
+    at:       [319.630, -18.499, -557.800, 128]
+    level:    [45, 49]
+  17285466:
+    template: Tonberry_Creeper
+    at:       [337.670, -18.591, -554.230, 56]
+    level:    [45, 49]
+  17285467:
+    template: Worker_Crawler
+    at:       [233.713, -0.457, -121.367, 39]
+    level:    [43, 46]
+  17285468:
+    template: Worker_Crawler
+    at:       [158.346, -0.405, -124.779, 127]
+    level:    [43, 46]
+  17285469:
+    template: Worker_Crawler
+    at:       [187.059, -1.047, -118.583, 127]
+    level:    [43, 46]
+  17285470:
+    template: Goblin_Poacher
+    at:       [500.894, 7.822, -520.350, 67]
+    level:    [45, 49]
+  17285471:
+    template: Master_Coeurl
+    level:    [47, 50]
+  17285472:
+    template: Goblin_Robber
+    at:       [519.725, 0.025, -414.084, 127]
+    level:    [45, 49]
+  17285473:
+    template: Goblin_Poacher
+    at:       [517.083, -0.312, -433.496, 37]
+    level:    [45, 49]
+  17285474:
+    template: Master_Coeurl
+    at:       [540.966, 0.094, -397.771, 127]
+    level:    [47, 50]
+  17285475:
+    template: Master_Coeurl
+    at:       [561.399, -0.499, -397.781, 127]
+    level:    [47, 50]
+  17285476:
+    template: Puroboros
+    at:       [532.223, -0.162, -434.773, 127]
+    level:    [51, 54]
+  17285477:
+    template: Goblin_Poacher
+    at:       [546.000, 0.057, -399.101, 104]
+    level:    [45, 49]
+  17285478:
+    template: Goblin_Robber
+    at:       [563.053, -0.478, -401.753, 127]
+    level:    [45, 49]
+  17285479:
+    template: Master_Coeurl
+    at:       [547.446, 8.499, -344.637, 26]
+    level:    [47, 50]
+  17285480:
+    template: Master_Coeurl
+    at:       [-304.000, 0.000, -128.000, 127]
+    level:    [47, 50]
+  17285481:
+    template: Puroboros
+    at:       [568.885, -0.498, -404.652, 64]
+    level:    [51, 54]
+  17285482:
+    template: Big_Jaw
+    at:       [548.004, -0.172, -433.181, 95]
+    level:    [43, 47]
+  17285483:
+    template: Big_Jaw
+    at:       [556.769, 0.060, -420.766, 35]
+    level:    [43, 47]
+  17285484:
+    template: Goblin_Robber
+    at:       [566.369, 7.415, -338.881, 127]
+    level:    [45, 49]
+  17285485:
+    template: Master_Coeurl
+    at:       [-320.000, 0.000, -118.000, 6]
+    level:    [47, 50]
+  17285486:
+    template: Worker_Crawler
+    at:       [121.170, -0.495, -231.206, 120]
+    level:    [43, 46]
+  17285487:
+    template: Tonberry_Hexer
+    at:       [59.955, 7.044, -269.832, 127]
+    level:    [45, 49]
+  17285488:
+    template: Worker_Crawler
+    at:       [220.049, -0.164, -228.813, 118]
+    level:    [43, 46]
+  17285489:
+    template: Tonberry_Hexer
+    at:       [298.386, 7.243, -327.487, 64]
+    level:    [45, 49]
+  17285490:
+    template: Worker_Crawler
+    at:       [237.975, -0.022, -250.510, 127]
+    level:    [43, 46]
+  17285491:
+    template: Worker_Crawler
+    at:       [187.140, 12.375, -147.779, 21]
+    level:    [43, 46]
+  17285492:
+    template: Worker_Crawler
+    at:       [228.862, -0.355, -106.415, 85]
+    level:    [43, 46]
+  17285493:
+    template: Tonberry_Hexer
+    at:       [236.941, -0.500, -82.527, 127]
+    level:    [45, 49]
+  17285494:
+    template: Tonberry_Creeper
+    at:       [236.445, 0.017, -99.661, 23]
+    level:    [45, 49]
+  17285495:
+    template: Tonberry_Harasser
+    at:       [231.520, -0.125, -101.445, 70]
+    level:    [45, 49]
+  17285496:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17285497:
+    template: Worker_Crawler
+    at:       [180.050, 11.834, -122.896, 127]
+    level:    [43, 46]
+  17285498:
+    template: Tonberry_Creeper
+    at:       [162.054, 0.100, -136.331, 127]
+    level:    [45, 49]
+  17285499:
+    template: Tonberry_Harasser
+    at:       [143.595, -0.036, -121.116, 118]
+    level:    [45, 49]
+  17285500:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17285501:
+    template: Goblin_Reaper
+    at:       [74.135, 7.456, -101.165, 11]
+    level:    [41, 45]
+  17285502:
+    template: Goblin_Reaper
+    at:       [60.373, 6.923, -91.055, 54]
+    level:    [41, 45]
+  17285503:
+    template: Goblin_Reaper
+    at:       [60.847, 6.963, -70.691, 127]
+    level:    [41, 45]
+  17285504:
+    template: Worker_Crawler
+    at:       [165.436, 11.552, -100.674, 127]
+    level:    [43, 46]
+  17285505:
+    template: Tonberry_Hexer
+    at:       [169.551, -0.134, -155.518, 127]
+    level:    [45, 49]
+  17285506:
+    template: Tonberry_Creeper
+    at:       [209.000, -0.197, -110.000, 82]
+    level:    [45, 49]
+  17285507:
+    template: Worker_Crawler
+    at:       [108.638, 2.384, -262.564, 1]
+    level:    [43, 46]
+  17285508:
+    template: Tonberry_Creeper
+    at:       [104.748, 3.299, -263.945, 64]
+    level:    [45, 49]
+  17285509:
+    template: Tonberry_Hexer
+    at:       [148.473, -0.465, -213.040, 139]
+    level:    [45, 49]
+  17285510:
+    template: Tonberry_Harasser
+    at:       [128.856, -0.499, -237.449, 60]
+    level:    [45, 49]
+  17285511:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17285512:
+    template: Worker_Crawler
+    at:       [200.661, 0.027, -212.479, 225]
+    level:    [43, 46]
+  17285513:
+    template: Tonberry_Creeper
+    at:       [225.724, 0.042, -229.276, 127]
+    level:    [45, 49]
+  17285514:
+    template: Worker_Crawler
+    at:       [241.293, 0.027, -255.895, 95]
+    level:    [43, 46]
+  17285515:
+    template: Tonberry_Creeper
+    at:       [235.692, -0.208, -231.794, 115]
+    level:    [45, 49]
+  17285516:
+    template: Anemone
+    at:       [232.471, -0.499, -279.083, 102]
+    level:    [51, 54]
+  17285517:
+    template: Young_Opo-opo
+    at:       [245.873, -0.486, -156.438, 115]
+    level:    [40, 44]
+  17285518:
+    template: Young_Opo-opo
+    at:       [246.050, -0.137, -183.889, 96]
+    level:    [40, 44]
+  17285519:
+    template: Tonberry_Hexer
+    at:       [245.719, -0.144, -185.635, 127]
+    level:    [45, 49]
+  17285520:
+    template: Tonberry_Hexer
+    at:       [245.963, -0.310, -151.906, 127]
+    level:    [45, 49]
+  17285521:
+    template: Young_Opo-opo
+    at:       [206.785, -1.176, -196.367, 51]
+    level:    [40, 44]
+  17285522:
+    template: Young_Opo-opo
+    at:       [217.325, -0.269, -190.096, 3]
+    level:    [40, 44]
+  17285523:
+    template: Tonberry_Creeper
+    at:       [189.682, -0.364, -181.061, 117]
+    level:    [45, 49]
+  17285524:
+    template: Tonberry_Hexer
+    at:       [220.690, -0.084, -226.994, 127]
+    level:    [45, 49]
+  17285525:
+    template: Fire_Elemental
+    at:       [209.072, -0.150, -168.756, 196]
+    level:    [53, 55]
+  17285526:
+    template: Bright-handed_Kunberry
+    at:       [227.000, -0.500, -169.000, 127]
+    level:    [55, 57]
+  17285527:
+    template: Tonberry_Hexer_3
+    script:   Tonberry_Hexer
+    at:       [192.000, -0.349, -162.000, 127]
+    level:    [45, 49]
+  17285528:
+    template: Tonberry_Harasser_2
+    script:   Tonberry_Harasser
+    at:       [189.000, -0.390, -136.000, 127]
+    level:    [45, 49]
+  17285529:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17285530:
+    template: Worker_Crawler
+    at:       [186.009, 12.362, -150.314, 60]
+    level:    [43, 46]
+  17285531:
+    template: Worker_Crawler
+    at:       [203.025, 11.664, -141.578, 128]
+    level:    [43, 46]
+  17285532:
+    template: Worker_Crawler
+    at:       [175.354, 10.454, -105.649, 26]
+    level:    [43, 46]
+  17285533:
+    template: Worker_Crawler
+    at:       [180.455, 10.832, -109.497, 26]
+    level:    [43, 46]
+  17285534:
+    template: Tonberry_Shadower
+    at:       [263.008, -4.500, -178.496, 127]
+    level:    [61, 63]
+  17285535:
+    template: Tonberry_Chopper
+    at:       [272.358, -4.500, -165.268, 127]
+    level:    [61, 63]
+  17285536:
+    template: Tonberry_Jinxer
+    at:       [274.510, -4.500, -179.045, 127]
+    level:    [61, 63]
+  17285537:
+    template: Tonberry_Jinxer
+    at:       [297.412, -10.500, -207.387, 48]
+    level:    [61, 63]
+  17285538:
+    template: Tonberry_Shadower
+    at:       [309.495, -10.500, -148.369, 127]
+    level:    [61, 63]
+  17285539:
+    template: Tonberry_Chopper
+    at:       [304.197, -10.500, -207.950, 111]
+    level:    [61, 63]
+  17285540:
+    template: Tonberry_Chopper
+    at:       [264.175, -18.504, -189.668, 127]
+    level:    [61, 63]
+  17285541:
+    template: Tonberry_Shadower
+    at:       [276.998, -18.500, -164.270, 127]
+    level:    [61, 63]
+  17285542:
+    template: Tonberry_Shadower
+    at:       [277.436, -18.500, -196.470, 127]
+    level:    [61, 63]
+  17285543:
+    template: Goblin_Digger_jungle
+    script:   Goblin_Digger
+    at:       [-69.276, 6.961, -179.442, 127]
+    level:    [41, 44]
+  17285544:
+    template: Kappa_Akuso
+    at:       [205.000, -1.000, 83.000, 230]
+    level:    [63, 63]
+  17285545:
+    template: Kappa_Bonze
+    at:       [204.000, -1.000, 83.000, 230]
+    level:    [61, 61]
+  17285546:
+    template: Kappa_Biwa
+    at:       [203.000, -1.000, 83.000, 230]
+    level:    [62, 62]
+  17285547:
+    template: Hobgoblin_Warrior
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285548:
+    template: Hobgoblin_White_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285549:
+    template: Hobgoblin_Black_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285550:
+    template: Hobgoblin_Red_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285551:
+    template: Hobgoblin_Thief
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285552:
+    template: Hobgoblin_Dark_Knight
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285553:
+    template: Hobgoblin_Ranger
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285554:
+    template: Hobgoblin_Beastmaster
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285555:
+    template: Goblins_Bee_jungle
+    script:   Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [48, 50]
+  17285556:
+    template: Noctonberry_Black_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285557:
+    template: Noctonberry_Thief
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285558:
+    template: Noctonberry_Ninja
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285559:
+    template: Noctonberry_Summoner
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17285560:
+    template: Tonberrys_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [48, 50]
+  17285561:
+    template: Tonberrys_Avatar
+    at:       [1.000, 1.000, 1.000]
+    level:    [48, 50]
+  17285562:
+    template: Tonberry_Creeper_2
+    script:   Tonberry_Creeper
+    at:       [216.516, 1.360, -88.167, 180]
+    level:    [50, 55]
+  17285563:
+    template: Tonberry_Creeper_2
+    script:   Tonberry_Creeper
+    at:       [196.287, 0.600, -98.315, 180]
+    level:    [50, 55]
+  17285564:
+    template: Tonberry_Hexer_2
+    script:   Tonberry_Hexer
+    at:       [204.159, 0.566, -102.480, 190]
+    level:    [50, 55]
+  17285565:
+    template: Tonberry_Hexer_2
+    script:   Tonberry_Hexer
+    at:       [211.165, 0.055, -100.819, 185]
+    level:    [50, 55]
+  17285566:
+    template: Tonberry_Creeper_2
+    script:   Tonberry_Creeper
+    at:       [207.867, 0.106, -94.150, 180]
+    level:    [50, 55]
+  17285567:
+    template: Tonberry_Creeper_2
+    script:   Tonberry_Creeper
+    at:       [209.323, 0.455, -90.628, 175]
+    level:    [50, 55]
+  17285568:
+    template: Tonberry_Hexer_2
+    script:   Tonberry_Hexer
+    at:       [217.202, 0.600, -83.085, 170]
+    level:    [50, 55]
+  17285569:
+    template: Tonberry_Hexer_2
+    script:   Tonberry_Hexer
+    at:       [220.634, 0.627, -81.104, 175]
+    level:    [50, 55]
+  17285570:
+    template: Tonberry_Decimator
+    at:       [228.785, 0.056, -104.925, 180]
+    level:    [55, 55]
+  17285571:
+    template: Edacious_Opo-opo
+    at:       [544.436, 0.589, -436.372]
+    level:    [55, 55]
+  17285572:
+    template: Kedgebelly_Kate
+    level:    [1, 1]
+  17285605:
+    script: Woodland_Mender
+  17285606:
+    script: Woodland_Mender
+
+slots:
+  - members:
+      17285211: {} # Goblin_Trader
+      17285217: {} # Goblin_Trader
+  - members:
+      17285226: {} # Goblin_Reaper
+      17285229: {} # Goblin_Reaper
+  - members:
+      17285227: {} # Young_Opo-opo
+      17285230: {} # Young_Opo-opo
+  - members:
+      17285237: {} # Young_Opo-opo
+      17285240: {} # Young_Opo-opo
+  - members:
+      17285263: {} # Worker_Crawler
+      17285267: {} # Worker_Crawler
+  - members:
+      17285270: {} # Worker_Crawler
+      17285282: {} # Worker_Crawler
+  - members:
+      17285271: {} # Master_Coeurl
+      17285280: {} # Master_Coeurl
+  - members:
+      17285273: {} # Worker_Crawler
+      17285290: {} # Worker_Crawler
+  - members:
+      17285274: {} # Master_Coeurl
+      17285277: {} # Master_Coeurl
+  - members:
+      17285276: {} # Worker_Crawler
+      17285324: {} # Worker_Crawler
+  - members:
+      17285283: {} # Master_Coeurl
+      17285285: {} # Anemone
+  - members:
+      17285293: {} # Goblin_Poacher
+      17285298: {} # Goblin_Poacher
+  - members:
+      17285295: {} # Worker_Crawler
+      17285300: {} # Worker_Crawler
+  - members:
+      17285302: {} # Goblin_Poacher
+      17285310: {} # Goblin_Poacher
+  - members:
+      17285305: {} # Worker_Crawler
+      17285307: {} # Worker_Crawler
+  - members:
+      17285312: {} # Worker_Crawler
+      17285316: {} # Worker_Crawler
+  - members:
+      17285320: {} # Worker_Crawler
+      17285328: {} # Worker_Crawler
+  - members:
+      17285331: {} # Goblin_Robber
+      17285334: {} # Goblin_Robber
+  - members:
+      17285339: {} # Goblin_Robber
+      17285346: {} # Goblin_Poacher
+  - members:
+      17285344: {} # Worker_Crawler
+      17285350: {} # Worker_Crawler
+  - members:
+      17285345: {} # Master_Coeurl
+      17285347: {} # Anemone
+  - members:
+      17285351: {} # Master_Coeurl
+      17285354: {} # Anemone
+  - members:
+      17285358: {} # Tonberry_Creeper
+      17285365: {} # Tonberry_Creeper
+  - members:
+      17285381: {} # Tonberry_Creeper
+      17285388: {} # Tonberry_Hexer
+  - members:
+      17285389: {} # Tonberry_Creeper
+      17285393: {} # Tonberry_Shadower
+  - members:
+      17285395: {} # Tonberry_Jinxer
+      17285396: {} # Tonberry_Chopper
+  - members:
+      17285397: {} # Tonberry_Chopper
+      17285398: {} # Tonberry_Shadower
+  - members:
+      17285399: {} # Tonberry_Chopper
+      17285400: {} # Tonberry_Shadower
+  - members:
+      17285401: {} # Tonberry_Jinxer
+      17285402: {} # Tonberry_Shadower
+      17285403: {} # Tonberry_Chopper
+  - members:
+      17285409: {} # Tonberry_Hexer
+      17285412: {} # Tonberry_Creeper
+  - members:
+      17285410: {} # Tonberry_Creeper
+      17285443: {} # Tonberry_Creeper
+  - members:
+      17285414: {} # Tonberry_Hexer
+      17285421: {} # Tonberry_Hexer
+  - members:
+      17285416: {} # Tonberry_Harasser
+      17285420: {} # Tonberry_Hexer
+  - members:
+      17285423: {} # Tonberry_Creeper
+      17285426: {} # Tonberry_Creeper
+  - members:
+      17285427: {} # Tonberry_Harasser
+      17285445: {} # Tonberry_Creeper
+  - members:
+      17285430: {} # Tonberry_Creeper
+      17285441: {} # Tonberry_Hexer
+  - members:
+      17285434: {} # Tonberry_Hexer
+      17285439: {} # Tonberry_Hexer
+  - members:
+      17285435: {} # Tonberry_Creeper
+      17285438: {} # Tonberry_Hexer
+  - members:
+      17285446: {} # Big_Jaw
+      17285447: {} # Big_Jaw
+  - members:
+      17285449: {} # Big_Jaw
+      17285450: {} # Big_Jaw
+  - members:
+      17285456: {} # Tonberry_Hexer
+      17285461: {} # Tonberry_Hexer
+  - members:
+      17285457: {} # Tonberry_Creeper
+      17285459: {} # Tonberry_Creeper
+  - members:
+      17285458: {} # Tonberry_Hexer
+      17285464: {} # Tonberry_Hexer
+  - members:
+      17285462: {} # Tonberry_Creeper
+      17285463: {} # Tonberry_Creeper
+  - members:
+      17285465: {} # Tonberry_Creeper
+      17285466: {} # Tonberry_Creeper
+  - members:
+      17285467: {} # Worker_Crawler
+      17285469: {} # Worker_Crawler
+  - members:
+      17285471: {} # Master_Coeurl
+      17285485: {} # Master_Coeurl
+  - members:
+      17285473: {} # Goblin_Poacher
+      17285477: {} # Goblin_Poacher
+  - members:
+      17285475: {} # Master_Coeurl
+      17285480: {} # Master_Coeurl
+  - members:
+      17285487: {} # Tonberry_Hexer
+      17285489: {} # Tonberry_Hexer
+      17285509: {} # Tonberry_Hexer
+  - members:
+      17285493: {} # Tonberry_Hexer
+      17285515: {} # Tonberry_Creeper
+  - members:
+      17285494: {} # Tonberry_Creeper
+      17285498: {} # Tonberry_Creeper
+  - members:
+      17285505: {} # Tonberry_Hexer
+      17285523: {} # Tonberry_Creeper
+  - members:
+      17285506: {} # Tonberry_Creeper
+      17285520: {} # Tonberry_Hexer
+  - members:
+      17285508: {} # Tonberry_Creeper
+      17285519: {} # Tonberry_Hexer
+  - members:
+      17285513: {} # Tonberry_Creeper
+      17285524: {} # Tonberry_Hexer
+  - members:
+      17285531: {} # Worker_Crawler
+      17285533: {} # Worker_Crawler
+  - members:
+      17285534: {} # Tonberry_Shadower
+      17285535: {} # Tonberry_Chopper
+  - members:
+      17285536: {} # Tonberry_Jinxer
+      17285537: {} # Tonberry_Jinxer
+  - members:
+      17285538: {} # Tonberry_Shadower
+      17285539: {} # Tonberry_Chopper
+  - members:
+      17285540: {} # Tonberry_Chopper
+      17285541: {} # Tonberry_Shadower

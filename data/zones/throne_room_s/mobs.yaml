@@ -1,0 +1,220 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Klara:
+    id:            5828
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 482
+    attributes:
+      combat:
+        skill: sword
+      render:
+        look:
+          type:  misc
+          model: 2182
+        entity_flags:  3
+        name_prefix:  32
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        flags: [no_assist]
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp:  9999
+
+  Marquis_Amon_past:
+    id:            5829
+    species:       kindred
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2221
+        entity_flags: 135
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 18000
+        mp:  9999
+
+  Zeid:
+    id:            4498
+    species:       galks
+    type:          [notorious, battlefield]
+    spell_list_id: 396
+    skill_list_id: 480
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 771
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        33
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+spawns:
+  17416193:
+    script: Shadow_Lord
+  17416194:
+    script: Shadow_Lord
+  17416195:
+    script: Shadow_Lord
+  17416197:
+    script: Shadow_Lord
+  17416198:
+    script: Shadow_Lord
+  17416199:
+    script: Shadow_Lord
+  17416201:
+    script: Shadow_Lord
+  17416202:
+    script: Shadow_Lord
+  17416203:
+    script: Shadow_Lord
+  17416205:
+    script: Aquila
+  17416206:
+    script: Haudrale
+  17416207:
+    script: Lilisette
+  17416208:
+    script: Aquila
+  17416209:
+    script: Haudrale
+  17416210:
+    script: Lilisette
+  17416211:
+    script: Aquila
+  17416212:
+    script: Haudrale
+  17416213:
+    script: Lilisette
+  17416214:
+    template: Klara
+    at:       [-466.500, -167.699, -240.000, 171]
+    level:    [76, 78]
+  17416215:
+    template: Marquis_Amon_past
+    script:   Marquis_Amon
+    at:       [-463.406, -167.699, -241.143, 201]
+    level:    [77, 79]
+  17416216:
+    template: Zeid
+    at:       [-463.743, -167.699, -241.513, 222]
+    level:    [75, 75]
+  17416217:
+    template: Klara
+    at:       [-786.449, -407.699, -479.991, 171]
+    level:    [76, 78]
+  17416218:
+    template: Marquis_Amon_past
+    script:   Marquis_Amon
+    at:       [-783.355, -407.699, -481.134, 201]
+    level:    [77, 79]
+  17416219:
+    template: Zeid
+    at:       [-783.692, -407.699, -481.504, 222]
+    level:    [75, 75]
+  17416220:
+    template: Klara
+    at:       [-1106.287, -647.699, -719.976, 171]
+    level:    [76, 78]
+  17416221:
+    template: Marquis_Amon_past
+    script:   Marquis_Amon
+    at:       [-1103.193, -647.699, -721.119, 201]
+    level:    [77, 79]
+  17416222:
+    template: Zeid
+    at:       [-1103.530, -647.699, -721.489, 222]
+    level:    [75, 75]
+  17416223:
+    script: Shadow_Lord
+  17416224:
+    script: Bloodcrown_Brradhod
+  17416225:
+    script: ZaDha_Adamantking
+  17416226:
+    script: Tzee_Xicu_the_Manifest
+  17416227:
+    script: Manifests_Diabolos
+  17416228:
+    script: Shadow_Lord
+  17416229:
+    script: Shadow_Lord
+  17416230:
+    script: Shadow_Lord
+  17416231:
+    script: Shadow_Lord
+  17416232:
+    script: Shadow_Lord
+  17416233:
+    script: Shadow_Lord
+  17416234:
+    script: Bloodcrown_Brradhod
+  17416235:
+    script: ZaDha_Adamantking
+  17416236:
+    script: Tzee_Xicu_the_Manifest
+  17416237:
+    script: Manifests_Diabolos
+  17416238:
+    script: Shadow_Lord
+  17416239:
+    script: Shadow_Lord
+  17416240:
+    script: Shadow_Lord
+  17416241:
+    script: Shadow_Lord
+  17416242:
+    script: Shadow_Lord
+  17416243:
+    script: Shadow_Lord
+  17416244:
+    script: Bloodcrown_Brradhod
+  17416245:
+    script: ZaDha_Adamantking
+  17416246:
+    script: Tzee_Xicu_the_Manifest
+  17416247:
+    script: Manifests_Diabolos
+  17416248:
+    script: Shadow_Lord
+  17416249:
+    script: Shadow_Lord
+  17416250:
+    script: Shadow_Lord
+  17416251:
+    script: Shadow_Lord
+  17416252:
+    script: Shadow_Lord

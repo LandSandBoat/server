@@ -1,0 +1,462 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ealdnarche_Apoc_Nigh:
+    id:            6641
+    display_name:  Ealdnarche
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 432
+    skill_list_id: 1144
+    attributes:
+      combat:
+        skill:    katana
+        delay:    220
+        dmg_mult: 125
+      jobs: [blm, war]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze, slow, light_sleep, dark_sleep]
+        rank_element:
+          fire:    3
+          ice:     3
+          wind:    3
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 779
+        name_prefix: 32
+        model_size:   1
+        hitbox:      10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 5000
+
+  Kamlanaut_Apoc_Nigh:
+    id:            6640
+    display_name:  Kamlanaut
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 431
+    skill_list_id: 1143
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze, slow, light_sleep, dark_sleep]
+        rank_element:
+          fire:    3
+          ice:     3
+          wind:    3
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 1309
+        name_prefix: 32
+        model_size:   1
+        hitbox:      20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Metus:
+    id:            4820
+    species:       promathia
+    type:          [notorious, battlefield]
+    spell_list_id: 128
+    skill_list_id: 478
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder:  2
+          water:    2
+          dark:    11
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 2939
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 20000
+
+  Prishe:
+    id:            3199
+    species:       elvaan
+    type:          [battlefield]
+    spell_list_id: 129
+    skill_list_id: 476
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, whm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1207
+        entity_flags: 25
+        name_vis:      2
+        name_prefix:  40
+        hitbox:       17
+      behaviors:
+        flags: [no_despawn, raisable]
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+    allegiance: player
+
+  Promathia_3205:
+    id:            3205
+    display_name:  Promathia
+    species:       promathia
+    type:          [notorious, battlefield]
+    spell_list_id: 127
+    skill_list_id: 134
+    attributes:
+      combat:
+        skill: sword
+        delay: 290
+      jobs: [pld, pld]
+      resists:
+        immune_status: [bind, stun, silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder:  2
+          water:    2
+          dark:    11
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 1072
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Promathia_5106:
+    id:            5106
+    display_name:  Promathia
+    species:       promathia
+    type:          [notorious, battlefield]
+    spell_list_id: 128
+    skill_list_id: 478
+    attributes:
+      combat:
+        skill: sword
+        delay: 290
+      jobs: [pld, pld]
+      resists:
+        immune_status: [bind, stun, silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder:  2
+          water:    2
+          dark:    11
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 1073
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+
+  Selhteus:
+    id:            5417
+    display_name:  Selh'teus
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 477
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1266
+        entity_flags: 153
+        name_vis:       2
+        name_prefix:   40
+        hitbox:        12
+      behaviors:
+        flags: [standback, no_assist]
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+spawns:
+  16924673:
+    template: Promathia_3205
+    script:   Promathia
+    at:       [-520.000, -120.000, 528.000, 64]
+    level:    [80, 80]
+  16924674:
+    template: Promathia_5106
+    script:   Promathia_2
+    at:       [-520.000, -120.000, 528.000, 64]
+    level:    [80, 80]
+  16924675:
+    template: Promathia_3205
+    script:   Promathia
+    at:       [520.404, 0.000, 527.522, 64]
+    level:    [80, 80]
+  16924676:
+    template: Promathia_5106
+    script:   Promathia_2
+    at:       [520.404, 0.000, 527.522, 64]
+    level:    [80, 80]
+  16924677:
+    template: Promathia_3205
+    script:   Promathia
+    at:       [-519.557, 120.000, -511.441, 64]
+    level:    [80, 80]
+  16924678:
+    template: Promathia_5106
+    script:   Promathia_2
+    at:       [-519.557, 120.000, -511.441, 64]
+    level:    [80, 80]
+  16924679:
+    template: Kamlanaut_Apoc_Nigh
+    script:   Kamlanaut
+    at:       [-518.190, -120.500, 524.392, 64]
+    level:    [78, 78]
+  16924680:
+    template: Ealdnarche_Apoc_Nigh
+    script:   Ealdnarche
+    at:       [-523.000, -120.000, 524.392, 64]
+    level:    [78, 78]
+  16924681:
+    template: Kamlanaut_Apoc_Nigh
+    script:   Kamlanaut
+    at:       [521.559, 0.000, 528.348, 64]
+    level:    [78, 78]
+  16924682:
+    template: Ealdnarche_Apoc_Nigh
+    script:   Ealdnarche
+    at:       [516.559, 0.000, 528.348, 64]
+    level:    [78, 78]
+  16924683:
+    template: Kamlanaut_Apoc_Nigh
+    script:   Kamlanaut
+    at:       [-515.000, -120.000, -511.469, 64]
+    level:    [78, 78]
+  16924684:
+    template: Ealdnarche_Apoc_Nigh
+    script:   Ealdnarche
+    at:       [-520.000, -120.000, -511.469, 64]
+    level:    [78, 78]
+  16924685:
+    script: Disjoined_One
+  16924686:
+    script: Iroha
+  16924687:
+    script: Disjoined_One
+  16924688:
+    script: Iroha
+  16924689:
+    script: Disjoined_One
+  16924690:
+    script: Iroha
+  16924691:
+    script: Promathia
+  16924692:
+    script: Promathia
+  16924693:
+    script: Promathia
+  16924694:
+    script: Promathia
+  16924695:
+    script: Promathia
+  16924696:
+    script: Promathia
+  16924697:
+    script: Promathia
+  16924698:
+    script: Promathia
+  16924699:
+    script: Promathia
+  16924700:
+    script: Promathia
+  16924701:
+    script: Promathia
+  16924702:
+    script: Promathia
+  16924703:
+    script: Promathia
+  16924704:
+    script: Promathia
+  16924705:
+    script: Promathia
+  16924706:
+    script: Promathia
+  16924707:
+    script: Promathia
+  16924708:
+    script: Promathia
+  16924709:
+    script: Promathia
+  16924710:
+    script: Promathia
+  16924711:
+    script: Promathia
+  16924712:
+    script: Promathia
+  16924713:
+    script: Promathia
+  16924714:
+    script: Promathia
+  16924715:
+    script: Promathia
+  16924716:
+    script: Promathia
+  16924717:
+    script: Promathia
+  16924718:
+    script: Promathia
+  16924719:
+    script: Promathia
+  16924720:
+    script: Promathia
+  16924721:
+    template: Metus
+    at:       [-520.000, -120.500, 528.000, 64]
+    level:    [125, 125]
+  16924722:
+    template: Metus
+    level:    [125, 125]
+  16924723:
+    template: Metus
+    level:    [125, 125]
+  16924724:
+    script: Omega
+  16924725:
+    script: Ultima
+  16924726:
+    script: Omega
+  16924727:
+    script: Ultima
+  16924728:
+    script: Omega
+  16924729:
+    script: Ultima

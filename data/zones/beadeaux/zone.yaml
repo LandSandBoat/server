@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z430:
+    from:  [-300.088, -1.085, 96.044]
+    to:    pashhow_marshlands
+    at:    [578.786, 23.416, -376.731, 3.141593]
+    scale: [1.000, 4.000]
+
+  z432:
+    from:  [384.501, 36.717, 19.617]
+    to:    qulun_dome
+    at:    [337.901, 38.091, 20.087, 3.141593]
+    scale: [1.000, 3.000]
+
+  z434:
+    from:  [260.002, 29.129, 1.730]
+    to:    qulun_dome
+    at:    [259.988, 38.363, 42.943, 4.712389]
+    scale: [1.000, 3.000]
+
+  z436:
+    from:  [-31.975, 20.859, 59.829]
+    to:    qulun_dome
+    at:    [2.887, 22.372, 59.957]
+    scale: [1.000, 3.000]

@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z3y0:
+    from:  [273.019, -43.500, 150.416]
+    to:    fort_ghelsba
+    at:    [219.949, -86.032, 19.489, 3.141593]
+    scale: [1.000, 5.000]
+
+  z3y2:
+    from:  [291.230, -27.265, 249.336]
+    to:    fort_ghelsba
+    at:    [226.688, -46.417, 101.045, 3.141593]
+    scale: [1.000, 5.000]
+
+  z3y4:
+    from:  [50.504, -15.840, 70.595]
+    to:    fort_ghelsba
+    at:    [6.587, -22.088, -107.077, 3.141593]
+    scale: [1.000, 5.000]
+
+  z3y6:
+    from:  [-251.344, -3.365, -69.672]
+    to:    ghelsba_outpost
+    at:    [-2.049, -2.202, -60.185]
+    scale: [1.000, 4.500]
+
+  z3y8:
+    from:  [443.240, -43.033, 169.684]
+    to:    horlais_peak
+    at:    [-536.363, 157.713, -210.819]
+    scale: [1.000, 4.000]
+
+  z3ya:
+    from:  [440.908, -43.149, 69.949]
+    to:    horlais_peak
+    at:    [444.270, -42.210, 68.513, 0.460064]
+    scale: [1.000, 3.000]

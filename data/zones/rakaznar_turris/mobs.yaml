@@ -1,0 +1,359 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  August_OB:
+    id:            7607
+    display_name:  August
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 397
+    skill_list_id: 1099
+    attributes:
+      combat:
+        skill: sword
+        delay: 180
+      jobs: [pld, war]
+      render:
+        look:
+          type:  standard
+          model: 3100
+        entity_flags:  3
+        name_prefix:  32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bztavian_OB:
+    id:           7600
+    display_name: Bztavian
+    species:      unclassified
+    type:         [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cehuetzi_OB:
+    id:           7605
+    display_name: Cehuetzi
+    species:      unclassified
+    type:         [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gabbrath_OB:
+    id:           7602
+    display_name: Gabbrath
+    species:      unclassified
+    type:         [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Rockfin_OB:
+    id:           7601
+    display_name: Rockfin
+    species:      unclassified
+    type:         [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Teodor_OB:
+    id:            7606
+    display_name:  Teodor
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 399
+    skill_list_id: 1101
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blm, thf]
+      render:
+        look:
+          type:  standard
+          model: 3103
+        entity_flags:  3
+        name_prefix:  32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Waktza_OB:
+    id:           7604
+    display_name: Waktza
+    species:      unclassified
+    type:         [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yggdreant_OB:
+    id:           7603
+    display_name: Yggdreant
+    species:      unclassified
+    type:         [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17911809:
+    script: Hades
+    at:     [720.000, -406.000, 480.000]
+  17911810:
+    script: Arciela
+    at:     [748.000, -406.500, 478.000, 128]
+  17911811:
+    script: Hades
+  17911812:
+    script: Arciela
+  17911813:
+    script: Hades
+  17911814:
+    script: Arciela
+  17911815:
+    script: Hades
+  17911816:
+    script: Arciela
+  17911817:
+    script: Hades
+  17911818:
+    script: Arciela
+  17911819:
+    script: Hades
+    at:     [720.000, -406.000, 480.000]
+  17911820:
+    script: Arciela
+    at:     [748.000, -406.500, 478.000, 128]
+  17911821:
+    script: Teodor
+    at:     [748.000, -406.500, 482.000, 128]
+  17911822:
+    script: Hades
+  17911823:
+    script: Arciela
+  17911824:
+    script: Teodor
+  17911825:
+    script: Hades
+  17911826:
+    script: Arciela
+  17911827:
+    script: Teodor
+  17911828:
+    script: Hades
+  17911829:
+    script: Arciela
+  17911830:
+    script: Teodor
+  17911831:
+    script: Hades
+  17911832:
+    script: Arciela
+  17911833:
+    script: Teodor
+  17911834:
+    script: Putraxia
+  17911835:
+    script: Putraxia
+  17911836:
+    script: Putraxia
+  17911837:
+    script: Putraxia
+  17911838:
+    script: Putraxia
+  17911839:
+    script: Rancibus
+  17911845:
+    script: Rancibus
+  17911851:
+    script: Rancibus
+  17911857:
+    script: Rancibus
+  17911863:
+    script: Rancibus
+  17911869:
+    script: Palloritus
+  17911870:
+    script: Palloritus
+  17911871:
+    script: Palloritus
+  17911872:
+    script: Palloritus
+  17911873:
+    script: Palloritus
+  17911874:
+    script: Perfidien
+  17911875:
+    script: Perfidien
+  17911876:
+    script: Perfidien
+  17911877:
+    script: Perfidien
+  17911878:
+    script: Perfidien
+  17911879:
+    script: Plouton
+  17911880:
+    script: Plouton
+  17911881:
+    script: Plouton
+  17911882:
+    script: Plouton
+  17911883:
+    script: Plouton
+  17911884:
+    template: August_OB
+  17911885:
+    template: Bztavian_OB
+  17911886:
+    template: Rockfin_OB
+  17911887:
+    template: Gabbrath_OB
+  17911888:
+    template: Yggdreant_OB
+  17911889:
+    template: Waktza_OB
+  17911890:
+    template: Cehuetzi_OB
+  17911891:
+    template: Teodor_OB
+  17911892:
+    template: August_OB
+  17911893:
+    template: Bztavian_OB
+  17911894:
+    template: Rockfin_OB
+  17911895:
+    template: Gabbrath_OB
+  17911896:
+    template: Yggdreant_OB
+  17911897:
+    template: Waktza_OB
+  17911898:
+    template: Cehuetzi_OB
+  17911899:
+    template: Teodor_OB
+  17911900:
+    template: August_OB
+  17911901:
+    template: Bztavian_OB
+  17911902:
+    template: Rockfin_OB
+  17911903:
+    template: Gabbrath_OB
+  17911904:
+    template: Yggdreant_OB
+  17911905:
+    template: Waktza_OB
+  17911906:
+    template: Cehuetzi_OB
+  17911907:
+    template: Teodor_OB
+  17911908:
+    template: August_OB
+  17911909:
+    template: Bztavian_OB
+  17911910:
+    template: Rockfin_OB
+  17911911:
+    template: Gabbrath_OB
+  17911912:
+    template: Yggdreant_OB
+  17911913:
+    template: Waktza_OB
+  17911914:
+    template: Cehuetzi_OB
+  17911915:
+    template: Teodor_OB
+  17911916:
+    template: August_OB
+  17911917:
+    template: Bztavian_OB
+  17911918:
+    template: Rockfin_OB
+  17911919:
+    template: Gabbrath_OB
+  17911920:
+    template: Yggdreant_OB
+  17911921:
+    template: Waktza_OB
+  17911922:
+    template: Cehuetzi_OB
+  17911923:
+    template: Teodor_OB

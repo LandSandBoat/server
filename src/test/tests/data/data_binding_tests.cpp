@@ -19,6 +19,7 @@
 ===========================================================================
 */
 
+#include "data/enums/detects.h"
 #include "map/data/datasets/ecosystems/dataset.h"
 #include "map/data/datasets/status_effects/dataset.h"
 #include "map/data/yaml/merge.h"

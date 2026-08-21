@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+
+zonelines:
+
+  z5t0:
+    from:  [-580.924, -2.070, -567.951]
+    to:    quicksand_caves
+    at:    [577.033, 7.343, -496.000, 1.570796]
+    scale: [1.000, 4.000]
+
+  z5t2:
+    from:  [-640.009, -18.380, -499.999]
+    to:    eastern_altepa_desert
+    at:    [80.866, 8.464, -100.362, 3.141593]
+    scale: [1.000, 4.000]

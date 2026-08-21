@@ -45,6 +45,7 @@
 #include "attack.h"
 #include "attackutils.h"
 #include "charutils.h"
+#include "data/enums/claim_type.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/weather.h"
 #include "enmity_container.h"

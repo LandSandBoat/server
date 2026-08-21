@@ -31,7 +31,6 @@
 
 #include <algorithm>
 #include <array>
-#include <cstring>
 #include <map>
 
 #include "entities/battle_entity.h"
@@ -87,7 +86,7 @@ DropGroup_t::DropGroup_t(uint16 GroupRate, bool hasFixedRate)
 {
 }
 
-LootContainer::LootContainer(DropList_t* dropList)
+LootContainer::LootContainer(const DropList_t* dropList)
 : dropList(dropList)
 {
 }
@@ -120,6 +119,39 @@ void LootContainer::ForEachItem(FnRef<void(const DropItem_t&)> func)
 
 namespace xi::items
 {
+
+// Built on first use from the loaded templates.
+auto lookupIdByName(const std::string_view name) -> Maybe<uint16>
+{
+    static const auto byName = []
+    {
+        HashMap<std::string, uint16> names;
+        for (const auto& item : itemTemplates)
+        {
+            if (!item)
+            {
+                continue;
+            }
+
+            const auto [entry, inserted] = names.try_emplace(item->getName(), item->getID());
+            if (!inserted)
+            {
+                // Some items have duplicate names (PUP attachments)
+                // This gets the lowest ID until the names get properly sorted
+                entry->second = std::min(entry->second, item->getID());
+            }
+        }
+        return names;
+    }();
+
+    const auto entry = byName.find(std::string{ name });
+    if (entry == byName.end())
+    {
+        return std::nullopt;
+    }
+
+    return entry->second;
+}
 
 auto lookup(const uint16 itemId) -> const CItem*
 {

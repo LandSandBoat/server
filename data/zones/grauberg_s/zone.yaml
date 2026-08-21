@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z2h0:
+    from:  [-680.000, 41.930, -880.000]
+    to:    north_gustaberg_s
+    at:    [-265.440, 33.413, 572.308, 2.443461]
+    scale: [1.000, 4.000]
+
+  z2h2:
+    from:  [489.490, 71.695, 927.574]
+    to:    pashhow_marshlands_s
+    at:    [-219.445, 22.500, -490.542, 4.712389]
+    scale: [1.000, 6.000]
+
+  z2h4:
+    from:  [759.208, 65.940, 834.376]
+    to:    pashhow_marshlands_s
+    at:    [59.268, 22.281, -530.265, 4.712389]
+    scale: [1.000, 6.000]

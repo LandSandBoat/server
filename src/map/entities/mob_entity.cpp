@@ -29,7 +29,9 @@
 #include "battlefield.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/xirand.h"
 #include "conquest_system.h"
+#include "data/enums/detects.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/weather.h"
 #include "enmity_container.h"
@@ -54,6 +56,8 @@
 #include "utils/mobutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
+
+#include <algorithm>
 
 namespace
 {
@@ -384,6 +388,17 @@ auto CMobEntity::GetRoamAnchor() const -> position_t
 auto CMobEntity::roamRegion() const -> const RoamRegion*
 {
     return roamRegion_;
+}
+
+void CMobEntity::setPatrolRoute(std::vector<position_t> route)
+{
+    patrolRoute_ = std::move(route);
+    if (!patrolRoute_.empty())
+    {
+        // enter the loop at a random waypoint
+        std::ranges::rotate(patrolRoute_, patrolRoute_.begin() + xirand::GetRandomNumber<size_t>(0, patrolRoute_.size()));
+        m_SpawnPoint = patrolRoute_.front();
+    }
 }
 
 void CMobEntity::setRoamRegion(const RoamRegion* region)
@@ -797,6 +812,24 @@ void CMobEntity::Spawn()
         SetDespawnTime(std::chrono::seconds(getMobMod(xi::MobMod::IdleDespawn)));
     }
 
+    // A route replaces roaming: the mob walks its waypoints for as long as it is left alone.
+    if (!patrolRoute_.empty())
+    {
+        std::vector<pathpoint_t> waypoints;
+        waypoints.reserve(patrolRoute_.size());
+        for (const auto& point : patrolRoute_)
+        {
+            waypoints.push_back({ point, timer::duration::zero(), false });
+        }
+
+        if (PAI->PathFind->PathThrough(std::move(waypoints), PATHFLAG_PATROL))
+        {
+            PAI->PathFind->FollowPath(timer::now());
+        }
+
+        return;
+    }
+
     // Roam immediately on spawn
     if (CanRoam() && PAI->PathFind->RoamAround(m_SpawnPoint, GetRoamDistance(), static_cast<uint8>(getMobMod(xi::MobMod::RoamTurns)), m_roamFlags))
     {
@@ -1007,6 +1040,16 @@ auto CMobEntity::GetEligibleGeodes() const -> std::vector<uint16>
     return {};
 }
 
+auto CMobEntity::dropList() const -> const DropList_t*
+{
+    if (m_DropList)
+    {
+        return m_DropList;
+    }
+
+    return itemutils::GetDropList(m_DropID);
+}
+
 void CMobEntity::DropItems(CCharEntity* PChar)
 {
     TracyZoneScoped;
@@ -1067,14 +1110,14 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         }
     };
 
-    DropList_t* dropList = itemutils::GetDropList(m_DropID);
+    const DropList_t* drops = dropList();
 
-    if (!getMobMod(xi::MobMod::NoDrops) && dropList != nullptr && (!dropList->Items.empty() || !dropList->Groups.empty() || PAI->EventHandler.hasListener("ITEM_DROPS")))
+    if (!getMobMod(xi::MobMod::NoDrops) && drops != nullptr && (!drops->Items.empty() || !drops->Groups.empty() || PAI->EventHandler.hasListener("ITEM_DROPS")))
     {
         // THLvl determines the drop rate.
         auto thDropRateFunction = lua["xi"]["combat"]["treasureHunter"]["getDropRate"];
 
-        LootContainer loot(dropList);
+        LootContainer loot(drops);
 
         PAI->EventHandler.triggerListener("ITEM_DROPS", this, &loot);
 

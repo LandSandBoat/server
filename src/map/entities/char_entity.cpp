@@ -70,6 +70,7 @@
 #include "action/interrupts.h"
 #include "blue_spell.h"
 #include "conquest_system.h"
+#include "data/enums/claim_type.h"
 #include "data/enums/mob_mod.h"
 #include "enums/recast.h"
 #include "ipc_client.h"

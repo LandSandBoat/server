@@ -1,0 +1,681 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17686578:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_prefix: 32
+    widescan: true
+    content:  WOTG
+
+  17686580:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    widescan: true
+    content:  WOTG
+
+  17686586:
+    script:       Provenance_Crystal
+    display_name: Provenance Crystal
+    at:           [-632.000, -19.850, -480.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2417
+      entity_flags: 27
+      name_vis:     32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686587:
+    script:       Provenance_Protocrystal
+    display_name: Provenance Protocrystal
+    at:           [-648.000, -19.850, -480.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2417
+      name_vis:    32
+      name_prefix: 32
+      moving:      20
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686588:
+    script:       Provenance_Crystal
+    display_name: Provenance Crystal
+    at:           [-285.000, -19.655, -245.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2417
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+      moving:       14
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686589:
+    script:       Provenance_Crystal
+    display_name: Provenance Crystal
+    at:           [-150.000, 3.911, -670.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2417
+      entity_flags: 27
+      name_vis:     32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686590:
+    script:       Provenance_Crystal
+    display_name: Provenance Crystal
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686591:
+    script:       Provenance_Crystal
+    display_name: Provenance Crystal
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686592:
+    script:       Provenance_Crystal
+    display_name: Provenance Crystal
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686593:
+    script:       Provenance_Crystal
+    display_name: Provenance Crystal
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686594:
+    script:       Provenance_Protocrystal
+    display_name: Provenance Protocrystal
+    at:           [-580.000, -228.000, 508.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2417
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686595:
+    script:       Provenance_Protocrystal
+    display_name: Provenance Protocrystal
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686596:
+    script:       Provenance_Protocrystal
+    display_name: Provenance Protocrystal
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686597:
+    script:       Crystal_100
+    display_name: Crystal_100
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686598:
+    script:       Crystal_200
+    display_name: Crystal_200
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686599:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686600:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686601:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686602:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686603:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686604:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686605:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686606:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686607:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686608:
+    script: blank
+    at:     [-240.367, -20.335, -233.488, 53]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       40
+      moving:          6
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686609:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686610:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686611:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686612:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686613:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686614:
+    script: blank
+    at:     [241.444, -20.216, -232.789, 44]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       40
+      moving:          7
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686615:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686616:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686617:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686618:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686619:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686620:
+    script:       Grumblix
+    display_name: Grumblix
+    at:           [-633.169, -19.444, -531.336, 189]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  WOTG
+
+  17686621:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-633.169, -19.444, -531.336, 189]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: WOTG
+
+  17686622:
+    script:       ???
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686623:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686624:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+    content:  WOTG
+
+  17686625:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+    content:  WOTG
+
+  17686626:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+    content:  WOTG
+
+  17686627:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686628:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686629:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686630:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686631:
+    script:       Cait_Sith_Ceithir
+    display_name: Cait Sith Ceithir
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686632:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686633:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686634:
+    script:       Cait_Sith_Seachd
+    display_name: Cait Sith Seachd
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686635:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686636:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2414
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  WOTG
+
+  17686637:
+    script:       Glimmering_Trove
+    display_name: Glimmering Trove
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17686638:
+    script:       Glimmering_Trove
+    display_name: Glimmering Trove
+    at:           [-644.000, -19.000, -536.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 36
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686639:
+    script:       Glimmering_Trove
+    display_name: Glimmering Trove
+    at:           [-656.000, -19.000, -520.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 36
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686640:
+    script:       Glimmering_Trove
+    display_name: Glimmering Trove
+    at:           [-654.000, -19.500, -486.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 36
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686641:
+    script:       Glimmering_Trove
+    display_name: Glimmering Trove
+    at:           [-623.000, -19.500, -473.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 36
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686642:
+    script:       Regal_Pawprints
+    display_name: Regal Pawprints
+    at:           [-653.319, -20.602, -507.382]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17686643:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [-638.000, -18.870, -535.000]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17686645:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         WOTG
+
+  17686646:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         WOTG
+
+  17686647:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         WOTG
+
+  17686648:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         WOTG
+
+  17686649:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         WOTG
+
+  17686650:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         WOTG
+
+  17686651:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         WOTG
+
+  17686652:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         WOTG

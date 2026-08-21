@@ -1,0 +1,984 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16904206:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-598.000, 82.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904208:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [5.589, 1.835, -0.426]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904210:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [602.750, -77.953, 0.430]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904212:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-598.000, 82.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904214:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [5.589, 1.835, -0.426]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904216:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [602.750, -77.953, 0.430]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904219:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-598.000, 82.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904222:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [5.589, 1.835, -0.426]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904225:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [602.750, -77.953, 0.430]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904227:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-598.000, 82.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904229:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [5.589, 1.835, -0.426]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904231:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [602.750, -77.953, 0.430]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904267:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-598.000, 82.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904273:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [5.589, 1.835, -0.426]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904279:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [602.750, -77.953, 0.430]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+
+  16904325:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16904326:
+    script: NPC[86]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16904327:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16904329:
+    script: NPC[89]
+    at:     [0.000, 1.700, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16904330:
+    script: NPC[8a]
+    at:     [0.000, 1.700, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16904331:
+    script: NPC[8b]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16904332:
+    script: NPC[8c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16904333:
+    script: NPC[8d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16904334:
+    script: NPC[8e]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16904335:
+    script: NPC[8f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16904336:
+    script: NPC[90]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16904337:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [18.934, -2.000, -539.898]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16904338:
+    script:       SD_Entrance
+    display_name: Spatial Displacement
+    at:           [-39.109, -3.347, -539.993]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16904339:
+    script:       SD_BCNM_Exit_1
+    display_name: Spatial Displacement
+    at:           [-518.521, 77.452, -1.691]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16904340:
+    script:       SD_BCNM_Exit_2
+    display_name: Spatial Displacement
+    at:           [81.524, -2.147, -1.633]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16904341:
+    script:       SD_BCNM_Exit_3
+    display_name: Spatial Displacement
+    at:           [681.271, -82.547, -1.510]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16904342:
+    script:       SD_Exit
+    display_name: Spatial Displacement
+    at:           [-19.684, -2.000, 618.993]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16904343:
+    script:       Prishe
+    display_name: Prishe
+    render:
+      look:
+        type:  standard
+        model: 1446
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 54
+    widescan:        true
+    content:         COP
+
+  16904344:
+    script:       Ulmia
+    display_name: Ulmia
+    render:
+      look:
+        type:  standard
+        model: 1472
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904345:
+    script:       Tenzen
+    display_name: Tenzen
+    render:
+      look:
+        type:  standard
+        model: 1442
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904346:
+    script:       Cherukiki
+    display_name: Cherukiki
+    render:
+      look:
+        type:  standard
+        model: 1443
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904347:
+    script:       Kukki-Chebukki
+    display_name: Kukki-Chebukki
+    render:
+      look:
+        type:  standard
+        model: 1444
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904348:
+    script:       Makki-Chebukki
+    display_name: Makki-Chebukki
+    render:
+      look:
+        type:  standard
+        model: 1445
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904349:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 1451
+      entity_flags: 27
+      name_prefix:  32
+    status:  cutscene_only
+    content: COP
+
+  16904350:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904351:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904352:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904353:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904354:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904355:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904356:
+    script:       Nagmolada
+    display_name: Nag'molada
+    render:
+      look:
+        type:  standard
+        model: 1452
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904357:
+    script:       Bahamut
+    display_name: Bahamut
+    render:
+      look:
+        type:  standard
+        model: 1473
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904358:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 608
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904359:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 610
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904360:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 609
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904361:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 611
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904362:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 783
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904363:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 783
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904364:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 783
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904365:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 783
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16904366:
+    script:       Bahamut
+    display_name: Bahamut
+    render:
+      look:
+        type:  standard
+        model: 1477
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904367:
+    display_name: ship
+    render:
+      look:
+        type: ship
+      door_id:   19
+      animation: animation_18
+      moving:    32768
+    status:   cutscene_only
+    widescan: true
+
+  16904368:
+    script:       Justinius
+    display_name: Justinius
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  10
+        head:  4100
+        body:  8328
+        hands: 12424
+        legs:  16520
+        feet:  20616
+        main:  24929
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904369:
+    script:       qm
+    display_name: ???
+    at:           [624.648, 82.053, 601.938, 33]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16904370:
+    script:       qm
+    display_name: ???
+    at:           [-76.179, -132.863, -10.317, 13]
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:  cutscene_only
+    content: COP
+
+  16904371:
+    script:       Bahamut
+    display_name: Bahamut
+    at:           [-74.896, -132.554, -11.461, 223]
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904372:
+    script:       Nagmolada
+    display_name: Nag'molada
+    at:           [0.000, -37.999, -128.339, 192]
+    render:
+      look:
+        type:  standard
+        model: 1452
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904373:
+    script:       Eshantarl
+    display_name: Esha'ntarl
+    at:           [0.000, -33.899, -93.544, 192]
+    render:
+      look:
+        type:  standard
+        model: 1451
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904374:
+    script:       Kenkyuin_A
+    display_name: Kenkyuin_A
+    at:           [-7.115, -34.059, -89.335, 155]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904375:
+    script:       Kenkyuin_B
+    display_name: Kenkyuin_B
+    at:           [-5.679, -34.059, -87.726, 161]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904376:
+    script:       Kenkyuin_C
+    display_name: Kenkyuin_C
+    at:           [0.000, -34.020, -85.321, 192]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904377:
+    script:       Kenkyuin_D
+    display_name: Kenkyuin_D
+    at:           [5.545, -34.059, -87.857, 227]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904378:
+    script:       Kenkyuin_E
+    display_name: Kenkyuin_E
+    at:           [7.112, -34.059, -89.315, 233]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904379:
+    script:       Kenkyuin_F
+    display_name: Kenkyuin_F
+    at:           [2.800, -35.499, -117.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904380:
+    script:       Kenkyuin_G
+    display_name: Kenkyuin_G
+    at:           [-2.800, -35.499, -117.000]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904381:
+    script:       _iya
+    display_name: TEST_DOOR
+    at:           [-20.000, -2.250, -280.187]
+    render:
+      look:
+        type: door
+      door_id:      1635346783
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32768
+    status:  cutscene_only
+    content: COP
+
+  16904382:
+    script: _f00
+    at:     [0.000, -41.786, -133.500]
+    render:
+      look:
+        type: door
+      door_id:   808478303
+      animation: close_door
+    status: cutscene_only
+
+  16904383:
+    script: NPC[bf]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16904384:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16904385:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16904386:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16904387:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16904388:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16904389:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16904390:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16904391:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16904392:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-5.344, -0.042, -550.998, 210]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16904393:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-5.344, -0.042, -550.998, 210]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP

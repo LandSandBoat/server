@@ -1,0 +1,940 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Cherukiki:
+    id:            710
+    species:       humes
+    type:          [notorious]
+    spell_list_id: 20
+    attributes:
+      combat:
+        skill: katana
+      jobs: [whm, war]
+      resists:
+        immune_status: [stun, silence, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  automaton
+          model: 1181
+        entity_flags:  541
+        animation_sub:  12
+        name_prefix:    32
+        model_size:      2
+        hitbox:         11
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+
+  Cherukiki_2:
+    id:            710
+    display_name:  Cherukiki
+    species:       humes
+    type:          [notorious]
+    spell_list_id: 20
+    attributes:
+      combat:
+        skill: katana
+      jobs: [whm, war]
+      resists:
+        immune_status: [stun, silence, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  automaton
+          model: 1181
+        entity_flags:  541
+        animation_sub:  12
+        name_prefix:    32
+        model_size:      2
+        hitbox:         11
+      spawn:
+        type: [scripted]
+
+  Kukki-Chebukki:
+    id:            2293
+    species:       humes
+    type:          [notorious]
+    spell_list_id: 490
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: katana
+      jobs: [blm, war]
+      resists:
+        immune_status: [stun, silence, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  automaton
+          model: 1180
+        entity_flags:  157
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         11
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+
+  Kukki-Chebukki_2:
+    id:            2293
+    display_name:  Kukki-Chebukki
+    species:       humes
+    type:          [notorious]
+    spell_list_id: 490
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: katana
+      jobs: [blm, war]
+      resists:
+        immune_status: [stun, silence, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  automaton
+          model: 1180
+        entity_flags:  157
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         11
+      spawn:
+        type: [scripted]
+
+  Makki-Chebukki:
+    id:      2492
+    species: humes
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: katana
+      jobs: [rng, war]
+      resists:
+        immune_status: [stun, silence, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 1179
+        entity_flags:  157
+        animation_sub:   6
+        name_prefix:    32
+        model_size:      2
+        hitbox:         11
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+
+  Makki-Chebukki_2:
+    id:           2492
+    display_name: Makki-Chebukki
+    species:      humes
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: katana
+      jobs: [rng, war]
+      resists:
+        immune_status: [stun, silence, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 1179
+        entity_flags:  157
+        animation_sub:   6
+        name_prefix:    32
+        model_size:      2
+        hitbox:         11
+      spawn:
+        type: [scripted]
+
+  Mammet-22_Zeta:
+    id:            2500
+    species:       mammet
+    type:          [notorious, battlefield]
+    spell_list_id: 29
+    skill_list_id: 503
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          thunder: -1
+      render:
+        look:
+          type:  automaton
+          model: 1006
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_common
+          item:   bottle_of_yellow_liquid
+        - chance: common
+          item:   bottle_of_yellow_liquid
+
+  Omega:
+    id:            2973
+    species:       omega
+    type:          [notorious, battlefield]
+    skill_list_id: 54
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 220
+      jobs: [war, mnk]
+      resists:
+        immune_status: [light_sleep, dark_sleep, terror]
+        rank_element:
+          thunder: -1
+      render:
+        look:
+          type:  standard
+          model: 1077
+        entity_flags:  1691
+        animation_sub:   13
+        name_prefix:     32
+        model_size:       1
+        hitbox:          15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15500
+
+  Omega_2:
+    id:            2973
+    display_name:  Omega
+    species:       omega
+    type:          [notorious, battlefield]
+    skill_list_id: 54
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 220
+      jobs: [war, mnk]
+      resists:
+        immune_status: [light_sleep, dark_sleep, terror]
+        rank_element:
+          thunder: -1
+      render:
+        look:
+          type:  standard
+          model: 1077
+        entity_flags:  1691
+        animation_sub:   13
+        name_prefix:     32
+        model_size:       1
+        hitbox:          15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tenzen:
+    id:            3875
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 200
+      jobs: [sam, rng]
+      render:
+        look:
+          type:  standard
+          model: 1182
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+
+  Tenzen_2:
+    id:            3875
+    display_name:  Tenzen
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 200
+      jobs: [sam, rng]
+      render:
+        look:
+          type:  standard
+          model: 1182
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ultima:
+    id:            4083
+    species:       ultima
+    type:          [notorious, battlefield]
+    skill_list_id: 728
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 200
+      resists:
+        immune_status: [light_sleep, dark_sleep, terror]
+        rank_element:
+          thunder: -1
+      render:
+        look:
+          type:  standard
+          model: 1075
+        entity_flags:  1691
+        animation_sub:   13
+        name_prefix:     32
+        model_size:       1
+        hitbox:          15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15500
+
+  Ultima_2:
+    id:            4083
+    display_name:  Ultima
+    species:       ultima
+    type:          [notorious, battlefield]
+    skill_list_id: 728
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 200
+      resists:
+        immune_status: [light_sleep, dark_sleep, terror]
+        rank_element:
+          thunder: -1
+      render:
+        look:
+          type:  standard
+          model: 1075
+        entity_flags:  1691
+        animation_sub:   13
+        name_prefix:     32
+        model_size:       1
+        hitbox:          15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  16908289:
+    template: Mammet-22_Zeta
+    at:       [-640.031, -231.348, 510.772, 191]
+    level:    [55, 56]
+  16908290:
+    template: Mammet-22_Zeta
+    at:       [-637.407, -231.605, 510.544, 191]
+    level:    [55, 56]
+  16908291:
+    template: Mammet-22_Zeta
+    at:       [-642.548, -231.348, 510.748, 191]
+    level:    [55, 56]
+  16908292:
+    template: Mammet-22_Zeta
+    at:       [-644.464, -231.148, 511.386, 191]
+    level:    [55, 56]
+  16908293:
+    template: Mammet-22_Zeta
+    at:       [-635.540, -231.148, 511.712, 191]
+    level:    [55, 56]
+  16908294:
+    template: Omega
+    at:       [-640.000, -231.847, 514.000, 192]
+    level:    [63, 64]
+  16908295:
+    template: Ultima
+    at:       [-640.000, -231.847, 514.000, 192]
+    level:    [63, 64]
+  16908296:
+    template: Mammet-22_Zeta
+    at:       [-0.050, -151.348, 150.723, 191]
+    level:    [55, 56]
+  16908297:
+    template: Mammet-22_Zeta
+    at:       [2.574, -151.605, 150.495, 191]
+    level:    [55, 56]
+  16908298:
+    template: Mammet-22_Zeta
+    at:       [-2.567, -151.348, 150.699, 191]
+    level:    [55, 56]
+  16908299:
+    template: Mammet-22_Zeta
+    at:       [-4.483, -151.148, 151.337, 191]
+    level:    [55, 56]
+  16908300:
+    template: Mammet-22_Zeta
+    at:       [4.441, -151.148, 151.663, 191]
+    level:    [55, 56]
+  16908301:
+    template: Omega
+    at:       [0.000, -151.847, 154.000, 192]
+    level:    [63, 64]
+  16908302:
+    template: Ultima
+    at:       [0.000, -151.847, 154.000, 192]
+    level:    [63, 64]
+  16908303:
+    template: Mammet-22_Zeta
+    at:       [639.926, -71.348, -209.201, 191]
+    level:    [55, 56]
+  16908304:
+    template: Mammet-22_Zeta
+    at:       [642.550, -71.605, -209.429, 191]
+    level:    [55, 56]
+  16908305:
+    template: Mammet-22_Zeta
+    at:       [637.409, -71.348, -209.225, 191]
+    level:    [55, 56]
+  16908306:
+    template: Mammet-22_Zeta
+    at:       [635.493, -71.148, -208.587, 191]
+    level:    [55, 56]
+  16908307:
+    template: Mammet-22_Zeta
+    at:       [644.417, -71.148, -208.261, 191]
+    level:    [55, 56]
+  16908308:
+    template: Omega
+    at:       [640.000, -71.847, -206.000, 192]
+    level:    [63, 64]
+  16908309:
+    template: Ultima
+    at:       [640.000, -71.847, -206.000, 192]
+    level:    [63, 64]
+  16908310:
+    template: Tenzen
+    at:       [-639.985, -231.347, 525.910, 65]
+    level:    [70, 70]
+  16908311:
+    template: Makki-Chebukki
+    at:       [-640.000, -235.378, 509.700, 192]
+    level:    [67, 67]
+  16908312:
+    template: Kukki-Chebukki
+    at:       [-641.000, -235.378, 509.700, 192]
+    level:    [67, 67]
+  16908313:
+    template: Cherukiki
+    at:       [-639.000, -235.378, 509.700, 189]
+    level:    [67, 67]
+  16908314:
+    template: Tenzen
+    at:       [0.007, -151.347, 166.001, 65]
+    level:    [70, 70]
+  16908315:
+    template: Makki-Chebukki
+    at:       [0.000, -155.378, 149.699, 211]
+    level:    [67, 67]
+  16908316:
+    template: Kukki-Chebukki
+    at:       [-1.000, -155.378, 149.699, 214]
+    level:    [67, 67]
+  16908317:
+    template: Cherukiki
+    at:       [1.000, -155.378, 149.699, 208]
+    level:    [67, 67]
+  16908318:
+    template: Tenzen
+    at:       [639.980, -71.347, -193.848, 65]
+    level:    [70, 70]
+  16908319:
+    template: Makki-Chebukki
+    at:       [639.957, -75.378, -210.273, 191]
+    level:    [67, 67]
+  16908320:
+    template: Kukki-Chebukki
+    at:       [638.957, -75.378, -210.273, 194]
+    level:    [67, 67]
+  16908321:
+    template: Cherukiki
+    at:       [640.957, -75.378, -210.273, 189]
+    level:    [67, 67]
+  16908322:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-646.335, -231.648, 516.480, 215]
+    level:    [99, 99]
+  16908323:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-640.000, -235.378, 509.700, 175]
+    level:    [99, 99]
+  16908324:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-640.000, -235.378, 509.700, 175]
+    level:    [99, 99]
+  16908325:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [-639.000, -235.378, 509.700, 171]
+    level:    [99, 99]
+  16908326:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-6.354, -151.648, 156.431, 215]
+    level:    [99, 99]
+  16908327:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-0.019, -155.378, 149.651, 175]
+    level:    [99, 99]
+  16908328:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-0.019, -155.378, 149.651, 175]
+    level:    [99, 99]
+  16908329:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [0.981, -155.378, 149.651, 171]
+    level:    [99, 99]
+  16908330:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [633.622, -71.648, -203.493, 215]
+    level:    [99, 99]
+  16908331:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [639.957, -75.378, -210.273, 175]
+    level:    [99, 99]
+  16908332:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [639.957, -75.378, -210.273, 175]
+    level:    [99, 99]
+  16908333:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [640.957, -75.378, -210.273, 171]
+    level:    [99, 99]
+  16908334:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-644.602, -231.648, 523.375]
+    level:    [99, 99]
+  16908335:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-640.000, -235.378, 509.700, 173]
+    level:    [99, 99]
+  16908336:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-641.000, -235.378, 509.700, 175]
+    level:    [99, 99]
+  16908337:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [-639.000, -235.378, 509.700, 170]
+    level:    [99, 99]
+  16908338:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-4.621, -151.648, 163.326]
+    level:    [99, 99]
+  16908339:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-0.019, -155.378, 149.651, 173]
+    level:    [99, 99]
+  16908340:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-1.019, -155.378, 149.651, 175]
+    level:    [99, 99]
+  16908341:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [0.981, -155.378, 149.651, 170]
+    level:    [99, 99]
+  16908342:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [635.355, -71.648, -196.598]
+    level:    [99, 99]
+  16908343:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [639.957, -75.378, -210.273, 173]
+    level:    [99, 99]
+  16908344:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [638.957, -75.378, -210.273, 175]
+    level:    [99, 99]
+  16908345:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [640.957, -75.378, -210.273, 170]
+    level:    [99, 99]
+  16908346:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-641.408, -231.847, 519.337, 214]
+    level:    [99, 99]
+  16908347:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-640.000, -235.378, 509.700, 195]
+    level:    [99, 99]
+  16908348:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-641.000, -235.378, 509.700, 201]
+    level:    [99, 99]
+  16908349:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [-639.000, -235.378, 509.700, 191]
+    level:    [99, 99]
+  16908350:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-1.427, -151.847, 159.288, 214]
+    level:    [99, 99]
+  16908351:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-0.019, -155.378, 149.651, 195]
+    level:    [99, 99]
+  16908352:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-1.019, -155.378, 149.651, 201]
+    level:    [99, 99]
+  16908353:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [0.981, -155.378, 149.651, 191]
+    level:    [99, 99]
+  16908354:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [638.549, -71.847, -200.636, 214]
+    level:    [99, 99]
+  16908355:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [639.957, -75.378, -210.273, 195]
+    level:    [99, 99]
+  16908356:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [638.957, -75.378, -210.273, 201]
+    level:    [99, 99]
+  16908357:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [640.957, -75.378, -210.273, 191]
+    level:    [99, 99]
+  16908358:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-640.244, -231.847, 526.641, 190]
+    level:    [99, 99]
+  16908359:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-640.000, -235.378, 509.700, 178]
+    level:    [99, 99]
+  16908360:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-641.000, -235.378, 509.700, 194]
+    level:    [99, 99]
+  16908361:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [-639.000, -235.378, 509.700, 174]
+    level:    [99, 99]
+  16908362:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-0.263, -151.847, 166.592, 190]
+    level:    [99, 99]
+  16908363:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-0.019, -155.378, 149.651, 178]
+    level:    [99, 99]
+  16908364:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-1.019, -155.378, 149.651, 194]
+    level:    [99, 99]
+  16908365:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [0.981, -155.378, 149.651, 174]
+    level:    [99, 99]
+  16908366:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [639.713, -71.847, -193.332, 190]
+    level:    [99, 99]
+  16908367:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [639.957, -75.378, -210.273, 178]
+    level:    [99, 99]
+  16908368:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [638.957, -75.378, -210.273, 194]
+    level:    [99, 99]
+  16908369:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [640.957, -75.378, -210.273, 174]
+    level:    [99, 99]
+  16908370:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-642.295, -231.847, 514.495, 39]
+    level:    [99, 99]
+  16908371:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-640.000, -235.378, 509.700, 166]
+    level:    [99, 99]
+  16908372:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-641.000, -235.378, 509.700, 169]
+    level:    [99, 99]
+  16908373:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [-639.000, -235.378, 509.700, 163]
+    level:    [99, 99]
+  16908374:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [-2.314, -151.847, 154.446, 39]
+    level:    [99, 99]
+  16908375:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [-0.019, -155.378, 149.651, 166]
+    level:    [99, 99]
+  16908376:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [-1.019, -155.378, 149.651, 169]
+    level:    [99, 99]
+  16908377:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [0.981, -155.378, 149.651, 163]
+    level:    [99, 99]
+  16908378:
+    template: Tenzen_2
+    script:   Tenzen
+    at:       [637.662, -71.847, -205.478, 39]
+    level:    [99, 99]
+  16908379:
+    template: Makki-Chebukki_2
+    script:   Makki-Chebukki
+    at:       [639.957, -75.378, -210.273, 166]
+    level:    [99, 99]
+  16908380:
+    template: Kukki-Chebukki_2
+    script:   Kukki-Chebukki
+    at:       [638.957, -75.378, -210.273, 169]
+    level:    [99, 99]
+  16908381:
+    template: Cherukiki_2
+    script:   Cherukiki
+    at:       [640.957, -75.378, -210.273, 163]
+    level:    [99, 99]
+  16908382:
+    template: Omega_2
+    script:   Omega
+    at:       [-643.105, -231.648, 516.596, 85]
+    level:    [99, 99]
+  16908383:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-642.951, -231.696, 517.117, 155]
+    level:    [99, 99]
+  16908384:
+    template: Omega_2
+    script:   Omega
+    at:       [-644.812, -231.648, 514.473, 56]
+    level:    [99, 99]
+  16908385:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-634.719, -231.648, 511.519, 83]
+    level:    [99, 99]
+  16908386:
+    template: Omega_2
+    script:   Omega
+    at:       [-640.000, -231.847, 514.000, 192]
+    level:    [99, 99]
+  16908387:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-640.035, -231.847, 513.282, 78]
+    level:    [99, 99]
+  16908388:
+    template: Omega_2
+    script:   Omega
+    at:       [-643.052, -231.648, 522.046, 206]
+    level:    [99, 99]
+  16908389:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-643.296, -231.648, 517.445, 207]
+    level:    [99, 99]
+  16908390:
+    template: Omega_2
+    script:   Omega
+    at:       [-647.294, -231.648, 520.590, 221]
+    level:    [99, 99]
+  16908391:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-640.000, -231.847, 514.000, 192]
+    level:    [99, 99]
+  16908392:
+    template: Omega_2
+    script:   Omega
+    at:       [-3.124, -151.648, 156.547, 85]
+    level:    [99, 99]
+  16908393:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-2.970, -151.696, 157.068, 155]
+    level:    [99, 99]
+  16908394:
+    template: Omega_2
+    script:   Omega
+    at:       [-4.831, -151.648, 154.424, 56]
+    level:    [99, 99]
+  16908395:
+    template: Ultima_2
+    script:   Ultima
+    at:       [5.262, -151.648, 151.470, 83]
+    level:    [99, 99]
+  16908396:
+    template: Omega_2
+    script:   Omega
+    at:       [-0.019, -151.847, 153.951, 192]
+    level:    [99, 99]
+  16908397:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-0.054, -151.847, 153.233, 78]
+    level:    [99, 99]
+  16908398:
+    template: Omega_2
+    script:   Omega
+    at:       [-3.071, -151.648, 161.997, 206]
+    level:    [99, 99]
+  16908399:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-3.315, -151.648, 157.396, 207]
+    level:    [99, 99]
+  16908400:
+    template: Omega_2
+    script:   Omega
+    at:       [-7.313, -151.648, 160.541, 221]
+    level:    [99, 99]
+  16908401:
+    template: Ultima_2
+    script:   Ultima
+    at:       [-0.019, -151.847, 153.951, 192]
+    level:    [99, 99]
+  16908402:
+    template: Omega_2
+    script:   Omega
+    at:       [636.852, -71.648, -203.377, 85]
+    level:    [99, 99]
+  16908403:
+    template: Ultima_2
+    script:   Ultima
+    at:       [637.006, -71.696, -202.856, 155]
+    level:    [99, 99]
+  16908404:
+    template: Omega_2
+    script:   Omega
+    at:       [635.145, -71.648, -205.500, 56]
+    level:    [99, 99]
+  16908405:
+    template: Ultima_2
+    script:   Ultima
+    at:       [645.238, -71.648, -208.454, 83]
+    level:    [99, 99]
+  16908406:
+    template: Omega_2
+    script:   Omega
+    at:       [639.957, -71.847, -205.973, 192]
+    level:    [99, 99]
+  16908407:
+    template: Ultima_2
+    script:   Ultima
+    at:       [639.922, -71.847, -206.691, 78]
+    level:    [99, 99]
+  16908408:
+    template: Omega_2
+    script:   Omega
+    at:       [636.905, -71.648, -197.927, 206]
+    level:    [99, 99]
+  16908409:
+    template: Ultima_2
+    script:   Ultima
+    at:       [636.661, -71.648, -202.528, 207]
+    level:    [99, 99]
+  16908410:
+    template: Omega_2
+    script:   Omega
+    at:       [632.663, -71.648, -199.383, 221]
+    level:    [99, 99]
+  16908411:
+    template: Ultima_2
+    script:   Ultima
+    at:       [639.957, -71.847, -205.973, 192]
+    level:    [99, 99]

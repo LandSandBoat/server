@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, mogmenu, auction_house, yell, los_player_block, assist]
+music:
+  day:          135
+  night:        135
+  battle_solo:  135
+  battle_party: 135
+
+zonelines:
+
+  z6y0:
+    from:  [-50.004, -11.780, -111.502]
+    to:    yuhtunga_jungle
+    at:    [-239.661, -1.575, 528.069, 1.570796]
+    scale: [1.000, 5.000]

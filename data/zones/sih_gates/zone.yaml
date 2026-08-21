@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  57
+  battle_party: 57
+
+zonelines:
+
+  z7g0:
+    from:  [-36.500, -33.662, -19.748]
+    to:    ceizak_battlegrounds
+    at:    [-100.000, 6.156, -521.955, 4.712389]
+    scale: [1.000, 4.000]
+
+  z7g2:
+    from:  [-260.000, -33.513, 43.000]
+    to:    ceizak_battlegrounds
+    at:    [-540.319, 6.197, -320.000, 1.570796]
+    scale: [1.000, 4.000]
+
+  z7g4:
+    from:  [-164.078, -34.005, -420.772]
+    to:    foret_de_hennetiel
+    at:    [374.347, 7.820, 460.167, 2.792527]
+    scale: [1.000, 4.000]
+
+  z7g6:
+    from:  [-299.669, -23.891, -443.428]
+    to:    foret_de_hennetiel
+    at:    [99.563, 7.790, -66.515, 1.308997]
+    scale: [1.000, 4.000]
+
+  z7g8:
+    from:  [-501.283, -44.429, 4.197]
+    to:    cirdas_caverns
+    at:    [420.000, 37.845, -280.500, 4.712389]
+    scale: [1.000, 5.000]

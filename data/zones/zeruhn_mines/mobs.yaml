@@ -1,0 +1,711 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Brass_Quadav_TVR:
+    id:            6036
+    display_name:  Brass_Quadav
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 652
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Burrower_Worm:
+    id:            6420
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        entity_flags: 129
+        hitbox:        11
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   flint_stone
+        - chance: uncommon
+          item:   pinch_of_zeruhn_soot
+        - chance: rare
+          item:   chunk_of_zinc_ore
+        - chance: very_rare
+          item:   chunk_of_silver_ore
+      steal: pebble
+      despoil:
+        chunk_of_copper_ore: 0
+        chunk_of_iron_ore:   0
+        chunk_of_silver_ore: 0
+        chunk_of_zinc_ore:   0
+    content: ABYSSEA
+
+  Colliery_Bat:
+    id:            6469
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   pinch_of_zeruhn_soot
+      despoil:
+        bat_wing: 0
+    content: ABYSSEA
+
+  Copper_Quadav_TVR:
+    id:            6037
+    display_name:  Copper_Quadav
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 650
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ding_Bats:
+    id:            1038
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  641
+        animation_sub:   8
+        name_prefix:    64
+        hitbox:         13
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   pinch_of_zeruhn_soot
+      despoil:
+        bat_wing: 0
+
+  DoBho_Venomtail:
+    id:            6079
+    display_name:  Do'Bho Venomtail
+    species:       orc
+    type:          [notorious]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1055
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gloom_Phantom_Zeruhn:
+    id:           3862
+    display_name: Gloom_Phantom
+    species:      goblin
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, drk]
+      render:
+        look:
+          type:  standard
+          model: 3584
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Old_Quadav_TVR:
+    id:            6038
+    display_name:  Old_Quadav
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 645
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  River_Crab:
+    id:            3371
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   pinch_of_zeruhn_soot
+        - chance: common
+          item:   chunk_of_rock_salt
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Soot_Crab:
+    id:            6365
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   pinch_of_zeruhn_soot
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+    content: ABYSSEA
+
+  Veindigger_Leech:
+    id:            6399
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 641
+        hitbox:         9
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   pinch_of_zeruhn_soot
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+    content: ABYSSEA
+
+spawns:
+  17481729:
+    template: Ding_Bats
+    at:       [-58.261, -0.034, 24.662, 38]
+    level:    [1, 2]
+  17481730:
+    template: Ding_Bats
+    at:       [-60.466, -0.054, 13.679, 100]
+    level:    [1, 2]
+  17481731:
+    template: Ding_Bats
+    at:       [-58.029, -0.045, 54.626, 209]
+    level:    [1, 2]
+  17481732:
+    template: Ding_Bats
+    at:       [-18.627, -0.070, 62.362, 134]
+    level:    [1, 2]
+  17481733:
+    template: Ding_Bats
+    at:       [-32.139, -0.051, 61.602, 159]
+    level:    [1, 2]
+  17481734:
+    template: Ding_Bats
+    at:       [-31.308, -0.073, 75.119, 199]
+    level:    [1, 2]
+  17481735:
+    template: River_Crab
+    at:       [-28.942, -0.062, 69.577, 118]
+    level:    [2, 3]
+  17481736:
+    template: Ding_Bats
+    at:       [-24.311, -0.073, 45.751, 1]
+    level:    [1, 2]
+  17481737:
+    template: River_Crab
+    at:       [-31.407, -0.073, 45.963, 2]
+    level:    [2, 4]
+  17481738:
+    template: Ding_Bats
+    at:       [-14.830, -0.073, 69.932, 127]
+    level:    [1, 2]
+  17481739:
+    template: River_Crab
+    at:       [-10.590, -0.073, 70.524, 56]
+    level:    [3, 4]
+  17481740:
+    template: Ding_Bats
+    at:       [-15.732, -0.061, 45.679, 134]
+    level:    [1, 2]
+  17481741:
+    template: River_Crab
+    at:       [-4.733, -0.073, 45.924, 24]
+    level:    [3, 4]
+  17481742:
+    template: Colliery_Bat
+    at:       [-45.266, 8.039, -59.742, 128]
+    level:    [75, 77]
+  17481743:
+    template: Colliery_Bat
+    at:       [-52.571, 7.890, -58.292, 31]
+    level:    [75, 77]
+  17481744:
+    template: Colliery_Bat
+    at:       [-47.438, 9.151, -130.994, 13]
+    level:    [75, 77]
+  17481745:
+    template: Colliery_Bat
+    at:       [-17.390, 8.720, -167.173, 42]
+    level:    [75, 77]
+  17481746:
+    template: Colliery_Bat
+    at:       [-17.037, 10.850, -138.677, 158]
+    level:    [75, 77]
+  17481747:
+    template: Colliery_Bat
+    at:       [3.736, 8.860, -117.854, 115]
+    level:    [75, 77]
+  17481748:
+    template: Colliery_Bat
+    at:       [3.402, 8.536, -170.195, 239]
+    level:    [75, 77]
+  17481749:
+    template: Colliery_Bat
+    at:       [1.160, 9.272, -150.705, 156]
+    level:    [75, 77]
+  17481750:
+    template: Burrower_Worm
+    at:       [-28.407, 10.325, -140.034, 242]
+    level:    [77, 79]
+  17481751:
+    template: Burrower_Worm
+    at:       [-43.026, 9.200, -153.055, 94]
+    level:    [77, 79]
+  17481752:
+    template: Burrower_Worm
+    at:       [-21.685, 8.975, -168.799, 148]
+    level:    [77, 79]
+  17481753:
+    template: Burrower_Worm
+    at:       [8.383, 8.651, -129.757, 30]
+    level:    [77, 79]
+  17481754:
+    template: Colliery_Bat
+    at:       [41.312, 8.130, -100.968, 254]
+    level:    [75, 77]
+  17481755:
+    template: Colliery_Bat
+    at:       [38.904, 8.113, -100.950, 127]
+    level:    [75, 77]
+  17481756:
+    template: Burrower_Worm
+    at:       [60.925, 8.655, -139.187, 117]
+    level:    [77, 79]
+  17481757:
+    template: Burrower_Worm
+    at:       [61.506, 8.378, -137.323, 92]
+    level:    [77, 79]
+  17481758:
+    template: Colliery_Bat
+    at:       [-58.901, 8.111, -204.654, 62]
+    level:    [75, 77]
+  17481759:
+    template: Colliery_Bat
+    at:       [-51.786, 8.100, -173.512, 170]
+    level:    [75, 77]
+  17481760:
+    template: Colliery_Bat
+    at:       [-47.071, 7.870, -261.065, 115]
+    level:    [75, 77]
+  17481761:
+    template: Colliery_Bat
+    at:       [-44.233, 7.928, -260.436, 127]
+    level:    [75, 77]
+  17481762:
+    template: Colliery_Bat
+    at:       [-32.904, 8.017, -259.529, 132]
+    level:    [75, 77]
+  17481763:
+    template: Colliery_Bat
+    at:       [-9.423, 7.937, -297.675, 146]
+    level:    [75, 77]
+  17481764:
+    template: Soot_Crab
+    at:       [-4.590, 8.056, -299.080, 4]
+    level:    [76, 78]
+  17481765:
+    template: Soot_Crab
+    at:       [-18.014, 8.008, -294.155, 11]
+    level:    [76, 78]
+  17481766:
+    template: Burrower_Worm
+    at:       [-90.922, 7.898, -221.289, 100]
+    level:    [77, 79]
+  17481767:
+    template: Burrower_Worm
+    at:       [-93.574, 7.191, -220.164, 74]
+    level:    [77, 79]
+  17481768:
+    template: Burrower_Worm
+    at:       [-67.751, 7.967, -261.296, 61]
+    level:    [77, 79]
+  17481769:
+    template: Burrower_Worm
+    at:       [-71.841, 7.754, -257.261, 82]
+    level:    [77, 79]
+  17481770:
+    template: Burrower_Worm
+    at:       [-59.465, 8.068, -280.254, 174]
+    level:    [77, 79]
+  17481771:
+    template: Soot_Crab
+    at:       [-62.040, 8.158, -322.034, 243]
+    level:    [76, 78]
+  17481772:
+    template: Soot_Crab
+    at:       [-58.129, 7.945, -318.249, 252]
+    level:    [76, 78]
+  17481773:
+    template: Soot_Crab
+    at:       [-60.714, 8.300, -326.081, 57]
+    level:    [76, 78]
+  17481774:
+    template: Colliery_Bat
+    at:       [58.903, 8.121, -196.394, 64]
+    level:    [75, 77]
+  17481775:
+    template: Colliery_Bat
+    at:       [58.894, 8.137, -201.703, 64]
+    level:    [75, 77]
+  17481776:
+    template: Colliery_Bat
+    at:       [29.180, 7.905, -219.521, 140]
+    level:    [75, 77]
+  17481777:
+    template: Colliery_Bat
+    at:       [39.212, 8.130, -220.371, 127]
+    level:    [75, 77]
+  17481778:
+    template: Colliery_Bat
+    at:       [99.488, 7.749, -168.985, 174]
+    level:    [75, 77]
+  17481779:
+    template: Colliery_Bat
+    at:       [98.418, 7.869, -169.307, 210]
+    level:    [75, 77]
+  17481780:
+    template: Burrower_Worm
+    at:       [57.656, 7.917, -253.272, 222]
+    level:    [77, 79]
+  17481781:
+    template: Burrower_Worm
+    at:       [55.034, 8.322, -262.828, 233]
+    level:    [77, 79]
+  17481782:
+    template: Burrower_Worm
+    at:       [54.671, 7.812, -254.777, 220]
+    level:    [77, 79]
+  17481783:
+    template: Burrower_Worm
+    at:       [145.945, 7.020, -211.703, 238]
+    level:    [77, 79]
+  17481784:
+    template: Burrower_Worm
+    at:       [136.140, 8.285, -188.395, 68]
+    level:    [77, 79]
+  17481785:
+    template: Burrower_Worm
+    at:       [135.744, 8.048, -194.101, 67]
+    level:    [77, 79]
+  17481786:
+    template: Veindigger_Leech
+    at:       [137.519, 7.949, -209.755, 148]
+    level:    [79, 80]
+  17481787:
+    template: Veindigger_Leech
+    at:       [120.395, 7.942, -183.929, 57]
+    level:    [79, 80]
+  17481788:
+    template: Veindigger_Leech
+    at:       [135.221, 7.182, -211.063, 108]
+    level:    [79, 80]
+  17481789:
+    template: Veindigger_Leech
+    at:       [125.451, 8.206, -179.405, 82]
+    level:    [79, 80]
+  17481790:
+    template: Gloom_Phantom_Zeruhn
+    script:   Gloom_Phantom
+    at:       [143.640, 7.000, -193.430, 163]
+    level:    [139, 139]
+  17481791:
+    template: DoBho_Venomtail
+    at:       [-4.809, 9.139, -140.654, 161]
+    level:    [139, 139]
+  17481792:
+    template: Old_Quadav_TVR
+    script:   Old_Quadav
+    at:       [-6.036, 9.117, -140.263, 186]
+    level:    [139, 139]
+  17481793:
+    template: Copper_Quadav_TVR
+    script:   Copper_Quadav
+    at:       [-4.466, 9.114, -138.249, 128]
+    level:    [139, 139]
+  17481794:
+    template: Brass_Quadav_TVR
+    script:   Brass_Quadav
+    at:       [-3.229, 9.081, -136.486, 102]
+    level:    [139, 139]

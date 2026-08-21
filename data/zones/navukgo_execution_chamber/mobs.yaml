@@ -1,0 +1,655 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Gurfurlur_the_Menacing:
+    id:            7596
+    species:       troll
+    type:          [battlefield]
+    skill_list_id: 326
+    attributes:
+      combat:
+        skill:    hand_to_hand
+        delay:    480
+        dmg_mult: 125
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    7
+          ice:     7
+          wind:    2
+          earth:   7
+          thunder: 7
+          water:   2
+          light:   4
+          dark:    4
+        rank_status:
+          paralyze:    7
+          bind:        7
+          silence:     2
+          slow:        7
+          poison:      2
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 1867
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Hilltroll_Elite_Guard:
+    id:            7594
+    species:       troll
+    type:          [battlefield]
+    spell_list_id: 4
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1691
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Immortal_Flan:
+    id:            2063
+    species:       flan
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+        entity_flags:  3
+        hitbox:       10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4200
+        mp: 4200
+
+  Karababa:
+    id:            2189
+    species:       tarutaru
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 153
+    attributes:
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  misc
+          model: 1884
+        entity_flags: 27
+        name_prefix:  16
+        model_size:    1
+        hitbox:       15
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    allegiance: player
+
+  Khimaira_13:
+    id:            2221
+    species:       khimaira
+    type:          [battlefield]
+    skill_list_id: 779
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    8
+          ice:     5
+          wind:    8
+          earth:   7
+          thunder: 9
+          water:   5
+          light:   7
+          dark:    5
+        rank_status:
+          paralyze:    7
+          bind:        7
+          silence:     7
+          slow:        7
+          poison:      7
+          light_sleep: 7
+          dark_sleep:  7
+          blind:       7
+      render:
+        look:
+          type:  standard
+          model: 1805
+        entity_flags: 667
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Pudding_Master:
+    id:            3219
+    species:       flan
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Shamarhaan:
+    id:            3582
+    species:       elvaan
+    type:          [battlefield]
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 340
+      jobs: [pup, pup]
+      render:
+        look:
+          type:  misc
+          model: 1395
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1900
+
+  Two-faced_Flan:
+    id:            4058
+    species:       flan
+    type:          [notorious, battlefield]
+    spell_list_id: 507
+    skill_list_id: 416
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 18500
+        mp: 20000
+
+  Valkeng:
+    id:            4123
+    species:       automaton
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 363
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+        entity_flags: 3
+        model_size:   1
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1300
+        mp: 1300
+
+  Watch_Wamoura:
+    id:            4307
+    species:       wamouracampa
+    type:          [battlefield]
+    skill_list_id: 254
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1802
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7200
+
+  Woodtroll_Elite_Guard:
+    id:            7595
+    species:       troll
+    type:          [battlefield]
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: axe
+        delay: 230
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1709
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17039361:
+    template: Watch_Wamoura
+    at:       [380.000, -116.000, 380.000, 125]
+    level:    [65, 65]
+  17039363:
+    template: Watch_Wamoura
+    at:       [-20.000, -16.000, -20.000, 125]
+    level:    [65, 65]
+  17039365:
+    template: Watch_Wamoura
+    at:       [380.000, 84.000, -420.000, 125]
+    level:    [65, 65]
+  17039367:
+    template: Two-faced_Flan
+    at:       [380.000, -116.000, 380.000, 125]
+    level:    [80, 80]
+  17039369:
+    template: Two-faced_Flan
+    at:       [-20.000, -16.000, -20.000, 125]
+    level:    [80, 80]
+  17039371:
+    template: Two-faced_Flan
+    at:       [380.000, 84.000, -420.000, 125]
+    level:    [80, 80]
+  17039373:
+    template: Pudding_Master
+    at:       [384.500, -116.500, 380.000]
+    level:    [50, 50]
+  17039374:
+    template: Immortal_Flan
+    at:       [384.000, -116.500, 383.000, 128]
+    level:    [53, 53]
+  17039375:
+    template: Immortal_Flan
+    at:       [384.000, -116.500, 374.000, 128]
+    level:    [53, 53]
+  17039376:
+    template: Immortal_Flan
+    at:       [382.000, -116.500, 390.000, 128]
+    level:    [53, 53]
+  17039377:
+    template: Immortal_Flan
+    at:       [382.000, -116.500, 368.000, 128]
+    level:    [53, 53]
+  17039378:
+    template: Immortal_Flan
+    at:       [378.000, -116.500, 394.000, 128]
+    level:    [53, 53]
+  17039379:
+    template: Immortal_Flan
+    at:       [378.000, -116.500, 366.000, 128]
+    level:    [53, 53]
+  17039380:
+    template: Pudding_Master
+    at:       [-16.212, -16.434, -20.053]
+    level:    [50, 50]
+  17039381:
+    template: Immortal_Flan
+    at:       [-16.212, -16.434, -17.053, 128]
+    level:    [53, 53]
+  17039382:
+    template: Immortal_Flan
+    at:       [-16.212, -16.434, -26.053, 128]
+    level:    [53, 53]
+  17039383:
+    template: Immortal_Flan
+    at:       [-18.712, -16.434, -10.053, 128]
+    level:    [53, 53]
+  17039384:
+    template: Immortal_Flan
+    at:       [-18.712, -16.434, -32.053, 128]
+    level:    [53, 53]
+  17039385:
+    template: Immortal_Flan
+    at:       [-22.712, -16.434, -6.053, 128]
+    level:    [53, 53]
+  17039386:
+    template: Immortal_Flan
+    at:       [-22.712, -16.434, -34.053, 128]
+    level:    [53, 53]
+  17039387:
+    template: Pudding_Master
+    at:       [384.769, 83.596, -420.301]
+    level:    [50, 50]
+  17039388:
+    template: Immortal_Flan
+    at:       [384.269, 83.596, -417.301, 128]
+    level:    [53, 53]
+  17039389:
+    template: Immortal_Flan
+    at:       [384.269, 83.596, -426.301, 128]
+    level:    [53, 53]
+  17039390:
+    template: Immortal_Flan
+    at:       [382.269, 83.596, -410.301, 128]
+    level:    [53, 53]
+  17039391:
+    template: Immortal_Flan
+    at:       [382.269, 83.596, -432.301, 128]
+    level:    [53, 53]
+  17039392:
+    template: Immortal_Flan
+    at:       [378.269, 83.596, -406.301, 128]
+    level:    [53, 53]
+  17039393:
+    template: Immortal_Flan
+    at:       [378.269, 83.596, -434.301, 128]
+    level:    [53, 53]
+  17039394:
+    template: Shamarhaan
+    at:       [382.000, -116.000, 381.500, 128]
+    level:    [70, 70]
+  17039395:
+    template: Valkeng
+    at:       [382.000, -116.000, 378.500, 128]
+    level:    [67, 67]
+  17039396:
+    template: Shamarhaan
+    at:       [-22.000, -16.000, -21.125, 128]
+    level:    [70, 70]
+  17039397:
+    template: Valkeng
+    at:       [-22.000, -16.000, -18.125, 128]
+    level:    [67, 67]
+  17039398:
+    template: Shamarhaan
+    at:       [382.000, 84.000, -421.125, 128]
+    level:    [70, 70]
+  17039399:
+    template: Valkeng
+    at:       [382.000, 84.000, -418.125, 128]
+    level:    [67, 67]
+  17039400:
+    template: Khimaira_13
+    at:       [383.144, -116.500, 381.355, 128]
+    level:    [70, 70]
+  17039401:
+    template: Karababa
+    at:       [361.488, -116.500, 382.511]
+    level:    [75, 75]
+  17039402:
+    template: Khimaira_13
+    level:    [70, 70]
+  17039403:
+    template: Karababa
+    level:    [75, 75]
+  17039404:
+    template: Khimaira_13
+    level:    [70, 70]
+  17039405:
+    template: Karababa
+    level:    [75, 75]
+  17039406:
+    template: Gurfurlur_the_Menacing
+    at:       [383.008, -116.500, 380.188, 240]
+    level:    [85, 85]
+  17039407:
+    template: Hilltroll_Elite_Guard
+    at:       [387.000, -116.500, 383.000, 81]
+    level:    [85, 85]
+  17039408:
+    template: Hilltroll_Elite_Guard
+    at:       [386.909, -116.500, 377.468, 186]
+    level:    [85, 85]
+  17039409:
+    template: Woodtroll_Elite_Guard
+    at:       [389.000, -116.500, 386.000, 85]
+    level:    [85, 85]
+  17039410:
+    template: Woodtroll_Elite_Guard
+    at:       [385.920, -116.500, 378.578, 129]
+    level:    [85, 85]
+  17039411:
+    template: Gurfurlur_the_Menacing
+    at:       [-16.992, -16.500, -19.812, 240]
+    level:    [85, 85]
+  17039412:
+    template: Hilltroll_Elite_Guard
+    at:       [-13.000, -16.500, -17.000, 81]
+    level:    [85, 85]
+  17039413:
+    template: Hilltroll_Elite_Guard
+    at:       [-13.091, -16.500, -22.532, 186]
+    level:    [85, 85]
+  17039414:
+    template: Woodtroll_Elite_Guard
+    at:       [-11.000, -16.500, -14.000, 85]
+    level:    [85, 85]
+  17039415:
+    template: Woodtroll_Elite_Guard
+    at:       [-14.080, -16.500, -21.422, 129]
+    level:    [85, 85]
+  17039416:
+    template: Gurfurlur_the_Menacing
+    at:       [383.008, 83.500, -419.812, 240]
+    level:    [85, 85]
+  17039417:
+    template: Hilltroll_Elite_Guard
+    at:       [387.000, 83.500, -417.000, 81]
+    level:    [85, 85]
+  17039418:
+    template: Hilltroll_Elite_Guard
+    at:       [386.909, 83.500, -422.532, 186]
+    level:    [85, 85]
+  17039419:
+    template: Woodtroll_Elite_Guard
+    at:       [389.000, 83.500, -414.000, 85]
+    level:    [85, 85]
+  17039420:
+    template: Woodtroll_Elite_Guard
+    at:       [385.920, 83.500, -421.422, 129]
+    level:    [85, 85]

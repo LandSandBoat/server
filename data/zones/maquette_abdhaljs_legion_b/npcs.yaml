@@ -1,0 +1,210 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17952868:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17952880:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17952884:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17952885:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17952888:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 52
+    widescan: true
+
+  17952889:
+    script:       NPC[79]
+    display_name: NPC
+    at:           [0.000, -1.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  129
+      animation_sub:  16
+      name_vis:       32
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17952894:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+
+  17952895:
+    script:       Legion_Portal
+    display_name: Legion Portal
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 32
+    status:   normal
+    widescan: true
+
+  17952896:
+    script:       Legion_Portal
+    display_name: Legion Portal
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 32
+    status:   normal
+    widescan: true
+
+  17952897:
+    script:       Legion_Tome
+    display_name: Legion Tome
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+    status:   normal
+    widescan: true
+
+  17952898:
+    script:       Legion_Libretto
+    display_name: Legion Libretto
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+    status:   normal
+    widescan: true
+
+  17952899:
+    script:       monthly_master
+    display_name: monthly_master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+
+  17952901:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17952902:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17952903:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17952904:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17952905:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17952906:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17952907:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17952908:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40

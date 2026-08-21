@@ -1,0 +1,4811 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aggressor_Antlion:
+    id:            61
+    species:       antlion
+    type:          [notorious]
+    skill_list_id: 855
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          wind:  -2
+          earth:  3
+          light: -3
+          dark:   3
+        rank_status:
+          silence:     -2
+          slow:         3
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1347
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: very_common
+          item:   magnus_pole
+        - chance: always
+          one_of: [goetia_seal_head, cirque_seal_head, aoidos_seal_head, callers_seal_head]
+        - chance: uncommon
+          one_of: [goetia_seal_head, cirque_seal_head, aoidos_seal_head, callers_seal_head]
+
+  Amuckatrice:
+    id:            115
+    species:       cockatrice
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: club
+      jobs: [war, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 288
+        entity_flags: 1665
+        hitbox:         32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mangled_cockatrice_skin
+        - chance: common
+          item:   slice_of_cockatrice_meat
+        - chance: rare
+          item:   giant_bird_feather
+        - chance: very_rare
+          item:   cockatrice_skin
+      steal: [giant_bird_feather, giant_bird_plume] # audit needed
+      despoil:
+        giant_bird_feather: 0
+
+  Amun:
+    id:            116
+    species:       hecteye
+    type:          [notorious]
+    spell_list_id: 215
+    skill_list_id: 856
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 1173
+        model_size:      2
+        hitbox:         13
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: rare
+          item:   cantabanks_horn
+        - chance: always
+          one_of: [tantra_seal_head, navarchs_seal_head, creed_seal_head, iga_seal_head]
+        - chance: uncommon
+          one_of: [tantra_seal_head, navarchs_seal_head, creed_seal_head, iga_seal_head]
+
+  Ateuvhi:
+    id:            282
+    species:       euvhi
+    type:          [notorious]
+    skill_list_id: 109
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:    3
+          light:    3
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags:  1155
+        animation_sub:    6
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+
+  Bastion_Fighter:
+    id:      356
+    species: humes
+    attributes:
+      combat:
+        skill: great_axe
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  1
+          head:  4154
+          body:  8414
+          hands: 12300
+          legs:  16555
+          feet:  20538
+          main:  24674
+          sub:   28672
+        entity_flags: 129
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Bastion_Mage:
+    id:            357
+    species:       humes
+    spell_list_id: 21
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  2
+          head:  4096
+          body:  8203
+          hands: 12308
+          legs:  16527
+          feet:  20483
+          main:  24873
+          sub:   28672
+        entity_flags: 129
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Berstuk:
+    id:            398
+    species:       slug
+    type:          [notorious]
+    spell_list_id: 216
+    skill_list_id: 857
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          thunder: -1
+          water:   11
+        rank_status:
+          paralyze: -1
+          bind:     -1
+          poison:   11
+      render:
+        look:
+          type:  standard
+          model: 2022
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        32
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   sagacity_lappas
+        - chance: always
+          one_of: [raiders_seal_head, tantra_seal_head, charis_seal_head, iga_seal_head]
+        - chance: uncommon
+          one_of: [raiders_seal_head, tantra_seal_head, charis_seal_head, iga_seal_head]
+
+  Blazing_Eruca:
+    id:            448
+    species:       eruca
+    type:          [notorious]
+    spell_list_id: 217
+    skill_list_id: 858
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -2
+          dark:    -1
+        rank_status:
+          paralyze:   -1
+          bind:       -1
+          silence:    -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 2208
+        entity_flags:  135
+        animation_sub:   8
+        model_size:      3
+        hitbox:         27
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vihuela
+        - chance: always
+          one_of: [goetia_seal_head, bale_seal_head, iga_seal_head, cirque_seal_head]
+        - chance: uncommon
+          one_of: [goetia_seal_head, bale_seal_head, iga_seal_head, cirque_seal_head]
+
+  Chasm_Coeurl:
+    id:            700
+    species:       coeurl
+    skill_list_id: 71
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 367
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   coeurl_round
+        - chance: common
+          item:   slice_of_coeurl_meat
+        - chance: rare
+          item:   slice_of_coeurl_meat
+        - chance: very_rare
+          item:   coeurl_hide
+      despoil:
+        coeurl_hide:          0
+        slice_of_coeurl_meat: 0
+
+  Chasm_Gnat:
+    id:            701
+    species:       gnat
+    skill_list_id: 131
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   gnat_wing
+      despoil:
+        gnat_wing: 0
+
+  Crevice_Amoeban:
+    id:            835
+    species:       amoeban
+    spell_list_id: 21
+    skill_list_id: 5
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, drk]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          earth:   4
+          thunder: 2
+          water:   2
+          dark:    4
+        rank_status:
+          paralyze:   2
+          bind:       2
+          slow:       4
+          poison:     2
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2396
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+    loot:
+      drops:
+        - chance: rare
+          item:   amoeban_pseudopod
+        - chance: very_rare
+          item:   sanguinet
+      despoil:
+        amoeban_pseudopod: 0
+
+  Custodian:
+    id:      869
+    species: gargoyles
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 305
+        entity_flags: 2177
+        name_vis:       24
+        hitbox:         25
+      spawn:
+        type: [scripted]
+
+  Decayed_Flesh:
+    id:            943
+    species:       doomed
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         25
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_undying_ooze
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   undead_skin
+      despoil:
+        undead_skin: 0
+
+  Decontaminator:
+    id:      945
+    species: white_gallu
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 413
+        entity_flags: 2177
+        name_vis:       24
+        hitbox:         32
+      spawn:
+        type: [scripted]
+
+  Defile_Scorpion:
+    id:            956
+    species:       scorpion
+    spell_list_id: 21
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 286
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   gory_pincer
+        - chance: common
+          item:   scorpion_claw
+        - chance: rare
+          item:   scorpion_shell
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Disassembler:
+    id:      1048
+    species: unclassified
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 1823
+        entity_flags: 2177
+        name_vis:       24
+        hitbox:         25
+      spawn:
+        type: [scripted]
+
+  Drekavac:
+    id:            1117
+    species:       bhoot
+    type:          [notorious]
+    spell_list_id: 218
+    skill_list_id: 859
+    attributes:
+      combat:
+        skill: club
+      jobs: [sch, rdm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      5
+          wind:    -1
+          thunder: -2
+          water:   -1
+          light:   -2
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 369
+        model_size: 2
+        hitbox:     9
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   ney
+
+  Earth_Mover:
+    id:            1162
+    species:       acrolith
+    skill_list_id: 302
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  2
+          light:    6
+          dark:    11
+        rank_status:
+          paralyze:     3
+          bind:         3
+          silence:      3
+          slow:         3
+          light_sleep:  6
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1778
+        entity_flags: 3201
+        name_vis:       24
+        hitbox:         17
+      spawn:
+        type: [scripted]
+
+  Edifier:
+    id:            1176
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1825
+        entity_flags: 3201
+        name_vis:       24
+        hitbox:         25
+      spawn:
+        type: [scripted]
+
+  Entozoon:
+    id:            1236
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 2392
+        entity_flags: 1153
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lump_of_blanched_silver
+        - chance: common
+          item:   flint_stone
+        - chance: rare
+          item:   chunk_of_zinc_ore
+        - chance: very_rare
+          item:   chunk_of_silver_ore
+      despoil:
+        chunk_of_copper_ore: 0
+        chunk_of_iron_ore:   0
+        chunk_of_silver_ore: 0
+        chunk_of_zinc_ore:   0
+
+  Ephemeral_Amoeban:
+    id:            1243
+    species:       amoeban
+    spell_list_id: 21
+    skill_list_id: 5
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          earth:   4
+          thunder: 2
+          water:   2
+          dark:    4
+        rank_status:
+          paralyze:   2
+          bind:       2
+          slow:       4
+          poison:     2
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2396
+        entity_flags:  1153
+        animation_sub:    5
+        hitbox:           6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+    loot:
+      drops:
+        - chance: rare
+          item:   amoeban_pseudopod
+        - chance: very_rare
+          item:   sanguinet
+      despoil:
+        amoeban_pseudopod: 0
+
+  Ephemeral_Murex:
+    id:            1246
+    species:       murex
+    spell_list_id: 21
+    skill_list_id: 187
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          fire:    2
+          wind:    4
+          thunder: 4
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          silence:     4
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2397
+        entity_flags:  1153
+        animation_sub:    5
+        hitbox:           6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+    loot:
+      drops:
+        - chance: rare
+          item:   murex_spicule
+        - chance: very_rare
+          item:   sanguinet
+      despoil:
+        murex_spicule: 0
+
+  Eseuvhi:
+    id:            1259
+    species:       euvhi
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 109
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:    3
+          light:    3
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags:  1155
+        animation_sub:    6
+      spawn:
+        type: [scripted]
+
+  Funnel_Antlion:
+    id:            1439
+    species:       antlion
+    roam:          [ambush]
+    skill_list_id: 357
+    attributes:
+      combat:
+        skill: sword
+      jobs: [war, drk]
+      resists:
+        rank_element:
+          wind:  -2
+          earth:  3
+          light: -3
+          dark:   3
+        rank_status:
+          silence:     -2
+          slow:         3
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1348
+        entity_flags:  2179
+        animation_sub:    4
+        name_vis:        24
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        flags:      [aggro_ambush]
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   antlion_jaw
+        - chance: very_rare
+          item:   scarlet_stone
+      despoil:
+        antlion_jaw: 0
+
+  Gaizkin:
+    id:            1446
+    species:       doomed
+    type:          [notorious]
+    skill_list_id: 860
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 321
+        model_size:  2
+        hitbox:     34
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   jinx_discus
+        - chance: always
+          one_of: [tantra_seal_head, aoidos_seal_head, lancers_seal_head, savants_seal_head]
+        - chance: uncommon
+          one_of: [tantra_seal_head, aoidos_seal_head, lancers_seal_head, savants_seal_head]
+
+  Gieremund:
+    id:            1547
+    species:       hound
+    type:          [notorious]
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags:  157
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         28
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: common
+          item:   yoshihiro
+        - chance: always
+          one_of: [ravagers_seal_head, lancers_seal_head, raiders_seal_head, charis_seal_head]
+        - chance: uncommon
+          one_of: [ravagers_seal_head, lancers_seal_head, raiders_seal_head, charis_seal_head]
+
+  Granite_Borer:
+    id:            1789
+    species:       wamouracampa
+    type:          [notorious]
+    spell_list_id: 219
+    skill_list_id: 862
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1803
+        entity_flags:  135
+        animation_sub:   4
+        model_size:      3
+        hitbox:         21
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   volley_earring
+        - chance: always
+          one_of: [ravagers_seal_head, charis_seal_head, navarchs_seal_head, orison_seal_head]
+        - chance: uncommon
+          one_of: [ravagers_seal_head, charis_seal_head, navarchs_seal_head, orison_seal_head]
+
+  Gullycampa:
+    id:            1844
+    species:       wamouracampa
+    skill_list_id: 254
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1802
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   withered_cocoon
+        - chance: rare
+          item:   wamoura_cocoon
+      despoil:
+        wamoura_cocoon: 0
+        wamoura_scale:  0
+
+  Hannequet:
+    id:            1889
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   withered_bud
+        - chance: rare
+          item:   two-leaf_mandragora_bud
+        - chance: super_rare
+          item:   four-leaf_mandragora_bud
+      despoil:
+        two-leaf_mandragora_bud: 0
+        ball_of_saruta_cotton:   0
+
+  Ignis_Eruca:
+    id:            2053
+    species:       eruca
+    skill_list_id: 107
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -2
+          dark:    -1
+        rank_status:
+          paralyze:   -1
+          bind:       -1
+          silence:    -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 406
+        entity_flags:  1155
+        animation_sub:   12
+        model_size:       1
+        hitbox:          15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   eruca_egg
+        - chance: uncommon
+          item:   piece_of_crawler_cocoon
+        - chance: uncommon
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Immobilizer:
+    id:            2061
+    species:       chariot
+    skill_list_id: 63
+    attributes:
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1822
+        entity_flags: 3201
+        name_vis:       24
+        hitbox:         25
+      spawn:
+        type: [scripted]
+
+  Inugami:
+    id:            2084
+    species:       hound
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         25
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   wolf_hide
+        - chance: rare
+          item:   revival_tree_root
+      despoil:
+        wolf_hide:         0
+        revival_tree_root: 0
+
+  Ironclad_Cleaver:
+    id:            2091
+    species:       iron_giant
+    type:          [notorious]
+    skill_list_id: 863
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:  4
+          ice:   6
+          wind:  4
+          earth: 4
+          water: 2
+          light: 4
+          dark:  4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2393
+        entity_flags:  3207
+        animation_sub:    5
+        name_vis:        24
+        model_size:       3
+        hitbox:          41
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: always
+          item:   tantra_tathlum
+        - chance: always
+          item:   lancers_pelerine
+        - chance: very_common
+          item:   tandava_crackows
+        - chance: rare
+          item:   velox_harness
+        - chance: very_common
+          item:   jewel_of_wieldance
+        - chance: very_common
+          item:   card_of_wieldance
+
+  Itzpapalotl:
+    id:            2109
+    species:       wamoura
+    type:          [notorious]
+    spell_list_id: 236
+    skill_list_id: 864
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1808
+        entity_flags:  1695
+        animation_sub:    8
+        name_prefix:     32
+        model_size:       3
+        hitbox:          27
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+    loot:
+      drops:
+        - chance: always
+          item:   itzpapalotls_scale
+        - chance: very_common
+          item:   itzpapalotls_scale
+        - chance: always
+          item:   aces_leggings
+        - chance: rare
+          item:   heofon_knuckles
+        - chance: always
+          item:   stone_of_vision
+        - chance: very_common
+          item:   card_of_vision
+        - chance: very_common
+          item:   stone_of_ardor
+        - chance: uncommon
+          item:   coin_of_ardor
+
+  Kampe:
+    id:            2183
+    species:       great_scorpion
+    type:          [notorious]
+    skill_list_id: 865
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 2243
+        entity_flags: 669
+        model_size:     2
+        hitbox:        32
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   heed_ring
+        - chance: always
+          one_of: [lancers_seal_head, unkai_seal_head, ravagers_seal_head, bale_seal_head]
+        - chance: uncommon
+          one_of: [lancers_seal_head, unkai_seal_head, ravagers_seal_head, bale_seal_head]
+
+  Kharon:
+    id:            2219
+    species:       draugar
+    type:          [notorious]
+    spell_list_id: 220
+    skill_list_id: 868
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   elementa_grip
+        - chance: always
+          one_of: [sylvan_seal_head, callers_seal_head, ferine_seal_head, mavi_seal_head]
+        - chance: uncommon
+          one_of: [sylvan_seal_head, callers_seal_head, ferine_seal_head, mavi_seal_head]
+
+  Lusca:
+    id:            2454
+    species:       xzomit
+    type:          [notorious]
+    skill_list_id: 269
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          slow:     -2
+          poison:   -2
+      render:
+        look:
+          type:  standard
+          model: 528
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   clement_skean
+        - chance: rare
+          item:   khloros_blade
+        - chance: always
+          item:   card_of_vision
+        - chance: very_common
+          item:   coin_of_vision
+        - chance: very_common
+          item:   stone_of_ardor
+        - chance: very_common
+          item:   card_of_ardor
+
+  Maahes:
+    id:            2459
+    species:       coeurl
+    type:          [notorious]
+    spell_list_id: 221
+    skill_list_id: 869
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2207
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   vallus_grip
+
+  Mielikki:
+    id:            2650
+    species:       treant
+    type:          [notorious]
+    spell_list_id: 222
+    skill_list_id: 870
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, sch]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 395
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         43
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   bloom_buckler
+        - chance: always
+          one_of: [ferine_seal_head, callers_seal_head, navarchs_seal_head, cirque_seal_head]
+        - chance: uncommon
+          one_of: [ferine_seal_head, callers_seal_head, navarchs_seal_head, cirque_seal_head]
+
+  Murrain_Chigoe:
+    id:            2773
+    species:       chigoe
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2231
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:          6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   vial_of_demon_blood
+
+  Myriadeyes:
+    id:            2785
+    species:       hecteye
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   vial_of_mercury
+        - chance: rare
+          item:   hecteyes_eye
+      despoil:
+        hecteyes_eye: 0
+
+  Nightshade:
+    id:            2876
+    species:       mandragora
+    type:          [notorious]
+    skill_list_id: 871
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2377
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:          9
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   airy_ring
+        - chance: always
+          one_of: [creed_seal_head, aoidos_seal_head, sylvan_seal_head, mavi_seal_head]
+        - chance: uncommon
+          one_of: [creed_seal_head, aoidos_seal_head, sylvan_seal_head, mavi_seal_head]
+
+  Oppressor:
+    id:            2991
+    species:       chariot
+    skill_list_id: 63
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1824
+        entity_flags: 3201
+        name_vis:       24
+        hitbox:         25
+      spawn:
+        type: [scripted]
+
+  Overseer:
+    id:      3077
+    species: iron_giant
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:  4
+          ice:   6
+          wind:  4
+          earth: 4
+          water: 2
+          light: 4
+          dark:  4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2393
+        entity_flags: 3201
+        name_vis:       24
+        hitbox:         25
+      spawn:
+        type: [scripted]
+
+  Pallid_Percy:
+    id:            3087
+    species:       worm
+    type:          [notorious]
+    roam:          [worm]
+    spell_list_id: 223
+    skill_list_id: 872
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 2392
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        28
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   incantor_stone
+        - chance: always
+          one_of: [unkai_seal_head, estoqueurs_seal_head, raiders_seal_head, creed_seal_head]
+        - chance: uncommon
+          one_of: [unkai_seal_head, estoqueurs_seal_head, raiders_seal_head, creed_seal_head]
+
+  Qiqirn_Bewitcher:
+    id:            3247
+    species:       qiqirn
+    spell_list_id: 3
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1737
+        entity_flags: 2177
+        name_vis:       24
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Trapper:
+    id:            3266
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Ravager_Chariot:
+    id:            3329
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1821
+        entity_flags: 2177
+        name_vis:       24
+        hitbox:         25
+      spawn:
+        type: [scripted]
+
+  Rift_Dragon:
+    id:            3364
+    species:       dragon
+    skill_list_id: 2071
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 129
+        hitbox:        28
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cracked_dragonscale
+
+  Rift_Treant:
+    id:            3365
+    species:       treant
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 388
+        entity_flags: 129
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   great_root
+      steal: treant_bulb
+      despoil:
+        bag_of_vegetable_seeds: 0
+        treant_bulb:            0
+        bag_of_wildgrass_seeds: 0
+
+  Rock_Murex:
+    id:            3382
+    species:       murex
+    spell_list_id: 21
+    skill_list_id: 187
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          wind:    4
+          thunder: 4
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          silence:     4
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2397
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   murex_spicule
+        - chance: very_rare
+          item:   sanguinet
+      despoil:
+        murex_spicule: 0
+
+  Schnitter:
+    id:            3498
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_bone_chips
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+      despoil:
+        bone_chip: 0
+
+  Scrutinizer:
+    id:      3508
+    species: spheroid
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 1080
+        entity_flags: 129
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Smok:
+    id:            3678
+    species:       black_feathered
+    type:          [notorious]
+    spell_list_id: 225
+    skill_list_id: 874
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+          light: -2
+        rank_status:
+          poison:      -2
+          light_sleep:  6
+          dark_sleep:   6
+      render:
+        look:
+          type:  standard
+          model: 608
+        model_size:  3
+        hitbox:     70
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   bale_choker
+        - chance: always
+          item:   sylvan_chlamys
+        - chance: rare
+          item:   cybele_pants
+        - chance: very_common
+          item:   stone_of_ardor
+        - chance: very_common
+          item:   stone_of_wieldance
+
+  Spuk:
+    id:            3746
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   set_of_wailing_rags
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   luminicloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Sturdy_Pyxis:
+    id:      3798
+    species: mimic
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 267
+        entity_flags:  4739
+        animation_sub:   12
+        name_vis:       100
+        model_size:       1
+        hitbox:          16
+      spawn:
+        type: [scripted]
+
+  Sturdy_Pyxis_Small:
+    id:           7102
+    display_name: Sturdy_Pyxis
+    species:      mimic
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 267
+        entity_flags:  4739
+        animation_sub:   12
+        name_vis:       100
+        hitbox:          16
+      spawn:
+        type: [scripted]
+
+  Surveyor:
+    id:            3813
+    species:       spheroid
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 314
+        entity_flags: 131
+        model_size:     1
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Surveyor_Small:
+    id:            7101
+    display_name:  Surveyor
+    species:       spheroid
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 314
+        entity_flags: 131
+        hitbox:         5
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Svarbhanu:
+    id:            4662
+    species:       dragon
+    spell_list_id: 224
+    skill_list_id: 873
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        model_size:  2
+        hitbox:     39
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Tejas:
+    id:            3861
+    species:       ifrit
+    type:          [notorious]
+    skill_list_id: 875
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   -3
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      -3
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 793
+      spawn:
+        type: [scripted]
+
+  Terminus_Eft:
+    id:            3881
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lizard_egg
+        - chance: rare
+          item:   eft_skin
+        - chance: very_rare
+          item:   high-quality_eft_skin
+      despoil:
+        lizard_egg: 0
+        eft_skin:   0
+
+  Titlacauan:
+    id:            3932
+    species:       corse
+    type:          [notorious]
+    spell_list_id: 226
+    skill_list_id: 877
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:    2
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     3
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         2
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 2389
+        model_size:  3
+        hitbox:     21
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   barbarus_bhuj
+        - chance: always
+          item:   virtus_crossbow
+        - chance: always
+          item:   jewel_of_vision
+        - chance: very_common
+          item:   stone_of_vision
+        - chance: very_common
+          item:   jewel_of_ardor
+        - chance: very_common
+          item:   card_of_ardor
+
+  Treacle_Slug:
+    id:            3989
+    species:       slug
+    spell_list_id: 21
+    skill_list_id: 231
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          thunder: -1
+          water:   11
+        rank_status:
+          paralyze: -1
+          bind:     -1
+          poison:   11
+      render:
+        look:
+          type:  standard
+          model: 2021
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   extended_eyestalk
+        - chance: very_rare
+          item:   slug_eye
+      despoil:
+        slug_eye: 0
+
+  Tunga:
+    id:            4051
+    species:       chigoe
+    type:          [notorious]
+    roam:          [stealth]
+    spell_list_id: 227
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: staff
+        delay: 200
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1748
+        entity_flags:  661
+        animation_sub:   8
+        model_size:      2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: very_common
+          item:   magnus_axe
+        - chance: rare
+          item:   hikmet_hat
+        - chance: very_rare
+          item:   piece_of_malachite
+
+  Ulhuadshi:
+    id:            4080
+    species:       sandworm
+    type:          [notorious]
+    spell_list_id: 229
+    skill_list_id: 878
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     1
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      1
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2029
+        entity_flags: 1175
+        name_prefix:    32
+        model_size:      3
+        hitbox:         80
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   eradico_mitts
+        - chance: rare
+          item:   ame-no-ohabari
+        - chance: always
+          item:   ulhuadshis_fang
+        - chance: very_common
+          item:   ulhuadshis_fang
+        - chance: always
+          item:   coin_of_vision
+        - chance: very_common
+          item:   jewel_of_vision
+        - chance: very_common
+          item:   stone_of_wieldance
+        - chance: uncommon
+          item:   coin_of_wieldance
+
+  Vigilant_Gear:
+    id:            4229
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 2177
+        name_vis:       24
+        hitbox:          8
+      spawn:
+        type: [scripted]
+
+  Vigilant_Gears:
+    id:            4230
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags: 2177
+        name_vis:       24
+        name_prefix:    64
+        hitbox:          8
+      spawn:
+        type: [scripted]
+
+  Warbler:
+    id:            4288
+    species:       gnat
+    type:          [notorious]
+    skill_list_id: 879
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: common
+          item:   toki
+        - chance: always
+          one_of: [estoqueurs_seal_head, ferine_seal_head, sylvan_seal_head, savants_seal_head]
+        - chance: uncommon
+          one_of: [estoqueurs_seal_head, ferine_seal_head, sylvan_seal_head, savants_seal_head]
+
+  Wherwetrice:
+    id:            4328
+    species:       cockatrice
+    type:          [notorious]
+    skill_list_id: 880
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 288
+        entity_flags: 645
+        model_size:     2
+        hitbox:        43
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   divinus_grip
+        - chance: always
+          one_of:
+            orison_seal_head:     34.34
+            savants_seal_head:     24.7
+            estoqueurs_seal_head: 20.48
+            goetia_seal_head:     20.48
+        - chance: uncommon
+          one_of:
+            orison_seal_head:     34.34
+            savants_seal_head:     24.7
+            estoqueurs_seal_head: 20.48
+            goetia_seal_head:     20.48
+
+  Whiro:
+    id:            4329
+    species:       eft
+    type:          [notorious]
+    skill_list_id: 881
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: rare
+          item:   fluid_crossbow
+        - chance: always
+          one_of: [orison_seal_head, bale_seal_head, unkai_seal_head, mavi_seal_head]
+        - chance: uncommon
+          one_of: [orison_seal_head, bale_seal_head, unkai_seal_head, mavi_seal_head]
+
+  Yaanei:
+    id:            4400
+    species:       rook
+    type:          [notorious]
+    spell_list_id: 156
+    skill_list_id: 882
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, mnk]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2211
+        entity_flags: 133
+        model_size:     2
+        hitbox:        28
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+    loot:
+      drops:
+        - chance: always
+          item:   ferine_necklace
+        - chance: always
+          item:   estoqueurs_cape
+        - chance: rare
+          item:   aias_bonnet
+
+spawns:
+  17657857:
+    template: Crevice_Amoeban
+    at:       [-86.378, -28.261, -99.793, 25]
+    level:    [77, 80]
+  17657858:
+    template: Crevice_Amoeban
+    at:       [-93.483, -26.490, -100.675, 80]
+    level:    [77, 80]
+  17657859:
+    template: Crevice_Amoeban
+    at:       [-104.286, 23.542, -99.085, 140]
+    level:    [77, 80]
+  17657860:
+    template: Crevice_Amoeban
+    at:       [-133.171, 20.108, -99.989, 200]
+    level:    [77, 80]
+  17657861:
+    template: Crevice_Amoeban
+    at:       [-139.068, 20.183, -95.397, 250]
+    level:    [77, 80]
+  17657862:
+    template: Crevice_Amoeban
+    at:       [-139.363, 20.000, -107.582, 50]
+    level:    [77, 80]
+  17657863:
+    template: Crevice_Amoeban
+    at:       [-161.367, 9.907, -138.236, 100]
+    level:    [77, 80]
+  17657864:
+    template: Crevice_Amoeban
+    at:       [-168.527, 6.645, -136.008, 150]
+    level:    [77, 80]
+  17657865:
+    template: Crevice_Amoeban
+    at:       [-175.812, 4.072, -129.987, 200]
+    level:    [77, 80]
+  17657866:
+    template: Crevice_Amoeban
+    at:       [-180.542, 0.122, -121.617, 250]
+    level:    [77, 80]
+  17657867:
+    template: Crevice_Amoeban
+    at:       [-180.000, 0.195, -116.756, 80]
+    level:    [77, 80]
+  17657868:
+    template: Crevice_Amoeban
+    at:       [-169.302, 6.368, -135.514, 70]
+    level:    [77, 80]
+  17657869:
+    template: Ephemeral_Amoeban
+    at:       [-138.691, 20.202, -93.280, 126]
+    level:    [79, 80]
+  17657870:
+    template: Rock_Murex
+    at:       [-21.764, 30.000, -119.382, 25]
+    level:    [79, 88]
+  17657871:
+    template: Rock_Murex
+    at:       [-20.230, 29.484, -123.011, 50]
+    level:    [79, 88]
+  17657872:
+    template: Rock_Murex
+    at:       [-20.298, 29.247, -123.834, 75]
+    level:    [79, 88]
+  17657873:
+    template: Rock_Murex
+    at:       [-9.445, 23.774, -138.102, 100]
+    level:    [79, 88]
+  17657874:
+    template: Rock_Murex
+    at:       [15.547, 16.320, -170.116, 125]
+    level:    [79, 88]
+  17657875:
+    template: Rock_Murex
+    at:       [15.299, 16.230, -169.790, 150]
+    level:    [79, 88]
+  17657876:
+    template: Rock_Murex
+    at:       [12.639, 15.319, -174.481, 175]
+    level:    [79, 88]
+  17657877:
+    template: Rock_Murex
+    at:       [10.997, 14.455, -174.437, 200]
+    level:    [79, 88]
+  17657878:
+    template: Rock_Murex
+    at:       [4.255, 11.186, -179.292, 225]
+    level:    [79, 88]
+  17657879:
+    template: Rock_Murex
+    at:       [-14.784, 0.061, -220.766, 250]
+    level:    [79, 88]
+  17657880:
+    template: Rock_Murex
+    at:       [1.905, -0.427, -221.704, 25]
+    level:    [79, 88]
+  17657881:
+    template: Rock_Murex
+    at:       [-21.284, 0.433, -220.319, 50]
+    level:    [79, 88]
+  17657882:
+    template: Ephemeral_Murex
+    at:       [-21.505, 0.297, -218.275, 75]
+    level:    [79, 88]
+  17657883:
+    template: Decayed_Flesh
+    at:       [-93.267, 4.619, -51.543, 100]
+    level:    [83, 84]
+  17657884:
+    template: Decayed_Flesh
+    at:       [-96.898, 1.243, -46.138, 125]
+    level:    [83, 84]
+  17657885:
+    template: Decayed_Flesh
+    at:       [-98.557, 0.001, -38.512, 150]
+    level:    [83, 84]
+  17657886:
+    template: Decayed_Flesh
+    at:       [-113.259, 0.021, -2.906, 175]
+    level:    [83, 84]
+  17657887:
+    template: Decayed_Flesh
+    at:       [-110.369, -0.247, -2.793, 200]
+    level:    [83, 84]
+  17657888:
+    template: Decayed_Flesh
+    at:       [-119.436, 0.001, -5.658, 225]
+    level:    [83, 84]
+  17657889:
+    template: Decayed_Flesh
+    at:       [-100.253, -2.564, 51.240, 250]
+    level:    [83, 84]
+  17657890:
+    template: Decayed_Flesh
+    at:       [-105.000, 0.001, 19.000, 25]
+    level:    [83, 84]
+  17657891:
+    template: Decayed_Flesh
+    at:       [-99.000, 0.001, 39.000, 50]
+    level:    [83, 84]
+  17657892:
+    template: Ephemeral_Amoeban
+    at:       [-110.280, 0.001, -8.235, 75]
+    level:    [79, 80]
+  17657893:
+    template: Spuk
+    at:       [-99.690, -9.776, 141.975, 100]
+    level:    [82, 83]
+  17657894:
+    template: Spuk
+    at:       [-101.780, -9.413, 138.132, 125]
+    level:    [82, 83]
+  17657895:
+    template: Spuk
+    at:       [-98.157, -10.031, 148.505, 150]
+    level:    [82, 83]
+  17657896:
+    template: Spuk
+    at:       [-142.833, -4.858, 181.930, 175]
+    level:    [82, 83]
+  17657897:
+    template: Spuk
+    at:       [-138.584, -5.875, 181.911, 200]
+    level:    [82, 83]
+  17657898:
+    template: Spuk
+    at:       [-180.871, 0.001, 199.171, 225]
+    level:    [82, 83]
+  17657899:
+    template: Spuk
+    at:       [-185.176, 0.014, 223.919, 250]
+    level:    [82, 83]
+  17657900:
+    template: Spuk
+    at:       [-181.026, 0.106, 226.179, 25]
+    level:    [82, 83]
+  17657901:
+    template: Spuk
+    at:       [-176.948, 0.087, 223.897, 50]
+    level:    [82, 83]
+  17657902:
+    template: Spuk
+    at:       [-185.478, 0.001, 225.191, 75]
+    level:    [82, 83]
+  17657903:
+    template: Spuk
+    at:       [-201.051, 10.000, 261.509, 100]
+    level:    [82, 83]
+  17657904:
+    template: Spuk
+    at:       [-222.326, 10.607, 258.429, 125]
+    level:    [82, 83]
+  17657905:
+    template: Spuk
+    at:       [-223.018, 10.565, 254.329, 150]
+    level:    [82, 83]
+  17657906:
+    template: Spuk
+    at:       [-179.000, 2.000, 247.000, 175]
+    level:    [82, 83]
+  17657907:
+    template: Ephemeral_Amoeban
+    at:       [-181.089, 0.126, 204.226, 200]
+    level:    [79, 80]
+  17657908:
+    template: Myriadeyes
+    at:       [22.689, 10.172, 22.271, 225]
+    level:    [82, 83]
+  17657909:
+    template: Myriadeyes
+    at:       [18.160, 10.060, 17.089, 250]
+    level:    [82, 83]
+  17657910:
+    template: Myriadeyes
+    at:       [17.243, 10.039, 16.756, 25]
+    level:    [82, 83]
+  17657911:
+    template: Myriadeyes
+    at:       [24.043, 10.000, 15.935, 50]
+    level:    [82, 83]
+  17657912:
+    template: Myriadeyes
+    at:       [23.923, 10.004, 13.135, 75]
+    level:    [82, 83]
+  17657913:
+    template: Myriadeyes
+    at:       [61.014, 20.113, -4.144, 100]
+    level:    [82, 83]
+  17657914:
+    template: Myriadeyes
+    at:       [66.561, 20.310, -22.050, 125]
+    level:    [82, 83]
+  17657915:
+    template: Myriadeyes
+    at:       [64.165, 20.235, -22.655, 150]
+    level:    [82, 83]
+  17657916:
+    template: Myriadeyes
+    at:       [60.388, 20.113, -10.036, 175]
+    level:    [82, 83]
+  17657917:
+    template: Myriadeyes
+    at:       [61.846, 20.285, -19.604, 200]
+    level:    [82, 83]
+  17657918:
+    template: Myriadeyes
+    at:       [61.382, 20.192, -27.478, 225]
+    level:    [82, 83]
+  17657919:
+    template: Myriadeyes
+    at:       [59.177, 19.715, -42.118, 250]
+    level:    [82, 83]
+  17657920:
+    template: Myriadeyes
+    at:       [57.677, 20.043, -18.224, 30]
+    level:    [82, 83]
+  17657921:
+    template: Myriadeyes
+    at:       [15.141, 9.626, -57.255, 60]
+    level:    [82, 83]
+  17657922:
+    template: Myriadeyes
+    at:       [14.114, 9.951, -59.913, 90]
+    level:    [82, 83]
+  17657923:
+    template: Myriadeyes
+    at:       [2.473, 9.632, -61.509, 120]
+    level:    [82, 83]
+  17657924:
+    template: Myriadeyes
+    at:       [-22.536, 10.612, -57.960, 150]
+    level:    [82, 83]
+  17657925:
+    template: Myriadeyes
+    at:       [17.000, 9.000, -56.000, 180]
+    level:    [82, 83]
+  17657926:
+    template: Ephemeral_Amoeban
+    at:       [64.165, 20.235, -22.655, 210]
+    level:    [79, 80]
+  17657927:
+    template: Treacle_Slug
+    at:       [-241.404, -3.687, -29.733, 240]
+    level:    [79, 80]
+  17657928:
+    template: Treacle_Slug
+    at:       [-239.549, -3.983, -35.655, 20]
+    level:    [79, 80]
+  17657929:
+    template: Treacle_Slug
+    at:       [-234.962, -3.875, -48.096, 50]
+    level:    [79, 80]
+  17657930:
+    template: Treacle_Slug
+    at:       [-229.464, -3.673, -36.931, 80]
+    level:    [79, 80]
+  17657931:
+    template: Treacle_Slug
+    at:       [-228.946, -5.242, -9.994, 110]
+    level:    [79, 80]
+  17657932:
+    template: Treacle_Slug
+    at:       [-215.530, -8.877, -14.010, 140]
+    level:    [79, 80]
+  17657933:
+    template: Treacle_Slug
+    at:       [-202.540, -12.000, -0.804, 170]
+    level:    [79, 80]
+  17657934:
+    template: Treacle_Slug
+    at:       [-227.818, -5.674, -4.969, 200]
+    level:    [79, 80]
+  17657935:
+    template: Treacle_Slug
+    at:       [-235.638, -3.733, -9.156, 230]
+    level:    [79, 80]
+  17657936:
+    template: Treacle_Slug
+    at:       [-270.629, -3.788, -34.215, 10]
+    level:    [79, 80]
+  17657937:
+    template: Treacle_Slug
+    at:       [-210.000, -4.000, -26.000, 93]
+    level:    [79, 80]
+  17657938:
+    template: Ephemeral_Amoeban
+    at:       [-264.573, -3.569, -26.069, 70]
+    level:    [79, 80]
+  17657939:
+    template: Crevice_Amoeban
+    at:       [-269.330, -4.409, -151.273, 100]
+    level:    [77, 80]
+  17657940:
+    template: Crevice_Amoeban
+    at:       [-267.311, -4.354, -150.835, 130]
+    level:    [77, 80]
+  17657941:
+    template: Crevice_Amoeban
+    at:       [-267.446, -3.315, -142.704, 160]
+    level:    [77, 80]
+  17657942:
+    template: Crevice_Amoeban
+    at:       [-247.830, -3.675, -145.562, 190]
+    level:    [77, 80]
+  17657943:
+    template: Crevice_Amoeban
+    at:       [-252.657, -4.466, -151.010, 220]
+    level:    [77, 80]
+  17657944:
+    template: Crevice_Amoeban
+    at:       [-272.704, -4.001, -106.471, 250]
+    level:    [77, 80]
+  17657945:
+    template: Crevice_Amoeban
+    at:       [-262.559, -4.180, -96.066, 30]
+    level:    [77, 80]
+  17657946:
+    template: Crevice_Amoeban
+    at:       [-261.411, -4.322, -97.201, 60]
+    level:    [77, 80]
+  17657947:
+    template: Crevice_Amoeban
+    at:       [-257.783, -4.500, -95.919, 90]
+    level:    [77, 80]
+  17657948:
+    template: Crevice_Amoeban
+    at:       [-250.872, -4.349, -86.792, 120]
+    level:    [77, 80]
+  17657949:
+    template: Crevice_Amoeban
+    at:       [-250.586, -4.323, -93.360, 150]
+    level:    [77, 80]
+  17657950:
+    template: Crevice_Amoeban
+    at:       [-239.898, 1.944, -107.852, 180]
+    level:    [77, 80]
+  17657951:
+    template: Crevice_Amoeban
+    at:       [-240.794, 3.935, -116.760, 210]
+    level:    [77, 80]
+  17657952:
+    template: Crevice_Amoeban
+    at:       [-241.759, 4.000, -118.513, 240]
+    level:    [77, 80]
+  17657953:
+    template: Crevice_Amoeban
+    at:       [-241.952, 0.861, -135.874, 20]
+    level:    [77, 80]
+  17657954:
+    template: Crevice_Amoeban
+    at:       [-241.345, 0.566, -136.676, 50]
+    level:    [77, 80]
+  17657955:
+    template: Crevice_Amoeban
+    at:       [-251.717, -0.116, -133.804, 80]
+    level:    [77, 80]
+  17657956:
+    template: Crevice_Amoeban
+    at:       [-252.676, -1.484, -138.946, 110]
+    level:    [77, 80]
+  17657957:
+    template: Ephemeral_Amoeban
+    at:       [-265.714, -3.738, -131.628, 85]
+    level:    [79, 80]
+  17657958:
+    template: Defile_Scorpion
+    at:       [-411.379, -3.972, -126.319, 170]
+    level:    [81, 82]
+  17657959:
+    template: Defile_Scorpion
+    at:       [-423.867, -3.243, -124.317, 200]
+    level:    [81, 82]
+  17657960:
+    template: Defile_Scorpion
+    at:       [-406.344, -4.048, -126.210, 230]
+    level:    [81, 82]
+  17657961:
+    template: Defile_Scorpion
+    at:       [-404.332, -3.109, -138.244, 20]
+    level:    [81, 82]
+  17657962:
+    template: Defile_Scorpion
+    at:       [-393.377, -3.869, -159.910, 50]
+    level:    [81, 82]
+  17657963:
+    template: Defile_Scorpion
+    at:       [-398.789, 2.107, -188.959, 80]
+    level:    [81, 82]
+  17657964:
+    template: Defile_Scorpion
+    at:       [-387.441, 2.001, -194.616, 110]
+    level:    [81, 82]
+  17657965:
+    template: Defile_Scorpion
+    at:       [-391.649, 2.749, -194.641, 140]
+    level:    [81, 82]
+  17657966:
+    template: Defile_Scorpion
+    at:       [-358.569, -4.000, -201.442, 170]
+    level:    [81, 82]
+  17657967:
+    template: Defile_Scorpion
+    at:       [-342.864, -3.459, -194.219, 200]
+    level:    [81, 82]
+  17657968:
+    template: Defile_Scorpion
+    at:       [-366.623, -4.002, -177.528, 230]
+    level:    [81, 82]
+  17657969:
+    template: Defile_Scorpion
+    at:       [-359.969, -3.828, -167.445, 10]
+    level:    [81, 82]
+  17657970:
+    template: Defile_Scorpion
+    at:       [-362.411, -4.000, -157.905, 40]
+    level:    [81, 82]
+  17657971:
+    template: Ephemeral_Amoeban
+    at:       [-361.855, -3.895, -191.314, 70]
+    level:    [79, 80]
+  17657972:
+    template: Rift_Dragon
+    at:       [-524.636, -3.968, 3.247, 100]
+    level:    [84, 85]
+  17657973:
+    template: Rift_Dragon
+    at:       [-527.822, -4.316, -9.145, 130]
+    level:    [84, 85]
+  17657974:
+    template: Rift_Dragon
+    at:       [-540.289, -3.277, 5.081, 160]
+    level:    [84, 85]
+  17657975:
+    template: Rift_Dragon
+    at:       [-530.523, -8.148, -55.652, 190]
+    level:    [84, 85]
+  17657976:
+    template: Rift_Dragon
+    at:       [-546.617, -11.325, -55.383, 220]
+    level:    [84, 85]
+  17657977:
+    template: Rift_Dragon
+    at:       [-522.417, -9.185, -63.967, 250]
+    level:    [84, 85]
+  17657978:
+    template: Rift_Dragon
+    at:       [-559.629, -13.114, -88.864, 30]
+    level:    [84, 85]
+  17657979:
+    template: Ephemeral_Amoeban
+    at:       [-510.848, -10.229, -65.191, 60]
+    level:    [79, 80]
+  17657980:
+    template: Funnel_Antlion
+    at:       [-514.000, -3.000, -13.000, 90]
+  17657981:
+    template: Funnel_Antlion
+    at:       [-516.000, -3.000, 19.000, 120]
+  17657982:
+    template: Funnel_Antlion
+    at:       [-511.000, -3.000, 39.000, 150]
+  17657983:
+    template: Funnel_Antlion
+    at:       [-502.000, -4.000, 31.000, 180]
+  17657984:
+    template: Funnel_Antlion
+    at:       [-487.000, -4.000, 31.000, 210]
+  17657985:
+    template: Funnel_Antlion
+    at:       [-481.000, -3.000, 54.000, 240]
+  17657986:
+    template: Funnel_Antlion
+    at:       [-483.000, -3.000, 58.000, 20]
+  17657987:
+    template: Funnel_Antlion
+    at:       [-474.000, -4.000, 95.000, 50]
+  17657988:
+    template: Funnel_Antlion
+    at:       [-478.000, -3.000, 97.000, 80]
+  17657989:
+    template: Funnel_Antlion
+    at:       [-464.000, -3.000, 82.000, 110]
+  17657990:
+    template: Funnel_Antlion
+    at:       [-461.000, -3.000, 78.000, 140]
+  17657991:
+    template: Funnel_Antlion
+    at:       [-421.000, -3.000, 80.000, 170]
+  17657992:
+    template: Funnel_Antlion
+    at:       [-411.000, -3.000, 82.000, 200]
+  17657993:
+    template: Funnel_Antlion
+    at:       [-433.000, -4.000, 110.000, 230]
+  17657994:
+    template: Funnel_Antlion
+    at:       [-402.000, -3.000, 65.000, 10]
+  17657995:
+    template: Funnel_Antlion
+    at:       [-400.000, -3.000, 102.000, 40]
+  17657996:
+    template: Ephemeral_Amoeban
+    at:       [-516.520, -4.137, 128.019, 70]
+    level:    [79, 80]
+  17657997:
+    template: Chasm_Gnat
+    at:       [-482.869, -3.511, 252.945, 100]
+    level:    [81, 82]
+  17657998:
+    template: Chasm_Gnat
+    at:       [-488.112, -4.000, 234.470, 130]
+    level:    [81, 82]
+  17657999:
+    template: Chasm_Gnat
+    at:       [-506.196, -3.584, 237.512, 160]
+    level:    [81, 82]
+  17658000:
+    template: Chasm_Gnat
+    at:       [-509.457, -3.825, 237.412, 190]
+    level:    [81, 82]
+  17658001:
+    template: Chasm_Gnat
+    at:       [-514.309, -4.000, 236.059, 220]
+    level:    [81, 82]
+  17658002:
+    template: Chasm_Gnat
+    at:       [-516.164, -4.000, 242.277, 250]
+    level:    [81, 82]
+  17658003:
+    template: Chasm_Gnat
+    at:       [-476.369, -4.000, 236.310, 30]
+    level:    [81, 82]
+  17658004:
+    template: Chasm_Gnat
+    at:       [-494.297, -4.121, 251.280, 60]
+    level:    [81, 82]
+  17658005:
+    template: Chasm_Gnat
+    at:       [-501.817, -3.236, 238.599, 90]
+    level:    [81, 82]
+  17658006:
+    template: Chasm_Gnat
+    at:       [-513.253, -3.863, 241.986, 120]
+    level:    [81, 82]
+  17658007:
+    template: Chasm_Gnat
+    at:       [-501.817, -3.236, 238.599, 150]
+    level:    [81, 82]
+  17658008:
+    template: Chasm_Gnat
+    at:       [-520.973, -3.620, 228.395, 180]
+    level:    [81, 82]
+  17658009:
+    template: Chasm_Gnat
+    at:       [-524.742, -3.687, 226.692, 210]
+    level:    [81, 82]
+  17658010:
+    template: Chasm_Gnat
+    at:       [-542.736, -3.240, 205.645, 240]
+    level:    [81, 82]
+  17658011:
+    template: Ephemeral_Amoeban
+    at:       [-517.714, -4.014, 206.060, 20]
+    level:    [79, 80]
+  17658012:
+    template: Inugami
+    at:       [-383.935, -4.957, 302.414, 50]
+    level:    [81, 82]
+  17658013:
+    template: Inugami
+    at:       [-380.833, -4.272, 307.147, 80]
+    level:    [81, 82]
+  17658014:
+    template: Inugami
+    at:       [-401.958, -3.730, 329.390, 110]
+    level:    [81, 82]
+  17658015:
+    template: Inugami
+    at:       [-382.753, -3.138, 318.563, 140]
+    level:    [81, 82]
+  17658016:
+    template: Inugami
+    at:       [-404.900, -3.376, 300.781, 170]
+    level:    [81, 82]
+  17658017:
+    template: Inugami
+    at:       [-394.929, -3.425, 295.989, 200]
+    level:    [81, 82]
+  17658018:
+    template: Inugami
+    at:       [-401.958, -3.730, 329.390, 230]
+    level:    [81, 82]
+  17658019:
+    template: Inugami
+    at:       [-400.681, -2.931, 301.532, 10]
+    level:    [81, 82]
+  17658020:
+    template: Inugami
+    at:       [-437.991, -4.000, 317.899, 40]
+    level:    [81, 82]
+  17658021:
+    template: Inugami
+    at:       [-415.721, -3.374, 326.228, 70]
+    level:    [81, 82]
+  17658022:
+    template: Inugami
+    at:       [-377.071, -3.087, 349.952, 100]
+    level:    [81, 82]
+  17658023:
+    template: Inugami
+    at:       [-375.661, -2.917, 351.476, 130]
+    level:    [81, 82]
+  17658024:
+    template: Inugami
+    at:       [-370.807, -3.545, 354.852, 160]
+    level:    [81, 82]
+  17658025:
+    template: Inugami
+    at:       [-380.833, -4.272, 307.147, 190]
+    level:    [81, 82]
+  17658026:
+    template: Inugami
+    at:       [-365.762, -4.152, 351.153, 220]
+    level:    [81, 82]
+  17658027:
+    template: Inugami
+    at:       [-359.985, -3.658, 349.166, 250]
+    level:    [81, 82]
+  17658028:
+    template: Inugami
+    at:       [-424.316, -3.341, 317.074, 30]
+    level:    [81, 82]
+  17658029:
+    template: Ephemeral_Amoeban
+    at:       [-438.100, -4.000, 317.907, 60]
+    level:    [79, 80]
+  17658030:
+    template: Schnitter
+    at:       [-342.148, -3.107, 159.746, 90]
+    level:    [81, 82]
+  17658031:
+    template: Schnitter
+    at:       [-351.832, -4.148, 170.085, 120]
+    level:    [81, 82]
+  17658032:
+    template: Schnitter
+    at:       [-354.541, -3.511, 177.456, 150]
+    level:    [81, 82]
+  17658033:
+    template: Schnitter
+    at:       [-346.801, -4.685, 176.138, 180]
+    level:    [81, 82]
+  17658034:
+    template: Schnitter
+    at:       [-384.024, -3.205, 197.976, 210]
+    level:    [81, 82]
+  17658035:
+    template: Schnitter
+    at:       [-404.956, -3.976, 194.251, 240]
+    level:    [81, 82]
+  17658036:
+    template: Schnitter
+    at:       [-396.949, -4.000, 200.729, 20]
+    level:    [81, 82]
+  17658037:
+    template: Schnitter
+    at:       [-401.594, -4.000, 201.464, 50]
+    level:    [81, 82]
+  17658038:
+    template: Schnitter
+    at:       [-389.107, -3.731, 195.764, 80]
+    level:    [81, 82]
+  17658039:
+    template: Schnitter
+    at:       [-362.018, -3.711, 230.193, 110]
+    level:    [81, 82]
+  17658040:
+    template: Schnitter
+    at:       [-361.009, -4.000, 241.637, 140]
+    level:    [81, 82]
+  17658041:
+    template: Schnitter
+    at:       [-356.460, -4.000, 237.849, 170]
+    level:    [81, 82]
+  17658042:
+    template: Schnitter
+    at:       [-368.283, -3.786, 240.499, 200]
+    level:    [81, 82]
+  17658043:
+    template: Schnitter
+    at:       [-362.903, -4.001, 239.349, 230]
+    level:    [81, 82]
+  17658044:
+    template: Schnitter
+    at:       [-358.000, -3.000, 215.000, 10]
+    level:    [81, 82]
+  17658045:
+    template: Schnitter
+    at:       [-363.000, -4.000, 203.000, 40]
+    level:    [81, 82]
+  17658046:
+    template: Schnitter
+    at:       [-352.000, -4.000, 190.000, 70]
+    level:    [81, 82]
+  17658047:
+    template: Ephemeral_Amoeban
+    at:       [-367.499, -3.825, 198.172, 100]
+    level:    [79, 80]
+  17658048:
+    template: Rock_Murex
+    at:       [51.636, -3.659, -155.818, 130]
+    level:    [79, 88]
+  17658049:
+    template: Rock_Murex
+    at:       [65.894, -3.398, -159.871, 160]
+    level:    [79, 88]
+  17658050:
+    template: Rock_Murex
+    at:       [48.848, -3.982, -148.993, 190]
+    level:    [79, 88]
+  17658051:
+    template: Rock_Murex
+    at:       [53.520, -3.203, -132.367, 220]
+    level:    [79, 88]
+  17658052:
+    template: Rock_Murex
+    at:       [78.063, -3.727, -133.151, 250]
+    level:    [79, 88]
+  17658053:
+    template: Rock_Murex
+    at:       [85.813, -3.773, -122.291, 30]
+    level:    [79, 88]
+  17658054:
+    template: Rock_Murex
+    at:       [92.017, -3.996, -144.079, 60]
+    level:    [79, 88]
+  17658055:
+    template: Rock_Murex
+    at:       [116.414, 4.335, -145.470, 90]
+    level:    [79, 88]
+  17658056:
+    template: Rock_Murex
+    at:       [119.666, 4.214, -151.895, 120]
+    level:    [79, 88]
+  17658057:
+    template: Rock_Murex
+    at:       [99.373, -0.139, -150.117, 150]
+    level:    [79, 88]
+  17658058:
+    template: Rock_Murex
+    at:       [117.982, 4.171, -129.443, 180]
+    level:    [79, 88]
+  17658059:
+    template: Rock_Murex
+    at:       [132.260, 5.338, -144.859, 210]
+    level:    [79, 88]
+  17658060:
+    template: Rock_Murex
+    at:       [139.565, 4.108, -151.463, 240]
+    level:    [79, 88]
+  17658061:
+    template: Ephemeral_Murex
+    at:       [54.923, -3.910, -140.782, 20]
+    level:    [79, 88]
+  17658062:
+    template: Ignis_Eruca
+    at:       [169.941, 6.007, -199.197, 50]
+    level:    [79, 80]
+  17658063:
+    template: Ignis_Eruca
+    at:       [167.962, 5.012, -198.466, 80]
+    level:    [79, 80]
+  17658064:
+    template: Ignis_Eruca
+    at:       [167.936, 7.138, -212.437, 110]
+    level:    [79, 80]
+  17658065:
+    template: Ignis_Eruca
+    at:       [187.282, 16.113, -211.151, 140]
+    level:    [79, 80]
+  17658066:
+    template: Ignis_Eruca
+    at:       [190.915, 19.338, -229.955, 170]
+    level:    [79, 80]
+  17658067:
+    template: Ignis_Eruca
+    at:       [198.049, 20.000, -237.781, 200]
+    level:    [79, 80]
+  17658068:
+    template: Ignis_Eruca
+    at:       [200.421, 19.781, -245.754, 230]
+    level:    [79, 80]
+  17658069:
+    template: Ignis_Eruca
+    at:       [172.425, 12.739, -257.621, 10]
+    level:    [79, 80]
+  17658070:
+    template: Ignis_Eruca
+    at:       [201.417, 20.292, -231.810, 40]
+    level:    [79, 80]
+  17658071:
+    template: Ignis_Eruca
+    at:       [204.965, 18.286, -250.559, 70]
+    level:    [79, 80]
+  17658072:
+    template: Ignis_Eruca
+    at:       [187.571, 11.769, -274.139, 100]
+    level:    [79, 80]
+  17658073:
+    template: Ignis_Eruca
+    at:       [195.920, 13.048, -269.419, 130]
+    level:    [79, 80]
+  17658074:
+    template: Ignis_Eruca
+    at:       [170.738, 12.280, -279.433, 160]
+    level:    [79, 80]
+  17658075:
+    template: Ignis_Eruca
+    at:       [172.481, 11.643, -270.859, 190]
+    level:    [79, 80]
+  17658076:
+    template: Ephemeral_Murex
+    at:       [194.063, 18.800, -246.843, 220]
+    level:    [79, 88]
+  17658077:
+    template: Chasm_Coeurl
+    at:       [130.106, 6.736, -82.638, 250]
+    level:    [79, 80]
+  17658078:
+    template: Chasm_Coeurl
+    at:       [154.958, 19.386, -65.481, 30]
+    level:    [79, 80]
+  17658079:
+    template: Chasm_Coeurl
+    at:       [164.829, 20.082, -69.250, 60]
+    level:    [79, 80]
+  17658080:
+    template: Chasm_Coeurl
+    at:       [133.919, 13.951, -58.175, 90]
+    level:    [79, 80]
+  17658081:
+    template: Chasm_Coeurl
+    at:       [144.729, 17.038, -54.192, 120]
+    level:    [79, 80]
+  17658082:
+    template: Chasm_Coeurl
+    at:       [154.988, 20.024, -57.155, 150]
+    level:    [79, 80]
+  17658083:
+    template: Chasm_Coeurl
+    at:       [125.396, 12.061, -42.531, 180]
+    level:    [79, 80]
+  17658084:
+    template: Chasm_Coeurl
+    at:       [124.461, 10.969, -52.150, 210]
+    level:    [79, 80]
+  17658085:
+    template: Chasm_Coeurl
+    at:       [131.038, 13.517, -40.980, 240]
+    level:    [79, 80]
+  17658086:
+    template: Chasm_Coeurl
+    at:       [155.874, 20.291, -20.189, 20]
+    level:    [79, 80]
+  17658087:
+    template: Chasm_Coeurl
+    at:       [148.389, 19.465, -32.666, 50]
+    level:    [79, 80]
+  17658088:
+    template: Chasm_Coeurl
+    at:       [162.350, 20.187, -7.751, 80]
+    level:    [79, 80]
+  17658089:
+    template: Chasm_Coeurl
+    at:       [139.000, 15.000, -45.000, 110]
+    level:    [79, 80]
+  17658090:
+    template: Chasm_Coeurl
+    at:       [132.000, 12.000, -9.000, 140]
+    level:    [79, 80]
+  17658091:
+    template: Chasm_Coeurl
+    at:       [140.000, 15.000, 2.000, 170]
+    level:    [79, 80]
+  17658092:
+    template: Chasm_Coeurl
+    at:       [161.000, 20.000, 6.000, 200]
+    level:    [79, 80]
+  17658093:
+    template: Chasm_Coeurl
+    at:       [141.000, 13.000, -82.000, 230]
+    level:    [79, 80]
+  17658094:
+    template: Ephemeral_Murex
+    at:       [151.663, 18.343, -14.747, 10]
+    level:    [79, 88]
+  17658095:
+    template: Amuckatrice
+    at:       [118.338, 11.888, 43.137, 40]
+    level:    [81, 82]
+  17658096:
+    template: Amuckatrice
+    at:       [127.434, 12.429, 43.608, 70]
+    level:    [81, 82]
+  17658097:
+    template: Amuckatrice
+    at:       [90.985, 5.616, 40.028, 100]
+    level:    [81, 82]
+  17658098:
+    template: Amuckatrice
+    at:       [88.107, 4.660, 39.828, 130]
+    level:    [81, 82]
+  17658099:
+    template: Amuckatrice
+    at:       [92.829, 3.430, 52.187, 160]
+    level:    [81, 82]
+  17658100:
+    template: Amuckatrice
+    at:       [84.877, 3.980, 44.978, 190]
+    level:    [81, 82]
+  17658101:
+    template: Amuckatrice
+    at:       [158.526, 12.802, 70.792, 220]
+    level:    [81, 82]
+  17658102:
+    template: Amuckatrice
+    at:       [183.823, 19.503, 62.026, 250]
+    level:    [81, 82]
+  17658103:
+    template: Amuckatrice
+    at:       [182.705, 20.211, 51.926, 30]
+    level:    [81, 82]
+  17658104:
+    template: Amuckatrice
+    at:       [182.394, 17.218, 89.095, 60]
+    level:    [81, 82]
+  17658105:
+    template: Amuckatrice
+    at:       [192.218, 20.483, 91.779, 90]
+    level:    [81, 82]
+  17658106:
+    template: Amuckatrice
+    at:       [189.679, 20.316, 119.507, 120]
+    level:    [81, 82]
+  17658107:
+    template: Ephemeral_Murex
+    at:       [103.293, 8.323, 36.953, 150]
+    level:    [79, 88]
+  17658108:
+    template: Entozoon
+    at:       [255.977, 19.617, 223.763, 180]
+    level:    [81, 82]
+  17658109:
+    template: Entozoon
+    at:       [264.183, 20.291, 235.483, 210]
+    level:    [81, 82]
+  17658110:
+    template: Entozoon
+    at:       [271.180, 19.525, 218.515, 240]
+    level:    [81, 82]
+  17658111:
+    template: Entozoon
+    at:       [273.947, 20.194, 219.385, 20]
+    level:    [81, 82]
+  17658112:
+    template: Entozoon
+    at:       [274.194, 20.391, 218.083, 50]
+    level:    [81, 82]
+  17658113:
+    template: Entozoon
+    at:       [258.288, 20.741, 205.153, 80]
+    level:    [81, 82]
+  17658114:
+    template: Entozoon
+    at:       [273.819, 19.987, 210.283, 110]
+    level:    [81, 82]
+  17658115:
+    template: Entozoon
+    at:       [275.459, 19.728, 233.987, 140]
+    level:    [81, 82]
+  17658116:
+    template: Entozoon
+    at:       [301.607, 20.186, 228.880, 170]
+    level:    [81, 82]
+  17658117:
+    template: Entozoon
+    at:       [271.180, 19.525, 218.515, 200]
+    level:    [81, 82]
+  17658118:
+    template: Entozoon
+    at:       [294.418, 20.793, 213.980, 230]
+    level:    [81, 82]
+  17658119:
+    template: Entozoon
+    at:       [293.723, 20.934, 208.189, 10]
+    level:    [81, 82]
+  17658120:
+    template: Entozoon
+    at:       [296.935, 20.794, 199.634, 40]
+    level:    [81, 82]
+  17658121:
+    template: Entozoon
+    at:       [287.387, 20.169, 201.950, 70]
+    level:    [81, 82]
+  17658122:
+    template: Entozoon
+    at:       [300.558, 19.902, 223.362, 100]
+    level:    [81, 82]
+  17658123:
+    template: Entozoon
+    at:       [337.512, 20.753, 211.091, 130]
+    level:    [81, 82]
+  17658124:
+    template: Entozoon
+    at:       [309.466, 19.947, 203.594, 160]
+    level:    [81, 82]
+  17658125:
+    template: Entozoon
+    at:       [328.162, 20.318, 223.225, 190]
+    level:    [81, 82]
+  17658126:
+    template: Entozoon
+    at:       [360.473, 20.172, 232.561, 220]
+    level:    [81, 82]
+  17658127:
+    template: Entozoon
+    at:       [343.088, 19.613, 222.964, 250]
+    level:    [81, 82]
+  17658128:
+    template: Entozoon
+    at:       [353.545, 20.157, 197.722, 30]
+    level:    [81, 82]
+  17658129:
+    template: Entozoon
+    at:       [346.914, 20.111, 180.348, 60]
+    level:    [81, 82]
+  17658130:
+    template: Entozoon
+    at:       [243.000, 19.000, 236.000, 90]
+    level:    [81, 82]
+  17658131:
+    template: Entozoon
+    at:       [247.000, 20.000, 217.000, 120]
+    level:    [81, 82]
+  17658132:
+    template: Entozoon
+    at:       [289.000, 20.000, 232.000, 150]
+    level:    [81, 82]
+  17658133:
+    template: Entozoon
+    at:       [309.000, 20.000, 233.000, 180]
+    level:    [81, 82]
+  17658134:
+    template: Entozoon
+    at:       [326.000, 20.000, 234.000, 210]
+    level:    [81, 82]
+  17658135:
+    template: Entozoon
+    at:       [342.000, 20.000, 238.000, 240]
+    level:    [81, 82]
+  17658136:
+    template: Entozoon
+    at:       [346.000, 20.000, 206.000, 20]
+    level:    [81, 82]
+  17658137:
+    template: Entozoon
+    at:       [360.000, 20.000, 203.000, 50]
+    level:    [81, 82]
+  17658138:
+    template: Entozoon
+    at:       [355.000, 20.000, 179.000, 80]
+    level:    [81, 82]
+  17658139:
+    template: Entozoon
+    at:       [332.000, 20.000, 196.000, 110]
+    level:    [81, 82]
+  17658140:
+    template: Entozoon
+    at:       [350.000, 19.000, 219.000, 140]
+    level:    [81, 82]
+  17658141:
+    template: Entozoon
+    at:       [336.000, 19.000, 223.000, 170]
+    level:    [81, 82]
+  17658142:
+    template: Entozoon
+    at:       [320.000, 20.000, 217.000, 200]
+    level:    [81, 82]
+  17658143:
+    template: Entozoon
+    at:       [312.000, 20.000, 216.000, 230]
+    level:    [81, 82]
+  17658144:
+    template: Entozoon
+    at:       [307.000, 19.000, 209.000, 10]
+    level:    [81, 82]
+  17658145:
+    template: Entozoon
+    at:       [298.000, 20.000, 218.000, 40]
+    level:    [81, 82]
+  17658146:
+    template: Entozoon
+    at:       [292.000, 19.000, 231.000, 70]
+    level:    [81, 82]
+  17658147:
+    template: Entozoon
+    at:       [286.000, 20.000, 224.000, 100]
+    level:    [81, 82]
+  17658148:
+    template: Ephemeral_Murex
+    at:       [336.923, 20.310, 187.998, 130]
+    level:    [79, 88]
+  17658149:
+    template: Terminus_Eft
+    at:       [413.867, 20.457, 198.961, 160]
+    level:    [81, 82]
+  17658150:
+    template: Terminus_Eft
+    at:       [427.997, 20.227, 193.459, 190]
+    level:    [81, 82]
+  17658151:
+    template: Terminus_Eft
+    at:       [433.501, 20.039, 184.410, 220]
+    level:    [81, 82]
+  17658152:
+    template: Terminus_Eft
+    at:       [416.060, 19.750, 185.944, 250]
+    level:    [81, 82]
+  17658153:
+    template: Terminus_Eft
+    at:       [426.346, 20.059, 168.842, 30]
+    level:    [81, 82]
+  17658154:
+    template: Terminus_Eft
+    at:       [421.890, 20.292, 168.108, 60]
+    level:    [81, 82]
+  17658155:
+    template: Terminus_Eft
+    at:       [417.798, 20.886, 161.634, 90]
+    level:    [81, 82]
+  17658156:
+    template: Terminus_Eft
+    at:       [405.264, 20.968, 177.410, 120]
+    level:    [81, 82]
+  17658157:
+    template: Terminus_Eft
+    at:       [439.105, 20.016, 156.395, 150]
+    level:    [81, 82]
+  17658158:
+    template: Terminus_Eft
+    at:       [405.120, 20.024, 164.635, 180]
+    level:    [81, 82]
+  17658159:
+    template: Terminus_Eft
+    at:       [445.838, 20.855, 140.419, 210]
+    level:    [81, 82]
+  17658160:
+    template: Terminus_Eft
+    at:       [445.518, 20.421, 133.077, 240]
+    level:    [81, 82]
+  17658161:
+    template: Terminus_Eft
+    at:       [439.684, 20.086, 126.328, 20]
+    level:    [81, 82]
+  17658162:
+    template: Terminus_Eft
+    at:       [450.722, 19.920, 126.849, 50]
+    level:    [81, 82]
+  17658163:
+    template: Terminus_Eft
+    at:       [450.771, 20.081, 114.571, 80]
+    level:    [81, 82]
+  17658164:
+    template: Terminus_Eft
+    at:       [459.000, 19.000, 132.000, 110]
+    level:    [81, 82]
+  17658165:
+    template: Terminus_Eft
+    at:       [440.000, 20.000, 165.000, 140]
+    level:    [81, 82]
+  17658166:
+    template: Terminus_Eft
+    at:       [404.000, 20.000, 189.000, 170]
+    level:    [81, 82]
+  17658167:
+    template: Terminus_Eft
+    at:       [424.000, 19.000, 149.000, 200]
+    level:    [81, 82]
+  17658168:
+    template: Ephemeral_Murex
+    at:       [427.968, 20.219, 190.920, 230]
+    level:    [79, 88]
+  17658169:
+    template: Rift_Treant
+    at:       [560.482, 8.553, 6.142, 10]
+    level:    [83, 84]
+  17658170:
+    template: Rift_Treant
+    at:       [541.430, 11.059, 40.668, 40]
+    level:    [83, 84]
+  17658171:
+    template: Rift_Treant
+    at:       [530.665, 17.667, 44.329, 70]
+    level:    [83, 84]
+  17658172:
+    template: Rift_Treant
+    at:       [555.475, 4.442, 2.694, 100]
+    level:    [83, 84]
+  17658173:
+    template: Rift_Treant
+    at:       [552.725, 11.566, -29.400, 130]
+    level:    [83, 84]
+  17658174:
+    template: Rift_Treant
+    at:       [540.053, 16.309, -30.635, 160]
+    level:    [83, 84]
+  17658175:
+    template: Rift_Treant
+    at:       [529.518, 17.310, -21.719, 190]
+    level:    [83, 84]
+  17658176:
+    template: Rift_Treant
+    at:       [561.001, 11.681, -33.446, 220]
+    level:    [83, 84]
+  17658177:
+    template: Ephemeral_Murex
+    at:       [552.973, 4.403, 23.896, 250]
+    level:    [79, 88]
+  17658178:
+    template: Murrain_Chigoe
+    at:       [512.391, 19.754, -82.762, 30]
+    level:    [79, 80]
+  17658179:
+    template: Murrain_Chigoe
+    at:       [527.525, 19.281, -65.558, 60]
+    level:    [79, 80]
+  17658180:
+    template: Murrain_Chigoe
+    at:       [524.272, 19.844, -70.435, 90]
+    level:    [79, 80]
+  17658181:
+    template: Murrain_Chigoe
+    at:       [521.425, 19.990, -75.980, 120]
+    level:    [79, 80]
+  17658182:
+    template: Murrain_Chigoe
+    at:       [518.079, 20.182, -112.204, 150]
+    level:    [79, 80]
+  17658183:
+    template: Murrain_Chigoe
+    at:       [514.608, 20.050, -135.367, 180]
+    level:    [79, 80]
+  17658184:
+    template: Murrain_Chigoe
+    at:       [510.871, 19.997, -150.402, 210]
+    level:    [79, 80]
+  17658185:
+    template: Murrain_Chigoe
+    at:       [513.686, 20.201, -134.908, 240]
+    level:    [79, 80]
+  17658186:
+    template: Murrain_Chigoe
+    at:       [524.255, 19.940, -118.981, 20]
+    level:    [79, 80]
+  17658187:
+    template: Murrain_Chigoe
+    at:       [518.081, 20.147, -153.057, 50]
+    level:    [79, 80]
+  17658188:
+    template: Murrain_Chigoe
+    at:       [516.440, 20.000, -153.420, 80]
+    level:    [79, 80]
+  17658189:
+    template: Murrain_Chigoe
+    at:       [514.035, 19.754, -157.713, 110]
+    level:    [79, 80]
+  17658190:
+    template: Murrain_Chigoe
+    at:       [510.871, 19.997, -150.402, 140]
+    level:    [79, 80]
+  17658191:
+    template: Murrain_Chigoe
+    at:       [514.608, 20.050, -135.367, 170]
+    level:    [79, 80]
+  17658192:
+    template: Murrain_Chigoe
+    at:       [516.470, 20.033, -153.412, 200]
+    level:    [79, 80]
+  17658193:
+    template: Murrain_Chigoe
+    at:       [519.264, 20.177, -72.454, 230]
+    level:    [79, 80]
+  17658194:
+    template: Murrain_Chigoe
+    at:       [528.333, 19.044, -64.082, 10]
+    level:    [79, 80]
+  17658195:
+    template: Murrain_Chigoe
+    at:       [528.369, 19.456, -71.818, 40]
+    level:    [79, 80]
+  17658196:
+    template: Murrain_Chigoe
+    at:       [513.219, 20.139, -71.674, 70]
+    level:    [79, 80]
+  17658197:
+    template: Murrain_Chigoe
+    at:       [516.497, 21.062, -61.171, 100]
+    level:    [79, 80]
+  17658198:
+    template: Murrain_Chigoe
+    at:       [523.314, 20.000, -158.916, 130]
+    level:    [79, 80]
+  17658199:
+    template: Murrain_Chigoe
+    at:       [511.203, 19.369, -164.757, 160]
+    level:    [79, 80]
+  17658200:
+    template: Murrain_Chigoe
+    at:       [522.985, 20.207, -172.346, 190]
+    level:    [79, 80]
+  17658201:
+    template: Ephemeral_Murex
+    at:       [524.241, 19.767, -125.878, 220]
+    level:    [79, 88]
+  17658202:
+    template: Gullycampa
+    at:       [406.667, 20.125, -244.106, 250]
+    level:    [83, 84]
+  17658203:
+    template: Gullycampa
+    at:       [401.226, 20.000, -242.605, 30]
+    level:    [83, 84]
+  17658204:
+    template: Gullycampa
+    at:       [401.561, 20.000, -239.991, 60]
+    level:    [83, 84]
+  17658205:
+    template: Gullycampa
+    at:       [398.825, 20.000, -236.972, 90]
+    level:    [83, 84]
+  17658206:
+    template: Gullycampa
+    at:       [418.667, 20.930, -239.843, 120]
+    level:    [83, 84]
+  17658207:
+    template: Gullycampa
+    at:       [421.166, 20.935, -241.745, 150]
+    level:    [83, 84]
+  17658208:
+    template: Gullycampa
+    at:       [422.640, 20.867, -242.854, 180]
+    level:    [83, 84]
+  17658209:
+    template: Gullycampa
+    at:       [400.602, 20.763, -216.978, 210]
+    level:    [83, 84]
+  17658210:
+    template: Gullycampa
+    at:       [409.416, 20.271, -201.563, 240]
+    level:    [83, 84]
+  17658211:
+    template: Gullycampa
+    at:       [403.533, 20.012, -204.074, 20]
+    level:    [83, 84]
+  17658212:
+    template: Gullycampa
+    at:       [429.145, 20.194, -195.687, 50]
+    level:    [83, 84]
+  17658213:
+    template: Gullycampa
+    at:       [436.747, 20.223, -186.667, 80]
+    level:    [83, 84]
+  17658214:
+    template: Gullycampa
+    at:       [433.524, 20.155, -189.268, 110]
+    level:    [83, 84]
+  17658215:
+    template: Gullycampa
+    at:       [427.533, 20.184, -153.773, 140]
+    level:    [83, 84]
+  17658216:
+    template: Gullycampa
+    at:       [420.585, 20.735, -156.267, 170]
+    level:    [83, 84]
+  17658217:
+    template: Gullycampa
+    at:       [429.854, 20.494, -166.009, 200]
+    level:    [83, 84]
+  17658218:
+    template: Ephemeral_Murex
+    at:       [407.497, 20.134, -186.655, 230]
+    level:    [79, 88]
+  17658219:
+    template: Hannequet
+    at:       [432.684, 20.200, 74.631, 10]
+    level:    [94, 95]
+  17658220:
+    template: Hannequet
+    at:       [438.828, 19.832, 86.223, 40]
+    level:    [94, 95]
+  17658221:
+    template: Hannequet
+    at:       [425.864, 20.000, 67.615, 70]
+    level:    [94, 95]
+  17658222:
+    template: Hannequet
+    at:       [414.916, 20.206, 63.832, 100]
+    level:    [94, 95]
+  17658223:
+    template: Hannequet
+    at:       [418.587, 20.429, 64.832, 130]
+    level:    [94, 95]
+  17658224:
+    template: Hannequet
+    at:       [435.179, 20.028, 74.114, 160]
+    level:    [82, 83]
+  17658225:
+    template: Hannequet
+    at:       [426.254, 20.000, 67.295, 190]
+    level:    [82, 83]
+  17658226:
+    template: Hannequet
+    at:       [438.716, 20.000, 78.237, 220]
+    level:    [82, 83]
+  17658227:
+    template: Hannequet
+    at:       [417.750, 20.890, 41.365, 250]
+    level:    [82, 83]
+  17658228:
+    template: Hannequet
+    at:       [421.904, 19.938, 13.591, 30]
+    level:    [82, 83]
+  17658229:
+    template: Hannequet
+    at:       [430.665, 20.295, 31.811, 60]
+    level:    [94, 95]
+  17658230:
+    template: Hannequet
+    at:       [423.956, 20.910, 41.364, 90]
+    level:    [94, 95]
+  17658231:
+    template: Hannequet
+    at:       [437.417, 19.979, 3.603, 120]
+    level:    [94, 95]
+  17658232:
+    template: Hannequet
+    at:       [410.959, 20.069, 3.722, 150]
+    level:    [94, 95]
+  17658233:
+    template: Hannequet
+    at:       [420.167, 19.881, 16.320, 180]
+    level:    [82, 83]
+  17658234:
+    template: Hannequet
+    at:       [407.393, 20.014, -48.189, 210]
+    level:    [82, 83]
+  17658235:
+    template: Hannequet
+    at:       [393.544, 20.848, -55.926, 240]
+    level:    [82, 83]
+  17658236:
+    template: Hannequet
+    at:       [399.533, 20.378, -68.631, 20]
+    level:    [82, 83]
+  17658237:
+    template: Hannequet
+    at:       [404.079, 20.198, -49.545, 50]
+    level:    [82, 83]
+  17658238:
+    template: Hannequet
+    at:       [396.826, 20.911, -57.286, 80]
+    level:    [82, 83]
+  17658239:
+    template: Hannequet
+    at:       [405.265, 19.977, -46.997, 110]
+    level:    [82, 83]
+  17658240:
+    template: Hannequet
+    at:       [406.744, 19.912, -47.112, 140]
+    level:    [82, 83]
+  17658241:
+    template: Hannequet
+    at:       [455.840, 20.000, -15.999, 170]
+    level:    [94, 95]
+  17658242:
+    template: Hannequet
+    at:       [470.741, 20.200, -28.786, 200]
+    level:    [94, 95]
+  17658243:
+    template: Hannequet
+    at:       [471.087, 20.000, -28.080, 230]
+    level:    [94, 95]
+  17658244:
+    template: Hannequet
+    at:       [468.224, 20.194, -25.796, 10]
+    level:    [94, 95]
+  17658245:
+    template: Hannequet
+    at:       [466.629, 19.987, -32.151, 40]
+    level:    [94, 95]
+  17658246:
+    template: Hannequet
+    at:       [472.575, 19.572, -39.897, 70]
+    level:    [94, 95]
+  17658247:
+    template: Ephemeral_Murex
+    at:       [439.160, 20.968, 21.467, 100]
+    level:    [79, 88]
+  17658248:
+    template: Tejas
+  17658249:
+    template: Tejas
+  17658250:
+    template: Tejas
+  17658251:
+    template: Tejas
+  17658252:
+    template: Tejas
+  17658253:
+    template: Lusca
+  17658254:
+    template: Eseuvhi
+  17658255:
+    template: Ateuvhi
+    level:    [82, 88]
+  17658256:
+    template: Ateuvhi
+    level:    [82, 88]
+  17658257:
+    template: Ateuvhi
+    level:    [82, 88]
+  17658258:
+    template: Ateuvhi
+    level:    [82, 88]
+  17658259:
+    template: Ateuvhi
+    level:    [82, 88]
+  17658260:
+    template: Ateuvhi
+    level:    [82, 88]
+  17658261:
+    template: Granite_Borer
+    at:       [401.000, 20.000, -282.000, 141]
+  17658262:
+    template: Blazing_Eruca
+    at:       [233.000, 19.000, -243.000, 50]
+  17658263:
+    template: Pallid_Percy
+    at:       [281.063, 20.376, 174.011, 80]
+  17658264:
+    template: Gaizkin
+    at:       [-130.000, 0.000, 2.000, 2]
+  17658265:
+    template: Kharon
+    at:       [-389.000, -3.000, 245.000, 140]
+  17658266:
+    template: Drekavac
+    at:       [-159.000, 0.001, 220.000, 170]
+  17658267:
+    template: Svarbhanu
+    at:       [-539.000, -12.000, -75.000, 150]
+  17658268:
+    template: Kampe
+    at:       [-404.000, 3.000, -198.000, 230]
+  17658269:
+    template: Berstuk
+    at:       [-279.000, -4.000, -38.000, 10]
+    level:    [82, 85]
+  17658270:
+    template: Maahes
+    at:       [214.000, 20.000, -94.000, 40]
+  17658271:
+    template: Nightshade
+    at:       [411.000, 19.000, 13.000, 70]
+  17658272:
+    template: Wherwetrice
+    at:       [206.000, 20.000, 109.000, 123]
+  17658273:
+    template: Mielikki
+    at:       [481.000, 20.000, 39.000, 13]
+  17658274:
+    template: Smok
+    at:       [-539.000, -12.000, -75.000, 150]
+  17658275:
+    template: Titlacauan
+    at:       [-404.436, -4.000, 246.000, 190]
+  17658276:
+    template: Ulhuadshi
+    at:       [360.000, 20.000, 199.000, 220]
+  17658277:
+    template: Itzpapalotl
+    at:       [436.000, 20.000, -184.000, 250]
+    level:    [90, 93]
+  17658278:
+    template: Smok
+    at:       [-547.000, -4.000, -12.000, 30]
+  17658279:
+    template: Titlacauan
+    at:       [-396.000, -3.000, 256.000, 190]
+  17658280:
+    template: Ulhuadshi
+    at:       [361.193, 20.005, 199.340, 90]
+  17658281:
+    template: Itzpapalotl
+    at:       [424.940, 20.220, -194.227, 120]
+    level:    [90, 93]
+  17658282:
+    template: Smok
+    at:       [-530.000, -5.000, -39.000, 160]
+  17658283:
+    template: Titlacauan
+    at:       [-396.937, -3.000, 259.001, 180]
+  17658284:
+    template: Ulhuadshi
+    at:       [340.193, 20.005, 220.340, 210]
+  17658285:
+    template: Itzpapalotl
+    at:       [439.940, 21.020, -179.227, 240]
+    level:    [90, 93]
+  17658286:
+    template: Tunga
+    at:       [511.266, 19.337, -162.986, 20]
+    level:    [90, 90]
+  17658287:
+    template: Amun
+    at:       [19.968, 10.003, 11.928, 50]
+    level:    [90, 90]
+  17658288:
+    template: Gieremund
+    at:       [-393.000, -4.000, -340.000, 80]
+    level:    [90, 90]
+  17658289:
+    template: Warbler
+    at:       [-481.353, -4.000, 237.475, 110]
+    level:    [90, 90]
+  17658290:
+    template: Aggressor_Antlion
+    at:       [-487.932, -4.492, 118.977, 140]
+    level:    [90, 90]
+  17658291:
+    template: Whiro
+    at:       [405.882, 20.000, 156.087, 170]
+    level:    [90, 90]
+  17658292:
+    template: Yaanei
+    at:       [322.000, -25.000, -33.000, 200]
+    level:    [95, 95]
+  17658293:
+    template: Ironclad_Cleaver
+    at:       [-276.000, -4.000, -159.000, 107]
+  17658294:
+    template: Sturdy_Pyxis_Small
+    script:   Sturdy_Pyxis
+    at:       [-116.129, -10.240, 179.051, 10]
+  17658295:
+    template: Sturdy_Pyxis_Small
+    script:   Sturdy_Pyxis
+    at:       [-404.126, -3.631, -142.481]
+  17658296:
+    template: Sturdy_Pyxis_Small
+    script:   Sturdy_Pyxis
+    at:       [-107.353, -0.550, -11.285]
+  17658297:
+    template: Sturdy_Pyxis_Small
+    script:   Sturdy_Pyxis
+    at:       [-531.202, -12.900, -72.591]
+  17658298:
+    template: Surveyor_Small
+    script:   Surveyor
+  17658299:
+    template: Surveyor_Small
+    script:   Surveyor
+  17658300:
+    template: Scrutinizer
+    at:       [-362.358, -12.874, 76.508, 202]
+  17658301:
+    template: Scrutinizer
+    at:       [-374.000, -11.155, 91.509, 166]
+  17658302:
+    template: Decontaminator
+    at:       [-439.714, -4.437, 194.608, 64]
+  17658303:
+    template: Decontaminator
+  17658304:
+    template: Vigilant_Gears
+  17658305:
+    template: Vigilant_Gears
+    at:       [-363.337, -12.568, 78.288, 124]
+  17658306:
+    template: Immobilizer
+    at:       [-362.336, -12.527, 78.540, 252]
+  17658307:
+    template: Disassembler
+    at:       [-353.208, -12.332, 79.812, 123]
+  17658308:
+    template: Oppressor
+    at:       [-472.246, -4.548, 231.072, 171]
+  17658309:
+    template: Edifier
+    at:       [-397.488, -3.508, 141.550, 192]
+  17658310:
+    template: Overseer
+  17658311:
+    template: Surveyor_Small
+    script:   Surveyor
+    at:       [-485.595, -4.499, 7.077, 175]
+  17658312:
+    template: Surveyor_Small
+    script:   Surveyor
+  17658313:
+    template: Scrutinizer
+    at:       [-510.294, -4.537, 33.776, 11]
+  17658314:
+    template: Scrutinizer
+    at:       [-353.961, -12.339, 43.856, 95]
+  17658315:
+    template: Vigilant_Gear
+    at:       [-486.763, -4.498, 6.460, 174]
+  17658316:
+    template: Vigilant_Gear
+    at:       [-561.594, -4.491, 2.077, 120]
+  17658317:
+    template: Earth_Mover
+    at:       [-475.578, -4.422, -5.400, 141]
+  17658318:
+    template: Earth_Mover
+    at:       [-346.929, -12.043, 51.236, 98]
+  17658319:
+    template: Immobilizer
+    at:       [-486.769, -4.499, 4.042, 171]
+  17658320:
+    template: Disassembler
+    at:       [-486.996, -4.500, 2.745, 179]
+  17658321:
+    template: Oppressor
+    at:       [-359.371, -12.466, 37.184, 95]
+  17658322:
+    template: Edifier
+    at:       [-353.555, -12.267, 42.645, 95]
+  17658323:
+    template: Overseer
+  17658324:
+    template: Surveyor_Small
+    script:   Surveyor
+    at:       [-327.935, -4.499, -115.497, 24]
+  17658325:
+    template: Surveyor_Small
+    script:   Surveyor
+    at:       [-341.423, -4.500, -100.727, 29]
+  17658326:
+    template: Scrutinizer
+    at:       [-342.068, -4.500, -100.139, 29]
+  17658327:
+    template: Scrutinizer
+  17658328:
+    template: Custodian
+    at:       [-326.894, -4.567, -154.415, 34]
+  17658329:
+    template: Custodian
+  17658330:
+    template: Ravager_Chariot
+  17658331:
+    template: Ravager_Chariot
+    at:       [-329.152, -12.091, 33.385, 83]
+  17658332:
+    template: Immobilizer
+    at:       [-325.969, -12.435, 38.209, 62]
+  17658333:
+    template: Disassembler
+    at:       [-338.404, -11.553, 37.283, 86]
+  17658334:
+    template: Oppressor
+    at:       [-331.843, -4.499, -112.285, 25]
+  17658335:
+    template: Edifier
+    at:       [-329.579, -4.611, -127.397, 89]
+  17658336:
+    template: Overseer
+  17658337:
+    template: Bastion_Fighter
+  17658338:
+    template: Bastion_Fighter
+  17658339:
+    template: Bastion_Fighter
+  17658340:
+    template: Bastion_Fighter
+  17658341:
+    template: Bastion_Fighter
+  17658342:
+    template: Bastion_Mage
+  17658343:
+    template: Bastion_Mage
+  17658344:
+    template: Bastion_Mage
+  17658345:
+    template: Qiqirn_Trapper
+  17658346:
+    template: Qiqirn_Trapper
+  17658347:
+    template: Qiqirn_Bewitcher
+  17658348:
+    template: Qiqirn_Bewitcher

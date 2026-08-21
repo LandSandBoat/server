@@ -70,6 +70,9 @@ extern sol::state lua;
 #include "lua_trigger_area.h"
 #include "lua_zone.h"
 
+#include "data/datasets/zones/mobs/dataset.h"
+#include "data/datasets/zones/npcs/dataset.h"
+
 enum class SendToDBoxReturnCode : uint8
 {
     SUCCESS                       = 0,
@@ -243,7 +246,35 @@ auto SetupExperiencePoints() -> Maybe<ExperiencePointsTable>; // Validate functi
 auto CalculateExperiencePoints(CCharEntity* PMember, CMobEntity* PMob, const CalcExpInput& input) -> Maybe<CalcExpResult>;
 
 void PopulateIDLookupsByFilename(Maybe<std::string> maybeFilename = std::nullopt);
-void PopulateIDLookupsByZone(Maybe<xi::ZoneId> maybeZoneId = std::nullopt);
+
+// Records the zone loader already parsed, so the id lookups do not read the files a second time.
+// An optional record set is either there or it is not; the lookups only want the pointer.
+template <class T>
+auto pointerTo(const std::optional<T>& value) -> const T*
+{
+    if (!value)
+    {
+        return nullptr;
+    }
+
+    return &*value;
+}
+
+struct ZoneEntityRecords
+{
+    ZoneEntityRecords() = default;
+
+    ZoneEntityRecords(const std::optional<xi::data::Npcs>& npcs, const std::optional<xi::data::Mobs>& mobs)
+    : Npcs(pointerTo(npcs))
+    , Mobs(pointerTo(mobs))
+    {
+    }
+
+    const xi::data::Npcs* Npcs{};
+    const xi::data::Mobs* Mobs{};
+};
+
+void PopulateIDLookupsByZone(Maybe<xi::ZoneId> maybeZoneId = std::nullopt, const ZoneEntityRecords& preloaded = {});
 
 void SendEntityVisualPacket(uint32 npcId, const char* command);
 void InitInteractionGlobal();

@@ -47,6 +47,7 @@ target_link_libraries(xi_world_lib
         ${SHARED_EXTERNAL_LIBS}
         ${WORLD_ONLY_EXTERNAL_LIBS}
         project_options
+        xi_data_core
     PRIVATE
         project_warnings
 )

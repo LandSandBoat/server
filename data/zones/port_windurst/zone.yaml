@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, costume, yell, los_player_block, assist]
+music:
+  day:          151
+  night:        151
+  battle_solo:  151
+  battle_party: 151
+
+zonelines:
+
+  z6o0:
+    from:  [-249.083, -11.658, 199.980]
+    to:    west_sarutabaruta
+    at:    [166.612, -2.610, -319.972, 3.141593]
+    scale: [1.000, 5.000]
+
+  z6o2:
+    from:  [-114.594, -11.654, 215.791]
+    to:    windurst_waters
+    at:    [-59.524, -5.360, -199.046, 4.712389]
+    scale: [1.000, 6.000]
+
+  z6o4:
+    from:  [230.555, -11.658, 179.926]
+    to:    windurst_woods
+    at:    [-81.121, 0.190, -67.625, 0.349066]
+    scale: [1.000, 5.000]
+
+  zmre:
+    from:  [197.805, -21.667, 264.495]
+    to:    port_windurst
+    at:    [197.711, -20.775, 261.857, 1.570796]
+    scale: [1.000, 5.000]

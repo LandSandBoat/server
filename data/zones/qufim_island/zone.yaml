@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z3i0:
+    from:  [140.004, 5.979, -480.004]
+    to:    port_jeuno
+    at:    [-158.194, 10.315, 97.573, 2.320520]
+    scale: [1.000, 2.000]
+
+  z3i2:
+    from:  [-642.015, 13.918, 459.993]
+    to:    behemoths_dominion
+    at:    [358.134, 24.806, -60.001, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3i4:
+    from:  [-289.882, -26.699, 320.036]
+    to:    lower_delkfutts_tower
+    at:    [460.022, -1.770, -103.442, 4.712389]
+    scale: [1.000, 4.000]

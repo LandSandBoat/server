@@ -1,0 +1,7085 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Archaic_Mirror:
+    id:      220
+    species: mirrors
+    attributes:
+      render:
+        look:
+          type:  automaton
+          model: 1557
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   archaic_mirror
+
+  Arrapago_Apkallu:
+    id:            253
+    species:       apkallu
+    skill_list_id: 27
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    5
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       5
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1723
+        entity_flags:  1155
+        animation_sub:    5
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   apkallu_feather
+        - chance: common
+          item:   apkallu_egg
+      steal: kalamar
+      despoil:
+        apkallu_feather: 0
+        apkallu_egg:     0
+
+  Arrapago_Leech:
+    id:            255
+    species:       leech
+    type:          [fished, battlefield]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 1669
+        model_size:      2
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: rare
+          item:   vial_of_beastman_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Ashakku:
+    id:            258
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: rare
+          item:   vial_of_beastman_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Assassins_Apprentice:
+    id:            5199
+    species:       qutrub
+    type:          [notorious]
+    skill_list_id: 203
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  automaton
+          model: 1733
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Awoken_Morbol_Emperor:
+    id:            6102
+    species:       morbol
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 2044
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 3599
+        entity_flags:  3
+        model_size:    2
+        hitbox:       36
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bhoot:
+    id:            404
+    species:       bhoot
+    spell_list_id: 28
+    skill_list_id: 52
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      5
+          wind:    -1
+          thunder: -2
+          water:   -1
+          light:   -2
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 369
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: common
+          item:   square_of_mohbwa_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Bloody_Bones:
+    id:            465
+    species:       draugar
+    type:          [notorious]
+    spell_list_id: 2
+    skill_list_id: 88
+    attributes:
+      combat:
+        skill: sword
+        delay: 290
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 13000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aces_locket
+        - chance: uncommon
+          item:   blackjack
+
+  Bukki:
+    id:            573
+    species:       imp
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+
+  Chimera_Clot:
+    id:            721
+    species:       clot
+    type:          [fished]
+    skill_list_id: 66
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags: 133
+        model_size:     2
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Dark_Elemental:
+    id:            913
+    species:       dark_elemental
+    spell_list_id: 18
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        immune_status: [blind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 443
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+
+  Dimgruzub:
+    id:            5198
+    species:       qutrub
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 203
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2096
+        entity_flags:  159
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         19
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Draugar_Servant_blm:
+    id:            5195
+    display_name:  Draugar_Servant
+    species:       draugar
+    spell_list_id: 21
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1765
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   lamian_fang_key
+      despoil:
+        bone_chip: 0
+
+  Draugar_Servant_drg:
+    id:            5196
+    display_name:  Draugar_Servant
+    species:       draugar
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1762
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   lamian_fang_key
+      despoil:
+        bone_chip: 0
+
+  Draugar_Servant_drk:
+    id:            1111
+    display_name:  Draugar_Servant
+    species:       draugar
+    spell_list_id: 5
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1750
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   lamian_fang_key
+      despoil:
+        bone_chip: 0
+
+  Draugar_Servant_thf:
+    id:            5197
+    display_name:  Draugar_Servant
+    species:       draugar
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1757
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   lamian_fang_key
+      despoil:
+        bone_chip: 0
+
+  Draugars_Wyvern:
+    id:            1112
+    species:       shadow_wyvern
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      spawn:
+        type: [scripted]
+
+  Dweomershell:
+    id:            5329
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: rare
+          item:   sack_of_white_sand
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+    content: ABYSSEA
+
+  Emperor_Apkallu:
+    id:            1211
+    species:       apkallu
+    skill_list_id: 27
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    5
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       5
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1723
+        entity_flags:  1157
+        animation_sub:    5
+        model_size:       2
+        hitbox:           9
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   apkallu_feather
+        - chance: uncommon
+          item:   apkallu_egg
+      despoil:
+        apkallu_feather: 0
+        apkallu_egg:     0
+
+  Ephramadian_Shade_cor:
+    id:            5205
+    display_name:  Ephramadian_Shade
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1897
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   timeworn_talisman
+
+  Ephramadian_Shade_mnk:
+    id:            5203
+    display_name:  Ephramadian_Shade
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1900
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   timeworn_talisman
+
+  Ephramadian_Shade_rdm:
+    id:            5202
+    display_name:  Ephramadian_Shade
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1899
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   timeworn_talisman
+
+  Ephramadian_Shade_rng:
+    id:            5204
+    display_name:  Ephramadian_Shade
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1898
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   timeworn_talisman
+
+  Euryale:
+    id:            5892
+    species:       lamiae
+    type:          [notorious]
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [dnc, dnc]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1649
+        entity_flags:  1565
+        animation_sub:   12
+        name_prefix:     32
+        model_size:       2
+        hitbox:          13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 20000
+    loot:
+      drops:
+        - chance: rare
+          item:   lyft_jambiya
+    content: WOTG
+
+  Fallen_Imperial_Trooper:
+    id:            1285
+    species:       fallen
+    spell_list_id: 5
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1902
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+
+  Fallen_Imperial_Wizard:
+    id:            1286
+    species:       fallen
+    spell_list_id: 21
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1903
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+
+  Fallen_Volunteer:
+    id:            1292
+    species:       fallen
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1901
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+
+  Giant_Orobon:
+    id:            1534
+    species:       orobon
+    type:          [fished, battlefield]
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+        delay: 270
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7700
+
+  Heraldic_Imp:
+    id:            1933
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   imp_wing
+        - chance: rare
+          item:   imp_horn
+      despoil:
+        imp_wing: 0
+
+  Ice_Elemental:
+    id:            2043
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 437
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+
+  Jnun_AR:
+    id:            2154
+    species:       doomed
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 321
+        entity_flags:  133
+        animation_sub:   4
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   undead_skin
+      despoil:
+        undead_skin: 0
+
+  Lahama:
+    id:            2318
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: always
+          item:   seashell
+        - chance: very_rare
+          item:   shall_shell
+      despoil:
+        seashell: 0
+
+  Lahama_fished:
+    id:            4813
+    display_name:  Lahama
+    species:       sea_monk
+    type:          [fished, battlefield]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   seashell
+        - chance: very_rare
+          item:   shall_shell
+      despoil:
+        seashell: 0
+
+  Lamia_Bellydancer:
+    id:            2324
+    species:       lamiae
+    spell_list_id: 33
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1653
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamia_Dancer:
+    id:            2328
+    species:       lamiae
+    spell_list_id: 33
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1653
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   corsairs_testimony
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamia_Dartist:
+    id:            2329
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1647
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   corsairs_testimony
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamia_Deathdancer:
+    id:            2330
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1656
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamia_Exon:
+    id:            2331
+    species:       lamiae
+    spell_list_id: 28
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags: 541
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Lamia_Fatedealer:
+    id:            2332
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1655
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   corsairs_testimony
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamia_Graverobber:
+    id:            2334
+    species:       lamiae
+    spell_list_id: 28
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   corsairs_testimony
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamia_Idolater_blm:
+    id:            6748
+    display_name:  Lamia_Idolater
+    species:       qutrub
+    spell_list_id: 21
+    skill_list_id: 203
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  automaton
+          model: 1734
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   qutrub_bandage
+        - chance: rare
+          item:   lamian_bone_key
+        - chance: rare
+          item:   lamian_claw_key
+        - chance: very_rare
+          item:   qutrub_gorget
+      despoil:
+        qutrub_bandage: 0
+        qutrub_gorget:  0
+
+  Lamia_Idolater_drk:
+    id:            2335
+    display_name:  Lamia_Idolater
+    species:       qutrub
+    spell_list_id: 5
+    skill_list_id: 203
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  automaton
+          model: 1733
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   qutrub_bandage
+        - chance: rare
+          item:   lamian_bone_key
+        - chance: rare
+          item:   lamian_claw_key
+        - chance: very_rare
+          item:   qutrub_gorget
+      despoil:
+        qutrub_bandage: 0
+        qutrub_gorget:  0
+
+  Lamia_Necromancer_AR:
+    id:            2338
+    display_name:  Lamia_Necromancer
+    species:       lamiae
+    spell_list_id: 28
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   lamia_skin
+        - chance: uncommon
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamia_No11:
+    id:            2339
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1657
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lamia_No18:
+    id:            2344
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1655
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lamia_No19:
+    id:            2345
+    species:       lamiae
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+        delay: 270
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags:  539
+        animation_sub:  12
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      stats:
+        hp: 9500
+        mp: 9000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   exorcist_hose
+        - chance: uncommon
+          item:   templar_mace
+
+  Lamia_No24:
+    id:            2348
+    species:       lamiae
+    spell_list_id: 28
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1653
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lamia_Palace_Guard_cor:
+    id:            6673
+    display_name:  Lamia_Palace_Guard
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1656
+        entity_flags:  541
+        animation_sub:  12
+        name_prefix:    32
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lamia_Palace_Guard_rng:
+    id:            2354
+    display_name:  Lamia_Palace_Guard
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1649
+        entity_flags:  541
+        animation_sub:  12
+        name_prefix:    32
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lamia_Toxophilite_AR:
+    id:            2361
+    display_name:  Lamia_Toxophilite
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1649
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   lamia_skin
+        - chance: common
+          item:   lamian_kaman_-1
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamias_Avatar:
+    id:            2358
+    species:       carbuncle
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 129
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Lamias_Elemental:
+    id:            2359
+    species:       dark_elemental
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags:  129
+        animation_sub:  16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Lamias_Skeleton:
+    id:            2360
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        hitbox: 10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4200
+
+  Lamie_Bellydancer:
+    id:            2362
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1653
+        entity_flags: 517
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamie_Deathdancer:
+    id:            2363
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1656
+        entity_flags: 517
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamie_Necromancer:
+    id:            2364
+    species:       lamiae
+    spell_list_id: 21
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags: 517
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lamie_No7:
+    id:            2365
+    species:       lamiae
+    type:          [notorious]
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1656
+        entity_flags:  543
+        animation_sub:  12
+        name_prefix:    32
+        model_size:      3
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 259200
+    loot:
+      drops:
+        - chance: common
+          item:   corsairs_scimitar
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+
+  Lamie_No8:
+    id:            2366
+    species:       lamiae
+    type:          [notorious]
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1649
+        entity_flags:  543
+        animation_sub:  12
+        name_prefix:    32
+        model_size:      3
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   mercenarys_turban
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: rare
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   lamian_armlet
+
+  Lamie_No9:
+    id:            2367
+    species:       lamiae
+    type:          [notorious]
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1653
+        model_size:  3
+        hitbox:     12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 259200
+    loot:
+      drops:
+        - chance: common
+          item:   evokers_gages
+        - chance: uncommon
+          item:   lamia_skin
+        - chance: very_rare
+          item:   lamian_armlet
+
+  Lamie_Toxophilite:
+    id:            2368
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1649
+        entity_flags: 517
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   lamia_skin
+        - chance: common
+          item:   lamian_kaman_-1
+        - chance: very_rare
+          item:   lamian_armlet
+      despoil:
+        lamian_kaman_-1: 0
+
+  Lil_Apkallu:
+    id:            2417
+    species:       apkallu
+    type:          [notorious]
+    skill_list_id: 294
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    5
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       5
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1723
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   lil_apkallus_egg
+        - chance: common
+          item:   numerist_pumps
+        - chance: common
+          item:   hakke_habaki
+
+  Llamhigyn_Y_Dwr:
+    id:            2426
+    species:       doomed
+    type:          [fished, battlefield]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   undead_skin
+      despoil:
+        undead_skin: 0
+
+  Mamool_Ja_Diver:
+    id:            6129
+    species:       blue_sahagin
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        entity_flags: 133
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Medusa:
+    id:            2606
+    species:       medusa
+    type:          [notorious]
+    skill_list_id: 725
+    attributes:
+      combat:
+        skill:    katana
+        dmg_mult: 125
+      jobs: [rng, rng]
+      resists:
+        immune_status: [gravity, poison, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1865
+        entity_flags:  541
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 259200
+      stats:
+        hp: 55000
+    loot:
+      drops:
+        - chance: very_common
+          item:   medusas_armlet
+        - chance: common
+          item:   mercenarys_dastanas
+
+  Merrow_Bladedancer:
+    id:            2617
+    species:       merrow
+    spell_list_id: 3
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1671
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Merrow_Chantress:
+    id:            2619
+    species:       merrow
+    spell_list_id: 6
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1669
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   corsairs_testimony
+        - chance: rare
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: very_rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Merrow_Icedancer:
+    id:            2620
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1669
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   corsairs_testimony
+        - chance: rare
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: very_rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Merrow_Kabukidancer_2621:
+    id:            2621
+    display_name:  Merrow_Kabukidancer
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1672
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   corsairs_testimony
+        - chance: rare
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: very_rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Merrow_Kabukidancer_6128:
+    id:            6128
+    display_name:  Merrow_Kabukidancer
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1672
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Merrow_No5:
+    id:            2625
+    species:       merrow
+    type:          [notorious]
+    spell_list_id: 8
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1670
+        entity_flags:  543
+        animation_sub:  12
+        name_prefix:    32
+        model_size:      3
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 259200
+    loot:
+      drops:
+        - chance: common
+          item:   volunteers_nails
+        - chance: uncommon
+          item:   merrow_scale
+        - chance: rare
+          item:   vial_of_chimera_blood
+
+  Merrow_Shadowdancer:
+    id:            2627
+    species:       merrow
+    spell_list_id: 3
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1669
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   corsairs_testimony
+        - chance: rare
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: very_rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Merrow_Songstress:
+    id:            2629
+    species:       merrow
+    spell_list_id: 6
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1670
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Merrow_Typhoondancer:
+    id:            2630
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1672
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Merrow_Typhoondancer_Large:
+    id:            7169
+    display_name:  Merrow_Typhoondancer
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1672
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Merrow_Wavedancer:
+    id:            2631
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1668
+        entity_flags: 517
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Naraka_Bat:
+    id:            5326
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Nipper:
+    id:            2890
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: rare
+          item:   sack_of_white_sand
+        - chance: rare
+          item:   crab_shell
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Nirgali:
+    id:            5327
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 645
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: rare
+          item:   vial_of_beastman_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+    content: ROV
+
+  Nix_Bladedancer:
+    id:            2893
+    species:       merrow
+    spell_list_id: 3
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1671
+        entity_flags: 517
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Nix_Songstress:
+    id:            2894
+    species:       merrow
+    spell_list_id: 6
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1670
+        entity_flags:  517
+        animation_sub:  12
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Nix_Typhoondancer:
+    id:            2895
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1672
+        entity_flags: 517
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Nix_Wavedancer:
+    id:            2896
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1668
+        entity_flags: 517
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   merrow_scale
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        lamian_kaman_-1: 0
+
+  Nostokulshedra:
+    id:            5328
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: always
+          item:   seashell
+        - chance: rare
+          item:   shall_shell
+      despoil:
+        seashell: 0
+    content: ROV
+
+  Nuhn:
+    id:            2920
+    species:       orobon
+    type:          [notorious]
+    skill_list_id: 312
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 36000
+    loot:
+      drops:
+        - chance: always
+          item:   nuhns_esca
+        - chance: very_common
+          item:   light_grip
+        - chance: very_common
+          item:   wind_grip
+        - chance: always
+          one_of: [oninohocho, enkidus_mittens, oracles_pigaches]
+        - chance: uncommon
+          one_of: [oninohocho, enkidus_mittens, oracles_pigaches]
+
+  Ornery_Orobon:
+    id:            3057
+    species:       orobon
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Phasma:
+    id:            3130
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 643
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: uncommon
+          item:   revival_tree_root
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Purgatory_Bat_Arrapago:
+    id:            7327
+    display_name:  Purgatory_Bat
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Qiqirn_Mine:
+    id:      3258
+    species: fortifications
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1790
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Trailer:
+    id:            3265
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: axe
+        delay: 200
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      mob_mods:
+        hp_standback: 1
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   handful_of_almonds
+        - chance: very_rare
+          item:   pebble
+        - chance: very_rare
+          item:   qiqirn_sandbag
+        - chance: very_rare
+          item:   qiqirn_cape
+        - chance: super_rare
+          item:   jar_of_firesand
+        - chance: super_rare
+          item:   handful_of_iron_sand
+        - chance: ultra_rare
+          item:   bowl_of_nashmau_stew
+        - chance: ultra_rare
+          item:   sack_of_silica
+      steal: qiqirn_sandbag
+      despoil:
+        qiqirn_cape:    0
+        qiqirn_sandbag: 0
+
+  Qiqirn_Treasure_Hunter:
+    id:            3267
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   handful_of_almonds
+        - chance: very_rare
+          item:   pebble
+        - chance: very_rare
+          item:   qiqirn_sandbag
+        - chance: very_rare
+          item:   qiqirn_cape
+        - chance: super_rare
+          item:   jar_of_firesand
+        - chance: super_rare
+          item:   handful_of_iron_sand
+        - chance: ultra_rare
+          item:   bowl_of_nashmau_stew
+        - chance: ultra_rare
+          item:   sack_of_silica
+      steal: qiqirn_sandbag
+      despoil:
+        qiqirn_cape:    0
+        qiqirn_sandbag: 0
+
+  Qutrub:
+    id:            6127
+    species:       qutrub
+    spell_list_id: 5
+    skill_list_id: 203
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1733
+        entity_flags:  129
+        animation_sub:   4
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Qutrub_blm:
+    id:            6747
+    display_name:  Qutrub
+    species:       qutrub
+    spell_list_id: 21
+    skill_list_id: 203
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  automaton
+          model: 1734
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamian_bone_key
+        - chance: common
+          item:   qutrub_bandage
+        - chance: very_rare
+          item:   qutrub_gorget
+      despoil:
+        qutrub_bandage: 0
+        qutrub_gorget:  0
+
+  Qutrub_drk:
+    id:            3294
+    display_name:  Qutrub
+    species:       qutrub
+    spell_list_id: 5
+    skill_list_id: 203
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  automaton
+          model: 1733
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamian_bone_key
+        - chance: common
+          item:   qutrub_bandage
+        - chance: very_rare
+          item:   qutrub_gorget
+      despoil:
+        qutrub_bandage: 0
+        qutrub_gorget:  0
+
+  Reserve_Draugar_AR_blm:
+    id:            3355
+    display_name:  Reserve_Draugar
+    species:       draugar
+    spell_list_id: 21
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1766
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   revival_tree_root
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Reserve_Draugar_AR_drg:
+    id:            5194
+    display_name:  Reserve_Draugar
+    species:       draugar
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1763
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   revival_tree_root
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Reserve_Draugar_AR_drk:
+    id:            5193
+    display_name:  Reserve_Draugar
+    species:       draugar
+    spell_list_id: 5
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   revival_tree_root
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Reserve_Draugar_AR_thf:
+    id:            5192
+    display_name:  Reserve_Draugar
+    species:       draugar
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1751
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lamian_fang_key
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   revival_tree_root
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Seneschal_Imp_AR:
+    id:            6749
+    display_name:  Seneschal_Imp
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  133
+        animation_sub:   4
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   imp_wing
+        - chance: rare
+          item:   imp_horn
+      despoil:
+        imp_wing: 0
+
+  Soulflayer:
+    id:            3704
+    species:       soulflayer
+    spell_list_id: 28
+    skill_list_id: 233
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:    2
+          water:  9
+          light: -1
+          dark:  11
+        rank_status:
+          paralyze:     2
+          bind:         2
+          poison:       9
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1775
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   soulflayer_tentacle
+        - chance: uncommon
+          item:   soulflayer_staff
+        - chance: rare
+          item:   soulflayer_robe
+      despoil:
+        soulflayer_staff: 0
+        soulflayer_robe:  0
+
+  Velionis:
+    id:            4217
+    species:       skeleton
+    type:          [notorious]
+    spell_list_id: 300
+    skill_list_id: 292
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1765
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   velioniss_bone
+        - chance: common
+          item:   white_joker
+        - chance: common
+          item:   corsairs_belt
+
+  Wootzshell_fished:
+    id:            6370
+    species:       crab
+    type:          [fished, battlefield]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: rare
+          item:   sack_of_white_sand
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Zareehkl_the_Jubilant:
+    id:            4490
+    species:       qutrub
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 303
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  automaton
+          model: 1733
+        model_size:  2
+        hitbox:     16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 75000
+    loot:
+      drops:
+        - chance: always
+          item:   zareekhls_neckpiece
+        - chance: common
+          item:   zareehkl_scythe
+        - chance: common
+          item:   zareehkl_jambiya
+
+spawns:
+  16998401:
+    template: Wootzshell_fished
+    script:   Wootzshell
+    at:       [1.000, 1.000, 1.000]
+    level:    [72, 73]
+  16998402:
+    template: Arrapago_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [73, 74]
+  16998403:
+    template: Chimera_Clot
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 76]
+  16998404:
+    template: Lahama_fished
+    script:   Lahama
+    at:       [1.000, 1.000, 1.000]
+    level:    [76, 78]
+  16998405:
+    template: Llamhigyn_Y_Dwr
+    at:       [1.000, 1.000, 1.000]
+    level:    [76, 78]
+  16998406:
+    template: Giant_Orobon
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 81]
+  16998407:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [453.738, -8.966, 66.754, 94]
+    level:    [72, 73]
+  16998408:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [478.340, -9.761, 81.387, 62]
+    level:    [72, 73]
+  16998409:
+    template: Merrow_Chantress
+    at:       [464.402, -7.000, 70.480, 221]
+    level:    [73, 75]
+  16998410:
+    template: Arrapago_Apkallu
+    at:       [501.650, -4.689, 63.597, 155]
+    level:    [70, 72]
+  16998411:
+    template: Arrapago_Apkallu
+    at:       [501.842, -4.320, 63.759, 143]
+    level:    [70, 72]
+  16998412:
+    template: Arrapago_Apkallu
+    at:       [498.835, -5.698, 38.346, 248]
+    level:    [70, 72]
+  16998413:
+    template: Arrapago_Apkallu
+    at:       [527.960, -4.381, 65.446, 113]
+    level:    [70, 72]
+  16998414:
+    template: Arrapago_Apkallu
+    at:       [528.548, -4.398, 65.503, 74]
+    level:    [70, 72]
+  16998415:
+    template: Arrapago_Apkallu
+    at:       [535.506, -3.954, 76.329, 220]
+    level:    [70, 72]
+  16998416:
+    template: Arrapago_Apkallu
+    at:       [523.203, -4.225, 63.675, 93]
+    level:    [70, 72]
+  16998417:
+    template: Arrapago_Apkallu
+    at:       [536.240, -6.112, 69.699, 85]
+    level:    [70, 72]
+  16998418:
+    template: Arrapago_Apkallu
+    at:       [522.265, -6.520, 102.385, 45]
+    level:    [70, 72]
+  16998419:
+    template: Arrapago_Apkallu
+    at:       [535.435, -5.065, 86.186, 6]
+    level:    [70, 72]
+  16998420:
+    template: Arrapago_Apkallu
+    at:       [523.873, -5.793, 99.753, 166]
+    level:    [70, 72]
+  16998421:
+    template: Lamia_Graverobber
+    at:       [578.524, -11.681, 92.020, 116]
+    level:    [73, 75]
+  16998422:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [570.648, -9.900, 95.594, 140]
+    level:    [72, 73]
+  16998423:
+    template: Phasma
+    at:       [548.300, -15.790, 138.810, 17]
+    level:    [73, 74]
+  16998424:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [580.159, -15.931, 158.282, 192]
+    level:    [72, 73]
+  16998425:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [578.517, -16.336, 170.692, 44]
+    level:    [72, 73]
+  16998426:
+    template: Lamia_Dartist
+    at:       [576.729, -15.771, 218.744, 116]
+    level:    [73, 75]
+  16998427:
+    template: Lamia_Dancer
+    at:       [576.209, -15.925, 223.869, 219]
+    level:    [73, 75]
+  16998428:
+    template: Lamias_Elemental
+    at:       [1.000, 1.000, 1.000, 213]
+    level:    [68, 70]
+  16998429:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [489.866, -8.295, 216.724, 193]
+    level:    [72, 73]
+  16998430:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [488.244, -8.263, 219.296, 255]
+    level:    [72, 73]
+  16998431:
+    template: Arrapago_Apkallu
+    at:       [431.375, -3.723, 173.280, 23]
+    level:    [70, 72]
+  16998432:
+    template: Arrapago_Apkallu
+    at:       [418.079, -3.919, 179.725, 83]
+    level:    [70, 72]
+  16998433:
+    template: Arrapago_Apkallu
+    at:       [453.380, -4.948, 178.304, 179]
+    level:    [70, 72]
+  16998434:
+    template: Arrapago_Apkallu
+    at:       [445.640, -4.621, 177.627, 146]
+    level:    [70, 72]
+  16998435:
+    template: Arrapago_Apkallu
+    at:       [491.510, -3.652, 173.026, 21]
+    level:    [70, 72]
+  16998436:
+    template: Arrapago_Apkallu
+    at:       [483.552, -6.448, 182.237, 129]
+    level:    [70, 72]
+  16998437:
+    template: Merrow_Chantress
+    at:       [446.761, -7.025, 114.934, 135]
+    level:    [73, 75]
+  16998438:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [444.331, -7.151, 113.642, 182]
+    level:    [72, 73]
+  16998439:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [452.400, -7.033, 109.170, 129]
+    level:    [72, 73]
+  16998440:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [449.850, -4.022, 146.264, 9]
+    level:    [72, 73]
+  16998441:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 2]
+    level:    [67, 75]
+  16998442:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [412.283, -2.050, 142.585, 195]
+    level:    [77, 78]
+  16998443:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [426.945, -2.164, 151.652, 240]
+    level:    [77, 78]
+  16998444:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [379.898, -3.907, 104.154, 255]
+    level:    [72, 73]
+  16998445:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 136]
+    level:    [67, 75]
+  16998446:
+    template: Nipper
+    at:       [367.553, -7.752, 94.833, 254]
+    level:    [72, 73]
+  16998447:
+    template: Nipper
+    at:       [416.041, -4.407, 62.900, 245]
+    level:    [72, 73]
+  16998448:
+    template: Nipper
+    at:       [414.431, -6.126, 57.203, 97]
+    level:    [72, 73]
+  16998449:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [416.026, -4.570, 61.856, 240]
+    level:    [72, 73]
+  16998450:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [413.303, -4.829, 60.422, 149]
+    level:    [72, 73]
+  16998451:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [413.749, -7.500, 50.244, 27]
+    level:    [72, 73]
+  16998452:
+    template: Nipper
+    at:       [389.595, -6.874, 58.002, 144]
+    level:    [72, 73]
+  16998453:
+    template: Nipper
+    at:       [414.330, -7.033, 52.090, 185]
+    level:    [72, 73]
+  16998454:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [335.845, -3.940, 83.942, 31]
+    level:    [72, 73]
+  16998455:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [337.496, -4.007, 83.863, 67]
+    level:    [72, 73]
+  16998456:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [342.927, -8.469, 72.756, 68]
+    level:    [72, 73]
+  16998457:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 248]
+    level:    [67, 75]
+  16998458:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [340.365, -7.802, 59.806, 85]
+    level:    [72, 73]
+  16998459:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [331.126, -4.645, 68.510, 134]
+    level:    [72, 73]
+  16998460:
+    template: Lamia_Graverobber
+    at:       [333.047, -4.693, 66.705, 72]
+    level:    [73, 75]
+  16998461:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [309.582, -3.325, 109.187, 229]
+    level:    [72, 73]
+  16998462:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [303.667, -4.724, 107.417, 71]
+    level:    [72, 73]
+  16998463:
+    template: Lamia_Fatedealer
+    at:       [280.990, -5.714, 100.413, 207]
+    level:    [73, 75]
+  16998464:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [259.023, -6.857, 80.959, 29]
+    level:    [72, 73]
+  16998465:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [256.537, -6.655, 71.742, 90]
+    level:    [72, 73]
+  16998466:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [175.354, -4.453, 194.553, 200]
+    level:    [73, 74]
+  16998467:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [166.579, -4.275, 183.503, 69]
+    level:    [73, 74]
+  16998468:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [180.858, -6.612, 206.617, 9]
+    level:    [73, 74]
+  16998469:
+    template: Lamia_Graverobber
+    at:       [179.047, -5.868, 125.533, 228]
+    level:    [73, 75]
+  16998470:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [177.407, -5.362, 117.696, 183]
+    level:    [73, 74]
+  16998471:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [176.522, -4.964, 114.927, 101]
+    level:    [73, 74]
+  16998472:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [158.956, -7.834, 93.741, 53]
+    level:    [73, 74]
+  16998473:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [143.423, -4.307, 103.696, 52]
+    level:    [73, 74]
+  16998474:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [166.520, -6.924, 95.377, 147]
+    level:    [73, 74]
+  16998475:
+    template: Lamia_Dartist
+    at:       [103.396, -4.469, 174.964, 154]
+    level:    [73, 75]
+  16998476:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [103.336, -4.666, 170.270, 88]
+    level:    [73, 74]
+  16998477:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [102.725, -5.168, 156.753, 67]
+    level:    [73, 74]
+  16998478:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [101.715, -5.516, 154.859, 226]
+    level:    [73, 74]
+  16998479:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [96.077, -5.962, 177.590, 231]
+    level:    [73, 74]
+  16998480:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [97.576, -7.186, 172.472, 217]
+    level:    [73, 74]
+  16998481:
+    template: Lamie_No8
+    at:       [144.706, -2.687, 136.081, 85]
+    level:    [80, 82]
+  16998482:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [43.717, -6.508, 218.501, 21]
+    level:    [73, 74]
+  16998483:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [51.589, -4.992, 222.870, 194]
+    level:    [73, 74]
+  16998484:
+    template: Ashakku
+    at:       [21.466, -6.317, 197.733, 231]
+    level:    [73, 74]
+  16998485:
+    template: Ashakku
+    at:       [19.170, -4.503, 215.449, 192]
+    level:    [73, 74]
+  16998486:
+    template: Lahama
+    at:       [28.081, -6.256, 221.555, 170]
+    level:    [76, 78]
+  16998487:
+    template: Ashakku
+    at:       [-2.918, -4.468, 103.204, 167]
+    level:    [73, 74]
+  16998488:
+    template: Ashakku
+    at:       [-0.249, -6.348, 99.796, 207]
+    level:    [73, 74]
+  16998489:
+    template: Ashakku
+    at:       [-16.668, -5.021, 126.240, 118]
+    level:    [73, 74]
+  16998490:
+    template: Lahama
+    at:       [-17.024, -4.786, 126.146, 61]
+    level:    [76, 78]
+  16998491:
+    template: Purgatory_Bat_Arrapago
+    script:   Purgatory_Bat
+    at:       [59.817, -8.229, 120.056, 67]
+    level:    [72, 73]
+  16998492:
+    template: Purgatory_Bat_Arrapago
+    script:   Purgatory_Bat
+    at:       [59.365, -8.243, 116.521, 191]
+    level:    [72, 73]
+  16998493:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [-0.567, -13.298, 166.169, 64]
+    level:    [73, 74]
+  16998494:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [-0.686, -13.313, 166.233, 64]
+    level:    [73, 74]
+  16998495:
+    template: Purgatory_Bat_Arrapago
+    script:   Purgatory_Bat
+    at:       [-59.732, -15.900, 150.619, 157]
+    level:    [72, 73]
+  16998496:
+    template: Purgatory_Bat_Arrapago
+    script:   Purgatory_Bat
+    at:       [-69.916, -16.064, 150.846, 235]
+    level:    [72, 73]
+  16998497:
+    template: Lamia_Fatedealer
+    at:       [-100.917, -16.018, 29.445, 58]
+    level:    [73, 75]
+  16998498:
+    template: Lamia_Fatedealer
+    at:       [-100.928, -16.016, 28.945, 57]
+    level:    [73, 75]
+  16998499:
+    template: Qiqirn_Treasure_Hunter
+    at:       [-63.241, -18.419, 68.532, 64]
+    level:    [77, 77]
+  16998500:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  16998501:
+    template: Qiqirn_Trailer
+    at:       [-60.205, -15.389, 59.698, 20]
+    level:    [77, 77]
+  16998502:
+    template: Heraldic_Imp
+    at:       [-20.904, -5.209, 244.174, 45]
+    level:    [72, 74]
+  16998503:
+    template: Heraldic_Imp
+    at:       [-24.759, -7.135, 233.791, 162]
+    level:    [72, 74]
+  16998504:
+    template: Heraldic_Imp
+    at:       [-11.924, -3.873, 227.791, 146]
+    level:    [72, 74]
+  16998505:
+    template: Heraldic_Imp
+    at:       [-23.571, -6.300, 228.986, 101]
+    level:    [72, 74]
+  16998506:
+    template: Ashakku
+    at:       [-53.405, -8.107, 245.580, 73]
+    level:    [73, 74]
+  16998507:
+    template: Ashakku
+    at:       [-47.995, -7.947, 252.143, 6]
+    level:    [73, 74]
+  16998508:
+    template: Ashakku
+    at:       [-63.058, -4.004, 244.557, 55]
+    level:    [73, 74]
+  16998509:
+    template: Ashakku
+    at:       [-81.177, -5.650, 217.825, 160]
+    level:    [73, 74]
+  16998510:
+    template: Ashakku
+    at:       [-96.631, -3.443, 225.858, 138]
+    level:    [73, 74]
+  16998511:
+    template: Ashakku
+    at:       [-90.482, -4.307, 223.649, 210]
+    level:    [73, 74]
+  16998512:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [-85.393, -4.411, 222.232, 18]
+    level:    [73, 74]
+  16998513:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [-98.650, -5.649, 203.361, 132]
+    level:    [73, 74]
+  16998514:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [-100.711, -4.962, 197.865, 194]
+    level:    [73, 74]
+  16998515:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [-136.164, -4.278, 151.517, 247]
+    level:    [73, 74]
+  16998516:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [-98.753, -5.782, 160.862, 226]
+    level:    [73, 74]
+  16998517:
+    template: Qutrub_blm
+    script:   Qutrub
+    at:       [-113.749, -8.164, 134.420, 30]
+    level:    [73, 74]
+  16998518:
+    template: Lamia_Dancer
+    at:       [-120.267, -4.951, 143.092, 254]
+    level:    [73, 75]
+  16998519:
+    template: Lamias_Elemental
+    at:       [1.000, 1.000, 1.000, 135]
+    level:    [68, 70]
+  16998520:
+    template: Lamie_No7
+    at:       [-146.615, -3.912, 186.245, 125]
+    level:    [80, 82]
+  16998521:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [-21.870, -7.000, 301.769, 49]
+    level:    [72, 73]
+  16998522:
+    template: Merrow_Chantress
+    at:       [-15.137, -9.758, 315.406, 121]
+    level:    [73, 75]
+  16998523:
+    template: Nipper
+    at:       [376.685, -4.415, 236.571, 225]
+    level:    [72, 73]
+  16998524:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [380.910, -6.613, 241.675, 99]
+    level:    [72, 73]
+  16998525:
+    template: Nipper
+    at:       [408.809, -4.590, 265.793, 192]
+    level:    [72, 73]
+  16998526:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [409.909, -6.071, 259.603, 206]
+    level:    [72, 73]
+  16998527:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [482.196, -4.575, 262.881, 253]
+    level:    [72, 73]
+  16998528:
+    template: Merrow_Shadowdancer
+    at:       [483.883, -6.482, 258.280, 57]
+    level:    [73, 75]
+  16998529:
+    template: Merrow_Icedancer
+    at:       [548.469, -4.559, 308.033, 20]
+    level:    [73, 74]
+  16998530:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [531.599, -4.572, 305.537, 120]
+    level:    [72, 73]
+  16998531:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [577.710, -5.820, 324.168, 137]
+    level:    [72, 73]
+  16998532:
+    template: Merrow_Shadowdancer
+    at:       [23.431, -4.753, 303.952, 9]
+    level:    [73, 75]
+  16998533:
+    template: Merrow_Kabukidancer_2621
+    script:   Merrow_Kabukidancer
+    at:       [48.413, -3.709, 311.738, 149]
+    level:    [73, 75]
+  16998534:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [54.902, -2.338, 295.513, 154]
+    level:    [72, 73]
+  16998535:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 139]
+    level:    [67, 75]
+  16998536:
+    template: Merrow_Kabukidancer_2621
+    script:   Merrow_Kabukidancer
+    at:       [-14.500, -3.220, 341.368, 210]
+    level:    [73, 75]
+  16998537:
+    template: Merrow_Icedancer
+    at:       [-64.128, -4.176, 333.745, 39]
+    level:    [73, 75]
+  16998538:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [-92.686, -4.072, 347.132, 43]
+    level:    [72, 73]
+  16998539:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [-90.080, -2.761, 363.521, 178]
+    level:    [72, 73]
+  16998540:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [-91.336, -3.749, 339.428, 62]
+    level:    [72, 73]
+  16998541:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 201]
+    level:    [67, 75]
+  16998542:
+    template: Merrow_Icedancer
+    at:       [-90.231, -3.447, 364.203, 135]
+    level:    [73, 75]
+  16998543:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [-113.091, -7.299, 342.845, 133]
+    level:    [72, 73]
+  16998544:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [-142.164, -3.234, 341.893, 60]
+    level:    [72, 73]
+  16998545:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [-133.965, -5.502, 342.290, 161]
+    level:    [72, 73]
+  16998546:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [-87.614, -2.603, 364.611, 13]
+    level:    [72, 73]
+  16998547:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-135.643, -5.825, 376.026, 43]
+    level:    [77, 78]
+  16998548:
+    template: Merrow_Chantress
+    at:       [-156.152, -9.749, 409.965, 177]
+    level:    [73, 75]
+  16998549:
+    template: Phasma
+    at:       [-153.688, -9.750, 410.645, 164]
+    level:    [73, 74]
+  16998550:
+    template: Bhoot
+    at:       [-157.674, -5.093, 364.663, 29]
+    level:    [80, 82]
+  16998551:
+    template: Phasma
+    at:       [-130.481, -10.000, 434.866, 167]
+    level:    [73, 74]
+  16998552:
+    template: Merrow_Shadowdancer
+    at:       [-101.676, -4.227, 425.811, 216]
+    level:    [73, 75]
+  16998553:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [-106.043, -3.982, 419.083, 221]
+    level:    [72, 73]
+  16998554:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-69.108, -2.019, 458.504, 146]
+    level:    [77, 78]
+  16998555:
+    template: Ashakku
+    at:       [-33.804, -4.253, 496.581, 24]
+    level:    [73, 74]
+  16998556:
+    template: Ashakku
+    at:       [-67.688, -4.910, 498.917, 166]
+    level:    [73, 74]
+  16998557:
+    template: Ashakku
+    at:       [-102.675, -5.109, 507.220, 64]
+    level:    [73, 74]
+  16998558:
+    template: Ashakku
+    at:       [-102.165, -4.006, 497.080, 133]
+    level:    [73, 74]
+  16998559:
+    template: Phasma
+    at:       [-99.762, -6.488, 511.802, 81]
+    level:    [73, 74]
+  16998560:
+    template: Merrow_No5
+    at:       [-84.380, -4.343, 497.333, 12]
+    level:    [80, 82]
+  16998561:
+    template: Heraldic_Imp
+    at:       [-27.055, -8.312, 544.488, 185]
+    level:    [72, 74]
+  16998562:
+    template: Heraldic_Imp
+    at:       [-36.039, -8.388, 539.103, 3]
+    level:    [72, 74]
+  16998563:
+    template: Heraldic_Imp
+    at:       [-18.348, -8.012, 544.107, 8]
+    level:    [72, 74]
+  16998564:
+    template: Phasma
+    at:       [-225.228, -3.950, 120.541, 37]
+    level:    [73, 74]
+  16998565:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-272.921, -3.784, 153.575, 160]
+    level:    [77, 78]
+  16998566:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-264.514, -2.322, 133.911, 32]
+    level:    [77, 78]
+  16998567:
+    template: Fallen_Volunteer
+    at:       [-299.996, -5.226, 82.993, 6]
+    level:    [72, 74]
+  16998568:
+    template: Fallen_Imperial_Wizard
+    at:       [-298.882, -4.910, 81.100, 199]
+    level:    [72, 74]
+  16998569:
+    template: Fallen_Imperial_Trooper
+    at:       [-303.000, -6.973, 81.438, 70]
+    level:    [72, 74]
+  16998570:
+    template: Merrow_Chantress
+    at:       [-299.718, -5.885, 41.159, 219]
+    level:    [73, 75]
+  16998571:
+    template: Fallen_Imperial_Trooper
+    at:       [-293.815, -4.964, 58.560, 181]
+    level:    [72, 74]
+  16998572:
+    template: Fallen_Volunteer
+    at:       [-297.212, -7.838, 52.944, 88]
+    level:    [72, 74]
+  16998573:
+    template: Fallen_Imperial_Wizard
+    at:       [-298.459, -8.152, 48.920, 200]
+    level:    [72, 74]
+  16998574:
+    template: Merrow_Chantress
+    at:       [-339.724, -15.920, -19.294, 168]
+    level:    [73, 75]
+  16998575:
+    template: Fallen_Imperial_Trooper
+    at:       [-343.657, -15.960, -12.920, 110]
+    level:    [72, 74]
+  16998576:
+    template: Fallen_Imperial_Trooper
+    at:       [-336.092, -15.543, 13.891, 35]
+    level:    [72, 74]
+  16998577:
+    template: Fallen_Volunteer
+    at:       [-338.811, -15.606, 13.444]
+    level:    [72, 74]
+  16998578:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-369.107, -5.278, 88.784, 130]
+    level:    [77, 78]
+  16998579:
+    template: Merrow_Chantress
+    at:       [-415.250, -7.011, 105.964, 206]
+    level:    [73, 75]
+  16998580:
+    template: Fallen_Volunteer
+    at:       [-412.762, -8.312, 111.995, 199]
+    level:    [72, 74]
+  16998581:
+    template: Fallen_Imperial_Wizard
+    at:       [-421.265, -6.882, 103.021, 92]
+    level:    [72, 74]
+  16998582:
+    template: Merrow_Kabukidancer_2621
+    script:   Merrow_Kabukidancer
+    at:       [-431.939, -7.597, 16.595, 91]
+    level:    [73, 75]
+  16998583:
+    template: Fallen_Imperial_Wizard
+    at:       [-422.703, -4.545, 36.309, 216]
+    level:    [72, 74]
+  16998584:
+    template: Fallen_Imperial_Trooper
+    at:       [-417.099, -6.852, 39.106, 235]
+    level:    [72, 74]
+  16998585:
+    template: Merrow_Shadowdancer
+    at:       [-430.966, -4.858, 22.117, 16]
+    level:    [73, 75]
+  16998586:
+    template: Fallen_Imperial_Trooper
+    at:       [-455.548, -7.365, 15.447, 207]
+    level:    [72, 74]
+  16998587:
+    template: Fallen_Imperial_Wizard
+    at:       [-435.503, -7.612, 17.074, 31]
+    level:    [72, 74]
+  16998588:
+    template: Fallen_Volunteer
+    at:       [-480.056, -6.943, -20.272, 175]
+    level:    [72, 74]
+  16998589:
+    template: Fallen_Imperial_Wizard
+    at:       [-478.474, -8.294, -24.249, 127]
+    level:    [72, 74]
+  16998590:
+    template: Merrow_Shadowdancer
+    at:       [-568.947, -4.478, 93.906, 66]
+    level:    [73, 75]
+  16998591:
+    template: Fallen_Imperial_Wizard
+    at:       [-565.185, -8.001, 103.779, 170]
+    level:    [72, 74]
+  16998592:
+    template: Fallen_Imperial_Trooper
+    at:       [-583.868, -7.466, 73.816, 78]
+    level:    [72, 74]
+  16998593:
+    template: Fallen_Imperial_Trooper
+    at:       [-577.125, -4.282, 74.963, 244]
+    level:    [72, 74]
+  16998594:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-488.007, -5.158, 85.171, 35]
+    level:    [77, 78]
+  16998595:
+    template: Merrow_Icedancer
+    at:       [-508.004, -4.535, 134.384, 204]
+    level:    [73, 75]
+  16998596:
+    template: Fallen_Volunteer
+    at:       [-505.940, -6.618, 139.016, 195]
+    level:    [72, 74]
+  16998597:
+    template: Fallen_Imperial_Wizard
+    at:       [-508.123, -4.281, 134.828, 128]
+    level:    [72, 74]
+  16998598:
+    template: Fallen_Imperial_Trooper
+    at:       [-507.661, -3.993, 133.939, 151]
+    level:    [72, 74]
+  16998599:
+    template: Merrow_Chantress
+    at:       [-554.195, -15.943, 178.926, 166]
+    level:    [73, 75]
+  16998600:
+    template: Merrow_Chantress
+    at:       [-579.072, -15.855, 205.624, 185]
+    level:    [73, 75]
+  16998601:
+    template: Fallen_Volunteer
+    at:       [-587.679, -15.923, 225.450, 149]
+    level:    [72, 74]
+  16998602:
+    template: Naraka_Bat
+    at:       [259.400, -5.352, 86.570, 27]
+    level:    [88, 89]
+  16998603:
+    template: Naraka_Bat
+    at:       [256.010, -6.893, 81.694, 97]
+    level:    [88, 89]
+  16998604:
+    template: Naraka_Bat
+    at:       [254.670, -7.367, 76.819, 177]
+    level:    [88, 89]
+  16998605:
+    template: Naraka_Bat
+    at:       [253.530, -7.080, 68.178, 251]
+    level:    [88, 89]
+  16998606:
+    template: Naraka_Bat
+    at:       [248.510, -8.173, 135.906, 113]
+    level:    [88, 89]
+  16998607:
+    template: Naraka_Bat
+    at:       [268.820, -7.813, 148.751, 55]
+    level:    [88, 89]
+  16998608:
+    template: Naraka_Bat
+    at:       [258.160, -8.515, 109.649, 182]
+    level:    [88, 89]
+  16998609:
+    template: Naraka_Bat
+    at:       [265.880, -6.796, 180.376, 72]
+    level:    [88, 89]
+  16998610:
+    template: Naraka_Bat
+    at:       [266.520, -4.155, 189.352, 174]
+    level:    [88, 89]
+  16998611:
+    template: Naraka_Bat
+    at:       [260.700, -5.077, 208.233, 246]
+    level:    [88, 89]
+  16998612:
+    template: Naraka_Bat
+    at:       [256.900, -6.953, 210.572, 42]
+    level:    [88, 89]
+  16998613:
+    template: Naraka_Bat
+    at:       [219.320, -7.453, 223.070, 17]
+    level:    [88, 89]
+  16998614:
+    template: Naraka_Bat
+    at:       [233.740, -7.262, 214.440, 129]
+    level:    [88, 89]
+  16998615:
+    template: Naraka_Bat
+    at:       [219.400, -3.427, 146.158, 192]
+    level:    [88, 89]
+  16998616:
+    template: Naraka_Bat
+    at:       [221.770, -2.576, 171.675, 75]
+    level:    [88, 89]
+  16998617:
+    template: Naraka_Bat
+    at:       [222.790, -4.193, 173.998, 218]
+    level:    [88, 89]
+  16998618:
+    template: Nirgali
+    at:       [-592.800, -9.690, -73.448, 90]
+    level:    [87, 89]
+  16998619:
+    template: Nirgali
+    at:       [-593.000, -9.689, -72.703, 208]
+    level:    [87, 89]
+  16998620:
+    template: Nirgali
+    at:       [-618.000, -9.850, -69.203, 187]
+    level:    [87, 89]
+  16998621:
+    template: Nirgali
+    at:       [-586.100, -7.965, -20.027, 115]
+    level:    [87, 89]
+  16998622:
+    template: Nirgali
+    at:       [-586.700, -8.008, -20.957, 176]
+    level:    [87, 89]
+  16998623:
+    template: Nirgali
+    at:       [-593.100, -7.754, -21.725, 192]
+    level:    [87, 89]
+  16998624:
+    template: Nirgali
+    at:       [-534.700, -4.765, 5.196, 209]
+    level:    [87, 89]
+  16998625:
+    template: Nirgali
+    at:       [-528.500, -5.287, -14.604, 67]
+    level:    [87, 89]
+  16998626:
+    template: Nirgali
+    at:       [-522.500, -5.317, -18.416, 45]
+    level:    [87, 89]
+  16998627:
+    template: Nirgali
+    at:       [-543.500, -6.708, 34.079, 138]
+    level:    [87, 89]
+  16998628:
+    template: Nirgali
+    at:       [-530.600, -4.320, 20.863, 214]
+    level:    [87, 89]
+  16998629:
+    template: Nirgali
+    at:       [-536.800, -4.366, 55.866, 28]
+    level:    [87, 89]
+  16998630:
+    template: Nirgali
+    at:       [-576.500, -6.699, 66.375, 19]
+    level:    [87, 89]
+  16998631:
+    template: Nirgali
+    at:       [-566.700, -3.727, 67.166, 162]
+    level:    [87, 89]
+  16998632:
+    template: Nirgali
+    at:       [-581.400, -5.907, 73.563, 11]
+    level:    [87, 89]
+  16998633:
+    template: Nirgali
+    at:       [-566.900, -4.080, 96.820, 103]
+    level:    [87, 89]
+  16998634:
+    template: Nirgali
+    at:       [-564.100, -4.468, 98.971, 48]
+    level:    [87, 89]
+  16998635:
+    template: Nirgali
+    at:       [-574.400, -7.111, 104.843, 141]
+    level:    [87, 89]
+  16998636:
+    template: Lamia_Bellydancer
+    at:       [-14.836, -2.132, 426.619, 132]
+    level:    [81, 83]
+  16998637:
+    template: Lamias_Elemental
+    at:       [-10.923, -1.673, 421.162, 6]
+    level:    [76, 78]
+  16998638:
+    template: Draugar_Servant_blm
+    script:   Draugar_Servant
+    at:       [-23.721, -2.099, 429.445, 203]
+    level:    [79, 81]
+  16998639:
+    template: Soulflayer
+    at:       [17.253, -6.861, 469.799, 104]
+    level:    [82, 83]
+  16998640:
+    template: Soulflayer
+    at:       [18.424, -6.575, 516.575, 248]
+    level:    [82, 83]
+  16998641:
+    template: Soulflayer
+    at:       [46.629, -4.518, 537.435, 24]
+    level:    [82, 83]
+  16998642:
+    template: Soulflayer
+    at:       [99.388, -7.961, 494.575, 59]
+    level:    [82, 83]
+  16998643:
+    template: Soulflayer
+    at:       [96.645, -7.979, 495.247, 114]
+    level:    [82, 83]
+  16998644:
+    template: Soulflayer
+    at:       [56.308, -5.215, 494.926, 18]
+    level:    [82, 83]
+  16998645:
+    template: Lahama
+    at:       [51.454, -3.692, 416.163, 52]
+    level:    [79, 80]
+  16998646:
+    template: Draugar_Servant_blm
+    script:   Draugar_Servant
+    at:       [55.915, -4.598, 428.031, 217]
+    level:    [79, 81]
+  16998647:
+    template: Lahama
+    at:       [65.240, -7.741, 394.962, 196]
+    level:    [79, 80]
+  16998648:
+    template: Draugar_Servant_drg
+    script:   Draugar_Servant
+    at:       [54.808, -5.067, 391.589, 80]
+    level:    [79, 81]
+  16998649:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 79]
+    level:    [67, 75]
+  16998650:
+    template: Lahama
+    at:       [99.805, -4.487, 417.637, 166]
+    level:    [79, 80]
+  16998651:
+    template: Lahama
+    at:       [106.160, -3.832, 427.454, 57]
+    level:    [79, 80]
+  16998652:
+    template: Lamia_Deathdancer
+    at:       [139.117, -5.489, 463.415, 137]
+    level:    [81, 83]
+  16998653:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [136.234, -6.831, 468.779, 94]
+    level:    [79, 81]
+  16998654:
+    template: Draugar_Servant_thf
+    script:   Draugar_Servant
+    at:       [134.976, -7.049, 464.915, 121]
+    level:    [79, 81]
+  16998655:
+    template: Bloody_Bones
+    at:       [136.000, -6.000, 476.000, 29]
+    level:    [83, 83]
+  16998656:
+    template: Bhoot
+    at:       [107.258, -2.060, 258.006, 170]
+    level:    [80, 82]
+  16998657:
+    template: Phasma
+    at:       [109.564, -4.015, 226.246, 255]
+    level:    [73, 74]
+  16998658:
+    template: Phasma
+    at:       [148.004, -7.453, 254.834, 77]
+    level:    [73, 74]
+  16998659:
+    template: Draugar_Servant_drg
+    script:   Draugar_Servant
+    at:       [150.777, -6.003, 259.533, 65]
+    level:    [79, 81]
+  16998660:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 83]
+    level:    [67, 75]
+  16998661:
+    template: Merrow_Songstress
+    at:       [185.787, -7.755, 288.889, 158]
+    level:    [81, 83]
+  16998662:
+    template: Draugar_Servant_thf
+    script:   Draugar_Servant
+    at:       [184.278, -7.011, 295.976, 194]
+    level:    [79, 81]
+  16998663:
+    template: Merrow_Bladedancer
+    at:       [203.712, -11.008, 280.946, 25]
+    level:    [81, 83]
+  16998664:
+    template: Ice_Elemental
+    at:       [279.450, -5.931, 341.207, 221]
+    level:    [80, 80]
+  16998665:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [228.061, -2.306, 302.545, 59]
+    level:    [79, 81]
+  16998666:
+    template: Lahama
+    at:       [229.657, -8.053, 350.198, 24]
+    level:    [79, 80]
+  16998667:
+    template: Nipper
+    at:       [231.114, -7.497, 345.863, 41]
+    level:    [72, 73]
+  16998668:
+    template: Nipper
+    at:       [224.796, -8.045, 355.511, 45]
+    level:    [72, 73]
+  16998669:
+    template: Nostokulshedra
+    at:       [260.230, -7.544, 375.356, 253]
+    level:    [88, 89]
+  16998670:
+    template: Nostokulshedra
+    at:       [259.610, -4.188, 384.230, 239]
+    level:    [88, 89]
+  16998671:
+    template: Nostokulshedra
+    at:       [251.490, -7.921, 370.986, 9]
+    level:    [88, 89]
+  16998672:
+    template: Nostokulshedra
+    at:       [282.500, -6.125, 379.774, 232]
+    level:    [88, 89]
+  16998673:
+    template: Nipper
+    at:       [267.470, -3.796, 387.522, 102]
+    level:    [72, 73]
+  16998674:
+    template: Nipper
+    at:       [265.520, -3.549, 389.204, 177]
+    level:    [72, 73]
+  16998675:
+    template: Soulflayer
+    at:       [253.587, -6.575, 377.290, 99]
+    level:    [82, 83]
+  16998676:
+    template: Nostokulshedra
+    at:       [344.000, -3.831, 302.444, 201]
+    level:    [88, 89]
+  16998677:
+    template: Nostokulshedra
+    at:       [333.650, -7.841, 316.497, 162]
+    level:    [88, 89]
+  16998678:
+    template: Nostokulshedra
+    at:       [341.380, -5.285, 323.123, 114]
+    level:    [88, 89]
+  16998679:
+    template: Nostokulshedra
+    at:       [337.860, -5.250, 298.795, 68]
+    level:    [88, 89]
+  16998680:
+    template: Nostokulshedra
+    at:       [338.240, -6.326, 354.984, 96]
+    level:    [88, 89]
+  16998681:
+    template: Nostokulshedra
+    at:       [342.890, -4.599, 364.282, 62]
+    level:    [88, 89]
+  16998682:
+    template: Nostokulshedra
+    at:       [350.510, -4.455, 339.040, 20]
+    level:    [88, 89]
+  16998683:
+    template: Nostokulshedra
+    at:       [347.470, -4.271, 348.197, 41]
+    level:    [88, 89]
+  16998684:
+    template: Merrow_Wavedancer
+    at:       [399.311, -9.675, 409.513, 30]
+    level:    [81, 83]
+  16998685:
+    template: Merrow_Songstress
+    at:       [388.981, -6.999, 412.720, 124]
+    level:    [81, 83]
+  16998686:
+    template: Draugar_Servant_thf
+    script:   Draugar_Servant
+    at:       [390.568, -7.000, 415.169, 190]
+    level:    [79, 81]
+  16998687:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [384.438, -5.386, 483.383, 180]
+    level:    [79, 80]
+  16998688:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [457.608, -4.638, 483.610, 124]
+    level:    [79, 80]
+  16998689:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [435.828, -6.650, 498.971, 136]
+    level:    [80, 82]
+  16998690:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [453.882, -4.398, 488.655, 116]
+    level:    [80, 82]
+  16998691:
+    template: Lamia_Necromancer_AR
+    script:   Lamia_Necromancer
+    at:       [453.156, -4.413, 454.844, 15]
+    level:    [81, 83]
+  16998692:
+    template: Lamia_Idolater_blm
+    script:   Lamia_Idolater
+    at:       [456.929, -4.437, 435.391, 68]
+    level:    [80, 82]
+  16998693:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [460.929, -6.256, 436.833, 46]
+    level:    [80, 82]
+  16998694:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [471.316, -4.598, 373.679, 38]
+    level:    [80, 82]
+  16998695:
+    template: Lamia_Idolater_blm
+    script:   Lamia_Idolater
+    at:       [461.189, -5.364, 380.427, 79]
+    level:    [80, 82]
+  16998696:
+    template: Euryale
+    at:       [477.970, -4.256, 378.003, 126]
+    level:    [87, 87]
+  16998697:
+    template: Lamia_Toxophilite_AR
+    script:   Lamia_Toxophilite
+    at:       [478.243, -4.440, 376.926, 106]
+    level:    [81, 83]
+  16998698:
+    template: Lamia_Idolater_blm
+    script:   Lamia_Idolater
+    at:       [478.383, -4.204, 376.524, 131]
+    level:    [80, 82]
+  16998699:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [509.667, -4.119, 374.475, 251]
+    level:    [80, 82]
+  16998700:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [540.471, -7.718, 419.559, 234]
+    level:    [80, 82]
+  16998701:
+    template: Lamia_Idolater_blm
+    script:   Lamia_Idolater
+    at:       [540.914, -8.192, 414.372, 14]
+    level:    [80, 82]
+  16998702:
+    template: Lamia_Idolater_blm
+    script:   Lamia_Idolater
+    at:       [590.554, -8.332, 419.471, 252]
+    level:    [80, 82]
+  16998703:
+    template: Lamia_Toxophilite_AR
+    script:   Lamia_Toxophilite
+    at:       [612.876, -7.516, 420.208, 132]
+    level:    [81, 83]
+  16998704:
+    template: Seneschal_Imp_AR
+    script:   Seneschal_Imp
+    at:       [500.061, -7.934, 453.926, 21]
+    level:    [77, 78]
+  16998705:
+    template: Seneschal_Imp_AR
+    script:   Seneschal_Imp
+    at:       [500.651, -8.034, 460.968, 166]
+    level:    [77, 78]
+  16998706:
+    template: Phasma
+    at:       [542.821, -7.383, 500.978, 29]
+    level:    [73, 74]
+  16998707:
+    template: Phasma
+    at:       [542.961, -7.376, 499.831, 220]
+    level:    [73, 74]
+  16998708:
+    template: Bhoot
+    level:    [80, 82]
+  16998709:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [552.397, -7.933, 461.480, 127]
+    level:    [80, 82]
+  16998710:
+    template: Merrow_Typhoondancer_Large
+    script:   Merrow_Typhoondancer
+    at:       [-472.506, -7.281, 203.831, 179]
+    level:    [81, 83]
+  16998711:
+    template: Merrow_Songstress
+    at:       [-471.002, -10.034, 223.183, 52]
+    level:    [81, 83]
+  16998712:
+    template: Draugar_Servant_thf
+    script:   Draugar_Servant
+    at:       [-468.697, -7.000, 213.653, 59]
+    level:    [79, 81]
+  16998713:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-430.928, -4.511, 224.673, 172]
+    level:    [79, 80]
+  16998714:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-388.065, -3.500, 174.204, 30]
+    level:    [79, 80]
+  16998715:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-395.839, -3.926, 176.414, 7]
+    level:    [79, 80]
+  16998716:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-362.737, -4.510, 218.437, 91]
+    level:    [79, 80]
+  16998717:
+    template: Seneschal_Imp_AR
+    script:   Seneschal_Imp
+    at:       [-470.420, -8.127, 345.022, 116]
+    level:    [77, 78]
+  16998718:
+    template: Seneschal_Imp_AR
+    script:   Seneschal_Imp
+    at:       [-461.562, -7.781, 338.614, 219]
+    level:    [77, 78]
+  16998719:
+    template: Emperor_Apkallu
+    at:       [-494.744, -7.879, 277.639, 203]
+    level:    [81, 83]
+  16998720:
+    template: Emperor_Apkallu
+    at:       [-504.467, -4.355, 287.005, 141]
+    level:    [81, 83]
+  16998721:
+    template: Emperor_Apkallu
+    at:       [-544.549, -5.514, 283.550, 101]
+    level:    [81, 83]
+  16998722:
+    template: Emperor_Apkallu
+    at:       [-522.960, -4.773, 296.819, 94]
+    level:    [81, 83]
+  16998723:
+    template: Emperor_Apkallu
+    at:       [-560.360, -6.503, 300.053, 228]
+    level:    [81, 83]
+  16998724:
+    template: Emperor_Apkallu
+    at:       [-563.219, -5.425, 298.768, 47]
+    level:    [81, 83]
+  16998725:
+    template: Emperor_Apkallu
+    at:       [-552.426, -4.974, 295.491, 168]
+    level:    [81, 83]
+  16998726:
+    template: Emperor_Apkallu
+    at:       [-615.801, -4.150, 282.712, 196]
+    level:    [81, 83]
+  16998727:
+    template: Emperor_Apkallu
+    at:       [-621.930, -7.316, 274.629, 93]
+    level:    [81, 83]
+  16998728:
+    template: Emperor_Apkallu
+    at:       [-548.843, -5.359, 279.953, 194]
+    level:    [81, 83]
+  16998729:
+    template: Emperor_Apkallu
+    at:       [-547.344, -5.553, 283.658, 233]
+    level:    [81, 83]
+  16998730:
+    template: Emperor_Apkallu
+    at:       [-535.718, -3.905, 261.840, 174]
+    level:    [81, 83]
+  16998731:
+    template: Emperor_Apkallu
+    at:       [-538.165, -5.608, 232.292, 35]
+    level:    [81, 83]
+  16998732:
+    template: Emperor_Apkallu
+    at:       [-530.804, -3.698, 231.523, 164]
+    level:    [81, 83]
+  16998733:
+    template: Nix_Songstress
+    at:       [-286.216, -10.000, 282.547, 31]
+    level:    [81, 83]
+  16998734:
+    template: Nix_Songstress
+    at:       [-284.578, -10.000, 283.936, 83]
+    level:    [81, 83]
+  16998735:
+    template: Merrow_Typhoondancer_Large
+    script:   Merrow_Typhoondancer
+    at:       [-295.847, -7.008, 301.477, 167]
+    level:    [81, 83]
+  16998736:
+    template: Merrow_Bladedancer
+    at:       [-343.062, -2.162, 338.935, 30]
+    level:    [81, 83]
+  16998737:
+    template: Merrow_Wavedancer
+    at:       [-367.927, -6.069, 379.936, 161]
+    level:    [81, 83]
+  16998738:
+    template: Merrow_Typhoondancer_Large
+    script:   Merrow_Typhoondancer
+    at:       [-367.189, -4.933, 373.970, 137]
+    level:    [81, 83]
+  16998739:
+    template: Merrow_Wavedancer
+    at:       [-334.357, -4.029, 392.697, 1]
+    level:    [81, 83]
+  16998740:
+    template: Ice_Elemental
+    at:       [-255.400, -2.105, 383.062, 199]
+    level:    [80, 80]
+  16998741:
+    template: Dark_Elemental
+    at:       [-264.843, -2.823, 385.519, 29]
+    level:    [80, 80]
+  16998742:
+    template: Lamie_No9
+    at:       [-228.367, -4.690, 342.671, 55]
+    level:    [80, 85]
+  16998743:
+    template: Lamias_Avatar
+    at:       [1.000, 1.000, 1.000, 62]
+    level:    [72, 76]
+  16998744:
+    template: Dweomershell
+    at:       [-421.400, -5.710, 234.921, 68]
+    level:    [88, 89]
+  16998745:
+    template: Dweomershell
+    at:       [-434.300, -6.197, 259.355, 190]
+    level:    [89, 90]
+  16998746:
+    template: Dweomershell
+    at:       [-420.600, -6.943, 253.580, 144]
+    level:    [88, 90]
+  16998747:
+    template: Dweomershell
+    at:       [-429.200, -4.664, 217.369, 88]
+    level:    [88, 90]
+  16998748:
+    template: Dweomershell
+    at:       [-385.900, -3.502, 171.891, 19]
+    level:    [88, 90]
+  16998749:
+    template: Dweomershell
+    at:       [-396.200, -6.785, 180.169, 150]
+    level:    [88, 90]
+  16998750:
+    template: Dweomershell
+    at:       [-415.100, -4.815, 177.412, 23]
+    level:    [89, 90]
+  16998751:
+    template: Dweomershell
+    at:       [-414.900, -5.030, 179.059, 122]
+    level:    [88, 90]
+  16998752:
+    template: Dweomershell
+    at:       [-327.200, -5.459, 220.746, 134]
+    level:    [88, 90]
+  16998753:
+    template: Dweomershell
+    at:       [-342.100, -4.210, 214.180, 126]
+    level:    [88, 90]
+  16998754:
+    template: Dweomershell
+    at:       [-377.200, -6.413, 210.962, 205]
+    level:    [88, 89]
+  16998755:
+    template: Dweomershell
+    at:       [-379.600, -7.119, 214.753, 33]
+    level:    [88, 90]
+  16998756:
+    template: Dweomershell
+    at:       [-280.400, -4.974, 162.382, 230]
+    level:    [88, 89]
+  16998757:
+    template: Dweomershell
+    at:       [-303.700, -5.381, 198.623, 229]
+    level:    [88, 89]
+  16998758:
+    template: Dweomershell
+    at:       [-302.800, -3.700, 173.001, 137]
+    level:    [88, 89]
+  16998759:
+    template: Dweomershell
+    at:       [-289.000, -5.242, 166.268, 163]
+    level:    [88, 90]
+  16998760:
+    template: Dweomershell
+    at:       [-314.400, -7.506, 227.464, 248]
+    level:    [88, 90]
+  16998761:
+    template: Dweomershell
+    at:       [-288.800, -2.832, 239.680, 209]
+    level:    [89, 90]
+  16998762:
+    template: Dweomershell
+    at:       [-295.200, -3.542, 227.988, 253]
+    level:    [88, 89]
+  16998763:
+    template: Dweomershell
+    at:       [-293.100, -3.744, 232.490, 238]
+    level:    [88, 90]
+  16998764:
+    template: Draugar_Servant_blm
+    script:   Draugar_Servant
+    at:       [101.646, -8.352, 9.579, 229]
+    level:    [79, 81]
+  16998765:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [100.980, -10.576, -13.382, 187]
+    level:    [79, 81]
+  16998766:
+    template: Nix_Wavedancer
+    at:       [48.595, -17.999, -38.460, 83]
+    level:    [81, 83]
+  16998767:
+    template: Nix_Bladedancer
+    at:       [-23.315, -17.245, -65.709, 59]
+    level:    [81, 83]
+  16998768:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-66.210, -10.476, -107.233, 110]
+    level:    [79, 81]
+  16998769:
+    template: Draugar_Servant_drg
+    script:   Draugar_Servant
+    at:       [-67.177, -10.645, -106.580, 71]
+    level:    [79, 81]
+  16998770:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 156]
+    level:    [67, 75]
+  16998771:
+    template: Nix_Typhoondancer
+    at:       [-97.817, -5.425, -136.776, 134]
+    level:    [81, 83]
+  16998772:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-85.653, -3.807, -145.799, 218]
+    level:    [79, 81]
+  16998773:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-108.944, -3.078, -133.708, 126]
+    level:    [79, 81]
+  16998774:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-108.936, -2.915, -134.978, 175]
+    level:    [79, 81]
+  16998775:
+    template: Nix_Typhoondancer
+    at:       [-50.343, -7.333, -174.662, 182]
+    level:    [81, 83]
+  16998776:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-55.730, -7.035, -173.188, 155]
+    level:    [79, 81]
+  16998777:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-55.000, -7.161, -173.334, 156]
+    level:    [79, 81]
+  16998778:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-56.681, -5.865, -178.079, 54]
+    level:    [79, 81]
+  16998779:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-12.875, -5.043, -183.565, 224]
+    level:    [79, 81]
+  16998780:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-8.203, -5.554, -180.136, 114]
+    level:    [79, 81]
+  16998781:
+    template: Ice_Elemental
+    at:       [-49.301, -4.160, -205.069, 33]
+    level:    [80, 80]
+  16998782:
+    template: Dark_Elemental
+    at:       [-49.301, -4.160, -205.069, 33]
+    level:    [80, 80]
+  16998783:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-105.143, -4.337, -286.469, 112]
+    level:    [80, 82]
+  16998784:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-102.079, -4.372, -277.244, 200]
+    level:    [80, 82]
+  16998785:
+    template: Lamie_Necromancer
+    at:       [-143.731, -4.318, -304.728, 181]
+    level:    [81, 83]
+  16998786:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-138.159, -6.468, -319.563, 66]
+    level:    [80, 82]
+  16998787:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-137.978, -6.580, -311.553, 163]
+    level:    [80, 82]
+  16998788:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-135.169, -6.047, -299.013, 44]
+    level:    [80, 82]
+  16998789:
+    template: Lamie_Bellydancer
+    at:       [-145.956, -4.678, -324.576, 106]
+    level:    [81, 83]
+  16998790:
+    template: Lamias_Elemental
+    at:       [1.000, 1.000, 1.000, 54]
+    level:    [68, 77]
+  16998791:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-146.510, -4.729, -342.959, 8]
+    level:    [80, 82]
+  16998792:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-148.872, -5.138, -328.479, 187]
+    level:    [80, 82]
+  16998793:
+    template: Lamie_Deathdancer
+    at:       [-100.001, -6.387, -397.049, 39]
+    level:    [81, 83]
+  16998794:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-100.259, -6.200, -398.179, 64]
+    level:    [80, 82]
+  16998795:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-107.298, -7.215, -380.027, 8]
+    level:    [80, 82]
+  16998796:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-101.720, -6.343, -391.693, 44]
+    level:    [80, 82]
+  16998797:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-59.434, -4.834, -285.954, 215]
+    level:    [79, 81]
+  16998798:
+    template: Draugar_Servant_drg
+    script:   Draugar_Servant
+    at:       [-62.860, -6.284, -288.629, 141]
+    level:    [79, 81]
+  16998799:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 133]
+    level:    [67, 75]
+  16998800:
+    template: Lamie_Necromancer
+    at:       [-17.540, -4.235, -298.143, 177]
+    level:    [81, 83]
+  16998801:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-19.003, -4.334, -297.752, 250]
+    level:    [79, 81]
+  16998802:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-21.954, -6.585, -309.300, 86]
+    level:    [79, 81]
+  16998803:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-14.346, -3.683, -305.165, 199]
+    level:    [79, 81]
+  16998804:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [-33.970, -4.306, -297.894, 132]
+    level:    [79, 81]
+  16998805:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [0.760, -8.075, -347.902, 19]
+    level:    [79, 81]
+  16998806:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [1.495, -7.701, -346.751, 36]
+    level:    [79, 81]
+  16998807:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [3.958, -4.915, -338.886, 228]
+    level:    [79, 81]
+  16998808:
+    template: Lamie_Toxophilite
+    at:       [22.856, -5.518, -361.903, 52]
+    level:    [81, 83]
+  16998809:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [17.995, -7.450, -361.254, 186]
+    level:    [79, 81]
+  16998810:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [24.362, -5.528, -371.546, 51]
+    level:    [79, 81]
+  16998811:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [19.123, -6.904, -366.064, 28]
+    level:    [79, 81]
+  16998812:
+    template: Lamie_Toxophilite
+    at:       [23.952, -4.992, -398.956, 63]
+    level:    [81, 83]
+  16998813:
+    template: Draugar_Servant_drk
+    script:   Draugar_Servant
+    at:       [17.145, -7.802, -402.501, 86]
+    level:    [79, 81]
+  16998814:
+    template: Draugar_Servant_drg
+    script:   Draugar_Servant
+    at:       [22.604, -6.513, -405.572, 76]
+    level:    [79, 81]
+  16998815:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000, 191]
+    level:    [67, 75]
+  16998816:
+    template: Lamie_Bellydancer
+    at:       [-98.405, -5.966, -409.375, 76]
+    level:    [81, 83]
+  16998817:
+    template: Lamias_Elemental
+    at:       [1.000, 1.000, 1.000, 11]
+    level:    [77, 77]
+  16998818:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-103.234, -4.023, -415.711, 236]
+    level:    [80, 82]
+  16998819:
+    template: Lamia_Idolater_drk
+    script:   Lamia_Idolater
+    at:       [-103.561, -4.833, -408.813, 133]
+    level:    [80, 82]
+  16998820:
+    template: Ice_Elemental
+    at:       [-58.725, -5.003, -421.843, 231]
+    level:    [80, 80]
+  16998821:
+    template: Dark_Elemental
+    at:       [-58.725, -5.003, -421.843, 231]
+    level:    [80, 80]
+  16998822:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-78.375, -4.854, -483.804, 96]
+    level:    [79, 80]
+  16998823:
+    template: Jnun_AR
+    script:   Jnun
+    at:       [-89.975, -1.096, -496.171, 42]
+    level:    [79, 80]
+  16998824:
+    template: Ice_Elemental
+    at:       [-141.900, -6.363, -518.130, 254]
+    level:    [80, 80]
+  16998825:
+    template: Dark_Elemental
+    at:       [-137.756, -4.280, -507.863, 167]
+    level:    [80, 80]
+  16998826:
+    template: Ephramadian_Shade_mnk
+    script:   Ephramadian_Shade
+    at:       [-451.155, -6.424, -460.168, 108]
+    level:    [68, 70]
+  16998827:
+    template: Ephramadian_Shade_rdm
+    script:   Ephramadian_Shade
+    at:       [-443.097, -7.151, -462.784, 205]
+    level:    [68, 70]
+  16998828:
+    template: Ephramadian_Shade_rng
+    script:   Ephramadian_Shade
+    at:       [-446.920, -7.288, -464.979, 45]
+    level:    [68, 70]
+  16998829:
+    template: Ephramadian_Shade_cor
+    script:   Ephramadian_Shade
+    at:       [-418.862, -6.831, -360.970, 67]
+    level:    [68, 70]
+  16998830:
+    template: Ephramadian_Shade_mnk
+    script:   Ephramadian_Shade
+    at:       [-424.810, -4.748, -371.961, 112]
+    level:    [68, 70]
+  16998831:
+    template: Ephramadian_Shade_rdm
+    script:   Ephramadian_Shade
+    at:       [-428.033, -4.640, -379.461, 29]
+    level:    [68, 70]
+  16998832:
+    template: Ephramadian_Shade_rng
+    script:   Ephramadian_Shade
+    at:       [-456.876, -4.398, -350.909, 79]
+    level:    [68, 70]
+  16998833:
+    template: Ephramadian_Shade_cor
+    script:   Ephramadian_Shade
+    at:       [-443.369, -4.463, -343.948, 121]
+    level:    [68, 70]
+  16998834:
+    template: Bukki
+    at:       [311.000, -3.674, 170.124]
+    level:    [72, 72]
+  16998835:
+    template: Lamia_No11
+    level:    [80, 85]
+  16998836:
+    template: Lamia_No24
+    level:    [80, 80]
+  16998837:
+    template: Lamia_No18
+    level:    [80, 85]
+  16998838:
+    template: Archaic_Mirror
+    at:       [624.111, -15.790, 139.620, 164]
+    level:    [75, 75]
+  16998839:
+    template: Archaic_Mirror
+    at:       [436.132, -7.135, 181.723, 251]
+    level:    [75, 75]
+  16998840:
+    template: Archaic_Mirror
+    at:       [133.243, -3.285, 150.255, 27]
+    level:    [75, 75]
+  16998841:
+    template: Archaic_Mirror
+    at:       [-139.504, -4.149, 187.627, 132]
+    level:    [75, 75]
+  16998842:
+    template: Archaic_Mirror
+    at:       [-371.776, -16.516, 51.963, 164]
+    level:    [75, 75]
+  16998843:
+    template: Archaic_Mirror
+    at:       [-502.025, -8.578, -62.024, 232]
+    level:    [75, 75]
+  16998844:
+    template: Archaic_Mirror
+    at:       [-574.105, -15.442, 261.351, 12]
+    level:    [75, 75]
+  16998845:
+    template: Archaic_Mirror
+    at:       [-150.020, -6.549, -501.904, 96]
+    level:    [75, 75]
+  16998846:
+    template: Lamia_Palace_Guard_rng
+    script:   Lamia_Palace_Guard
+    at:       [630.185, -15.481, 139.951, 255]
+    level:    [81, 82]
+  16998847:
+    template: Lamia_Palace_Guard_cor
+    script:   Lamia_Palace_Guard
+    at:       [618.654, -15.317, 137.708, 96]
+    level:    [81, 82]
+  16998848:
+    template: Lamia_Palace_Guard_rng
+    script:   Lamia_Palace_Guard
+    at:       [435.476, -7.153, 184.263, 28]
+    level:    [81, 82]
+  16998849:
+    template: Lamia_Palace_Guard_cor
+    script:   Lamia_Palace_Guard
+    at:       [428.557, -7.860, 191.688, 169]
+    level:    [81, 82]
+  16998850:
+    template: Lamia_Palace_Guard_rng
+    script:   Lamia_Palace_Guard
+    at:       [143.400, -2.372, 144.604, 231]
+    level:    [81, 82]
+  16998851:
+    template: Lamia_Palace_Guard_cor
+    script:   Lamia_Palace_Guard
+    at:       [147.187, -2.576, 138.588, 189]
+    level:    [81, 82]
+  16998852:
+    template: Lamia_Palace_Guard_rng
+    script:   Lamia_Palace_Guard
+    at:       [-146.201, -4.060, 187.705, 253]
+    level:    [81, 82]
+  16998853:
+    template: Lamia_Palace_Guard_cor
+    script:   Lamia_Palace_Guard
+    at:       [-143.338, -4.417, 188.159, 6]
+    level:    [81, 82]
+  16998854:
+    template: Lamia_Palace_Guard_rng
+    script:   Lamia_Palace_Guard
+    at:       [-374.297, -15.995, 54.175, 29]
+    level:    [81, 82]
+  16998855:
+    template: Lamia_Palace_Guard_cor
+    script:   Lamia_Palace_Guard
+    at:       [-381.340, -15.354, 62.192, 5]
+    level:    [81, 82]
+  16998856:
+    template: Lamia_Palace_Guard_rng
+    script:   Lamia_Palace_Guard
+    at:       [-520.475, -7.982, -59.101, 131]
+    level:    [81, 82]
+  16998857:
+    template: Lamia_Palace_Guard_cor
+    script:   Lamia_Palace_Guard
+    at:       [-514.474, -7.662, -59.672, 135]
+    level:    [81, 82]
+  16998858:
+    template: Lamia_Palace_Guard_rng
+    script:   Lamia_Palace_Guard
+    at:       [-590.476, -15.888, 256.825, 112]
+    level:    [81, 82]
+  16998859:
+    template: Lamia_Palace_Guard_cor
+    script:   Lamia_Palace_Guard
+    at:       [-577.597, -15.460, 259.740, 244]
+    level:    [81, 82]
+  16998860:
+    template: Lamia_Palace_Guard_rng
+    script:   Lamia_Palace_Guard
+    at:       [-149.378, -5.374, -498.903, 158]
+    level:    [81, 82]
+  16998861:
+    template: Lamia_Palace_Guard_cor
+    script:   Lamia_Palace_Guard
+    at:       [-141.828, -4.789, -501.637, 205]
+    level:    [81, 82]
+  16998862:
+    template: Medusa
+    at:       [-460.000, -20.500, 460.000, 32]
+    level:    [85, 85]
+  16998863:
+    template: Lamia_Exon
+    at:       [-458.000, -20.500, 458.000, 7]
+    level:    [76, 76]
+  16998864:
+    template: Lamia_Exon
+    at:       [-448.500, -18.160, 444.781, 188]
+    level:    [76, 76]
+  16998865:
+    template: Lamia_Exon
+    at:       [-446.000, -18.220, 450.000, 114]
+    level:    [76, 76]
+  16998866:
+    template: Lamia_Exon
+    at:       [-462.000, -20.500, 458.000, 7]
+    level:    [76, 76]
+  16998867:
+    template: Ornery_Orobon
+    level:    [75, 80]
+  16998868:
+    template: Lamia_No19
+    at:       [-138.000, -7.600, 132.000, 161]
+    level:    [78, 78]
+  16998869:
+    template: Lamias_Skeleton
+    at:       [-136.700, -7.900, 132.000, 254]
+    level:    [75, 75]
+  16998870:
+    template: Lamias_Skeleton
+    at:       [-140.000, -7.600, 131.000, 254]
+    level:    [75, 75]
+  16998871:
+    template: Lil_Apkallu
+    at:       [489.740, -2.742, 168.490, 190]
+    level:    [82, 83]
+  16998872:
+    template: Velionis
+    at:       [313.170, -4.089, 26.211, 247]
+    level:    [78, 80]
+  16998873:
+    template: Zareehkl_the_Jubilant
+    at:       [177.640, -5.159, 181.399, 135]
+    level:    [85, 86]
+  16998874:
+    template: Nuhn
+    at:       [-451.000, -7.000, 389.000, 86]
+    level:    [86, 86]
+  16998875:
+    template: Dimgruzub
+    at:       [544.490, -7.480, 83.916]
+    level:    [95, 95]
+  16998876:
+    template: Assassins_Apprentice
+    at:       [546.440, -7.760, 85.097, 50]
+    level:    [80, 80]
+  16998877:
+    template: Assassins_Apprentice
+    at:       [545.090, -7.684, 85.097, 21]
+    level:    [80, 80]
+  16998878:
+    template: Dimgruzub
+    at:       [345.970, -3.125, 109.742, 123]
+    level:    [95, 95]
+  16998879:
+    template: Assassins_Apprentice
+    at:       [345.480, -2.890, 111.128, 8]
+    level:    [80, 80]
+  16998880:
+    template: Assassins_Apprentice
+    at:       [344.740, -3.180, 109.094, 141]
+    level:    [80, 80]
+  16998881:
+    template: Dimgruzub
+    at:       [387.494, -2.677, 275.046, 33]
+    level:    [95, 95]
+  16998882:
+    template: Assassins_Apprentice
+    at:       [387.661, -2.680, 275.146, 35]
+    level:    [80, 80]
+  16998883:
+    template: Assassins_Apprentice
+    at:       [387.492, -2.677, 275.046, 33]
+    level:    [80, 80]
+  16998884:
+    template: Qutrub
+    at:       [-590.214, -4.423, 287.579, 66]
+    level:    [139, 139]
+  16998885:
+    template: Qutrub
+    at:       [-589.984, -4.500, 284.482, 142]
+    level:    [139, 139]
+  16998886:
+    template: Merrow_Kabukidancer_6128
+    script:   Merrow_Kabukidancer
+    at:       [-591.534, -3.115, 283.105, 179]
+    level:    [139, 139]
+  16998887:
+    template: Merrow_Kabukidancer_6128
+    script:   Merrow_Kabukidancer
+    at:       [-590.369, -4.304, 282.930, 181]
+    level:    [139, 139]
+  16998888:
+    template: Mamool_Ja_Diver
+    at:       [-590.418, -4.335, 283.106, 7]
+    level:    [139, 139]
+  16998889:
+    template: Mamool_Ja_Diver
+    at:       [-590.014, -4.500, 285.779, 72]
+    level:    [139, 139]
+  16998890:
+    template: Awoken_Morbol_Emperor
+    at:       [-391.000, -4.170, 330.000, 171]
+    level:    [119, 119]
+
+slots:
+  - members:
+      16998549: {} # Phasma
+      16998550: {} # Bhoot
+  - members:
+      16998707: {} # Phasma
+      16998708: {} # Bhoot

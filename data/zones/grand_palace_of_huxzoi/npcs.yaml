@@ -1,0 +1,1647 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16916818:
+    script: NPC[152]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16916819:
+    script:       qm_ixaern_mnk
+    display_name: ???
+    at:           [460.000, 0.000, 540.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  normal
+    content: COP
+
+  16916820:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  SOA
+
+  16916821:
+    script: NPC[155]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16916822:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16916824:
+    script: NPC[158]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16916825:
+    script: NPC[159]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16916826:
+    script: NPC[15a]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16916827:
+    script: NPC[15b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16916828:
+    script:       _iya
+    display_name: Gate of the Gods
+    at:           [-20.000, -2.250, -280.187]
+    render:
+      look:
+        type: door
+      door_id:      1635346783
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16916829:
+    script:       _iyb
+    display_name: Particle Gate
+    at:           [5.000, -1.450, -320.000]
+    render:
+      look:
+        type: door
+      door_id:      1652123999
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916830:
+    script:       _iyc
+    display_name: Particle Gate
+    at:           [-45.000, -1.450, -320.000]
+    render:
+      look:
+        type: door
+      door_id:      1668901215
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916831:
+    script:       _0y0
+    display_name: Particle Gate
+    at:           [-480.000, -2.050, 260.000]
+    render:
+      look:
+        type: door
+      door_id:      813248607
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916832:
+    script:       _0y1
+    display_name: Particle Gate
+    at:           [-460.000, -2.050, 700.000]
+    render:
+      look:
+        type: door
+      door_id:      830025823
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916833:
+    script:       _0y2
+    display_name: Particle Gate
+    at:           [-420.000, -2.050, 740.000]
+    render:
+      look:
+        type: door
+      door_id:      846803039
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916834:
+    script:       _0y3
+    display_name: Particle Gate
+    at:           [-380.000, -2.050, 700.000]
+    render:
+      look:
+        type: door
+      door_id:      863580255
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916835:
+    script:       _0y5
+    display_name: Particle Gate
+    at:           [-440.000, -2.050, 500.000]
+    render:
+      look:
+        type: door
+      door_id:      897134687
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916836:
+    script:       _0y8
+    display_name: Particle Gate
+    at:           [-100.000, -2.050, 500.000]
+    render:
+      look:
+        type: door
+      door_id:      947466335
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916837:
+    script:       _0y9
+    display_name: Particle Gate
+    at:           [-60.000, -2.050, 460.000]
+    render:
+      look:
+        type: door
+      door_id:      964243551
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916838:
+    script:       _0ya
+    display_name: Particle Gate
+    at:           [-100.000, -2.050, 420.000]
+    render:
+      look:
+        type: door
+      door_id:      1635332191
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916839:
+    script:       _0yb
+    display_name: Particle Gate
+    at:           [-300.000, -2.050, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      1652109407
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916840:
+    script:       _0yc
+    display_name: Particle Gate
+    at:           [-300.000, -2.050, 240.000]
+    render:
+      look:
+        type: door
+      door_id:      1668886623
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916841:
+    script:       _0yd
+    display_name: Particle Gate
+    at:           [-220.000, -2.050, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      1685663839
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916842:
+    script:       _0ye
+    display_name: Particle Gate
+    at:           [-260.000, -2.050, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1702441055
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916843:
+    script:       _0yf
+    display_name: Particle Gate
+    at:           [-300.000, -2.050, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      1719218271
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916844:
+    script:       _0yg
+    display_name: Particle Gate
+    at:           [-540.000, -2.050, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      1735995487
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916845:
+    script:       _0yh
+    display_name: Particle Gate
+    at:           [-580.000, -2.050, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1752772703
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916846:
+    script:       _0yi
+    display_name: Particle Gate
+    at:           [-620.000, -2.050, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      1769549919
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916847:
+    script:       _0yj
+    display_name: Particle Gate
+    at:           [-540.000, -2.050, 240.000]
+    render:
+      look:
+        type: door
+      door_id:      1786327135
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916848:
+    script:       _0yl
+    display_name: Particle Gate
+    at:           [-580.000, -2.050, 440.000]
+    render:
+      look:
+        type: door
+      door_id:      1819881567
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916849:
+    script:       _0ym
+    display_name: Particle Gate
+    at:           [-580.000, -2.050, 480.000]
+    render:
+      look:
+        type: door
+      door_id:      1836658783
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916850:
+    script:       _0yn
+    display_name: Particle Gate
+    at:           [-740.000, -2.050, 420.000]
+    render:
+      look:
+        type: door
+      door_id:      1853435999
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916851:
+    script:       _0yo
+    display_name: Particle Gate
+    at:           [-780.000, -2.050, 460.000]
+    render:
+      look:
+        type: door
+      door_id:      1870213215
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916852:
+    script:       _0yp
+    display_name: Particle Gate
+    at:           [-740.000, -2.050, 500.000]
+    render:
+      look:
+        type: door
+      door_id:      1886990431
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916853:
+    script:       _0yq
+    display_name: Particle Gate
+    at:           [380.000, -2.050, 700.000]
+    render:
+      look:
+        type: door
+      door_id:      1903767647
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916854:
+    script:       _0yr
+    display_name: Particle Gate
+    at:           [420.000, -2.050, 740.000]
+    render:
+      look:
+        type: door
+      door_id:      1920544863
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916855:
+    script:       _0ys
+    display_name: Particle Gate
+    at:           [460.000, -2.050, 700.000]
+    render:
+      look:
+        type: door
+      door_id:      1937322079
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916856:
+    script:       _0yt
+    display_name: Particle Gate
+    at:           [740.000, -2.050, 500.000]
+    render:
+      look:
+        type: door
+      door_id:      1954099295
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916857:
+    script:       _0yv
+    display_name: Particle Gate
+    at:           [740.000, -2.050, 420.000]
+    render:
+      look:
+        type: door
+      door_id:      1987653727
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916858:
+    script:       _0yw
+    display_name: Particle Gate
+    at:           [620.000, -2.050, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      2004430943
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916859:
+    script:       _0yx
+    display_name: Particle Gate
+    at:           [580.000, -2.050, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      2021208159
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916860:
+    script:       _0yy
+    display_name: Particle Gate
+    at:           [540.000, -2.050, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      2037985375
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916861:
+    script:       _0yz
+    display_name: Particle Gate
+    at:           [300.000, -2.050, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      2054762591
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916862:
+    script:       _iy0
+    display_name: Particle Gate
+    at:           [260.000, -2.050, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      813263199
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916863:
+    script:       _iy1
+    display_name: Particle Gate
+    at:           [220.000, -2.050, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      830040415
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916864:
+    script:       _iy2
+    display_name: Particle Gate
+    at:           [100.000, -2.050, 420.000]
+    render:
+      look:
+        type: door
+      door_id:      846817631
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916865:
+    script:       _iy3
+    display_name: Particle Gate
+    at:           [60.000, -2.050, 460.000]
+    render:
+      look:
+        type: door
+      door_id:      863594847
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916866:
+    script:       _iy4
+    display_name: Particle Gate
+    at:           [100.000, -2.050, 500.000]
+    render:
+      look:
+        type: door
+      door_id:      880372063
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916867:
+    script:       _iy8
+    display_name: Particle Gate
+    at:           [300.000, -2.050, 440.000]
+    render:
+      look:
+        type: door
+      door_id:      947480927
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916868:
+    script:       _0y6
+    display_name: Particle Gate
+    at:           [-260.000, -2.050, 480.000]
+    render:
+      look:
+        type: door
+      door_id:      913911903
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916869:
+    script:       _0y7
+    display_name: Particle Gate
+    at:           [-260.000, -2.050, 440.000]
+    render:
+      look:
+        type: door
+      door_id:      930689119
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916870:
+    script:       _iyj
+    display_name: Cermet Portal
+    at:           [-240.000, -2.050, 460.000]
+    render:
+      look:
+        type: door
+      door_id:      1786341727
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916871:
+    script:       _iyn
+    display_name: Cermet Portal
+    at:           [580.000, -2.050, 440.000]
+    render:
+      look:
+        type: door
+      door_id:      1853450591
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916872:
+    script:       _0yu
+    display_name: Particle Gate
+    at:           [780.000, -2.050, 460.000]
+    render:
+      look:
+        type: door
+      door_id:      1970876511
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916873:
+    script:       _iyp
+    display_name: Cermet Portal
+    at:           [700.000, -2.050, 440.000]
+    render:
+      look:
+        type: door
+      door_id:      1887005023
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916874:
+    script:       _iyo
+    display_name: Cermet Portal
+    at:           [600.000, -2.050, 460.000]
+    render:
+      look:
+        type: door
+      door_id:      1870227807
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916875:
+    script:       _iy5
+    display_name: Particle Gate
+    at:           [540.000, -2.050, 440.000]
+    render:
+      look:
+        type: door
+      door_id:      897149279
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916876:
+    script:       _iyk
+    display_name: Cermet Portal
+    at:           [280.000, -2.050, 260.000]
+    render:
+      look:
+        type: door
+      door_id:      1803118943
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916877:
+    script:       _iy6
+    display_name: Particle Gate
+    at:           [540.000, -2.050, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      913926495
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916878:
+    script:       _iym
+    display_name: Cermet Portal
+    at:           [480.000, -2.050, 260.000]
+    render:
+      look:
+        type: door
+      door_id:      1836673375
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916879:
+    script:       _iyl
+    display_name: Cermet Portal
+    at:           [360.000, -2.050, 260.000]
+    render:
+      look:
+        type: door
+      door_id:      1819896159
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916880:
+    script:       _iy7
+    display_name: Particle Gate
+    at:           [300.000, -2.050, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      930703711
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916881:
+    script:       _iyd
+    display_name: Cermet Portal
+    at:           [-420.000, -2.050, 560.000]
+    render:
+      look:
+        type: door
+      door_id:      1685678431
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916882:
+    script:       _0yk
+    display_name: Particle Gate
+    at:           [-540.000, -2.050, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      1803104351
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916883:
+    script:       _iyi
+    display_name: Cermet Portal
+    at:           [-500.000, -2.050, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      1769564511
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916884:
+    script:       _iyh
+    display_name: Cermet Portal
+    at:           [-540.000, -2.050, 440.000]
+    render:
+      look:
+        type: door
+      door_id:      1752787295
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916885:
+    script:       _iyg
+    display_name: Cermet Portal
+    at:           [-540.000, -2.050, 480.000]
+    render:
+      look:
+        type: door
+      door_id:      1736010079
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916886:
+    script:       _iyf
+    display_name: Cermet Portal
+    at:           [-500.000, -2.050, 520.000]
+    render:
+      look:
+        type: door
+      door_id:      1719232863
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916887:
+    script:       _iye
+    display_name: Cermet Portal
+    at:           [-440.000, -2.050, 540.000]
+    render:
+      look:
+        type: door
+      door_id:      1702455647
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916888:
+    script:       _0y4
+    display_name: Particle Gate
+    at:           [-400.000, -2.050, 500.000]
+    render:
+      look:
+        type: door
+      door_id:      880357471
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916889:
+    script:       _iy9
+    display_name: Cermet Portal
+    at:           [420.000, -1.850, 480.000]
+    render:
+      look:
+        type: door
+      door_id:      964258143
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916890:
+    script:       _iyq
+    display_name: Cermet Portal
+    at:           [420.000, -1.850, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      1903782239
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16916891:
+    script:       Ebon_Panel
+    display_name: Ebon Panel
+    at:           [420.000, -2.424, 697.649]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916892:
+    script:       Ebon_Panel
+    display_name: Ebon Panel
+    at:           [102.349, -2.424, 459.999]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916893:
+    script:       Ebon_Panel
+    display_name: Ebon Panel
+    at:           [737.650, -2.424, 460.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916894:
+    script:       Ebon_Panel
+    display_name: Ebon Panel
+    at:           [260.001, -2.424, 102.350]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916895:
+    script:       Ebon_Panel
+    display_name: Ebon Panel
+    at:           [580.000, -2.424, 102.349]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916896:
+    script:       qm_cancel_escort
+    display_name: ???
+    at:           [713.000, -1.500, 500.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16916897:
+    script:       qm_cancel_escort
+    display_name: ???
+    at:           [340.000, -1.500, 305.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16916898:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [-285.053, -0.125, 137.022, 192]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916899:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [-275.338, 0.000, 139.936]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916900:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [-110.063, 0.000, 459.979, 127]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 23
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916901:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [414.385, -6.000, 174.285, 85]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 16
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916902:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [237.332, 0.000, 102.186, 128]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916903:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [-602.269, 0.000, 139.945, 128]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916904:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [351.995, 0.000, 356.279, 64]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 23
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916905:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [-402.551, 0.000, 540.012, 128]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 16
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916906:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [-397.515, 0.000, 702.358]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916907:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [402.125, 0.000, 699.998]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916908:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16916909:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+    content: COP
+
+  16916910:
+    script:       Prishe
+    display_name: Prishe
+    render:
+      look:
+        type:  standard
+        model: 1457
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 54
+    widescan:        true
+    content:         COP
+
+  16916911:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916912:
+    script:       Ulmia
+    display_name: Ulmia
+    render:
+      look:
+        type:  standard
+        model: 1472
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916913:
+    script:       Tenzen
+    display_name: Tenzen
+    render:
+      look:
+        type:  standard
+        model: 1442
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916914:
+    script:       Jabbos
+    display_name: Jabbos
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  8
+        head:  4096
+        body:  8307
+        hands: 12290
+        legs:  16490
+        feet:  20480
+        main:  24670
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916915:
+    script:       Shikaree_Z
+    display_name: Shikaree Z
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  2
+        head:  4159
+        body:  8247
+        hands: 12348
+        legs:  16472
+        feet:  20540
+        main:  24792
+        sub:   28672
+      entity_flags: 29
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916916:
+    script:       Louverance
+    display_name: Louverance
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4158
+        body:  8236
+        hands: 12288
+        legs:  16484
+        feet:  20580
+        main:  24640
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916917:
+    script:       Nagmolada
+    display_name: Nag'molada
+    render:
+      look:
+        type:  standard
+        model: 985
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916918:
+    script:       Makki-Chebukki
+    display_name: Makki-Chebukki
+    render:
+      look:
+        type:  standard
+        model: 1445
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916919:
+    script:       Kukki-Chebukki
+    display_name: Kukki-Chebukki
+    render:
+      look:
+        type:  standard
+        model: 1444
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916920:
+    script:       Cherukiki
+    display_name: Cherukiki
+    render:
+      look:
+        type:  standard
+        model: 1443
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916921:
+    script: blank
+    at:     [-2.377, 4.124, -5.285, 225]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  16916922:
+    script:       Trailmix
+    display_name: Trailmix
+    at:           [-24.812, 0.624, -359.042, 184]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916923:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-24.812, 0.624, -359.042, 184]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16916924:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1206
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916925:
+    script:       Yvenoile
+    display_name: Yve'noile
+    render:
+      look:
+        type:  standard
+        model: 1464
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16916926:
+    script:       Prishe
+    display_name: Prishe
+    render:
+      look:
+        type:  standard
+        model: 1446
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 54
+    widescan:        true
+    content:         COP
+
+  16916927:
+    script:       Quasilumin
+    display_name: Quasilumin
+    at:           [-382.500, -1.000, 500.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 7
+    widescan: true
+    content:  COP
+
+  16916928:
+    script:       Cermet_Alcove
+    display_name: Cermet Alcove
+    at:           [-260.000, -1.000, 422.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916929:
+    script:       Cermet_Alcove
+    display_name: Cermet Alcove
+    at:           [797.500, -1.000, 460.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916930:
+    script:       Cermet_Alcove
+    display_name: Cermet Alcove
+    at:           [540.000, -1.000, 297.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916931:
+    script:       Cermet_Alcove
+    display_name: Cermet Alcove
+    at:           [-540.000, -1.000, 297.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16916932:
+    script: NPC[1c4]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16916933:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16916934:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16916935:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16916936:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16916937:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16916938:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16916939:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16916940:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16916941:
+    script:       HomePoint#1
+    display_name: 'Home Point #1'
+    at:           [-12.000, 0.500, -288.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  16916942:
+    script:       Home_Point_#2
+    display_name: 'Home Point #2'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16916943:
+    script:       Home_Point_#3
+    display_name: 'Home Point #3'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16916944:
+    script:       Home_Point_#4
+    display_name: 'Home Point #4'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16916945:
+    script:       Home_Point_#5
+    display_name: 'Home Point #5'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true

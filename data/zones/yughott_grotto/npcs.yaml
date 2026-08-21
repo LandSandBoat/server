@@ -1,0 +1,726 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17359036:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         SOA
+
+  17359037:
+    script: NPC[bd]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17359038:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17359040:
+    script: NPC[c0]
+    at:     [0.000, -0.699, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17359041:
+    script: NPC[c1]
+    at:     [0.000, -0.699, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17359042:
+    script: NPC[c2]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17359043:
+    script: NPC[c3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17359044:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17359045:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17359046:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17359047:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17359048:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17359049:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17359050:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17359051:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17359052:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17359053:
+    script:       Treasure_Chest
+    display_name: Treasure Chest
+    render:
+      look:
+        type:  standard
+        model: 960
+      moving: 7
+    status: normal
+
+  17359054:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [15.087, -1.349, -41.581]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status: normal
+
+  17359055:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [7.740, -0.810, 35.541]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status: normal
+
+  17359056:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-264.696, -0.509, -91.928]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status: normal
+
+  17359057:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [259.251, -13.552, 121.916]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status: normal
+
+  17359058:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-192.130, -0.730, -108.965]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status: normal
+
+  17359059:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [311.416, -24.692, 160.929]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32775
+    status: normal
+
+  17359060:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17359061:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17359062:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17359063:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17359064:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17359065:
+    script:       Excenmille
+    display_name: Excenmille
+    render:
+      look:
+        type:  standard
+        model: 2254
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359066:
+    script:       Excenmille
+    display_name: Excenmille
+    render:
+      look:
+        type:  standard
+        model: 2254
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359067:
+    script:       Excenmille
+    display_name: Excenmille
+    render:
+      look:
+        type:  standard
+        model: 2254
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359068:
+    script:       Maxcimille
+    display_name: Maxcimille
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4096
+        body:  8254
+        hands: 12350
+        legs:  16444
+        feet:  20540
+        main:  24645
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359069:
+    script:       Maxcimille
+    display_name: Maxcimille
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4096
+        body:  8254
+        hands: 12350
+        legs:  16444
+        feet:  20540
+        main:  24645
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359070:
+    script:       Rahal
+    display_name: Rahal
+    render:
+      look:
+        type:  standard
+        model: 2259
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359071:
+    script:       Zogbog
+    display_name: Zogbog
+    render:
+      look:
+        type:  standard
+        model: 624
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359072:
+    script:       Rivetpounder_Mekglok
+    display_name: Rivetpounder Mekglok
+    render:
+      look:
+        type:  standard
+        model: 614
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359073:
+    script:       kyo
+    display_name: kyo
+    render:
+      look:
+        type:  standard
+        model: 1057
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359074:
+    script:       kyo
+    display_name: kyo
+    render:
+      look:
+        type:  standard
+        model: 1057
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359075:
+    script:       Bostillette
+    display_name: Bostillette
+    render:
+      look:
+        type:  standard
+        model: 428
+      entity_flags: 29
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359076:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+
+  17359077:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status: cutscene_only
+
+  17359078:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status: cutscene_only
+
+  17359079:
+    script:       Bostillette
+    display_name: Bostillette
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  7
+        head:  4215
+        body:  8303
+        hands: 12406
+        legs:  16533
+        feet:  20629
+        main:  24692
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359080:
+    script:       Lharant
+    display_name: Lharant
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  0
+        head:  4240
+        body:  8242
+        hands: 12338
+        legs:  16434
+        feet:  20530
+        main:  24734
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359081:
+    script:       isi1
+    display_name: isi1
+    render:
+      look:
+        type:  standard
+        model: 1056
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359082:
+    script:       isi2
+    display_name: isi2
+    render:
+      look:
+        type:  standard
+        model: 1056
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359083:
+    script:       isi3
+    display_name: isi3
+    render:
+      look:
+        type:  standard
+        model: 1056
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359084:
+    script:       isi4
+    display_name: isi4
+    render:
+      look:
+        type:  standard
+        model: 1056
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359085:
+    script:       isi5
+    display_name: isi5
+    render:
+      look:
+        type:  standard
+        model: 1056
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359086:
+    script:       isi6
+    display_name: isi6
+    render:
+      look:
+        type:  standard
+        model: 1056
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359087:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17359088:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17359089:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17359090:
+    script:       Scrape_Mark
+    display_name: Scrape Mark
+    at:           [-7.817, 0.132, -62.194, 80]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 515
+      name_vis:     112
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17359091:
+    script:       Debug_NPC
+    display_name: Debug NPC
+    at:           [-7.017, 0.132, -60.194, 80]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 112
+      moving:     1
+    widescan: true
+
+  17359092:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-271.116, -0.009, -76.551, 94]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17359093:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-271.116, -0.009, -76.551, 94]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17359094:
+    script:       Geomagnetic_Fount
+    display_name: Geomagnetic Fount
+    at:           [199.133, -11.515, 110.606]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17359095:
+    script:       HomePoint#1
+    display_name: 'Home Point #1'
+    at:           [434.000, -40.300, 171.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17359096:
+    script:       HomePoint#2
+    display_name: 'Home Point #2'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17359097:
+    script:       HomePoint#3
+    display_name: 'Home Point #3'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17359098:
+    script:       HomePoint#4
+    display_name: 'Home Point #4'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17359099:
+    script:       HomePoint#5
+    display_name: 'Home Point #5'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17359100:
+    script:       Resume_Point
+    display_name: Resume Point
+    at:           [-183.263, -0.437, -114.552, 173]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+    content:  WOTG

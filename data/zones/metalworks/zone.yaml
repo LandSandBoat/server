@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, yell, los_player_block]
+music:
+  day:          154
+  night:        154
+  battle_solo:  154
+  battle_party: 154
+
+zonelines:
+
+  z6l0:
+    from:  [-6.175, -2.966, -0.008]
+    to:    bastok_markets
+    at:    [-208.918, -11.654, 0.020]
+    scale: [1.000, 4.000]

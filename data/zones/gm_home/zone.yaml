@@ -1,0 +1,3 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, fellow, mount, mazurka, tractor, mogmenu, costume, pet, treasure, auction_house, yell, trust]

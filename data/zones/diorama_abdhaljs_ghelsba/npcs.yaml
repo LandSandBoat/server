@@ -1,0 +1,288 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16953345:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953347:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953352:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953354:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953355:
+    script:       Hut_Door
+    display_name: Hut Door
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953356:
+    script:       ???
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953357:
+    script:       Rook
+    display_name: Rook
+    at:           [-172.612, -20.600, 395.973]
+    render:
+      look:
+        type:  standard
+        model: 325
+      entity_flags:  27
+      animation_sub: 64
+      name_vis:      36
+      name_prefix:   32
+    status:   status_18
+    widescan: true
+
+  16953358:
+    script:       Rook
+    display_name: Rook
+    at:           [-161.964, -10.000, 260.400, 53]
+    render:
+      look:
+        type:  standard
+        model: 325
+      entity_flags:  27
+      animation_sub: 64
+      name_vis:      36
+      name_prefix:   32
+    status:   status_18
+    widescan: true
+
+  16953359:
+    script:       Rook
+    display_name: Rook
+    at:           [-176.323, -10.571, 124.307, 16]
+    render:
+      look:
+        type:  standard
+        model: 325
+      entity_flags:  27
+      animation_sub: 64
+      name_vis:      36
+      name_prefix:   32
+    status:   status_18
+    widescan: true
+
+  16953360:
+    script:       Rook
+    display_name: Rook
+    at:           [-40.000, -0.600, 40.100]
+    render:
+      look:
+        type:  standard
+        model: 325
+      entity_flags:  27
+      animation_sub: 64
+      name_vis:      36
+      name_prefix:   32
+    status:   status_18
+    widescan: true
+
+  16953361:
+    script:       Item_box
+    display_name: Item_box
+    at:           [-207.264, -10.650, 251.767, 11]
+    render:
+      look:
+        type:  standard
+        model: 960
+      moving: 1
+    widescan: true
+
+  16953362:
+    script:       Pursuivant
+    display_name: Pursuivant
+    at:           [-127.200, -20.530, 341.006, 216]
+    render:
+      look:
+        type:  equipped
+        race:  0
+        face:  7
+        head:  4192
+        body:  8236
+        hands: 12346
+        legs:  16442
+        feet:  20538
+        main:  24880
+        sub:   28672
+      entity_flags:  27
+      animation_sub: 64
+      name_prefix:   32
+      moving:        14
+    status:   normal
+    widescan: true
+
+  16953363:
+    script:       Pursuivant
+    display_name: Pursuivant
+    at:           [-207.470, -10.332, 250.136, 16]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  15
+        head:  4192
+        body:  8236
+        hands: 12346
+        legs:  16442
+        feet:  20538
+        main:  24880
+        sub:   28672
+      entity_flags:  27
+      animation_sub: 64
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  16953364:
+    script:       Pursuivant
+    display_name: Pursuivant
+    at:           [-155.861, -10.000, 66.829, 238]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  3
+        head:  4192
+        body:  8236
+        hands: 12346
+        legs:  16442
+        feet:  20538
+        main:  24880
+        sub:   28672
+      entity_flags:  27
+      animation_sub: 64
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  16953365:
+    script:       Pursuivant
+    display_name: Pursuivant
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953366:
+    script:       Herald
+    display_name: Herald
+    at:           [-203.652, -10.000, 252.509, 3]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  3
+        head:  4192
+        body:  8236
+        hands: 12346
+        legs:  16442
+        feet:  20538
+        main:  24880
+        sub:   28672
+      animation_sub: 64
+      moving:        14
+    status:   normal
+    widescan: true
+
+  16953367:
+    script:       Tillecoe
+    display_name: Tillecoe
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953369:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953370:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953371:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953372:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953373:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953374:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953375:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16953376:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50

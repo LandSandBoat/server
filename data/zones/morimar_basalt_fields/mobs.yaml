@@ -1,0 +1,3853 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Acerbic_Jagil:
+    id:            4951
+    species:       pugil
+    skill_list_id: 709
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 1153
+        hitbox:         23
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Achuka:
+    id:            4677
+    species:       gabbrath
+    skill_list_id: 461
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    9
+          ice:     9
+          wind:    4
+          earth:   4
+          thunder: 2
+          water:   2
+          light:   6
+          dark:    4
+        rank_status:
+          paralyze:    9
+          bind:        9
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 6
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2515
+        entity_flags: 131
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Alpine_Eft:
+    id:            4776
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Animosiraptor:
+    id:            5099
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1938
+        entity_flags: 1153
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Anthousai:
+    id:            4952
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 382
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Basalt_Lizard:
+    id:            4777
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Bedrock_Crag:
+    id:      4950
+    species: unclassified
+    type:    [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2794
+        entity_flags: 135
+        model_size:     3
+        hitbox:        50
+      spawn:
+        type: [scripted]
+
+  Befuddled_Twitherym:
+    id:            4954
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2535
+        entity_flags: 131
+        name_prefix:   64
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Bumbling_Leafkin:
+    id:            4780
+    species:       leafkin
+    skill_list_id: 455
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    8
+          light:   11
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      2
+          slow:         4
+          poison:       8
+          light_sleep: 11
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2530
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Burgeoning_Flames:
+    id:            6930
+    species:       fire_elemental
+    type:          [notorious]
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags: 129
+        hitbox:         3
+      spawn:
+        type: [scripted]
+
+  Deranged_Ameretat:
+    id:            6931
+    species:       morbol
+    type:          [notorious]
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 382
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Emberflash_Matamata:
+    id:            4781
+    species:       matamata
+    skill_list_id: 275
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2560
+        entity_flags:  1155
+        animation_sub:    8
+        model_size:       1
+        hitbox:          25
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 900
+
+  Felsic_Eruca:
+    id:            4859
+    species:       eruca
+    spell_list_id: 21
+    skill_list_id: 107
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -2
+          dark:    -1
+        rank_status:
+          paralyze:   -1
+          bind:       -1
+          silence:    -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 406
+        entity_flags:  129
+        animation_sub:  12
+        hitbox:         12
+      spawn:
+        respawn: 300
+
+  Frosty_Twitherym:
+    id:            5100
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2535
+        entity_flags: 129
+        name_prefix:   64
+        hitbox:         6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Grimy_Boulders:
+    id:            4865
+    species:       rocks
+    skill_list_id: 349
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2782
+        entity_flags: 131
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Hoarfrost_Gefyrst:
+    id:            5105
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+
+  Kurma:
+    id:            6929
+    species:       adamantoise
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2376
+        entity_flags: 665
+        name_prefix:   32
+        hitbox:        51
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lavawalker_Raptor:
+    id:            4953
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1938
+        entity_flags: 131
+        model_size:     1
+        hitbox:        18
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Maca_Maca:
+    id:            5102
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 129
+        hitbox:         6
+      spawn:
+        respawn: 300
+
+  Mafic_Spider:
+    id:            4858
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 313
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Matamata:
+    id:            4778
+    species:       matamata
+    type:          [notorious]
+    skill_list_id: 275
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2560
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         25
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Mountain_Peiste:
+    id:            4956
+    species:       peiste
+    skill_list_id: 192
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [dnc, dnc]
+      resists:
+        rank_element:
+          earth: 2
+          water: 3
+        rank_status:
+          slow:   2
+          poison: 3
+      render:
+        look:
+          type:  standard
+          model: 2015
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         15
+      spawn:
+        respawn: 300
+
+  Outlands_Peiste:
+    id:            4866
+    species:       peiste
+    skill_list_id: 192
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          earth: 2
+          water: 3
+        rank_status:
+          slow:   2
+          poison: 3
+      render:
+        look:
+          type:  standard
+          model: 2015
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          17
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Perdurable_Raptor:
+    id:            4868
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1938
+        entity_flags: 135
+        model_size:     3
+        hitbox:        26
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Petrous_Lizard:
+    id:            4955
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Qohanyk:
+    id:            5103
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 382
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shimmering_Tarichuk:
+    id:            6927
+    species:       eft
+    type:          [notorious]
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1350
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sinewy_Matamata:
+    id:            5104
+    species:       matamata
+    skill_list_id: 275
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2560
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         21
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Snaggletooth_Raptor:
+    id:            4775
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1938
+        entity_flags: 131
+        model_size:     1
+        hitbox:        18
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Snowcap_Umbril:
+    id:            4958
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  129
+        animation_sub:   5
+        name_prefix:     2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+      stats:
+        mp: 999
+
+  Steam_Spout:
+    id:            4959
+    species:       unclassified
+    type:          [notorious]
+    skill_list_id: 349
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2777
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Tephra_Lizard:
+    id:            5101
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 129
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Tundra_Eft:
+    id:            4957
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        respawn: 300
+
+  Tutewehiwehi:
+    id:            6928
+    species:       peiste
+    type:          [notorious]
+    skill_list_id: 803
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          earth: 2
+          water: 3
+        rank_status:
+          slow:   2
+          poison: 3
+      render:
+        look:
+          type:  standard
+          model: 2016
+        entity_flags:  153
+        animation_sub:   4
+        name_prefix:    32
+        hitbox:         25
+      spawn:
+        type: [scripted]
+
+  Twirling_Heartwing:
+    id:            4779
+    species:       heartwing
+    spell_list_id: 21
+    skill_list_id: 343
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2575
+        entity_flags: 129
+        hitbox:         4
+      spawn:
+        respawn: 300
+
+  Volatile_Matamata:
+    id:            4867
+    species:       matamata
+    spell_list_id: 4
+    skill_list_id: 275
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2560
+        entity_flags:  135
+        animation_sub:   8
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        flags:          [no_despawn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Volcanic_Wivre:
+    id:            4960
+    species:       wivre
+    skill_list_id: 257
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:    3
+          thunder:  1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:         3
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1788
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        flags:      [no_turn]
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Wivre_Cragdweller:
+    id:            6926
+    species:       wivre
+    type:          [notorious]
+    skill_list_id: 257
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:    3
+          thunder:  1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:         3
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1788
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        flags:      [no_turn]
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17862657:
+    script: Steamed_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17862658:
+    script: Steamed_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17862659:
+    script: Steamed_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17862660:
+    script: Steamed_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17862661:
+    script: Minacious_Matamata
+    at:     [1.000, 1.000, 1.000]
+  17862662:
+    template: Frosty_Twitherym
+    at:       [442.600, -16.500, -477.420, 123]
+    level:    [102, 105]
+  17862663:
+    template: Frosty_Twitherym
+    at:       [442.890, -16.500, -483.190, 59]
+    level:    [102, 105]
+  17862664:
+    template: Frosty_Twitherym
+    at:       [435.130, -16.480, -473.650, 161]
+    level:    [102, 105]
+  17862665:
+    template: Tephra_Lizard
+    at:       [205.790, -16.220, -144.710, 62]
+    level:    [102, 104]
+  17862666:
+    template: Tephra_Lizard
+    at:       [195.850, -16.270, -151.370, 143]
+    level:    [102, 104]
+  17862667:
+    template: Tephra_Lizard
+    at:       [203.820, -16.540, -119.270, 48]
+    level:    [102, 104]
+  17862668:
+    template: Tephra_Lizard
+    at:       [202.290, -15.960, -141.600, 207]
+    level:    [102, 104]
+  17862669:
+    template: Tephra_Lizard
+    at:       [198.910, -15.760, -136.130, 13]
+    level:    [102, 104]
+  17862670:
+    template: Tephra_Lizard
+    at:       [200.270, -16.320, -155.690, 219]
+    level:    [102, 104]
+  17862671:
+    template: Tephra_Lizard
+    at:       [230.360, -16.550, -184.600, 177]
+    level:    [102, 104]
+  17862672:
+    template: Tephra_Lizard
+    at:       [246.970, -16.480, -182.620, 79]
+    level:    [102, 104]
+  17862673:
+    template: Tephra_Lizard
+    at:       [251.950, -16.490, -179.760, 88]
+    level:    [102, 104]
+  17862674:
+    template: Tephra_Lizard
+    at:       [261.660, -16.490, -179.950, 205]
+    level:    [102, 104]
+  17862675:
+    template: Frosty_Twitherym
+    at:       [246.440, -16.420, -207.900, 87]
+    level:    [102, 105]
+  17862676:
+    template: Frosty_Twitherym
+    at:       [254.420, -16.180, -212.200, 14]
+    level:    [102, 105]
+  17862677:
+    template: Frosty_Twitherym
+    at:       [232.190, -16.490, -186.110, 160]
+    level:    [102, 105]
+  17862678:
+    template: Frosty_Twitherym
+    at:       [255.480, -16.490, -183.960, 87]
+    level:    [102, 105]
+  17862679:
+    template: Maca_Maca
+    at:       [271.810, -16.270, -280.220, 54]
+    level:    [102, 105]
+  17862680:
+    template: Maca_Maca
+    at:       [258.060, -16.050, -286.800, 30]
+    level:    [102, 105]
+  17862681:
+    template: Maca_Maca
+    at:       [265.430, -16.310, -256.860, 238]
+    level:    [102, 105]
+  17862682:
+    template: Maca_Maca
+    at:       [236.850, -16.300, -241.860, 29]
+    level:    [102, 105]
+  17862683:
+    template: Frosty_Twitherym
+    at:       [241.780, -16.370, -249.190, 130]
+    level:    [102, 105]
+  17862684:
+    template: Frosty_Twitherym
+    at:       [272.410, -16.300, -288.220, 1]
+    level:    [102, 105]
+  17862685:
+    template: Frosty_Twitherym
+    at:       [267.070, -16.230, -287.650]
+    level:    [102, 105]
+  17862686:
+    template: Frosty_Twitherym
+    at:       [242.180, -16.300, -242.230, 91]
+    level:    [102, 105]
+  17862687:
+    template: Maca_Maca
+    at:       [283.550, -16.480, -389.690, 120]
+    level:    [102, 105]
+  17862688:
+    template: Maca_Maca
+    at:       [292.880, -16.510, -382.650, 46]
+    level:    [102, 105]
+  17862689:
+    template: Maca_Maca
+    at:       [308.820, -16.500, -385.030, 20]
+    level:    [102, 105]
+  17862690:
+    template: Maca_Maca
+    at:       [282.110, -16.490, -383.770, 106]
+    level:    [102, 105]
+  17862691:
+    template: Frosty_Twitherym
+    at:       [267.170, -16.230, -384.980, 8]
+    level:    [102, 105]
+  17862692:
+    template: Frosty_Twitherym
+    at:       [256.410, -16.730, -351.340, 138]
+    level:    [102, 105]
+  17862693:
+    template: Frosty_Twitherym
+    at:       [254.350, -15.870, -382.410, 119]
+    level:    [102, 105]
+  17862694:
+    template: Frosty_Twitherym
+    at:       [256.490, -16.700, -351.220, 28]
+    level:    [102, 105]
+  17862695:
+    template: Maca_Maca
+    at:       [305.980, -16.430, -450.300, 77]
+    level:    [102, 105]
+  17862696:
+    template: Maca_Maca
+    at:       [299.140, -15.860, -433.270, 29]
+    level:    [102, 105]
+  17862697:
+    template: Maca_Maca
+    at:       [344.610, -16.840, -452.160, 22]
+    level:    [102, 105]
+  17862698:
+    template: Maca_Maca
+    at:       [305.330, -15.800, -429.690, 211]
+    level:    [102, 105]
+  17862699:
+    template: Frosty_Twitherym
+    at:       [323.140, -16.400, -438.460, 42]
+    level:    [102, 105]
+  17862700:
+    template: Frosty_Twitherym
+    at:       [294.480, -15.740, -430.530, 243]
+    level:    [102, 105]
+  17862701:
+    template: Frosty_Twitherym
+    at:       [304.090, -16.000, -438.200, 56]
+    level:    [102, 105]
+  17862702:
+    template: Frosty_Twitherym
+    at:       [328.140, -16.440, -466.130, 8]
+    level:    [102, 105]
+  17862703:
+    template: Tephra_Lizard
+    at:       [425.890, -16.240, -184.030, 108]
+    level:    [102, 104]
+  17862704:
+    template: Tephra_Lizard
+    at:       [426.410, -16.360, -185.260, 127]
+    level:    [102, 104]
+  17862705:
+    template: Tephra_Lizard
+    at:       [423.720, -16.150, -183.070, 214]
+    level:    [102, 104]
+  17862706:
+    template: Tephra_Lizard
+    at:       [424.540, -16.140, -184.060, 206]
+    level:    [102, 104]
+  17862707:
+    template: Snowcap_Umbril
+    at:       [417.930, -16.520, -191.470, 175]
+    level:    [103, 106]
+  17862708:
+    template: Tephra_Lizard
+    at:       [419.620, -15.680, -55.254, 41]
+    level:    [102, 104]
+  17862709:
+    template: Tephra_Lizard
+    at:       [421.750, -15.980, -56.414, 50]
+    level:    [102, 104]
+  17862710:
+    template: Tephra_Lizard
+    at:       [423.400, -15.800, -46.772, 31]
+    level:    [102, 104]
+  17862711:
+    template: Tephra_Lizard
+    at:       [416.740, -15.670, -42.048, 28]
+    level:    [102, 104]
+  17862712:
+    template: Snowcap_Umbril
+    at:       [414.490, -15.850, -40.971, 163]
+    level:    [103, 106]
+  17862713:
+    template: Qohanyk
+    at:       [482.300, -16.490, 83.033, 200]
+    level:    [102, 104]
+  17862714:
+    template: Qohanyk
+    at:       [518.450, -16.490, 73.710, 75]
+    level:    [102, 104]
+  17862715:
+    template: Snowcap_Umbril
+    at:       [423.370, -15.620, -102.580, 204]
+    level:    [103, 106]
+  17862716:
+    template: Snowcap_Umbril
+    at:       [422.950, -16.030, -132.110, 48]
+    level:    [103, 106]
+  17862717:
+    template: Snowcap_Umbril
+    at:       [462.560, -15.770, 13.413, 71]
+    level:    [103, 106]
+  17862718:
+    template: Snowcap_Umbril
+    at:       [463.230, -15.820, 24.978, 181]
+    level:    [103, 106]
+  17862719:
+    template: Maca_Maca
+    at:       [293.940, -16.510, 335.549, 231]
+    level:    [102, 105]
+  17862720:
+    template: Maca_Maca
+    at:       [295.550, -16.560, 331.957, 102]
+    level:    [102, 105]
+  17862721:
+    template: Maca_Maca
+    at:       [300.170, -16.510, 336.251, 101]
+    level:    [102, 105]
+  17862722:
+    template: Maca_Maca
+    at:       [260.400, -16.150, 294.869, 221]
+    level:    [102, 105]
+  17862723:
+    template: Maca_Maca
+    at:       [281.590, -16.520, 309.397, 149]
+    level:    [102, 105]
+  17862724:
+    template: Maca_Maca
+    at:       [266.450, -16.270, 312.492, 247]
+    level:    [102, 105]
+  17862725:
+    template: Frosty_Twitherym
+    at:       [262.020, -16.240, 300.881, 219]
+    level:    [102, 105]
+  17862726:
+    template: Frosty_Twitherym
+    at:       [278.910, -16.250, 299.553, 106]
+    level:    [102, 105]
+  17862727:
+    template: Maca_Maca
+    at:       [277.290, -16.480, 271.203, 153]
+    level:    [102, 105]
+  17862728:
+    template: Maca_Maca
+    at:       [282.050, -16.090, 247.613, 39]
+    level:    [102, 105]
+  17862729:
+    template: Frosty_Twitherym
+    at:       [294.550, -16.390, 270.196, 159]
+    level:    [102, 105]
+  17862730:
+    template: Frosty_Twitherym
+    at:       [260.240, -16.410, 272.412, 240]
+    level:    [102, 105]
+  17862731:
+    template: Frosty_Twitherym
+    at:       [320.290, -15.990, 186.569, 100]
+    level:    [102, 105]
+  17862732:
+    template: Frosty_Twitherym
+    at:       [293.650, -16.100, 213.214, 133]
+    level:    [102, 105]
+  17862733:
+    template: Frosty_Twitherym
+    at:       [318.180, -16.390, 208.723, 3]
+    level:    [102, 105]
+  17862734:
+    template: Frosty_Twitherym
+    at:       [291.620, -16.200, 202.759, 229]
+    level:    [102, 105]
+  17862735:
+    template: Frosty_Twitherym
+    at:       [340.100, -16.430, 118.416, 36]
+    level:    [102, 105]
+  17862736:
+    template: Frosty_Twitherym
+    at:       [319.860, -16.500, 125.720, 227]
+    level:    [102, 105]
+  17862737:
+    template: Tephra_Lizard
+    at:       [338.690, -16.430, 115.205, 25]
+    level:    [102, 104]
+  17862738:
+    template: Tephra_Lizard
+    at:       [328.070, -16.340, 122.000, 175]
+    level:    [102, 104]
+  17862739:
+    template: Tephra_Lizard
+    at:       [261.760, -16.000, 58.097, 29]
+    level:    [102, 104]
+  17862740:
+    template: Animosiraptor
+    at:       [263.800, -16.070, 45.218, 155]
+    level:    [102, 104]
+  17862741:
+    template: Animosiraptor
+    at:       [260.320, -15.770, 40.883, 253]
+    level:    [102, 104]
+  17862742:
+    template: Tephra_Lizard
+    at:       [245.000, -16.310, 0.137, 46]
+    level:    [102, 104]
+  17862743:
+    template: Tephra_Lizard
+    at:       [261.460, -16.410, -12.699, 17]
+    level:    [102, 104]
+  17862744:
+    template: Animosiraptor
+    at:       [235.110, -16.560, 18.387, 160]
+    level:    [102, 104]
+  17862745:
+    template: Animosiraptor
+    at:       [250.080, -16.510, 6.293, 158]
+    level:    [102, 104]
+  17862746:
+    template: Qohanyk
+    at:       [225.880, -16.490, 19.617, 229]
+    level:    [102, 104]
+  17862747:
+    template: Frosty_Twitherym
+    at:       [251.680, -16.280, -72.563, 91]
+    level:    [102, 105]
+  17862748:
+    template: Frosty_Twitherym
+    at:       [261.450, -16.320, -37.241, 144]
+    level:    [102, 105]
+  17862749:
+    template: Tephra_Lizard
+    at:       [274.250, -16.230, -47.854, 193]
+    level:    [102, 104]
+  17862750:
+    template: Tephra_Lizard
+    at:       [262.960, -16.370, -35.192, 143]
+    level:    [102, 104]
+  17862751:
+    template: Qohanyk
+    at:       [264.830, -15.920, -70.900, 126]
+    level:    [102, 104]
+  17862752:
+    template: Qohanyk
+    at:       [279.510, -0.090, 428.755, 167]
+    level:    [102, 104]
+  17862753:
+    template: Qohanyk
+    at:       [325.680, -0.263, 433.662, 11]
+    level:    [102, 104]
+  17862754:
+    template: Qohanyk
+    at:       [315.790, -0.214, 447.664]
+    level:    [102, 104]
+  17862755:
+    template: Snowcap_Umbril
+    at:       [324.590, -0.296, 447.705, 253]
+    level:    [103, 106]
+  17862756:
+    template: Qohanyk
+    at:       [244.490, -0.363, 395.082, 249]
+    level:    [102, 104]
+  17862757:
+    template: Qohanyk
+    at:       [245.400, -0.305, 392.734, 222]
+    level:    [102, 104]
+  17862758:
+    template: Qohanyk
+    at:       [219.640, 0.112, 360.990, 51]
+    level:    [102, 104]
+  17862759:
+    template: Snowcap_Umbril
+    at:       [217.250, 0.035, 366.898, 221]
+    level:    [103, 106]
+  17862760:
+    template: Frosty_Twitherym
+    at:       [205.360, -0.287, 339.035, 195]
+    level:    [102, 105]
+  17862761:
+    template: Frosty_Twitherym
+    at:       [187.800, -0.136, 328.972, 243]
+    level:    [102, 105]
+  17862762:
+    template: Qohanyk
+    at:       [199.940, -0.236, 341.391, 89]
+    level:    [102, 104]
+  17862763:
+    template: Frosty_Twitherym
+    at:       [133.320, -0.165, 210.932, 151]
+    level:    [102, 105]
+  17862764:
+    template: Frosty_Twitherym
+    at:       [130.470, -0.384, 229.199, 152]
+    level:    [102, 105]
+  17862765:
+    template: Animosiraptor
+    at:       [120.850, -0.116, 199.544, 40]
+    level:    [102, 104]
+  17862766:
+    template: Animosiraptor
+    at:       [113.720, -0.241, 219.076, 147]
+    level:    [102, 104]
+  17862767:
+    template: Snowcap_Umbril
+    at:       [116.400, -0.228, 212.333, 5]
+    level:    [103, 106]
+  17862768:
+    template: Frosty_Twitherym
+    at:       [171.720, -0.171, 169.462, 21]
+    level:    [102, 105]
+  17862769:
+    template: Frosty_Twitherym
+    at:       [153.150, -0.354, 162.597, 191]
+    level:    [102, 105]
+  17862770:
+    template: Frosty_Twitherym
+    at:       [156.300, -0.326, 163.438, 155]
+    level:    [102, 105]
+  17862771:
+    template: Frosty_Twitherym
+    at:       [164.720, -0.280, 159.940, 182]
+    level:    [102, 105]
+  17862772:
+    template: Animosiraptor
+    at:       [143.300, 0.192, 160.906, 45]
+    level:    [102, 104]
+  17862773:
+    template: Animosiraptor
+    at:       [173.770, -0.146, 147.638, 234]
+    level:    [102, 104]
+  17862774:
+    template: Animosiraptor
+    at:       [158.750, 0.277, 179.501, 154]
+    level:    [102, 104]
+  17862775:
+    template: Frosty_Twitherym
+    at:       [233.830, -0.282, 144.889, 180]
+    level:    [102, 105]
+  17862776:
+    template: Frosty_Twitherym
+    at:       [244.960, -0.277, 127.372, 48]
+    level:    [102, 105]
+  17862777:
+    template: Frosty_Twitherym
+    at:       [242.890, -0.207, 140.632, 160]
+    level:    [102, 105]
+  17862778:
+    template: Frosty_Twitherym
+    at:       [257.040, 0.082, 126.231, 23]
+    level:    [102, 105]
+  17862779:
+    template: Snowcap_Umbril
+    at:       [257.270, 0.023, 125.596, 15]
+    level:    [103, 106]
+  17862780:
+    template: Animosiraptor
+    at:       [118.690, -0.231, 125.810, 76]
+    level:    [102, 104]
+  17862781:
+    template: Animosiraptor
+    at:       [116.860, -0.238, 120.051, 142]
+    level:    [102, 104]
+  17862782:
+    template: Animosiraptor
+    at:       [101.880, 0.072, 113.987, 123]
+    level:    [102, 104]
+  17862783:
+    template: Qohanyk
+    at:       [95.528, 0.261, 136.248, 46]
+    level:    [102, 104]
+  17862784:
+    template: Tephra_Lizard
+    at:       [139.670, 0.190, 36.954, 21]
+    level:    [102, 104]
+  17862785:
+    template: Tephra_Lizard
+    at:       [135.240, -0.630, 54.100, 227]
+    level:    [102, 104]
+  17862786:
+    template: Animosiraptor
+    at:       [153.880, -0.324, 44.829, 199]
+    level:    [102, 104]
+  17862787:
+    template: Animosiraptor
+    at:       [135.250, 0.019, 40.021, 17]
+    level:    [102, 104]
+  17862788:
+    template: Animosiraptor
+    at:       [134.960, -0.603, 52.410, 167]
+    level:    [102, 104]
+  17862789:
+    template: Tephra_Lizard
+    at:       [151.510, -0.143, 37.933, 13]
+    level:    [102, 104]
+  17862790:
+    template: Tephra_Lizard
+    at:       [137.920, 0.173, 39.465, 19]
+    level:    [102, 104]
+  17862791:
+    template: Tephra_Lizard
+    at:       [139.500, 0.199, 41.293, 11]
+    level:    [102, 104]
+  17862792:
+    template: Sinewy_Matamata
+    at:       [129.220, -0.412, 59.449, 84]
+    level:    [102, 104]
+  17862793:
+    template: Sinewy_Matamata
+    at:       [57.009, -0.437, 184.343, 166]
+    level:    [102, 104]
+  17862794:
+    template: Sinewy_Matamata
+    at:       [55.577, -0.472, 195.158, 129]
+    level:    [102, 104]
+  17862795:
+    template: Sinewy_Matamata
+    at:       [-33.760, -0.229, 188.003, 73]
+    level:    [102, 104]
+  17862796:
+    template: Sinewy_Matamata
+    at:       [-34.720, -0.226, 192.227, 176]
+    level:    [102, 104]
+  17862797:
+    template: Sinewy_Matamata
+    at:       [-19.810, -0.301, 179.000, 155]
+    level:    [102, 104]
+  17862798:
+    template: Hoarfrost_Gefyrst
+    at:       [-26.540, -0.287, 185.537, 41]
+    level:    [102, 104]
+  17862799:
+    template: Steam_Spout
+    at:       [-5.723, -0.365, 191.488, 88]
+    level:    [1, 1]
+  17862800:
+    template: Frosty_Twitherym
+    at:       [-157.000, -0.028, 104.543, 190]
+    level:    [102, 105]
+  17862801:
+    template: Frosty_Twitherym
+    at:       [-141.400, 0.286, 80.991, 172]
+    level:    [102, 105]
+  17862802:
+    template: Frosty_Twitherym
+    at:       [-152.700, -0.096, 83.536, 142]
+    level:    [102, 105]
+  17862803:
+    template: Frosty_Twitherym
+    at:       [-161.000, 0.276, 99.599, 5]
+    level:    [102, 105]
+  17862804:
+    template: Frosty_Twitherym
+    at:       [-160.400, 0.279, 97.115, 239]
+    level:    [102, 105]
+  17862805:
+    template: Frosty_Twitherym
+    at:       [-145.800, 0.137, 81.947, 250]
+    level:    [102, 105]
+  17862806:
+    template: Snowcap_Umbril
+    at:       [-155.700, 0.197, 101.667, 65]
+    level:    [103, 106]
+  17862807:
+    template: Tephra_Lizard
+    at:       [-141.700, 0.159, -5.746, 56]
+    level:    [102, 104]
+  17862808:
+    template: Tephra_Lizard
+    at:       [-103.000, 0.094, -5.702, 205]
+    level:    [102, 104]
+  17862809:
+    template: Tephra_Lizard
+    at:       [-120.600, -0.335, 2.646, 157]
+    level:    [102, 104]
+  17862810:
+    template: Tephra_Lizard
+    at:       [-110.500, -0.190, -1.436, 180]
+    level:    [102, 104]
+  17862811:
+    template: Frosty_Twitherym
+    at:       [-114.300, -0.192, -7.549, 232]
+    level:    [102, 105]
+  17862812:
+    template: Frosty_Twitherym
+    at:       [-148.800, -0.160, -17.802, 76]
+    level:    [102, 105]
+  17862813:
+    template: Tephra_Lizard
+    at:       [-103.900, -0.171, -70.094, 202]
+    level:    [102, 104]
+  17862814:
+    template: Tephra_Lizard
+    at:       [-77.740, -0.133, -68.642, 238]
+    level:    [102, 104]
+  17862815:
+    template: Tephra_Lizard
+    at:       [-90.830, -0.259, -54.229, 110]
+    level:    [102, 104]
+  17862816:
+    template: Tephra_Lizard
+    at:       [-78.440, -0.268, -35.058, 143]
+    level:    [102, 104]
+  17862817:
+    template: Frosty_Twitherym
+    at:       [-93.790, 0.380, -72.072, 106]
+    level:    [102, 105]
+  17862818:
+    template: Frosty_Twitherym
+    at:       [-94.000, 0.387, -71.458, 105]
+    level:    [102, 105]
+  17862819:
+    template: Hoarfrost_Gefyrst
+    at:       [-81.620, -0.261, -39.203, 75]
+    level:    [102, 104]
+  17862820:
+    template: Steam_Spout
+    at:       [-110.500, -0.228, -76.052, 82]
+    level:    [1, 1]
+  17862821:
+    template: Tephra_Lizard
+    at:       [-39.680, -0.206, -33.423, 198]
+    level:    [102, 104]
+  17862822:
+    template: Tephra_Lizard
+    at:       [-40.430, -0.151, -30.593, 76]
+    level:    [102, 104]
+  17862823:
+    template: Sinewy_Matamata
+    at:       [-26.570, -0.010, -44.092, 120]
+    level:    [102, 104]
+  17862824:
+    template: Sinewy_Matamata
+    at:       [-35.720, 0.038, -10.998, 92]
+    level:    [102, 104]
+  17862825:
+    template: Sinewy_Matamata
+    at:       [-45.540, 0.320, -19.736, 195]
+    level:    [102, 104]
+  17862826:
+    template: Sinewy_Matamata
+    at:       [-4.956, -0.268, -21.634, 132]
+    level:    [102, 104]
+  17862827:
+    template: Steam_Spout
+    at:       [-46.580, 0.286, -20.872, 66]
+    level:    [1, 1]
+  17862828:
+    template: Animosiraptor
+    at:       [78.680, -0.238, 38.667, 22]
+    level:    [102, 104]
+  17862829:
+    template: Animosiraptor
+    at:       [52.557, 0.148, 31.422, 105]
+    level:    [102, 104]
+  17862830:
+    template: Animosiraptor
+    at:       [44.492, 0.157, 26.731, 109]
+    level:    [102, 104]
+  17862831:
+    template: Animosiraptor
+    at:       [70.543, -0.048, 51.652, 72]
+    level:    [102, 104]
+  17862832:
+    template: Sinewy_Matamata
+    at:       [72.067, -0.246, 27.155, 141]
+    level:    [102, 104]
+  17862833:
+    template: Sinewy_Matamata
+    at:       [81.319, -0.075, 27.941, 194]
+    level:    [102, 104]
+  17862834:
+    template: Animosiraptor
+    at:       [20.774, -0.207, -10.265, 199]
+    level:    [102, 104]
+  17862835:
+    template: Animosiraptor
+    at:       [28.697, -0.340, -39.604, 200]
+    level:    [102, 104]
+  17862836:
+    template: Animosiraptor
+    at:       [18.236, 0.135, -31.337, 74]
+    level:    [102, 104]
+  17862837:
+    template: Animosiraptor
+    at:       [18.242, 0.238, -31.372, 68]
+    level:    [102, 104]
+  17862838:
+    template: Sinewy_Matamata
+    at:       [36.972, -0.286, -47.708, 115]
+    level:    [102, 104]
+  17862839:
+    template: Sinewy_Matamata
+    at:       [27.287, -0.041, -42.321, 152]
+    level:    [102, 104]
+  17862840:
+    template: Snowcap_Umbril
+    at:       [26.511, -0.354, -30.038, 162]
+    level:    [103, 106]
+  17862841:
+    template: Animosiraptor
+    at:       [9.955, -0.680, -95.051, 37]
+    level:    [102, 104]
+  17862842:
+    template: Animosiraptor
+    at:       [47.668, -0.301, -83.089, 195]
+    level:    [102, 104]
+  17862843:
+    template: Animosiraptor
+    at:       [11.777, -0.657, -94.169, 46]
+    level:    [102, 104]
+  17862844:
+    template: Tephra_Lizard
+    at:       [2.259, -0.241, -101.230, 200]
+    level:    [102, 104]
+  17862845:
+    template: Tephra_Lizard
+    at:       [48.435, -0.342, -86.472, 50]
+    level:    [102, 104]
+  17862846:
+    template: Tephra_Lizard
+    at:       [18.252, -0.735, -95.674, 122]
+    level:    [102, 104]
+  17862847:
+    template: Tephra_Lizard
+    at:       [13.454, -16.210, -156.930, 154]
+    level:    [102, 104]
+  17862848:
+    template: Tephra_Lizard
+    at:       [28.020, -15.540, -154.420, 141]
+    level:    [102, 104]
+  17862849:
+    template: Animosiraptor
+    at:       [39.582, -15.770, -176.700, 72]
+    level:    [102, 104]
+  17862850:
+    template: Animosiraptor
+    at:       [26.094, -15.430, -155.360, 166]
+    level:    [102, 104]
+  17862851:
+    template: Volcanic_Wivre
+    at:       [19.384, -15.810, -161.300, 23]
+    level:    [102, 105]
+  17862852:
+    template: Volcanic_Wivre
+    at:       [38.280, -16.450, -154.130, 166]
+    level:    [102, 105]
+  17862853:
+    template: Tephra_Lizard
+    at:       [125.730, -16.440, -187.970, 12]
+    level:    [102, 104]
+  17862854:
+    template: Tephra_Lizard
+    at:       [104.090, -16.110, -178.650, 25]
+    level:    [102, 104]
+  17862855:
+    template: Animosiraptor
+    at:       [106.040, -16.310, -170.010, 220]
+    level:    [102, 104]
+  17862856:
+    template: Animosiraptor
+    at:       [94.502, -16.090, -173.960, 176]
+    level:    [102, 104]
+  17862857:
+    template: Volcanic_Wivre
+    at:       [123.160, -16.310, -186.430, 20]
+    level:    [102, 105]
+  17862858:
+    template: Volcanic_Wivre
+    at:       [99.617, -16.340, -165.550, 250]
+    level:    [102, 105]
+  17862859:
+    template: Animosiraptor
+    at:       [48.582, -16.280, -237.290, 67]
+    level:    [102, 104]
+  17862860:
+    template: Animosiraptor
+    at:       [55.576, -15.820, -234.860, 236]
+    level:    [102, 104]
+  17862861:
+    template: Volcanic_Wivre
+    at:       [61.812, -16.350, -211.270, 46]
+    level:    [102, 105]
+  17862862:
+    template: Volcanic_Wivre
+    at:       [52.640, -16.200, -244.640, 116]
+    level:    [102, 105]
+  17862863:
+    template: Volcanic_Wivre
+    at:       [51.530, -16.230, -209.410, 141]
+    level:    [102, 105]
+  17862864:
+    template: Volcanic_Wivre
+    at:       [45.945, -16.250, -215.700, 181]
+    level:    [102, 105]
+  17862865:
+    template: Tephra_Lizard
+    at:       [71.522, -15.750, -304.460, 185]
+    level:    [102, 104]
+  17862866:
+    template: Tephra_Lizard
+    at:       [85.948, -16.090, -312.720, 47]
+    level:    [102, 104]
+  17862867:
+    template: Tundra_Eft
+    at:       [90.540, -16.440, -312.160, 228]
+    level:    [102, 104]
+  17862868:
+    template: Tundra_Eft
+    at:       [81.510, -16.200, -325.660, 38]
+    level:    [102, 104]
+  17862869:
+    template: Sinewy_Matamata
+    at:       [74.563, -16.210, -318.610, 152]
+    level:    [102, 104]
+  17862870:
+    template: Sinewy_Matamata
+    at:       [79.914, -16.200, -319.180, 255]
+    level:    [102, 104]
+  17862871:
+    template: Hoarfrost_Gefyrst
+    at:       [81.790, -15.840, -305.950, 27]
+    level:    [102, 104]
+  17862872:
+    template: Steam_Spout
+    at:       [56.089, -15.690, -283.490, 1]
+    level:    [1, 1]
+  17862873:
+    template: Tundra_Eft
+    at:       [106.080, -16.200, -406.440, 238]
+    level:    [102, 104]
+  17862874:
+    template: Tundra_Eft
+    at:       [99.513, -15.770, -397.720, 208]
+    level:    [102, 104]
+  17862875:
+    template: Sinewy_Matamata
+    at:       [114.450, -16.280, -370.380, 134]
+    level:    [102, 104]
+  17862876:
+    template: Sinewy_Matamata
+    at:       [118.060, -16.020, -386.850, 168]
+    level:    [102, 104]
+  17862877:
+    template: Sinewy_Matamata
+    at:       [118.950, -16.440, -393.100, 118]
+    level:    [102, 104]
+  17862878:
+    template: Sinewy_Matamata
+    at:       [125.860, -16.330, -396.190, 239]
+    level:    [102, 104]
+  17862879:
+    template: Tundra_Eft
+    at:       [152.600, -16.500, -466.400, 50]
+    level:    [102, 104]
+  17862880:
+    template: Tundra_Eft
+    at:       [158.270, -16.290, -484.410, 72]
+    level:    [102, 104]
+  17862881:
+    template: Tundra_Eft
+    at:       [119.800, -15.710, -457.860, 116]
+    level:    [102, 104]
+  17862882:
+    template: Volcanic_Wivre
+    at:       [113.430, -15.930, -443.130, 177]
+    level:    [102, 105]
+  17862883:
+    template: Volcanic_Wivre
+    at:       [115.590, -16.150, -440.510, 155]
+    level:    [102, 105]
+  17862884:
+    template: Volcanic_Wivre
+    at:       [124.290, -16.310, -484.270, 12]
+    level:    [102, 105]
+  17862885:
+    template: Tundra_Eft
+    at:       [62.985, -15.730, -399.150, 89]
+    level:    [102, 104]
+  17862886:
+    template: Tundra_Eft
+    at:       [46.840, -16.400, -394.520, 206]
+    level:    [102, 104]
+  17862887:
+    template: Tundra_Eft
+    at:       [60.650, -16.210, -381.260, 163]
+    level:    [102, 104]
+  17862888:
+    template: Sinewy_Matamata
+    at:       [70.787, -16.250, -395.480, 204]
+    level:    [102, 104]
+  17862889:
+    template: Sinewy_Matamata
+    at:       [55.437, -15.860, -392.970, 237]
+    level:    [102, 104]
+  17862890:
+    template: Sinewy_Matamata
+    at:       [45.099, -15.900, -372.170, 205]
+    level:    [102, 104]
+  17862891:
+    template: Tephra_Lizard
+    at:       [21.545, -15.730, -480.440, 97]
+    level:    [102, 104]
+  17862892:
+    template: Tephra_Lizard
+    at:       [-2.999, -16.050, -463.610, 9]
+    level:    [102, 104]
+  17862893:
+    template: Tephra_Lizard
+    at:       [42.796, -16.160, -449.590, 201]
+    level:    [102, 104]
+  17862894:
+    template: Volcanic_Wivre
+    at:       [7.234, -16.480, -460.220, 78]
+    level:    [102, 105]
+  17862895:
+    template: Volcanic_Wivre
+    at:       [-8.291, -16.190, -469.980, 103]
+    level:    [102, 105]
+  17862896:
+    template: Volcanic_Wivre
+    at:       [41.801, -16.110, -468.250, 52]
+    level:    [102, 105]
+  17862897:
+    template: Volcanic_Wivre
+    at:       [-32.180, -16.040, -416.350, 51]
+    level:    [102, 105]
+  17862898:
+    template: Volcanic_Wivre
+    at:       [-35.910, -16.260, -444.930, 68]
+    level:    [102, 105]
+  17862899:
+    template: Volcanic_Wivre
+    at:       [-26.630, -16.010, -421.710, 133]
+    level:    [102, 105]
+  17862900:
+    template: Mountain_Peiste
+    at:       [-167.400, -15.950, -111.460, 112]
+    level:    [102, 104]
+  17862901:
+    template: Mountain_Peiste
+    at:       [-186.900, -15.830, -100.010, 148]
+    level:    [102, 104]
+  17862902:
+    template: Mountain_Peiste
+    at:       [-162.400, -16.080, -111.020, 110]
+    level:    [102, 104]
+  17862903:
+    template: Felsic_Eruca
+    at:       [-160.500, -16.460, -119.910, 86]
+    level:    [102, 104]
+  17862904:
+    template: Felsic_Eruca
+    at:       [-186.200, -15.790, -103.220, 167]
+    level:    [102, 104]
+  17862905:
+    template: Felsic_Eruca
+    at:       [-174.800, -15.810, -124.020, 64]
+    level:    [102, 104]
+  17862906:
+    template: Mountain_Peiste
+    at:       [-114.406, -16.138, -331.833, 21]
+    level:    [102, 104]
+  17862907:
+    template: Mountain_Peiste
+    at:       [-131.009, -16.138, -325.218, 105]
+    level:    [102, 104]
+  17862908:
+    template: Mountain_Peiste
+    at:       [-133.090, -16.042, -324.519, 64]
+    level:    [102, 104]
+  17862909:
+    template: Felsic_Eruca
+    at:       [-120.075, -16.454, -324.036, 67]
+    level:    [102, 104]
+  17862910:
+    template: Felsic_Eruca
+    at:       [-134.884, -16.039, -308.394, 211]
+    level:    [102, 104]
+  17862911:
+    template: Felsic_Eruca
+    at:       [-138.277, -16.666, -345.974, 98]
+    level:    [102, 104]
+  17862912:
+    template: Mountain_Peiste
+    at:       [-498.200, -32.520, -174.730, 225]
+    level:    [102, 104]
+  17862913:
+    template: Mountain_Peiste
+    at:       [-480.600, -31.660, -182.490, 193]
+    level:    [102, 104]
+  17862914:
+    template: Mafic_Spider
+    at:       [-493.700, -32.860, -185.020, 192]
+    level:    [102, 104]
+  17862915:
+    template: Mafic_Spider
+    at:       [-490.900, -32.890, -177.160, 222]
+    level:    [102, 104]
+  17862916:
+    template: Qohanyk
+    at:       [-484.700, -32.160, -176.140, 164]
+    level:    [102, 104]
+  17862917:
+    template: Mountain_Peiste
+    at:       [-429.600, -32.270, -191.350, 194]
+    level:    [102, 104]
+  17862918:
+    template: Mountain_Peiste
+    at:       [-452.000, -32.310, -209.140, 248]
+    level:    [102, 104]
+  17862919:
+    template: Mafic_Spider
+    at:       [-443.100, -32.130, -189.480, 158]
+    level:    [102, 104]
+  17862920:
+    template: Mafic_Spider
+    at:       [-444.400, -32.470, -203.950, 121]
+    level:    [102, 104]
+  17862921:
+    template: Qohanyk
+    at:       [-458.200, -32.070, -187.990, 234]
+    level:    [102, 104]
+  17862922:
+    template: Mountain_Peiste
+    at:       [-345.900, -32.060, -256.140, 6]
+    level:    [102, 104]
+  17862923:
+    template: Mountain_Peiste
+    at:       [-360.600, -32.440, -227.840, 240]
+    level:    [102, 104]
+  17862924:
+    template: Mountain_Peiste
+    at:       [-334.000, -32.340, -257.570, 3]
+    level:    [102, 104]
+  17862925:
+    template: Mafic_Spider
+    at:       [-336.000, -32.020, -271.540, 239]
+    level:    [102, 104]
+  17862926:
+    template: Mafic_Spider
+    at:       [-360.300, -32.170, -263.750, 42]
+    level:    [102, 104]
+  17862927:
+    template: Felsic_Eruca
+    at:       [-282.300, -32.480, -358.360, 208]
+    level:    [102, 104]
+  17862928:
+    template: Felsic_Eruca
+    at:       [-288.800, -32.410, -387.720, 71]
+    level:    [102, 104]
+  17862929:
+    template: Mafic_Spider
+    at:       [-267.000, -32.420, -362.940, 224]
+    level:    [102, 104]
+  17862930:
+    template: Mafic_Spider
+    at:       [-257.100, -32.490, -378.380, 205]
+    level:    [102, 104]
+  17862931:
+    template: Felsic_Eruca
+    at:       [-289.700, -31.900, -301.100, 88]
+    level:    [102, 104]
+  17862932:
+    template: Felsic_Eruca
+    at:       [-310.000, -32.250, -311.070, 127]
+    level:    [102, 104]
+  17862933:
+    template: Mountain_Peiste
+    at:       [-266.200, -32.100, -304.170, 51]
+    level:    [102, 104]
+  17862934:
+    template: Mountain_Peiste
+    at:       [-260.700, -31.930, -321.130, 184]
+    level:    [102, 104]
+  17862935:
+    template: Hoarfrost_Gefyrst
+    at:       [-274.600, -32.250, -328.500, 180]
+    level:    [102, 104]
+  17862936:
+    template: Steam_Spout
+    at:       [-286.500, -31.900, -293.700, 11]
+    level:    [1, 1]
+  17862937:
+    template: Felsic_Eruca
+    at:       [-285.000, -32.130, -386.950, 187]
+    level:    [102, 104]
+  17862938:
+    template: Felsic_Eruca
+    at:       [-270.200, -32.360, -405.040, 46]
+    level:    [102, 104]
+  17862939:
+    template: Mountain_Peiste
+    at:       [-254.000, -32.470, -393.830, 2]
+    level:    [102, 104]
+  17862940:
+    template: Mountain_Peiste
+    at:       [-270.800, -32.390, -388.650, 33]
+    level:    [102, 104]
+  17862941:
+    template: Felsic_Eruca
+    at:       [-228.300, -32.270, -399.200, 169]
+    level:    [102, 104]
+  17862942:
+    template: Felsic_Eruca
+    at:       [-211.600, -32.360, -409.810, 138]
+    level:    [102, 104]
+  17862943:
+    template: Felsic_Eruca
+    at:       [-225.800, -32.220, -405.490, 104]
+    level:    [102, 104]
+  17862944:
+    template: Felsic_Eruca
+    at:       [-205.400, -32.340, -397.580, 216]
+    level:    [102, 104]
+  17862945:
+    template: Mountain_Peiste
+    at:       [-225.500, -32.030, -394.720, 145]
+    level:    [102, 104]
+  17862946:
+    template: Mountain_Peiste
+    at:       [-226.700, -32.440, -409.600, 168]
+    level:    [102, 104]
+  17862947:
+    template: Felsic_Eruca
+    at:       [-240.400, -32.430, -482.270, 119]
+    level:    [102, 104]
+  17862948:
+    template: Felsic_Eruca
+    at:       [-235.000, -32.400, -483.600, 4]
+    level:    [102, 104]
+  17862949:
+    template: Felsic_Eruca
+    at:       [-257.100, -32.290, -478.370, 74]
+    level:    [102, 104]
+  17862950:
+    template: Felsic_Eruca
+    at:       [-260.200, -32.490, -463.170, 4]
+    level:    [102, 104]
+  17862951:
+    template: Felsic_Eruca
+    at:       [-256.900, -32.490, -463.300, 3]
+    level:    [102, 104]
+  17862952:
+    template: Felsic_Eruca
+    at:       [-243.000, -32.430, -480.790, 121]
+    level:    [102, 104]
+  17862953:
+    template: Mafic_Spider
+    at:       [-498.200, -32.030, -289.770, 50]
+    level:    [102, 104]
+  17862954:
+    template: Mafic_Spider
+    at:       [-500.500, -32.030, -273.160, 77]
+    level:    [102, 104]
+  17862955:
+    template: Mafic_Spider
+    at:       [-452.400, -32.120, -355.800, 97]
+    level:    [102, 104]
+  17862956:
+    template: Mafic_Spider
+    at:       [-453.900, -32.170, -355.100, 74]
+    level:    [102, 104]
+  17862957:
+    template: Mafic_Spider
+    at:       [-448.200, -32.430, -352.030, 252]
+    level:    [102, 104]
+  17862958:
+    template: Mafic_Spider
+    at:       [-476.200, -32.440, -326.550, 191]
+    level:    [102, 104]
+  17862959:
+    template: Mafic_Spider
+    at:       [-480.500, -31.800, -340.780, 57]
+    level:    [102, 104]
+  17862960:
+    template: Mafic_Spider
+    at:       [-485.700, -32.500, -321.100, 177]
+    level:    [102, 104]
+  17862961:
+    template: Felsic_Eruca
+    at:       [-147.200, -32.580, -184.380, 225]
+    level:    [102, 104]
+  17862962:
+    template: Felsic_Eruca
+    at:       [-144.900, -31.990, -198.990, 202]
+    level:    [102, 104]
+  17862963:
+    template: Felsic_Eruca
+    at:       [-152.000, -32.380, -207.320, 100]
+    level:    [102, 104]
+  17862964:
+    template: Tundra_Eft
+    at:       [-144.600, -32.510, -187.480, 209]
+    level:    [102, 104]
+  17862965:
+    template: Tundra_Eft
+    at:       [-145.600, -32.610, -186.800, 225]
+    level:    [102, 104]
+  17862966:
+    template: Tundra_Eft
+    at:       [-144.300, -32.220, -192.580, 38]
+    level:    [102, 104]
+  17862967:
+    template: Felsic_Eruca
+    at:       [-244.500, -31.790, -98.350, 73]
+    level:    [102, 104]
+  17862968:
+    template: Felsic_Eruca
+    at:       [-244.600, -32.060, -113.110, 74]
+    level:    [102, 104]
+  17862969:
+    template: Felsic_Eruca
+    at:       [-243.800, -32.170, -92.086, 183]
+    level:    [102, 104]
+  17862970:
+    template: Felsic_Eruca
+    at:       [-236.300, -32.380, -115.190, 9]
+    level:    [102, 104]
+  17862971:
+    template: Acerbic_Jagil
+    at:       [-289.600, -32.270, -86.862, 14]
+    level:    [102, 104]
+  17862972:
+    template: Acerbic_Jagil
+    at:       [-289.000, -32.080, -64.311, 243]
+    level:    [102, 104]
+  17862973:
+    template: Acerbic_Jagil
+    at:       [-295.600, -31.780, -70.523, 77]
+    level:    [102, 104]
+  17862974:
+    template: Acerbic_Jagil
+    at:       [-294.000, -32.220, -50.669, 184]
+    level:    [102, 104]
+  17862975:
+    template: Mountain_Peiste
+    at:       [-291.100, -32.340, -63.654, 150]
+    level:    [102, 104]
+  17862976:
+    template: Mountain_Peiste
+    at:       [-280.300, -32.090, -56.625, 93]
+    level:    [102, 104]
+  17862977:
+    template: Hoarfrost_Gefyrst
+    at:       [-309.500, -32.290, -65.902, 167]
+    level:    [102, 104]
+  17862978:
+    template: Steam_Spout
+    at:       [-291.800, -32.490, -64.813, 110]
+    level:    [1, 1]
+  17862979:
+    template: Tundra_Eft
+    at:       [-415.800, -31.600, -36.486, 87]
+    level:    [102, 104]
+  17862980:
+    template: Tundra_Eft
+    at:       [-431.500, -32.320, -34.918, 187]
+    level:    [102, 104]
+  17862981:
+    template: Tundra_Eft
+    at:       [-427.900, -32.260, -80.765, 108]
+    level:    [102, 104]
+  17862982:
+    template: Mountain_Peiste
+    at:       [-420.800, -31.420, -56.090, 33]
+    level:    [102, 104]
+  17862983:
+    template: Mountain_Peiste
+    at:       [-419.200, -31.670, -43.661, 155]
+    level:    [102, 104]
+  17862984:
+    template: Mountain_Peiste
+    at:       [-412.900, -31.980, -69.499, 220]
+    level:    [102, 104]
+  17862985:
+    template: Tundra_Eft
+    at:       [-249.100, -32.200, -122.820, 24]
+    level:    [102, 104]
+  17862986:
+    template: Tundra_Eft
+    at:       [-267.800, -32.070, -119.590, 95]
+    level:    [102, 104]
+  17862987:
+    template: Acerbic_Jagil
+    at:       [-287.000, -31.750, -134.330, 64]
+    level:    [102, 104]
+  17862988:
+    template: Acerbic_Jagil
+    at:       [-277.100, -32.250, -115.800, 103]
+    level:    [102, 104]
+  17862989:
+    template: Acerbic_Jagil
+    at:       [-270.600, -32.020, -112.930, 138]
+    level:    [102, 104]
+  17862990:
+    template: Acerbic_Jagil
+    at:       [-281.800, -32.290, -113.700, 241]
+    level:    [102, 104]
+  17862991:
+    template: Felsic_Eruca
+    at:       [-480.001, -47.840, -63.946, 201]
+    level:    [102, 104]
+  17862992:
+    template: Felsic_Eruca
+    at:       [-482.100, -48.440, -75.650, 228]
+    level:    [102, 104]
+  17862993:
+    template: Felsic_Eruca
+    at:       [-518.952, -48.264, -84.648, 43]
+    level:    [102, 104]
+  17862994:
+    template: Felsic_Eruca
+    at:       [-516.150, -48.214, -71.179, 36]
+    level:    [102, 104]
+  17862995:
+    template: Felsic_Eruca
+    at:       [-500.200, -47.460, -85.681, 89]
+    level:    [102, 104]
+  17862996:
+    template: Felsic_Eruca
+    at:       [-498.844, -48.195, -48.341, 251]
+    level:    [102, 104]
+  17862997:
+    template: Snowcap_Umbril
+    at:       [-503.647, -47.582, -85.985, 50]
+    level:    [103, 106]
+  17862998:
+    template: Felsic_Eruca
+    at:       [-451.900, -48.240, 1.247, 231]
+    level:    [102, 104]
+  17862999:
+    template: Felsic_Eruca
+    at:       [-452.140, -48.535, -13.316, 234]
+    level:    [102, 104]
+  17863000:
+    template: Felsic_Eruca
+    at:       [-459.800, -47.720, -1.685, 188]
+    level:    [102, 104]
+  17863001:
+    template: Felsic_Eruca
+    at:       [-454.300, -48.270, -9.786, 119]
+    level:    [102, 104]
+  17863002:
+    template: Animosiraptor
+    at:       [-462.400, -48.210, -8.006, 23]
+    level:    [102, 104]
+  17863003:
+    template: Animosiraptor
+    at:       [-467.219, -48.148, -19.650, 97]
+    level:    [102, 104]
+  17863004:
+    template: Animosiraptor
+    at:       [-367.700, -48.180, 7.450, 36]
+    level:    [102, 104]
+  17863005:
+    template: Animosiraptor
+    at:       [-392.600, -48.230, 27.555, 5]
+    level:    [102, 104]
+  17863006:
+    template: Animosiraptor
+    at:       [-366.400, -48.300, 23.412, 236]
+    level:    [102, 104]
+  17863007:
+    template: Animosiraptor
+    at:       [-363.300, -48.150, 9.540, 79]
+    level:    [102, 104]
+  17863008:
+    template: Acerbic_Jagil
+    at:       [-291.100, -48.100, 105.955, 174]
+    level:    [102, 104]
+  17863009:
+    template: Acerbic_Jagil
+    at:       [-327.500, -48.250, 70.831, 232]
+    level:    [102, 104]
+  17863010:
+    template: Acerbic_Jagil
+    at:       [-294.300, -48.240, 110.968, 188]
+    level:    [102, 104]
+  17863011:
+    template: Acerbic_Jagil
+    at:       [-288.800, -48.010, 101.589, 253]
+    level:    [102, 104]
+  17863012:
+    template: Mountain_Peiste
+    at:       [-333.600, -48.170, 72.263, 170]
+    level:    [102, 104]
+  17863013:
+    template: Mountain_Peiste
+    at:       [-299.500, -48.150, 99.072, 205]
+    level:    [102, 104]
+  17863014:
+    template: Hoarfrost_Gefyrst
+    at:       [-297.000, -47.760, 94.844, 79]
+    level:    [102, 104]
+  17863015:
+    template: Acerbic_Jagil
+    at:       [-386.200, -48.090, 91.947, 18]
+    level:    [102, 104]
+  17863016:
+    template: Acerbic_Jagil
+    at:       [-392.300, -47.760, 69.463, 70]
+    level:    [102, 104]
+  17863017:
+    template: Acerbic_Jagil
+    at:       [-398.300, -48.040, 74.469, 234]
+    level:    [102, 104]
+  17863018:
+    template: Acerbic_Jagil
+    at:       [-378.000, -47.710, 115.533, 129]
+    level:    [102, 104]
+  17863019:
+    template: Sinewy_Matamata
+    at:       [-392.100, -48.240, 78.503, 19]
+    level:    [102, 104]
+  17863020:
+    template: Sinewy_Matamata
+    at:       [-384.900, -48.110, 88.184, 200]
+    level:    [102, 104]
+  17863021:
+    template: Steam_Spout
+    at:       [-384.700, -48.300, 73.778, 16]
+    level:    [1, 1]
+  17863022:
+    template: Acerbic_Jagil
+    at:       [-305.400, -48.190, 145.921, 51]
+    level:    [102, 104]
+  17863023:
+    template: Acerbic_Jagil
+    at:       [-354.800, -48.170, 132.341, 80]
+    level:    [102, 104]
+  17863024:
+    template: Acerbic_Jagil
+    at:       [-296.700, -47.770, 142.483, 168]
+    level:    [102, 104]
+  17863025:
+    template: Sinewy_Matamata
+    at:       [-347.800, -48.250, 136.065, 231]
+    level:    [102, 104]
+  17863026:
+    template: Sinewy_Matamata
+    at:       [-350.000, -48.040, 139.479, 123]
+    level:    [102, 104]
+  17863027:
+    template: Sinewy_Matamata
+    at:       [-414.700, -48.160, 203.490, 242]
+    level:    [102, 104]
+  17863028:
+    template: Sinewy_Matamata
+    at:       [-408.200, -47.850, 172.649, 179]
+    level:    [102, 104]
+  17863029:
+    template: Sinewy_Matamata
+    at:       [-404.700, -48.260, 151.839, 110]
+    level:    [102, 104]
+  17863030:
+    template: Sinewy_Matamata
+    at:       [-410.600, -47.520, 179.983, 41]
+    level:    [102, 104]
+  17863031:
+    template: Acerbic_Jagil
+    at:       [-502.400, -47.980, 248.436, 152]
+    level:    [102, 104]
+  17863032:
+    template: Acerbic_Jagil
+    at:       [-456.400, -48.270, 212.567, 163]
+    level:    [102, 104]
+  17863033:
+    template: Acerbic_Jagil
+    at:       [-483.700, -47.680, 220.199, 87]
+    level:    [102, 104]
+  17863034:
+    template: Acerbic_Jagil
+    at:       [-501.500, -47.850, 247.561, 39]
+    level:    [102, 104]
+  17863035:
+    template: Animosiraptor
+    at:       [-461.500, -47.850, 207.246, 31]
+    level:    [102, 104]
+  17863036:
+    template: Animosiraptor
+    at:       [-486.800, -48.070, 240.067, 211]
+    level:    [102, 104]
+  17863037:
+    template: Sinewy_Matamata
+    at:       [-495.600, -47.690, 235.518, 73]
+    level:    [102, 104]
+  17863038:
+    template: Sinewy_Matamata
+    at:       [-474.600, -48.220, 232.764, 8]
+    level:    [102, 104]
+  17863039:
+    template: Steam_Spout
+    at:       [-487.800, -48.220, 247.643, 23]
+    level:    [1, 1]
+  17863040:
+    template: Acerbic_Jagil
+    at:       [-491.200, -47.860, 312.794, 130]
+    level:    [102, 104]
+  17863041:
+    template: Acerbic_Jagil
+    at:       [-487.900, -48.060, 312.565, 243]
+    level:    [102, 104]
+  17863042:
+    template: Acerbic_Jagil
+    at:       [-498.300, -47.770, 309.928, 208]
+    level:    [102, 104]
+  17863043:
+    template: Tundra_Eft
+    at:       [-311.300, -47.880, 264.514, 229]
+    level:    [102, 104]
+  17863044:
+    template: Tundra_Eft
+    at:       [-336.200, -48.150, 267.201, 102]
+    level:    [102, 104]
+  17863045:
+    template: Tundra_Eft
+    at:       [-325.900, -48.370, 272.582, 146]
+    level:    [102, 104]
+  17863046:
+    template: Tundra_Eft
+    at:       [-337.000, -48.300, 271.423, 234]
+    level:    [102, 104]
+  17863047:
+    template: Mountain_Peiste
+    at:       [-295.800, -48.340, 262.677, 154]
+    level:    [102, 104]
+  17863048:
+    template: Mountain_Peiste
+    at:       [-327.600, -48.450, 276.231, 120]
+    level:    [102, 104]
+  17863049:
+    template: Snowcap_Umbril
+    at:       [-337.400, -47.660, 282.744, 138]
+    level:    [103, 106]
+  17863050:
+    template: Acerbic_Jagil
+    at:       [-255.100, -47.820, 472.399, 152]
+    level:    [102, 104]
+  17863051:
+    template: Acerbic_Jagil
+    at:       [-230.300, -48.100, 474.687, 140]
+    level:    [102, 104]
+  17863052:
+    template: Acerbic_Jagil
+    at:       [-211.300, -47.870, 457.871, 206]
+    level:    [102, 104]
+  17863053:
+    template: Acerbic_Jagil
+    at:       [-253.600, -47.950, 470.071, 148]
+    level:    [102, 104]
+  17863054:
+    template: Sinewy_Matamata
+    at:       [-211.400, -47.850, 457.283, 202]
+    level:    [102, 104]
+  17863055:
+    template: Sinewy_Matamata
+    at:       [-217.700, -48.150, 449.455, 92]
+    level:    [102, 104]
+  17863056:
+    template: Acerbic_Jagil
+    at:       [-168.800, -47.790, 419.125, 194]
+    level:    [102, 104]
+  17863057:
+    template: Acerbic_Jagil
+    at:       [-165.900, -48.410, 396.093, 22]
+    level:    [102, 104]
+  17863058:
+    template: Acerbic_Jagil
+    at:       [-165.800, -48.330, 398.769, 43]
+    level:    [102, 104]
+  17863059:
+    template: Hoarfrost_Gefyrst
+    at:       [-185.400, -47.940, 434.141, 38]
+    level:    [102, 104]
+  17863060:
+    template: Steam_Spout
+    at:       [-174.400, -48.140, 390.835, 69]
+    level:    [1, 1]
+  17863061:
+    template: Sinewy_Matamata
+    at:       [-175.400, -48.120, 389.628, 151]
+    level:    [102, 104]
+  17863062:
+    template: Sinewy_Matamata
+    at:       [-175.200, -48.240, 405.713, 109]
+    level:    [102, 104]
+  17863063:
+    template: Hoarfrost_Gefyrst
+    at:       [-166.900, -47.780, 417.278, 194]
+    level:    [102, 104]
+  17863064:
+    template: Animosiraptor
+    at:       [-146.100, -48.220, 349.364, 254]
+    level:    [102, 104]
+  17863065:
+    template: Animosiraptor
+    at:       [-153.700, -48.110, 343.321, 33]
+    level:    [102, 104]
+  17863066:
+    template: Animosiraptor
+    at:       [-150.500, -48.110, 344.240, 77]
+    level:    [102, 104]
+  17863067:
+    template: Sinewy_Matamata
+    at:       [-158.200, -47.780, 378.098, 148]
+    level:    [102, 104]
+  17863068:
+    template: Sinewy_Matamata
+    at:       [-157.400, -48.090, 325.152, 124]
+    level:    [102, 104]
+  17863069:
+    template: Sinewy_Matamata
+    at:       [-153.100, -48.110, 342.859, 82]
+    level:    [102, 104]
+  17863070:
+    template: Animosiraptor
+    at:       [-59.100, -48.350, 418.528, 89]
+    level:    [102, 104]
+  17863071:
+    template: Animosiraptor
+    at:       [-79.520, -47.640, 461.399, 106]
+    level:    [102, 104]
+  17863072:
+    template: Animosiraptor
+    at:       [-54.990, -47.780, 411.830, 53]
+    level:    [102, 104]
+  17863073:
+    template: Tundra_Eft
+    at:       [-57.220, -47.820, 410.085, 8]
+    level:    [102, 104]
+  17863074:
+    template: Tundra_Eft
+    at:       [-51.670, -48.190, 449.760, 14]
+    level:    [102, 104]
+  17863075:
+    template: Tundra_Eft
+    at:       [-55.890, -48.180, 452.006, 153]
+    level:    [102, 104]
+  17863076:
+    template: Mountain_Peiste
+    at:       [10.142, -48.190, 427.636, 67]
+    level:    [102, 104]
+  17863077:
+    template: Mountain_Peiste
+    at:       [33.474, -48.430, 440.712, 51]
+    level:    [102, 104]
+  17863078:
+    template: Mountain_Peiste
+    at:       [19.746, -48.040, 440.919, 48]
+    level:    [102, 104]
+  17863079:
+    template: Mountain_Peiste
+    at:       [11.722, -48.270, 439.540, 102]
+    level:    [102, 104]
+  17863080:
+    template: Mountain_Peiste
+    at:       [31.450, -48.430, 441.378, 52]
+    level:    [102, 104]
+  17863081:
+    template: Tundra_Eft
+    at:       [-4.192, -48.340, 479.873, 179]
+    level:    [102, 104]
+  17863082:
+    template: Tundra_Eft
+    at:       [-33.160, -48.350, 477.427, 157]
+    level:    [102, 104]
+  17863083:
+    template: Mountain_Peiste
+    at:       [-22.980, -48.100, 471.986, 28]
+    level:    [102, 104]
+  17863084:
+    template: Mountain_Peiste
+    at:       [2.263, -48.040, 471.350, 206]
+    level:    [102, 104]
+  17863085:
+    template: Mountain_Peiste
+    at:       [-33.560, -48.240, 478.998, 125]
+    level:    [102, 104]
+  17863086:
+    template: Animosiraptor
+    at:       [-326.100, -64.200, 432.559, 143]
+    level:    [102, 104]
+  17863087:
+    template: Animosiraptor
+    at:       [-317.700, -63.790, 453.476, 252]
+    level:    [102, 104]
+  17863088:
+    template: Mountain_Peiste
+    at:       [-325.900, -64.280, 434.141, 39]
+    level:    [102, 104]
+  17863089:
+    template: Mountain_Peiste
+    at:       [-327.600, -63.750, 464.321, 176]
+    level:    [102, 104]
+  17863090:
+    template: Sinewy_Matamata
+    at:       [-399.200, -64.180, 387.666, 217]
+    level:    [102, 104]
+  17863091:
+    template: Sinewy_Matamata
+    at:       [-387.600, -64.170, 389.631, 246]
+    level:    [102, 104]
+  17863092:
+    template: Sinewy_Matamata
+    at:       [-405.400, -63.750, 374.967, 147]
+    level:    [102, 104]
+  17863093:
+    template: Sinewy_Matamata
+    at:       [-385.500, -64.570, 381.717, 43]
+    level:    [102, 104]
+  17863094:
+    template: Sinewy_Matamata
+    at:       [-407.400, -64.090, 367.759, 82]
+    level:    [102, 104]
+  17863095:
+    template: Sinewy_Matamata
+    at:       [-398.200, -64.390, 364.877, 12]
+    level:    [102, 104]
+  17863096:
+    template: Anthousai
+    at:       [111.230, -32.250, 398.768, 205]
+    level:    [105, 110]
+  17863097:
+    template: Anthousai
+    at:       [98.189, -31.420, 393.252, 40]
+    level:    [105, 110]
+  17863098:
+    template: Anthousai
+    at:       [66.408, -32.300, 390.334, 120]
+    level:    [105, 110]
+  17863099:
+    template: Anthousai
+    at:       [27.259, -31.890, 356.691, 161]
+    level:    [105, 110]
+  17863100:
+    template: Lavawalker_Raptor
+    at:       [44.067, -32.540, 365.658, 8]
+    level:    [105, 110]
+  17863101:
+    template: Lavawalker_Raptor
+    at:       [38.939, -32.260, 367.923, 95]
+    level:    [105, 110]
+  17863102:
+    template: Lavawalker_Raptor
+    at:       [21.278, -32.020, 325.260, 10]
+    level:    [105, 110]
+  17863103:
+    template: Lavawalker_Raptor
+    at:       [19.541, -32.110, 322.920, 251]
+    level:    [105, 110]
+  17863104:
+    template: Lavawalker_Raptor
+    at:       [27.844, -32.000, 329.009, 248]
+    level:    [105, 110]
+  17863105:
+    template: Lavawalker_Raptor
+    at:       [21.048, -32.070, 324.467, 250]
+    level:    [105, 110]
+  17863106:
+    template: Lavawalker_Raptor
+    at:       [6.223, -32.510, 314.916, 14]
+    level:    [105, 110]
+  17863107:
+    template: Lavawalker_Raptor
+    at:       [-53.960, -31.080, 276.093, 112]
+    level:    [105, 110]
+  17863108:
+    template: Lavawalker_Raptor
+    at:       [-39.730, -32.410, 290.635, 117]
+    level:    [105, 110]
+  17863109:
+    template: Lavawalker_Raptor
+    at:       [-48.520, -32.120, 297.910, 217]
+    level:    [105, 110]
+  17863110:
+    template: Befuddled_Twitherym
+    at:       [-50.520, -31.930, 276.548, 1]
+    level:    [105, 110]
+  17863111:
+    template: Befuddled_Twitherym
+    at:       [-68.510, -32.080, 287.640, 156]
+    level:    [105, 110]
+  17863112:
+    template: Befuddled_Twitherym
+    at:       [-116.900, -32.530, 253.561, 24]
+    level:    [105, 110]
+  17863113:
+    template: Befuddled_Twitherym
+    at:       [-121.400, -32.130, 259.510, 97]
+    level:    [105, 110]
+  17863114:
+    template: Befuddled_Twitherym
+    at:       [-117.600, -32.210, 260.130, 222]
+    level:    [105, 110]
+  17863115:
+    template: Befuddled_Twitherym
+    at:       [-145.500, -31.920, 266.188, 65]
+    level:    [105, 110]
+  17863116:
+    template: Befuddled_Twitherym
+    at:       [-159.700, -32.360, 255.188, 41]
+    level:    [105, 110]
+  17863117:
+    template: Befuddled_Twitherym
+    at:       [-165.900, -32.310, 251.095, 106]
+    level:    [105, 110]
+  17863118:
+    template: Befuddled_Twitherym
+    at:       [-226.100, -31.860, 243.410, 202]
+    level:    [105, 110]
+  17863119:
+    template: Befuddled_Twitherym
+    at:       [-222.600, -32.270, 203.542, 220]
+    level:    [105, 110]
+  17863120:
+    template: Befuddled_Twitherym
+    at:       [-229.400, -32.460, 225.520, 151]
+    level:    [105, 110]
+  17863121:
+    template: Befuddled_Twitherym
+    at:       [-230.000, -32.240, 234.589, 95]
+    level:    [105, 110]
+  17863122:
+    template: Befuddled_Twitherym
+    at:       [-202.700, -32.620, 204.792, 85]
+    level:    [105, 110]
+  17863123:
+    template: Befuddled_Twitherym
+    at:       [-244.800, -32.250, 112.379, 114]
+    level:    [105, 110]
+  17863124:
+    template: Befuddled_Twitherym
+    at:       [-249.500, -32.390, 155.128, 65]
+    level:    [105, 110]
+  17863125:
+    template: Petrous_Lizard
+    at:       [-245.600, -32.230, 126.902, 88]
+    level:    [105, 110]
+  17863126:
+    template: Petrous_Lizard
+    at:       [-238.100, -32.470, 120.637, 228]
+    level:    [105, 110]
+  17863127:
+    template: Petrous_Lizard
+    at:       [-241.300, -31.990, 130.843, 89]
+    level:    [105, 110]
+  17863128:
+    template: Petrous_Lizard
+    at:       [-242.800, -32.100, 45.479, 105]
+    level:    [105, 110]
+  17863129:
+    template: Petrous_Lizard
+    at:       [-232.400, -32.410, 78.711, 193]
+    level:    [105, 110]
+  17863130:
+    template: Petrous_Lizard
+    at:       [-232.500, -32.060, 65.179, 208]
+    level:    [105, 110]
+  17863131:
+    template: Petrous_Lizard
+    at:       [-231.200, -32.110, 52.000, 56]
+    level:    [105, 110]
+  17863132:
+    template: Petrous_Lizard
+    at:       [-240.100, -32.100, 46.709, 104]
+    level:    [105, 110]
+  17863133:
+    template: Anthousai
+    at:       [185.440, -15.790, 400.588, 169]
+    level:    [105, 110]
+  17863134:
+    template: Anthousai
+    at:       [191.290, -16.170, 405.341, 253]
+    level:    [105, 110]
+  17863135:
+    template: Anthousai
+    at:       [185.860, -16.620, 382.130, 86]
+    level:    [105, 110]
+  17863136:
+    template: Anthousai
+    at:       [95.414, -16.350, 341.398, 117]
+    level:    [105, 110]
+  17863137:
+    template: Anthousai
+    at:       [109.100, -16.650, 348.309, 236]
+    level:    [105, 110]
+  17863138:
+    template: Lavawalker_Raptor
+    at:       [-95.190, -15.370, 198.610, 75]
+    level:    [105, 110]
+  17863139:
+    template: Lavawalker_Raptor
+    at:       [-106.100, -16.250, 198.035, 99]
+    level:    [105, 110]
+  17863140:
+    template: Lavawalker_Raptor
+    at:       [-107.600, -15.950, 196.514, 3]
+    level:    [105, 110]
+  17863141:
+    template: Lavawalker_Raptor
+    at:       [-100.600, -15.560, 201.218, 44]
+    level:    [105, 110]
+  17863142:
+    template: Petrous_Lizard
+    at:       [-172.000, -16.240, 167.175, 138]
+    level:    [105, 110]
+  17863143:
+    template: Petrous_Lizard
+    at:       [-167.900, -16.430, 161.151, 50]
+    level:    [105, 110]
+  17863144:
+    template: Petrous_Lizard
+    at:       [-176.400, -16.190, 166.662, 152]
+    level:    [105, 110]
+  17863145:
+    template: Lavawalker_Raptor
+    at:       [-192.200, -16.430, 161.104, 76]
+    level:    [105, 110]
+  17863146:
+    template: Lavawalker_Raptor
+    at:       [-172.800, -16.420, 157.977, 14]
+    level:    [105, 110]
+  17863147:
+    template: Petrous_Lizard
+    at:       [-207.500, -16.280, 84.911, 189]
+    level:    [105, 110]
+  17863148:
+    template: Petrous_Lizard
+    at:       [-203.300, -15.810, 68.380, 99]
+    level:    [105, 110]
+  17863149:
+    template: Lavawalker_Raptor
+    at:       [-197.900, -16.380, 85.601, 218]
+    level:    [105, 110]
+  17863150:
+    template: Lavawalker_Raptor
+    at:       [-207.200, -16.280, 84.140, 240]
+    level:    [105, 110]
+  17863151:
+    template: Lavawalker_Raptor
+    at:       [-197.400, -15.800, 71.935, 191]
+    level:    [105, 110]
+  17863152:
+    template: Emberflash_Matamata
+    at:       [-201.500, -16.470, 7.821, 5]
+    level:    [107, 109]
+  17863153:
+    template: Emberflash_Matamata
+    at:       [-201.400, -16.380, 31.115, 246]
+    level:    [107, 109]
+  17863154:
+    template: Emberflash_Matamata
+    at:       [-207.700, -16.320, 1.086, 170]
+    level:    [107, 109]
+  17863155:
+    template: Befuddled_Twitherym
+    at:       [192.710, -0.244, -228.000, 181]
+    level:    [105, 110]
+  17863156:
+    template: Befuddled_Twitherym
+    at:       [200.250, 0.084, -226.240, 250]
+    level:    [105, 110]
+  17863157:
+    template: Befuddled_Twitherym
+    at:       [200.070, -0.273, -274.610, 11]
+    level:    [105, 110]
+  17863158:
+    template: Petrous_Lizard
+    at:       [200.970, 0.444, -261.140, 8]
+    level:    [105, 110]
+  17863159:
+    template: Petrous_Lizard
+    at:       [193.910, -0.222, -214.920, 178]
+    level:    [105, 110]
+  17863160:
+    template: Petrous_Lizard
+    at:       [194.830, -0.181, -228.500, 187]
+    level:    [105, 110]
+  17863161:
+    template: Befuddled_Twitherym
+    at:       [195.100, -0.287, -352.100, 73]
+    level:    [105, 110]
+  17863162:
+    template: Befuddled_Twitherym
+    at:       [217.350, 0.057, -332.620, 234]
+    level:    [105, 110]
+  17863163:
+    template: Befuddled_Twitherym
+    at:       [183.090, -0.148, -365.410, 72]
+    level:    [105, 110]
+  17863164:
+    template: Petrous_Lizard
+    at:       [210.960, -0.252, -324.930, 78]
+    level:    [105, 110]
+  17863165:
+    template: Petrous_Lizard
+    at:       [211.210, -0.293, -320.090, 180]
+    level:    [105, 110]
+  17863166:
+    template: Petrous_Lizard
+    at:       [200.630, -0.330, -351.840, 102]
+    level:    [105, 110]
+  17863167:
+    template: Befuddled_Twitherym
+    at:       [226.140, -0.240, -436.020, 40]
+    level:    [105, 110]
+  17863168:
+    template: Befuddled_Twitherym
+    at:       [219.830, -0.199, -436.100, 227]
+    level:    [105, 110]
+  17863169:
+    template: Befuddled_Twitherym
+    at:       [243.900, 0.129, -463.810]
+    level:    [105, 110]
+  17863170:
+    template: Lavawalker_Raptor
+    at:       [230.280, -0.216, -465.670, 148]
+    level:    [105, 110]
+  17863171:
+    template: Lavawalker_Raptor
+    at:       [215.020, -0.233, -465.750, 80]
+    level:    [105, 110]
+  17863172:
+    template: Lavawalker_Raptor
+    at:       [228.200, -0.128, -442.850, 214]
+    level:    [105, 110]
+  17863173:
+    template: Bumbling_Leafkin
+    at:       [-380.300, -47.650, 117.861, 40]
+    level:    [103, 104]
+  17863174:
+    template: Twirling_Heartwing
+    at:       [116.540, 0.317, 256.359, 62]
+    level:    [103, 106]
+  17863175:
+    template: Mountain_Peiste
+    level:    [102, 104]
+  17863176:
+    template: Volcanic_Wivre
+    level:    [102, 105]
+  17863177:
+    template: Volcanic_Wivre
+    level:    [102, 105]
+  17863178:
+    template: Volcanic_Wivre
+    level:    [102, 105]
+  17863179:
+    template: Grimy_Boulders
+    at:       [200.000, -15.500, 220.000, 63]
+    level:    [103, 103]
+  17863180:
+    template: Matamata
+    at:       [188.190, -15.960, 228.899, 186]
+    level:    [103, 103]
+  17863181:
+    template: Matamata
+    at:       [210.180, -16.060, 224.695, 32]
+    level:    [103, 103]
+  17863182:
+    template: Matamata
+    at:       [190.110, -16.160, 210.824, 134]
+    level:    [103, 103]
+  17863183:
+    template: Basalt_Lizard
+    at:       [198.310, -15.780, 218.679, 28]
+    level:    [103, 103]
+  17863184:
+    template: Basalt_Lizard
+    at:       [199.840, -16.350, 232.811, 155]
+    level:    [103, 103]
+  17863185:
+    template: Basalt_Lizard
+    at:       [186.920, -15.780, 213.279, 72]
+    level:    [103, 103]
+  17863186:
+    template: Grimy_Boulders
+    at:       [-100.000, -1.677, 140.000, 127]
+    level:    [103, 103]
+  17863187:
+    template: Matamata
+    at:       [-108.300, -1.019, 138.910, 208]
+    level:    [103, 103]
+  17863188:
+    template: Matamata
+    at:       [-110.300, -0.716, 132.613, 248]
+    level:    [103, 103]
+  17863189:
+    template: Matamata
+    at:       [-102.600, -0.546, 146.009, 89]
+    level:    [103, 103]
+  17863190:
+    template: Alpine_Eft
+    at:       [-104.200, -1.156, 135.339, 82]
+    level:    [102, 103]
+  17863191:
+    template: Alpine_Eft
+    at:       [-103.600, 0.007, 124.371, 28]
+    level:    [102, 103]
+  17863192:
+    template: Alpine_Eft
+    at:       [-87.940, -0.050, 135.470, 234]
+    level:    [102, 103]
+  17863193:
+    template: Grimy_Boulders
+    at:       [-70.000, -16.516, -140.000, 125]
+    level:    [103, 103]
+  17863194:
+    template: Matamata
+    at:       [-62.126, -15.700, -145.319, 102]
+    level:    [103, 103]
+  17863195:
+    template: Matamata
+    at:       [-69.523, -15.537, -140.710, 150]
+    level:    [103, 103]
+  17863196:
+    template: Matamata
+    at:       [-67.329, -15.720, -135.685, 107]
+    level:    [103, 103]
+  17863197:
+    template: Wivre_Cragdweller
+    at:       [-60.074, -15.737, -139.835, 155]
+    level:    [103, 103]
+  17863198:
+    template: Wivre_Cragdweller
+    at:       [-70.686, -16.256, -128.179, 231]
+    level:    [103, 103]
+  17863199:
+    template: Wivre_Cragdweller
+    at:       [-65.961, -15.589, -138.628, 231]
+    level:    [103, 103]
+  17863200:
+    template: Grimy_Boulders
+    at:       [-460.000, -32.160, -140.000, 46]
+    level:    [103, 103]
+  17863201:
+    template: Matamata
+    at:       [-462.800, -33.530, -150.920, 137]
+    level:    [103, 103]
+  17863202:
+    template: Matamata
+    at:       [-453.100, -33.270, -133.150, 83]
+    level:    [103, 103]
+  17863203:
+    template: Matamata
+    at:       [-450.400, -33.590, -127.760, 1]
+    level:    [103, 103]
+  17863204:
+    template: Outlands_Peiste
+    at:       [-461.200, -33.720, -127.280, 237]
+    level:    [103, 103]
+  17863205:
+    template: Outlands_Peiste
+    at:       [-455.100, -33.640, -128.130, 74]
+    level:    [103, 103]
+  17863206:
+    template: Outlands_Peiste
+    at:       [-452.800, -33.840, -148.010, 244]
+    level:    [103, 103]
+  17863207:
+    template: Grimy_Boulders
+    at:       [-340.000, -49.670, 340.000, 41]
+    level:    [103, 103]
+  17863208:
+    template: Matamata
+    at:       [-343.200, -48.540, 336.101, 45]
+    level:    [103, 103]
+  17863209:
+    template: Matamata
+    at:       [-339.900, -49.140, 340.282, 18]
+    level:    [103, 103]
+  17863210:
+    template: Matamata
+    at:       [-347.900, -48.580, 351.835, 146]
+    level:    [103, 103]
+  17863211:
+    template: Snaggletooth_Raptor
+    at:       [-348.900, -48.750, 340.584, 29]
+    level:    [103, 103]
+  17863212:
+    template: Snaggletooth_Raptor
+    at:       [-350.200, -48.670, 349.996, 165]
+    level:    [103, 103]
+  17863213:
+    template: Snaggletooth_Raptor
+    at:       [-339.600, -47.930, 354.634, 154]
+    level:    [103, 103]
+  17863214:
+    template: Bedrock_Crag
+    at:       [116.500, -1.000, -60.000, 110]
+    level:    [103, 103]
+  17863215:
+    template: Bedrock_Crag
+    at:       [120.000, -1.000, -60.000, 35]
+    level:    [103, 103]
+  17863216:
+    template: Bedrock_Crag
+    at:       [123.500, -1.000, -60.000, 39]
+    level:    [103, 103]
+  17863217:
+    template: Matamata
+    at:       [117.140, -0.149, -50.051, 18]
+    level:    [103, 103]
+  17863218:
+    template: Matamata
+    at:       [114.630, -0.321, -45.493, 104]
+    level:    [103, 103]
+  17863219:
+    template: Matamata
+    at:       [114.770, -0.111, -50.099, 94]
+    level:    [103, 103]
+  17863220:
+    template: Snaggletooth_Raptor
+    at:       [109.230, -0.206, -42.152, 131]
+    level:    [103, 103]
+  17863221:
+    template: Snaggletooth_Raptor
+    at:       [123.750, 0.179, -50.707, 28]
+    level:    [103, 103]
+  17863222:
+    template: Snaggletooth_Raptor
+    at:       [123.400, -0.286, -46.153, 23]
+    level:    [103, 103]
+  17863223:
+    template: Bedrock_Crag
+    at:       [-3.500, -1.000, 60.000, 64]
+    level:    [103, 103]
+  17863224:
+    template: Bedrock_Crag
+    at:       [0.001, -1.000, 60.000, 60]
+    level:    [103, 103]
+  17863225:
+    template: Bedrock_Crag
+    at:       [3.500, -1.000, 60.000, 109]
+    level:    [103, 103]
+  17863226:
+    template: Matamata
+    at:       [-4.077, -0.023, 68.409, 162]
+    level:    [103, 103]
+  17863227:
+    template: Matamata
+    at:       [10.666, 0.642, 70.290, 14]
+    level:    [103, 103]
+  17863228:
+    template: Matamata
+    at:       [5.653, 0.280, 69.305, 134]
+    level:    [103, 103]
+  17863229:
+    template: Snaggletooth_Raptor
+    at:       [0.153, -0.079, 69.183, 65]
+    level:    [103, 103]
+  17863230:
+    template: Snaggletooth_Raptor
+    at:       [8.713, 0.819, 68.132, 255]
+    level:    [103, 103]
+  17863231:
+    template: Snaggletooth_Raptor
+    at:       [-6.809, -0.086, 69.737, 250]
+    level:    [103, 103]
+  17863232:
+    template: Bedrock_Crag
+    at:       [-60.000, -17.000, -276.500, 37]
+    level:    [103, 103]
+  17863233:
+    template: Bedrock_Crag
+    at:       [-60.000, -17.000, -280.000, 123]
+    level:    [103, 103]
+  17863234:
+    template: Bedrock_Crag
+    at:       [-60.000, -17.000, -283.500, 36]
+    level:    [103, 103]
+  17863235:
+    template: Matamata
+    at:       [-46.930, -16.290, -281.830, 187]
+    level:    [103, 103]
+  17863236:
+    template: Matamata
+    at:       [-51.380, -15.560, -287.680, 177]
+    level:    [103, 103]
+  17863237:
+    template: Matamata
+    at:       [-46.730, -15.970, -289.300, 79]
+    level:    [103, 103]
+  17863238:
+    template: Basalt_Lizard
+    at:       [-43.290, -16.290, -288.050, 206]
+    level:    [103, 103]
+  17863239:
+    template: Basalt_Lizard
+    at:       [-45.480, -15.990, -290.860, 112]
+    level:    [103, 103]
+  17863240:
+    template: Basalt_Lizard
+    at:       [-43.780, -16.390, -276.630, 246]
+    level:    [103, 103]
+  17863241:
+    template: Bedrock_Crag
+    at:       [-123.500, -17.000, -420.000, 89]
+    level:    [103, 103]
+  17863242:
+    template: Bedrock_Crag
+    at:       [-120.000, -17.000, -420.000, 99]
+    level:    [103, 103]
+  17863243:
+    template: Bedrock_Crag
+    at:       [-116.500, -17.000, -420.000, 98]
+    level:    [103, 103]
+  17863244:
+    template: Matamata
+    at:       [-118.200, -16.430, -438.120, 73]
+    level:    [103, 103]
+  17863245:
+    template: Matamata
+    at:       [-111.900, -16.250, -434.860, 136]
+    level:    [103, 103]
+  17863246:
+    template: Matamata
+    at:       [-108.800, -16.410, -430.740, 224]
+    level:    [103, 103]
+  17863247:
+    template: Basalt_Lizard
+    at:       [-122.400, -16.200, -433.430, 117]
+    level:    [103, 103]
+  17863248:
+    template: Basalt_Lizard
+    at:       [-117.400, -16.220, -432.980, 7]
+    level:    [103, 103]
+  17863249:
+    template: Basalt_Lizard
+    at:       [-123.900, -16.350, -436.490, 74]
+    level:    [103, 103]
+  17863250:
+    template: Bedrock_Crag
+    at:       [-243.500, -33.000, -220.000, 62]
+    level:    [103, 103]
+  17863251:
+    template: Bedrock_Crag
+    at:       [-240.000, -33.000, -220.000, 93]
+    level:    [103, 103]
+  17863252:
+    template: Bedrock_Crag
+    at:       [-236.500, -33.000, -220.000, 109]
+    level:    [103, 103]
+  17863253:
+    template: Matamata
+    at:       [-240.700, -32.790, -220.710, 90]
+    level:    [103, 103]
+  17863254:
+    template: Matamata
+    at:       [-238.800, -32.530, -225.400, 131]
+    level:    [103, 103]
+  17863255:
+    template: Matamata
+    at:       [-229.200, -32.570, -228.000, 92]
+    level:    [103, 103]
+  17863256:
+    template: Basalt_Lizard
+    at:       [-240.900, -32.100, -223.230, 103]
+    level:    [103, 103]
+  17863257:
+    template: Basalt_Lizard
+    at:       [-239.800, -32.360, -226.090, 139]
+    level:    [103, 103]
+  17863258:
+    template: Basalt_Lizard
+    at:       [-242.300, -32.750, -223.480, 90]
+    level:    [103, 103]
+  17863259:
+    template: Bedrock_Crag
+    at:       [-363.500, -33.000, -140.000, 34]
+    level:    [103, 103]
+  17863260:
+    template: Bedrock_Crag
+    at:       [-360.000, -33.000, -140.000, 83]
+    level:    [103, 103]
+  17863261:
+    template: Bedrock_Crag
+    at:       [-356.500, -33.000, -140.000, 114]
+    level:    [103, 103]
+  17863262:
+    template: Matamata
+    at:       [-350.300, -31.880, -150.850, 255]
+    level:    [103, 103]
+  17863263:
+    template: Matamata
+    at:       [-355.000, -32.240, -154.120, 23]
+    level:    [103, 103]
+  17863264:
+    template: Matamata
+    at:       [-367.900, -31.870, -154.150, 113]
+    level:    [103, 103]
+  17863265:
+    template: Basalt_Lizard
+    at:       [-365.600, -31.620, -150.250, 241]
+    level:    [103, 103]
+  17863266:
+    template: Basalt_Lizard
+    at:       [-354.800, -32.320, -155.220, 233]
+    level:    [103, 103]
+  17863267:
+    template: Basalt_Lizard
+    at:       [-358.000, -32.360, -155.340, 179]
+    level:    [103, 103]
+  17863268:
+    template: Bedrock_Crag
+    at:       [-243.500, -49.000, 340.000, 52]
+    level:    [103, 103]
+  17863269:
+    template: Bedrock_Crag
+    at:       [-240.000, -49.000, 340.000, 13]
+    level:    [103, 103]
+  17863270:
+    template: Bedrock_Crag
+    at:       [-236.500, -49.000, 340.000]
+    level:    [103, 103]
+  17863271:
+    template: Matamata
+    at:       [-242.600, -48.230, 327.334, 1]
+    level:    [103, 103]
+  17863272:
+    template: Matamata
+    at:       [-250.500, -47.820, 327.790, 105]
+    level:    [103, 103]
+  17863273:
+    template: Matamata
+    at:       [-251.600, -47.580, 328.246, 79]
+    level:    [103, 103]
+  17863274:
+    template: Snaggletooth_Raptor
+    at:       [-245.200, -48.420, 321.591, 127]
+    level:    [103, 103]
+  17863275:
+    template: Snaggletooth_Raptor
+    at:       [-241.900, -48.350, 324.821, 201]
+    level:    [103, 103]
+  17863276:
+    template: Snaggletooth_Raptor
+    at:       [-248.600, -48.130, 325.294, 241]
+    level:    [103, 103]
+  17863277:
+    template: Achuka
+    at:       [-469.000, -63.000, 503.000, 32]
+    level:    [115, 117]
+  17863278:
+    template: Outlands_Peiste
+    level:    [103, 103]
+  17863279:
+    template: Outlands_Peiste
+    level:    [103, 103]
+  17863280:
+    template: Matamata
+    level:    [103, 103]
+  17863281:
+    template: Matamata
+    level:    [103, 103]
+  17863282:
+    template: Matamata
+    level:    [103, 103]
+  17863283:
+    template: Matamata
+    level:    [103, 103]
+  17863284:
+    template: Snaggletooth_Raptor
+    level:    [103, 103]
+  17863285:
+    template: Snaggletooth_Raptor
+    level:    [103, 103]
+  17863286:
+    template: Snaggletooth_Raptor
+    level:    [103, 103]
+  17863287:
+    template: Snaggletooth_Raptor
+    level:    [103, 103]
+  17863288:
+    template: Snaggletooth_Raptor
+    level:    [103, 103]
+  17863289:
+    template: Snaggletooth_Raptor
+    level:    [103, 103]
+  17863290:
+    template: Volatile_Matamata
+    at:       [393.410, -16.500, -39.127, 147]
+    level:    [110, 112]
+  17863291:
+    template: Perdurable_Raptor
+    at:       [-7.209, -16.080, -492.370, 37]
+    level:    [115, 115]
+  17863292:
+    template: Shimmering_Tarichuk
+    at:       [362.000, -16.500, -490.000, 164]
+  17863293:
+    template: Tutewehiwehi
+    at:       [-449.000, -48.249, 83.000, 114]
+  17863294:
+    template: Kurma
+    at:       [-364.000, -32.500, -321.000, 69]
+  17863295:
+    template: Burgeoning_Flames
+    at:       [484.657, -17.086, 270.256, 147]
+  17863296:
+    template: Burgeoning_Flames
+    at:       [429.885, -16.964, 323.899]
+  17863297:
+    template: Deranged_Ameretat
+    at:       [318.539, -0.542, 395.143, 237]
+    level:    [109, 109]

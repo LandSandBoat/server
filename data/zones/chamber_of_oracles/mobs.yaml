@@ -1,0 +1,1535 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Blizzard_Wyvern:
+    id:            454
+    species:       wyvern
+    type:          [battlefield]
+    skill_list_id: 1140
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bopa_Greso:
+    id:            506
+    species:       mithra
+    type:          [battlefield]
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  equipped
+          race:  7
+          face:  1
+          head:  4119
+          body:  8198
+          hands: 12294
+          feet:  20504
+          main:  24755
+        hitbox: 12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Centurio_V-III:
+    id:            673
+    species:       antica
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1297
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8400
+
+  Centurio_XI-I:
+    id:            675
+    species:       antica
+    type:          [notorious, battlefield]
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1276
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+  Centurio_XI-I_2:
+    id:            675
+    display_name:  Centurio_XI-I
+    species:       antica
+    type:          [notorious, battlefield]
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1276
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cha_Lebagta:
+    id:            704
+    species:       mithra
+    type:          [battlefield]
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 818
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chaos_Wyvern:
+    id:            695
+    species:       wyvern
+    type:          [battlefield]
+    skill_list_id: 1139
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Goblin_Enforcer:
+    id:            1655
+    species:       goblin
+    type:          [notorious, battlefield]
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 1090
+        hitbox: 12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Goblin_Intimidator:
+    id:            1678
+    species:       goblin
+    type:          [notorious, battlefield]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 497
+        hitbox: 10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Goblin_Repossessor:
+    id:            1708
+    species:       goblin
+    type:          [notorious, battlefield]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 505
+        hitbox: 10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Hoplomachus_XI-XXVI:
+    id:            1989
+    species:       antica
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1297
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3800
+        mp: 3800
+
+  Hoplomachus_XI-XXVI_2:
+    id:            1989
+    display_name:  Hoplomachus_XI-XXVI
+    species:       antica
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1297
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lightning_Wyvern:
+    id:            2411
+    species:       wyvern
+    type:          [battlefield]
+    skill_list_id: 1138
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Maat_drg:
+    id:            5404
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: polearm
+        delay: 400
+      jobs: [drg, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+
+  Maat_nin:
+    id:            5403
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 7
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: katana
+        delay: 300
+      jobs: [nin, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+
+  Maat_sam:
+    id:            5345
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 360
+      jobs: [sam, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3100
+
+  Maats_Wyvern:
+    id:            2463
+    species:       blue_wyvern
+    type:          [notorious, called, battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        name_prefix: 32
+        model_size:   1
+        hitbox:       8
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 350
+
+  Nanaa_Mihgo:
+    id:            2804
+    species:       mithra
+    type:          [battlefield]
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  misc
+          model: 2371
+        hitbox: 17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Princeps_V-XI:
+    id:            3194
+    species:       antica
+    type:          [notorious, battlefield]
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: dagger
+        delay: 180
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1270
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7350
+
+  Purson:
+    id:            3234
+    species:       manticore
+    type:          [battlefield]
+    spell_list_id: 5
+    skill_list_id: 179
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags:  3
+        model_size:    3
+        hitbox:       44
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 24000
+
+  Radiant_Wyvern:
+    id:            3303
+    species:       wyvern
+    type:          [battlefield]
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Retiarius_XI-XIX:
+    id:            3357
+    species:       antica
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: staff
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1281
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4100
+        mp: 4100
+
+  Retiarius_XI-XIX_2:
+    id:            3357
+    display_name:  Retiarius_XI-XIX
+    species:       antica
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: staff
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1281
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sabotender_Amante:
+    id:            3427
+    species:       sabotender
+    type:          [battlefield]
+    skill_list_id: 212
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:    4
+          light:    4
+          dark:    -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:       4
+          light_sleep:  4
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 372
+        entity_flags: 645
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13500
+
+  Sabotender_Campeon:
+    id:            3429
+    species:       sabotender
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 212
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:    4
+          light:    4
+          dark:    -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:       4
+          light_sleep:  4
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 373
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6250
+        mp: 6250
+
+  Secutor_XI-XXXII:
+    id:            3527
+    species:       antica
+    type:          [notorious, battlefield]
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1263
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3800
+
+  Secutor_XI-XXXII_2:
+    id:            3527
+    display_name:  Secutor_XI-XXXII
+    species:       antica
+    type:          [notorious, battlefield]
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1263
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Triarius_V-VIII:
+    id:            4000
+    species:       antica
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: staff
+        delay: 200
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -3
+          earth:    4
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         4
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1280
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7100
+
+spawns:
+  17465345:
+    template: Centurio_V-III
+    at:       [-4.000, 100.325, -240.000, 64]
+    level:    [70, 70]
+  17465346:
+    template: Triarius_V-VIII
+    at:       [4.000, 100.325, -240.000, 64]
+    level:    [68, 68]
+  17465347:
+    template: Princeps_V-XI
+    at:       [0.000, 100.325, -240.000, 64]
+    level:    [68, 68]
+  17465348:
+    template: Centurio_V-III
+    at:       [-3.975, 0.325, 0.081, 64]
+    level:    [70, 70]
+  17465349:
+    template: Triarius_V-VIII
+    at:       [4.025, 0.325, 0.081, 64]
+    level:    [68, 68]
+  17465350:
+    template: Princeps_V-XI
+    at:       [0.025, 0.325, 0.081, 64]
+    level:    [68, 68]
+  17465351:
+    template: Centurio_V-III
+    at:       [-3.945, -99.675, 240.335, 64]
+    level:    [70, 70]
+  17465352:
+    template: Triarius_V-VIII
+    at:       [4.055, -99.675, 240.335, 64]
+    level:    [68, 68]
+  17465353:
+    template: Princeps_V-XI
+    at:       [0.055, -99.675, 240.335, 64]
+    level:    [68, 68]
+  17465354:
+    template: Maat_sam
+    at:       [0.000, 100.826, -240.000, 64]
+    level:    [70, 70]
+  17465355:
+    template: Maat_sam
+    at:       [-0.016, 0.826, 0.337, 64]
+    level:    [70, 70]
+  17465356:
+    template: Maat_sam
+    at:       [0.037, -99.174, 240.413, 64]
+    level:    [70, 70]
+  17465357:
+    template: Maat_nin
+    at:       [0.000, 100.826, -240.000, 64]
+    level:    [70, 70]
+  17465358:
+    template: Maat_nin
+    at:       [-0.016, 0.826, 0.337, 64]
+    level:    [70, 70]
+  17465359:
+    template: Maat_nin
+    at:       [0.037, -99.174, 240.413, 64]
+    level:    [70, 70]
+  17465360:
+    template: Maat_drg
+    at:       [0.000, 100.826, -240.000, 64]
+    level:    [70, 70]
+  17465361:
+    template: Maats_Wyvern
+    at:       [-1.000, 100.000, -240.000, 64]
+    level:    [56, 56]
+  17465362:
+    template: Maat_drg
+    at:       [-0.016, 0.826, 0.337, 64]
+    level:    [70, 70]
+  17465363:
+    template: Maats_Wyvern
+    at:       [-0.975, 0.000, 0.081, 64]
+    level:    [56, 56]
+  17465364:
+    template: Maat_drg
+    at:       [0.037, -99.174, 240.413, 64]
+    level:    [70, 70]
+  17465365:
+    template: Maats_Wyvern
+    at:       [-0.945, -100.000, 240.335, 64]
+    level:    [56, 56]
+  17465366:
+    template: Secutor_XI-XXXII
+    at:       [-2.000, 100.325, -240.000, 64]
+    level:    [64, 64]
+  17465367:
+    template: Retiarius_XI-XIX
+    at:       [6.000, 100.182, -240.000, 64]
+    level:    [64, 64]
+  17465368:
+    template: Hoplomachus_XI-XXVI
+    at:       [2.000, 100.325, -240.000, 64]
+    level:    [63, 63]
+  17465369:
+    template: Centurio_XI-I
+    at:       [-6.000, 100.182, -240.000, 64]
+    level:    [65, 65]
+  17465371:
+    template: Secutor_XI-XXXII
+    at:       [-2.000, 0.325, 0.000, 64]
+    level:    [64, 64]
+  17465372:
+    template: Retiarius_XI-XIX
+    at:       [6.000, 0.182, 0.000, 64]
+    level:    [64, 64]
+  17465373:
+    template: Hoplomachus_XI-XXVI
+    at:       [2.000, 0.325, 0.000, 64]
+    level:    [63, 63]
+  17465374:
+    template: Centurio_XI-I
+    at:       [-6.000, 0.182, 0.000, 64]
+    level:    [65, 65]
+  17465376:
+    template: Secutor_XI-XXXII
+    at:       [-2.000, -100.325, 240.000, 64]
+    level:    [64, 64]
+  17465377:
+    template: Retiarius_XI-XIX
+    at:       [6.000, -100.182, 240.000, 64]
+    level:    [64, 64]
+  17465378:
+    template: Hoplomachus_XI-XXVI
+    at:       [2.000, -100.325, 240.000, 64]
+    level:    [63, 63]
+  17465379:
+    template: Centurio_XI-I
+    at:       [-6.000, -100.182, 240.000, 64]
+    level:    [65, 65]
+  17465381:
+    template: Sabotender_Campeon
+    at:       [0.000, 100.325, -240.000, 64]
+    level:    [77, 77]
+  17465382:
+    template: Sabotender_Amante
+    at:       [-4.000, 100.325, -240.000, 64]
+    level:    [73, 74]
+  17465383:
+    template: Sabotender_Amante
+    at:       [4.000, 100.325, -240.000, 64]
+    level:    [73, 74]
+  17465385:
+    template: Sabotender_Campeon
+    at:       [0.125, 0.000, 2.081, 64]
+    level:    [77, 77]
+  17465386:
+    template: Sabotender_Amante
+    at:       [-3.875, 0.000, 2.081, 64]
+    level:    [73, 74]
+  17465387:
+    template: Sabotender_Amante
+    at:       [4.125, 0.000, 2.081, 64]
+    level:    [73, 74]
+  17465389:
+    template: Sabotender_Campeon
+    at:       [0.155, -100.000, 242.335, 64]
+    level:    [77, 77]
+  17465390:
+    template: Sabotender_Amante
+    at:       [-3.845, -100.000, 242.335, 64]
+    level:    [73, 74]
+  17465391:
+    template: Sabotender_Amante
+    at:       [4.155, -100.000, 242.335, 64]
+    level:    [73, 74]
+  17465393:
+    template: Radiant_Wyvern
+    at:       [-2.000, 100.325, -240.000, 64]
+    level:    [75, 76]
+  17465394:
+    template: Blizzard_Wyvern
+    at:       [6.000, 100.182, -240.000, 64]
+    level:    [75, 76]
+  17465395:
+    template: Lightning_Wyvern
+    at:       [2.000, 100.325, -240.000, 64]
+    level:    [75, 76]
+  17465396:
+    template: Chaos_Wyvern
+    at:       [-6.000, 100.182, -240.000, 64]
+    level:    [75, 76]
+  17465398:
+    template: Radiant_Wyvern
+    at:       [-2.000, 0.325, 0.000, 64]
+    level:    [75, 76]
+  17465399:
+    template: Blizzard_Wyvern
+    at:       [6.000, 0.182, 0.000, 64]
+    level:    [75, 76]
+  17465400:
+    template: Lightning_Wyvern
+    at:       [2.000, 0.325, 0.000, 64]
+    level:    [75, 76]
+  17465401:
+    template: Chaos_Wyvern
+    at:       [-6.000, 0.182, 0.000, 64]
+    level:    [75, 76]
+  17465403:
+    template: Radiant_Wyvern
+    at:       [-2.000, -100.325, 240.000, 64]
+    level:    [75, 76]
+  17465404:
+    template: Blizzard_Wyvern
+    at:       [6.000, -100.182, 240.000, 64]
+    level:    [75, 76]
+  17465405:
+    template: Lightning_Wyvern
+    at:       [2.000, -100.325, 240.000, 64]
+    level:    [75, 76]
+  17465406:
+    template: Chaos_Wyvern
+    at:       [-6.000, -100.182, 240.000, 64]
+    level:    [75, 76]
+  17465408:
+    template: Purson
+    at:       [-0.100, 100.000, -238.000, 68]
+    level:    [80, 80]
+  17465410:
+    template: Purson
+    at:       [0.125, 0.000, 2.081, 68]
+    level:    [80, 80]
+  17465412:
+    template: Purson
+    at:       [0.155, -100.000, 242.335, 68]
+    level:    [80, 80]
+  17465414:
+    template: Nanaa_Mihgo
+    at:       [0.000, 100.325, -240.000, 64]
+    level:    [75, 75]
+  17465415:
+    template: Cha_Lebagta
+    at:       [-0.010, 100.023, -247.604, 191]
+    level:    [75, 75]
+  17465416:
+    template: Bopa_Greso
+    at:       [-0.727, 100.098, -247.052, 232]
+    level:    [75, 75]
+  17465417:
+    template: Goblin_Repossessor
+    at:       [0.000, 100.325, -237.000, 64]
+    level:    [75, 75]
+  17465418:
+    template: Goblin_Intimidator
+    at:       [3.000, 100.304, -237.000, 64]
+    level:    [75, 75]
+  17465419:
+    template: Goblin_Enforcer
+    at:       [-3.000, 100.304, -237.000, 64]
+    level:    [75, 75]
+  17465420:
+    template: Nanaa_Mihgo
+    level:    [75, 75]
+  17465421:
+    template: Cha_Lebagta
+    level:    [75, 75]
+  17465422:
+    template: Bopa_Greso
+    level:    [75, 75]
+  17465423:
+    template: Goblin_Repossessor
+    level:    [75, 75]
+  17465424:
+    template: Goblin_Intimidator
+    level:    [75, 75]
+  17465425:
+    template: Goblin_Enforcer
+    level:    [75, 75]
+  17465426:
+    template: Nanaa_Mihgo
+    level:    [75, 75]
+  17465427:
+    template: Cha_Lebagta
+    level:    [75, 75]
+  17465428:
+    template: Bopa_Greso
+    level:    [75, 75]
+  17465429:
+    template: Goblin_Repossessor
+    level:    [75, 75]
+  17465430:
+    template: Goblin_Intimidator
+    level:    [75, 75]
+  17465431:
+    template: Goblin_Enforcer
+    level:    [75, 75]
+  17465432:
+    script: Ekhis
+  17465433:
+    script: Sybaris
+  17465435:
+    script: Ekhis
+  17465436:
+    script: Sybaris
+  17465438:
+    script: Ekhis
+  17465439:
+    script: Sybaris
+  17465441:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465442:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465443:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465444:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465446:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465447:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465448:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465449:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465451:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465452:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465453:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465454:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465456:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465457:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465458:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465459:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465461:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465462:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465463:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465464:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465466:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465467:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465468:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465469:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465471:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465472:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465473:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465474:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465476:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465477:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465478:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465479:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465481:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465482:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465483:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465484:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465486:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465487:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465488:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465489:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465491:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465492:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465493:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465494:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465496:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465497:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465498:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465499:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465501:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465502:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465503:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465504:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465506:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465507:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465508:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465509:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I
+  17465511:
+    template: Secutor_XI-XXXII_2
+    script:   Secutor_XI-XXXII
+  17465512:
+    template: Retiarius_XI-XIX_2
+    script:   Retiarius_XI-XIX
+  17465513:
+    template: Hoplomachus_XI-XXVI_2
+    script:   Hoplomachus_XI-XXVI
+  17465514:
+    template: Centurio_XI-I_2
+    script:   Centurio_XI-I

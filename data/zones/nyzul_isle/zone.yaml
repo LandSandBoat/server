@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [instanced]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          148
+  night:        148
+  battle_solo:  144
+  battle_party: 144

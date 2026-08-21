@@ -1,0 +1,561 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16846856:
+    script:       Armoury_Crate
+    display_name: Enigmatic Sphere
+    at:           [-239.999, -59.750, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 298
+      entity_flags:  1667
+      animation_sub:    8
+      name_vis:        32
+      moving:           6
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         COP
+
+  16846861:
+    script:       Armoury_Crate
+    display_name: Enigmatic Sphere
+    at:           [0.059, -119.500, -0.135]
+    render:
+      look:
+        type:  standard
+        model: 298
+      entity_flags:  1667
+      animation_sub:    8
+      name_vis:        32
+      moving:           6
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         COP
+
+  16846866:
+    script:       Armoury_Crate
+    display_name: Enigmatic Sphere
+    at:           [240.062, 60.250, -0.103]
+    render:
+      look:
+        type:  standard
+        model: 298
+      entity_flags:  1667
+      animation_sub:    8
+      name_vis:        32
+      moving:           6
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         COP
+
+  16846933:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 0
+    widescan: true
+    content:  SOA
+
+  16846934:
+    script: NPC[56]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16846935:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16846937:
+    script: NPC[59]
+    at:     [0.000, 0.250, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16846938:
+    script: NPC[5a]
+    at:     [0.000, 0.250, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16846939:
+    script: NPC[5b]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16846940:
+    script:       _0h0
+    display_name: Web of Recollections
+    at:           [0.000, -3.812, -243.992]
+    render:
+      look:
+        type: door
+      door_id:      812134495
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16846941:
+    script:       _0h2
+    display_name: Web of Regret
+    at:           [-240.000, -63.799, -40.244]
+    render:
+      look:
+        type: door
+      door_id:      845688927
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16846942:
+    script:       _0h1
+    display_name: Web of Regret
+    at:           [0.000, -3.799, -40.248]
+    render:
+      look:
+        type: door
+      door_id:      828911711
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16846943:
+    script:       _0h3
+    display_name: Web of Regret
+    at:           [240.000, 56.380, -40.243]
+    render:
+      look:
+        type: door
+      door_id:      862466143
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16846944:
+    script: NPC[60]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16846945:
+    script: NPC[61]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16846946:
+    script: NPC[62]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16846947:
+    script: NPC[63]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16846948:
+    script: NPC[64]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16846949:
+    script:       Radiant_Aureole
+    display_name: Radiant Aureole
+    at:           [0.044, -119.249, 360.028]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16846950:
+    script:       qm
+    display_name: ???
+    at:           [0.604, -1.000, -277.570, 74]
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:  cutscene_only
+    content: COP
+
+  16846951:
+    script:       Yvenoile
+    display_name: Yve'noile
+    at:           [0.000, -1.999, 47.200, 192]
+    render:
+      look:
+        type:  standard
+        model: 1464
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16846952:
+    script:       Miko_A
+    display_name: Miko_A
+    at:           [-1.000, -1.999, 44.200, 192]
+    render:
+      look:
+        type:  standard
+        model: 1465
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16846953:
+    script:       Miko_B
+    display_name: Miko_B
+    at:           [1.000, -1.999, 44.200, 192]
+    render:
+      look:
+        type:  standard
+        model: 1465
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16846954:
+    script:       Prishe
+    display_name: Prishe
+    at:           [-108.000, -24.000, 60.000, 126]
+    render:
+      look:
+        type:  standard
+        model: 1462
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 54
+    widescan:        true
+    content:         COP
+
+  16846955:
+    script:       Ealdnarche
+    display_name: Eald'narche
+    at:           [-438.000, -19.099, 400.000]
+    render:
+      look:
+        type:  standard
+        model: 61
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 30
+    widescan:        true
+    content:         COP
+
+  16846956:
+    script: blank
+    at:     [-1.625, -1.000, -277.473, 51]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32769
+
+  16846957:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16846958:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16846959:
+    script:       Selhteus
+    display_name: Selh'teus
+    at:           [-427.629, -19.099, 400.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16846960:
+    script:       Nagmolada
+    display_name: Nag'molada
+    at:           [-446.125, -19.099, 400.000]
+    render:
+      look:
+        type:  standard
+        model: 1452
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16846961:
+    script: blank
+    at:     [-447.273, -19.099, 399.000]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16846962:
+    script: blank
+    at:     [-447.273, -19.099, 401.000]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16846963:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16846964:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16846965:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16846966:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16846967:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16846968:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16846969:
+    script:       Grumblix
+    display_name: Grumblix
+    at:           [-8.486, -2.000, -294.418, 191]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16846970:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-8.486, -2.000, -294.418, 191]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16846971:
+    script: NPC[7b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16846972:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16846973:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16846974:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16846975:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16846976:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16846977:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16846978:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16846979:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP

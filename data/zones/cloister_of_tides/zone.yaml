@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+
+zonelines:
+
+  z5v0:
+    from:  [561.347, 33.018, 499.999]
+    to:    den_of_rancor
+    at:    [196.421, 34.595, -60.319, 3.141593]
+    scale: [1.000, 4.000]
+
+  z5v2:
+    from:  [-500.026, 12.543, -437.114]
+    to:    den_of_rancor
+    at:    [179.837, 13.394, -157.074, 4.712389]
+    scale: [1.000, 4.000]

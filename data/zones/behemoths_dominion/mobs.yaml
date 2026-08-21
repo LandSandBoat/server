@@ -1,0 +1,1128 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ancient_Weapon:
+    id:            130
+    species:       evil_weapon
+    type:          [notorious]
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 476
+        entity_flags:  1669
+        animation_sub:    8
+        model_size:       2
+        hitbox:          22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7750
+
+  Behemoth:
+    id:            387
+    species:       behemoth
+    type:          [notorious]
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [thf, war]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags: 129
+        hitbox:        38
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 65000
+    loot:
+      drops:
+        - chance: very_common
+          item:   behemoth_hide
+        - chance: very_common
+          item:   behemoth_hide
+        - chance: rare
+          item:   savory_shank
+        - chance: always
+          one_of:
+            thundercloud: 90
+            comet_tail:   10
+
+  Bhuta:
+    id:            407
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Demonic_Weapon:
+    id:            980
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Doglix_Muttsnout:
+    id:            1074
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+        delay: 200
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 484
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8500
+        mp: 8500
+
+  Greater_Gayla:
+    id:            1803
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: common
+          item:   bat_fang
+        - chance: common
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Gudanna:
+    id:            1836
+    species:       behemoth
+    type:          [notorious]
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill: axe
+        delay: 380
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags: 145
+        hitbox:        38
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  King_Behemoth:
+    id:            2255
+    species:       behemoth
+    type:          [notorious]
+    skill_list_id: 479
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 180
+      jobs: [thf, war]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags: 131
+        model_size:     1
+        hitbox:        45
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      mods:
+        regain: 70
+      mob_mods:
+        mp_base:    100
+        magic_cool:  60
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 80000
+    loot:
+      drops:
+        - chance: always
+          item:   behemoth_hide
+        - chance: common
+          item:   behemoth_hide
+        - chance: rare
+          item:   hunk_of_behemoth_meat
+        - chance: always
+          item:   behemoth_horn
+        - chance: very_common
+          item:   square_of_shining_cloth
+        - chance: common
+          item:   behemoth_horn
+        - chance: very_common
+          item:   behemoth_tongue
+        - chance: always
+          one_of:
+            wyrmal_abjuration_head:   31
+            aquarian_abjuration_feet: 23
+            earthen_abjuration_legs:  23
+            martial_abjuration_legs:  23
+        - chance: uncommon
+          one_of:
+            wyrmal_abjuration_head:   31
+            aquarian_abjuration_feet: 23
+            earthen_abjuration_legs:  23
+            martial_abjuration_legs:  23
+        - chance: always
+          one_of:
+            pixie_earring:  95
+            defending_ring:  5
+
+  Legendary_Weapon:
+    id:            2387
+    species:       evil_weapon
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 478
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7300
+
+  Lesser_Gaylas:
+    id:            2397
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: common
+          item:   bat_fang
+        - chance: common
+          item:   bat_fang
+      despoil:
+        bat_wing: 0
+
+  Light_Elemental:
+    id:            2413
+    species:       light_elemental
+    spell_list_id: 19
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 442
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+
+  Lost_Soul_blm:
+    id:            2442
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_stun
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Lost_Soul_war:
+    id:            6558
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_stun
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Master_Coeurl:
+    id:            2585
+    species:       coeurl
+    skill_list_id: 71
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 367
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_coeurl_meat
+        - chance: uncommon
+          item:   coeurl_hide
+        - chance: very_common
+          item:   coeurl_whisker
+      steal: coeurl_whisker
+      despoil:
+        coeurl_hide:          0
+        slice_of_coeurl_meat: 0
+
+  Moxnix_Nightgoggle:
+    id:            2767
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 499
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8700
+
+  Picklix_Longindex:
+    id:            3135
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 505
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9400
+
+  Pil_VNM:
+    id:            4695
+    display_name:  Pil
+    species:       bishop
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: staff
+        delay: 360
+      jobs: [blm, sch]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2102
+        entity_flags:  159
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Sovereign_Behemoth:
+    id:            6855
+    species:       behemoth
+    type:          [notorious]
+    spell_list_id: 126
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill:    great_axe
+        delay:    380
+        dmg_mult: 125
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags: 131
+        model_size:     1
+        hitbox:        45
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+spawns:
+  17297409:
+    template: Lesser_Gaylas
+    at:       [171.183, 4.291, -124.580, 30]
+    level:    [41, 42]
+  17297410:
+    template: Lesser_Gaylas
+    at:       [153.156, 3.746, -116.237, 127]
+    level:    [41, 42]
+  17297411:
+    template: Lesser_Gaylas
+    at:       [89.000, 2.000, -103.000, 99]
+    level:    [41, 42]
+  17297412:
+    template: Greater_Gayla
+    at:       [119.409, 3.860, -126.084, 127]
+    level:    [43, 44]
+  17297413:
+    template: Greater_Gayla
+    at:       [175.632, 3.077, -98.700, 127]
+    level:    [43, 44]
+  17297414:
+    template: Thunder_Elemental
+    at:       [138.615, 3.400, -101.378, 125]
+    level:    [48, 50]
+  17297415:
+    template: Light_Elemental
+    at:       [138.615, 3.400, -101.378, 125]
+    level:    [48, 50]
+  17297416:
+    template: Demonic_Weapon
+    at:       [159.000, 4.000, -82.000, 127]
+    level:    [45, 46]
+  17297417:
+    template: Demonic_Weapon
+    at:       [192.178, 3.851, -86.399, 82]
+    level:    [45, 46]
+  17297418:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [124.000, 4.000, -117.000, 127]
+    level:    [45, 46]
+  17297419:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [165.000, 4.000, -116.000, 49]
+    level:    [45, 46]
+  17297420:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [154.000, 4.000, -95.000, 127]
+    level:    [45, 46]
+  17297421:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [141.000, 4.000, -130.000, 1]
+    level:    [45, 46]
+  17297422:
+    template: Demonic_Weapon
+    at:       [23.000, -4.000, -30.000, 127]
+    level:    [45, 46]
+  17297423:
+    template: Demonic_Weapon
+    at:       [1.531, -3.612, -23.642, 117]
+    level:    [45, 46]
+  17297424:
+    template: Lesser_Gaylas
+    at:       [-104.000, -9.000, -19.000, 119]
+    level:    [41, 42]
+  17297425:
+    template: Lesser_Gaylas
+    at:       [-68.693, -3.265, -71.942, 46]
+    level:    [41, 42]
+  17297426:
+    template: Greater_Gayla
+    at:       [-97.892, -6.114, -50.670, 102]
+    level:    [43, 44]
+  17297427:
+    template: Greater_Gayla
+    at:       [-82.446, -3.896, -71.939, 127]
+    level:    [43, 44]
+  17297428:
+    template: Lesser_Gaylas
+    at:       [-64.514, -4.798, 11.870, 127]
+    level:    [41, 42]
+  17297429:
+    template: Lesser_Gaylas
+    at:       [-49.231, -4.483, -5.900, 127]
+    level:    [41, 42]
+  17297430:
+    template: Greater_Gayla
+    at:       [-52.906, -3.392, 14.425, 127]
+    level:    [43, 44]
+  17297431:
+    template: Greater_Gayla
+    at:       [-100.000, -9.000, 22.000, 30]
+    level:    [43, 44]
+  17297432:
+    template: Master_Coeurl
+    at:       [-82.389, -4.301, -90.121, 88]
+    level:    [49, 50]
+  17297433:
+    template: Bhuta
+    at:       [-70.571, -4.375, -85.672, 53]
+    level:    [47, 48]
+  17297434:
+    template: Thunder_Elemental
+    at:       [-84.343, -4.477, -85.742, 127]
+    level:    [48, 50]
+  17297435:
+    template: Light_Elemental
+    at:       [-80.538, -4.413, -79.202, 2]
+    level:    [48, 50]
+  17297436:
+    template: Master_Coeurl
+    at:       [-36.000, -3.000, -6.000, 127]
+    level:    [49, 50]
+  17297437:
+    template: Bhuta
+    at:       [-24.568, -3.857, 4.811, 13]
+    level:    [47, 48]
+  17297438:
+    template: Thunder_Elemental
+    at:       [-44.195, -4.390, -8.444, 45]
+    level:    [48, 50]
+  17297439:
+    template: Light_Elemental
+    at:       [-44.195, -4.390, -8.444, 45]
+    level:    [48, 50]
+  17297440:
+    template: Behemoth
+    at:       [-269.350, -19.773, 74.268]
+    level:    [70, 70]
+  17297441:
+    template: King_Behemoth
+    at:       [-269.350, -19.773, 74.268]
+    level:    [85, 85]
+  17297442:
+    template: Thunder_Elemental
+    at:       [-226.728, -20.524, 21.987, 79]
+    level:    [48, 50]
+  17297443:
+    template: Thunder_Elemental
+    at:       [-270.475, -20.439, 75.426, 67]
+    level:    [48, 50]
+  17297444:
+    template: Light_Elemental
+    at:       [-209.248, -19.929, 61.437, 57]
+    level:    [48, 50]
+  17297445:
+    template: Light_Elemental
+    at:       [-248.852, -20.733, 87.634, 36]
+    level:    [48, 50]
+  17297446:
+    template: Picklix_Longindex
+    at:       [208.678, 4.415, -81.035, 93]
+    level:    [60, 60]
+  17297447:
+    template: Moxnix_Nightgoggle
+    at:       [204.199, 4.025, -78.000, 93]
+    level:    [58, 58]
+  17297448:
+    template: Doglix_Muttsnout
+    at:       [210.899, 4.138, -81.648, 93]
+    level:    [58, 58]
+  17297449:
+    template: Ancient_Weapon
+    at:       [-77.000, -4.000, -92.000, 170]
+    level:    [66, 66]
+  17297450:
+    template: Legendary_Weapon
+    at:       [-75.000, -4.000, -92.000, 170]
+    level:    [66, 66]
+  17297451:
+    template: Gudanna
+    at:       [-279.065, -20.484, -0.456, 18]
+    level:    [55, 60]
+  17297452:
+    template: Pil_VNM
+    script:   Pil
+    at:       [-210.000, -20.835, 70.000]
+    level:    [94, 95]
+  17297453:
+    template: Pil_VNM
+    script:   Pil
+    at:       [-4.000, -4.331, -33.299]
+    level:    [94, 95]
+  17297454:
+    template: Pil_VNM
+    script:   Pil
+    at:       [112.473, 4.549, -108.364]
+    level:    [94, 95]
+  17297455:
+    template: Sovereign_Behemoth
+    at:       [-247.289, -20.444, 32.400]
+    level:    [99, 99]
+  17297456:
+    template: Sovereign_Behemoth
+    at:       [-48.880, -4.469, -5.769]
+    level:    [99, 99]
+  17297457:
+    template: Sovereign_Behemoth
+    at:       [161.259, 3.500, -85.589]
+    level:    [99, 99]
+
+slots:
+  - members:
+      17297412: {} # Greater_Gayla
+      17297414: {} # Thunder_Elemental
+      17297415: {} # Light_Elemental
+  - members:
+      17297432: {} # Master_Coeurl
+      17297433: {} # Bhuta
+      17297434: {} # Thunder_Elemental
+      17297435: {} # Light_Elemental
+  - members:
+      17297436: {} # Master_Coeurl
+      17297437: {} # Bhuta
+      17297438: {} # Thunder_Elemental
+      17297439: {} # Light_Elemental

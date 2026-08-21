@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 219
+
+zonelines:
+
+  z040:
+    from:  [673.803, -24.869, 911.899]
+    to:    buburimu_peninsula
+    at:    [-276.529, 16.403, -324.519, 0.261799]
+    scale: [1.000, 3.000]

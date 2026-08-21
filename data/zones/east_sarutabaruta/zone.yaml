@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          113
+  night:        113
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z380:
+    from:  [-128.070, -7.903, -520.014]
+    to:    windurst_woods
+    at:    [124.043, -7.704, -39.992, 3.141593]
+    scale: [1.000, 6.000]
+
+  z382:
+    from:  [-343.926, -13.696, 106.455]
+    to:    west_sarutabaruta
+    at:    [501.209, -12.111, 134.432, 3.141593]
+    scale: [1.000, 3.000]
+
+  z384:
+    from:  [-425.512, -30.692, 600.890]
+    to:    west_sarutabaruta
+    at:    [421.970, -28.059, 694.068, 3.141593]
+    scale: [1.000, 3.000]
+
+  z386:
+    from:  [306.101, -37.753, 664.733]
+    to:    tahrongi_canyon
+    at:    [-65.655, 44.371, -737.096, 4.712389]
+    scale: [1.000, 3.000]
+
+  z388:
+    from:  [-60.020, -32.344, 759.397]
+    to:    outer_horutoto_ruins
+    at:    [419.991, -9.637, 716.991, 4.712389]
+    scale: [1.000, 4.000]
+
+  z38a:
+    from:  [399.294, -8.287, 99.968]
+    to:    inner_horutoto_ruins
+    at:    [437.101, -9.602, 180.014]
+    scale: [1.000, 4.000]
+
+  z38c:
+    from:  [259.996, -12.117, -479.060]
+    to:    outer_horutoto_ruins
+    at:    [580.018, -25.626, -637.011, 1.570796]
+    scale: [1.000, 4.000]

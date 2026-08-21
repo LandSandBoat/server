@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 219
+
+zonelines:
+
+  z050:
+    from:  [-299.951, -45.216, -605.658]
+    to:    xarcabard
+    at:    [-136.287, -23.268, 137.302, 2.268928]
+    scale: [1.000, 5.000]
+
+  z052:
+    from:  [360.102, 15.074, -59.900]
+    to:    bearclaw_pinnacle
+    at:    [-679.796, 16.000, -539.992, 3.141593]
+    scale: [1.000, 4.000]
+
+  z054:
+    from:  [420.134, -40.825, 196.059]
+    to:    bearclaw_pinnacle
+    at:    [-819.917, -39.987, -82.521, 1.570796]
+    scale: [1.000, 4.000]
+
+  z056:
+    from:  [59.998, -104.974, 438.236]
+    to:    bearclaw_pinnacle
+    at:    [-795.490, -104.137, 619.960]
+    scale: [1.000, 4.000]
+
+  z058:
+    from:  [81.956, -196.429, 179.876]
+    to:    bearclaw_pinnacle
+    at:    [119.997, -195.490, 660.017]
+    scale: [1.000, 4.000]
+
+  z05a:
+    from:  [-200.076, -8.687, -60.120]
+    to:    bearclaw_pinnacle
+    at:    [-519.513, 0.541, -899.992]
+    scale: [1.000, 4.000]
+
+  z05c:
+    from:  [180.004, -228.953, 121.050]
+    to:    bearclaw_pinnacle
+    at:    [-199.494, -112.470, -100.018]
+    scale: [1.000, 4.000]

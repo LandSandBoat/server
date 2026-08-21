@@ -1,0 +1,7994 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Acrolith:
+    id:            39
+    species:       acrolith
+    type:          [event]
+    skill_list_id: 1
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  2
+          light:    6
+          dark:    11
+        rank_status:
+          paralyze:     3
+          bind:         3
+          silence:      3
+          slow:         3
+          light_sleep:  6
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1778
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Chariot:
+    id:            216
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1821
+        entity_flags: 1153
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22800
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Chariot_2:
+    id:            216
+    display_name:  Archaic_Chariot
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1821
+        entity_flags: 1153
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 30500
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Chariot_3:
+    id:            216
+    display_name:  Archaic_Chariot
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1821
+        entity_flags: 1153
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Archaic_Gear:
+    id:            218
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4170
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Gear_2:
+    id:            218
+    display_name:  Archaic_Gear
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4560
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Gear_3:
+    id:            218
+    display_name:  Archaic_Gear
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Gears:
+    id:            219
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4175
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Gears_2:
+    id:            219
+    display_name:  Archaic_Gears
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Gears_3:
+    id:            219
+    display_name:  Archaic_Gears
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Rampart:
+    id:            221
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6670
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Rampart_2:
+    id:            221
+    display_name:  Archaic_Rampart
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7320
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Rampart_3:
+    id:            221
+    display_name:  Archaic_Rampart
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8810
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Rampart_4:
+    id:            221
+    display_name:  Archaic_Rampart
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4870
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Rampart_5:
+    id:            221
+    display_name:  Archaic_Rampart
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9875
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Rampart_6:
+    id:            221
+    display_name:  Archaic_Rampart
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9700
+    loot:
+      drops:
+        - chance: common
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Rampart_7:
+    id:            221
+    display_name:  Archaic_Rampart
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Battleclad_Chariot:
+    id:            364
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1824
+        model_size:  3
+        hitbox:     41
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   linen_coin_purse
+        - chance: always
+          one_of: [tsukikazu_togi, phoboss_cuisses, freyrs_gloves, tsukikazu_jinpachi, eas_crackows, bodbs_slops]
+        - chance: always
+          one_of: [tsukikazu_togi, phoboss_cuisses, freyrs_gloves, tsukikazu_jinpachi, eas_crackows, bodbs_slops]
+
+  Battleclad_Chariot_2:
+    id:            364
+    display_name:  Battleclad_Chariot
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1824
+        model_size:  3
+        hitbox:     41
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Bull_Bugard:
+    id:            577
+    species:       bugard
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: sword
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 129
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2037
+    loot:
+      drops:
+        - chance: always
+          item:   incus_cell
+        - chance: always
+          item:   duplicatus_cell
+
+  Bull_Bugard_2:
+    id:            577
+    display_name:  Bull_Bugard
+    species:       bugard
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: sword
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 129
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1700
+    loot:
+      drops:
+        - chance: always
+          item:   opacus_cell
+        - chance: always
+          item:   praecipitatio_cell
+
+  Bull_Bugard_3:
+    id:            577
+    display_name:  Bull_Bugard
+    species:       bugard
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: sword
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 129
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1700
+
+  Bull_Bugard_4:
+    id:            577
+    display_name:  Bull_Bugard
+    species:       bugard
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: sword
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 129
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1700
+    loot:
+      drops:
+        - chance: always
+          item:   duplicatus_cell
+
+  Crawler:
+    id:            831
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Diremite:
+    id:            1040
+    species:       diremite
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Draco_Lizard:
+    id:            1098
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        model_size:  1
+        hitbox:     16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2830
+    loot:
+      drops:
+        - chance: very_common
+          item:   cumulus_cell
+        - chance: always
+          item:   radiatus_cell
+        - chance: always
+          item:   radiatus_cell
+
+  Draco_Lizard_2:
+    id:            1098
+    display_name:  Draco_Lizard
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        model_size:  1
+        hitbox:     16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2830
+
+  Draco_Lizard_3:
+    id:            1098
+    display_name:  Draco_Lizard
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        model_size:  1
+        hitbox:     16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2830
+    loot:
+      drops:
+        - chance: 0
+          item:   cirrocumulus_cell
+
+  First_Rampart:
+    id:            1345
+    species:       rampart
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        model_size:  1
+        hitbox:     24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   zhayolm_card
+
+  Fourth_Rampart:
+    id:            1413
+    species:       rampart
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        model_size:  1
+        hitbox:     24
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   zhayolm_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Greater_Manticore:
+    id:            1806
+    species:       manticore
+    skill_list_id: 179
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags: 643
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        exp_bonus: 10
+      spawn:
+        type: [scripted]
+
+  Hydra:
+    id:            2018
+    species:       hydra
+    type:          [notorious]
+    skill_list_id: 164
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      resists:
+        dmg_physical:
+          blunt: -1250
+        rank_element:
+          fire:    6
+          ice:     6
+          wind:    6
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 1796
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         40
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Jakko:
+    id:            2138
+    species:       imp
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1727
+        animation_sub:  4
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8254
+        mp: 9999
+    loot:
+      drops:
+        - chance: always
+          item:   njords_jerkin
+
+  Mamool_Ja_Bounder:
+    id:            2508
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4227
+    loot:
+      drops:
+        - chance: always
+          item:   castellanus_cell
+        - chance: very_common
+          item:   cumulus_cell
+
+  Mamool_Ja_Bounder_2:
+    id:            2508
+    display_name:  Mamool_Ja_Bounder
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+    loot:
+      drops:
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   velum_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Bounder_3:
+    id:            2508
+    display_name:  Mamool_Ja_Bounder
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+    loot:
+      drops:
+        - chance: always
+          item:   pileus_cell
+        - chance: always
+          item:   pileus_cell
+        - chance: always
+          item:   pileus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Bounder_4:
+    id:            2508
+    display_name:  Mamool_Ja_Bounder
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: always
+          item:   fractus_cell
+        - chance: always
+          item:   fractus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          one_of: [humilus_cell, spissatus_cell]
+        - chance: always
+          one_of: [humilus_cell, spissatus_cell]
+
+  Mamool_Ja_Bounder_5:
+    id:            2508
+    display_name:  Mamool_Ja_Bounder
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Mimicker:
+    id:            2526
+    species:       knight_ja
+    spell_list_id: 8
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2800
+
+  Mamool_Ja_Mimicker_2:
+    id:            2526
+    display_name:  Mamool_Ja_Mimicker
+    species:       knight_ja
+    spell_list_id: 8
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4267
+
+  Mamool_Ja_Mimicker_3:
+    id:            2526
+    display_name:  Mamool_Ja_Mimicker
+    species:       knight_ja
+    spell_list_id: 8
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4267
+    loot:
+      drops:
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   mediocris_cell
+
+  Mamool_Ja_Mimicker_4:
+    id:            2526
+    display_name:  Mamool_Ja_Mimicker
+    species:       knight_ja
+    spell_list_id: 8
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4267
+    loot:
+      drops:
+        - chance: always
+          item:   fractus_cell
+        - chance: always
+          item:   pileus_cell
+
+  Mamool_Ja_Mimicker_5:
+    id:            2526
+    display_name:  Mamool_Ja_Mimicker
+    species:       knight_ja
+    spell_list_id: 8
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Savant:
+    id:            2533
+    species:       knight_ja
+    spell_list_id: 20
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4165
+    loot:
+      drops:
+        - chance: 0
+          item:   cirrocumulus_cell
+
+  Mamool_Ja_Savant_2:
+    id:            2533
+    display_name:  Mamool_Ja_Savant
+    species:       knight_ja
+    spell_list_id: 20
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2700
+        mp: 9999
+
+  Mamool_Ja_Savant_3:
+    id:            2533
+    display_name:  Mamool_Ja_Savant
+    species:       knight_ja
+    spell_list_id: 20
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4132
+        mp: 9999
+    loot:
+      drops:
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   humilus_cell
+
+  Mamool_Ja_Savant_4:
+    id:            2533
+    display_name:  Mamool_Ja_Savant
+    species:       knight_ja
+    spell_list_id: 20
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4132
+        mp: 9999
+    loot:
+      drops:
+        - chance: always
+          item:   congestus_cell
+        - chance: always
+          item:   nimbus_cell
+
+  Mamool_Ja_Savant_5:
+    id:            2533
+    display_name:  Mamool_Ja_Savant
+    species:       knight_ja
+    spell_list_id: 20
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4132
+        mp: 9999
+
+  Mamool_Ja_Savant_6:
+    id:            2533
+    display_name:  Mamool_Ja_Savant
+    species:       knight_ja
+    spell_list_id: 20
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Sophist:
+    id:            2534
+    species:       knight_ja
+    spell_list_id: 21
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1631
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2700
+        mp: 9999
+
+  Mamool_Ja_Sophist_2:
+    id:            2534
+    display_name:  Mamool_Ja_Sophist
+    species:       knight_ja
+    spell_list_id: 21
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1631
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   mediocris_cell
+
+  Mamool_Ja_Sophist_3:
+    id:            2534
+    display_name:  Mamool_Ja_Sophist
+    species:       knight_ja
+    spell_list_id: 21
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1631
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: always
+          item:   fractus_cell
+        - chance: always
+          item:   pileus_cell
+
+  Mamool_Ja_Sophist_4:
+    id:            2534
+    display_name:  Mamool_Ja_Sophist
+    species:       knight_ja
+    spell_list_id: 21
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1631
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   humilus_cell
+
+  Mamool_Ja_Sophist_5:
+    id:            2534
+    display_name:  Mamool_Ja_Sophist
+    species:       knight_ja
+    spell_list_id: 21
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1631
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: always
+          item:   congestus_cell
+        - chance: always
+          item:   nimbus_cell
+
+  Mamool_Ja_Sophist_6:
+    id:            2534
+    display_name:  Mamool_Ja_Sophist
+    species:       knight_ja
+    spell_list_id: 21
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1631
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Spearman:
+    id:            2535
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: polearm
+        delay: 280
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1616
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4573
+    loot:
+      drops:
+        - chance: always
+          item:   stratus_cell
+        - chance: very_common
+          item:   cumulus_cell
+
+  Mamool_Ja_Spearman_2:
+    id:            2535
+    display_name:  Mamool_Ja_Spearman
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: polearm
+        delay: 280
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1616
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pannus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Spearman_3:
+    id:            2535
+    display_name:  Mamool_Ja_Spearman
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: polearm
+        delay: 280
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1616
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   nimbus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Spearman_4:
+    id:            2535
+    display_name:  Mamool_Ja_Spearman
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: polearm
+        delay: 280
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1616
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   velum_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Spearman_5:
+    id:            2535
+    display_name:  Mamool_Ja_Spearman
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: polearm
+        delay: 280
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1616
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   mediocris_cell
+        - chance: always
+          item:   mediocris_cell
+        - chance: always
+          item:   mediocris_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Spearman_6:
+    id:            2535
+    display_name:  Mamool_Ja_Spearman
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: polearm
+        delay: 280
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1616
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   congestus_cell
+        - chance: always
+          item:   congestus_cell
+        - chance: always
+          item:   congestus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Spearman_7:
+    id:            2535
+    display_name:  Mamool_Ja_Spearman
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: polearm
+        delay: 280
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1616
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   congestus_cell
+        - chance: always
+          item:   congestus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: always
+          one_of: [humilus_cell, spissatus_cell]
+        - chance: always
+          one_of: [humilus_cell, spissatus_cell]
+
+  Mamool_Ja_Strapper:
+    id:            2538
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pannus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Strapper_2:
+    id:            2538
+    display_name:  Mamool_Ja_Strapper
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   congestus_cell
+        - chance: always
+          item:   congestus_cell
+        - chance: always
+          item:   congestus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Strapper_3:
+    id:            2538
+    display_name:  Mamool_Ja_Strapper
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   pileus_cell
+        - chance: always
+          item:   pileus_cell
+        - chance: always
+          item:   pileus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Strapper_4:
+    id:            2538
+    display_name:  Mamool_Ja_Strapper
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+    loot:
+      drops:
+        - chance: always
+          item:   mediocris_cell
+        - chance: always
+          item:   mediocris_cell
+        - chance: always
+          item:   mediocris_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Strapper_5:
+    id:            2538
+    display_name:  Mamool_Ja_Strapper
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2280
+
+  Mamool_Ja_Strapper_6:
+    id:            2538
+    display_name:  Mamool_Ja_Strapper
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pileus_cell
+        - chance: always
+          item:   pileus_cell
+        - chance: always
+          item:   mediocris_cell
+        - chance: always
+          item:   mediocris_cell
+        - chance: always
+          one_of: [humilus_cell, spissatus_cell]
+        - chance: always
+          one_of: [humilus_cell, spissatus_cell]
+
+  Mamool_Ja_Strapper_7:
+    id:            2538
+    display_name:  Mamool_Ja_Strapper
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Zenist:
+    id:            2545
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cumulus_cell
+        - chance: uncommon
+          item:   radiatus_cell
+
+  Mamool_Ja_Zenist_2:
+    id:            2545
+    display_name:  Mamool_Ja_Zenist
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4428
+    loot:
+      drops:
+        - chance: very_common
+          item:   castellanus_cell
+        - chance: very_common
+          item:   cirrocumulus_cell
+
+  Mamool_Ja_Zenist_3:
+    id:            2545
+    display_name:  Mamool_Ja_Zenist
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+    loot:
+      drops:
+        - chance: always
+          item:   fractus_cell
+        - chance: always
+          item:   fractus_cell
+        - chance: always
+          item:   fractus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Zenist_4:
+    id:            2545
+    display_name:  Mamool_Ja_Zenist
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+    loot:
+      drops:
+        - chance: always
+          item:   nimbus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Zenist_5:
+    id:            2545
+    display_name:  Mamool_Ja_Zenist
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+    loot:
+      drops:
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   velum_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Zenist_6:
+    id:            2545
+    display_name:  Mamool_Ja_Zenist
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+
+  Mamool_Ja_Zenist_7:
+    id:            2545
+    display_name:  Mamool_Ja_Zenist
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+    loot:
+      drops:
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pannus_cell
+        - chance: always
+          item:   pannus_cell
+        - chance: very_common
+          item:   humilus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Mamool_Ja_Zenist_8:
+    id:            2545
+    display_name:  Mamool_Ja_Zenist
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3100
+    loot:
+      drops:
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   pileus_cell
+        - chance: always
+          item:   pileus_cell
+        - chance: always
+          item:   mediocris_cell
+        - chance: always
+          item:   mediocris_cell
+        - chance: always
+          one_of: [humilus_cell, spissatus_cell]
+        - chance: always
+          one_of: [humilus_cell, spissatus_cell]
+
+  Mamool_Ja_Zenist_9:
+    id:            2545
+    display_name:  Mamool_Ja_Zenist
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Jas_Lizard:
+    id:            2539
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 129
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2370
+
+  Mamool_Jas_Lizard_2:
+    id:            2539
+    display_name:  Mamool_Jas_Lizard
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 129
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Jas_Wyvern:
+    id:            2541
+    species:       blue_wyvern
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 842
+
+  Mamool_Jas_Wyvern_2:
+    id:            2541
+    display_name:  Mamool_Jas_Wyvern
+    species:       blue_wyvern
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 657
+
+  Mindgazer:
+    id:            2669
+    species:       hecteye
+    spell_list_id: 10
+    skill_list_id: 2091
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Poroggo_Gent:
+    id:            3181
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3166
+        mp: 9999
+    loot:
+      drops:
+        - chance: always
+          item:   praecipitatio_cell
+        - chance: always
+          item:   praecipitatio_cell
+
+  Poroggo_Gent_10:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9200
+        mp: 9999
+    loot:
+      drops:
+        - chance: very_common
+          item:   undulatus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Poroggo_Gent_11:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9200
+        mp: 9999
+    loot:
+      drops:
+        - chance: very_common
+          item:   cumulus_cell
+        - chance: very_common
+          item:   virga_cell
+
+  Poroggo_Gent_12:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9200
+        mp: 9999
+    loot:
+      drops:
+        - chance: very_common
+          item:   castellanus_cell
+        - chance: very_common
+          item:   cirrocumulus_cell
+
+  Poroggo_Gent_2:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3166
+        mp: 9999
+    loot:
+      drops:
+        - chance: always
+          item:   incus_cell
+        - chance: always
+          item:   incus_cell
+
+  Poroggo_Gent_3:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3166
+        mp: 9999
+    loot:
+      drops:
+        - chance: always
+          item:   duplicatus_cell
+        - chance: always
+          item:   duplicatus_cell
+
+  Poroggo_Gent_4:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3166
+        mp: 9999
+    loot:
+      drops:
+        - chance: always
+          item:   opacus_cell
+        - chance: always
+          item:   opacus_cell
+
+  Poroggo_Gent_5:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9200
+        mp: 9999
+
+  Poroggo_Gent_6:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4650
+        mp: 9999
+
+  Poroggo_Gent_7:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4650
+        mp: 9999
+    loot:
+      drops:
+        - chance: very_common
+          item:   undulatus_cell
+        - chance: very_common
+          item:   spissatus_cell
+
+  Poroggo_Gent_8:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4650
+        mp: 9999
+    loot:
+      drops:
+        - chance: very_common
+          item:   cumulus_cell
+        - chance: very_common
+          item:   virga_cell
+
+  Poroggo_Gent_9:
+    id:            3181
+    display_name:  Poroggo_Gent
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4650
+        mp: 9999
+    loot:
+      drops:
+        - chance: very_common
+          item:   castellanus_cell
+        - chance: very_common
+          item:   cirrocumulus_cell
+
+  Poroggo_Madame:
+    id:            3183
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        model_size: 2
+        hitbox:     9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13000
+        mp:  9999
+    loot:
+      drops:
+        - chance: common
+          one_of: [enyos_gauntlets, nemains_cuffs, anus_brais, hoshikazu_kyahan, njords_mask]
+
+  Poroggo_Madame_2:
+    id:            3183
+    display_name:  Poroggo_Madame
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        model_size: 2
+        hitbox:     9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6241
+        mp: 9999
+
+  Poroggo_Madame_3:
+    id:            3183
+    display_name:  Poroggo_Madame
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        model_size: 2
+        hitbox:     9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13500
+        mp:  9999
+
+  Poroggo_Madame_4:
+    id:            3183
+    display_name:  Poroggo_Madame
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        model_size: 2
+        hitbox:     9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17060
+        mp:  9999
+
+  Poroggo_Madame_5:
+    id:            3183
+    display_name:  Poroggo_Madame
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        model_size: 2
+        hitbox:     9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17060
+        mp:  9999
+    loot:
+      drops:
+        - chance: always
+          item:   anus_brais
+        - chance: always
+          item:   hoshikazu_kyahan
+        - chance: always
+          item:   njords_mask
+        - chance: always
+          item:   cotton_coin_purse
+
+  Poroggo_Madame_6:
+    id:            3183
+    display_name:  Poroggo_Madame
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        model_size: 2
+        hitbox:     9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20242
+        mp:  9999
+
+  Poroggo_Madame_7:
+    id:            3183
+    display_name:  Poroggo_Madame
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        model_size: 2
+        hitbox:     9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17060
+        mp:  9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   enlils_gambison
+        - chance: uncommon
+          item:   hikazu_gote
+        - chance: uncommon
+          item:   freyas_trousers
+        - chance: always
+          item:   cotton_coin_purse
+
+  Poroggo_Madame_8:
+    id:            3183
+    display_name:  Poroggo_Madame
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        model_size: 2
+        hitbox:     9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17060
+        mp:  9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   deimoss_leggings
+        - chance: uncommon
+          item:   machas_pigaches
+        - chance: uncommon
+          item:   enlils_tiara
+
+  Pugil:
+    id:            3221
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 129
+        hitbox:        23
+      spawn:
+        type: [scripted]
+
+  Puk_WW:
+    id:            3223
+    species:       puk
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1380
+    loot:
+      drops:
+        - chance: always
+          item:   incus_cell
+        - chance: always
+          item:   duplicatus_cell
+
+  Puk_WW_2:
+    id:            3223
+    display_name:  Puk_WW
+    species:       puk
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1380
+    loot:
+      drops:
+        - chance: always
+          item:   opacus_cell
+        - chance: always
+          item:   praecipitatio_cell
+
+  Puk_WW_3:
+    id:            3223
+    display_name:  Puk_WW
+    species:       puk
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1380
+
+  Puk_WW_4:
+    id:            3223
+    display_name:  Puk_WW
+    species:       puk
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1380
+    loot:
+      drops:
+        - chance: always
+          item:   incus_cell
+
+  Rogue_Marid:
+    id:            3383
+    species:       marid
+    skill_list_id: 180
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          ice:     -1
+          wind:    -1
+          earth:    2
+          thunder: -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:         2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1738
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10135
+
+  Second_Rampart:
+    id:            3526
+    species:       rampart
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        model_size:  1
+        hitbox:     24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   zhayolm_card
+
+  Slime_Mold:
+    id:            3670
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Third_Rampart:
+    id:            3898
+    species:       rampart
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        model_size:  1
+        hitbox:     24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   zhayolm_card
+
+  Toad:
+    id:      3934
+    species: toad
+    attributes:
+      combat:
+        skill: scythe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Torama:
+    id:            3976
+    species:       coeurl
+    skill_list_id: 71
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 367
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vagrant_Lindwurm:
+    id:            4117
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 317
+        model_size:  1
+        hitbox:     18
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+    loot:
+      drops:
+        - chance: always
+          item:   opacus_cell
+        - chance: always
+          item:   praecipitatio_cell
+
+  Vagrant_Lindwurm_2:
+    id:            4117
+    display_name:  Vagrant_Lindwurm
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 317
+        model_size:  1
+        hitbox:     18
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+    loot:
+      drops:
+        - chance: always
+          item:   incus_cell
+        - chance: always
+          item:   duplicatus_cell
+
+  Vagrant_Lindwurm_3:
+    id:            4117
+    display_name:  Vagrant_Lindwurm
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 317
+        model_size:  1
+        hitbox:     18
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+
+  Vagrant_Lindwurm_4:
+    id:            4117
+    display_name:  Vagrant_Lindwurm
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 317
+        model_size:  1
+        hitbox:     18
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+    loot:
+      drops:
+        - chance: always
+          item:   opacus_cell
+
+  Wajaom_Tiger:
+    id:            4275
+    species:       tiger
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Wyvern:
+    id:            4389
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4700
+    loot:
+      drops:
+        - chance: always
+          item:   castellanus_cell
+        - chance: always
+          item:   castellanus_cell
+        - chance: very_common
+          item:   cumulus_cell
+
+  Wyvern_2:
+    id:            4389
+    display_name:  Wyvern
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4700
+
+  Wyvern_3:
+    id:            4389
+    display_name:  Wyvern
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4700
+    loot:
+      drops:
+        - chance: very_common
+          item:   cumulus_cell
+        - chance: always
+          item:   stratus_cell
+        - chance: always
+          item:   stratus_cell
+
+  Ziz:
+    id:            4508
+    species:       cockatrice
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 289
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1890
+    loot:
+      drops:
+        - chance: always
+          item:   opacus_cell
+        - chance: always
+          item:   praecipitatio_cell
+
+  Ziz_2:
+    id:            4508
+    display_name:  Ziz
+    species:       cockatrice
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 289
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2037
+
+  Ziz_3:
+    id:            4508
+    display_name:  Ziz
+    species:       cockatrice
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 289
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1890
+
+  Ziz_4:
+    id:            4508
+    display_name:  Ziz
+    species:       cockatrice
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 289
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1890
+    loot:
+      drops:
+        - chance: always
+          item:   praecipitatio_cell
+
+spawns:
+  17076225:
+    template: Puk_WW
+    script:   Puk
+    at:       [372.000, -8.000, -452.000, 254]
+    level:    [70, 70]
+  17076226:
+    template: Puk_WW_2
+    script:   Puk
+    at:       [386.000, -8.000, -460.000, 83]
+    level:    [70, 70]
+  17076227:
+    template: Puk_WW_3
+    script:   Puk
+    at:       [371.000, -8.000, -468.000, 180]
+    level:    [70, 70]
+  17076228:
+    template: Puk_WW_3
+    script:   Puk
+    at:       [391.000, -8.000, -450.000, 83]
+    level:    [70, 70]
+  17076229:
+    template: Puk_WW_4
+    script:   Puk
+    at:       [451.000, -12.000, -457.000, 248]
+    level:    [70, 70]
+  17076230:
+    template: Puk_WW_4
+    script:   Puk
+    at:       [460.000, -12.000, -469.000, 140]
+    level:    [70, 70]
+  17076231:
+    template: Puk_WW_3
+    script:   Puk
+    at:       [468.000, -12.000, -458.000, 152]
+    level:    [70, 70]
+  17076232:
+    template: Puk_WW_3
+    script:   Puk
+    at:       [448.000, -12.000, -447.000, 79]
+    level:    [70, 70]
+  17076233:
+    template: Puk_WW_4
+    script:   Puk
+    at:       [471.000, -15.000, -543.000, 144]
+    level:    [70, 70]
+  17076234:
+    template: Puk_WW_4
+    script:   Puk
+    at:       [452.000, -15.000, -552.000, 230]
+    level:    [70, 70]
+  17076235:
+    template: Puk_WW_3
+    script:   Puk
+    at:       [447.000, -16.000, -529.000, 92]
+    level:    [70, 70]
+  17076236:
+    template: Puk_WW_3
+    script:   Puk
+    at:       [465.000, -16.000, -546.000, 157]
+    level:    [70, 70]
+  17076237:
+    template: Puk_WW_4
+    script:   Puk
+    at:       [379.000, -20.000, -542.000, 253]
+    level:    [70, 70]
+  17076238:
+    template: Puk_WW_4
+    script:   Puk
+    at:       [395.000, -20.000, -554.000, 161]
+    level:    [70, 70]
+  17076239:
+    template: Puk_WW_3
+    script:   Puk
+    at:       [373.000, -19.000, -528.000, 25]
+    level:    [70, 70]
+  17076240:
+    template: Puk_WW_3
+    script:   Puk
+    at:       [373.000, -19.000, -553.000, 228]
+    level:    [70, 70]
+  17076241:
+    template: Mamool_Ja_Zenist
+    at:       [421.780, -11.410, -457.220, 98]
+    level:    [75, 75]
+  17076242:
+    template: Poroggo_Gent
+    at:       [365.930, -20.450, -544.010]
+    level:    [75, 75]
+  17076243:
+    template: Ziz
+    at:       [380.433, -8.013, -388.903, 6]
+    level:    [70, 70]
+  17076244:
+    template: Ziz_2
+    script:   Ziz
+    at:       [381.623, -8.515, -378.952, 69]
+    level:    [70, 70]
+  17076245:
+    template: Ziz_3
+    script:   Ziz
+    at:       [383.743, -8.039, -373.170, 17]
+    level:    [70, 70]
+  17076246:
+    template: Ziz_3
+    script:   Ziz
+    at:       [378.567, -8.041, -387.854, 151]
+    level:    [70, 70]
+  17076247:
+    template: Ziz_4
+    script:   Ziz
+    at:       [372.863, -12.017, -297.835, 247]
+    level:    [70, 70]
+  17076248:
+    template: Ziz_4
+    script:   Ziz
+    at:       [392.181, -12.017, -297.549, 250]
+    level:    [70, 70]
+  17076249:
+    template: Ziz_3
+    script:   Ziz
+    at:       [387.591, -12.017, -304.992, 8]
+    level:    [70, 70]
+  17076250:
+    template: Ziz_3
+    script:   Ziz
+    at:       [374.053, -12.017, -297.777, 245]
+    level:    [70, 70]
+  17076251:
+    template: Ziz_4
+    script:   Ziz
+    at:       [455.094, -16.013, -304.065, 38]
+    level:    [70, 70]
+  17076252:
+    template: Ziz_4
+    script:   Ziz
+    at:       [465.283, -16.013, -307.994, 201]
+    level:    [70, 70]
+  17076253:
+    template: Ziz_3
+    script:   Ziz
+    at:       [466.041, -16.013, -290.765, 192]
+    level:    [70, 70]
+  17076254:
+    template: Ziz_3
+    script:   Ziz
+    at:       [464.179, -16.013, -294.838, 24]
+    level:    [70, 70]
+  17076255:
+    template: Ziz_4
+    script:   Ziz
+    at:       [459.138, -20.041, -387.587, 151]
+    level:    [70, 70]
+  17076256:
+    template: Ziz_4
+    script:   Ziz
+    at:       [471.862, -20.036, -382.061, 27]
+    level:    [70, 70]
+  17076257:
+    template: Ziz_3
+    script:   Ziz
+    at:       [462.773, -20.056, -386.308, 5]
+    level:    [70, 70]
+  17076258:
+    template: Ziz_3
+    script:   Ziz
+    at:       [462.967, -20.044, -373.988, 255]
+    level:    [70, 70]
+  17076259:
+    template: Mamool_Ja_Zenist
+    at:       [375.390, -9.168, -345.290, 141]
+    level:    [75, 75]
+  17076260:
+    template: Poroggo_Gent_2
+    script:   Poroggo_Gent
+    at:       [454.620, -20.140, -374.180, 246]
+    level:    [75, 75]
+  17076261:
+    template: Vagrant_Lindwurm
+    at:       [292.000, -7.952, -363.350, 10]
+    level:    [70, 70]
+  17076262:
+    template: Vagrant_Lindwurm_2
+    script:   Vagrant_Lindwurm
+    at:       [291.870, -7.951, -363.630, 6]
+    level:    [70, 70]
+  17076263:
+    template: Vagrant_Lindwurm_3
+    script:   Vagrant_Lindwurm
+    at:       [292.070, -7.949, -363.350, 10]
+    level:    [70, 70]
+  17076264:
+    template: Vagrant_Lindwurm_3
+    script:   Vagrant_Lindwurm
+    at:       [295.640, -8.043, -367.050, 187]
+    level:    [70, 70]
+  17076265:
+    template: Vagrant_Lindwurm_4
+    script:   Vagrant_Lindwurm
+    at:       [216.480, -11.990, -375.470, 116]
+    level:    [70, 70]
+  17076266:
+    template: Vagrant_Lindwurm_4
+    script:   Vagrant_Lindwurm
+    at:       [230.290, -12.000, -373.800, 255]
+    level:    [70, 70]
+  17076267:
+    template: Vagrant_Lindwurm_3
+    script:   Vagrant_Lindwurm
+    at:       [216.090, -11.990, -377.010, 135]
+    level:    [70, 70]
+  17076268:
+    template: Vagrant_Lindwurm_3
+    script:   Vagrant_Lindwurm
+    at:       [219.000, -12.000, -363.180, 224]
+    level:    [70, 70]
+  17076269:
+    template: Vagrant_Lindwurm_4
+    script:   Vagrant_Lindwurm
+    at:       [207.500, -16.020, -294.590, 130]
+    level:    [70, 70]
+  17076270:
+    template: Vagrant_Lindwurm_4
+    script:   Vagrant_Lindwurm
+    at:       [216.750, -16.000, -298.090, 17]
+    level:    [70, 70]
+  17076271:
+    template: Vagrant_Lindwurm_3
+    script:   Vagrant_Lindwurm
+    at:       [219.530, -16.000, -297.510, 64]
+    level:    [70, 70]
+  17076272:
+    template: Vagrant_Lindwurm_3
+    script:   Vagrant_Lindwurm
+    at:       [218.070, -16.010, -297.820, 33]
+    level:    [70, 70]
+  17076273:
+    template: Vagrant_Lindwurm_4
+    script:   Vagrant_Lindwurm
+    at:       [310.380, -19.960, -295.560, 3]
+    level:    [70, 70]
+  17076274:
+    template: Vagrant_Lindwurm_4
+    script:   Vagrant_Lindwurm
+    at:       [298.020, -20.000, -308.440, 155]
+    level:    [70, 70]
+  17076275:
+    template: Vagrant_Lindwurm_3
+    script:   Vagrant_Lindwurm
+    at:       [294.970, -19.970, -289.230, 177]
+    level:    [70, 70]
+  17076276:
+    template: Vagrant_Lindwurm_3
+    script:   Vagrant_Lindwurm
+    at:       [286.350, -19.960, -297.970, 169]
+    level:    [70, 70]
+  17076277:
+    template: Mamool_Ja_Zenist
+    at:       [253.380, -12.000, -380.430, 18]
+    level:    [75, 75]
+  17076278:
+    template: Poroggo_Gent_3
+    script:   Poroggo_Gent
+    at:       [314.730, -20.450, -294.180]
+    level:    [75, 75]
+  17076279:
+    template: Bull_Bugard
+    at:       [300.970, -8.045, -449.170, 183]
+    level:    [70, 70]
+  17076280:
+    template: Bull_Bugard_2
+    script:   Bull_Bugard
+    at:       [298.060, -8.041, -446.760, 96]
+    level:    [70, 70]
+  17076281:
+    template: Bull_Bugard_3
+    script:   Bull_Bugard
+    at:       [305.270, -8.045, -449.450, 30]
+    level:    [70, 70]
+  17076282:
+    template: Bull_Bugard_3
+    script:   Bull_Bugard
+    at:       [302.220, -8.038, -449.450, 246]
+    level:    [70, 70]
+  17076283:
+    template: Bull_Bugard_4
+    script:   Bull_Bugard
+    at:       [300.390, -12.000, -521.990, 182]
+    level:    [70, 70]
+  17076284:
+    template: Bull_Bugard_4
+    script:   Bull_Bugard
+    at:       [307.120, -12.010, -538.530, 164]
+    level:    [70, 70]
+  17076285:
+    template: Bull_Bugard_3
+    script:   Bull_Bugard
+    at:       [305.910, -12.010, -534.650, 60]
+    level:    [70, 70]
+  17076286:
+    template: Bull_Bugard_3
+    script:   Bull_Bugard
+    at:       [294.990, -12.010, -536.850, 245]
+    level:    [70, 70]
+  17076287:
+    template: Bull_Bugard_4
+    script:   Bull_Bugard
+    at:       [220.700, -16.000, -536.600, 119]
+    level:    [70, 70]
+  17076288:
+    template: Bull_Bugard_4
+    script:   Bull_Bugard
+    at:       [217.830, -16.000, -533.280, 71]
+    level:    [70, 70]
+  17076289:
+    template: Bull_Bugard_3
+    script:   Bull_Bugard
+    at:       [221.430, -16.000, -539.810, 160]
+    level:    [70, 70]
+  17076290:
+    template: Bull_Bugard_3
+    script:   Bull_Bugard
+    at:       [217.690, -16.000, -532.580, 71]
+    level:    [70, 70]
+  17076291:
+    template: Bull_Bugard_4
+    script:   Bull_Bugard
+    at:       [218.870, -19.990, -452.100, 104]
+    level:    [70, 70]
+  17076292:
+    template: Bull_Bugard_4
+    script:   Bull_Bugard
+    at:       [217.320, -20.000, -455.480, 187]
+    level:    [70, 70]
+  17076293:
+    template: Bull_Bugard_3
+    script:   Bull_Bugard
+    at:       [216.150, -20.000, -455.140, 202]
+    level:    [70, 70]
+  17076294:
+    template: Bull_Bugard_3
+    script:   Bull_Bugard
+    at:       [214.370, -20.000, -453.300, 240]
+    level:    [70, 70]
+  17076295:
+    template: Mamool_Ja_Zenist
+    at:       [300.290, -8.500, -490.270, 161]
+    level:    [75, 75]
+  17076296:
+    template: Poroggo_Gent_4
+    script:   Poroggo_Gent
+    at:       [217.100, -20.220, -453.630, 188]
+    level:    [75, 75]
+  17076297:
+    template: Poroggo_Madame
+    at:       [338.000, -8.000, -458.000, 35]
+    level:    [75, 75]
+  17076298:
+    template: Draco_Lizard
+    at:       [397.960, -0.023, -127.620, 23]
+    level:    [75, 75]
+  17076299:
+    template: Draco_Lizard_2
+    script:   Draco_Lizard
+    at:       [392.280, -0.497, -122.920, 113]
+    level:    [75, 75]
+  17076300:
+    template: Draco_Lizard
+    at:       [387.220, -0.059, -132.880, 48]
+    level:    [75, 75]
+  17076301:
+    template: Draco_Lizard_2
+    script:   Draco_Lizard
+    at:       [428.880, 0.001, -117.340, 75]
+    level:    [75, 75]
+  17076302:
+    template: Draco_Lizard_2
+    script:   Draco_Lizard
+    at:       [434.880, 0.001, -118.480, 33]
+    level:    [75, 75]
+  17076303:
+    template: Draco_Lizard
+    at:       [429.910, 0.002, -114.810, 147]
+    level:    [75, 75]
+  17076304:
+    template: Draco_Lizard
+    at:       [439.330, 0.002, -150.450, 148]
+    level:    [75, 75]
+  17076305:
+    template: Draco_Lizard_2
+    script:   Draco_Lizard
+    at:       [444.070, -0.488, -151.510, 93]
+    level:    [75, 75]
+  17076306:
+    template: Mamool_Ja_Zenist_2
+    script:   Mamool_Ja_Zenist
+    at:       [382.437, -0.020, -140.020, 121]
+    level:    [80, 80]
+  17076307:
+    template: Draco_Lizard_3
+    script:   Draco_Lizard
+    at:       [417.820, -0.067, 53.419, 253]
+    level:    [75, 75]
+  17076308:
+    template: Draco_Lizard_2
+    script:   Draco_Lizard
+    at:       [423.730, -0.093, 45.495, 11]
+    level:    [75, 75]
+  17076309:
+    template: Draco_Lizard_2
+    script:   Draco_Lizard
+    at:       [412.340, -0.052, 46.415, 98]
+    level:    [75, 75]
+  17076310:
+    template: Draco_Lizard_3
+    script:   Draco_Lizard
+    at:       [411.800, -0.064, -3.019, 165]
+    level:    [75, 75]
+  17076311:
+    template: Draco_Lizard_2
+    script:   Draco_Lizard
+    at:       [387.740, -0.074, 18.985, 161]
+    level:    [75, 75]
+  17076312:
+    template: Draco_Lizard_3
+    script:   Draco_Lizard
+    at:       [394.330, -0.100, 30.110, 71]
+    level:    [75, 75]
+  17076313:
+    template: Draco_Lizard_3
+    script:   Draco_Lizard
+    at:       [394.550, -0.035, 20.886, 69]
+    level:    [75, 75]
+  17076314:
+    template: Draco_Lizard_2
+    script:   Draco_Lizard
+    at:       [397.050, -0.068, 31.788, 172]
+    level:    [75, 75]
+  17076315:
+    template: Mamool_Ja_Savant
+    at:       [425.590, -0.500, 42.956]
+    level:    [80, 80]
+  17076316:
+    template: Wyvern
+    at:       [268.550, -0.358, 52.638, 194]
+    level:    [75, 75]
+  17076317:
+    template: Wyvern_2
+    script:   Wyvern
+    at:       [268.060, -0.074, 45.728, 8]
+    level:    [75, 75]
+  17076318:
+    template: Wyvern
+    at:       [298.020, -0.405, 15.213, 222]
+    level:    [75, 75]
+  17076319:
+    template: Wyvern_2
+    script:   Wyvern
+    at:       [290.310, -0.035, 16.237, 182]
+    level:    [75, 75]
+  17076320:
+    template: Wyvern_2
+    script:   Wyvern
+    at:       [291.180, -0.065, 13.605, 92]
+    level:    [75, 75]
+  17076321:
+    template: Wyvern
+    at:       [242.690, -0.056, -0.451, 203]
+    level:    [75, 75]
+  17076322:
+    template: Wyvern
+    at:       [239.180, -0.061, 3.607, 119]
+    level:    [75, 75]
+  17076323:
+    template: Wyvern_2
+    script:   Wyvern
+    at:       [244.680, -0.064, 0.677, 161]
+    level:    [75, 75]
+  17076324:
+    template: Mamool_Ja_Bounder
+    at:       [272.130, -0.488, 49.841, 122]
+    level:    [80, 80]
+  17076325:
+    template: Wyvern_3
+    script:   Wyvern
+    at:       [274.660, -0.298, -107.000, 28]
+    level:    [75, 75]
+  17076326:
+    template: Wyvern_2
+    script:   Wyvern
+    at:       [273.220, -0.810, -103.520, 108]
+    level:    [75, 75]
+  17076327:
+    template: Wyvern_3
+    script:   Wyvern
+    at:       [239.830, -0.052, -150.190, 217]
+    level:    [75, 75]
+  17076328:
+    template: Wyvern_2
+    script:   Wyvern
+    at:       [235.140, -0.023, -149.710, 175]
+    level:    [75, 75]
+  17076329:
+    template: Wyvern_2
+    script:   Wyvern
+    at:       [237.620, -0.059, -151.790, 163]
+    level:    [75, 75]
+  17076330:
+    template: Wyvern_3
+    script:   Wyvern
+    at:       [284.970, -0.017, -150.190, 195]
+    level:    [75, 75]
+  17076331:
+    template: Wyvern_3
+    script:   Wyvern
+    at:       [280.380, -0.469, -156.600, 107]
+    level:    [75, 75]
+  17076332:
+    template: Wyvern_2
+    script:   Wyvern
+    at:       [269.820, -0.023, -157.770, 132]
+    level:    [75, 75]
+  17076333:
+    template: Mamool_Ja_Spearman
+    at:       [258.607, -0.044, -108.350, 74]
+    level:    [80, 80]
+  17076334:
+    template: Mamool_Jas_Wyvern
+    at:       [248.300, -0.256, -104.530, 32]
+    level:    [75, 75]
+  17076335:
+    template: Jakko
+    at:       [260.000, -0.500, 46.000, 69]
+    level:    [75, 75]
+  17076336:
+    template: Poroggo_Madame_2
+    script:   Poroggo_Madame
+    at:       [420.000, -0.500, 65.000, 44]
+    level:    [80, 80]
+  17076337:
+    template: Mamool_Ja_Zenist_3
+    script:   Mamool_Ja_Zenist
+    at:       [255.500, -4.000, 495.500, 245]
+    level:    [75, 75]
+  17076338:
+    template: Mamool_Ja_Zenist_4
+    script:   Mamool_Ja_Zenist
+    at:       [264.500, -4.000, 495.500, 229]
+    level:    [75, 75]
+  17076339:
+    template: Mamool_Ja_Zenist_5
+    script:   Mamool_Ja_Zenist
+    at:       [264.500, -4.000, 504.500, 27]
+    level:    [75, 75]
+  17076340:
+    template: Mamool_Ja_Zenist_6
+    script:   Mamool_Ja_Zenist
+    at:       [255.500, -4.000, 504.500, 56]
+    level:    [75, 75]
+  17076341:
+    template: Mamool_Ja_Spearman_2
+    script:   Mamool_Ja_Spearman
+    at:       [224.500, -4.000, 464.500, 8]
+    level:    [75, 75]
+  17076342:
+    template: Mamool_Jas_Wyvern_2
+    script:   Mamool_Jas_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076343:
+    template: Mamool_Ja_Spearman_3
+    script:   Mamool_Ja_Spearman
+    at:       [215.500, -4.000, 464.500, 246]
+    level:    [75, 75]
+  17076344:
+    template: Mamool_Jas_Wyvern_2
+    script:   Mamool_Jas_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076345:
+    template: Mamool_Ja_Spearman_4
+    script:   Mamool_Ja_Spearman
+    at:       [215.500, -4.000, 455.500, 229]
+    level:    [75, 75]
+  17076346:
+    template: Mamool_Jas_Wyvern_2
+    script:   Mamool_Jas_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076347:
+    template: Mamool_Ja_Spearman_5
+    script:   Mamool_Ja_Spearman
+    at:       [224.500, -4.000, 455.500, 227]
+    level:    [75, 75]
+  17076348:
+    template: Mamool_Jas_Wyvern_2
+    script:   Mamool_Jas_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076349:
+    template: Mamool_Ja_Strapper
+    at:       [253.500, -4.000, 426.500, 94]
+    level:    [75, 75]
+  17076350:
+    template: Mamool_Ja_Strapper_2
+    script:   Mamool_Ja_Strapper
+    at:       [253.500, -4.000, 413.500, 156]
+    level:    [75, 75]
+  17076351:
+    template: Mamool_Ja_Strapper_3
+    script:   Mamool_Ja_Strapper
+    at:       [266.500, -4.000, 413.500, 232]
+    level:    [75, 75]
+  17076352:
+    template: Mamool_Ja_Strapper_4
+    script:   Mamool_Ja_Strapper
+    at:       [266.500, -4.000, 426.500, 206]
+    level:    [75, 75]
+  17076353:
+    template: Mamool_Jas_Lizard
+    script:   Mamool_Ja_s_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076354:
+    template: Mamool_Jas_Lizard
+    script:   Mamool_Ja_s_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076355:
+    template: Mamool_Jas_Lizard
+    script:   Mamool_Ja_s_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076356:
+    template: Mamool_Jas_Lizard
+    script:   Mamool_Ja_s_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076357:
+    template: Mamool_Ja_Zenist_3
+    script:   Mamool_Ja_Zenist
+    at:       [299.210, -4.000, 360.257, 234]
+    level:    [75, 75]
+  17076358:
+    template: Mamool_Ja_Spearman_6
+    script:   Mamool_Ja_Spearman
+    at:       [293.350, -4.000, 361.320, 79]
+    level:    [75, 75]
+  17076359:
+    template: Mamool_Ja_Bounder_2
+    script:   Mamool_Ja_Bounder
+    at:       [306.780, -4.000, 359.936, 15]
+    level:    [75, 75]
+  17076360:
+    template: Mamool_Ja_Strapper_5
+    script:   Mamool_Ja_Strapper
+    at:       [296.850, -4.000, 363.325, 213]
+    level:    [75, 75]
+  17076361:
+    template: Mamool_Jas_Wyvern_2
+    script:   Mamool_Jas_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076362:
+    template: Mamool_Jas_Lizard
+    script:   Mamool_Ja_s_Lizard
+    at:       [297.660, -4.000, 363.526, 200]
+    level:    [75, 75]
+  17076363:
+    template: Mamool_Ja_Zenist_3
+    script:   Mamool_Ja_Zenist
+    at:       [334.140, -4.032, 358.717, 10]
+    level:    [75, 75]
+  17076364:
+    template: Mamool_Ja_Spearman_6
+    script:   Mamool_Ja_Spearman
+    at:       [311.830, -4.106, 356.631, 137]
+    level:    [75, 75]
+  17076365:
+    template: Mamool_Ja_Bounder_3
+    script:   Mamool_Ja_Bounder
+    at:       [317.500, -4.492, 359.928, 212]
+    level:    [75, 75]
+  17076366:
+    template: Mamool_Ja_Strapper_4
+    script:   Mamool_Ja_Strapper
+    at:       [342.760, -4.019, 357.561, 19]
+    level:    [75, 75]
+  17076367:
+    template: Mamool_Jas_Wyvern_2
+    script:   Mamool_Jas_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076368:
+    template: Mamool_Jas_Lizard
+    script:   Mamool_Ja_s_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076369:
+    template: Mamool_Ja_Zenist_7
+    script:   Mamool_Ja_Zenist
+    at:       [360.920, -4.341, 354.303, 200]
+    level:    [75, 75]
+  17076370:
+    template: Mamool_Ja_Spearman_3
+    script:   Mamool_Ja_Spearman
+    at:       [350.690, -4.190, 354.740, 110]
+    level:    [75, 75]
+  17076371:
+    template: Mamool_Ja_Bounder_3
+    script:   Mamool_Ja_Bounder
+    at:       [373.040, -4.085, 353.375, 6]
+    level:    [75, 75]
+  17076372:
+    template: Mamool_Ja_Strapper_5
+    script:   Mamool_Ja_Strapper
+    at:       [355.370, -4.440, 360.182, 33]
+    level:    [75, 75]
+  17076373:
+    template: Mamool_Jas_Wyvern_2
+    script:   Mamool_Jas_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076374:
+    template: Mamool_Jas_Lizard
+    script:   Mamool_Ja_s_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076375:
+    template: Archaic_Rampart
+    at:       [380.000, -4.500, 376.000, 64]
+    level:    [75, 75]
+  17076376:
+    template: Wajaom_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076377:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [424.500, -4.000, 415.000, 118]
+    level:    [80, 80]
+  17076378:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [415.500, -4.000, 415.500, 10]
+    level:    [80, 80]
+  17076379:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [415.500, -4.000, 424.500, 100]
+    level:    [80, 80]
+  17076380:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [424.500, -4.000, 424.500, 117]
+    level:    [80, 80]
+  17076381:
+    template: Mamool_Ja_Sophist
+    at:       [455.500, -4.000, 455.500, 190]
+    level:    [80, 80]
+  17076382:
+    template: Mamool_Ja_Sophist
+    at:       [464.500, -4.000, 455.500, 203]
+    level:    [80, 80]
+  17076383:
+    template: Mamool_Ja_Sophist
+    at:       [464.500, -4.000, 464.500, 89]
+    level:    [80, 80]
+  17076384:
+    template: Mamool_Ja_Sophist
+    at:       [455.500, -4.000, 464.500, 74]
+    level:    [80, 80]
+  17076385:
+    template: Mamool_Ja_Mimicker
+    at:       [424.500, -4.000, 495.500, 56]
+    level:    [80, 80]
+  17076386:
+    template: Mamool_Ja_Mimicker
+    at:       [424.500, -4.000, 504.500, 14]
+    level:    [80, 80]
+  17076387:
+    template: Mamool_Ja_Mimicker
+    at:       [413.500, -4.000, 506.500, 106]
+    level:    [80, 80]
+  17076388:
+    template: Mamool_Ja_Mimicker
+    at:       [413.500, -4.000, 493.500, 56]
+    level:    [80, 80]
+  17076389:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [327.590, -4.098, 556.726, 254]
+    level:    [80, 80]
+  17076390:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [329.850, -4.072, 561.382, 49]
+    level:    [80, 80]
+  17076391:
+    template: Mamool_Ja_Sophist
+    at:       [325.490, -4.090, 561.081, 182]
+    level:    [80, 80]
+  17076392:
+    template: Mamool_Ja_Sophist
+    at:       [324.070, -4.118, 556.669, 49]
+    level:    [80, 80]
+  17076393:
+    template: Mamool_Ja_Mimicker
+    at:       [318.890, -4.535, 557.585, 110]
+    level:    [80, 80]
+  17076394:
+    template: Mamool_Ja_Mimicker
+    at:       [321.370, -4.592, 561.757, 22]
+    level:    [80, 80]
+  17076395:
+    template: Mamool_Ja_Mimicker
+    at:       [326.980, -4.156, 561.033, 51]
+    level:    [80, 80]
+  17076396:
+    template: Mamool_Ja_Mimicker
+    at:       [301.690, -4.060, 558.442, 111]
+    level:    [80, 80]
+  17076397:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [321.700, -5.000, 558.861, 125]
+    level:    [80, 80]
+  17076398:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [324.160, -4.032, 556.117, 90]
+    level:    [80, 80]
+  17076399:
+    template: Mamool_Ja_Sophist
+    at:       [342.140, -4.448, 565.263, 1]
+    level:    [80, 80]
+  17076400:
+    template: Mamool_Ja_Sophist
+    at:       [357.590, -4.519, 558.734, 13]
+    level:    [80, 80]
+  17076401:
+    template: Mamool_Ja_Mimicker
+    at:       [331.010, -4.074, 554.189, 120]
+    level:    [80, 80]
+  17076402:
+    template: Mamool_Ja_Mimicker
+    at:       [345.010, -4.052, 556.969, 47]
+    level:    [80, 80]
+  17076403:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [381.170, -4.041, 554.538, 108]
+    level:    [80, 80]
+  17076404:
+    template: Mamool_Ja_Savant_2
+    script:   Mamool_Ja_Savant
+    at:       [381.570, -4.040, 553.866, 109]
+    level:    [80, 80]
+  17076405:
+    template: Mamool_Ja_Sophist
+    at:       [369.950, -4.033, 556.385, 80]
+    level:    [80, 80]
+  17076406:
+    template: Mamool_Ja_Sophist
+    at:       [380.600, -4.052, 554.966, 83]
+    level:    [80, 80]
+  17076407:
+    template: Mamool_Ja_Mimicker
+    at:       [372.340, -4.031, 555.591, 173]
+    level:    [80, 80]
+  17076408:
+    template: Mamool_Ja_Mimicker
+    at:       [387.320, -4.031, 554.846, 42]
+    level:    [80, 80]
+  17076409:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [300.000, -4.500, 535.000, 192]
+    level:    [80, 80]
+  17076410:
+    template: Wajaom_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076411:
+    template: Poroggo_Madame_3
+    script:   Poroggo_Madame
+    at:       [380.000, -4.500, 389.000, 192]
+    level:    [80, 80]
+  17076412:
+    template: Mamool_Ja_Zenist_8
+    script:   Mamool_Ja_Zenist
+    at:       [-304.500, 0.000, -544.500, 31]
+    level:    [75, 75]
+  17076413:
+    template: Mamool_Ja_Spearman_7
+    script:   Mamool_Ja_Spearman
+    at:       [-295.500, 0.000, -544.500, 80]
+    level:    [75, 75]
+  17076414:
+    template: Mamool_Ja_Bounder_4
+    script:   Mamool_Ja_Bounder
+    at:       [-291.000, 0.000, -535.500, 70]
+    level:    [75, 75]
+  17076415:
+    template: Mamool_Ja_Strapper_6
+    script:   Mamool_Ja_Strapper
+    at:       [-309.000, 0.000, -535.500, 70]
+    level:    [75, 75]
+  17076416:
+    template: Mamool_Jas_Wyvern_2
+    script:   Mamool_Jas_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076417:
+    template: Mamool_Jas_Lizard
+    script:   Mamool_Ja_s_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076418:
+    template: First_Rampart
+    at:       [-246.625, -0.500, -566.775, 173]
+    level:    [78, 78]
+  17076419:
+    template: Second_Rampart
+    at:       [-233.500, -0.449, -566.500, 192]
+    level:    [78, 78]
+  17076420:
+    template: Third_Rampart
+    at:       [-246.500, -0.449, -513.500, 64]
+    level:    [78, 78]
+  17076421:
+    template: Fourth_Rampart
+    at:       [-233.500, -0.449, -513.500, 64]
+    level:    [78, 78]
+  17076422:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076423:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076424:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076425:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076426:
+    template: Poroggo_Gent_10
+    script:   Poroggo_Gent
+    at:       [-358.800, 3.482, -677.990, 157]
+    level:    [75, 75]
+  17076427:
+    template: Poroggo_Gent_11
+    script:   Poroggo_Gent
+    at:       [-357.200, 3.326, -679.970, 225]
+    level:    [75, 75]
+  17076428:
+    template: Poroggo_Gent_12
+    script:   Poroggo_Gent
+    at:       [-365.500, 3.917, -685.550, 135]
+    level:    [75, 75]
+  17076429:
+    template: Poroggo_Gent_5
+    script:   Poroggo_Gent
+    at:       [-362.000, 3.471, -684.670, 62]
+    level:    [75, 75]
+  17076430:
+    template: Poroggo_Gent_10
+    script:   Poroggo_Gent
+    at:       [-349.200, 3.801, -675.940, 93]
+    level:    [75, 75]
+  17076431:
+    template: Poroggo_Gent_11
+    script:   Poroggo_Gent
+    at:       [-339.400, 3.916, -673.790, 137]
+    level:    [75, 75]
+  17076432:
+    template: Poroggo_Gent_12
+    script:   Poroggo_Gent
+    at:       [-348.300, 3.831, -678.680, 115]
+    level:    [75, 75]
+  17076433:
+    template: Poroggo_Gent_5
+    script:   Poroggo_Gent
+    at:       [-349.600, 3.937, -673.390, 130]
+    level:    [75, 75]
+  17076434:
+    template: Mamool_Ja_Savant_3
+    script:   Mamool_Ja_Savant
+    at:       [-368.300, -0.081, -537.880, 123]
+    level:    [80, 80]
+  17076435:
+    template: Mamool_Ja_Savant_4
+    script:   Mamool_Ja_Savant
+    at:       [-383.300, -0.168, -535.750, 171]
+    level:    [80, 80]
+  17076436:
+    template: Mamool_Ja_Sophist_2
+    script:   Mamool_Ja_Sophist
+    at:       [-375.000, -0.067, -537.530, 22]
+    level:    [80, 80]
+  17076437:
+    template: Mamool_Ja_Sophist_3
+    script:   Mamool_Ja_Sophist
+    at:       [-369.400, 0.002, -537.260, 246]
+    level:    [80, 80]
+  17076438:
+    template: Mamool_Ja_Mimicker_2
+    script:   Mamool_Ja_Mimicker
+    at:       [-383.900, -0.451, -541.750, 19]
+    level:    [80, 80]
+  17076439:
+    template: Mamool_Ja_Mimicker_2
+    script:   Mamool_Ja_Mimicker
+    at:       [-383.200, -0.002, -529.200, 158]
+    level:    [80, 80]
+  17076440:
+    template: Mamool_Ja_Savant_5
+    script:   Mamool_Ja_Savant
+    at:       [-368.300, -0.081, -537.880, 123]
+    level:    [80, 80]
+  17076441:
+    template: Mamool_Ja_Savant_5
+    script:   Mamool_Ja_Savant
+    at:       [-383.300, -0.168, -535.750, 171]
+    level:    [80, 80]
+  17076442:
+    template: Mamool_Ja_Sophist_4
+    script:   Mamool_Ja_Sophist
+    at:       [-375.000, -0.067, -537.530, 22]
+    level:    [80, 80]
+  17076443:
+    template: Mamool_Ja_Sophist_5
+    script:   Mamool_Ja_Sophist
+    at:       [-369.400, 0.002, -537.260, 246]
+    level:    [80, 80]
+  17076444:
+    template: Mamool_Ja_Mimicker_3
+    script:   Mamool_Ja_Mimicker
+    at:       [-383.900, -0.451, -541.750, 19]
+    level:    [80, 80]
+  17076445:
+    template: Mamool_Ja_Mimicker_4
+    script:   Mamool_Ja_Mimicker
+    at:       [-383.200, -0.002, -529.200, 158]
+    level:    [80, 80]
+  17076446:
+    template: First_Rampart
+    at:       [-433.500, -0.449, -566.500, 192]
+    level:    [78, 78]
+  17076447:
+    template: Second_Rampart
+    at:       [-446.500, -0.449, -566.500, 192]
+    level:    [78, 78]
+  17076448:
+    template: Third_Rampart
+    at:       [-433.500, -0.449, -513.500, 64]
+    level:    [78, 78]
+  17076449:
+    template: Fourth_Rampart
+    at:       [-446.500, -0.449, -513.500, 64]
+    level:    [78, 78]
+  17076450:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076451:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076452:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076453:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076454:
+    template: First_Rampart
+    at:       [-433.500, -0.449, -566.500, 192]
+    level:    [78, 78]
+  17076455:
+    template: Second_Rampart
+    at:       [-446.500, -0.449, -566.500, 192]
+    level:    [78, 78]
+  17076456:
+    template: Third_Rampart
+    at:       [-433.500, -0.449, -513.500, 64]
+    level:    [78, 78]
+  17076457:
+    template: Fourth_Rampart
+    at:       [-446.500, -0.449, -513.500, 64]
+    level:    [78, 78]
+  17076458:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076459:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076460:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076461:
+    template: Rogue_Marid
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076462:
+    template: Poroggo_Gent_7
+    script:   Poroggo_Gent
+    at:       [-352.500, -4.084, -403.050, 61]
+    level:    [75, 75]
+  17076463:
+    template: Poroggo_Gent_8
+    script:   Poroggo_Gent
+    at:       [-354.600, -4.027, -396.570, 30]
+    level:    [75, 75]
+  17076464:
+    template: Poroggo_Gent_9
+    script:   Poroggo_Gent
+    at:       [-362.000, -4.473, -396.470, 77]
+    level:    [75, 75]
+  17076465:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-356.900, -4.434, -401.050, 175]
+    level:    [75, 75]
+  17076466:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-361.600, -4.565, -402.760, 116]
+    level:    [75, 75]
+  17076467:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-364.200, -4.050, -393.630, 225]
+    level:    [75, 75]
+  17076468:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-350.100, -4.035, -406.110, 89]
+    level:    [75, 75]
+  17076469:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-336.300, -4.034, -402.740, 254]
+    level:    [75, 75]
+  17076470:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-328.500, -4.186, -397.430, 163]
+    level:    [75, 75]
+  17076471:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-345.200, -4.065, -397.700, 2]
+    level:    [75, 75]
+  17076472:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-345.100, -4.046, -403.640, 137]
+    level:    [75, 75]
+  17076473:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-335.100, -4.059, -397.890, 126]
+    level:    [75, 75]
+  17076474:
+    template: Poroggo_Gent_7
+    script:   Poroggo_Gent
+    at:       [-352.500, -4.084, -403.050, 61]
+    level:    [75, 75]
+  17076475:
+    template: Poroggo_Gent_8
+    script:   Poroggo_Gent
+    at:       [-354.600, -4.027, -396.570, 30]
+    level:    [75, 75]
+  17076476:
+    template: Poroggo_Gent_9
+    script:   Poroggo_Gent
+    at:       [-362.000, -4.473, -396.470, 77]
+    level:    [75, 75]
+  17076477:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-356.900, -4.434, -401.050, 175]
+    level:    [75, 75]
+  17076478:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-361.600, -4.565, -402.760, 116]
+    level:    [75, 75]
+  17076479:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-364.200, -4.050, -393.630, 225]
+    level:    [75, 75]
+  17076480:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-350.100, -4.035, -406.110, 89]
+    level:    [75, 75]
+  17076481:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-336.300, -4.034, -402.740, 254]
+    level:    [75, 75]
+  17076482:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-328.500, -4.186, -397.430, 163]
+    level:    [75, 75]
+  17076483:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-345.200, -4.065, -397.700, 2]
+    level:    [75, 75]
+  17076484:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-345.100, -4.046, -403.640, 137]
+    level:    [75, 75]
+  17076485:
+    template: Poroggo_Gent_6
+    script:   Poroggo_Gent
+    at:       [-335.100, -4.059, -397.890, 126]
+    level:    [75, 75]
+  17076486:
+    template: Poroggo_Madame_4
+    script:   Poroggo_Madame
+    at:       [-355.800, 3.858, -675.460, 203]
+    level:    [80, 80]
+  17076487:
+    template: Poroggo_Madame_5
+    script:   Poroggo_Madame
+    at:       [-350.800, -3.858, -390.000, 71]
+    level:    [80, 80]
+  17076488:
+    template: Archaic_Gear
+    at:       [-340.000, 0.000, -229.000]
+    level:    [75, 75]
+  17076489:
+    template: Archaic_Gear
+    at:       [-331.000, 0.000, -229.000]
+    level:    [75, 75]
+  17076490:
+    template: Archaic_Gear
+    at:       [-331.000, 0.000, -220.000, 64]
+    level:    [75, 75]
+  17076491:
+    template: Archaic_Gear
+    at:       [-331.000, 0.000, -211.000, 192]
+    level:    [75, 75]
+  17076492:
+    template: Archaic_Gear
+    at:       [-340.000, 0.000, -211.000, 128]
+    level:    [75, 75]
+  17076493:
+    template: Archaic_Gear
+    at:       [-349.000, 0.000, -211.000]
+    level:    [75, 75]
+  17076494:
+    template: Archaic_Gear
+    at:       [-349.000, 0.000, -220.000, 192]
+    level:    [75, 75]
+  17076495:
+    template: Archaic_Gear
+    at:       [-349.000, 0.000, -229.000, 192]
+    level:    [75, 75]
+  17076496:
+    template: Archaic_Rampart_3
+    script:   Archaic_Rampart
+    at:       [-340.000, -4.500, -131.000, 64]
+    level:    [75, 75]
+  17076497:
+    template: Archaic_Rampart_3
+    script:   Archaic_Rampart
+    at:       [-331.000, -4.500, -140.000, 128]
+    level:    [75, 75]
+  17076498:
+    template: Archaic_Rampart_3
+    script:   Archaic_Rampart
+    at:       [-349.000, -4.500, -140.000]
+    level:    [75, 75]
+  17076499:
+    template: Slime_Mold
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076500:
+    template: Slime_Mold
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076501:
+    template: Slime_Mold
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076502:
+    template: Archaic_Chariot
+    at:       [-300.000, -0.500, -100.000]
+    level:    [75, 75]
+  17076503:
+    template: Archaic_Gear
+    at:       [-260.000, 0.000, -103.500, 192]
+    level:    [75, 75]
+  17076504:
+    template: Archaic_Gear
+    at:       [-260.000, 0.000, -95.500, 128]
+    level:    [75, 75]
+  17076505:
+    template: Archaic_Gear
+    at:       [-256.000, 0.000, -100.000, 192]
+    level:    [75, 75]
+  17076506:
+    template: Archaic_Gear
+    at:       [-264.000, 0.000, -100.000, 128]
+    level:    [75, 75]
+  17076507:
+    template: Archaic_Gear
+    at:       [-233.500, 0.000, -126.500, 64]
+    level:    [75, 75]
+  17076508:
+    template: Archaic_Gear
+    at:       [-233.500, 0.000, -73.500, 192]
+    level:    [75, 75]
+  17076509:
+    template: Archaic_Gear
+    at:       [-286.500, 0.000, -73.500]
+    level:    [75, 75]
+  17076510:
+    template: Archaic_Gear
+    at:       [-286.500, 0.000, -126.500, 128]
+    level:    [75, 75]
+  17076511:
+    template: Archaic_Gear
+    at:       [-309.000, 0.000, -180.000, 96]
+    level:    [75, 75]
+  17076512:
+    template: Archaic_Gear
+    at:       [-300.000, 0.000, -171.000, 160]
+    level:    [75, 75]
+  17076513:
+    template: Archaic_Gear
+    at:       [-291.000, 0.000, -180.000, 96]
+    level:    [75, 75]
+  17076514:
+    template: Archaic_Gear
+    at:       [-300.000, 0.000, -189.000, 160]
+    level:    [75, 75]
+  17076515:
+    template: Archaic_Rampart_4
+    script:   Archaic_Rampart
+    at:       [-283.000, -0.500, -180.000, 128]
+    level:    [80, 80]
+  17076516:
+    template: Wajaom_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076517:
+    template: Archaic_Gears
+    at:       [-331.000, 0.000, 29.000, 192]
+    level:    [75, 75]
+  17076518:
+    template: Archaic_Gears
+    at:       [-340.000, 0.000, 29.000, 192]
+    level:    [75, 75]
+  17076519:
+    template: Archaic_Gears
+    at:       [-349.000, 0.000, 29.000, 128]
+    level:    [75, 75]
+  17076520:
+    template: Archaic_Gears
+    at:       [-349.000, 0.000, 20.000, 128]
+    level:    [75, 75]
+  17076521:
+    template: Archaic_Gears
+    at:       [-349.000, 0.000, 11.000, 64]
+    level:    [75, 75]
+  17076522:
+    template: Archaic_Gears
+    at:       [-340.000, 0.000, 11.000, 64]
+    level:    [75, 75]
+  17076523:
+    template: Archaic_Gears
+    at:       [-331.000, 0.000, 11.000]
+    level:    [75, 75]
+  17076524:
+    template: Archaic_Gears
+    at:       [-331.000, 0.000, 20.000]
+    level:    [75, 75]
+  17076525:
+    template: Archaic_Gears
+    at:       [-341.000, 0.000, 20.000, 194]
+    level:    [75, 75]
+  17076526:
+    template: Archaic_Gears
+    at:       [-341.000, 0.000, 20.000, 193]
+    level:    [75, 75]
+  17076527:
+    template: Archaic_Gears
+    at:       [-341.000, 0.000, 20.000, 211]
+    level:    [75, 75]
+  17076528:
+    template: Archaic_Gears
+    at:       [-341.000, 0.000, 20.000, 43]
+    level:    [75, 75]
+  17076529:
+    template: Archaic_Rampart_5
+    script:   Archaic_Rampart
+    at:       [-340.000, 3.500, -69.000, 192]
+    level:    [80, 80]
+  17076530:
+    template: Archaic_Rampart_5
+    script:   Archaic_Rampart
+    at:       [-331.000, 3.500, -60.000, 128]
+    level:    [80, 80]
+  17076531:
+    template: Archaic_Rampart_5
+    script:   Archaic_Rampart
+    at:       [-349.000, 3.500, -60.000, 252]
+    level:    [80, 80]
+  17076532:
+    template: Mindgazer
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076533:
+    template: Mindgazer
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076534:
+    template: Mindgazer
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076535:
+    template: Archaic_Chariot
+    at:       [-380.000, -0.500, -100.000, 128]
+    level:    [75, 75]
+  17076536:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-420.000, 0.000, -96.000]
+    level:    [80, 80]
+  17076537:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-420.000, 0.000, -104.000, 128]
+    level:    [80, 80]
+  17076538:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-416.000, 0.000, -100.000, 192]
+    level:    [80, 80]
+  17076539:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-424.000, 0.000, -100.000, 64]
+    level:    [80, 80]
+  17076540:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-393.500, 0.000, -73.500, 64]
+    level:    [80, 80]
+  17076541:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-446.500, 0.000, -73.500, 64]
+    level:    [80, 80]
+  17076542:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-393.500, 0.000, -126.500, 64]
+    level:    [80, 80]
+  17076543:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-393.500, 0.000, -73.500, 64]
+    level:    [80, 80]
+  17076544:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-446.500, 0.000, -126.500, 128]
+    level:    [80, 80]
+  17076545:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-393.500, 0.000, -126.500]
+    level:    [80, 80]
+  17076546:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-446.500, 0.000, -73.500, 128]
+    level:    [80, 80]
+  17076547:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-446.500, 0.000, -126.500]
+    level:    [80, 80]
+  17076548:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-375.500, 0.000, -19.000, 128]
+    level:    [80, 80]
+  17076549:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-375.500, 0.000, -21.000]
+    level:    [80, 80]
+  17076550:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-384.500, 0.000, -21.000]
+    level:    [80, 80]
+  17076551:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-384.500, 0.000, -19.000]
+    level:    [80, 80]
+  17076552:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-390.000, 0.000, -24.500, 64]
+    level:    [80, 80]
+  17076553:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-390.000, 0.000, -15.500, 64]
+    level:    [80, 80]
+  17076554:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-370.000, 0.000, -24.500, 64]
+    level:    [80, 80]
+  17076555:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-370.000, 0.000, -15.500, 64]
+    level:    [80, 80]
+  17076556:
+    template: Archaic_Rampart_4
+    script:   Archaic_Rampart
+    at:       [-397.000, -0.500, -20.000]
+    level:    [80, 80]
+  17076557:
+    template: Torama
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076558:
+    template: Poroggo_Madame_6
+    script:   Poroggo_Madame
+    at:       [-348.000, -4.020, -142.320, 27]
+    level:    [80, 80]
+  17076559:
+    template: Poroggo_Madame_7
+    script:   Poroggo_Madame
+    at:       [-340.000, 4.000, -59.000, 193]
+    level:    [80, 80]
+  17076560:
+    template: Archaic_Chariot_2
+    script:   Archaic_Chariot
+    at:       [-340.200, -0.039, 251.345, 50]
+    level:    [80, 80]
+  17076561:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-338.200, -0.500, 278.000, 128]
+    level:    [80, 80]
+  17076562:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-338.200, -0.449, 262.000, 128]
+    level:    [80, 80]
+  17076563:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-338.200, -0.500, 242.000, 128]
+    level:    [80, 80]
+  17076564:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-338.200, -0.992, 222.000, 128]
+    level:    [80, 80]
+  17076565:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-338.200, -0.500, 202.000, 128]
+    level:    [80, 80]
+  17076566:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-341.700, -0.500, 276.000]
+    level:    [80, 80]
+  17076567:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-341.700, -0.123, 257.000]
+    level:    [80, 80]
+  17076568:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-341.700, -0.500, 238.000]
+    level:    [80, 80]
+  17076569:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-341.700, -0.992, 218.000]
+    level:    [80, 80]
+  17076570:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-341.700, -0.500, 198.000]
+    level:    [80, 80]
+  17076571:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-342.700, -0.435, 250.745, 167]
+    level:    [80, 80]
+  17076572:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-336.200, -0.466, 250.745, 211]
+    level:    [80, 80]
+  17076573:
+    template: Archaic_Rampart_6
+    script:   Archaic_Rampart
+    at:       [-416.000, -0.660, 260.000]
+    level:    [80, 80]
+  17076574:
+    template: Greater_Manticore
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076575:
+    template: Archaic_Rampart_6
+    script:   Archaic_Rampart
+    at:       [-265.000, -0.500, 220.000, 128]
+    level:    [80, 80]
+  17076576:
+    template: Greater_Manticore
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17076577:
+    template: Poroggo_Madame_8
+    script:   Poroggo_Madame
+    at:       [-340.000, 0.000, 170.000, 188]
+    level:    [80, 80]
+  17076578:
+    template: Battleclad_Chariot
+    at:       [-340.000, -4.448, 566.500, 64]
+    level:    [80, 80]
+  17076590:
+    template: Crawler
+  17076591:
+    template: Crawler
+  17076592:
+    template: Crawler
+  17076593:
+    template: Crawler
+  17076594:
+    template: Crawler
+  17076595:
+    template: Crawler
+  17076596:
+    template: Crawler
+  17076597:
+    template: Crawler
+  17076598:
+    template: Crawler
+  17076599:
+    template: Crawler
+  17076600:
+    template: Crawler
+  17076601:
+    template: Crawler
+  17076602:
+    template: Crawler
+  17076603:
+    template: Crawler
+  17076604:
+    template: Crawler
+  17076605:
+    template: Crawler
+  17076606:
+    template: Crawler
+  17076607:
+    template: Crawler
+  17076608:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076609:
+    template: Mamool_Ja_Strapper_7
+    script:   Mamool_Ja_Strapper
+  17076610:
+    template: Mamool_Jas_Lizard_2
+    script:   Mamool_Jas_Lizard
+  17076611:
+    script: Poroggo_Comtesse
+  17076612:
+    template: Crawler
+  17076613:
+    template: Crawler
+  17076614:
+    template: Crawler
+  17076615:
+    template: Crawler
+  17076616:
+    template: Crawler
+  17076617:
+    template: Crawler
+  17076618:
+    template: Crawler
+  17076619:
+    template: Crawler
+  17076620:
+    template: Crawler
+  17076621:
+    template: Crawler
+  17076622:
+    template: Crawler
+  17076623:
+    template: Crawler
+  17076624:
+    template: Crawler
+  17076625:
+    template: Crawler
+  17076626:
+    template: Crawler
+  17076627:
+    template: Crawler
+  17076628:
+    template: Crawler
+  17076629:
+    template: Crawler
+  17076630:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076631:
+    template: Mamool_Ja_Strapper_7
+    script:   Mamool_Ja_Strapper
+  17076632:
+    template: Mamool_Jas_Lizard_2
+    script:   Mamool_Jas_Lizard
+  17076633:
+    script: Poroggo_Comtesse
+  17076634:
+    template: Toad
+  17076635:
+    template: Toad
+  17076636:
+    template: Toad
+  17076637:
+    template: Toad
+  17076638:
+    template: Toad
+  17076639:
+    template: Toad
+  17076640:
+    template: Toad
+  17076641:
+    template: Toad
+  17076642:
+    template: Toad
+  17076643:
+    template: Toad
+  17076644:
+    template: Toad
+  17076645:
+    template: Toad
+  17076646:
+    template: Toad
+  17076647:
+    template: Toad
+  17076648:
+    template: Toad
+  17076649:
+    template: Toad
+  17076650:
+    template: Toad
+  17076651:
+    template: Toad
+  17076652:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076653:
+    template: Mamool_Ja_Strapper_7
+    script:   Mamool_Ja_Strapper
+  17076654:
+    template: Mamool_Jas_Lizard_2
+    script:   Mamool_Jas_Lizard
+  17076655:
+    script: Poroggo_Comtesse
+  17076656:
+    template: Toad
+  17076657:
+    template: Toad
+  17076658:
+    template: Toad
+  17076659:
+    template: Toad
+  17076660:
+    template: Toad
+  17076661:
+    template: Toad
+  17076662:
+    template: Toad
+  17076663:
+    template: Toad
+  17076664:
+    template: Toad
+  17076665:
+    template: Toad
+  17076666:
+    template: Toad
+  17076667:
+    template: Toad
+  17076668:
+    template: Toad
+  17076669:
+    template: Toad
+  17076670:
+    template: Toad
+  17076671:
+    template: Toad
+  17076672:
+    template: Toad
+  17076673:
+    template: Toad
+  17076674:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076675:
+    template: Mamool_Ja_Strapper_7
+    script:   Mamool_Ja_Strapper
+  17076676:
+    template: Mamool_Jas_Lizard_2
+    script:   Mamool_Jas_Lizard
+  17076677:
+    script: Poroggo_Comtesse
+  17076678:
+    template: Toad
+  17076679:
+    template: Toad
+  17076680:
+    template: Toad
+  17076681:
+    template: Mamool_Ja_Mimicker_5
+    script:   Mamool_Ja_Mimicker
+  17076682:
+    template: Toad
+  17076683:
+    template: Toad
+  17076684:
+    template: Toad
+  17076685:
+    template: Toad
+  17076686:
+    template: Toad
+  17076687:
+    template: Toad
+  17076688:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076689:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076690:
+    template: Toad
+  17076691:
+    template: Toad
+  17076692:
+    template: Toad
+  17076693:
+    template: Mamool_Ja_Mimicker_5
+    script:   Mamool_Ja_Mimicker
+  17076694:
+    template: Toad
+  17076695:
+    template: Toad
+  17076696:
+    template: Toad
+  17076697:
+    template: Toad
+  17076698:
+    template: Toad
+  17076699:
+    template: Toad
+  17076700:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076701:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076702:
+    template: Crawler
+  17076703:
+    template: Crawler
+  17076704:
+    template: Crawler
+  17076705:
+    template: Mamool_Ja_Mimicker_5
+    script:   Mamool_Ja_Mimicker
+  17076706:
+    template: Crawler
+  17076707:
+    template: Crawler
+  17076708:
+    template: Crawler
+  17076709:
+    template: Crawler
+  17076710:
+    template: Crawler
+  17076711:
+    template: Crawler
+  17076712:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076713:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076714:
+    template: Crawler
+  17076715:
+    template: Crawler
+  17076716:
+    template: Crawler
+  17076717:
+    template: Mamool_Ja_Mimicker_5
+    script:   Mamool_Ja_Mimicker
+  17076718:
+    template: Crawler
+  17076719:
+    template: Crawler
+  17076720:
+    template: Crawler
+  17076721:
+    template: Crawler
+  17076722:
+    template: Crawler
+  17076723:
+    template: Crawler
+  17076724:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076725:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076726:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076727:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076728:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076729:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076730:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076731:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076732:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076733:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076734:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076735:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076736:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076737:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076738:
+    script: Poroggo_Comtesse
+  17076739:
+    template: Diremite
+  17076740:
+    template: Diremite
+  17076741:
+    template: Diremite
+  17076742:
+    template: Diremite
+  17076743:
+    template: Archaic_Rampart_7
+    script:   Archaic_Rampart
+  17076744:
+    template: Diremite
+  17076745:
+    template: Diremite
+  17076746:
+    template: Diremite
+  17076747:
+    template: Diremite
+  17076748:
+    template: Diremite
+  17076749:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076750:
+    template: Diremite
+  17076751:
+    template: Diremite
+  17076752:
+    template: Diremite
+  17076753:
+    template: Diremite
+  17076754:
+    template: Pugil
+  17076755:
+    template: Pugil
+  17076756:
+    template: Pugil
+  17076757:
+    template: Pugil
+  17076758:
+    template: Archaic_Rampart_7
+    script:   Archaic_Rampart
+  17076759:
+    template: Pugil
+  17076760:
+    template: Pugil
+  17076761:
+    template: Pugil
+  17076762:
+    template: Pugil
+  17076763:
+    template: Pugil
+  17076764:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076765:
+    template: Pugil
+  17076766:
+    template: Pugil
+  17076767:
+    template: Pugil
+  17076768:
+    template: Pugil
+  17076769:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076770:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076771:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076772:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076773:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076774:
+    template: Mamool_Ja_Zenist_9
+    script:   Mamool_Ja_Zenist
+  17076775:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076776:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076777:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076778:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076779:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076780:
+    template: Mamool_Ja_Sophist_6
+    script:   Mamool_Ja_Sophist
+  17076781:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076782:
+    template: Pugil
+  17076783:
+    template: Pugil
+  17076784:
+    template: Pugil
+  17076785:
+    template: Pugil
+  17076786:
+    template: Pugil
+  17076787:
+    template: Pugil
+  17076788:
+    template: Pugil
+  17076789:
+    template: Pugil
+  17076790:
+    template: Pugil
+  17076791:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076792:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076793:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076794:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076795:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076796:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076797:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076798:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076799:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076800:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076801:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076802:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076803:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076804:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076805:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076806:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076807:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076808:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076809:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076810:
+    template: Diremite
+  17076811:
+    template: Diremite
+  17076812:
+    template: Diremite
+  17076813:
+    template: Diremite
+  17076814:
+    template: Diremite
+  17076815:
+    template: Diremite
+  17076816:
+    template: Diremite
+  17076817:
+    template: Diremite
+  17076818:
+    template: Diremite
+  17076819:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076820:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076821:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076822:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076823:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076824:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076825:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076826:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076827:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076828:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076829:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076830:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076831:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076832:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076833:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076834:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076835:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076836:
+    template: Mamool_Ja_Bounder_5
+    script:   Mamool_Ja_Bounder
+  17076837:
+    template: Mamool_Ja_Savant_6
+    script:   Mamool_Ja_Savant
+  17076838:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076839:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076840:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076841:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076842:
+    template: Archaic_Chariot_3
+    script:   Archaic_Chariot
+  17076843:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076844:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076845:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076846:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076847:
+    template: Archaic_Chariot_3
+    script:   Archaic_Chariot
+  17076848:
+    template: Archaic_Rampart_7
+    script:   Archaic_Rampart
+  17076849:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076850:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076851:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076852:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076853:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076854:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076855:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076856:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076857:
+    script: Mamool_Ja_Backstabber
+  17076858:
+    template: Archaic_Chariot_3
+    script:   Archaic_Chariot
+  17076859:
+    template: Battleclad_Chariot_2
+    script:   Battleclad_Chariot
+  17076860:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076861:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076862:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076863:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076864:
+    template: Archaic_Chariot_3
+    script:   Archaic_Chariot
+  17076865:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076866:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076867:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076868:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076869:
+    template: Archaic_Chariot_3
+    script:   Archaic_Chariot
+  17076870:
+    template: Archaic_Rampart_7
+    script:   Archaic_Rampart
+  17076871:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076872:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076873:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076874:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076875:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076876:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076877:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076878:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076879:
+    script: Mamool_Ja_Antiquary
+  17076880:
+    template: Archaic_Chariot_3
+    script:   Archaic_Chariot
+  17076881:
+    template: Battleclad_Chariot_2
+    script:   Battleclad_Chariot
+  17076882:
+    template: Archaic_Rampart_7
+    script:   Archaic_Rampart
+  17076883:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076884:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076885:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076886:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076887:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076888:
+    template: Archaic_Rampart_7
+    script:   Archaic_Rampart
+  17076889:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076890:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076891:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076892:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076893:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076894:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076895:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076896:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076897:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076898:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076899:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076900:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076901:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076902:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+  17076903:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076904:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076905:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076906:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+  17076907:
+    template: Archaic_Rampart_7
+    script:   Archaic_Rampart
+  17076908:
+    template: Acrolith
+  17076909:
+    template: Acrolith
+  17076910:
+    template: Acrolith
+  17076911:
+    template: Acrolith
+  17076912:
+    template: Archaic_Rampart_7
+    script:   Archaic_Rampart
+  17076913:
+    template: Hydra
+  17076914:
+    script: Enraged_Alfard

@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Chaos:
+    id:      6136
+    species: bahamut
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dazbog_Gwora_Corridor:
+    id:           6693
+    display_name: Dazbog
+    species:      meeble
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Gloom_Phantom_Gwora_Corridor:
+    id:           3868
+    display_name: Gloom_Phantom
+    species:      goblin
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, drk]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Magh_Bihu_Gwora_Corridor:
+    id:           3870
+    display_name: Magh_Bihu
+    species:      citrullus
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+spawns:
+  17915905:
+    template: Chaos
+    level:    [139, 139]
+  17915906:
+    template: Gloom_Phantom_Gwora_Corridor
+    script:   Gloom_Phantom
+    level:    [139, 139]
+  17915907:
+    template: Magh_Bihu_Gwora_Corridor
+    script:   Magh_Bihu
+    level:    [139, 139]
+  17915908:
+    template: Dazbog_Gwora_Corridor
+    script:   Dazbog
+    level:    [139, 139]

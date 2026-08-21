@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          109
+  night:        109
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z2t0:
+    from:  [-30.050, -58.027, 140.034]
+    to:    west_ronfaure
+    at:    [-24.427, -53.107, 140.000, 3.141593]
+    scale: [3.000, 10.000]
+
+  z2t2:
+    from:  [79.181, -70.089, 280.841]
+    to:    southern_san_doria
+    at:    [110.234, -2.127, -54.223, 3.926991]
+    scale: [1.000, 5.000]
+
+  z2t4:
+    from:  [56.140, -37.462, -199.961]
+    to:    west_ronfaure
+    at:    [83.913, -26.756, -200.033, 3.141593]
+    scale: [3.000, 15.000]
+
+  z2t6:
+    from:  [199.982, -8.500, -544.574]
+    to:    king_ranperres_tomb
+    at:    [-129.996, -2.529, 256.499, 1.570796]
+    scale: [1.000, 4.000]
+
+  z2t8:
+    from:  [661.624, -21.974, -595.631]
+    to:    king_ranperres_tomb
+    at:    [57.415, 5.482, 300.784, 1.570796]
+    scale: [1.000, 5.000]
+
+  z2ta:
+    from:  [821.681, -68.003, 666.443]
+    to:    ranguemont_pass
+    at:    [-139.986, 2.162, -321.508, 4.712389]
+    scale: [1.000, 5.000]

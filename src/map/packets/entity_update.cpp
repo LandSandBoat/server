@@ -229,7 +229,19 @@ std::string getTransportNPCName(CBaseEntity* PEntity)
     auto strSize    = isElevator ? 10 : 8;
 
     std::string str(strSize, '\0');
-    std::memcpy(str.data() + 0, PEntity->name.data(), std::min<size_t>(PEntity->name.size(), 4));
+
+    // Data-loaded entities state this id outright.
+    // SQL path still smuggles it through the name.
+    const auto* PTransport = dynamic_cast<CNpcEntity*>(PEntity);
+    if (PTransport && PTransport->door_id)
+    {
+        const auto doorId = *PTransport->door_id;
+        std::memcpy(str.data() + 0, &doorId, 4);
+    }
+    else
+    {
+        std::memcpy(str.data() + 0, PEntity->name.data(), std::min<size_t>(PEntity->name.size(), 4));
+    }
 
     auto timestamp = PEntity->GetLocalVar("TransportTimestamp");
     std::memcpy(str.data() + 4, &timestamp, 4);
@@ -422,7 +434,14 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 this->setSize(0x48);
                 if (PMob->packetName.empty())
                 {
-                    std::memcpy(buffer_.data() + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
+                    if (const auto* PDoor = dynamic_cast<CNpcEntity*>(PEntity); PDoor && PDoor->door_id)
+                    {
+                        ref<uint32>(0x34) = *PDoor->door_id;
+                    }
+                    else
+                    {
+                        std::memcpy(buffer_.data() + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
+                    }
                 }
                 else
                 {
@@ -465,7 +484,14 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         {
             this->setSize(0x48);
             ref<uint16>(0x30) = PEntity->look.size;
-            std::memcpy(buffer_.data() + 0x34, PEntity->getName().c_str(), (PEntity->getName().size() > 12 ? 12 : PEntity->getName().size()));
+            if (const auto* PDoor = dynamic_cast<CNpcEntity*>(PEntity); PDoor && PDoor->door_id)
+            {
+                ref<uint32>(0x34) = *PDoor->door_id;
+            }
+            else
+            {
+                std::memcpy(buffer_.data() + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
+            }
         }
         break;
         case MODEL_SHIP:

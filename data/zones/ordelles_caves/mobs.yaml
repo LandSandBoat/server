@@ -1,0 +1,4500 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Agar_Agar:
+    id:      5170
+    species: slime
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags:  1153
+        animation_sub:   16
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   soarer_earring
+    content: WOTG
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: rare
+          item:   ordelle_chest_key
+
+  Air_Elemental_SA:
+    id:            5534
+    display_name:  Air_Elemental
+    species:       air_elemental
+    type:          [notorious]
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags: 131
+        model_size:     1
+        hitbox:         3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: rare
+          item:   ordelle_chest_key
+
+  Ancient_Bat:
+    id:            120
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Aroma_Leech:
+    id:            252
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 1669
+        model_size:      2
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2330
+
+  Bilis_Leech:
+    id:            6395
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+    content: ABYSSEA
+
+  Blood_Bunny:
+    id:            471
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rabbit_hide
+        - chance: common
+          item:   slice_of_hare_meat
+      steal: slice_of_hare_meat
+      despoil:
+        rabbit_hide:        0
+        slice_of_hare_meat: 0
+
+  Bombast:
+    id:            5169
+    species:       bomb
+    type:          [notorious]
+    spell_list_id: 461
+    attributes:
+      combat:
+        skill: club
+      jobs: [war, blm]
+      resists:
+        immune_status: [gravity, bind, stun, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 5400
+      stats:
+        hp: 3050
+        mp: 5000
+    loot:
+      drops:
+        - chance: common
+          item:   ardent_earring
+    content: WOTG
+
+  Buds_Bunny:
+    id:            5356
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rabbit_hide
+        - chance: common
+          item:   slice_of_hare_meat
+      steal: slice_of_hare_meat
+      despoil:
+        rabbit_hide:        0
+        slice_of_hare_meat: 0
+    content: ABYSSEA
+
+  Clipper:
+    id:            743
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Donggu:
+    id:            5895
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3500
+    loot:
+      drops:
+        - chance: common
+          item:   fidelity_earring
+    content: WOTG
+
+  Dung_Beetle:
+    id:            1139
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   insect_wing
+        - chance: uncommon
+          item:   beetle_shell
+        - chance: rare
+          item:   beetle_jaw
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+
+  Fly_Agaric_OC:
+    id:            6343
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   sleepshroom
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Gerwitzs_Axe:
+    id:            1501
+    species:       evil_weapon
+    type:          [notorious]
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 461
+        entity_flags:  667
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: always
+          item:   gerwitzs_axe
+
+  Gerwitzs_Soul:
+    id:            1503
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags:  667
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5600
+        mp: 5600
+
+  Gerwitzs_Sword:
+    id:            1504
+    species:       evil_weapon
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 455
+        entity_flags:  667
+        animation_sub:  16
+        name_prefix:    32
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item:   gerwitzs_sword
+
+  Goblin_Ambusher:
+    id:            1635
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 486
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   block_of_animal_glue
+        - chance: very_rare
+          item:   leather_bandana
+        - chance: very_rare
+          item:   leather_gloves
+        - chance: very_rare
+          item:   leather_trousers
+        - chance: very_rare
+          item:   leather_highboots
+      steal: crossbow_bolt
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Butcher:
+    id:            1643
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 495
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: very_rare
+          item:   faceguard
+        - chance: very_rare
+          item:   scale_finger_gauntlets
+        - chance: very_rare
+          item:   scale_cuisses
+        - chance: very_rare
+          item:   scale_greaves
+      steal: beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Furrier:
+    id:            1665
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 490
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   ordelle_chest_key
+        - chance: rare
+          item:   sack_of_galka_fangs
+        - chance: very_rare
+          item:   square_of_sheep_leather
+        - chance: very_rare
+          item:   square_of_dhalmel_leather
+        - chance: super_rare
+          item:   square_of_black_tiger_leather
+        - chance: ultra_rare
+          item:   square_of_coeurl_leather
+        - chance: super_rare
+          item:   studded_bandana
+        - chance: super_rare
+          item:   studded_gloves
+        - chance: super_rare
+          item:   studded_trousers
+        - chance: super_rare
+          item:   studded_boots
+      steal: crossbow_bolt
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Gambler:
+    id:            1666
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 494
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   bag_of_poison_flour
+        - chance: very_rare
+          item:   poets_circlet
+        - chance: very_rare
+          item:   linen_cuffs
+        - chance: very_rare
+          item:   linen_slops
+        - chance: very_rare
+          item:   holly_clogs
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Leecher:
+    id:            1683
+    species:       goblin
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 488
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   scroll_of_paralyze
+        - chance: rare
+          item:   scroll_of_barsleep
+        - chance: rare
+          item:   scroll_of_silence
+        - chance: very_rare
+          item:   scroll_of_barpoison
+        - chance: rare
+          item:   scroll_of_protectra
+        - chance: rare
+          item:   scroll_of_sneak
+        - chance: very_rare
+          item:   scroll_of_invisible
+        - chance: very_rare
+          item:   scroll_of_deodorize
+        - chance: very_rare
+          item:   poets_circlet
+        - chance: very_rare
+          item:   linen_cuffs
+        - chance: very_rare
+          item:   linen_slops
+        - chance: very_rare
+          item:   holly_clogs
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Mugger:
+    id:            1690
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 485
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: very_rare
+          item:   brass_cap
+        - chance: very_rare
+          item:   brass_mittens
+        - chance: very_rare
+          item:   brass_subligar
+        - chance: very_rare
+          item:   brass_leggings
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Pathfinder:
+    id:            1694
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 487
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   ordelle_chest_key
+        - chance: rare
+          item:   sack_of_galka_fangs
+        - chance: very_rare
+          item:   brass_cuisses
+        - chance: very_rare
+          item:   brass_mask
+        - chance: very_rare
+          item:   brass_finger_gauntlets
+        - chance: very_rare
+          item:   brass_greaves
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Shaman:
+    id:            1710
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   ordelle_chest_key
+        - chance: ultra_rare
+          item:   wool_hat
+        - chance: ultra_rare
+          item:   wool_cuffs
+        - chance: ultra_rare
+          item:   wool_slops
+        - chance: ultra_rare
+          item:   chestnut_sabots
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Smithy:
+    id:            1715
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 497
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   ordelle_chest_key
+        - chance: very_rare
+          item:   iron_mask
+        - chance: very_rare
+          item:   chain_hose
+        - chance: very_rare
+          item:   chain_mittens
+        - chance: very_rare
+          item:   greaves
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Tinkerer:
+    id:            1738
+    species:       armored_goblin
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 491
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: very_rare
+          item:   faceguard
+        - chance: very_rare
+          item:   scale_finger_gauntlets
+        - chance: very_rare
+          item:   scale_cuisses
+        - chance: very_rare
+          item:   scale_greaves
+      steal: beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblins_Bats:
+    id:            1721
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Goliath_Beetle_aggro:
+    id:            6076
+    display_name:  Goliath_Beetle
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ordelle_chest_key
+        - chance: very_common
+          item:   insect_wing
+        - chance: common
+          item:   beetle_shell
+        - chance: uncommon
+          item:   beetle_jaw
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+
+  Hognosed_Bat:
+    id:            1985
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  1665
+        animation_sub:    8
+        hitbox:          11
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Jelly_MS_OC:
+    id:            6408
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 641
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 600
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Krabimanjaro:
+    id:            5168
+    species:       crab
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 358
+        entity_flags: 143
+        name_prefix:   32
+        model_size:     3
+        hitbox:        35
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Metallic_Slime:
+    id:            2633
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Morbolger:
+    id:            2742
+    species:       morbol
+    type:          [notorious]
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 135
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive: true
+      mob_mods:
+        always_aggro: 1
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2900
+    loot:
+      drops:
+        - chance: always
+          item:   morbolger_vine
+        - chance: very_common
+          item:   malboro_vine
+        - chance: very_common
+          item:   malboro_vine
+        - chance: very_common
+          item:   malboro_vine
+      steal: malboro_vine
+
+  Napalm:
+    id:            2808
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags:  133
+        animation_sub:  16
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+        - chance: rare
+          item:   ordelle_chest_key
+        - chance: rare
+          item:   flame_degen
+      steal: pinch_of_bomb_ash
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Necroplasm:
+    id:            2817
+    species:       doomed
+    type:          [notorious]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Poison_Leech_OC:
+    id:            5134
+    display_name:  Poison_Leech
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Poison_Leech_OC_2:
+    id:            5134
+    display_name:  Poison_Leech
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Polevik:
+    id:            3169
+    species:       earth_elemental
+    type:          [notorious]
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: sword
+        delay: 300
+      jobs: [rdm, blm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  900
+        mp: 2000
+
+  Rancid_Ooze_fished:
+    id:            6787
+    display_name:  Rancid_Ooze
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 133
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Seeker_Bats_MoS_Ord:
+    id:            3537
+    display_name:  Seeker_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   vial_of_magicked_blood
+      despoil:
+        bat_wing: 0
+
+  Shrieker_OC:
+    id:            6345
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+    loot:
+      drops:
+        - chance: common
+          item:   sleepshroom
+        - chance: uncommon
+          item:   woozyshroom
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Slash_Pine:
+    id:            3662
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   treant_bulb
+        - chance: uncommon
+          item:   bag_of_grain_seeds
+        - chance: rare
+          item:   bag_of_herb_seeds
+        - chance: very_rare
+          item:   dolphin_staff
+      steal: bag_of_vegetable_seeds
+
+  Snipper_OC:
+    id:            5141
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Stag_Crab:
+    id:            3753
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Stalking_Sapling_OC:
+    id:            3758
+    display_name:  Stalking_Sapling
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   treant_bulb
+        - chance: uncommon
+          item:   bag_of_vegetable_seeds
+        - chance: rare
+          item:   bag_of_herb_seeds
+        - chance: very_rare
+          item:   bag_of_grain_seeds
+      steal: [bag_of_vegetable_seeds, bag_of_grain_seeds] # audit needed
+      despoil:
+        bag_of_vegetable_seeds: 0
+        treant_bulb:            0
+        bag_of_wildgrass_seeds: 0
+
+  Stink_Bats:
+    id:            3775
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  641
+        animation_sub:   8
+        name_prefix:    64
+        hitbox:         13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   vial_of_magicked_blood
+      despoil:
+        bat_wing: 0
+
+  Stroper:
+    id:            3794
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   malboro_vine
+        - chance: common
+          item:   malboro_vine
+        - chance: uncommon
+          item:   malboro_vine
+        - chance: rare
+          item:   ordelle_chest_key
+        - chance: rare
+          item:   shield_pendant
+      steal: malboro_vine
+
+  Stroper_Chyme:
+    id:            3795
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_slime_oil
+        - chance: uncommon
+          item:   vial_of_slime_oil
+        - chance: rare
+          item:   ordelle_chest_key
+        - chance: very_rare
+          item:   shikaree_ring
+      despoil:
+        vial_of_slime_oil: 0
+
+  Swagger_Spruce:
+    id:            6352
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   treant_bulb
+        - chance: uncommon
+          item:   bag_of_vegetable_seeds
+        - chance: rare
+          item:   bag_of_herb_seeds
+        - chance: rare
+          item:   bag_of_grain_seeds
+      steal: bag_of_vegetable_seeds
+      despoil:
+        bag_of_vegetable_seeds: 0
+        treant_bulb:            0
+        bag_of_wildgrass_seeds: 0
+    content: ABYSSEA
+
+  Targe_Beetle:
+    id:            6074
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   insect_wing
+        - chance: uncommon
+          item:   beetle_shell
+        - chance: rare
+          item:   beetle_jaw
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+    content: ABYSSEA
+
+  Thread_Leech_OC:
+    id:            6403
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 641
+        hitbox:         9
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Thread_Leech_fished:
+    id:            5133
+    display_name:  Thread_Leech
+    species:       leech
+    type:          [fished]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Vorpal_Bunny:
+    id:            4256
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rabbit_hide
+        - chance: common
+          item:   slice_of_hare_meat
+      steal: slice_of_hare_meat
+      despoil:
+        rabbit_hide:        0
+        slice_of_hare_meat: 0
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: rare
+          item:   ordelle_chest_key
+
+  Will-o-the-Wisp:
+    id:            4345
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      despoil:
+        pinch_of_bomb_ash: 0
+
+spawns:
+  17567745:
+    template: Stag_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [15, 17]
+  17567746:
+    template: Stag_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [15, 17]
+  17567747:
+    template: Thread_Leech_fished
+    script:   Thread_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [21, 22]
+  17567748:
+    template: Poison_Leech_OC
+    script:   Poison_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17567749:
+    template: Rancid_Ooze_fished
+    script:   Rancid_Ooze
+    at:       [1.000, 1.000, 1.000]
+    level:    [34, 36]
+  17567750:
+    template: Stink_Bats
+    at:       [-97.910, 0.001, 609.755, 254]
+    level:    [15, 18]
+  17567751:
+    template: Stink_Bats
+    at:       [-105.400, 0.334, 600.611, 231]
+    level:    [15, 18]
+  17567752:
+    template: Stink_Bats
+    at:       [-106.500, 0.270, 601.221, 3]
+    level:    [15, 18]
+  17567753:
+    template: Stink_Bats
+    at:       [-119.400, -0.389, 603.791, 21]
+    level:    [15, 18]
+  17567754:
+    template: Snipper_OC
+    script:   Snipper
+    at:       [-84.740, 1.499, 613.137, 152]
+    level:    [17, 20]
+  17567755:
+    template: Snipper_OC
+    script:   Snipper
+    at:       [-79.630, 1.452, 602.752, 253]
+    level:    [17, 20]
+  17567756:
+    template: Stink_Bats
+    at:       [-39.760, 0.001, 579.539, 31]
+    level:    [15, 18]
+  17567757:
+    template: Stink_Bats
+    at:       [-6.440, 0.001, 580.559, 6]
+    level:    [15, 18]
+  17567758:
+    template: Stink_Bats
+    at:       [-28.870, 0.001, 582.325, 242]
+    level:    [15, 18]
+  17567759:
+    template: Blood_Bunny
+    at:       [8.453, -0.010, 579.551, 145]
+    level:    [17, 19]
+  17567760:
+    template: Blood_Bunny
+    at:       [-6.559, 0.001, 579.955, 1]
+    level:    [17, 19]
+  17567761:
+    template: Stink_Bats
+    at:       [23.770, 3.556, 543.369, 217]
+    level:    [15, 18]
+  17567762:
+    template: Stink_Bats
+    at:       [53.992, 9.091, 538.848, 211]
+    level:    [15, 18]
+  17567763:
+    template: Blood_Bunny
+    at:       [39.039, 7.980, 540.655, 146]
+    level:    [17, 19]
+  17567764:
+    template: Blood_Bunny
+    at:       [54.450, 9.129, 538.476, 196]
+    level:    [17, 19]
+  17567765:
+    template: Goblin_Tinkerer
+    at:       [57.549, 12.083, 501.656, 69]
+    level:    [17, 20]
+  17567766:
+    template: Goblin_Butcher
+    at:       [57.771, 12.083, 501.671, 67]
+    level:    [17, 20]
+  17567767:
+    template: Goblin_Ambusher
+    at:       [45.264, 12.206, 474.557, 72]
+    level:    [17, 20]
+  17567768:
+    template: Goblin_Tinkerer
+    at:       [42.438, 12.378, 486.190, 34]
+    level:    [17, 20]
+  17567769:
+    template: Goblin_Butcher
+    at:       [47.964, 11.795, 483.070, 30]
+    level:    [17, 20]
+  17567770:
+    template: Goblin_Ambusher
+    at:       [37.992, 11.993, 475.263, 17]
+    level:    [17, 20]
+  17567771:
+    template: Goblin_Tinkerer
+    at:       [36.592, 11.977, 481.730, 210]
+    level:    [17, 20]
+  17567772:
+    template: Goblin_Butcher
+    at:       [40.166, 11.994, 488.282, 215]
+    level:    [17, 20]
+  17567773:
+    template: Blood_Bunny
+    at:       [43.591, 12.250, 470.958, 126]
+    level:    [17, 19]
+  17567774:
+    template: Blood_Bunny
+    at:       [39.601, 11.887, 484.459, 163]
+    level:    [17, 19]
+  17567775:
+    template: Goblin_Ambusher
+    at:       [60.665, 11.991, 438.981, 67]
+    level:    [17, 20]
+  17567776:
+    template: Stink_Bats
+    at:       [59.666, 12.878, 429.375, 76]
+    level:    [15, 18]
+  17567777:
+    template: Stink_Bats
+    at:       [60.463, 13.270, 423.178, 182]
+    level:    [15, 18]
+  17567778:
+    template: Blood_Bunny
+    at:       [61.009, 12.395, 434.316, 60]
+    level:    [17, 19]
+  17567779:
+    template: Stink_Bats
+    at:       [65.156, 17.457, 385.489, 8]
+    level:    [15, 18]
+  17567780:
+    template: Blood_Bunny
+    at:       [65.046, 17.482, 385.375, 254]
+    level:    [17, 19]
+  17567781:
+    template: Stink_Bats
+    at:       [101.150, 20.000, 367.369, 221]
+    level:    [15, 18]
+  17567782:
+    template: Stink_Bats
+    at:       [100.350, 20.000, 359.369, 52]
+    level:    [15, 18]
+  17567783:
+    template: Blood_Bunny
+    at:       [101.640, 20.000, 361.238, 63]
+    level:    [17, 19]
+  17567784:
+    template: Blood_Bunny
+    at:       [99.786, 20.000, 366.151, 84]
+    level:    [17, 19]
+  17567785:
+    template: Stink_Bats
+    at:       [96.358, 25.204, 307.903, 198]
+    level:    [15, 18]
+  17567786:
+    template: Blood_Bunny
+    at:       [98.661, 25.170, 305.358, 248]
+    level:    [17, 19]
+  17567787:
+    template: Stink_Bats
+    at:       [31.975, 31.990, 300.842, 124]
+    level:    [15, 18]
+  17567788:
+    template: Stink_Bats
+    at:       [45.935, 31.617, 300.531, 19]
+    level:    [15, 18]
+  17567789:
+    template: Hognosed_Bat
+    at:       [-33.370, 31.958, 278.529, 14]
+    level:    [17, 20]
+  17567790:
+    template: Hognosed_Bat
+    at:       [-15.720, 31.750, 274.153, 13]
+    level:    [17, 20]
+  17567791:
+    template: Hognosed_Bat
+    at:       [-30.890, 31.923, 273.731, 41]
+    level:    [17, 20]
+  17567792:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [0.432, 31.865, 275.359, 41]
+    level:    [18, 21]
+  17567793:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-29.290, 31.767, 288.011, 92]
+    level:    [18, 21]
+  17567794:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-0.750, 32.058, 283.893, 126]
+    level:    [18, 21]
+  17567795:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-49.780, 31.951, 280.773, 40]
+    level:    [18, 21]
+  17567796:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [-47.090, 31.841, 285.128, 120]
+    level:    [21, 24]
+  17567797:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [-48.060, 31.996, 270.290, 126]
+    level:    [21, 24]
+  17567798:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [-24.010, 31.666, 269.781, 15]
+    level:    [21, 24]
+  17567799:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [-39.120, 31.589, 277.881, 172]
+    level:    [21, 24]
+  17567800:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [-46.830, 32.376, 276.507, 28]
+    level:    [21, 24]
+  17567801:
+    template: Donggu
+    at:       [-48.060, 31.996, 270.290, 126]
+    level:    [42, 44]
+  17567802:
+    template: Stink_Bats
+    at:       [-84.080, 31.982, 258.752, 3]
+    level:    [15, 18]
+  17567803:
+    template: Stink_Bats
+    at:       [-80.500, 31.999, 258.903, 254]
+    level:    [15, 18]
+  17567804:
+    template: Hognosed_Bat
+    at:       [-76.440, 31.999, 259.481, 250]
+    level:    [17, 20]
+  17567805:
+    template: Goblin_Mugger
+    at:       [-150.400, 31.655, 246.119, 249]
+    level:    [22, 26]
+  17567806:
+    template: Goblin_Leecher
+    at:       [-141.800, 32.465, 240.953, 128]
+    level:    [22, 26]
+  17567807:
+    template: Goblin_Gambler
+    at:       [-108.200, 31.163, 228.757, 251]
+    level:    [22, 26]
+  17567808:
+    template: Goblin_Mugger
+    at:       [-123.100, 31.500, 228.231, 69]
+    level:    [22, 26]
+  17567809:
+    template: Goblin_Leecher
+    at:       [-134.400, 31.906, 246.679, 105]
+    level:    [22, 26]
+  17567810:
+    template: Goblin_Gambler
+    at:       [-143.800, 32.209, 243.160, 253]
+    level:    [22, 26]
+  17567811:
+    template: Stink_Bats
+    at:       [-130.400, 32.174, 234.125, 183]
+    level:    [15, 18]
+  17567812:
+    template: Stink_Bats
+    at:       [-136.800, 32.469, 240.001, 77]
+    level:    [15, 18]
+  17567813:
+    template: Hognosed_Bat
+    at:       [-106.700, 31.256, 240.746, 236]
+    level:    [17, 20]
+  17567814:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-161.100, 31.615, 238.559, 24]
+    level:    [18, 21]
+  17567815:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-165.200, 31.924, 236.651, 65]
+    level:    [18, 21]
+  17567816:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-161.100, 31.895, 246.171, 168]
+    level:    [18, 21]
+  17567817:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-115.900, 31.111, 227.634, 99]
+    level:    [18, 21]
+  17567818:
+    template: Goblin_Mugger
+    at:       [-151.800, 31.653, 205.658, 240]
+    level:    [22, 26]
+  17567819:
+    template: Goblin_Leecher
+    at:       [-163.900, 32.297, 185.031, 168]
+    level:    [22, 26]
+  17567820:
+    template: Goblin_Gambler
+    at:       [-166.100, 32.095, 185.953, 255]
+    level:    [22, 26]
+  17567821:
+    template: Goblin_Mugger
+    at:       [-151.000, 31.985, 176.863, 235]
+    level:    [22, 26]
+  17567822:
+    template: Goblin_Leecher
+    at:       [-157.200, 31.982, 191.660, 213]
+    level:    [22, 26]
+  17567823:
+    template: Goblin_Gambler
+    at:       [-152.200, 32.749, 186.080, 233]
+    level:    [22, 26]
+  17567824:
+    template: Stink_Bats
+    at:       [-152.900, 32.124, 212.259, 207]
+    level:    [15, 18]
+  17567825:
+    template: Stink_Bats
+    at:       [-172.800, 31.655, 191.218, 152]
+    level:    [15, 18]
+  17567826:
+    template: Hognosed_Bat
+    at:       [-173.000, 31.326, 201.069, 134]
+    level:    [17, 20]
+  17567827:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-161.000, 31.261, 146.880, 67]
+    level:    [18, 21]
+  17567828:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-162.100, 32.444, 178.968, 49]
+    level:    [18, 21]
+  17567829:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-167.200, 31.787, 161.554, 161]
+    level:    [18, 21]
+  17567830:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-170.100, 31.843, 173.033, 80]
+    level:    [18, 21]
+  17567831:
+    template: Goblin_Mugger
+    at:       [-214.100, 32.000, 92.279, 223]
+    level:    [22, 26]
+  17567832:
+    template: Hognosed_Bat
+    at:       [-205.500, 32.000, 98.783, 1]
+    level:    [17, 20]
+  17567833:
+    template: Hognosed_Bat
+    at:       [-190.100, 31.954, 99.516, 239]
+    level:    [17, 20]
+  17567834:
+    template: Hognosed_Bat
+    at:       [-202.252, 31.999, 100.747, 149]
+    level:    [17, 20]
+  17567835:
+    template: Buds_Bunny
+    at:       [-196.800, 32.487, 18.981, 54]
+    level:    [84, 86]
+  17567836:
+    template: Buds_Bunny
+    at:       [-202.400, 32.194, 18.069, 92]
+    level:    [84, 86]
+  17567837:
+    template: Buds_Bunny
+    at:       [-165.200, 31.568, 39.584, 58]
+    level:    [84, 86]
+  17567838:
+    template: Buds_Bunny
+    at:       [-162.700, 32.554, 21.387, 109]
+    level:    [84, 86]
+  17567839:
+    template: Buds_Bunny
+    at:       [-159.900, 31.573, 0.696, 252]
+    level:    [84, 86]
+  17567840:
+    template: Buds_Bunny
+    at:       [-197.800, 31.502, -11.159, 56]
+    level:    [84, 86]
+  17567841:
+    template: Buds_Bunny
+    at:       [-168.000, 31.906, 1.651, 139]
+    level:    [84, 86]
+  17567842:
+    template: Buds_Bunny
+    at:       [-191.400, 32.228, -10.671, 24]
+    level:    [84, 86]
+  17567843:
+    template: Buds_Bunny
+    at:       [-126.300, 31.527, 53.422, 121]
+    level:    [84, 86]
+  17567844:
+    template: Buds_Bunny
+    at:       [-137.800, 31.471, 50.122, 222]
+    level:    [84, 86]
+  17567845:
+    template: Buds_Bunny
+    at:       [-138.300, 31.291, 52.064, 18]
+    level:    [84, 86]
+  17567846:
+    template: Buds_Bunny
+    at:       [-127.900, 31.858, 39.207, 133]
+    level:    [84, 86]
+  17567847:
+    template: Buds_Bunny
+    at:       [-112.400, 31.811, -2.252, 70]
+    level:    [84, 86]
+  17567848:
+    template: Buds_Bunny
+    at:       [-152.700, 31.972, -6.645, 191]
+    level:    [84, 86]
+  17567849:
+    template: Buds_Bunny
+    at:       [-152.000, 31.611, 15.098, 191]
+    level:    [84, 86]
+  17567850:
+    template: Buds_Bunny
+    at:       [-128.000, 31.923, -14.637, 251]
+    level:    [84, 86]
+  17567851:
+    template: Bilis_Leech
+    at:       [-150.000, 28.091, -27.583, 246]
+    level:    [87, 88]
+  17567852:
+    template: Bilis_Leech
+    at:       [-158.200, 27.555, -37.916, 46]
+    level:    [87, 88]
+  17567853:
+    template: Bilis_Leech
+    at:       [-113.800, 27.958, -30.087, 226]
+    level:    [87, 88]
+  17567854:
+    template: Bilis_Leech
+    at:       [-134.300, 28.141, -29.426, 120]
+    level:    [87, 88]
+  17567855:
+    template: Bilis_Leech
+    at:       [-162.800, 28.322, -66.275, 113]
+    level:    [87, 88]
+  17567856:
+    template: Bilis_Leech
+    at:       [-142.400, 27.579, -64.685, 47]
+    level:    [87, 88]
+  17567857:
+    template: Bilis_Leech
+    at:       [-162.500, 27.902, -85.337, 241]
+    level:    [87, 88]
+  17567858:
+    template: Bilis_Leech
+    at:       [-158.200, 28.002, -85.221, 134]
+    level:    [87, 88]
+  17567859:
+    template: Bilis_Leech
+    at:       [-116.300, 28.229, -55.541, 104]
+    level:    [87, 88]
+  17567860:
+    template: Bilis_Leech
+    at:       [-116.000, 27.815, -69.383, 1]
+    level:    [87, 88]
+  17567861:
+    template: Bilis_Leech
+    at:       [-126.700, 27.642, -50.785, 145]
+    level:    [87, 88]
+  17567862:
+    template: Bilis_Leech
+    at:       [-117.500, 28.318, -63.502, 101]
+    level:    [87, 88]
+  17567863:
+    template: Bilis_Leech
+    at:       [-220.700, 27.900, -104.290, 229]
+    level:    [87, 88]
+  17567864:
+    template: Bilis_Leech
+    at:       [-221.300, 28.000, -120.570, 165]
+    level:    [87, 88]
+  17567865:
+    template: Bilis_Leech
+    at:       [-220.500, 27.915, -104.780, 87]
+    level:    [87, 88]
+  17567866:
+    template: Stink_Bats
+    at:       [-117.800, 32.000, 178.604, 1]
+    level:    [15, 18]
+  17567867:
+    template: Hognosed_Bat
+    at:       [-132.300, 32.077, 177.835, 123]
+    level:    [17, 20]
+  17567868:
+    template: Hognosed_Bat
+    at:       [-114.900, 31.976, 179.054, 119]
+    level:    [17, 20]
+  17567869:
+    template: Dung_Beetle
+    at:       [-80.860, 31.929, 165.216, 24]
+    level:    [23, 26]
+  17567870:
+    template: Dung_Beetle
+    at:       [-81.180, 31.812, 166.774, 152]
+    level:    [23, 26]
+  17567871:
+    template: Dung_Beetle
+    at:       [-87.550, 32.009, 159.882, 149]
+    level:    [23, 26]
+  17567872:
+    template: Dung_Beetle
+    at:       [-77.080, 31.996, 155.804, 119]
+    level:    [23, 26]
+  17567873:
+    template: Vorpal_Bunny
+    at:       [-70.300, 31.915, 154.652, 168]
+    level:    [23, 26]
+  17567874:
+    template: Dung_Beetle
+    at:       [-66.450, 31.895, 170.177, 155]
+    level:    [23, 26]
+  17567875:
+    template: Dung_Beetle
+    at:       [-61.120, 32.498, 156.567, 27]
+    level:    [23, 26]
+  17567876:
+    template: Dung_Beetle
+    at:       [-60.720, 31.600, 167.339, 250]
+    level:    [23, 26]
+  17567877:
+    template: Vorpal_Bunny
+    at:       [-58.610, 32.356, 164.134, 97]
+    level:    [23, 26]
+  17567878:
+    template: Vorpal_Bunny
+    at:       [-51.010, 31.788, 169.940, 16]
+    level:    [23, 26]
+  17567879:
+    template: Dung_Beetle
+    at:       [-17.440, 32.409, 166.951, 56]
+    level:    [23, 26]
+  17567880:
+    template: Dung_Beetle
+    at:       [-15.520, 32.832, 155.938, 64]
+    level:    [23, 26]
+  17567881:
+    template: Vorpal_Bunny
+    at:       [-35.070, 31.607, 159.365, 188]
+    level:    [23, 26]
+  17567882:
+    template: Vorpal_Bunny
+    at:       [-9.887, 31.813, 149.080, 44]
+    level:    [23, 26]
+  17567883:
+    template: Vorpal_Bunny
+    at:       [-12.950, 32.169, 158.895, 22]
+    level:    [23, 26]
+  17567884:
+    template: Dung_Beetle
+    at:       [10.777, 31.327, 179.546, 89]
+    level:    [23, 26]
+  17567885:
+    template: Vorpal_Bunny
+    at:       [3.970, 31.888, 168.975, 98]
+    level:    [23, 26]
+  17567886:
+    template: Vorpal_Bunny
+    at:       [-11.450, 32.071, 153.914, 68]
+    level:    [23, 26]
+  17567887:
+    template: Vorpal_Bunny
+    at:       [-0.882, 32.044, 172.192, 69]
+    level:    [23, 26]
+  17567888:
+    template: Vorpal_Bunny
+    at:       [-5.038, 31.829, 156.287, 134]
+    level:    [23, 26]
+  17567889:
+    template: Poison_Leech_OC_2
+    script:   Poison_Leech
+    at:       [-11.370, 31.698, 202.837, 135]
+    level:    [25, 27]
+  17567890:
+    template: Poison_Leech_OC_2
+    script:   Poison_Leech
+    at:       [-8.315, 32.020, 195.125, 219]
+    level:    [25, 27]
+  17567891:
+    template: Poison_Leech_OC_2
+    script:   Poison_Leech
+    at:       [-12.470, 32.071, 191.046, 104]
+    level:    [25, 27]
+  17567892:
+    template: Poison_Leech_OC_2
+    script:   Poison_Leech
+    at:       [-3.216, 31.645, 208.207, 114]
+    level:    [25, 27]
+  17567893:
+    template: Poison_Leech_OC_2
+    script:   Poison_Leech
+    at:       [4.904, 31.697, 194.255, 104]
+    level:    [25, 27]
+  17567894:
+    template: Poison_Leech_OC_2
+    script:   Poison_Leech
+    at:       [8.086, 31.688, 195.826, 82]
+    level:    [25, 27]
+  17567895:
+    template: Jelly_MS_OC
+    script:   Jelly
+    at:       [-43.690, 31.968, 218.671, 12]
+    level:    [26, 28]
+  17567896:
+    template: Jelly_MS_OC
+    script:   Jelly
+    at:       [-36.410, 31.940, 219.283, 253]
+    level:    [26, 28]
+  17567897:
+    template: Jelly_MS_OC
+    script:   Jelly
+    at:       [-81.310, 31.493, 210.675, 162]
+    level:    [26, 28]
+  17567898:
+    template: Jelly_MS_OC
+    script:   Jelly
+    at:       [-76.670, 31.163, 186.602, 40]
+    level:    [26, 28]
+  17567899:
+    template: Jelly_MS_OC
+    script:   Jelly
+    at:       [-80.770, 31.979, 193.542, 112]
+    level:    [26, 28]
+  17567900:
+    template: Jelly_MS_OC
+    script:   Jelly
+    at:       [-79.820, 31.968, 208.309, 226]
+    level:    [26, 28]
+  17567901:
+    template: Agar_Agar
+    at:       [-71.360, 31.975, 207.479, 25]
+    level:    [64, 66]
+  17567902:
+    template: Goblin_Mugger
+    at:       [27.270, 31.999, 105.776, 25]
+    level:    [22, 26]
+  17567903:
+    template: Hognosed_Bat
+    at:       [35.034, 32.000, 100.679, 11]
+    level:    [17, 20]
+  17567904:
+    template: Hognosed_Bat
+    at:       [21.695, 31.999, 114.634, 61]
+    level:    [17, 20]
+  17567905:
+    template: Hognosed_Bat
+    at:       [26.691, 32.000, 106.845, 154]
+    level:    [17, 20]
+  17567906:
+    template: Swagger_Spruce
+    at:       [-31.210, 31.961, 16.653, 33]
+    level:    [86, 88]
+  17567907:
+    template: Swagger_Spruce
+    at:       [-1.646, 31.524, 37.335, 47]
+    level:    [86, 88]
+  17567908:
+    template: Swagger_Spruce
+    at:       [-32.010, 31.968, 16.710, 20]
+    level:    [86, 88]
+  17567909:
+    template: Swagger_Spruce
+    at:       [-23.770, 31.948, 44.548, 234]
+    level:    [86, 88]
+  17567910:
+    template: Swagger_Spruce
+    at:       [-3.868, 32.157, -9.035, 176]
+    level:    [86, 88]
+  17567911:
+    template: Swagger_Spruce
+    at:       [-46.890, 31.889, -5.330, 53]
+    level:    [86, 88]
+  17567912:
+    template: Swagger_Spruce
+    at:       [-34.710, 31.943, -5.153, 247]
+    level:    [86, 88]
+  17567913:
+    template: Swagger_Spruce
+    at:       [-26.670, 32.863, -16.051, 116]
+    level:    [86, 88]
+  17567914:
+    template: Swagger_Spruce
+    at:       [36.939, 31.674, 51.956, 235]
+    level:    [86, 88]
+  17567915:
+    template: Swagger_Spruce
+    at:       [48.597, 31.908, 25.522, 218]
+    level:    [86, 88]
+  17567916:
+    template: Swagger_Spruce
+    at:       [18.552, 32.481, 44.817, 222]
+    level:    [86, 88]
+  17567917:
+    template: Swagger_Spruce
+    at:       [30.679, 31.645, 37.292, 240]
+    level:    [86, 88]
+  17567918:
+    template: Swagger_Spruce
+    at:       [41.291, 31.606, 4.670, 4]
+    level:    [86, 88]
+  17567919:
+    template: Swagger_Spruce
+    at:       [17.336, 32.159, 17.917, 230]
+    level:    [86, 88]
+  17567920:
+    template: Swagger_Spruce
+    at:       [26.965, 32.201, -6.744, 247]
+    level:    [86, 88]
+  17567921:
+    template: Swagger_Spruce
+    at:       [46.201, 31.836, -1.726, 7]
+    level:    [86, 88]
+  17567922:
+    template: Targe_Beetle
+    at:       [-43.200, 28.288, -28.329, 160]
+    level:    [84, 85]
+  17567923:
+    template: Targe_Beetle
+    at:       [-22.580, 28.070, -43.341, 121]
+    level:    [84, 85]
+  17567924:
+    template: Targe_Beetle
+    at:       [-35.550, 27.774, -49.792, 220]
+    level:    [84, 85]
+  17567925:
+    template: Targe_Beetle
+    at:       [-34.040, 27.781, -34.076, 200]
+    level:    [84, 85]
+  17567926:
+    template: Targe_Beetle
+    at:       [-17.080, 28.437, -80.253, 15]
+    level:    [84, 85]
+  17567927:
+    template: Targe_Beetle
+    at:       [-9.281, 27.986, -77.519, 74]
+    level:    [84, 85]
+  17567928:
+    template: Targe_Beetle
+    at:       [-34.610, 28.100, -60.650, 94]
+    level:    [84, 85]
+  17567929:
+    template: Targe_Beetle
+    at:       [-27.090, 28.045, -86.397, 202]
+    level:    [84, 85]
+  17567930:
+    template: Targe_Beetle
+    at:       [7.643, 28.763, -57.270, 151]
+    level:    [84, 85]
+  17567931:
+    template: Targe_Beetle
+    at:       [-2.562, 28.252, -61.008, 20]
+    level:    [84, 85]
+  17567932:
+    template: Targe_Beetle
+    at:       [5.297, 27.927, -36.479, 201]
+    level:    [84, 85]
+  17567933:
+    template: Targe_Beetle
+    at:       [3.708, 28.204, -68.962, 165]
+    level:    [84, 85]
+  17567934:
+    template: Hognosed_Bat
+    at:       [-20.210, 32.058, 131.347, 68]
+    level:    [17, 20]
+  17567935:
+    template: Hognosed_Bat
+    at:       [-26.070, 26.714, 103.107, 153]
+    level:    [17, 20]
+  17567936:
+    template: Hognosed_Bat
+    at:       [-20.080, 28.799, 109.197, 191]
+    level:    [17, 20]
+  17567937:
+    template: Hognosed_Bat
+    at:       [-23.930, 28.097, 109.361, 126]
+    level:    [17, 20]
+  17567938:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-25.880, 26.486, 101.718, 71]
+    level:    [19, 21]
+  17567939:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-20.580, 28.075, 102.543, 58]
+    level:    [18, 21]
+  17567940:
+    template: Hognosed_Bat
+    at:       [-58.870, 15.913, 80.587, 178]
+    level:    [17, 20]
+  17567941:
+    template: Hognosed_Bat
+    at:       [-23.980, 3.278, 55.914, 171]
+    level:    [17, 20]
+  17567942:
+    template: Hognosed_Bat
+    at:       [-56.740, 12.010, 67.213, 216]
+    level:    [17, 20]
+  17567943:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-33.770, 6.268, 61.104, 143]
+    level:    [18, 21]
+  17567944:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-55.860, 11.180, 61.931, 121]
+    level:    [18, 21]
+  17567945:
+    template: Buds_Bunny
+    at:       [-20.010, -0.059, 35.715, 48]
+    level:    [84, 86]
+  17567946:
+    template: Buds_Bunny
+    at:       [-21.620, 0.016, 29.142, 195]
+    level:    [84, 86]
+  17567947:
+    template: Buds_Bunny
+    at:       [-42.310, -0.510, 13.266, 242]
+    level:    [84, 86]
+  17567948:
+    template: Buds_Bunny
+    at:       [-37.080, -0.365, 11.610, 208]
+    level:    [84, 86]
+  17567949:
+    template: Swagger_Spruce
+    at:       [-51.550, -0.277, -4.169, 155]
+    level:    [86, 88]
+  17567950:
+    template: Buds_Bunny
+    at:       [-21.660, -0.017, -48.717, 76]
+    level:    [84, 86]
+  17567951:
+    template: Buds_Bunny
+    at:       [-20.690, 0.001, -41.311, 95]
+    level:    [84, 86]
+  17567952:
+    template: Buds_Bunny
+    at:       [-45.180, -0.233, -87.524, 225]
+    level:    [84, 86]
+  17567953:
+    template: Buds_Bunny
+    at:       [-50.980, -0.039, -78.106, 180]
+    level:    [84, 86]
+  17567954:
+    template: Swagger_Spruce
+    at:       [-36.330, 0.048, -79.705, 69]
+    level:    [86, 88]
+  17567955:
+    template: Swagger_Spruce
+    at:       [-82.270, 0.001, -20.225, 132]
+    level:    [86, 88]
+  17567956:
+    template: Swagger_Spruce
+    at:       [-75.360, -0.064, -21.261, 5]
+    level:    [86, 88]
+  17567957:
+    template: Buds_Bunny
+    at:       [-125.400, 0.183, -4.536, 190]
+    level:    [84, 86]
+  17567958:
+    template: Swagger_Spruce
+    at:       [-124.200, -0.921, 12.605, 239]
+    level:    [86, 88]
+  17567959:
+    template: Swagger_Spruce
+    at:       [-115.200, 0.204, -4.866, 211]
+    level:    [86, 88]
+  17567960:
+    template: Swagger_Spruce
+    at:       [-139.500, -0.007, -42.374, 60]
+    level:    [86, 88]
+  17567961:
+    template: Swagger_Spruce
+    at:       [-140.200, -0.079, -46.207, 72]
+    level:    [86, 88]
+  17567962:
+    template: Buds_Bunny
+    at:       [-133.600, -0.986, -81.185, 180]
+    level:    [84, 86]
+  17567963:
+    template: Swagger_Spruce
+    at:       [-122.600, -0.367, -69.197, 140]
+    level:    [86, 88]
+  17567964:
+    template: Swagger_Spruce
+    at:       [-125.600, 0.260, -78.299, 12]
+    level:    [86, 88]
+  17567965:
+    template: Stink_Bats
+    at:       [-150.300, -0.014, 579.744, 250]
+    level:    [15, 18]
+  17567966:
+    template: Stink_Bats
+    at:       [-154.200, -0.059, 579.341, 18]
+    level:    [15, 18]
+  17567967:
+    template: Goblin_Ambusher
+    at:       [-214.400, 0.058, 563.435, 46]
+    level:    [17, 20]
+  17567968:
+    template: Goblin_Tinkerer
+    at:       [-219.100, 0.453, 568.349, 169]
+    level:    [17, 20]
+  17567969:
+    template: Goblin_Butcher
+    at:       [-215.000, -0.090, 537.591, 183]
+    level:    [17, 20]
+  17567970:
+    template: Goblin_Ambusher
+    at:       [-190.800, -0.600, 585.088, 97]
+    level:    [17, 20]
+  17567971:
+    template: Goblin_Tinkerer
+    at:       [-219.500, -0.024, 551.890, 104]
+    level:    [17, 20]
+  17567972:
+    template: Goblin_Butcher
+    at:       [-224.000, -0.004, 572.333, 196]
+    level:    [17, 20]
+  17567973:
+    template: Stink_Bats
+    at:       [-215.400, 0.089, 544.651, 236]
+    level:    [15, 18]
+  17567974:
+    template: Stink_Bats
+    at:       [-217.000, 0.150, 583.815, 17]
+    level:    [15, 18]
+  17567975:
+    template: Blood_Bunny
+    at:       [-215.700, 0.250, 579.119, 51]
+    level:    [17, 19]
+  17567976:
+    template: Blood_Bunny
+    at:       [-225.300, -0.428, 577.591, 86]
+    level:    [17, 19]
+  17567977:
+    template: Blood_Bunny
+    at:       [-209.200, 0.098, 536.239, 47]
+    level:    [17, 19]
+  17567978:
+    template: Blood_Bunny
+    at:       [-218.400, 0.276, 544.341, 224]
+    level:    [17, 19]
+  17567979:
+    template: Goblin_Ambusher
+    at:       [-159.700, -0.010, 497.729, 150]
+    level:    [17, 20]
+  17567980:
+    template: Goblin_Tinkerer
+    at:       [-200.600, -0.027, 546.627, 140]
+    level:    [17, 20]
+  17567981:
+    template: Goblin_Butcher
+    at:       [-183.500, 0.221, 536.945, 50]
+    level:    [17, 20]
+  17567982:
+    template: Goblin_Ambusher
+    at:       [-172.200, -0.026, 506.423, 216]
+    level:    [17, 20]
+  17567983:
+    template: Goblin_Tinkerer
+    at:       [-177.800, -0.202, 513.130, 131]
+    level:    [17, 20]
+  17567984:
+    template: Goblin_Butcher
+    at:       [-170.400, 0.419, 503.055, 239]
+    level:    [17, 20]
+  17567985:
+    template: Stink_Bats
+    at:       [-179.400, -0.104, 532.377, 164]
+    level:    [15, 18]
+  17567986:
+    template: Stink_Bats
+    at:       [-202.000, 0.005, 536.531, 223]
+    level:    [15, 18]
+  17567987:
+    template: Blood_Bunny
+    at:       [-178.600, -0.013, 523.963, 102]
+    level:    [17, 19]
+  17567988:
+    template: Blood_Bunny
+    at:       [-181.900, 0.316, 538.752, 18]
+    level:    [17, 19]
+  17567989:
+    template: Blood_Bunny
+    at:       [-176.200, -0.086, 497.128, 66]
+    level:    [17, 19]
+  17567990:
+    template: Blood_Bunny
+    at:       [-160.400, -0.024, 502.527, 63]
+    level:    [17, 19]
+  17567991:
+    template: Stink_Bats
+    at:       [-100.600, 0.001, 477.864, 71]
+    level:    [15, 18]
+  17567992:
+    template: Stink_Bats
+    at:       [-106.400, 0.001, 493.036, 38]
+    level:    [15, 18]
+  17567993:
+    template: Stink_Bats
+    at:       [-24.460, 0.176, 460.897, 205]
+    level:    [15, 18]
+  17567994:
+    template: Stink_Bats
+    at:       [-86.140, -0.037, 459.296, 115]
+    level:    [15, 18]
+  17567995:
+    template: Hognosed_Bat
+    at:       [-90.980, -0.458, 455.747, 69]
+    level:    [17, 20]
+  17567996:
+    template: Hognosed_Bat
+    at:       [-24.830, -0.041, 459.135, 113]
+    level:    [17, 20]
+  17567997:
+    template: Hognosed_Bat
+    at:       [-65.950, -0.119, 466.483, 136]
+    level:    [17, 20]
+  17567998:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-61.570, 0.044, 455.666, 194]
+    level:    [18, 21]
+  17567999:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-95.220, -0.006, 454.584, 137]
+    level:    [18, 21]
+  17568000:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-50.820, 0.232, 459.947, 199]
+    level:    [18, 21]
+  17568001:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-63.680, 0.187, 461.437, 156]
+    level:    [18, 21]
+  17568002:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-42.310, 0.218, 463.140, 151]
+    level:    [18, 21]
+  17568003:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-83.210, -0.021, 463.356, 45]
+    level:    [18, 21]
+  17568004:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-61.870, 0.249, 460.104, 222]
+    level:    [18, 21]
+  17568005:
+    template: Stink_Bats
+    at:       [-37.220, -0.068, 546.932, 252]
+    level:    [15, 18]
+  17568006:
+    template: Stink_Bats
+    at:       [-13.890, -0.072, 521.698, 227]
+    level:    [15, 18]
+  17568007:
+    template: Hognosed_Bat
+    at:       [-40.450, -0.026, 537.926, 230]
+    level:    [17, 20]
+  17568008:
+    template: Hognosed_Bat
+    at:       [-14.210, -0.123, 516.229, 43]
+    level:    [17, 20]
+  17568009:
+    template: Hognosed_Bat
+    at:       [-19.650, 0.234, 498.191, 158]
+    level:    [17, 20]
+  17568010:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-25.350, -0.495, 527.677, 163]
+    level:    [18, 21]
+  17568011:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-27.420, -0.118, 493.979, 73]
+    level:    [18, 21]
+  17568012:
+    template: Stalking_Sapling_OC
+    script:   Stalking_Sapling
+    at:       [-26.530, 0.001, 482.796, 187]
+    level:    [18, 21]
+  17568013:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-38.250, 0.384, 542.033, 7]
+    level:    [18, 21]
+  17568014:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-14.350, -0.200, 514.554, 184]
+    level:    [18, 21]
+  17568015:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-18.970, 0.028, 507.320, 23]
+    level:    [18, 21]
+  17568016:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-21.820, 0.037, 479.070, 138]
+    level:    [18, 21]
+  17568017:
+    template: Stink_Bats
+    at:       [-80.850, 0.008, 539.081, 121]
+    level:    [15, 18]
+  17568018:
+    template: Stink_Bats
+    at:       [-63.730, 0.099, 538.616, 204]
+    level:    [15, 18]
+  17568019:
+    template: Stink_Bats
+    at:       [-100.200, 9.213, 510.079, 181]
+    level:    [15, 18]
+  17568020:
+    template: Stink_Bats
+    at:       [-64.130, 17.450, 497.312, 30]
+    level:    [15, 18]
+  17568021:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-61.810, 19.058, 484.126, 70]
+    level:    [18, 21]
+  17568022:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-90.650, 13.116, 498.309, 96]
+    level:    [18, 21]
+  17568023:
+    template: Stink_Bats
+    at:       [-95.460, 28.233, 449.795, 210]
+    level:    [15, 18]
+  17568024:
+    template: Stink_Bats
+    at:       [-92.190, 26.038, 458.734, 124]
+    level:    [15, 18]
+  17568025:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-62.560, 21.093, 465.971, 165]
+    level:    [18, 21]
+  17568026:
+    template: Stink_Bats
+    at:       [-21.950, 31.931, 425.373, 200]
+    level:    [15, 18]
+  17568027:
+    template: Stink_Bats
+    at:       [-22.050, 31.888, 423.796, 70]
+    level:    [15, 18]
+  17568028:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-19.830, 31.999, 439.158, 120]
+    level:    [18, 21]
+  17568029:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [-18.570, 31.999, 444.803, 199]
+    level:    [18, 21]
+  17568030:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [47.761, 31.409, 428.272, 239]
+    level:    [21, 24]
+  17568031:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [32.699, 31.811, 438.046, 77]
+    level:    [21, 24]
+  17568032:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [39.297, 31.635, 439.342, 21]
+    level:    [21, 24]
+  17568033:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [53.015, 31.465, 443.295, 174]
+    level:    [21, 24]
+  17568034:
+    template: Fly_Agaric_OC
+    script:   Fly_Agaric
+    at:       [44.831, 31.913, 434.610, 122]
+    level:    [21, 24]
+  17568035:
+    template: Stink_Bats
+    at:       [124.670, 32.000, 460.940, 1]
+    level:    [15, 18]
+  17568036:
+    template: Stink_Bats
+    at:       [130.050, 32.000, 462.609, 98]
+    level:    [15, 18]
+  17568037:
+    template: Stink_Bats
+    at:       [134.880, 32.000, 467.506, 226]
+    level:    [15, 18]
+  17568038:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [122.730, 32.000, 459.417, 29]
+    level:    [18, 21]
+  17568039:
+    template: Thread_Leech_OC
+    script:   Thread_Leech
+    at:       [119.780, 32.000, 461.600, 237]
+    level:    [18, 21]
+  17568040:
+    template: Stink_Bats
+    at:       [7.884, 28.101, 382.217, 236]
+    level:    [15, 18]
+  17568041:
+    template: Stink_Bats
+    at:       [10.050, 28.413, 380.783, 9]
+    level:    [15, 18]
+  17568042:
+    template: Hognosed_Bat
+    at:       [21.277, 31.860, 399.734, 202]
+    level:    [17, 20]
+  17568043:
+    template: Stink_Bats
+    at:       [-88.310, 5.297, 339.084, 179]
+    level:    [15, 18]
+  17568044:
+    template: Hognosed_Bat
+    at:       [-63.750, 11.612, 345.217, 116]
+    level:    [17, 20]
+  17568045:
+    template: Hognosed_Bat
+    at:       [-61.200, 12.076, 342.651, 54]
+    level:    [17, 20]
+  17568046:
+    template: Hognosed_Bat
+    at:       [-123.400, -0.268, 288.536, 91]
+    level:    [17, 20]
+  17568047:
+    template: Hognosed_Bat
+    at:       [-161.400, 0.302, 260.197, 249]
+    level:    [17, 20]
+  17568048:
+    template: Hognosed_Bat
+    at:       [-154.100, -0.061, 235.057, 45]
+    level:    [17, 20]
+  17568049:
+    template: Shrieker_OC
+    script:   Shrieker
+    at:       [-136.000, -0.194, 287.756, 53]
+    level:    [24, 27]
+  17568050:
+    template: Shrieker_OC
+    script:   Shrieker
+    at:       [-161.002, -0.122, 283.922, 33]
+    level:    [24, 27]
+  17568051:
+    template: Shrieker_OC
+    script:   Shrieker
+    at:       [-154.600, -0.333, 238.259, 139]
+    level:    [24, 27]
+  17568052:
+    template: Shrieker_OC
+    script:   Shrieker
+    at:       [-131.800, -0.064, 271.397, 251]
+    level:    [24, 27]
+  17568053:
+    template: Shrieker_OC
+    script:   Shrieker
+    at:       [-169.100, -0.234, 268.096, 227]
+    level:    [24, 27]
+  17568054:
+    template: Shrieker_OC
+    script:   Shrieker
+    at:       [-133.200, -0.272, 286.796, 157]
+    level:    [24, 27]
+  17568055:
+    template: Shrieker_OC
+    script:   Shrieker
+    at:       [-125.500, -0.363, 262.644, 175]
+    level:    [24, 27]
+  17568056:
+    template: Shrieker_OC
+    script:   Shrieker
+    at:       [-118.800, -0.349, 290.509, 104]
+    level:    [24, 27]
+  17568057:
+    template: Will-o-the-Wisp
+    at:       [-103.100, 0.120, 271.209, 193]
+    level:    [23, 25]
+  17568058:
+    template: Will-o-the-Wisp
+    at:       [-114.500, 0.367, 258.550, 45]
+    level:    [23, 25]
+  17568059:
+    template: Will-o-the-Wisp
+    at:       [-146.900, -0.490, 250.005, 13]
+    level:    [23, 25]
+  17568060:
+    template: Clipper
+    at:       [-99.030, 0.437, 276.188, 245]
+    level:    [26, 29]
+  17568061:
+    template: Clipper
+    at:       [-102.700, 0.485, 279.751, 129]
+    level:    [26, 29]
+  17568062:
+    template: Clipper
+    at:       [-96.230, 0.482, 278.842, 81]
+    level:    [26, 29]
+  17568063:
+    template: Jelly_MS_OC
+    script:   Jelly
+    at:       [-102.100, 0.767, 286.121, 134]
+    level:    [26, 28]
+  17568064:
+    template: Goliath_Beetle_aggro
+    script:   Goliath_Beetle
+    at:       [-138.700, 0.005, 202.361, 59]
+    level:    [29, 31]
+  17568065:
+    template: Goliath_Beetle_aggro
+    script:   Goliath_Beetle
+    at:       [-138.400, 0.104, 177.867, 224]
+    level:    [29, 31]
+  17568066:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [54.213, 23.896, -56.585, 125]
+    level:    [23, 26]
+  17568067:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [42.631, 27.743, -58.264, 132]
+    level:    [23, 26]
+  17568068:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [57.790, 22.597, -52.562, 144]
+    level:    [23, 26]
+  17568069:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [96.876, -0.425, 15.883, 122]
+    level:    [23, 26]
+  17568070:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [95.575, 0.232, 10.773, 169]
+    level:    [23, 26]
+  17568071:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [47.958, -7.435, 20.391, 11]
+    level:    [23, 26]
+  17568072:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [41.383, -8.027, 20.863, 1]
+    level:    [23, 26]
+  17568073:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-20.840, -20.130, 42.482, 109]
+    level:    [23, 26]
+  17568074:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-10.900, -15.230, 21.024, 64]
+    level:    [23, 26]
+  17568075:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-63.250, -27.990, 67.962, 226]
+    level:    [23, 26]
+  17568076:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-63.030, -28.000, 39.952, 197]
+    level:    [23, 26]
+  17568077:
+    template: Ancient_Bat
+    at:       [-59.450, -28.090, 87.710, 134]
+    level:    [26, 28]
+  17568078:
+    template: Ancient_Bat
+    at:       [-66.980, -28.000, 64.671, 65]
+    level:    [26, 28]
+  17568079:
+    template: Goliath_Beetle_aggro
+    script:   Goliath_Beetle
+    at:       [-65.370, -28.250, 94.085, 203]
+    level:    [29, 31]
+  17568080:
+    template: Goliath_Beetle_aggro
+    script:   Goliath_Beetle
+    at:       [-62.500, -28.030, 61.177, 180]
+    level:    [29, 31]
+  17568081:
+    template: Goliath_Beetle_aggro
+    script:   Goliath_Beetle
+    at:       [-63.980, -28.010, 24.384, 142]
+    level:    [29, 31]
+  17568082:
+    template: Goliath_Beetle_aggro
+    script:   Goliath_Beetle
+    at:       [-60.140, -27.790, 57.099, 151]
+    level:    [29, 31]
+  17568083:
+    template: Stroper_Chyme
+    at:       [-62.970, -28.000, 42.342, 190]
+    level:    [33, 35]
+  17568084:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-117.800, -12.300, 138.507, 127]
+    level:    [23, 26]
+  17568085:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-141.700, -4.004, 158.333, 65]
+    level:    [23, 26]
+  17568086:
+    template: Ancient_Bat
+    at:       [-107.600, -15.830, 136.761, 50]
+    level:    [26, 28]
+  17568087:
+    template: Goliath_Beetle_aggro
+    script:   Goliath_Beetle
+    at:       [-130.700, -9.854, 142.449, 232]
+    level:    [29, 31]
+  17568088:
+    template: Goliath_Beetle_aggro
+    script:   Goliath_Beetle
+    at:       [-135.600, -8.682, 143.835, 146]
+    level:    [29, 31]
+  17568089:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-100.400, -27.990, 0.832, 91]
+    level:    [23, 26]
+  17568090:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-99.630, -27.990, 4.788, 65]
+    level:    [23, 26]
+  17568091:
+    template: Goblin_Pathfinder
+    at:       [-93.830, -28.110, -41.158, 88]
+    level:    [31, 34]
+  17568092:
+    template: Goblins_Bats
+    at:       [-94.860, -28.020, -41.224, 245]
+    level:    [24, 26]
+  17568093:
+    template: Goblin_Furrier
+    at:       [-105.400, -28.130, -58.549, 202]
+    level:    [31, 34]
+  17568094:
+    template: Goblin_Smithy
+    at:       [-97.130, -28.080, -94.714, 62]
+    level:    [31, 34]
+  17568095:
+    template: Goblin_Shaman
+    at:       [-103.300, -28.000, -39.032, 226]
+    level:    [31, 34]
+  17568096:
+    template: Goblin_Pathfinder
+    at:       [-84.410, -28.000, -100.150]
+    level:    [31, 34]
+  17568097:
+    template: Goblins_Bats
+    at:       [-84.050, -28.010, -99.913, 2]
+    level:    [24, 26]
+  17568098:
+    template: Goblin_Furrier
+    at:       [-96.700, -27.700, -58.611, 175]
+    level:    [31, 34]
+  17568099:
+    template: Goblin_Smithy
+    at:       [-98.050, -28.010, -83.685, 221]
+    level:    [31, 34]
+  17568100:
+    template: Goblin_Shaman
+    at:       [-104.100, -27.990, -39.111, 134]
+    level:    [31, 34]
+  17568101:
+    template: Slash_Pine
+    at:       [-100.100, -28.000, -76.796, 150]
+    level:    [27, 29]
+  17568102:
+    template: Slash_Pine
+    at:       [-101.000, -27.700, -52.022, 193]
+    level:    [27, 29]
+  17568103:
+    template: Slash_Pine
+    at:       [-102.800, -27.870, -65.150, 234]
+    level:    [27, 29]
+  17568104:
+    template: Slash_Pine
+    at:       [-101.000, -28.160, -87.442, 221]
+    level:    [27, 29]
+  17568105:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-60.340, -28.010, -113.640, 80]
+    level:    [23, 26]
+  17568106:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-60.340, -28.010, -113.340, 81]
+    level:    [23, 26]
+  17568107:
+    template: Ancient_Bat
+    at:       [-61.060, -28.000, -122.840, 196]
+    level:    [26, 28]
+  17568108:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-103.500, -28.060, -180.170, 137]
+    level:    [23, 26]
+  17568109:
+    template: Seeker_Bats_MoS_Ord
+    script:   Seeker_Bats
+    at:       [-102.900, -28.040, -182.770, 51]
+    level:    [23, 26]
+  17568110:
+    template: Ancient_Bat
+    at:       [-103.100, -28.020, -182.980, 49]
+    level:    [26, 28]
+  17568111:
+    template: Goblin_Pathfinder
+    at:       [-115.300, -27.270, -255.280, 213]
+    level:    [31, 34]
+  17568112:
+    template: Goblins_Bats
+    at:       [-118.800, -27.630, -255.510, 37]
+    level:    [24, 26]
+  17568113:
+    template: Goblin_Furrier
+    at:       [-105.500, -27.160, -234.380, 222]
+    level:    [31, 34]
+  17568114:
+    template: Goblin_Smithy
+    at:       [-100.600, -27.980, -206.670, 209]
+    level:    [31, 34]
+  17568115:
+    template: Goblin_Shaman
+    at:       [-80.650, -27.480, -262.000, 8]
+    level:    [31, 34]
+  17568116:
+    template: Goblin_Pathfinder
+    at:       [-93.940, -27.830, -246.580, 54]
+    level:    [31, 34]
+  17568117:
+    template: Goblins_Bats
+    at:       [-94.440, -27.800, -244.660, 52]
+    level:    [24, 26]
+  17568118:
+    template: Goblin_Furrier
+    at:       [-123.200, -28.020, -239.010, 121]
+    level:    [31, 34]
+  17568119:
+    template: Goblin_Smithy
+    at:       [-84.910, -27.860, -250.720, 189]
+    level:    [31, 34]
+  17568120:
+    template: Goblin_Shaman
+    at:       [-105.800, -27.920, -249.820, 49]
+    level:    [31, 34]
+  17568121:
+    template: Ancient_Bat
+    at:       [-78.770, -28.120, -238.320, 171]
+    level:    [26, 28]
+  17568122:
+    template: Ancient_Bat
+    at:       [-77.750, -27.990, -284.850, 80]
+    level:    [26, 28]
+  17568123:
+    template: Ancient_Bat
+    at:       [-75.760, -27.650, -265.140, 63]
+    level:    [26, 28]
+  17568124:
+    template: Stroper
+    at:       [-83.380, -28.400, -240.320, 103]
+    level:    [31, 34]
+  17568125:
+    template: Stroper
+    at:       [-98.580, -27.430, -283.950, 92]
+    level:    [31, 34]
+  17568126:
+    template: Stroper
+    at:       [-71.830, -28.230, -270.330, 247]
+    level:    [31, 34]
+  17568127:
+    template: Morbolger
+    at:       [-99.080, -27.950, -219.330, 184]
+    level:    [42, 44]
+  17568128:
+    template: Napalm
+    at:       [-168.200, -28.000, -198.450, 156]
+    level:    [31, 33]
+  17568129:
+    template: Napalm
+    at:       [-149.100, -28.010, -193.090, 182]
+    level:    [31, 33]
+  17568130:
+    template: Air_Elemental
+    at:       [-170.100, -28.400, -204.390, 155]
+    level:    [33, 36]
+  17568131:
+    template: Water_Elemental
+    at:       [-160.500, -27.930, -203.320, 181]
+    level:    [33, 36]
+  17568132:
+    template: Bombast
+    at:       [-154.000, -27.730, -197.250, 230]
+    level:    [42, 44]
+  17568133:
+    template: Stroper_Chyme
+    at:       [-109.900, -28.000, -179.730, 6]
+    level:    [33, 35]
+  17568134:
+    template: Polevik
+    at:       [-50.250, 0.083, 2.829, 57]
+    level:    [45, 45]
+  17568135:
+    template: Gerwitzs_Axe
+    at:       [13.000, 31.574, 165.000, 106]
+    level:    [50, 50]
+  17568136:
+    template: Gerwitzs_Sword
+    at:       [-99.830, -28.000, -77.763, 97]
+    level:    [52, 52]
+  17568137:
+    template: Gerwitzs_Soul
+    at:       [-132.500, -28.430, -246.920, 36]
+    level:    [54, 54]
+  17568138:
+    template: Necroplasm
+    at:       [-91.090, 31.725, 161.143, 244]
+    level:    [37, 37]
+  17568139:
+    template: Air_Elemental_SA
+    script:   Air_Elemental
+    at:       [-297.236, 26.926, -100.298]
+    level:    [33, 36]
+  17568140:
+    template: Aroma_Leech
+    at:       [1.000, 1.000, 1.000, 20]
+    level:    [38, 38]
+  17568141:
+    template: Metallic_Slime
+    at:       [42.219, 30.340, 430.156, 190]
+    level:    [34, 38]
+  17568142:
+    template: Krabimanjaro
+    at:       [-204.600, 32.000, 1.540, 78]
+    level:    [95, 96]
+  17568143:
+    template: Krabimanjaro
+    at:       [-116.400, -0.879, 228.917, 246]
+    level:    [95, 96]
+  17568144:
+    template: Krabimanjaro
+    at:       [-149.900, -28.020, -199.410, 195]
+    level:    [95, 96]
+
+slots:
+  - members:
+      17567756: {} # Stink_Bats
+      17567759: {} # Blood_Bunny
+  - members:
+      17567761: {} # Stink_Bats
+      17567763: {} # Blood_Bunny
+  - members:
+      17567765: {} # Goblin_Tinkerer
+      17567766: {} # Goblin_Butcher
+  - members:
+      17567767: {} # Goblin_Ambusher
+      17567768: {} # Goblin_Tinkerer
+  - members:
+      17567769: {} # Goblin_Butcher
+      17567770: {} # Goblin_Ambusher
+  - members:
+      17567771: {} # Goblin_Tinkerer
+      17567772: {} # Goblin_Butcher
+  - members:
+      17567779: {} # Stink_Bats
+      17567780: {} # Blood_Bunny
+  - members:
+      17567785: {} # Stink_Bats
+      17567786: {} # Blood_Bunny
+  - members:
+      17567789: {} # Hognosed_Bat
+      17567792: {} # Stalking_Sapling
+  - members:
+      17567790: {} # Hognosed_Bat
+      17567796: {} # Fly_Agaric
+  - members:
+      17567803: {} # Stink_Bats
+      17567804: {} # Hognosed_Bat
+  - members:
+      17567805: {} # Goblin_Mugger
+      17567806: {} # Goblin_Leecher
+  - members:
+      17567807: {} # Goblin_Gambler
+      17567808: {} # Goblin_Mugger
+  - members:
+      17567809: {} # Goblin_Leecher
+      17567810: {} # Goblin_Gambler
+  - members:
+      17567818: {} # Goblin_Mugger
+      17567819: {} # Goblin_Leecher
+  - members:
+      17567820: {} # Goblin_Gambler
+      17567821: {} # Goblin_Mugger
+  - members:
+      17567822: {} # Goblin_Leecher
+      17567823: {} # Goblin_Gambler
+  - members:
+      17567866: {} # Stink_Bats
+      17567867: {} # Hognosed_Bat
+  - members:
+      17567934: {} # Hognosed_Bat
+      17567935: {} # Hognosed_Bat
+  - members:
+      17567938: {} # Stalking_Sapling
+      17567943: {} # Stalking_Sapling
+  - members:
+      17567970: {} # Goblin_Ambusher
+      17567971: {} # Goblin_Tinkerer
+      17567972: {} # Goblin_Butcher
+  - members:
+      17567982: {} # Goblin_Ambusher
+      17567983: {} # Goblin_Tinkerer
+      17567984: {} # Goblin_Butcher
+  - members:
+      17567995: {} # Hognosed_Bat
+      17568007: {} # Hognosed_Bat
+  - members:
+      17567998: {} # Stalking_Sapling
+      17568001: {} # Thread_Leech
+  - members:
+      17568010: {} # Stalking_Sapling
+      17568013: {} # Thread_Leech
+  - members:
+      17568049: {} # Shrieker
+      17568050: {} # Shrieker
+  - members:
+      17568051: {} # Shrieker
+      17568052: {} # Shrieker
+      17568053: {} # Shrieker
+      17568055: {} # Shrieker
+  - members:
+      17568056: {} # Shrieker
+      17568057: {} # Will-o-the-Wisp
+      17568058: {} # Will-o-the-Wisp
+      17568059: {} # Will-o-the-Wisp
+  - members:
+      17568065: {} # Goliath_Beetle
+      17568066: {} # Seeker_Bats
+  - members:
+      17568067: {} # Seeker_Bats
+      17568068: {} # Seeker_Bats
+      17568070: {} # Seeker_Bats
+  - members:
+      17568072: {} # Seeker_Bats
+      17568073: {} # Seeker_Bats
+  - members:
+      17568111: {} # Goblin_Pathfinder
+      17568113: {} # Goblin_Furrier
+  - members:
+      17568114: {} # Goblin_Smithy
+      17568115: {} # Goblin_Shaman
+  - members:
+      17568116: {} # Goblin_Pathfinder
+      17568119: {} # Goblin_Smithy
+  - members:
+      17568118: {} # Goblin_Furrier
+      17568120: {} # Goblin_Shaman

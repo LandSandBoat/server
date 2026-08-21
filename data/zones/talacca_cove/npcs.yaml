@@ -1,0 +1,849 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17010700:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-180.000, 39.080, 180.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags: 1155
+      moving:          7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17010706:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [20.000, -0.500, 185.000, 65]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17010712:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [220.000, -40.500, 185.000, 65]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17010714:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-180.000, 39.080, 180.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags: 1155
+      moving:          7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17010716:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [20.000, -0.500, 185.000, 65]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17010718:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [220.000, -40.500, 185.000, 65]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17010866:
+    script: NPC[b2]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17010867:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17010868:
+    script: NPC[b4]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17010869:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17010871:
+    script: NPC[b7]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17010872:
+    script: NPC[b8]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17010873:
+    script: NPC[b9]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17010874:
+    script: NPC[ba]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17010875:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17010876:
+    script: NPC[bc]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17010877:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17010878:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17010879:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17010880:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17010881:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17010882:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17010883:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17010884:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17010885:
+    script: NPC[c5]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17010886:
+    script: NPC[c6]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17010887:
+    script: NPC[c7]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17010888:
+    script: NPC[c8]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17010889:
+    script:       _1l0
+    display_name: Rock Slab
+    at:           [-100.000, -9.399, -87.000]
+    render:
+      look:
+        type: door
+      door_id:      812396895
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010890:
+    script:       _1l1
+    display_name: Iron Gate
+    at:           [20.000, -9.399, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      829174111
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010891:
+    script:       _1l2
+    display_name: Iron Gate
+    at:           [-180.000, 30.575, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      845951327
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010892:
+    script:       _1l3
+    display_name: Iron Gate
+    at:           [220.000, -49.400, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      862728543
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010893:
+    script:       _1l4
+    display_name: FX_1l4
+    at:           [22.821, -3.267, 155.769]
+    render:
+      look:
+        type: door
+      door_id:      879505759
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010894:
+    script:       _1l5
+    display_name: FX_1l5
+    at:           [-177.178, 36.732, 155.769]
+    render:
+      look:
+        type: door
+      door_id:      896282975
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010895:
+    script:       _1l6
+    display_name: FX_1l6
+    at:           [222.821, -43.267, 155.769]
+    render:
+      look:
+        type: door
+      door_id:      913060191
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010896:
+    script:       _1l7
+    display_name: FX_1l7
+    at:           [9.000, -1.799, 190.000]
+    render:
+      look:
+        type: door
+      door_id:      929837407
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010897:
+    script:       _1l8
+    display_name: FX_1l8
+    at:           [-191.000, 38.200, 190.000]
+    render:
+      look:
+        type: door
+      door_id:      946614623
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010898:
+    script:       _1l9
+    display_name: FX_1l9
+    at:           [209.000, -41.799, 190.000]
+    render:
+      look:
+        type: door
+      door_id:      963391839
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17010899:
+    script:       Wasuhd
+    display_name: Wasuhd
+    at:           [6.849, -0.574, 186.524, 241]
+    render:
+      look:
+        type:  standard
+        model: 1537
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010900:
+    script:       Yazquhl
+    display_name: Yazquhl
+    at:           [19.980, -0.528, 193.767, 241]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  10
+        head:  4096
+        body:  8351
+        hands: 12447
+        legs:  16543
+        feet:  20639
+        main:  24858
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010901:
+    script:       Gowam
+    display_name: Gowam
+    at:           [24.191, -0.460, 193.660, 122]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  0
+        head:  4192
+        body:  8288
+        hands: 12384
+        legs:  16480
+        feet:  20576
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010902:
+    script:       Qultada
+    display_name: Qultada
+    at:           [8.148, -0.441, 171.151, 215]
+    render:
+      look:
+        type:  standard
+        model: 1541
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010903:
+    script:       Qultada
+    display_name: Qultada
+    at:           [8.148, -0.441, 171.151, 215]
+    render:
+      look:
+        type:  standard
+        model: 1541
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010904:
+    script:       Qultada
+    display_name: Qultada
+    at:           [18.846, -0.449, 176.990, 219]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  0
+        head:  4263
+        body:  8359
+        hands: 12455
+        legs:  16551
+        feet:  20647
+        main:  24751
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010905:
+    script:       Zweeha
+    display_name: Zweeha
+    at:           [8.811, -0.481, 169.027, 202]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  11
+        head:  4096
+        body:  8227
+        hands: 12288
+        legs:  16484
+        feet:  20580
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010906:
+    script:       Mutihb
+    display_name: Mutihb
+    at:           [3.523, -0.424, 167.556, 219]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  7
+        head:  4096
+        body:  8325
+        hands: 12288
+        legs:  16400
+        feet:  20496
+        main:  24736
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010907:
+    script: blank
+    at:     [4.420, -0.450, 165.679, 219]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  11
+        head:  4096
+        body:  8349
+        hands: 12445
+        legs:  16515
+        feet:  20611
+        main:  24831
+        sub:   28672
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status: cutscene_only
+
+  17010908:
+    script: blank
+    at:     [10.508, -0.705, 175.274, 20]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  17010909:
+    script: blank
+    at:     [21.980, -59.330, 180.309, 157]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17010910:
+    script: blank
+    at:     [16.731, -59.702, 173.737, 175]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17010911:
+    script: blank
+    at:     [20.022, -59.702, 169.009, 60]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17010912:
+    script: blank
+    at:     [16.730, -0.507, 179.816, 227]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  17010913:
+    script: blank
+    at:     [25.511, -0.264, 188.151, 50]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  17010914:
+    script: blank
+    at:     [19.484, -0.452, 190.344, 227]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  17010915:
+    script: blank
+    at:     [14.386, -0.622, 188.423, 227]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  17010916:
+    script: blank
+    at:     [15.101, -0.621, 182.898, 20]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  17010917:
+    script: blank
+    at:     [7.745, -0.221, 167.887, 50]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  17010918:
+    script:       qm1
+    display_name: ???
+    at:           [-61.516, -9.905, -138.676, 117]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17010919:
+    script:       Valkeng
+    display_name: Valkeng
+    render:
+      look:
+        type:  standard
+        model: 998
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+    content:  TOAU
+
+  17010920:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-24.552, -7.803, -269.619, 186]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17010921:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-24.552, -7.803, -269.619, 186]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17010922:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17010923:
+    script:       Gessho
+    display_name: Gessho
+    render:
+      look:
+        type:  standard
+        model: 1083
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  TOAU
+
+  17010924:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1083
+      entity_flags: 2075
+      name_prefix:    32
+
+  17010925:
+    script:       Gessho
+    display_name: Gessho
+    render:
+      look:
+        type:  standard
+        model: 1536
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  TOAU

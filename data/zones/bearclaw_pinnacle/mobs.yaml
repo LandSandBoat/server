@@ -1,0 +1,595 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Apis:
+    id:            196
+    species:       buffalo
+    type:          [battlefield]
+    skill_list_id: 1174
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 360
+      jobs: [war, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13000
+
+  Bearclaw_Leveret:
+    id:            383
+    species:       rabbit
+    type:          [battlefield]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 270
+        entity_flags:  3
+        model_size:    2
+        hitbox:       14
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+
+  Bearclaw_Rabbit:
+    id:            384
+    species:       rabbit
+    type:          [battlefield]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 270
+        entity_flags: 135
+        model_size:     3
+        hitbox:        18
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+
+  Eldertaur:
+    id:            1190
+    species:       taurus
+    type:          [notorious, battlefield]
+    spell_list_id: 203
+    skill_list_id: 317
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [whm, pld]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 1153
+        hitbox:         10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  5000
+        mp: 10000
+
+  Mindertaur:
+    id:            2668
+    species:       taurus
+    type:          [notorious, battlefield]
+    spell_list_id: 202
+    skill_list_id: 318
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [whm, pld]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  4500
+        mp: 10000
+
+  Snoll_Tzar:
+    id:            3684
+    species:       snoll
+    type:          [notorious, battlefield]
+    skill_list_id: 1164
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:      3
+          wind:     1
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 283
+        entity_flags:  135
+        animation_sub:   4
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        mp_base: 30
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+
+  Snow_Devil_blm:
+    id:            7099
+    display_name:  Snow_Devil
+    species:       snoll
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 232
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      3
+          wind:     1
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 278
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 4000
+
+  Snow_Devil_war:
+    id:            7100
+    display_name:  Snow_Devil
+    species:       snoll
+    type:          [battlefield]
+    skill_list_id: 232
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      3
+          wind:     1
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 278
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+
+spawns:
+  16801793:
+    template: Snoll_Tzar
+    at:       [-460.000, 0.402, 902.000, 64]
+    level:    [65, 66]
+  16801794:
+    template: Snoll_Tzar
+    at:       [-220.168, 0.397, 501.688, 64]
+    level:    [65, 66]
+  16801795:
+    template: Snoll_Tzar
+    at:       [-621.041, 0.414, 221.900, 64]
+    level:    [65, 66]
+  16801796:
+    template: Bearclaw_Rabbit
+    at:       [-460.000, -0.097, 902.000, 64]
+    level:    [75, 75]
+  16801797:
+    template: Bearclaw_Leveret
+    at:       [-459.494, 0.085, 899.878, 64]
+    level:    [73, 73]
+  16801798:
+    template: Bearclaw_Leveret
+    at:       [-458.452, 0.106, 899.559, 64]
+    level:    [73, 73]
+  16801799:
+    template: Bearclaw_Leveret
+    at:       [-460.131, 0.073, 900.111, 64]
+    level:    [73, 73]
+  16801800:
+    template: Bearclaw_Leveret
+    at:       [-458.905, 0.093, 899.814, 64]
+    level:    [73, 73]
+  16801801:
+    template: Bearclaw_Leveret
+    at:       [-458.340, 0.104, 899.561, 64]
+    level:    [73, 73]
+  16801803:
+    template: Bearclaw_Rabbit
+    at:       [-220.327, -0.420, 501.149, 64]
+    level:    [75, 75]
+  16801804:
+    template: Bearclaw_Leveret
+    at:       [-219.821, -0.238, 499.027, 64]
+    level:    [73, 73]
+  16801805:
+    template: Bearclaw_Leveret
+    at:       [-218.779, -0.217, 498.708, 64]
+    level:    [73, 73]
+  16801806:
+    template: Bearclaw_Leveret
+    at:       [-220.458, -0.250, 499.260, 64]
+    level:    [73, 73]
+  16801807:
+    template: Bearclaw_Leveret
+    at:       [-219.232, -0.230, 498.963, 64]
+    level:    [73, 73]
+  16801808:
+    template: Bearclaw_Leveret
+    at:       [-218.667, -0.219, 498.710, 64]
+    level:    [73, 73]
+  16801810:
+    template: Bearclaw_Rabbit
+    at:       [-620.565, 0.095, 221.161, 64]
+    level:    [75, 75]
+  16801811:
+    template: Bearclaw_Leveret
+    at:       [-620.059, 0.277, 219.039, 64]
+    level:    [73, 73]
+  16801812:
+    template: Bearclaw_Leveret
+    at:       [-619.017, 0.298, 218.720, 64]
+    level:    [73, 73]
+  16801813:
+    template: Bearclaw_Leveret
+    at:       [-620.696, 0.265, 219.272, 64]
+    level:    [73, 73]
+  16801814:
+    template: Bearclaw_Leveret
+    at:       [-619.470, 0.285, 218.975, 64]
+    level:    [73, 73]
+  16801815:
+    template: Bearclaw_Leveret
+    at:       [-618.905, 0.296, 218.722, 64]
+    level:    [73, 73]
+  16801818:
+    template: Snow_Devil_war
+    at:       [-465.000, 0.000, 903.000, 64]
+    level:    [78, 78]
+  16801819:
+    template: Snow_Devil_war
+    at:       [-460.000, 0.000, 903.000, 64]
+    level:    [78, 78]
+  16801820:
+    template: Snow_Devil_war
+    at:       [-455.000, 0.000, 903.000, 64]
+    level:    [78, 78]
+  16801821:
+    template: Snow_Devil_blm
+    at:       [-465.000, 0.000, 903.000, 64]
+    level:    [78, 78]
+  16801822:
+    template: Snow_Devil_blm
+    at:       [-460.000, 0.000, 903.000, 64]
+    level:    [78, 78]
+  16801823:
+    template: Snow_Devil_blm
+    at:       [-455.000, 0.000, 903.000, 64]
+    level:    [78, 78]
+  16801826:
+    template: Snow_Devil_war
+    at:       [-226.000, 0.000, 498.000, 64]
+    level:    [78, 78]
+  16801827:
+    template: Snow_Devil_war
+    at:       [-221.000, 0.000, 498.000, 64]
+    level:    [78, 78]
+  16801828:
+    template: Snow_Devil_war
+    at:       [-216.000, 0.000, 498.000, 64]
+    level:    [78, 78]
+  16801829:
+    template: Snow_Devil_blm
+    at:       [-226.000, 0.000, 498.000, 64]
+    level:    [78, 78]
+  16801830:
+    template: Snow_Devil_blm
+    at:       [-221.000, 0.000, 498.000, 64]
+    level:    [78, 78]
+  16801831:
+    template: Snow_Devil_blm
+    at:       [-216.000, 0.000, 498.000, 64]
+    level:    [78, 78]
+  16801834:
+    template: Snow_Devil_war
+    at:       [-625.000, 0.000, 219.000, 64]
+    level:    [78, 78]
+  16801835:
+    template: Snow_Devil_war
+    at:       [-620.000, 0.000, 219.000, 64]
+    level:    [78, 78]
+  16801836:
+    template: Snow_Devil_war
+    at:       [-615.000, 0.000, 219.000, 64]
+    level:    [78, 78]
+  16801837:
+    template: Snow_Devil_blm
+    at:       [-625.000, 0.000, 219.000, 64]
+    level:    [78, 78]
+  16801838:
+    template: Snow_Devil_blm
+    at:       [-620.000, 0.000, 219.000, 64]
+    level:    [78, 78]
+  16801839:
+    template: Snow_Devil_blm
+    at:       [-615.000, 0.000, 219.000, 64]
+    level:    [78, 78]
+  16801841:
+    template: Eldertaur
+    at:       [-464.000, 0.602, 902.000, 64]
+    level:    [80, 80]
+  16801842:
+    template: Mindertaur
+    at:       [-456.000, 0.453, 902.000, 64]
+    level:    [80, 80]
+  16801844:
+    template: Eldertaur
+    at:       [-224.000, 0.602, 502.000, 64]
+    level:    [80, 80]
+  16801845:
+    template: Mindertaur
+    at:       [-216.000, 0.453, 502.000, 64]
+    level:    [80, 80]
+  16801847:
+    template: Eldertaur
+    at:       [-624.000, 0.602, 222.000, 64]
+    level:    [80, 80]
+  16801848:
+    template: Mindertaur
+    at:       [-616.000, 0.453, 222.000, 64]
+    level:    [80, 80]
+  16801850:
+    template: Apis
+    at:       [-460.403, 0.423, 902.468, 62]
+    level:    [81, 81]
+  16801852:
+    template: Apis
+    at:       [-222.980, 0.647, 503.372, 59]
+    level:    [81, 81]
+  16801854:
+    template: Apis
+    at:       [-624.413, 0.686, 223.038, 59]
+    level:    [81, 81]
+  16801857:
+    script: Predataur
+  16801858:
+    script: Predataur
+  16801859:
+    script: Predataur
+  16801860:
+    script: Predataur
+  16801861:
+    script: Predataur
+  16801864:
+    script: Predataur
+  16801865:
+    script: Predataur
+  16801866:
+    script: Predataur
+  16801867:
+    script: Predataur
+  16801868:
+    script: Predataur
+  16801871:
+    script: Predataur
+  16801872:
+    script: Predataur
+  16801873:
+    script: Predataur
+  16801874:
+    script: Predataur
+  16801875:
+    script: Predataur

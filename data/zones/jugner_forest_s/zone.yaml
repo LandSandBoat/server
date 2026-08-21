@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z2a0:
+    from:  [-340.908, -8.244, 465.750]
+    to:    east_ronfaure_s
+    at:    [693.068, -21.256, -590.713, 3.141593]
+    scale: [2.000, 6.000]
+
+  z2a2:
+    from:  [591.936, -15.294, 560.095]
+    to:    batallia_downs_s
+    at:    [-439.393, -11.765, -239.958]
+    scale: [1.000, 10.000]
+
+  z2a4:
+    from:  [625.783, -8.850, 298.389]
+    to:    vunkerl_inlet_s
+    at:    [-393.238, -50.034, 741.199]
+    scale: [1.500, 4.000]
+
+  z2a6:
+    from:  [545.714, -8.406, -138.350]
+    to:    vunkerl_inlet_s
+    at:    [-579.977, -49.507, 198.729, 4.712389]
+    scale: [1.500, 4.000]
+
+  z2a8:
+    from:  [178.491, -24.823, -585.659]
+    to:    vunkerl_inlet_s
+    at:    [-661.000, -66.268, -328.000, 1.570796]
+    scale: [1.500, 4.000]
+
+  z2aa:
+    from:  [-240.440, -16.683, -597.493]
+    to:    la_vaule_s
+    at:    [236.500, -2.250, 20.000, 3.141593]
+    scale: [1.000, 4.000]

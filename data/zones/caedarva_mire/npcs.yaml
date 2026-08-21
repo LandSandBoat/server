@@ -1,0 +1,1834 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17101285:
+    script: NPC[1e5]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17101286:
+    script: NPC[1e6]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17101287:
+    script:       Peculiar_Plant
+    display_name: Peculiar Plant
+    at:           [182.000, -12.000, -120.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    widescan: true
+    content:  TOAU
+
+  17101288:
+    script:       Warhorse_Hoofprint
+    display_name: Warhorse Hoofprint
+    at:           [413.186, -20.778, -114.026]
+    render:
+      look:
+        type:  standard
+        model: 1525
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+      moving:        6
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101289:
+    script:       Warhorse_Hoofprint
+    display_name: Warhorse Hoofprint
+    at:           [401.294, -8.381, -282.228]
+    render:
+      look:
+        type:  standard
+        model: 1525
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+      moving:        7
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101290:
+    script:       Warhorse_Hoofprint
+    display_name: Warhorse Hoofprint
+    at:           [318.261, -13.501, -416.551]
+    render:
+      look:
+        type:  standard
+        model: 1525
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+      moving:        6
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101291:
+    script: NPC[1eb]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+    speed:           40
+    animation_speed: 40
+
+  17101292:
+    script:       qm1
+    display_name: ???
+    at:           [417.795, -19.631, -74.338]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101293:
+    script:       qm2
+    display_name: ???
+    at:           [-771.466, -11.750, 322.087]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101294:
+    script:       qm3
+    display_name: ???
+    at:           [697.491, -7.000, 526.015]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101295:
+    script:       qm4
+    display_name: ???
+    at:           [-756.499, -12.413, 632.740]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101296:
+    script:       Peculiar_Footprints
+    display_name: Peculiar Footprints
+    at:           [784.870, -12.250, 647.170]
+    render:
+      look:
+        type:  standard
+        model: 1525
+      entity_flags:    27
+      name_vis:        96
+      name_prefix:     34
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  TVR
+
+  17101297:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17101298:
+    script: NPC[1f2]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17101299:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17101301:
+    script: NPC[1f5]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+    speed:           40
+    animation_speed: 40
+
+  17101302:
+    script: NPC[1f6]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17101303:
+    script: NPC[1f7]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17101304:
+    script: NPC[1f8]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+    speed:           40
+    animation_speed: 40
+
+  17101305:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17101306:
+    script: NPC[1fa]
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+
+  17101307:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101308:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101309:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101310:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101311:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101312:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101313:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101314:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101315:
+    script:       Rujawan
+    display_name: Rujawan
+    at:           [492.176, -22.431, -494.374, 12]
+    render:
+      look:
+        type:  standard
+        model: 964
+      moving: 1
+    widescan: true
+    content:  TOAU
+
+  17101316:
+    script:       Perikia
+    display_name: Perikia
+    at:           [-347.173, -2.130, -15.139, 35]
+    render:
+      look:
+        type:  standard
+        model: 964
+      moving: 1
+    widescan: true
+    content:  TOAU
+
+  17101317:
+    script:       _270
+    display_name: Heavy Iron Gate
+    at:           [540.090, -20.371, -437.420]
+    render:
+      look:
+        type: door
+      door_id:      808923743
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101318:
+    script:       _272
+    display_name: Runic Seal
+    at:           [486.859, -23.100, -500.000]
+    render:
+      look:
+        type: door
+      door_id:      842478175
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101319:
+    script:       Runic_Portal_Azouph
+    display_name: Runic Portal
+    at:           [523.833, -29.119, -503.636]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101320:
+    script:       _271
+    display_name: Heavy Iron Gate
+    at:           [-299.999, -8.370, -78.519]
+    render:
+      look:
+        type: door
+      door_id:      825700959
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101321:
+    script:       _273
+    display_name: Runic Seal
+    at:           [-353.880, -2.799, -20.000]
+    render:
+      look:
+        type: door
+      door_id:      859255391
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101322:
+    script:       Runic_Portal_Dvucca
+    display_name: Runic Portal
+    at:           [-264.512, -7.219, -28.285]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101323:
+    script:       _276
+    display_name: Door_276
+    at:           [321.003, 1.124, -700.011]
+    render:
+      look:
+        type: door
+      door_id:      909587039
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101324:
+    script:       _277
+    display_name: Door_277
+    at:           [-440.998, 1.107, -740.015]
+    render:
+      look:
+        type: door
+      door_id:      926364255
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101325:
+    script:       _278
+    display_name: Door_278
+    at:           [-380.000, -2.669, -281.000]
+    render:
+      look:
+        type: door
+      door_id:      943141471
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101326:
+    script:       _279
+    display_name: Door_279
+    at:           [-639.000, 13.323, -260.000]
+    render:
+      look:
+        type: door
+      door_id:      959918687
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101327:
+    script:       Tyamah
+    display_name: Tyamah
+    at:           [321.003, 1.124, -700.011, 128]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  2
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101328:
+    script:       Nasheefa
+    display_name: Nasheefa
+    at:           [-440.998, 1.107, -740.015]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  9
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101329:
+    script:       Nuimahn
+    display_name: Nuimahn
+    at:           [-380.000, -2.669, -281.000, 192]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  8
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       16
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101330:
+    script:       Kwadaaf
+    display_name: Kwadaaf
+    at:           [-639.000, 13.323, -260.000, 128]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  2
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101331:
+    script:       _27a
+    display_name: Engraved Tablet
+    at:           [763.466, -9.515, 638.219]
+    render:
+      look:
+        type: door
+      door_id:      1631007327
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101332:
+    script:       _27b
+    display_name: Engraved Tablet
+    at:           [-719.309, -13.529, 765.549]
+    render:
+      look:
+        type: door
+      door_id:      1647784543
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17101333:
+    script: NPC[215]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  17101334:
+    script:       qm5
+    display_name: ???
+    at:           [-389.084, 6.343, -597.228, 143]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101335:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [40.329, 5.324, -697.070, 72]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101336:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [40.329, 5.324, -697.070, 72]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101337:
+    script:       qm6
+    display_name: ???
+    at:           [157.529, -8.043, -115.699, 33]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101338:
+    script:       qm7
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17101339:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17101340:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17101341:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17101342:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17101343:
+    script:       Jazaraats_Headstone
+    display_name: Jazaraat's Headstone
+    at:           [-389.670, 6.691, -570.019, 130]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101344:
+    script:       Jazaraat
+    display_name: Jazaraat
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  29
+        head:  4096
+        body:  8340
+        hands: 12439
+        legs:  16551
+        feet:  20647
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101345:
+    script:       Razfahd
+    display_name: Razfahd
+    at:           [-0.024, 0.000, -7.063, 64]
+    render:
+      look:
+        type:  standard
+        model: 1535
+      entity_flags: 29
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101346:
+    script:       Mnejing
+    display_name: Mnejing
+    render:
+      look:
+        type:  standard
+        model: 1549
+      entity_flags:  27
+      animation_sub:  2
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101347:
+    script:       Ovjang
+    display_name: Ovjang
+    render:
+      look:
+        type:  standard
+        model: 1543
+      entity_flags:  27
+      animation_sub:  2
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101348:
+    script:       Aphmau
+    display_name: Aphmau
+    render:
+      look:
+        type:  standard
+        model: 1544
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101349:
+    script:       Odin
+    display_name: Odin
+    render:
+      look:
+        type:  standard
+        model: 1829
+      entity_flags: 2075
+      name_prefix:    32
+    widescan: true
+    content:  TOAU
+
+  17101350:
+    script:       Luzaf
+    display_name: Luzaf
+    render:
+      look:
+        type:  standard
+        model: 1548
+      entity_flags: 2077
+      name_prefix:    32
+    widescan: true
+    content:  TOAU
+
+  17101351:
+    script:       Flit
+    display_name: Flit
+    render:
+      look:
+        type:  standard
+        model: 1726
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101352:
+    script:       Raubahn
+    display_name: Raubahn
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  9
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 29
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101353:
+    script:       Whafael
+    display_name: Whafael
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  1
+        head:  4215
+        body:  8312
+        hands: 12425
+        legs:  16555
+        feet:  20617
+        main:  24809
+        sub:   28672
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101354:
+    script:       Amkeen
+    display_name: Amkeen
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  11
+        head:  4215
+        body:  8312
+        hands: 12425
+        legs:  16555
+        feet:  20617
+        main:  24809
+        sub:   28672
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101355:
+    script:       Hadwahn
+    display_name: Hadwahn
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4215
+        body:  8312
+        hands: 12425
+        legs:  16555
+        feet:  20617
+        main:  24809
+        sub:   28672
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101356:
+    script:       '1'
+    display_name: '1'
+    render:
+      look:
+        type:  automaton
+        model: 1658
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101357:
+    script:       '2'
+    display_name: '2'
+    render:
+      look:
+        type:  automaton
+        model: 1658
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101358:
+    script:       '3'
+    display_name: '3'
+    render:
+      look:
+        type:  automaton
+        model: 1658
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101359:
+    script:       Nashmeira
+    display_name: Nashmeira
+    render:
+      look:
+        type:  standard
+        model: 1544
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101360:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17101361:
+    script:       Seaprinces_Tombstone
+    display_name: Seaprince's Tombstone
+    at:           [-433.640, 7.000, -586.112, 126]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101362:
+    script:       Balrahn_Eidolon
+    display_name: Balrahn Eidolon
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  29
+        head:  4295
+        body:  8387
+        hands: 12483
+        legs:  16579
+        feet:  20675
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101363:
+    script:       Nahshib
+    display_name: Nahshib
+    at:           [-274.334, -8.287, -64.255, 163]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  5
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101364:
+    script:       Nareema
+    display_name: Nareema
+    at:           [518.387, -23.707, -467.297, 61]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  2
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17101365:
+    script:       qm8
+    display_name: ???
+    at:           [125.686, -7.792, -186.036, 250]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101366:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [-597.552, 2.990, -121.253]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status:  normal
+    content: TOAU
+
+  17101367:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [-562.612, -7.343, 56.605]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status:  normal
+    content: TOAU
+
+  17101368:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [145.298, -10.925, -153.635]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32774
+    status:  normal
+    content: TOAU
+
+  17101369:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [-424.953, -9.026, -86.288]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32774
+    status:  normal
+    content: TOAU
+
+  17101370:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [175.217, -11.000, -186.769]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status:  normal
+    content: TOAU
+
+  17101371:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [443.342, -10.943, -332.972]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32774
+    status:   normal
+    widescan: true
+
+  17101372:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17101373:
+    script:       qm9
+    display_name: ???
+    at:           [128.882, 1.407, -631.431, 247]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101374:
+    script:       qm10
+    display_name: ???
+    at:           [473.271, -31.778, 75.525, 196]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101375:
+    script:       Yafahb
+    display_name: Yafahb
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  9
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16513
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+    content:  TOAU
+
+  17101376:
+    script:       Automaton
+    display_name: Automaton
+    render:
+      look:
+        type:  standard
+        model: 998
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+    content:  TOAU
+
+  17101377:
+    script:       Elisabeth
+    display_name: Elisabeth
+    render:
+      look:
+        type:  standard
+        model: 998
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+    content:  TOAU
+
+  17101378:
+    script:       Iruki-Waraki
+    display_name: Iruki-Waraki
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  6
+        head:  4265
+        body:  8236
+        hands: 12392
+        legs:  16513
+        feet:  20649
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+    content:  TOAU
+
+  17101379:
+    script:       qm11
+    display_name: ???
+    at:           [195.364, 1.296, -616.641, 55]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101380:
+    script:       Liliroon
+    display_name: Liliroon
+    render:
+      look:
+        type:  standard
+        model: 1581
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101381:
+    script:       Dashahan
+    display_name: Dashahan
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  2
+        head:  4096
+        body:  8295
+        hands: 12288
+        legs:  16520
+        feet:  20586
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101382:
+    script:       Dabhuh
+    display_name: Dabhuh
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  3
+        head:  4215
+        body:  8227
+        hands: 12323
+        legs:  16494
+        feet:  20515
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101383:
+    script: blank
+    render:
+      look:
+        type:  automaton
+        model: 1673
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17101384:
+    script:       qm12
+    display_name: ???
+    at:           [456.993, -7.000, -270.815, 207]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  17101385:
+    script:       Ahgdeen
+    display_name: Ahgdeen
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  7
+        head:  4111
+        body:  8235
+        hands: 12311
+        legs:  16391
+        feet:  20582
+        main:  24576
+        sub:   28672
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101386:
+    script:       Basweema
+    display_name: Basweema
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  14
+        head:  4096
+        body:  8203
+        hands: 12288
+        legs:  16415
+        feet:  20511
+        main:  24576
+        sub:   28672
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101387:
+    script:       Ahgdeen
+    display_name: Ahgdeen
+    render:
+      look:
+        type:  standard
+        model: 1551
+      entity_flags: 25
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 18
+    widescan:        true
+    content:         TOAU
+
+  17101388:
+    script:       Basweema
+    display_name: Basweema
+    render:
+      look:
+        type:  standard
+        model: 1550
+      entity_flags: 25
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 18
+    widescan:        true
+    content:         TOAU
+
+  17101389:
+    script:       Lamia_No27
+    display_name: Lamia No.27
+    render:
+      look:
+        type:  automaton
+        model: 1652
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101390:
+    script:       lamia2
+    display_name: lamia2
+    render:
+      look:
+        type:  automaton
+        model: 1734
+      entity_flags:  25
+      animation_sub:  5
+      name_vis:       4
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101391:
+    script:       Basweema
+    display_name: Basweema
+    render:
+      look:
+        type:  automaton
+        model: 1658
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17101392:
+    script:       usa
+    display_name: usa
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17101393:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [242.949, -4.485, -491.422, 74]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17101394:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [269.501, -4.473, -732.206, 150]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17101395:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [-314.613, -4.327, -748.021, 193]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17101396:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [243.049, -4.485, -491.422, 74]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17101397:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [269.601, -4.473, -732.206, 150]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17101398:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [-314.513, -4.327, -748.021, 193]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17101399:
+    script:       HomePoint#1
+    display_name: 'Home Point #1'
+    at:           [-449.000, 13.400, -497.000]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17101400:
+    script:       HomePoint#2
+    display_name: 'Home Point #2'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17101401:
+    script:       HomePoint#3
+    display_name: 'Home Point #3'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17101402:
+    script:       HomePoint#4
+    display_name: 'Home Point #4'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17101403:
+    script:       HomePoint#5
+    display_name: 'Home Point #5'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17101404:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [681.420, 0.000, 442.270]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17101405:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [592.660, -8.420, 320.610]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17101406:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [742.000, -3.500, 391.000]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17101407:
+    script:       Survival_Guide
+    display_name: Survival Guide
+    at:           [-659.000, -13.000, 340.000, 96]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:  1
+      name_vis:      32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  SURVIVAL_GUIDE
+
+  17101408:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112
+
+  17101409:
+    script:       Arisen_Soulflayer
+    display_name: Arisen Soulflayer
+    render:
+      look:
+        type:  standard
+        model: 3592
+      entity_flags: 2073
+      name_prefix:    32
+    status: cutscene_only
+
+  17101410:
+    script:       Arisen_Soulflayer
+    display_name: Arisen Soulflayer
+    render:
+      look:
+        type:  standard
+        model: 1775
+      entity_flags: 2073
+      name_prefix:    32
+    status: cutscene_only
+
+  17101411:
+    script:       Uran-Mafran
+    display_name: Uran-Mafran
+    render:
+      look:
+        type:   equipped
+        race:   5
+        face:   4
+        head:   4096
+        body:   8238
+        hands:  12334
+        legs:   16430
+        feet:   20526
+        main:   24576
+        sub:    28672
+        ranged: 32787
+      entity_flags:  2075
+      animation_sub:    1
+      name_prefix:     32
+    status: cutscene_only
+
+  17101412:
+    script:       Uran-Mafran
+    display_name: Uran-Mafran
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  4
+        head:  4096
+        body:  8238
+        hands: 12334
+        legs:  16430
+        feet:  20526
+        main:  24576
+        sub:   28672
+      entity_flags:  2075
+      animation_sub:    1
+      name_prefix:     32
+    status: cutscene_only
+
+  17101413:
+    script:       Amnaf
+    display_name: Amnaf
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24576
+        sub:   28672
+      entity_flags: 2073
+      name_prefix:    32
+    status: cutscene_only
+
+  17101414:
+    script:       Savage Scars
+    display_name: Savage Scars
+    at:           [761.402, -8.000, 640.928]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:      112
+      name_prefix:     2
+      moving:      32769
+    status:  normal
+    content: TVR
+
+  17101415:
+    script:       Gloom Phantom
+    display_name: Gloom Phantom
+    render:
+      look:
+        type:  standard
+        model: 3157
+      entity_flags: 2075
+      name_prefix:    32
+    status: cutscene_only
+
+  17101416:
+    script:       Magh_Bihu
+    display_name: Magh Bihu
+    render:
+      look:
+        type:  standard
+        model: 3585
+      entity_flags: 2075
+      name_prefix:    32
+    status: cutscene_only
+
+  17101417:
+    script:       Dazbog
+    display_name: Dazbog
+    render:
+      look:
+        type:  standard
+        model: 3586
+      entity_flags: 2075
+      name_prefix:    32
+    status: cutscene_only
+
+  17101418:
+    at: [-451.535, 8.394, -613.203, 19]
+    render:
+      look:
+        type: ship
+      door_id:      10
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+      moving:       32768
+    status: cutscene_only
+
+  17101419:
+    script:       Vexing_Sniffles
+    display_name: Vexing Sniffles
+    at:           [-446.700, 8.249, -594.500]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:      112
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+    content:  TVR

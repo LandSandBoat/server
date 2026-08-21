@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z490:
+    from:  [393.999, 2.331, -60.573]
+    to:    the_sanctuary_of_zitah
+    at:    [539.901, 3.379, -580.218, 3.141593]
+    scale: [1.000, 3.000]
+
+  z492:
+    from:  [337.280, -6.619, 71.739]
+    to:    the_sanctuary_of_zitah
+    at:    [380.081, 3.756, -499.802, 1.570796]
+    scale: [1.000, 3.000]
+
+  z494:
+    from:  [-140.890, 2.353, 206.980]
+    to:    dragons_aery
+    at:    [-60.006, -2.915, -39.501, 4.712389]
+    scale: [1.000, 3.000]
+
+  z496:
+    from:  [96.526, -16.907, -221.490]
+    to:    cloister_of_storms
+    at:    [517.957, -18.013, 540.045]
+    scale: [1.000, 3.000]
+
+  z498:
+    from:  [8.902, 5.360, -338.835]
+    to:    cloister_of_storms
+    at:    [-523.126, 6.808, -500.019]
+    scale: [1.000, 3.000]

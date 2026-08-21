@@ -1,0 +1,1969 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Carrion_Crab:
+    id:            649
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Carrion_Leech:
+    id:            652
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Carrion_Slime:
+    id:            654
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Carrion_Toad:
+    id:            655
+    species:       doomed
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 321
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Clavauert_B_Chanoix:
+    id:           8167
+    display_name: Clavauert B Chanoix
+    species:      unclassified
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags:  3
+        name_prefix:  32
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Clipper_assault:
+    id:            5754
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      spawn:
+        type: [scripted]
+
+  Cursed_Chest:
+    id:            864
+    species:       mimic
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 960
+        entity_flags:  4227
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  D5J2-MERROW:
+    id:            885
+    species:       merrow
+    type:          [battlefield]
+    spell_list_id: 6
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1669
+        entity_flags:  515
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  D5R3-MERROW:
+    id:            886
+    species:       merrow
+    type:          [battlefield]
+    spell_list_id: 3
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1669
+        entity_flags:  515
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  D5S1-MERROW:
+    id:            887
+    species:       merrow
+    type:          [battlefield]
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1672
+        entity_flags: 771
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Demolition_Automaton:
+    id:            973
+    species:       automaton
+    skill_list_id: 28
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Draugar:
+    id:            1110
+    species:       draugar
+    spell_list_id: 21
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1766
+        entity_flags:  129
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Draugar2:
+    id:            5743
+    species:       draugar
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: staff
+      jobs: [drg, drg]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1751
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Fallen_Imperial_Trooper:
+    id:            1285
+    species:       fallen
+    spell_list_id: 5
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1902
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Fallen_Imperial_Wizard:
+    id:            1286
+    species:       fallen
+    spell_list_id: 21
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1903
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Fallen_Volunteer:
+    id:            1292
+    species:       fallen
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1901
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Giant_Pugil_assault:
+    id:            5752
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Imp:
+    id:            2065
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  1153
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  K22B6-LAMIA:
+    id:            2172
+    species:       lamiae
+    type:          [battlefield]
+    spell_list_id: 28
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  K22H3-LAMIA:
+    id:            2173
+    species:       lamiae
+    type:          [battlefield]
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1647
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  K22P2-LAMIA:
+    id:            2174
+    species:       lamiae
+    type:          [battlefield]
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1655
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Kelp_Crab:
+    id:            2206
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Kelp_Kulshedra:
+    id:            2207
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        model_size:  1
+        hitbox:     17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Kelp_Pugil:
+    id:            2208
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        hitbox: 23
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Khimaira_14X:
+    id:            2222
+    species:       khimaira
+    skill_list_id: 168
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    8
+          ice:     5
+          wind:    8
+          earth:   7
+          thunder: 9
+          water:   5
+          light:   7
+          dark:    5
+        rank_status:
+          paralyze:    7
+          bind:        7
+          silence:     7
+          slow:        7
+          poison:      7
+          light_sleep: 7
+          dark_sleep:  7
+          blind:       7
+      render:
+        look:
+          type:  standard
+          model: 1805
+        entity_flags: 155
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+  Kraken_assault:
+    id:            5755
+    species:       sea_monk
+    type:          [notorious]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        entity_flags: 133
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Lamia_No13:
+    id:            2340
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1644
+        entity_flags: 541
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Martial_Maestro_Megomak:
+    id:            2582
+    species:       moblin
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 691
+        entity_flags: 155
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 9999
+
+  Orobon_fished:
+    id:            3059
+    display_name:  Orobon
+    species:       orobon
+    type:          [fished]
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+        delay: 270
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8500
+
+  Percipient_Fish:
+    id:            3117
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10500
+
+  Puffer_Pugil:
+    id:            3220
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Pecheur:
+    id:            3262
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: axe
+        delay: 200
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        links: true
+      mob_mods:
+        hp_standback: 1
+      spawn:
+        type: [scripted]
+
+  Snipper_assault:
+    id:            5753
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Undead_Crab:
+    id:            4093
+    species:       crab
+    type:          [notorious]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 133
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Undead_Leech:
+    id:            4094
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 645
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Undead_Slime:
+    id:            4095
+    species:       slime
+    type:          [notorious]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 133
+        model_size:     2
+        hitbox:        27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Undead_Toad:
+    id:            4096
+    species:       doomed
+    type:          [notorious]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: axe
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 321
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17002497:
+    template: Percipient_Fish
+    at:       [364.000, -5.000, 99.000, 33]
+    level:    [81, 82]
+  17002498:
+    template: Percipient_Fish
+    at:       [343.000, -5.000, 99.000, 94]
+    level:    [81, 82]
+  17002499:
+    template: Percipient_Fish
+    at:       [338.000, -6.000, 67.000, 90]
+    level:    [81, 82]
+  17002500:
+    template: Percipient_Fish
+    at:       [302.000, -6.000, 50.000, 41]
+    level:    [81, 82]
+  17002501:
+    template: Percipient_Fish
+    at:       [256.000, -1.000, 22.000, 41]
+    level:    [81, 82]
+  17002502:
+    template: Percipient_Fish
+    at:       [223.000, -2.000, -21.000, 41]
+    level:    [81, 82]
+  17002503:
+    template: Percipient_Fish
+    at:       [295.000, -4.000, -14.000, 41]
+    level:    [81, 82]
+  17002504:
+    template: Percipient_Fish
+    at:       [313.000, -6.000, -16.000, 41]
+    level:    [81, 82]
+  17002505:
+    template: Cursed_Chest
+    at:       [509.000, -7.000, 100.000, 192]
+    level:    [73, 75]
+  17002506:
+    template: Cursed_Chest
+    at:       [590.000, -15.000, 103.000, 127]
+    level:    [73, 75]
+  17002507:
+    template: Cursed_Chest
+    at:       [346.000, -2.000, 113.000, 49]
+    level:    [73, 75]
+  17002508:
+    template: Cursed_Chest
+    at:       [351.000, -15.000, -14.000, 134]
+    level:    [73, 75]
+  17002509:
+    template: Cursed_Chest
+    at:       [305.000, -7.000, -56.000, 249]
+    level:    [73, 75]
+  17002510:
+    template: Cursed_Chest
+    at:       [288.000, -15.000, -105.000, 248]
+    level:    [73, 75]
+  17002511:
+    template: Cursed_Chest
+    at:       [331.000, -15.000, -181.000, 202]
+    level:    [73, 75]
+  17002512:
+    template: Cursed_Chest
+    at:       [434.000, -7.000, -123.000, 103]
+    level:    [73, 75]
+  17002513:
+    template: Cursed_Chest
+    at:       [330.000, -3.000, -34.000, 163]
+    level:    [73, 75]
+  17002514:
+    template: Cursed_Chest
+    at:       [472.000, -7.000, 228.000, 96]
+    level:    [73, 75]
+  17002515:
+    template: Cursed_Chest
+    at:       [221.000, -1.000, -32.000, 226]
+    level:    [73, 75]
+  17002516:
+    template: Cursed_Chest
+    at:       [546.000, -7.000, 161.000, 156]
+    level:    [73, 75]
+  17002517:
+    template: Lamia_No13
+    at:       [24.381, -4.094, -209.261, 42]
+    level:    [77, 78]
+  17002518:
+    template: Fallen_Volunteer
+    at:       [23.354, -4.243, -208.151, 39]
+    level:    [77, 78]
+  17002519:
+    template: Fallen_Imperial_Wizard
+    at:       [23.197, -4.286, -206.899, 41]
+    level:    [77, 78]
+  17002520:
+    template: Fallen_Imperial_Trooper
+    at:       [23.439, -4.264, -206.303, 43]
+    level:    [77, 78]
+  17002521:
+    template: Carrion_Crab
+    at:       [224.089, -8.515, 139.960, 223]
+    level:    [77, 78]
+  17002522:
+    template: Carrion_Leech
+    at:       [182.643, -5.278, 172.527, 83]
+    level:    [77, 78]
+  17002523:
+    template: Carrion_Crab
+    at:       [98.355, -6.449, 109.213, 38]
+    level:    [77, 78]
+  17002524:
+    template: Carrion_Crab
+    at:       [97.908, -6.864, 125.906, 124]
+    level:    [77, 78]
+  17002525:
+    template: Carrion_Leech
+    at:       [100.357, -6.039, 121.498, 117]
+    level:    [77, 78]
+  17002526:
+    template: Carrion_Crab
+    at:       [179.587, -3.634, 95.977, 100]
+    level:    [77, 78]
+  17002527:
+    template: Carrion_Crab
+    at:       [187.293, -3.333, 105.398, 166]
+    level:    [77, 78]
+  17002528:
+    template: Carrion_Crab
+    at:       [190.496, -2.543, 99.269, 50]
+    level:    [77, 78]
+  17002529:
+    template: Carrion_Slime
+    at:       [131.229, -7.275, -17.059, 17]
+    level:    [77, 78]
+  17002530:
+    template: Carrion_Slime
+    at:       [131.466, -7.279, -21.870, 96]
+    level:    [77, 78]
+  17002531:
+    template: Carrion_Slime
+    at:       [128.436, -7.419, -22.921, 87]
+    level:    [77, 78]
+  17002532:
+    template: Carrion_Crab
+    at:       [312.346, -5.207, 259.552, 31]
+    level:    [77, 78]
+  17002533:
+    template: Carrion_Leech
+    at:       [339.955, -8.721, 263.975, 238]
+    level:    [77, 78]
+  17002534:
+    template: Carrion_Leech
+    at:       [333.305, -9.289, 264.963, 129]
+    level:    [77, 78]
+  17002535:
+    template: Carrion_Leech
+    at:       [349.627, -2.358, 210.196, 230]
+    level:    [77, 78]
+  17002536:
+    template: Carrion_Leech
+    at:       [353.084, -5.625, 203.472, 15]
+    level:    [77, 78]
+  17002537:
+    template: Carrion_Leech
+    at:       [470.493, -7.645, 3747.511, 237]
+    level:    [77, 78]
+  17002538:
+    template: Carrion_Leech
+    at:       [497.515, -4.852, 326.347, 83]
+    level:    [77, 78]
+  17002539:
+    template: Carrion_Toad
+    at:       [491.285, -5.183, 303.975, 54]
+    level:    [77, 78]
+  17002540:
+    template: Carrion_Toad
+    at:       [492.665, -5.847, 303.296, 90]
+    level:    [77, 78]
+  17002541:
+    template: Undead_Crab
+    at:       [189.410, -3.663, 102.417, 145]
+    level:    [79, 80]
+  17002542:
+    template: Undead_Leech
+    at:       [323.574, -6.361, 261.256]
+    level:    [79, 80]
+  17002543:
+    template: Undead_Slime
+    at:       [111.220, -10.232, -26.560, 188]
+    level:    [79, 80]
+  17002544:
+    template: Undead_Toad
+    at:       [491.285, -5.183, 303.974, 90]
+    level:    [79, 80]
+  17002545:
+    template: Demolition_Automaton
+  17002551:
+    template: Carrion_Crab
+    level:    [76, 78]
+  17002552:
+    template: Carrion_Crab
+    level:    [76, 78]
+  17002553:
+    template: Carrion_Crab
+    level:    [76, 78]
+  17002554:
+    template: Carrion_Crab
+    level:    [76, 78]
+  17002555:
+    template: Carrion_Crab
+    level:    [76, 78]
+  17002556:
+    template: Imp
+    level:    [76, 78]
+  17002557:
+    template: Imp
+    level:    [76, 78]
+  17002558:
+    template: Imp
+    level:    [76, 78]
+  17002559:
+    template: Imp
+    level:    [76, 78]
+  17002560:
+    template: Imp
+    level:    [76, 78]
+  17002561:
+    template: Imp
+    level:    [76, 78]
+  17002562:
+    template: Imp
+    level:    [76, 78]
+  17002563:
+    template: Imp
+    level:    [76, 78]
+  17002577:
+    template: Kelp_Pugil
+    level:    [55, 55]
+  17002578:
+    template: Kelp_Pugil
+    level:    [55, 55]
+  17002579:
+    template: Kelp_Pugil
+    level:    [55, 55]
+  17002580:
+    template: Kelp_Pugil
+    level:    [55, 55]
+  17002581:
+    template: Kelp_Pugil
+    level:    [55, 55]
+  17002582:
+    template: Kelp_Pugil
+    level:    [55, 55]
+  17002583:
+    template: Kelp_Pugil
+    level:    [55, 55]
+  17002584:
+    template: Kelp_Pugil
+    level:    [55, 55]
+  17002585:
+    template: Kelp_Kulshedra
+    level:    [54, 54]
+  17002586:
+    template: Kelp_Kulshedra
+    level:    [54, 54]
+  17002587:
+    template: Kelp_Kulshedra
+    level:    [54, 54]
+  17002588:
+    template: Kelp_Kulshedra
+    level:    [54, 54]
+  17002589:
+    template: Kelp_Kulshedra
+    level:    [54, 54]
+  17002590:
+    template: Kelp_Crab
+    level:    [54, 54]
+  17002591:
+    template: Kelp_Crab
+    level:    [54, 54]
+  17002592:
+    template: Kelp_Crab
+    level:    [54, 54]
+  17002593:
+    template: K22B6-LAMIA
+    at:       [-67.894, -3.068, -421.135, 106]
+    level:    [75, 77]
+  17002594:
+    template: K22B6-LAMIA
+    at:       [26.578, -4.965, -536.243, 49]
+    level:    [75, 77]
+  17002595:
+    template: K22H3-LAMIA
+    at:       [58.868, -3.977, -530.415, 192]
+    level:    [75, 77]
+  17002596:
+    template: K22H3-LAMIA
+    at:       [-18.415, -4.772, -456.658, 8]
+    level:    [75, 77]
+  17002597:
+    template: K22P2-LAMIA
+    at:       [59.432, -6.211, -542.238, 34]
+    level:    [75, 77]
+  17002598:
+    template: K22P2-LAMIA
+    at:       [25.722, -3.931, -426.920, 209]
+    level:    [75, 77]
+  17002599:
+    template: D5R3-MERROW
+    at:       [262.330, -6.568, -558.040, 180]
+    level:    [75, 77]
+  17002600:
+    template: D5R3-MERROW
+    at:       [297.230, -6.101, -545.355, 213]
+    level:    [75, 77]
+  17002601:
+    template: D5J2-MERROW
+    at:       [107.952, -11.006, -419.657, 182]
+    level:    [75, 77]
+  17002602:
+    template: D5J2-MERROW
+    at:       [378.897, -2.314, -489.378, 139]
+    level:    [75, 77]
+  17002603:
+    template: D5S1-MERROW
+    at:       [252.487, -3.140, -539.785, 213]
+  17002604:
+    template: D5S1-MERROW
+    at:       [179.846, -1.418, -528.573, 212]
+  17002605:
+    template: Draugar
+    at:       [32.493, -8.578, -548.719, 26]
+    level:    [75, 77]
+  17002606:
+    template: Draugar
+    at:       [15.726, -4.929, -563.487, 230]
+    level:    [75, 77]
+  17002607:
+    template: Draugar2
+    script:   Draugar
+    at:       [72.861, -4.702, -581.688, 28]
+    level:    [75, 77]
+  17002608:
+    template: Draugar2
+    script:   Draugar
+    at:       [9.426, -2.859, -561.371, 95]
+    level:    [75, 77]
+  17002609:
+    template: Draugar
+    at:       [-59.400, -6.157, -450.011, 32]
+    level:    [75, 77]
+  17002610:
+    template: Draugar
+    at:       [-64.101, -3.532, -415.833, 212]
+    level:    [75, 77]
+  17002611:
+    template: Draugar2
+    script:   Draugar
+    at:       [-50.494, -6.427, -423.711, 193]
+    level:    [75, 77]
+  17002612:
+    template: Draugar
+    at:       [303.893, -3.846, -577.556, 23]
+    level:    [75, 77]
+  17002613:
+    template: Draugar2
+    script:   Draugar
+    at:       [294.432, -6.929, -570.479, 127]
+    level:    [75, 77]
+  17002614:
+    template: Draugar2
+    script:   Draugar
+    at:       [304.786, -3.861, -574.184, 38]
+    level:    [75, 77]
+  17002615:
+    template: Giant_Pugil_assault
+    script:   Giant_Pugil
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [75, 75]
+  17002616:
+    template: Puffer_Pugil
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [75, 77]
+  17002617:
+    template: Clipper_assault
+    script:   Clipper
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [75, 75]
+  17002618:
+    template: Snipper_assault
+    script:   Snipper
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [75, 75]
+  17002619:
+    template: Kraken_assault
+    script:   Kraken
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [75, 75]
+  17002620:
+    template: Orobon_fished
+    script:   Orobon
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [77, 78]
+  17002621:
+    template: Qiqirn_Pecheur
+    at:       [-4.089, -4.885, 457.010, 252]
+    level:    [76, 77]
+  17002622:
+    template: Qiqirn_Pecheur
+    at:       [44.164, -5.821, 341.236, 124]
+    level:    [76, 77]
+  17002623:
+    template: Qiqirn_Pecheur
+    at:       [37.992, -5.882, 341.829, 117]
+    level:    [76, 77]
+  17002624:
+    template: Qiqirn_Pecheur
+    at:       [6.341, -7.822, 219.600, 6]
+    level:    [76, 77]
+  17002625:
+    template: Qiqirn_Pecheur
+    at:       [-55.573, -5.319, 305.331, 166]
+    level:    [76, 77]
+  17002626:
+    template: Qiqirn_Pecheur
+    at:       [-54.519, -7.012, 297.528, 81]
+    level:    [76, 77]
+  17002627:
+    template: Qiqirn_Pecheur
+    at:       [28.034, -8.105, 324.039, 189]
+    level:    [76, 77]
+  17002628:
+    template: Qiqirn_Pecheur
+    at:       [24.862, -7.195, 319.945, 154]
+    level:    [76, 77]
+  17002629:
+    template: Qiqirn_Pecheur
+    at:       [45.141, -4.004, 295.775, 37]
+    level:    [76, 77]
+  17002630:
+    template: Qiqirn_Pecheur
+    at:       [36.963, -4.483, 297.237, 114]
+    level:    [76, 77]
+  17002631:
+    template: Qiqirn_Pecheur
+    at:       [59.791, -5.873, 321.320, 149]
+    level:    [76, 77]
+  17002632:
+    template: Qiqirn_Pecheur
+    at:       [57.576, -6.567, 315.325, 208]
+    level:    [76, 77]
+  17002633:
+    template: Qiqirn_Pecheur
+    at:       [56.772, -5.464, 340.044, 43]
+    level:    [76, 77]
+  17002634:
+    template: Qiqirn_Pecheur
+    at:       [56.962, -5.081, 341.797, 212]
+    level:    [76, 77]
+  17002635:
+    template: Qiqirn_Pecheur
+    at:       [-23.345, -7.720, 378.660, 75]
+    level:    [76, 77]
+  17002636:
+    template: Qiqirn_Pecheur
+    at:       [-21.898, -6.756, 381.403, 137]
+    level:    [76, 77]
+  17002637:
+    template: Qiqirn_Pecheur
+    at:       [7.309, -4.569, 418.990, 140]
+    level:    [76, 77]
+  17002638:
+    template: Qiqirn_Pecheur
+    at:       [6.190, -4.406, 417.409, 171]
+    level:    [76, 77]
+  17002639:
+    template: Qiqirn_Pecheur
+    at:       [105.038, -5.609, 340.554, 49]
+    level:    [76, 77]
+  17002640:
+    template: Qiqirn_Pecheur
+    at:       [96.504, -4.795, 348.006, 182]
+    level:    [76, 77]
+  17002641:
+    template: Qiqirn_Pecheur
+    at:       [135.102, -5.179, 296.760, 211]
+    level:    [76, 77]
+  17002642:
+    template: Qiqirn_Pecheur
+    at:       [127.780, -3.749, 295.301, 102]
+    level:    [76, 77]
+  17002643:
+    template: Qiqirn_Pecheur
+    at:       [126.230, -4.263, 261.522, 176]
+    level:    [76, 77]
+  17002644:
+    template: Qiqirn_Pecheur
+    at:       [134.878, -4.783, 260.564, 213]
+    level:    [76, 77]
+  17002645:
+    template: Qiqirn_Pecheur
+    at:       [95.372, -4.574, 207.973, 35]
+    level:    [76, 77]
+  17002646:
+    template: Qiqirn_Pecheur
+    at:       [99.409, -4.886, 216.710, 130]
+    level:    [76, 77]
+  17002647:
+    template: Qiqirn_Pecheur
+    at:       [63.057, -5.008, 217.542, 171]
+    level:    [76, 77]
+  17002648:
+    template: Qiqirn_Pecheur
+    at:       [67.317, -4.616, 209.830, 19]
+    level:    [76, 77]
+  17002649:
+    template: Qiqirn_Pecheur
+    at:       [51.743, -6.742, 255.294, 239]
+    level:    [76, 77]
+  17002650:
+    template: Qiqirn_Pecheur
+    at:       [57.609, -5.689, 255.759, 161]
+    level:    [76, 77]
+  17002651:
+    template: Khimaira_14X
+    at:       [-395.000, -1.878, -560.000, 162]
+    level:    [80, 82]
+  17002652:
+    template: Martial_Maestro_Megomak
+    at:       [-393.730, -2.499, -553.414, 150]
+    level:    [78, 80]
+  17002659:
+    template: Clavauert_B_Chanoix

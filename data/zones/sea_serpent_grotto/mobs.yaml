@@ -1,0 +1,5279 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Abyss_Sahagin:
+    id:            27
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1331
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 1200
+      stats:
+        hp: 4200
+    loot:
+      drops:
+        - chance: very_common
+          item:   bards_testimony
+        - chance: common
+          item:   scroll_of_foe_requiem_vi
+        - chance: rare
+          item:   scroll_of_maidens_virelai
+        - chance: super_rare
+          item:   scroll_of_chocobo_mazurka
+        - chance: very_common
+          one_of: [scroll_of_swift_etude, scroll_of_herculean_etude, scroll_of_logical_etude, scroll_of_vital_etude, scroll_of_bewitching_etude, scroll_of_uncanny_etude, scroll_of_sage_etude]
+        - chance: uncommon
+          one_of: [scroll_of_victory_march, scroll_of_knights_minne_iv, scroll_of_valor_minuet_iv]
+      steal: gold_beastcoin
+
+  Bakunawa:
+    id:            6887
+    species:       sea_monk
+    type:          [notorious]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Big_Jaw_fished:
+    id:            417
+    display_name:  Big_Jaw
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Bigclaw_aggro:
+    id:            413
+    display_name:  Bigclaw
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   chunk_of_rock_salt
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: very_rare
+          item:   grotto_chest_key
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Bigclaw_fished:
+    id:            1268
+    display_name:  Bigclaw
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   chunk_of_rock_salt
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: very_rare
+          item:   grotto_chest_key
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Blubber_Eyes:
+    id:            476
+    display_name:  Blubber_Eyes_PX
+    species:       hecteye
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   hecteyes_eye
+        - chance: rare
+          item:   earthen_hakutaku_eye
+        - chance: rare
+          item:   grotto_coffer_key
+      despoil:
+        hecteyes_eye: 0
+
+  Bog_Sahagin:
+    id:            488
+    species:       blue_sahagin
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1311
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: rare
+          item:   clump_of_pamtam_kelp
+        - chance: rare
+          item:   grotto_coffer_key
+        - chance: very_rare
+          item:   quus
+        - chance: rare
+          item:   shall_shell
+        - chance: very_rare
+          item:   black_pearl
+        - chance: very_rare
+          item:   bastore_sardine
+        - chance: very_rare
+          item:   cobalt_jellyfish
+      steal: mythril_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Brook_Sahagin:
+    id:            541
+    species:       blue_sahagin
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1303
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: rare
+          item:   elshimo_newt
+        - chance: uncommon
+          item:   eastern_gem
+        - chance: rare
+          item:   grotto_chest_key
+        - chance: very_rare
+          item:   blackened_toad
+        - chance: rare
+          item:   sheep_leather_missive
+        - chance: very_rare
+          item:   mermaid_head
+        - chance: very_rare
+          item:   pearl
+      steal: mythril_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Charybdis:
+    id:            698
+    species:       sea_monk
+    type:          [notorious]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+        delay: 480
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 135
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 30000
+    loot:
+      drops:
+        - chance: always
+          item:   joyeuse
+        - chance: common
+          item:   shall_shell
+        - chance: uncommon
+          item:   pearl
+        - chance: very_rare
+          item:   piece_of_oxblood
+
+  Coastal_Sahagin:
+    id:            752
+    species:       yellow_sahagin
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1335
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seashell
+        - chance: uncommon
+          item:   bards_testimony
+        - chance: uncommon
+          item:   scroll_of_warding_round
+        - chance: rare
+          item:   scroll_of_foe_requiem_vi
+        - chance: rare
+          item:   scroll_of_goddesss_hymnus
+        - chance: very_rare
+          item:   scroll_of_armys_paeon_v
+        - chance: very_rare
+          item:   scroll_of_knights_minne_iv
+        - chance: super_rare
+          item:   scroll_of_valor_minuet_iv
+        - chance: super_rare
+          item:   scroll_of_chocobo_mazurka
+        - chance: very_rare
+          item:   coral_fragment
+        - chance: uncommon
+          one_of: [scroll_of_bewitching_etude, scroll_of_sage_etude, scroll_of_swift_etude, scroll_of_vital_etude, scroll_of_logical_etude, scroll_of_herculean_etude, scroll_of_uncanny_etude]
+      steal: gold_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Coral_Sahagin:
+    id:            795
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1325
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 1200
+      stats:
+        hp: 4100
+        mp: 4100
+    loot:
+      drops:
+        - chance: very_common
+          item:   white_mages_testimony
+        - chance: common
+          item:   scroll_of_reraise_iii
+        - chance: rare
+          item:   scroll_of_raise_ii
+        - chance: rare
+          item:   scroll_of_banish_iii
+      steal: gold_beastcoin
+
+  Delta_Sahagin:
+    id:            965
+    species:       blue_sahagin
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1306
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   dragoons_testimony
+        - chance: common
+          item:   seashell
+        - chance: rare
+          item:   shall_shell
+        - chance: rare
+          item:   bastore_sardine
+        - chance: rare
+          item:   clump_of_pamtam_kelp
+        - chance: very_rare
+          item:   coral_fragment
+        - chance: very_rare
+          item:   cobalt_jellyfish
+        - chance: super_rare
+          item:   quus
+      steal: gold_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Denn_the_Orcavoiced:
+    id:            999
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1338
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: common
+          item:   shall_shell
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: rare
+          item:   bastore_sardine
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: very_rare
+          item:   quus
+        - chance: rare
+          item:   scroll_of_foe_requiem_vi
+        - chance: very_rare
+          item:   scroll_of_chocobo_mazurka
+        - chance: very_rare
+          item:   scroll_of_valor_minuet_iv
+        - chance: very_rare
+          item:   scroll_of_knights_minne_iv
+        - chance: common
+          one_of: [scroll_of_herculean_etude, scroll_of_uncanny_etude, scroll_of_vital_etude, scroll_of_swift_etude, scroll_of_sage_etude, scroll_of_logical_etude, scroll_of_bewitching_etude]
+
+  Devil_Manta:
+    id:            1018
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   manta_skin
+        - chance: rare
+          item:   shall_shell
+        - chance: uncommon
+          item:   seashell
+      despoil:
+        seashell: 0
+
+  Dire_Bat_UDT_TC_SSG:
+    id:            6456
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Fyuu_the_Seabellow:
+    id:            1443
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1338
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 4200
+    loot:
+      drops:
+        - chance: common
+          item:   frog_trousers
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+
+  Ghast_blm:
+    id:            1511
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: rare
+          item:   grotto_chest_key
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Ghast_war:
+    id:            6549
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: rare
+          item:   grotto_chest_key
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Glyryvilu:
+    id:            1626
+    species:       sea_monk
+    type:          [notorious]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5750
+
+  Greatclaw:
+    id:            1799
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Grotto_Pugil:
+    id:            1826
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+        - chance: very_rare
+          item:   grotto_chest_key
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Ironshell:
+    id:            2099
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  1153
+        animation_sub:    8
+        hitbox:          11
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 780
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: very_rare
+          item:   grotto_chest_key
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Kanavid:
+    id:            6888
+    species:       sea_monk
+    type:          [notorious]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Lagoon_Sahagin:
+    id:            2317
+    species:       yellow_sahagin
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1320
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   white_mages_testimony
+        - chance: very_rare
+          item:   scroll_of_banish_iii
+        - chance: very_rare
+          item:   scroll_of_curaga_iv
+        - chance: rare
+          item:   scroll_of_regen_iii
+        - chance: rare
+          item:   scroll_of_shellra_iv
+        - chance: rare
+          item:   scroll_of_cure_v
+        - chance: rare
+          item:   scroll_of_esuna
+        - chance: super_rare
+          item:   coral_fragment
+      steal: gold_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Lake_Sahagin:
+    id:            2321
+    species:       yellow_sahagin
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1330
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 780
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: uncommon
+          item:   eastern_gem
+        - chance: rare
+          item:   shall_shell
+        - chance: very_rare
+          item:   pearl
+      steal: silver_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Marsh_Sahagin:
+    id:            2581
+    species:       blue_sahagin
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   grotto_coffer_key
+        - chance: common
+          item:   seashell
+        - chance: rare
+          item:   shall_shell
+        - chance: rare
+          item:   clump_of_pamtam_kelp
+        - chance: rare
+          item:   bastore_sardine
+        - chance: very_rare
+          item:   cobalt_jellyfish
+        - chance: very_rare
+          item:   quus
+        - chance: very_rare
+          item:   black_pearl
+      steal: mythril_beastcoin
+
+  Masan:
+    id:            2584
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 645
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3000
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item:   pigeons_blood_ruby
+        - chance: very_common
+          item:   vial_of_fiend_blood
+        - chance: very_common
+          item:   vial_of_fiend_blood
+        - chance: common
+          item:   vial_of_beastman_blood
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   grotto_coffer_key
+
+  Mindgazer_SSG:
+    id:            6390
+    species:       hecteye
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   hecteyes_eye
+        - chance: rare
+          item:   golden_hakutaku_eye
+        - chance: uncommon
+          item:   scroll_of_fire_iii
+      despoil:
+        hecteyes_eye: 0
+
+  Mousse_SSG:
+    id:            2764
+    display_name:  Mousse
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 645
+        model_size:     2
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Mouu_the_Waverider:
+    id:            2765
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1312
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7350
+    loot:
+      drops:
+        - chance: uncommon
+          item:   monsoon_spear
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: rare
+          item:   bastore_sardine
+        - chance: rare
+          item:   cobalt_jellyfish
+        - chance: very_common
+          item:   shall_shell
+        - chance: rare
+          item:   quus
+      steal: gold_beastcoin
+
+  Namtar:
+    id:            2803
+    species:       skeleton
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 2475
+        mp: 2475
+    loot:
+      drops:
+        - chance: always
+          item:   bone_chip
+        - chance: always
+          item:   namtar_bone
+        - chance: always
+          item:   bone_chip
+        - chance: uncommon
+          item:   revival_tree_root
+
+  Nightmare_Bats_NM_SSG:
+    id:            6432
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  645
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      2
+        hitbox:         18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_beastman_blood
+        - chance: very_rare
+          item:   vial_of_dragon_blood
+      despoil:
+        bat_wing: 0
+
+  Novv_the_Whitehearted:
+    id:            2914
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1327
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3550
+        mp: 3550
+    loot:
+      drops:
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: uncommon
+          item:   scroll_of_shellra_iv
+        - chance: uncommon
+          item:   scroll_of_regen_iii
+        - chance: rare
+          item:   scroll_of_cure_v
+        - chance: rare
+          item:   scroll_of_curaga_iv
+        - chance: common
+          item:   minstrels_coat
+
+  Ocean_Sahagin:
+    id:            2938
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1310
+        entity_flags: 1159
+        model_size:      3
+        hitbox:         18
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 4600
+    loot:
+      drops:
+        - chance: very_common
+          item:   dragoons_testimony
+        - chance: common
+          item:   shall_shell
+        - chance: rare
+          item:   colossal_lance
+      steal: platinum_beastcoin
+
+  Ooze:
+    id:            2987
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+        - chance: common
+          item:   vial_of_slime_oil
+        - chance: rare
+          item:   grotto_chest_key
+      despoil:
+        vial_of_slime_oil: 0
+
+  Pahh_the_Gullcaller:
+    id:            3084
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1310
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3800
+    loot:
+      drops:
+        - chance: very_common
+          item:   calamar
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: rare
+          item:   bastore_sardine
+        - chance: rare
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+
+  Pond_Sahagin:
+    id:            3174
+    species:       blue_sahagin
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 780
+    loot:
+      drops:
+        - chance: very_common
+          item:   seashell
+        - chance: uncommon
+          item:   eastern_gem
+        - chance: rare
+          item:   shall_shell
+        - chance: very_rare
+          item:   pearl
+      steal: silver_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Qull_the_Shellbuster:
+    id:            3291
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7800
+    loot:
+      drops:
+        - chance: common
+          item:   exocets
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: common
+          item:   bastore_sardine
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+
+  Razorjaw_Pugil:
+    id:            3336
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+        - chance: rare
+          item:   grotto_coffer_key
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Riparian_Sahagin:
+    id:            3369
+    species:       yellow_sahagin
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1337
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 780
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: uncommon
+          item:   eastern_gem
+        - chance: rare
+          item:   sheep_leather_missive
+        - chance: very_rare
+          item:   grotto_chest_key
+        - chance: very_rare
+          item:   pearl
+      steal: mythril_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Rivulet_Sahagin:
+    id:            3374
+    species:       yellow_sahagin
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1323
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seashell
+        - chance: uncommon
+          item:   elshimo_newt
+        - chance: rare
+          item:   grotto_chest_key
+        - chance: uncommon
+          item:   scroll_of_auspice
+        - chance: rare
+          item:   scroll_of_regen_ii
+      steal: mythril_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Robber_Crab_SSG:
+    id:            6368
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Rock_Crab:
+    id:            3377
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: rare
+          item:   grotto_coffer_key
+        - chance: very_rare
+          item:   chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Rock_Crab_fished:
+    id:            6777
+    display_name:  Rock_Crab
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: rare
+          item:   grotto_coffer_key
+        - chance: very_rare
+          item:   chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Royal_Leech:
+    id:            3406
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   cup_of_leech_saliva
+        - chance: very_common
+          item:   cup_of_leech_saliva
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Sahagin_Parasite:
+    id:            3440
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: rare
+          item:   vial_of_beastman_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Sahagins_Wyvern:
+    id:            3442
+    species:       blue_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 1155
+        model_size:      1
+        hitbox:          8
+      spawn:
+        type: [scripted]
+
+  Sea_Bonze:
+    id:            3519
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: very_rare
+          item:   shall_shell
+      despoil:
+        seashell: 0
+
+  Sea_Hog:
+    id:            3521
+    species:       pugil
+    type:          [notorious]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags:  133
+        animation_sub:  16
+        model_size:      2
+        hitbox:         32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 10750
+    loot:
+      drops:
+        - chance: always
+          item:   southern_pearl
+        - chance: always
+          item:   shall_shell
+        - chance: always
+          item:   shall_shell
+        - chance: always
+          item:   shall_shell
+
+  Seww_the_Squidlimbed:
+    id:            3558
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1337
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 4800
+    loot:
+      drops:
+        - chance: always
+          item:   mermaid_tail
+
+  Shore_Sahagin:
+    id:            3609
+    species:       blue_sahagin
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   monks_testimony
+        - chance: uncommon
+          item:   seashell
+        - chance: very_rare
+          item:   coral_fragment
+      steal: gold_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Spring_Sahagin:
+    id:            3743
+    species:       yellow_sahagin
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1318
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 780
+    loot:
+      drops:
+        - chance: uncommon
+          item:   elshimo_frog
+        - chance: uncommon
+          item:   shall_shell
+        - chance: uncommon
+          item:   scroll_of_cura
+        - chance: very_rare
+          item:   mermaid_body
+      steal: silver_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Stygian_Pugil_fished:
+    id:            6768
+    display_name:  Stygian_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Swamp_Sahagin:
+    id:            3822
+    species:       yellow_sahagin
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1333
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   grotto_coffer_key
+        - chance: common
+          item:   seashell
+        - chance: rare
+          item:   clump_of_pamtam_kelp
+        - chance: rare
+          item:   shall_shell
+        - chance: very_rare
+          item:   cobalt_jellyfish
+        - chance: very_rare
+          item:   black_pearl
+        - chance: very_rare
+          item:   bastore_sardine
+        - chance: super_rare
+          item:   quus
+      steal: mythril_beastcoin
+      despoil:
+        quus:            0
+        coral_butterfly: 0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Undead_Bats_SSG:
+    id:            4406
+    display_name:  Undead_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  1667
+        animation_sub:    8
+        name_prefix:     64
+        model_size:       1
+        hitbox:          16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Vampire_Bat:
+    id:            4127
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: rare
+          item:   grotto_chest_key
+      despoil:
+        bat_wing: 0
+
+  Voll_the_Sharkfinned:
+    id:            4250
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8100
+    loot:
+      drops:
+        - chance: uncommon
+          item:   monsoon_jinpachi
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: very_rare
+          item:   cobalt_jellyfish
+        - chance: uncommon
+          item:   shall_shell
+      steal: gold_beastcoin
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Water_Leaper:
+    id:            4311
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+
+  Worr_the_Clawfisted:
+    id:            4377
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 11200
+    loot:
+      drops:
+        - chance: common
+          item:   pagures
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+
+  Wuur_the_Sandcomber:
+    id:            4383
+    species:       blue_sahagin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1325
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3200
+    loot:
+      drops:
+        - chance: uncommon
+          item:   holy_ampulla
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+
+  Yarr_the_Pearleyed:
+    id:            4467
+    species:       yellow_sahagin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1327
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: common
+          item:   shall_shell
+        - chance: rare
+          item:   quus
+        - chance: very_rare
+          item:   scroll_of_cure_v
+        - chance: rare
+          item:   scroll_of_reraise_iii
+        - chance: very_rare
+          item:   scroll_of_regen_iii
+        - chance: very_rare
+          item:   scroll_of_shellra_iv
+        - chance: very_rare
+          item:   scroll_of_curaga_iv
+      steal: gold_beastcoin
+
+  Zuug_the_Shoreleaper:
+    id:            4525
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1312
+        model_size:  3
+        hitbox:     18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12400
+    loot:
+      drops:
+        - chance: common
+          item:   narval
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: rare
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+      steal: gold_beastcoin
+
+spawns:
+  17498113:
+    template: Big_Jaw_fished
+    script:   Big_Jaw
+    at:       [1.000, 1.000, 1.000]
+    level:    [35, 37]
+  17498114:
+    template: Big_Jaw_fished
+    script:   Big_Jaw
+    at:       [1.000, 1.000, 1.000]
+    level:    [35, 37]
+  17498115:
+    template: Bigclaw_fished
+    script:   Bigclaw
+    at:       [1.000, 1.000, 1.000]
+    level:    [43, 48]
+  17498116:
+    template: Rock_Crab_fished
+    script:   Rock_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 58]
+  17498117:
+    template: Stygian_Pugil_fished
+    script:   Stygian_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [65, 67]
+  17498118:
+    template: Royal_Leech
+    at:       [216.824, -17.119, 270.492, 90]
+    level:    [35, 38]
+  17498119:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [221.151, -19.925, 285.073, 127]
+    level:    [36, 39]
+  17498120:
+    template: Royal_Leech
+    at:       [185.676, -10.250, 260.013, 127]
+    level:    [35, 38]
+  17498121:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [177.981, -9.436, 237.934, 127]
+    level:    [36, 39]
+  17498122:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [176.014, -9.930, 234.796, 98]
+    level:    [36, 39]
+  17498123:
+    template: Spring_Sahagin
+    at:       [166.898, -10.608, 261.566, 127]
+    level:    [36, 39]
+  17498124:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [151.970, -10.799, 261.472, 120]
+    level:    [36, 39]
+  17498125:
+    template: Royal_Leech
+    at:       [154.964, -11.250, 257.889, 71]
+    level:    [35, 38]
+  17498126:
+    template: Royal_Leech
+    at:       [100.479, -9.100, 245.852, 104]
+    level:    [35, 38]
+  17498127:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [99.290, -9.440, 249.363, 127]
+    level:    [36, 39]
+  17498128:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [99.314, -11.095, 262.209, 127]
+    level:    [36, 39]
+  17498129:
+    template: Pond_Sahagin
+    at:       [88.368, -11.611, 263.727, 127]
+    level:    [36, 39]
+  17498130:
+    template: Lake_Sahagin
+    at:       [99.536, -8.855, 243.078, 127]
+    level:    [36, 39]
+  17498131:
+    template: Royal_Leech
+    at:       [154.972, -11.559, 216.242, 68]
+    level:    [35, 38]
+  17498132:
+    template: Royal_Leech
+    at:       [129.456, -11.917, 215.465, 57]
+    level:    [35, 38]
+  17498133:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [146.013, -10.470, 210.394, 127]
+    level:    [36, 39]
+  17498134:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [155.562, -11.592, 215.874, 70]
+    level:    [36, 39]
+  17498135:
+    template: Pond_Sahagin
+    at:       [132.576, -12.216, 208.173, 127]
+    level:    [36, 39]
+  17498136:
+    template: Spring_Sahagin
+    at:       [134.772, -10.684, 217.400, 103]
+    level:    [36, 39]
+  17498137:
+    template: Royal_Leech
+    at:       [58.499, -1.294, 240.790, 90]
+    level:    [35, 38]
+  17498138:
+    template: Royal_Leech
+    at:       [63.197, -3.753, 247.084, 127]
+    level:    [35, 38]
+  17498139:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [53.765, 5.043, 224.973, 94]
+    level:    [36, 39]
+  17498140:
+    template: Royal_Leech
+    at:       [27.507, 8.572, 215.490, 70]
+    level:    [35, 38]
+  17498141:
+    template: Royal_Leech
+    at:       [21.037, 9.478, 207.651, 49]
+    level:    [35, 38]
+  17498142:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [23.496, 9.510, 219.981, 39]
+    level:    [36, 39]
+  17498143:
+    template: Ironshell
+    at:       [1.596, 11.249, 259.372, 11]
+    level:    [37, 40]
+  17498144:
+    template: Ironshell
+    at:       [21.290, 9.944, 243.053, 30]
+    level:    [37, 40]
+  17498145:
+    template: Ghast_war
+    script:   Ghast
+    at:       [9.529, 9.695, 262.521, 6]
+    level:    [38, 41]
+  17498146:
+    template: Ironshell
+    at:       [-16.476, 10.603, 267.562, 44]
+    level:    [37, 40]
+  17498147:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-18.108, 9.881, 279.514, 127]
+    level:    [38, 41]
+  17498148:
+    template: Ironshell
+    at:       [-28.095, 9.335, 294.882, 1]
+    level:    [37, 40]
+  17498149:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-37.192, 9.480, 298.519, 124]
+    level:    [38, 41]
+  17498150:
+    template: Ironshell
+    at:       [-22.714, 11.100, 262.956, 127]
+    level:    [37, 40]
+  17498151:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-21.320, 11.197, 265.802, 127]
+    level:    [38, 41]
+  17498152:
+    template: Ironshell
+    at:       [-19.157, 7.343, 326.515, 24]
+    level:    [37, 40]
+  17498153:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-7.626, 8.816, 307.460, 127]
+    level:    [38, 41]
+  17498154:
+    template: Ironshell
+    at:       [-60.225, -1.558, 352.395, 127]
+    level:    [37, 40]
+  17498155:
+    template: Royal_Leech
+    at:       [17.001, 9.340, 186.571, 127]
+    level:    [35, 38]
+  17498156:
+    template: Royal_Leech
+    at:       [18.702, 9.512, 183.594, 57]
+    level:    [35, 38]
+  17498157:
+    template: Ghast_war
+    script:   Ghast
+    at:       [8.726, 10.542, 178.244, 127]
+    level:    [38, 41]
+  17498158:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [5.568, 10.480, 182.602, 28]
+    level:    [38, 41]
+  17498159:
+    template: Masan
+    at:       [1.178, 10.799, 178.807, 2]
+    level:    [39, 39]
+  17498160:
+    template: Ironshell
+    at:       [24.078, 10.134, 185.711, 127]
+    level:    [37, 40]
+  17498161:
+    template: Royal_Leech
+    at:       [-42.561, 9.935, 178.073, 111]
+    level:    [35, 38]
+  17498162:
+    template: Royal_Leech
+    at:       [-37.128, 9.777, 179.305, 29]
+    level:    [35, 38]
+  17498163:
+    template: Royal_Leech
+    at:       [-62.268, 10.724, 200.097, 4]
+    level:    [35, 38]
+  17498164:
+    template: Royal_Leech
+    at:       [-64.019, 10.171, 204.232, 127]
+    level:    [35, 38]
+  17498165:
+    template: Royal_Leech
+    at:       [-59.206, 10.543, 196.816, 36]
+    level:    [35, 38]
+  17498166:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-81.981, 9.971, 215.529, 67]
+    level:    [38, 41]
+  17498167:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-78.035, 10.386, 223.933, 127]
+    level:    [38, 41]
+  17498168:
+    template: Royal_Leech
+    at:       [-67.866, 11.107, 221.278, 127]
+    level:    [35, 38]
+  17498169:
+    template: Royal_Leech
+    at:       [-54.612, 11.072, 211.888, 14]
+    level:    [35, 38]
+  17498170:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-141.487, 9.176, 202.794, 81]
+    level:    [38, 41]
+  17498171:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-114.745, 9.289, 219.124, 127]
+    level:    [38, 41]
+  17498172:
+    template: Royal_Leech
+    at:       [-74.449, 7.973, 176.444, 113]
+    level:    [35, 38]
+  17498173:
+    template: Royal_Leech
+    at:       [-60.903, 9.193, 169.959, 127]
+    level:    [35, 38]
+  17498174:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-68.739, 8.888, 173.893, 127]
+    level:    [38, 41]
+  17498175:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-135.199, 9.864, 169.165, 80]
+    level:    [38, 41]
+  17498176:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-113.708, 7.884, 170.668, 10]
+    level:    [38, 41]
+  17498177:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-123.548, 9.711, 152.724, 127]
+    level:    [38, 41]
+  17498178:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-128.762, 9.595, 164.996, 127]
+    level:    [38, 41]
+  17498179:
+    template: Ooze
+    at:       [-110.418, 7.728, 168.609, 127]
+    level:    [39, 42]
+  17498180:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-145.430, 10.147, 169.840, 115]
+    level:    [38, 41]
+  17498181:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-147.772, 9.794, 156.299, 127]
+    level:    [38, 41]
+  17498182:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-161.306, 9.856, 156.498, 36]
+    level:    [38, 41]
+  17498183:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-157.606, 9.905, 168.518, 127]
+    level:    [38, 41]
+  17498184:
+    template: Namtar
+    at:       [-148.457, 9.171, 175.332, 60]
+    level:    [39, 41]
+  17498185:
+    template: Ooze
+    at:       [-187.253, 9.364, 142.011, 127]
+    level:    [39, 42]
+  17498186:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-221.606, 18.158, 173.064, 127]
+    level:    [38, 41]
+  17498187:
+    template: Ooze
+    at:       [-220.938, 18.385, 169.899, 127]
+    level:    [39, 42]
+  17498188:
+    template: Ghast_war
+    script:   Ghast
+    at:       [-204.255, 18.932, 179.704, 127]
+    level:    [38, 41]
+  17498189:
+    template: Ghast_blm
+    script:   Ghast
+    at:       [-213.394, 17.285, 178.579, 127]
+    level:    [38, 41]
+  17498190:
+    template: Ooze
+    at:       [-182.581, 25.268, 229.155, 127]
+    level:    [39, 42]
+  17498191:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [11.454, 8.445, 152.169, 102]
+    level:    [36, 39]
+  17498192:
+    template: Royal_Leech
+    at:       [14.644, 7.840, 154.508, 127]
+    level:    [35, 38]
+  17498193:
+    template: Ironshell
+    at:       [6.944, 6.429, 148.513, 127]
+    level:    [37, 40]
+  17498194:
+    template: Royal_Leech
+    at:       [10.411, 3.701, 138.396, 50]
+    level:    [35, 38]
+  17498195:
+    template: Spring_Sahagin
+    at:       [14.044, 0.494, 109.487, 127]
+    level:    [36, 39]
+  17498196:
+    template: Spring_Sahagin
+    at:       [10.799, -0.665, 102.446, 127]
+    level:    [36, 39]
+  17498197:
+    template: Ironshell
+    at:       [10.208, -0.248, 101.421, 18]
+    level:    [37, 40]
+  17498198:
+    template: Royal_Leech
+    at:       [10.359, -0.992, 111.045, 66]
+    level:    [35, 38]
+  17498199:
+    template: Wuur_the_Sandcomber
+    at:       [16.000, -0.500, 120.000, 127]
+    level:    [42, 44]
+  17498200:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [151.858, -5.922, 177.846, 8]
+    level:    [36, 39]
+  17498201:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [152.593, -3.660, 169.867, 104]
+    level:    [36, 39]
+  17498202:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [147.285, -1.795, 167.325, 127]
+    level:    [36, 39]
+  17498203:
+    template: Ironshell
+    at:       [135.468, -0.837, 136.901, 86]
+    level:    [37, 40]
+  17498204:
+    template: Ironshell
+    at:       [108.286, -0.137, 126.032, 127]
+    level:    [37, 40]
+  17498205:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [113.005, -0.367, 124.333, 127]
+    level:    [36, 39]
+  17498206:
+    template: Pond_Sahagin
+    at:       [105.081, 0.164, 120.903, 127]
+    level:    [36, 39]
+  17498207:
+    template: Spring_Sahagin
+    at:       [120.978, -0.326, 108.201, 127]
+    level:    [36, 39]
+  17498208:
+    template: Ironshell
+    at:       [79.076, -0.002, 121.016, 127]
+    level:    [37, 40]
+  17498209:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [81.833, -0.068, 125.983, 127]
+    level:    [36, 39]
+  17498210:
+    template: Lake_Sahagin
+    at:       [80.243, -0.274, 111.073, 63]
+    level:    [36, 39]
+  17498211:
+    template: Pond_Sahagin
+    at:       [92.297, -0.405, 114.592, 109]
+    level:    [36, 39]
+  17498212:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [41.207, -0.687, 98.023, 105]
+    level:    [36, 39]
+  17498213:
+    template: Ironshell
+    at:       [65.852, -0.793, 60.309, 127]
+    level:    [37, 40]
+  17498214:
+    template: Lake_Sahagin
+    at:       [58.332, -2.333, 53.849, 77]
+    level:    [36, 39]
+  17498215:
+    template: Pond_Sahagin
+    at:       [46.447, 0.278, 64.253, 127]
+    level:    [36, 39]
+  17498216:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [64.957, -0.758, 60.810, 127]
+    level:    [36, 39]
+  17498217:
+    template: Ooze
+    at:       [18.169, -0.357, 71.122, 127]
+    level:    [39, 42]
+  17498218:
+    template: Spring_Sahagin
+    at:       [102.616, -0.105, 62.914, 124]
+    level:    [36, 39]
+  17498219:
+    template: Undead_Bats_SSG
+    script:   Undead_Bats
+    at:       [104.868, -0.502, 54.735, 60]
+    level:    [36, 39]
+  17498220:
+    template: Ooze
+    at:       [98.190, -0.412, 49.753, 27]
+    level:    [39, 42]
+  17498221:
+    template: Ooze
+    at:       [139.547, 6.661, 46.856, 46]
+    level:    [39, 42]
+  17498222:
+    template: Brook_Sahagin
+    at:       [122.386, 9.949, 5.176, 6]
+    level:    [41, 45]
+  17498223:
+    template: Brook_Sahagin
+    at:       [119.329, 9.727, -6.228, 127]
+    level:    [41, 45]
+  17498224:
+    template: Rivulet_Sahagin
+    at:       [121.669, 9.777, 10.122, 127]
+    level:    [41, 45]
+  17498225:
+    template: Rivulet_Sahagin
+    at:       [120.921, 9.910, 4.834, 127]
+    level:    [41, 45]
+  17498226:
+    template: Brook_Sahagin
+    at:       [66.857, 9.707, -12.339, 27]
+    level:    [41, 45]
+  17498227:
+    template: Brook_Sahagin
+    at:       [66.500, 9.341, -2.872, 127]
+    level:    [41, 45]
+  17498228:
+    template: Rivulet_Sahagin
+    at:       [64.857, 8.885, -8.358, 127]
+    level:    [41, 45]
+  17498229:
+    template: Rivulet_Sahagin
+    at:       [87.278, 9.990, 0.476, 127]
+    level:    [41, 45]
+  17498230:
+    template: Brook_Sahagin
+    at:       [129.297, 10.098, -22.421, 127]
+    level:    [41, 45]
+  17498231:
+    template: Brook_Sahagin
+    at:       [116.311, 9.519, -30.376, 85]
+    level:    [41, 45]
+  17498232:
+    template: Rivulet_Sahagin
+    at:       [127.511, 10.090, -29.457]
+    level:    [41, 45]
+  17498233:
+    template: Rivulet_Sahagin
+    at:       [128.504, 10.062, -20.619]
+    level:    [41, 45]
+  17498234:
+    template: Brook_Sahagin
+    at:       [90.335, 10.085, -41.223, 94]
+    level:    [41, 45]
+  17498235:
+    template: Brook_Sahagin
+    at:       [81.832, 9.615, -47.729, 127]
+    level:    [41, 45]
+  17498236:
+    template: Rivulet_Sahagin
+    at:       [84.024, 10.153, -23.689, 127]
+    level:    [41, 45]
+  17498237:
+    template: Rivulet_Sahagin
+    at:       [69.837, 9.724, -49.668, 99]
+    level:    [41, 45]
+  17498238:
+    template: Vampire_Bat
+    at:       [85.285, 9.988, -27.526, 64]
+    level:    [42, 45]
+  17498239:
+    template: Vampire_Bat
+    at:       [105.948, 10.803, -39.078, 119]
+    level:    [42, 45]
+  17498240:
+    template: Vampire_Bat
+    at:       [80.381, 10.050, -11.735, 127]
+    level:    [42, 45]
+  17498241:
+    template: Vampire_Bat
+    at:       [177.344, 15.703, -30.734, 127]
+    level:    [42, 45]
+  17498242:
+    template: Vampire_Bat
+    at:       [180.981, 19.619, -42.972, 127]
+    level:    [42, 45]
+  17498243:
+    template: Brook_Sahagin
+    at:       [196.812, 19.992, -76.213, 89]
+    level:    [41, 45]
+  17498244:
+    template: Brook_Sahagin
+    at:       [204.873, 19.567, -68.584, 127]
+    level:    [41, 45]
+  17498245:
+    template: Rivulet_Sahagin
+    at:       [189.679, 19.586, -75.743, 69]
+    level:    [41, 45]
+  17498246:
+    template: Vampire_Bat
+    at:       [222.655, 19.712, -71.549, 104]
+    level:    [42, 45]
+  17498247:
+    template: Vampire_Bat
+    at:       [225.231, 19.680, -57.378, 127]
+    level:    [42, 45]
+  17498248:
+    template: Brook_Sahagin
+    at:       [241.998, 19.803, -57.097, 127]
+    level:    [41, 45]
+  17498249:
+    template: Brook_Sahagin
+    at:       [239.682, 19.818, -57.030, 127]
+    level:    [41, 45]
+  17498250:
+    template: Rivulet_Sahagin
+    at:       [231.757, 19.820, -31.384, 3]
+    level:    [41, 45]
+  17498251:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [228.563, 19.528, -40.938, 127]
+    level:    [43, 48]
+  17498252:
+    template: Brook_Sahagin
+    at:       [245.916, 20.006, -65.549, 127]
+    level:    [41, 45]
+  17498253:
+    template: Brook_Sahagin
+    at:       [249.885, 20.140, -65.389, 122]
+    level:    [41, 45]
+  17498254:
+    template: Rivulet_Sahagin
+    at:       [239.199, 19.916, -71.167, 127]
+    level:    [41, 45]
+  17498255:
+    template: Rivulet_Sahagin
+    at:       [227.514, 20.001, -88.078, 101]
+    level:    [41, 45]
+  17498256:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [249.559, 20.054, -66.717, 127]
+    level:    [43, 48]
+  17498257:
+    template: Vampire_Bat
+    at:       [242.888, 20.474, -81.675, 17]
+    level:    [42, 45]
+  17498258:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [219.739, 19.604, -6.589, 75]
+    level:    [43, 48]
+  17498259:
+    template: Riparian_Sahagin
+    at:       [217.570, 19.945, 22.121, 127]
+    level:    [44, 48]
+  17498260:
+    template: Brook_Sahagin
+    at:       [220.321, 19.637, 30.989, 104]
+    level:    [44, 48]
+  17498261:
+    template: Rivulet_Sahagin
+    at:       [215.802, 18.537, 6.847, 48]
+    level:    [44, 48]
+  17498262:
+    template: Rivulet_Sahagin
+    at:       [206.050, 21.018, 19.706, 127]
+    level:    [44, 48]
+  17498263:
+    template: Brook_Sahagin
+    at:       [225.190, 19.502, 29.157, 91]
+    level:    [44, 48]
+  17498264:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [203.826, 20.534, 16.763, 94]
+    level:    [43, 48]
+  17498265:
+    template: Riparian_Sahagin
+    at:       [178.251, 20.988, 25.510, 127]
+    level:    [44, 48]
+  17498266:
+    template: Riparian_Sahagin
+    at:       [185.074, 20.252, 39.317, 119]
+    level:    [44, 48]
+  17498267:
+    template: Brook_Sahagin
+    at:       [182.106, 21.161, 16.598, 127]
+    level:    [44, 48]
+  17498268:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [181.908, 20.780, 30.264, 97]
+    level:    [43, 48]
+  17498269:
+    template: Fyuu_the_Seabellow
+    at:       [175.000, 20.000, 41.000, 127]
+    level:    [48, 48]
+  17498270:
+    template: Grotto_Pugil
+    at:       [217.491, 20.091, 52.775, 127]
+    level:    [44, 47]
+  17498271:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [220.315, 19.786, 48.919, 127]
+    level:    [43, 48]
+  17498272:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [210.726, 19.706, 51.657, 49]
+    level:    [43, 48]
+  17498273:
+    template: Brook_Sahagin
+    at:       [293.123, 19.594, -104.357, 18]
+    level:    [44, 48]
+  17498274:
+    template: Grotto_Pugil
+    at:       [327.747, 19.554, -104.447, 127]
+    level:    [44, 47]
+  17498275:
+    template: Grotto_Pugil
+    at:       [332.496, 19.487, -108.875, 108]
+    level:    [44, 47]
+  17498276:
+    template: Brook_Sahagin
+    at:       [365.103, 9.494, -139.277, 127]
+    level:    [44, 48]
+  17498277:
+    template: Riparian_Sahagin
+    at:       [381.239, 9.064, -106.763, 127]
+    level:    [44, 48]
+  17498278:
+    template: Riparian_Sahagin
+    at:       [383.876, 10.432, -115.704, 59]
+    level:    [44, 48]
+  17498279:
+    template: Riparian_Sahagin
+    at:       [335.787, 10.398, -83.796, 58]
+    level:    [44, 48]
+  17498280:
+    template: Brook_Sahagin
+    at:       [348.293, 10.133, -65.543, 21]
+    level:    [44, 48]
+  17498281:
+    template: Rivulet_Sahagin
+    at:       [344.055, 10.272, -82.524, 127]
+    level:    [44, 48]
+  17498282:
+    template: Grotto_Pugil
+    at:       [349.246, 10.607, -63.535, 85]
+    level:    [44, 47]
+  17498283:
+    template: Brook_Sahagin
+    at:       [363.430, 10.578, -62.752, 105]
+    level:    [44, 48]
+  17498284:
+    template: Rivulet_Sahagin
+    at:       [359.599, 10.927, -58.565, 127]
+    level:    [44, 48]
+  17498285:
+    template: Qull_the_Shellbuster
+    at:       [391.000, 9.000, -59.000, 127]
+    level:    [49, 51]
+  17498286:
+    template: Brook_Sahagin
+    at:       [341.044, 10.751, -40.065, 81]
+    level:    [44, 48]
+  17498287:
+    template: Rivulet_Sahagin
+    at:       [340.227, 10.185, -34.118, 39]
+    level:    [44, 48]
+  17498288:
+    template: Riparian_Sahagin
+    at:       [407.176, 8.411, -57.298, 127]
+    level:    [44, 48]
+  17498289:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [333.220, 9.666, -74.693, 44]
+    level:    [43, 48]
+  17498290:
+    template: Brook_Sahagin
+    at:       [302.870, 10.596, -0.535, 60]
+    level:    [44, 48]
+  17498291:
+    template: Grotto_Pugil
+    at:       [302.184, 9.097, -14.011, 127]
+    level:    [44, 47]
+  17498292:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [276.478, 9.528, 18.795, 127]
+    level:    [43, 48]
+  17498293:
+    template: Brook_Sahagin
+    at:       [306.151, 9.238, -21.365, 127]
+    level:    [44, 48]
+  17498294:
+    template: Rivulet_Sahagin
+    at:       [303.926, 10.000, 10.733, 26]
+    level:    [44, 44]
+  17498295:
+    template: Rivulet_Sahagin
+    at:       [260.342, 7.425, 22.767, 52]
+    level:    [44, 48]
+  17498296:
+    template: Grotto_Pugil
+    at:       [256.623, 9.172, 41.077, 50]
+    level:    [44, 47]
+  17498297:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [255.000, 9.000, 57.000, 51]
+    level:    [43, 48]
+  17498298:
+    template: Riparian_Sahagin
+    at:       [232.828, 9.860, 63.214, 127]
+    level:    [44, 48]
+  17498299:
+    template: Brook_Sahagin
+    at:       [237.969, 10.531, 62.663, 127]
+    level:    [44, 48]
+  17498300:
+    template: Rivulet_Sahagin
+    at:       [222.282, 10.012, 60.606, 127]
+    level:    [44, 48]
+  17498301:
+    template: Seww_the_Squidlimbed
+    at:       [245.000, 11.000, 61.000, 127]
+    level:    [48, 49]
+  17498302:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [257.694, 9.423, 66.404, 4]
+    level:    [43, 48]
+  17498303:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [259.027, 9.504, 63.345, 29]
+    level:    [43, 48]
+  17498304:
+    template: Grotto_Pugil
+    at:       [262.638, 9.949, 60.317, 127]
+    level:    [44, 47]
+  17498305:
+    template: Grotto_Pugil
+    at:       [266.995, 9.971, 68.243, 127]
+    level:    [44, 47]
+  17498306:
+    template: Riparian_Sahagin
+    at:       [221.609, 8.829, 85.165, 39]
+    level:    [44, 48]
+  17498307:
+    template: Rivulet_Sahagin
+    at:       [195.979, 9.612, 100.419, 127]
+    level:    [44, 48]
+  17498308:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [220.283, 8.845, 85.273, 18]
+    level:    [43, 48]
+  17498309:
+    template: Riparian_Sahagin
+    at:       [253.677, 7.610, 98.912, 127]
+    level:    [44, 48]
+  17498310:
+    template: Rivulet_Sahagin
+    at:       [251.564, 8.661, 102.705, 127]
+    level:    [44, 48]
+  17498311:
+    template: Riparian_Sahagin
+    at:       [237.113, 28.438, 139.957, 127]
+    level:    [44, 48]
+  17498312:
+    template: Rivulet_Sahagin
+    at:       [218.425, 19.053, 120.447, 127]
+    level:    [44, 48]
+  17498313:
+    template: Sea_Bonze
+    at:       [252.763, 29.682, 152.098, 127]
+    level:    [47, 50]
+  17498314:
+    template: Sea_Bonze
+    at:       [315.034, 20.123, 20.537, 127]
+    level:    [47, 50]
+  17498315:
+    template: Riparian_Sahagin
+    at:       [296.476, 20.460, 75.565, 49]
+    level:    [44, 48]
+  17498316:
+    template: Brook_Sahagin
+    at:       [302.029, 18.998, 56.097, 83]
+    level:    [44, 48]
+  17498317:
+    template: Rivulet_Sahagin
+    at:       [288.426, 19.453, 100.078, 127]
+    level:    [44, 48]
+  17498318:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [298.100, 19.063, 93.538, 127]
+    level:    [43, 48]
+  17498319:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [265.335, 17.718, 99.335, 92]
+    level:    [43, 48]
+  17498320:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [259.034, 18.894, 110.942, 127]
+    level:    [43, 48]
+  17498321:
+    template: Riparian_Sahagin
+    at:       [289.695, 19.177, 140.661, 53]
+    level:    [44, 48]
+  17498322:
+    template: Brook_Sahagin
+    at:       [298.028, 19.815, 151.465, 65]
+    level:    [44, 48]
+  17498323:
+    template: Rivulet_Sahagin
+    at:       [263.028, 19.640, 133.116, 89]
+    level:    [44, 48]
+  17498324:
+    template: Bigclaw_aggro
+    script:   Bigclaw
+    at:       [290.654, 19.087, 139.911, 72]
+    level:    [43, 48]
+  17498325:
+    template: Sea_Bonze
+    at:       [302.990, 28.354, 224.630, 81]
+    level:    [47, 50]
+  17498326:
+    template: Marsh_Sahagin
+    at:       [18.758, 13.541, 15.815, 107]
+    level:    [52, 55]
+  17498327:
+    template: Sahagin_Parasite
+    at:       [9.812, 16.740, 20.466, 127]
+    level:    [50, 53]
+  17498328:
+    template: Thunder_Elemental
+    at:       [8.197, 17.597, 22.581, 127]
+    level:    [55, 58]
+  17498329:
+    template: Marsh_Sahagin
+    at:       [-32.891, 18.340, 15.581, 80]
+    level:    [52, 55]
+  17498330:
+    template: Swamp_Sahagin
+    at:       [-13.432, 19.882, 18.562, 109]
+    level:    [52, 55]
+  17498331:
+    template: Bog_Sahagin
+    at:       [-19.128, 21.246, 5.998, 124]
+    level:    [52, 55]
+  17498332:
+    template: Bog_Sahagin
+    at:       [-31.810, 19.500, 21.953, 241]
+    level:    [52, 55]
+  17498333:
+    template: Sahagin_Parasite
+    at:       [-28.757, 19.827, 23.714, 116]
+    level:    [50, 53]
+  17498334:
+    template: Rock_Crab
+    at:       [-16.542, 19.038, 23.642, 127]
+    level:    [53, 58]
+  17498335:
+    template: Marsh_Sahagin
+    at:       [-20.580, 20.066, -26.037, 127]
+    level:    [52, 55]
+  17498336:
+    template: Swamp_Sahagin
+    at:       [-13.532, 21.301, -20.861, 127]
+    level:    [52, 55]
+  17498337:
+    template: Bog_Sahagin
+    at:       [-21.280, 20.807, -1.930, 127]
+    level:    [52, 55]
+  17498338:
+    template: Bog_Sahagin
+    at:       [-26.034, 19.041, -5.374, 127]
+    level:    [52, 55]
+  17498339:
+    template: Sahagin_Parasite
+    at:       [3.097, 20.593, -21.098, 120]
+    level:    [50, 53]
+  17498340:
+    template: Rock_Crab
+    at:       [3.099, 20.317, -18.542, 127]
+    level:    [53, 58]
+  17498341:
+    template: Pahh_the_Gullcaller
+    at:       [-2.000, 21.000, -19.000, 127]
+    level:    [56, 58]
+  17498342:
+    template: Marsh_Sahagin
+    at:       [-61.334, 20.721, -45.640, 127]
+    level:    [52, 55]
+  17498343:
+    template: Swamp_Sahagin
+    at:       [-59.613, 20.954, -33.150, 35]
+    level:    [52, 55]
+  17498344:
+    template: Bog_Sahagin
+    at:       [-64.066, 18.825, -18.771, 24]
+    level:    [52, 55]
+  17498345:
+    template: Bog_Sahagin
+    at:       [-54.471, 20.118, -18.721, 127]
+    level:    [52, 55]
+  17498346:
+    template: Sahagin_Parasite
+    at:       [-56.666, 20.516, -37.364, 127]
+    level:    [50, 53]
+  17498347:
+    template: Marsh_Sahagin
+    at:       [-62.435, 19.412, 25.642, 33]
+    level:    [52, 55]
+  17498348:
+    template: Swamp_Sahagin
+    at:       [-75.162, 19.671, 20.503, 14]
+    level:    [52, 55]
+  17498349:
+    template: Sahagin_Parasite
+    at:       [-59.485, 19.575, 37.330, 127]
+    level:    [50, 53]
+  17498350:
+    template: Rock_Crab
+    at:       [-61.931, 19.297, 33.000, 127]
+    level:    [53, 58]
+  17498351:
+    template: Sahagin_Parasite
+    at:       [-103.972, 20.685, 47.566, 127]
+    level:    [50, 53]
+  17498352:
+    template: Rock_Crab
+    at:       [-102.571, 20.596, 47.974, 127]
+    level:    [53, 58]
+  17498353:
+    template: Marsh_Sahagin
+    at:       [-68.273, 19.980, 58.330, 28]
+    level:    [52, 55]
+  17498354:
+    template: Swamp_Sahagin
+    at:       [-63.473, 19.953, 57.853, 127]
+    level:    [52, 55]
+  17498355:
+    template: Bog_Sahagin
+    at:       [-60.728, 19.884, 53.966, 105]
+    level:    [52, 55]
+  17498356:
+    template: Mouu_the_Waverider
+    at:       [-82.000, 21.000, 62.000, 127]
+    level:    [64, 66]
+  17498357:
+    template: Sahagins_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [58, 60]
+  17498358:
+    template: Sahagin_Parasite
+    at:       [-62.967, 19.951, 57.298, 127]
+    level:    [50, 53]
+  17498359:
+    template: Sahagin_Parasite
+    at:       [-59.778, 19.888, 53.927, 96]
+    level:    [50, 53]
+  17498360:
+    template: Sahagin_Parasite
+    at:       [-58.164, 18.764, 83.793, 127]
+    level:    [50, 53]
+  17498361:
+    template: Sahagin_Parasite
+    at:       [-53.301, 18.964, 66.101, 96]
+    level:    [50, 53]
+  17498362:
+    template: Rock_Crab
+    at:       [-97.687, 21.248, 56.343, 127]
+    level:    [53, 58]
+  17498363:
+    template: Rock_Crab
+    at:       [-97.378, 21.252, 56.860, 35]
+    level:    [53, 58]
+  17498364:
+    template: Marsh_Sahagin
+    at:       [-86.182, 20.571, -64.732, 126]
+    level:    [52, 55]
+  17498365:
+    template: Swamp_Sahagin
+    at:       [-94.686, 19.983, -71.170, 126]
+    level:    [52, 55]
+  17498366:
+    template: Bog_Sahagin
+    at:       [-75.152, 20.229, -59.936, 127]
+    level:    [52, 55]
+  17498367:
+    template: Rock_Crab
+    at:       [-57.883, 21.183, -57.265, 83]
+    level:    [53, 58]
+  17498368:
+    template: Rock_Crab
+    at:       [-56.100, 21.280, -64.382, 9]
+    level:    [53, 58]
+  17498369:
+    template: Rock_Crab
+    at:       [-98.054, 19.834, -19.872, 125]
+    level:    [53, 58]
+  17498370:
+    template: Rock_Crab
+    at:       [-97.944, 19.547, -39.489, 35]
+    level:    [53, 58]
+  17498371:
+    template: Marsh_Sahagin
+    at:       [-100.637, 19.848, -16.369, 127]
+    level:    [52, 55]
+  17498372:
+    template: Bog_Sahagin
+    at:       [-97.807, 19.400, 0.911, 127]
+    level:    [52, 55]
+  17498373:
+    template: Blubber_Eyes
+    at:       [-122.229, 28.859, 23.664, 127]
+    level:    [55, 58]
+  17498374:
+    template: Swamp_Sahagin
+    at:       [-116.010, 28.332, 19.924, 127]
+    level:    [52, 55]
+  17498375:
+    template: Rock_Crab
+    at:       [-116.116, 19.336, -61.976, 127]
+    level:    [53, 58]
+  17498376:
+    template: Rock_Crab
+    at:       [-125.595, 18.502, -62.209, 60]
+    level:    [53, 58]
+  17498377:
+    template: Marsh_Sahagin
+    at:       [-126.018, 18.448, -62.197, 46]
+    level:    [52, 55]
+  17498378:
+    template: Bog_Sahagin
+    at:       [-143.382, 19.273, -84.352, 127]
+    level:    [52, 55]
+  17498379:
+    template: Thunder_Elemental
+    at:       [-117.144, 19.279, -62.341, 127]
+    level:    [55, 58]
+  17498380:
+    template: Marsh_Sahagin
+    at:       [-158.095, 20.646, -95.235, 127]
+    level:    [55, 59]
+  17498381:
+    template: Blubber_Eyes
+    at:       [-174.535, 21.246, -104.180, 116]
+    level:    [55, 58]
+  17498382:
+    template: Rock_Crab
+    at:       [-176.504, 21.427, -101.662, 127]
+    level:    [53, 58]
+  17498383:
+    template: Marsh_Sahagin
+    at:       [-219.793, 19.209, -95.025, 127]
+    level:    [55, 59]
+  17498384:
+    template: Bog_Sahagin
+    at:       [-196.332, 20.055, -102.798, 89]
+    level:    [55, 59]
+  17498385:
+    template: Rock_Crab
+    at:       [-217.119, 19.313, -75.153, 127]
+    level:    [53, 58]
+  17498386:
+    template: Rock_Crab
+    at:       [-215.222, 19.862, -71.408, 78]
+    level:    [53, 58]
+  17498387:
+    template: Bog_Sahagin
+    at:       [-181.001, 17.694, -53.608, 127]
+    level:    [55, 59]
+  17498388:
+    template: Blubber_Eyes
+    at:       [-156.348, 19.706, -19.534, 17]
+    level:    [55, 58]
+  17498389:
+    template: Rock_Crab
+    at:       [-165.536, 19.098, -22.107, 1]
+    level:    [53, 58]
+  17498390:
+    template: Thunder_Elemental
+    at:       [-182.623, 19.780, -34.033, 127]
+    level:    [55, 58]
+  17498391:
+    template: Swamp_Sahagin
+    at:       [-140.146, 19.873, -17.046, 127]
+    level:    [55, 59]
+  17498392:
+    template: Rock_Crab
+    at:       [-130.940, 19.919, -24.797, 8]
+    level:    [53, 58]
+  17498393:
+    template: Rock_Crab
+    at:       [-136.064, 19.379, -11.775, 127]
+    level:    [53, 58]
+  17498394:
+    template: Blubber_Eyes
+    at:       [-181.596, 19.515, 35.978, 67]
+    level:    [55, 58]
+  17498395:
+    template: Blubber_Eyes
+    at:       [-181.644, 19.331, 1.076, 62]
+    level:    [55, 58]
+  17498396:
+    template: Rock_Crab
+    at:       [-177.407, 19.138, 41.533, 36]
+    level:    [53, 58]
+  17498397:
+    template: Thunder_Elemental
+    at:       [-177.848, 19.863, 5.290, 127]
+    level:    [55, 58]
+  17498398:
+    template: Bog_Sahagin
+    at:       [-172.851, 19.895, 60.643, 127]
+    level:    [55, 59]
+  17498399:
+    template: Rock_Crab
+    at:       [-172.628, 19.766, 61.058, 127]
+    level:    [53, 58]
+  17498400:
+    template: Marsh_Sahagin
+    at:       [-219.782, 19.255, 23.530, 31]
+    level:    [55, 59]
+  17498401:
+    template: Razorjaw_Pugil
+    at:       [-202.902, 19.307, 22.123, 123]
+    level:    [57, 60]
+  17498402:
+    template: Rock_Crab
+    at:       [-221.292, 19.428, 21.016, 127]
+    level:    [53, 58]
+  17498403:
+    template: Thunder_Elemental
+    at:       [-198.402, 19.496, 19.564, 61]
+    level:    [55, 58]
+  17498404:
+    template: Marsh_Sahagin
+    at:       [-216.753, 19.196, 40.092, 127]
+    level:    [55, 59]
+  17498405:
+    template: Razorjaw_Pugil
+    at:       [-254.581, 18.839, -16.232, 28]
+    level:    [57, 60]
+  17498406:
+    template: Thunder_Elemental
+    at:       [-255.918, 18.660, -11.006, 127]
+    level:    [55, 58]
+  17498407:
+    template: Razorjaw_Pugil
+    at:       [-260.362, 19.967, -43.055, 127]
+    level:    [57, 60]
+  17498408:
+    template: Razorjaw_Pugil
+    at:       [-268.168, 20.274, -56.808, 65]
+    level:    [57, 60]
+  17498409:
+    template: Marsh_Sahagin
+    at:       [-290.531, 19.207, -58.073, 127]
+    level:    [55, 59]
+  17498410:
+    template: Marsh_Sahagin
+    at:       [-308.649, 17.344, -52.316, 127]
+    level:    [55, 59]
+  17498411:
+    template: Swamp_Sahagin
+    at:       [-301.166, 18.051, -53.026, 127]
+    level:    [55, 59]
+  17498412:
+    template: Bog_Sahagin
+    at:       [-276.327, 19.759, -57.578, 24]
+    level:    [55, 59]
+  17498413:
+    template: Worr_the_Clawfisted
+    at:       [-301.000, 20.000, -64.000, 127]
+    level:    [60, 61]
+  17498414:
+    template: Rock_Crab
+    at:       [-299.728, 20.234, -71.261, 92]
+    level:    [53, 58]
+  17498415:
+    template: Marsh_Sahagin
+    at:       [-255.296, 9.773, -64.213, 127]
+    level:    [55, 59]
+  17498416:
+    template: Swamp_Sahagin
+    at:       [-221.983, 9.501, -45.031, 127]
+    level:    [55, 59]
+  17498417:
+    template: Bog_Sahagin
+    at:       [-240.371, 10.419, -64.615, 127]
+    level:    [55, 59]
+  17498418:
+    template: Razorjaw_Pugil
+    at:       [-221.455, 9.542, -44.191, 127]
+    level:    [57, 60]
+  17498419:
+    template: Razorjaw_Pugil
+    at:       [-249.000, 10.000, -57.000, 20]
+    level:    [57, 60]
+  17498420:
+    template: Sea_Hog
+    at:       [-233.000, 10.000, -59.000, 127]
+    level:    [62, 63]
+  17498421:
+    template: Marsh_Sahagin
+    at:       [-261.027, 9.022, -89.632, 42]
+    level:    [55, 59]
+  17498422:
+    template: Swamp_Sahagin
+    at:       [-260.000, 9.000, -108.000, 68]
+    level:    [55, 59]
+  17498423:
+    template: Bog_Sahagin
+    at:       [-261.156, 9.705, -96.072, 127]
+    level:    [55, 59]
+  17498424:
+    template: Razorjaw_Pugil
+    at:       [-270.535, 9.170, -96.817, 127]
+    level:    [57, 60]
+  17498425:
+    template: Razorjaw_Pugil
+    at:       [-259.000, 10.000, -77.000, 67]
+    level:    [57, 60]
+  17498426:
+    template: Marsh_Sahagin
+    at:       [-337.035, 16.950, -106.841, 115]
+    level:    [55, 59]
+  17498427:
+    template: Swamp_Sahagin
+    at:       [-333.108, 16.949, -101.298, 127]
+    level:    [55, 59]
+  17498428:
+    template: Voll_the_Sharkfinned
+    at:       [-320.000, 16.000, -98.000, 127]
+    level:    [64, 66]
+  17498429:
+    template: Mousse_SSG
+    script:   Mousse
+    at:       [41.102, 19.361, -99.853, 11]
+    level:    [62, 65]
+  17498430:
+    template: Water_Elemental
+    at:       [41.364, 19.477, -100.439, 127]
+    level:    [65, 68]
+  17498431:
+    template: Shore_Sahagin
+    at:       [5.489, 19.605, -121.466, 127]
+    level:    [62, 65]
+  17498432:
+    template: Coastal_Sahagin
+    at:       [-4.433, 20.337, -144.713, 127]
+    level:    [62, 65]
+  17498433:
+    template: Delta_Sahagin
+    at:       [11.536, 19.852, -148.636, 54]
+    level:    [62, 65]
+  17498434:
+    template: Lagoon_Sahagin
+    at:       [1.654, 19.914, -113.913, 127]
+    level:    [62, 65]
+  17498435:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [10.160, 19.965, -132.712, 99]
+    level:    [62, 67]
+  17498436:
+    template: Yarr_the_Pearleyed
+    at:       [3.000, 20.000, -140.000, 127]
+    level:    [64, 66]
+  17498437:
+    template: Shore_Sahagin
+    at:       [3.906, 19.761, -175.850, 127]
+    level:    [62, 65]
+  17498438:
+    template: Coastal_Sahagin
+    at:       [8.260, 20.091, -154.102, 127]
+    level:    [62, 65]
+  17498439:
+    template: Delta_Sahagin
+    at:       [7.021, 19.542, -154.208, 127]
+    level:    [62, 65]
+  17498440:
+    template: Lagoon_Sahagin
+    at:       [-5.765, 19.684, -155.171, 127]
+    level:    [62, 65]
+  17498441:
+    template: Shore_Sahagin
+    at:       [-49.812, 19.500, -211.094, 127]
+    level:    [62, 65]
+  17498442:
+    template: Coastal_Sahagin
+    at:       [-23.286, 19.983, -206.217, 52]
+    level:    [62, 65]
+  17498443:
+    template: Delta_Sahagin
+    at:       [-49.869, 19.500, -212.592, 127]
+    level:    [62, 65]
+  17498444:
+    template: Lagoon_Sahagin
+    at:       [-38.302, 19.997, -194.269, 127]
+    level:    [62, 65]
+  17498445:
+    template: Novv_the_Whitehearted
+    at:       [-37.000, 19.000, -205.000, 127]
+    level:    [66, 67]
+  17498446:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-0.453, 20.510, -204.339, 127]
+    level:    [62, 67]
+  17498447:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [0.142, 20.170, -211.812, 113]
+    level:    [62, 67]
+  17498448:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [3.331, 20.581, -206.837, 127]
+    level:    [62, 67]
+  17498449:
+    template: Mousse_SSG
+    script:   Mousse
+    at:       [-60.151, 28.412, -170.253, 127]
+    level:    [62, 65]
+  17498450:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-62.202, 27.751, -169.047, 72]
+    level:    [62, 67]
+  17498451:
+    template: Mousse_SSG
+    script:   Mousse
+    at:       [-94.179, 15.182, -219.216, 127]
+    level:    [62, 65]
+  17498452:
+    template: Water_Elemental
+    at:       [-94.268, 15.387, -217.982, 60]
+    level:    [65, 68]
+  17498453:
+    template: Shore_Sahagin
+    at:       [-144.342, 10.499, -239.219, 82]
+    level:    [62, 65]
+  17498454:
+    template: Coastal_Sahagin
+    at:       [-135.929, 9.981, -247.460, 60]
+    level:    [62, 65]
+  17498455:
+    template: Delta_Sahagin
+    at:       [-136.599, 9.680, -231.107, 33]
+    level:    [62, 65]
+  17498456:
+    template: Lagoon_Sahagin
+    at:       [-143.942, 10.487, -244.352, 89]
+    level:    [62, 65]
+  17498457:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-142.599, 10.173, -249.760, 127]
+    level:    [62, 67]
+  17498458:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-105.617, 8.033, -259.817, 127]
+    level:    [63, 66]
+  17498459:
+    template: Water_Elemental
+    at:       [-97.274, 6.832, -262.231, 127]
+    level:    [65, 68]
+  17498460:
+    template: Shore_Sahagin
+    at:       [-102.877, 9.859, -300.331, 10]
+    level:    [62, 65]
+  17498461:
+    template: Coastal_Sahagin
+    at:       [-102.127, 9.797, -308.149, 98]
+    level:    [62, 65]
+  17498462:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-103.628, 9.862, -307.753, 47]
+    level:    [63, 66]
+  17498463:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-93.063, 9.768, -302.413, 127]
+    level:    [63, 66]
+  17498464:
+    template: Denn_the_Orcavoiced
+    at:       [-94.000, 9.000, -298.000, 127]
+    level:    [64, 65]
+  17498465:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-88.186, 27.963, -177.110, 127]
+    level:    [63, 66]
+  17498466:
+    template: Mousse_SSG
+    script:   Mousse
+    at:       [-90.964, 26.347, -167.792, 40]
+    level:    [62, 65]
+  17498467:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-100.778, 23.525, -168.125, 127]
+    level:    [63, 66]
+  17498468:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-114.103, 19.054, -184.587, 127]
+    level:    [63, 66]
+  17498469:
+    template: Delta_Sahagin
+    at:       [-120.592, 20.970, -179.734, 127]
+    level:    [62, 65]
+  17498470:
+    template: Lagoon_Sahagin
+    at:       [-108.938, 20.709, -177.597, 127]
+    level:    [62, 65]
+  17498471:
+    template: Mousse_SSG
+    script:   Mousse
+    at:       [-140.067, 19.313, -185.453, 127]
+    level:    [62, 65]
+  17498472:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-155.271, 20.025, -219.068, 116]
+    level:    [62, 67]
+  17498473:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-141.738, 20.266, -209.348, 69]
+    level:    [62, 67]
+  17498474:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-157.040, 20.008, -218.859, 22]
+    level:    [62, 67]
+  17498475:
+    template: Shore_Sahagin
+    at:       [-173.824, 19.701, -256.787, 127]
+    level:    [66, 69]
+  17498476:
+    template: Coastal_Sahagin
+    at:       [-183.526, 20.514, -243.165, 116]
+    level:    [66, 69]
+  17498477:
+    template: Delta_Sahagin
+    at:       [-188.998, 18.857, -237.105, 67]
+    level:    [66, 69]
+  17498478:
+    template: Lagoon_Sahagin
+    at:       [-179.027, 20.754, -242.398, 48]
+    level:    [66, 69]
+  17498479:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-187.438, 19.687, -247.982, 48]
+    level:    [62, 67]
+  17498480:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-160.230, 19.610, -261.433, 73]
+    level:    [63, 66]
+  17498481:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-156.503, 19.977, -260.877, 127]
+    level:    [63, 66]
+  17498482:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-152.049, 19.944, -264.849, 38]
+    level:    [62, 67]
+  17498483:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-141.677, 19.587, -292.998, 127]
+    level:    [63, 66]
+  17498484:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-147.570, 18.263, -295.399, 127]
+    level:    [63, 66]
+  17498485:
+    template: Water_Elemental
+    at:       [-148.874, 18.624, -303.852, 11]
+    level:    [65, 68]
+  17498486:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-193.993, 30.165, -258.590, 127]
+    level:    [62, 67]
+  17498487:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-182.615, 30.105, -270.584, 127]
+    level:    [62, 67]
+  17498488:
+    template: Shore_Sahagin
+    at:       [-225.688, 29.889, -252.445, 127]
+    level:    [66, 69]
+  17498489:
+    template: Delta_Sahagin
+    at:       [-213.512, 29.842, -260.535, 80]
+    level:    [66, 69]
+  17498490:
+    template: Lagoon_Sahagin
+    at:       [-218.297, 29.904, -258.458, 16]
+    level:    [66, 69]
+  17498491:
+    template: Devil_Manta
+    at:       [-213.237, 29.721, -226.106, 74]
+    level:    [66, 69]
+  17498492:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-185.783, 29.856, -216.996, 114]
+    level:    [62, 67]
+  17498493:
+    template: Devil_Manta
+    at:       [-179.649, 30.063, -206.458, 84]
+    level:    [66, 69]
+  17498494:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-194.123, 37.583, -181.515, 119]
+    level:    [62, 67]
+  17498495:
+    template: Water_Elemental
+    at:       [-218.069, 39.815, -195.359, 72]
+    level:    [65, 68]
+  17498496:
+    template: Devil_Manta
+    at:       [-226.371, 40.195, -213.499, 127]
+    level:    [66, 69]
+  17498497:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-258.321, 39.019, -218.129, 118]
+    level:    [62, 67]
+  17498498:
+    template: Water_Elemental
+    at:       [-249.349, 40.428, -217.358, 17]
+    level:    [65, 68]
+  17498499:
+    template: Devil_Manta
+    at:       [-299.994, 49.185, -246.551, 127]
+    level:    [66, 69]
+  17498500:
+    template: Water_Elemental
+    at:       [-297.579, 50.847, -277.280, 124]
+    level:    [65, 68]
+  17498501:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-268.628, 50.157, -302.061, 127]
+    level:    [62, 67]
+  17498502:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-263.387, 50.145, -306.740, 127]
+    level:    [62, 67]
+  17498503:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-255.176, 47.969, -333.297, 127]
+    level:    [62, 67]
+  17498504:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-258.214, 51.147, -343.688, 57]
+    level:    [62, 67]
+  17498505:
+    template: Devil_Manta
+    at:       [-230.814, 39.978, -264.337, 102]
+    level:    [66, 69]
+  17498506:
+    template: Devil_Manta
+    at:       [-225.144, 39.750, -270.253, 48]
+    level:    [66, 69]
+  17498507:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-258.586, 37.581, -269.467, 127]
+    level:    [62, 67]
+  17498508:
+    template: Robber_Crab_SSG
+    script:   Robber_Crab
+    at:       [-258.756, 39.571, -280.355, 127]
+    level:    [62, 67]
+  17498509:
+    template: Water_Elemental
+    at:       [-258.784, 39.590, -280.648, 127]
+    level:    [65, 68]
+  17498510:
+    template: Shore_Sahagin
+    at:       [-257.082, 39.975, -300.625, 80]
+    level:    [66, 69]
+  17498511:
+    template: Coastal_Sahagin
+    at:       [-227.521, 38.181, -312.568, 63]
+    level:    [66, 69]
+  17498512:
+    template: Delta_Sahagin
+    at:       [-223.455, 39.944, -300.838, 74]
+    level:    [66, 69]
+  17498513:
+    template: Delta_Sahagin
+    at:       [-231.975, 39.083, -294.117, 127]
+    level:    [66, 69]
+  17498514:
+    template: Lagoon_Sahagin
+    at:       [-251.218, 39.500, -304.529, 7]
+    level:    [66, 69]
+  17498515:
+    template: Devil_Manta
+    at:       [-230.577, 39.077, -294.827, 127]
+    level:    [66, 69]
+  17498516:
+    template: Zuug_the_Shoreleaper
+    at:       [-243.000, 41.000, -298.000, 127]
+    level:    [70, 70]
+  17498517:
+    template: Sahagins_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [58, 60]
+  17498518:
+    template: Devil_Manta
+    at:       [-212.407, 38.538, -342.544, 127]
+    level:    [66, 69]
+  17498519:
+    template: Water_Elemental
+    at:       [-218.690, 37.288, -340.355, 50]
+    level:    [65, 68]
+  17498520:
+    template: Devil_Manta
+    at:       [-138.181, 48.389, -338.001, 127]
+    level:    [66, 69]
+  17498521:
+    template: Devil_Manta
+    at:       [-167.247, 48.358, -336.823, 2]
+    level:    [66, 69]
+  17498522:
+    template: Charybdis
+    at:       [-152.000, 48.000, -328.000, 127]
+    level:    [79, 81]
+  17498523:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [110.662, 2.660, 12.958, 127]
+    level:    [66, 69]
+  17498524:
+    template: Shore_Sahagin
+    at:       [107.255, 2.561, 15.756, 127]
+    level:    [69, 71]
+  17498525:
+    template: Greatclaw
+    at:       [107.346, 2.639, -30.873, 15]
+    level:    [66, 69]
+  17498526:
+    template: Delta_Sahagin
+    at:       [96.536, 2.639, -16.122, 53]
+    level:    [69, 71]
+  17498527:
+    template: Shore_Sahagin
+    at:       [101.866, -0.309, -77.465, 26]
+    level:    [69, 71]
+  17498528:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [98.005, -0.298, -73.668, 127]
+    level:    [66, 69]
+  17498529:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [129.396, 0.373, -122.116, 127]
+    level:    [66, 69]
+  17498530:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [129.987, 0.271, -121.081, 115]
+    level:    [66, 69]
+  17498531:
+    template: Greatclaw
+    at:       [123.586, 0.455, -124.150, 127]
+    level:    [66, 69]
+  17498532:
+    template: Delta_Sahagin
+    at:       [128.987, 0.347, -120.294, 74]
+    level:    [69, 71]
+  17498533:
+    template: Nightmare_Bats_NM_SSG
+    script:   Nightmare_Bats
+    at:       [125.055, 0.247, -127.960, 109]
+    level:    [66, 69]
+  17498534:
+    template: Coastal_Sahagin
+    at:       [144.636, -0.231, -113.699, 46]
+    level:    [69, 71]
+  17498535:
+    template: Lagoon_Sahagin
+    at:       [150.970, -0.278, -114.216, 64]
+    level:    [69, 71]
+  17498536:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [142.331, 0.295, -110.359, 127]
+    level:    [66, 69]
+  17498537:
+    template: Greatclaw
+    at:       [136.934, -0.044, -128.207, 85]
+    level:    [66, 69]
+  17498538:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [155.737, -0.247, -125.031, 127]
+    level:    [66, 69]
+  17498539:
+    template: Nightmare_Bats_NM_SSG
+    script:   Nightmare_Bats
+    at:       [138.663, -0.011, -123.767, 80]
+    level:    [66, 69]
+  17498540:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [127.355, -0.214, -181.671, 127]
+    level:    [66, 69]
+  17498541:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [120.787, 0.421, -174.105, 127]
+    level:    [66, 69]
+  17498542:
+    template: Greatclaw
+    at:       [106.670, 1.057, -174.391, 115]
+    level:    [66, 69]
+  17498543:
+    template: Greatclaw
+    at:       [99.944, 1.140, -186.173, 127]
+    level:    [66, 69]
+  17498544:
+    template: Delta_Sahagin
+    at:       [103.753, 0.345, -195.368, 57]
+    level:    [69, 71]
+  17498545:
+    template: Abyss_Sahagin
+    at:       [100.499, 0.730, -194.593, 127]
+    level:    [72, 74]
+  17498546:
+    template: Greatclaw
+    at:       [110.267, 3.557, -218.387, 127]
+    level:    [66, 69]
+  17498547:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [112.778, 6.217, -228.384, 127]
+    level:    [66, 69]
+  17498548:
+    template: Greatclaw
+    at:       [100.355, 7.887, -233.598, 97]
+    level:    [66, 69]
+  17498549:
+    template: Delta_Sahagin
+    at:       [98.817, 9.502, -240.199, 55]
+    level:    [70, 72]
+  17498550:
+    template: Shore_Sahagin
+    at:       [116.890, 9.911, -284.104, 127]
+    level:    [70, 72]
+  17498551:
+    template: Delta_Sahagin
+    at:       [123.074, 9.601, -291.974, 118]
+    level:    [70, 72]
+  17498552:
+    template: Shore_Sahagin
+    at:       [95.517, 9.874, -270.790, 29]
+    level:    [70, 72]
+  17498553:
+    template: Coastal_Sahagin
+    at:       [99.182, 10.000, -278.292, 127]
+    level:    [70, 72]
+  17498554:
+    template: Delta_Sahagin
+    at:       [103.901, 10.356, -275.280, 17]
+    level:    [70, 72]
+  17498555:
+    template: Shore_Sahagin
+    at:       [89.394, 9.950, -282.594, 56]
+    level:    [70, 72]
+  17498556:
+    template: Delta_Sahagin
+    at:       [72.941, 9.564, -283.348, 6]
+    level:    [70, 72]
+  17498557:
+    template: Lagoon_Sahagin
+    at:       [69.274, 10.500, -264.268, 127]
+    level:    [70, 72]
+  17498558:
+    template: Abyss_Sahagin
+    at:       [127.653, 9.904, -277.297, 82]
+    level:    [72, 74]
+  17498559:
+    template: Coral_Sahagin
+    at:       [128.532, 9.997, -284.626, 61]
+    level:    [72, 74]
+  17498560:
+    template: Ocean_Sahagin
+    at:       [99.034, 9.626, -250.518, 127]
+    level:    [75, 75]
+  17498561:
+    template: Sahagins_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [58, 60]
+  17498562:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [20.020, 10.232, -256.663, 81]
+    level:    [66, 69]
+  17498563:
+    template: Mindgazer_SSG
+    script:   Mindgazer
+    at:       [20.357, 10.235, -257.067, 127]
+    level:    [66, 69]
+  17498564:
+    template: Mimic
+    at:       [1.000, 1.000, 1.000]
+    level:    [55, 55]
+  17498565:
+    template: Water_Leaper
+    at:       [112.500, 0.800, -126.200, 158]
+    level:    [80, 80]
+  17498566:
+    template: Glyryvilu
+    at:       [138.302, -13.974, 229.035, 79]
+    level:    [55, 55]
+  17498567:
+    template: Bakunawa
+    at:       [-48.220, 19.949, -201.570, 254]
+  17498568:
+    template: Kanavid
+    at:       [-45.632, 20.411, -202.264, 113]
+  17498569:
+    template: Kanavid
+    at:       [-46.950, 20.340, -201.134, 59]
+  17498570:
+    template: Bakunawa
+  17498571:
+    template: Kanavid
+  17498572:
+    template: Kanavid
+  17498573:
+    template: Bakunawa
+  17498574:
+    template: Kanavid
+  17498575:
+    template: Kanavid
+
+slots:
+  - members:
+      17498178: {} # Ghast
+      17498183: {} # Ghast
+  - members:
+      17498259: {} # Riparian_Sahagin
+      17498266: {} # Riparian_Sahagin
+  - members:
+      17498280: {} # Brook_Sahagin
+      17498283: {} # Brook_Sahagin
+  - members:
+      17498331: {} # Bog_Sahagin
+      17498337: {} # Bog_Sahagin
+      17498344: {} # Bog_Sahagin
+  - members:
+      17498332: {} # Bog_Sahagin
+      17498338: {} # Bog_Sahagin
+      17498345: {} # Bog_Sahagin
+  - members:
+      17498409: {} # Marsh_Sahagin
+      17498411: {} # Swamp_Sahagin
+      17498412: {} # Bog_Sahagin
+  - members:
+      17498418: {} # Razorjaw_Pugil
+      17498419: {} # Razorjaw_Pugil
+  - members:
+      17498422: {} # Swamp_Sahagin
+      17498423: {} # Bog_Sahagin
+  - members:
+      17498511: {} # Coastal_Sahagin
+      17498514: {} # Lagoon_Sahagin
+  - members:
+      17498518: {} # Devil_Manta
+      17498521: {} # Devil_Manta

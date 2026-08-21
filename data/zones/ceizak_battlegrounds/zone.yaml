@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [mount, mazurka, tractor, pet, trust]
+music:
+  day:          60
+  night:        60
+  battle_solo:  57
+  battle_party: 57
+
+zonelines:
+
+  z790:
+    from:  [-299.713, -2.525, 405.000]
+    to:    yahse_hunting_grounds
+    at:    [-379.759, -1.808, -441.000, 4.712389]
+    scale: [2.000, 4.500]
+
+  z792:
+    from:  [-20.359, -3.059, 445.000]
+    to:    yahse_hunting_grounds
+    at:    [-100.836, -1.878, -399.000, 4.712389]
+    scale: [2.000, 4.500]
+
+  z794:
+    from:  [340.376, -3.236, 364.000]
+    to:    yahse_hunting_grounds
+    at:    [260.044, -1.844, -441.000, 4.712389]
+    scale: [2.000, 4.500]
+
+  z796:
+    from:  [-540.000, 4.926, -315.000]
+    to:    sih_gates
+    at:    [-260.000, -31.550, 39.000, 1.570796]
+    scale: [1.000, 4.000]
+
+  z798:
+    from:  [-99.891, 3.906, -527.175]
+    to:    sih_gates
+    at:    [-41.000, -31.602, -20.166, 3.141593]
+    scale: [1.000, 4.000]
+
+  z79a:
+    from:  [460.781, -1.341, 176.941]
+    to:    western_adoulin
+    at:    [-142.000, 0.950, -20.000]
+    scale: [2.000, 15.000]

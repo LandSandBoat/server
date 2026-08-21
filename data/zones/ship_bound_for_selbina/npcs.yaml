@@ -1,0 +1,295 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17678354:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17678356:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17678361:
+    script:       Bhagirath
+    display_name: Bhagirath
+    at:           [0.340, -12.232, -4.120, 192]
+    render:
+      look:
+        type:  standard
+        model: 223
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:        21
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17678362:
+    script:       Maera
+    display_name: Maera
+    at:           [-1.139, -2.101, -9.000, 121]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  3
+        head:  4116
+        body:  8215
+        hands: 12296
+        legs:  16394
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17678363:
+    script:       Rajmonda
+    display_name: Rajmonda
+    at:           [1.841, -2.101, -9.000, 15]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  6
+        head:  4116
+        body:  8215
+        hands: 12296
+        legs:  16394
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17678364:
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17678365:
+    script:       Map
+    display_name: Map
+    at:           [0.278, -14.707, -1.411]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17678366:
+    script:       _640
+    display_name: Cargo Ship Door
+    at:           [0.345, -8.723, -0.445]
+    render:
+      look:
+        type: door
+      door_id:      808728159
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  17678367:
+    script:       _641
+    display_name: Door
+    at:           [-5.172, -3.698, -5.614]
+    render:
+      look:
+        type: door
+      door_id:      825505375
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  17678368:
+    script:       _642
+    display_name: Door
+    at:           [5.862, -3.698, -5.614]
+    render:
+      look:
+        type: door
+      door_id:      842282591
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  17678369:
+    script:       _643
+    display_name: Door
+    at:           [0.345, -3.699, 12.341]
+    render:
+      look:
+        type: door
+      door_id:      859059807
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  17678370:
+    script:       _644
+    display_name: Cargo Ship Door
+    at:           [-3.158, -12.723, -10.582]
+    render:
+      look:
+        type: door
+      door_id:      875837023
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  17678371:
+    script:       _645
+    display_name: Cargo Ship Door
+    at:           [3.821, -12.725, -10.581]
+    render:
+      look:
+        type: door
+      door_id:      892614239
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  17678372:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17678374:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17678375:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17678376:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17678377:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17678378:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17678379:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17678380:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17678381:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40

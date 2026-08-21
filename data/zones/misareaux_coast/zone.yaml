@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          230
+  night:        230
+  battle_solo:  101
+  battle_party: 219
+
+zonelines:
+
+  z0p0:
+    from:  [572.441, -19.402, 282.673]
+    to:    lufaise_meadows
+    at:    [-475.825, -20.461, 281.149, 0.213803]
+    scale: [2.000, 10.000]
+
+  z0p2:
+    from:  [602.537, -2.850, 19.974]
+    to:    tavnazian_safehold
+    at:    [-46.465, -32.599, 158.105, 0.698132]
+    scale: [1.000, 5.000]
+
+  z0p4:
+    from:  [642.432, 21.094, -220.022]
+    to:    tavnazian_safehold
+    at:    [-37.079, -30.028, 118.783, 5.585054]
+    scale: [1.000, 5.000]
+
+  z0p6:
+    from:  [61.063, -27.674, 739.997]
+    to:    sacrarium
+    at:    [-219.996, -18.587, 82.795, 1.570796]
+    scale: [1.000, 5.000]

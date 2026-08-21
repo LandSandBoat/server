@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from .common import ENUMS_DIR, ROOT, TEMPLATES_DIR, write_if_changed
+from .common import ENUMS_DIR, ROOT, TEMPLATES_DIR, ZONES_DIR, write_if_changed
 from .enum_codegen import emit_pure_enum, emit_table_enums
 from .validate import validate_data_yamls
 
@@ -13,7 +13,7 @@ def enum_inputs_newer_than(stamp: Path) -> bool:
     inputs = [
         *Path(__file__).parent.glob("*.py"),
         *TEMPLATES_DIR.glob("*.j2"),
-        *(ROOT / "data").rglob("*.yaml"),
+        *(path for path in (ROOT / "data").rglob("*.yaml") if not path.is_relative_to(ZONES_DIR)),
         *ROOT.glob("modules/*/data/*.yaml"),
     ]
     return any(input_path.stat().st_mtime > stamp_mtime for input_path in inputs)
@@ -48,7 +48,8 @@ def main():
     for enum_path in sorted(ENUMS_DIR.glob("*.yaml")):
         enums.append(emit_pure_enum(enum_path))
     for data_path in sorted((ROOT / "data").rglob("*.yaml")):
-        if data_path.is_relative_to(ENUMS_DIR):
+        # No enum comes out of per-zone content, and it is hundreds of files to parse.
+        if data_path.is_relative_to(ENUMS_DIR) or data_path.is_relative_to(ZONES_DIR):
             continue
 
         print(f"scanning {data_path.relative_to(ROOT).as_posix()} for embedded enums ...", flush=True)

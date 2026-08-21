@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  220
+  battle_party: 220
+
+zonelines:
+
+  z060:
+    from:  [-677.021, 15.975, -540.013]
+    to:    uleguerand_range
+    at:    [363.025, 16.017, -59.903]
+    scale: [1.000, 4.000]
+
+  z062:
+    from:  [-820.016, -41.017, -79.066]
+    to:    uleguerand_range
+    at:    [420.024, -40.006, 198.498, 4.712389]
+    scale: [1.000, 4.000]
+
+  z064:
+    from:  [-798.984, -105.026, 620.020]
+    to:    uleguerand_range
+    at:    [60.015, -103.627, 440.661, 4.712389]
+    scale: [1.000, 4.000]
+
+  z066:
+    from:  [116.984, -197.114, 660.044]
+    to:    uleguerand_range
+    at:    [79.508, -196.004, 179.999, 3.141593]
+    scale: [1.000, 4.000]
+
+  z068:
+    from:  [-523.003, -1.031, -899.966]
+    to:    uleguerand_range
+    at:    [-202.872, -7.470, -60.003, 3.141593]
+    scale: [1.000, 4.000]
+
+  z06a:
+    from:  [-203.003, -113.417, -99.965]
+    to:    uleguerand_range
+    at:    [179.994, -227.801, 118.492, 1.570796]
+    scale: [1.000, 4.000]

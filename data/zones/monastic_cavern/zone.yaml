@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z460:
+    from:  [262.959, -10.803, 19.936]
+    to:    davoi
+    at:    [282.292, 2.498, -17.908]
+    scale: [1.000, 3.000]
+
+  z462:
+    from:  [200.040, -19.282, -260.230]
+    to:    davoi
+    at:    [177.745, 2.918, -238.573, 4.712389]
+    scale: [1.000, 3.000]
+
+  z464:
+    from:  [-40.076, -19.404, -100.113]
+    to:    davoi
+    at:    [-22.086, 3.454, -80.150, 4.712389]
+    scale: [1.000, 3.000]
+
+  z466:
+    from:  [40.040, -19.277, -380.068]
+    to:    davoi
+    at:    [57.952, 3.204, -359.422, 4.712389]
+    scale: [1.000, 3.000]
+
+  z468:
+    from:  [79.993, -19.133, -180.071]
+    to:    davoi
+    at:    [93.179, 2.233, -158.973, 4.712389]
+    scale: [1.000, 2.000]

@@ -1,0 +1,2496 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Apex_Chapuli:
+    id:            5391
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Apex_Jagil:
+    id:            5393
+    species:       pugil
+    skill_list_id: 6
+    attributes:
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Apex_Leech:
+    id:            5394
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Apex_Mandragora:
+    id:            5392
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Bloated_Acuex:
+    id:            5062
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Bonaria:
+    id:            5055
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          6
+      spawn:
+        respawn: 300
+
+  Burrowing_Chapuli:
+    id:            5054
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Choleric_Umbril:
+    id:            6702
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  129
+        animation_sub:   5
+        name_prefix:     2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Craklaw_SG:
+    id:            6371
+    species:       craklaw
+    type:          [notorious]
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 129
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Cthonic_Chapuli_SG:
+    id:            5081
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Dullahan_generic:
+    id:            5250
+    species:       dullahan
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2605
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Echo_Bats:
+    id:            4887
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  1665
+        animation_sub:    8
+        name_prefix:     64
+        hitbox:          13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 5000
+
+  Esurient_Bat:
+    id:            6465
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Ferocious_Funguar:
+    id:            5063
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Fetid_Twitherym:
+    id:            4884
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2536
+        entity_flags: 131
+        name_prefix:   64
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Flitting_Bee:
+    id:            5520
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1936
+        entity_flags: 129
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Fomor_Pioneer:
+    id:            4890
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2867
+        entity_flags:  517
+        animation_sub:   8
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 5000
+
+  Fulvous_Jagil:
+    id:            5061
+    species:       pugil
+    skill_list_id: 709
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Furious_Arundmite:
+    id:            5521
+    species:       diremite
+    type:          [notorious]
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1354
+        entity_flags: 131
+        model_size:     1
+        hitbox:        19
+      spawn:
+        type: [scripted]
+
+  Hemorraghic_Bats:
+    id:            6441
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags: 129
+        name_prefix:   64
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Javelin_Wasp:
+    id:            5056
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1936
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Knotted_Root_SG_MG:
+    id:           6709
+    display_name: Knotted_Root
+    species:      unclassified
+    type:         [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2794
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         20
+      spawn:
+        type: [scripted]
+
+  Loathsome_Leech:
+    id:            4889
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 641
+        hitbox:         9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 5000
+
+  Loathsome_Obdella:
+    id:            5057
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Lyngbakr:
+    id:            5518
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Macabre_Bat:
+    id:            4888
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 5000
+
+  Malodorous_Twitherym:
+    id:            5058
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2536
+        entity_flags: 129
+        name_prefix:   64
+        hitbox:         6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Mighty_Craklaw:
+    id:            5059
+    species:       craklaw
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Pungent_Fungus:
+    id:      5060
+    species: funguar
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2775
+        entity_flags: 129
+        hitbox:         3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Quiescent_Leech:
+    id:            5517
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Snapping_Craklaw:
+    id:            5519
+    species:       craklaw
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 129
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Somber_Obdella:
+    id:            4885
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Speleothem_Gefyrst:
+    id:            4773
+    species:       earth_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+      stats:
+        hp: 20000
+
+  Speleothem_Ungeweder:
+    id:            4774
+    species:       earth_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 2150
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+      stats:
+        hp: 20000
+
+  Sprightly_Acuex:
+    id:            6323
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Tortured_Diremite:
+    id:            6384
+    species:       diremite
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+spawns:
+  17874945:
+    script: Baited_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17874946:
+    script: Baited_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17874947:
+    script: Baited_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17874948:
+    script: Groundwater_Leech
+    at:     [1.000, 1.000, 1.000]
+  17874949:
+    script: Groundwater_Leech
+    at:     [1.000, 1.000, 1.000]
+  17874950:
+    template: Burrowing_Chapuli
+    at:       [-60.790, -20.970, -54.055, 56]
+    level:    [101, 103]
+  17874951:
+    template: Burrowing_Chapuli
+    at:       [-67.650, -21.180, -52.595, 129]
+    level:    [101, 103]
+  17874952:
+    template: Burrowing_Chapuli
+    at:       [-61.150, -21.330, -57.194, 29]
+    level:    [101, 103]
+  17874953:
+    template: Burrowing_Chapuli
+    at:       [-92.470, -15.540, -61.962, 81]
+    level:    [101, 103]
+  17874954:
+    template: Burrowing_Chapuli
+    at:       [-89.030, -17.220, -57.922, 212]
+    level:    [101, 103]
+  17874955:
+    template: Burrowing_Chapuli
+    at:       [-83.750, -18.690, -59.410, 254]
+    level:    [101, 103]
+  17874956:
+    template: Bonaria
+    at:       [-103.400, -9.829, -127.410, 145]
+    level:    [101, 103]
+  17874957:
+    template: Bonaria
+    at:       [-100.000, -11.190, -134.510, 241]
+    level:    [101, 103]
+  17874958:
+    template: Bonaria
+    at:       [-96.870, -10.910, -130.470, 245]
+    level:    [101, 103]
+  17874959:
+    template: Bonaria
+    at:       [-103.000, -9.739, -117.400, 3]
+    level:    [101, 103]
+  17874960:
+    template: Bonaria
+    at:       [-105.100, -10.170, -116.830, 224]
+    level:    [101, 103]
+  17874961:
+    template: Bonaria
+    at:       [-96.350, -9.864, -110.490, 107]
+    level:    [101, 103]
+  17874962:
+    template: Javelin_Wasp
+    at:       [-154.100, -10.400, -163.840, 206]
+    level:    [99, 107]
+  17874963:
+    template: Javelin_Wasp
+    at:       [-153.800, -10.200, -159.400, 202]
+    level:    [99, 107]
+  17874964:
+    template: Javelin_Wasp
+    at:       [-161.800, -10.480, -157.590, 104]
+    level:    [99, 107]
+  17874965:
+    template: Javelin_Wasp
+    at:       [-155.100, -10.510, -153.830, 255]
+    level:    [99, 107]
+  17874966:
+    template: Loathsome_Obdella
+    at:       [-158.600, -10.490, -159.570, 137]
+    level:    [99, 107]
+  17874967:
+    template: Loathsome_Obdella
+    at:       [-156.200, -10.390, -158.980, 138]
+    level:    [99, 107]
+  17874968:
+    template: Speleothem_Ungeweder
+    at:       [-161.100, -10.510, -163.580, 140]
+    level:    [103, 105]
+  17874969:
+    template: Burrowing_Chapuli
+    at:       [-116.900, -10.550, -240.080, 188]
+    level:    [101, 103]
+  17874970:
+    template: Burrowing_Chapuli
+    at:       [-118.500, -10.330, -247.130, 39]
+    level:    [101, 103]
+  17874971:
+    template: Burrowing_Chapuli
+    at:       [-125.300, -10.370, -243.950, 156]
+    level:    [101, 103]
+  17874972:
+    template: Malodorous_Twitherym
+    at:       [-124.900, -10.420, -238.340, 116]
+    level:    [101, 103]
+  17874973:
+    template: Malodorous_Twitherym
+    at:       [-115.900, -10.460, -237.100, 75]
+    level:    [101, 103]
+  17874974:
+    template: Malodorous_Twitherym
+    at:       [-117.800, -10.490, -243.200, 247]
+    level:    [101, 103]
+  17874975:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [-155.600, -10.480, -320.990, 75]
+    level:    [99, 107]
+  17874976:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [-159.400, -10.410, -317.040, 104]
+    level:    [99, 107]
+  17874977:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [-152.700, -10.170, -322.250, 5]
+    level:    [99, 107]
+  17874978:
+    template: Malodorous_Twitherym
+    at:       [-152.900, -10.210, -321.610, 16]
+    level:    [101, 103]
+  17874979:
+    template: Malodorous_Twitherym
+    at:       [-161.000, -10.490, -316.040, 70]
+    level:    [101, 103]
+  17874980:
+    template: Pungent_Fungus
+    at:       [101.210, 0.232, -220.230, 108]
+    level:    [1, 1]
+  17874981:
+    template: Fulvous_Jagil
+    at:       [-87.470, -0.156, -374.800, 110]
+    level:    [99, 107]
+  17874982:
+    template: Fulvous_Jagil
+    at:       [-90.060, -0.442, -375.210, 255]
+    level:    [99, 107]
+  17874983:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [-85.760, 0.552, -379.780, 100]
+    level:    [99, 107]
+  17874984:
+    template: Fulvous_Jagil
+    at:       [-71.090, 0.276, -376.640, 196]
+    level:    [99, 107]
+  17874985:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [-76.930, -0.193, -383.490, 79]
+    level:    [99, 107]
+  17874986:
+    template: Pungent_Fungus
+    at:       [-76.120, 0.304, -375.830, 22]
+    level:    [1, 1]
+  17874987:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [15.703, -0.027, -351.650, 35]
+    level:    [99, 107]
+  17874988:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [3.014, -0.449, -359.040, 129]
+    level:    [99, 107]
+  17874989:
+    template: Malodorous_Twitherym
+    at:       [-8.324, -0.089, -360.420, 124]
+    level:    [101, 103]
+  17874990:
+    template: Malodorous_Twitherym
+    at:       [-0.224, -0.499, -357.280, 240]
+    level:    [101, 103]
+  17874991:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [40.804, -0.509, -366.540, 113]
+    level:    [99, 107]
+  17874992:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [41.416, -0.787, -364.810, 203]
+    level:    [99, 107]
+  17874993:
+    template: Malodorous_Twitherym
+    at:       [33.949, -0.555, -358.260, 79]
+    level:    [101, 103]
+  17874994:
+    template: Malodorous_Twitherym
+    at:       [30.249, -0.194, -361.080, 116]
+    level:    [101, 103]
+  17874995:
+    template: Speleothem_Gefyrst
+    at:       [28.452, -0.043, -364.980, 32]
+    level:    [103, 105]
+  17874996:
+    template: Loathsome_Obdella
+    at:       [-220.500, -9.309, -317.150, 65]
+    level:    [99, 107]
+  17874997:
+    template: Loathsome_Obdella
+    at:       [-222.000, -10.770, -309.740, 86]
+    level:    [99, 107]
+  17874998:
+    template: Loathsome_Obdella
+    at:       [-215.800, -10.870, -306.050, 9]
+    level:    [99, 107]
+  17874999:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [-225.600, -20.810, -370.490, 159]
+    level:    [99, 107]
+  17875000:
+    template: Malodorous_Twitherym
+    at:       [-225.900, -20.900, -370.880, 183]
+    level:    [101, 103]
+  17875001:
+    template: Malodorous_Twitherym
+    at:       [-218.900, -19.230, -362.550, 117]
+    level:    [101, 103]
+  17875002:
+    template: Echo_Bats
+    at:       [-278.500, -20.210, -392.210, 137]
+    level:    [101, 103]
+  17875003:
+    template: Echo_Bats
+    at:       [-275.900, -20.380, -406.390, 38]
+    level:    [101, 103]
+  17875004:
+    template: Macabre_Bat
+    at:       [-284.200, -20.680, -399.110, 117]
+    level:    [101, 103]
+  17875005:
+    template: Macabre_Bat
+    at:       [-281.300, -20.510, -400.870, 30]
+    level:    [101, 103]
+  17875006:
+    template: Macabre_Bat
+    at:       [-275.400, -20.500, -395.970, 151]
+    level:    [101, 103]
+  17875007:
+    template: Speleothem_Gefyrst
+    at:       [-277.200, -20.450, -403.820, 150]
+    level:    [103, 105]
+  17875008:
+    template: Loathsome_Leech
+    at:       [-317.700, -19.880, -334.610, 211]
+    level:    [102, 103]
+  17875009:
+    template: Loathsome_Leech
+    at:       [-310.200, -20.320, -333.230, 177]
+    level:    [102, 103]
+  17875010:
+    template: Loathsome_Obdella
+    at:       [-317.000, -19.790, -335.370, 41]
+    level:    [99, 107]
+  17875011:
+    template: Loathsome_Obdella
+    at:       [-317.300, -19.920, -334.400, 174]
+    level:    [99, 107]
+  17875012:
+    template: Pungent_Fungus
+    at:       [-309.900, -19.600, -335.460, 47]
+    level:    [1, 1]
+  17875013:
+    template: Craklaw_SG
+    script:   Craklaw
+    at:       [-258.500, -21.520, -334.750, 225]
+    level:    [99, 107]
+  17875014:
+    template: Fulvous_Jagil
+    at:       [-264.300, -21.030, -332.960, 5]
+    level:    [99, 107]
+  17875015:
+    template: Fulvous_Jagil
+    at:       [-259.700, -20.200, -328.090, 67]
+    level:    [99, 107]
+  17875016:
+    template: Speleothem_Gefyrst
+    at:       [-262.400, -20.630, -332.050, 51]
+    level:    [103, 105]
+  17875017:
+    template: Ferocious_Funguar
+    at:       [-234.000, -10.490, -192.890, 217]
+    level:    [99, 107]
+  17875018:
+    template: Ferocious_Funguar
+    at:       [-234.100, -10.490, -192.770, 216]
+    level:    [99, 107]
+  17875019:
+    template: Ferocious_Funguar
+    at:       [-233.400, -10.350, -197.820, 199]
+    level:    [99, 107]
+  17875020:
+    template: Ferocious_Funguar
+    at:       [-243.200, -10.480, -193.570, 187]
+    level:    [99, 107]
+  17875021:
+    template: Ferocious_Funguar
+    at:       [-247.800, -10.170, -196.110, 75]
+    level:    [99, 107]
+  17875022:
+    template: Ferocious_Funguar
+    at:       [-234.100, -10.790, -202.770, 206]
+    level:    [99, 107]
+  17875023:
+    template: Speleothem_Ungeweder
+    at:       [-238.800, -10.470, -202.460, 191]
+    level:    [103, 105]
+  17875024:
+    template: Ferocious_Funguar
+    at:       [-244.300, -9.821, -95.972, 185]
+    level:    [99, 107]
+  17875025:
+    template: Ferocious_Funguar
+    at:       [-245.100, -10.590, -114.460, 2]
+    level:    [99, 107]
+  17875026:
+    template: Bloated_Acuex
+    at:       [-244.500, -9.965, -109.330, 58]
+    level:    [99, 107]
+  17875027:
+    template: Bloated_Acuex
+    at:       [-244.900, -9.991, -102.160, 207]
+    level:    [99, 107]
+  17875028:
+    template: Ferocious_Funguar
+    at:       [-219.100, -9.538, -83.621, 38]
+    level:    [99, 107]
+  17875029:
+    template: Ferocious_Funguar
+    at:       [-211.100, -10.270, -76.273, 64]
+    level:    [99, 107]
+  17875030:
+    template: Bloated_Acuex
+    at:       [-217.900, -10.090, -87.939, 195]
+    level:    [99, 107]
+  17875031:
+    template: Bloated_Acuex
+    at:       [-204.500, -9.980, -84.726, 5]
+    level:    [99, 107]
+  17875032:
+    template: Speleothem_Gefyrst
+    at:       [-202.600, -10.550, -79.518, 156]
+    level:    [103, 105]
+  17875033:
+    template: Javelin_Wasp
+    at:       [-182.000, -10.130, -21.809, 114]
+    level:    [99, 107]
+  17875034:
+    template: Javelin_Wasp
+    at:       [-178.700, -10.300, -24.697, 250]
+    level:    [99, 107]
+  17875035:
+    template: Javelin_Wasp
+    at:       [-179.600, -10.180, -16.846, 202]
+    level:    [99, 107]
+  17875036:
+    template: Pungent_Fungus
+    at:       [-180.600, -9.642, -20.044, 52]
+    level:    [1, 1]
+  17875037:
+    template: Burrowing_Chapuli
+    at:       [-222.400, -19.270, -4.932, 86]
+    level:    [101, 103]
+  17875038:
+    template: Burrowing_Chapuli
+    at:       [-216.100, -19.540, -2.401, 251]
+    level:    [101, 103]
+  17875039:
+    template: Burrowing_Chapuli
+    at:       [-218.700, -20.420, -9.910, 52]
+    level:    [101, 103]
+  17875040:
+    template: Burrowing_Chapuli
+    at:       [-223.000, -19.340, 1.344, 135]
+    level:    [101, 103]
+  17875041:
+    template: Bloated_Acuex
+    at:       [-368.400, -20.490, -58.918, 47]
+    level:    [99, 107]
+  17875042:
+    template: Bloated_Acuex
+    at:       [-368.400, -20.430, -58.827, 47]
+    level:    [99, 107]
+  17875043:
+    template: Ferocious_Funguar
+    at:       [-351.000, -20.600, -59.020, 35]
+    level:    [99, 107]
+  17875044:
+    template: Ferocious_Funguar
+    at:       [-364.900, -20.700, -53.667, 248]
+    level:    [99, 107]
+  17875045:
+    template: Speleothem_Ungeweder
+    at:       [-353.300, -21.190, -55.962, 127]
+    level:    [103, 105]
+  17875046:
+    template: Loathsome_Obdella
+    at:       [-139.700, -10.520, -194.200, 196]
+    level:    [99, 107]
+  17875047:
+    template: Loathsome_Obdella
+    at:       [-138.900, -10.500, -203.950, 66]
+    level:    [99, 107]
+  17875048:
+    template: Malodorous_Twitherym
+    at:       [-179.100, -10.490, -352.480, 190]
+    level:    [101, 103]
+  17875049:
+    template: Malodorous_Twitherym
+    at:       [-179.400, -10.490, -352.660, 190]
+    level:    [101, 103]
+  17875050:
+    template: Fulvous_Jagil
+    at:       [-61.110, -2.486, -416.070, 149]
+    level:    [99, 107]
+  17875051:
+    template: Fulvous_Jagil
+    at:       [-48.210, -1.220, -419.210, 134]
+    level:    [99, 107]
+  17875052:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [-120.000, -11.500, -97.500, 39]
+    level:    [99, 107]
+  17875053:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [-120.000, -11.500, -100.000, 14]
+    level:    [99, 107]
+  17875054:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [-120.000, -11.500, -102.500, 115]
+    level:    [99, 107]
+  17875055:
+    template: Cthonic_Chapuli_SG
+    script:   Cthonic_Chapuli
+    at:       [-116.800, -10.580, -102.360, 68]
+    level:    [101, 103]
+  17875056:
+    template: Cthonic_Chapuli_SG
+    script:   Cthonic_Chapuli
+    at:       [-116.300, -10.480, -97.994, 147]
+    level:    [101, 103]
+  17875057:
+    template: Fetid_Twitherym
+    at:       [-113.200, -9.817, -102.080, 156]
+    level:    [101, 103]
+  17875058:
+    template: Cthonic_Chapuli_SG
+    script:   Cthonic_Chapuli
+    at:       [-128.900, -10.320, -101.330, 98]
+    level:    [101, 103]
+  17875059:
+    template: Cthonic_Chapuli_SG
+    script:   Cthonic_Chapuli
+    at:       [-123.300, -10.510, -102.660, 62]
+    level:    [101, 103]
+  17875060:
+    template: Fetid_Twitherym
+    at:       [-123.400, -10.500, -102.790, 36]
+    level:    [101, 103]
+  17875061:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [-80.000, -11.500, -257.500, 55]
+    level:    [99, 107]
+  17875062:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [-80.000, -11.500, -260.000, 73]
+    level:    [99, 107]
+  17875063:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [-80.000, -11.500, -262.500, 77]
+    level:    [99, 107]
+  17875064:
+    template: Mighty_Craklaw
+    at:       [-89.730, -10.700, -260.740, 143]
+    level:    [102, 104]
+  17875065:
+    template: Somber_Obdella
+    at:       [-86.500, -10.670, -261.250, 152]
+    level:    [102, 103]
+  17875066:
+    template: Somber_Obdella
+    at:       [-89.560, -10.730, -259.980, 107]
+    level:    [102, 103]
+  17875067:
+    template: Mighty_Craklaw
+    at:       [-72.500, -8.095, -259.270, 144]
+    level:    [102, 104]
+  17875068:
+    template: Somber_Obdella
+    at:       [-70.520, -7.010, -257.840, 85]
+    level:    [102, 103]
+  17875069:
+    template: Somber_Obdella
+    at:       [-73.230, -9.083, -256.670, 217]
+    level:    [102, 103]
+  17875070:
+    template: Fomor_Pioneer
+    at:       [-417.600, -20.300, -58.867, 3]
+    level:    [102, 103]
+  17875071:
+    template: Hemorraghic_Bats
+    at:       [337.590, -9.295, 490.196, 230]
+    level:    [119, 122]
+  17875072:
+    template: Quiescent_Leech
+    at:       [336.600, -9.486, 478.044, 253]
+    level:    [119, 121]
+  17875073:
+    template: Hemorraghic_Bats
+    at:       [346.310, -10.750, 499.149, 155]
+    level:    [119, 122]
+  17875074:
+    template: Quiescent_Leech
+    at:       [344.580, -10.820, 495.648, 46]
+    level:    [119, 121]
+  17875075:
+    template: Hemorraghic_Bats
+    at:       [415.830, -9.822, 530.221, 240]
+    level:    [119, 122]
+  17875076:
+    template: Hemorraghic_Bats
+    at:       [415.860, -9.588, 519.539, 24]
+    level:    [119, 122]
+  17875077:
+    template: Quiescent_Leech
+    at:       [407.340, -10.830, 514.992, 12]
+    level:    [119, 121]
+  17875078:
+    template: Quiescent_Leech
+    at:       [424.070, -10.250, 528.468, 176]
+    level:    [119, 121]
+  17875079:
+    template: Hemorraghic_Bats
+    at:       [429.000, -10.190, 512.768, 202]
+    level:    [119, 122]
+  17875080:
+    template: Hemorraghic_Bats
+    at:       [438.000, -10.150, 509.080, 129]
+    level:    [119, 122]
+  17875081:
+    template: Quiescent_Leech
+    at:       [444.130, -11.070, 513.320, 75]
+    level:    [119, 121]
+  17875082:
+    template: Quiescent_Leech
+    at:       [419.520, -10.550, 506.618, 121]
+    level:    [119, 121]
+  17875083:
+    template: Quiescent_Leech
+    at:       [392.540, -10.610, 509.153, 112]
+    level:    [119, 121]
+  17875084:
+    template: Quiescent_Leech
+    at:       [418.420, -10.670, 492.824, 65]
+    level:    [119, 121]
+  17875085:
+    template: Hemorraghic_Bats
+    at:       [420.580, -10.650, 481.191, 183]
+    level:    [119, 122]
+  17875086:
+    template: Sprightly_Acuex
+    at:       [444.280, -9.168, 460.325, 232]
+    level:    [119, 122]
+  17875087:
+    template: Sprightly_Acuex
+    at:       [429.480, -9.675, 458.816, 214]
+    level:    [119, 122]
+  17875088:
+    template: Hemorraghic_Bats
+    at:       [421.280, -10.460, 456.622, 232]
+    level:    [119, 122]
+  17875089:
+    template: Hemorraghic_Bats
+    at:       [420.700, -10.520, 439.605, 74]
+    level:    [119, 122]
+  17875090:
+    template: Hemorraghic_Bats
+    at:       [423.470, -10.300, 425.766, 48]
+    level:    [119, 122]
+  17875091:
+    template: Sprightly_Acuex
+    at:       [421.060, -10.600, 406.790, 202]
+    level:    [119, 122]
+  17875092:
+    template: Sprightly_Acuex
+    at:       [421.230, -11.470, 389.713, 62]
+    level:    [119, 122]
+  17875093:
+    template: Sprightly_Acuex
+    at:       [491.640, -10.480, 427.180, 79]
+    level:    [119, 122]
+  17875094:
+    template: Sprightly_Acuex
+    at:       [493.070, -10.410, 431.045, 207]
+    level:    [119, 122]
+  17875095:
+    template: Sprightly_Acuex
+    at:       [501.710, -9.807, 430.083, 56]
+    level:    [119, 122]
+  17875096:
+    template: Sprightly_Acuex
+    at:       [482.570, -10.570, 422.822, 109]
+    level:    [119, 122]
+  17875097:
+    template: Sprightly_Acuex
+    at:       [485.300, -10.250, 420.800, 63]
+    level:    [119, 122]
+  17875098:
+    template: Sprightly_Acuex
+    at:       [470.260, -10.100, 419.145, 120]
+    level:    [119, 122]
+  17875099:
+    template: Sprightly_Acuex
+    at:       [454.380, -10.280, 414.210, 94]
+    level:    [119, 122]
+  17875100:
+    template: Sprightly_Acuex
+    at:       [511.220, -10.370, 428.033, 210]
+    level:    [119, 122]
+  17875101:
+    template: Sprightly_Acuex
+    at:       [511.550, -10.270, 420.014, 47]
+    level:    [119, 122]
+  17875102:
+    template: Sprightly_Acuex
+    at:       [520.610, -9.312, 419.242, 51]
+    level:    [119, 122]
+  17875103:
+    template: Tortured_Diremite
+    at:       [500.830, -10.440, 349.062, 52]
+    level:    [125, 125]
+  17875104:
+    template: Tortured_Diremite
+    at:       [513.740, -9.914, 304.302, 248]
+    level:    [125, 125]
+  17875105:
+    template: Tortured_Diremite
+    at:       [510.580, -10.270, 298.154, 91]
+    level:    [125, 125]
+  17875106:
+    template: Tortured_Diremite
+    at:       [523.480, -10.950, 316.165, 154]
+    level:    [125, 125]
+  17875107:
+    template: Tortured_Diremite
+    at:       [519.510, -9.939, 294.480, 105]
+    level:    [125, 125]
+  17875108:
+    template: Tortured_Diremite
+    at:       [517.010, -9.553, 294.653, 42]
+    level:    [125, 125]
+  17875109:
+    template: Esurient_Bat
+    at:       [522.990, -10.280, 312.049, 118]
+    level:    [119, 122]
+  17875110:
+    template: Tortured_Diremite
+    at:       [515.430, -10.640, 270.436, 70]
+    level:    [125, 125]
+  17875111:
+    template: Tortured_Diremite
+    at:       [513.060, -10.510, 280.187, 222]
+    level:    [125, 125]
+  17875112:
+    template: Esurient_Bat
+    at:       [520.460, -10.590, 268.875, 28]
+    level:    [119, 122]
+  17875113:
+    template: Esurient_Bat
+    at:       [476.920, -10.470, 309.376, 42]
+    level:    [119, 122]
+  17875114:
+    template: Esurient_Bat
+    at:       [483.260, -10.570, 318.040, 108]
+    level:    [119, 122]
+  17875115:
+    template: Esurient_Bat
+    at:       [483.050, -10.590, 321.623, 141]
+    level:    [119, 122]
+  17875116:
+    template: Tortured_Diremite
+    at:       [507.070, -9.968, 320.500, 207]
+    level:    [125, 125]
+  17875117:
+    template: Esurient_Bat
+    at:       [509.470, -9.949, 315.535, 4]
+    level:    [119, 122]
+  17875118:
+    template: Lyngbakr
+    at:       [420.460, -0.759, 254.472, 247]
+    level:    [119, 122]
+  17875119:
+    template: Lyngbakr
+    at:       [359.110, -0.150, 231.005, 181]
+    level:    [119, 122]
+  17875120:
+    template: Lyngbakr
+    at:       [362.630, 0.522, 225.059, 24]
+    level:    [119, 122]
+  17875121:
+    template: Lyngbakr
+    at:       [351.140, 0.005, 244.942, 149]
+    level:    [119, 122]
+  17875122:
+    template: Lyngbakr
+    at:       [376.310, -0.014, 248.412, 197]
+    level:    [119, 122]
+  17875123:
+    template: Choleric_Umbril
+    at:       [353.530, -0.187, 276.045, 138]
+    level:    [119, 122]
+  17875124:
+    template: Choleric_Umbril
+    at:       [353.450, -0.160, 290.604, 90]
+    level:    [119, 122]
+  17875125:
+    template: Dullahan_generic
+    script:   Unrelenting_Dullahan
+    at:       [353.890, -0.164, 289.985, 112]
+    level:    [119, 122]
+  17875126:
+    template: Choleric_Umbril
+    at:       [374.200, -0.386, 303.126, 61]
+    level:    [119, 122]
+  17875127:
+    template: Dullahan_generic
+    script:   Unrelenting_Dullahan
+    at:       [374.520, -0.600, 305.614, 213]
+    level:    [119, 122]
+  17875128:
+    template: Dullahan_generic
+    script:   Unrelenting_Dullahan
+    at:       [354.800, -0.423, 312.832, 8]
+    level:    [119, 122]
+  17875129:
+    template: Dullahan_generic
+    script:   Unrelenting_Dullahan
+    at:       [354.600, -0.423, 312.953, 7]
+    level:    [119, 122]
+  17875130:
+    template: Dullahan_generic
+    script:   Unrelenting_Dullahan
+    at:       [351.410, -2.020, 326.653, 211]
+    level:    [119, 122]
+  17875131:
+    template: Choleric_Umbril
+    at:       [352.220, -2.388, 328.760, 210]
+    level:    [119, 122]
+  17875132:
+    template: Choleric_Umbril
+    at:       [365.090, -0.259, 278.531, 211]
+    level:    [119, 122]
+  17875133:
+    template: Choleric_Umbril
+    at:       [373.710, -0.947, 315.468, 169]
+    level:    [119, 122]
+  17875134:
+    template: Choleric_Umbril
+    at:       [314.720, -0.354, 276.470, 164]
+    level:    [119, 122]
+  17875135:
+    template: Choleric_Umbril
+    at:       [317.170, -0.405, 273.131, 102]
+    level:    [119, 122]
+  17875136:
+    template: Dullahan_generic
+    script:   Unrelenting_Dullahan
+    at:       [328.020, -0.222, 279.131, 88]
+    level:    [119, 122]
+  17875137:
+    template: Choleric_Umbril
+    at:       [333.300, -0.481, 263.200, 127]
+    level:    [119, 122]
+  17875138:
+    template: Snapping_Craklaw
+    at:       [269.170, -10.690, 473.360, 149]
+    level:    [119, 122]
+  17875139:
+    template: Flitting_Bee
+    at:       [283.950, -10.590, 480.122, 41]
+    level:    [119, 122]
+  17875140:
+    template: Flitting_Bee
+    at:       [271.480, -10.120, 493.207, 1]
+    level:    [119, 122]
+  17875141:
+    template: Snapping_Craklaw
+    at:       [294.470, -10.800, 500.748, 68]
+    level:    [119, 122]
+  17875142:
+    template: Snapping_Craklaw
+    at:       [285.370, -10.330, 500.580, 150]
+    level:    [119, 122]
+  17875143:
+    template: Flitting_Bee
+    at:       [271.280, -10.030, 517.669, 67]
+    level:    [119, 122]
+  17875144:
+    template: Flitting_Bee
+    at:       [179.030, -11.240, 414.127, 190]
+    level:    [119, 122]
+  17875145:
+    template: Snapping_Craklaw
+    at:       [208.220, -10.390, 381.358, 96]
+    level:    [119, 122]
+  17875146:
+    template: Flitting_Bee
+    at:       [207.680, -10.250, 379.832, 194]
+    level:    [119, 122]
+  17875147:
+    template: Flitting_Bee
+    at:       [178.210, -9.494, 384.925, 129]
+    level:    [119, 122]
+  17875148:
+    template: Flitting_Bee
+    at:       [180.370, -9.588, 384.700, 3]
+    level:    [119, 122]
+  17875149:
+    template: Flitting_Bee
+    at:       [175.010, -9.581, 390.350, 61]
+    level:    [119, 122]
+  17875150:
+    template: Flitting_Bee
+    at:       [187.700, -11.210, 399.636, 254]
+    level:    [119, 122]
+  17875151:
+    template: Snapping_Craklaw
+    at:       [222.730, -10.570, 400.704, 86]
+    level:    [119, 122]
+  17875152:
+    template: Snapping_Craklaw
+    at:       [220.530, -9.975, 394.023, 219]
+    level:    [119, 122]
+  17875153:
+    template: Snapping_Craklaw
+    at:       [217.130, -10.790, 396.683, 80]
+    level:    [119, 122]
+  17875154:
+    template: Flitting_Bee
+    at:       [198.720, -10.430, 420.509, 131]
+    level:    [119, 122]
+  17875155:
+    template: Flitting_Bee
+    at:       [220.220, -10.280, 431.878, 151]
+    level:    [119, 122]
+  17875156:
+    template: Snapping_Craklaw
+    at:       [230.260, -10.480, 415.153, 184]
+    level:    [119, 122]
+  17875157:
+    template: Tortured_Diremite
+    at:       [257.530, -9.446, 357.811, 243]
+    level:    [125, 125]
+  17875158:
+    template: Esurient_Bat
+    at:       [255.880, -10.290, 340.114, 239]
+    level:    [119, 122]
+  17875159:
+    template: Tortured_Diremite
+    at:       [274.480, -10.550, 340.122, 73]
+    level:    [125, 125]
+  17875160:
+    template: Tortured_Diremite
+    at:       [278.760, -10.560, 339.915, 168]
+    level:    [125, 125]
+  17875161:
+    template: Esurient_Bat
+    at:       [229.810, -11.180, 342.444, 242]
+    level:    [119, 122]
+  17875162:
+    template: Tortured_Diremite
+    at:       [235.300, -10.850, 341.128, 10]
+    level:    [125, 125]
+  17875163:
+    template: Tortured_Diremite
+    at:       [220.660, -11.310, 330.250, 55]
+    level:    [125, 125]
+  17875164:
+    template: Esurient_Bat
+    at:       [214.590, -10.970, 297.954, 78]
+    level:    [119, 122]
+  17875165:
+    template: Tortured_Diremite
+    at:       [215.970, -10.580, 303.894, 201]
+    level:    [125, 125]
+  17875166:
+    template: Tortured_Diremite
+    at:       [210.870, -10.070, 271.321, 67]
+    level:    [125, 125]
+  17875167:
+    template: Esurient_Bat
+    at:       [210.880, -10.100, 271.080, 74]
+    level:    [119, 122]
+  17875168:
+    template: Esurient_Bat
+    at:       [197.450, -9.715, 261.197, 38]
+    level:    [119, 122]
+  17875169:
+    template: Tortured_Diremite
+    at:       [198.760, -10.270, 271.852, 197]
+    level:    [125, 125]
+  17875170:
+    template: Tortured_Diremite
+    at:       [188.320, -10.790, 265.800, 177]
+    level:    [125, 125]
+  17875171:
+    template: Esurient_Bat
+    at:       [203.830, -9.866, 261.454, 142]
+    level:    [119, 122]
+  17875172:
+    template: Furious_Arundmite
+    at:       [239.910, -10.500, 238.677, 143]
+    level:    [119, 122]
+  17875173:
+    template: Apex_Leech
+    at:       [-25.270, -0.032, -189.110, 244]
+    level:    [125, 127]
+  17875174:
+    template: Apex_Leech
+    at:       [-20.660, -0.037, -203.630, 16]
+    level:    [125, 127]
+  17875175:
+    template: Apex_Leech
+    at:       [-20.660, 0.080, -203.390, 25]
+    level:    [125, 127]
+  17875176:
+    template: Apex_Leech
+    at:       [-29.840, -0.705, -203.960, 141]
+    level:    [125, 127]
+  17875177:
+    template: Apex_Chapuli
+    at:       [-20.260, 0.203, -189.780, 198]
+    level:    [125, 127]
+  17875178:
+    template: Apex_Chapuli
+    at:       [-35.340, -0.883, -194.310, 98]
+    level:    [125, 127]
+  17875179:
+    template: Apex_Chapuli
+    at:       [-39.550, -0.500, -201.560, 62]
+    level:    [125, 127]
+  17875180:
+    template: Apex_Chapuli
+    at:       [-26.230, 0.019, -189.140, 243]
+    level:    [125, 127]
+  17875181:
+    template: Apex_Leech
+    at:       [-11.280, -0.310, -195.540, 59]
+    level:    [125, 127]
+  17875182:
+    template: Apex_Leech
+    at:       [-14.300, 0.328, -198.060, 165]
+    level:    [125, 127]
+  17875183:
+    template: Apex_Leech
+    at:       [2.329, -0.462, -205.220, 82]
+    level:    [125, 127]
+  17875184:
+    template: Apex_Leech
+    at:       [1.292, -0.483, -198.340, 72]
+    level:    [125, 127]
+  17875185:
+    template: Apex_Chapuli
+    at:       [-13.340, 0.024, -205.090, 8]
+    level:    [125, 127]
+  17875186:
+    template: Apex_Chapuli
+    at:       [-13.210, -0.264, -192.640, 18]
+    level:    [125, 127]
+  17875187:
+    template: Apex_Chapuli
+    at:       [-7.784, -0.542, -202.240, 156]
+    level:    [125, 127]
+  17875188:
+    template: Apex_Chapuli
+    at:       [1.309, -0.495, -200.420, 191]
+    level:    [125, 127]
+  17875189:
+    template: Apex_Mandragora
+    at:       [77.775, 0.661, -181.440, 145]
+    level:    [125, 127]
+  17875190:
+    template: Apex_Mandragora
+    at:       [89.615, -0.301, -179.080, 43]
+    level:    [125, 127]
+  17875191:
+    template: Apex_Mandragora
+    at:       [82.375, 0.240, -185.280, 90]
+    level:    [125, 127]
+  17875192:
+    template: Apex_Mandragora
+    at:       [84.054, 0.713, -177.170, 20]
+    level:    [125, 127]
+  17875193:
+    template: Apex_Mandragora
+    at:       [97.474, -0.814, -168.080, 171]
+    level:    [125, 127]
+  17875194:
+    template: Apex_Mandragora
+    at:       [100.890, -0.521, -168.680, 196]
+    level:    [125, 127]
+  17875195:
+    template: Apex_Mandragora
+    at:       [95.179, -0.861, -177.420, 63]
+    level:    [125, 127]
+  17875196:
+    template: Apex_Mandragora
+    at:       [95.745, -0.787, -177.160, 74]
+    level:    [125, 127]
+  17875197:
+    template: Pungent_Fungus
+    at:       [98.068, -0.870, -171.070, 84]
+    level:    [1, 1]
+  17875198:
+    template: Apex_Mandragora
+    at:       [17.461, -0.758, -265.610, 12]
+    level:    [125, 127]
+  17875199:
+    template: Apex_Mandragora
+    at:       [23.990, -0.853, -269.750, 210]
+    level:    [125, 127]
+  17875200:
+    template: Apex_Mandragora
+    at:       [14.793, 0.138, -275.430, 127]
+    level:    [125, 127]
+  17875201:
+    template: Apex_Mandragora
+    at:       [17.704, -0.823, -266.200, 231]
+    level:    [125, 127]
+  17875202:
+    template: Apex_Mandragora
+    at:       [17.113, 0.417, -278.660, 126]
+    level:    [125, 127]
+  17875203:
+    template: Apex_Mandragora
+    at:       [19.777, 0.633, -280.290, 9]
+    level:    [125, 127]
+  17875204:
+    template: Apex_Mandragora
+    at:       [24.680, -0.865, -292.960, 60]
+    level:    [125, 127]
+  17875205:
+    template: Apex_Mandragora
+    at:       [16.642, 0.402, -278.910, 152]
+    level:    [125, 127]
+  17875206:
+    template: Pungent_Fungus
+    at:       [24.694, 0.250, -282.470, 104]
+    level:    [1, 1]
+  17875207:
+    template: Apex_Leech
+    at:       [97.668, -0.958, -227.450, 102]
+    level:    [125, 127]
+  17875208:
+    template: Apex_Leech
+    at:       [101.860, 0.220, -218.230, 70]
+    level:    [125, 127]
+  17875209:
+    template: Apex_Leech
+    at:       [103.340, -0.035, -217.200, 158]
+    level:    [125, 127]
+  17875210:
+    template: Apex_Leech
+    at:       [93.893, -0.574, -222.760, 158]
+    level:    [125, 127]
+  17875211:
+    template: Apex_Leech
+    at:       [99.634, -0.639, -226.330, 97]
+    level:    [125, 127]
+  17875212:
+    template: Apex_Leech
+    at:       [154.680, -0.092, -271.410, 217]
+    level:    [125, 127]
+  17875213:
+    template: Apex_Leech
+    at:       [150.780, -0.321, -275.960, 123]
+    level:    [125, 127]
+  17875214:
+    template: Apex_Leech
+    at:       [150.170, -0.252, -275.470, 104]
+    level:    [125, 127]
+  17875215:
+    template: Apex_Chapuli
+    at:       [151.450, -0.418, -279.260, 48]
+    level:    [125, 127]
+  17875216:
+    template: Apex_Chapuli
+    at:       [155.780, -0.168, -272.500, 179]
+    level:    [125, 127]
+  17875217:
+    template: Apex_Chapuli
+    at:       [117.910, -0.435, -278.210, 94]
+    level:    [125, 127]
+  17875218:
+    template: Apex_Jagil
+    at:       [159.540, -0.335, -272.240, 232]
+    level:    [125, 127]
+  17875219:
+    template: Apex_Jagil
+    at:       [124.740, 0.018, -289.250, 6]
+    level:    [125, 127]
+  17875220:
+    template: Apex_Jagil
+    at:       [127.750, 0.340, -275.070, 83]
+    level:    [125, 127]
+  17875221:
+    template: Apex_Leech
+    at:       [163.130, -2.134, -250.680, 52]
+    level:    [125, 127]
+  17875222:
+    template: Apex_Leech
+    at:       [158.990, -0.666, -249.490, 70]
+    level:    [125, 127]
+  17875223:
+    template: Apex_Leech
+    at:       [155.680, -0.629, -245.780, 140]
+    level:    [125, 127]
+  17875224:
+    template: Apex_Chapuli
+    at:       [162.100, 0.145, -261.270, 209]
+    level:    [125, 127]
+  17875225:
+    template: Apex_Chapuli
+    at:       [158.180, 0.036, -264.190, 91]
+    level:    [125, 127]
+  17875226:
+    template: Apex_Chapuli
+    at:       [158.970, 0.054, -258.050, 76]
+    level:    [125, 127]
+  17875227:
+    template: Apex_Jagil
+    at:       [151.000, -0.254, -263.880, 58]
+    level:    [125, 127]
+  17875228:
+    template: Apex_Jagil
+    at:       [164.070, -0.718, -257.940, 202]
+    level:    [125, 127]
+  17875229:
+    template: Apex_Jagil
+    at:       [150.900, -0.246, -260.250, 154]
+    level:    [125, 127]
+  17875230:
+    template: Apex_Jagil
+    at:       [174.240, 0.649, -258.140, 176]
+    level:    [125, 127]
+  17875231:
+    template: Apex_Jagil
+    at:       [171.090, -0.170, -259.760, 162]
+    level:    [125, 127]
+  17875232:
+    template: Apex_Jagil
+    at:       [174.430, 0.548, -278.500, 62]
+    level:    [125, 127]
+  17875233:
+    template: Apex_Jagil
+    at:       [171.610, 0.041, -275.470, 112]
+    level:    [125, 127]

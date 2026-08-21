@@ -1,0 +1,4049 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Acuex:
+    id:            5076
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+
+  Ancestral_Rage:
+    id:            6941
+    species:       dark_elemental
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2148
+        entity_flags:  643
+        animation_sub:  16
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Asperous_Marolith:
+    id:            5073
+    species:       marolith
+    skill_list_id: 347
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    3
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        3
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 1940
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          25
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Balas_Bats:
+    id:            6443
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 263
+        entity_flags:  641
+        animation_sub:   8
+        name_prefix:    64
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Banespore:
+    id:      4763
+    species: funguar
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2775
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:          4
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+        mp:  5000
+
+  Bloodmoon_Umbril:
+    id:            6704
+    species:       umbril
+    type:          [notorious]
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  131
+        animation_sub:   5
+        name_prefix:     2
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Coagulum_Acuex:
+    id:            6383
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Crepuscular_Worm:
+    id:            5067
+    species:       worm
+    roam:          [worm]
+    skill_list_id: 276
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     1
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      1
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 129
+        hitbox:        11
+      spawn:
+        respawn: 300
+
+  Drearyeyed_Bat:
+    id:            6444
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 263
+        entity_flags: 643
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Dullahan_generic:
+    id:            5250
+    species:       dullahan
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2605
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Flatus_Acuex:
+    id:            5068
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Foreboding_Funguar:
+    id:            5077
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Frightful_Funguar:
+    id:            4753
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+
+  Fuliginous_Mandragora:
+    id:            5074
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          6
+      spawn:
+        respawn: 300
+
+  Fulvous_Bats:
+    id:            5476
+    species:       flock_bat
+    type:          [notorious]
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 263
+        entity_flags: 129
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Grossular_Bat:
+    id:            5080
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 257
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Hefty_Marolith:
+    id:            6601
+    species:       marolith
+    skill_list_id: 347
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    3
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        3
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 1940
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          25
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Igneous_Clot:
+    id:            5075
+    species:       clot
+    skill_list_id: 66
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags: 1153
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Invidious_Lizard:
+    id:            5070
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 1153
+        hitbox:         13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Knotted_Root_CC:
+    id:           6710
+    display_name: Knotted_Root
+    species:      unclassified
+    type:         [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2794
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         30
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Livid_Umbril:
+    id:            5066
+    species:       umbril
+    type:          [notorious]
+    skill_list_id: 337
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  129
+        animation_sub:   5
+        name_prefix:     2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Moist_Funguar:
+    id:            4764
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 15000
+        mp:  5000
+
+  Moldmouth_Attercop:
+    id:            6338
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 312
+        entity_flags: 641
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Molten_Clot:
+    id:            4761
+    species:       clot
+    type:          [notorious]
+    skill_list_id: 66
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17000
+        mp:  1000
+
+  Obstinate_Clot:
+    id:            6807
+    species:       clot
+    skill_list_id: 67
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -8750
+          h2h:      -8750
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags: 129
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Oregorger_Worm:
+    id:            4757
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+
+  Pallid_Funguar:
+    id:            5065
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Plodding_Funguar:
+    id:            6806
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags: 131
+        hitbox:        15
+      spawn:
+        respawn: 300
+
+  Pungent_Fungus:
+    id:      5060
+    species: funguar
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2775
+        entity_flags: 129
+        hitbox:         3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Putrid_Acuex:
+    id:            4765
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 5000
+
+  Putrid_Funguar:
+    id:            4759
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+
+  Pyre_Bat:
+    id:            4758
+    species:       bat
+    type:          [notorious]
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 257
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+
+  Shadowshiver_Umbril:
+    id:            6700
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  1155
+        animation_sub:    5
+        name_prefix:      2
+        hitbox:           6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Slag_Mandragora:
+    id:            4754
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+
+  Snippy_Rafflesia:
+    id:            5477
+    species:       rafflesia
+    skill_list_id: 207
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -1
+          earth:    3
+          thunder:  1
+          light:    2
+        rank_status:
+          silence:     -1
+          slow:         3
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2024
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   slashed_vine
+        - chance: common
+          item:   rafflesia_vine
+        - chance: common
+          item:   rafflesia_petal
+      despoil:
+        rafflesia_vine:  0
+        rafflesia_petal: 0
+
+  Sordid_Lizard:
+    id:            4762
+    species:       hill_lizard
+    type:          [notorious]
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Speckled_Spider:
+    id:            5072
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 312
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Subterrane_Spider:
+    id:            5071
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 313
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Tenebrous_Obdella:
+    id:            5078
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Tooth_Cave_Tarantula:
+    id:            4756
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 312
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+
+  Tormented_Obdella:
+    id:            4755
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+
+  Tunnel_Lizard:
+    id:            5069
+    species:       ash_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 329
+        entity_flags: 129
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Umbril_Shadewarrior:
+    id:            4760
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  1155
+        animation_sub:    5
+        name_prefix:      2
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  9999
+
+  Wetscale_Toad:
+    id:            6379
+    species:       red_poroggo
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2666
+        entity_flags: 129
+        hitbox:         6
+      spawn:
+        respawn: 300
+
+spawns:
+  17883137:
+    script: Smirking_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17883138:
+    script: Smirking_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17883139:
+    script: Smirking_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17883140:
+    script: Throbbing_Clot
+    at:     [1.000, 1.000, 1.000]
+  17883141:
+    script: Throbbing_Clot
+    at:     [1.000, 1.000, 1.000]
+  17883142:
+    template: Balas_Bats
+    at:       [289.030, 29.059, -200.560, 43]
+    level:    [102, 106]
+  17883143:
+    template: Balas_Bats
+    at:       [282.650, 29.506, -207.270, 37]
+    level:    [102, 106]
+  17883144:
+    template: Pallid_Funguar
+    at:       [277.160, 29.541, -204.300, 179]
+    level:    [102, 106]
+  17883145:
+    template: Pallid_Funguar
+    at:       [276.950, 29.531, -200.230, 77]
+    level:    [102, 106]
+  17883146:
+    template: Foreboding_Funguar
+    at:       [294.010, 29.266, -255.280, 211]
+    level:    [102, 106]
+  17883147:
+    template: Foreboding_Funguar
+    at:       [302.330, 29.576, -261.410]
+    level:    [102, 106]
+  17883148:
+    template: Grossular_Bat
+    at:       [190.990, 29.474, -195.100, 101]
+    level:    [102, 106]
+  17883149:
+    template: Grossular_Bat
+    at:       [200.460, 29.468, -209.140, 8]
+    level:    [102, 106]
+  17883150:
+    template: Pallid_Funguar
+    at:       [199.530, 29.365, -190.950, 244]
+    level:    [102, 106]
+  17883151:
+    template: Livid_Umbril
+    at:       [240.610, 29.152, -127.750, 47]
+    level:    [102, 106]
+  17883152:
+    template: Livid_Umbril
+    at:       [233.360, 29.232, -113.180, 212]
+    level:    [102, 106]
+  17883153:
+    template: Livid_Umbril
+    at:       [232.300, 29.363, -123.810, 12]
+    level:    [102, 106]
+  17883154:
+    template: Livid_Umbril
+    at:       [242.440, 29.350, -122.570, 149]
+    level:    [102, 106]
+  17883155:
+    template: Pallid_Funguar
+    at:       [120.470, 29.455, -286.770, 223]
+    level:    [102, 106]
+  17883156:
+    template: Pallid_Funguar
+    at:       [110.690, 29.513, -277.440, 101]
+    level:    [102, 106]
+  17883157:
+    template: Foreboding_Funguar
+    at:       [120.370, 29.482, -286.940, 235]
+    level:    [102, 106]
+  17883158:
+    template: Foreboding_Funguar
+    at:       [122.240, 29.184, -289.710, 51]
+    level:    [102, 106]
+  17883159:
+    template: Pallid_Funguar
+    at:       [87.527, 29.520, -324.390, 34]
+    level:    [102, 106]
+  17883160:
+    template: Foreboding_Funguar
+    at:       [74.337, 29.580, -331.070, 23]
+    level:    [102, 106]
+  17883161:
+    template: Foreboding_Funguar
+    at:       [78.237, 29.822, -315.280, 167]
+    level:    [102, 106]
+  17883162:
+    template: Foreboding_Funguar
+    at:       [70.889, 29.868, -321.710, 183]
+    level:    [102, 106]
+  17883163:
+    template: Flatus_Acuex
+    at:       [82.166, 29.430, -319.550, 245]
+    level:    [102, 106]
+  17883164:
+    template: Pallid_Funguar
+    at:       [34.195, 29.538, -317.860, 115]
+    level:    [102, 106]
+  17883165:
+    template: Pallid_Funguar
+    at:       [49.501, 29.770, -319.900, 228]
+    level:    [102, 106]
+  17883166:
+    template: Foreboding_Funguar
+    at:       [43.062, 29.339, -324.860, 2]
+    level:    [102, 106]
+  17883167:
+    template: Foreboding_Funguar
+    at:       [48.441, 29.339, -326.480, 235]
+    level:    [102, 106]
+  17883168:
+    template: Flatus_Acuex
+    at:       [47.438, 29.350, -316.030, 104]
+    level:    [102, 106]
+  17883169:
+    template: Crepuscular_Worm
+    at:       [25.527, 29.504, -261.510, 20]
+    level:    [102, 106]
+  17883170:
+    template: Crepuscular_Worm
+    at:       [19.850, 29.083, -262.870, 80]
+    level:    [102, 106]
+  17883171:
+    template: Crepuscular_Worm
+    at:       [23.978, 28.999, -255.880, 220]
+    level:    [102, 106]
+  17883172:
+    template: Foreboding_Funguar
+    at:       [-43.423, 29.591, -152.108, 213]
+    level:    [102, 106]
+  17883173:
+    template: Foreboding_Funguar
+    level:    [102, 106]
+  17883174:
+    template: Foreboding_Funguar
+    at:       [-47.380, 29.514, -160.753, 89]
+    level:    [102, 106]
+  17883175:
+    template: Foreboding_Funguar
+    at:       [-48.397, 29.375, -157.741, 179]
+    level:    [102, 106]
+  17883176:
+    template: Flatus_Acuex
+    at:       [-128.700, 29.548, -197.690, 178]
+    level:    [102, 106]
+  17883177:
+    template: Flatus_Acuex
+    at:       [-118.900, 29.469, -194.470, 20]
+    level:    [102, 106]
+  17883178:
+    template: Flatus_Acuex
+    at:       [-124.000, 29.361, -192.060, 189]
+    level:    [102, 106]
+  17883179:
+    template: Flatus_Acuex
+    at:       [-128.100, 29.534, -195.180, 118]
+    level:    [102, 106]
+  17883180:
+    template: Tenebrous_Obdella
+    at:       [-97.080, 28.763, -262.100, 49]
+    level:    [102, 106]
+  17883181:
+    template: Tenebrous_Obdella
+    at:       [-102.300, 28.691, -260.360, 23]
+    level:    [102, 106]
+  17883182:
+    template: Tenebrous_Obdella
+    at:       [-98.970, 28.951, -263.200, 179]
+    level:    [102, 106]
+  17883183:
+    template: Pallid_Funguar
+    at:       [-49.930, 29.125, -322.080, 89]
+    level:    [102, 106]
+  17883184:
+    template: Pallid_Funguar
+    at:       [-49.380, 29.128, -325.870, 154]
+    level:    [102, 106]
+  17883185:
+    template: Pallid_Funguar
+    at:       [-39.260, 29.267, -326.970, 206]
+    level:    [102, 106]
+  17883186:
+    template: Livid_Umbril
+    at:       [-23.420, 29.257, -261.150, 33]
+    level:    [102, 106]
+  17883187:
+    template: Livid_Umbril
+    at:       [-26.120, 29.309, -261.680, 169]
+    level:    [102, 106]
+  17883188:
+    template: Tunnel_Lizard
+    at:       [-194.100, 29.371, -197.870, 12]
+    level:    [102, 106]
+  17883189:
+    template: Tunnel_Lizard
+    at:       [-205.800, 29.579, -194.960, 213]
+    level:    [102, 106]
+  17883190:
+    template: Tunnel_Lizard
+    at:       [-208.400, 29.330, -200.430, 155]
+    level:    [102, 106]
+  17883191:
+    template: Pallid_Funguar
+    at:       [-205.200, 29.086, -210.330, 38]
+    level:    [102, 106]
+  17883192:
+    template: Invidious_Lizard
+    at:       [-168.600, 29.489, -125.040, 88]
+    level:    [102, 106]
+  17883193:
+    template: Invidious_Lizard
+    at:       [-167.800, 29.509, -124.730, 93]
+    level:    [102, 106]
+  17883194:
+    template: Invidious_Lizard
+    at:       [-157.600, 29.639, -114.370, 49]
+    level:    [102, 106]
+  17883195:
+    template: Invidious_Lizard
+    at:       [-156.100, 29.097, -129.780, 50]
+    level:    [102, 106]
+  17883196:
+    template: Tunnel_Lizard
+    at:       [-193.800, 29.347, -34.672, 168]
+    level:    [102, 106]
+  17883197:
+    template: Tunnel_Lizard
+    at:       [-199.700, 29.388, -37.389, 109]
+    level:    [102, 106]
+  17883198:
+    template: Invidious_Lizard
+    at:       [-193.700, 29.409, -40.165, 173]
+    level:    [102, 106]
+  17883199:
+    template: Invidious_Lizard
+    at:       [-196.800, 29.488, -50.472, 3]
+    level:    [102, 106]
+  17883200:
+    template: Pallid_Funguar
+    at:       [-236.200, 29.413, 41.661, 233]
+    level:    [102, 106]
+  17883201:
+    template: Foreboding_Funguar
+    at:       [-236.000, 29.610, 47.037, 217]
+    level:    [102, 106]
+  17883202:
+    template: Flatus_Acuex
+    at:       [-242.900, 29.290, 47.303, 212]
+    level:    [102, 106]
+  17883203:
+    template: Flatus_Acuex
+    at:       [-235.400, 29.437, 41.296, 199]
+    level:    [102, 106]
+  17883204:
+    template: Pallid_Funguar
+    at:       [-194.300, 30.311, 105.541, 87]
+    level:    [102, 106]
+  17883205:
+    template: Pallid_Funguar
+    at:       [-201.700, 29.761, 81.938, 181]
+    level:    [102, 106]
+  17883206:
+    template: Foreboding_Funguar
+    at:       [-193.800, 29.520, 90.271, 144]
+    level:    [102, 106]
+  17883207:
+    template: Foreboding_Funguar
+    at:       [-195.900, 30.256, 106.863, 67]
+    level:    [102, 106]
+  17883208:
+    template: Flatus_Acuex
+    at:       [-200.400, 30.156, 91.410, 212]
+    level:    [102, 106]
+  17883209:
+    template: Flatus_Acuex
+    at:       [-203.200, 29.812, 108.450, 182]
+    level:    [102, 106]
+  17883210:
+    template: Pallid_Funguar
+    at:       [-224.700, 29.627, 105.931, 48]
+    level:    [102, 106]
+  17883211:
+    template: Pallid_Funguar
+    at:       [-235.900, 29.583, 116.080, 151]
+    level:    [102, 106]
+  17883212:
+    template: Foreboding_Funguar
+    at:       [-216.700, 29.798, 115.458, 153]
+    level:    [102, 106]
+  17883213:
+    template: Foreboding_Funguar
+    at:       [-243.600, 29.502, 121.816, 165]
+    level:    [102, 106]
+  17883214:
+    template: Flatus_Acuex
+    at:       [-242.700, 29.531, 116.975, 118]
+    level:    [102, 106]
+  17883215:
+    template: Flatus_Acuex
+    at:       [-238.900, 29.565, 116.188, 31]
+    level:    [102, 106]
+  17883216:
+    template: Tunnel_Lizard
+    at:       [-125.700, 29.332, -33.734, 197]
+    level:    [102, 106]
+  17883217:
+    template: Tunnel_Lizard
+    at:       [-126.900, 29.304, -46.235, 225]
+    level:    [102, 106]
+  17883218:
+    template: Invidious_Lizard
+    at:       [-118.300, 29.468, -38.948, 159]
+    level:    [102, 106]
+  17883219:
+    template: Invidious_Lizard
+    at:       [-125.500, 29.305, -49.574, 45]
+    level:    [102, 106]
+  17883220:
+    template: Asperous_Marolith
+    at:       [-43.030, 29.406, -87.283, 159]
+    level:    [102, 106]
+  17883221:
+    template: Asperous_Marolith
+    at:       [-43.309, 29.499, -90.024, 88]
+    level:    [102, 106]
+  17883222:
+    template: Tunnel_Lizard
+    at:       [-81.880, 19.613, 46.598, 133]
+    level:    [102, 106]
+  17883223:
+    template: Tunnel_Lizard
+    at:       [-76.910, 19.284, 33.324, 245]
+    level:    [102, 106]
+  17883224:
+    template: Tunnel_Lizard
+    at:       [-84.460, 19.422, 38.706, 211]
+    level:    [102, 106]
+  17883225:
+    template: Tunnel_Lizard
+    at:       [-71.370, 19.502, 42.670, 244]
+    level:    [102, 106]
+  17883226:
+    template: Pallid_Funguar
+    at:       [-58.390, 29.535, 217.617, 26]
+    level:    [102, 106]
+  17883227:
+    template: Pallid_Funguar
+    at:       [-64.280, 28.912, 218.436, 181]
+    level:    [102, 106]
+  17883228:
+    template: Pallid_Funguar
+    at:       [-206.700, 29.177, 196.470, 90]
+    level:    [102, 106]
+  17883229:
+    template: Pallid_Funguar
+    at:       [-193.700, 29.121, 190.587, 86]
+    level:    [102, 106]
+  17883230:
+    template: Pallid_Funguar
+    at:       [-197.000, 29.514, 207.210, 243]
+    level:    [102, 106]
+  17883231:
+    template: Pallid_Funguar
+    at:       [-206.900, 29.253, 193.891, 179]
+    level:    [102, 106]
+  17883232:
+    template: Crepuscular_Worm
+    at:       [-236.800, 29.430, 276.330, 11]
+    level:    [102, 106]
+  17883233:
+    template: Crepuscular_Worm
+    at:       [-230.600, 29.416, 274.631, 232]
+    level:    [102, 106]
+  17883234:
+    template: Crepuscular_Worm
+    at:       [-230.500, 29.298, 281.882, 227]
+    level:    [102, 106]
+  17883235:
+    template: Crepuscular_Worm
+    at:       [-233.600, 29.041, 272.601, 87]
+    level:    [102, 106]
+  17883236:
+    template: Livid_Umbril
+    at:       [-182.100, 29.135, 264.201, 120]
+    level:    [102, 106]
+  17883237:
+    template: Livid_Umbril
+    at:       [-178.100, 28.982, 255.466, 60]
+    level:    [102, 106]
+  17883238:
+    template: Flatus_Acuex
+    at:       [-293.900, 29.010, 299.263, 53]
+    level:    [102, 106]
+  17883239:
+    template: Flatus_Acuex
+    at:       [-295.200, 29.079, 298.700, 25]
+    level:    [102, 106]
+  17883240:
+    template: Flatus_Acuex
+    at:       [-294.500, 29.340, 302.964, 201]
+    level:    [102, 106]
+  17883241:
+    template: Subterrane_Spider
+    at:       [-208.000, 29.377, 365.875, 101]
+    level:    [102, 106]
+  17883242:
+    template: Subterrane_Spider
+    at:       [-202.600, 29.365, 366.006, 93]
+    level:    [102, 106]
+  17883243:
+    template: Speckled_Spider
+    at:       [-199.100, 29.107, 351.579, 10]
+    level:    [102, 106]
+  17883244:
+    template: Speckled_Spider
+    at:       [-203.100, 29.334, 355.299, 161]
+    level:    [102, 106]
+  17883245:
+    template: Subterrane_Spider
+    at:       [-249.700, 29.472, 401.608, 170]
+    level:    [102, 106]
+  17883246:
+    template: Subterrane_Spider
+    at:       [-250.900, 29.086, 398.576, 69]
+    level:    [102, 106]
+  17883247:
+    template: Speckled_Spider
+    at:       [-234.100, 29.142, 394.683, 231]
+    level:    [102, 106]
+  17883248:
+    template: Speckled_Spider
+    at:       [-239.600, 29.510, 390.588, 11]
+    level:    [102, 106]
+  17883249:
+    template: Tenebrous_Obdella
+    at:       [-280.500, 29.548, 367.549, 243]
+    level:    [102, 106]
+  17883250:
+    template: Tenebrous_Obdella
+    at:       [-282.900, 29.396, 367.343, 138]
+    level:    [102, 106]
+  17883251:
+    template: Tenebrous_Obdella
+    at:       [-286.700, 29.326, 359.950, 225]
+    level:    [102, 106]
+  17883252:
+    template: Tenebrous_Obdella
+    at:       [-286.900, 28.650, 353.954, 248]
+    level:    [102, 106]
+  17883253:
+    template: Subterrane_Spider
+    at:       [-69.090, 29.955, 323.584, 21]
+    level:    [102, 106]
+  17883254:
+    template: Subterrane_Spider
+    at:       [-71.660, 29.729, 325.029, 206]
+    level:    [102, 106]
+  17883255:
+    template: Speckled_Spider
+    at:       [-66.150, 30.187, 321.914, 20]
+    level:    [102, 106]
+  17883256:
+    template: Speckled_Spider
+    at:       [-68.560, 29.409, 316.111, 84]
+    level:    [102, 106]
+  17883257:
+    template: Flatus_Acuex
+    at:       [-74.250, 29.656, 309.316, 101]
+    level:    [102, 106]
+  17883258:
+    template: Subterrane_Spider
+    at:       [-45.450, 29.582, 320.971, 1]
+    level:    [102, 106]
+  17883259:
+    template: Subterrane_Spider
+    at:       [-43.270, 29.197, 316.328, 51]
+    level:    [102, 106]
+  17883260:
+    template: Speckled_Spider
+    at:       [-40.350, 29.131, 315.720, 102]
+    level:    [102, 106]
+  17883261:
+    template: Speckled_Spider
+    at:       [-52.590, 30.132, 313.316, 150]
+    level:    [102, 106]
+  17883262:
+    template: Flatus_Acuex
+    at:       [-44.690, 29.555, 309.727, 13]
+    level:    [102, 106]
+  17883263:
+    template: Subterrane_Spider
+    at:       [41.436, 29.497, 326.714, 35]
+    level:    [102, 106]
+  17883264:
+    template: Subterrane_Spider
+    at:       [42.941, 29.431, 316.388, 11]
+    level:    [102, 106]
+  17883265:
+    template: Subterrane_Spider
+    at:       [36.099, 29.361, 322.045, 240]
+    level:    [102, 106]
+  17883266:
+    template: Subterrane_Spider
+    at:       [46.430, 29.284, 327.372, 170]
+    level:    [102, 106]
+  17883267:
+    template: Pallid_Funguar
+    at:       [8.936, 30.245, 423.278, 243]
+    level:    [102, 106]
+  17883268:
+    template: Pallid_Funguar
+    at:       [-0.141, 29.597, 435.678, 146]
+    level:    [102, 106]
+  17883269:
+    template: Tenebrous_Obdella
+    at:       [-1.118, 29.837, 428.697, 166]
+    level:    [102, 106]
+  17883270:
+    template: Tenebrous_Obdella
+    at:       [-7.418, 29.752, 429.204, 151]
+    level:    [102, 106]
+  17883271:
+    template: Crepuscular_Worm
+    at:       [-4.956, 30.270, 419.201, 27]
+    level:    [102, 106]
+  17883272:
+    template: Crepuscular_Worm
+    at:       [9.259, 29.577, 435.028, 199]
+    level:    [102, 106]
+  17883273:
+    template: Pallid_Funguar
+    at:       [-5.518, 29.554, 443.084, 225]
+    level:    [102, 106]
+  17883274:
+    template: Pallid_Funguar
+    at:       [-29.500, 29.555, 435.285, 167]
+    level:    [102, 106]
+  17883275:
+    template: Crepuscular_Worm
+    at:       [-42.910, 29.518, 439.028, 93]
+    level:    [102, 106]
+  17883276:
+    template: Crepuscular_Worm
+    at:       [-35.630, 29.683, 448.872, 151]
+    level:    [102, 106]
+  17883277:
+    template: Crepuscular_Worm
+    at:       [-36.090, 29.677, 448.113, 159]
+    level:    [102, 106]
+  17883278:
+    template: Crepuscular_Worm
+    at:       [-24.450, 29.695, 427.412, 178]
+    level:    [102, 106]
+  17883279:
+    template: Asperous_Marolith
+    at:       [-80.870, 29.238, 395.322, 243]
+    level:    [102, 106]
+  17883280:
+    template: Asperous_Marolith
+    at:       [-80.050, 29.443, 393.837, 221]
+    level:    [102, 106]
+  17883281:
+    template: Flatus_Acuex
+    at:       [113.100, 29.468, 558.455, 44]
+    level:    [102, 106]
+  17883282:
+    template: Flatus_Acuex
+    at:       [126.990, 29.353, 559.788, 205]
+    level:    [102, 106]
+  17883283:
+    template: Livid_Umbril
+    at:       [110.770, 29.503, 560.398, 152]
+    level:    [102, 106]
+  17883284:
+    template: Livid_Umbril
+    at:       [120.930, 29.298, 559.312, 213]
+    level:    [102, 106]
+  17883285:
+    template: Flatus_Acuex
+    at:       [165.340, 29.354, 513.200, 141]
+    level:    [102, 106]
+  17883286:
+    template: Flatus_Acuex
+    at:       [156.470, 29.388, 510.147, 13]
+    level:    [102, 106]
+  17883287:
+    template: Livid_Umbril
+    at:       [160.940, 29.333, 521.854, 19]
+    level:    [102, 106]
+  17883288:
+    template: Livid_Umbril
+    at:       [162.410, 29.354, 519.635, 56]
+    level:    [102, 106]
+  17883289:
+    template: Flatus_Acuex
+    at:       [63.772, 29.510, 375.726]
+    level:    [102, 106]
+  17883290:
+    template: Flatus_Acuex
+    at:       [64.458, 29.145, 381.075, 183]
+    level:    [102, 106]
+  17883291:
+    template: Flatus_Acuex
+    at:       [57.437, 29.475, 380.834, 190]
+    level:    [102, 106]
+  17883292:
+    template: Pallid_Funguar
+    at:       [145.230, 9.333, 423.019, 19]
+    level:    [102, 106]
+  17883293:
+    template: Pallid_Funguar
+    at:       [145.110, 9.346, 422.937, 11]
+    level:    [102, 106]
+  17883294:
+    template: Tenebrous_Obdella
+    at:       [363.070, 29.365, 429.726, 13]
+    level:    [102, 106]
+  17883295:
+    template: Tenebrous_Obdella
+    at:       [358.120, 29.114, 431.712, 236]
+    level:    [102, 106]
+  17883296:
+    template: Tenebrous_Obdella
+    at:       [366.140, 29.441, 444.743, 79]
+    level:    [102, 106]
+  17883297:
+    template: Tenebrous_Obdella
+    at:       [359.690, 29.305, 447.055, 166]
+    level:    [102, 106]
+  17883298:
+    template: Flatus_Acuex
+    at:       [404.370, 29.370, 488.118, 205]
+    level:    [102, 106]
+  17883299:
+    template: Flatus_Acuex
+    at:       [408.970, 28.878, 483.912, 249]
+    level:    [102, 106]
+  17883300:
+    template: Flatus_Acuex
+    at:       [393.230, 29.055, 476.196, 153]
+    level:    [102, 106]
+  17883301:
+    template: Flatus_Acuex
+    at:       [404.050, 29.165, 479.544, 57]
+    level:    [102, 106]
+  17883302:
+    template: Pallid_Funguar
+    at:       [277.390, 29.447, 481.950, 189]
+    level:    [102, 106]
+  17883303:
+    template: Pallid_Funguar
+    at:       [277.460, 29.339, 475.295, 182]
+    level:    [102, 106]
+  17883304:
+    template: Pallid_Funguar
+    at:       [270.940, 29.423, 482.286, 184]
+    level:    [102, 106]
+  17883305:
+    template: Pallid_Funguar
+    at:       [277.690, 29.312, 488.593, 163]
+    level:    [102, 106]
+  17883306:
+    template: Flatus_Acuex
+    at:       [431.490, 29.704, 358.269, 111]
+    level:    [102, 106]
+  17883307:
+    template: Flatus_Acuex
+    at:       [403.920, 29.371, 365.078, 222]
+    level:    [102, 106]
+  17883308:
+    template: Fuliginous_Mandragora
+    at:       [421.760, 30.138, 353.135, 51]
+    level:    [102, 106]
+  17883309:
+    template: Fuliginous_Mandragora
+    at:       [426.330, 29.775, 351.136, 11]
+    level:    [102, 106]
+  17883310:
+    template: Fuliginous_Mandragora
+    at:       [429.220, 29.693, 361.000, 169]
+    level:    [102, 106]
+  17883311:
+    template: Foreboding_Funguar
+    at:       [396.650, 29.429, 354.851, 151]
+    level:    [102, 106]
+  17883312:
+    template: Fuliginous_Mandragora
+    at:       [453.220, 29.641, 350.096, 9]
+    level:    [102, 106]
+  17883313:
+    template: Fuliginous_Mandragora
+    at:       [463.100, 29.929, 363.322, 109]
+    level:    [102, 106]
+  17883314:
+    template: Fuliginous_Mandragora
+    at:       [459.820, 29.968, 355.660, 12]
+    level:    [102, 106]
+  17883315:
+    template: Flatus_Acuex
+    at:       [463.180, 29.938, 362.682, 107]
+    level:    [102, 106]
+  17883316:
+    template: Flatus_Acuex
+    at:       [464.290, 29.733, 349.460, 102]
+    level:    [102, 106]
+  17883317:
+    template: Foreboding_Funguar
+    at:       [458.550, 29.771, 348.923, 113]
+    level:    [102, 106]
+  17883318:
+    template: Igneous_Clot
+    at:       [444.550, 29.361, 279.292, 156]
+    level:    [102, 106]
+  17883319:
+    template: Igneous_Clot
+    at:       [437.880, 29.322, 285.250, 157]
+    level:    [102, 106]
+  17883320:
+    template: Igneous_Clot
+    at:       [435.740, 29.370, 278.539, 206]
+    level:    [102, 106]
+  17883321:
+    template: Igneous_Clot
+    at:       [446.600, 29.475, 274.873, 114]
+    level:    [102, 106]
+  17883322:
+    template: Pallid_Funguar
+    at:       [503.600, 29.107, 293.384, 40]
+    level:    [102, 106]
+  17883323:
+    template: Pallid_Funguar
+    at:       [506.660, 28.917, 298.876, 3]
+    level:    [102, 106]
+  17883324:
+    template: Fuliginous_Mandragora
+    at:       [358.090, 29.437, 196.744, 67]
+    level:    [102, 106]
+  17883325:
+    template: Fuliginous_Mandragora
+    at:       [366.160, 29.080, 190.587, 84]
+    level:    [102, 106]
+  17883326:
+    template: Fuliginous_Mandragora
+    at:       [364.300, 29.250, 192.873, 207]
+    level:    [102, 106]
+  17883327:
+    template: Fuliginous_Mandragora
+    at:       [357.080, 29.409, 191.263, 44]
+    level:    [102, 106]
+  17883328:
+    template: Asperous_Marolith
+    at:       [327.510, 29.330, 361.697, 143]
+    level:    [102, 106]
+  17883329:
+    template: Asperous_Marolith
+    at:       [319.310, 29.429, 365.295, 79]
+    level:    [102, 106]
+  17883330:
+    template: Igneous_Clot
+    at:       [398.010, 19.507, 111.532, 80]
+    level:    [102, 106]
+  17883331:
+    template: Igneous_Clot
+    at:       [396.100, 19.540, 120.912, 45]
+    level:    [102, 106]
+  17883332:
+    template: Igneous_Clot
+    at:       [396.560, 19.450, 111.897, 42]
+    level:    [102, 106]
+  17883333:
+    template: Igneous_Clot
+    at:       [399.240, 19.443, 125.970, 93]
+    level:    [102, 106]
+  17883334:
+    template: Pallid_Funguar
+    at:       [395.010, 29.482, 3.521, 242]
+    level:    [102, 106]
+  17883335:
+    template: Pallid_Funguar
+    at:       [402.560, 29.468, -0.473, 40]
+    level:    [102, 106]
+  17883336:
+    template: Flatus_Acuex
+    at:       [409.170, 29.524, -1.205, 56]
+    level:    [102, 106]
+  17883337:
+    template: Flatus_Acuex
+    at:       [398.270, 29.406, 5.714, 105]
+    level:    [102, 106]
+  17883338:
+    template: Flatus_Acuex
+    at:       [358.670, 29.351, -47.750, 111]
+    level:    [102, 106]
+  17883339:
+    template: Flatus_Acuex
+    at:       [355.700, 29.409, -38.279, 189]
+    level:    [102, 106]
+  17883340:
+    template: Flatus_Acuex
+    at:       [354.670, 29.405, -42.770, 59]
+    level:    [102, 106]
+  17883341:
+    template: Flatus_Acuex
+    at:       [359.650, 29.673, -31.055, 243]
+    level:    [102, 106]
+  17883342:
+    template: Asperous_Marolith
+    at:       [302.080, 29.492, -132.980, 105]
+    level:    [102, 106]
+  17883343:
+    template: Asperous_Marolith
+    at:       [316.480, 29.577, -112.230, 246]
+    level:    [102, 106]
+  17883344:
+    template: Flatus_Acuex
+    at:       [316.890, 29.458, -123.480, 114]
+    level:    [102, 106]
+  17883345:
+    template: Flatus_Acuex
+    at:       [313.860, 29.417, -122.430, 49]
+    level:    [102, 106]
+  17883346:
+    template: Tenebrous_Obdella
+    at:       [439.680, 29.402, -112.750, 243]
+    level:    [102, 106]
+  17883347:
+    template: Tenebrous_Obdella
+    at:       [445.620, 29.534, -117.620, 12]
+    level:    [102, 106]
+  17883348:
+    template: Tenebrous_Obdella
+    at:       [443.170, 29.548, -123.450, 82]
+    level:    [102, 106]
+  17883349:
+    template: Tenebrous_Obdella
+    at:       [444.730, 29.534, -119.670, 140]
+    level:    [102, 106]
+  17883350:
+    template: Livid_Umbril
+    at:       [457.890, 29.631, -182.840, 60]
+    level:    [102, 106]
+  17883351:
+    template: Livid_Umbril
+    at:       [454.800, 29.302, -179.000, 204]
+    level:    [102, 106]
+  17883352:
+    template: Pallid_Funguar
+    at:       [528.760, 29.976, -76.998, 52]
+    level:    [102, 106]
+  17883353:
+    template: Pallid_Funguar
+    at:       [522.570, 29.572, -84.253, 39]
+    level:    [102, 106]
+  17883354:
+    template: Pallid_Funguar
+    at:       [528.970, 29.840, -76.901, 43]
+    level:    [102, 106]
+  17883355:
+    template: Foreboding_Funguar
+    at:       [525.470, 29.398, -69.904, 84]
+    level:    [102, 106]
+  17883356:
+    template: Pallid_Funguar
+    at:       [487.530, 29.468, -52.206, 126]
+    level:    [102, 106]
+  17883357:
+    template: Pallid_Funguar
+    at:       [486.210, 29.527, -47.810, 176]
+    level:    [102, 106]
+  17883358:
+    template: Foreboding_Funguar
+    at:       [502.340, 29.820, -46.479, 233]
+    level:    [102, 106]
+  17883359:
+    template: Foreboding_Funguar
+    at:       [492.550, 29.933, -35.539, 79]
+    level:    [102, 106]
+  17883360:
+    template: Pallid_Funguar
+    at:       [529.490, 29.386, -36.083, 23]
+    level:    [102, 106]
+  17883361:
+    template: Foreboding_Funguar
+    at:       [520.730, 29.763, -50.208, 119]
+    level:    [102, 106]
+  17883362:
+    template: Foreboding_Funguar
+    at:       [513.010, 29.840, -38.578, 161]
+    level:    [102, 106]
+  17883363:
+    template: Pallid_Funguar
+    at:       [51.567, 19.698, 7.893, 188]
+    level:    [102, 106]
+  17883364:
+    template: Pallid_Funguar
+    at:       [52.097, 19.423, -0.356, 71]
+    level:    [102, 106]
+  17883365:
+    template: Livid_Umbril
+    at:       [56.230, 19.503, -1.510, 21]
+    level:    [102, 106]
+  17883366:
+    template: Livid_Umbril
+    at:       [62.470, 20.201, -3.835, 233]
+    level:    [102, 106]
+  17883367:
+    template: Flatus_Acuex
+    at:       [62.174, 20.318, -1.064, 25]
+    level:    [102, 106]
+  17883368:
+    template: Flatus_Acuex
+    at:       [63.104, 20.017, 2.041, 185]
+    level:    [102, 106]
+  17883369:
+    template: Invidious_Lizard
+    at:       [8.634, 19.263, 82.235, 200]
+    level:    [102, 106]
+  17883370:
+    template: Invidious_Lizard
+    at:       [-2.854, 19.458, 79.508, 87]
+    level:    [102, 106]
+  17883371:
+    template: Invidious_Lizard
+    at:       [-5.793, 19.379, 88.059, 212]
+    level:    [102, 106]
+  17883372:
+    template: Invidious_Lizard
+    at:       [0.432, 19.386, 82.216, 24]
+    level:    [102, 106]
+  17883373:
+    template: Tenebrous_Obdella
+    at:       [100.190, 19.552, 220.197, 6]
+    level:    [102, 106]
+  17883374:
+    template: Tenebrous_Obdella
+    at:       [99.169, 19.629, 223.666, 227]
+    level:    [102, 106]
+  17883375:
+    template: Tenebrous_Obdella
+    at:       [99.029, 19.733, 220.570, 130]
+    level:    [102, 106]
+  17883376:
+    template: Fuliginous_Mandragora
+    at:       [228.130, 19.913, 288.022]
+    level:    [102, 106]
+  17883377:
+    template: Fuliginous_Mandragora
+    at:       [233.900, 19.714, 284.471, 53]
+    level:    [102, 106]
+  17883378:
+    template: Fuliginous_Mandragora
+    at:       [239.360, 19.445, 275.658, 11]
+    level:    [102, 106]
+  17883379:
+    template: Tenebrous_Obdella
+    at:       [229.950, 19.444, 270.467, 87]
+    level:    [102, 106]
+  17883380:
+    template: Tenebrous_Obdella
+    at:       [229.920, 19.920, 281.752, 96]
+    level:    [102, 106]
+  17883381:
+    template: Livid_Umbril
+    at:       [299.140, 19.089, 212.917, 193]
+    level:    [102, 106]
+  17883382:
+    template: Livid_Umbril
+    at:       [298.520, 19.011, 212.022, 38]
+    level:    [102, 106]
+  17883383:
+    template: Livid_Umbril
+    at:       [284.980, 20.208, 102.376, 102]
+    level:    [102, 106]
+  17883384:
+    template: Livid_Umbril
+    at:       [278.430, 19.795, 106.194, 148]
+    level:    [102, 106]
+  17883385:
+    template: Livid_Umbril
+    at:       [285.140, 20.243, 99.136, 167]
+    level:    [102, 106]
+  17883386:
+    template: Livid_Umbril
+    at:       [268.650, 20.016, 73.977, 13]
+    level:    [102, 106]
+  17883387:
+    template: Livid_Umbril
+    at:       [270.600, 19.784, 83.402, 59]
+    level:    [102, 106]
+  17883388:
+    template: Livid_Umbril
+    at:       [262.260, 20.347, 82.300, 14]
+    level:    [102, 106]
+  17883389:
+    template: Putrid_Acuex
+    at:       [136.580, 10.258, 123.266, 115]
+    level:    [104, 109]
+  17883390:
+    template: Putrid_Acuex
+    at:       [127.430, 10.085, 122.807, 112]
+    level:    [104, 109]
+  17883391:
+    template: Putrid_Acuex
+    at:       [149.840, 10.102, 116.194, 15]
+    level:    [104, 109]
+  17883392:
+    template: Moist_Funguar
+    at:       [147.460, 10.185, 122.333, 136]
+    level:    [104, 109]
+  17883393:
+    template: Moist_Funguar
+    at:       [133.850, 9.985, 110.916, 117]
+    level:    [104, 109]
+  17883394:
+    template: Bloodmoon_Umbril
+    at:       [154.570, 9.789, 137.944, 214]
+    level:    [106, 109]
+  17883395:
+    template: Bloodmoon_Umbril
+    at:       [165.200, 10.227, 145.658, 93]
+    level:    [106, 109]
+  17883396:
+    template: Moist_Funguar
+    at:       [159.170, 9.386, 162.046, 167]
+    level:    [104, 109]
+  17883397:
+    template: Moist_Funguar
+    at:       [155.260, 9.441, 159.893, 212]
+    level:    [104, 109]
+  17883398:
+    template: Moist_Funguar
+    at:       [159.340, 9.919, 137.591, 139]
+    level:    [104, 109]
+  17883399:
+    template: Balas_Bats
+    at:       [424.800, 29.500, -192.720, 182]
+    level:    [102, 106]
+  17883400:
+    template: Balas_Bats
+    at:       [422.180, 30.681, -200.130, 184]
+    level:    [102, 106]
+  17883401:
+    template: Crepuscular_Worm
+    at:       [382.830, 29.295, -145.440, 211]
+    level:    [102, 106]
+  17883402:
+    template: Crepuscular_Worm
+    at:       [385.700, 29.180, -147.540, 35]
+    level:    [102, 106]
+  17883403:
+    template: Crepuscular_Worm
+    at:       [380.900, 30.371, -167.590, 46]
+    level:    [102, 106]
+  17883404:
+    template: Grossular_Bat
+    at:       [373.040, 29.115, -218.240, 77]
+    level:    [102, 106]
+  17883405:
+    template: Grossular_Bat
+    at:       [354.350, 29.972, -213.630, 9]
+    level:    [102, 106]
+  17883406:
+    template: Grossular_Bat
+    at:       [338.070, 30.347, -216.850, 40]
+    level:    [102, 106]
+  17883407:
+    template: Grossular_Bat
+    at:       [337.680, 29.218, -184.670, 200]
+    level:    [102, 106]
+  17883408:
+    template: Grossular_Bat
+    at:       [341.820, 29.736, -190.520, 189]
+    level:    [102, 106]
+  17883409:
+    template: Flatus_Acuex
+    at:       [232.750, 28.850, -258.340, 254]
+    level:    [102, 106]
+  17883410:
+    template: Flatus_Acuex
+    at:       [240.760, 29.243, -258.520]
+    level:    [102, 106]
+  17883411:
+    template: Flatus_Acuex
+    at:       [240.530, 29.319, -258.620, 1]
+    level:    [102, 106]
+  17883412:
+    template: Crepuscular_Worm
+    at:       [155.410, 30.143, -142.370, 75]
+    level:    [102, 106]
+  17883413:
+    template: Crepuscular_Worm
+    at:       [160.800, 28.820, -144.510, 40]
+    level:    [102, 106]
+  17883414:
+    template: Crepuscular_Worm
+    at:       [155.210, 30.368, -135.240, 175]
+    level:    [102, 106]
+  17883415:
+    template: Crepuscular_Worm
+    at:       [164.060, 30.461, -139.220, 118]
+    level:    [102, 106]
+  17883416:
+    template: Livid_Umbril
+    at:       [138.140, 29.218, -188.180, 33]
+    level:    [102, 106]
+  17883417:
+    template: Livid_Umbril
+    at:       [138.290, 29.211, -188.530, 34]
+    level:    [102, 106]
+  17883418:
+    template: Livid_Umbril
+    at:       [140.360, 30.420, -207.840, 221]
+    level:    [102, 106]
+  17883419:
+    template: Livid_Umbril
+    at:       [137.360, 29.351, -230.500, 58]
+    level:    [102, 106]
+  17883420:
+    template: Tenebrous_Obdella
+    at:       [53.687, 19.268, -210.720, 72]
+    level:    [102, 106]
+  17883421:
+    template: Tenebrous_Obdella
+    at:       [55.719, 19.049, -212.570, 116]
+    level:    [102, 106]
+  17883422:
+    template: Tenebrous_Obdella
+    at:       [51.721, 19.134, -218.940, 88]
+    level:    [102, 106]
+  17883423:
+    template: Tenebrous_Obdella
+    at:       [27.159, 24.726, -226.940, 223]
+    level:    [102, 106]
+  17883424:
+    template: Tenebrous_Obdella
+    at:       [28.170, 24.377, -226.540, 236]
+    level:    [102, 106]
+  17883425:
+    template: Pallid_Funguar
+    at:       [17.406, 23.593, -171.300, 79]
+    level:    [102, 106]
+  17883426:
+    template: Flatus_Acuex
+    at:       [11.256, 26.047, -176.990, 229]
+    level:    [102, 106]
+  17883427:
+    template: Tenebrous_Obdella
+    at:       [-54.810, 29.959, -237.270, 31]
+    level:    [102, 106]
+  17883428:
+    template: Tenebrous_Obdella
+    at:       [-61.900, 29.226, -231.950, 138]
+    level:    [102, 106]
+  17883429:
+    template: Tenebrous_Obdella
+    at:       [-62.930, 29.402, -233.090, 174]
+    level:    [102, 106]
+  17883430:
+    template: Tenebrous_Obdella
+    at:       [-251.500, 29.034, -256.600, 247]
+    level:    [102, 106]
+  17883431:
+    template: Tenebrous_Obdella
+    at:       [-249.700, 29.083, -260.620, 51]
+    level:    [102, 106]
+  17883432:
+    template: Tenebrous_Obdella
+    at:       [-243.200, 30.353, -258.450, 47]
+    level:    [102, 106]
+  17883433:
+    template: Pallid_Funguar
+    at:       [-218.800, 27.680, -144.280, 190]
+    level:    [102, 106]
+  17883434:
+    template: Pallid_Funguar
+    at:       [-215.100, 27.853, -140.620, 234]
+    level:    [102, 106]
+  17883435:
+    template: Crepuscular_Worm
+    at:       [-59.310, 20.271, -1.366, 63]
+    level:    [102, 106]
+  17883436:
+    template: Crepuscular_Worm
+    at:       [-73.820, 28.173, -17.396, 110]
+    level:    [102, 106]
+  17883437:
+    template: Tenebrous_Obdella
+    at:       [-105.600, 17.760, 100.624, 137]
+    level:    [102, 106]
+  17883438:
+    template: Tenebrous_Obdella
+    at:       [-105.800, 17.686, 101.064, 130]
+    level:    [102, 106]
+  17883439:
+    template: Tenebrous_Obdella
+    at:       [-100.800, 17.586, 99.199, 177]
+    level:    [102, 106]
+  17883440:
+    template: Flatus_Acuex
+    at:       [-111.400, 29.507, 146.035, 248]
+    level:    [102, 106]
+  17883441:
+    template: Flatus_Acuex
+    at:       [-118.100, 30.173, 145.985, 230]
+    level:    [102, 106]
+  17883442:
+    template: Flatus_Acuex
+    at:       [-112.000, 29.388, 138.694, 246]
+    level:    [102, 106]
+  17883443:
+    template: Pallid_Funguar
+    at:       [-94.920, 28.742, 206.356, 117]
+    level:    [102, 106]
+  17883444:
+    template: Flatus_Acuex
+    at:       [-98.820, 29.627, 216.292, 221]
+    level:    [102, 106]
+  17883445:
+    template: Flatus_Acuex
+    at:       [-97.010, 29.170, 202.914, 141]
+    level:    [102, 106]
+  17883446:
+    template: Tenebrous_Obdella
+    at:       [-142.200, 30.318, 231.902, 48]
+    level:    [102, 106]
+  17883447:
+    template: Tenebrous_Obdella
+    at:       [-147.600, 29.600, 227.925, 122]
+    level:    [102, 106]
+  17883448:
+    template: Tenebrous_Obdella
+    at:       [-142.300, 30.315, 231.054, 49]
+    level:    [102, 106]
+  17883449:
+    template: Tenebrous_Obdella
+    at:       [-136.600, 29.489, 250.975, 114]
+    level:    [102, 106]
+  17883450:
+    template: Tenebrous_Obdella
+    at:       [-142.600, 30.422, 258.229, 133]
+    level:    [102, 106]
+  17883451:
+    template: Tenebrous_Obdella
+    at:       [-131.200, 28.670, 252.190, 102]
+    level:    [102, 106]
+  17883452:
+    template: Foreboding_Funguar
+    at:       [-261.000, 27.819, 223.214, 171]
+    level:    [102, 106]
+  17883453:
+    template: Crepuscular_Worm
+    at:       [-238.700, 29.263, 218.604]
+    level:    [102, 106]
+  17883454:
+    template: Crepuscular_Worm
+    at:       [-188.300, 29.208, 420.822, 86]
+    level:    [102, 106]
+  17883455:
+    template: Crepuscular_Worm
+    at:       [-179.100, 29.433, 428.816, 38]
+    level:    [102, 106]
+  17883456:
+    template: Foreboding_Funguar
+    at:       [-140.600, 30.617, 355.160, 39]
+    level:    [102, 106]
+  17883457:
+    template: Foreboding_Funguar
+    at:       [-144.500, 30.084, 361.511, 112]
+    level:    [102, 106]
+  17883458:
+    template: Foreboding_Funguar
+    at:       [64.712, 30.319, 500.989, 133]
+    level:    [102, 106]
+  17883459:
+    template: Foreboding_Funguar
+    at:       [58.706, 30.176, 491.033, 90]
+    level:    [102, 106]
+  17883460:
+    template: Foreboding_Funguar
+    at:       [104.890, 30.219, 476.571, 46]
+    level:    [102, 106]
+  17883461:
+    template: Flatus_Acuex
+    at:       [97.053, 29.488, 496.802, 180]
+    level:    [102, 106]
+  17883462:
+    template: Livid_Umbril
+    at:       [102.970, 29.170, 348.105, 86]
+    level:    [102, 106]
+  17883463:
+    template: Livid_Umbril
+    at:       [100.620, 30.302, 353.682, 207]
+    level:    [102, 106]
+  17883464:
+    template: Livid_Umbril
+    at:       [84.388, 30.507, 417.361, 225]
+    level:    [102, 106]
+  17883465:
+    template: Flatus_Acuex
+    at:       [90.531, 29.135, 414.593, 1]
+    level:    [102, 106]
+  17883466:
+    template: Flatus_Acuex
+    at:       [87.016, 29.788, 415.540, 84]
+    level:    [102, 106]
+  17883467:
+    template: Livid_Umbril
+    at:       [140.530, 17.763, 345.098, 182]
+    level:    [102, 106]
+  17883468:
+    template: Fuliginous_Mandragora
+    at:       [140.400, 17.746, 345.154, 182]
+    level:    [102, 106]
+  17883469:
+    template: Fuliginous_Mandragora
+    at:       [139.830, 18.714, 352.082, 188]
+    level:    [102, 106]
+  17883470:
+    template: Pallid_Funguar
+    at:       [180.610, 19.271, 398.359, 58]
+    level:    [102, 106]
+  17883471:
+    template: Foreboding_Funguar
+    at:       [241.920, 20.090, 381.367, 252]
+    level:    [102, 106]
+  17883472:
+    template: Foreboding_Funguar
+    at:       [274.290, 29.871, 425.188, 231]
+    level:    [102, 106]
+  17883473:
+    template: Foreboding_Funguar
+    at:       [275.500, 30.357, 418.630, 205]
+    level:    [102, 106]
+  17883474:
+    template: Crepuscular_Worm
+    at:       [218.420, 29.333, 503.940, 245]
+    level:    [102, 106]
+  17883475:
+    template: Crepuscular_Worm
+    at:       [218.540, 30.384, 486.901, 49]
+    level:    [102, 106]
+  17883476:
+    template: Crepuscular_Worm
+    at:       [219.560, 30.097, 476.218, 12]
+    level:    [102, 106]
+  17883477:
+    template: Crepuscular_Worm
+    at:       [221.550, 30.131, 489.261, 225]
+    level:    [102, 106]
+  17883478:
+    template: Livid_Umbril
+    at:       [219.610, 29.323, 463.510, 196]
+    level:    [102, 106]
+  17883479:
+    template: Livid_Umbril
+    at:       [210.050, 29.107, 456.019, 251]
+    level:    [102, 106]
+  17883480:
+    template: Livid_Umbril
+    at:       [191.120, 30.031, 463.121, 246]
+    level:    [102, 106]
+  17883481:
+    template: Livid_Umbril
+    at:       [195.810, 30.236, 462.878, 136]
+    level:    [102, 106]
+  17883482:
+    template: Pallid_Funguar
+    at:       [476.220, 29.343, 259.450, 135]
+    level:    [102, 106]
+  17883483:
+    template: Pallid_Funguar
+    at:       [485.700, 29.045, 258.023, 124]
+    level:    [102, 106]
+  17883484:
+    template: Tenebrous_Obdella
+    at:       [414.820, 30.093, 193.514, 144]
+    level:    [102, 106]
+  17883485:
+    template: Tenebrous_Obdella
+    at:       [415.880, 28.937, 184.938, 161]
+    level:    [102, 106]
+  17883486:
+    template: Tenebrous_Obdella
+    at:       [418.860, 30.145, 205.485, 205]
+    level:    [102, 106]
+  17883487:
+    template: Tenebrous_Obdella
+    at:       [461.380, 29.732, 205.792, 190]
+    level:    [102, 106]
+  17883488:
+    template: Flatus_Acuex
+    at:       [455.070, 29.604, 205.554, 194]
+    level:    [102, 106]
+  17883489:
+    template: Flatus_Acuex
+    at:       [464.640, 30.281, 178.636, 150]
+    level:    [102, 106]
+  17883490:
+    template: Flatus_Acuex
+    at:       [466.040, 30.013, 181.046, 113]
+    level:    [102, 106]
+  17883491:
+    template: Flatus_Acuex
+    at:       [461.800, 30.336, 178.384, 221]
+    level:    [102, 106]
+  17883492:
+    template: Tenebrous_Obdella
+    at:       [375.971, 29.638, 284.941, 60]
+    level:    [102, 106]
+  17883493:
+    template: Tenebrous_Obdella
+    at:       [378.983, 29.921, 279.427, 228]
+    level:    [102, 106]
+  17883494:
+    template: Tenebrous_Obdella
+    at:       [376.087, 30.193, 297.586, 243]
+    level:    [102, 106]
+  17883495:
+    template: Foreboding_Funguar
+    at:       [319.000, 30.062, 260.270, 181]
+    level:    [102, 106]
+  17883496:
+    template: Foreboding_Funguar
+    at:       [320.680, 30.283, 256.697, 101]
+    level:    [102, 106]
+  17883497:
+    template: Tenebrous_Obdella
+    at:       [345.673, 29.066, 302.059, 21]
+    level:    [102, 106]
+  17883498:
+    template: Tenebrous_Obdella
+    at:       [349.097, 29.224, 304.237, 180]
+    level:    [102, 106]
+  17883499:
+    template: Crepuscular_Worm
+    at:       [357.100, 20.556, 141.214, 20]
+    level:    [102, 106]
+  17883500:
+    template: Crepuscular_Worm
+    at:       [356.810, 20.576, 141.423, 19]
+    level:    [102, 106]
+  17883501:
+    template: Crepuscular_Worm
+    at:       [436.200, 28.624, 62.666, 15]
+    level:    [102, 106]
+  17883502:
+    template: Crepuscular_Worm
+    at:       [428.990, 25.711, 65.639, 32]
+    level:    [102, 106]
+  17883503:
+    template: Crepuscular_Worm
+    at:       [462.760, 29.243, 32.222, 77]
+    level:    [102, 106]
+  17883504:
+    template: Crepuscular_Worm
+    at:       [462.650, 29.577, 48.495, 33]
+    level:    [102, 106]
+  17883505:
+    template: Crepuscular_Worm
+    at:       [459.450, 29.284, 53.434, 28]
+    level:    [102, 106]
+  17883506:
+    template: Tenebrous_Obdella
+    at:       [306.680, 28.986, 17.662, 28]
+    level:    [102, 106]
+  17883507:
+    template: Tenebrous_Obdella
+    at:       [326.090, 29.500, 16.534, 107]
+    level:    [102, 106]
+  17883508:
+    template: Tenebrous_Obdella
+    at:       [331.390, 29.145, 21.238, 157]
+    level:    [102, 106]
+  17883509:
+    template: Foreboding_Funguar
+    at:       [276.670, 30.615, -22.443, 124]
+    level:    [102, 106]
+  17883510:
+    template: Foreboding_Funguar
+    at:       [276.600, 30.506, -23.260, 132]
+    level:    [102, 106]
+  17883511:
+    template: Foreboding_Funguar
+    at:       [254.790, 30.375, -2.064, 80]
+    level:    [102, 106]
+  17883512:
+    template: Crepuscular_Worm
+    at:       [418.580, 27.857, -66.119, 43]
+    level:    [102, 106]
+  17883513:
+    template: Crepuscular_Worm
+    at:       [407.040, 28.548, -60.367, 253]
+    level:    [102, 106]
+  17883514:
+    template: Livid_Umbril
+    at:       [541.460, 30.301, 39.717, 138]
+    level:    [102, 106]
+  17883515:
+    template: Livid_Umbril
+    at:       [536.280, 29.187, 17.261, 65]
+    level:    [102, 106]
+  17883516:
+    template: Flatus_Acuex
+    at:       [0.836, 19.736, -21.603, 249]
+    level:    [102, 106]
+  17883517:
+    template: Flatus_Acuex
+    at:       [-6.709, 21.452, -23.086, 240]
+    level:    [102, 106]
+  17883518:
+    template: Pallid_Funguar
+    at:       [33.778, 20.353, 138.246, 253]
+    level:    [102, 106]
+  17883519:
+    template: Pallid_Funguar
+    at:       [52.069, 19.288, 137.106, 154]
+    level:    [102, 106]
+  17883520:
+    template: Subterrane_Spider
+    at:       [-54.680, 25.341, 265.898, 156]
+    level:    [102, 106]
+  17883521:
+    template: Speckled_Spider
+    at:       [-53.550, 24.989, 265.247, 156]
+    level:    [102, 106]
+  17883522:
+    template: Subterrane_Spider
+    at:       [32.136, 19.471, 175.033, 140]
+    level:    [102, 106]
+  17883523:
+    template: Speckled_Spider
+    at:       [26.013, 18.920, 179.537, 140]
+    level:    [102, 106]
+  17883524:
+    template: Crepuscular_Worm
+    at:       [299.540, 28.131, 313.302, 211]
+    level:    [102, 106]
+  17883525:
+    template: Crepuscular_Worm
+    at:       [285.970, 21.100, 300.003, 109]
+    level:    [102, 106]
+  17883526:
+    template: Pallid_Funguar
+    at:       [260.650, 20.586, 196.619, 35]
+    level:    [102, 106]
+  17883527:
+    template: Pallid_Funguar
+    at:       [255.940, 20.125, 198.738, 70]
+    level:    [102, 106]
+  17883528:
+    template: Pallid_Funguar
+    at:       [301.910, 18.106, 173.914, 50]
+    level:    [102, 106]
+  17883529:
+    template: Balas_Bats
+    at:       [145.920, 19.142, -12.508, 216]
+    level:    [102, 106]
+  17883530:
+    template: Balas_Bats
+    at:       [258.220, 26.805, -71.092, 172]
+    level:    [102, 106]
+  17883531:
+    template: Moist_Funguar
+    at:       [139.630, 9.814, 32.129, 36]
+    level:    [104, 109]
+  17883532:
+    template: Moist_Funguar
+    at:       [140.420, 10.512, 38.712, 75]
+    level:    [104, 109]
+  17883533:
+    template: Moist_Funguar
+    at:       [139.420, 9.292, 68.901, 229]
+    level:    [104, 109]
+  17883534:
+    template: Putrid_Acuex
+    at:       [97.111, 9.185, 173.513, 11]
+    level:    [104, 109]
+  17883535:
+    template: Putrid_Acuex
+    at:       [87.142, 9.158, 174.396, 253]
+    level:    [104, 109]
+  17883536:
+    template: Bloodmoon_Umbril
+    at:       [211.890, 14.545, 136.524, 164]
+    level:    [106, 109]
+  17883537:
+    template: Bloodmoon_Umbril
+    at:       [204.460, 10.897, 139.977, 146]
+    level:    [106, 109]
+  17883538:
+    template: Pungent_Fungus
+    at:       [414.630, 28.976, -189.390, 41]
+    level:    [1, 1]
+  17883539:
+    template: Pungent_Fungus
+    at:       [375.280, 28.739, -219.710, 93]
+    level:    [1, 1]
+  17883540:
+    template: Pungent_Fungus
+    at:       [284.240, 29.500, -192.030, 4]
+    level:    [1, 1]
+  17883541:
+    template: Pungent_Fungus
+    at:       [303.480, 29.302, -269.760, 111]
+    level:    [1, 1]
+  17883542:
+    template: Pungent_Fungus
+    at:       [193.950, 29.391, -193.830, 100]
+    level:    [1, 1]
+  17883543:
+    template: Pungent_Fungus
+    at:       [172.220, 29.638, -138.760, 3]
+    level:    [1, 1]
+  17883544:
+    template: Pungent_Fungus
+    at:       [47.838, 19.500, -1.607, 83]
+    level:    [1, 1]
+  17883545:
+    template: Pungent_Fungus
+    at:       [89.012, 19.440, 2.466, 62]
+    level:    [1, 1]
+  17883546:
+    template: Pungent_Fungus
+    at:       [122.150, 20.097, -53.845, 125]
+    level:    [1, 1]
+  17883547:
+    template: Pungent_Fungus
+    at:       [122.930, 9.901, 123.103, 99]
+    level:    [1, 1]
+  17883548:
+    template: Pungent_Fungus
+    at:       [64.905, 29.166, -306.530, 82]
+    level:    [1, 1]
+  17883549:
+    template: Pungent_Fungus
+    at:       [-42.860, 29.389, -317.950, 1]
+    level:    [1, 1]
+  17883550:
+    template: Pungent_Fungus
+    at:       [-259.100, 27.927, -228.950, 126]
+    level:    [1, 1]
+  17883551:
+    template: Pungent_Fungus
+    at:       [-209.600, 29.500, -191.020, 27]
+    level:    [1, 1]
+  17883552:
+    template: Pungent_Fungus
+    at:       [-158.200, 29.372, -126.010, 97]
+    level:    [1, 1]
+  17883553:
+    template: Pungent_Fungus
+    at:       [-192.200, 29.941, -39.025, 107]
+    level:    [1, 1]
+  17883554:
+    template: Pungent_Fungus
+    at:       [-129.000, 29.656, -37.736, 91]
+    level:    [1, 1]
+  17883555:
+    template: Pungent_Fungus
+    at:       [-79.060, 19.697, 33.209, 117]
+    level:    [1, 1]
+  17883556:
+    template: Pungent_Fungus
+    at:       [5.503, 19.583, 73.632, 88]
+    level:    [1, 1]
+  17883557:
+    template: Pungent_Fungus
+    at:       [-198.500, 29.500, 113.473, 74]
+    level:    [1, 1]
+  17883558:
+    template: Pungent_Fungus
+    at:       [-68.400, 28.180, 224.865, 87]
+    level:    [1, 1]
+  17883559:
+    template: Pungent_Fungus
+    at:       [-178.600, 30.562, 434.661, 85]
+    level:    [1, 1]
+  17883560:
+    template: Pungent_Fungus
+    at:       [-230.400, 28.950, 395.605, 36]
+    level:    [1, 1]
+  17883561:
+    template: Pungent_Fungus
+    at:       [-210.100, 29.464, 362.097, 100]
+    level:    [1, 1]
+  17883562:
+    template: Pungent_Fungus
+    at:       [-137.300, 29.246, 346.321, 121]
+    level:    [1, 1]
+  17883563:
+    template: Pungent_Fungus
+    at:       [-54.890, 29.396, 331.115, 101]
+    level:    [1, 1]
+  17883564:
+    template: Pungent_Fungus
+    at:       [-35.010, 29.295, 327.222, 91]
+    level:    [1, 1]
+  17883565:
+    template: Pungent_Fungus
+    at:       [36.986, 29.131, 309.118, 99]
+    level:    [1, 1]
+  17883566:
+    template: Pungent_Fungus
+    at:       [105.260, 29.871, 362.447, 1]
+    level:    [1, 1]
+  17883567:
+    template: Pungent_Fungus
+    at:       [110.350, 20.396, 298.003, 65]
+    level:    [1, 1]
+  17883568:
+    template: Pungent_Fungus
+    at:       [-51.770, 29.336, 454.069, 52]
+    level:    [1, 1]
+  17883569:
+    template: Pungent_Fungus
+    at:       [101.090, 27.972, 461.916, 41]
+    level:    [1, 1]
+  17883570:
+    template: Pungent_Fungus
+    at:       [139.740, 9.418, 411.485, 5]
+    level:    [1, 1]
+  17883571:
+    template: Pungent_Fungus
+    at:       [462.640, 29.849, 350.654, 79]
+    level:    [1, 1]
+  17883572:
+    template: Pungent_Fungus
+    at:       [435.840, 29.500, 269.049, 121]
+    level:    [1, 1]
+  17883573:
+    template: Pungent_Fungus
+    at:       [502.100, 29.687, 302.786, 50]
+    level:    [1, 1]
+  17883574:
+    template: Pungent_Fungus
+    at:       [419.060, 28.687, 183.751, 114]
+    level:    [1, 1]
+  17883575:
+    template: Pungent_Fungus
+    at:       [348.610, 29.500, 191.438, 46]
+    level:    [1, 1]
+  17883576:
+    template: Pungent_Fungus
+    at:       [388.380, 19.398, 117.720, 76]
+    level:    [1, 1]
+  17883577:
+    template: Pungent_Fungus
+    at:       [354.320, 19.681, 84.813, 97]
+    level:    [1, 1]
+  17883578:
+    template: Pungent_Fungus
+    at:       [278.090, 19.937, 71.557, 69]
+    level:    [1, 1]
+  17883579:
+    template: Pungent_Fungus
+    at:       [298.740, 29.343, 514.044, 68]
+    level:    [1, 1]
+  17883580:
+    template: Pungent_Fungus
+    at:       [519.930, 29.392, -27.569, 125]
+    level:    [1, 1]
+  17883581:
+    template: Pungent_Fungus
+    at:       [254.310, 30.177, 0.521, 91]
+    level:    [1, 1]
+  17883582:
+    template: Banespore
+    at:       [49.000, 19.812, -115.000, 36]
+    level:    [104, 106]
+  17883583:
+    template: Acuex
+    at:       [63.087, 19.875, -118.040, 170]
+    level:    [104, 106]
+  17883584:
+    template: Acuex
+    at:       [53.567, 19.798, -110.710, 135]
+    level:    [104, 106]
+  17883585:
+    template: Acuex
+    at:       [45.867, 19.666, -107.900, 73]
+    level:    [104, 106]
+  17883586:
+    template: Acuex
+    at:       [40.219, 19.271, -115.350, 106]
+    level:    [104, 106]
+  17883587:
+    template: Acuex
+    at:       [40.208, 20.173, -104.620, 147]
+    level:    [104, 106]
+  17883588:
+    template: Acuex
+    at:       [39.201, 19.771, -112.480, 21]
+    level:    [104, 106]
+  17883589:
+    template: Banespore
+    at:       [200.000, 19.500, 360.000, 46]
+    level:    [104, 106]
+  17883590:
+    template: Acuex
+    at:       [199.410, 19.632, 369.942, 136]
+    level:    [104, 106]
+  17883591:
+    template: Acuex
+    at:       [204.350, 19.513, 352.773, 98]
+    level:    [104, 106]
+  17883592:
+    template: Acuex
+    at:       [195.920, 19.617, 368.158, 200]
+    level:    [104, 106]
+  17883593:
+    template: Acuex
+    at:       [197.930, 19.641, 352.661, 132]
+    level:    [104, 106]
+  17883594:
+    template: Acuex
+    at:       [196.780, 19.622, 353.610, 51]
+    level:    [104, 106]
+  17883595:
+    template: Acuex
+    at:       [201.530, 19.488, 359.903, 48]
+    level:    [104, 106]
+  17883596:
+    template: Banespore
+    at:       [20.000, 20.500, 240.000, 38]
+    level:    [104, 106]
+  17883597:
+    template: Acuex
+    at:       [17.201, 19.694, 234.927, 163]
+    level:    [104, 106]
+  17883598:
+    template: Acuex
+    at:       [18.899, 20.055, 244.505, 20]
+    level:    [104, 106]
+  17883599:
+    template: Acuex
+    at:       [14.163, 19.608, 231.809, 39]
+    level:    [104, 106]
+  17883600:
+    template: Acuex
+    at:       [17.257, 19.635, 237.255, 99]
+    level:    [104, 106]
+  17883601:
+    template: Acuex
+    at:       [23.169, 20.183, 231.123, 85]
+    level:    [104, 106]
+  17883602:
+    template: Acuex
+    at:       [10.776, 19.277, 234.024, 148]
+    level:    [104, 106]
+  17883603:
+    template: Banespore
+    at:       [200.000, 20.500, -21.000, 96]
+    level:    [104, 106]
+  17883604:
+    template: Acuex
+    at:       [194.110, 20.225, -23.888, 43]
+    level:    [104, 106]
+  17883605:
+    template: Acuex
+    at:       [203.190, 20.228, -14.437, 178]
+    level:    [104, 106]
+  17883606:
+    template: Acuex
+    at:       [201.570, 20.062, -14.401, 214]
+    level:    [104, 106]
+  17883607:
+    template: Acuex
+    at:       [198.100, 19.691, -18.656, 103]
+    level:    [104, 106]
+  17883608:
+    template: Acuex
+    at:       [201.770, 20.090, -14.116, 226]
+    level:    [104, 106]
+  17883609:
+    template: Acuex
+    at:       [201.400, 20.069, -25.215, 3]
+    level:    [104, 106]
+  17883610:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [-120.000, 18.500, 22.000, 69]
+    level:    [104, 106]
+  17883611:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [-120.000, 18.500, 18.000, 104]
+    level:    [104, 106]
+  17883612:
+    template: Sordid_Lizard
+    at:       [-109.200, 18.872, 19.498, 119]
+    level:    [104, 106]
+  17883613:
+    template: Acuex
+    at:       [-110.500, 18.964, 20.046, 40]
+    level:    [104, 106]
+  17883614:
+    template: Sordid_Lizard
+    at:       [-127.400, 17.302, 23.493, 247]
+    level:    [104, 106]
+  17883615:
+    template: Acuex
+    at:       [-133.900, 15.482, 25.066, 106]
+    level:    [104, 106]
+  17883616:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [440.000, 18.500, 142.000, 106]
+    level:    [104, 106]
+  17883617:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [440.000, 18.500, 138.000, 89]
+    level:    [104, 106]
+  17883618:
+    template: Molten_Clot
+    at:       [429.510, 19.340, 138.104, 226]
+    level:    [107, 108]
+  17883619:
+    template: Acuex
+    at:       [427.540, 19.516, 137.656, 63]
+    level:    [104, 106]
+  17883620:
+    template: Umbril_Shadewarrior
+    at:       [451.500, 15.892, 136.011, 155]
+    level:    [102, 103]
+  17883621:
+    template: Umbril_Shadewarrior
+    at:       [447.700, 16.871, 136.789, 125]
+    level:    [102, 103]
+  17883622:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [98.000, 18.500, -40.000, 31]
+    level:    [104, 106]
+  17883623:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [102.000, 18.500, -40.000, 29]
+    level:    [104, 106]
+  17883624:
+    template: Putrid_Funguar
+    at:       [100.930, 19.125, -31.945, 196]
+    level:    [104, 106]
+  17883625:
+    template: Putrid_Funguar
+    at:       [100.610, 19.160, -33.819, 25]
+    level:    [104, 106]
+  17883626:
+    template: Pyre_Bat
+    at:       [99.324, 18.728, -53.701, 111]
+    level:    [104, 106]
+  17883627:
+    template: Pyre_Bat
+    at:       [99.102, 18.777, -53.214, 83]
+    level:    [104, 106]
+  17883628:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [-62.000, 18.500, 160.000, 8]
+    level:    [104, 106]
+  17883629:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [-58.000, 18.500, 160.000, 38]
+    level:    [104, 106]
+  17883630:
+    template: Oregorger_Worm
+    at:       [-60.330, 19.577, 166.522, 11]
+    level:    [104, 106]
+  17883631:
+    template: Acuex
+    at:       [-61.470, 19.535, 166.925, 116]
+    level:    [104, 106]
+  17883632:
+    template: Oregorger_Worm
+    at:       [-56.400, 19.170, 150.182, 7]
+    level:    [104, 106]
+  17883633:
+    template: Acuex
+    at:       [-61.080, 19.023, 150.869, 113]
+    level:    [104, 106]
+  17883634:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [160.000, 18.500, 302.000, 84]
+    level:    [104, 106]
+  17883635:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [160.000, 18.500, 298.000, 76]
+    level:    [104, 106]
+  17883636:
+    template: Tooth_Cave_Tarantula
+    at:       [172.600, 19.475, 298.601, 57]
+    level:    [104, 106]
+  17883637:
+    template: Acuex
+    at:       [172.690, 18.892, 300.467, 208]
+    level:    [104, 106]
+  17883638:
+    template: Tormented_Obdella
+    at:       [151.060, 19.313, 299.268, 191]
+    level:    [104, 106]
+  17883639:
+    template: Acuex
+    at:       [153.560, 19.819, 300.236, 205]
+    level:    [104, 106]
+  17883640:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [218.000, 18.500, 40.000, 13]
+    level:    [104, 106]
+  17883641:
+    template: Knotted_Root_CC
+    script:   Knotted_Root
+    at:       [222.000, 18.500, 40.000, 91]
+    level:    [104, 106]
+  17883642:
+    template: Slag_Mandragora
+    at:       [217.790, 19.139, 48.347, 74]
+    level:    [104, 106]
+  17883643:
+    template: Acuex
+    at:       [222.160, 19.559, 53.288, 240]
+    level:    [104, 106]
+  17883644:
+    template: Frightful_Funguar
+    at:       [216.780, 19.548, 27.118, 111]
+    level:    [104, 106]
+  17883645:
+    template: Frightful_Funguar
+    at:       [219.600, 18.846, 25.964, 16]
+    level:    [104, 106]
+  17883646:
+    template: Ancestral_Rage
+    at:       [453.803, 9.135, 102.766, 42]
+  17883647:
+    template: Wetscale_Toad
+    at:       [-439.500, 29.337, -552.770, 146]
+    level:    [125, 126]
+  17883648:
+    template: Plodding_Funguar
+    at:       [-442.000, 29.378, -553.250, 199]
+    level:    [125, 126]
+  17883649:
+    template: Plodding_Funguar
+    at:       [-437.000, 29.465, -563.380, 8]
+    level:    [125, 126]
+  17883650:
+    template: Plodding_Funguar
+    at:       [-461.200, 29.496, -543.320, 14]
+    level:    [125, 126]
+  17883651:
+    template: Fulvous_Bats
+    at:       [-495.200, 29.381, -535.960, 143]
+    level:    [125, 126]
+  17883652:
+    template: Wetscale_Toad
+    at:       [-419.600, 29.343, -525.750, 198]
+    level:    [125, 126]
+  17883653:
+    template: Wetscale_Toad
+    at:       [-422.500, 29.389, -536.120, 82]
+    level:    [125, 126]
+  17883654:
+    template: Moldmouth_Attercop
+    at:       [-352.000, 29.503, -554.710, 14]
+    level:    [125, 126]
+  17883655:
+    template: Moldmouth_Attercop
+    at:       [-367.800, 29.326, -557.580, 170]
+    level:    [125, 126]
+  17883656:
+    template: Wetscale_Toad
+    at:       [-380.800, 29.329, -509.480, 187]
+    level:    [125, 126]
+  17883657:
+    template: Wetscale_Toad
+    at:       [-381.000, 29.327, -509.590, 187]
+    level:    [125, 126]
+  17883658:
+    template: Moldmouth_Attercop
+    at:       [-341.000, 29.336, -543.920, 236]
+    level:    [125, 126]
+  17883659:
+    template: Moldmouth_Attercop
+    at:       [-326.800, 29.402, -539.390, 252]
+    level:    [125, 126]
+  17883660:
+    template: Moldmouth_Attercop
+    at:       [-306.300, 28.035, -539.660, 110]
+    level:    [125, 126]
+  17883661:
+    template: Moldmouth_Attercop
+    at:       [-301.700, 28.937, -525.180, 189]
+    level:    [125, 126]
+  17883662:
+    template: Moldmouth_Attercop
+    at:       [-309.600, 29.398, -493.700, 44]
+    level:    [125, 126]
+  17883663:
+    template: Pungent_Fungus
+    at:       [-545.800, 29.743, -509.080, 36]
+    level:    [1, 1]
+  17883664:
+    template: Pungent_Fungus
+    at:       [-561.900, 29.520, -509.740, 74]
+    level:    [1, 1]
+  17883665:
+    template: Pungent_Fungus
+    at:       [-542.200, 30.340, -523.520, 8]
+    level:    [1, 1]
+  17883666:
+    template: Pungent_Fungus
+    at:       [-556.400, 29.156, -517.240, 35]
+    level:    [1, 1]
+  17883667:
+    template: Pungent_Fungus
+    at:       [-564.400, 29.327, -523.550, 60]
+    level:    [1, 1]
+  17883668:
+    template: Pungent_Fungus
+    at:       [-549.400, 29.572, -530.770, 83]
+    level:    [1, 1]
+  17883669:
+    template: Pungent_Fungus
+    at:       [-573.100, 29.719, -541.680, 9]
+    level:    [1, 1]
+  17883670:
+    template: Pungent_Fungus
+    at:       [-553.900, 29.552, -546.940, 76]
+    level:    [1, 1]
+  17883671:
+    template: Pungent_Fungus
+    at:       [-561.800, 30.165, -549.330, 50]
+    level:    [1, 1]
+  17883672:
+    template: Pungent_Fungus
+    at:       [-541.200, 29.287, -546.330, 113]
+    level:    [1, 1]
+  17883673:
+    template: Plodding_Funguar
+    at:       [-514.600, 29.375, -527.940, 163]
+    level:    [125, 126]
+  17883674:
+    template: Fulvous_Bats
+    at:       [-511.200, 29.372, -527.910, 219]
+    level:    [125, 126]
+  17883675:
+    template: Plodding_Funguar
+    at:       [-513.200, 29.485, -518.000, 111]
+    level:    [125, 126]
+  17883676:
+    template: Snippy_Rafflesia
+    at:       [-534.000, 29.534, -537.140, 94]
+    level:    [125, 126]
+  17883677:
+    template: Snippy_Rafflesia
+    at:       [-546.100, 29.739, -539.710, 142]
+    level:    [125, 126]
+  17883678:
+    template: Snippy_Rafflesia
+    at:       [-556.900, 29.795, -531.000, 13]
+    level:    [125, 126]
+  17883679:
+    template: Snippy_Rafflesia
+    at:       [-569.600, 29.804, -530.180, 22]
+    level:    [125, 126]
+  17883680:
+    template: Snippy_Rafflesia
+    at:       [-550.200, 29.718, -545.010, 244]
+    level:    [125, 126]
+  17883681:
+    script: Vemosia
+  17883682:
+    template: Pungent_Fungus
+    at:       [-575.200, 29.354, -463.180, 24]
+    level:    [1, 1]
+  17883683:
+    template: Pungent_Fungus
+    at:       [-573.600, 29.249, -508.450, 7]
+    level:    [1, 1]
+  17883684:
+    template: Pungent_Fungus
+    at:       [-575.500, 28.705, -479.700, 81]
+    level:    [1, 1]
+  17883685:
+    template: Pungent_Fungus
+    at:       [-569.200, 29.174, -455.160, 39]
+    level:    [1, 1]
+  17883686:
+    template: Coagulum_Acuex
+    at:       [-577.500, 29.513, -490.410, 49]
+    level:    [125, 126]
+  17883687:
+    template: Coagulum_Acuex
+    at:       [-575.000, 29.360, -459.070, 83]
+    level:    [125, 126]
+  17883688:
+    template: Fulvous_Bats
+    at:       [-493.600, 29.469, -500.850, 239]
+    level:    [125, 126]
+  17883689:
+    template: Fulvous_Bats
+    at:       [-486.300, 29.413, -499.610, 249]
+    level:    [125, 126]
+  17883690:
+    template: Plodding_Funguar
+    at:       [-404.600, 29.458, -484.890, 201]
+    level:    [125, 126]
+  17883691:
+    template: Wetscale_Toad
+    at:       [-399.500, 29.347, -470.830, 236]
+    level:    [125, 126]
+  17883692:
+    template: Plodding_Funguar
+    at:       [-393.500, 29.511, -474.730, 25]
+    level:    [125, 126]
+  17883693:
+    template: Wetscale_Toad
+    at:       [-394.000, 29.503, -474.870, 24]
+    level:    [125, 126]
+  17883694:
+    template: Plodding_Funguar
+    at:       [-403.800, 29.485, -478.530, 166]
+    level:    [125, 126]
+  17883695:
+    template: Pungent_Fungus
+    at:       [-346.400, 29.427, -462.530, 88]
+    level:    [1, 1]
+  17883696:
+    template: Pungent_Fungus
+    at:       [-358.800, 29.216, -456.800, 45]
+    level:    [1, 1]
+  17883697:
+    template: Snippy_Rafflesia
+    at:       [-364.400, 29.377, -460.870, 127]
+    level:    [125, 126]
+  17883698:
+    template: Fulvous_Bats
+    at:       [-472.600, 29.138, -442.650, 57]
+    level:    [125, 126]
+  17883699:
+    template: Fulvous_Bats
+    at:       [-489.600, 29.395, -447.370, 166]
+    level:    [125, 126]
+  17883700:
+    template: Obstinate_Clot
+    at:       [-472.500, 29.503, -433.100, 244]
+    level:    [125, 126]
+  17883701:
+    template: Obstinate_Clot
+    at:       [-485.300, 29.455, -436.820, 48]
+    level:    [125, 126]
+  17883702:
+    template: Fulvous_Bats
+    at:       [-488.900, 29.517, -444.180, 87]
+    level:    [125, 126]
+  17883703:
+    template: Pungent_Fungus
+    at:       [-539.400, 29.375, -456.510, 118]
+    level:    [1, 1]
+  17883704:
+    template: Pungent_Fungus
+    at:       [-530.500, 28.982, -460.550, 101]
+    level:    [1, 1]
+  17883705:
+    template: Fulvous_Bats
+    at:       [-499.200, 29.454, -426.590, 148]
+    level:    [125, 126]
+  17883706:
+    template: Obstinate_Clot
+    at:       [-498.800, 29.451, -426.600, 148]
+    level:    [125, 126]
+  17883707:
+    template: Obstinate_Clot
+    at:       [-516.800, 29.363, -421.600, 1]
+    level:    [125, 126]
+  17883708:
+    template: Pungent_Fungus
+    at:       [-322.200, 29.361, -478.480, 100]
+    level:    [1, 1]
+  17883709:
+    template: Pungent_Fungus
+    at:       [-330.400, 29.702, -457.300, 121]
+    level:    [1, 1]
+  17883710:
+    template: Pungent_Fungus
+    at:       [-327.200, 29.559, -435.050, 93]
+    level:    [1, 1]
+  17883711:
+    template: Pungent_Fungus
+    at:       [-325.000, 29.577, -456.540, 115]
+    level:    [1, 1]
+  17883712:
+    template: Pungent_Fungus
+    at:       [-323.500, 30.381, -464.540, 127]
+    level:    [1, 1]
+  17883713:
+    template: Pungent_Fungus
+    at:       [-323.900, 29.187, -477.690, 113]
+    level:    [1, 1]
+  17883714:
+    template: Drearyeyed_Bat
+    at:       [-309.400, 30.094, -458.480, 207]
+    level:    [125, 126]
+  17883715:
+    template: Drearyeyed_Bat
+    at:       [-314.300, 30.033, -460.140, 74]
+    level:    [125, 126]
+  17883716:
+    template: Drearyeyed_Bat
+    at:       [-312.800, 29.346, -436.740, 139]
+    level:    [125, 126]
+  17883717:
+    template: Drearyeyed_Bat
+    at:       [-331.600, 29.389, -440.460, 127]
+    level:    [125, 126]
+  17883718:
+    template: Coagulum_Acuex
+    at:       [-330.600, 29.917, -461.320, 30]
+    level:    [125, 126]
+  17883719:
+    template: Coagulum_Acuex
+    at:       [-329.100, 29.125, -480.890, 63]
+    level:    [125, 126]
+  17883720:
+    template: Snippy_Rafflesia
+    at:       [-334.800, 29.617, -460.940, 156]
+    level:    [125, 126]
+  17883721:
+    template: Snippy_Rafflesia
+    at:       [-325.300, 29.139, -477.070, 222]
+    level:    [125, 126]
+  17883722:
+    template: Pungent_Fungus
+    at:       [-565.100, 29.233, -451.920, 49]
+    level:    [1, 1]
+  17883723:
+    template: Pungent_Fungus
+    at:       [-555.400, 29.349, -451.330, 123]
+    level:    [1, 1]
+  17883724:
+    template: Pungent_Fungus
+    at:       [-555.300, 29.500, -438.350, 106]
+    level:    [1, 1]
+  17883725:
+    template: Pungent_Fungus
+    at:       [-573.800, 29.145, -420.500, 46]
+    level:    [1, 1]
+  17883726:
+    template: Pungent_Fungus
+    at:       [-549.500, 29.718, -436.320, 13]
+    level:    [1, 1]
+  17883727:
+    template: Pungent_Fungus
+    at:       [-567.500, 29.877, -439.310, 78]
+    level:    [1, 1]
+  17883728:
+    template: Coagulum_Acuex
+    at:       [-554.300, 29.350, -445.780, 231]
+    level:    [125, 126]
+  17883729:
+    template: Obstinate_Clot
+    at:       [-556.900, 30.313, -419.350, 165]
+    level:    [125, 126]
+  17883730:
+    template: Obstinate_Clot
+    at:       [-559.000, 29.746, -409.230, 48]
+    level:    [125, 126]
+  17883731:
+    template: Shadowshiver_Umbril
+    at:       [-554.300, 29.472, -397.440, 15]
+    level:    [126, 127]
+  17883732:
+    template: Shadowshiver_Umbril
+    at:       [-550.700, 29.433, -396.610, 185]
+    level:    [126, 127]
+  17883733:
+    template: Obstinate_Clot
+    at:       [-548.000, 29.270, -401.970, 12]
+    level:    [125, 126]
+  17883734:
+    template: Coagulum_Acuex
+    at:       [-559.000, 29.427, -440.270, 228]
+    level:    [125, 126]
+  17883735:
+    template: Coagulum_Acuex
+    at:       [-566.000, 29.840, -432.110, 12]
+    level:    [125, 126]
+  17883736:
+    template: Coagulum_Acuex
+    at:       [-567.100, 29.476, -450.730, 219]
+    level:    [125, 126]
+  17883737:
+    template: Shadowshiver_Umbril
+    at:       [-473.800, 29.322, -365.230, 111]
+    level:    [126, 127]
+  17883738:
+    template: Dullahan_generic
+    script:   Imposing_Dullahan
+    at:       [-450.900, 29.152, -375.440, 128]
+    level:    [127, 127]
+  17883739:
+    template: Dullahan_generic
+    script:   Imposing_Dullahan
+    at:       [-450.700, 29.416, -373.340, 232]
+    level:    [127, 127]
+  17883740:
+    template: Shadowshiver_Umbril
+    at:       [-443.600, 29.531, -360.790, 215]
+    level:    [126, 127]
+  17883741:
+    template: Dullahan_generic
+    script:   Imposing_Dullahan
+    at:       [-438.200, 29.635, -350.480, 166]
+    level:    [127, 127]
+  17883742:
+    template: Dullahan_generic
+    script:   Imposing_Dullahan
+    at:       [-469.700, 29.097, -363.410, 26]
+    level:    [127, 127]
+  17883743:
+    template: Hefty_Marolith
+    at:       [-472.200, 29.267, -364.480, 125]
+    level:    [127, 128]
+  17883744:
+    template: Drearyeyed_Bat
+    at:       [-390.800, 30.472, -418.490, 149]
+    level:    [125, 126]
+  17883745:
+    template: Shadowshiver_Umbril
+    at:       [-413.400, 28.858, -417.510, 108]
+    level:    [126, 127]
+  17883746:
+    template: Shadowshiver_Umbril
+    at:       [-406.300, 29.600, -415.350, 139]
+    level:    [126, 127]
+  17883747:
+    template: Drearyeyed_Bat
+    at:       [-398.900, 30.708, -418.140, 110]
+    level:    [125, 126]
+  17883748:
+    template: Drearyeyed_Bat
+    at:       [-419.000, 29.496, -401.860, 63]
+    level:    [125, 126]
+  17883749:
+    template: Shadowshiver_Umbril
+    at:       [-498.000, 29.363, -373.160, 105]
+    level:    [126, 127]

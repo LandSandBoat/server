@@ -1,0 +1,3534 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Adamantking_Effigy:
+    id:            43
+    species:       quadav_statue
+    skill_list_id: 94
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1058
+        entity_flags: 1665
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: very_rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   one_byne_bill
+
+  Diabolos_Club:
+    id:            1028
+    species:       diabolos
+    type:          [notorious]
+    spell_list_id: 108
+    skill_list_id: 35
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, blm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_ii_chapter_14
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Diabolos_Diamond:
+    id:            1029
+    species:       diabolos
+    type:          [notorious]
+    spell_list_id: 107
+    skill_list_id: 35
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_ii_chapter_14
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Diabolos_Heart:
+    id:            1030
+    species:       diabolos
+    type:          [notorious]
+    spell_list_id: 106
+    skill_list_id: 35
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_ii_chapter_14
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Diabolos_Letum:
+    id:            6050
+    species:       diabolos
+    type:          [notorious]
+    spell_list_id: 21
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: common
+          item:   portus_collar
+        - chance: common
+          item:   alucinor_mitts
+        - chance: uncommon
+          item:   portus_annulet
+        - chance: uncommon
+          item:   portus_ring
+        - chance: uncommon
+          item:   forgotten_thought
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Diabolos_Nox:
+    id:            6051
+    species:       diabolos
+    type:          [notorious]
+    spell_list_id: 21
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: common
+          item:   portus_collar
+        - chance: common
+          item:   alucinor_mitts
+        - chance: uncommon
+          item:   portus_annulet
+        - chance: uncommon
+          item:   portus_ring
+        - chance: uncommon
+          item:   forgotten_thought
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Diabolos_Somnus:
+    id:            6052
+    species:       diabolos
+    type:          [notorious]
+    spell_list_id: 21
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: common
+          item:   portus_collar
+        - chance: common
+          item:   alucinor_mitts
+        - chance: uncommon
+          item:   portus_annulet
+        - chance: uncommon
+          item:   portus_ring
+        - chance: uncommon
+          item:   forgotten_thought
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Diabolos_Spade:
+    id:            1031
+    species:       diabolos
+    type:          [notorious]
+    skill_list_id: 35
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_ii_chapter_14
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Diabolos_Umbra:
+    id:            4091
+    species:       diabolos
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 35
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: common
+          item:   portus_collar
+        - chance: common
+          item:   alucinor_mitts
+        - chance: uncommon
+          item:   portus_annulet
+        - chance: uncommon
+          item:   portus_ring
+        - chance: uncommon
+          item:   forgotten_thought
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Diaboloss_Shard:
+    id:            1032
+    species:       diabolos
+    type:          [called]
+    skill_list_id: 35
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+
+  Diaboloss_Vestige:
+    id:      6743
+    species: diabolos
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Effigy_Prototype:
+    id:            1178
+    species:       quadav_statue
+    type:          [notorious]
+    skill_list_id: 94
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1058
+        entity_flags:  1665
+        animation_sub:   20
+        hitbox:          15
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        dmgmagic: -1000
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Goblin_Replica:
+    id:            1707
+    species:       goblin_statue
+    spell_list_id: 20
+    skill_list_id: 92
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1062
+        entity_flags: 135
+        model_size:     3
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: very_rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          one_of: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Bard:
+    id:            2019
+    species:       hydra_fomor
+    spell_list_id: 6
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: sword
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 558
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Beastmaster:
+    id:            2020
+    species:       hydra_fomor
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 557
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Black_Mage:
+    id:            2021
+    species:       hydra_fomor
+    spell_list_id: 21
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 515
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Dark_Knight:
+    id:            2022
+    species:       hydra_fomor
+    spell_list_id: 5
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 556
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Dragoon:
+    id:            2023
+    species:       hydra_fomor
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 562
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Monk:
+    id:            2024
+    species:       hydra_fomor
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 513
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Ninja:
+    id:            2025
+    species:       hydra_fomor
+    spell_list_id: 7
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 561
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Paladin:
+    id:            2026
+    species:       hydra_fomor
+    spell_list_id: 4
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 555
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Ranger:
+    id:            2027
+    species:       hydra_fomor
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 559
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Red_Mage:
+    id:            2028
+    species:       hydra_fomor
+    spell_list_id: 3
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 553
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Samurai:
+    id:            2029
+    species:       hydra_fomor
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 560
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Summoner:
+    id:            2030
+    species:       hydra_fomor
+    spell_list_id: 141
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 563
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Thief:
+    id:            2034
+    species:       hydra_fomor
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 554
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_Warrior:
+    id:            2035
+    species:       hydra_fomor
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 512
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydra_White_Mage:
+    id:            2036
+    species:       hydra_fomor
+    spell_list_id: 20
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 514
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_cyclas, clerics_bliaut, sorcerers_coat, duelists_tabard, abyss_cuirass, bards_justaucorps, saotome_domaru, koga_chainmail, wyrm_mail, summoners_doublet, warriors_cuisses, assassins_culottes, valor_breeches, monster_gaiters, scouts_socks]
+        - chance: very_rare
+          one_of: [mirage_jubbah, commodore_frac, pantin_tobe, argute_gown, etoile_tights]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Hydras_Avatar:
+    id:            2031
+    species:       carbuncle
+    type:          [called]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+        mp: 1000
+
+  Hydras_Hound:
+    id:            2032
+    species:       hound
+    type:          [called]
+    spell_list_id: 85
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        silenceres: 15
+      mob_mods:
+        magic_cool:     20
+        standback_cool:  0
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+        mp: 1000
+
+  Hydras_Wyvern:
+    id:            2033
+    species:       blue_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: polearm
+        delay: 200
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+        mp: 1000
+
+  Icon_Prototype:
+    id:            2047
+    species:       yagudo_statue
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 95
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1060
+        entity_flags:  1665
+        animation_sub:   20
+        hitbox:          15
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        dmgmagic: -1000
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Kindred_Bard:
+    id:            2232
+    species:       kindred
+    spell_list_id: 6
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Beastmaster:
+    id:            2233
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Black_Mage:
+    id:            2234
+    species:       kindred
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: staff
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Dark_Knight:
+    id:            2235
+    species:       kindred
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Dragoon:
+    id:            2236
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Monk:
+    id:            2237
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Ninja:
+    id:            2238
+    species:       kindred
+    spell_list_id: 7
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Paladin:
+    id:            2239
+    species:       kindred
+    spell_list_id: 4
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Ranger:
+    id:            2240
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Red_Mage:
+    id:            2241
+    species:       kindred
+    spell_list_id: 3
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Samurai:
+    id:            2242
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Summoner:
+    id:            2243
+    species:       kindred
+    spell_list_id: 31
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Thief:
+    id:            2248
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Warrior:
+    id:            2249
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_White_Mage:
+    id:            2250
+    species:       kindred
+    spell_list_id: 20
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   fiendish_tome_ii_chapter_15
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindreds_Avatar:
+    id:            2244
+    species:       carbuncle
+    type:          [called, battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+        mp: 1000
+
+  Kindreds_Vouivre:
+    id:            2246
+    species:       wyvern
+    type:          [called]
+    skill_list_id: 267
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 643
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+
+  Kindreds_Wyvern:
+    id:            2247
+    species:       shadow_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+        mp: 1000
+
+  Manifest_Icon:
+    id:            5122
+    species:       yagudo_statue
+    spell_list_id: 21
+    skill_list_id: 95
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1060
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: very_rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   tukuku_whiteshell
+
+  Nightmare_Bugard:
+    id:            2843
+    species:       bugard
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: axe
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [warriors_cuisses_-1, melee_hose_-1, clerics_pantaloons_-1, sorcerers_tonban_-1, duelists_tights_-1, assassins_culotte_-1, valor_breeches_-1, abyss_flanchard_-1, monster_trousers_-1, bards_cannions_-1, scouts_braccae_-1, saotome_haidate_-1, koga_hakama_-1, wyrm_brais_-1, summoners_spats_-1]
+        - chance: very_rare
+          one_of: [mirage_shalwar_-1, commodore_trews_-1, pantin_churidars_-1, etoile_tights_-1, argute_pants_-1]
+      steal: one_byne_bill
+
+  Nightmare_Cluster:
+    id:            2845
+    species:       cluster
+    skill_list_id: 68
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  3
+          water:    3
+          light:    3
+          dark:     3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 291
+        entity_flags:  131
+        animation_sub:  12
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   fiendish_tome_ii_chapter_16
+        - chance: very_rare
+          item:   fiendish_tome_ii_chapter_17
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [warriors_lorica_-1, melee_cyclas_-1, clerics_bliaut_-1, sorcerers_coat_-1, duelists_tabard_-1, assassins_vest_-1, valor_surcoat_-1, abyss_cuirass_-1, monster_jackcoat_-1, bards_justaucorps_-1, scouts_jerkin_-1, saotome_domaru_-1, koga_chainmail_-1, wyrm_mail_-1, summoners_doublet_-1]
+        - chance: very_rare
+          one_of: [mirage_jubbah_-1, commodore_frac_-1, pantin_tobe_-1, etoile_casaque_-1, argute_gown_-1]
+      steal: ordelle_bronzepiece
+
+  Nightmare_Hornet:
+    id:            2855
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [warriors_cuisses_-1, melee_hose_-1, clerics_pantaloons_-1, sorcerers_tonban_-1, duelists_tights_-1, assassins_culotte_-1, valor_breeches_-1, abyss_flanchard_-1, monster_trousers_-1, bards_cannions_-1, scouts_braccae_-1, saotome_haidate_-1, koga_hakama_-1, wyrm_brais_-1, summoners_spats_-1]
+        - chance: very_rare
+          one_of: [mirage_shalwar_-1, commodore_trews_-1, pantin_churidars_-1, etoile_tights_-1, argute_pants_-1]
+      steal: one_byne_bill
+
+  Nightmare_Leech:
+    id:            2857
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   fiendish_tome_ii_chapter_16
+        - chance: very_rare
+          item:   fiendish_tome_ii_chapter_17
+        - chance: uncommon
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [warriors_lorica_-1, melee_cyclas_-1, clerics_bliaut_-1, sorcerers_coat_-1, duelists_tabard_-1, assassins_vest_-1, valor_surcoat_-1, abyss_cuirass_-1, monster_jackcoat_-1, bards_justaucorps_-1, scouts_jerkin_-1, saotome_domaru_-1, koga_chainmail_-1, wyrm_mail_-1, summoners_doublet_-1]
+        - chance: very_rare
+          one_of: [mirage_jubbah_-1, commodore_frac_-1, pantin_tobe_-1, etoile_casaque_-1, argute_gown_-1]
+      steal: tukuku_whiteshell
+
+  Nightmare_Makara:
+    id:            2858
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [warriors_cuisses_-1, melee_hose_-1, clerics_pantaloons_-1, sorcerers_tonban_-1, duelists_tights_-1, assassins_culotte_-1, valor_breeches_-1, abyss_flanchard_-1, monster_trousers_-1, bards_cannions_-1, scouts_braccae_-1, saotome_haidate_-1, koga_hakama_-1, wyrm_brais_-1, summoners_spats_-1]
+        - chance: very_rare
+          one_of: [mirage_shalwar_-1, commodore_trews_-1, pantin_churidars_-1, etoile_tights_-1, argute_pants_-1]
+      steal: ordelle_bronzepiece
+
+  Nightmare_Taurus:
+    id:            2870
+    species:       taurus
+    skill_list_id: 240
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [hydra_salade, hydra_haubert, hydra_moufles, hydra_brayettes, hydra_sollerets]
+        - chance: rare
+          one_of: [hydra_tiara, hydra_harness, hydra_mittens, hydra_tights, hydra_spats]
+        - chance: rare
+          one_of: [hydra_beret, hydra_doublet, hydra_gloves, hydra_brais, hydra_gaiters]
+        - chance: rare
+          one_of: [hydra_cap, hydra_bracers, hydra_jupon, hydra_hose, hydra_boots]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Nightmare_Worm:
+    id:            2875
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   heralds_juju
+        - chance: very_rare
+          one_of: [forgotten_thought, forgotten_hope]
+        - chance: rare
+          one_of: [warriors_cuisses_-1, melee_hose_-1, clerics_pantaloons_-1, sorcerers_tonban_-1, duelists_tights_-1, assassins_culotte_-1, valor_breeches_-1, abyss_flanchard_-1, monster_trousers_-1, bards_cannions_-1, scouts_braccae_-1, saotome_haidate_-1, koga_hakama_-1, wyrm_brais_-1, summoners_spats_-1]
+        - chance: very_rare
+          one_of: [mirage_shalwar_-1, commodore_trews_-1, pantin_churidars_-1, etoile_tights_-1, argute_pants_-1]
+      steal: tukuku_whiteshell
+
+  Prototype_Eye:
+    id:            5121
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [elegy, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 265
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  Serjeant_Tombstone:
+    id:            3548
+    species:       orc_statue
+    spell_list_id: 21
+    skill_list_id: 93
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1056
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: very_rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   ordelle_bronzepiece
+
+  Statue_Prototype:
+    id:            3759
+    species:       goblin_statue
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 92
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1062
+        entity_flags:  647
+        animation_sub:  12
+        model_size:      3
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        dmgmagic: -1000
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Tombstone_Prototype:
+    id:            3941
+    species:       orc_statue
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 93
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1056
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        dmgmagic: -1000
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Vanguard_Eye:
+    id:            4149
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [elegy, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 265
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: very_rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          one_of: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+spawns:
+  16949249:
+    template: Diabolos_Spade
+    at:       [1.035, -30.310, 148.976, 86]
+    level:    [85, 85]
+  16949250:
+    template: Diabolos_Heart
+    at:       [0.900, -30.331, 149.505, 59]
+    level:    [85, 85]
+  16949251:
+    template: Diabolos_Diamond
+    at:       [1.500, -30.308, 149.500, 82]
+    level:    [85, 85]
+  16949252:
+    template: Diabolos_Club
+    at:       [1.500, -30.308, 149.500, 204]
+    level:    [85, 85]
+  16949253:
+    template: Diaboloss_Shard
+    at:       [1.820, -30.392, 145.221, 161]
+    level:    [80, 80]
+  16949254:
+    template: Diaboloss_Shard
+    at:       [3.198, -30.196, 147.990, 128]
+    level:    [80, 80]
+  16949255:
+    template: Nightmare_Bugard
+    at:       [23.871, -12.546, 44.276, 141]
+    level:    [78, 80]
+  16949256:
+    template: Nightmare_Bugard
+    at:       [30.454, -12.502, 44.152, 127]
+    level:    [78, 80]
+  16949257:
+    template: Nightmare_Worm
+    at:       [1.000, -23.351, 25.521, 110]
+    level:    [78, 80]
+  16949258:
+    template: Nightmare_Worm
+    at:       [-17.477, -22.499, 20.797, 216]
+    level:    [78, 80]
+  16949259:
+    template: Nightmare_Worm
+    at:       [0.161, -24.030, 33.732, 26]
+    level:    [78, 80]
+  16949260:
+    template: Nightmare_Worm
+    at:       [-2.268, -24.000, 35.323, 190]
+    level:    [78, 80]
+  16949261:
+    template: Nightmare_Worm
+    at:       [-21.913, -22.478, -13.886, 45]
+    level:    [78, 80]
+  16949262:
+    template: Nightmare_Worm
+    at:       [-18.776, -22.301, -18.321, 158]
+    level:    [78, 80]
+  16949263:
+    template: Nightmare_Worm
+    at:       [-22.120, -22.424, -14.472, 47]
+    level:    [78, 80]
+  16949264:
+    template: Nightmare_Worm
+    at:       [-23.397, -22.587, -12.544, 174]
+    level:    [78, 80]
+  16949265:
+    template: Nightmare_Worm
+    at:       [26.676, -22.423, -5.240, 152]
+    level:    [78, 80]
+  16949266:
+    template: Nightmare_Worm
+    at:       [26.460, -22.498, -1.784, 189]
+    level:    [78, 80]
+  16949267:
+    template: Nightmare_Worm
+    at:       [13.179, -22.474, -20.795, 81]
+    level:    [78, 80]
+  16949268:
+    template: Nightmare_Worm
+    at:       [5.361, -23.067, -24.060, 118]
+    level:    [78, 80]
+  16949269:
+    template: Adamantking_Effigy
+    at:       [28.563, -22.697, -8.070, 168]
+    level:    [70, 70]
+  16949270:
+    template: Adamantking_Effigy
+    at:       [27.313, -22.487, -2.898, 192]
+    level:    [70, 70]
+  16949271:
+    template: Adamantking_Effigy
+    at:       [15.148, -22.449, -17.837, 102]
+    level:    [70, 70]
+  16949272:
+    template: Effigy_Prototype
+    at:       [26.360, -22.412, -7.080, 199]
+    level:    [70, 70]
+  16949273:
+    template: Nightmare_Hornet
+    at:       [-48.025, -22.655, 41.577, 119]
+    level:    [78, 80]
+  16949274:
+    template: Nightmare_Hornet
+    at:       [-34.722, -22.804, 32.907, 125]
+    level:    [78, 80]
+  16949275:
+    template: Nightmare_Hornet
+    at:       [-46.364, -22.656, 41.604, 12]
+    level:    [78, 80]
+  16949276:
+    template: Nightmare_Hornet
+    at:       [-44.052, -22.660, 43.771, 164]
+    level:    [78, 80]
+  16949277:
+    template: Nightmare_Hornet
+    at:       [-38.467, -22.879, -42.301, 46]
+    level:    [78, 80]
+  16949278:
+    template: Nightmare_Hornet
+    at:       [-59.542, -22.633, -45.001, 76]
+    level:    [78, 80]
+  16949279:
+    template: Nightmare_Hornet
+    at:       [-44.869, -22.654, -42.904, 175]
+    level:    [78, 80]
+  16949280:
+    template: Nightmare_Hornet
+    at:       [-33.769, -22.767, -33.500, 122]
+    level:    [78, 80]
+  16949281:
+    template: Hydra_Warrior
+    at:       [-91.478, -27.340, -26.025, 96]
+    level:    [77, 79]
+  16949282:
+    template: Hydra_Red_Mage
+    at:       [-96.570, -27.360, -16.965, 42]
+    level:    [77, 79]
+  16949283:
+    template: Hydra_Paladin
+    at:       [-96.407, -27.366, -16.573, 55]
+    level:    [77, 79]
+  16949284:
+    template: Hydra_Ninja
+    at:       [-96.560, -27.633, -12.114, 201]
+    level:    [77, 79]
+  16949285:
+    template: Hydra_Monk
+    at:       [-99.500, -27.420, -44.662, 8]
+    level:    [77, 79]
+  16949286:
+    template: Hydra_White_Mage
+    at:       [-109.493, -27.493, -39.361, 236]
+    level:    [77, 79]
+  16949287:
+    template: Hydra_Beastmaster
+    at:       [-110.239, -27.449, -36.357, 150]
+    level:    [77, 79]
+  16949288:
+    template: Hydras_Hound
+    at:       [-107.359, -27.478, -36.484, 133]
+    level:    [77, 79]
+  16949289:
+    template: Serjeant_Tombstone
+    at:       [-106.493, -27.492, -37.804, 18]
+    level:    [70, 70]
+  16949290:
+    template: Serjeant_Tombstone
+    at:       [-110.807, -27.363, -53.316, 177]
+    level:    [70, 70]
+  16949291:
+    template: Serjeant_Tombstone
+    at:       [-112.810, -27.540, -49.090, 194]
+    level:    [70, 70]
+  16949292:
+    template: Tombstone_Prototype
+    at:       [-106.651, -27.581, -42.936, 132]
+    level:    [70, 70]
+  16949293:
+    template: Hydra_Black_Mage
+    at:       [-96.638, -27.409, 23.690, 120]
+    level:    [77, 79]
+  16949294:
+    template: Hydra_Dark_Knight
+    at:       [-89.854, -27.061, 25.603, 233]
+    level:    [77, 79]
+  16949295:
+    template: Hydra_Bard
+    at:       [-97.274, -27.333, 20.559, 74]
+    level:    [77, 79]
+  16949296:
+    template: Hydra_Dragoon
+    at:       [-96.833, -27.387, 3.995, 236]
+    level:    [77, 79]
+  16949297:
+    template: Hydras_Wyvern
+    at:       [-96.071, -27.255, 21.502, 102]
+    level:    [77, 79]
+  16949298:
+    template: Hydra_Thief
+    at:       [-103.367, -27.296, 50.013, 234]
+    level:    [77, 79]
+  16949299:
+    template: Hydra_Ranger
+    at:       [-104.862, -27.407, 54.295, 95]
+    level:    [77, 79]
+  16949300:
+    template: Hydra_Samurai
+    at:       [-110.409, -27.419, 48.331, 195]
+    level:    [77, 79]
+  16949301:
+    template: Hydra_Summoner
+    at:       [-97.630, -27.450, 49.399, 30]
+    level:    [77, 79]
+  16949302:
+    template: Hydras_Avatar
+    at:       [-99.329, -27.428, 51.145, 31]
+    level:    [77, 79]
+  16949303:
+    template: Manifest_Icon
+    at:       [-106.274, -27.395, 52.796, 171]
+    level:    [70, 70]
+  16949304:
+    template: Manifest_Icon
+    at:       [-101.292, -27.320, 52.954, 89]
+    level:    [70, 70]
+  16949305:
+    template: Manifest_Icon
+    at:       [-102.625, -27.346, 46.551, 3]
+    level:    [70, 70]
+  16949306:
+    template: Icon_Prototype
+    at:       [-105.414, -27.320, 48.618, 196]
+    level:    [70, 70]
+  16949307:
+    template: Nightmare_Taurus
+    at:       [-85.608, -14.525, -40.746, 199]
+    level:    [78, 80]
+  16949308:
+    template: Nightmare_Taurus
+    at:       [-88.664, -18.834, -56.618, 181]
+    level:    [78, 80]
+  16949309:
+    template: Nightmare_Taurus
+    at:       [-85.729, -14.496, -40.589, 213]
+    level:    [78, 80]
+  16949310:
+    template: Nightmare_Taurus
+    at:       [-80.283, -20.490, -68.536, 98]
+    level:    [78, 80]
+  16949311:
+    template: Nightmare_Taurus
+    at:       [-80.290, -20.490, -63.233, 242]
+    level:    [78, 80]
+  16949312:
+    template: Nightmare_Taurus
+    at:       [-88.321, -14.608, 44.284, 75]
+    level:    [78, 80]
+  16949313:
+    template: Nightmare_Taurus
+    at:       [-87.291, -20.067, 61.371, 191]
+    level:    [78, 80]
+  16949314:
+    template: Nightmare_Taurus
+    at:       [-85.595, -14.353, 38.496, 49]
+    level:    [78, 80]
+  16949315:
+    template: Nightmare_Taurus
+    at:       [-75.147, -20.561, 69.794, 61]
+    level:    [78, 80]
+  16949316:
+    template: Nightmare_Taurus
+    at:       [-80.799, -21.988, 71.441, 71]
+    level:    [78, 80]
+  16949317:
+    template: Nightmare_Makara
+    at:       [-84.818, -13.085, 11.089, 187]
+    level:    [78, 80]
+  16949318:
+    template: Nightmare_Makara
+    at:       [-79.299, -11.973, 7.221, 125]
+    level:    [78, 80]
+  16949319:
+    template: Nightmare_Makara
+    at:       [-87.969, -13.360, 4.338, 193]
+    level:    [78, 80]
+  16949320:
+    template: Nightmare_Makara
+    at:       [-86.147, -13.054, 8.368, 100]
+    level:    [78, 80]
+  16949321:
+    template: Nightmare_Makara
+    at:       [-74.099, -12.204, 0.955, 63]
+    level:    [78, 80]
+  16949322:
+    template: Goblin_Replica
+    at:       [-73.610, -11.653, -5.566, 10]
+    level:    [70, 70]
+  16949323:
+    template: Goblin_Replica
+    at:       [-75.699, -11.257, 14.462, 1]
+    level:    [70, 70]
+  16949324:
+    template: Goblin_Replica
+    at:       [-84.564, -12.866, -5.932, 153]
+    level:    [70, 70]
+  16949325:
+    template: Statue_Prototype
+    at:       [-72.307, -11.686, -5.761, 11]
+    level:    [70, 70]
+  16949326:
+    template: Diabolos_Somnus
+    at:       [1.500, -30.308, 149.500, 64]
+    level:    [105, 105]
+  16949327:
+    template: Diabolos_Nox
+    at:       [1.500, -30.308, 149.500, 64]
+    level:    [105, 105]
+  16949328:
+    template: Diabolos_Letum
+    at:       [1.500, -30.300, 149.500, 64]
+    level:    [105, 105]
+  16949329:
+    template: Diabolos_Umbra
+    at:       [1.500, -30.308, 149.500, 4]
+    level:    [105, 105]
+  16949330:
+    template: Diaboloss_Vestige
+    at:       [2.214, -30.304, 150.537, 28]
+  16949331:
+    template: Diaboloss_Vestige
+    at:       [2.214, -30.304, 150.537, 28]
+  16949332:
+    template: Nightmare_Cluster
+    at:       [-25.780, -36.490, 14.872, 155]
+    level:    [95, 97]
+  16949333:
+    template: Nightmare_Cluster
+    at:       [-12.750, -36.710, 20.831, 114]
+    level:    [95, 97]
+  16949334:
+    template: Nightmare_Cluster
+    at:       [-24.190, -36.490, 19.534, 157]
+    level:    [95, 97]
+  16949335:
+    template: Nightmare_Cluster
+    at:       [-17.160, -36.380, -20.954, 36]
+    level:    [95, 97]
+  16949336:
+    template: Nightmare_Cluster
+    at:       [-11.980, -36.790, -23.534, 19]
+    level:    [95, 97]
+  16949337:
+    template: Nightmare_Cluster
+    at:       [-11.700, -36.800, -23.642, 17]
+    level:    [95, 97]
+  16949338:
+    template: Nightmare_Cluster
+    at:       [23.218, -36.480, -11.961, 225]
+    level:    [95, 97]
+  16949339:
+    template: Nightmare_Cluster
+    at:       [20.402, -36.380, -17.969, 208]
+    level:    [95, 97]
+  16949340:
+    template: Nightmare_Cluster
+    at:       [19.926, -36.440, -17.238, 226]
+    level:    [95, 97]
+  16949341:
+    template: Nightmare_Leech
+    at:       [57.872, -36.808, 45.794, 151]
+    level:    [95, 97]
+  16949342:
+    template: Nightmare_Leech
+    at:       [57.797, -36.758, 44.514, 248]
+    level:    [95, 97]
+  16949343:
+    template: Nightmare_Leech
+    at:       [35.283, -37.035, 31.851, 58]
+    level:    [95, 97]
+  16949344:
+    template: Nightmare_Leech
+    at:       [43.524, -36.743, 40.859, 252]
+    level:    [95, 97]
+  16949345:
+    template: Nightmare_Leech
+    at:       [58.179, -36.717, -43.435, 124]
+    level:    [95, 97]
+  16949346:
+    template: Nightmare_Leech
+    at:       [32.256, -36.915, -35.288, 142]
+    level:    [95, 97]
+  16949347:
+    template: Nightmare_Leech
+    at:       [43.325, -36.761, -40.748, 242]
+    level:    [95, 97]
+  16949348:
+    template: Nightmare_Leech
+    at:       [33.945, -36.680, -32.737, 160]
+    level:    [95, 97]
+  16949349:
+    template: Kindred_Monk
+    at:       [98.430, -41.598, 13.109, 49]
+    level:    [95, 97]
+  16949350:
+    template: Kindred_Black_Mage
+    at:       [98.623, -41.563, -6.756, 63]
+    level:    [95, 97]
+  16949351:
+    template: Kindred_Beastmaster
+    at:       [98.847, -41.500, 7.399, 184]
+    level:    [95, 97]
+  16949352:
+    template: Kindreds_Vouivre
+    at:       [98.657, -41.616, 13.845, 222]
+    level:    [95, 97]
+  16949353:
+    template: Kindred_White_Mage
+    at:       [114.267, -41.640, 50.396, 193]
+    level:    [95, 97]
+  16949354:
+    template: Kindred_Dark_Knight
+    at:       [97.681, -41.470, 43.472, 81]
+    level:    [95, 97]
+  16949355:
+    template: Kindred_Ranger
+    at:       [109.243, -41.511, 56.332, 155]
+    level:    [95, 97]
+  16949356:
+    template: Goblin_Replica
+    at:       [113.318, -41.500, 45.880, 67]
+    level:    [70, 70]
+  16949357:
+    template: Goblin_Replica
+    at:       [102.970, -41.560, 32.953, 145]
+    level:    [70, 70]
+  16949358:
+    template: Goblin_Replica
+    at:       [103.360, -41.290, 52.062, 93]
+    level:    [70, 70]
+  16949359:
+    template: Kindred_Red_Mage
+    at:       [100.540, -41.430, -37.951, 205]
+    level:    [95, 97]
+  16949360:
+    template: Kindred_Paladin
+    at:       [113.300, -41.500, -41.226, 56]
+    level:    [95, 97]
+  16949361:
+    template: Kindred_Samurai
+    at:       [109.100, -41.530, -45.554, 77]
+    level:    [95, 97]
+  16949362:
+    template: Manifest_Icon
+    at:       [96.217, -41.480, -46.854, 235]
+    level:    [70, 70]
+  16949363:
+    template: Manifest_Icon
+    at:       [98.420, -41.430, -46.411, 129]
+    level:    [70, 70]
+  16949364:
+    template: Manifest_Icon
+    at:       [101.190, -41.380, -46.007, 171]
+    level:    [70, 70]
+  16949365:
+    template: Kindred_Warrior
+    at:       [75.084, -34.558, -69.209, 82]
+    level:    [95, 97]
+  16949366:
+    template: Kindred_Thief
+    at:       [80.496, -34.519, -72.879, 68]
+    level:    [95, 97]
+  16949367:
+    template: Kindred_Summoner
+    at:       [73.685, -34.502, -65.114, 175]
+    level:    [95, 97]
+  16949368:
+    template: Kindreds_Avatar
+    at:       [75.946, -34.561, -67.601, 76]
+    level:    [95, 97]
+  16949369:
+    template: Adamantking_Effigy
+    at:       [77.518, -34.500, -67.840, 182]
+    level:    [70, 70]
+  16949370:
+    template: Adamantking_Effigy
+    at:       [80.979, -36.735, -42.289, 67]
+    level:    [70, 70]
+  16949371:
+    template: Adamantking_Effigy
+    at:       [84.277, -34.522, -63.600, 59]
+    level:    [70, 70]
+  16949372:
+    template: Kindred_Bard
+    at:       [79.081, -36.528, 40.247, 86]
+    level:    [95, 97]
+  16949373:
+    template: Kindred_Ninja
+    at:       [74.831, -34.501, 64.289, 86]
+    level:    [95, 97]
+  16949374:
+    template: Kindred_Dragoon
+    at:       [80.213, -34.670, 60.059, 207]
+    level:    [95, 97]
+  16949375:
+    template: Kindreds_Wyvern
+    at:       [87.105, -34.310, 62.461, 83]
+    level:    [95, 97]
+  16949376:
+    template: Serjeant_Tombstone
+    at:       [86.276, -34.144, 63.686, 64]
+    level:    [70, 70]
+  16949377:
+    template: Serjeant_Tombstone
+    at:       [84.518, -34.470, 63.696, 128]
+    level:    [70, 70]
+  16949378:
+    template: Serjeant_Tombstone
+    at:       [83.805, -34.548, 73.253, 113]
+    level:    [70, 70]
+  16949379:
+    template: Vanguard_Eye
+    at:       [76.675, -25.349, 1.108, 135]
+    level:    [80, 82]
+  16949380:
+    template: Prototype_Eye
+    at:       [72.709, -25.402, 4.501, 76]
+    level:    [80, 82]
+  16949381:
+    template: Vanguard_Eye
+    at:       [85.351, -27.626, -34.478, 168]
+    level:    [80, 82]
+  16949382:
+    template: Vanguard_Eye
+    at:       [76.064, -25.425, -24.005, 39]
+    level:    [80, 82]
+  16949383:
+    template: Vanguard_Eye
+    at:       [83.092, -27.020, -32.300, 27]
+    level:    [80, 82]
+  16949384:
+    template: Vanguard_Eye
+    at:       [82.632, -27.314, 34.351, 227]
+    level:    [80, 82]
+  16949385:
+    template: Vanguard_Eye
+    at:       [74.971, -25.423, 26.397, 211]
+    level:    [80, 82]
+  16949386:
+    template: Vanguard_Eye
+    at:       [76.819, -25.653, 29.299, 95]
+    level:    [80, 82]

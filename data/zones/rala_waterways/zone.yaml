@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          61
+  night:        61
+  battle_solo:  57
+  battle_party: 57
+
+zonelines:
+
+  z760:
+    from:  [-265.000, -8.000, -380.000]
+    to:    western_adoulin
+    at:    [77.000, 10.463, -148.000]
+    scale: [1.000, 2.000]
+
+  z762:
+    from:  [-615.000, -8.272, 100.000]
+    to:    western_adoulin
+    at:    [-76.000, 22.495, 117.000, 4.712389]
+    scale: [1.000, 2.000]
+
+  z764:
+    from:  [-185.000, -8.440, 60.000]
+    to:    western_adoulin
+    at:    [141.000, 18.454, 4.000]
+    scale: [1.000, 2.000]
+
+  z766:
+    from:  [145.000, -8.382, 140.000]
+    to:    eastern_adoulin
+    at:    [-126.000, 6.632, 28.000, 3.141593]
+    scale: [1.000, 2.000]
+
+  z768:
+    from:  [295.000, -8.532, -260.000]
+    to:    eastern_adoulin
+    at:    [65.000, -41.600, -16.000]
+    scale: [1.000, 2.000]

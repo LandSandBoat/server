@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [mount, mazurka, tractor, pet, trust]
+music:
+  day:          60
+  night:        60
+  battle_solo:  57
+  battle_party: 57
+
+zonelines:
+
+  z780:
+    from:  [-379.572, -2.908, -446.000]
+    to:    ceizak_battlegrounds
+    at:    [-300.500, -1.860, 400.000, 1.658063]
+    scale: [1.000, 4.500]
+
+  z782:
+    from:  [-100.208, -2.908, -405.000]
+    to:    ceizak_battlegrounds
+    at:    [-20.000, -1.852, 440.000, 1.658063]
+    scale: [1.000, 4.000]
+
+  z784:
+    from:  [260.446, -2.454, -446.000]
+    to:    ceizak_battlegrounds
+    at:    [340.708, -1.846, 359.000, 1.570796]
+    scale: [1.000, 4.000]
+
+  z786:
+    from:  [-540.000, 4.534, -117.500]
+    to:    moh_gates
+    at:    [100.000, 47.350, -479.500, 4.712389]
+    scale: [1.000, 5.000]
+
+  z788:
+    from:  [-117.000, 4.194, 419.984]
+    to:    moh_gates
+    at:    [300.000, 47.369, -359.000, 4.712389]
+    scale: [1.000, 5.000]

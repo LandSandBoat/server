@@ -1,0 +1,2283 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Bugaboo:
+    id:            555
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+        mp: 3500
+
+  Chillgaze_Foddrud:
+    id:            719
+    species:       orc
+    spell_list_id: 21
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 637
+        entity_flags:  3
+        model_size:    2
+        hitbox:       17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Grimbolt_Onkzok:
+    id:            1814
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 624
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   davoi_coffer_key
+
+  Orcish_Bewitcher:
+    id:            6041
+    species:       orc
+    type:          [notorious]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blm, drk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 628
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Orcish_Bowshooter:
+    id:            2997
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 617
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: super_rare
+          item:   cuir_bandana
+        - chance: super_rare
+          item:   cuir_gloves
+        - chance: super_rare
+          item:   cuir_trousers
+        - chance: super_rare
+          item:   cuir_highboots
+      steal: mythril_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Champion:
+    id:            3000
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 250
+      jobs: [mnk, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 633
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   monks_testimony
+        - chance: rare
+          item:   davoi_coffer_key
+        - chance: super_rare
+          item:   padded_cap
+        - chance: super_rare
+          item:   iron_mittens
+        - chance: super_rare
+          item:   iron_subligar
+        - chance: super_rare
+          item:   leggings
+      steal: gold_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Dragoon:
+    id:            3006
+    species:       orc
+    skill_list_id: 713
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 636
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   dragoons_testimony
+        - chance: rare
+          item:   davoi_coffer_key
+      steal: gold_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Dreadnought:
+    id:            3007
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 627
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   warriors_testimony
+        - chance: rare
+          item:   davoi_coffer_key
+        - chance: ultra_rare
+          item:   mythril_sallet
+        - chance: ultra_rare
+          item:   mythril_gauntlets
+        - chance: ultra_rare
+          item:   mythril_cuisses
+        - chance: ultra_rare
+          item:   mythril_leggings
+      steal: gold_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Farkiller:
+    id:            3008
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 619
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rangers_testimony
+        - chance: rare
+          item:   davoi_coffer_key
+        - chance: very_rare
+          item:   scroll_of_archers_prelude
+      steal: gold_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Footsoldier:
+    id:            3014
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 618
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: uncommon
+          item:   soiled_letter
+        - chance: rare
+          item:   davoi_chest_key
+        - chance: super_rare
+          item:   silver_mask
+        - chance: super_rare
+          item:   silver_mittens
+        - chance: super_rare
+          item:   silver_hose
+        - chance: super_rare
+          item:   silver_greaves
+      steal: mythril_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Gladiator:
+    id:            3015
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 250
+      jobs: [mnk, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 632
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   davoi_chest_key
+        - chance: super_rare
+          item:   padded_cap
+        - chance: super_rare
+          item:   iron_mittens
+        - chance: super_rare
+          item:   iron_subligar
+        - chance: super_rare
+          item:   leggings
+      steal: mythril_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Hexspinner:
+    id:            3019
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 637
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 1200
+      stats:
+        hp: 4600
+    loot:
+      drops:
+        - chance: very_common
+          item:   black_mages_testimony
+        - chance: common
+          item:   scroll_of_stone_iii
+        - chance: rare
+          item:   scroll_of_stonega_iii
+        - chance: uncommon
+          item:   scroll_of_stonega_ii
+        - chance: rare
+          item:   scroll_of_quake
+        - chance: very_rare
+          item:   scroll_of_stone_iv
+
+  Orcish_Overlord:
+    id:            3027
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1011
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: always
+          item:   gold_orcmask
+        - chance: always
+          item:   platinum_beastcoin
+        - chance: always
+          item:   paladins_testimony
+        - chance: uncommon
+          item:   glorious_sword
+      steal: beastcoin
+
+  Orcish_Predator:
+    id:            3029
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 626
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: super_rare
+          item:   cuir_bandana
+        - chance: super_rare
+          item:   cuir_gloves
+        - chance: super_rare
+          item:   cuir_trousers
+        - chance: super_rare
+          item:   cuir_highboots
+      steal: mythril_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Protector:
+    id:            3031
+    species:       orc
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 629
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   paladins_testimony
+      steal: gold_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Trooper:
+    id:            3039
+    species:       orc
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 634
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: uncommon
+          item:   gold_orcmask
+        - chance: rare
+          item:   scroll_of_flash
+        - chance: rare
+          item:   davoi_chest_key
+        - chance: ultra_rare
+          item:   sallet
+        - chance: ultra_rare
+          item:   gauntlets
+        - chance: ultra_rare
+          item:   cuisses
+        - chance: ultra_rare
+          item:   plate_leggings
+      steal: mythril_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Veteran:
+    id:            3041
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 625
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: ultra_rare
+          item:   mythril_sallet
+        - chance: ultra_rare
+          item:   mythril_gauntlets
+        - chance: ultra_rare
+          item:   mythril_cuisses
+        - chance: ultra_rare
+          item:   mythril_leggings
+      steal: mythril_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Warchief:
+    id:            3043
+    species:       orc
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 635
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   scroll_of_flash
+        - chance: ultra_rare
+          item:   mythril_sallet
+        - chance: ultra_rare
+          item:   mythril_gauntlets
+        - chance: ultra_rare
+          item:   mythril_cuisses
+        - chance: ultra_rare
+          item:   mythril_leggings
+      steal: mythril_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Warlord:
+    id:            3044
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 638
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 1200
+      stats:
+        hp: 4900
+    loot:
+      drops:
+        - chance: very_common
+          item:   dark_knights_testimony
+        - chance: common
+          item:   scroll_of_stun
+        - chance: rare
+          item:   scroll_of_stonega_ii
+        - chance: very_rare
+          item:   scroll_of_stone_iii
+        - chance: very_rare
+          item:   scroll_of_stone_iv
+        - chance: very_rare
+          item:   scroll_of_stonega_iii
+        - chance: very_rare
+          item:   scroll_of_quake
+      steal: beastcoin
+
+  Orcish_Zerker:
+    id:            3046
+    species:       orc
+    spell_list_id: 5
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 630
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   scroll_of_absorb-int
+        - chance: rare
+          item:   scroll_of_absorb-vit
+        - chance: rare
+          item:   scroll_of_absorb-agi
+        - chance: rare
+          item:   scroll_of_stun
+        - chance: ultra_rare
+          item:   mythril_sallet
+        - chance: ultra_rare
+          item:   mythril_gauntlets
+        - chance: ultra_rare
+          item:   mythril_cuisses
+        - chance: ultra_rare
+          item:   mythril_leggings
+      steal: mythril_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Overlord_Bakgodek:
+    id:            3075
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1011
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 42000
+        mp: 42000
+    loot:
+      drops:
+        - chance: always
+          item:   paladins_testimony
+        - chance: very_common
+          item:   juggernaut
+        - chance: very_rare
+          item:   reraiser
+        - chance: very_rare
+          item:   vile_elixir
+        - chance: very_rare
+          item:   vile_elixir_+1
+        - chance: always
+          one_of:
+            philosophers_stone:          30
+            phoenix_feather:             30
+            square_of_raxa:              10
+            damascus_ingot:             7.5
+            spool_of_malboro_fiber:     7.5
+            square_of_damascene_cloth:  7.5
+            vial_of_black_beetle_blood: 7.5
+        - chance: always
+          one_of:
+            square_of_raxa:           15.5
+            chunk_of_darksteel_ore:    6.5
+            chunk_of_gold_ore:         6.5
+            chunk_of_mythril_ore:      6.5
+            chunk_of_platinum_ore:     6.5
+            coral_fragment:            6.5
+            demon_horn:                6.5
+            ebony_log:                 6.5
+            handful_of_wyvern_scales:  6.5
+            mahogany_log:              6.5
+            petrified_log:             6.5
+            ram_horn:                  6.5
+            spool_of_gold_thread:      6.5
+            square_of_rainbow_cloth:   6.5
+        - chance: always
+          one_of:
+            nightmare_sword:   85
+            highlanders_targe: 15
+      steal: platinum_beastcoin
+
+  Rictusgrin_Prakpok:
+    id:            3362
+    species:       orc
+    spell_list_id: 5
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 634
+        entity_flags:  3
+        model_size:    2
+        hitbox:       17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sevenskewer_Krugglug:
+    id:            3552
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 620
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shatterskull_Mippdapp:
+    id:            3588
+    species:       orc
+    type:          [notorious]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2050
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Siegebreaker_Wujroj:
+    id:            3618
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 614
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17391617:
+    template: Orcish_Bowshooter
+    at:       [-9.935, -6.373, -383.034, 203]
+    level:    [42, 46]
+  17391618:
+    template: Orcish_Footsoldier
+    at:       [-9.621, -6.207, -380.968, 231]
+    level:    [43, 47]
+  17391619:
+    template: Orcish_Gladiator
+    at:       [-0.031, -8.594, -380.755, 8]
+    level:    [44, 48]
+  17391620:
+    template: Orcish_Trooper
+    at:       [0.974, -8.523, -380.188, 227]
+    level:    [45, 49]
+  17391621:
+    template: Orcish_Bowshooter
+    at:       [3.625, -9.252, -378.358, 31]
+    level:    [42, 46]
+  17391622:
+    template: Orcish_Footsoldier
+    at:       [-16.358, -4.915, -383.090, 250]
+    level:    [43, 47]
+  17391623:
+    template: Orcish_Gladiator
+    at:       [3.740, -9.302, -378.126, 37]
+    level:    [44, 48]
+  17391624:
+    template: Orcish_Trooper
+    at:       [-17.486, -4.650, -382.491, 63]
+    level:    [45, 49]
+  17391625:
+    template: Orcish_Bowshooter
+    at:       [-29.122, -1.231, -334.652, 215]
+    level:    [42, 46]
+  17391626:
+    template: Orcish_Footsoldier
+    at:       [-38.894, -0.700, -331.111, 189]
+    level:    [44, 47]
+  17391627:
+    template: Orcish_Gladiator
+    at:       [-22.422, -2.093, -298.238, 231]
+    level:    [47, 48]
+  17391628:
+    template: Orcish_Trooper
+    at:       [-51.267, -0.924, -324.778, 234]
+    level:    [45, 49]
+  17391629:
+    template: Orcish_Veteran
+    at:       [-48.146, -1.183, -328.368, 171]
+    level:    [52, 56]
+  17391630:
+    template: Orcish_Predator
+    at:       [-52.804, -1.177, -326.603, 167]
+    level:    [53, 57]
+  17391631:
+    template: Orcish_Zerker
+    at:       [-51.736, -1.499, -311.369, 27]
+    level:    [54, 58]
+  17391632:
+    template: Orcish_Warchief
+    at:       [-23.935, -1.318, -345.028, 26]
+    level:    [55, 59]
+  17391633:
+    template: Orcish_Bowshooter
+    at:       [3.290, -0.934, -299.720, 240]
+    level:    [42, 46]
+  17391634:
+    template: Orcish_Footsoldier
+    at:       [1.279, -0.704, -308.548, 223]
+    level:    [44, 47]
+  17391635:
+    template: Orcish_Gladiator
+    at:       [12.909, -1.704, -300.766, 35]
+    level:    [44, 48]
+  17391636:
+    template: Orcish_Trooper
+    at:       [-10.924, -0.773, -311.234, 17]
+    level:    [45, 49]
+  17391637:
+    template: Orcish_Veteran
+    at:       [-5.670, -0.998, -299.000, 213]
+    level:    [52, 56]
+  17391638:
+    template: Orcish_Predator
+    at:       [11.891, -0.982, -313.199, 247]
+    level:    [53, 57]
+  17391639:
+    template: Orcish_Zerker
+    at:       [-11.548, -1.140, -327.863, 44]
+    level:    [54, 58]
+  17391640:
+    template: Orcish_Warchief
+    at:       [9.901, -0.997, -303.030, 218]
+    level:    [55, 59]
+  17391641:
+    template: Orcish_Veteran
+    at:       [-9.894, -1.008, -263.598, 122]
+    level:    [52, 56]
+  17391642:
+    template: Orcish_Predator
+    at:       [-4.859, -0.981, -291.185, 226]
+    level:    [53, 57]
+  17391643:
+    template: Orcish_Zerker
+    at:       [45.214, -0.892, -273.878, 67]
+    level:    [54, 58]
+  17391644:
+    template: Orcish_Warchief
+    at:       [14.339, -0.676, -288.125, 4]
+    level:    [55, 59]
+  17391645:
+    template: Orcish_Veteran
+    at:       [-2.461, -0.621, -288.688, 99]
+    level:    [52, 56]
+  17391646:
+    template: Orcish_Predator
+    at:       [-9.166, -0.871, -285.930, 173]
+    level:    [53, 57]
+  17391647:
+    template: Orcish_Zerker
+    at:       [4.553, -0.679, -271.649, 125]
+    level:    [54, 58]
+  17391648:
+    template: Orcish_Warchief
+    at:       [2.387, -0.627, -279.345, 216]
+    level:    [55, 59]
+  17391649:
+    template: Orcish_Veteran
+    at:       [36.085, -1.113, -294.562]
+    level:    [52, 56]
+  17391650:
+    template: Orcish_Predator
+    at:       [55.942, -2.124, -289.924, 76]
+    level:    [53, 57]
+  17391651:
+    template: Orcish_Zerker
+    at:       [32.904, -1.238, -265.126, 213]
+    level:    [54, 58]
+  17391652:
+    template: Orcish_Warchief
+    at:       [44.980, -0.786, -273.108, 63]
+    level:    [55, 59]
+  17391653:
+    template: Orcish_Veteran
+    at:       [44.863, -0.781, -275.284, 188]
+    level:    [52, 56]
+  17391654:
+    template: Orcish_Predator
+    at:       [43.161, -0.771, -275.108, 240]
+    level:    [53, 57]
+  17391655:
+    template: Orcish_Zerker
+    at:       [57.982, -0.888, -257.542, 216]
+    level:    [54, 58]
+  17391656:
+    template: Orcish_Warchief
+    at:       [56.959, -0.833, -259.005, 207]
+    level:    [55, 59]
+  17391657:
+    template: Orcish_Veteran
+    at:       [-50.846, -0.988, -259.906, 4]
+    level:    [52, 56]
+  17391658:
+    template: Orcish_Predator
+    at:       [-56.997, -0.828, -260.277, 55]
+    level:    [53, 57]
+  17391659:
+    template: Orcish_Zerker
+    at:       [-60.712, -1.143, -251.345, 40]
+    level:    [54, 58]
+  17391660:
+    template: Orcish_Warchief
+    at:       [-62.421, -0.881, -230.157, 38]
+    level:    [55, 59]
+  17391661:
+    template: Orcish_Veteran
+    at:       [-57.334, -0.925, -263.063, 112]
+    level:    [52, 56]
+  17391662:
+    template: Orcish_Predator
+    at:       [-29.850, -0.875, -260.396, 143]
+    level:    [53, 57]
+  17391663:
+    template: Orcish_Zerker
+    at:       [-56.155, -1.372, -265.347, 192]
+    level:    [54, 58]
+  17391664:
+    template: Orcish_Warchief
+    at:       [-50.513, -1.062, -259.709, 2]
+    level:    [55, 59]
+  17391665:
+    template: Orcish_Veteran
+    at:       [-66.191, -0.785, -186.070, 52]
+    level:    [52, 56]
+  17391666:
+    template: Orcish_Predator
+    at:       [-66.287, -0.829, -185.799, 219]
+    level:    [53, 57]
+  17391667:
+    template: Orcish_Zerker
+    at:       [-55.278, -0.756, -213.246, 203]
+    level:    [54, 58]
+  17391668:
+    template: Orcish_Warchief
+    at:       [-53.130, -1.226, -211.064, 103]
+    level:    [55, 59]
+  17391669:
+    template: Orcish_Farkiller
+    at:       [-59.070, -0.906, -214.914, 30]
+    level:    [62, 66]
+  17391670:
+    template: Orcish_Dreadnought
+    at:       [-64.822, -0.783, -182.614, 195]
+    level:    [63, 66]
+  17391671:
+    template: Orcish_Veteran
+    at:       [-64.071, -0.844, -146.011, 26]
+    level:    [52, 56]
+  17391672:
+    template: Orcish_Predator
+    at:       [-65.570, -1.376, -144.983, 137]
+    level:    [53, 57]
+  17391673:
+    template: Orcish_Zerker
+    at:       [-60.792, -0.814, -144.996, 73]
+    level:    [54, 58]
+  17391674:
+    template: Orcish_Warchief
+    at:       [-60.997, -0.937, -149.868, 178]
+    level:    [55, 59]
+  17391675:
+    template: Orcish_Veteran
+    at:       [-59.372, -0.868, -153.613, 69]
+    level:    [52, 56]
+  17391676:
+    template: Orcish_Predator
+    at:       [-61.658, -0.628, -147.422, 197]
+    level:    [53, 57]
+  17391677:
+    template: Orcish_Zerker
+    at:       [-60.694, -0.879, -150.902, 58]
+    level:    [54, 58]
+  17391678:
+    template: Orcish_Warchief
+    at:       [-62.902, -0.962, -145.750, 15]
+    level:    [55, 59]
+  17391679:
+    template: Orcish_Veteran
+    at:       [19.308, -0.810, -217.036, 228]
+    level:    [52, 56]
+  17391680:
+    template: Orcish_Predator
+    at:       [50.389, -0.958, -219.429, 251]
+    level:    [53, 57]
+  17391681:
+    template: Orcish_Zerker
+    at:       [55.817, -1.033, -215.745, 78]
+    level:    [54, 58]
+  17391682:
+    template: Orcish_Warchief
+    at:       [59.858, -0.883, -224.284, 52]
+    level:    [55, 59]
+  17391683:
+    template: Orcish_Veteran
+    at:       [48.485, -0.892, -219.566, 109]
+    level:    [52, 56]
+  17391684:
+    template: Orcish_Predator
+    at:       [56.514, -0.905, -217.245, 141]
+    level:    [53, 57]
+  17391685:
+    template: Orcish_Zerker
+    at:       [59.238, -0.925, -223.180, 177]
+    level:    [54, 58]
+  17391686:
+    template: Orcish_Warchief
+    at:       [56.301, -1.313, -215.001, 53]
+    level:    [55, 59]
+  17391687:
+    template: Orcish_Veteran
+    at:       [6.461, -0.729, -217.663, 238]
+    level:    [52, 56]
+  17391688:
+    template: Orcish_Predator
+    at:       [5.598, -0.619, -215.800, 76]
+    level:    [53, 57]
+  17391689:
+    template: Orcish_Zerker
+    at:       [8.335, -1.405, -220.501, 19]
+    level:    [54, 58]
+  17391690:
+    template: Orcish_Warchief
+    at:       [-9.232, -0.925, -219.889, 241]
+    level:    [55, 59]
+  17391691:
+    template: Orcish_Farkiller
+    at:       [13.304, -0.759, -216.004, 6]
+    level:    [62, 66]
+  17391692:
+    template: Orcish_Dreadnought
+    at:       [-3.527, -0.794, -219.610, 168]
+    level:    [63, 66]
+  17391693:
+    template: Orcish_Veteran
+    at:       [-19.817, -0.774, -200.324, 63]
+    level:    [52, 56]
+  17391694:
+    template: Orcish_Predator
+    at:       [-18.510, -0.724, -219.883, 19]
+    level:    [53, 57]
+  17391695:
+    template: Orcish_Zerker
+    at:       [-19.838, -0.708, -200.073, 244]
+    level:    [54, 58]
+  17391696:
+    template: Orcish_Warchief
+    at:       [-21.658, -0.707, -200.339, 188]
+    level:    [55, 59]
+  17391697:
+    template: Orcish_Veteran
+    at:       [-22.196, -0.876, -211.783, 158]
+    level:    [52, 56]
+  17391698:
+    template: Orcish_Predator
+    at:       [-21.437, -0.772, -162.004, 66]
+    level:    [53, 57]
+  17391699:
+    template: Orcish_Zerker
+    at:       [-17.790, -0.917, -191.705, 144]
+    level:    [54, 58]
+  17391700:
+    template: Orcish_Warchief
+    at:       [-21.994, -0.946, -197.462, 14]
+    level:    [55, 59]
+  17391701:
+    template: Orcish_Veteran
+    at:       [-22.708, -0.826, -139.089, 226]
+    level:    [52, 56]
+  17391702:
+    template: Orcish_Predator
+    at:       [-22.232, -0.834, -141.535, 224]
+    level:    [53, 57]
+  17391703:
+    template: Orcish_Zerker
+    at:       [-22.398, -0.743, -152.166, 220]
+    level:    [54, 58]
+  17391704:
+    template: Orcish_Warchief
+    at:       [-25.082, -1.197, -141.735, 194]
+    level:    [55, 59]
+  17391705:
+    template: Orcish_Champion
+    at:       [-15.354, -0.884, -136.778, 224]
+    level:    [64, 68]
+  17391706:
+    template: Orcish_Veteran
+    at:       [29.522, -1.055, -141.672, 235]
+    level:    [52, 56]
+  17391707:
+    template: Orcish_Predator
+    at:       [10.881, -0.804, -138.836, 121]
+    level:    [53, 57]
+  17391708:
+    template: Orcish_Zerker
+    at:       [7.182, -0.920, -143.399, 229]
+    level:    [54, 58]
+  17391709:
+    template: Orcish_Warchief
+    at:       [7.540, -1.351, -135.321, 70]
+    level:    [55, 59]
+  17391710:
+    template: Orcish_Veteran
+    at:       [21.445, -0.950, -147.104, 72]
+    level:    [52, 56]
+  17391711:
+    template: Orcish_Predator
+    at:       [23.064, -0.969, -142.142, 105]
+    level:    [53, 57]
+  17391712:
+    template: Orcish_Zerker
+    at:       [15.595, -1.036, -134.430, 210]
+    level:    [54, 58]
+  17391713:
+    template: Orcish_Warchief
+    at:       [18.624, -1.037, -132.274, 25]
+    level:    [55, 59]
+  17391714:
+    template: Orcish_Farkiller
+    at:       [24.604, -2.700, -101.246, 103]
+    level:    [62, 66]
+  17391715:
+    template: Orcish_Dreadnought
+    at:       [22.502, -1.988, -101.444, 184]
+    level:    [63, 66]
+  17391716:
+    template: Orcish_Champion
+    at:       [24.596, -2.181, -98.579, 153]
+    level:    [64, 68]
+  17391717:
+    template: Orcish_Dragoon
+    at:       [21.559, -1.860, -99.633, 135]
+    level:    [65, 69]
+  17391718:
+    template: Orcish_Farkiller
+    at:       [55.384, -1.069, -144.357, 251]
+    level:    [62, 66]
+  17391719:
+    template: Orcish_Dreadnought
+    at:       [58.560, -0.888, -108.872, 199]
+    level:    [63, 66]
+  17391720:
+    template: Orcish_Champion
+    at:       [71.834, -0.945, -141.691, 231]
+    level:    [64, 68]
+  17391721:
+    template: Orcish_Dragoon
+    at:       [66.795, -1.300, -139.159, 92]
+    level:    [65, 69]
+  17391722:
+    template: Orcish_Farkiller
+    at:       [60.731, -0.705, -118.067, 53]
+    level:    [62, 72]
+  17391723:
+    template: Orcish_Dreadnought
+    at:       [58.500, -0.773, -113.016, 179]
+    level:    [63, 66]
+  17391724:
+    template: Orcish_Champion
+    at:       [79.081, -0.630, -97.760, 11]
+    level:    [64, 68]
+  17391725:
+    template: Orcish_Dragoon
+    at:       [77.909, -0.781, -98.623, 10]
+    level:    [65, 69]
+  17391726:
+    template: Orcish_Dreadnought
+    at:       [99.713, -2.887, -147.105, 60]
+    level:    [63, 66]
+  17391727:
+    template: Orcish_Warlord
+    at:       [98.262, -1.442, -136.775, 171]
+    level:    [72, 74]
+  17391728:
+    template: Orcish_Farkiller
+    at:       [81.612, -0.871, -95.945, 198]
+    level:    [62, 66]
+  17391729:
+    template: Orcish_Dreadnought
+    at:       [80.109, -0.729, -96.661, 6]
+    level:    [63, 66]
+  17391730:
+    template: Orcish_Champion
+    at:       [74.046, -0.602, -96.967, 85]
+    level:    [64, 72]
+  17391731:
+    template: Orcish_Dragoon
+    at:       [87.621, -0.746, -99.655, 249]
+    level:    [66, 69]
+  17391732:
+    template: Orcish_Farkiller
+    at:       [92.288, -0.902, -104.923, 6]
+    level:    [62, 66]
+  17391733:
+    template: Orcish_Dreadnought
+    at:       [74.246, -0.850, -100.137, 26]
+    level:    [63, 66]
+  17391734:
+    template: Orcish_Champion
+    at:       [89.083, -0.906, -96.798, 27]
+    level:    [64, 68]
+  17391735:
+    template: Orcish_Dragoon
+    at:       [92.876, -0.875, -101.838, 41]
+    level:    [66, 69]
+  17391736:
+    template: Orcish_Farkiller
+    at:       [43.769, -9.097, -180.992, 130]
+    level:    [62, 66]
+  17391737:
+    template: Orcish_Dreadnought
+    at:       [34.779, -7.472, -180.575, 157]
+    level:    [63, 66]
+  17391738:
+    template: Orcish_Champion
+    at:       [38.441, -8.483, -181.481, 246]
+    level:    [64, 68]
+  17391739:
+    template: Orcish_Dragoon
+    at:       [43.194, -9.133, -178.668, 122]
+    level:    [66, 69]
+  17391740:
+    template: Orcish_Farkiller
+    at:       [25.243, -5.654, -185.978, 97]
+    level:    [62, 66]
+  17391741:
+    template: Orcish_Dreadnought
+    at:       [25.838, -5.137, -182.017, 142]
+    level:    [63, 66]
+  17391742:
+    template: Orcish_Champion
+    at:       [22.331, -4.146, -177.930, 166]
+    level:    [64, 68]
+  17391743:
+    template: Orcish_Dragoon
+    at:       [20.194, -3.432, -173.901, 165]
+    level:    [66, 69]
+  17391744:
+    template: Orcish_Farkiller
+    at:       [220.928, -0.848, -197.194, 148]
+    level:    [69, 71]
+  17391745:
+    template: Orcish_Dreadnought
+    at:       [222.498, -10.007, -248.089, 95]
+    level:    [63, 72]
+  17391746:
+    template: Orcish_Champion
+    at:       [218.908, -1.422, -205.988, 62]
+    level:    [69, 71]
+  17391747:
+    template: Orcish_Dragoon
+    at:       [224.811, -5.600, -224.852, 74]
+    level:    [65, 72]
+  17391748:
+    template: Orcish_Farkiller
+    at:       [222.677, -6.877, -231.554, 141]
+    level:    [62, 72]
+  17391749:
+    template: Orcish_Dreadnought
+    at:       [221.210, -0.683, -200.278, 211]
+    level:    [69, 71]
+  17391750:
+    template: Orcish_Champion
+    at:       [221.348, -1.186, -203.037, 84]
+    level:    [69, 71]
+  17391751:
+    template: Orcish_Dragoon
+    at:       [221.713, -1.178, -202.697, 92]
+    level:    [69, 71]
+  17391752:
+    template: Orcish_Farkiller
+    at:       [217.973, -0.965, -173.677, 148]
+    level:    [69, 71]
+  17391753:
+    template: Orcish_Dreadnought
+    at:       [213.123, -1.009, -177.874, 84]
+    level:    [69, 71]
+  17391754:
+    template: Orcish_Champion
+    at:       [232.275, -1.189, -173.161, 223]
+    level:    [69, 71]
+  17391755:
+    template: Orcish_Dragoon
+    at:       [225.830, -1.198, -178.593, 60]
+    level:    [69, 71]
+  17391756:
+    template: Orcish_Farkiller
+    at:       [222.399, -1.190, -172.888, 136]
+    level:    [69, 71]
+  17391757:
+    template: Orcish_Dreadnought
+    at:       [219.006, -0.924, -167.484, 9]
+    level:    [69, 71]
+  17391758:
+    template: Orcish_Champion
+    at:       [222.655, -0.905, -203.161, 100]
+    level:    [69, 71]
+  17391759:
+    template: Orcish_Dragoon
+    at:       [213.765, -1.500, -171.343, 214]
+    level:    [69, 71]
+  17391760:
+    template: Orcish_Protector
+    at:       [223.884, -2.010, -137.840, 13]
+    level:    [70, 72]
+  17391761:
+    template: Orcish_Farkiller
+    at:       [241.359, -0.677, -132.041, 77]
+    level:    [69, 71]
+  17391762:
+    template: Orcish_Dreadnought
+    at:       [211.271, -1.007, -125.252, 81]
+    level:    [71, 72]
+  17391763:
+    template: Orcish_Champion
+    at:       [208.955, -0.824, -128.572, 149]
+    level:    [64, 72]
+  17391764:
+    template: Orcish_Dragoon
+    at:       [217.739, -1.166, -123.409, 233]
+    level:    [69, 71]
+  17391765:
+    template: Orcish_Hexspinner
+    at:       [217.819, -3.025, -102.635, 76]
+    level:    [71, 73]
+  17391766:
+    template: Orcish_Warlord
+    at:       [230.037, -2.886, -95.685, 8]
+    level:    [72, 74]
+  17391767:
+    template: Orcish_Protector
+    at:       [259.298, -1.634, -99.486, 190]
+    level:    [70, 72]
+  17391768:
+    template: Orcish_Farkiller
+    at:       [235.825, -0.745, -117.973, 129]
+    level:    [71, 72]
+  17391769:
+    template: Orcish_Dreadnought
+    at:       [256.194, -1.103, -124.345, 100]
+    level:    [63, 72]
+  17391770:
+    template: Orcish_Champion
+    at:       [249.886, -0.778, -124.493, 131]
+    level:    [70, 72]
+  17391771:
+    template: Orcish_Dragoon
+    at:       [251.471, -0.554, -81.305, 108]
+    level:    [71, 72]
+  17391772:
+    template: Orcish_Protector
+    at:       [198.763, -0.728, -77.516, 235]
+    level:    [70, 72]
+  17391773:
+    template: Orcish_Farkiller
+    at:       [199.618, -0.749, -64.813, 80]
+    level:    [71, 72]
+  17391774:
+    template: Orcish_Dreadnought
+    at:       [194.198, -1.003, -108.366, 180]
+    level:    [71, 72]
+  17391775:
+    template: Orcish_Champion
+    at:       [185.673, -0.732, -93.790, 31]
+    level:    [70, 72]
+  17391776:
+    template: Orcish_Dragoon
+    at:       [198.998, -0.761, -76.173, 246]
+    level:    [71, 72]
+  17391777:
+    template: Orcish_Protector
+    at:       [232.934, -1.064, -67.894, 32]
+    level:    [70, 72]
+  17391778:
+    template: Orcish_Farkiller
+    at:       [242.406, -0.629, -79.450, 15]
+    level:    [71, 72]
+  17391779:
+    template: Orcish_Dreadnought
+    at:       [240.298, -0.744, -84.671, 61]
+    level:    [71, 72]
+  17391780:
+    template: Orcish_Champion
+    at:       [222.989, -0.610, -77.507, 223]
+    level:    [70, 72]
+  17391781:
+    template: Orcish_Dragoon
+    at:       [212.556, -1.710, -62.677, 230]
+    level:    [71, 72]
+  17391782:
+    template: Orcish_Veteran
+    at:       [181.182, 3.101, -17.171, 70]
+    level:    [52, 56]
+  17391783:
+    template: Orcish_Warchief
+    at:       [187.931, 3.051, -21.764, 233]
+    level:    [55, 59]
+  17391784:
+    template: Orcish_Bowshooter
+    at:       [199.942, 3.238, 49.946, 251]
+    level:    [42, 46]
+  17391785:
+    template: Orcish_Footsoldier
+    at:       [215.919, 2.843, 36.822, 127]
+    level:    [44, 44]
+  17391786:
+    template: Orcish_Gladiator
+    at:       [187.672, 3.178, 42.389, 31]
+    level:    [44, 48]
+  17391787:
+    template: Orcish_Trooper
+    at:       [205.474, 2.743, 53.839, 9]
+    level:    [45, 49]
+  17391788:
+    template: Orcish_Bowshooter
+    at:       [211.466, 2.336, 30.112, 127]
+    level:    [42, 46]
+  17391789:
+    template: Orcish_Footsoldier
+    at:       [199.840, 3.407, 50.393, 35]
+    level:    [43, 47]
+  17391790:
+    template: Orcish_Gladiator
+    at:       [223.121, 3.171, 59.435, 244]
+    level:    [44, 48]
+  17391791:
+    template: Orcish_Trooper
+    at:       [198.316, 3.373, 26.901, 10]
+    level:    [45, 49]
+  17391792:
+    template: Orcish_Predator
+    at:       [200.576, 3.331, 49.572, 72]
+    level:    [53, 57]
+  17391793:
+    template: Orcish_Zerker
+    at:       [209.725, 2.913, 49.915, 237]
+    level:    [54, 58]
+  17391794:
+    template: Orcish_Bowshooter
+    at:       [237.257, 3.250, 58.883, 234]
+    level:    [42, 46]
+  17391795:
+    template: Orcish_Footsoldier
+    at:       [258.173, -4.649, 41.105, 62]
+    level:    [43, 47]
+  17391796:
+    template: Orcish_Gladiator
+    at:       [233.083, 3.300, 60.691, 226]
+    level:    [47, 48]
+  17391797:
+    template: Orcish_Trooper
+    at:       [257.135, -0.068, 57.565, 151]
+    level:    [45, 49]
+  17391798:
+    template: Orcish_Bowshooter
+    at:       [229.114, 3.067, 59.170, 184]
+    level:    [42, 46]
+  17391799:
+    template: Orcish_Footsoldier
+    at:       [247.386, 2.219, 62.000, 3]
+    level:    [43, 47]
+  17391800:
+    template: Orcish_Gladiator
+    level:    [44, 48]
+  17391801:
+    template: Orcish_Trooper
+    at:       [245.068, 2.735, 60.426, 238]
+    level:    [45, 49]
+  17391802:
+    template: Orcish_Overlord
+    at:       [218.046, -3.017, -101.239, 58]
+    level:    [75, 75]
+  17391803:
+    template: Overlord_Bakgodek
+    at:       [225.168, -2.974, -110.339, 29]
+    level:    [85, 85]
+  17391804:
+    template: Bugaboo
+    at:       [107.583, -2.060, -144.100, 162]
+    level:    [63, 63]
+  17391805:
+    template: Mimic
+    at:       [1.000, 1.000, 1.000]
+    level:    [60, 60]
+  17391806:
+    template: Orcish_Overlord
+    level:    [75, 75]
+  17391807:
+    template: Chillgaze_Foddrud
+    level:    [69, 75]
+  17391808:
+    template: Rictusgrin_Prakpok
+    level:    [69, 75]
+  17391809:
+    template: Siegebreaker_Wujroj
+    level:    [69, 75]
+  17391810:
+    template: Shatterskull_Mippdapp
+    level:    [69, 75]
+  17391811:
+    template: Grimbolt_Onkzok
+    level:    [69, 75]
+  17391812:
+    template: Sevenskewer_Krugglug
+    level:    [69, 75]
+  17391813:
+    template: Orcish_Bewitcher
+    at:       [9.211, -0.715, -288.477, 80]
+    level:    [139, 139]
+
+slots:
+  - members:
+      17391617: {} # Orcish_Bowshooter
+      17391618: {} # Orcish_Footsoldier
+      17391619: {} # Orcish_Gladiator
+      17391620: {} # Orcish_Trooper
+  - members:
+      17391621: {} # Orcish_Bowshooter
+      17391622: {} # Orcish_Footsoldier
+      17391623: {} # Orcish_Gladiator
+      17391624: {} # Orcish_Trooper
+  - members:
+      17391629: {} # Orcish_Veteran
+      17391630: {} # Orcish_Predator
+      17391631: {} # Orcish_Zerker
+      17391632: {} # Orcish_Warchief
+  - members:
+      17391637: {} # Orcish_Veteran
+      17391638: {} # Orcish_Predator
+      17391639: {} # Orcish_Zerker
+  - members:
+      17391640: {} # Orcish_Warchief
+      17391641: {} # Orcish_Veteran
+      17391642: {} # Orcish_Predator
+  - members:
+      17391643: {} # Orcish_Zerker
+      17391644: {} # Orcish_Warchief
+  - members:
+      17391645: {} # Orcish_Veteran
+      17391647: {} # Orcish_Zerker
+  - members:
+      17391646: {} # Orcish_Predator
+      17391648: {} # Orcish_Warchief
+  - members:
+      17391649: {} # Orcish_Veteran
+      17391650: {} # Orcish_Predator
+  - members:
+      17391651: {} # Orcish_Zerker
+      17391652: {} # Orcish_Warchief
+  - members:
+      17391653: {} # Orcish_Veteran
+      17391656: {} # Orcish_Warchief
+  - members:
+      17391654: {} # Orcish_Predator
+      17391655: {} # Orcish_Zerker
+  - members:
+      17391657: {} # Orcish_Veteran
+      17391658: {} # Orcish_Predator
+      17391659: {} # Orcish_Zerker
+      17391660: {} # Orcish_Warchief
+  - members:
+      17391661: {} # Orcish_Veteran
+      17391662: {} # Orcish_Predator
+      17391663: {} # Orcish_Zerker
+      17391664: {} # Orcish_Warchief
+  - members:
+      17391665: {} # Orcish_Veteran
+      17391666: {} # Orcish_Predator
+      17391669: {} # Orcish_Farkiller
+  - members:
+      17391667: {} # Orcish_Zerker
+      17391668: {} # Orcish_Warchief
+      17391670: {} # Orcish_Dreadnought
+  - members:
+      17391671: {} # Orcish_Veteran
+      17391672: {} # Orcish_Predator
+      17391673: {} # Orcish_Zerker
+      17391674: {} # Orcish_Warchief
+  - members:
+      17391675: {} # Orcish_Veteran
+      17391676: {} # Orcish_Predator
+      17391677: {} # Orcish_Zerker
+      17391678: {} # Orcish_Warchief
+  - members:
+      17391679: {} # Orcish_Veteran
+      17391680: {} # Orcish_Predator
+      17391681: {} # Orcish_Zerker
+  - members:
+      17391682: {} # Orcish_Warchief
+      17391683: {} # Orcish_Veteran
+      17391684: {} # Orcish_Predator
+  - members:
+      17391685: {} # Orcish_Zerker
+      17391686: {} # Orcish_Warchief
+  - members:
+      17391687: {} # Orcish_Veteran
+      17391692: {} # Orcish_Dreadnought
+  - members:
+      17391688: {} # Orcish_Predator
+      17391689: {} # Orcish_Zerker
+      17391690: {} # Orcish_Warchief
+      17391691: {} # Orcish_Farkiller
+  - members:
+      17391693: {} # Orcish_Veteran
+      17391694: {} # Orcish_Predator
+  - members:
+      17391695: {} # Orcish_Zerker
+      17391696: {} # Orcish_Warchief
+      17391697: {} # Orcish_Veteran
+  - members:
+      17391698: {} # Orcish_Predator
+      17391699: {} # Orcish_Zerker
+      17391700: {} # Orcish_Warchief
+  - members:
+      17391701: {} # Orcish_Veteran
+      17391702: {} # Orcish_Predator
+      17391703: {} # Orcish_Zerker
+      17391704: {} # Orcish_Warchief
+  - members:
+      17391710: {} # Orcish_Veteran
+      17391711: {} # Orcish_Predator
+      17391712: {} # Orcish_Zerker
+      17391713: {} # Orcish_Warchief
+  - members:
+      17391714: {} # Orcish_Farkiller
+      17391715: {} # Orcish_Dreadnought
+  - members:
+      17391716: {} # Orcish_Champion
+      17391717: {} # Orcish_Dragoon
+  - members:
+      17391718: {} # Orcish_Farkiller
+      17391719: {} # Orcish_Dreadnought
+  - members:
+      17391720: {} # Orcish_Champion
+      17391721: {} # Orcish_Dragoon
+  - members:
+      17391722: {} # Orcish_Farkiller
+      17391724: {} # Orcish_Champion
+  - members:
+      17391723: {} # Orcish_Dreadnought
+      17391725: {} # Orcish_Dragoon
+  - members:
+      17391728: {} # Orcish_Farkiller
+      17391729: {} # Orcish_Dreadnought
+      17391730: {} # Orcish_Champion
+  - members:
+      17391731: {} # Orcish_Dragoon
+      17391732: {} # Orcish_Farkiller
+  - members:
+      17391733: {} # Orcish_Dreadnought
+      17391734: {} # Orcish_Champion
+      17391735: {} # Orcish_Dragoon
+  - members:
+      17391736: {} # Orcish_Farkiller
+      17391737: {} # Orcish_Dreadnought
+      17391738: {} # Orcish_Champion
+      17391739: {} # Orcish_Dragoon
+  - members:
+      17391740: {} # Orcish_Farkiller
+      17391741: {} # Orcish_Dreadnought
+      17391742: {} # Orcish_Champion
+      17391743: {} # Orcish_Dragoon
+  - members:
+      17391744: {} # Orcish_Farkiller
+      17391745: {} # Orcish_Dreadnought
+      17391746: {} # Orcish_Champion
+      17391747: {} # Orcish_Dragoon
+  - members:
+      17391748: {} # Orcish_Farkiller
+      17391749: {} # Orcish_Dreadnought
+      17391750: {} # Orcish_Champion
+      17391751: {} # Orcish_Dragoon
+  - members:
+      17391752: {} # Orcish_Farkiller
+      17391753: {} # Orcish_Dreadnought
+  - members:
+      17391754: {} # Orcish_Champion
+      17391755: {} # Orcish_Dragoon
+      17391756: {} # Orcish_Farkiller
+  - members:
+      17391757: {} # Orcish_Dreadnought
+      17391758: {} # Orcish_Champion
+      17391759: {} # Orcish_Dragoon
+  - members:
+      17391761: {} # Orcish_Farkiller
+      17391762: {} # Orcish_Dreadnought
+      17391763: {} # Orcish_Champion
+      17391764: {} # Orcish_Dragoon
+  - members:
+      17391768: {} # Orcish_Farkiller
+      17391769: {} # Orcish_Dreadnought
+  - members:
+      17391770: {} # Orcish_Champion
+      17391771: {} # Orcish_Dragoon
+  - members:
+      17391773: {} # Orcish_Farkiller
+      17391776: {} # Orcish_Dragoon
+  - members:
+      17391774: {} # Orcish_Dreadnought
+      17391775: {} # Orcish_Champion
+  - members:
+      17391778: {} # Orcish_Farkiller
+      17391779: {} # Orcish_Dreadnought
+      17391780: {} # Orcish_Champion
+      17391781: {} # Orcish_Dragoon
+  - members:
+      17391784: {} # Orcish_Bowshooter
+      17391785: {} # Orcish_Footsoldier
+      17391786: {} # Orcish_Gladiator
+  - members:
+      17391787: {} # Orcish_Trooper
+      17391788: {} # Orcish_Bowshooter
+      17391789: {} # Orcish_Footsoldier
+  - members:
+      17391790: {} # Orcish_Gladiator
+      17391791: {} # Orcish_Trooper
+  - members:
+      17391792: {} # Orcish_Predator
+      17391793: {} # Orcish_Zerker
+  - members:
+      17391794: {} # Orcish_Bowshooter
+      17391795: {} # Orcish_Footsoldier
+      17391796: {} # Orcish_Gladiator
+      17391797: {} # Orcish_Trooper
+  - members:
+      17391798: {} # Orcish_Bowshooter
+      17391799: {} # Orcish_Footsoldier
+      17391800: {} # Orcish_Gladiator
+      17391801: {} # Orcish_Trooper

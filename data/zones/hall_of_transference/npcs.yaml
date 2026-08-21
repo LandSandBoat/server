@@ -1,0 +1,576 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16834562:
+    script: NPC[2]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16834563:
+    script: NPC[3]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16834564:
+    script: NPC[4]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16834565:
+    script: NPC[5]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16834566:
+    script:       _0e0
+    display_name: Cermet Gate
+    at:           [-216.449, -8.635, 280.000]
+    render:
+      look:
+        type: door
+      door_id:   811937887
+      animation: close_door
+      moving:    1
+    status:  normal
+    content: COP
+
+  16834567:
+    script:       _0e1
+    display_name: Cermet Gate
+    at:           [-216.449, -48.635, -280.000]
+    render:
+      look:
+        type: door
+      door_id:   828715103
+      animation: close_door
+      moving:    1
+    status:  normal
+    content: COP
+
+  16834568:
+    script:       _0e2
+    display_name: Cermet Gate
+    at:           [280.000, -88.659, -16.450]
+    render:
+      look:
+        type: door
+      door_id:   845492319
+      animation: close_door
+      moving:    1
+    status:  normal
+    content: COP
+
+  16834569:
+    script:       _0e3
+    display_name: Large Apparatus
+    at:           [-236.300, -4.900, 290.000]
+    render:
+      look:
+        type: door
+      door_id:      862269535
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16834570:
+    script:       _0e4
+    display_name: Large Apparatus
+    at:           [-236.300, -4.900, 270.000]
+    render:
+      look:
+        type: door
+      door_id:      879046751
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16834571:
+    script:       _0e5
+    display_name: Large Apparatus
+    at:           [-236.300, -44.900, -270.000]
+    render:
+      look:
+        type: door
+      door_id:      895823967
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16834572:
+    script:       _0e6
+    display_name: Large Apparatus
+    at:           [-236.300, -44.900, -290.000]
+    render:
+      look:
+        type: door
+      door_id:      912601183
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16834573:
+    script:       _0e7
+    display_name: Large Apparatus
+    at:           [270.000, -84.900, -36.299]
+    render:
+      look:
+        type: door
+      door_id:      929378399
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16834574:
+    script:       _0e8
+    display_name: Large Apparatus
+    at:           [290.000, -84.900, -36.299]
+    render:
+      look:
+        type: door
+      door_id:      946155615
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16834575:
+    script:       FXTEST
+    display_name: FXTEST
+    at:           [280.025, -86.459, -17.840]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32768
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16834576:
+    script:       Wolfgang
+    display_name: Wolfgang
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  2
+        head:  4116
+        body:  8217
+        hands: 12313
+        legs:  16409
+        feet:  20505
+        main:  24581
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16834577:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:  cutscene_only
+    content: COP
+
+  16834578:
+    script:       Nagmolada
+    display_name: Nag'molada
+    render:
+      look:
+        type:  standard
+        model: 1452
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16834579:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    content: COP
+
+  16834580:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    content: COP
+
+  16834581:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [275.724, -81.135, -94.386, 210]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16834582:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [275.724, -81.135, -94.386, 210]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16834583:
+    script:       qm
+    display_name: ???
+    at:           [-218.500, -6.459, 280.638, 126]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:  cutscene_only
+    content: COP
+
+  16834584:
+    script:       qm
+    display_name: ???
+    at:           [-218.500, -6.459, 279.000, 126]
+    render:
+      look:
+        type:  standard
+        model: 1004
+      entity_flags: 27
+      name_prefix:  32
+    status:  cutscene_only
+    content: COP
+
+  16834585:
+    script: NPC[19]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16834586:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16834587:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16834588:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16834589:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16834590:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16834591:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16834592:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16834593:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16834594:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16834595:
+    script: NPC[23]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16834596:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16834597:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  16834598:
+    script:       Iroha
+    display_name: Iroha
+    render:
+      look:
+        type:  standard
+        model: 2449
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834599:
+    script:       Tenzen
+    display_name: Tenzen
+    render:
+      look:
+        type:  standard
+        model: 1442
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834600:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834601:
+    script:       Diabolos
+    display_name: Diabolos
+    render:
+      look:
+        type:  standard
+        model: 1145
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834602:
+    script:       Atomos
+    display_name: Atomos
+    render:
+      look:
+        type:  standard
+        model: 2445
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834603:
+    script:       Fenrir
+    display_name: Fenrir
+    render:
+      look:
+        type:  standard
+        model: 792
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834604:
+    script:       Balamor
+    display_name: Balamor
+    render:
+      look:
+        type:  standard
+        model: 2742
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834605:
+    script:       Odin
+    display_name: Odin
+    render:
+      look:
+        type:  standard
+        model: 1831
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834606:
+    script:       Volto_Oscuro
+    display_name: Volto Oscuro
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  16834607:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 326
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16834608:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 524
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16834609:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  16834610:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  16834611:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051

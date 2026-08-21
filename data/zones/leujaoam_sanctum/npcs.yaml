@@ -1,0 +1,2115 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17059911:
+    script:       Ice_Cage
+    display_name: Ice Cage
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32768
+    status:   status_7
+    widescan: true
+
+  17059912:
+    script:       Ice_Cage
+    display_name: Ice Cage
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32768
+    status:   status_7
+    widescan: true
+
+  17059913:
+    script:       Ice_Cage
+    display_name: Ice Cage
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32768
+    status:   status_7
+    widescan: true
+
+  17059914:
+    script:       Ice_Cage
+    display_name: Ice Cage
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32768
+    status:   status_7
+    widescan: true
+
+  17059915:
+    script:       Ice_Cage
+    display_name: Ice Cage
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32768
+    status:   status_7
+    widescan: true
+
+  17059916:
+    script:       Qiqirn_Shepherd
+    display_name: Qiqirn Shepherd
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059917:
+    script:       Qiqirn_Mine
+    display_name: Qiqirn Mine
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   status_7
+    widescan: true
+
+  17059918:
+    script:       Qiqirn_Shepherd
+    display_name: Qiqirn Shepherd
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059919:
+    script:       Qiqirn_Mine
+    display_name: Qiqirn Mine
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   status_7
+    widescan: true
+
+  17059920:
+    script:       Qiqirn_Shepherd
+    display_name: Qiqirn Shepherd
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059921:
+    script:       Qiqirn_Mine
+    display_name: Qiqirn Mine
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   status_7
+    widescan: true
+
+  17059922:
+    script:       Qiqirn_Shepherd
+    display_name: Qiqirn Shepherd
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059923:
+    script:       Qiqirn_Mine
+    display_name: Qiqirn Mine
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   status_7
+    widescan: true
+
+  17059924:
+    script:       Qiqirn_Shepherd
+    display_name: Qiqirn Shepherd
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059925:
+    script:       Qiqirn_Mine
+    display_name: Qiqirn Mine
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   status_7
+    widescan: true
+
+  17059926:
+    script:       Qiqirn_Shepherd
+    display_name: Qiqirn Shepherd
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059927:
+    script:       Qiqirn_Mine
+    display_name: Qiqirn Mine
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   status_7
+    widescan: true
+
+  17059928:
+    script:       Qiqirn_Mine_Baron
+    display_name: Qiqirn Mine Baron
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059929:
+    script:       Qiqirn_Greengrocer
+    display_name: Qiqirn Greengrocer
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059930:
+    script:       Qiqirn_Dealer
+    display_name: Qiqirn Dealer
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059931:
+    script:       Karakul
+    display_name: Karakul
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059932:
+    script:       Karakul
+    display_name: Karakul
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059933:
+    script:       Karakul
+    display_name: Karakul
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059934:
+    script:       Karakul
+    display_name: Karakul
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17059935:
+    script:       Karakul
+    display_name: Karakul
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17060013:
+    script: NPC[ad]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 33
+      name_prefix:  32
+
+  17060014:
+    script:       Ancient_Lockbox
+    display_name: Ancient Lockbox
+    at:           [476.000, 8.479, 39.000, 49]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags: 1667
+      moving:          7
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17060015:
+    script:       Rune_of_Release
+    display_name: Rune of Release
+    at:           [476.000, 8.479, 40.000, 49]
+    render:
+      look:
+        type:  standard
+        model: 1508
+      entity_flags:  27
+      name_vis:     112
+      name_prefix:   32
+      moving:         7
+    widescan: true
+    content:  TOAU
+
+  17060016:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-551.561, -51.654, 207.978]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060017:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-540.609, -51.849, 286.021]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060018:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-434.059, -24.539, 237.531]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060019:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-336.109, 3.500, 180.414]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060020:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [309.551, -0.112, 199.472]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060021:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-420.385, -13.043, 76.331]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060022:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-372.017, -28.000, 219.106]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060023:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-424.168, -32.041, 335.851]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060024:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-440.346, -56.278, 162.886]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060025:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-327.724, -27.453, 235.233]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  cutscene_only
+    content: TOAU
+
+  17060026:
+    script:       Mulwahah
+    display_name: Mulwahah
+    at:           [-449.000, -27.685, 170.000, 251]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  8
+        head:  4261
+        body:  8357
+        hands: 12453
+        legs:  16549
+        feet:  20645
+        main:  24833
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17060027:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [74.160, 0.466, -394.939]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060028:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [75.570, -0.141, -409.211]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060029:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [81.386, 0.351, -404.744]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060030:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [114.293, 0.499, -458.410]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060031:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [181.913, -3.826, -423.696]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060032:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [183.222, -3.132, -381.109]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060033:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [203.135, -3.499, -381.114]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060034:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [217.399, -3.704, -375.384]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060035:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [275.067, -4.140, -329.081]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060036:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [284.069, -3.605, -320.479]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060037:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [275.312, -3.759, -312.542]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060038:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [310.696, -3.558, -380.555]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060039:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [299.094, -3.500, -164.547]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060040:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [288.997, -4.125, -124.986]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060041:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [271.293, -3.355, -116.740]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060042:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [248.700, -4.042, -112.313]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060043:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [250.036, -3.499, -122.410]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060044:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [230.551, -4.209, -125.534]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060045:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [221.044, -3.310, -177.737]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060046:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [174.547, -3.499, -96.073]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060047:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [261.798, -3.571, -65.663]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060048:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [246.278, -3.560, -56.664]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060049:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [215.238, -3.353, -57.787]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060050:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [193.637, -3.500, -58.427]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060051:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [178.743, -3.520, -23.410]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060052:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [200.422, 0.000, 37.762]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060053:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [202.899, 0.466, 44.462]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060054:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [190.414, 0.563, 35.233]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060055:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [190.526, -0.206, 44.664]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17060056:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [222.110, -7.652, 140.991]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: TOAU
+
+  17060057:
+    script:       Vegetation
+    display_name: Vegetation
+    at:           [206.146, -7.500, 139.531]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: TOAU
+
+  17060058:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060059:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060060:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060061:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060062:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060063:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060064:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060065:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060066:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060067:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060068:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060069:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060070:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060071:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060072:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060073:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060074:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060075:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060076:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060077:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060078:
+    script:       Mining_Point
+    display_name: Mining Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060079:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060080:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060081:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060082:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060083:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060084:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060085:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060086:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060087:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060088:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060089:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060090:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060091:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060092:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060093:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060094:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060095:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060096:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060097:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060098:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060099:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+
+  17060100:
+    script: NPC[104]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17060101:
+    script:       Kuihlud
+    display_name: Kuihlud
+    at:           [178.530, -3.320, 143.345, 25]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  4
+        head:  4272
+        body:  8368
+        hands: 12464
+        legs:  16560
+        feet:  20656
+        main:  24832
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:  cutscene_only
+    content: TOAU
+
+  17060102:
+    script:       Nareema
+    display_name: Nareema
+    at:           [83.899, -3.550, 321.165, 147]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  2
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 155
+      name_prefix:   32
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17060103:
+    script:       qm0
+    display_name: ???
+    at:           [0.001, 0.001, 0.001]
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:  cutscene_only
+    content: TOAU
+
+  17060104:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: TOAU
+
+  17060105:
+    script: NPC[109]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17060107:
+    script: NPC[10b]
+    at:     [0.000, -4.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17060108:
+    script: NPC[10c]
+    at:     [0.000, -4.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17060109:
+    script: NPC[10d]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17060110:
+    script: NPC[10e]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17060111:
+    script: NPC[10f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17060112:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17060113:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17060114:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17060115:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17060116:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17060117:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17060118:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17060119:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: TOAU
+
+  17060120:
+    script:       DOOR_MASTER
+    display_name: DOOR_MASTER
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: TOAU
+
+  17060121:
+    script: _1x1
+    at:     [-279.925, -27.729, -180.239]
+    render:
+      look:
+        type: door
+      door_id:      829960543
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060122:
+    script: _1x2
+    at:     [-219.520, -7.809, -80.714]
+    render:
+      look:
+        type: door
+      door_id:      846737759
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060123:
+    script: _1x3
+    at:     [-201.712, 0.161, -260.063]
+    render:
+      look:
+        type: door
+      door_id:      863514975
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060124:
+    script: _1x4
+    at:     [-159.841, -8.074, -340.063]
+    render:
+      look:
+        type: door
+      door_id:      880292191
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060125:
+    script: _1x5
+    at:     [-79.188, -11.846, -419.897]
+    render:
+      look:
+        type: door
+      door_id:      897069407
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060126:
+    script: _1x6
+    at:     [19.707, -7.829, -239.809]
+    render:
+      look:
+        type: door
+      door_id:      913846623
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060127:
+    script: _1x7
+    at:     [43.342, -4.190, -419.365]
+    render:
+      look:
+        type: door
+      door_id:      930623839
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060128:
+    script: _1x8
+    at:     [160.186, -8.012, -20.063]
+    render:
+      look:
+        type: door
+      door_id:      947401055
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060129:
+    script: _1x9
+    at:     [140.177, -12.092, -120.068]
+    render:
+      look:
+        type: door
+      door_id:      964178271
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060130:
+    script: _1xa
+    at:     [219.964, -11.926, -202.621]
+    render:
+      look:
+        type: door
+      door_id:      1635266911
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060131:
+    script: _1xb
+    at:     [241.826, -8.061, -300.016]
+    render:
+      look:
+        type: door
+      door_id:      1652044127
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060132:
+    script: _1xc
+    at:     [260.172, -8.065, -83.200]
+    render:
+      look:
+        type: door
+      door_id:      1668821343
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060133:
+    script: _1xd
+    at:     [-358.397, -12.133, 59.936]
+    render:
+      look:
+        type: door
+      door_id:      1685598559
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060134:
+    script: _1xe
+    at:     [-278.843, 0.146, 140.200]
+    render:
+      look:
+        type: door
+      door_id:      1702375775
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060135:
+    script: _1xf
+    at:     [-199.257, -7.674, 140.616]
+    render:
+      look:
+        type: door
+      door_id:      1719152991
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060136:
+    script: _1xg
+    at:     [-119.978, -7.814, 59.552]
+    render:
+      look:
+        type: door
+      door_id:      1735930207
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060137:
+    script: _1xh
+    at:     [-80.020, -8.083, 99.935]
+    render:
+      look:
+        type: door
+      door_id:      1752707423
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060138:
+    script: _1xi
+    at:     [20.107, -7.936, -40.021]
+    render:
+      look:
+        type: door
+      door_id:      1769484639
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060139:
+    script: _1xj
+    at:     [39.707, -8.200, 19.963]
+    render:
+      look:
+        type: door
+      door_id:      1786261855
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060140:
+    script: _1xk
+    at:     [59.937, -7.925, 159.978]
+    render:
+      look:
+        type: door
+      door_id:      1803039071
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060141:
+    script: _1xl
+    at:     [119.834, -8.092, 19.898]
+    render:
+      look:
+        type: door
+      door_id:      1819816287
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060142:
+    script: _1xm
+    at:     [199.742, -11.890, 140.094]
+    render:
+      look:
+        type: door
+      door_id:      1836593503
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060143:
+    script: _1xn
+    at:     [357.198, -7.931, 59.770]
+    render:
+      look:
+        type: door
+      door_id:      1853370719
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060144:
+    script: _1xo
+    at:     [-460.054, -32.172, 120.370]
+    render:
+      look:
+        type: door
+      door_id:      1870147935
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060145:
+    script: _1xp
+    at:     [-234.295, -7.918, 180.132]
+    render:
+      look:
+        type: door
+      door_id:      1886925151
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060146:
+    script: _1xq
+    at:     [-239.708, -8.261, 259.650]
+    render:
+      look:
+        type: door
+      door_id:      1903702367
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060147:
+    script: _1xr
+    at:     [-60.241, -8.143, 282.958]
+    render:
+      look:
+        type: door
+      door_id:      1920479583
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060148:
+    script: _1xs
+    at:     [19.899, -8.041, 239.859]
+    render:
+      look:
+        type: door
+      door_id:      1937256799
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060149:
+    script: _1xt
+    at:     [120.021, -7.949, 219.936]
+    render:
+      look:
+        type: door
+      door_id:      1954034015
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060150:
+    script: _1xu
+    at:     [139.884, -7.954, 160.652]
+    render:
+      look:
+        type: door
+      door_id:      1970811231
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060151:
+    script: _1xv
+    at:     [241.708, -12.041, 140.008]
+    render:
+      look:
+        type: door
+      door_id:      1987588447
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060152:
+    script: _1xw
+    at:     [281.197, -40.077, 220.323]
+    render:
+      look:
+        type: door
+      door_id:      2004365663
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060153:
+    script: _1xx
+    at:     [-360.001, -8.482, -379.952]
+    render:
+      look:
+        type: door
+      door_id:      2021142879
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060154:
+    script: _1xy
+    at:     [-198.366, -12.063, -420.553]
+    render:
+      look:
+        type: door
+      door_id:      2037920095
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060155:
+    script: _1xz
+    at:     [179.867, -7.952, -398.975]
+    render:
+      look:
+        type: door
+      door_id:      2054697311
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060156:
+    script: _jx0
+    at:     [-140.266, -7.801, -200.565]
+    render:
+      look:
+        type: door
+      door_id:      813197919
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060157:
+    script: _jx1
+    at:     [-82.742, -7.930, -259.462]
+    render:
+      look:
+        type: door
+      door_id:      829975135
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060158:
+    script: _jx2
+    at:     [-80.389, -7.694, -179.878]
+    render:
+      look:
+        type: door
+      door_id:      846752351
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060159:
+    script: _jx3
+    at:     [-19.605, -3.695, -156.868]
+    render:
+      look:
+        type: door
+      door_id:      863529567
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060160:
+    script: _jx4
+    at:     [18.874, -7.725, -174.565]
+    render:
+      look:
+        type: door
+      door_id:      880306783
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060161:
+    script: _jx5
+    at:     [-20.704, -7.764, -261.821]
+    render:
+      look:
+        type: door
+      door_id:      897083999
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060162:
+    script: _jx6
+    at:     [199.654, -7.624, -60.185]
+    render:
+      look:
+        type: door
+      door_id:      913861215
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060163:
+    script: _jx7
+    at:     [300.214, -8.191, -158.497]
+    render:
+      look:
+        type: door
+      door_id:      930638431
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060164:
+    script: _jx8
+    at:     [-160.306, -7.956, -139.460]
+    render:
+      look:
+        type: door
+      door_id:      947415647
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060165:
+    script: _jx9
+    at:     [-420.411, -15.382, -39.064]
+    render:
+      look:
+        type: door
+      door_id:      964192863
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060166:
+    script: _jxa
+    at:     [-140.045, -8.014, 0.074]
+    render:
+      look:
+        type: door
+      door_id:      1635281503
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060167:
+    script: _jxb
+    at:     [-240.062, -7.471, -60.093]
+    render:
+      look:
+        type: door
+      door_id:      1652058719
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060168:
+    script: _jxc
+    at:     [-240.119, 0.260, 100.010]
+    render:
+      look:
+        type: door
+      door_id:      1668835935
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060169:
+    script: _jxd
+    at:     [-240.036, -8.228, 300.173]
+    render:
+      look:
+        type: door
+      door_id:      1685613151
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060170:
+    script: _jxe
+    at:     [-180.192, -7.597, 320.364]
+    render:
+      look:
+        type: door
+      door_id:      1702390367
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060171:
+    script: _jxf
+    at:     [-200.065, -8.079, 220.059]
+    render:
+      look:
+        type: door
+      door_id:      1719167583
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060172:
+    script: _jxg
+    at:     [-139.947, -7.975, 280.143]
+    render:
+      look:
+        type: door
+      door_id:      1735944799
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060173:
+    script: _jxh
+    at:     [-121.423, -8.021, 219.824]
+    render:
+      look:
+        type: door
+      door_id:      1752722015
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060174:
+    script: _jxi
+    at:     [-99.903, -7.344, 240.145]
+    render:
+      look:
+        type: door
+      door_id:      1769499231
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060175:
+    script: _jxj
+    at:     [-40.141, -8.330, 220.409]
+    render:
+      look:
+        type: door
+      door_id:      1786276447
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17060176:
+    script: _jxk
+    at:     [-0.519, -12.303, -379.968]
+    render:
+      look:
+        type: door
+      door_id:      1803053663
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17060177:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    status: normal

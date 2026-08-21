@@ -1,0 +1,6751 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Amymone:
+    id:            5680
+    species:       hydra
+    type:          [notorious]
+    skill_list_id: 164
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, thf]
+      resists:
+        dmg_physical:
+          blunt: -1250
+        rank_element:
+          fire:    6
+          ice:     6
+          wind:    6
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 1797
+        entity_flags:  129
+        animation_sub:   4
+        name_prefix:    32
+        hitbox:         34
+      spawn:
+        type: [scripted]
+
+  Amymones_Peapuk:
+    id:            5681
+    species:       puk
+    type:          [notorious]
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1745
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        19
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_EV:
+    id:            235
+    species:       elvaan
+    type:          [notorious, battlefield]
+    spell_list_id: 37
+    skill_list_id: 352
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [pld, whm]
+      render:
+        look:
+          type:  standard
+          model: 785
+        entity_flags: 1051
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Ark_Angel_GK:
+    id:            236
+    species:       galks
+    type:          [notorious, battlefield]
+    skill_list_id: 353
+    attributes:
+      combat:
+        skill:    great_katana
+        dmg_mult: 125
+      jobs: [sam, drg]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   2
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       2
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 788
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_HM:
+    id:            237
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 38
+    skill_list_id: 354
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [war, nin]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 784
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_MR:
+    id:            238
+    species:       mithra
+    type:          [notorious, battlefield]
+    skill_list_id: 355
+    attributes:
+      combat:
+        skill:    dagger
+        dmg_mult: 125
+      jobs: [bst, thf]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    2
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    2
+          slow:       1
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 786
+        entity_flags: 1051
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_TT:
+    id:            242
+    species:       tarutaru
+    type:          [notorious, battlefield]
+    spell_list_id: 39
+    skill_list_id: 356
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [blm, drk]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     2
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   2
+          dark:    2
+        rank_status:
+          paralyze:   2
+          bind:       2
+          silence:    1
+          slow:       1
+          poison:     2
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 787
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        flags:          [standback]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Gnat:
+    id:            6991
+    species:       gnat
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 131
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 129
+        name_prefix:   32
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Karakul:
+    id:            5696
+    species:       karakul
+    skill_list_id: 167
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:    1
+          thunder: -2
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:         1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 341
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Wyvern_ER:
+    id:            6992
+    display_name:  Ark_Angels_Wyvern
+    species:       shadow_wyvern
+    type:          [notorious, battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drg, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 780
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Asida:
+    id:            5672
+    species:       flan
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2936
+        entity_flags:  133
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Balamor_ER:
+    id:           5631
+    display_name: Balamor
+    species:      defiant
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2632
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Bia:
+    id:            6981
+    species:       pawn
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2063
+        entity_flags:  133
+        animation_sub:   5
+        name_vis:        4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Byakko_ER:
+    id:            5690
+    display_name:  Byakko
+    species:       legendary_tigers
+    type:          [notorious]
+    spell_list_id: 26
+    skill_list_id: 279
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [thf, whm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:   10
+          dark:    -2
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:       4
+          light_sleep: 10
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 309
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        36
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Duke_Vepar:
+    id:            6987
+    species:       gnat
+    type:          [notorious]
+    skill_list_id: 831
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2930
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Duke_Vepars_Gnat:
+    id:            6988
+    species:       gnat
+    type:          [notorious]
+    skill_list_id: 831
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Emputa:
+    id:            5670
+    species:       imp
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2935
+        entity_flags:  133
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         19
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Eschan_Amoeban:
+    id:            5622
+    species:       amoeban
+    spell_list_id: 21
+    skill_list_id: 5
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, drk]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          earth:   4
+          thunder: 2
+          water:   2
+          dark:    4
+        rank_status:
+          paralyze:   2
+          bind:       2
+          slow:       4
+          poison:     2
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2396
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+
+  Eschan_Clionid:
+    id:            5623
+    species:       clionid
+    spell_list_id: 21
+    skill_list_id: 65
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          ice:   4
+          wind:  2
+          earth: 2
+          water: 4
+          light: 2
+          dark:  2
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        2
+          poison:      4
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2380
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      spawn:
+        respawn: 180
+
+  Eschan_Euvhi:
+    id:      5630
+    species: euvhi
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:    3
+          light:    3
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Eschan_Gargouille:
+    id:      5650
+    species: gargouille
+    type:    [event]
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          ice:      2
+          wind:    -1
+          earth:    4
+          thunder:  1
+          light:   -1
+          dark:     5
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         4
+          light_sleep: -1
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 2225
+        entity_flags:  2179
+        animation_sub:    6
+        name_vis:        76
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+
+  Eschan_Ghrah:
+    id:            5627
+    species:       bird_ghrah
+    skill_list_id: 122
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      render:
+        look:
+          type:  automaton
+          model: 1168
+        entity_flags:  131
+        animation_sub:   4
+        name_prefix:     2
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 180
+
+  Eschan_Hpemde:
+    id:            5629
+    species:       hpemde
+    skill_list_id: 144
+    attributes:
+      combat:
+        skill: polearm
+        delay: 220
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1152
+        entity_flags:  129
+        animation_sub:   6
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Eschan_Ilaerns_Euvhi:
+    id:            5652
+    species:       euvhi
+    type:          [called]
+    skill_list_id: 109
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:    3
+          light:    3
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Eschan_Ilaerns_Spirit:
+    id:            5653
+    species:       dark_elemental
+    type:          [called]
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags: 129
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Eschan_Ilaerns_Wynav:
+    id:            5651
+    species:       wynav
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 530
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Eschan_Limule:
+    id:            5620
+    species:       limule
+    spell_list_id: 21
+    skill_list_id: 173
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          fire:    4
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          light:   4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          light_sleep: 4
+      render:
+        look:
+          type:  standard
+          model: 2381
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      spawn:
+        respawn: 180
+
+  Eschan_Murex:
+    id:            5621
+    species:       murex
+    spell_list_id: 21
+    skill_list_id: 187
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          fire:    2
+          wind:    4
+          thunder: 4
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          silence:     4
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2397
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      spawn:
+        respawn: 180
+
+  Eschan_Phuabo:
+    id:            5626
+    species:       phuabo
+    skill_list_id: 194
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:    1
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep:  1
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1155
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 180
+
+  Eschan_Porxie:
+    id:      5632
+    species: unclassified
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:     3
+          ice:      9
+          wind:     3
+          earth:    9
+          thunder:  3
+          water:    9
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     9
+          bind:         9
+          silence:      3
+          slow:         9
+          poison:       9
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2928
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 180
+
+  Eschan_Xzomit:
+    id:            5628
+    species:       xzomit
+    skill_list_id: 269
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          slow:     -2
+          poison:   -2
+      render:
+        look:
+          type:  standard
+          model: 528
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Eschan_Yovra:
+    id:            5624
+    species:       yovra
+    skill_list_id: 271
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  6
+          light:    2
+          dark:    -1
+        rank_status:
+          slow:        -2
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1149
+        entity_flags:  2177
+        animation_sub:    3
+        hitbox:           3
+      spawn:
+        respawn: 180
+
+  Eschan_Zdei:
+    id:            5625
+    species:       zdei
+    skill_list_id: 272
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 1157
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 180
+
+  Genbu_ER:
+    id:            5695
+    display_name:  Genbu
+    species:       legendary_adamantoise
+    type:          [notorious]
+    spell_list_id: 24
+    skill_list_id: 277
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    380
+        dmg_mult: 125
+      jobs: [pld, blm]
+      resists:
+        rank_element:
+          fire:    10
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder: -2
+          water:   10
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:      10
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 407
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Hanbi:
+    id:            5676
+    species:       gallu
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 467
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:     3
+          ice:      4
+          wind:     3
+          earth:    4
+          thunder:  3
+          water:    4
+          light:   -1
+          dark:     9
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         4
+          poison:       4
+          light_sleep: -1
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 1933
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        41
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Hanbis_Demon:
+    id:            5677
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 751
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Ilaern_blm:
+    id:            6221
+    species:       aern
+    spell_list_id: 21
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1368
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_brd:
+    id:            6227
+    species:       aern
+    spell_list_id: 6
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1368
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_bst:
+    id:            6226
+    species:       aern
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1369
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_drg:
+    id:            6231
+    species:       aern
+    skill_list_id: 440
+    attributes:
+      combat:
+        skill: polearm
+        delay: 360
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1371
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_drk:
+    id:            6225
+    species:       aern
+    spell_list_id: 5
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1370
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_mnk:
+    id:            6219
+    species:       aern
+    skill_list_id: 3
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1367
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_nin:
+    id:            6230
+    species:       aern
+    spell_list_id: 7
+    skill_list_id: 3
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1367
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_pld:
+    id:            6224
+    species:       aern
+    spell_list_id: 4
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1370
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_rdm:
+    id:            6222
+    species:       aern
+    spell_list_id: 3
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1370
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_rng:
+    id:            6228
+    species:       aern
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1369
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_sam:
+    id:            6229
+    species:       aern
+    skill_list_id: 440
+    attributes:
+      combat:
+        skill: polearm
+        delay: 360
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1371
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_smn:
+    id:            6232
+    species:       aern
+    skill_list_id: 439
+    attributes:
+      combat:
+        skill: staff
+        delay: 360
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1372
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_thf:
+    id:            6223
+    species:       aern
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1368
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_war:
+    id:            6218
+    species:       aern
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1369
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Ilaern_whm:
+    id:            6220
+    species:       aern
+    spell_list_id: 20
+    skill_list_id: 439
+    attributes:
+      combat:
+        skill: staff
+        delay: 360
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1372
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Kammavaca:
+    id:      5633
+    species: grimoire
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: club
+      jobs: [sch, sch]
+      render:
+        look:
+          type:  standard
+          model: 2068
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Kammavacas_Amoeban:
+    id:            5687
+    species:       amoeban
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 5
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, drk]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          earth:   4
+          thunder: 2
+          water:   2
+          dark:    4
+        rank_status:
+          paralyze:   2
+          bind:       2
+          slow:       4
+          poison:     2
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2396
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Kammavacas_Clionid:
+    id:            5685
+    species:       clionid
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 65
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          ice:   4
+          wind:  2
+          earth: 2
+          water: 4
+          light: 2
+          dark:  2
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        2
+          poison:      4
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2380
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Kammavacas_Limule:
+    id:            5684
+    species:       limule
+    type:          [notorious]
+    skill_list_id: 173
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    4
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          light:   4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          light_sleep: 4
+      render:
+        look:
+          type:  standard
+          model: 2381
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Kammavacas_Murex:
+    id:            5686
+    species:       murex
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 187
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          fire:    2
+          wind:    4
+          thunder: 4
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          silence:     4
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2397
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Khon:
+    id:            6983
+    species:       bishop
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2102
+        entity_flags:  133
+        animation_sub:   5
+        name_vis:        4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Khun:
+    id:            5669
+    species:       king
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2094
+        entity_flags:  133
+        animation_sub:   4
+        name_vis:        4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Kirin_ER:
+    id:            5693
+    display_name:  Kirin
+    species:       legendary_manticore
+    type:          [notorious]
+    spell_list_id: 23
+    skill_list_id: 281
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    360
+        dmg_mult: 125
+      jobs: [smn, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:    -2
+          earth:   10
+          thunder: 10
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          slow:        10
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 403
+        entity_flags: 2183
+        name_vis:        8
+        name_prefix:    32
+        model_size:      3
+        hitbox:         44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kirins_Avatar:
+    id:            2266
+    species:       carbuncle
+    type:          [called]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Kouryu:
+    id:            5694
+    species:       earth_wyrm
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 259
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -2
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 610
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         70
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Ma:
+    id:            5668
+    species:       knight
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2061
+        entity_flags:  133
+        animation_sub:   4
+        name_vis:        4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Met:
+    id:            6984
+    species:       queen
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2093
+        entity_flags:  133
+        animation_sub:   4
+        name_vis:        4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Naga_Raja:
+    id:            5634
+    species:       blue_wyrm
+    type:          [notorious]
+    spell_list_id: 1
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire: -2
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 609
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         70
+      behaviors:
+        flags:          [no_assist, no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3400000
+
+  Naga_Rajas_Lamia_1:
+    id:            5635
+    species:       lamiae
+    spell_list_id: 28
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags:   3
+        animation_sub:  4
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 18000
+
+  Naga_Rajas_Lamia_2:
+    id:      5636
+    species: lamiae
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1649
+        entity_flags:   3
+        animation_sub:  4
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 18000
+
+  Naphula:
+    id:            5682
+    species:       dvergr
+    type:          [notorious]
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2070
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Naphulas_Corpselight:
+    id:            5683
+    species:       corpselight
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 74
+    attributes:
+      combat:
+        skill: staff
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2069
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Pakecet:
+    id:            5688
+    species:       pteraketo
+    type:          [notorious]
+    skill_list_id: 451
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          light:   1
+          dark:    6
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        4
+          poison:      4
+          light_sleep: 1
+          dark_sleep:  6
+          blind:       6
+      render:
+        look:
+          type:  standard
+          model: 2929
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        40
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Pakecets_Pugil:
+    id:            5689
+    species:       pugil
+    type:          [notorious]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Palila:
+    id:            5674
+    species:       waktza
+    skill_list_id: 460
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    4
+          ice:     2
+          wind:    9
+          earth:   2
+          thunder: 9
+          water:   4
+          light:   4
+          dark:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     9
+          slow:        2
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  6
+          blind:       6
+      render:
+        look:
+          type:  standard
+          model: 2581
+        entity_flags:  131
+        animation_sub:   5
+        name_vis:        4
+        name_prefix:    32
+        model_size:      1
+        hitbox:         27
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Palilas_Vulture:
+    id:            5675
+    species:       bird
+    type:          [notorious]
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 445
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        27
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Peirithoos:
+    id:            5671
+    species:       monoceros
+    type:          [notorious]
+    skill_list_id: 39
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:   -2
+          thunder:  6
+          water:    2
+          dark:     4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:       -2
+          poison:      2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2227
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        29
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Ruea:
+    id:            6982
+    species:       rook
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2062
+        entity_flags:  133
+        animation_sub:   6
+        name_vis:        4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sava_Savanovic:
+    id:            5673
+    species:       vampyr
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 309
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1846
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Seiryu_ER:
+    id:            5691
+    display_name:  Seiryu
+    species:       wyvern
+    type:          [notorious]
+    spell_list_id: 25
+    skill_list_id: 278
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    360
+        dmg_mult: 125
+      jobs: [mnk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:    10
+          earth:   10
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     10
+          slow:        10
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 399
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Suzaku_ER:
+    id:            5692
+    display_name:  Suzaku
+    species:       bird
+    type:          [notorious]
+    spell_list_id: 27
+    skill_list_id: 280
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    10
+          ice:     10
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    10
+          bind:        10
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 337
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Tenodera:
+    id:            6986
+    species:       golden_mantid
+    type:          [notorious]
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2095
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Virava:
+    id:            6989
+    species:       rafflesia
+    type:          [notorious]
+    skill_list_id: 207
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -1
+          earth:    3
+          thunder:  1
+          light:    2
+        rank_status:
+          silence:     -1
+          slow:         3
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2931
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Viravas_Rafflesia:
+    id:            6990
+    species:       rafflesia
+    type:          [notorious]
+    skill_list_id: 207
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -1
+          earth:    3
+          thunder:  1
+          light:    2
+        rank_status:
+          silence:     -1
+          slow:         3
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2026
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Warder_of_Courage:
+    id:            5697
+    species:       aern
+    type:          [notorious]
+    spell_list_id: 145
+    skill_list_id: 329
+    attributes:
+      combat:
+        skill:    polearm
+        delay:    180
+        dmg_mult: 125
+      jobs: [drg, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1378
+        entity_flags:  135
+        animation_sub:   6
+        name_prefix:    32
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Dignity:
+    id:            5665
+    species:       thinker
+    type:          [notorious]
+    skill_list_id: 241
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 1128
+        entity_flags:  133
+        animation_sub:   6
+        name_prefix:    32
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Faith:
+    id:            5656
+    species:       euvhi
+    type:          [notorious]
+    spell_list_id: 138
+    skill_list_id: 109
+    attributes:
+      combat:
+        skill:    staff
+        delay:    200
+        dmg_mult: 125
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:    3
+          light:    3
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Fortitude:
+    id:            6980
+    species:       bird_ghrah
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 124
+    attributes:
+      combat:
+        skill:    sword
+        delay:    220
+        dmg_mult: 125
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  automaton
+          model: 1169
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    34
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Warder_of_Hope:
+    id:            5659
+    species:       phuabo
+    type:          [notorious]
+    skill_list_id: 194
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    280
+        dmg_mult: 125
+      jobs: [war, blm]
+      resists:
+        immune_status: [stun, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:    1
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep:  1
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1155
+        entity_flags:  2183
+        animation_sub:    5
+        name_vis:        24
+        name_prefix:     32
+        model_size:       3
+        hitbox:          16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Justice:
+    id:            5657
+    species:       xzomit
+    type:          [notorious]
+    skill_list_id: 269
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          slow:     -2
+          poison:   -2
+      render:
+        look:
+          type:  standard
+          model: 528
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        16
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Love:
+    id:            5661
+    species:       yovra
+    type:          [notorious]
+    skill_list_id: 271
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    220
+        dmg_mult: 125
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  6
+          light:    2
+          dark:    -1
+        rank_status:
+          slow:        -2
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1148
+        entity_flags:  2183
+        animation_sub:    4
+        name_vis:        24
+        name_prefix:     32
+        model_size:       3
+        hitbox:          16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Loyalty:
+    id:            5666
+    species:       gorger
+    type:          [notorious]
+    skill_list_id: 137
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 1133
+        entity_flags:  133
+        animation_sub:   6
+        name_prefix:    32
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Mercy:
+    id:            5667
+    species:       craver
+    type:          [notorious]
+    skill_list_id: 78
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  standard
+          model: 1139
+        entity_flags:  133
+        animation_sub:   6
+        name_prefix:    32
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Prudence:
+    id:            5660
+    species:       hpemde
+    type:          [notorious]
+    skill_list_id: 144
+    attributes:
+      combat:
+        skill:    dagger
+        delay:    220
+        dmg_mult: 125
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1152
+        entity_flags:  135
+        animation_sub:   6
+        name_prefix:    32
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warder_of_Temperance:
+    id:            5654
+    species:       zdei
+    type:          [notorious]
+    skill_list_id: 272
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 1158
+        entity_flags:  135
+        animation_sub:   5
+        name_prefix:    32
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warders_Ghrah:
+    id:            5655
+    species:       bird_ghrah
+    type:          [notorious]
+    skill_list_id: 122
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      render:
+        look:
+          type:  automaton
+          model: 1169
+        entity_flags:  129
+        animation_sub:   4
+        name_prefix:     2
+        hitbox:         10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Warders_Hpedme:
+    id:            5664
+    species:       hpemde
+    skill_list_id: 144
+    attributes:
+      combat:
+        skill: polearm
+        delay: 220
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1152
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Warders_Phuabo:
+    id:            5662
+    species:       phuabo
+    type:          [notorious]
+    roam:          [stealth]
+    skill_list_id: 194
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:    1
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep:  1
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1155
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Warders_Wynav:
+    id:            5698
+    species:       wynav
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 530
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Warders_Xzomit_5658:
+    id:            5658
+    display_name:  Warders_Xzomit
+    species:       xzomit
+    type:          [notorious]
+    skill_list_id: 269
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          slow:     -2
+          poison:   -2
+      render:
+        look:
+          type:  standard
+          model: 528
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Warders_Xzomit_5663:
+    id:            5663
+    display_name:  Warders_Xzomit
+    species:       xzomit
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 269
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          slow:     -2
+          poison:   -2
+      render:
+        look:
+          type:  standard
+          model: 528
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Wasserspeier:
+    id:            6985
+    species:       gargouille
+    type:          [notorious]
+    skill_list_id: 118
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          ice:      2
+          wind:    -1
+          earth:    4
+          thunder:  1
+          light:   -1
+          dark:     5
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         4
+          light_sleep: -1
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 2934
+        entity_flags:  133
+        animation_sub:   4
+        name_vis:        4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yilan:
+    id:            5678
+    species:       zilant
+    type:          [notorious]
+    skill_list_id: 470
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          fire:     2
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    4
+          dark:    11
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        4
+          poison:      4
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 2174
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         55
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  Yilans_Dragon:
+    id:            5679
+    species:       zilant
+    type:          [notorious]
+    skill_list_id: 260
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+          light: -2
+        rank_status:
+          poison:      -2
+          light_sleep:  6
+          dark_sleep:   6
+      render:
+        look:
+          type:  standard
+          model: 2383
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+spawns:
+  17960961:
+    template: Eschan_Zdei
+    at:       [14.720, -40.500, -416.540, 64]
+    level:    [81, 89]
+  17960962:
+    template: Eschan_Zdei
+    at:       [12.364, -40.500, -417.750, 64]
+    level:    [81, 89]
+  17960963:
+    template: Eschan_Zdei
+    at:       [-32.050, -40.700, -368.630, 64]
+    level:    [81, 89]
+  17960964:
+    template: Eschan_Zdei
+    at:       [-30.530, -40.700, -375.390, 64]
+    level:    [81, 89]
+  17960965:
+    template: Eschan_Zdei
+    at:       [30.312, -40.700, -377.250, 64]
+    level:    [81, 89]
+  17960966:
+    template: Eschan_Zdei
+    at:       [39.249, -40.700, -379.840, 64]
+    level:    [81, 89]
+  17960967:
+    template: Eschan_Zdei
+    at:       [-1.893, -40.500, -382.830, 64]
+    level:    [81, 89]
+  17960968:
+    template: Eschan_Zdei
+    at:       [35.423, -40.700, -462.140, 64]
+    level:    [81, 89]
+  17960969:
+    template: Eschan_Zdei
+    at:       [83.440, -40.700, -443.230, 64]
+    level:    [81, 89]
+  17960970:
+    template: Eschan_Zdei
+    at:       [51.936, -40.700, -441.480, 64]
+    level:    [81, 89]
+  17960971:
+    template: Eschan_Zdei
+    at:       [52.965, -24.780, -411.380, 64]
+    level:    [81, 89]
+  17960972:
+    template: Eschan_Zdei
+    at:       [57.673, -24.500, -418.900, 64]
+    level:    [81, 89]
+  17960973:
+    template: Eschan_Zdei
+    at:       [81.837, -24.700, -377.350, 64]
+    level:    [81, 89]
+  17960974:
+    template: Eschan_Zdei
+    at:       [79.796, -24.500, -418.470, 64]
+    level:    [81, 89]
+  17960975:
+    template: Eschan_Zdei
+    at:       [92.255, -24.700, -380.960, 64]
+    level:    [81, 89]
+  17960976:
+    template: Eschan_Zdei
+    at:       [135.700, -24.500, -374.260, 64]
+    level:    [81, 89]
+  17960977:
+    template: Eschan_Zdei
+    at:       [140.890, -24.500, -383.310, 64]
+    level:    [81, 89]
+  17960978:
+    template: Eschan_Zdei
+    at:       [141.860, -24.500, -370.380, 64]
+    level:    [81, 89]
+  17960979:
+    template: Eschan_Zdei
+    at:       [160.640, -24.500, -386.250, 64]
+    level:    [81, 89]
+  17960980:
+    template: Eschan_Zdei
+    at:       [158.880, -24.500, -384.480, 64]
+    level:    [81, 89]
+  17960981:
+    template: Eschan_Zdei
+    at:       [165.310, -40.500, -396.860, 64]
+    level:    [81, 89]
+  17960982:
+    template: Eschan_Zdei
+    at:       [187.090, -40.500, -425.340, 64]
+    level:    [81, 89]
+  17960983:
+    template: Eschan_Zdei
+    at:       [164.320, -39.570, -424.740, 64]
+    level:    [81, 89]
+  17960984:
+    template: Eschan_Zdei
+    at:       [-29.450, -40.700, -460.670, 64]
+    level:    [81, 89]
+  17960985:
+    template: Eschan_Zdei
+    at:       [-30.130, -40.700, -457.340, 64]
+    level:    [81, 89]
+  17960986:
+    template: Eschan_Zdei
+    at:       [-23.950, -40.700, -458.820, 64]
+    level:    [81, 89]
+  17960987:
+    template: Eschan_Zdei
+    at:       [-56.610, -24.500, -412.290, 64]
+    level:    [81, 89]
+  17960988:
+    template: Eschan_Zdei
+    at:       [-52.070, -32.500, -385.540, 64]
+    level:    [81, 89]
+  17960989:
+    template: Eschan_Zdei
+    at:       [-62.120, -24.700, -385.400, 64]
+    level:    [81, 89]
+  17960990:
+    template: Eschan_Zdei
+    at:       [-46.690, -24.500, -432.428, 64]
+    level:    [81, 89]
+  17960991:
+    template: Eschan_Zdei
+    at:       [-133.441, -24.500, -400.510, 64]
+    level:    [81, 89]
+  17960992:
+    template: Eschan_Zdei
+    at:       [-143.556, -24.500, -430.283, 64]
+    level:    [81, 89]
+  17960993:
+    template: Eschan_Zdei
+    at:       [-172.051, -38.194, -383.695, 64]
+    level:    [81, 89]
+  17960994:
+    template: Eschan_Zdei
+    at:       [-150.463, -30.500, -358.943, 64]
+    level:    [81, 89]
+  17960995:
+    template: Eschan_Zdei
+    at:       [-177.500, -40.500, -396.519, 64]
+    level:    [81, 89]
+  17960996:
+    template: Eschan_Zdei
+    at:       [-180.309, -40.500, -431.878, 64]
+    level:    [81, 89]
+  17960997:
+    template: Eschan_Zdei
+    at:       [-163.910, -39.526, -424.292, 64]
+    level:    [81, 89]
+  17960998:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [-5.401, -40.700, -335.520, 65]
+    level:    [115, 119]
+  17960999:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [4.021, -40.640, -337.830, 86]
+    level:    [115, 119]
+  17961000:
+    template: Ilaern_drg
+    script:   Eschan_Ilaern
+    at:       [4.817, -41.710, -305.540, 3]
+    level:    [115, 119]
+  17961001:
+    template: Eschan_Ilaerns_Wynav
+    at:       [54.000, -41.130, -202.210, 246]
+    level:    [116, 116]
+  17961002:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [4.758, -43.510, -264.790, 57]
+    level:    [115, 119]
+  17961003:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [4.254, -42.890, -274.850, 243]
+    level:    [115, 119]
+  17961004:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [0.912, -44.090, -223.700, 225]
+    level:    [115, 119]
+  17961005:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [0.309, -44.090, -222.940, 245]
+    level:    [115, 119]
+  17961006:
+    template: Ilaern_drg
+    script:   Eschan_Ilaern
+    at:       [1.268, -44.090, -224.960, 214]
+    level:    [115, 119]
+  17961007:
+    template: Eschan_Ilaerns_Wynav
+    at:       [70.686, -41.500, -215.210, 40]
+    level:    [116, 116]
+  17961008:
+    template: Ilaern_drg
+    script:   Eschan_Ilaern
+    at:       [31.781, -44.090, -208.980, 250]
+    level:    [115, 119]
+  17961009:
+    template: Eschan_Ilaerns_Wynav
+    at:       [71.925, -41.500, -218.170, 15]
+    level:    [116, 116]
+  17961010:
+    template: Ilaern_drg
+    script:   Eschan_Ilaern
+    at:       [66.380, -40.930, -201.830, 163]
+    level:    [115, 119]
+  17961011:
+    template: Eschan_Ilaerns_Wynav
+    at:       [74.509, -41.100, -218.600, 72]
+    level:    [116, 116]
+  17961012:
+    template: Eschan_Phuabo
+    at:       [78.289, -41.040, -194.550, 144]
+    level:    [112, 115]
+  17961013:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [65.030, -40.700, -173.710, 81]
+    level:    [115, 119]
+  17961014:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [80.166, -40.700, -150.550, 127]
+    level:    [115, 119]
+  17961015:
+    template: Eschan_Phuabo
+    at:       [77.061, -40.700, -181.500, 45]
+    level:    [112, 115]
+  17961016:
+    template: Eschan_Phuabo
+    at:       [48.414, -40.690, -168.180, 172]
+    level:    [112, 115]
+  17961017:
+    template: Eschan_Phuabo
+    at:       [83.565, -40.700, -168.940, 66]
+    level:    [112, 115]
+  17961018:
+    template: Eschan_Phuabo
+    at:       [77.860, -40.670, -184.020, 219]
+    level:    [112, 115]
+  17961019:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [140.910, -40.530, -174.320, 40]
+    level:    [115, 119]
+  17961020:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [129.280, -40.680, -159.010, 229]
+    level:    [115, 119]
+  17961021:
+    template: Ilaern_drg
+    script:   Eschan_Ilaern
+    at:       [126.410, -40.690, -162.330, 142]
+    level:    [115, 119]
+  17961022:
+    template: Eschan_Ilaerns_Wynav
+    at:       [73.969, -41.310, -216.800, 88]
+    level:    [116, 116]
+  17961023:
+    template: Eschan_Phuabo
+    at:       [117.660, -40.690, -157.450, 168]
+    level:    [112, 115]
+  17961024:
+    template: Eschan_Phuabo
+    at:       [128.250, -40.530, -148.850, 171]
+    level:    [112, 115]
+  17961025:
+    template: Eschan_Phuabo
+    at:       [119.830, -40.690, -161.510, 45]
+    level:    [112, 115]
+  17961026:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [110.060, -34.520, -178.740, 32]
+    level:    [115, 119]
+  17961027:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [118.920, -34.500, -187.140, 245]
+    level:    [115, 119]
+  17961028:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [121.180, -34.880, -189.020, 96]
+    level:    [115, 119]
+  17961029:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [118.890, -34.500, -182.780, 58]
+    level:    [115, 119]
+  17961030:
+    template: Ilaern_drg
+    script:   Eschan_Ilaern
+    at:       [-36.319, -43.868, -206.719, 4]
+    level:    [115, 119]
+  17961031:
+    template: Eschan_Ilaerns_Wynav
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [116, 116]
+  17961032:
+    template: Ilaern_drg
+    script:   Eschan_Ilaern
+    at:       [-66.740, -40.640, -200.310, 172]
+    level:    [115, 119]
+  17961033:
+    template: Eschan_Ilaerns_Wynav
+    at:       [-59.650, -40.080, -201.970, 171]
+    level:    [116, 116]
+  17961034:
+    template: Eschan_Phuabo
+    at:       [-64.520, -41.130, -207.670, 41]
+    level:    [112, 115]
+  17961035:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [-66.940, -40.700, -159.760, 69]
+    level:    [115, 119]
+  17961036:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [-85.150, -40.700, -162.520, 106]
+    level:    [115, 119]
+  17961037:
+    template: Eschan_Phuabo
+    at:       [-70.130, -40.700, -162.920, 57]
+    level:    [112, 115]
+  17961038:
+    template: Eschan_Phuabo
+    at:       [-85.630, -41.250, -180.470, 84]
+    level:    [112, 115]
+  17961039:
+    template: Eschan_Phuabo
+    at:       [-69.640, -40.700, -165.620, 58]
+    level:    [112, 115]
+  17961040:
+    template: Eschan_Phuabo
+    at:       [-69.890, -40.700, -161.010, 16]
+    level:    [112, 115]
+  17961041:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [-117.800, -40.690, -157.860, 65]
+    level:    [115, 119]
+  17961042:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [-141.400, -40.500, -174.260, 73]
+    level:    [115, 119]
+  17961043:
+    template: Ilaern_drg
+    script:   Eschan_Ilaern
+    at:       [-117.800, -40.690, -158.480, 58]
+    level:    [115, 119]
+  17961044:
+    template: Eschan_Ilaerns_Wynav
+    at:       [-119.900, -40.550, -152.130, 115]
+    level:    [116, 116]
+  17961045:
+    template: Eschan_Phuabo
+    at:       [-138.800, -40.530, -167.770, 135]
+    level:    [112, 115]
+  17961046:
+    template: Eschan_Phuabo
+    at:       [-119.500, -40.690, -162.500, 86]
+    level:    [112, 115]
+  17961047:
+    template: Eschan_Phuabo
+    at:       [-111.000, -40.500, -209.850, 42]
+    level:    [112, 115]
+  17961048:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [-122.300, -34.630, -185.350, 249]
+    level:    [115, 119]
+  17961049:
+    template: Ilaern_war
+    script:   Eschan_Ilaern
+    at:       [-111.700, -34.490, -183.100, 191]
+    level:    [115, 119]
+  17961050:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [-108.600, -34.580, -176.220, 39]
+    level:    [115, 119]
+  17961051:
+    template: Ilaern_blm
+    script:   Eschan_Ilaern
+    at:       [-125.700, -34.580, -180.220, 182]
+    level:    [115, 119]
+  17961052:
+    template: Eschan_Yovra
+    at:       [75.263, -41.700, -204.560, 29]
+    level:    [120, 121]
+  17961053:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [404.960, -8.621, -142.690, 242]
+    level:    [115, 119]
+  17961054:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [416.880, -8.911, -132.510, 194]
+    level:    [115, 119]
+  17961055:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [414.100, -8.826, -129.030, 1]
+    level:    [115, 119]
+  17961056:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [437.950, -4.073, -142.910, 65]
+    level:    [115, 119]
+  17961057:
+    template: Ilaern_bst
+    script:   Eschan_Ilaern
+    at:       [429.950, -7.314, -140.350, 69]
+    level:    [115, 119]
+  17961058:
+    template: Eschan_Ilaerns_Euvhi
+    at:       [426.670, -7.336, -143.930, 95]
+    level:    [116, 116]
+  17961059:
+    template: Eschan_Euvhi
+    at:       [386.010, -17.320, -125.400, 66]
+    level:    [115, 119]
+  17961060:
+    template: Eschan_Euvhi
+    at:       [383.460, -20.500, -59.395]
+    level:    [115, 119]
+  17961061:
+    template: Eschan_Euvhi
+    at:       [357.760, -20.500, -148.790]
+    level:    [115, 119]
+  17961062:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [389.570, -24.820, -11.364, 81]
+    level:    [115, 119]
+  17961063:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [392.800, -24.820, -5.543, 23]
+    level:    [115, 119]
+  17961064:
+    template: Eschan_Euvhi
+    at:       [389.510, -24.820, -10.093, 90]
+    level:    [115, 119]
+  17961065:
+    template: Eschan_Euvhi
+    at:       [391.010, -24.820, -26.843, 234]
+    level:    [115, 119]
+  17961066:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [391.020, -24.820, 51.768, 20]
+    level:    [115, 119]
+  17961067:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [383.050, -24.820, 56.050, 240]
+    level:    [115, 119]
+  17961068:
+    template: Ilaern_bst
+    script:   Eschan_Ilaern
+    at:       [380.200, -30.430, 39.967, 253]
+    level:    [115, 119]
+  17961069:
+    template: Eschan_Ilaerns_Euvhi
+    at:       [368.600, -34.340, 26.991, 42]
+    level:    [116, 116]
+  17961070:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [360.590, -40.690, -32.479, 96]
+    level:    [115, 119]
+  17961071:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [368.810, -41.010, -3.973, 67]
+    level:    [115, 119]
+  17961072:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [427.480, -40.670, -42.622, 212]
+    level:    [115, 119]
+  17961073:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [427.470, -40.500, -49.804, 2]
+    level:    [115, 119]
+  17961074:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [447.810, -40.500, 13.445, 207]
+    level:    [115, 119]
+  17961075:
+    template: Ilaern_whm
+    script:   Eschan_Ilaern
+    at:       [416.040, -40.720, 1.772, 64]
+    level:    [115, 119]
+  17961076:
+    template: Eschan_Euvhi
+    at:       [451.550, -40.550, 14.401, 144]
+    level:    [115, 119]
+  17961077:
+    template: Eschan_Euvhi
+    at:       [440.040, -40.500, 6.362, 103]
+    level:    [115, 119]
+  17961078:
+    template: Ilaern_bst
+    script:   Eschan_Ilaern
+    at:       [433.400, -40.850, 38.362, 58]
+    level:    [115, 119]
+  17961079:
+    template: Eschan_Ilaerns_Euvhi
+    at:       [441.710, -38.440, 57.791, 84]
+    level:    [116, 116]
+  17961080:
+    template: Eschan_Euvhi
+    at:       [384.590, -40.500, -34.470]
+    level:    [115, 119]
+  17961081:
+    template: Eschan_Euvhi
+    at:       [406.250, -40.500, 10.440]
+    level:    [115, 119]
+  17961082:
+    template: Ilaern_bst
+    script:   Eschan_Ilaern
+    at:       [432.230, -36.850, -133.380, 204]
+    level:    [115, 119]
+  17961083:
+    template: Eschan_Ilaerns_Euvhi
+    at:       [431.440, -36.500, -133.950, 186]
+    level:    [116, 116]
+  17961084:
+    template: Eschan_Euvhi
+    at:       [434.330, -36.500, -118.970]
+    level:    [115, 119]
+  17961085:
+    template: Eschan_Euvhi
+    at:       [439.730, -36.500, -106.780]
+    level:    [115, 119]
+  17961086:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [341.460, -24.820, -202.270, 71]
+    level:    [115, 119]
+  17961087:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [319.950, -24.820, -233.450, 249]
+    level:    [115, 119]
+  17961088:
+    template: Eschan_Euvhi
+    at:       [325.530, -24.820, -212.870, 196]
+    level:    [115, 119]
+  17961089:
+    template: Eschan_Euvhi
+    at:       [334.670, -24.820, -206.010, 45]
+    level:    [115, 119]
+  17961090:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [275.480, -24.820, -259.440, 21]
+    level:    [115, 119]
+  17961091:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [298.250, -24.820, -240.310, 211]
+    level:    [115, 119]
+  17961092:
+    template: Ilaern_bst
+    script:   Eschan_Ilaern
+    at:       [289.460, -38.690, -232.150, 90]
+    level:    [115, 119]
+  17961093:
+    template: Eschan_Ilaerns_Euvhi
+    at:       [285.880, -30.470, -253.320, 196]
+    level:    [116, 116]
+  17961094:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [304.480, -40.970, -211.670, 133]
+    level:    [115, 119]
+  17961095:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [319.640, -40.740, -188.070, 27]
+    level:    [115, 119]
+  17961096:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [376.120, -40.500, -248.770, 37]
+    level:    [115, 119]
+  17961097:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [375.130, -40.510, -238.520, 88]
+    level:    [115, 119]
+  17961098:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [381.490, -40.690, -272.020, 5]
+    level:    [115, 119]
+  17961099:
+    template: Ilaern_nin
+    script:   Eschan_Ilaern
+    at:       [379.420, -40.670, -262.600, 4]
+    level:    [115, 119]
+  17961100:
+    template: Eschan_Euvhi
+    at:       [362.150, -40.510, -265.150, 103]
+    level:    [115, 119]
+  17961101:
+    template: Eschan_Euvhi
+    at:       [363.880, -40.510, -262.770, 211]
+    level:    [115, 119]
+  17961102:
+    template: Ilaern_bst
+    script:   Eschan_Ilaern
+    at:       [320.210, -38.300, -308.380, 17]
+    level:    [115, 119]
+  17961103:
+    template: Eschan_Ilaerns_Euvhi
+    at:       [322.270, -40.390, -298.460, 40]
+    level:    [116, 116]
+  17961104:
+    template: Eschan_Euvhi
+    at:       [349.150, -40.500, -206.880]
+    level:    [115, 119]
+  17961105:
+    template: Eschan_Euvhi
+    at:       [307.480, -40.500, -235.660]
+    level:    [115, 119]
+  17961106:
+    template: Eschan_Clionid
+    at:       [567.020, -71.080, -24.545, 201]
+    level:    [115, 119]
+  17961107:
+    template: Eschan_Clionid
+    at:       [570.340, -70.610, -90.888, 206]
+    level:    [115, 119]
+  17961108:
+    template: Eschan_Clionid
+    at:       [546.790, -70.580, -95.079, 69]
+    level:    [115, 119]
+  17961109:
+    template: Eschan_Clionid
+    at:       [569.550, -70.760, -96.810, 251]
+    level:    [115, 119]
+  17961110:
+    template: Eschan_Clionid
+    at:       [555.400, -70.620, -66.027, 138]
+    level:    [115, 119]
+  17961111:
+    template: Eschan_Clionid
+    at:       [562.020, -68.840, -140.310, 145]
+    level:    [115, 119]
+  17961112:
+    template: Eschan_Clionid
+    at:       [559.410, -69.250, -177.820, 72]
+    level:    [115, 119]
+  17961113:
+    template: Eschan_Clionid
+    at:       [566.190, -68.590, -156.690, 203]
+    level:    [115, 119]
+  17961114:
+    template: Eschan_Yovra
+    at:       [561.600, -71.550, -103.300, 184]
+    level:    [120, 121]
+  17961115:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [213.780, -8.500, 316.229, 103]
+    level:    [115, 119]
+  17961116:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [278.580, -2.956, 375.324, 194]
+    level:    [115, 119]
+  17961117:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [215.980, -8.503, 318.121, 159]
+    level:    [115, 119]
+  17961118:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [264.090, -9.711, 355.955, 34]
+    level:    [115, 119]
+  17961119:
+    template: Ilaern_brd
+    script:   Eschan_Ilaern
+    at:       [278.880, -3.207, 372.828, 188]
+    level:    [115, 119]
+  17961120:
+    template: Eschan_Hpemde
+    at:       [242.080, -17.420, 326.200, 225]
+    level:    [115, 119]
+  17961121:
+    template: Eschan_Hpemde
+    at:       [241.010, -20.760, 304.819, 155]
+    level:    [115, 119]
+  17961122:
+    template: Eschan_Hpemde
+    at:       [211.120, -20.810, 326.170, 151]
+    level:    [115, 119]
+  17961123:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [123.770, -24.500, 378.351, 235]
+    level:    [115, 119]
+  17961124:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [114.170, -24.500, 377.111, 97]
+    level:    [115, 119]
+  17961125:
+    template: Eschan_Hpemde
+    at:       [135.700, -24.500, 374.204, 208]
+    level:    [115, 119]
+  17961126:
+    template: Eschan_Hpemde
+    at:       [148.930, -24.780, 368.562, 154]
+    level:    [115, 119]
+  17961127:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [68.013, -24.780, 365.373, 49]
+    level:    [115, 119]
+  17961128:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [65.997, -24.780, 383.842, 254]
+    level:    [115, 119]
+  17961129:
+    template: Ilaern_brd
+    script:   Eschan_Ilaern
+    at:       [98.338, -39.910, 360.404, 12]
+    level:    [115, 119]
+  17961130:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [149.710, -40.700, 340.451, 189]
+    level:    [115, 119]
+  17961131:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [115.700, -40.790, 359.531, 14]
+    level:    [115, 119]
+  17961132:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [166.860, -40.700, 395.972, 218]
+    level:    [115, 119]
+  17961133:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [173.950, -40.530, 394.885, 23]
+    level:    [115, 119]
+  17961134:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [118.390, -40.500, 427.075, 51]
+    level:    [115, 119]
+  17961135:
+    template: Ilaern_mnk
+    script:   Eschan_Ilaern
+    at:       [128.060, -40.500, 422.381, 123]
+    level:    [115, 119]
+  17961136:
+    template: Eschan_Hpemde
+    at:       [129.020, -40.500, 425.585, 92]
+    level:    [115, 119]
+  17961137:
+    template: Eschan_Hpemde
+    at:       [129.250, -40.310, 424.394, 108]
+    level:    [115, 119]
+  17961138:
+    template: Ilaern_brd
+    script:   Eschan_Ilaern
+    at:       [99.811, -40.640, 427.350, 248]
+    level:    [115, 119]
+  17961139:
+    template: Eschan_Hpemde
+    at:       [176.320, -40.500, 388.213, 85]
+    level:    [115, 119]
+  17961140:
+    template: Eschan_Hpemde
+    at:       [113.010, -40.780, 380.459, 76]
+    level:    [115, 119]
+  17961141:
+    template: Ilaern_brd
+    script:   Eschan_Ilaern
+    at:       [286.230, -36.780, 346.013, 27]
+    level:    [115, 119]
+  17961142:
+    template: Ilaern_brd
+    script:   Eschan_Ilaern
+    at:       [227.440, -36.500, 386.934, 128]
+    level:    [115, 119]
+  17961143:
+    template: Eschan_Hpemde
+    at:       [267.150, -36.780, 361.391, 153]
+    level:    [115, 119]
+  17961144:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [299.530, -24.780, 249.162, 98]
+    level:    [115, 119]
+  17961145:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [325.420, -24.780, 223.158, 250]
+    level:    [115, 119]
+  17961146:
+    template: Eschan_Hpemde
+    at:       [304.700, -24.780, 242.451, 117]
+    level:    [115, 119]
+  17961147:
+    template: Eschan_Hpemde
+    at:       [309.590, -24.780, 239.526, 95]
+    level:    [115, 119]
+  17961148:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [337.800, -24.780, 182.796, 165]
+    level:    [115, 119]
+  17961149:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [348.850, -24.780, 188.966, 211]
+    level:    [115, 119]
+  17961150:
+    template: Ilaern_brd
+    script:   Eschan_Ilaern
+    at:       [323.670, -33.810, 191.837, 135]
+    level:    [115, 119]
+  17961151:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [304.300, -40.710, 215.201, 125]
+    level:    [115, 119]
+  17961152:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [297.150, -40.650, 226.824, 81]
+    level:    [115, 119]
+  17961153:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [340.410, -40.530, 291.808, 232]
+    level:    [115, 119]
+  17961154:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [330.100, -40.700, 277.726, 211]
+    level:    [115, 119]
+  17961155:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [366.710, -40.570, 268.805, 75]
+    level:    [115, 119]
+  17961156:
+    template: Ilaern_rdm
+    script:   Eschan_Ilaern
+    at:       [344.680, -40.740, 236.688, 140]
+    level:    [115, 119]
+  17961157:
+    template: Eschan_Hpemde
+    at:       [382.170, -40.670, 246.472, 28]
+    level:    [115, 119]
+  17961158:
+    template: Eschan_Hpemde
+    at:       [375.420, -40.690, 269.320, 54]
+    level:    [115, 119]
+  17961159:
+    template: Ilaern_brd
+    script:   Eschan_Ilaern
+    at:       [385.130, -40.420, 216.604, 52]
+    level:    [115, 119]
+  17961160:
+    template: Eschan_Hpemde
+    at:       [328.800, -40.780, 227.531, 231]
+    level:    [115, 119]
+  17961161:
+    template: Eschan_Hpemde
+    at:       [303.830, -40.780, 267.812, 226]
+    level:    [115, 119]
+  17961162:
+    template: Eschan_Amoeban
+    at:       [198.370, -71.260, 515.697, 79]
+    level:    [115, 119]
+  17961163:
+    template: Eschan_Amoeban
+    at:       [244.240, -70.550, 497.119, 119]
+    level:    [115, 119]
+  17961164:
+    template: Eschan_Amoeban
+    at:       [245.040, -70.690, 528.765, 150]
+    level:    [115, 119]
+  17961165:
+    template: Eschan_Amoeban
+    at:       [234.490, -70.540, 501.140, 136]
+    level:    [115, 119]
+  17961166:
+    template: Eschan_Amoeban
+    at:       [249.030, -70.510, 505.571, 197]
+    level:    [115, 119]
+  17961167:
+    template: Eschan_Amoeban
+    at:       [290.440, -69.010, 487.830, 29]
+    level:    [115, 119]
+  17961168:
+    template: Eschan_Amoeban
+    at:       [290.340, -68.940, 486.886, 23]
+    level:    [115, 119]
+  17961169:
+    template: Eschan_Amoeban
+    at:       [332.930, -68.870, 483.536, 94]
+    level:    [115, 119]
+  17961170:
+    template: Eschan_Yovra
+    at:       [307.320, -69.450, 496.411, 233]
+    level:    [120, 121]
+  17961171:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-261.200, -8.500, 338.213, 182]
+    level:    [115, 119]
+  17961172:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-258.400, -8.505, 331.920, 55]
+    level:    [115, 119]
+  17961173:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-216.100, -8.581, 327.703, 157]
+    level:    [115, 119]
+  17961174:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-223.600, -8.501, 307.415, 239]
+    level:    [115, 119]
+  17961175:
+    template: Ilaern_rng
+    script:   Eschan_Ilaern
+    at:       [-260.200, -8.500, 337.790, 183]
+    level:    [115, 119]
+  17961176:
+    template: Eschan_Xzomit
+    at:       [-280.700, -4.060, 379.697, 14]
+    level:    [115, 119]
+  17961177:
+    template: Eschan_Xzomit
+    at:       [-221.700, -20.640, 316.302, 105]
+    level:    [115, 119]
+  17961178:
+    template: Eschan_Xzomit
+    at:       [-241.600, -20.620, 300.908, 228]
+    level:    [115, 119]
+  17961179:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-109.400, -24.610, 370.626, 105]
+    level:    [115, 119]
+  17961180:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-119.000, -24.610, 369.605, 16]
+    level:    [115, 119]
+  17961181:
+    template: Eschan_Xzomit
+    at:       [-137.900, -24.610, 367.631, 92]
+    level:    [115, 119]
+  17961182:
+    template: Eschan_Xzomit
+    at:       [-133.800, -24.610, 371.315, 117]
+    level:    [115, 119]
+  17961183:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-69.360, -24.610, 371.476, 60]
+    level:    [115, 119]
+  17961184:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-91.620, -24.610, 386.014, 118]
+    level:    [115, 119]
+  17961185:
+    template: Ilaern_rng
+    script:   Eschan_Ilaern
+    at:       [-79.800, -30.220, 376.731, 191]
+    level:    [115, 119]
+  17961186:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-108.000, -40.600, 362.571, 230]
+    level:    [115, 119]
+  17961187:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-140.700, -40.690, 342.321, 174]
+    level:    [115, 119]
+  17961188:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-166.900, -40.500, 385.954, 152]
+    level:    [115, 119]
+  17961189:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-159.900, -40.690, 395.075, 207]
+    level:    [115, 119]
+  17961190:
+    template: Ilaern_rng
+    script:   Eschan_Ilaern
+    at:       [-167.800, -40.680, 404.156, 29]
+    level:    [115, 119]
+  17961191:
+    template: Eschan_Xzomit
+    at:       [-179.100, -40.500, 401.339, 89]
+    level:    [115, 119]
+  17961192:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-120.100, -40.700, 442.300, 17]
+    level:    [115, 119]
+  17961193:
+    template: Ilaern_pld
+    script:   Eschan_Ilaern
+    at:       [-127.100, -40.510, 425.110, 18]
+    level:    [115, 119]
+  17961194:
+    template: Eschan_Xzomit
+    at:       [-126.500, -40.500, 420.281, 57]
+    level:    [115, 119]
+  17961195:
+    template: Eschan_Xzomit
+    at:       [-123.300, -40.540, 419.375, 34]
+    level:    [115, 119]
+  17961196:
+    template: Ilaern_rng
+    script:   Eschan_Ilaern
+    at:       [-102.100, -40.310, 433.432, 95]
+    level:    [115, 119]
+  17961197:
+    template: Eschan_Xzomit
+    at:       [-113.600, -40.610, 379.118, 180]
+    level:    [115, 119]
+  17961198:
+    template: Eschan_Xzomit
+    at:       [-157.300, -40.610, 363.595, 175]
+    level:    [115, 119]
+  17961199:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-326.700, -24.610, 226.830, 97]
+    level:    [115, 119]
+  17961200:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-294.900, -24.610, 263.359, 198]
+    level:    [115, 119]
+  17961201:
+    template: Eschan_Xzomit
+    at:       [-310.200, -24.610, 235.643, 211]
+    level:    [115, 119]
+  17961202:
+    template: Eschan_Xzomit
+    at:       [-314.300, -24.610, 238.919, 214]
+    level:    [115, 119]
+  17961203:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-323.200, -24.610, 208.667, 255]
+    level:    [115, 119]
+  17961204:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-333.100, -24.610, 174.977, 118]
+    level:    [115, 119]
+  17961205:
+    template: Ilaern_rng
+    script:   Eschan_Ilaern
+    at:       [-318.000, -34.570, 191.942, 86]
+    level:    [115, 119]
+  17961206:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-297.300, -40.680, 221.175, 235]
+    level:    [115, 119]
+  17961207:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-311.000, -40.610, 214.464, 96]
+    level:    [115, 119]
+  17961208:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-335.400, -40.690, 267.285, 192]
+    level:    [115, 119]
+  17961209:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-334.800, -40.670, 260.765, 33]
+    level:    [115, 119]
+  17961210:
+    template: Ilaern_rng
+    script:   Eschan_Ilaern
+    at:       [-318.500, -39.580, 311.329, 97]
+    level:    [115, 119]
+  17961211:
+    template: Eschan_Xzomit
+    at:       [-335.400, -40.670, 272.031, 255]
+    level:    [115, 119]
+  17961212:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-357.600, -40.500, 243.966, 179]
+    level:    [115, 119]
+  17961213:
+    template: Ilaern_drk
+    script:   Eschan_Ilaern
+    at:       [-361.600, -40.580, 258.088, 140]
+    level:    [115, 119]
+  17961214:
+    template: Eschan_Xzomit
+    at:       [-355.500, -40.500, 252.244, 186]
+    level:    [115, 119]
+  17961215:
+    template: Eschan_Xzomit
+    at:       [-348.700, -40.500, 254.694, 23]
+    level:    [115, 119]
+  17961216:
+    template: Ilaern_rng
+    script:   Eschan_Ilaern
+    at:       [-391.900, -38.570, 213.408, 85]
+    level:    [115, 119]
+  17961217:
+    template: Eschan_Xzomit
+    at:       [-319.600, -40.610, 221.121, 24]
+    level:    [115, 119]
+  17961218:
+    template: Eschan_Xzomit
+    at:       [-296.600, -40.610, 261.438, 157]
+    level:    [115, 119]
+  17961219:
+    template: Eschan_Murex
+    at:       [-438.400, -70.840, 358.057, 24]
+    level:    [115, 119]
+  17961220:
+    template: Eschan_Murex
+    at:       [-418.800, -71.010, 415.079, 133]
+    level:    [115, 119]
+  17961221:
+    template: Eschan_Murex
+    at:       [-410.300, -70.920, 414.683, 249]
+    level:    [115, 119]
+  17961222:
+    template: Eschan_Murex
+    at:       [-395.000, -71.230, 402.170, 123]
+    level:    [115, 119]
+  17961223:
+    template: Eschan_Murex
+    at:       [-408.300, -71.250, 380.877, 24]
+    level:    [115, 119]
+  17961224:
+    template: Eschan_Murex
+    at:       [-358.000, -69.350, 475.462, 139]
+    level:    [115, 119]
+  17961225:
+    template: Eschan_Murex
+    at:       [-349.900, -69.240, 472.854, 221]
+    level:    [115, 119]
+  17961226:
+    template: Eschan_Murex
+    at:       [-349.700, -68.950, 462.911, 240]
+    level:    [115, 119]
+  17961227:
+    template: Eschan_Yovra
+    at:       [-388.700, -70.540, 436.690, 48]
+    level:    [120, 121]
+  17961228:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-421.600, -9.442, -139.490, 87]
+    level:    [115, 119]
+  17961229:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-368.400, -8.500, -103.810, 60]
+    level:    [115, 119]
+  17961230:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-376.700, -8.500, -138.540, 174]
+    level:    [115, 119]
+  17961231:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-370.000, -8.510, -103.850]
+    level:    [115, 119]
+  17961232:
+    template: Ilaern_smn
+    script:   Eschan_Ilaern
+    at:       [-398.900, -8.500, -145.810, 184]
+    level:    [115, 119]
+  17961233:
+    template: Eschan_Ilaerns_Spirit
+    at:       [-399.900, -8.500, -145.470, 210]
+    level:    [116, 116]
+  17961234:
+    template: Eschan_Ghrah
+    at:       [-389.800, -15.930, -124.690, 220]
+    level:    [115, 119]
+  17961235:
+    template: Eschan_Ghrah
+    at:       [-353.900, -20.500, -160.470, 180]
+    level:    [115, 119]
+  17961236:
+    template: Eschan_Ghrah
+    at:       [-375.300, -20.490, -98.305, 53]
+    level:    [115, 119]
+  17961237:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-388.100, -24.500, -33.900, 19]
+    level:    [115, 119]
+  17961238:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-385.600, -24.500, -41.993, 51]
+    level:    [115, 119]
+  17961239:
+    template: Eschan_Ghrah
+    at:       [-386.400, -24.500, -32.999, 46]
+    level:    [115, 119]
+  17961240:
+    template: Eschan_Ghrah
+    at:       [-386.600, -24.500, -42.592, 113]
+    level:    [115, 119]
+  17961241:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-401.000, -24.500, 37.326, 106]
+    level:    [115, 119]
+  17961242:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-395.100, -24.500, 40.965, 39]
+    level:    [115, 119]
+  17961243:
+    template: Ilaern_smn
+    script:   Eschan_Ilaern
+    at:       [-372.900, -33.650, 34.485, 171]
+    level:    [115, 119]
+  17961244:
+    template: Eschan_Ilaerns_Spirit
+    at:       [-371.500, -32.500, 32.821, 213]
+    level:    [116, 116]
+  17961245:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-373.400, -40.540, -1.253, 151]
+    level:    [115, 119]
+  17961246:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-368.400, -40.680, -14.734, 53]
+    level:    [115, 119]
+  17961247:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-443.400, -40.500, -39.400, 170]
+    level:    [115, 119]
+  17961248:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-419.200, -42.000, -31.531, 35]
+    level:    [115, 119]
+  17961249:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-449.500, -40.500, 16.298, 66]
+    level:    [115, 119]
+  17961250:
+    template: Ilaern_thf
+    script:   Eschan_Ilaern
+    at:       [-469.200, -40.700, 2.207, 61]
+    level:    [115, 119]
+  17961251:
+    template: Eschan_Ghrah
+    at:       [-458.700, -40.670, 15.688, 103]
+    level:    [115, 119]
+  17961252:
+    template: Eschan_Ghrah
+    at:       [-428.500, -40.500, 20.442, 110]
+    level:    [115, 119]
+  17961253:
+    template: Ilaern_smn
+    script:   Eschan_Ilaern
+    at:       [-433.400, -40.470, 26.169, 34]
+    level:    [115, 119]
+  17961254:
+    template: Eschan_Ilaerns_Spirit
+    at:       [-431.500, -39.950, 34.252, 117]
+    level:    [116, 116]
+  17961255:
+    template: Eschan_Ghrah
+    at:       [-388.500, -40.500, 10.761]
+    level:    [115, 119]
+  17961256:
+    template: Eschan_Ghrah
+    at:       [-393.900, -40.500, -35.347, 124]
+    level:    [115, 119]
+  17961257:
+    template: Ilaern_smn
+    script:   Eschan_Ilaern
+    at:       [-423.900, -36.520, -153.940, 177]
+    level:    [115, 119]
+  17961258:
+    template: Eschan_Ilaerns_Spirit
+    at:       [-427.600, -36.500, -144.350, 44]
+    level:    [116, 116]
+  17961259:
+    template: Eschan_Ghrah
+    at:       [-429.300, -36.500, -140.650, 178]
+    level:    [115, 119]
+  17961260:
+    template: Eschan_Ghrah
+    at:       [-427.800, -36.530, -146.030, 50]
+    level:    [115, 119]
+  17961261:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-343.000, -24.500, -195.300, 116]
+    level:    [115, 119]
+  17961262:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-323.700, -24.500, -231.200, 43]
+    level:    [115, 119]
+  17961263:
+    template: Eschan_Ghrah
+    at:       [-336.800, -24.500, -209.530, 72]
+    level:    [115, 119]
+  17961264:
+    template: Eschan_Ghrah
+    at:       [-344.100, -24.500, -198.750, 171]
+    level:    [115, 119]
+  17961265:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-289.000, -24.500, -273.600, 156]
+    level:    [115, 119]
+  17961266:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-296.400, -24.500, -277.620, 123]
+    level:    [115, 119]
+  17961267:
+    template: Ilaern_smn
+    script:   Eschan_Ilaern
+    at:       [-287.000, -36.750, -240.810, 172]
+    level:    [115, 119]
+  17961268:
+    template: Eschan_Ilaerns_Spirit
+    at:       [-302.900, -24.500, -259.550, 185]
+    level:    [116, 116]
+  17961269:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-320.400, -40.570, -193.740, 119]
+    level:    [115, 119]
+  17961270:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-307.600, -40.690, -192.200, 6]
+    level:    [115, 119]
+  17961271:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-378.000, -40.660, -226.480, 250]
+    level:    [115, 119]
+  17961272:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-374.400, -40.580, -242.790, 219]
+    level:    [115, 119]
+  17961273:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-347.100, -40.510, -275.470, 205]
+    level:    [115, 119]
+  17961274:
+    template: Ilaern_sam
+    script:   Eschan_Ilaern
+    at:       [-337.900, -40.500, -259.480, 232]
+    level:    [115, 119]
+  17961275:
+    template: Eschan_Ghrah
+    at:       [-347.700, -40.500, -259.630, 124]
+    level:    [115, 119]
+  17961276:
+    template: Eschan_Ghrah
+    at:       [-336.500, -40.540, -256.780, 56]
+    level:    [115, 119]
+  17961277:
+    template: Ilaern_smn
+    script:   Eschan_Ilaern
+    at:       [-313.700, -37.700, -304.170, 208]
+    level:    [115, 119]
+  17961278:
+    template: Eschan_Ilaerns_Spirit
+    at:       [-332.700, -40.490, -282.990, 47]
+    level:    [116, 116]
+  17961279:
+    template: Eschan_Ghrah
+    at:       [-311.800, -40.500, -239.370, 229]
+    level:    [115, 119]
+  17961280:
+    template: Eschan_Ghrah
+    at:       [-340.800, -40.500, -202.850, 234]
+    level:    [115, 119]
+  17961281:
+    template: Eschan_Limule
+    at:       [-474.800, -70.620, -308.920, 162]
+    level:    [115, 119]
+  17961282:
+    template: Eschan_Limule
+    at:       [-500.600, -70.570, -279.120, 16]
+    level:    [115, 119]
+  17961283:
+    template: Eschan_Limule
+    at:       [-506.900, -70.940, -285.540, 238]
+    level:    [115, 119]
+  17961284:
+    template: Eschan_Limule
+    at:       [-499.300, -70.570, -277.190, 42]
+    level:    [115, 119]
+  17961285:
+    template: Eschan_Limule
+    at:       [-494.443, -70.557, -255.255, 228]
+    level:    [115, 119]
+  17961286:
+    template: Eschan_Limule
+    at:       [-549.825, -68.640, -190.872, 104]
+    level:    [115, 119]
+  17961287:
+    template: Eschan_Limule
+    at:       [-552.546, -68.879, -189.289, 217]
+    level:    [115, 119]
+  17961288:
+    template: Eschan_Limule
+    at:       [-533.107, -70.153, -224.042, 82]
+    level:    [115, 119]
+  17961289:
+    template: Eschan_Yovra
+    at:       [-487.600, -70.760, -269.610, 52]
+    level:    [120, 121]
+  17961290:
+    template: Eschan_Gargouille
+    at:       [20.239, -41.720, -340.040, 128]
+    level:    [111, 111]
+  17961291:
+    template: Eschan_Gargouille
+    at:       [20.239, -42.920, -324.020, 128]
+    level:    [111, 111]
+  17961292:
+    template: Eschan_Gargouille
+    at:       [20.239, -42.920, -315.950, 128]
+    level:    [111, 111]
+  17961293:
+    template: Eschan_Gargouille
+    at:       [20.239, -42.920, -307.980, 128]
+    level:    [111, 111]
+  17961294:
+    template: Eschan_Gargouille
+    at:       [20.239, -44.120, -292.000, 128]
+    level:    [111, 111]
+  17961295:
+    template: Eschan_Gargouille
+    at:       [20.239, -44.120, -284.070, 128]
+    level:    [111, 111]
+  17961296:
+    template: Eschan_Gargouille
+    at:       [20.239, -44.120, -276.010, 128]
+    level:    [111, 111]
+  17961297:
+    template: Eschan_Gargouille
+    at:       [20.239, -45.320, -259.970, 128]
+    level:    [111, 111]
+  17961298:
+    template: Eschan_Gargouille
+    at:       [-20.310, -41.720, -339.920]
+    level:    [111, 111]
+  17961299:
+    template: Eschan_Gargouille
+    at:       [-20.230, -42.920, -324.020]
+    level:    [111, 111]
+  17961300:
+    template: Eschan_Gargouille
+    at:       [-20.230, -42.920, -315.950]
+    level:    [111, 111]
+  17961301:
+    template: Eschan_Gargouille
+    at:       [-20.230, -42.920, -307.980]
+    level:    [111, 111]
+  17961302:
+    template: Eschan_Gargouille
+    at:       [-20.230, -44.120, -292.000]
+    level:    [111, 111]
+  17961303:
+    template: Eschan_Gargouille
+    at:       [-20.230, -44.120, -284.070]
+    level:    [111, 111]
+  17961304:
+    template: Eschan_Gargouille
+    at:       [-20.230, -44.120, -276.010]
+    level:    [111, 111]
+  17961305:
+    template: Eschan_Gargouille
+    at:       [-20.230, -45.320, -259.970]
+    level:    [111, 111]
+  17961306:
+    template: Eschan_Gargouille
+    at:       [378.000, -25.480, 0.730, 2]
+    level:    [111, 111]
+  17961307:
+    template: Eschan_Gargouille
+    at:       [378.000, -25.480, -12.529, 2]
+    level:    [111, 111]
+  17961308:
+    template: Eschan_Gargouille
+    at:       [378.000, -25.480, -25.826, 2]
+    level:    [111, 111]
+  17961309:
+    template: Eschan_Gargouille
+    at:       [320.840, -25.480, -201.210, 23]
+    level:    [111, 111]
+  17961310:
+    template: Eschan_Gargouille
+    at:       [313.000, -25.480, -212.170, 23]
+    level:    [111, 111]
+  17961311:
+    template: Eschan_Gargouille
+    at:       [305.930, -25.480, -223.300, 23]
+    level:    [111, 111]
+  17961312:
+    template: Eschan_Gargouille
+    at:       [116.250, -25.480, 360.216, 206]
+    level:    [111, 111]
+  17961313:
+    template: Eschan_Gargouille
+    at:       [128.860, -25.480, 355.871, 206]
+    level:    [111, 111]
+  17961314:
+    template: Eschan_Gargouille
+    at:       [141.200, -25.480, 351.075, 206]
+    level:    [111, 111]
+  17961315:
+    template: Eschan_Gargouille
+    at:       [290.270, -25.480, 242.751, 228]
+    level:    [111, 111]
+  17961316:
+    template: Eschan_Gargouille
+    at:       [298.000, -25.480, 232.470, 228]
+    level:    [111, 111]
+  17961317:
+    template: Eschan_Gargouille
+    at:       [306.640, -25.480, 221.822, 228]
+    level:    [111, 111]
+  17961318:
+    template: Eschan_Gargouille
+    at:       [-141.200, -25.480, 350.911, 175]
+    level:    [111, 111]
+  17961319:
+    template: Eschan_Gargouille
+    at:       [-128.800, -25.480, 355.845, 175]
+    level:    [111, 111]
+  17961320:
+    template: Eschan_Gargouille
+    at:       [-116.200, -25.480, 360.247, 175]
+    level:    [111, 111]
+  17961321:
+    template: Eschan_Gargouille
+    at:       [-306.500, -25.480, 221.791, 151]
+    level:    [111, 111]
+  17961322:
+    template: Eschan_Gargouille
+    at:       [-298.500, -25.480, 232.419, 155]
+    level:    [111, 111]
+  17961323:
+    template: Eschan_Gargouille
+    at:       [-290.100, -25.480, 242.690, 159]
+    level:    [111, 111]
+  17961324:
+    template: Eschan_Gargouille
+    at:       [-377.400, -25.480, -25.773, 123]
+    level:    [111, 111]
+  17961325:
+    template: Eschan_Gargouille
+    at:       [-378.200, -25.480, -12.581, 129]
+    level:    [111, 111]
+  17961326:
+    template: Eschan_Gargouille
+    at:       [-378.300, -25.480, 0.720, 126]
+    level:    [111, 111]
+  17961327:
+    template: Eschan_Gargouille
+    at:       [-305.700, -25.480, -223.070, 102]
+    level:    [111, 111]
+  17961328:
+    template: Eschan_Gargouille
+    at:       [-313.300, -25.480, -212.180, 107]
+    level:    [111, 111]
+  17961329:
+    template: Eschan_Gargouille
+    at:       [-320.500, -25.480, -200.970, 105]
+    level:    [111, 111]
+  17961330:
+    template: Warder_of_Temperance
+    at:       [2.605, -34.605, -472.606, 99]
+    level:    [124, 124]
+  17961331:
+    template: Warder_of_Fortitude
+    at:       [-445.176, -40.534, 10.822, 10]
+  17961332:
+    template: Warders_Ghrah
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [124, 124]
+  17961333:
+    template: Warders_Ghrah
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [124, 124]
+  17961334:
+    template: Warder_of_Faith
+    at:       [341.261, -24.821, -197.244, 9]
+    level:    [124, 124]
+  17961335:
+    template: Warder_of_Justice
+    at:       [-157.512, -40.500, 365.634, 175]
+    level:    [124, 124]
+  17961336:
+    template: Warders_Xzomit_5658
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961337:
+    template: Warders_Xzomit_5658
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961338:
+    template: Warders_Xzomit_5658
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961339:
+    template: Warders_Xzomit_5658
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961340:
+    template: Warders_Xzomit_5658
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961341:
+    template: Warders_Xzomit_5658
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961342:
+    template: Warder_of_Hope
+    at:       [-78.997, -40.500, -198.493, 119]
+    level:    [124, 124]
+  17961343:
+    template: Warder_of_Prudence
+    at:       [115.300, -40.500, 406.191, 126]
+    level:    [124, 124]
+  17961344:
+    template: Warder_of_Prudence
+    at:       [120.500, -40.513, 425.807, 70]
+    level:    [124, 124]
+  17961345:
+    template: Warder_of_Love
+    at:       [-431.045, -70.803, 397.578, 123]
+    level:    [124, 125]
+  17961346:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961347:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961348:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961349:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961350:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961351:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961352:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961353:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961354:
+    template: Warders_Phuabo
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 123]
+  17961355:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961356:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961357:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961358:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961359:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961360:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961361:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961362:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961363:
+    template: Warders_Xzomit_5663
+    script:   Warders_Xzomit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961364:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961365:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961366:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961367:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961368:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961369:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961370:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961371:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961372:
+    template: Warders_Hpedme
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [123, 124]
+  17961373:
+    template: Warder_of_Dignity
+    at:       [-548.861, -68.519, -205.536, 62]
+    level:    [124, 124]
+  17961374:
+    template: Warder_of_Loyalty
+    at:       [462.202, -70.519, -96.435, 246]
+    level:    [124, 124]
+  17961375:
+    template: Warder_of_Mercy
+    at:       [-442.023, -71.302, 336.785, 80]
+    level:    [125, 125]
+  17961376:
+    template: Eschan_Porxie
+    at:       [-260.580, -8.500, 341.691, 53]
+    level:    [119, 119]
+  17961377:
+    template: Eschan_Porxie
+    at:       [-261.397, -8.500, 347.348, 227]
+    level:    [119, 119]
+  17961378:
+    template: Eschan_Porxie
+    at:       [-335.895, -24.331, -198.614, 155]
+    level:    [119, 119]
+  17961379:
+    template: Bia
+    at:       [-290.960, -42.587, -400.527, 210]
+  17961380:
+    template: Bia
+  17961381:
+    template: Bia
+  17961382:
+    template: Ruea
+    at:       [-284.095, -42.535, -401.091, 235]
+  17961383:
+    template: Ruea
+  17961384:
+    template: Ruea
+  17961385:
+    template: Ma
+    at:       [108.020, -40.605, -430.971, 196]
+    level:    [125, 125]
+  17961386:
+    template: Ma
+    level:    [125, 125]
+  17961387:
+    template: Ma
+    at:       [-471.486, -42.587, 153.195, 148]
+    level:    [125, 125]
+  17961388:
+    template: Khon
+    at:       [-284.086, -42.491, -388.770, 64]
+  17961389:
+    template: Khon
+    at:       [107.019, -40.605, -432.584, 16]
+  17961390:
+    template: Khon
+  17961391:
+    template: Met
+    at:       [107.019, -40.605, -432.584, 241]
+  17961392:
+    template: Met
+  17961393:
+    template: Met
+  17961394:
+    template: Khun
+    at:       [291.394, -42.587, -401.071, 222]
+    level:    [125, 125]
+  17961395:
+    template: Khun
+    level:    [125, 125]
+  17961396:
+    template: Khun
+    at:       [-291.033, -42.587, -400.476, 207]
+    level:    [125, 125]
+  17961397:
+    template: Wasserspeier
+    at:       [-290.630, -42.587, -400.037, 209]
+  17961398:
+    template: Wasserspeier
+  17961399:
+    template: Wasserspeier
+  17961400:
+    template: Emputa
+    at:       [-291.357, -42.771, -391.450, 192]
+    level:    [125, 125]
+  17961401:
+    template: Emputa
+    level:    [125, 125]
+  17961402:
+    template: Emputa
+    at:       [571.479, -69.203, -185.686, 83]
+    level:    [125, 125]
+  17961403:
+    template: Peirithoos
+    at:       [-352.868, -69.205, 486.309, 165]
+    level:    [125, 125]
+  17961404:
+    template: Peirithoos
+    at:       [-471.486, -42.587, 153.195, 200]
+    level:    [125, 125]
+  17961405:
+    template: Peirithoos
+    at:       [-571.348, -69.204, -185.561, 226]
+    level:    [125, 125]
+  17961406:
+    template: Asida
+    at:       [-290.229, -42.587, -399.348, 198]
+    level:    [125, 125]
+  17961407:
+    template: Asida
+    level:    [125, 125]
+  17961408:
+    template: Asida
+    at:       [466.955, -42.772, 140.305, 101]
+    level:    [125, 125]
+  17961409:
+    template: Tenodera
+    at:       [-291.394, -42.587, -401.071, 143]
+  17961410:
+    template: Tenodera
+  17961411:
+    template: Tenodera
+  17961412:
+    template: Sava_Savanovic
+    at:       [-291.394, -42.587, -401.071, 43]
+    level:    [125, 125]
+  17961413:
+    template: Sava_Savanovic
+    at:       [-471.486, -42.587, 153.195, 27]
+    level:    [125, 125]
+  17961414:
+    template: Sava_Savanovic
+    at:       [95.005, -40.500, -439.173, 16]
+    level:    [125, 125]
+  17961415:
+    template: Palila
+    at:       [107.019, -40.605, -432.584]
+    level:    [125, 125]
+  17961416:
+    template: Palila
+    level:    [125, 125]
+  17961417:
+    template: Palila
+    at:       [115.485, -40.500, -438.714, 150]
+    level:    [125, 125]
+  17961418:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961419:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961420:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961421:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961422:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961423:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961424:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961425:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961426:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961427:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961428:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961429:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961430:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961431:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961432:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961433:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961434:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961435:
+    template: Palilas_Vulture
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [125, 125]
+  17961436:
+    template: Hanbi
+    at:       [-291.394, -42.587, -401.071, 85]
+    level:    [124, 125]
+  17961437:
+    template: Hanbi
+    at:       [-470.984, -42.587, 151.889, 252]
+    level:    [124, 125]
+  17961438:
+    template: Hanbi
+    at:       [-291.394, -42.587, -401.071, 27]
+    level:    [124, 125]
+  17961439:
+    template: Hanbis_Demon
+    at:       [-291.127, -42.587, -402.426, 118]
+    level:    [123, 123]
+  17961440:
+    template: Hanbis_Demon
+    at:       [-292.206, -42.587, -403.418, 198]
+    level:    [123, 123]
+  17961441:
+    template: Hanbis_Demon
+    at:       [292.241, -43.186, -384.170, 152]
+    level:    [123, 123]
+  17961442:
+    template: Hanbis_Demon
+    at:       [292.241, -43.186, -384.170, 152]
+    level:    [123, 123]
+  17961443:
+    template: Hanbis_Demon
+    at:       [-470.984, -42.587, 151.889, 152]
+    level:    [123, 123]
+  17961444:
+    template: Hanbis_Demon
+    at:       [104.388, -40.605, -431.689, 190]
+    level:    [123, 123]
+  17961445:
+    template: Hanbis_Demon
+    at:       [-289.669, -42.587, -398.429, 28]
+    level:    [123, 123]
+  17961446:
+    template: Hanbis_Demon
+    at:       [-288.791, -42.475, -399.776, 163]
+    level:    [123, 123]
+  17961447:
+    template: Hanbis_Demon
+    at:       [-290.316, -42.409, -403.751, 190]
+    level:    [123, 123]
+  17961448:
+    template: Hanbis_Demon
+    level:    [123, 123]
+  17961449:
+    template: Hanbis_Demon
+    level:    [123, 123]
+  17961450:
+    template: Hanbis_Demon
+    level:    [123, 123]
+  17961451:
+    template: Yilan
+    at:       [-472.328, -42.587, 153.452]
+    level:    [125, 125]
+  17961452:
+    template: Yilan
+    at:       [107.019, -40.605, -432.584]
+    level:    [125, 125]
+  17961453:
+    template: Yilan
+    at:       [-470.369, -42.632, 150.745, 3]
+    level:    [125, 125]
+  17961454:
+    template: Yilans_Dragon
+    at:       [-471.066, -42.406, 152.807]
+    level:    [124, 124]
+  17961455:
+    template: Yilans_Dragon
+    at:       [-289.306, -42.087, -404.197, 49]
+    level:    [124, 124]
+  17961456:
+    template: Yilans_Dragon
+    at:       [100.128, -40.310, -436.810, 218]
+    level:    [124, 124]
+  17961457:
+    template: Yilans_Dragon
+    at:       [100.572, -40.405, -438.149, 204]
+    level:    [124, 124]
+  17961458:
+    template: Yilans_Dragon
+    at:       [-468.615, -42.400, 149.793, 198]
+    level:    [124, 124]
+  17961459:
+    template: Yilans_Dragon
+    at:       [-471.302, -42.254, 151.978, 3]
+    level:    [124, 124]
+  17961460:
+    template: Amymone
+    at:       [-288.341, -42.587, -403.106, 101]
+    level:    [125, 125]
+  17961461:
+    template: Amymone
+    level:    [125, 125]
+  17961462:
+    template: Amymone
+    at:       [-557.820, -69.215, -183.230, 228]
+    level:    [125, 125]
+  17961463:
+    template: Amymones_Peapuk
+    at:       [-294.685, -42.539, -407.599, 99]
+    level:    [123, 124]
+  17961464:
+    template: Amymones_Peapuk
+    at:       [107.834, -40.605, -433.525, 182]
+    level:    [123, 124]
+  17961465:
+    template: Amymones_Peapuk
+    at:       [-556.054, -68.519, -193.255, 248]
+    level:    [123, 124]
+  17961466:
+    template: Amymones_Peapuk
+    at:       [-562.898, -69.120, -188.100, 149]
+    level:    [123, 124]
+  17961467:
+    template: Amymones_Peapuk
+    at:       [-477.543, -42.492, 156.237, 103]
+    level:    [123, 124]
+  17961468:
+    template: Amymones_Peapuk
+    level:    [123, 124]
+  17961469:
+    template: Amymones_Peapuk
+    level:    [123, 124]
+  17961470:
+    template: Amymones_Peapuk
+    level:    [123, 124]
+  17961471:
+    template: Amymones_Peapuk
+    level:    [123, 124]
+  17961472:
+    template: Naphula
+    at:       [471.486, -42.587, 153.195, 158]
+    level:    [125, 125]
+  17961473:
+    template: Naphula
+    at:       [105.213, -40.778, -425.650, 212]
+    level:    [125, 125]
+  17961474:
+    template: Naphula
+    at:       [-471.486, -42.587, 153.195, 74]
+    level:    [125, 125]
+  17961475:
+    template: Naphulas_Corpselight
+    at:       [470.889, -42.587, 151.964, 175]
+    level:    [125, 125]
+  17961476:
+    template: Naphulas_Corpselight
+    at:       [472.361, -42.587, 152.200, 159]
+    level:    [125, 125]
+  17961477:
+    template: Naphulas_Corpselight
+    at:       [105.657, -40.605, -435.171, 187]
+    level:    [125, 125]
+  17961478:
+    template: Naphulas_Corpselight
+    at:       [106.237, -40.605, -433.855, 140]
+    level:    [125, 125]
+  17961479:
+    template: Naphulas_Corpselight
+    at:       [98.395, -40.500, -428.677, 240]
+    level:    [125, 125]
+  17961480:
+    template: Naphulas_Corpselight
+    at:       [103.147, -40.778, -426.966, 50]
+    level:    [125, 125]
+  17961481:
+    template: Kammavaca
+    at:       [107.019, -40.605, -432.584]
+    level:    [121, 122]
+  17961482:
+    template: Kammavaca
+    at:       [-291.394, -42.587, -401.071, 136]
+    level:    [121, 122]
+  17961483:
+    template: Kammavaca
+    at:       [-471.580, -42.587, 153.200, 1]
+    level:    [121, 122]
+  17961484:
+    template: Kammavacas_Limule
+    at:       [104.279, -40.605, -430.796, 167]
+    level:    [123, 123]
+  17961485:
+    template: Kammavacas_Clionid
+    at:       [102.903, -40.509, -430.956, 4]
+    level:    [123, 123]
+  17961486:
+    template: Kammavacas_Murex
+    at:       [103.567, -40.605, -431.961, 47]
+    level:    [123, 123]
+  17961487:
+    template: Kammavacas_Amoeban
+    at:       [102.715, -40.778, -431.204, 40]
+    level:    [123, 123]
+  17961488:
+    template: Kammavacas_Limule
+    at:       [-294.436, -42.587, -402.691, 212]
+    level:    [123, 123]
+  17961489:
+    template: Kammavacas_Clionid
+    at:       [-292.202, -42.587, -402.151, 154]
+    level:    [123, 123]
+  17961490:
+    template: Kammavacas_Murex
+    at:       [-294.440, -42.587, -401.748, 232]
+    level:    [123, 123]
+  17961491:
+    template: Kammavacas_Amoeban
+    at:       [-292.961, -42.587, -401.557, 10]
+    level:    [123, 123]
+  17961492:
+    template: Kammavacas_Limule
+    at:       [288.033, -42.587, -401.155, 224]
+    level:    [123, 123]
+  17961493:
+    template: Kammavacas_Clionid
+    at:       [289.093, -42.758, -401.085, 255]
+    level:    [123, 123]
+  17961494:
+    template: Kammavacas_Murex
+    at:       [291.089, -42.587, -400.022, 52]
+    level:    [123, 123]
+  17961495:
+    template: Kammavacas_Amoeban
+    at:       [288.993, -42.587, -401.339, 13]
+    level:    [123, 123]
+  17961496:
+    template: Pakecet
+    at:       [105.322, -40.605, -432.129, 32]
+    level:    [123, 124]
+  17961497:
+    template: Pakecet
+    level:    [123, 124]
+  17961498:
+    template: Pakecet
+    at:       [-474.976, -42.587, 154.810, 185]
+    level:    [123, 124]
+  17961499:
+    template: Pakecets_Pugil
+    at:       [96.347, -40.500, -425.676, 192]
+    level:    [123, 123]
+  17961500:
+    template: Pakecets_Pugil
+    at:       [94.062, -40.500, -425.304, 212]
+    level:    [123, 123]
+  17961501:
+    template: Pakecets_Pugil
+    at:       [-462.703, -42.796, 145.808, 49]
+    level:    [123, 123]
+  17961502:
+    template: Pakecets_Pugil
+    at:       [-460.660, -42.297, 144.852, 68]
+    level:    [123, 123]
+  17961503:
+    template: Pakecets_Pugil
+    at:       [-478.945, -42.053, 157.525, 229]
+    level:    [123, 123]
+  17961504:
+    template: Pakecets_Pugil
+    at:       [-478.272, -42.108, 156.431, 217]
+    level:    [123, 123]
+  17961505:
+    template: Pakecets_Pugil
+    at:       [-460.944, -42.492, 146.149, 64]
+    level:    [123, 123]
+  17961506:
+    template: Pakecets_Pugil
+    at:       [-479.076, -42.004, 160.238, 4]
+    level:    [123, 123]
+  17961507:
+    template: Pakecets_Pugil
+    at:       [-462.302, -42.788, 146.409, 53]
+    level:    [123, 123]
+  17961508:
+    template: Pakecets_Pugil
+    at:       [-479.026, -42.003, 160.323, 5]
+    level:    [123, 123]
+  17961509:
+    template: Pakecets_Pugil
+    at:       [-468.712, -42.595, 152.557, 178]
+    level:    [123, 123]
+  17961510:
+    template: Pakecets_Pugil
+    at:       [-468.561, -42.639, 153.745, 165]
+    level:    [123, 123]
+  17961511:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961512:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961513:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961514:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961515:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961516:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961517:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961518:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961519:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961520:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961521:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961522:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961523:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961524:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961525:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961526:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961527:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961528:
+    template: Pakecets_Pugil
+    level:    [123, 123]
+  17961529:
+    template: Duke_Vepar
+    at:       [107.019, -40.605, -432.584, 164]
+  17961530:
+    template: Duke_Vepar
+  17961531:
+    template: Duke_Vepar
+  17961532:
+    template: Duke_Vepars_Gnat
+    at:       [105.187, -40.605, -433.506, 187]
+  17961533:
+    template: Duke_Vepars_Gnat
+  17961534:
+    template: Duke_Vepars_Gnat
+  17961535:
+    template: Virava
+    at:       [107.339, -40.605, -433.355, 55]
+  17961536:
+    template: Virava
+  17961537:
+    template: Virava
+  17961538:
+    template: Viravas_Rafflesia
+    at:       [108.411, -40.605, -436.026, 63]
+  17961539:
+    template: Viravas_Rafflesia
+    at:       [108.611, -40.755, -436.297, 66]
+  17961540:
+    template: Viravas_Rafflesia
+    at:       [109.385, -40.605, -434.987, 73]
+  17961541:
+    template: Viravas_Rafflesia
+    at:       [105.976, -40.605, -435.991, 34]
+  17961542:
+    template: Viravas_Rafflesia
+    at:       [107.569, -40.605, -434.821, 55]
+  17961543:
+    template: Viravas_Rafflesia
+  17961544:
+    template: Viravas_Rafflesia
+    at:       [109.307, -40.778, -437.432, 85]
+  17961545:
+    template: Viravas_Rafflesia
+  17961546:
+    template: Viravas_Rafflesia
+  17961547:
+    template: Viravas_Rafflesia
+  17961548:
+    template: Viravas_Rafflesia
+  17961549:
+    template: Viravas_Rafflesia
+  17961550:
+    template: Viravas_Rafflesia
+  17961551:
+    template: Viravas_Rafflesia
+  17961552:
+    template: Viravas_Rafflesia
+  17961553:
+    template: Viravas_Rafflesia
+  17961554:
+    template: Viravas_Rafflesia
+  17961555:
+    template: Viravas_Rafflesia
+  17961556:
+    template: Viravas_Rafflesia
+  17961557:
+    template: Viravas_Rafflesia
+  17961558:
+    template: Viravas_Rafflesia
+  17961559:
+    template: Byakko_ER
+    script:   Byakko
+    at:       [106.469, -40.605, -430.917, 180]
+    level:    [125, 125]
+  17961560:
+    template: Byakko_ER
+    script:   Byakko
+    level:    [125, 125]
+  17961561:
+    template: Byakko_ER
+    script:   Byakko
+    at:       [105.699, -40.500, -442.299, 55]
+    level:    [125, 125]
+  17961562:
+    template: Genbu_ER
+    script:   Genbu
+    at:       [292.724, -42.760, -405.071, 111]
+    level:    [125, 125]
+  17961563:
+    template: Genbu_ER
+    script:   Genbu
+    level:    [125, 125]
+  17961564:
+    template: Genbu_ER
+    script:   Genbu
+    level:    [125, 125]
+  17961565:
+    template: Seiryu_ER
+    script:   Seiryu
+    at:       [-292.206, -42.587, -398.847, 134]
+    level:    [125, 125]
+  17961566:
+    template: Seiryu_ER
+    script:   Seiryu
+    level:    [125, 125]
+  17961567:
+    template: Seiryu_ER
+    script:   Seiryu
+    at:       [95.754, -40.500, -440.720, 155]
+    level:    [125, 125]
+  17961568:
+    template: Suzaku_ER
+    script:   Suzaku
+    at:       [107.019, -40.605, -432.584, 96]
+    level:    [125, 125]
+  17961569:
+    template: Suzaku_ER
+    script:   Suzaku
+    level:    [125, 125]
+  17961570:
+    template: Suzaku_ER
+    script:   Suzaku
+    at:       [110.702, -40.778, -428.654, 113]
+    level:    [125, 125]
+  17961571:
+    template: Kirin_ER
+    script:   Kirin
+    at:       [106.148, -40.778, -427.618]
+    level:    [124, 124]
+  17961572:
+    template: Kirin_ER
+    script:   Kirin
+    level:    [124, 124]
+  17961573:
+    template: Kirin_ER
+    script:   Kirin
+    at:       [104.915, -40.605, -435.120, 182]
+    level:    [124, 124]
+  17961574:
+    template: Kirins_Avatar
+    at:       [104.902, -40.778, -427.520, 195]
+  17961575:
+    template: Kirins_Avatar
+  17961576:
+    template: Kirins_Avatar
+  17961577:
+    template: Kouryu
+    at:       [106.148, -40.778, -427.618]
+    level:    [124, 124]
+  17961578:
+    template: Kouryu
+    level:    [124, 124]
+  17961579:
+    template: Kouryu
+    at:       [104.915, -40.605, -435.119]
+    level:    [124, 124]
+  17961580:
+    template: Byakko_ER
+    script:   Byakko
+    at:       [103.924, -40.734, -425.113, 227]
+    level:    [125, 125]
+  17961581:
+    template: Byakko_ER
+    script:   Byakko
+    level:    [125, 125]
+  17961582:
+    template: Byakko_ER
+    script:   Byakko
+    level:    [125, 125]
+  17961583:
+    template: Genbu_ER
+    script:   Genbu
+    at:       [102.850, -40.779, -426.966, 87]
+    level:    [125, 125]
+  17961584:
+    template: Genbu_ER
+    script:   Genbu
+    level:    [125, 125]
+  17961585:
+    template: Genbu_ER
+    script:   Genbu
+    at:       [105.597, -40.605, -432.655, 191]
+    level:    [125, 125]
+  17961586:
+    template: Seiryu_ER
+    script:   Seiryu
+    at:       [104.798, -40.778, -426.029, 239]
+    level:    [125, 125]
+  17961587:
+    template: Seiryu_ER
+    script:   Seiryu
+    level:    [125, 125]
+  17961588:
+    template: Seiryu_ER
+    script:   Seiryu
+    at:       [105.294, -40.605, -432.621, 128]
+    level:    [125, 125]
+  17961589:
+    template: Suzaku_ER
+    script:   Suzaku
+    at:       [105.590, -40.245, -426.910, 232]
+    level:    [125, 125]
+  17961590:
+    template: Suzaku_ER
+    script:   Suzaku
+    level:    [125, 125]
+  17961591:
+    template: Suzaku_ER
+    script:   Suzaku
+    at:       [104.862, -40.605, -433.781, 201]
+    level:    [125, 125]
+  17961592:
+    template: Ark_Angel_HM
+    at:       [96.865, -40.500, -430.834, 103]
+    level:    [124, 124]
+  17961593:
+    template: Ark_Angel_HM
+    level:    [124, 124]
+  17961594:
+    template: Ark_Angel_HM
+    at:       [-568.685, -69.204, -185.461, 23]
+    level:    [124, 124]
+  17961595:
+    template: Ark_Angel_TT
+    at:       [102.650, -40.778, -431.036, 8]
+    level:    [124, 124]
+  17961596:
+    template: Ark_Angel_TT
+    level:    [124, 124]
+  17961597:
+    template: Ark_Angel_TT
+    at:       [-286.290, -42.492, -394.342, 87]
+    level:    [124, 124]
+  17961598:
+    template: Ark_Angel_MR
+    at:       [107.936, -40.605, -430.155, 134]
+    level:    [124, 124]
+  17961599:
+    template: Ark_Angel_MR
+    level:    [124, 124]
+  17961600:
+    template: Ark_Angel_MR
+    at:       [-568.174, -69.204, -187.354, 77]
+    level:    [124, 124]
+  17961601:
+    template: Ark_Angels_Gnat
+    at:       [108.217, -40.778, -427.755, 94]
+  17961602:
+    template: Ark_Angels_Gnat
+  17961603:
+    template: Ark_Angels_Gnat
+  17961604:
+    template: Ark_Angels_Karakul
+    at:       [-291.254, -42.587, -402.561, 98]
+    level:    [123, 124]
+  17961605:
+    template: Ark_Angels_Karakul
+    level:    [123, 124]
+  17961606:
+    template: Ark_Angels_Karakul
+    at:       [-566.940, -69.120, -187.949, 92]
+    level:    [123, 124]
+  17961607:
+    template: Ark_Angel_EV
+    at:       [109.778, -40.500, -421.445, 211]
+    level:    [124, 124]
+  17961608:
+    template: Ark_Angel_EV
+    level:    [124, 124]
+  17961609:
+    template: Ark_Angel_EV
+    at:       [-570.592, -69.204, -184.690, 113]
+    level:    [124, 124]
+  17961610:
+    template: Ark_Angel_GK
+    at:       [-292.052, -42.587, -400.442, 157]
+    level:    [123, 124]
+  17961611:
+    template: Ark_Angel_GK
+    level:    [123, 124]
+  17961612:
+    template: Ark_Angel_GK
+    at:       [-471.485, -42.587, 153.190, 38]
+    level:    [123, 124]
+  17961613:
+    template: Ark_Angels_Wyvern_ER
+    script:   Ark_Angels_Wyvern
+    at:       [-293.304, -42.587, -401.068, 175]
+    level:    [122, 123]
+  17961614:
+    template: Ark_Angels_Wyvern_ER
+    script:   Ark_Angels_Wyvern
+    level:    [122, 123]
+  17961615:
+    template: Ark_Angels_Wyvern_ER
+    script:   Ark_Angels_Wyvern
+    at:       [-471.173, -42.587, 153.321, 65]
+    level:    [122, 123]
+  17961616:
+    template: Warder_of_Courage
+    at:       [107.019, -40.605, -432.584]
+    level:    [150, 150]
+  17961617:
+    template: Warder_of_Courage
+    at:       [-425.652, -40.500, -6.164]
+    level:    [150, 150]
+  17961618:
+    template: Warder_of_Courage
+    at:       [107.890, -40.605, -431.218, 56]
+    level:    [150, 150]
+  17961619:
+    template: Warders_Wynav
+    at:       [105.370, -40.689, -430.163, 56]
+    level:    [145, 145]
+  17961620:
+    template: Warders_Wynav
+    at:       [106.104, -40.705, -429.857, 63]
+    level:    [145, 145]
+  17961621:
+    template: Warders_Wynav
+    at:       [-425.544, -40.207, -8.638, 201]
+    level:    [145, 145]
+  17961622:
+    template: Warders_Wynav
+    at:       [-426.762, -40.173, -7.998, 240]
+    level:    [145, 145]
+  17961623:
+    template: Warders_Wynav
+    at:       [-423.847, -40.206, -8.418, 146]
+    level:    [145, 145]
+  17961624:
+    template: Warders_Wynav
+    at:       [-424.674, -40.197, -8.801, 113]
+    level:    [145, 145]
+  17961625:
+    template: Warders_Wynav
+    at:       [-426.004, -40.500, -6.016, 51]
+    level:    [145, 145]
+  17961626:
+    template: Warders_Wynav
+    at:       [-423.984, -40.189, -7.428, 89]
+    level:    [145, 145]
+  17961627:
+    template: Warders_Wynav
+    at:       [106.556, -40.605, -430.541, 51]
+    level:    [145, 145]
+  17961628:
+    template: Warders_Wynav
+    at:       [108.720, -40.605, -431.119, 85]
+    level:    [145, 145]
+  17961629:
+    template: Warders_Wynav
+    at:       [108.012, -40.605, -429.579, 70]
+    level:    [145, 145]
+  17961630:
+    template: Warders_Wynav
+    level:    [145, 145]
+  17961631:
+    template: Warders_Wynav
+    level:    [145, 145]
+  17961632:
+    template: Warders_Wynav
+    level:    [145, 145]
+  17961633:
+    template: Warders_Wynav
+    level:    [145, 145]
+  17961634:
+    template: Warders_Wynav
+    level:    [145, 145]
+  17961635:
+    template: Warders_Wynav
+    level:    [145, 145]
+  17961636:
+    template: Warders_Wynav
+    level:    [145, 145]
+  17961637:
+    template: Balamor_ER
+    script:   Balamor
+    at:       [-1.185, -54.905, -618.450, 179]
+    level:    [121, 122]
+  17961638:
+    template: Naga_Raja
+    at:       [0.001, -44.099, -210.000, 64]
+    level:    [119, 119]
+  17961639:
+    template: Naga_Rajas_Lamia_1
+    script:   Naga_Rajas_Lamia
+    at:       [5.583, -44.086, -211.099, 69]
+    level:    [115, 117]
+  17961640:
+    template: Naga_Rajas_Lamia_2
+    script:   Naga_Rajas_Lamia
+    at:       [0.816, -44.099, -216.170, 196]
+    level:    [115, 117]
+  17961641:
+    template: Naga_Rajas_Lamia_1
+    script:   Naga_Rajas_Lamia
+    at:       [4.620, -44.032, -214.133, 133]
+    level:    [115, 117]
+  17961642:
+    template: Naga_Rajas_Lamia_2
+    script:   Naga_Rajas_Lamia
+    at:       [2.035, -44.099, -217.008, 180]
+    level:    [115, 117]
+  17961643:
+    template: Naga_Rajas_Lamia_1
+    script:   Naga_Rajas_Lamia
+    at:       [2.236, -44.099, -211.939, 157]
+    level:    [115, 117]
+  17961644:
+    template: Naga_Rajas_Lamia_2
+    script:   Naga_Rajas_Lamia
+    at:       [5.644, -44.099, -214.791, 79]
+    level:    [115, 117]
+  17961645:
+    template: Naga_Rajas_Lamia_1
+    script:   Naga_Rajas_Lamia
+    at:       [4.921, -44.045, -212.132, 72]
+    level:    [115, 117]
+  17961646:
+    template: Naga_Rajas_Lamia_2
+    script:   Naga_Rajas_Lamia
+    at:       [6.339, -44.099, -213.972, 80]
+    level:    [115, 117]
+  17961647:
+    template: Naga_Rajas_Lamia_1
+    script:   Naga_Rajas_Lamia
+    at:       [4.287, -43.873, -214.330, 71]
+    level:    [115, 117]
+  17961648:
+    template: Naga_Rajas_Lamia_2
+    script:   Naga_Rajas_Lamia
+    at:       [3.779, -44.099, -210.366, 67]
+    level:    [115, 117]
+  17961649:
+    template: Naga_Rajas_Lamia_1
+    script:   Naga_Rajas_Lamia
+    at:       [3.750, -43.885, -215.937, 157]
+    level:    [115, 117]
+  17961650:
+    script: Mireu

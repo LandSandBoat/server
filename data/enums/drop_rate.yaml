@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint16_t
+
+values:
+  ultra_rare:     1 # 0.10%
+  super_rare:     5 # 0.50%
+  very_rare:     10 # 1.00%
+  rare:          50 # 5.00%
+  uncommon:     100 # 10.00%
+  common:       150 # 15.00%
+  very_common:  240 # 24.00%
+  always:      1000 # 100.00%

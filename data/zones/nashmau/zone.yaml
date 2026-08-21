@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [mazurka, mogmenu, auction_house, yell, assist]
+music:
+  day:          175
+  night:        175
+  battle_solo:  175
+  battle_party: 175
+
+zonelines:
+
+  z1h0:
+    from:  [42.910, -9.508, -24.006]
+    to:    caedarva_mire
+    at:    [25.965, 2.535, -700.009]
+    scale: [1.500, 6.000]
+
+  z1h2:
+    from:  [16.000, -9.508, 82.895]
+    to:    caedarva_mire
+    at:    [13.930, -6.684, -453.836]
+    scale: [1.500, 5.000]
+
+  z1h4:
+    from:  [-42.911, -9.508, 23.997]
+    to:    caedarva_mire
+    at:    [-260.961, -4.370, -699.985, 3.141593]
+    scale: [1.500, 6.000]

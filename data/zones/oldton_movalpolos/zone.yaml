@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          221
+  night:        221
+  battle_solo:  115
+  battle_party: 218
+
+zonelines:
+
+  z0b0:
+    from:  [-325.112, 4.409, -259.658]
+    to:    north_gustaberg
+    at:    [575.589, -16.677, 692.864, 2.443461]
+    scale: [1.000, 4.000]
+
+  z0b2:
+    from:  [-307.079, -10.849, -100.008]
+    to:    north_gustaberg
+    at:    [455.859, -6.690, 733.027, 2.443461]
+    scale: [1.000, 4.000]
+
+  z0b4:
+    from:  [-375.326, -14.094, 464.797]
+    to:    gusgen_mines
+    at:    [100.007, -61.630, -237.441, 4.712389]
+    scale: [1.000, 3.000]
+
+  z0b6:
+    from:  [73.896, 5.030, 139.753]
+    to:    newton_movalpolos
+    at:    [-261.858, 10.858, 180.559]
+    scale: [1.000, 4.000]
+
+  z0b8:
+    from:  [139.913, 5.031, -5.051]
+    to:    newton_movalpolos
+    at:    [-220.031, 10.065, 43.605, 4.712389]
+    scale: [1.000, 4.000]
+
+  z0ba:
+    from:  [247.604, 8.701, -59.960]
+    to:    newton_movalpolos
+    at:    [-141.883, 10.737, -19.373]
+    scale: [1.000, 4.000]
+
+  z0bc:
+    from:  [199.017, 5.050, -140.129]
+    to:    newton_movalpolos
+    at:    [-196.066, 6.088, -59.949]
+    scale: [1.000, 4.000]
+
+  z0be:
+    from:  [100.132, 12.877, -158.626]
+    to:    newton_movalpolos
+    at:    [-260.004, 10.148, -123.785, 1.570796]
+    scale: [1.000, 4.000]
+
+  z0bg:
+    from:  [-2.339, 4.788, -219.733]
+    to:    newton_movalpolos
+    at:    [-356.944, 6.047, -179.974]
+    scale: [1.000, 4.000]

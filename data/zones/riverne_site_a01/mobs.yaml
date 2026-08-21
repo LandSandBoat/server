@@ -1,0 +1,1973 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aiatar:
+    id:            68
+    species:       shadow_wyvern
+    type:          [notorious]
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 318
+        entity_flags:  3
+        model_size:    3
+        hitbox:       44
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 5200
+    loot:
+      drops:
+        - chance: very_common
+          item:   giant_scale
+        - chance: very_common
+          item:   wyvern_skin
+        - chance: uncommon
+          item:   falconers_hose
+        - chance: uncommon
+          item:   sable_cuisses
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+
+  Arcane_Phantasm:
+    id:            215
+    species:       fomor
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 568
+        entity_flags: 1155
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Atomic_Cluster:
+    id:            277
+    species:       cluster
+    skill_list_id: 68
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  3
+          water:    3
+          light:    3
+          dark:     3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 290
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          37
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   cluster_core
+        - chance: uncommon
+          item:   pot_of_clustered_tar
+        - chance: uncommon
+          item:   pinch_of_cluster_ash
+        - chance: rare
+          item:   cluster_arm
+      steal: cluster_core
+
+  Carmine_Dobsonfly:
+    id:            641
+    species:       fly
+    type:          [notorious]
+    spell_list_id: 145
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 449
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        links: true
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 1300
+    loot:
+      drops:
+        - chance: always
+          item:   dobson_bandana
+        - chance: common
+          item:   jaeger_ring
+        - chance: uncommon
+          item:   voyager_sallet
+
+  Cloud_Hippogryph:
+    id:            747
+    species:       hippogryph
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: uncommon
+          item:   hippogryph_tailfeather
+        - chance: very_rare
+          item:   hippogryph_feather
+      despoil:
+        hippogryph_feather:     0
+        hippogryph_tailfeather: 0
+
+  Darner:
+    id:            4532
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   insect_wing
+      despoil:
+        insect_wing: 0
+    content: ABYSSEA
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3200
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Firedrake:
+    id:            1340
+    species:       shadow_wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   giant_scale
+        - chance: uncommon
+          item:   wyvern_skin
+        - chance: rare
+          item:   wyvern_wing
+      despoil:
+        handful_of_wyvern_scales: 0
+
+  Flamedrake:
+    id:            1355
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 133
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   giant_scale
+        - chance: rare
+          item:   wyvern_wing
+        - chance: uncommon
+          item:   wyvern_skin
+      despoil:
+        handful_of_wyvern_scales: 0
+
+  Hawker:
+    id:            1901
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   insect_wing
+      despoil:
+        insect_wing: 0
+
+  Hawkertrap_RSA:
+    id:            6962
+    display_name:  Hawkertrap
+    species:       flytrap
+    skill_list_id: 114
+    attributes:
+      combat:
+        skill: polearm
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -3
+          ice:   -1
+          wind:   3
+          water:  3
+          light:  3
+          dark:  -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1345
+        entity_flags:  1155
+        animation_sub:    8
+        model_size:       1
+        hitbox:          12
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   flytrap_leaf
+      despoil:
+        flytrap_leaf: 0
+
+  Heliodromos:
+    id:            1918
+    species:       hippogryph
+    type:          [notorious]
+    skill_list_id: 141
+    attributes:
+      combat:
+        skill: dagger
+        delay: 210
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+    loot:
+      drops:
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: uncommon
+          item:   hippogryph_tailfeather
+        - chance: uncommon
+          item:   hippogryph_tailfeather
+        - chance: uncommon
+          item:   mountain_gaiters
+
+  Hippogryph:
+    id:            1960
+    species:       hippogryph
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: uncommon
+          item:   hippogryph_tailfeather
+      despoil:
+        hippogryph_feather:     0
+        hippogryph_tailfeather: 0
+
+  Ouryu:
+    id:            3070
+    species:       earth_wyrm
+    type:          [notorious, battlefield]
+    spell_list_id: 109
+    skill_list_id: 259
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -2
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 610
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         50
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_kunwu_ore
+        - chance: always
+          item:   chunk_of_kunwu_ore
+        - chance: always
+          item:   monarchs_orb
+        - chance: always
+          item:   chunk_of_kunwu_ore
+        - chance: always
+          item:   wyrm_horn
+        - chance: always
+          item:   tutelary
+        - chance: uncommon
+          item:   imanotsurugi
+        - chance: very_common
+          one_of:
+            lock_of_sirens_hair:         15
+            square_of_damascene_cloth:   15
+            vial_of_black_beetle_blood:  15
+            adaman_ingot:                10
+            damascus_ingot:              10
+            divine_log:                  10
+            spool_of_malboro_fiber:      10
+            behemoth_hide:              7.5
+            piece_of_oxblood:           7.5
+        - chance: very_common
+          one_of:
+            slice_of_dragon_meat: 50
+            dragon_talon:         30
+            dragon_heart:         10
+            vial_of_dragon_blood: 10
+
+  Ouryu_Large:
+    id:            7286
+    display_name:  Ouryu
+    species:       earth_wyrm
+    type:          [notorious, battlefield]
+    spell_list_id: 109
+    skill_list_id: 259
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -2
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 610
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      2
+        hitbox:         57
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_kunwu_ore
+        - chance: always
+          item:   chunk_of_kunwu_ore
+        - chance: always
+          item:   monarchs_orb
+        - chance: always
+          item:   chunk_of_kunwu_ore
+        - chance: always
+          item:   wyrm_horn
+        - chance: always
+          item:   tutelary
+        - chance: uncommon
+          item:   imanotsurugi
+        - chance: very_common
+          one_of:
+            lock_of_sirens_hair:         15
+            square_of_damascene_cloth:   15
+            vial_of_black_beetle_blood:  15
+            adaman_ingot:                10
+            damascus_ingot:              10
+            divine_log:                  10
+            spool_of_malboro_fiber:      10
+            behemoth_hide:              7.5
+            piece_of_oxblood:           7.5
+        - chance: very_common
+          one_of:
+            slice_of_dragon_meat: 50
+            dragon_talon:         30
+            dragon_heart:         10
+            vial_of_dragon_blood: 10
+
+  Riverne_Vulture:
+    id:            3370
+    species:       bird
+    skill_list_id: 2089
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 445
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   bird_feather
+        - chance: uncommon
+          item:   copper_key
+        - chance: rare
+          item:   bird_egg
+      steal: bird_feather
+      despoil:
+        bird_feather: 0
+        bird_egg:     0
+
+  Shieldtrap:
+    id:            3596
+    species:       flytrap
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 114
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -3
+          ice:   -1
+          wind:   3
+          water:  3
+          light:  3
+          dark:  -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1345
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_common
+          item:   sennight_bangles
+        - chance: very_common
+          item:   flytrap_leaf
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3200
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Ziryu:
+    id:            4507
+    species:       worm
+    type:          [battlefield]
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+    loot:
+      drops:
+        - chance: common
+          item:   sack_of_lugworm_sand
+        - chance: common
+          item:   sack_of_little_worm_mulch
+
+spawns:
+  16900097:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [682.740, -31.763, -500.811, 238]
+    level:    [38, 41]
+  16900098:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [688.842, -31.883, -565.863, 232]
+    level:    [38, 41]
+  16900099:
+    template: Riverne_Vulture
+    at:       [722.517, -32.145, -555.406, 199]
+    level:    [39, 42]
+  16900100:
+    template: Riverne_Vulture
+    at:       [700.075, -31.699, -522.215, 90]
+    level:    [39, 42]
+  16900101:
+    template: Riverne_Vulture
+    at:       [683.567, -31.747, -496.754, 40]
+    level:    [39, 42]
+  16900102:
+    template: Riverne_Vulture
+    at:       [701.066, -31.645, -519.432, 63]
+    level:    [39, 42]
+  16900103:
+    template: Hippogryph
+    at:       [687.833, -32.245, -519.519, 218]
+    level:    [40, 42]
+  16900104:
+    template: Riverne_Vulture
+    at:       [718.143, -3.660, -668.277, 222]
+    level:    [39, 42]
+  16900105:
+    template: Riverne_Vulture
+    at:       [730.741, -4.820, -664.373, 222]
+    level:    [39, 42]
+  16900106:
+    template: Hippogryph
+    at:       [718.960, -3.951, -681.144, 143]
+    level:    [40, 42]
+  16900107:
+    template: Hippogryph
+    at:       [749.724, 47.771, -871.226, 250]
+    level:    [40, 42]
+  16900108:
+    template: Hippogryph
+    at:       [736.205, 47.979, -859.131, 223]
+    level:    [40, 42]
+  16900109:
+    template: Hippogryph
+    at:       [727.484, 47.644, -874.848, 53]
+    level:    [40, 42]
+  16900110:
+    template: Heliodromos
+    at:       [737.576, 48.462, -874.415, 200]
+    level:    [45, 45]
+  16900111:
+    template: Heliodromos
+    at:       [713.545, 49.217, -854.947, 86]
+    level:    [45, 45]
+  16900112:
+    template: Heliodromos
+    at:       [737.120, 48.207, -856.605, 65]
+    level:    [45, 45]
+  16900113:
+    template: Air_Elemental
+    at:       [583.142, 19.015, -784.222, 231]
+    level:    [44, 47]
+  16900114:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [584.108, 17.410, -792.017, 183]
+    level:    [38, 41]
+  16900115:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [557.204, 16.885, -778.877, 97]
+    level:    [38, 41]
+  16900116:
+    template: Riverne_Vulture
+    at:       [564.661, 16.360, -772.255, 59]
+    level:    [39, 42]
+  16900117:
+    template: Riverne_Vulture
+    at:       [572.739, 17.813, -780.064, 182]
+    level:    [39, 42]
+  16900118:
+    template: Riverne_Vulture
+    at:       [563.010, 16.851, -778.580, 158]
+    level:    [39, 42]
+  16900119:
+    template: Hippogryph
+    at:       [577.192, 17.592, -790.484, 193]
+    level:    [40, 42]
+  16900120:
+    template: Hippogryph
+    at:       [578.895, 16.990, -803.865, 20]
+    level:    [40, 42]
+  16900121:
+    template: Air_Elemental
+    at:       [447.379, 39.740, -861.050, 252]
+    level:    [44, 47]
+  16900122:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [423.472, 40.209, -859.665, 92]
+    level:    [38, 41]
+  16900123:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [447.206, 39.978, -887.249, 229]
+    level:    [38, 41]
+  16900124:
+    template: Riverne_Vulture
+    at:       [489.386, 40.006, -886.313, 34]
+    level:    [39, 42]
+  16900125:
+    template: Riverne_Vulture
+    at:       [405.185, 40.012, -871.215, 167]
+    level:    [39, 42]
+  16900126:
+    template: Riverne_Vulture
+    at:       [401.774, 40.189, -831.728, 216]
+    level:    [39, 42]
+  16900127:
+    template: Riverne_Vulture
+    at:       [464.351, 39.621, -871.220, 153]
+    level:    [39, 42]
+  16900128:
+    template: Hippogryph
+    at:       [453.505, 39.858, -878.248, 217]
+    level:    [40, 42]
+  16900129:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [315.083, 28.693, -804.913, 162]
+    level:    [38, 41]
+  16900130:
+    template: Riverne_Vulture
+    at:       [326.753, 29.147, -791.502, 151]
+    level:    [39, 42]
+  16900131:
+    template: Riverne_Vulture
+    at:       [332.179, 29.817, -802.667, 57]
+    level:    [39, 42]
+  16900132:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [274.456, 75.870, -923.115, 215]
+    level:    [38, 41]
+  16900133:
+    template: Riverne_Vulture
+    at:       [272.221, 76.042, -925.894, 62]
+    level:    [39, 42]
+  16900134:
+    template: Riverne_Vulture
+    at:       [286.992, 76.109, -927.657, 69]
+    level:    [39, 42]
+  16900135:
+    template: Riverne_Vulture
+    at:       [168.763, 96.120, -883.330, 99]
+    level:    [39, 42]
+  16900136:
+    template: Riverne_Vulture
+    at:       [195.674, 95.944, -847.221, 46]
+    level:    [39, 42]
+  16900137:
+    template: Riverne_Vulture
+    at:       [174.829, 96.161, -877.194, 66]
+    level:    [39, 42]
+  16900138:
+    template: Riverne_Vulture
+    at:       [175.750, 96.137, -865.041, 209]
+    level:    [39, 42]
+  16900139:
+    template: Riverne_Vulture
+    at:       [166.339, 96.031, -883.481, 235]
+    level:    [39, 42]
+  16900140:
+    template: Riverne_Vulture
+    at:       [171.592, 95.615, -830.982, 171]
+    level:    [39, 42]
+  16900141:
+    template: Riverne_Vulture
+    at:       [165.696, 96.041, -884.011, 235]
+    level:    [39, 42]
+  16900142:
+    template: Riverne_Vulture
+    at:       [183.952, 96.135, -881.937, 225]
+    level:    [39, 42]
+  16900143:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [602.480, 0.047, 577.157, 244]
+    level:    [38, 41]
+  16900144:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [619.598, -0.406, 591.541, 110]
+    level:    [38, 41]
+  16900145:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [618.950, 0.227, 598.435, 254]
+    level:    [38, 41]
+  16900146:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [609.937, -0.122, 598.068, 209]
+    level:    [38, 41]
+  16900147:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [639.853, -0.418, 594.240, 146]
+    level:    [38, 41]
+  16900148:
+    template: Riverne_Vulture
+    at:       [643.838, 0.024, 503.602, 92]
+    level:    [39, 42]
+  16900149:
+    template: Riverne_Vulture
+    at:       [636.760, -0.236, 480.673, 142]
+    level:    [39, 42]
+  16900150:
+    template: Riverne_Vulture
+    at:       [608.833, -0.220, 589.028, 221]
+    level:    [39, 42]
+  16900151:
+    template: Riverne_Vulture
+    at:       [605.126, -0.253, 584.458, 126]
+    level:    [39, 42]
+  16900152:
+    template: Hippogryph
+    at:       [606.386, 0.130, 544.762, 196]
+    level:    [40, 42]
+  16900153:
+    template: Hippogryph
+    at:       [635.938, -0.406, 522.643, 157]
+    level:    [40, 42]
+  16900154:
+    template: Hippogryph
+    at:       [609.810, -0.351, 470.194, 119]
+    level:    [40, 42]
+  16900155:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [440.184, 0.169, 422.669, 232]
+    level:    [38, 41]
+  16900156:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [567.976, -0.077, 380.136, 59]
+    level:    [38, 41]
+  16900157:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [555.919, 0.009, 327.529, 77]
+    level:    [38, 41]
+  16900158:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [542.071, 0.243, 385.532, 231]
+    level:    [38, 41]
+  16900159:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [477.226, -0.271, 394.374, 88]
+    level:    [38, 41]
+  16900160:
+    template: Riverne_Vulture
+    at:       [555.747, -0.218, 372.529, 24]
+    level:    [39, 42]
+  16900161:
+    template: Riverne_Vulture
+    at:       [529.243, -0.318, 363.049, 89]
+    level:    [39, 42]
+  16900162:
+    template: Riverne_Vulture
+    at:       [469.617, 0.323, 392.435, 126]
+    level:    [39, 42]
+  16900163:
+    template: Firedrake
+    at:       [518.353, -0.299, 393.239, 239]
+    level:    [41, 43]
+  16900164:
+    template: Firedrake
+    at:       [505.998, -0.792, 414.831, 218]
+    level:    [41, 43]
+  16900165:
+    template: Firedrake
+    at:       [535.680, 0.035, 391.844, 128]
+    level:    [41, 43]
+  16900166:
+    template: Hippogryph
+    at:       [524.615, 0.414, 424.255, 15]
+    level:    [40, 42]
+  16900167:
+    template: Hippogryph
+    at:       [480.363, 0.240, 393.105, 62]
+    level:    [40, 42]
+  16900168:
+    template: Firedrake
+    at:       [466.858, 0.175, 490.392, 96]
+    level:    [41, 43]
+  16900169:
+    template: Firedrake
+    at:       [407.283, 0.170, 461.980, 127]
+    level:    [41, 43]
+  16900170:
+    template: Firedrake
+    at:       [450.076, 0.261, 495.903, 235]
+    level:    [41, 43]
+  16900171:
+    template: Firedrake
+    at:       [479.854, 0.160, 496.200, 145]
+    level:    [41, 43]
+  16900172:
+    template: Firedrake
+    at:       [457.894, -1.137, 467.422, 79]
+    level:    [41, 43]
+  16900173:
+    template: Firedrake
+    at:       [487.342, -0.167, 472.554, 56]
+    level:    [41, 43]
+  16900174:
+    template: Hippogryph
+    at:       [429.135, 0.081, 496.618, 170]
+    level:    [40, 42]
+  16900175:
+    template: Thunder_Elemental
+    at:       [460.660, 0.066, 499.235, 51]
+    level:    [44, 47]
+  16900176:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [437.614, -0.352, 356.476, 15]
+    level:    [38, 41]
+  16900177:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [438.221, -0.226, 388.148, 249]
+    level:    [38, 41]
+  16900178:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [338.556, 0.781, 277.800, 146]
+    level:    [38, 41]
+  16900179:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [395.550, 1.225, 311.342, 63]
+    level:    [38, 41]
+  16900180:
+    template: Riverne_Vulture
+    at:       [435.540, 0.124, 373.581, 137]
+    level:    [39, 42]
+  16900181:
+    template: Riverne_Vulture
+    at:       [337.174, 0.197, 283.134, 235]
+    level:    [39, 42]
+  16900182:
+    template: Riverne_Vulture
+    at:       [437.605, 0.386, 380.067, 7]
+    level:    [39, 42]
+  16900183:
+    template: Firedrake
+    at:       [346.778, -0.748, 303.566, 90]
+    level:    [41, 43]
+  16900184:
+    template: Firedrake
+    at:       [360.365, -0.515, 318.895, 117]
+    level:    [41, 43]
+  16900185:
+    template: Firedrake
+    at:       [435.785, -0.345, 387.460, 194]
+    level:    [41, 43]
+  16900186:
+    template: Hippogryph
+    at:       [402.256, 0.311, 315.095, 120]
+    level:    [40, 42]
+  16900187:
+    template: Hippogryph
+    at:       [458.318, -1.548, 384.250, 246]
+    level:    [40, 42]
+  16900188:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [252.412, -0.034, 389.292, 186]
+    level:    [38, 41]
+  16900189:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [255.691, -0.181, 335.952, 151]
+    level:    [38, 41]
+  16900190:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [235.889, -0.178, 337.250, 167]
+    level:    [38, 41]
+  16900191:
+    template: Riverne_Vulture
+    at:       [280.450, -0.217, 281.274, 70]
+    level:    [39, 42]
+  16900192:
+    template: Riverne_Vulture
+    at:       [214.106, 0.051, 359.755, 228]
+    level:    [39, 42]
+  16900193:
+    template: Riverne_Vulture
+    at:       [250.737, -0.088, 394.535, 24]
+    level:    [39, 42]
+  16900194:
+    template: Firedrake
+    at:       [242.952, 0.252, 376.937, 100]
+    level:    [41, 43]
+  16900195:
+    template: Firedrake
+    at:       [270.716, 1.415, 279.647, 187]
+    level:    [41, 43]
+  16900196:
+    template: Firedrake
+    at:       [270.341, 1.806, 287.391, 152]
+    level:    [41, 43]
+  16900197:
+    template: Hippogryph
+    at:       [242.357, 0.132, 384.695, 168]
+    level:    [40, 42]
+  16900198:
+    template: Hippogryph
+    at:       [251.193, -0.072, 396.908, 58]
+    level:    [40, 42]
+  16900199:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [297.215, 1.541, 431.677, 196]
+    level:    [38, 41]
+  16900200:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [295.743, 1.499, 422.433, 71]
+    level:    [38, 41]
+  16900201:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [197.315, -0.598, 518.844, 254]
+    level:    [38, 41]
+  16900202:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [193.801, -0.236, 548.815, 154]
+    level:    [38, 41]
+  16900203:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [213.367, 0.156, 552.666, 136]
+    level:    [38, 41]
+  16900204:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [240.573, 0.353, 538.623, 33]
+    level:    [38, 41]
+  16900205:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [213.316, 0.015, 561.199, 129]
+    level:    [38, 41]
+  16900206:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [180.820, -0.019, 528.098, 178]
+    level:    [38, 41]
+  16900207:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [162.547, 0.027, 494.018, 254]
+    level:    [38, 41]
+  16900208:
+    template: Hawkertrap_RSA
+    script:   Hawkertrap
+    at:       [156.522, 0.213, 500.172, 193]
+    level:    [38, 41]
+  16900209:
+    template: Thunder_Elemental
+    at:       [318.886, -0.468, 553.329, 143]
+    level:    [47, 50]
+  16900210:
+    template: Hippogryph
+    at:       [316.101, -0.404, 525.182, 204]
+    level:    [40, 42]
+  16900211:
+    template: Hippogryph
+    at:       [313.631, -0.098, 529.348, 208]
+    level:    [40, 42]
+  16900212:
+    template: Firedrake
+    at:       [230.204, -0.074, 550.625, 15]
+    level:    [41, 43]
+  16900213:
+    template: Firedrake
+    at:       [231.488, -0.107, 550.035, 211]
+    level:    [41, 43]
+  16900214:
+    template: Firedrake
+    at:       [237.268, -0.331, 550.182, 49]
+    level:    [41, 43]
+  16900215:
+    template: Firedrake
+    at:       [237.353, 0.477, 541.744, 119]
+    level:    [41, 43]
+  16900216:
+    template: Hawker
+    at:       [13.025, 0.202, 355.711, 229]
+    level:    [45, 48]
+  16900217:
+    template: Hawker
+    at:       [90.033, -0.057, 443.769, 158]
+    level:    [45, 48]
+  16900218:
+    template: Hawker
+    at:       [20.024, 0.226, 349.555, 160]
+    level:    [45, 48]
+  16900219:
+    template: Hawker
+    at:       [85.501, -0.232, 368.436, 24]
+    level:    [45, 48]
+  16900220:
+    template: Hawker
+    at:       [22.134, 0.012, 345.667, 223]
+    level:    [45, 48]
+  16900221:
+    template: Hawker
+    at:       [23.577, 0.286, 331.264, 12]
+    level:    [45, 48]
+  16900222:
+    template: Hawker
+    at:       [-23.736, 0.946, 354.027, 13]
+    level:    [45, 48]
+  16900223:
+    template: Hawker
+    at:       [120.422, 0.281, 389.630, 30]
+    level:    [45, 48]
+  16900224:
+    template: Cloud_Hippogryph
+    at:       [122.381, -0.320, 431.164, 227]
+    level:    [45, 47]
+  16900225:
+    template: Cloud_Hippogryph
+    at:       [48.946, -0.397, 390.533, 187]
+    level:    [45, 47]
+  16900226:
+    template: Cloud_Hippogryph
+    at:       [86.773, 0.220, 419.522, 45]
+    level:    [45, 47]
+  16900227:
+    template: Atomic_Cluster
+    at:       [-170.900, 48.162, -845.435, 68]
+    level:    [45, 48]
+  16900228:
+    template: Atomic_Cluster
+    at:       [-192.718, 47.550, -837.175, 130]
+    level:    [45, 48]
+  16900229:
+    template: Flamedrake
+    at:       [-173.412, 47.735, -872.150, 185]
+    level:    [47, 49]
+  16900230:
+    template: Carmine_Dobsonfly
+    at:       [-177.148, 48.009, -860.127, 77]
+    level:    [44, 46]
+  16900231:
+    template: Carmine_Dobsonfly
+    at:       [-199.488, 47.865, -846.699, 25]
+    level:    [44, 46]
+  16900232:
+    template: Carmine_Dobsonfly
+    at:       [-191.203, 48.221, -854.397, 184]
+    level:    [44, 46]
+  16900233:
+    template: Carmine_Dobsonfly
+    at:       [-177.917, 47.917, -860.994, 84]
+    level:    [44, 46]
+  16900234:
+    template: Carmine_Dobsonfly
+    at:       [-174.605, 48.335, -862.923, 159]
+    level:    [44, 46]
+  16900235:
+    template: Carmine_Dobsonfly
+    at:       [-174.401, 47.742, -861.639, 145]
+    level:    [44, 46]
+  16900236:
+    template: Carmine_Dobsonfly
+    at:       [-173.868, 48.086, -860.400, 114]
+    level:    [44, 46]
+  16900237:
+    template: Carmine_Dobsonfly
+    at:       [-178.717, 47.507, -864.465, 198]
+    level:    [44, 46]
+  16900238:
+    template: Carmine_Dobsonfly
+    at:       [-174.731, 48.208, -859.063, 98]
+    level:    [44, 46]
+  16900239:
+    template: Carmine_Dobsonfly
+    at:       [-179.699, 47.634, -863.423, 227]
+    level:    [44, 46]
+  16900240:
+    template: Air_Elemental
+    at:       [-371.064, 19.463, -662.991, 189]
+    level:    [47, 50]
+  16900241:
+    template: Atomic_Cluster
+    at:       [-390.036, 19.999, -694.905, 15]
+    level:    [45, 48]
+  16900242:
+    template: Atomic_Cluster
+    at:       [-282.930, 20.367, -741.068, 1]
+    level:    [45, 48]
+  16900243:
+    template: Atomic_Cluster
+    at:       [-275.072, 19.818, -696.930, 53]
+    level:    [45, 48]
+  16900244:
+    template: Atomic_Cluster
+    at:       [-285.412, 19.837, -687.511, 121]
+    level:    [45, 48]
+  16900245:
+    template: Atomic_Cluster
+    at:       [-276.759, 19.941, -692.177, 97]
+    level:    [45, 48]
+  16900246:
+    template: Flamedrake
+    at:       [-407.749, 19.790, -724.037, 176]
+    level:    [47, 49]
+  16900247:
+    template: Hawker
+    at:       [-226.565, 19.070, -707.740, 232]
+    level:    [45, 48]
+  16900248:
+    template: Hawker
+    at:       [-324.993, 19.540, -761.584, 242]
+    level:    [45, 48]
+  16900249:
+    template: Hawker
+    at:       [-280.765, 19.540, -718.328, 194]
+    level:    [45, 48]
+  16900250:
+    template: Hawker
+    at:       [-273.079, 19.868, -685.844, 183]
+    level:    [45, 48]
+  16900251:
+    template: Hawker
+    at:       [-404.805, 20.171, -671.012, 129]
+    level:    [45, 48]
+  16900252:
+    template: Hawker
+    at:       [-394.053, 19.906, -692.306, 166]
+    level:    [45, 48]
+  16900253:
+    template: Hawker
+    at:       [-385.893, 19.948, -694.540, 39]
+    level:    [45, 48]
+  16900254:
+    template: Hawker
+    at:       [-349.442, 19.945, -643.273, 65]
+    level:    [45, 48]
+  16900255:
+    template: Atomic_Cluster
+    at:       [-279.301, 0.742, -607.280, 218]
+    level:    [45, 48]
+  16900256:
+    template: Atomic_Cluster
+    at:       [-292.864, 0.694, -596.499, 118]
+    level:    [45, 48]
+  16900257:
+    template: Hawker
+    at:       [-444.028, -19.951, -568.750, 123]
+    level:    [45, 48]
+  16900258:
+    template: Hawker
+    at:       [-431.051, -20.235, -563.174, 137]
+    level:    [45, 48]
+  16900259:
+    template: Hawker
+    at:       [-447.158, -20.392, -556.735, 71]
+    level:    [45, 48]
+  16900260:
+    template: Hawker
+    at:       [-438.519, -19.694, -536.363, 37]
+    level:    [45, 48]
+  16900261:
+    template: Hawker
+    at:       [-440.758, -20.105, -567.778, 187]
+    level:    [45, 48]
+  16900262:
+    template: Hawker
+    at:       [-434.258, -20.145, -521.510, 40]
+    level:    [45, 48]
+  16900263:
+    template: Hawker
+    at:       [-425.623, -20.805, -573.419, 38]
+    level:    [45, 48]
+  16900264:
+    template: Air_Elemental
+    at:       [-599.991, 19.580, -595.206, 58]
+    level:    [47, 50]
+  16900265:
+    template: Cloud_Hippogryph
+    at:       [-603.474, 19.684, -556.293, 250]
+    level:    [45, 47]
+  16900266:
+    template: Cloud_Hippogryph
+    at:       [-579.669, 21.016, -600.280, 43]
+    level:    [45, 47]
+  16900267:
+    template: Cloud_Hippogryph
+    at:       [-576.583, 20.591, -593.791, 3]
+    level:    [45, 47]
+  16900268:
+    template: Cloud_Hippogryph
+    at:       [-604.153, 19.730, -545.114, 32]
+    level:    [45, 47]
+  16900269:
+    template: Cloud_Hippogryph
+    at:       [-585.472, 21.046, -595.502, 215]
+    level:    [45, 47]
+  16900270:
+    template: Hawker
+    at:       [-529.833, -6.672, -400.075, 203]
+    level:    [45, 48]
+  16900271:
+    template: Hawker
+    at:       [-508.708, -7.516, -399.440, 66]
+    level:    [45, 48]
+  16900272:
+    template: Hawker
+    at:       [-732.712, -43.557, -310.368, 11]
+    level:    [45, 48]
+  16900273:
+    template: Hawker
+    at:       [-725.303, -43.624, -335.415, 197]
+    level:    [45, 48]
+  16900274:
+    template: Hawker
+    at:       [-731.633, -43.931, -356.017, 75]
+    level:    [45, 48]
+  16900275:
+    template: Atomic_Cluster
+    at:       [-739.254, -43.898, -308.400, 205]
+    level:    [45, 48]
+  16900276:
+    template: Cloud_Hippogryph
+    at:       [-734.512, -43.425, -319.822, 158]
+    level:    [45, 47]
+  16900277:
+    template: Darner
+    at:       [-91.146, 0.366, 451.184, 112]
+    level:    [84, 85]
+  16900278:
+    template: Darner
+    at:       [-101.805, 0.550, 437.849, 214]
+    level:    [84, 85]
+  16900279:
+    template: Darner
+    at:       [-114.557, 0.364, 435.764, 69]
+    level:    [84, 85]
+  16900280:
+    template: Darner
+    at:       [-116.021, -0.358, 469.421, 128]
+    level:    [84, 85]
+  16900281:
+    template: Darner
+    at:       [-126.644, 1.252, 495.903, 158]
+    level:    [84, 85]
+  16900282:
+    template: Darner
+    at:       [-108.027, -0.045, 489.798, 227]
+    level:    [84, 85]
+  16900283:
+    template: Darner
+    at:       [-122.779, 0.669, 501.268, 215]
+    level:    [84, 85]
+  16900284:
+    template: Darner
+    at:       [-151.878, -0.124, 565.742, 122]
+    level:    [84, 85]
+  16900285:
+    template: Darner
+    at:       [-179.666, 0.706, 558.305, 63]
+    level:    [84, 85]
+  16900286:
+    template: Darner
+    at:       [-176.395, 3.157, 542.505, 113]
+    level:    [84, 85]
+  16900287:
+    template: Darner
+    at:       [-177.982, 0.891, 555.023, 162]
+    level:    [84, 85]
+  16900288:
+    template: Darner
+    at:       [-144.624, 0.076, 555.759, 107]
+    level:    [84, 85]
+  16900289:
+    template: Darner
+    at:       [-147.049, -0.251, 560.680, 104]
+    level:    [84, 85]
+  16900290:
+    template: Darner
+    at:       [-97.155, -0.035, 568.853, 190]
+    level:    [84, 85]
+  16900291:
+    template: Darner
+    at:       [-93.004, -0.125, 556.464, 6]
+    level:    [84, 85]
+  16900292:
+    template: Darner
+    at:       [-105.514, -0.172, 570.000, 79]
+    level:    [84, 85]
+  16900293:
+    template: Darner
+    at:       [-122.286, -0.366, 566.829, 140]
+    level:    [84, 85]
+  16900294:
+    template: Darner
+    at:       [-119.008, -0.234, 570.572, 174]
+    level:    [84, 85]
+  16900295:
+    template: Darner
+    at:       [-72.354, -0.319, 563.491, 33]
+    level:    [84, 85]
+  16900296:
+    template: Darner
+    at:       [-77.453, -0.475, 565.220, 248]
+    level:    [84, 85]
+  16900297:
+    template: Darner
+    at:       [-71.521, 0.075, 579.339, 160]
+    level:    [84, 85]
+  16900298:
+    template: Darner
+    at:       [-124.034, -0.006, 648.285, 81]
+    level:    [84, 85]
+  16900299:
+    template: Atomic_Cluster
+    at:       [23.648, -1.520, 625.327, 32]
+    level:    [45, 48]
+  16900300:
+    template: Atomic_Cluster
+    at:       [22.347, -1.795, 615.303, 56]
+    level:    [45, 48]
+  16900301:
+    template: Flamedrake
+    at:       [-91.069, -0.443, 703.755, 35]
+    level:    [47, 49]
+  16900302:
+    template: Flamedrake
+    at:       [-43.299, -0.534, 721.520, 29]
+    level:    [47, 49]
+  16900303:
+    template: Flamedrake
+    at:       [-63.744, 0.202, 707.078, 52]
+    level:    [47, 49]
+  16900304:
+    template: Flamedrake
+    at:       [-95.015, -1.222, 738.260, 142]
+    level:    [47, 49]
+  16900305:
+    template: Flamedrake
+    at:       [-88.954, -0.232, 726.668, 57]
+    level:    [47, 49]
+  16900306:
+    template: Aiatar
+    at:       [-81.967, 0.246, 751.067, 180]
+    level:    [51, 52]
+  16900307:
+    template: Thunder_Elemental
+    at:       [-74.122, -0.218, 724.150, 230]
+    level:    [47, 50]
+  16900308:
+    template: Atomic_Cluster
+    at:       [-66.701, -0.143, 677.762]
+    level:    [45, 48]
+  16900309:
+    template: Atomic_Cluster
+    at:       [-61.948, 0.385, 723.499, 255]
+    level:    [45, 48]
+  16900310:
+    template: Atomic_Cluster
+    at:       [-71.947, 0.316, 695.067, 112]
+    level:    [45, 48]
+  16900311:
+    template: Atomic_Cluster
+    at:       [-61.079, 0.213, 704.609, 133]
+    level:    [45, 48]
+  16900312:
+    template: Water_Elemental
+    at:       [9.270, 75.830, -721.020]
+    level:    [72, 73]
+  16900313:
+    template: Earth_Elemental
+    at:       [-0.280, 76.340, -737.490, 41]
+    level:    [72, 73]
+  16900314:
+    template: Ouryu_Large
+    script:   Ouryu
+    at:       [18.670, 76.180, -740.650, 224]
+    level:    [90, 90]
+  16900315:
+    template: Ziryu
+    at:       [-8.300, 75.828, -757.276, 100]
+    level:    [72, 74]
+  16900316:
+    template: Ziryu
+    at:       [0.680, 76.098, -728.375, 143]
+    level:    [72, 74]
+  16900317:
+    template: Ziryu
+    at:       [20.744, 76.462, -756.730, 229]
+    level:    [72, 74]
+  16900318:
+    template: Ziryu
+    at:       [52.704, 76.034, -713.611, 109]
+    level:    [72, 74]
+  16900319:
+    template: Arcane_Phantasm
+    at:       [-727.863, -43.951, -304.650, 239]
+    level:    [44, 45]
+  16900320:
+    template: Shieldtrap
+    level:    [39, 44]
+
+slots:
+  - members:
+      16900151: {} # Riverne_Vulture
+      16900154: {} # Hippogryph
+  - members:
+      16900162: {} # Riverne_Vulture
+      16900166: {} # Hippogryph
+  - members:
+      16900182: {} # Riverne_Vulture
+      16900187: {} # Hippogryph
+  - members:
+      16900185: {} # Firedrake
+      16900196: {} # Firedrake
+  - members:
+      16900193: {} # Riverne_Vulture
+      16900198: {} # Hippogryph
+  - members:
+      16900250: {} # Hawker
+      16900254: {} # Hawker

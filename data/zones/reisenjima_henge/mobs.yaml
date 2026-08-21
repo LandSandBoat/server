@@ -1,0 +1,906 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Gessho_Reisenjima:
+    id:           6035
+    display_name: Gessho
+    species:      unclassified
+    type:         [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Katashiro:
+    id:      6031
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nii_Aquu:
+    id:      6032
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Reikuu:
+    id:      6033
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Zhuu_Buxu_the_Silent_Reisenjima:
+    id:           6034
+    display_name: Zhuu_Buxu_the_Silent
+    species:      unclassified
+    type:         [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17973249:
+    script: Sweetwater_Tiger
+    at:     [-740.595, -439.953, -777.042, 156]
+    level:  [127, 127]
+  17973250:
+    script: Sweetwater_Tiger
+    at:     [-732.382, -439.874, -782.994, 100]
+    level:  [127, 127]
+  17973251:
+    script: Sweetwater_Tiger
+    at:     [-733.981, -439.982, -772.595, 74]
+    level:  [127, 127]
+  17973252:
+    script: Sweetwater_Tiger
+    at:     [-719.102, -439.845, -783.255, 219]
+    level:  [127, 127]
+  17973253:
+    script: Sweetwater_Tiger
+    at:     [-721.258, -439.625, -774.018, 4]
+    level:  [127, 127]
+  17973254:
+    script: Sweetwater_Tiger
+    at:     [-725.743, -440.013, -783.544, 156]
+    level:  [127, 127]
+  17973255:
+    script: Sweetwater_Tiger
+    at:     [-734.084, -440.092, -789.825, 127]
+    level:  [127, 127]
+  17973256:
+    script: Sweetwater_Fly
+    at:     [-743.282, -439.971, -786.593, 183]
+    level:  [127, 127]
+  17973257:
+    script: Sweetwater_Fly
+    at:     [-734.492, -439.819, -767.588, 152]
+    level:  [127, 127]
+  17973258:
+    script: Sweetwater_Fly
+    at:     [-734.926, -440.057, -772.865, 103]
+    level:  [127, 127]
+  17973259:
+    script: Sweetwater_Fly
+    at:     [-721.508, -440.162, -788.026, 56]
+    level:  [127, 127]
+  17973260:
+    script: Sweetwater_Fly
+    at:     [-731.735, -440.031, -767.102, 248]
+    level:  [127, 127]
+  17973261:
+    script: Sweetwater_Fly
+    at:     [-732.028, -439.987, -774.952, 254]
+    level:  [127, 127]
+  17973262:
+    script: Sweetwater_Fly
+    at:     [-721.961, -439.777, -772.835, 58]
+    level:  [127, 127]
+  17973263:
+    script: Transcended_Tiger
+    at:     [-729.074, -440.030, -788.077, 184]
+    level:  [129, 129]
+  17973264:
+    script: Transcended_Fly
+    at:     [-727.724, -439.923, -783.467, 118]
+    level:  [129, 129]
+  17973265:
+    script: Sweetwater_Leech
+    level:  [127, 127]
+  17973266:
+    script: Sweetwater_Leech
+    level:  [127, 127]
+  17973267:
+    script: Sweetwater_Leech
+    level:  [127, 127]
+  17973268:
+    script: Sweetwater_Leech
+    level:  [127, 127]
+  17973269:
+    script: Sweetwater_Leech
+    level:  [127, 127]
+  17973270:
+    script: Sweetwater_Leech
+    level:  [127, 127]
+  17973271:
+    script: Sweetwater_Leech
+    level:  [127, 127]
+  17973272:
+    script: Sweetwater_Beetle
+    level:  [127, 127]
+  17973273:
+    script: Sweetwater_Beetle
+    level:  [127, 127]
+  17973274:
+    script: Sweetwater_Beetle
+    level:  [127, 127]
+  17973275:
+    script: Sweetwater_Beetle
+    level:  [127, 127]
+  17973276:
+    script: Sweetwater_Beetle
+    level:  [127, 127]
+  17973277:
+    script: Sweetwater_Beetle
+    level:  [127, 127]
+  17973278:
+    script: Sweetwater_Beetle
+    level:  [127, 127]
+  17973279:
+    script: Transcended_Beetle
+    level:  [129, 129]
+  17973280:
+    script: Transcended_Leech
+    level:  [129, 129]
+  17973281:
+    script: Glassy_Thinker
+  17973282:
+    script: Glassy_Craver
+  17973283:
+    script: Glassy_Gorger
+  17973284:
+    script: Sweetwater_Hippogryph
+    level:  [127, 127]
+  17973285:
+    script: Sweetwater_Hippogryph
+    level:  [127, 127]
+  17973286:
+    script: Sweetwater_Hippogryph
+    level:  [127, 127]
+  17973287:
+    script: Sweetwater_Hippogryph
+    level:  [127, 127]
+  17973288:
+    script: Sweetwater_Hippogryph
+    level:  [127, 127]
+  17973289:
+    script: Sweetwater_Hippogryph
+    level:  [127, 127]
+  17973290:
+    script: Sweetwater_Hippogryph
+    level:  [127, 127]
+  17973291:
+    script: Sweetwater_Goobbue
+    level:  [127, 127]
+  17973292:
+    script: Sweetwater_Goobbue
+    level:  [127, 127]
+  17973293:
+    script: Sweetwater_Goobbue
+    level:  [127, 127]
+  17973294:
+    script: Sweetwater_Goobbue
+    level:  [127, 127]
+  17973295:
+    script: Sweetwater_Goobbue
+    level:  [127, 127]
+  17973296:
+    script: Sweetwater_Goobbue
+    level:  [127, 127]
+  17973297:
+    script: Sweetwater_Goobbue
+    level:  [127, 127]
+  17973298:
+    script: Sweetwater_Faaz
+    level:  [127, 127]
+  17973299:
+    script: Sweetwater_Faaz
+    level:  [127, 127]
+  17973300:
+    script: Sweetwater_Faaz
+    level:  [127, 127]
+  17973301:
+    script: Sweetwater_Faaz
+    level:  [127, 127]
+  17973302:
+    script: Sweetwater_Faaz
+    level:  [127, 127]
+  17973303:
+    script: Sweetwater_Faaz
+    level:  [127, 127]
+  17973304:
+    script: Sweetwater_Faaz
+    level:  [127, 127]
+  17973305:
+    script: Sweetwater_Pugil
+    level:  [127, 127]
+  17973306:
+    script: Sweetwater_Pugil
+    level:  [127, 127]
+  17973307:
+    script: Sweetwater_Pugil
+    level:  [127, 127]
+  17973308:
+    script: Sweetwater_Pugil
+    level:  [127, 127]
+  17973309:
+    script: Sweetwater_Pugil
+    level:  [127, 127]
+  17973310:
+    script: Sweetwater_Pugil
+    level:  [127, 127]
+  17973311:
+    script: Sweetwater_Pugil
+    level:  [127, 127]
+  17973312:
+    script: Transcended_Hippogryph
+    level:  [129, 129]
+  17973313:
+    script: Transcended_Goobbue
+    level:  [129, 129]
+  17973314:
+    script: Transcended_Faaz
+    level:  [129, 129]
+  17973315:
+    script: Transcended_Pugil
+    level:  [129, 129]
+  17973316:
+    script: Sweetwater_Toad
+    level:  [127, 127]
+  17973317:
+    script: Sweetwater_Toad
+    level:  [127, 127]
+  17973318:
+    script: Sweetwater_Toad
+    level:  [127, 127]
+  17973319:
+    script: Sweetwater_Toad
+    level:  [127, 127]
+  17973320:
+    script: Sweetwater_Toad
+    level:  [127, 127]
+  17973321:
+    script: Sweetwater_Toad
+    level:  [127, 127]
+  17973322:
+    script: Sweetwater_Toad
+    level:  [127, 127]
+  17973323:
+    script: Sweetwater_Raptor
+    level:  [127, 127]
+  17973324:
+    script: Sweetwater_Raptor
+    level:  [127, 127]
+  17973325:
+    script: Sweetwater_Raptor
+    level:  [127, 127]
+  17973326:
+    script: Sweetwater_Raptor
+    level:  [127, 127]
+  17973327:
+    script: Sweetwater_Raptor
+    level:  [127, 127]
+  17973328:
+    script: Sweetwater_Raptor
+    level:  [127, 127]
+  17973329:
+    script: Sweetwater_Raptor
+    level:  [127, 127]
+  17973330:
+    script: Sweetwater_Mosquito
+    level:  [127, 127]
+  17973331:
+    script: Sweetwater_Mosquito
+    level:  [127, 127]
+  17973332:
+    script: Sweetwater_Mosquito
+    level:  [127, 127]
+  17973333:
+    script: Sweetwater_Mosquito
+    level:  [127, 127]
+  17973334:
+    script: Sweetwater_Mosquito
+    level:  [127, 127]
+  17973335:
+    script: Sweetwater_Mosquito
+    level:  [127, 127]
+  17973336:
+    script: Sweetwater_Mosquito
+    level:  [127, 127]
+  17973337:
+    script: Sweetwater_Bats
+    level:  [127, 127]
+  17973338:
+    script: Sweetwater_Bats
+    level:  [127, 127]
+  17973339:
+    script: Sweetwater_Bats
+    level:  [127, 127]
+  17973340:
+    script: Sweetwater_Bats
+    level:  [127, 127]
+  17973341:
+    script: Sweetwater_Bats
+    level:  [127, 127]
+  17973342:
+    script: Sweetwater_Bats
+    level:  [127, 127]
+  17973343:
+    script: Sweetwater_Bats
+    level:  [127, 127]
+  17973344:
+    script: Transcended_Toad
+    level:  [129, 129]
+  17973345:
+    script: Transcended_Raptor
+    level:  [129, 129]
+  17973346:
+    script: Transcended_Mosquito
+    level:  [129, 129]
+  17973347:
+    script: Transcended_Bats
+    level:  [129, 129]
+  17973348:
+    script: Sweetwater_Elemental
+    level:  [127, 127]
+  17973349:
+    script: Sweetwater_Elemental
+    level:  [127, 127]
+  17973350:
+    script: Sweetwater_Elemental
+    level:  [127, 127]
+  17973351:
+    script: Sweetwater_Elemental
+    level:  [127, 127]
+  17973352:
+    script: Sweetwater_Elemental
+    level:  [127, 127]
+  17973353:
+    script: Sweetwater_Elemental
+    level:  [127, 127]
+  17973354:
+    script: Sweetwater_Elemental
+    level:  [127, 127]
+  17973355:
+    script: Sweetwater_Slime
+    level:  [127, 127]
+  17973356:
+    script: Sweetwater_Slime
+    level:  [127, 127]
+  17973357:
+    script: Sweetwater_Slime
+    level:  [127, 127]
+  17973358:
+    script: Sweetwater_Slime
+    level:  [127, 127]
+  17973359:
+    script: Sweetwater_Slime
+    level:  [127, 127]
+  17973360:
+    script: Sweetwater_Slime
+    level:  [127, 127]
+  17973361:
+    script: Sweetwater_Slime
+    level:  [127, 127]
+  17973362:
+    script: Sweetwater_Lucani
+    level:  [127, 127]
+  17973363:
+    script: Sweetwater_Lucani
+    level:  [127, 127]
+  17973364:
+    script: Sweetwater_Lucani
+    level:  [127, 127]
+  17973365:
+    script: Sweetwater_Lucani
+    level:  [127, 127]
+  17973366:
+    script: Sweetwater_Lucani
+    level:  [127, 127]
+  17973367:
+    script: Sweetwater_Lucani
+    level:  [127, 127]
+  17973368:
+    script: Sweetwater_Lucani
+    level:  [127, 127]
+  17973369:
+    script: Sweetwater_Worm
+    level:  [127, 127]
+  17973370:
+    script: Sweetwater_Worm
+    level:  [127, 127]
+  17973371:
+    script: Sweetwater_Worm
+    level:  [127, 127]
+  17973372:
+    script: Sweetwater_Worm
+    level:  [127, 127]
+  17973373:
+    script: Sweetwater_Worm
+    level:  [127, 127]
+  17973374:
+    script: Sweetwater_Worm
+    level:  [127, 127]
+  17973375:
+    script: Sweetwater_Worm
+    level:  [127, 127]
+  17973376:
+    script: Transcended_Elemental
+    level:  [129, 129]
+  17973377:
+    script: Transcended_Slime
+    level:  [129, 129]
+  17973378:
+    script: Transcended_Lucani
+    level:  [129, 129]
+  17973379:
+    script: Transcended_Worm
+    level:  [129, 129]
+  17973380:
+    script: Sweetwater_Chapuli
+    level:  [127, 127]
+  17973381:
+    script: Sweetwater_Chapuli
+    level:  [127, 127]
+  17973382:
+    script: Sweetwater_Chapuli
+    level:  [127, 127]
+  17973383:
+    script: Sweetwater_Chapuli
+    level:  [127, 127]
+  17973384:
+    script: Sweetwater_Chapuli
+    level:  [127, 127]
+  17973385:
+    script: Sweetwater_Chapuli
+    level:  [127, 127]
+  17973386:
+    script: Sweetwater_Chapuli
+    level:  [127, 127]
+  17973387:
+    script: Sweetwater_Treant
+    level:  [127, 127]
+  17973388:
+    script: Sweetwater_Treant
+    level:  [127, 127]
+  17973389:
+    script: Sweetwater_Treant
+    level:  [127, 127]
+  17973390:
+    script: Sweetwater_Treant
+    level:  [127, 127]
+  17973391:
+    script: Sweetwater_Treant
+    level:  [127, 127]
+  17973392:
+    script: Sweetwater_Treant
+    level:  [127, 127]
+  17973393:
+    script: Sweetwater_Treant
+    level:  [127, 127]
+  17973394:
+    script: Sweetwater_Mantis
+    level:  [127, 127]
+  17973395:
+    script: Sweetwater_Mantis
+    level:  [127, 127]
+  17973396:
+    script: Sweetwater_Mantis
+    level:  [127, 127]
+  17973397:
+    script: Sweetwater_Mantis
+    level:  [127, 127]
+  17973398:
+    script: Sweetwater_Mantis
+    level:  [127, 127]
+  17973399:
+    script: Sweetwater_Mantis
+    level:  [127, 127]
+  17973400:
+    script: Sweetwater_Mantis
+    level:  [127, 127]
+  17973401:
+    script: Sweetwater_Doomed
+    level:  [127, 127]
+  17973402:
+    script: Sweetwater_Doomed
+    level:  [127, 127]
+  17973403:
+    script: Sweetwater_Doomed
+    level:  [127, 127]
+  17973404:
+    script: Sweetwater_Doomed
+    level:  [127, 127]
+  17973405:
+    script: Sweetwater_Doomed
+    level:  [127, 127]
+  17973406:
+    script: Sweetwater_Doomed
+    level:  [127, 127]
+  17973407:
+    script: Sweetwater_Doomed
+    level:  [127, 127]
+  17973408:
+    script: Transcended_Chapuli
+    level:  [129, 129]
+  17973409:
+    script: Transcended_Treant
+    level:  [129, 129]
+  17973410:
+    script: Transcended_Mantis
+    level:  [129, 129]
+  17973411:
+    script: Transcended_Doomed
+    level:  [129, 129]
+  17973412:
+    script: Sweetwater_Skeleton
+    level:  [127, 127]
+  17973413:
+    script: Sweetwater_Skeleton
+    level:  [127, 127]
+  17973414:
+    script: Sweetwater_Skeleton
+    level:  [127, 127]
+  17973415:
+    script: Sweetwater_Skeleton
+    level:  [127, 127]
+  17973416:
+    script: Sweetwater_Skeleton
+    level:  [127, 127]
+  17973417:
+    script: Sweetwater_Skeleton
+    level:  [127, 127]
+  17973418:
+    script: Sweetwater_Skeleton
+    level:  [127, 127]
+  17973419:
+    script: Sweetwater_Cyhiraeth
+    level:  [127, 127]
+  17973420:
+    script: Sweetwater_Cyhiraeth
+    level:  [127, 127]
+  17973421:
+    script: Sweetwater_Cyhiraeth
+    level:  [127, 127]
+  17973422:
+    script: Sweetwater_Cyhiraeth
+    level:  [127, 127]
+  17973423:
+    script: Sweetwater_Cyhiraeth
+    level:  [127, 127]
+  17973424:
+    script: Sweetwater_Cyhiraeth
+    level:  [127, 127]
+  17973425:
+    script: Sweetwater_Cyhiraeth
+    level:  [127, 127]
+  17973426:
+    script: Sweetwater_Ghost
+    level:  [127, 127]
+  17973427:
+    script: Sweetwater_Ghost
+    level:  [127, 127]
+  17973428:
+    script: Sweetwater_Ghost
+    level:  [127, 127]
+  17973429:
+    script: Sweetwater_Ghost
+    level:  [127, 127]
+  17973430:
+    script: Sweetwater_Ghost
+    level:  [127, 127]
+  17973431:
+    script: Sweetwater_Ghost
+    level:  [127, 127]
+  17973432:
+    script: Sweetwater_Ghost
+    level:  [127, 127]
+  17973433:
+    script: Sweetwater_Doll
+    level:  [127, 127]
+  17973434:
+    script: Sweetwater_Doll
+    level:  [127, 127]
+  17973435:
+    script: Sweetwater_Doll
+    level:  [127, 127]
+  17973436:
+    script: Sweetwater_Doll
+    level:  [127, 127]
+  17973437:
+    script: Sweetwater_Doll
+    level:  [127, 127]
+  17973438:
+    script: Sweetwater_Doll
+    level:  [127, 127]
+  17973439:
+    script: Sweetwater_Doll
+    level:  [127, 127]
+  17973440:
+    script: Transcended_Skeleton
+    level:  [129, 129]
+  17973441:
+    script: Transcended_Cyhiraeth
+    level:  [129, 129]
+  17973442:
+    script: Transcended_Ghost
+    level:  [129, 129]
+  17973443:
+    script: Transcended_Doll
+    level:  [129, 129]
+  17973444:
+    script: Kin
+  17973445:
+    script: Gin
+  17973446:
+    script: Kei
+  17973447:
+    script: Kyou
+  17973448:
+    script: Fu
+  17973497:
+    script: Sweetwater_Rabbit
+    level:  [127, 127]
+  17973498:
+    script: Sweetwater_Rabbit
+    level:  [127, 127]
+  17973499:
+    script: Sweetwater_Rabbit
+    level:  [127, 127]
+  17973500:
+    script: Sweetwater_Rabbit
+    level:  [127, 127]
+  17973501:
+    script: Sweetwater_Rabbit
+    level:  [127, 127]
+  17973502:
+    script: Sweetwater_Rabbit
+    level:  [127, 127]
+  17973503:
+    script: Sweetwater_Rabbit
+    level:  [127, 127]
+  17973504:
+    script: Sweetwater_Mandragora
+    level:  [127, 127]
+  17973505:
+    script: Sweetwater_Mandragora
+    level:  [127, 127]
+  17973506:
+    script: Sweetwater_Mandragora
+    level:  [127, 127]
+  17973507:
+    script: Sweetwater_Mandragora
+    level:  [127, 127]
+  17973508:
+    script: Sweetwater_Mandragora
+    level:  [127, 127]
+  17973509:
+    script: Sweetwater_Mandragora
+    level:  [127, 127]
+  17973510:
+    script: Sweetwater_Mandragora
+    level:  [127, 127]
+  17973511:
+    script: Sweetwater_Lizard
+    level:  [127, 127]
+  17973512:
+    script: Sweetwater_Lizard
+    level:  [127, 127]
+  17973513:
+    script: Sweetwater_Lizard
+    level:  [127, 127]
+  17973514:
+    script: Sweetwater_Lizard
+    level:  [127, 127]
+  17973515:
+    script: Sweetwater_Lizard
+    level:  [127, 127]
+  17973516:
+    script: Sweetwater_Lizard
+    level:  [127, 127]
+  17973517:
+    script: Sweetwater_Lizard
+    level:  [127, 127]
+  17973518:
+    script: Sweetwater_Vulture
+    level:  [127, 127]
+  17973519:
+    script: Sweetwater_Vulture
+    level:  [127, 127]
+  17973520:
+    script: Sweetwater_Vulture
+    level:  [127, 127]
+  17973521:
+    script: Sweetwater_Vulture
+    level:  [127, 127]
+  17973522:
+    script: Sweetwater_Vulture
+    level:  [127, 127]
+  17973523:
+    script: Sweetwater_Vulture
+    level:  [127, 127]
+  17973524:
+    script: Sweetwater_Vulture
+    level:  [127, 127]
+  17973525:
+    script: Sweetwater_Ladybug
+    level:  [127, 127]
+  17973526:
+    script: Sweetwater_Ladybug
+    level:  [127, 127]
+  17973527:
+    script: Sweetwater_Ladybug
+    level:  [127, 127]
+  17973528:
+    script: Sweetwater_Ladybug
+    level:  [127, 127]
+  17973529:
+    script: Sweetwater_Ladybug
+    level:  [127, 127]
+  17973530:
+    script: Sweetwater_Ladybug
+    level:  [127, 127]
+  17973531:
+    script: Sweetwater_Ladybug
+    level:  [127, 127]
+  17973532:
+    script: Sweetwater_Porxie
+    level:  [127, 127]
+  17973533:
+    script: Sweetwater_Porxie
+    level:  [127, 127]
+  17973534:
+    script: Sweetwater_Porxie
+    level:  [127, 127]
+  17973535:
+    script: Sweetwater_Porxie
+    level:  [127, 127]
+  17973536:
+    script: Sweetwater_Porxie
+    level:  [127, 127]
+  17973537:
+    script: Sweetwater_Porxie
+    level:  [127, 127]
+  17973538:
+    script: Sweetwater_Porxie
+    level:  [127, 127]
+  17973539:
+    script: Sweetwater_Panopt
+    level:  [127, 127]
+  17973540:
+    script: Sweetwater_Panopt
+    level:  [127, 127]
+  17973541:
+    script: Sweetwater_Panopt
+    level:  [127, 127]
+  17973542:
+    script: Sweetwater_Panopt
+    level:  [127, 127]
+  17973543:
+    script: Sweetwater_Panopt
+    level:  [127, 127]
+  17973544:
+    script: Sweetwater_Panopt
+    level:  [127, 127]
+  17973545:
+    script: Sweetwater_Panopt
+    level:  [127, 127]
+  17973546:
+    script: Sweetwater_Unseelie
+    level:  [127, 127]
+  17973547:
+    script: Sweetwater_Unseelie
+    level:  [127, 127]
+  17973548:
+    script: Sweetwater_Unseelie
+    level:  [127, 127]
+  17973549:
+    script: Sweetwater_Unseelie
+    level:  [127, 127]
+  17973550:
+    script: Sweetwater_Unseelie
+    level:  [127, 127]
+  17973551:
+    script: Sweetwater_Unseelie
+    level:  [127, 127]
+  17973552:
+    script: Sweetwater_Unseelie
+    level:  [127, 127]
+  17973553:
+    script: Transcended_Rabbit
+    level:  [129, 129]
+  17973554:
+    script: Transcended_Mandragora
+    level:  [129, 129]
+  17973555:
+    script: Transcended_Lizard
+    level:  [129, 129]
+  17973556:
+    script: Transcended_Vulture
+    level:  [129, 129]
+  17973557:
+    script: Transcended_Ladybug
+    level:  [129, 129]
+  17973558:
+    script: Transcended_Porxie
+    level:  [129, 129]
+  17973559:
+    script: Transcended_Panopt
+    level:  [129, 129]
+  17973560:
+    script: Transcended_Unseelie
+    level:  [129, 129]
+  17973561:
+    script: Ou

@@ -30,6 +30,7 @@
 #include "ai/states/weaponskill_state.h"
 #include "battlefield.h"
 #include "common/utils.h"
+#include "data/enums/detects.h"
 #include "data/enums/mob_mod.h"
 #include "enmity_container.h"
 #include "entities/mob_entity.h"

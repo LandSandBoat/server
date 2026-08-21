@@ -1,0 +1,250 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16941667:
+    script: NPC[263]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16941668:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16941669:
+    script: NPC[265]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16941670:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16941672:
+    script: NPC[268]
+    at:     [0.000, -16.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16941673:
+    script: NPC[269]
+    at:     [0.000, -16.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16941674:
+    script: NPC[26a]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16941675:
+    script: NPC[26b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16941676:
+    script:       Somnial_Threshold
+    display_name: Somnial Threshold
+    at:           [158.000, 0.899, -178.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16941677:
+    script:       qm0
+    display_name: ???
+    at:           [-224.000, -22.000, 100.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16941678:
+    script:       qm1
+    display_name: ???
+    at:           [450.000, 0.485, -82.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16941679:
+    script:       qm2
+    display_name: ???
+    at:           [446.000, -0.125, -322.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16941680:
+    script:       qm3
+    display_name: ???
+    at:           [-566.000, -40.978, 126.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16941681:
+    script:       qm4
+    display_name: ???
+    at:           [-358.000, -0.500, -322.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16941682:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  16941683:
+    script: NPC[273]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16941684:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+    content:  COP
+
+  16941685:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+    content:  COP
+
+  16941686:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+    content:  COP
+
+  16941687:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+    content:  COP
+
+  16941688:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+    content:  COP
+
+  16941689:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+    content:  COP
+
+  16941690:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+    content:  COP
+
+  16941691:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+    content:  COP

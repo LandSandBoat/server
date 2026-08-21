@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+
+zonelines:
+
+  z5r0:
+    from:  [-698.595, -3.594, -650.200]
+    to:    ifrits_cauldron
+    at:    [-60.296, 48.884, 105.967, 1.834907]
+    scale: [1.000, 3.000]

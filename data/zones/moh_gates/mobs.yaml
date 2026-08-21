@@ -1,0 +1,2539 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Apex_Eft:
+    id:            5397
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        respawn: 180
+
+  Apex_Eruca:
+    id:            5398
+    species:       eruca
+    skill_list_id: 107
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -2
+          dark:    -1
+        rank_status:
+          paralyze:   -1
+          bind:       -1
+          silence:    -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 406
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 180
+
+  Apex_Matamata:
+    id:            5396
+    species:       matamata
+    skill_list_id: 275
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2560
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+
+  Apex_Raptor:
+    id:            5395
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1938
+        entity_flags: 131
+        model_size:     1
+        hitbox:        18
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+
+  Blustering_Twitherym:
+    id:            4922
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2536
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Cave_Panopt:
+    id:            5082
+    species:       panopt
+    spell_list_id: 9
+    skill_list_id: 376
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          ice:     2
+          wind:    4
+          earth:   2
+          thunder: 1
+          water:   2
+          light:   3
+          dark:    5
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     4
+          slow:        2
+          poison:      2
+          light_sleep: 3
+          dark_sleep:  5
+          blind:       5
+      render:
+        look:
+          type:  standard
+          model: 517
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+
+  Conflagrant_Eruca:
+    id:            5088
+    species:       eruca
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 107
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -2
+          dark:    -1
+        rank_status:
+          paralyze:   -1
+          bind:       -1
+          silence:    -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 406
+        entity_flags:  129
+        animation_sub:  13
+        hitbox:         12
+      spawn:
+        respawn: 300
+
+  Consecrated_Baelfyr:
+    id:            4818
+    species:       earth_elemental
+    spell_list_id: 3
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 2149
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      spawn:
+        respawn: 300
+        type:    [weather]
+      stats:
+        mp: 9999
+
+  Crestfallen_Baelfyr:
+    id:            4920
+    species:       earth_elemental
+    spell_list_id: 3
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 2149
+        entity_flags: 129
+        hitbox:        15
+      spawn:
+        respawn: 300
+        type:    [weather]
+      stats:
+        mp: 9999
+
+  Cthonic_Chapuli_MG:
+    id:            6311
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Disturbed_Matamata:
+    id:            5086
+    species:       matamata
+    skill_list_id: 275
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2560
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         21
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Dullahan_generic:
+    id:            5250
+    species:       dullahan
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2605
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Erupting_Geyser:
+    id:            5090
+    species:       unclassified
+    type:          [notorious]
+    skill_list_id: 349
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2777
+        entity_flags: 1153
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Erythemic_Eft:
+    id:            5087
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 1153
+        hitbox:         10
+      spawn:
+        respawn: 300
+
+  Ferocious_Funguar:
+    id:            5063
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Gelatinous_Clot:
+    id:            6805
+    species:       clot
+    skill_list_id: 67
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -8750
+          h2h:      -8750
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags: 129
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Gleeful_Ungeweder:
+    id:            5092
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 2150
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+
+  Groundstomp_Matamata:
+    id:            4892
+    species:       matamata
+    skill_list_id: 275
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2560
+        entity_flags: 129
+        name_prefix:   32
+        hitbox:        21
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Highwing_Chapuli:
+    id:            4921
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Incandescent_Baelfyr:
+    id:            5473
+    species:       fire_elemental
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 2149
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+      stats:
+        mp: 9999
+
+  Knotted_Root_SG_MG:
+    id:           6709
+    display_name: Knotted_Root
+    species:      unclassified
+    type:         [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2794
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         20
+      spawn:
+        type: [scripted]
+
+  Liquidbone_Leech:
+    id:            6405
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 129
+        hitbox:         9
+      spawn:
+        respawn: 300
+
+  Menacing_Mantis:
+    id:            4924
+    species:       red_mantid
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2066
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Murkmoan_Umbril:
+    id:            6705
+    species:       umbril
+    type:          [notorious]
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  131
+        animation_sub:   5
+        name_prefix:     2
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Nachtschatten:
+    id:            5084
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 641
+        hitbox:         6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Pepper_Hare:
+    id:            5089
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 269
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Praying_Chapuli:
+    id:            6804
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Pungent_Fungus:
+    id:      5060
+    species: funguar
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2775
+        entity_flags: 129
+        hitbox:         3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Rank_Eft:
+    id:            6803
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        respawn: 300
+
+  Repugnant_Twitherym:
+    id:            5083
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2536
+        entity_flags: 129
+        name_prefix:   64
+        hitbox:         6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Ruby_Raptor:
+    id:            5085
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1938
+        entity_flags: 129
+        model_size:     1
+        hitbox:        18
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ruby_Raptor_Small:
+    id:            7285
+    display_name:  Ruby_Raptor
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1938
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Scoriaceous_Clot:
+    id:            5091
+    species:       clot
+    skill_list_id: 66
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags: 129
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Skittish_Matamata:
+    id:            4766
+    species:       matamata
+    skill_list_id: 275
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2560
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         25
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Splotched_Acuex:
+    id:            5211
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Staumarth:
+    id:            4817
+    species:       ice_elemental
+    type:          [notorious]
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Steelclaw_Raptor:
+    id:            5645
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1938
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Thirsting_Obdella:
+    id:            4923
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags: 131
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Writhing_Obdella:
+    id:            4891
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+spawns:
+  17879041:
+    script: Boiling_Obdella
+    at:     [1.000, 1.000, 1.000]
+  17879042:
+    script: Boiling_Obdella
+    at:     [1.000, 1.000, 1.000]
+  17879043:
+    script: Boiling_Obdella
+    at:     [1.000, 1.000, 1.000]
+  17879044:
+    script: Submerged_Slime
+    at:     [1.000, 1.000, 1.000]
+  17879045:
+    script: Submerged_Slime
+    at:     [1.000, 1.000, 1.000]
+  17879046:
+    template: Menacing_Mantis
+    at:       [183.350, 40.328, -319.350, 57]
+    level:    [101, 110]
+  17879047:
+    template: Cthonic_Chapuli_MG
+    script:   Cthonic_Chapuli
+    at:       [175.170, 39.500, -327.440, 116]
+    level:    [101, 105]
+  17879048:
+    template: Cthonic_Chapuli_MG
+    script:   Cthonic_Chapuli
+    at:       [177.900, 39.576, -327.890, 4]
+    level:    [101, 105]
+  17879049:
+    template: Cthonic_Chapuli_MG
+    script:   Cthonic_Chapuli
+    at:       [184.940, 39.785, -314.440, 247]
+    level:    [101, 105]
+  17879050:
+    template: Menacing_Mantis
+    at:       [171.890, 38.403, -273.690, 83]
+    level:    [101, 110]
+  17879051:
+    template: Cthonic_Chapuli_MG
+    script:   Cthonic_Chapuli
+    at:       [171.510, 38.391, -273.980, 82]
+    level:    [101, 105]
+  17879052:
+    template: Cthonic_Chapuli_MG
+    script:   Cthonic_Chapuli
+    at:       [178.850, 40.092, -271.590, 173]
+    level:    [101, 105]
+  17879053:
+    template: Cthonic_Chapuli_MG
+    script:   Cthonic_Chapuli
+    at:       [175.390, 40.074, -274.820, 32]
+    level:    [101, 105]
+  17879054:
+    template: Gleeful_Ungeweder
+    at:       [175.570, 39.659, -286.920, 120]
+    level:    [102, 110]
+  17879055:
+    template: Cave_Panopt
+    at:       [237.750, 39.445, -189.650, 128]
+    level:    [101, 110]
+  17879056:
+    template: Cave_Panopt
+    at:       [249.610, 39.539, -202.440, 52]
+    level:    [101, 110]
+  17879057:
+    template: Cave_Panopt
+    at:       [229.540, 39.512, -200.670, 194]
+    level:    [101, 110]
+  17879058:
+    template: Erythemic_Eft
+    at:       [232.410, 39.429, -204.330, 8]
+    level:    [101, 110]
+  17879059:
+    template: Erythemic_Eft
+    at:       [234.400, 39.333, -198.820, 228]
+    level:    [101, 110]
+  17879060:
+    template: Erythemic_Eft
+    at:       [234.570, 39.449, -191.630, 240]
+    level:    [101, 110]
+  17879061:
+    template: Crestfallen_Baelfyr
+    at:       [229.180, 39.215, -206.200, 155]
+    level:    [127, 128]
+  17879062:
+    template: Repugnant_Twitherym
+    at:       [293.400, 39.569, -249.160, 84]
+    level:    [101, 105]
+  17879063:
+    template: Repugnant_Twitherym
+    at:       [299.640, 39.780, -249.260, 75]
+    level:    [101, 105]
+  17879064:
+    template: Repugnant_Twitherym
+    at:       [305.010, 39.681, -240.420, 154]
+    level:    [101, 105]
+  17879065:
+    template: Repugnant_Twitherym
+    at:       [303.000, 40.340, -242.290, 55]
+    level:    [101, 105]
+  17879066:
+    template: Gleeful_Ungeweder
+    at:       [297.350, 40.338, -242.320, 67]
+    level:    [102, 110]
+  17879067:
+    template: Thirsting_Obdella
+    at:       [299.280, 29.819, -272.830, 214]
+    level:    [102, 110]
+  17879068:
+    template: Thirsting_Obdella
+    at:       [299.870, 30.405, -284.700, 130]
+    level:    [102, 110]
+  17879069:
+    template: Thirsting_Obdella
+    at:       [300.660, 30.513, -285.040, 150]
+    level:    [102, 110]
+  17879070:
+    template: Thirsting_Obdella
+    at:       [294.100, 28.583, -285.110, 163]
+    level:    [102, 110]
+  17879071:
+    template: Blustering_Twitherym
+    at:       [355.000, 29.951, -295.010, 217]
+    level:    [102, 110]
+  17879072:
+    template: Blustering_Twitherym
+    at:       [363.930, 30.500, -301.820, 52]
+    level:    [102, 110]
+  17879073:
+    template: Blustering_Twitherym
+    at:       [355.010, 30.096, -297.810, 31]
+    level:    [102, 110]
+  17879074:
+    template: Blustering_Twitherym
+    at:       [355.710, 30.128, -297.210, 50]
+    level:    [102, 110]
+  17879075:
+    template: Blustering_Twitherym
+    at:       [373.390, 30.250, -301.460, 35]
+    level:    [102, 110]
+  17879076:
+    template: Blustering_Twitherym
+    at:       [379.750, 30.382, -302.000, 74]
+    level:    [102, 110]
+  17879077:
+    template: Blustering_Twitherym
+    at:       [374.260, 30.301, -298.940, 187]
+    level:    [102, 110]
+  17879078:
+    template: Highwing_Chapuli
+    at:       [359.500, 30.635, -334.640, 118]
+    level:    [102, 110]
+  17879079:
+    template: Highwing_Chapuli
+    at:       [358.670, 30.323, -341.510, 146]
+    level:    [102, 110]
+  17879080:
+    template: Highwing_Chapuli
+    at:       [369.600, 30.309, -333.480, 231]
+    level:    [102, 110]
+  17879081:
+    template: Highwing_Chapuli
+    at:       [381.660, 28.753, -341.670, 161]
+    level:    [102, 110]
+  17879082:
+    template: Highwing_Chapuli
+    at:       [352.160, 28.629, -344.640, 135]
+    level:    [102, 110]
+  17879083:
+    template: Consecrated_Baelfyr
+    at:       [354.440, 30.312, -341.010, 255]
+    level:    [103, 108]
+  17879084:
+    template: Conflagrant_Eruca
+    at:       [207.370, 29.593, -139.770, 7]
+    level:    [101, 110]
+  17879085:
+    template: Conflagrant_Eruca
+    at:       [200.750, 30.415, -137.550, 18]
+    level:    [101, 110]
+  17879086:
+    template: Conflagrant_Eruca
+    at:       [202.950, 30.295, -142.470, 77]
+    level:    [101, 110]
+  17879087:
+    template: Conflagrant_Eruca
+    at:       [172.560, 19.718, 18.426, 149]
+    level:    [101, 110]
+  17879088:
+    template: Conflagrant_Eruca
+    at:       [175.470, 19.559, 29.248, 212]
+    level:    [101, 110]
+  17879089:
+    template: Conflagrant_Eruca
+    at:       [171.780, 19.740, 15.501, 58]
+    level:    [101, 110]
+  17879090:
+    template: Erupting_Geyser
+    at:       [183.500, 19.250, 31.363, 126]
+    level:    [1, 1]
+  17879091:
+    template: Erythemic_Eft
+    at:       [163.710, 20.429, 60.674, 144]
+    level:    [101, 110]
+  17879092:
+    template: Erythemic_Eft
+    at:       [152.710, 20.056, 61.740, 139]
+    level:    [101, 110]
+  17879093:
+    template: Erythemic_Eft
+    at:       [163.790, 20.503, 56.055, 108]
+    level:    [101, 110]
+  17879094:
+    template: Erythemic_Eft
+    at:       [164.210, 20.402, 55.265, 123]
+    level:    [101, 110]
+  17879095:
+    template: Erythemic_Eft
+    at:       [166.560, 20.162, 59.214, 253]
+    level:    [101, 110]
+  17879096:
+    template: Erythemic_Eft
+    at:       [152.860, 20.075, 60.335, 170]
+    level:    [101, 110]
+  17879097:
+    template: Crestfallen_Baelfyr
+    at:       [155.750, 20.388, 61.122, 234]
+    level:    [127, 128]
+  17879098:
+    template: Disturbed_Matamata
+    at:       [138.580, 20.437, 74.122, 232]
+    level:    [101, 110]
+  17879099:
+    template: Disturbed_Matamata
+    at:       [137.690, 20.493, 65.839, 65]
+    level:    [101, 110]
+  17879100:
+    template: Erupting_Geyser
+    at:       [266.320, 29.753, -103.120, 98]
+    level:    [1, 1]
+  17879101:
+    template: Pepper_Hare
+    at:       [142.260, 19.666, -22.631, 215]
+    level:    [101, 110]
+  17879102:
+    template: Pepper_Hare
+    at:       [141.610, 19.753, -20.830, 253]
+    level:    [101, 110]
+  17879103:
+    template: Pepper_Hare
+    at:       [136.150, 19.462, -20.988, 235]
+    level:    [101, 110]
+  17879104:
+    template: Repugnant_Twitherym
+    at:       [75.049, 19.445, -3.694, 138]
+    level:    [101, 105]
+  17879105:
+    template: Repugnant_Twitherym
+    at:       [91.263, 19.569, -4.419, 245]
+    level:    [101, 105]
+  17879106:
+    template: Repugnant_Twitherym
+    at:       [83.241, 19.357, 4.688, 30]
+    level:    [101, 105]
+  17879107:
+    template: Repugnant_Twitherym
+    at:       [89.847, 19.448, 4.602, 24]
+    level:    [101, 105]
+  17879108:
+    template: Gleeful_Ungeweder
+    at:       [79.040, 19.409, 10.323, 161]
+    level:    [102, 110]
+  17879109:
+    template: Erupting_Geyser
+    at:       [69.345, 19.500, 5.074]
+    level:    [1, 1]
+  17879110:
+    template: Disturbed_Matamata
+    at:       [71.655, 29.860, -80.636, 57]
+    level:    [101, 110]
+  17879111:
+    template: Disturbed_Matamata
+    at:       [70.858, 29.650, -86.774, 53]
+    level:    [101, 110]
+  17879112:
+    template: Ruby_Raptor_Small
+    script:   Ruby_Raptor
+    at:       [73.253, 29.643, -82.055, 122]
+    level:    [101, 103]
+  17879113:
+    template: Ruby_Raptor_Small
+    script:   Ruby_Raptor
+    at:       [42.667, 29.604, -72.623, 199]
+    level:    [101, 103]
+  17879114:
+    template: Ruby_Raptor_Small
+    script:   Ruby_Raptor
+    at:       [53.068, 29.940, -84.416, 207]
+    level:    [101, 103]
+  17879115:
+    template: Ruby_Raptor_Small
+    script:   Ruby_Raptor
+    at:       [66.514, 29.843, -88.507, 123]
+    level:    [101, 103]
+  17879116:
+    template: Crestfallen_Baelfyr
+    at:       [54.354, 29.981, -84.471, 162]
+    level:    [127, 128]
+  17879117:
+    template: Erupting_Geyser
+    at:       [44.626, 29.145, -84.045, 115]
+    level:    [1, 1]
+  17879118:
+    template: Scoriaceous_Clot
+    at:       [107.280, 29.759, -259.590, 74]
+    level:    [101, 110]
+  17879119:
+    template: Scoriaceous_Clot
+    at:       [121.210, 30.003, -248.920, 34]
+    level:    [101, 110]
+  17879120:
+    template: Nachtschatten
+    at:       [111.670, 29.767, -266.600, 157]
+    level:    [101, 110]
+  17879121:
+    template: Nachtschatten
+    at:       [118.610, 30.134, -257.970, 99]
+    level:    [101, 110]
+  17879122:
+    template: Pungent_Fungus
+    at:       [121.740, 30.287, -261.160, 26]
+    level:    [1, 1]
+  17879123:
+    template: Scoriaceous_Clot
+    at:       [95.017, 30.429, -277.550, 133]
+    level:    [101, 110]
+  17879124:
+    template: Scoriaceous_Clot
+    at:       [89.836, 30.254, -278.480, 166]
+    level:    [101, 110]
+  17879125:
+    template: Nachtschatten
+    at:       [90.995, 29.427, -283.650, 95]
+    level:    [101, 110]
+  17879126:
+    template: Nachtschatten
+    at:       [90.583, 30.347, -278.350, 155]
+    level:    [101, 110]
+  17879127:
+    template: Pungent_Fungus
+    at:       [104.620, 30.183, -284.860, 37]
+    level:    [1, 1]
+  17879128:
+    template: Ferocious_Funguar
+    at:       [55.967, 30.034, -352.690, 155]
+    level:    [101, 110]
+  17879129:
+    template: Ferocious_Funguar
+    at:       [58.083, 30.135, -351.680, 253]
+    level:    [101, 110]
+  17879130:
+    template: Ferocious_Funguar
+    at:       [57.014, 30.208, -356.670, 109]
+    level:    [101, 110]
+  17879131:
+    template: Ferocious_Funguar
+    at:       [43.287, 29.784, -370.260, 39]
+    level:    [101, 110]
+  17879132:
+    template: Pungent_Fungus
+    at:       [58.254, 29.048, -372.240, 93]
+    level:    [1, 1]
+  17879133:
+    template: Ferocious_Funguar
+    at:       [83.596, 29.613, -355.740, 13]
+    level:    [101, 110]
+  17879134:
+    template: Ferocious_Funguar
+    at:       [65.724, 30.263, -362.630, 83]
+    level:    [101, 110]
+  17879135:
+    template: Ferocious_Funguar
+    at:       [72.391, 29.997, -365.190, 151]
+    level:    [101, 110]
+  17879136:
+    template: Ferocious_Funguar
+    at:       [77.500, 29.094, -362.150, 58]
+    level:    [101, 110]
+  17879137:
+    template: Gleeful_Ungeweder
+    at:       [73.385, 29.628, -352.750, 176]
+    level:    [102, 110]
+  17879138:
+    template: Pungent_Fungus
+    at:       [63.689, 30.370, -363.930, 67]
+    level:    [1, 1]
+  17879139:
+    template: Cave_Panopt
+    at:       [166.200, 29.576, -375.520, 150]
+    level:    [101, 110]
+  17879140:
+    template: Cave_Panopt
+    at:       [181.720, 30.344, -373.790, 214]
+    level:    [101, 110]
+  17879141:
+    template: Cave_Panopt
+    at:       [171.170, 30.410, -377.100, 175]
+    level:    [101, 110]
+  17879142:
+    template: Cave_Panopt
+    at:       [159.110, 30.514, -380.640, 123]
+    level:    [101, 110]
+  17879143:
+    template: Pungent_Fungus
+    at:       [173.390, 30.447, -379.950, 68]
+    level:    [1, 1]
+  17879144:
+    template: Repugnant_Twitherym
+    at:       [182.580, 30.141, -353.510, 28]
+    level:    [101, 105]
+  17879145:
+    template: Repugnant_Twitherym
+    at:       [178.440, 29.924, -350.210, 208]
+    level:    [101, 105]
+  17879146:
+    template: Repugnant_Twitherym
+    at:       [177.620, 30.503, -360.990, 115]
+    level:    [101, 105]
+  17879147:
+    template: Repugnant_Twitherym
+    at:       [176.720, 30.458, -360.120, 89]
+    level:    [101, 105]
+  17879148:
+    template: Scoriaceous_Clot
+    at:       [-37.030, 30.655, -338.360, 203]
+    level:    [101, 110]
+  17879149:
+    template: Scoriaceous_Clot
+    at:       [-38.520, 30.607, -337.230, 249]
+    level:    [101, 110]
+  17879150:
+    template: Scoriaceous_Clot
+    at:       [-30.050, 29.648, -342.550, 98]
+    level:    [101, 110]
+  17879151:
+    template: Pungent_Fungus
+    at:       [-49.580, 28.427, -334.360, 40]
+    level:    [1, 1]
+  17879152:
+    template: Writhing_Obdella
+    at:       [221.613, 39.407, -229.688, 223]
+    level:    [101, 110]
+  17879153:
+    template: Writhing_Obdella
+    at:       [217.910, 39.148, -244.430, 188]
+    level:    [101, 110]
+  17879154:
+    template: Writhing_Obdella
+    at:       [220.360, 39.366, -244.360, 170]
+    level:    [101, 110]
+  17879155:
+    template: Ruby_Raptor_Small
+    script:   Ruby_Raptor
+    at:       [221.460, 19.364, 5.128, 43]
+    level:    [101, 103]
+  17879156:
+    template: Ruby_Raptor_Small
+    script:   Ruby_Raptor
+    at:       [217.220, 17.054, 16.886, 175]
+    level:    [101, 103]
+  17879157:
+    template: Nachtschatten
+    at:       [60.444, 29.481, -319.440, 230]
+    level:    [101, 110]
+  17879158:
+    template: Nachtschatten
+    at:       [57.513, 29.392, -323.650, 189]
+    level:    [101, 110]
+  17879159:
+    template: Nachtschatten
+    at:       [58.051, 29.440, -322.140, 92]
+    level:    [101, 110]
+  17879160:
+    template: Cthonic_Chapuli_MG
+    script:   Cthonic_Chapuli
+    at:       [110.800, 29.106, -339.640, 124]
+    level:    [101, 105]
+  17879161:
+    template: Cthonic_Chapuli_MG
+    script:   Cthonic_Chapuli
+    at:       [141.710, 28.531, -351.610, 37]
+    level:    [101, 105]
+  17879162:
+    template: Ferocious_Funguar
+    at:       [3.627, 29.466, -379.430, 234]
+    level:    [101, 110]
+  17879163:
+    template: Ferocious_Funguar
+    at:       [12.255, 28.965, -380.340, 42]
+    level:    [101, 110]
+  17879164:
+    template: Ferocious_Funguar
+    at:       [-2.507, 29.340, -382.320, 22]
+    level:    [101, 110]
+  17879165:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [240.000, 18.500, -57.500, 119]
+    level:    [102, 110]
+  17879166:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [240.000, 18.500, -60.000, 80]
+    level:    [102, 110]
+  17879167:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [240.000, 18.500, -62.500, 72]
+    level:    [102, 110]
+  17879168:
+    template: Ruby_Raptor
+    at:       [226.420, 18.938, -63.125, 119]
+    level:    [101, 103]
+  17879169:
+    template: Ruby_Raptor
+    at:       [229.520, 19.186, -62.075, 29]
+    level:    [101, 103]
+  17879170:
+    template: Skittish_Matamata
+    at:       [233.430, 19.308, -57.098, 223]
+    level:    [102, 110]
+  17879171:
+    template: Ruby_Raptor
+    at:       [251.820, 24.086, -63.068, 181]
+    level:    [101, 103]
+  17879172:
+    template: Ruby_Raptor
+    at:       [246.250, 20.719, -62.979, 121]
+    level:    [101, 103]
+  17879173:
+    template: Skittish_Matamata
+    at:       [250.850, 23.679, -62.408, 232]
+    level:    [102, 110]
+  17879174:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [102.500, 28.500, -160.000, 50]
+    level:    [102, 110]
+  17879175:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [100.000, 28.500, -160.000, 13]
+    level:    [102, 110]
+  17879176:
+    template: Knotted_Root_SG_MG
+    script:   Knotted_Root
+    at:       [97.500, 28.500, -160.000, 37]
+    level:    [102, 110]
+  17879177:
+    template: Scoriaceous_Clot
+    at:       [99.580, 29.628, -161.980, 119]
+    level:    [101, 110]
+  17879178:
+    template: Scoriaceous_Clot
+    at:       [99.247, 29.804, -163.270, 141]
+    level:    [101, 110]
+  17879179:
+    template: Skittish_Matamata
+    at:       [96.454, 29.141, -158.350, 57]
+    level:    [102, 110]
+  17879180:
+    template: Scoriaceous_Clot
+    at:       [101.790, 29.607, -172.870, 43]
+    level:    [101, 110]
+  17879181:
+    template: Scoriaceous_Clot
+    at:       [104.650, 29.860, -172.690, 73]
+    level:    [101, 110]
+  17879182:
+    template: Skittish_Matamata
+    at:       [103.190, 29.919, -172.410, 19]
+    level:    [102, 110]
+  17879183:
+    template: Staumarth
+    at:       [396.500, 29.520, -167.240, 6]
+    level:    [103, 108]
+  17879184:
+    template: Liquidbone_Leech
+    at:       [-477.300, 39.362, 357.453, 38]
+    level:    [120, 124]
+  17879185:
+    template: Rank_Eft
+    at:       [-469.200, 39.570, 354.910, 3]
+    level:    [120, 124]
+  17879186:
+    template: Liquidbone_Leech
+    at:       [-476.500, 39.919, 388.350, 250]
+    level:    [120, 124]
+  17879187:
+    template: Rank_Eft
+    at:       [-467.900, 39.617, 410.588, 27]
+    level:    [120, 124]
+  17879188:
+    template: Rank_Eft
+    at:       [-472.600, 39.400, 410.661, 129]
+    level:    [120, 124]
+  17879189:
+    template: Liquidbone_Leech
+    at:       [-483.000, 39.453, 402.752, 244]
+    level:    [120, 124]
+  17879190:
+    template: Rank_Eft
+    at:       [-480.700, 39.330, 389.993, 123]
+    level:    [120, 124]
+  17879191:
+    template: Liquidbone_Leech
+    at:       [-483.500, 39.701, 384.631, 26]
+    level:    [120, 124]
+  17879192:
+    template: Liquidbone_Leech
+    at:       [-465.100, 39.307, 381.132, 14]
+    level:    [120, 124]
+  17879193:
+    template: Rank_Eft
+    at:       [-491.200, 39.206, 370.285, 238]
+    level:    [120, 124]
+  17879194:
+    template: Rank_Eft
+    at:       [-466.000, 39.433, 349.843, 178]
+    level:    [120, 124]
+  17879195:
+    template: Steelclaw_Raptor
+    at:       [-451.900, 39.561, 343.579, 243]
+    level:    [120, 124]
+  17879196:
+    template: Steelclaw_Raptor
+    at:       [-444.200, 39.404, 341.899, 184]
+    level:    [120, 124]
+  17879197:
+    template: Steelclaw_Raptor
+    at:       [-444.400, 39.423, 342.070, 185]
+    level:    [120, 124]
+  17879198:
+    template: Praying_Chapuli
+    at:       [-404.000, 39.401, 410.963, 182]
+    level:    [120, 124]
+  17879199:
+    template: Praying_Chapuli
+    at:       [-410.600, 39.583, 405.929, 119]
+    level:    [120, 124]
+  17879200:
+    template: Praying_Chapuli
+    at:       [-391.900, 39.470, 405.179, 32]
+    level:    [120, 124]
+  17879201:
+    template: Praying_Chapuli
+    at:       [-392.200, 39.402, 404.114, 9]
+    level:    [120, 124]
+  17879202:
+    template: Praying_Chapuli
+    at:       [-396.700, 39.388, 391.407, 74]
+    level:    [120, 124]
+  17879203:
+    template: Praying_Chapuli
+    at:       [-371.500, 39.439, 381.679, 134]
+    level:    [120, 124]
+  17879204:
+    template: Groundstomp_Matamata
+    at:       [-326.300, 50.166, 423.122, 14]
+    level:    [120, 124]
+  17879205:
+    template: Groundstomp_Matamata
+    at:       [-311.100, 49.736, 425.509, 243]
+    level:    [120, 124]
+  17879206:
+    template: Groundstomp_Matamata
+    at:       [-304.300, 49.823, 463.648, 130]
+    level:    [120, 124]
+  17879207:
+    template: Groundstomp_Matamata
+    at:       [-304.700, 49.421, 456.407, 157]
+    level:    [120, 124]
+  17879208:
+    template: Groundstomp_Matamata
+    at:       [-303.100, 50.244, 431.170, 83]
+    level:    [120, 124]
+  17879209:
+    template: Erupting_Geyser
+    at:       [-284.500, 49.735, 419.936, 5]
+    level:    [1, 1]
+  17879210:
+    template: Incandescent_Baelfyr
+    at:       [-227.000, 48.894, 418.927, 191]
+    level:    [125, 126]
+  17879211:
+    template: Incandescent_Baelfyr
+    at:       [-238.700, 50.727, 421.161, 226]
+    level:    [125, 126]
+  17879212:
+    template: Incandescent_Baelfyr
+    at:       [-250.000, 49.601, 416.076, 71]
+    level:    [125, 126]
+  17879213:
+    template: Erupting_Geyser
+    at:       [-238.900, 50.805, 421.589, 86]
+    level:    [1, 1]
+  17879214:
+    template: Erupting_Geyser
+    at:       [-226.000, 47.936, 415.153, 4]
+    level:    [1, 1]
+  17879215:
+    template: Erupting_Geyser
+    at:       [-249.600, 49.512, 415.675, 109]
+    level:    [1, 1]
+  17879216:
+    template: Groundstomp_Matamata
+    at:       [-247.300, 49.660, 414.510, 134]
+    level:    [120, 124]
+  17879217:
+    template: Erupting_Geyser
+    at:       [-196.000, 59.500, 461.411, 115]
+    level:    [1, 1]
+  17879218:
+    template: Murkmoan_Umbril
+    at:       [-172.200, 58.604, 455.171, 48]
+    level:    [120, 124]
+  17879219:
+    template: Murkmoan_Umbril
+    at:       [-171.300, 58.542, 447.002, 87]
+    level:    [120, 124]
+  17879220:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-173.700, 59.229, 449.313, 121]
+    level:    [120, 124]
+  17879221:
+    template: Murkmoan_Umbril
+    at:       [-183.400, 59.895, 449.088, 248]
+    level:    [120, 124]
+  17879222:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-175.100, 59.981, 447.884, 186]
+    level:    [120, 124]
+  17879223:
+    template: Erupting_Geyser
+    at:       [-137.000, 59.695, 507.778, 128]
+    level:    [1, 1]
+  17879224:
+    template: Erupting_Geyser
+    at:       [-156.800, 59.644, 522.486, 35]
+    level:    [1, 1]
+  17879225:
+    template: Murkmoan_Umbril
+    at:       [-124.300, 59.555, 475.377, 226]
+    level:    [120, 124]
+  17879226:
+    template: Murkmoan_Umbril
+    at:       [-111.500, 59.688, 476.453, 217]
+    level:    [120, 124]
+  17879227:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-119.300, 60.118, 494.989, 252]
+    level:    [120, 124]
+  17879228:
+    template: Murkmoan_Umbril
+    at:       [-163.400, 59.623, 514.518, 52]
+    level:    [120, 124]
+  17879229:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-154.600, 59.237, 510.829, 98]
+    level:    [120, 124]
+  17879230:
+    template: Murkmoan_Umbril
+    at:       [-156.200, 59.702, 526.247, 74]
+    level:    [120, 124]
+  17879231:
+    template: Murkmoan_Umbril
+    at:       [-124.200, 59.487, 517.013, 119]
+    level:    [120, 124]
+  17879232:
+    template: Murkmoan_Umbril
+    at:       [-124.000, 59.811, 522.479, 193]
+    level:    [120, 124]
+  17879233:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-132.100, 59.488, 506.446, 69]
+    level:    [120, 124]
+  17879234:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-138.700, 59.736, 509.540, 74]
+    level:    [120, 124]
+  17879235:
+    template: Murkmoan_Umbril
+    at:       [-163.400, 60.027, 420.372, 127]
+    level:    [120, 124]
+  17879236:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-190.300, 58.943, 427.098, 251]
+    level:    [120, 124]
+  17879237:
+    template: Murkmoan_Umbril
+    at:       [-187.700, 59.255, 409.308, 18]
+    level:    [120, 124]
+  17879238:
+    template: Murkmoan_Umbril
+    at:       [-189.400, 59.526, 409.796, 145]
+    level:    [120, 124]
+  17879239:
+    template: Erupting_Geyser
+    at:       [-133.500, 59.672, 415.221, 100]
+    level:    [1, 1]
+  17879240:
+    template: Murkmoan_Umbril
+    at:       [-144.500, 59.664, 423.458, 128]
+    level:    [120, 124]
+  17879241:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-134.300, 59.736, 422.778, 188]
+    level:    [120, 124]
+  17879242:
+    template: Dullahan_generic
+    script:   Somatophylax_Dullahan
+    at:       [-134.600, 59.708, 418.705, 60]
+    level:    [120, 124]
+  17879243:
+    template: Splotched_Acuex
+    at:       [-159.100, 60.668, 376.450, 1]
+    level:    [121, 123]
+  17879244:
+    template: Splotched_Acuex
+    at:       [-155.700, 60.452, 377.645, 96]
+    level:    [121, 123]
+  17879245:
+    template: Splotched_Acuex
+    at:       [-179.000, 59.775, 377.194, 40]
+    level:    [121, 123]
+  17879246:
+    template: Splotched_Acuex
+    at:       [-180.500, 59.345, 378.165, 164]
+    level:    [121, 123]
+  17879247:
+    template: Splotched_Acuex
+    at:       [-165.900, 60.504, 375.190, 244]
+    level:    [121, 123]
+  17879248:
+    template: Splotched_Acuex
+    at:       [-182.300, 60.431, 358.997, 74]
+    level:    [121, 123]
+  17879249:
+    template: Steelclaw_Raptor
+    at:       [-187.500, 60.466, 337.587, 132]
+    level:    [120, 124]
+  17879250:
+    template: Steelclaw_Raptor
+    at:       [-193.600, 59.687, 341.601, 165]
+    level:    [120, 124]
+  17879251:
+    template: Groundstomp_Matamata
+    at:       [-211.700, 58.168, 335.532, 128]
+    level:    [120, 124]
+  17879252:
+    template: Groundstomp_Matamata
+    at:       [-219.100, 58.965, 349.203, 124]
+    level:    [120, 124]
+  17879253:
+    template: Steelclaw_Raptor
+    at:       [-219.100, 58.292, 364.544, 47]
+    level:    [120, 124]
+  17879254:
+    template: Gelatinous_Clot
+    at:       [-264.800, 49.263, 374.721, 248]
+    level:    [120, 124]
+  17879255:
+    template: Gelatinous_Clot
+    at:       [-273.400, 49.442, 353.507, 169]
+    level:    [120, 124]
+  17879256:
+    template: Gelatinous_Clot
+    at:       [-275.700, 49.541, 363.878, 219]
+    level:    [120, 124]
+  17879257:
+    template: Gelatinous_Clot
+    at:       [-283.100, 49.409, 365.497, 28]
+    level:    [120, 124]
+  17879258:
+    template: Gelatinous_Clot
+    at:       [-290.500, 49.569, 355.072, 186]
+    level:    [120, 124]
+  17879259:
+    template: Gelatinous_Clot
+    at:       [-305.800, 48.883, 341.033, 70]
+    level:    [120, 124]
+  17879260:
+    template: Liquidbone_Leech
+    at:       [-338.400, 49.401, 333.716, 214]
+    level:    [120, 124]
+  17879261:
+    template: Liquidbone_Leech
+    at:       [-346.600, 48.943, 325.192, 115]
+    level:    [120, 124]
+  17879262:
+    template: Groundstomp_Matamata
+    at:       [-352.300, 48.828, 312.429, 109]
+    level:    [120, 124]
+  17879263:
+    template: Groundstomp_Matamata
+    at:       [-340.600, 49.134, 292.092, 115]
+    level:    [120, 124]
+  17879264:
+    template: Groundstomp_Matamata
+    at:       [-355.100, 48.673, 293.136, 61]
+    level:    [120, 124]
+  17879265:
+    template: Groundstomp_Matamata
+    at:       [-355.100, 50.487, 302.611, 165]
+    level:    [120, 124]
+  17879266:
+    template: Groundstomp_Matamata
+    at:       [-364.700, 50.180, 298.855, 228]
+    level:    [120, 124]
+  17879267:
+    script: Stinkskin
+    level:  [126, 126]
+  17879268:
+    template: Liquidbone_Leech
+    at:       [-420.500, 49.791, 310.937, 140]
+    level:    [120, 124]
+  17879269:
+    template: Steelclaw_Raptor
+    at:       [-410.700, 48.516, 305.200, 192]
+    level:    [120, 124]
+  17879270:
+    template: Steelclaw_Raptor
+    at:       [-422.900, 50.654, 318.263, 81]
+    level:    [120, 124]
+  17879271:
+    template: Rank_Eft
+    at:       [-418.300, 50.617, 318.130, 53]
+    level:    [120, 124]
+  17879272:
+    template: Liquidbone_Leech
+    at:       [-411.900, 48.237, 318.934, 182]
+    level:    [120, 124]
+  17879273:
+    template: Rank_Eft
+    at:       [-411.200, 48.287, 310.230, 184]
+    level:    [120, 124]
+  17879274:
+    template: Apex_Matamata
+    at:       [315.940, 29.813, -92.415, 139]
+    level:    [124, 127]
+  17879275:
+    template: Apex_Matamata
+    at:       [315.170, 29.944, -93.221, 157]
+    level:    [124, 127]
+  17879276:
+    template: Apex_Matamata
+    at:       [335.540, 30.063, -84.525, 80]
+    level:    [124, 127]
+  17879277:
+    template: Apex_Raptor
+    at:       [323.810, 30.149, -105.640, 117]
+    level:    [124, 127]
+  17879278:
+    template: Apex_Raptor
+    at:       [321.500, 30.114, -98.325, 49]
+    level:    [124, 127]
+  17879279:
+    template: Apex_Raptor
+    at:       [308.060, 30.306, -100.250, 149]
+    level:    [124, 127]
+  17879280:
+    template: Apex_Matamata
+    at:       [343.290, 30.128, -67.538, 32]
+    level:    [124, 127]
+  17879281:
+    template: Apex_Matamata
+    at:       [335.890, 28.735, -60.618, 109]
+    level:    [124, 127]
+  17879282:
+    template: Apex_Matamata
+    at:       [349.160, 29.923, -57.626, 138]
+    level:    [124, 127]
+  17879283:
+    template: Apex_Raptor
+    at:       [338.780, 29.972, -30.469, 210]
+    level:    [124, 127]
+  17879284:
+    template: Apex_Raptor
+    at:       [347.510, 29.809, -59.292, 197]
+    level:    [124, 127]
+  17879285:
+    template: Apex_Raptor
+    at:       [338.980, 29.799, -30.945, 207]
+    level:    [124, 127]
+  17879286:
+    template: Apex_Matamata
+    at:       [376.170, 30.400, -52.844, 200]
+    level:    [124, 127]
+  17879287:
+    template: Apex_Matamata
+    at:       [378.060, 30.322, -52.404, 160]
+    level:    [124, 127]
+  17879288:
+    template: Apex_Matamata
+    at:       [388.370, 27.809, -53.692, 196]
+    level:    [124, 127]
+  17879289:
+    template: Apex_Raptor
+    at:       [385.020, 30.193, -38.263, 73]
+    level:    [124, 127]
+  17879290:
+    template: Apex_Raptor
+    at:       [380.710, 29.773, -55.777, 168]
+    level:    [124, 127]
+  17879291:
+    template: Apex_Raptor
+    at:       [371.390, 28.627, -46.974, 177]
+    level:    [124, 127]
+  17879292:
+    template: Apex_Raptor
+    at:       [379.130, 30.549, -49.270, 87]
+    level:    [124, 127]
+  17879293:
+    template: Erupting_Geyser
+    at:       [294.110, 29.733, -134.910, 106]
+    level:    [1, 1]
+  17879294:
+    template: Apex_Eft
+    at:       [370.910, 29.943, -150.730, 169]
+    level:    [124, 127]
+  17879295:
+    template: Apex_Eft
+    at:       [371.700, 30.405, -155.780, 117]
+    level:    [124, 127]
+  17879296:
+    template: Apex_Eft
+    at:       [371.180, 29.878, -161.330, 118]
+    level:    [124, 127]
+  17879297:
+    template: Apex_Eft
+    at:       [359.970, 29.433, -161.740, 110]
+    level:    [124, 127]
+  17879298:
+    template: Apex_Eft
+    at:       [380.650, 30.353, -156.000, 235]
+    level:    [124, 127]
+  17879299:
+    template: Apex_Eft
+    at:       [377.700, 29.702, -148.010, 140]
+    level:    [124, 127]
+  17879300:
+    template: Apex_Eft
+    at:       [380.200, 30.360, -155.690, 233]
+    level:    [124, 127]
+  17879301:
+    template: Apex_Eft
+    at:       [358.050, 29.497, -157.430, 68]
+    level:    [124, 127]
+  17879302:
+    template: Apex_Eft
+    at:       [397.220, 29.530, -121.330, 103]
+    level:    [124, 127]
+  17879303:
+    template: Apex_Eft
+    at:       [398.380, 29.403, -117.160, 85]
+    level:    [124, 127]
+  17879304:
+    template: Apex_Eft
+    at:       [395.490, 29.954, -135.710, 160]
+    level:    [124, 127]
+  17879305:
+    template: Apex_Eft
+    at:       [391.950, 29.839, -134.860, 245]
+    level:    [124, 127]
+  17879306:
+    template: Apex_Eft
+    at:       [396.290, 29.558, -121.670, 112]
+    level:    [124, 127]
+  17879307:
+    template: Apex_Eft
+    at:       [398.290, 30.434, -135.740, 233]
+    level:    [124, 127]
+  17879308:
+    template: Apex_Eft
+    at:       [400.220, 29.888, -128.020, 38]
+    level:    [124, 127]
+  17879309:
+    template: Apex_Eft
+    at:       [386.890, 29.808, -136.520, 162]
+    level:    [124, 127]
+  17879310:
+    template: Apex_Eft
+    at:       [396.880, 29.583, -162.410, 144]
+    level:    [124, 127]
+  17879311:
+    template: Apex_Eft
+    at:       [399.850, 29.559, -158.160, 194]
+    level:    [124, 127]
+  17879312:
+    template: Apex_Eft
+    at:       [394.840, 29.618, -160.330, 58]
+    level:    [124, 127]
+  17879313:
+    template: Apex_Eft
+    at:       [395.450, 29.638, -164.240, 183]
+    level:    [124, 127]
+  17879314:
+    template: Apex_Eruca
+    at:       [345.710, 29.250, 20.458, 204]
+    level:    [124, 127]
+  17879315:
+    template: Apex_Eruca
+    at:       [344.850, 29.542, 21.328, 238]
+    level:    [124, 127]
+  17879316:
+    template: Apex_Eruca
+    at:       [341.690, 29.465, 15.972, 84]
+    level:    [124, 127]
+  17879317:
+    template: Apex_Eruca
+    at:       [336.520, 29.563, 19.464, 244]
+    level:    [124, 127]
+  17879318:
+    template: Apex_Eruca
+    at:       [341.890, 29.684, 17.558, 71]
+    level:    [124, 127]
+  17879319:
+    template: Apex_Eruca
+    at:       [413.750, 29.545, 55.512, 130]
+    level:    [124, 127]
+  17879320:
+    template: Apex_Eruca
+    at:       [423.360, 29.566, 51.660, 61]
+    level:    [124, 127]
+  17879321:
+    template: Apex_Eruca
+    at:       [414.280, 29.541, 56.334, 111]
+    level:    [124, 127]
+  17879322:
+    template: Apex_Eruca
+    at:       [424.670, 29.281, 54.826, 209]
+    level:    [124, 127]
+  17879323:
+    template: Apex_Eruca
+    at:       [424.190, 29.188, 57.823, 25]
+    level:    [124, 127]

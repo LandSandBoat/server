@@ -1,0 +1,3352 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+
+  Aura_Butler:
+    id:            286
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   doll_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+
+  Aura_Gear:
+    id:            287
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   doll_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+
+  Aura_Pot:
+    id:            288
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         43
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   red_mages_testimony
+        - chance: rare
+          item:   vial_of_mercury
+        - chance: rare
+          item:   flask_of_romaeve_spring_water
+        - chance: very_rare
+          one_of:
+            scroll_of_thunder_iii:  35
+            scroll_of_shell_iv:     20
+            scroll_of_thundaga_iii: 20
+            scroll_of_thunder_iv:   15
+            scroll_of_burst:        10
+      despoil:
+        magic_pot_shard: 0
+
+  Aura_Sculpture:
+    id:            6595
+    species:       golem
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_mythril_ore
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: rare
+          item:   fossilized_fang
+        - chance: rare
+          item:   golem_shard
+      despoil:
+        chunk_of_mythril_ore: 0
+        golem_shard:          0
+    content: ABYSSEA
+
+  Aura_Statue:
+    id:            289
+    species:       golem
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 4
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   chunk_of_mythril_ore
+        - chance: rare
+          item:   golem_shard
+        - chance: very_rare
+          item:   square_of_raxa
+        - chance: very_rare
+          item:   chunk_of_diorite
+      despoil:
+        chunk_of_mythril_ore: 0
+        golem_shard:          0
+
+  Aura_Weapon:
+    id:            290
+    species:       evil_weapon
+    spell_list_id: 42
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Baelfyr:
+    id:            323
+    species:       ice_elemental
+    spell_list_id: 3
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2149
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    content: ABYSSEA
+
+  Bai_Hu:
+    id:            4715
+    species:       legendary_tigers
+    type:          [notorious]
+    spell_list_id: 26
+    skill_list_id: 279
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [thf, whm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:   10
+          dark:    -2
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:       4
+          light_sleep: 10
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 309
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        36
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Byakko_pet:
+    id:            4672
+    display_name:  Byakko
+    species:       legendary_tigers
+    type:          [notorious]
+    spell_list_id: 26
+    skill_list_id: 332
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [thf, whm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:   10
+          dark:    -2
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:       4
+          light_sleep: 10
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 309
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        36
+      behaviors:
+        aggressive: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10500
+        mp: 10500
+
+  Byrgen:
+    id:            593
+    species:       dark_elemental
+    spell_list_id: 21
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2148
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+    content: ABYSSEA
+
+  Dark_Elemental:
+    id:            913
+    species:       dark_elemental
+    spell_list_id: 18
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        immune_status: [blind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 443
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+
+  Decorative_Weapon:
+    id:            946
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Defender:
+    id:            955
+    species:       spheroid
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 315
+        entity_flags: 131
+        model_size:     1
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      mob_mods:
+        exp_bonus: -100
+      spawn:
+        respawn: 300
+      stats:
+        hp: 500
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Faust:
+    id:            1306
+    species:       gargoyles
+    type:          [notorious]
+    roam:          [scripted]
+    skill_list_id: 367
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  157
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 30
+      spawn:
+        respawn: 10800
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: always
+          item:   summerstone
+        - chance: common
+          item:   summerstone
+        - chance: common
+          item:   oblation_abjuration
+        - chance: uncommon
+          item:   tonbo-giri
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Gefyrst:
+    id:            1487
+    species:       ice_elemental
+    spell_list_id: 3
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        model_size:  1
+        hitbox:     17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    content: ABYSSEA
+
+  Genbu_pet:
+    id:            4670
+    display_name:  Genbu
+    species:       legendary_adamantoise
+    type:          [notorious]
+    spell_list_id: 24
+    skill_list_id: 330
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      jobs: [pld, rdm]
+      resists:
+        rank_element:
+          fire:    10
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder: -2
+          water:   10
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:      10
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 407
+        entity_flags: 153
+        name_prefix:   32
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Ice_Elemental:
+    id:            2043
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 437
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+
+  Kirin:
+    id:            2265
+    species:       legendary_manticore
+    type:          [notorious]
+    spell_list_id: 23
+    skill_list_id: 281
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    360
+        dmg_mult: 125
+      jobs: [smn, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:    -2
+          earth:   10
+          thunder: 10
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          slow:        10
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 403
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mods:
+        regain: 150
+        regen:   50
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 60000
+        mp: 60000
+    loot:
+      drops:
+        - chance: common
+          item:   kirins_pole
+        - chance: common
+          item:   kirins_osode
+        - chance: uncommon
+          item:   scroll_of_raise_iii
+        - chance: uncommon
+          item:   scroll_of_quake
+        - chance: common
+          one_of:
+            square_of_shining_cloth: 40
+            damascus_ingot:          30
+            orichalcum_ingot:        30
+        - chance: common
+          one_of:
+            square_of_shining_cloth: 40
+            damascus_ingot:          30
+            orichalcum_ingot:        30
+        - chance: common
+          one_of:
+            dryadic_abjuration_body:  40
+            neptunal_abjuration_body: 30
+            wyrmal_abjuration_legs:   30
+        - chance: common
+          one_of:
+            dryadic_abjuration_body:  40
+            neptunal_abjuration_body: 30
+            wyrmal_abjuration_legs:   30
+
+  Kirins_Avatar:
+    id:            2266
+    species:       carbuncle
+    type:          [called]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Mother_Globe:
+    id:            2755
+    species:       spheroid
+    type:          [notorious]
+    spell_list_id: 41
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 315
+        entity_flags: 135
+        model_size:     3
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 10800
+      stats:
+        hp: 12000
+    loot:
+      drops:
+        - chance: always
+          item:   springstone
+        - chance: common
+          item:   springstone
+        - chance: common
+          item:   libation_abjuration
+        - chance: uncommon
+          item:   shiranui
+
+  Olla_Grande:
+    id:            2969
+    species:       magic_pot
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  1671
+        animation_sub:    8
+        model_size:       3
+        hitbox:          53
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5300
+    loot:
+      drops:
+        - chance: always
+          item:   winterstone
+        - chance: common
+          item:   winterstone
+        - chance: common
+          item:   libation_abjuration
+        - chance: uncommon
+          item:   skofnung
+        - chance: rare
+          item:   freyas_tear
+
+  Olla_Media:
+    id:            2970
+    species:       magic_pot
+    type:          [notorious]
+    spell_list_id: 2
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  1669
+        animation_sub:    8
+        model_size:       2
+        hitbox:          43
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5200
+
+  Olla_Pequena:
+    id:            2971
+    species:       magic_pot
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Qilin:
+    id:            4716
+    species:       legendary_manticore
+    type:          [notorious]
+    spell_list_id: 23
+    skill_list_id: 281
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [smn, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:    -2
+          earth:   10
+          thunder: 10
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          slow:        10
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 403
+        entity_flags: 159
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Qing_Long:
+    id:            4714
+    species:       wyvern
+    type:          [notorious]
+    spell_list_id: 25
+    skill_list_id: 278
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:    10
+          earth:   10
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     10
+          slow:        10
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 399
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Seiryu_pet:
+    id:            4671
+    display_name:  Seiryu
+    species:       wyvern
+    type:          [notorious]
+    spell_list_id: 25
+    skill_list_id: 331
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:    10
+          earth:   10
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     10
+          slow:        10
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 399
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+        mp: 11000
+
+  Slave_Globe:
+    id:            3667
+    species:       spheroid
+    type:          [notorious]
+    roam:          [scripted]
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 314
+        entity_flags: 131
+        model_size:     1
+        hitbox:         6
+      mob_mods:
+        exp_bonus: -100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 600
+
+  Suzaku_pet:
+    id:            4673
+    display_name:  Suzaku
+    species:       bird
+    type:          [notorious]
+    spell_list_id: 27
+    skill_list_id: 333
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    10
+          ice:     10
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    10
+          bind:        10
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 337
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Ullikummi:
+    id:            4082
+    species:       golem
+    type:          [notorious]
+    spell_list_id: 494
+    skill_list_id: 422
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         27
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 4
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: always
+          item:   autumnstone
+        - chance: common
+          item:   autumnstone
+        - chance: common
+          item:   oblation_abjuration
+        - chance: uncommon
+          item:   ulfhedinn_axe
+
+  Ungeweder:
+    id:            4099
+    species:       thunder_elemental
+    spell_list_id: 3
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 2150
+        model_size:  1
+        hitbox:     17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    content: ABYSSEA
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Xuan_Wu:
+    id:            4712
+    species:       adamantoise
+    type:          [notorious]
+    spell_list_id: 24
+    skill_list_id: 277
+    attributes:
+      combat:
+        skill: scythe
+        delay: 380
+      jobs: [pld, blm]
+      resists:
+        rank_element:
+          fire:    10
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder: -2
+          water:   10
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:      10
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 407
+        entity_flags: 153
+        name_prefix:   32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Zhu_Que:
+    id:            4713
+    species:       bird
+    type:          [notorious]
+    spell_list_id: 27
+    skill_list_id: 280
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    10
+          ice:     10
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    10
+          bind:        10
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 337
+        entity_flags: 155
+        name_prefix:   32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+spawns:
+  17506305:
+    template: Aura_Weapon
+    at:       [892.855, 99.501, 718.020, 127]
+    level:    [80, 82]
+  17506306:
+    template: Aura_Weapon
+    at:       [901.360, 99.500, 695.598, 61]
+    level:    [80, 82]
+  17506307:
+    template: Aura_Weapon
+    at:       [901.262, 99.500, 666.785, 127]
+    level:    [80, 82]
+  17506308:
+    template: Aura_Weapon
+    at:       [882.132, 99.785, 648.931, 43]
+    level:    [80, 82]
+  17506309:
+    template: Aura_Weapon
+    at:       [866.854, 99.500, 622.557, 248]
+    level:    [80, 82]
+  17506310:
+    template: Aura_Weapon
+    at:       [831.815, 99.500, 621.467]
+    level:    [80, 82]
+  17506311:
+    template: Aura_Weapon
+    at:       [807.126, 98.441, 651.876, 127]
+    level:    [80, 82]
+  17506312:
+    template: Aura_Weapon
+    at:       [771.008, 99.500, 661.572, 127]
+    level:    [80, 82]
+  17506313:
+    template: Aura_Weapon
+    at:       [724.710, 99.917, 643.800, 33]
+    level:    [80, 82]
+  17506314:
+    template: Aura_Weapon
+    at:       [728.706, 99.687, 638.851, 89]
+    level:    [80, 82]
+  17506315:
+    template: Aura_Weapon
+    at:       [699.248, 99.563, 687.831, 68]
+    level:    [80, 82]
+  17506316:
+    template: Aura_Weapon
+    at:       [698.989, 99.500, 700.398, 127]
+    level:    [80, 82]
+  17506317:
+    template: Aura_Pot
+    at:       [724.036, 99.488, 707.119, 88]
+    level:    [75, 80]
+  17506318:
+    template: Aura_Pot
+    at:       [870.288, 98.174, 475.697, 30]
+    level:    [75, 80]
+  17506319:
+    template: Aura_Pot
+    at:       [898.633, 99.500, 500.722, 62]
+    level:    [75, 80]
+  17506320:
+    template: Aura_Pot
+    at:       [898.887, 99.500, 524.115, 127]
+    level:    [75, 80]
+  17506321:
+    template: Aura_Pot
+    at:       [882.578, 98.978, 564.510, 40]
+    level:    [75, 80]
+  17506322:
+    template: Aura_Pot
+    at:       [861.230, 99.500, 579.064, 127]
+    level:    [75, 80]
+  17506323:
+    template: Aura_Pot
+    at:       [823.885, 99.500, 579.242, 10]
+    level:    [75, 80]
+  17506324:
+    template: Aura_Pot
+    at:       [796.015, 98.556, 570.556, 127]
+    level:    [75, 80]
+  17506325:
+    template: Aura_Pot
+    at:       [778.587, 99.500, 538.823, 127]
+    level:    [75, 80]
+  17506326:
+    template: Aura_Pot
+    at:       [748.390, 99.500, 538.705, 127]
+    level:    [75, 80]
+  17506327:
+    template: Aura_Pot
+    at:       [721.005, 99.871, 553.727, 15]
+    level:    [75, 80]
+  17506328:
+    template: Aura_Pot
+    at:       [706.267, 99.516, 549.534, 127]
+    level:    [75, 80]
+  17506329:
+    template: Ice_Elemental
+    at:       [741.099, -0.429, 86.423, 25]
+    level:    [73, 74]
+  17506330:
+    template: Ice_Elemental
+    at:       [745.154, -0.390, 98.013, 228]
+    level:    [73, 74]
+  17506331:
+    template: Aura_Pot
+    at:       [740.813, -0.390, 110.233, 93]
+    level:    [77, 80]
+  17506332:
+    template: Aura_Pot
+    at:       [744.896, -0.390, 93.628, 127]
+    level:    [77, 80]
+  17506333:
+    template: Aura_Pot
+    at:       [805.290, -0.499, 97.778, 111]
+    level:    [77, 80]
+  17506334:
+    template: Aura_Pot
+    at:       [820.133, -0.499, 99.444, 127]
+    level:    [77, 80]
+  17506335:
+    template: Aura_Pot
+    at:       [807.324, -0.494, 112.092, 99]
+    level:    [77, 80]
+  17506336:
+    template: Aura_Pot
+    at:       [789.166, -0.484, 114.011, 96]
+    level:    [77, 80]
+  17506337:
+    template: Aura_Pot
+    at:       [863.735, -0.099, 96.116, 112]
+    level:    [77, 80]
+  17506338:
+    template: Aura_Pot
+    at:       [830.516, -0.386, 112.290, 61]
+    level:    [77, 80]
+  17506339:
+    template: Aura_Pot
+    at:       [870.849, -0.458, 68.226, 156]
+    level:    [77, 80]
+  17506340:
+    template: Aura_Pot
+    at:       [859.043, -0.499, 76.672, 120]
+    level:    [77, 80]
+  17506341:
+    template: Ice_Elemental
+    at:       [859.819, -0.390, 18.430, 138]
+    level:    [73, 74]
+  17506342:
+    template: Ice_Elemental
+    at:       [854.583, -0.390, 20.427, 176]
+    level:    [73, 74]
+  17506343:
+    template: Aura_Pot
+    at:       [807.100, -0.500, 21.269, 235]
+    level:    [77, 80]
+  17506344:
+    template: Aura_Pot
+    at:       [780.546, -0.500, 38.470, 77]
+    level:    [77, 80]
+  17506345:
+    template: Aura_Pot
+    at:       [815.349, -0.500, 22.675, 127]
+    level:    [77, 80]
+  17506346:
+    template: Aura_Pot
+    at:       [827.993, -0.481, 10.294, 194]
+    level:    [77, 80]
+  17506347:
+    template: Aura_Pot
+    at:       [766.005, -0.499, 60.500, 3]
+    level:    [77, 80]
+  17506348:
+    template: Aura_Pot
+    at:       [829.544, -0.378, 8.722, 37]
+    level:    [77, 80]
+  17506349:
+    template: Aura_Pot
+    at:       [769.279, -0.497, 4.864, 35]
+    level:    [77, 80]
+  17506350:
+    template: Aura_Pot
+    at:       [777.993, -0.500, 41.325, 127]
+    level:    [77, 80]
+  17506351:
+    template: Aura_Pot
+    at:       [769.463, -0.373, 8.389, 102]
+    level:    [77, 80]
+  17506352:
+    template: Aura_Butler
+    at:       [830.280, -0.479, -70.348, 127]
+    level:    [79, 82]
+  17506353:
+    template: Aura_Butler
+    at:       [809.899, -0.481, -72.464, 125]
+    level:    [79, 82]
+  17506354:
+    template: Aura_Butler
+    at:       [823.292, -0.498, -23.729, 62]
+    level:    [79, 82]
+  17506355:
+    template: Aura_Butler
+    at:       [783.882, -0.500, -22.334, 118]
+    level:    [79, 82]
+  17506356:
+    template: Aura_Butler
+    at:       [835.336, -0.500, -58.961, 127]
+    level:    [79, 82]
+  17506357:
+    template: Aura_Butler
+    at:       [827.628, -0.481, -7.206, 127]
+    level:    [79, 82]
+  17506358:
+    template: Aura_Butler
+    at:       [771.459, -0.481, -6.807, 24]
+    level:    [79, 82]
+  17506359:
+    template: Aura_Butler
+    at:       [789.592, -0.394, -8.444, 36]
+    level:    [79, 82]
+  17506360:
+    template: Aura_Butler
+    at:       [809.615, -0.405, -71.787, 193]
+    level:    [79, 82]
+  17506361:
+    template: Fire_Elemental
+    at:       [854.315, -0.403, -96.735, 223]
+    level:    [73, 74]
+  17506362:
+    template: Fire_Elemental
+    at:       [859.403, -0.390, -107.957, 228]
+    level:    [73, 74]
+  17506363:
+    template: Aura_Butler
+    at:       [781.921, -0.499, -100.391, 106]
+    level:    [79, 82]
+  17506364:
+    template: Aura_Butler
+    at:       [769.248, -0.500, -100.126, 129]
+    level:    [79, 82]
+  17506365:
+    template: Aura_Butler
+    at:       [809.596, -0.499, -99.962, 127]
+    level:    [79, 82]
+  17506366:
+    template: Aura_Butler
+    at:       [822.280, -0.499, -100.460, 127]
+    level:    [79, 82]
+  17506367:
+    template: Aura_Butler
+    at:       [830.558, -0.378, -111.957, 127]
+    level:    [79, 82]
+  17506368:
+    template: Aura_Butler
+    at:       [809.307, -0.453, -113.485, 92]
+    level:    [79, 82]
+  17506369:
+    template: Aura_Butler
+    at:       [791.074, -0.422, -112.021, 12]
+    level:    [79, 82]
+  17506370:
+    template: Faust
+    at:       [740.000, -0.463, -99.000, 192]
+    level:    [83, 84]
+  17506371:
+    template: Aura_Butler
+    at:       [736.913, -0.189, -94.920, 127]
+    level:    [79, 82]
+  17506372:
+    template: Aura_Butler
+    at:       [728.677, -0.376, -69.563, 87]
+    level:    [79, 82]
+  17506373:
+    template: Aura_Butler
+    at:       [740.794, -0.500, -57.507, 66]
+    level:    [79, 82]
+  17506374:
+    template: Fire_Elemental
+    at:       [748.742, -0.390, -16.711, 217]
+    level:    [73, 74]
+  17506375:
+    template: Fire_Elemental
+    at:       [744.267, -0.390, -9.390, 186]
+    level:    [73, 74]
+  17506376:
+    template: Defender
+    at:       [735.796, -0.390, -8.746, 127]
+    level:    [73, 76]
+  17506377:
+    template: Aura_Gear
+    at:       [735.796, -0.390, -8.746, 127]
+    level:    [76, 81]
+  17506378:
+    template: Defender
+    at:       [857.389, -100.498, -541.590, 16]
+    level:    [73, 76]
+  17506379:
+    template: Aura_Gear
+    at:       [857.389, -100.498, -541.590, 16]
+    level:    [76, 81]
+  17506380:
+    template: Defender
+    at:       [843.426, -100.019, -556.288, 61]
+    level:    [73, 76]
+  17506381:
+    template: Aura_Gear
+    at:       [843.426, -100.019, -556.288, 61]
+    level:    [76, 81]
+  17506382:
+    template: Defender
+    at:       [861.161, -100.278, -608.230, 27]
+    level:    [73, 76]
+  17506383:
+    template: Aura_Gear
+    at:       [861.161, -100.278, -608.230, 27]
+    level:    [76, 81]
+  17506384:
+    template: Defender
+    at:       [880.221, -100.004, -604.035, 127]
+    level:    [73, 76]
+  17506385:
+    template: Aura_Gear
+    at:       [880.221, -100.004, -604.035, 127]
+    level:    [76, 81]
+  17506386:
+    template: Defender
+    at:       [829.377, -100.323, -564.229, 127]
+    level:    [73, 76]
+  17506387:
+    template: Aura_Gear
+    at:       [829.377, -100.323, -564.229, 127]
+    level:    [76, 81]
+  17506388:
+    template: Defender
+    at:       [830.183, -100.216, -591.594, 14]
+    level:    [73, 76]
+  17506389:
+    template: Aura_Gear
+    at:       [830.183, -100.216, -591.594, 14]
+    level:    [76, 81]
+  17506390:
+    template: Defender
+    at:       [900.457, -100.499, -586.158, 68]
+    level:    [73, 76]
+  17506391:
+    template: Aura_Gear
+    at:       [900.457, -100.499, -586.158, 68]
+    level:    [76, 81]
+  17506392:
+    template: Defender
+    at:       [889.733, -100.269, -592.791, 127]
+    level:    [73, 76]
+  17506393:
+    template: Aura_Gear
+    at:       [889.733, -100.269, -592.791, 127]
+    level:    [76, 81]
+  17506394:
+    template: Defender
+    at:       [870.622, -99.924, -580.343, 25]
+    level:    [73, 76]
+  17506395:
+    template: Aura_Gear
+    at:       [870.622, -99.924, -580.343, 25]
+    level:    [76, 81]
+  17506396:
+    template: Mother_Globe
+    at:       [855.947, -99.924, -578.291, 127]
+    level:    [83, 84]
+  17506397:
+    template: Slave_Globe
+    at:       [854.947, -99.924, -577.291, 127]
+    level:    [77, 79]
+  17506398:
+    template: Slave_Globe
+    at:       [853.947, -99.924, -576.291, 127]
+    level:    [77, 79]
+  17506399:
+    template: Slave_Globe
+    at:       [852.947, -99.924, -575.291, 127]
+    level:    [77, 79]
+  17506400:
+    template: Slave_Globe
+    at:       [856.947, -99.924, -579.291, 127]
+    level:    [77, 79]
+  17506401:
+    template: Slave_Globe
+    at:       [857.947, -99.924, -580.291, 127]
+    level:    [77, 79]
+  17506402:
+    template: Slave_Globe
+    at:       [858.947, -99.924, -581.291, 127]
+    level:    [77, 79]
+  17506403:
+    template: Aura_Statue
+    at:       [713.000, -99.000, -588.000, 120]
+    level:    [81, 84]
+  17506404:
+    template: Aura_Statue
+    at:       [740.000, -100.000, -546.000, 127]
+    level:    [81, 84]
+  17506405:
+    template: Aura_Statue
+    at:       [769.883, -100.325, -560.173, 31]
+    level:    [81, 84]
+  17506406:
+    template: Aura_Statue
+    at:       [711.000, -100.000, -576.000, 59]
+    level:    [81, 84]
+  17506407:
+    template: Aura_Statue
+    at:       [717.000, -100.000, -601.000, 106]
+    level:    [81, 84]
+  17506408:
+    template: Aura_Statue
+    at:       [737.000, -100.000, -609.000, 127]
+    level:    [81, 84]
+  17506409:
+    template: Aura_Statue
+    at:       [765.000, -100.000, -595.000, 127]
+    level:    [81, 84]
+  17506410:
+    template: Aura_Statue
+    at:       [768.000, -100.000, -582.000, 127]
+    level:    [81, 84]
+  17506411:
+    template: Aura_Statue
+    at:       [763.000, -100.000, -557.000, 127]
+    level:    [81, 84]
+  17506412:
+    template: Aura_Statue
+    at:       [742.000, -100.000, -583.000, 127]
+    level:    [81, 84]
+  17506413:
+    template: Aura_Statue
+    at:       [733.000, -100.000, -575.000, 56]
+    level:    [81, 84]
+  17506414:
+    template: Aura_Statue
+    at:       [739.000, -100.000, -557.000, 33]
+    level:    [81, 84]
+  17506415:
+    template: Aura_Statue
+    at:       [717.000, -100.000, -559.000, 127]
+    level:    [81, 84]
+  17506416:
+    template: Aura_Statue
+    at:       [750.000, -100.000, -608.000, 127]
+    level:    [81, 84]
+  17506417:
+    template: Aura_Statue
+    at:       [747.569, -99.686, -606.462, 92]
+    level:    [81, 84]
+  17506418:
+    template: Ullikummi
+    at:       [739.000, -99.000, -581.000, 195]
+    level:    [85, 87]
+  17506419:
+    template: Aura_Weapon
+    at:       [35.744, -16.294, 87.829, 122]
+    level:    [80, 82]
+  17506420:
+    template: Aura_Weapon
+    at:       [44.116, -16.021, 75.522, 214]
+    level:    [80, 82]
+  17506421:
+    template: Aura_Weapon
+    at:       [35.774, -16.032, 83.397, 57]
+    level:    [80, 82]
+  17506422:
+    template: Aura_Weapon
+    at:       [51.640, -16.020, 74.467, 127]
+    level:    [80, 82]
+  17506423:
+    template: Aura_Weapon
+    at:       [76.423, -15.944, 68.107, 126]
+    level:    [80, 82]
+  17506424:
+    template: Aura_Weapon
+    at:       [74.201, -15.926, 66.724, 127]
+    level:    [80, 82]
+  17506425:
+    template: Aura_Weapon
+    at:       [75.049, -16.499, 28.763, 127]
+    level:    [80, 82]
+  17506426:
+    template: Aura_Weapon
+    at:       [96.870, -16.502, 60.091, 51]
+    level:    [80, 82]
+  17506427:
+    template: Aura_Weapon
+    at:       [-75.416, -16.451, -27.841, 127]
+    level:    [80, 82]
+  17506428:
+    template: Aura_Weapon
+    at:       [-78.967, -16.058, -35.303, 127]
+    level:    [80, 82]
+  17506429:
+    template: Aura_Weapon
+    at:       [-53.543, -16.498, -61.579, 3]
+    level:    [80, 82]
+  17506430:
+    template: Aura_Weapon
+    at:       [-68.529, -16.098, -87.042, 127]
+    level:    [80, 82]
+  17506431:
+    template: Decorative_Weapon
+    at:       [-41.316, -16.445, 68.870, 19]
+    level:    [79, 81]
+  17506432:
+    template: Decorative_Weapon
+    at:       [-29.947, -16.373, 81.209, 176]
+    level:    [79, 81]
+  17506433:
+    template: Decorative_Weapon
+    at:       [-38.585, -16.042, 74.707, 116]
+    level:    [79, 81]
+  17506434:
+    template: Decorative_Weapon
+    at:       [-34.961, -16.337, 89.148, 57]
+    level:    [79, 81]
+  17506435:
+    template: Decorative_Weapon
+    at:       [-70.621, -15.913, 81.128, 127]
+    level:    [79, 81]
+  17506436:
+    template: Decorative_Weapon
+    at:       [-58.779, -16.505, 59.090, 127]
+    level:    [79, 81]
+  17506437:
+    template: Decorative_Weapon
+    at:       [-78.634, -16.050, 35.694, 10]
+    level:    [79, 81]
+  17506438:
+    template: Decorative_Weapon
+    at:       [-79.102, -16.398, 30.642, 68]
+    level:    [79, 81]
+  17506439:
+    template: Decorative_Weapon
+    at:       [-19.706, -16.499, 52.511, 127]
+    level:    [79, 81]
+  17506440:
+    template: Decorative_Weapon
+    at:       [19.926, -16.500, -49.376, 194]
+    level:    [79, 81]
+  17506441:
+    template: Decorative_Weapon
+    at:       [19.674, -16.500, -28.153, 127]
+    level:    [79, 81]
+  17506442:
+    template: Decorative_Weapon
+    at:       [99.014, -16.500, -53.277, 229]
+    level:    [79, 81]
+  17506443:
+    template: Decorative_Weapon
+    at:       [92.430, -16.484, -35.804, 3]
+    level:    [79, 81]
+  17506444:
+    template: Decorative_Weapon
+    at:       [83.232, -16.021, -52.431, 127]
+    level:    [79, 81]
+  17506445:
+    template: Decorative_Weapon
+    at:       [57.678, -16.103, -67.347, 127]
+    level:    [79, 81]
+  17506446:
+    template: Decorative_Weapon
+    at:       [67.305, -16.335, -49.575, 127]
+    level:    [79, 81]
+  17506447:
+    template: Decorative_Weapon
+    at:       [57.254, -16.500, -96.386, 127]
+    level:    [79, 81]
+  17506448:
+    template: Decorative_Weapon
+    at:       [41.156, -16.407, -90.316, 74]
+    level:    [79, 81]
+  17506449:
+    template: Decorative_Weapon
+    at:       [153.913, -16.080, -78.066, 157]
+    level:    [79, 81]
+  17506450:
+    template: Decorative_Weapon
+    at:       [138.504, -16.499, -51.485, 64]
+    level:    [79, 81]
+  17506451:
+    template: Decorative_Weapon
+    at:       [145.464, -16.511, -84.865, 127]
+    level:    [79, 81]
+  17506452:
+    template: Decorative_Weapon
+    at:       [154.309, -16.080, -83.721, 127]
+    level:    [79, 81]
+  17506453:
+    template: Decorative_Weapon
+    at:       [179.127, -16.500, -109.612, 127]
+    level:    [79, 81]
+  17506454:
+    template: Aura_Butler
+    at:       [161.363, -16.500, -140.782]
+    level:    [77, 78]
+  17506455:
+    template: Aura_Butler
+    at:       [162.566, -16.500, -140.763, 124]
+    level:    [77, 78]
+  17506456:
+    template: Aura_Butler
+    at:       [115.691, -16.928, -125.780, 127]
+    level:    [77, 78]
+  17506457:
+    template: Aura_Butler
+    at:       [129.754, -17.433, -127.200, 127]
+    level:    [77, 78]
+  17506458:
+    template: Decorative_Weapon
+    at:       [105.549, -16.506, -147.842, 127]
+    level:    [79, 81]
+  17506459:
+    template: Decorative_Weapon
+    at:       [124.755, -16.000, -147.992, 75]
+    level:    [79, 81]
+  17506460:
+    template: Decorative_Weapon
+    at:       [-149.424, -16.186, -19.270, 64]
+    level:    [79, 81]
+  17506461:
+    template: Decorative_Weapon
+    at:       [-166.141, -16.217, -77.576, 164]
+    level:    [79, 81]
+  17506462:
+    template: Decorative_Weapon
+    at:       [-159.452, -15.955, -78.594, 127]
+    level:    [79, 81]
+  17506463:
+    template: Decorative_Weapon
+    at:       [-153.373, -16.101, -76.615, 67]
+    level:    [79, 81]
+  17506464:
+    template: Decorative_Weapon
+    at:       [-178.439, -16.499, -104.592, 62]
+    level:    [79, 81]
+  17506465:
+    template: Aura_Butler
+    at:       [-166.240, -16.500, -139.846, 127]
+    level:    [77, 78]
+  17506466:
+    template: Aura_Butler
+    at:       [-164.002, -16.500, -139.769, 126]
+    level:    [77, 78]
+  17506467:
+    template: Aura_Butler
+    at:       [-129.425, -17.400, -124.429, 56]
+    level:    [77, 78]
+  17506468:
+    template: Aura_Butler
+    at:       [-123.482, -16.900, -111.746, 127]
+    level:    [77, 78]
+  17506469:
+    template: Aura_Butler
+    at:       [-108.502, -16.500, -146.966, 116]
+    level:    [77, 78]
+  17506470:
+    template: Aura_Butler
+    at:       [228.661, -0.534, 305.682, 80]
+    level:    [77, 78]
+  17506471:
+    template: Aura_Butler
+    at:       [250.059, -1.481, 315.457, 126]
+    level:    [77, 78]
+  17506472:
+    template: Aura_Butler
+    at:       [238.493, -0.925, 283.171, 182]
+    level:    [77, 78]
+  17506473:
+    template: Thunder_Elemental
+    at:       [175.867, -0.389, 305.858, 14]
+    level:    [73, 74]
+  17506474:
+    template: Thunder_Elemental
+    at:       [175.757, -0.467, 287.087, 46]
+    level:    [73, 74]
+  17506475:
+    template: Defender
+    at:       [175.610, -0.390, 311.269, 127]
+    level:    [73, 76]
+  17506476:
+    template: Aura_Gear
+    at:       [175.610, -0.390, 311.269, 127]
+    level:    [76, 81]
+  17506477:
+    template: Defender
+    at:       [183.659, -0.389, 304.750, 127]
+    level:    [73, 76]
+  17506478:
+    template: Aura_Gear
+    at:       [183.659, -0.389, 304.750, 127]
+    level:    [76, 81]
+  17506479:
+    template: Defender
+    at:       [181.146, -0.549, 221.091, 127]
+    level:    [73, 76]
+  17506480:
+    template: Aura_Gear
+    at:       [181.146, -0.549, 221.091, 127]
+    level:    [76, 81]
+  17506481:
+    template: Defender
+    at:       [175.209, -0.549, 256.941, 127]
+    level:    [73, 76]
+  17506482:
+    template: Aura_Gear
+    at:       [175.209, -0.549, 256.941, 127]
+    level:    [76, 81]
+  17506483:
+    template: Thunder_Elemental
+    at:       [176.252, -0.389, 189.921, 185]
+    level:    [73, 74]
+  17506484:
+    template: Thunder_Elemental
+    at:       [176.488, -0.389, 180.563, 98]
+    level:    [73, 74]
+  17506485:
+    template: Defender
+    at:       [177.780, -0.390, 177.616, 91]
+    level:    [73, 76]
+  17506486:
+    template: Aura_Gear
+    at:       [177.780, -0.390, 177.616, 91]
+    level:    [76, 81]
+  17506487:
+    template: Aura_Weapon
+    at:       [153.382, -0.500, 179.501, 106]
+    level:    [80, 82]
+  17506488:
+    template: Aura_Weapon
+    at:       [219.953, -8.153, 160.295, 193]
+    level:    [80, 82]
+  17506489:
+    template: Aura_Weapon
+    at:       [156.179, -0.500, 177.564, 127]
+    level:    [80, 82]
+  17506490:
+    template: Aura_Weapon
+    at:       [221.914, -11.206, 147.732, 127]
+    level:    [80, 82]
+  17506491:
+    template: Aura_Weapon
+    at:       [209.610, -14.274, 137.574, 54]
+    level:    [80, 82]
+  17506492:
+    template: Aura_Weapon
+    at:       [166.207, -16.029, 118.139, 127]
+    level:    [80, 82]
+  17506493:
+    template: Aura_Weapon
+    at:       [147.001, -16.511, 123.888, 125]
+    level:    [80, 82]
+  17506494:
+    template: Aura_Butler
+    at:       [-250.310, -0.549, 295.669, 130]
+    level:    [77, 78]
+  17506495:
+    template: Aura_Butler
+    at:       [132.067, -16.474, 70.117, 127]
+    level:    [77, 78]
+  17506496:
+    template: Aura_Butler
+    at:       [-243.014, -0.990, 295.257, 50]
+    level:    [77, 78]
+  17506497:
+    template: Aura_Butler
+    at:       [-239.411, -1.276, 311.554, 127]
+    level:    [77, 78]
+  17506498:
+    template: Water_Elemental
+    at:       [-183.634, -0.390, 292.267, 57]
+    level:    [73, 74]
+  17506499:
+    template: Water_Elemental
+    at:       [-173.504, -0.390, 305.292, 136]
+    level:    [73, 74]
+  17506500:
+    template: Defender
+    at:       [-185.181, -0.390, 295.784, 8]
+    level:    [73, 76]
+  17506501:
+    template: Aura_Gear
+    at:       [-185.181, -0.390, 295.784, 8]
+    level:    [76, 81]
+  17506502:
+    template: Defender
+    at:       [-176.038, -0.591, 252.804, 192]
+    level:    [73, 76]
+  17506503:
+    template: Aura_Gear
+    at:       [-239.860, -2.249, 347.242, 192]
+    level:    [76, 81]
+  17506504:
+    template: Defender
+    at:       [-179.939, -0.591, 224.204, 127]
+    level:    [73, 76]
+  17506505:
+    template: Aura_Gear
+    at:       [-179.939, -0.591, 224.204, 127]
+    level:    [76, 81]
+  17506506:
+    template: Defender
+    at:       [-179.478, -0.591, 224.249, 127]
+    level:    [73, 76]
+  17506507:
+    template: Aura_Gear
+    at:       [-179.478, -0.591, 224.249, 127]
+    level:    [76, 81]
+  17506508:
+    template: Water_Elemental
+    at:       [-179.683, -0.390, 182.903, 10]
+    level:    [73, 74]
+  17506509:
+    template: Water_Elemental
+    at:       [-170.906, -0.474, 181.201, 49]
+    level:    [73, 74]
+  17506510:
+    template: Defender
+    at:       [-180.495, -0.390, 189.280, 72]
+    level:    [73, 76]
+  17506511:
+    template: Aura_Gear
+    at:       [-180.495, -0.390, 189.280, 72]
+    level:    [76, 81]
+  17506512:
+    template: Aura_Weapon
+    at:       [-177.495, -0.390, 169.992, 35]
+    level:    [80, 82]
+  17506513:
+    template: Aura_Weapon
+    at:       [-220.281, -7.031, 165.925, 205]
+    level:    [80, 82]
+  17506514:
+    template: Aura_Weapon
+    at:       [-144.198, -0.896, 174.210, 31]
+    level:    [80, 82]
+  17506515:
+    template: Aura_Weapon
+    at:       [-221.505, -9.741, 153.402, 127]
+    level:    [80, 82]
+  17506516:
+    template: Aura_Weapon
+    at:       [-206.693, -14.965, 139.357, 14]
+    level:    [80, 82]
+  17506517:
+    template: Aura_Weapon
+    at:       [-147.248, -16.519, 123.975, 127]
+    level:    [80, 82]
+  17506518:
+    template: Aura_Weapon
+    at:       [-172.196, -16.441, 118.402, 88]
+    level:    [80, 82]
+  17506519:
+    template: Aura_Butler
+    at:       [-140.314, -16.500, 97.644, 127]
+    level:    [77, 78]
+  17506520:
+    template: Aura_Butler
+    at:       [-41.066, -0.529, -182.748, 219]
+    level:    [77, 78]
+  17506521:
+    template: Aura_Butler
+    at:       [-46.645, -0.524, -182.652, 41]
+    level:    [77, 78]
+  17506522:
+    template: Aura_Butler
+    at:       [-28.629, -0.877, -174.548, 48]
+    level:    [77, 78]
+  17506523:
+    template: Decorative_Weapon
+    at:       [-43.726, -0.902, -158.698, 119]
+    level:    [79, 81]
+  17506524:
+    template: Decorative_Weapon
+    at:       [-43.415, -0.931, -164.801, 127]
+    level:    [79, 81]
+  17506525:
+    template: Decorative_Weapon
+    at:       [3.784, -0.499, -180.392, 125]
+    level:    [79, 81]
+  17506526:
+    template: Decorative_Weapon
+    at:       [-6.927, -1.031, -121.793, 127]
+    level:    [79, 81]
+  17506527:
+    template: Decorative_Weapon
+    at:       [5.723, -0.944, -132.675, 84]
+    level:    [79, 81]
+  17506528:
+    template: Decorative_Weapon
+    at:       [18.777, -0.779, -100.628, 127]
+    level:    [79, 81]
+  17506529:
+    template: Decorative_Weapon
+    at:       [120.183, -1.115, -101.225, 127]
+    level:    [79, 81]
+  17506530:
+    template: Decorative_Weapon
+    at:       [114.262, -1.115, -114.067, 127]
+    level:    [79, 81]
+  17506531:
+    template: Decorative_Weapon
+    at:       [77.707, -0.125, -76.494, 127]
+    level:    [79, 81]
+  17506532:
+    template: Decorative_Weapon
+    at:       [99.226, -0.500, -134.442, 127]
+    level:    [79, 81]
+  17506533:
+    template: Decorative_Weapon
+    at:       [141.820, -0.502, -103.816, 44]
+    level:    [79, 81]
+  17506534:
+    template: Decorative_Weapon
+    at:       [89.260, -0.496, -62.898, 106]
+    level:    [79, 81]
+  17506535:
+    template: Air_Elemental
+    at:       [187.668, -0.390, -99.262, 138]
+    level:    [71, 72]
+  17506536:
+    template: Air_Elemental
+    at:       [178.292, -0.390, -99.936, 74]
+    level:    [71, 72]
+  17506537:
+    template: Defender
+    at:       [184.779, -0.390, -95.266, 127]
+    level:    [71, 74]
+  17506538:
+    template: Aura_Gear
+    at:       [184.779, -0.390, -95.266, 127]
+    level:    [76, 81]
+  17506539:
+    template: Defender
+    at:       [250.723, -0.473, -99.137, 128]
+    level:    [71, 74]
+  17506540:
+    template: Aura_Gear
+    at:       [350.436, -2.111, -158.808, 21]
+    level:    [76, 81]
+  17506541:
+    template: Defender
+    at:       [232.103, -0.473, -102.387, 40]
+    level:    [71, 74]
+  17506542:
+    template: Aura_Gear
+    at:       [232.103, -0.473, -102.387, 40]
+    level:    [76, 81]
+  17506543:
+    template: Defender
+    at:       [241.552, -0.473, -99.038, 44]
+    level:    [71, 74]
+  17506544:
+    template: Aura_Gear
+    at:       [241.552, -0.473, -99.038, 44]
+    level:    [76, 81]
+  17506545:
+    template: Air_Elemental
+    at:       [297.415, -0.390, -99.215, 181]
+    level:    [71, 72]
+  17506546:
+    template: Air_Elemental
+    at:       [309.906, -0.390, -103.397, 62]
+    level:    [71, 72]
+  17506547:
+    template: Defender
+    at:       [298.281, -0.390, -106.312, 12]
+    level:    [71, 74]
+  17506548:
+    template: Aura_Gear
+    at:       [298.281, -0.390, -106.312, 12]
+    level:    [76, 81]
+  17506549:
+    template: Aura_Butler
+    at:       [289.184, -0.390, -104.469, 103]
+    level:    [77, 78]
+  17506550:
+    template: Aura_Butler
+    at:       [283.149, -0.899, -167.499, 208]
+    level:    [77, 78]
+  17506551:
+    template: Aura_Butler
+    at:       [276.477, -0.895, -160.748, 105]
+    level:    [77, 78]
+  17506552:
+    template: Aura_Butler
+    level:    [77, 78]
+  17506553:
+    template: Decorative_Weapon
+    at:       [299.259, -0.499, -162.395, 127]
+    level:    [79, 81]
+  17506554:
+    template: Decorative_Weapon
+    at:       [305.629, -0.499, -164.516, 29]
+    level:    [79, 81]
+  17506555:
+    template: Decorative_Weapon
+    at:       [100.897, -0.525, -12.985, 65]
+    level:    [79, 81]
+  17506556:
+    template: Decorative_Weapon
+    at:       [-23.736, -0.504, -101.075, 127]
+    level:    [79, 81]
+  17506557:
+    template: Decorative_Weapon
+    at:       [-116.013, -0.996, -103.875, 127]
+    level:    [79, 81]
+  17506558:
+    template: Decorative_Weapon
+    at:       [-105.995, -0.996, -86.488, 127]
+    level:    [79, 81]
+  17506559:
+    template: Decorative_Weapon
+    at:       [-69.693, -0.438, -125.242, 33]
+    level:    [79, 81]
+  17506560:
+    template: Decorative_Weapon
+    at:       [-92.615, -0.315, -129.430, 35]
+    level:    [79, 81]
+  17506561:
+    template: Decorative_Weapon
+    at:       [-127.723, -0.377, -94.801, 2]
+    level:    [79, 81]
+  17506562:
+    template: Decorative_Weapon
+    at:       [-119.784, 0.003, -81.073, 92]
+    level:    [79, 81]
+  17506563:
+    template: Earth_Elemental
+    at:       [-178.557, -0.478, -109.290, 113]
+    level:    [71, 72]
+  17506564:
+    template: Earth_Elemental
+    at:       [-167.063, -0.390, -92.863, 211]
+    level:    [71, 72]
+  17506565:
+    template: Defender
+    at:       [-180.045, -0.390, -92.724, 20]
+    level:    [71, 74]
+  17506566:
+    template: Aura_Gear
+    at:       [-180.045, -0.390, -92.724, 20]
+    level:    [76, 81]
+  17506567:
+    template: Defender
+    at:       [-173.869, -0.390, -100.275, 127]
+    level:    [71, 74]
+  17506568:
+    template: Aura_Gear
+    at:       [-173.869, -0.390, -100.275, 127]
+    level:    [76, 81]
+  17506569:
+    template: Defender
+    at:       [-254.085, -0.405, -96.182, 127]
+    level:    [71, 74]
+  17506570:
+    template: Aura_Gear
+    at:       [-254.085, -0.405, -96.182, 127]
+    level:    [76, 81]
+  17506571:
+    template: Defender
+    at:       [-257.116, -0.405, -98.455, 35]
+    level:    [71, 74]
+  17506572:
+    template: Aura_Gear
+    at:       [-257.116, -0.405, -98.455, 35]
+    level:    [76, 81]
+  17506573:
+    template: Earth_Elemental
+    at:       [-289.420, -0.390, -94.662, 88]
+    level:    [71, 72]
+  17506574:
+    template: Earth_Elemental
+    at:       [-289.747, -0.390, -94.871, 129]
+    level:    [71, 72]
+  17506575:
+    template: Defender
+    at:       [-295.967, -0.390, -105.180, 127]
+    level:    [71, 74]
+  17506576:
+    template: Aura_Gear
+    at:       [-295.967, -0.390, -105.180, 127]
+    level:    [76, 81]
+  17506577:
+    template: Aura_Butler
+    at:       [-300.765, -0.500, -127.888, 62]
+    level:    [77, 78]
+  17506578:
+    template: Aura_Butler
+    at:       [-285.281, -0.899, -153.858, 134]
+    level:    [77, 78]
+  17506579:
+    template: Aura_Butler
+    at:       [-279.527, -0.900, -166.075, 44]
+    level:    [77, 78]
+  17506580:
+    template: Aura_Butler
+    at:       [-300.732, -0.500, -159.257, 70]
+    level:    [77, 78]
+  17506581:
+    template: Decorative_Weapon
+    at:       [-315.585, -0.569, -175.332, 57]
+    level:    [79, 81]
+  17506582:
+    template: Aura_Weapon
+    at:       [-314.249, -1.645, -154.741, 127]
+    level:    [80, 82]
+  17506583:
+    template: Aura_Weapon
+    at:       [-101.059, -1.350, -0.318, 127]
+    level:    [80, 82]
+  17506584:
+    template: Aura_Weapon
+    at:       [138.571, -0.531, 131.829, 74]
+    level:    [80, 82]
+  17506585:
+    template: Aura_Weapon
+    at:       [92.787, -0.894, 111.779, 127]
+    level:    [80, 82]
+  17506586:
+    template: Aura_Weapon
+    at:       [114.065, -0.983, 106.000, 31]
+    level:    [80, 82]
+  17506587:
+    template: Aura_Weapon
+    at:       [96.326, -0.318, 124.747, 127]
+    level:    [80, 82]
+  17506588:
+    template: Aura_Weapon
+    at:       [96.752, -0.235, 128.105, 84]
+    level:    [80, 82]
+  17506589:
+    template: Aura_Weapon
+    at:       [66.909, -0.495, 104.706, 79]
+    level:    [80, 82]
+  17506590:
+    template: Aura_Weapon
+    at:       [69.478, -0.397, 90.399, 127]
+    level:    [80, 82]
+  17506591:
+    template: Aura_Weapon
+    at:       [134.236, -0.573, 82.682, 127]
+    level:    [80, 82]
+  17506592:
+    template: Aura_Weapon
+    at:       [134.047, -0.719, 81.661, 127]
+    level:    [80, 82]
+  17506593:
+    template: Aura_Weapon
+    at:       [85.391, -0.526, 64.718, 105]
+    level:    [80, 82]
+  17506594:
+    template: Aura_Weapon
+    at:       [94.250, -0.884, 60.467, 36]
+    level:    [80, 82]
+  17506595:
+    template: Aura_Weapon
+    at:       [99.667, -0.499, 21.054, 93]
+    level:    [80, 82]
+  17506596:
+    template: Aura_Weapon
+    at:       [55.988, -0.578, 141.198, 126]
+    level:    [80, 82]
+  17506597:
+    template: Aura_Weapon
+    at:       [-139.265, -0.626, 149.958, 63]
+    level:    [80, 82]
+  17506598:
+    template: Aura_Weapon
+    at:       [-105.991, -1.063, 114.929, 99]
+    level:    [80, 82]
+  17506599:
+    template: Aura_Weapon
+    at:       [-86.495, -1.056, 109.395, 28]
+    level:    [80, 82]
+  17506600:
+    template: Aura_Weapon
+    at:       [-101.343, -0.505, 136.681, 127]
+    level:    [80, 82]
+  17506601:
+    template: Aura_Weapon
+    at:       [-100.436, -0.608, 139.225, 61]
+    level:    [80, 82]
+  17506602:
+    template: Aura_Weapon
+    at:       [-130.716, -0.227, 106.879, 127]
+    level:    [80, 82]
+  17506603:
+    template: Aura_Weapon
+    at:       [-127.542, -0.085, 115.356, 127]
+    level:    [80, 82]
+  17506604:
+    template: Aura_Weapon
+    at:       [-69.960, -0.928, 84.267, 88]
+    level:    [80, 82]
+  17506605:
+    template: Aura_Weapon
+    at:       [-70.480, -0.351, 89.000, 108]
+    level:    [80, 82]
+  17506606:
+    template: Aura_Weapon
+    at:       [-99.777, -0.499, 61.956, 127]
+    level:    [80, 82]
+  17506607:
+    template: Aura_Weapon
+    at:       [-104.759, -0.423, 68.439, 42]
+    level:    [80, 82]
+  17506608:
+    template: Aura_Weapon
+    at:       [-102.664, -0.499, 35.817, 127]
+    level:    [80, 82]
+  17506609:
+    template: Aura_Weapon
+    at:       [-63.443, -0.852, 139.158, 127]
+    level:    [80, 82]
+  17506610:
+    template: Aura_Weapon
+    at:       [-27.081, -0.538, 139.342, 127]
+    level:    [80, 82]
+  17506611:
+    template: Aura_Weapon
+    at:       [19.502, -0.749, 139.400, 127]
+    level:    [80, 82]
+  17506612:
+    template: Dark_Elemental
+    at:       [19.916, -0.390, 49.506, 88]
+    level:    [73, 74]
+  17506613:
+    template: Dark_Elemental
+    at:       [25.164, -0.389, 60.317, 55]
+    level:    [74, 74]
+  17506614:
+    template: Aura_Statue
+    at:       [19.426, -0.500, 90.482, 127]
+    level:    [81, 84]
+  17506615:
+    template: Aura_Statue
+    at:       [15.448, -0.389, 70.112, 25]
+    level:    [81, 84]
+  17506616:
+    template: Aura_Statue
+    at:       [18.990, -0.390, 55.927, 51]
+    level:    [81, 84]
+  17506617:
+    template: Aura_Statue
+    at:       [60.261, -0.499, 12.151, 44]
+    level:    [81, 84]
+  17506618:
+    template: Aura_Statue
+    at:       [58.868, -0.500, 43.261, 125]
+    level:    [81, 84]
+  17506619:
+    template: Aura_Statue
+    at:       [58.891, -0.500, -36.427, 104]
+    level:    [81, 84]
+  17506620:
+    template: Aura_Statue
+    at:       [61.016, -0.500, -33.783, 127]
+    level:    [81, 84]
+  17506621:
+    template: Aura_Statue
+    at:       [29.566, -0.499, -60.111, 127]
+    level:    [81, 84]
+  17506622:
+    template: Aura_Statue
+    at:       [44.547, -0.499, -62.175, 14]
+    level:    [81, 84]
+  17506623:
+    template: Aura_Statue
+    at:       [-17.320, -0.499, 59.189, 127]
+    level:    [81, 84]
+  17506624:
+    template: Aura_Statue
+    at:       [-32.150, -0.499, 59.962, 18]
+    level:    [81, 84]
+  17506625:
+    template: Aura_Statue
+    at:       [-57.418, -0.499, 23.783, 127]
+    level:    [81, 84]
+  17506626:
+    template: Aura_Statue
+    at:       [-57.993, -0.499, 36.309, 127]
+    level:    [81, 84]
+  17506627:
+    template: Aura_Statue
+    at:       [-60.907, -0.498, -16.499, 127]
+    level:    [81, 84]
+  17506628:
+    template: Aura_Statue
+    at:       [-59.334, -0.500, -40.073, 127]
+    level:    [81, 84]
+  17506629:
+    template: Aura_Statue
+    at:       [46.735, -0.481, 28.666, 67]
+    level:    [81, 84]
+  17506630:
+    template: Aura_Statue
+    at:       [60.428, -0.500, 15.558, 127]
+    level:    [81, 84]
+  17506631:
+    template: Aura_Statue
+    at:       [48.544, -0.498, -13.077, 94]
+    level:    [81, 84]
+  17506632:
+    template: Aura_Statue
+    at:       [59.844, -0.500, -20.827, 127]
+    level:    [81, 84]
+  17506633:
+    template: Aura_Statue
+    at:       [-8.727, -0.457, 73.667, 127]
+    level:    [81, 84]
+  17506634:
+    template: Aura_Statue
+    at:       [-35.545, -0.500, 60.360, 22]
+    level:    [81, 84]
+  17506635:
+    template: Aura_Statue
+    at:       [-56.419, -0.500, 30.275, 127]
+    level:    [81, 84]
+  17506636:
+    template: Aura_Statue
+    at:       [-50.530, -0.481, 12.030, 127]
+    level:    [81, 84]
+  17506637:
+    template: Aura_Statue
+    at:       [-48.769, -0.384, -9.941, 127]
+    level:    [81, 84]
+  17506638:
+    template: Dark_Elemental
+    at:       [-21.702, -0.391, -69.346, 35]
+    level:    [73, 74]
+  17506639:
+    template: Dark_Elemental
+    at:       [-18.440, -0.390, -51.821, 213]
+    level:    [73, 74]
+  17506640:
+    template: Aura_Statue
+    at:       [31.079, -0.480, -73.715, 127]
+    level:    [81, 84]
+  17506641:
+    template: Aura_Statue
+    at:       [-22.600, -0.390, -50.290, 87]
+    level:    [81, 84]
+  17506642:
+    template: Aura_Statue
+    at:       [-15.603, -0.390, -60.881, 127]
+    level:    [81, 84]
+  17506643:
+    template: Aura_Statue
+    at:       [-21.430, -0.499, -24.125, 64]
+    level:    [81, 84]
+  17506644:
+    template: Aura_Statue
+    at:       [4.480, -0.443, -9.022, 127]
+    level:    [81, 84]
+  17506645:
+    template: Aura_Statue
+    at:       [3.453, 2.264, 8.101, 127]
+    level:    [81, 84]
+  17506646:
+    template: Baelfyr
+    at:       [43.279, 31.500, 58.552, 2]
+    level:    [104, 106]
+  17506647:
+    template: Gefyrst
+    level:    [104, 106]
+  17506648:
+    template: Ungeweder
+    level:    [104, 106]
+  17506649:
+    template: Byrgen
+    at:       [48.659, 31.500, 58.339, 127]
+    level:    [104, 106]
+  17506650:
+    template: Aura_Sculpture
+    at:       [81.000, 32.000, 20.000, 127]
+    level:    [104, 106]
+  17506651:
+    template: Baelfyr
+    level:    [104, 106]
+  17506652:
+    template: Gefyrst
+    level:    [104, 106]
+  17506653:
+    template: Ungeweder
+    level:    [104, 106]
+  17506654:
+    template: Byrgen
+    level:    [104, 106]
+  17506655:
+    template: Aura_Sculpture
+    at:       [74.000, 32.000, 3.000, 127]
+    level:    [104, 106]
+  17506656:
+    template: Aura_Sculpture
+    at:       [93.000, 32.000, 0.500, 127]
+    level:    [104, 106]
+  17506657:
+    template: Baelfyr
+    level:    [104, 106]
+  17506658:
+    template: Gefyrst
+    level:    [104, 106]
+  17506659:
+    template: Ungeweder
+    level:    [104, 106]
+  17506660:
+    template: Byrgen
+    level:    [104, 106]
+  17506661:
+    template: Aura_Sculpture
+    at:       [81.000, 32.000, -20.000, 127]
+    level:    [104, 106]
+  17506662:
+    template: Baelfyr
+    level:    [104, 106]
+  17506663:
+    template: Gefyrst
+    level:    [104, 106]
+  17506664:
+    template: Ungeweder
+    level:    [104, 106]
+  17506665:
+    template: Byrgen
+    level:    [104, 106]
+  17506666:
+    template: Aura_Sculpture
+    at:       [82.000, 32.000, -5.000, 127]
+    level:    [104, 106]
+  17506667:
+    template: Olla_Pequena
+    at:       [854.619, -0.099, 98.345, 157]
+    level:    [82, 83]
+  17506668:
+    template: Olla_Media
+    at:       [851.000, -1.000, 92.000, 113]
+    level:    [84, 84]
+  17506669:
+    template: Olla_Grande
+    at:       [851.000, -1.000, 92.000, 113]
+    level:    [85, 85]
+  17506670:
+    template: Kirin
+    at:       [-90.377, 32.575, 5.507, 25]
+    level:    [92, 92]
+  17506671:
+    template: Genbu_pet
+    script:   Genbu
+    at:       [1.000, 1.000, 1.000, 166]
+    level:    [82, 84]
+  17506672:
+    template: Seiryu_pet
+    script:   Seiryu
+    at:       [-76.000, 32.000, -4.000, 166]
+    level:    [82, 84]
+  17506673:
+    template: Byakko_pet
+    script:   Byakko
+    at:       [-76.000, 32.000, -4.000, 166]
+    level:    [82, 84]
+  17506674:
+    template: Suzaku_pet
+    script:   Suzaku
+    at:       [-76.000, 32.000, -4.000, 166]
+    level:    [82, 84]
+  17506675:
+    template: Kirins_Avatar
+    at:       [1.000, 1.000, 1.000]
+    level:    [78, 81]
+  17506676:
+    template: Qilin
+    at:       [-68.491, -15.924, 72.974]
+    level:    [100, 101]
+  17506677:
+    template: Bai_Hu
+    at:       [-70.369, -15.924, 70.146, 76]
+    level:    [98, 99]
+  17506678:
+    template: Qing_Long
+    at:       [-69.790, -15.924, 69.852, 88]
+    level:    [98, 99]
+  17506679:
+    template: Zhu_Que
+    at:       [-76.041, -15.924, 65.899, 32]
+    level:    [98, 99]
+  17506680:
+    template: Xuan_Wu
+    at:       [-68.486, -15.924, 69.603, 45]
+    level:    [98, 99]
+  17506681:
+    template: Qilin
+    at:       [69.649, -15.924, 69.738, 56]
+    level:    [100, 101]
+  17506682:
+    template: Bai_Hu
+    at:       [67.720, -15.924, 68.997, 205]
+    level:    [98, 99]
+  17506683:
+    template: Qing_Long
+    at:       [70.563, -15.924, 68.785, 64]
+    level:    [98, 99]
+  17506684:
+    template: Zhu_Que
+    at:       [70.364, -15.924, 65.639, 37]
+    level:    [98, 99]
+  17506685:
+    template: Xuan_Wu
+    at:       [67.539, -15.924, 67.720, 31]
+    level:    [98, 99]
+  17506686:
+    template: Qilin
+    at:       [-68.000, -15.924, -68.000, 185]
+    level:    [100, 101]
+  17506687:
+    template: Bai_Hu
+    at:       [-68.116, -15.654, -67.098, 250]
+    level:    [98, 99]
+  17506688:
+    template: Qing_Long
+    at:       [-69.289, -15.924, -67.282, 71]
+    level:    [98, 99]
+  17506689:
+    template: Zhu_Que
+    at:       [-66.994, -15.924, -68.520, 84]
+    level:    [98, 99]
+  17506690:
+    template: Xuan_Wu
+    at:       [-67.808, -15.924, -67.526, 106]
+    level:    [98, 99]
+
+slots:
+  - members:
+      17506306: {} # Aura_Weapon
+      17506307: {} # Aura_Weapon
+  - members:
+      17506311: {} # Aura_Weapon
+      17506312: {} # Aura_Weapon
+  - members:
+      17506314: {} # Aura_Weapon
+      17506315: {} # Aura_Weapon
+  - members:
+      17506318: {} # Aura_Pot
+      17506319: {} # Aura_Pot
+  - members:
+      17506322: {} # Aura_Pot
+      17506323: {} # Aura_Pot
+  - members:
+      17506326: {} # Aura_Pot
+      17506327: {} # Aura_Pot
+  - members:
+      17506333: {} # Aura_Pot
+      17506334: {} # Aura_Pot
+  - members:
+      17506335: {} # Aura_Pot
+      17506336: {} # Aura_Pot
+  - members:
+      17506339: {} # Aura_Pot
+      17506340: {} # Aura_Pot
+  - members:
+      17506346: {} # Aura_Pot
+      17506347: {} # Aura_Pot
+  - members:
+      17506348: {} # Aura_Pot
+      17506349: {} # Aura_Pot
+  - members:
+      17506355: {} # Aura_Butler
+      17506356: {} # Aura_Butler
+  - members:
+      17506357: {} # Aura_Butler
+      17506358: {} # Aura_Butler
+  - members:
+      17506359: {} # Aura_Butler
+      17506360: {} # Aura_Butler
+  - members:
+      17506365: {} # Aura_Butler
+      17506366: {} # Aura_Butler
+  - members:
+      17506367: {} # Aura_Butler
+      17506368: {} # Aura_Butler
+  - members:
+      17506405: {} # Aura_Statue
+      17506408: {} # Aura_Statue
+      17506411: {} # Aura_Statue
+      17506414: {} # Aura_Statue
+      17506417: {} # Aura_Statue
+  - members:
+      17506437: {} # Decorative_Weapon
+      17506438: {} # Decorative_Weapon
+  - members:
+      17506439: {} # Decorative_Weapon
+      17506440: {} # Decorative_Weapon
+  - members:
+      17506447: {} # Decorative_Weapon
+      17506448: {} # Decorative_Weapon
+  - members:
+      17506455: {} # Aura_Butler
+      17506457: {} # Aura_Butler
+  - members:
+      17506458: {} # Decorative_Weapon
+      17506459: {} # Decorative_Weapon
+  - members:
+      17506466: {} # Aura_Butler
+      17506468: {} # Aura_Butler
+  - members:
+      17506470: {} # Aura_Butler
+      17506472: {} # Aura_Butler
+  - members:
+      17506475: {} # Defender
+      17506485: {} # Defender
+  - members:
+      17506492: {} # Aura_Weapon
+      17506493: {} # Aura_Weapon
+  - members:
+      17506495: {} # Aura_Butler
+      17506497: {} # Aura_Butler
+  - members:
+      17506500: {} # Defender
+      17506510: {} # Defender
+  - members:
+      17506517: {} # Aura_Weapon
+      17506518: {} # Aura_Weapon
+  - members:
+      17506520: {} # Aura_Butler
+      17506522: {} # Aura_Butler
+  - members:
+      17506537: {} # Defender
+      17506547: {} # Defender
+  - members:
+      17506550: {} # Aura_Butler
+      17506552: {} # Aura_Butler
+  - members:
+      17506565: {} # Defender
+      17506575: {} # Defender
+  - members:
+      17506578: {} # Aura_Butler
+      17506580: {} # Aura_Butler
+  - members:
+      17506626: {} # Aura_Statue
+      17506627: {} # Aura_Statue
+  - members:
+      17506628: {} # Aura_Statue
+      17506629: {} # Aura_Statue
+  - members:
+      17506630: {} # Aura_Statue
+      17506631: {} # Aura_Statue
+  - members:
+      17506632: {} # Aura_Statue
+      17506633: {} # Aura_Statue
+  - members:
+      17506634: {} # Aura_Statue
+      17506635: {} # Aura_Statue
+  - members:
+      17506636: {} # Aura_Statue
+      17506637: {} # Aura_Statue
+  - members:
+      17506640: {} # Aura_Statue
+      17506641: {} # Aura_Statue
+  - members:
+      17506642: {} # Aura_Statue
+      17506643: {} # Aura_Statue
+  - members:
+      17506644: {} # Aura_Statue
+      17506645: {} # Aura_Statue

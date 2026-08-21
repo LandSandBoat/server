@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  57
+  battle_party: 57
+
+zonelines:
+
+  z7l0:
+    from:  [500.000, 4.758, 404.000]
+    to:    morimar_basalt_fields
+    at:    [-540.237, -25.794, -399.500, 4.712389]
+    scale: [1.000, 4.000]
+
+  z7l2:
+    from:  [484.000, -5.282, 140.000]
+    to:    yorcia_weald
+    at:    [-400.000, 6.100, 260.000]
+    scale: [1.000, 4.000]
+
+  z7l4:
+    from:  [180.000, 25.164, 37.000]
+    to:    marjami_ravine
+    at:    [-500.000, -42.530, 320.000, 1.570796]
+    scale: [1.000, 4.000]
+
+  z7l6:
+    from:  [404.000, 27.626, 100.000]
+    to:    cirdas_caverns
+    at:    [-219.869, 7.800, 519.000, 1.570796]
+    scale: [1.000, 5.000]
+
+  z7l8:
+    from:  [340.000, -35.227, 524.000]
+    to:    kamihr_drifts
+    at:    [500.500, 70.922, -479.500, 4.712389]
+    scale: [1.000, 3.000]

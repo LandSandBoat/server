@@ -1,0 +1,3721 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Acid_Grease:
+    id:            38
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   vial_of_slime_oil
+        - chance: common
+          item:   vial_of_slime_oil
+        - chance: rare
+          item:   vial_of_slime_oil
+        - chance: rare
+          item:   garlaige_chest_key
+      despoil:
+        vial_of_slime_oil: 0
+
+  Bhuta:
+    id:            407
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Borer_Beetle:
+    id:            512
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   insect_wing
+        - chance: very_common
+          item:   beetle_shell
+        - chance: very_common
+          item:   beetle_shell
+        - chance: very_common
+          item:   beetle_jaw
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+
+  Chamber_Beetle:
+    id:            689
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   insect_wing
+        - chance: very_common
+          item:   beetle_shell
+        - chance: very_common
+          item:   beetle_jaw
+        - chance: very_common
+          item:   beetle_shell
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+
+  Chandelier:
+    id:            692
+    species:       bomb
+    type:          [notorious]
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+    loot:
+      drops:
+        - chance: always
+          item:   lump_of_chandelier_coal
+
+  Citadel_Bats:
+    id:            731
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_fang
+        - chance: common
+          item:   bat_fang
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+  Clockwork_Pod_GC:
+    id:            6596
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 129
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: very_rare
+          item:   chrysoberyl
+        - chance: rare
+          item:   piece_of_eastern_pottery
+      despoil:
+        magic_pot_shard: 0
+
+  Demonic_Weapon:
+    id:            980
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Donjon_Bat:
+    id:            6463
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+    content: ABYSSEA
+
+  Droma_GC:
+    id:            6597
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 131
+        model_size:     1
+        hitbox:        37
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          item:   garlaige_chest_key
+        - chance: very_rare
+          item:   jadeite
+      despoil:
+        magic_pot_shard: 0
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Explosure:
+    id:            1275
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   chunk_of_bomb_coal
+        - chance: uncommon
+          item:   chunk_of_bomb_coal
+        - chance: uncommon
+          item:   chunk_of_bomb_coal
+        - chance: rare
+          item:   garlaige_chest_key
+      steal: pinch_of_bomb_ash
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Fallen_Evacuee_blm:
+    id:            1283
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   garlaige_key
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: super_rare
+          item:   scroll_of_absorb-vit
+        - chance: super_rare
+          item:   scroll_of_absorb-agi
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Fallen_Evacuee_war:
+    id:            6544
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   garlaige_key
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: super_rare
+          item:   scroll_of_absorb-vit
+        - chance: super_rare
+          item:   scroll_of_absorb-agi
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Fallen_Mage:
+    id:            1288
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   garlaige_coffer_key
+        - chance: rare
+          item:   scroll_of_blizzard_iii
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Fallen_Major:
+    id:            1289
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   garlaige_coffer_key
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Fallen_Officer_blm:
+    id:            1290
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   garlaige_chest_key
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Fallen_Officer_war:
+    id:            6547
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   garlaige_chest_key
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Fallen_Soldier_blm:
+    id:            1291
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_stun
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Fallen_Soldier_war:
+    id:            6548
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_stun
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Fetid_Flesh:
+    id:            1328
+    species:       doomed
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   undead_skin
+        - chance: common
+          item:   revival_tree_root
+        - chance: rare
+          item:   garlaige_chest_key
+      despoil:
+        undead_skin: 0
+
+  Fortalice_Bats:
+    id:            6425
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  645
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      2
+        hitbox:         18
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+    content: ABYSSEA
+
+  Frogamander:
+    id:            5888
+    species:       doomed
+    type:          [notorious]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags: 645
+        model_size:     2
+        hitbox:        34
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: common
+          item:   selemnus_belt
+    content: WOTG
+
+  Funnel_Bats_GC:
+    id:            6424
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  645
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      2
+        hitbox:         18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_fang
+        - chance: very_common
+          item:   bat_fang
+        - chance: very_common
+          item:   bat_wing
+        - chance: rare
+          item:   garlaige_chest_key
+      despoil:
+        bat_wing: 0
+
+  Guardian_Statue:
+    id:            1831
+    species:       doll
+    type:          [notorious]
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  643
+        animation_sub:  12
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10500
+    loot:
+      drops:
+        - chance: always
+          item:   nail_puller
+
+  Hazmat:
+    id:            5767
+    species:       bomb
+    type:          [notorious]
+    spell_list_id: 295
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        immune_status: [gravity, bind, silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: common
+          item:   promptitude_solea
+    content: WOTG
+
+  Hellmine:
+    id:            1922
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   garlaige_coffer_key
+
+  Hovering_Hotpot:
+    id:            5841
+    species:       magic_pot
+    type:          [notorious]
+    spell_list_id: 36
+    skill_list_id: 998
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 131
+        model_size:     1
+        hitbox:        37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7000
+        mp: 9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   sleight_kukri
+    content: WOTG
+
+  Kaboom:
+    id:            6588
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      despoil:
+        pinch_of_bomb_ash: 0
+    content: ABYSSEA
+
+  Light_Elemental_SA:
+    id:            5531
+    display_name:  Light_Elemental
+    species:       light_elemental
+    type:          [notorious]
+    spell_list_id: 19
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 14
+        entity_flags: 131
+        model_size:     1
+        hitbox:         3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+
+  Magic_Jug:
+    id:            2478
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 133
+        model_size:     2
+        hitbox:        43
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   garlaige_coffer_key
+        - chance: uncommon
+          item:   scroll_of_enaero_ii
+        - chance: rare
+          item:   scroll_of_shell_iv
+      despoil:
+        magic_pot_shard: 0
+
+  Mephitas:
+    id:            6891
+    species:       scorpion
+    type:          [notorious]
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        39
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   garlaige_coffer_key
+
+  Oil_Spill:
+    id:            2958
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Old_Two-Wings:
+    id:            2968
+    species:       bat
+    type:          [notorious]
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  1695
+        animation_sub:    8
+        name_prefix:     32
+        model_size:       3
+        hitbox:          18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8150
+    loot:
+      drops:
+        - chance: always
+          item:   vial_of_fiend_blood
+        - chance: very_common
+          item:   bat_cape
+
+  Over_Weapon:
+    id:            3078
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  1669
+        animation_sub:    8
+        model_size:       2
+        hitbox:          22
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   garlaige_coffer_key
+
+  Puroboros_EN_GC:
+    id:            6589
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Revenant_NGS_EN_GC:
+    id:            6511
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_silk_cloth: 0
+
+  Roly-Poly:
+    id:            5147
+    species:       flan
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1801
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Serket:
+    id:            3549
+    species:       great_scorpion
+    type:          [notorious]
+    spell_list_id: 46
+    skill_list_id: 273
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    270
+        dmg_mult: 125
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        19
+      mods:
+        regen: 50
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 40000
+    loot:
+      drops:
+        - chance: always
+          item:   reraiser
+        - chance: common
+          item:   hi-reraiser
+        - chance: always
+          item:   vile_elixir
+        - chance: common
+          item:   vile_elixir_+1
+        - chance: common
+          item:   serket_shield
+        - chance: common
+          item:   serket_ring
+        - chance: uncommon
+          item:   venomous_claw
+        - chance: common
+          item:   triple_dagger
+
+  Siege_Bat:
+    id:            3619
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_fang
+        - chance: common
+          item:   bat_fang
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Skewer_Sam:
+    id:            3648
+    species:       cockatrice
+    type:          [notorious]
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 288
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        43
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8500
+    loot:
+      drops:
+        - chance: always
+          item:   cockatrice_skin
+        - chance: common
+          item:   wind_spear
+        - chance: very_common
+          item:   cockatrice_skin
+        - chance: very_common
+          item:   cockatrice_skin
+      steal: giant_bird_feather
+
+  Tainted_Flesh_GC:
+    id:            6484
+    species:       doomed
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags: 133
+        model_size:     2
+        hitbox:        34
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   garlaige_coffer_key
+        - chance: uncommon
+          item:   undead_skin
+        - chance: uncommon
+          item:   undead_skin
+      despoil:
+        undead_skin: 0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: rare
+          item:   garlaige_chest_key
+
+  Vault_Weapon:
+    id:            4207
+    species:       evil_weapon
+    spell_list_id: 42
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   garlaige_coffer_key
+
+  Warden_Beetle:
+    id:            6072
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   insect_wing
+        - chance: uncommon
+          item:   beetle_shell
+        - chance: rare
+          item:   beetle_jaw
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+    content: ABYSSEA
+
+  Wingrats_GC:
+    id:            6439
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  129
+        animation_sub:   8
+        name_prefix:    64
+        hitbox:         13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_fang
+        - chance: common
+          item:   bat_fang
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+  Wraith:
+    id:            4379
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   garlaige_coffer_key
+        - chance: rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+spawns:
+  17596417:
+    template: Borer_Beetle
+    at:       [-340.000, -0.010, 310.000, 65]
+    level:    [41, 44]
+  17596418:
+    template: Siege_Bat
+    at:       [-299.000, -0.500, 286.000, 127]
+    level:    [40, 42]
+  17596419:
+    template: Siege_Bat
+    at:       [-361.000, -0.050, 299.000, 127]
+    level:    [40, 42]
+  17596420:
+    template: Borer_Beetle
+    at:       [-256.254, -0.012, 301.226, 11]
+    level:    [41, 44]
+  17596421:
+    template: Siege_Bat
+    at:       [-313.000, -0.510, 300.000, 57]
+    level:    [40, 42]
+  17596422:
+    template: Siege_Bat
+    at:       [-288.000, -0.012, 298.000, 127]
+    level:    [40, 42]
+  17596423:
+    template: Siege_Bat
+    at:       [-338.000, -1.000, 315.000, 127]
+    level:    [40, 42]
+  17596424:
+    template: Siege_Bat
+    at:       [-269.947, -0.012, 302.357, 127]
+    level:    [40, 42]
+  17596425:
+    template: Siege_Bat
+    at:       [-340.000, -0.500, 300.000, 127]
+    level:    [40, 42]
+  17596426:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-355.923, -0.012, 265.697, 85]
+    level:    [40, 42]
+  17596427:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-348.814, -0.012, 275.913, 127]
+    level:    [40, 42]
+  17596428:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-324.047, -0.012, 274.592, 11]
+    level:    [40, 42]
+  17596429:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-331.096, -0.012, 272.960, 127]
+    level:    [40, 42]
+  17596430:
+    template: Fallen_Evacuee_war
+    script:   Fallen_Evacuee
+    at:       [-316.194, -0.012, 269.743, 127]
+    level:    [42, 43]
+  17596431:
+    template: Fallen_Evacuee_blm
+    script:   Fallen_Evacuee
+    at:       [-312.714, -0.012, 269.265, 127]
+    level:    [42, 43]
+  17596432:
+    template: Fallen_Evacuee_war
+    script:   Fallen_Evacuee
+    at:       [-353.108, -0.012, 249.415, 127]
+    level:    [42, 43]
+  17596433:
+    template: Fallen_Evacuee_blm
+    script:   Fallen_Evacuee
+    at:       [-354.134, -0.012, 256.434, 127]
+    level:    [42, 43]
+  17596434:
+    template: Borer_Beetle
+    at:       [-229.000, -0.012, 224.000, 28]
+    level:    [41, 44]
+  17596435:
+    template: Siege_Bat
+    at:       [-298.469, -0.012, 234.062, 127]
+    level:    [41, 43]
+  17596436:
+    template: Siege_Bat
+    at:       [-342.002, -0.012, 196.171, 127]
+    level:    [41, 43]
+  17596437:
+    template: Siege_Bat
+    at:       [-222.000, -0.012, 235.000, 127]
+    level:    [41, 43]
+  17596438:
+    template: Siege_Bat
+    at:       [-354.589, -0.012, 221.007, 127]
+    level:    [41, 43]
+  17596439:
+    template: Puroboros_EN_GC
+    script:   Puroboros
+    at:       [-332.043, -0.012, 248.698, 127]
+    level:    [43, 45]
+  17596440:
+    template: Oil_Spill
+    at:       [-315.897, -0.012, 248.543, 127]
+    level:    [43, 45]
+  17596441:
+    template: Oil_Spill
+    at:       [-313.554, -0.012, 251.152, 127]
+    level:    [43, 45]
+  17596442:
+    template: Siege_Bat
+    at:       [-298.429, -0.012, 258.423, 127]
+    level:    [40, 42]
+  17596443:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-283.710, -0.012, 270.310, 60]
+    level:    [40, 42]
+  17596444:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-283.515, -0.012, 274.795, 127]
+    level:    [40, 42]
+  17596445:
+    template: Siege_Bat
+    at:       [-259.657, -0.012, 273.530, 44]
+    level:    [40, 42]
+  17596446:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-267.537, -0.012, 270.599, 56]
+    level:    [40, 42]
+  17596447:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-272.148, -0.012, 270.044, 8]
+    level:    [40, 42]
+  17596448:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-251.252, -0.012, 269.233, 127]
+    level:    [40, 42]
+  17596449:
+    template: Wingrats_GC
+    script:   Wingrats
+    at:       [-248.218, -0.012, 276.013, 127]
+    level:    [40, 42]
+  17596450:
+    template: Fallen_Evacuee_war
+    script:   Fallen_Evacuee
+    at:       [-247.371, -0.012, 244.900, 63]
+    level:    [42, 43]
+  17596451:
+    template: Fallen_Evacuee_blm
+    script:   Fallen_Evacuee
+    at:       [-244.040, -0.013, 245.388, 65]
+    level:    [42, 43]
+  17596452:
+    template: Siege_Bat
+    at:       [-257.990, -0.012, 243.882, 127]
+    level:    [41, 43]
+  17596453:
+    template: Puroboros_EN_GC
+    script:   Puroboros
+    at:       [-269.613, -0.012, 248.123, 84]
+    level:    [43, 45]
+  17596454:
+    template: Clockwork_Pod_GC
+    script:   Clockwork_Pod
+    at:       [-283.853, -0.012, 251.367, 58]
+    level:    [44, 45]
+  17596455:
+    template: Clockwork_Pod_GC
+    script:   Clockwork_Pod
+    at:       [-284.190, -0.012, 244.200, 39]
+    level:    [44, 45]
+  17596456:
+    template: Borer_Beetle
+    at:       [-250.329, -0.012, 219.461, 104]
+    level:    [41, 44]
+  17596457:
+    template: Siege_Bat
+    at:       [-259.000, -0.012, 211.000, 96]
+    level:    [41, 43]
+  17596458:
+    template: Siege_Bat
+    at:       [-261.433, -0.012, 197.214, 127]
+    level:    [41, 43]
+  17596459:
+    template: Borer_Beetle
+    at:       [-350.000, -0.012, 300.000, 119]
+    level:    [41, 44]
+  17596460:
+    template: Siege_Bat
+    at:       [-222.194, -0.012, 316.006, 69]
+    level:    [41, 43]
+  17596461:
+    template: Siege_Bat
+    at:       [-229.317, -0.012, 299.519, 74]
+    level:    [41, 43]
+  17596462:
+    template: Revenant_NGS_EN_GC
+    script:   Revenant
+    at:       [-196.720, -0.012, 301.766, 127]
+    level:    [44, 46]
+  17596463:
+    template: Revenant_NGS_EN_GC
+    script:   Revenant
+    at:       [-237.000, -0.012, 379.000, 127]
+    level:    [44, 46]
+  17596464:
+    template: Borer_Beetle
+    at:       [-222.245, -0.012, 266.224, 90]
+    level:    [41, 44]
+  17596465:
+    template: Siege_Bat
+    at:       [-226.786, -0.012, 261.578, 6]
+    level:    [41, 43]
+  17596466:
+    template: Siege_Bat
+    at:       [-222.109, -0.012, 271.106, 91]
+    level:    [41, 43]
+  17596467:
+    template: Borer_Beetle
+    at:       [-221.429, -0.012, 218.243, 127]
+    level:    [41, 44]
+  17596468:
+    template: Siege_Bat
+    at:       [-220.000, -0.012, 202.000, 127]
+    level:    [41, 43]
+  17596469:
+    template: Siege_Bat
+    at:       [-230.988, -0.012, 220.625, 127]
+    level:    [41, 43]
+  17596470:
+    template: Citadel_Bats
+    at:       [-178.650, -0.012, 189.311, 7]
+    level:    [46, 48]
+  17596471:
+    template: Citadel_Bats
+    at:       [-179.814, -0.123, 225.495, 127]
+    level:    [46, 48]
+  17596472:
+    template: Citadel_Bats
+    at:       [-181.150, -0.012, 194.416, 127]
+    level:    [46, 48]
+  17596473:
+    template: Citadel_Bats
+    at:       [-176.123, -0.012, 176.741, 127]
+    level:    [46, 48]
+  17596474:
+    template: Citadel_Bats
+    at:       [-170.087, -0.012, 261.739, 103]
+    level:    [46, 48]
+  17596475:
+    template: Demonic_Weapon
+    at:       [-167.104, -0.012, 252.127, 127]
+    level:    [47, 49]
+  17596476:
+    template: Demonic_Weapon
+    at:       [-170.384, -0.013, 250.528, 127]
+    level:    [47, 49]
+  17596477:
+    template: Fallen_Soldier_war
+    script:   Fallen_Soldier
+    at:       [-168.538, -0.012, 233.226, 91]
+    level:    [47, 49]
+  17596478:
+    template: Fallen_Soldier_blm
+    script:   Fallen_Soldier
+    at:       [-171.124, -0.013, 230.522, 76]
+    level:    [47, 49]
+  17596479:
+    template: Fallen_Soldier_war
+    script:   Fallen_Soldier
+    at:       [-167.714, -0.012, 204.540, 43]
+    level:    [47, 49]
+  17596480:
+    template: Fallen_Soldier_blm
+    script:   Fallen_Soldier
+    at:       [-163.777, -0.012, 214.595, 127]
+    level:    [47, 49]
+  17596481:
+    template: Bhuta
+    at:       [-164.283, -0.012, 188.818, 63]
+    level:    [47, 48]
+  17596482:
+    template: Citadel_Bats
+    at:       [-143.992, -0.012, 261.247, 97]
+    level:    [46, 48]
+  17596483:
+    template: Citadel_Bats
+    at:       [-128.074, -0.012, 255.904, 92]
+    level:    [46, 48]
+  17596484:
+    template: Citadel_Bats
+    at:       [-138.482, -0.012, 283.069, 127]
+    level:    [46, 48]
+  17596485:
+    template: Bhuta
+    at:       [-126.921, -0.012, 236.445, 127]
+    level:    [49, 49]
+  17596486:
+    template: Demonic_Weapon
+    at:       [-125.764, -0.012, 215.450, 127]
+    level:    [47, 49]
+  17596487:
+    template: Demonic_Weapon
+    at:       [-124.569, -0.013, 210.591, 127]
+    level:    [47, 49]
+  17596488:
+    template: Citadel_Bats
+    at:       [-129.816, -0.012, 185.680]
+    level:    [46, 48]
+  17596489:
+    template: Citadel_Bats
+    at:       [-140.659, -0.012, 197.486, 127]
+    level:    [46, 48]
+  17596490:
+    template: Citadel_Bats
+    at:       [-143.622, -0.012, 177.338, 42]
+    level:    [46, 48]
+  17596491:
+    template: Bhuta
+    at:       [-156.316, -0.012, 209.731, 127]
+    level:    [47, 49]
+  17596492:
+    template: Demonic_Weapon
+    at:       [-148.881, -0.012, 229.897, 127]
+    level:    [47, 49]
+  17596493:
+    template: Demonic_Weapon
+    at:       [-149.300, -0.500, 236.268, 125]
+    level:    [47, 49]
+  17596494:
+    template: Citadel_Bats
+    at:       [-114.455, -0.012, 178.561, 88]
+    level:    [46, 48]
+  17596495:
+    template: Citadel_Bats
+    at:       [-93.000, -0.012, 217.000, 127]
+    level:    [46, 48]
+  17596496:
+    template: Citadel_Bats
+    at:       [-101.210, -0.012, 181.931, 58]
+    level:    [46, 48]
+  17596497:
+    template: Citadel_Bats
+    at:       [-101.821, -0.012, 263.534, 98]
+    level:    [46, 48]
+  17596498:
+    template: Citadel_Bats
+    at:       [-87.675, -0.012, 224.675, 127]
+    level:    [46, 48]
+  17596499:
+    template: Demonic_Weapon
+    at:       [-114.825, -0.012, 246.148, 105]
+    level:    [47, 49]
+  17596500:
+    template: Demonic_Weapon
+    at:       [-110.000, -0.013, 251.000, 102]
+    level:    [47, 49]
+  17596501:
+    template: Fallen_Soldier_war
+    script:   Fallen_Soldier
+    at:       [-111.642, -0.012, 229.557, 120]
+    level:    [47, 49]
+  17596502:
+    template: Fallen_Soldier_blm
+    script:   Fallen_Soldier
+    at:       [-116.271, -0.012, 234.751, 127]
+    level:    [47, 49]
+  17596503:
+    template: Fallen_Soldier_war
+    script:   Fallen_Soldier
+    at:       [-115.679, -0.012, 203.911, 92]
+    level:    [47, 49]
+  17596504:
+    template: Fallen_Soldier_blm
+    script:   Fallen_Soldier
+    at:       [-115.891, -0.013, 208.444, 127]
+    level:    [47, 49]
+  17596505:
+    template: Bhuta
+    at:       [-111.482, -0.012, 189.914, 127]
+    level:    [47, 48]
+  17596506:
+    template: Old_Two-Wings
+    at:       [-99.000, -0.500, 226.000, 127]
+    level:    [52, 52]
+  17596507:
+    template: Skewer_Sam
+    at:       [-108.000, -0.500, 177.000, 127]
+    level:    [54, 54]
+  17596508:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-135.000, 19.000, 197.000, 127]
+    level:    [51, 53]
+  17596509:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-58.041, 5.864, 166.341, 47]
+    level:    [51, 53]
+  17596510:
+    template: Fetid_Flesh
+    at:       [-79.947, 6.265, 139.543, 127]
+    level:    [54, 56]
+  17596511:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-18.869, 6.229, 154.663, 188]
+    level:    [51, 53]
+  17596512:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-18.426, 6.620, 148.526, 177]
+    level:    [51, 53]
+  17596513:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-15.463, 7.189, 144.397, 186]
+    level:    [51, 53]
+  17596514:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-54.418, 6.765, 135.377, 52]
+    level:    [51, 53]
+  17596515:
+    template: Explosure
+    at:       [5.839, 7.014, 197.462, 127]
+    level:    [52, 53]
+  17596516:
+    template: Explosure
+    at:       [-3.358, 7.014, 203.070, 127]
+    level:    [52, 53]
+  17596517:
+    template: Explosure
+    at:       [-6.000, 7.033, 194.000, 127]
+    level:    [52, 53]
+  17596518:
+    template: Thunder_Elemental
+    at:       [40.763, 6.987, 110.887, 76]
+    level:    [52, 54]
+  17596519:
+    template: Earth_Elemental
+    at:       [-2.969, 7.009, 203.127, 127]
+    level:    [52, 54]
+  17596520:
+    template: Hazmat
+    at:       [5.839, 7.014, 197.462, 127]
+    level:    [57, 58]
+  17596521:
+    template: Droma_GC
+    script:   Droma
+    at:       [13.034, 6.088, 186.750, 78]
+    level:    [53, 54]
+  17596522:
+    template: Droma_GC
+    script:   Droma
+    at:       [7.220, 6.184, 215.250, 11]
+    level:    [53, 54]
+  17596523:
+    template: Explosure
+    at:       [-40.392, 6.987, 248.727, 127]
+    level:    [52, 53]
+  17596524:
+    template: Explosure
+    at:       [-35.084, 7.121, 233.937, 91]
+    level:    [52, 53]
+  17596525:
+    template: Explosure
+    at:       [-41.691, 7.014, 232.915, 127]
+    level:    [52, 53]
+  17596526:
+    template: Thunder_Elemental
+    at:       [-313.318, 19.522, 254.342, 58]
+    level:    [52, 54]
+  17596527:
+    template: Earth_Elemental
+    at:       [-41.805, 6.929, 232.613, 85]
+    level:    [52, 54]
+  17596528:
+    template: Droma_GC
+    script:   Droma
+    at:       [-49.427, 6.191, 225.777, 21]
+    level:    [52, 54]
+  17596529:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [18.042, -0.012, 300.997, 79]
+    level:    [52, 54]
+  17596530:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [19.000, 2.000, 261.000, 54]
+    level:    [52, 54]
+  17596531:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [19.000, -0.032, 310.000, 72]
+    level:    [52, 54]
+  17596532:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [0.500, -0.012, 300.000, 2]
+    level:    [52, 54]
+  17596533:
+    template: Chandelier
+    at:       [19.000, 1.000, 325.000, 67]
+    level:    [63, 63]
+  17596534:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-53.542, 6.523, 302.549, 216]
+    level:    [51, 53]
+  17596535:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-56.540, 8.283, 295.116, 201]
+    level:    [51, 53]
+  17596536:
+    template: Fetid_Flesh
+    at:       [-83.768, 6.232, 298.557, 115]
+    level:    [54, 56]
+  17596537:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-59.580, 3.243, 333.133, 37]
+    level:    [51, 53]
+  17596538:
+    template: Acid_Grease
+    at:       [-98.000, -0.012, 350.000, 127]
+    level:    [52, 54]
+  17596539:
+    template: Acid_Grease
+    at:       [-99.122, -0.012, 345.747, 127]
+    level:    [52, 54]
+  17596540:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-115.000, 19.000, 222.000, 127]
+    level:    [51, 53]
+  17596541:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-122.995, -0.012, 341.436, 145]
+    level:    [51, 53]
+  17596542:
+    template: Explosure
+    at:       [-133.299, -0.012, 352.527, 88]
+    level:    [52, 53]
+  17596543:
+    template: Droma_GC
+    script:   Droma
+    at:       [-126.082, -0.012, 331.379, 127]
+    level:    [52, 54]
+  17596544:
+    template: Droma_GC
+    script:   Droma
+    at:       [-132.560, -0.012, 331.301, 127]
+    level:    [53, 54]
+  17596545:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-154.216, -0.012, 348.454, 110]
+    level:    [52, 54]
+  17596546:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-148.501, -0.015, 355.582, 127]
+    level:    [53, 54]
+  17596547:
+    template: Explosure
+    at:       [-155.169, -0.012, 331.356, 127]
+    level:    [52, 53]
+  17596548:
+    template: Explosure
+    at:       [-168.253, -0.012, 356.293, 127]
+    level:    [52, 53]
+  17596549:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-176.009, -0.012, 326.569, 114]
+    level:    [53, 54]
+  17596550:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-170.244, -0.013, 329.409, 25]
+    level:    [52, 54]
+  17596551:
+    template: Droma_GC
+    script:   Droma
+    at:       [-186.369, -0.012, 331.959, 127]
+    level:    [52, 54]
+  17596552:
+    template: Droma_GC
+    script:   Droma
+    at:       [-192.966, -0.012, 328.089, 61]
+    level:    [53, 54]
+  17596553:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-146.000, 14.000, 215.000, 127]
+    level:    [51, 53]
+  17596554:
+    template: Acid_Grease
+    at:       [-186.585, -0.012, 357.410, 127]
+    level:    [52, 54]
+  17596555:
+    template: Acid_Grease
+    at:       [-193.897, -0.012, 348.605, 6]
+    level:    [52, 54]
+  17596556:
+    template: Wraith
+    at:       [-126.813, -0.012, 381.813, 163]
+    level:    [60, 62]
+  17596557:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-32.452, -6.012, 380.480, 113]
+    level:    [53, 55]
+  17596558:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-101.462, -0.012, 374.125, 127]
+    level:    [53, 55]
+  17596559:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-67.676, -1.235, 378.957, 62]
+    level:    [53, 55]
+  17596560:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-53.249, -4.866, 378.682, 106]
+    level:    [53, 55]
+  17596561:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-23.802, -6.012, 379.575, 7]
+    level:    [53, 55]
+  17596562:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-19.216, -0.007, 325.139, 127]
+    level:    [53, 55]
+  17596563:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-18.934, -6.008, 353.788, 80]
+    level:    [53, 55]
+  17596564:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-19.159, -4.763, 346.668, 11]
+    level:    [53, 55]
+  17596565:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-35.286, 0.015, 98.092, 71]
+    level:    [51, 53]
+  17596566:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-21.959, 5.568, 113.917, 172]
+    level:    [51, 53]
+  17596567:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-21.471, 2.737, 97.569, 120]
+    level:    [51, 53]
+  17596568:
+    template: Droma_GC
+    script:   Droma
+    at:       [-43.432, -0.012, 107.841, 33]
+    level:    [52, 54]
+  17596569:
+    template: Droma_GC
+    script:   Droma
+    at:       [-43.692, -0.012, 112.568, 6]
+    level:    [53, 54]
+  17596570:
+    template: Explosure
+    at:       [-43.381, -0.012, 86.354, 127]
+    level:    [52, 53]
+  17596571:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-70.490, -0.012, 114.544, 127]
+    level:    [53, 55]
+  17596572:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-64.477, -0.012, 110.816, 127]
+    level:    [52, 54]
+  17596573:
+    template: Explosure
+    at:       [-74.377, -0.012, 87.216, 127]
+    level:    [52, 53]
+  17596574:
+    template: Acid_Grease
+    at:       [-103.000, -0.012, 90.301, 64]
+    level:    [52, 54]
+  17596575:
+    template: Acid_Grease
+    at:       [-96.844, -0.012, 89.250, 127]
+    level:    [52, 54]
+  17596576:
+    template: Explosure
+    at:       [-124.122, -0.012, 115.711, 127]
+    level:    [52, 53]
+  17596577:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-135.031, -0.012, 91.288, 127]
+    level:    [52, 54]
+  17596578:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-129.436, -0.012, 92.358, 63]
+    level:    [52, 54]
+  17596579:
+    template: Explosure
+    at:       [-149.240, -0.012, 113.180, 127]
+    level:    [52, 53]
+  17596580:
+    template: Droma_GC
+    script:   Droma
+    at:       [-156.000, -0.012, 84.000, 127]
+    level:    [52, 54]
+  17596581:
+    template: Droma_GC
+    script:   Droma
+    at:       [-146.876, -0.012, 92.394, 127]
+    level:    [52, 54]
+  17596582:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-136.000, 13.000, 229.000, 127]
+    level:    [51, 53]
+  17596583:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-184.689, -0.012, 97.899, 182]
+    level:    [51, 53]
+  17596584:
+    template: Funnel_Bats_GC
+    script:   Funnel_Bats
+    at:       [-168.609, -0.012, 98.924, 128]
+    level:    [51, 53]
+  17596585:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-230.000, -0.012, 139.000, 122]
+    level:    [52, 54]
+  17596586:
+    template: Fallen_Officer_war
+    script:   Fallen_Officer
+    at:       [-220.527, -0.012, 146.295, 54]
+    level:    [52, 54]
+  17596587:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-246.609, -0.012, 138.841, 123]
+    level:    [52, 54]
+  17596588:
+    template: Fallen_Officer_blm
+    script:   Fallen_Officer
+    at:       [-219.007, -0.012, 163.123, 127]
+    level:    [52, 54]
+  17596589:
+    template: Droma_GC
+    script:   Droma
+    at:       [-193.536, -0.012, 139.115, 64]
+    level:    [52, 54]
+  17596590:
+    template: Chamber_Beetle
+    at:       [-52.751, 4.500, 58.767, 127]
+    level:    [56, 58]
+  17596591:
+    template: Chamber_Beetle
+    at:       [-131.501, -0.012, 57.797, 127]
+    level:    [56, 58]
+  17596592:
+    template: Chamber_Beetle
+    at:       [-172.277, -2.444, 58.797, 14]
+    level:    [56, 58]
+  17596593:
+    template: Chamber_Beetle
+    at:       [-18.004, 6.693, 53.469, 127]
+    level:    [56, 58]
+  17596594:
+    template: Chamber_Beetle
+    at:       [18.674, 6.208, 68.199, 36]
+    level:    [56, 58]
+  17596595:
+    template: Chamber_Beetle
+    at:       [20.401, 7.701, 51.551, 77]
+    level:    [56, 58]
+  17596596:
+    template: Chamber_Beetle
+    at:       [-0.500, 6.000, 57.000, 5]
+    level:    [56, 58]
+  17596597:
+    template: Tainted_Flesh_GC
+    script:   Tainted_Flesh
+    at:       [-260.000, 18.000, 201.000, 127]
+    level:    [63, 64]
+  17596598:
+    template: Tainted_Flesh_GC
+    script:   Tainted_Flesh
+    at:       [-209.000, 19.000, 145.000, 127]
+    level:    [63, 64]
+  17596599:
+    template: Frogamander
+    at:       [-78.800, 6.150, 140.600, 127]
+    level:    [72, 73]
+  17596600:
+    template: Hellmine
+    at:       [38.176, 7.018, 110.095, 17]
+    level:    [59, 61]
+  17596601:
+    template: Hellmine
+    at:       [31.808, 7.012, 119.778, 178]
+    level:    [59, 61]
+  17596602:
+    template: Hellmine
+    at:       [33.148, 7.002, 121.440, 121]
+    level:    [59, 61]
+  17596603:
+    template: Thunder_Elemental
+    at:       [-283.894, 19.033, 235.495, 76]
+    level:    [52, 54]
+  17596604:
+    template: Earth_Elemental
+    at:       [32.256, 6.952, 120.520, 127]
+    level:    [52, 54]
+  17596605:
+    template: Over_Weapon
+    at:       [-319.000, 18.000, 179.000, 127]
+    level:    [59, 61]
+  17596606:
+    template: Vault_Weapon
+    at:       [-305.000, 19.000, 171.000, 48]
+    level:    [60, 62]
+  17596607:
+    template: Over_Weapon
+    at:       [-300.000, 20.000, 176.000, 127]
+    level:    [59, 61]
+  17596608:
+    template: Vault_Weapon
+    at:       [-297.000, 18.000, 171.000, 127]
+    level:    [60, 62]
+  17596609:
+    template: Chamber_Beetle
+    at:       [105.536, -3.684, 99.849, 127]
+    level:    [56, 58]
+  17596610:
+    template: Chamber_Beetle
+    at:       [98.667, -3.264, 98.537, 69]
+    level:    [56, 58]
+  17596611:
+    template: Chamber_Beetle
+    at:       [60.848, 5.781, 77.250, 127]
+    level:    [56, 58]
+  17596612:
+    template: Chamber_Beetle
+    at:       [98.803, -0.033, 75.963, 78]
+    level:    [56, 58]
+  17596613:
+    template: Fallen_Major
+    at:       [130.547, -0.012, 61.572, 102]
+    level:    [60, 62]
+  17596614:
+    template: Fallen_Major
+    at:       [144.236, -0.012, 61.857, 127]
+    level:    [60, 62]
+  17596615:
+    template: Fallen_Mage
+    at:       [122.036, -0.012, 61.392, 115]
+    level:    [59, 62]
+  17596616:
+    template: Fallen_Mage
+    at:       [168.021, -0.013, 60.349, 109]
+    level:    [59, 62]
+  17596617:
+    template: Wraith
+    at:       [-123.784, -0.012, 382.057, 127]
+    level:    [60, 62]
+  17596618:
+    template: Over_Weapon
+    at:       [-293.000, 19.000, 177.000, 21]
+    level:    [59, 60]
+  17596619:
+    template: Vault_Weapon
+    at:       [-291.000, 18.000, 185.000, 127]
+    level:    [60, 62]
+  17596620:
+    template: Over_Weapon
+    at:       [-284.000, 18.000, 184.000, 54]
+    level:    [59, 61]
+  17596621:
+    template: Vault_Weapon
+    at:       [-285.000, 18.000, 176.000, 127]
+    level:    [60, 62]
+  17596622:
+    template: Wraith
+    at:       [124.213, -0.012, 72.559, 127]
+    level:    [60, 62]
+  17596623:
+    template: Fallen_Major
+    at:       [182.157, -0.012, 29.941, 127]
+    level:    [60, 62]
+  17596624:
+    template: Fallen_Major
+    at:       [180.846, -0.014, 24.911, 20]
+    level:    [60, 62]
+  17596625:
+    template: Fallen_Mage
+    at:       [188.229, -0.018, 20.151, 127]
+    level:    [59, 62]
+  17596626:
+    template: Fallen_Mage
+    at:       [153.345, -0.012, 18.278, 123]
+    level:    [59, 62]
+  17596627:
+    template: Wraith
+    at:       [143.409, -0.012, 52.118, 14]
+    level:    [60, 62]
+  17596628:
+    template: Hovering_Hotpot
+    at:       [158.000, 2.000, 20.000, 127]
+    level:    [58, 60]
+  17596629:
+    template: Citadel_Bats
+    at:       [-249.324, -1.638, 340.192, 13]
+    level:    [46, 48]
+  17596630:
+    template: Citadel_Bats
+    at:       [-334.939, 5.987, 376.117, 75]
+    level:    [46, 48]
+  17596631:
+    template: Citadel_Bats
+    at:       [-270.546, -0.012, 380.962, 127]
+    level:    [46, 48]
+  17596632:
+    template: Citadel_Bats
+    at:       [-309.070, 13.709, 338.301, 57]
+    level:    [46, 48]
+  17596633:
+    template: Citadel_Bats
+    at:       [-339.027, 8.657, 341.651, 5]
+    level:    [46, 48]
+  17596634:
+    template: Citadel_Bats
+    at:       [-312.715, 12.611, 339.912, 26]
+    level:    [46, 48]
+  17596635:
+    template: Over_Weapon
+    at:       [-280.000, 17.000, 175.000, 127]
+    level:    [60, 62]
+  17596636:
+    template: Over_Weapon
+    at:       [-271.000, 19.000, 179.000, 15]
+    level:    [60, 62]
+  17596637:
+    template: Over_Weapon
+    at:       [-305.000, 20.000, 177.000, 127]
+    level:    [60, 62]
+  17596638:
+    template: Vault_Weapon
+    at:       [-278.000, 18.000, 181.000, 127]
+    level:    [60, 62]
+  17596639:
+    template: Vault_Weapon
+    at:       [-266.000, 19.000, 181.000, 127]
+    level:    [60, 62]
+  17596640:
+    template: Vault_Weapon
+    at:       [-280.000, 18.000, 179.000, 127]
+    level:    [60, 62]
+  17596641:
+    template: Tainted_Flesh_GC
+    script:   Tainted_Flesh
+    at:       [-20.609, 5.673, 80.024, 127]
+    level:    [63, 65]
+  17596642:
+    template: Tainted_Flesh_GC
+    script:   Tainted_Flesh
+    at:       [16.000, 7.000, 11.000, 127]
+    level:    [63, 64]
+  17596643:
+    template: Guardian_Statue
+    at:       [-168.000, 0.000, 230.000, 34]
+    level:    [61, 61]
+  17596644:
+    template: Warden_Beetle
+    at:       [-291.276, 19.608, 270.227, 127]
+    level:    [95, 96]
+  17596645:
+    template: Warden_Beetle
+    at:       [-235.000, 19.000, 265.000, 127]
+    level:    [95, 96]
+  17596646:
+    template: Warden_Beetle
+    at:       [-355.439, 19.147, 284.329, 3]
+    level:    [95, 96]
+  17596647:
+    template: Donjon_Bat
+    at:       [-306.000, 19.000, 277.000, 127]
+    level:    [91, 93]
+  17596648:
+    template: Donjon_Bat
+    at:       [-352.000, 19.000, 238.000, 127]
+    level:    [91, 93]
+  17596649:
+    template: Donjon_Bat
+    at:       [-310.000, 19.000, 239.000, 127]
+    level:    [91, 93]
+  17596650:
+    template: Warden_Beetle
+    at:       [-211.000, 19.000, 272.000, 127]
+    level:    [95, 96]
+  17596651:
+    template: Warden_Beetle
+    at:       [-193.000, 19.000, 323.000, 127]
+    level:    [95, 96]
+  17596652:
+    template: Warden_Beetle
+    at:       [-362.720, 18.657, 271.389, 53]
+    level:    [95, 96]
+  17596653:
+    template: Donjon_Bat
+    at:       [-266.000, 19.000, 236.000, 127]
+    level:    [91, 93]
+  17596654:
+    template: Donjon_Bat
+    at:       [-234.000, 19.000, 249.000, 127]
+    level:    [91, 93]
+  17596655:
+    template: Kaboom
+    at:       [-186.000, 18.000, 269.000, 127]
+    level:    [94, 96]
+  17596656:
+    template: Warden_Beetle
+    at:       [-334.033, 18.546, 241.160, 252]
+    level:    [95, 96]
+  17596657:
+    template: Warden_Beetle
+    at:       [-333.051, 18.661, 239.896, 206]
+    level:    [95, 96]
+  17596658:
+    template: Warden_Beetle
+    at:       [-340.625, 19.439, 234.672, 123]
+    level:    [95, 96]
+  17596659:
+    template: Donjon_Bat
+    at:       [-217.000, 19.000, 281.000, 127]
+    level:    [91, 93]
+  17596660:
+    template: Kaboom
+    at:       [-148.000, 18.000, 333.000, 127]
+    level:    [94, 96]
+  17596661:
+    template: Fortalice_Bats
+    at:       [-206.000, -0.500, 100.000, 127]
+    level:    [92, 94]
+  17596662:
+    template: Fortalice_Bats
+    at:       [-180.000, -0.500, 91.000, 127]
+    level:    [93, 94]
+  17596663:
+    template: Fortalice_Bats
+    at:       [-180.000, -0.500, 77.000, 127]
+    level:    [92, 94]
+  17596664:
+    template: Fortalice_Bats
+    at:       [-137.000, -0.500, 99.000, 127]
+    level:    [93, 94]
+  17596665:
+    template: Warden_Beetle
+    at:       [-291.009, 19.267, 282.473, 187]
+    level:    [95, 96]
+  17596666:
+    template: Warden_Beetle
+    at:       [-307.674, 19.372, 284.031, 10]
+    level:    [95, 96]
+  17596667:
+    template: Donjon_Bat
+    at:       [-197.000, 19.000, 307.000, 127]
+    level:    [91, 93]
+  17596668:
+    template: Donjon_Bat
+    at:       [-166.000, 19.000, 327.000, 127]
+    level:    [91, 93]
+  17596669:
+    template: Fortalice_Bats
+    at:       [-43.000, -0.500, 100.000, 127]
+    level:    [92, 94]
+  17596670:
+    template: Fortalice_Bats
+    at:       [-19.000, 2.000, 101.000, 127]
+    level:    [92, 94]
+  17596671:
+    template: Warden_Beetle
+    at:       [-363.000, 19.071, 262.000, 65]
+    level:    [95, 96]
+  17596672:
+    template: Warden_Beetle
+    at:       [-320.000, 18.603, 241.000, 127]
+    level:    [95, 96]
+  17596673:
+    template: Donjon_Bat
+    at:       [-166.000, 19.000, 311.000, 127]
+    level:    [91, 93]
+  17596674:
+    template: Donjon_Bat
+    at:       [-266.000, 14.000, 266.000, 127]
+    level:    [91, 93]
+  17596675:
+    template: Donjon_Bat
+    at:       [-253.000, 13.000, 253.000, 127]
+    level:    [91, 93]
+  17596676:
+    template: Kaboom
+    at:       [-146.000, 18.000, 308.000, 127]
+    level:    [94, 96]
+  17596677:
+    template: Warden_Beetle
+    at:       [-354.501, 19.203, 280.912, 127]
+    level:    [95, 96]
+  17596678:
+    template: Warden_Beetle
+    at:       [-177.000, 19.000, 320.000, 45]
+    level:    [95, 96]
+  17596679:
+    template: Donjon_Bat
+    at:       [-319.000, 19.000, 260.000, 127]
+    level:    [91, 93]
+  17596680:
+    template: Donjon_Bat
+    at:       [-306.713, 19.604, 245.932, 139]
+    level:    [91, 93]
+  17596681:
+    template: Kaboom
+    at:       [-373.000, 18.000, 291.000, 127]
+    level:    [94, 96]
+  17596682:
+    template: Fortalice_Bats
+    at:       [-15.000, 7.000, 140.000, 127]
+    level:    [92, 94]
+  17596683:
+    template: Fortalice_Bats
+    at:       [-20.000, 5.000, 153.000, 127]
+    level:    [92, 94]
+  17596684:
+    template: Fortalice_Bats
+    at:       [-30.000, 7.000, 138.000, 127]
+    level:    [92, 94]
+  17596685:
+    template: Fortalice_Bats
+    at:       [-52.000, 6.000, 137.000, 127]
+    level:    [92, 94]
+  17596686:
+    template: Donjon_Bat
+    at:       [-273.156, 18.332, 279.846, 120]
+    level:    [91, 93]
+  17596687:
+    template: Kaboom
+    at:       [-371.000, 18.000, 227.000, 127]
+    level:    [94, 96]
+  17596688:
+    template: Fortalice_Bats
+    at:       [-59.000, -0.500, 203.000, 127]
+    level:    [92, 94]
+  17596689:
+    template: Fortalice_Bats
+    at:       [-59.000, 6.000, 164.000, 127]
+    level:    [92, 94]
+  17596690:
+    template: Fortalice_Bats
+    at:       [-60.000, 6.000, 281.000, 127]
+    level:    [92, 94]
+  17596691:
+    template: Warden_Beetle
+    at:       [-197.000, 19.111, 297.000, 127]
+    level:    [95, 96]
+  17596692:
+    template: Kaboom
+    at:       [-236.153, 18.699, 247.724, 223]
+    level:    [94, 96]
+  17596693:
+    template: Fortalice_Bats
+    at:       [-58.000, 6.000, 307.000, 127]
+    level:    [92, 94]
+  17596694:
+    template: Fortalice_Bats
+    at:       [-84.000, -0.500, 339.000, 127]
+    level:    [92, 94]
+  17596695:
+    template: Fortalice_Bats
+    at:       [-141.000, -0.500, 340.000, 127]
+    level:    [92, 94]
+  17596696:
+    template: Warden_Beetle
+    at:       [-280.779, 19.495, 256.943, 34]
+    level:    [95, 96]
+  17596697:
+    template: Warden_Beetle
+    at:       [-262.279, 19.374, 286.762, 8]
+    level:    [95, 96]
+  17596698:
+    template: Kaboom
+    at:       [-231.840, 18.990, 237.950, 93]
+    level:    [94, 96]
+  17596699:
+    template: Fortalice_Bats
+    at:       [-169.000, -0.500, 340.000, 127]
+    level:    [92, 94]
+  17596700:
+    template: Fortalice_Bats
+    at:       [-194.000, -0.500, 339.000, 127]
+    level:    [92, 94]
+  17596701:
+    template: Donjon_Bat
+    at:       [-196.068, 19.090, 282.235, 232]
+    level:    [91, 93]
+  17596702:
+    template: Donjon_Bat
+    at:       [-191.699, 19.096, 273.624, 23]
+    level:    [91, 93]
+  17596703:
+    template: Kaboom
+    at:       [-199.867, 19.273, 286.656, 10]
+    level:    [94, 96]
+  17596704:
+    template: Fortalice_Bats
+    at:       [-330.668, 18.578, 239.779, 127]
+    level:    [92, 94]
+  17596705:
+    template: Fortalice_Bats
+    at:       [-366.945, 19.163, 245.823, 75]
+    level:    [92, 94]
+  17596706:
+    template: Donjon_Bat
+    at:       [-186.161, 19.669, 310.696, 221]
+    level:    [91, 93]
+  17596707:
+    template: Kaboom
+    at:       [-200.082, 19.011, 321.116, 87]
+    level:    [95, 96]
+  17596708:
+    template: Fortalice_Bats
+    at:       [-340.000, 19.000, 283.000, 127]
+    level:    [92, 94]
+  17596709:
+    template: Fortalice_Bats
+    at:       [-285.000, 19.000, 283.000, 127]
+    level:    [92, 94]
+  17596710:
+    template: Fortalice_Bats
+    at:       [-306.000, 19.000, 258.000, 127]
+    level:    [92, 94]
+  17596711:
+    template: Donjon_Bat
+    at:       [-172.928, 19.451, 320.467, 180]
+    level:    [91, 93]
+  17596712:
+    template: Kaboom
+    at:       [-173.775, 19.223, 329.076, 231]
+    level:    [94, 96]
+  17596713:
+    template: Fortalice_Bats
+    at:       [-346.633, 12.126, 249.586, 115]
+    level:    [92, 94]
+  17596714:
+    template: Fortalice_Bats
+    at:       [-274.000, 19.000, 233.000, 25]
+    level:    [92, 94]
+  17596715:
+    template: Fortalice_Bats
+    at:       [-340.000, 12.000, 261.000, 127]
+    level:    [92, 94]
+  17596716:
+    template: Wraith
+    at:       [183.809, -0.012, 32.565, 127]
+    level:    [60, 62]
+  17596717:
+    template: Wraith
+    at:       [-159.000, 19.000, 217.000, 127]
+    level:    [60, 62]
+  17596718:
+    template: Wraith
+    at:       [-152.174, 19.138, 193.684, 5]
+    level:    [60, 62]
+  17596719:
+    template: Wraith
+    at:       [-115.204, 19.038, 192.837, 87]
+    level:    [60, 62]
+  17596720:
+    template: Serket
+    at:       [-155.000, 19.000, 244.000, 28]
+    level:    [70, 70]
+  17596721:
+    template: Wraith
+    at:       [-145.818, 12.250, 226.362, 127]
+    level:    [60, 62]
+  17596722:
+    template: Magic_Jug
+    at:       [-171.000, 18.000, 186.000, 127]
+    level:    [63, 64]
+  17596723:
+    template: Magic_Jug
+    at:       [-106.000, 18.000, 189.000, 127]
+    level:    [62, 64]
+  17596724:
+    template: Magic_Jug
+    at:       [-109.000, 18.000, 253.000, 127]
+    level:    [62, 64]
+  17596725:
+    template: Magic_Jug
+    at:       [-174.000, 18.000, 251.000, 127]
+    level:    [62, 63]
+  17596726:
+    template: Hellmine
+    at:       [26.000, 6.000, 131.000, 78]
+    level:    [60, 62]
+  17596727:
+    template: Hellmine
+    at:       [52.000, 6.000, 132.000, 88]
+    level:    [60, 62]
+  17596728:
+    template: Mimic
+    at:       [1.000, 1.000, 1.000]
+    level:    [60, 60]
+  17596729:
+    template: Light_Elemental_SA
+    script:   Light_Elemental
+    at:       [257.299, -0.682, 20.000]
+    level:    [75, 75]
+  17596730:
+    template: Roly-Poly
+    at:       [-340.000, -0.500, 220.000, 107]
+    level:    [91, 93]
+  17596731:
+    template: Roly-Poly
+    at:       [-261.541, -0.500, 379.626, 137]
+    level:    [91, 93]
+  17596732:
+    template: Roly-Poly
+    at:       [-140.000, -0.500, 180.000, 61]
+    level:    [91, 93]
+  17596733:
+    template: Mephitas
+    at:       [-167.889, 18.750, 321.510, 238]
+    level:    [99, 99]
+  17596734:
+    template: Mephitas
+    at:       [-361.299, 18.500, 283.130, 19]
+    level:    [99, 99]
+  17596735:
+    template: Mephitas
+    at:       [-260.170, 18.869, 233.899, 197]
+    level:    [99, 99]
+
+slots:
+  - members:
+      17596597: {} # Tainted_Flesh
+      17596598: {} # Tainted_Flesh
+  - members:
+      17596605: {} # Over_Weapon
+      17596606: {} # Vault_Weapon
+  - members:
+      17596607: {} # Over_Weapon
+      17596608: {} # Vault_Weapon
+  - members:
+      17596624: {} # Fallen_Major
+      17596626: {} # Fallen_Mage

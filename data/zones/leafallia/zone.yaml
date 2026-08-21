@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+zonelines:
+
+  z7t0:
+    from:  [19.355, -5.000, -43.000]
+    to:    kamihr_drifts
+    at:    [-212.000, 41.000, -414.000]
+    scale: [1.000, 3.000]

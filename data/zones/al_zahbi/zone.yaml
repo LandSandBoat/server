@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, tractor, pet, auction_house, yell, los_player_block]
+music:
+  day:          178
+  night:        178
+  battle_solo:  178
+  battle_party: 178
+
+zonelines:
+
+  z1c0:
+    from:  [-120.190, -1.369, 67.981]
+    to:    wajaom_woodlands
+    at:    [610.542, -28.547, 356.247, 3.141593]
+    scale: [2.000, 15.000]
+
+  z1c2:
+    from:  [-68.008, -1.091, 120.009]
+    to:    bhaflau_thickets
+    at:    [432.986, -11.075, -40.041, 3.141593]
+    scale: [2.000, 11.000]
+
+  z1c4:
+    from:  [122.109, -5.160, 40.005]
+    to:    aht_urhgan_whitegate
+    at:    [-155.854, 0.225, -0.004]
+    scale: [1.000, 4.000]
+
+  zmrw:
+    from:  [40.000, -3.764, -74.000]
+    to:    al_zahbi
+    at:    [40.000, -1.500, -62.510, 4.712389]
+    scale: [1.000, 4.000]

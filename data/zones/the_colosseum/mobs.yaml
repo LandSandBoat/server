@@ -1,0 +1,842 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Pit_Monster:
+    id:      3145
+    species: unclassified
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 0
+      spawn:
+        type: [scripted]
+
+spawns:
+  17068033:
+    template: Pit_Monster
+  17068034:
+    template: Pit_Monster
+  17068035:
+    template: Pit_Monster
+  17068036:
+    template: Pit_Monster
+  17068037:
+    template: Pit_Monster
+  17068038:
+    template: Pit_Monster
+  17068039:
+    template: Pit_Monster
+  17068040:
+    template: Pit_Monster
+  17068041:
+    template: Pit_Monster
+  17068042:
+    template: Pit_Monster
+  17068043:
+    template: Pit_Monster
+  17068044:
+    template: Pit_Monster
+  17068045:
+    template: Pit_Monster
+  17068046:
+    template: Pit_Monster
+  17068047:
+    template: Pit_Monster
+  17068048:
+    template: Pit_Monster
+  17068049:
+    template: Pit_Monster
+  17068050:
+    template: Pit_Monster
+  17068051:
+    template: Pit_Monster
+  17068052:
+    template: Pit_Monster
+  17068053:
+    template: Pit_Monster
+  17068054:
+    template: Pit_Monster
+  17068055:
+    template: Pit_Monster
+  17068056:
+    template: Pit_Monster
+  17068057:
+    template: Pit_Monster
+    at:       [-568.718, 1.798, 41.135, 62]
+  17068058:
+    template: Pit_Monster
+  17068059:
+    template: Pit_Monster
+  17068060:
+    template: Pit_Monster
+  17068061:
+    template: Pit_Monster
+  17068062:
+    template: Pit_Monster
+  17068063:
+    template: Pit_Monster
+  17068064:
+    template: Pit_Monster
+  17068065:
+    template: Pit_Monster
+  17068066:
+    template: Pit_Monster
+  17068067:
+    template: Pit_Monster
+  17068068:
+    template: Pit_Monster
+  17068069:
+    template: Pit_Monster
+  17068070:
+    template: Pit_Monster
+  17068071:
+    template: Pit_Monster
+  17068072:
+    template: Pit_Monster
+  17068073:
+    template: Pit_Monster
+  17068074:
+    template: Pit_Monster
+  17068075:
+    template: Pit_Monster
+  17068076:
+    template: Pit_Monster
+  17068077:
+    template: Pit_Monster
+  17068078:
+    template: Pit_Monster
+  17068079:
+    template: Pit_Monster
+  17068080:
+    template: Pit_Monster
+  17068081:
+    template: Pit_Monster
+  17068082:
+    template: Pit_Monster
+  17068083:
+    template: Pit_Monster
+  17068084:
+    template: Pit_Monster
+  17068085:
+    template: Pit_Monster
+  17068086:
+    template: Pit_Monster
+  17068087:
+    template: Pit_Monster
+  17068088:
+    template: Pit_Monster
+  17068089:
+    template: Pit_Monster
+  17068090:
+    template: Pit_Monster
+  17068091:
+    template: Pit_Monster
+  17068092:
+    template: Pit_Monster
+  17068093:
+    template: Pit_Monster
+    at:       [-568.609, 1.713, 36.787, 191]
+  17068094:
+    template: Pit_Monster
+  17068095:
+    template: Pit_Monster
+  17068096:
+    template: Pit_Monster
+  17068097:
+    template: Pit_Monster
+  17068098:
+    template: Pit_Monster
+  17068099:
+    template: Pit_Monster
+  17068100:
+    template: Pit_Monster
+  17068101:
+    template: Pit_Monster
+  17068102:
+    template: Pit_Monster
+  17068103:
+    template: Pit_Monster
+  17068104:
+    template: Pit_Monster
+  17068105:
+    template: Pit_Monster
+  17068106:
+    template: Pit_Monster
+  17068107:
+    template: Pit_Monster
+  17068108:
+    template: Pit_Monster
+  17068109:
+    template: Pit_Monster
+  17068110:
+    template: Pit_Monster
+  17068111:
+    template: Pit_Monster
+  17068112:
+    template: Pit_Monster
+  17068113:
+    template: Pit_Monster
+  17068114:
+    template: Pit_Monster
+  17068115:
+    template: Pit_Monster
+  17068116:
+    template: Pit_Monster
+  17068117:
+    template: Pit_Monster
+  17068118:
+    template: Pit_Monster
+  17068119:
+    template: Pit_Monster
+  17068120:
+    template: Pit_Monster
+  17068121:
+    template: Pit_Monster
+  17068122:
+    template: Pit_Monster
+  17068123:
+    template: Pit_Monster
+  17068124:
+    template: Pit_Monster
+  17068125:
+    template: Pit_Monster
+  17068126:
+    template: Pit_Monster
+  17068127:
+    template: Pit_Monster
+  17068128:
+    template: Pit_Monster
+  17068129:
+    template: Pit_Monster
+  17068130:
+    template: Pit_Monster
+  17068131:
+    template: Pit_Monster
+  17068132:
+    template: Pit_Monster
+  17068133:
+    template: Pit_Monster
+  17068134:
+    template: Pit_Monster
+  17068135:
+    template: Pit_Monster
+  17068136:
+    template: Pit_Monster
+  17068137:
+    template: Pit_Monster
+  17068138:
+    template: Pit_Monster
+  17068139:
+    template: Pit_Monster
+  17068140:
+    template: Pit_Monster
+  17068141:
+    template: Pit_Monster
+  17068142:
+    template: Pit_Monster
+  17068143:
+    template: Pit_Monster
+  17068144:
+    template: Pit_Monster
+  17068145:
+    template: Pit_Monster
+  17068146:
+    template: Pit_Monster
+  17068147:
+    template: Pit_Monster
+  17068148:
+    template: Pit_Monster
+  17068149:
+    template: Pit_Monster
+  17068150:
+    template: Pit_Monster
+  17068151:
+    template: Pit_Monster
+  17068152:
+    template: Pit_Monster
+  17068153:
+    template: Pit_Monster
+  17068154:
+    template: Pit_Monster
+  17068155:
+    template: Pit_Monster
+  17068156:
+    template: Pit_Monster
+  17068157:
+    template: Pit_Monster
+  17068158:
+    template: Pit_Monster
+  17068159:
+    template: Pit_Monster
+  17068160:
+    template: Pit_Monster
+  17068161:
+    template: Pit_Monster
+  17068162:
+    template: Pit_Monster
+    at:       [-568.455, 1.500, -38.641, 123]
+  17068163:
+    template: Pit_Monster
+  17068164:
+    template: Pit_Monster
+  17068165:
+    template: Pit_Monster
+  17068166:
+    template: Pit_Monster
+  17068167:
+    template: Pit_Monster
+  17068168:
+    template: Pit_Monster
+  17068169:
+    template: Pit_Monster
+  17068170:
+    template: Pit_Monster
+  17068171:
+    template: Pit_Monster
+  17068172:
+    template: Pit_Monster
+  17068173:
+    template: Pit_Monster
+  17068174:
+    template: Pit_Monster
+  17068175:
+    template: Pit_Monster
+  17068176:
+    template: Pit_Monster
+  17068177:
+    template: Pit_Monster
+  17068178:
+    template: Pit_Monster
+  17068179:
+    template: Pit_Monster
+  17068180:
+    template: Pit_Monster
+  17068181:
+    template: Pit_Monster
+  17068182:
+    template: Pit_Monster
+  17068183:
+    template: Pit_Monster
+  17068184:
+    template: Pit_Monster
+  17068185:
+    template: Pit_Monster
+  17068186:
+    template: Pit_Monster
+  17068187:
+    template: Pit_Monster
+  17068188:
+    template: Pit_Monster
+  17068189:
+    template: Pit_Monster
+  17068190:
+    template: Pit_Monster
+  17068191:
+    template: Pit_Monster
+  17068192:
+    template: Pit_Monster
+  17068193:
+    template: Pit_Monster
+  17068194:
+    template: Pit_Monster
+  17068195:
+    template: Pit_Monster
+  17068196:
+    template: Pit_Monster
+  17068197:
+    template: Pit_Monster
+  17068198:
+    template: Pit_Monster
+  17068199:
+    template: Pit_Monster
+  17068200:
+    template: Pit_Monster
+  17068201:
+    template: Pit_Monster
+    at:       [-570.940, 1.500, -38.896, 251]
+  17068202:
+    template: Pit_Monster
+  17068203:
+    template: Pit_Monster
+  17068204:
+    template: Pit_Monster
+  17068205:
+    template: Pit_Monster
+  17068206:
+    template: Pit_Monster
+  17068207:
+    template: Pit_Monster
+  17068208:
+    template: Pit_Monster
+  17068209:
+    template: Pit_Monster
+  17068210:
+    template: Pit_Monster
+  17068211:
+    template: Pit_Monster
+  17068212:
+    template: Pit_Monster
+  17068213:
+    template: Pit_Monster
+  17068214:
+    template: Pit_Monster
+  17068215:
+    template: Pit_Monster
+  17068216:
+    template: Pit_Monster
+  17068217:
+    template: Pit_Monster
+  17068218:
+    template: Pit_Monster
+  17068219:
+    template: Pit_Monster
+  17068220:
+    template: Pit_Monster
+  17068221:
+    template: Pit_Monster
+  17068222:
+    template: Pit_Monster
+  17068223:
+    template: Pit_Monster
+  17068224:
+    template: Pit_Monster
+  17068225:
+    template: Pit_Monster
+  17068226:
+    template: Pit_Monster
+  17068227:
+    template: Pit_Monster
+  17068228:
+    template: Pit_Monster
+  17068229:
+    template: Pit_Monster
+  17068230:
+    template: Pit_Monster
+  17068231:
+    template: Pit_Monster
+  17068232:
+    template: Pit_Monster
+  17068233:
+    template: Pit_Monster
+  17068234:
+    template: Pit_Monster
+  17068235:
+    template: Pit_Monster
+  17068236:
+    template: Pit_Monster
+  17068237:
+    template: Pit_Monster
+  17068238:
+    template: Pit_Monster
+  17068239:
+    template: Pit_Monster
+  17068240:
+    template: Pit_Monster
+  17068241:
+    template: Pit_Monster
+  17068242:
+    template: Pit_Monster
+  17068243:
+    template: Pit_Monster
+  17068244:
+    template: Pit_Monster
+  17068245:
+    template: Pit_Monster
+  17068246:
+    template: Pit_Monster
+    at:       [-488.337, 1.930, 43.022, 65]
+  17068247:
+    template: Pit_Monster
+  17068248:
+    template: Pit_Monster
+  17068249:
+    template: Pit_Monster
+  17068250:
+    template: Pit_Monster
+  17068251:
+    template: Pit_Monster
+  17068252:
+    template: Pit_Monster
+  17068253:
+    template: Pit_Monster
+  17068254:
+    template: Pit_Monster
+  17068255:
+    template: Pit_Monster
+  17068256:
+    template: Pit_Monster
+  17068257:
+    template: Pit_Monster
+  17068258:
+    template: Pit_Monster
+  17068259:
+    template: Pit_Monster
+  17068260:
+    template: Pit_Monster
+  17068261:
+    template: Pit_Monster
+  17068262:
+    template: Pit_Monster
+  17068263:
+    template: Pit_Monster
+  17068264:
+    template: Pit_Monster
+  17068265:
+    template: Pit_Monster
+  17068266:
+    template: Pit_Monster
+  17068267:
+    template: Pit_Monster
+  17068268:
+    template: Pit_Monster
+  17068269:
+    template: Pit_Monster
+  17068270:
+    template: Pit_Monster
+  17068271:
+    template: Pit_Monster
+  17068272:
+    template: Pit_Monster
+  17068273:
+    template: Pit_Monster
+  17068274:
+    template: Pit_Monster
+  17068275:
+    template: Pit_Monster
+  17068276:
+    template: Pit_Monster
+  17068277:
+    template: Pit_Monster
+  17068278:
+    template: Pit_Monster
+  17068279:
+    template: Pit_Monster
+  17068280:
+    template: Pit_Monster
+  17068281:
+    template: Pit_Monster
+  17068282:
+    template: Pit_Monster
+  17068283:
+    template: Pit_Monster
+  17068284:
+    template: Pit_Monster
+  17068285:
+    template: Pit_Monster
+  17068286:
+    template: Pit_Monster
+  17068287:
+    template: Pit_Monster
+  17068288:
+    template: Pit_Monster
+  17068289:
+    template: Pit_Monster
+  17068290:
+    template: Pit_Monster
+  17068291:
+    template: Pit_Monster
+    at:       [-488.000, 2.000, 36.000, 192]
+  17068292:
+    template: Pit_Monster
+  17068293:
+    template: Pit_Monster
+  17068294:
+    template: Pit_Monster
+  17068295:
+    template: Pit_Monster
+  17068296:
+    template: Pit_Monster
+  17068297:
+    template: Pit_Monster
+  17068298:
+    template: Pit_Monster
+  17068299:
+    template: Pit_Monster
+  17068300:
+    template: Pit_Monster
+  17068301:
+    template: Pit_Monster
+  17068302:
+    template: Pit_Monster
+  17068303:
+    template: Pit_Monster
+  17068304:
+    template: Pit_Monster
+  17068305:
+    template: Pit_Monster
+  17068306:
+    template: Pit_Monster
+  17068307:
+    template: Pit_Monster
+  17068308:
+    template: Pit_Monster
+  17068309:
+    template: Pit_Monster
+  17068310:
+    template: Pit_Monster
+  17068311:
+    template: Pit_Monster
+  17068312:
+    template: Pit_Monster
+  17068313:
+    template: Pit_Monster
+  17068314:
+    template: Pit_Monster
+  17068315:
+    template: Pit_Monster
+  17068316:
+    template: Pit_Monster
+  17068317:
+    template: Pit_Monster
+  17068318:
+    template: Pit_Monster
+  17068319:
+    template: Pit_Monster
+  17068320:
+    template: Pit_Monster
+  17068321:
+    template: Pit_Monster
+  17068322:
+    template: Pit_Monster
+  17068323:
+    template: Pit_Monster
+  17068324:
+    template: Pit_Monster
+  17068325:
+    template: Pit_Monster
+  17068326:
+    template: Pit_Monster
+  17068327:
+    template: Pit_Monster
+  17068328:
+    template: Pit_Monster
+  17068329:
+    template: Pit_Monster
+  17068330:
+    template: Pit_Monster
+  17068331:
+    template: Pit_Monster
+  17068332:
+    template: Pit_Monster
+  17068333:
+    template: Pit_Monster
+  17068334:
+    template: Pit_Monster
+  17068335:
+    template: Pit_Monster
+  17068336:
+    template: Pit_Monster
+  17068337:
+    template: Pit_Monster
+  17068338:
+    template: Pit_Monster
+  17068339:
+    template: Pit_Monster
+  17068340:
+    template: Pit_Monster
+  17068341:
+    template: Pit_Monster
+  17068342:
+    template: Pit_Monster
+  17068343:
+    template: Pit_Monster
+  17068344:
+    template: Pit_Monster
+  17068345:
+    template: Pit_Monster
+    at:       [-488.466, 1.500, -37.861, 65]
+  17068346:
+    template: Pit_Monster
+  17068347:
+    template: Pit_Monster
+  17068348:
+    template: Pit_Monster
+  17068349:
+    template: Pit_Monster
+  17068350:
+    template: Pit_Monster
+  17068351:
+    template: Pit_Monster
+  17068352:
+    template: Pit_Monster
+  17068353:
+    template: Pit_Monster
+  17068354:
+    template: Pit_Monster
+  17068355:
+    template: Pit_Monster
+  17068356:
+    template: Pit_Monster
+  17068357:
+    template: Pit_Monster
+  17068358:
+    template: Pit_Monster
+  17068359:
+    template: Pit_Monster
+  17068360:
+    template: Pit_Monster
+  17068361:
+    template: Pit_Monster
+  17068362:
+    template: Pit_Monster
+  17068363:
+    template: Pit_Monster
+  17068364:
+    template: Pit_Monster
+  17068365:
+    template: Pit_Monster
+  17068366:
+    template: Pit_Monster
+  17068367:
+    template: Pit_Monster
+  17068368:
+    template: Pit_Monster
+  17068369:
+    template: Pit_Monster
+  17068370:
+    template: Pit_Monster
+  17068371:
+    template: Pit_Monster
+  17068372:
+    template: Pit_Monster
+  17068373:
+    template: Pit_Monster
+  17068374:
+    template: Pit_Monster
+  17068375:
+    template: Pit_Monster
+  17068376:
+    template: Pit_Monster
+  17068377:
+    template: Pit_Monster
+  17068378:
+    template: Pit_Monster
+  17068379:
+    template: Pit_Monster
+  17068380:
+    template: Pit_Monster
+  17068381:
+    template: Pit_Monster
+  17068382:
+    template: Pit_Monster
+  17068383:
+    template: Pit_Monster
+  17068384:
+    template: Pit_Monster
+  17068385:
+    template: Pit_Monster
+  17068386:
+    template: Pit_Monster
+  17068387:
+    template: Pit_Monster
+  17068388:
+    template: Pit_Monster
+  17068389:
+    template: Pit_Monster
+  17068390:
+    template: Pit_Monster
+  17068391:
+    template: Pit_Monster
+  17068392:
+    template: Pit_Monster
+  17068393:
+    template: Pit_Monster
+  17068394:
+    template: Pit_Monster
+  17068395:
+    template: Pit_Monster
+  17068396:
+    template: Pit_Monster
+  17068397:
+    template: Pit_Monster
+  17068398:
+    template: Pit_Monster
+  17068399:
+    template: Pit_Monster
+  17068400:
+    template: Pit_Monster
+  17068401:
+    template: Pit_Monster
+  17068402:
+    template: Pit_Monster
+  17068403:
+    template: Pit_Monster
+  17068404:
+    template: Pit_Monster
+  17068405:
+    template: Pit_Monster
+  17068406:
+    template: Pit_Monster
+  17068407:
+    template: Pit_Monster
+  17068408:
+    template: Pit_Monster
+  17068409:
+    template: Pit_Monster
+  17068410:
+    template: Pit_Monster
+  17068411:
+    template: Pit_Monster
+  17068412:
+    template: Pit_Monster
+  17068413:
+    template: Pit_Monster
+  17068414:
+    template: Pit_Monster
+  17068415:
+    template: Pit_Monster
+  17068416:
+    template: Pit_Monster
+  17068417:
+    template: Pit_Monster
+  17068418:
+    template: Pit_Monster
+  17068419:
+    template: Pit_Monster
+  17068420:
+    template: Pit_Monster
+  17068421:
+    template: Pit_Monster
+  17068422:
+    template: Pit_Monster
+  17068423:
+    template: Pit_Monster
+  17068424:
+    template: Pit_Monster
+  17068425:
+    template: Pit_Monster
+  17068426:
+    template: Pit_Monster
+    at:       [-488.641, 1.500, -43.197, 193]
+  17068427:
+    template: Pit_Monster
+  17068428:
+    template: Pit_Monster
+  17068429:
+    template: Pit_Monster
+  17068430:
+    template: Pit_Monster
+  17068431:
+    template: Pit_Monster
+  17068432:
+    template: Pit_Monster
+  17068433:
+    template: Pit_Monster
+  17068434:
+    template: Pit_Monster
+  17068435:
+    template: Pit_Monster
+  17068436:
+    template: Pit_Monster
+  17068437:
+    template: Pit_Monster
+  17068438:
+    template: Pit_Monster
+  17068439:
+    template: Pit_Monster
+  17068440:
+    template: Pit_Monster

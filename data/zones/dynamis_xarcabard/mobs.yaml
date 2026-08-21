@@ -1,0 +1,7050 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Adamantking_Effigy:
+    id:            43
+    species:       quadav_statue
+    skill_list_id: 94
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1058
+        entity_flags: 1665
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: uncommon
+          item:   infinity_core
+        - chance: rare
+          item:   mythril_beastcoin
+        - chance: rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   one_byne_bill
+
+  Andrass_Vouivre:
+    id:            134
+    species:       wyvern
+    type:          [called]
+    skill_list_id: 267
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 643
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+
+  Animated_Claymore:
+    id:            143
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 91
+    skill_list_id: 14
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 459
+        entity_flags:  5763
+        animation_sub:   23
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   intricate_fragment
+
+  Animated_Dagger:
+    id:            144
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 94
+    skill_list_id: 11
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 453
+        entity_flags:  5763
+        animation_sub:    7
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   ornate_fragment
+
+  Animated_Great_Axe:
+    id:            145
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 12
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 458
+        entity_flags:  5763
+        animation_sub:   15
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   seraphic_fragment
+
+  Animated_Gun:
+    id:            146
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 18
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 466
+        entity_flags:  5251
+        animation_sub:   15
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   ethereal_fragment
+
+  Animated_Hammer:
+    id:            147
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 9
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 457
+        entity_flags:  5251
+        animation_sub:    7
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   heavenly_fragment
+
+  Animated_Horn:
+    id:            148
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 16
+    attributes:
+      combat:
+        skill: staff
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 470
+        entity_flags:  1667
+        animation_sub:    1
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   mysterial_fragment
+
+  Animated_Knuckles:
+    id:            149
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 95
+    skill_list_id: 15
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 452
+        entity_flags:  5251
+        animation_sub:    7
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   mystic_fragment
+
+  Animated_Kunai:
+    id:            150
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 17
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 463
+        entity_flags:  5251
+        animation_sub:   23
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   demoniac_fragment
+
+  Animated_Longbow:
+    id:            151
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 7
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 465
+        entity_flags:  5251
+        animation_sub:    7
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   snarled_fragment
+
+  Animated_Longsword:
+    id:            152
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 87
+    skill_list_id: 24
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 450
+        entity_flags:  5763
+        animation_sub:   23
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   holy_fragment
+
+  Animated_Scythe:
+    id:            153
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 92
+    skill_list_id: 20
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 456
+        entity_flags:  5763
+        animation_sub:   15
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   tenebrous_fragment
+
+  Animated_Shield:
+    id:            154
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 96
+    skill_list_id: 21
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 469
+        entity_flags:  5251
+        animation_sub:    7
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      mods:
+        dmgmagic: -1250
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   supernal_fragment
+
+  Animated_Spear:
+    id:            155
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 19
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 460
+        entity_flags:  5251
+        animation_sub:    7
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   stellar_fragment
+
+  Animated_Staff:
+    id:            156
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 89
+    skill_list_id: 23
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 462
+        entity_flags:  5763
+        animation_sub:    7
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   celestial_fragment
+
+  Animated_Tabar:
+    id:            157
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 90
+    skill_list_id: 8
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 454
+        entity_flags:  5251
+        animation_sub:    7
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   runaeic_fragment
+
+  Animated_Tachi:
+    id:            158
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 93
+    skill_list_id: 13
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 464
+        entity_flags:  5251
+        animation_sub:   23
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20500
+    loot:
+      drops:
+        - chance: always
+          item:   divine_fragment
+
+  Arch_Dynamis_Lord:
+    id:            6059
+    species:       shadow_lord
+    type:          [notorious]
+    spell_list_id: 86
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  automaton
+          model: 760
+        entity_flags: 135
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 90000
+        mp:  9999
+    loot:
+      drops:
+        - chance: always
+          item:   vial_of_umbral_marrow
+        - chance: rare
+          item:   vial_of_umbral_marrow
+        - chance: common
+          item:   archon_cape
+        - chance: common
+          item:   archon_ring
+        - chance: common
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: uncommon
+          one_of:
+            talekeeper: 95
+            sagasinger:  5
+
+  Avatar_Icon:
+    id:            294
+    species:       yagudo_statue
+    spell_list_id: 21
+    skill_list_id: 95
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1060
+        entity_flags: 1153
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: uncommon
+          item:   infinity_core
+        - chance: rare
+          item:   mythril_beastcoin
+        - chance: rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   tukuku_whiteshell
+
+  Baron_Avnas:
+    id:            6056
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 5
+    attributes:
+      combat:
+        skill: katana
+      jobs: [thf, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_29
+        - chance: common
+          item:   demonry_ring
+        - chance: common
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+
+  Caims_Vouivre:
+    id:      6055
+    species: wyvern
+    type:    [called]
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 667
+        name_prefix:   32
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Count_Haagenti:
+    id:            6057
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 30
+    attributes:
+      combat:
+        skill: axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9000
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_30
+        - chance: common
+          item:   demonry_stone
+        - chance: common
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+
+  Count_Raum:
+    id:            817
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: katana
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   assassins_armlets
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Count_Vine:
+    id:            818
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   saotome_kabuto
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Count_Zaebos:
+    id:            819
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   warriors_lorica
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Duke_Berith:
+    id:            1131
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: katana
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        19
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   duelists_chapeau
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, one_hundred_byne_bill, montiont_silverpiece]
+
+  Duke_Gomory:
+    id:            1133
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   melee_crown
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, one_hundred_byne_bill, montiont_silverpiece]
+
+  Duke_Haures:
+    id:            6053
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 3
+    attributes:
+      combat:
+        skill: katana
+      jobs: [rdm, brd]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        19
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_27
+        - chance: common
+          item:   demonry_sash
+        - chance: common
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+
+  Duke_Scox:
+    id:            1135
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: common
+          item:   abyss_burgeonet
+        - chance: rare
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, one_hundred_byne_bill, montiont_silverpiece]
+
+  Dynamis_Lord:
+    id:            1154
+    species:       shadow_lord
+    type:          [notorious]
+    spell_list_id: 86
+    skill_list_id: 361
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  automaton
+          model: 760
+        entity_flags: 135
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 78000
+        mp: 78000
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_26
+        - chance: common
+          item:   shadow_mantle
+        - chance: uncommon
+          item:   shadow_ring
+        - chance: rare
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Effigy_Prototype:
+    id:            1178
+    species:       quadav_statue
+    type:          [notorious]
+    skill_list_id: 94
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1058
+        entity_flags:  1665
+        animation_sub:   20
+        hitbox:          15
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        dmgmagic: -1000
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Goblin_Replica:
+    id:            1707
+    species:       goblin_statue
+    spell_list_id: 20
+    skill_list_id: 92
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1062
+        entity_flags: 135
+        model_size:     3
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: uncommon
+          item:   infinity_core
+        - chance: rare
+          item:   mythril_beastcoin
+        - chance: rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          one_of: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Haagentis_Avatar:
+    id:      6058
+    species: shiva
+    type:    [called]
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags: 27
+        name_prefix:  32
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Icon_Prototype:
+    id:            2047
+    species:       yagudo_statue
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 95
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1060
+        entity_flags:  1665
+        animation_sub:   20
+        hitbox:          15
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        dmgmagic: -1000
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Kindred_Bard:
+    id:            2232
+    species:       kindred
+    spell_list_id: 6
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Bard_HI:
+    id:            6615
+    species:       kindred
+    spell_list_id: 6
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_horn
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Beastmaster:
+    id:            2233
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Beastmaster_HI:
+    id:            6616
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_pen
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Black_Mage:
+    id:            2234
+    species:       kindred
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: staff
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Black_Mage_HI:
+    id:            6618
+    species:       kindred
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: staff
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_pen
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Dark_Knight:
+    id:            2235
+    species:       kindred
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Dark_Knight_HI:
+    id:            6620
+    species:       kindred
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_skull
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Dragoon:
+    id:            2236
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Dragoon_HI:
+    id:            6621
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   vial_of_odious_blood
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Monk:
+    id:            2237
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Monk_HI:
+    id:            6622
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   vial_of_odious_blood
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Ninja:
+    id:            2238
+    species:       kindred
+    spell_list_id: 7
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Ninja_HI:
+    id:            6623
+    species:       kindred
+    spell_list_id: 7
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_horn
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Paladin:
+    id:            2239
+    species:       kindred
+    spell_list_id: 4
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Paladin_HI:
+    id:            6624
+    species:       kindred
+    spell_list_id: 4
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_pen
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Ranger:
+    id:            2240
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Ranger_HI:
+    id:            6625
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_pen
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Red_Mage:
+    id:            2241
+    species:       kindred
+    spell_list_id: 3
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Red_Mage_HI:
+    id:            6626
+    species:       kindred
+    spell_list_id: 3
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_skull
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Samurai:
+    id:            2242
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Samurai_HI:
+    id:            6627
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_skull
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Summoner:
+    id:            2243
+    species:       kindred
+    spell_list_id: 31
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Summoner_HI:
+    id:            6629
+    species:       kindred
+    spell_list_id: 31
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_horn
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Thief:
+    id:            2248
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Thief_HI:
+    id:            6630
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   vial_of_odious_blood
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Warrior:
+    id:            2249
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_Warrior_HI:
+    id:            6632
+    species:       kindred
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_horn
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_White_Mage:
+    id:            2250
+    species:       kindred
+    spell_list_id: 20
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindred_White_Mage_HI:
+    id:            6633
+    species:       kindred
+    spell_list_id: 20
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: rare
+          item:   vial_of_odious_blood
+        - chance: uncommon
+          item:   forgotten_hope
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kindreds_Avatar:
+    id:            2244
+    species:       carbuncle
+    type:          [called, battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+        mp: 1000
+
+  Kindreds_Vouivre:
+    id:            2246
+    species:       wyvern
+    type:          [called]
+    skill_list_id: 267
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 643
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+
+  Kindreds_Wyvern:
+    id:            2247
+    species:       shadow_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+        mp: 1000
+
+  King_Zagan:
+    id:            2263
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: common
+          item:   wyrm_armet
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Marquis_Andras:
+    id:            2570
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   monster_gloves
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Marquis_Caim:
+    id:            6054
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 7
+    attributes:
+      combat:
+        skill: sword
+      jobs: [bst, nin]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_28
+        - chance: common
+          item:   demonry_core
+        - chance: common
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [melee_crown, sorcerers_petasos, duelists_chapeau, abyss_burgeonet, saotome_kabuto, wyrm_armet, summoners_horn, warriors_lorica, valor_surcoat, scouts_jerkin, clerics_mitts, assassins_armlets, monster_gloves, koga_tekko, bards_cannions]
+        - chance: very_rare
+          one_of: [etoile_casaque, mirage_keffiyeh, commodore_tricorne, pantin_taj, argute_mortarboard]
+
+  Marquis_Cimeries:
+    id:            2572
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   scouts_jerkin
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Marquis_Decarabia:
+    id:            2573
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: katana
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        19
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   bards_cannions
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Marquis_Gamygyn:
+    id:            2575
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 698
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   koga_tekko
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Marquis_Nebiros:
+    id:            2576
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 141
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   summoners_horn
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Marquis_Orias:
+    id:            2577
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 755
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: rare
+          item:   forgotten_hope
+        - chance: common
+          item:   sorcerers_petasos
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Marquis_Sabnak:
+    id:            2578
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: common
+          item:   valor_surcoat
+        - chance: rare
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Nebiross_Avatar:
+    id:            2816
+    species:       carbuncle
+    type:          [called]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+
+  Prince_Seere:
+    id:            3198
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 756
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        19
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: very_common
+          item:   shrouded_bijou
+        - chance: common
+          item:   clerics_mitts
+        - chance: rare
+          item:   forgotten_hope
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, one_hundred_byne_bill, montiont_silverpiece]
+
+  Prototype_Eye:
+    id:            5121
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [elegy, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 265
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  Satellite_Claymores:
+    id:            3467
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 14
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 459
+        entity_flags:  5763
+        animation_sub:   21
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   intricate_goad
+
+  Satellite_Daggers:
+    id:            3468
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 11
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 453
+        entity_flags:  5763
+        animation_sub:    5
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   ornate_goad
+
+  Satellite_Great_Axes:
+    id:            3469
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 12
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 458
+        entity_flags:  5763
+        animation_sub:   13
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seraphic_goad
+
+  Satellite_Guns:
+    id:            3470
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 18
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 466
+        entity_flags:  5251
+        animation_sub:   13
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   ethereal_goad
+
+  Satellite_Hammers:
+    id:            3471
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 9
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 457
+        entity_flags:  5251
+        animation_sub:    5
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   heavenly_goad
+
+  Satellite_Horns:
+    id:            3472
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 16
+    attributes:
+      combat:
+        skill: staff
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 470
+        entity_flags:  5763
+        animation_sub:   21
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mysterial_goad
+
+  Satellite_Knuckles:
+    id:            3473
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 15
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 452
+        entity_flags:  5251
+        animation_sub:    5
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mystic_goad
+
+  Satellite_Kunai:
+    id:            3474
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 17
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 463
+        entity_flags:  5251
+        animation_sub:   21
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   demoniac_goad
+
+  Satellite_Longbows:
+    id:            3475
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 7
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 465
+        entity_flags:  5251
+        animation_sub:    5
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   snarled_goad
+
+  Satellite_Longswords:
+    id:            3476
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 24
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 450
+        entity_flags:  5763
+        animation_sub:   21
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   holy_goad
+
+  Satellite_Scythes:
+    id:            3477
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 20
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 456
+        entity_flags:  5763
+        animation_sub:   13
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   tenebrous_goad
+
+  Satellite_Shield:
+    id:            3478
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 21
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 469
+        entity_flags:  5251
+        animation_sub:    5
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   supernal_goad
+
+  Satellite_Spears:
+    id:            3479
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 19
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 460
+        entity_flags:  5251
+        animation_sub:    5
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   stellar_goad
+
+  Satellite_Staves:
+    id:            3480
+    species:       animated_weapons
+    type:          [notorious]
+    spell_list_id: 88
+    skill_list_id: 23
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 462
+        entity_flags:  5763
+        animation_sub:    5
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   celestial_goad
+
+  Satellite_Tabars:
+    id:            3481
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 8
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 454
+        entity_flags:  5251
+        animation_sub:    5
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   runaeic_goad
+
+  Satellite_Tachi:
+    id:            3482
+    species:       animated_weapons
+    type:          [notorious]
+    skill_list_id: 13
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    2
+          earth: -1
+          water: -1
+          light: -2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 464
+        entity_flags:  5251
+        animation_sub:   21
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   divine_goad
+
+  Serjeant_Tombstone:
+    id:            3548
+    species:       orc_statue
+    spell_list_id: 21
+    skill_list_id: 93
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1056
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: rare
+          item:   copy_of_ginuvas_battle_theory
+        - chance: uncommon
+          item:   infinity_core
+        - chance: rare
+          item:   mythril_beastcoin
+        - chance: rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   ordelle_bronzepiece
+
+  Statue_Prototype:
+    id:            3759
+    species:       goblin_statue
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 92
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1062
+        entity_flags:  647
+        animation_sub:  12
+        model_size:      3
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        dmgmagic: -1000
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Tombstone_Prototype:
+    id:            3941
+    species:       orc_statue
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 93
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1056
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        dmgmagic: -1000
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Vanguard_Dragon:
+    id:            4145
+    species:       dragon
+    skill_list_id: 2078
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 131
+        model_size:     1
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 30000
+    loot:
+      drops:
+        - chance: always
+          item:   copy_of_schultz_stratagems
+        - chance: common
+          item:   shard_of_necropsyche
+
+  Vanguard_Eye:
+    id:            4149
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [elegy, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 265
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1500
+        mp: 1500
+    loot:
+      drops:
+        - chance: uncommon
+          item:   copy_of_ginuvas_battle_theory
+        - chance: very_rare
+          one_of: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Yang:
+    id:            4464
+    species:       dragon
+    type:          [notorious]
+    skill_list_id: 2079
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags:  159
+        animation_sub:  16
+        name_prefix:    32
+        model_size:      3
+        hitbox:         47
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17000
+
+  Ying:
+    id:            4473
+    species:       dragon
+    type:          [notorious]
+    skill_list_id: 2080
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags:  159
+        animation_sub:  16
+        name_prefix:    32
+        model_size:      3
+        hitbox:         47
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17000
+
+  Zagans_Wyvern:
+    id:            4487
+    species:       shadow_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+        mp: 2000
+
+spawns:
+  17330177:
+    template: Dynamis_Lord
+    at:       [-406.273, -43.693, 20.465, 93]
+    level:    [90, 90]
+  17330178:
+    template: Dynamis_Lord
+    at:       [-417.400, -44.500, 19.332, 222]
+    level:    [90, 90]
+  17330179:
+    template: Dynamis_Lord
+    at:       [-415.900, -44.390, 20.838, 91]
+    level:    [90, 90]
+  17330180:
+    template: Dynamis_Lord
+    at:       [-416.700, -44.490, 17.291, 91]
+    level:    [90, 90]
+  17330181:
+    template: Dynamis_Lord
+    at:       [-416.000, -44.490, 17.291, 91]
+    level:    [90, 90]
+  17330182:
+    template: Dynamis_Lord
+    at:       [-416.300, -44.490, 17.291, 91]
+    level:    [90, 90]
+  17330183:
+    template: Ying
+    at:       [-404.719, -44.404, 34.084, 54]
+    level:    [85, 85]
+  17330184:
+    template: Yang
+    at:       [-407.332, -43.773, 19.063, 215]
+    level:    [85, 85]
+  17330185:
+    template: Duke_Haures
+    at:       [575.395, -1.988, 18.722, 104]
+    level:    [95, 95]
+  17330186:
+    template: Marquis_Caim
+    at:       [579.552, -10.000, 224.746, 183]
+    level:    [95, 95]
+  17330187:
+    template: Caims_Vouivre
+    at:       [578.174, -10.065, 225.287, 223]
+    level:    [92, 92]
+  17330188:
+    template: Baron_Avnas
+    at:       [342.843, -28.677, 336.044, 42]
+    level:    [95, 95]
+  17330189:
+    template: Count_Haagenti
+    at:       [-107.596, -40.309, 35.880, 189]
+    level:    [95, 95]
+  17330190:
+    template: Haagentis_Avatar
+    at:       [-108.756, -40.244, 36.453, 216]
+    level:    [95, 95]
+  17330191:
+    template: Arch_Dynamis_Lord
+    at:       [-415.000, -44.499, 20.000, 196]
+    level:    [99, 99]
+  17330192:
+    template: Arch_Dynamis_Lord
+    at:       [-406.000, -43.478, 26.000]
+    level:    [99, 99]
+  17330193:
+    template: Arch_Dynamis_Lord
+    at:       [-406.000, -43.404, 14.000]
+    level:    [99, 99]
+  17330194:
+    template: Arch_Dynamis_Lord
+    at:       [-406.000, -43.152, 20.000]
+    level:    [99, 99]
+  17330195:
+    template: Arch_Dynamis_Lord
+    at:       [-415.989, -44.499, 20.524, 48]
+    level:    [99, 99]
+  17330196:
+    template: Arch_Dynamis_Lord
+    at:       [-413.792, -44.499, 23.551, 75]
+    level:    [99, 99]
+  17330197:
+    template: Arch_Dynamis_Lord
+    at:       [-416.746, -44.499, 19.278, 15]
+    level:    [99, 99]
+  17330198:
+    template: Arch_Dynamis_Lord
+    at:       [-405.620, -43.743, 22.602, 25]
+    level:    [99, 99]
+  17330199:
+    template: Animated_Knuckles
+    at:       [238.000, -21.238, -160.000, 254]
+    level:    [82, 82]
+  17330200:
+    template: Animated_Dagger
+    at:       [232.000, -21.238, -170.000, 81]
+    level:    [82, 82]
+  17330201:
+    template: Animated_Longsword
+    at:       [119.500, -29.269, -112.500, 23]
+    level:    [82, 82]
+  17330202:
+    template: Animated_Claymore
+    at:       [119.000, -29.269, -124.000, 206]
+    level:    [82, 82]
+  17330203:
+    template: Animated_Tabar
+    at:       [57.000, -29.011, -192.500, 57]
+    level:    [82, 82]
+  17330204:
+    template: Animated_Great_Axe
+    at:       [65.000, -29.011, -201.000, 50]
+    level:    [82, 82]
+  17330205:
+    template: Animated_Spear
+    at:       [39.500, -29.214, -140.000, 111]
+    level:    [82, 82]
+  17330206:
+    template: Animated_Scythe
+    at:       [39.000, -29.214, -128.500, 59]
+    level:    [82, 82]
+  17330207:
+    template: Animated_Kunai
+    at:       [-3.000, -29.054, -96.000, 63]
+    level:    [82, 82]
+  17330208:
+    template: Animated_Tachi
+    at:       [-7.500, -29.054, -106.500, 218]
+    level:    [82, 82]
+  17330209:
+    template: Animated_Hammer
+    at:       [340.345, 0.272, -334.634, 185]
+    level:    [82, 82]
+  17330210:
+    template: Animated_Staff
+    at:       [43.634, -36.077, 71.441, 190]
+    level:    [82, 82]
+  17330211:
+    template: Animated_Longbow
+    at:       [-294.000, -23.283, 145.500, 93]
+    level:    [82, 82]
+  17330212:
+    template: Animated_Gun
+    at:       [-254.500, -15.299, -147.500, 212]
+    level:    [82, 82]
+  17330213:
+    template: Animated_Horn
+    at:       [229.780, -8.500, -71.660, 145]
+    level:    [82, 82]
+  17330214:
+    template: Animated_Shield
+    at:       [157.201, -24.737, -247.339, 13]
+    level:    [82, 82]
+  17330215:
+    template: Kindred_Paladin
+    at:       [436.306, -0.417, -197.372, 1]
+    level:    [77, 80]
+  17330216:
+    template: Kindred_Paladin
+    at:       [438.683, -0.448, -163.622, 215]
+    level:    [77, 80]
+  17330217:
+    template: Kindred_Dark_Knight
+    at:       [430.289, -0.233, -197.793, 114]
+    level:    [77, 80]
+  17330218:
+    template: Kindred_Dark_Knight
+    at:       [437.479, -0.456, -163.489, 225]
+    level:    [77, 80]
+  17330219:
+    template: Kindred_Beastmaster
+    at:       [433.958, 0.229, -177.317, 100]
+    level:    [77, 80]
+  17330220:
+    template: Kindreds_Vouivre
+    at:       [434.135, -0.004, -173.730, 82]
+    level:    [77, 80]
+  17330221:
+    template: Kindred_Ranger
+    at:       [429.745, -0.270, -170.557, 253]
+    level:    [77, 80]
+  17330222:
+    template: Kindred_Bard
+    at:       [411.378, -0.788, -211.129, 249]
+    level:    [77, 80]
+  17330223:
+    template: Marquis_Decarabia
+    at:       [392.770, -0.649, -215.006, 224]
+    level:    [85, 85]
+  17330224:
+    template: Kindred_Samurai
+    at:       [366.807, 0.244, -228.449, 124]
+    level:    [77, 80]
+  17330225:
+    template: Kindred_Samurai
+    at:       [375.278, 3.395, -212.931, 128]
+    level:    [77, 80]
+  17330226:
+    template: Kindred_Ninja
+    at:       [397.693, -0.142, -214.329, 88]
+    level:    [77, 80]
+  17330227:
+    template: Kindred_Ninja
+    at:       [380.648, 2.488, -201.641, 251]
+    level:    [77, 80]
+  17330228:
+    template: Kindred_Summoner
+    at:       [404.889, -0.550, -207.249, 145]
+    level:    [77, 80]
+  17330229:
+    template: Kindreds_Avatar
+    at:       [407.245, -0.510, -209.106, 137]
+    level:    [77, 80]
+  17330230:
+    template: Adamantking_Effigy
+    at:       [396.179, -0.587, -215.179, 122]
+    level:    [65, 65]
+  17330231:
+    template: Adamantking_Effigy
+    at:       [399.045, -0.179, -206.479, 255]
+    level:    [65, 65]
+  17330232:
+    template: Kindred_Dragoon
+    at:       [388.484, -0.112, -184.098, 60]
+    level:    [77, 80]
+  17330233:
+    template: Kindreds_Wyvern
+    at:       [396.456, -0.589, -182.035, 193]
+    level:    [77, 80]
+  17330234:
+    template: Kindred_Dragoon
+    at:       [398.667, -0.198, -187.389, 11]
+    level:    [77, 80]
+  17330235:
+    template: Kindreds_Wyvern
+    at:       [381.819, 2.331, -161.711, 148]
+    level:    [77, 80]
+  17330236:
+    template: Kindred_White_Mage
+    at:       [385.293, 2.128, -157.941, 129]
+    level:    [77, 80]
+  17330237:
+    template: Kindred_Black_Mage
+    at:       [382.429, 2.985, -159.956, 214]
+    level:    [77, 80]
+  17330238:
+    template: Kindred_Red_Mage
+    at:       [375.389, 4.650, -180.136, 65]
+    level:    [77, 80]
+  17330239:
+    template: Kindred_Bard
+    at:       [377.545, 5.189, -166.628, 126]
+    level:    [77, 80]
+  17330240:
+    template: Adamantking_Effigy
+    at:       [399.693, 0.277, -175.391, 8]
+    level:    [65, 65]
+  17330241:
+    template: Adamantking_Effigy
+    at:       [380.593, 3.888, -190.719, 127]
+    level:    [65, 65]
+  17330242:
+    template: Kindred_Warrior
+    at:       [343.133, 6.994, -185.406, 86]
+    level:    [77, 80]
+  17330243:
+    template: Kindred_Warrior
+    at:       [314.230, 0.809, -170.515, 201]
+    level:    [77, 80]
+  17330244:
+    template: Kindred_Monk
+    at:       [328.224, 1.393, -164.474, 28]
+    level:    [77, 80]
+  17330245:
+    template: Kindred_Thief
+    at:       [330.985, 0.858, -155.005, 208]
+    level:    [77, 80]
+  17330246:
+    template: Kindred_Beastmaster
+    at:       [335.608, 1.836, -153.175, 147]
+    level:    [77, 80]
+  17330247:
+    template: Kindreds_Vouivre
+    at:       [337.392, 2.463, -153.519, 143]
+    level:    [77, 80]
+  17330248:
+    template: Serjeant_Tombstone
+    at:       [325.509, 3.593, -181.153, 54]
+    level:    [65, 65]
+  17330249:
+    template: Serjeant_Tombstone
+    at:       [316.963, 3.077, -178.096, 23]
+    level:    [65, 65]
+  17330250:
+    template: Kindred_Paladin
+    at:       [343.317, 3.147, -226.042, 246]
+    level:    [77, 80]
+  17330251:
+    template: Kindred_Paladin
+    at:       [330.461, 4.973, -233.945, 43]
+    level:    [77, 80]
+  17330252:
+    template: Kindred_Samurai
+    at:       [332.439, 7.186, -203.966, 151]
+    level:    [77, 80]
+  17330253:
+    template: Kindred_Ninja
+    at:       [313.085, 5.917, -222.933, 239]
+    level:    [77, 80]
+  17330254:
+    template: Kindred_Summoner
+    at:       [307.018, 6.664, -211.416, 227]
+    level:    [77, 80]
+  17330255:
+    template: Kindreds_Avatar
+    at:       [306.005, 6.439, -214.339, 217]
+    level:    [77, 80]
+  17330256:
+    template: Serjeant_Tombstone
+    at:       [317.943, 7.801, -229.961, 156]
+    level:    [65, 65]
+  17330257:
+    template: Serjeant_Tombstone
+    at:       [330.593, 6.884, -208.676, 171]
+    level:    [65, 65]
+  17330258:
+    template: Kindred_Dark_Knight
+    at:       [300.376, 0.486, -272.668, 70]
+    level:    [77, 80]
+  17330259:
+    template: Kindred_Dark_Knight
+    at:       [293.369, -0.784, -266.965, 131]
+    level:    [77, 80]
+  17330260:
+    template: Kindred_Red_Mage
+    at:       [317.314, 5.523, -255.659, 152]
+    level:    [77, 80]
+  17330261:
+    template: Kindred_Black_Mage
+    at:       [343.784, 1.586, -263.988, 17]
+    level:    [77, 80]
+  17330262:
+    template: Kindred_Bard
+    at:       [303.687, 0.304, -274.989, 90]
+    level:    [77, 80]
+  17330263:
+    template: Kindred_Dragoon
+    at:       [304.160, 4.208, -257.780, 161]
+    level:    [77, 80]
+  17330264:
+    template: Kindreds_Wyvern
+    at:       [323.692, -0.030, -272.243, 8]
+    level:    [77, 80]
+  17330265:
+    template: Kindred_Ranger
+    at:       [266.853, -11.867, -155.652, 161]
+    level:    [77, 80]
+  17330266:
+    template: Kindred_Ranger
+    at:       [268.107, -11.716, -150.697, 7]
+    level:    [77, 80]
+  17330267:
+    template: Kindred_Samurai
+    at:       [258.274, -14.563, -169.682, 59]
+    level:    [77, 80]
+  17330268:
+    template: Kindred_Samurai
+    at:       [273.794, -9.214, -170.779, 157]
+    level:    [77, 80]
+  17330269:
+    template: Kindred_Ninja
+    at:       [285.224, -5.375, -180.626, 115]
+    level:    [77, 80]
+  17330270:
+    template: Kindred_Ninja
+    at:       [297.133, -6.046, -169.141, 135]
+    level:    [77, 80]
+  17330271:
+    template: Kindred_Thief
+    at:       [275.477, -9.660, -166.587, 123]
+    level:    [77, 80]
+  17330272:
+    template: Kindred_Thief
+    at:       [262.551, -10.458, -180.958]
+    level:    [77, 80]
+  17330273:
+    template: Avatar_Icon
+    at:       [297.989, -5.885, -167.718, 211]
+    level:    [65, 65]
+  17330274:
+    template: Avatar_Icon
+    at:       [285.606, -8.256, -158.061, 104]
+    level:    [65, 65]
+  17330275:
+    template: Kindred_White_Mage
+    at:       [281.767, -0.862, -192.927, 254]
+    level:    [77, 80]
+  17330276:
+    template: Kindred_White_Mage
+    at:       [259.868, -8.980, -217.772, 87]
+    level:    [77, 80]
+  17330277:
+    template: Kindred_Black_Mage
+    at:       [289.299, 0.230, -230.979, 49]
+    level:    [77, 80]
+  17330278:
+    template: Kindred_Black_Mage
+    at:       [260.005, -8.271, -222.241, 152]
+    level:    [77, 80]
+  17330279:
+    template: Kindred_Red_Mage
+    at:       [274.140, -1.603, -224.619, 180]
+    level:    [77, 80]
+  17330280:
+    template: Kindred_Red_Mage
+    at:       [291.126, -0.148, -191.419, 247]
+    level:    [77, 80]
+  17330281:
+    template: Kindred_Summoner
+    at:       [258.269, -8.086, -221.712, 149]
+    level:    [77, 80]
+  17330282:
+    template: Kindreds_Avatar
+    at:       [259.958, -6.972, -222.300, 143]
+    level:    [77, 80]
+  17330283:
+    template: Kindred_Summoner
+    at:       [273.313, -2.059, -205.477, 29]
+    level:    [77, 80]
+  17330284:
+    template: Kindreds_Avatar
+    at:       [276.384, -0.836, -233.656, 117]
+    level:    [77, 80]
+  17330285:
+    template: Avatar_Icon
+    at:       [289.407, 0.354, -196.103, 219]
+    level:    [65, 65]
+  17330286:
+    template: Avatar_Icon
+    at:       [250.383, -8.723, -230.739, 79]
+    level:    [65, 65]
+  17330287:
+    template: Kindred_Paladin
+    at:       [205.761, -18.746, -223.477, 82]
+    level:    [77, 80]
+  17330288:
+    template: Kindred_Paladin
+    at:       [226.481, -14.120, -218.662, 182]
+    level:    [77, 80]
+  17330289:
+    template: Kindred_White_Mage
+    at:       [212.130, -16.203, -232.390, 38]
+    level:    [77, 80]
+  17330290:
+    template: Satellite_Shield
+    at:       [211.541, -19.341, -220.319, 57]
+    level:    [77, 79]
+  17330291:
+    template: Satellite_Shield
+    at:       [221.659, -20.482, -203.392, 106]
+    level:    [77, 79]
+  17330292:
+    template: Satellite_Shield
+    at:       [214.027, -19.359, -217.873, 38]
+    level:    [77, 79]
+  17330293:
+    template: Vanguard_Eye
+    at:       [225.274, -16.023, -215.852, 37]
+    level:    [70, 70]
+  17330294:
+    template: Kindred_Paladin
+    at:       [219.007, -21.460, -206.490, 114]
+    level:    [77, 80]
+  17330295:
+    template: Kindred_Paladin
+    at:       [223.688, -19.959, -203.127, 226]
+    level:    [77, 80]
+  17330296:
+    template: Kindred_Beastmaster
+    at:       [192.484, -21.122, -221.803, 46]
+    level:    [77, 80]
+  17330297:
+    template: Kindreds_Vouivre
+    at:       [191.880, -21.838, -220.350, 51]
+    level:    [77, 80]
+  17330298:
+    template: Kindred_Black_Mage
+    at:       [190.535, -20.655, -225.857, 83]
+    level:    [77, 80]
+  17330299:
+    template: Satellite_Shield
+    at:       [176.668, -22.181, -236.042, 3]
+    level:    [77, 79]
+  17330300:
+    template: Satellite_Shield
+    at:       [188.630, -19.214, -235.898, 120]
+    level:    [77, 79]
+  17330301:
+    template: Satellite_Shield
+    at:       [196.740, -21.128, -220.264, 81]
+    level:    [77, 79]
+  17330302:
+    template: Vanguard_Eye
+    at:       [202.203, -17.581, -230.449, 252]
+    level:    [70, 70]
+  17330303:
+    template: Kindred_Monk
+    at:       [190.494, -19.067, -167.880, 184]
+    level:    [77, 80]
+  17330304:
+    template: Duke_Gomory
+    at:       [138.420, -25.042, -175.906, 79]
+    level:    [85, 85]
+  17330305:
+    template: Kindred_Thief
+    at:       [200.475, -18.286, -167.758, 50]
+    level:    [77, 80]
+  17330306:
+    template: Satellite_Daggers
+    at:       [203.782, -17.985, -163.970, 77]
+    level:    [77, 79]
+  17330307:
+    template: Satellite_Daggers
+    at:       [176.179, -22.529, -161.748, 169]
+    level:    [77, 79]
+  17330308:
+    template: Satellite_Daggers
+    at:       [192.055, -20.086, -176.974, 112]
+    level:    [77, 79]
+  17330309:
+    template: Satellite_Knuckles
+    at:       [171.054, -25.197, -179.577, 183]
+    level:    [77, 79]
+  17330310:
+    template: Satellite_Knuckles
+    at:       [166.968, -25.298, -173.726, 26]
+    level:    [77, 79]
+  17330311:
+    template: Satellite_Knuckles
+    at:       [204.186, -17.289, -150.771, 4]
+    level:    [77, 79]
+  17330312:
+    template: Vanguard_Eye
+    at:       [191.711, -19.598, -219.473, 70]
+    level:    [70, 70]
+  17330313:
+    template: Kindred_Monk
+    at:       [218.580, -19.849, -127.152, 202]
+    level:    [77, 80]
+  17330314:
+    template: Kindred_Thief
+    at:       [216.036, -20.556, -124.793, 249]
+    level:    [77, 80]
+  17330315:
+    template: Count_Raum
+    at:       [160.862, -15.902, -106.505, 138]
+    level:    [85, 85]
+  17330316:
+    template: Satellite_Daggers
+    at:       [184.938, -21.435, -127.036, 114]
+    level:    [77, 79]
+  17330317:
+    template: Satellite_Daggers
+    at:       [199.373, -21.788, -131.065, 113]
+    level:    [77, 79]
+  17330318:
+    template: Satellite_Daggers
+    at:       [175.499, -20.071, -123.111, 153]
+    level:    [77, 79]
+  17330319:
+    template: Satellite_Knuckles
+    at:       [188.557, -18.332, -99.535, 168]
+    level:    [77, 79]
+  17330320:
+    template: Satellite_Knuckles
+    at:       [200.003, -23.271, -115.953, 42]
+    level:    [77, 79]
+  17330321:
+    template: Satellite_Knuckles
+    at:       [171.956, -20.420, -141.129, 72]
+    level:    [77, 79]
+  17330322:
+    template: Vanguard_Eye
+    at:       [220.655, -17.651, -137.892, 116]
+    level:    [70, 70]
+  17330323:
+    template: Kindred_Warrior
+    at:       [132.852, -22.294, -103.695, 148]
+    level:    [77, 80]
+  17330324:
+    template: Kindred_Monk
+    at:       [167.041, -17.924, -108.709, 91]
+    level:    [77, 80]
+  17330325:
+    template: Kindred_Ranger
+    at:       [147.470, -18.969, -96.470, 74]
+    level:    [77, 80]
+  17330326:
+    template: Kindred_White_Mage
+    at:       [147.825, -21.443, -144.266, 92]
+    level:    [77, 80]
+  17330327:
+    template: Kindred_Black_Mage
+    at:       [149.706, -18.995, -103.450, 166]
+    level:    [77, 80]
+  17330328:
+    template: Kindred_Dark_Knight
+    at:       [153.182, -18.603, -134.154, 1]
+    level:    [77, 80]
+  17330329:
+    template: Kindred_Dragoon
+    at:       [161.552, -16.839, -118.440, 231]
+    level:    [77, 80]
+  17330330:
+    template: Kindreds_Wyvern
+    at:       [216.799, -7.969, 31.230, 150]
+    level:    [77, 80]
+  17330331:
+    template: Kindred_White_Mage
+    at:       [142.201, -18.145, -63.685, 171]
+    level:    [77, 80]
+  17330332:
+    template: Prince_Seere
+    at:       [179.183, -13.740, -75.856, 168]
+    level:    [85, 85]
+  17330333:
+    template: Kindred_Black_Mage
+    at:       [124.317, -20.282, -59.076, 3]
+    level:    [77, 80]
+  17330334:
+    template: Satellite_Hammers
+    at:       [121.380, -22.070, -65.745, 46]
+    level:    [77, 79]
+  17330335:
+    template: Satellite_Hammers
+    at:       [151.133, -17.305, -65.193, 232]
+    level:    [77, 79]
+  17330336:
+    template: Satellite_Hammers
+    at:       [128.614, -20.309, -60.823, 211]
+    level:    [77, 79]
+  17330337:
+    template: Satellite_Staves
+    at:       [142.410, -18.280, -61.602, 182]
+    level:    [77, 79]
+  17330338:
+    template: Satellite_Staves
+    at:       [147.476, -16.948, -53.417, 26]
+    level:    [77, 79]
+  17330339:
+    template: Satellite_Staves
+    at:       [140.119, -18.520, -59.964, 9]
+    level:    [77, 79]
+  17330340:
+    template: Vanguard_Eye
+    at:       [62.134, -21.508, -29.359, 134]
+    level:    [70, 70]
+  17330341:
+    template: Kindred_White_Mage
+    at:       [68.556, -24.400, -65.317, 42]
+    level:    [77, 80]
+  17330342:
+    template: Kindred_Black_Mage
+    at:       [44.039, -23.677, -50.265, 91]
+    level:    [77, 80]
+  17330343:
+    template: Marquis_Orias
+    at:       [94.730, -15.826, -43.147, 200]
+    level:    [85, 85]
+  17330344:
+    template: Satellite_Hammers
+    at:       [55.590, -22.446, -34.363, 57]
+    level:    [77, 79]
+  17330345:
+    template: Satellite_Hammers
+    at:       [91.219, -20.211, -56.213, 87]
+    level:    [77, 79]
+  17330346:
+    template: Satellite_Hammers
+    at:       [93.144, -19.111, -52.883, 202]
+    level:    [77, 79]
+  17330347:
+    template: Satellite_Staves
+    at:       [81.072, -19.935, -54.818, 201]
+    level:    [77, 79]
+  17330348:
+    template: Satellite_Staves
+    at:       [77.799, -23.885, -67.377, 7]
+    level:    [77, 79]
+  17330349:
+    template: Satellite_Staves
+    at:       [41.628, -23.600, -52.105, 106]
+    level:    [77, 79]
+  17330350:
+    template: Vanguard_Eye
+    at:       [84.105, -22.677, -65.657, 88]
+    level:    [70, 70]
+  17330351:
+    template: Kindred_Paladin
+    at:       [84.764, -24.230, -89.207, 14]
+    level:    [77, 80]
+  17330352:
+    template: Kindred_Red_Mage
+    at:       [78.976, -23.993, -95.405, 158]
+    level:    [77, 80]
+  17330353:
+    template: Duke_Berith
+    at:       [51.557, -24.160, -102.157, 104]
+    level:    [85, 85]
+  17330354:
+    template: Kindred_Red_Mage
+    at:       [93.732, -24.890, -105.384, 27]
+    level:    [77, 80]
+  17330355:
+    template: Satellite_Longswords
+    at:       [78.219, -23.978, -96.452, 114]
+    level:    [77, 79]
+  17330356:
+    template: Satellite_Longswords
+    at:       [86.441, -24.144, -92.826, 202]
+    level:    [77, 79]
+  17330357:
+    template: Satellite_Longswords
+    at:       [61.486, -24.381, -99.573, 67]
+    level:    [77, 79]
+  17330358:
+    template: Vanguard_Eye
+    at:       [86.365, -24.068, -92.670, 207]
+    level:    [70, 70]
+  17330359:
+    template: Kindred_Paladin
+    at:       [66.472, -24.067, -126.678, 58]
+    level:    [77, 80]
+  17330360:
+    template: Marquis_Sabnak
+    at:       [72.315, -24.214, -127.865, 81]
+    level:    [85, 85]
+  17330361:
+    template: Kindred_Dark_Knight
+    at:       [98.238, -23.739, -123.852, 222]
+    level:    [77, 80]
+  17330362:
+    template: Satellite_Longswords
+    at:       [77.288, -24.416, -124.918, 84]
+    level:    [77, 79]
+  17330363:
+    template: Satellite_Longswords
+    at:       [66.843, -24.475, -134.604, 255]
+    level:    [77, 79]
+  17330364:
+    template: Satellite_Longswords
+    at:       [95.026, -23.896, -126.617, 248]
+    level:    [77, 79]
+  17330365:
+    template: Satellite_Claymores
+    at:       [67.624, -24.350, -133.070, 27]
+    level:    [77, 79]
+  17330366:
+    template: Satellite_Claymores
+    at:       [62.638, -24.230, -130.196, 153]
+    level:    [77, 79]
+  17330367:
+    template: Satellite_Claymores
+    at:       [99.126, -24.283, -113.746, 167]
+    level:    [77, 79]
+  17330368:
+    template: Vanguard_Eye
+    at:       [82.096, -24.432, -114.659, 131]
+    level:    [70, 70]
+  17330369:
+    template: Kindred_Dark_Knight
+    at:       [66.061, -24.400, -151.230, 228]
+    level:    [77, 80]
+  17330370:
+    template: Kindred_Dark_Knight
+    at:       [76.158, -24.141, -148.016, 57]
+    level:    [77, 80]
+  17330371:
+    template: Kindred_Black_Mage
+    at:       [97.541, -24.292, -141.462, 243]
+    level:    [77, 80]
+  17330372:
+    template: Satellite_Claymores
+    at:       [88.591, -24.102, -148.530, 4]
+    level:    [77, 79]
+  17330373:
+    template: Satellite_Claymores
+    at:       [87.019, -24.192, -148.517, 182]
+    level:    [77, 79]
+  17330374:
+    template: Satellite_Claymores
+    at:       [82.642, -24.111, -145.026, 9]
+    level:    [77, 79]
+  17330375:
+    template: Vanguard_Eye
+    at:       [87.419, -24.093, -160.732, 40]
+    level:    [70, 70]
+  17330376:
+    template: Kindred_Warrior
+    at:       [68.952, -24.360, -169.952, 142]
+    level:    [77, 80]
+  17330377:
+    template: Count_Zaebos
+    at:       [85.142, -24.125, -209.879, 55]
+    level:    [85, 85]
+  17330378:
+    template: Kindred_Beastmaster
+    at:       [62.697, -24.334, -183.362, 56]
+    level:    [77, 80]
+  17330379:
+    template: Kindreds_Vouivre
+    at:       [61.452, -24.374, -179.472, 54]
+    level:    [77, 80]
+  17330380:
+    template: Satellite_Tabars
+    at:       [76.226, -24.506, -193.939, 22]
+    level:    [77, 79]
+  17330381:
+    template: Satellite_Tabars
+    at:       [70.968, -24.562, -190.950, 152]
+    level:    [77, 79]
+  17330382:
+    template: Satellite_Tabars
+    at:       [62.377, -24.328, -184.276, 69]
+    level:    [77, 79]
+  17330383:
+    template: Satellite_Great_Axes
+    at:       [74.687, -24.066, -183.878, 33]
+    level:    [77, 79]
+  17330384:
+    template: Satellite_Great_Axes
+    at:       [75.993, -24.407, -192.732, 195]
+    level:    [77, 79]
+  17330385:
+    template: Satellite_Great_Axes
+    at:       [59.148, -24.400, -179.815, 165]
+    level:    [77, 79]
+  17330386:
+    template: Vanguard_Eye
+    at:       [61.849, -24.339, -184.697, 54]
+    level:    [70, 70]
+  17330387:
+    template: Kindred_Warrior
+    at:       [44.310, -23.702, -224.981, 162]
+    level:    [77, 80]
+  17330388:
+    template: Kindred_Beastmaster
+    at:       [40.887, -24.436, -241.471, 117]
+    level:    [77, 80]
+  17330389:
+    template: Kindreds_Vouivre
+    at:       [43.040, -24.396, -242.700, 134]
+    level:    [77, 80]
+  17330390:
+    template: Marquis_Andras
+    at:       [69.122, -23.951, -221.793, 185]
+    level:    [85, 85]
+  17330391:
+    template: Andrass_Vouivre
+    at:       [67.475, -24.458, -223.164, 208]
+    level:    [80, 82]
+  17330392:
+    template: Satellite_Tabars
+    at:       [66.821, -23.944, -238.276, 95]
+    level:    [77, 79]
+  17330393:
+    template: Satellite_Tabars
+    at:       [55.922, -23.944, -231.905, 149]
+    level:    [77, 79]
+  17330394:
+    template: Satellite_Tabars
+    at:       [51.321, -24.090, -240.488, 250]
+    level:    [77, 79]
+  17330395:
+    template: Satellite_Great_Axes
+    at:       [65.177, -23.859, -237.247, 50]
+    level:    [77, 79]
+  17330396:
+    template: Satellite_Great_Axes
+    at:       [51.230, -24.147, -236.679, 145]
+    level:    [77, 79]
+  17330397:
+    template: Satellite_Great_Axes
+    at:       [51.894, -24.391, -211.292, 140]
+    level:    [77, 79]
+  17330398:
+    template: Vanguard_Eye
+    at:       [66.946, -24.367, -221.350, 120]
+    level:    [70, 70]
+  17330399:
+    template: Kindred_Thief
+    at:       [58.534, -24.425, -281.844, 201]
+    level:    [77, 80]
+  17330400:
+    template: Kindred_Ninja
+    at:       [63.147, -24.435, -278.497, 230]
+    level:    [77, 80]
+  17330401:
+    template: Kindred_Ranger
+    at:       [57.699, -24.483, -285.115, 73]
+    level:    [77, 80]
+  17330402:
+    template: Kindred_Thief
+    at:       [29.311, -24.738, -306.457, 58]
+    level:    [77, 80]
+  17330403:
+    template: Kindred_Ninja
+    at:       [30.098, -24.679, -305.920, 84]
+    level:    [77, 80]
+  17330404:
+    template: Kindred_Ranger
+    at:       [33.178, -24.497, -302.922, 225]
+    level:    [77, 80]
+  17330405:
+    template: Kindred_Warrior
+    at:       [13.431, -24.229, -365.540, 71]
+    level:    [77, 80]
+  17330406:
+    template: Kindred_Monk
+    at:       [31.526, -24.256, -360.441, 254]
+    level:    [77, 80]
+  17330407:
+    template: Kindred_White_Mage
+    at:       [29.046, -24.066, -358.961, 139]
+    level:    [77, 80]
+  17330408:
+    template: Kindred_Black_Mage
+    at:       [14.799, -23.899, -356.075, 123]
+    level:    [77, 80]
+  17330409:
+    template: Kindred_Red_Mage
+    at:       [16.100, -23.782, -362.830, 237]
+    level:    [77, 80]
+  17330410:
+    template: Kindred_Paladin
+    at:       [13.623, -24.268, -366.851, 130]
+    level:    [77, 80]
+  17330411:
+    template: Kindred_Dark_Knight
+    at:       [9.243, -24.208, -361.994, 126]
+    level:    [77, 80]
+  17330412:
+    template: Kindred_Thief
+    at:       [97.082, -24.417, -357.425, 90]
+    level:    [77, 80]
+  17330413:
+    template: Kindred_Ninja
+    at:       [100.235, -24.391, -360.124, 229]
+    level:    [77, 80]
+  17330414:
+    template: Kindred_Ranger
+    at:       [101.690, -24.443, -353.375, 200]
+    level:    [77, 80]
+  17330415:
+    template: Marquis_Cimeries
+    at:       [98.504, -24.312, -359.729, 213]
+    level:    [85, 85]
+  17330416:
+    template: Kindred_Dark_Knight
+    at:       [17.919, -24.383, -138.293, 207]
+    level:    [77, 80]
+  17330417:
+    template: Duke_Scox
+    at:       [17.611, -23.619, -121.383, 239]
+    level:    [85, 85]
+  17330418:
+    template: Kindred_Dragoon
+    at:       [19.712, -24.147, -130.325, 247]
+    level:    [77, 80]
+  17330419:
+    template: Kindreds_Wyvern
+    at:       [1.216, -24.208, -129.829, 120]
+    level:    [77, 80]
+  17330420:
+    template: Satellite_Scythes
+    at:       [17.355, -23.783, -124.075, 230]
+    level:    [77, 79]
+  17330421:
+    template: Satellite_Scythes
+    at:       [17.610, -24.355, -138.703, 236]
+    level:    [77, 79]
+  17330422:
+    template: Satellite_Scythes
+    at:       [21.267, -24.260, -138.844, 53]
+    level:    [77, 79]
+  17330423:
+    template: Satellite_Spears
+    at:       [12.762, -24.226, -130.980, 251]
+    level:    [77, 79]
+  17330424:
+    template: Satellite_Spears
+    at:       [21.783, -24.030, -146.960, 16]
+    level:    [77, 79]
+  17330425:
+    template: Satellite_Spears
+    at:       [21.174, -24.375, -140.214, 188]
+    level:    [77, 79]
+  17330426:
+    template: Vanguard_Eye
+    at:       [14.741, -24.168, -134.063, 162]
+    level:    [70, 70]
+  17330427:
+    template: Kindred_Dark_Knight
+    at:       [6.812, -24.165, -112.487, 254]
+    level:    [77, 80]
+  17330428:
+    template: Kindred_Dragoon
+    at:       [5.730, -23.953, -108.277, 142]
+    level:    [77, 80]
+  17330429:
+    template: Kindreds_Wyvern
+    at:       [-11.632, -24.500, -130.758, 149]
+    level:    [77, 80]
+  17330430:
+    template: King_Zagan
+    at:       [33.587, -23.791, -108.695, 249]
+    level:    [85, 85]
+  17330431:
+    template: Zagans_Wyvern
+    at:       [33.420, -23.979, -107.241, 13]
+    level:    [80, 82]
+  17330432:
+    template: Satellite_Scythes
+    at:       [12.782, -23.992, -107.161, 130]
+    level:    [77, 79]
+  17330433:
+    template: Satellite_Scythes
+    at:       [16.191, -24.673, -93.418, 90]
+    level:    [77, 79]
+  17330434:
+    template: Satellite_Scythes
+    at:       [15.529, -24.163, -100.663, 23]
+    level:    [77, 79]
+  17330435:
+    template: Satellite_Spears
+    at:       [17.683, -24.514, -96.801, 53]
+    level:    [77, 79]
+  17330436:
+    template: Satellite_Spears
+    at:       [15.699, -24.660, -92.221, 85]
+    level:    [77, 79]
+  17330437:
+    template: Satellite_Spears
+    at:       [23.178, -24.309, -95.860, 5]
+    level:    [77, 79]
+  17330438:
+    template: Vanguard_Eye
+    at:       [26.080, -24.102, -88.561, 205]
+    level:    [70, 70]
+  17330439:
+    template: Kindred_Samurai
+    at:       [-36.587, -24.005, -101.173, 22]
+    level:    [77, 80]
+  17330440:
+    template: Count_Vine
+    at:       [-40.975, -23.718, -95.814, 199]
+    level:    [85, 85]
+  17330441:
+    template: Kindred_Ninja
+    at:       [-40.416, -23.642, -96.282, 63]
+    level:    [77, 80]
+  17330442:
+    template: Satellite_Kunai
+    at:       [-32.108, -24.478, -96.203, 74]
+    level:    [77, 79]
+  17330443:
+    template: Satellite_Kunai
+    at:       [-22.383, -25.397, -94.731, 67]
+    level:    [77, 79]
+  17330444:
+    template: Satellite_Kunai
+    at:       [-26.734, -24.172, -85.435, 139]
+    level:    [77, 79]
+  17330445:
+    template: Satellite_Tachi
+    at:       [-42.680, -24.290, -89.700, 154]
+    level:    [77, 79]
+  17330446:
+    template: Satellite_Tachi
+    at:       [-31.225, -24.158, -90.975, 124]
+    level:    [77, 79]
+  17330447:
+    template: Satellite_Tachi
+    at:       [-47.940, -24.342, -90.046, 237]
+    level:    [77, 79]
+  17330448:
+    template: Vanguard_Eye
+    at:       [-39.122, -23.740, -95.599, 167]
+    level:    [70, 70]
+  17330449:
+    template: Kindred_Samurai
+    at:       [-80.411, -23.873, -60.363, 100]
+    level:    [77, 80]
+  17330450:
+    template: Kindred_Ninja
+    at:       [-92.958, -25.241, -57.889, 113]
+    level:    [77, 80]
+  17330451:
+    template: Marquis_Gamygyn
+    at:       [-72.227, -24.311, -79.561, 129]
+    level:    [85, 85]
+  17330452:
+    template: Kindred_Summoner
+    at:       [-86.714, -24.664, -75.265, 102]
+    level:    [77, 80]
+  17330453:
+    template: Kindreds_Avatar
+    at:       [-85.351, -24.720, -74.107, 94]
+    level:    [77, 80]
+  17330454:
+    template: Satellite_Kunai
+    at:       [-74.660, -24.675, -54.165, 244]
+    level:    [77, 79]
+  17330455:
+    template: Satellite_Kunai
+    at:       [-67.744, -24.666, -61.335, 145]
+    level:    [77, 79]
+  17330456:
+    template: Satellite_Kunai
+    at:       [-69.710, -24.230, -79.716, 157]
+    level:    [77, 79]
+  17330457:
+    template: Satellite_Tachi
+    at:       [-87.156, -25.133, -68.288, 112]
+    level:    [77, 79]
+  17330458:
+    template: Satellite_Tachi
+    at:       [-74.043, -24.356, -82.461, 130]
+    level:    [77, 79]
+  17330459:
+    template: Satellite_Tachi
+    at:       [-57.795, -23.916, -76.775, 139]
+    level:    [77, 79]
+  17330460:
+    template: Vanguard_Eye
+    at:       [-90.296, -25.220, -59.944, 143]
+    level:    [70, 70]
+  17330461:
+    template: Kindred_Warrior
+    at:       [-92.291, -17.876, -11.137, 120]
+    level:    [77, 80]
+  17330462:
+    template: Kindred_Monk
+    at:       [-76.331, -22.394, -27.566, 255]
+    level:    [77, 80]
+  17330463:
+    template: Kindred_White_Mage
+    at:       [-90.481, -18.206, -10.825, 158]
+    level:    [77, 80]
+  17330464:
+    template: Kindred_Black_Mage
+    at:       [-108.204, -23.428, -28.721, 69]
+    level:    [77, 80]
+  17330465:
+    template: Kindred_Red_Mage
+    at:       [-108.573, -24.352, -30.846, 70]
+    level:    [77, 80]
+  17330466:
+    template: Kindred_Thief
+    at:       [-83.351, -19.799, -15.169, 248]
+    level:    [77, 80]
+  17330467:
+    template: Kindred_Paladin
+    at:       [-88.280, -22.056, -23.590, 44]
+    level:    [77, 80]
+  17330468:
+    template: Kindred_Dark_Knight
+    at:       [-98.518, -21.354, -23.429, 176]
+    level:    [77, 80]
+  17330469:
+    template: Kindred_Beastmaster
+    at:       [-87.050, -23.440, -31.733, 55]
+    level:    [77, 80]
+  17330470:
+    template: Kindreds_Vouivre
+    at:       [-87.170, -23.190, -29.194, 60]
+    level:    [77, 80]
+  17330471:
+    template: Goblin_Replica
+    at:       [-97.730, -20.926, -21.363, 216]
+    level:    [65, 65]
+  17330472:
+    template: Goblin_Replica
+    at:       [-95.399, -23.798, -29.580, 99]
+    level:    [65, 65]
+  17330473:
+    template: Kindred_Bard
+    at:       [-125.735, -21.291, -18.962, 3]
+    level:    [77, 80]
+  17330474:
+    template: Kindred_Ranger
+    at:       [-150.531, -17.247, -6.526, 9]
+    level:    [77, 80]
+  17330475:
+    template: Kindred_Samurai
+    at:       [-146.716, -19.116, -17.106, 133]
+    level:    [77, 80]
+  17330476:
+    template: Kindred_Ninja
+    at:       [-143.190, -23.650, -27.344, 23]
+    level:    [77, 80]
+  17330477:
+    template: Kindred_Dragoon
+    at:       [-139.334, -19.514, -16.786, 53]
+    level:    [77, 80]
+  17330478:
+    template: Kindreds_Wyvern
+    at:       [-159.200, -24.450, -44.955, 119]
+    level:    [77, 80]
+  17330479:
+    template: Kindred_Summoner
+    at:       [-156.016, -16.141, -1.791, 6]
+    level:    [77, 80]
+  17330480:
+    template: Kindreds_Avatar
+    at:       [-155.810, -16.710, -3.103, 216]
+    level:    [77, 80]
+  17330481:
+    template: Marquis_Nebiros
+    at:       [-127.792, -23.643, -32.870, 66]
+    level:    [85, 85]
+  17330482:
+    template: Nebiross_Avatar
+    at:       [-130.763, -22.654, -30.081, 43]
+    level:    [85, 85]
+  17330483:
+    template: Goblin_Replica
+    at:       [-150.743, -17.907, -11.532, 224]
+    level:    [65, 65]
+  17330484:
+    template: Goblin_Replica
+    at:       [-146.047, -16.014, -4.550, 28]
+    level:    [65, 65]
+  17330485:
+    template: Kindred_Warrior
+    at:       [367.028, 5.807, -134.494, 53]
+    level:    [77, 80]
+  17330486:
+    template: Kindred_Monk
+    at:       [363.638, -5.977, -93.456, 142]
+    level:    [77, 80]
+  17330487:
+    template: Kindred_White_Mage
+    at:       [388.482, 0.714, -116.363, 214]
+    level:    [77, 80]
+  17330488:
+    template: Kindred_Black_Mage
+    at:       [377.578, -4.615, -98.521, 8]
+    level:    [77, 80]
+  17330489:
+    template: Kindred_Red_Mage
+    at:       [380.725, 2.435, -121.915, 55]
+    level:    [77, 80]
+  17330490:
+    template: Kindred_Thief
+    at:       [363.390, -5.094, -94.865, 185]
+    level:    [77, 80]
+  17330491:
+    template: Kindred_Bard
+    at:       [327.841, 0.168, -117.620, 149]
+    level:    [77, 80]
+  17330492:
+    template: Kindred_Bard
+    at:       [335.408, -6.119, -92.546, 249]
+    level:    [77, 80]
+  17330493:
+    template: Kindred_Summoner
+    at:       [329.874, -6.010, -101.261, 186]
+    level:    [77, 80]
+  17330494:
+    template: Kindreds_Avatar
+    at:       [330.450, -4.624, -104.272, 187]
+    level:    [77, 80]
+  17330495:
+    template: Satellite_Horns
+    at:       [343.130, 0.496, -111.507, 172]
+    level:    [77, 79]
+  17330496:
+    template: Satellite_Horns
+    at:       [340.815, 2.043, -120.395, 122]
+    level:    [77, 79]
+  17330497:
+    template: Satellite_Horns
+    at:       [340.287, -1.217, -109.289, 78]
+    level:    [77, 79]
+  17330498:
+    template: Vanguard_Eye
+    at:       [327.656, -6.776, -97.537, 232]
+    level:    [70, 70]
+  17330499:
+    template: Kindred_Bard
+    at:       [303.403, -8.911, -87.335, 55]
+    level:    [77, 80]
+  17330500:
+    template: Kindred_Bard
+    at:       [294.729, -6.762, -110.894, 54]
+    level:    [77, 80]
+  17330501:
+    template: Kindred_Summoner
+    at:       [267.394, -8.189, -84.920, 17]
+    level:    [77, 80]
+  17330502:
+    template: Kindreds_Avatar
+    at:       [263.782, -8.097, -81.353, 25]
+    level:    [77, 80]
+  17330503:
+    template: Satellite_Horns
+    at:       [287.087, -8.059, -101.760, 232]
+    level:    [77, 79]
+  17330504:
+    template: Satellite_Horns
+    at:       [287.730, -7.855, -89.251, 173]
+    level:    [77, 79]
+  17330505:
+    template: Satellite_Horns
+    at:       [284.995, -8.287, -74.739, 252]
+    level:    [77, 79]
+  17330506:
+    template: Vanguard_Eye
+    at:       [292.371, -7.153, -99.692, 126]
+    level:    [70, 70]
+  17330507:
+    template: Vanguard_Dragon
+    at:       [-185.895, -3.083, -4.321, 154]
+    level:    [81, 83]
+  17330508:
+    template: Vanguard_Dragon
+    at:       [-178.987, -2.072, -9.679, 188]
+    level:    [81, 83]
+  17330509:
+    template: Vanguard_Dragon
+    at:       [-233.103, -11.465, 65.225, 49]
+    level:    [81, 83]
+  17330510:
+    template: Vanguard_Dragon
+    at:       [-237.240, -11.943, 83.459, 21]
+    level:    [81, 83]
+  17330511:
+    template: Vanguard_Dragon
+    at:       [-227.705, -12.144, -13.638, 29]
+    level:    [81, 83]
+  17330512:
+    template: Vanguard_Dragon
+    at:       [-255.323, -15.032, -9.984, 185]
+    level:    [81, 83]
+  17330513:
+    template: Satellite_Guns
+    at:       [-241.234, -12.703, -113.860, 14]
+    level:    [77, 79]
+  17330514:
+    template: Satellite_Guns
+    at:       [-278.496, -19.747, -110.683, 114]
+    level:    [77, 79]
+  17330515:
+    template: Satellite_Guns
+    at:       [-271.300, -18.691, -108.619, 230]
+    level:    [77, 79]
+  17330516:
+    template: Satellite_Guns
+    at:       [-263.263, -17.143, -113.052, 216]
+    level:    [77, 79]
+  17330517:
+    template: Satellite_Guns
+    at:       [-252.860, -14.373, -139.196, 8]
+    level:    [77, 79]
+  17330518:
+    template: Satellite_Guns
+    at:       [-259.454, -16.447, -117.727, 82]
+    level:    [77, 79]
+  17330519:
+    template: Vanguard_Dragon
+    at:       [-255.625, -15.623, -116.877, 181]
+    level:    [81, 83]
+  17330520:
+    template: Vanguard_Dragon
+    at:       [-283.433, -20.510, 44.881, 162]
+    level:    [81, 83]
+  17330521:
+    template: Vanguard_Dragon
+    at:       [-272.411, -19.553, 21.395, 206]
+    level:    [81, 83]
+  17330522:
+    template: Satellite_Longbows
+    at:       [-272.329, -19.559, 109.010, 219]
+    level:    [77, 79]
+  17330523:
+    template: Satellite_Longbows
+    at:       [-294.652, -23.310, 108.460, 154]
+    level:    [77, 79]
+  17330524:
+    template: Satellite_Longbows
+    at:       [-295.445, -23.841, 119.678, 129]
+    level:    [77, 79]
+  17330525:
+    template: Satellite_Longbows
+    at:       [-305.514, -26.307, 106.929, 63]
+    level:    [77, 79]
+  17330526:
+    template: Satellite_Longbows
+    at:       [-305.966, -26.380, 114.582, 116]
+    level:    [77, 79]
+  17330527:
+    template: Satellite_Longbows
+    at:       [-301.322, -25.223, 113.195, 138]
+    level:    [77, 79]
+  17330528:
+    template: Vanguard_Dragon
+    at:       [-296.785, -24.454, 105.512, 127]
+    level:    [81, 83]
+  17330529:
+    template: Vanguard_Dragon
+    at:       [-303.837, -28.747, -71.192, 40]
+    level:    [81, 83]
+  17330530:
+    template: Vanguard_Dragon
+    at:       [-309.395, -27.466, -52.140, 67]
+    level:    [81, 83]
+  17330531:
+    template: Tombstone_Prototype
+    at:       [342.583, -0.365, -315.169, 68]
+    level:    [65, 65]
+  17330532:
+    template: Effigy_Prototype
+    at:       [20.597, -25.926, -444.045, 64]
+    level:    [65, 65]
+  17330533:
+    template: Icon_Prototype
+    at:       [176.391, -14.059, -62.834, 149]
+    level:    [65, 65]
+  17330534:
+    template: Statue_Prototype
+    at:       [-161.100, -24.360, -80.164, 64]
+    level:    [65, 65]
+  17330535:
+    template: Prototype_Eye
+    at:       [317.990, -8.741, 168.167, 192]
+    level:    [80, 80]
+  17330536:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [371.933, -6.448, -44.713, 146]
+    level:    [93, 95]
+  17330537:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [381.530, -3.406, -39.504, 29]
+    level:    [93, 95]
+  17330538:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [375.150, -5.607, -33.360, 130]
+    level:    [93, 95]
+  17330539:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [368.430, -7.080, -32.559, 10]
+    level:    [93, 95]
+  17330540:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [374.031, -5.922, -32.489, 111]
+    level:    [93, 95]
+  17330541:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [379.421, -9.437, -8.051, 223]
+    level:    [93, 95]
+  17330542:
+    template: Vanguard_Eye
+    at:       [373.383, -6.781, -20.810, 47]
+    level:    [85, 85]
+  17330543:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [413.222, -3.237, -14.635, 133]
+    level:    [93, 95]
+  17330544:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [404.396, -7.363, -3.295, 166]
+    level:    [93, 95]
+  17330545:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [405.278, -7.241, -3.497, 156]
+    level:    [93, 95]
+  17330546:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [402.223, -0.426, -43.906, 122]
+    level:    [93, 95]
+  17330547:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [406.488, -0.319, -43.858, 122]
+    level:    [93, 95]
+  17330548:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [411.085, -1.131, -33.045, 94]
+    level:    [93, 95]
+  17330549:
+    template: Vanguard_Eye
+    at:       [426.689, -3.136, 16.931, 174]
+    level:    [85, 85]
+  17330550:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [424.774, -3.674, 11.839, 79]
+    level:    [93, 95]
+  17330551:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [419.338, -3.902, 29.237, 179]
+    level:    [93, 95]
+  17330552:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [435.644, -0.403, 7.384, 18]
+    level:    [93, 95]
+  17330553:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [413.370, -7.464, 22.187, 111]
+    level:    [93, 95]
+  17330554:
+    template: Kindred_Beastmaster_HI
+    script:   Kindred_Beastmaster
+    at:       [403.898, -7.887, 7.764, 132]
+    level:    [93, 95]
+  17330555:
+    template: Kindreds_Vouivre
+    at:       [407.292, -7.580, 7.844, 130]
+    level:    [93, 95]
+  17330556:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [417.192, -9.476, 70.907, 94]
+    level:    [93, 95]
+  17330557:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [425.346, -3.324, 48.524, 250]
+    level:    [93, 95]
+  17330558:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [421.016, -4.989, 54.028, 48]
+    level:    [93, 95]
+  17330559:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [444.746, -5.533, 61.409, 209]
+    level:    [93, 95]
+  17330560:
+    template: Kindred_Beastmaster_HI
+    script:   Kindred_Beastmaster
+    at:       [434.211, -2.489, 51.494, 251]
+    level:    [93, 95]
+  17330561:
+    template: Kindreds_Vouivre
+    at:       [432.471, -2.685, 50.554, 239]
+    level:    [93, 95]
+  17330562:
+    template: Vanguard_Eye
+    at:       [436.671, -2.408, 52.479, 88]
+    level:    [85, 85]
+  17330563:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [479.918, -6.794, 69.298, 213]
+    level:    [93, 95]
+  17330564:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [460.081, -0.049, 44.391, 80]
+    level:    [93, 95]
+  17330565:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [464.732, -5.404, 68.676, 68]
+    level:    [93, 95]
+  17330566:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [476.651, -5.399, 64.792, 81]
+    level:    [93, 95]
+  17330567:
+    template: Vanguard_Eye
+    at:       [466.913, -2.948, 58.078, 67]
+    level:    [85, 85]
+  17330568:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [388.258, -8.116, 124.393, 234]
+    level:    [93, 95]
+  17330569:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [393.079, -8.223, 102.227, 215]
+    level:    [93, 95]
+  17330570:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [385.565, -8.610, 108.472, 27]
+    level:    [93, 95]
+  17330571:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [394.791, -8.468, 121.359, 87]
+    level:    [93, 95]
+  17330572:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [363.592, -8.448, 118.749, 96]
+    level:    [93, 95]
+  17330573:
+    template: Kindreds_Wyvern
+    at:       [360.114, -8.500, 124.430, 11]
+    level:    [93, 95]
+  17330574:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [339.289, -8.013, 128.412, 167]
+    level:    [93, 95]
+  17330575:
+    template: Kindreds_Avatar
+    at:       [340.633, -8.024, 126.997, 161]
+    level:    [93, 95]
+  17330576:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [297.880, -9.171, 131.766, 249]
+    level:    [93, 95]
+  17330577:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [312.158, -8.522, 130.172, 40]
+    level:    [93, 95]
+  17330578:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [306.314, -8.704, 134.263, 80]
+    level:    [93, 95]
+  17330579:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [298.282, -9.550, 135.813, 219]
+    level:    [93, 95]
+  17330580:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [326.827, -8.269, 134.915, 3]
+    level:    [93, 95]
+  17330581:
+    template: Vanguard_Eye
+    at:       [293.984, -9.452, 129.654, 201]
+    level:    [85, 85]
+  17330582:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [289.254, -8.558, 107.276, 6]
+    level:    [93, 95]
+  17330583:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [289.443, -8.637, 99.823, 34]
+    level:    [93, 95]
+  17330584:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [275.220, -8.246, 100.665, 102]
+    level:    [93, 95]
+  17330585:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [281.653, -8.365, 108.424, 240]
+    level:    [93, 95]
+  17330586:
+    template: Vanguard_Eye
+    at:       [282.842, -7.905, 93.943, 53]
+    level:    [85, 85]
+  17330587:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [354.340, -8.249, -8.053, 9]
+    level:    [93, 95]
+  17330588:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [343.255, -8.920, -11.910, 72]
+    level:    [93, 95]
+  17330589:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [343.159, -7.918, -2.355, 246]
+    level:    [93, 95]
+  17330590:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [334.384, -8.676, 7.496, 228]
+    level:    [93, 95]
+  17330591:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [344.998, -9.118, -11.937, 102]
+    level:    [93, 95]
+  17330592:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [285.640, -8.182, 50.673, 65]
+    level:    [93, 95]
+  17330593:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [309.560, -8.283, 36.355, 217]
+    level:    [93, 95]
+  17330594:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [289.808, -8.397, 43.759, 22]
+    level:    [93, 95]
+  17330595:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [300.252, -7.835, 42.851, 40]
+    level:    [93, 95]
+  17330596:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [303.500, -7.889, 41.571, 124]
+    level:    [93, 95]
+  17330597:
+    template: Kindreds_Avatar
+    at:       [306.461, -8.285, 45.527, 40]
+    level:    [93, 95]
+  17330598:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [244.960, -8.583, 40.212, 63]
+    level:    [93, 95]
+  17330599:
+    template: Kindred_Beastmaster_HI
+    script:   Kindred_Beastmaster
+    at:       [265.526, -8.774, 55.396, 248]
+    level:    [93, 95]
+  17330600:
+    template: Kindreds_Vouivre
+    at:       [262.455, -9.070, 56.260, 4]
+    level:    [93, 95]
+  17330601:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [258.232, -9.537, 57.433, 229]
+    level:    [93, 95]
+  17330602:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [267.696, -8.568, 52.200, 175]
+    level:    [93, 95]
+  17330603:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [251.707, -8.527, 35.023, 31]
+    level:    [93, 95]
+  17330604:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [223.345, -9.660, 30.217, 244]
+    level:    [93, 95]
+  17330605:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [223.430, -7.945, 43.923, 253]
+    level:    [93, 95]
+  17330606:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [223.370, -7.940, 43.528, 251]
+    level:    [93, 95]
+  17330607:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [216.091, -9.057, 29.718, 153]
+    level:    [93, 95]
+  17330608:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [222.672, -9.521, 30.050, 7]
+    level:    [93, 95]
+  17330609:
+    template: Kindreds_Wyvern
+    at:       [225.925, -9.319, 30.407, 125]
+    level:    [93, 95]
+  17330610:
+    template: Vanguard_Eye
+    at:       [228.658, -10.215, 28.374, 162]
+    level:    [85, 85]
+  17330611:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [192.751, -8.585, -9.166, 57]
+    level:    [93, 95]
+  17330612:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [165.584, -15.271, -22.071, 107]
+    level:    [93, 95]
+  17330613:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [192.321, -9.019, -3.831, 235]
+    level:    [93, 95]
+  17330614:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [186.891, -10.797, -29.957, 224]
+    level:    [93, 95]
+  17330615:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [192.902, -8.934, -10.575, 36]
+    level:    [93, 95]
+  17330616:
+    template: Kindreds_Avatar
+    at:       [189.868, -9.736, -10.551, 19]
+    level:    [93, 95]
+  17330617:
+    template: Vanguard_Eye
+    at:       [194.276, -8.798, -15.432, 210]
+    level:    [85, 85]
+  17330618:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [74.887, -17.132, -17.598, 77]
+    level:    [93, 95]
+  17330619:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [75.290, -16.356, -2.449, 234]
+    level:    [93, 95]
+  17330620:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [70.674, -16.625, 7.069, 128]
+    level:    [93, 95]
+  17330621:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [69.537, -16.507, 5.306, 23]
+    level:    [93, 95]
+  17330622:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [36.018, -16.520, 10.928, 141]
+    level:    [93, 95]
+  17330623:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [50.597, -16.466, 6.354, 223]
+    level:    [93, 95]
+  17330624:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [59.444, -16.120, 10.495, 26]
+    level:    [93, 95]
+  17330625:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [37.035, -16.509, 5.530, 92]
+    level:    [93, 95]
+  17330626:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [30.822, -16.648, 23.142, 220]
+    level:    [93, 95]
+  17330627:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [45.461, -15.894, 24.086, 109]
+    level:    [93, 95]
+  17330628:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [24.259, -15.696, 44.484, 109]
+    level:    [93, 95]
+  17330629:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [31.030, -16.251, 40.559, 4]
+    level:    [93, 95]
+  17330630:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [26.588, -16.579, 29.528, 46]
+    level:    [93, 95]
+  17330631:
+    template: Vanguard_Eye
+    at:       [43.796, -16.500, 42.280, 232]
+    level:    [85, 85]
+  17330632:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [1.311, -16.642, 34.554, 123]
+    level:    [93, 95]
+  17330633:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [1.140, -16.641, 34.493, 124]
+    level:    [93, 95]
+  17330634:
+    template: Kindred_Beastmaster_HI
+    script:   Kindred_Beastmaster
+    at:       [-16.848, -16.182, 36.296, 74]
+    level:    [93, 95]
+  17330635:
+    template: Kindreds_Vouivre
+    at:       [-16.114, -16.033, 40.744, 83]
+    level:    [93, 95]
+  17330636:
+    template: Vanguard_Eye
+    at:       [-2.814, -16.594, 46.423, 164]
+    level:    [85, 85]
+  17330637:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [-42.680, -16.440, 39.874, 133]
+    level:    [93, 95]
+  17330638:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [-24.677, -15.695, 42.743, 210]
+    level:    [93, 95]
+  17330639:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [-28.332, -15.868, 37.448, 4]
+    level:    [93, 95]
+  17330640:
+    template: Kindreds_Wyvern
+    at:       [-32.488, -16.324, 40.667, 134]
+    level:    [93, 95]
+  17330641:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [-64.366, -15.898, 36.242, 200]
+    level:    [93, 95]
+  17330642:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [-73.076, -16.608, 43.620, 179]
+    level:    [93, 95]
+  17330643:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [-72.548, -16.255, 21.328, 133]
+    level:    [93, 95]
+  17330644:
+    template: Kindreds_Wyvern
+    at:       [-68.483, -16.612, 27.363, 194]
+    level:    [93, 95]
+  17330645:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [-75.510, -16.296, 29.750, 83]
+    level:    [93, 95]
+  17330646:
+    template: Kindreds_Avatar
+    at:       [-74.779, -16.324, 31.447, 78]
+    level:    [93, 95]
+  17330647:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [305.198, -28.960, 180.070, 12]
+    level:    [93, 95]
+  17330648:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [315.711, -28.762, 187.442, 43]
+    level:    [93, 95]
+  17330649:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [309.882, -28.167, 198.627, 237]
+    level:    [93, 95]
+  17330650:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [296.929, -28.324, 190.610, 90]
+    level:    [93, 95]
+  17330651:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [303.408, -28.017, 163.619, 203]
+    level:    [93, 95]
+  17330652:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [291.291, -28.790, 164.902, 36]
+    level:    [93, 95]
+  17330653:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [298.438, -28.980, 177.454, 134]
+    level:    [93, 95]
+  17330654:
+    template: Kindreds_Wyvern
+    at:       [312.449, -28.401, 177.844, 155]
+    level:    [93, 95]
+  17330655:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [281.922, -27.858, 174.208, 241]
+    level:    [93, 95]
+  17330656:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [280.561, -27.613, 179.787, 222]
+    level:    [93, 95]
+  17330657:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [258.318, -28.199, 152.740, 193]
+    level:    [93, 95]
+  17330658:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [244.229, -28.359, 156.911, 61]
+    level:    [93, 95]
+  17330659:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [250.433, -28.704, 133.854, 125]
+    level:    [93, 95]
+  17330660:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [252.187, -28.105, 147.814, 75]
+    level:    [93, 95]
+  17330661:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [255.145, -27.896, 155.295, 218]
+    level:    [93, 95]
+  17330662:
+    template: Vanguard_Eye
+    at:       [256.660, -28.950, 138.352, 215]
+    level:    [85, 85]
+  17330663:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [241.301, -28.216, 112.937, 58]
+    level:    [93, 95]
+  17330664:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [240.985, -28.003, 108.230, 196]
+    level:    [93, 95]
+  17330665:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [256.101, -28.206, 107.690, 18]
+    level:    [93, 95]
+  17330666:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [255.838, -28.250, 107.968, 24]
+    level:    [93, 95]
+  17330667:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [255.962, -28.242, 107.399, 22]
+    level:    [93, 95]
+  17330668:
+    template: Vanguard_Eye
+    at:       [242.244, -28.160, 110.161, 124]
+    level:    [85, 85]
+  17330669:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [246.246, -28.482, 75.979, 139]
+    level:    [93, 95]
+  17330670:
+    template: Kindred_Beastmaster_HI
+    script:   Kindred_Beastmaster
+    at:       [251.165, -28.755, 75.588, 115]
+    level:    [93, 95]
+  17330671:
+    template: Kindreds_Vouivre
+    at:       [251.142, -28.827, 79.050, 73]
+    level:    [93, 95]
+  17330672:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [244.789, -28.652, 66.870, 100]
+    level:    [93, 95]
+  17330673:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [208.895, -28.053, 162.041, 248]
+    level:    [93, 95]
+  17330674:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [215.174, -28.097, 150.437, 129]
+    level:    [93, 95]
+  17330675:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [207.231, -27.250, 142.724, 38]
+    level:    [93, 95]
+  17330676:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [213.565, -26.734, 141.726, 9]
+    level:    [93, 95]
+  17330677:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [215.428, -27.912, 150.487, 114]
+    level:    [93, 95]
+  17330678:
+    template: Kindreds_Avatar
+    at:       [218.332, -27.601, 149.266, 128]
+    level:    [93, 95]
+  17330679:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [171.345, -28.651, 147.187, 144]
+    level:    [93, 95]
+  17330680:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [174.188, -33.785, 122.462, 110]
+    level:    [93, 95]
+  17330681:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [163.409, -35.668, 124.006, 128]
+    level:    [93, 95]
+  17330682:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [182.330, -29.769, 144.102, 136]
+    level:    [93, 95]
+  17330683:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [188.602, -30.280, 128.432, 93]
+    level:    [93, 95]
+  17330684:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [163.515, -34.357, 131.222, 185]
+    level:    [93, 95]
+  17330685:
+    template: Vanguard_Eye
+    at:       [130.092, -35.826, 150.996, 125]
+    level:    [85, 85]
+  17330686:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [171.191, -36.310, 104.855, 105]
+    level:    [93, 95]
+  17330687:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [170.309, -36.833, 101.478, 173]
+    level:    [93, 95]
+  17330688:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [191.811, -30.293, 99.848, 51]
+    level:    [93, 95]
+  17330689:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [187.367, -30.613, 113.952, 220]
+    level:    [93, 95]
+  17330690:
+    template: Vanguard_Eye
+    at:       [177.900, -32.283, 111.738, 139]
+    level:    [85, 85]
+  17330691:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [195.351, -29.153, 66.609, 169]
+    level:    [93, 95]
+  17330692:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [177.121, -32.963, 67.712, 189]
+    level:    [93, 95]
+  17330693:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [195.040, -28.996, 73.127, 1]
+    level:    [93, 95]
+  17330694:
+    template: Kindreds_Wyvern
+    at:       [191.919, -29.342, 70.748, 84]
+    level:    [93, 95]
+  17330695:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [194.918, -28.159, 59.396, 119]
+    level:    [93, 95]
+  17330696:
+    template: Kindreds_Avatar
+    at:       [194.609, -28.451, 60.360, 7]
+    level:    [93, 95]
+  17330697:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [166.773, -36.500, 40.495, 78]
+    level:    [93, 95]
+  17330698:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [175.742, -35.652, 30.282, 100]
+    level:    [93, 95]
+  17330699:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [174.085, -35.844, 48.972, 131]
+    level:    [93, 95]
+  17330700:
+    template: Kindreds_Wyvern
+    at:       [166.857, -36.500, 38.406, 248]
+    level:    [93, 95]
+  17330701:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [173.472, -35.675, 29.874, 21]
+    level:    [93, 95]
+  17330702:
+    template: Kindreds_Avatar
+    at:       [168.623, -36.003, 31.347, 15]
+    level:    [93, 95]
+  17330703:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [129.647, -34.676, 151.622, 160]
+    level:    [93, 95]
+  17330704:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [126.808, -36.861, 133.295, 52]
+    level:    [93, 95]
+  17330705:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [116.381, -36.456, 157.616, 184]
+    level:    [93, 95]
+  17330706:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [115.036, -35.898, 139.798, 147]
+    level:    [93, 95]
+  17330707:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [117.146, -36.365, 149.405, 156]
+    level:    [93, 95]
+  17330708:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [72.366, -36.681, 151.104, 109]
+    level:    [93, 95]
+  17330709:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [67.489, -36.081, 159.954, 160]
+    level:    [93, 95]
+  17330710:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [98.347, -36.469, 149.154, 48]
+    level:    [93, 95]
+  17330711:
+    template: Kindreds_Wyvern
+    at:       [88.118, -36.354, 155.458, 140]
+    level:    [93, 95]
+  17330712:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [41.532, -36.165, 146.368, 222]
+    level:    [93, 95]
+  17330713:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [33.807, -36.396, 150.952, 79]
+    level:    [93, 95]
+  17330714:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [45.836, -36.473, 161.577, 161]
+    level:    [93, 95]
+  17330715:
+    template: Kindreds_Avatar
+    at:       [49.337, -36.338, 158.102, 162]
+    level:    [93, 95]
+  17330716:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [58.625, -35.695, 159.551, 197]
+    level:    [93, 95]
+  17330717:
+    template: Kindreds_Avatar
+    at:       [58.581, -35.865, 155.496, 195]
+    level:    [93, 95]
+  17330718:
+    template: Vanguard_Eye
+    at:       [74.549, -36.514, 154.261, 212]
+    level:    [85, 85]
+  17330719:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [47.862, -36.594, 128.059, 101]
+    level:    [93, 95]
+  17330720:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [41.964, -36.272, 112.913, 48]
+    level:    [93, 95]
+  17330721:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [36.872, -36.575, 64.805, 98]
+    level:    [93, 95]
+  17330722:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [45.804, -36.243, 90.539, 51]
+    level:    [93, 95]
+  17330723:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [45.159, -36.401, 87.048, 214]
+    level:    [93, 95]
+  17330724:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [32.782, -35.565, 88.621, 80]
+    level:    [93, 95]
+  17330725:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [46.720, -36.750, 71.658, 182]
+    level:    [93, 95]
+  17330726:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [25.135, -35.604, 152.583, 68]
+    level:    [93, 95]
+  17330727:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [19.370, -35.673, 161.416, 180]
+    level:    [93, 95]
+  17330728:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [22.596, -35.260, 148.991, 223]
+    level:    [93, 95]
+  17330729:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [-0.726, -36.440, 157.154, 215]
+    level:    [93, 95]
+  17330730:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [4.999, -36.310, 153.304, 216]
+    level:    [93, 95]
+  17330731:
+    template: Vanguard_Eye
+    at:       [-7.034, -36.529, 158.746, 179]
+    level:    [85, 85]
+  17330732:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [5.676, -36.184, 106.097, 67]
+    level:    [93, 95]
+  17330733:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [-1.334, -36.364, 127.397, 120]
+    level:    [93, 95]
+  17330734:
+    template: Kindred_Beastmaster_HI
+    script:   Kindred_Beastmaster
+    at:       [-4.685, -35.752, 103.843, 226]
+    level:    [93, 95]
+  17330735:
+    template: Kindreds_Vouivre
+    at:       [-6.317, -35.933, 106.130, 60]
+    level:    [93, 95]
+  17330736:
+    template: Kindred_Beastmaster_HI
+    script:   Kindred_Beastmaster
+    at:       [4.307, -36.285, 120.475, 98]
+    level:    [93, 95]
+  17330737:
+    template: Kindreds_Vouivre
+    at:       [3.560, -36.265, 122.463, 83]
+    level:    [93, 95]
+  17330738:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [4.399, -36.128, 82.312, 10]
+    level:    [93, 95]
+  17330739:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [0.425, -36.671, 71.018, 50]
+    level:    [93, 95]
+  17330740:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [-6.853, -36.412, 88.140, 180]
+    level:    [93, 95]
+  17330741:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [2.859, -35.987, 89.590, 144]
+    level:    [93, 95]
+  17330742:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [-43.281, -36.170, 55.952, 8]
+    level:    [93, 95]
+  17330743:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [-29.140, -35.696, 53.949, 23]
+    level:    [93, 95]
+  17330744:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [-24.334, -36.114, 54.284, 93]
+    level:    [93, 95]
+  17330745:
+    template: Kindreds_Wyvern
+    at:       [-44.344, -36.319, 58.049, 145]
+    level:    [93, 95]
+  17330746:
+    template: Vanguard_Eye
+    at:       [-17.446, -36.673, 58.206, 173]
+    level:    [85, 85]
+  17330747:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [-68.335, -36.215, 62.039, 250]
+    level:    [93, 95]
+  17330748:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [-60.688, -35.439, 61.555, 4]
+    level:    [93, 95]
+  17330749:
+    template: Vanguard_Eye
+    at:       [-58.034, -35.342, 60.563, 156]
+    level:    [85, 85]
+  17330750:
+    template: Kindred_Warrior_HI
+    script:   Kindred_Warrior
+    at:       [-138.913, -34.564, 52.872, 196]
+    level:    [93, 95]
+  17330751:
+    template: Kindred_Monk_HI
+    script:   Kindred_Monk
+    at:       [-126.613, -35.850, 48.207, 15]
+    level:    [93, 95]
+  17330752:
+    template: Kindred_White_Mage_HI
+    script:   Kindred_White_Mage
+    at:       [-114.667, -35.811, 64.750, 169]
+    level:    [93, 95]
+  17330753:
+    template: Kindred_Black_Mage_HI
+    script:   Kindred_Black_Mage
+    at:       [-133.241, -34.942, 52.057, 75]
+    level:    [93, 95]
+  17330754:
+    template: Kindred_Red_Mage_HI
+    script:   Kindred_Red_Mage
+    at:       [-119.191, -36.103, 50.711, 76]
+    level:    [93, 95]
+  17330755:
+    template: Kindred_Thief_HI
+    script:   Kindred_Thief
+    at:       [-124.043, -35.158, 63.361, 241]
+    level:    [93, 95]
+  17330756:
+    template: Vanguard_Eye
+    at:       [-135.247, -36.834, 42.666, 253]
+    level:    [85, 85]
+  17330757:
+    template: Kindred_Paladin_HI
+    script:   Kindred_Paladin
+    at:       [-116.125, -35.734, 103.670, 48]
+    level:    [93, 95]
+  17330758:
+    template: Kindred_Dark_Knight_HI
+    script:   Kindred_Dark_Knight
+    at:       [-114.990, -36.429, 86.077, 67]
+    level:    [93, 95]
+  17330759:
+    template: Kindred_Beastmaster_HI
+    script:   Kindred_Beastmaster
+    at:       [-116.595, -35.614, 100.141, 232]
+    level:    [93, 95]
+  17330760:
+    template: Kindreds_Vouivre
+    at:       [-119.130, -35.746, 99.286, 217]
+    level:    [93, 95]
+  17330761:
+    template: Kindred_Bard_HI
+    script:   Kindred_Bard
+    at:       [-116.085, -35.614, 101.486, 64]
+    level:    [93, 95]
+  17330762:
+    template: Vanguard_Eye
+    at:       [-112.318, -36.436, 92.800, 21]
+    level:    [85, 85]
+  17330763:
+    template: Kindred_Ranger_HI
+    script:   Kindred_Ranger
+    at:       [-137.401, -26.088, 97.617, 215]
+    level:    [93, 95]
+  17330764:
+    template: Kindred_Samurai_HI
+    script:   Kindred_Samurai
+    at:       [-128.573, -28.513, 81.430, 48]
+    level:    [93, 95]
+  17330765:
+    template: Kindred_Ninja_HI
+    script:   Kindred_Ninja
+    at:       [-133.264, -29.024, 80.011, 224]
+    level:    [93, 95]
+  17330766:
+    template: Kindred_Dragoon_HI
+    script:   Kindred_Dragoon
+    at:       [-132.563, -28.864, 81.364, 75]
+    level:    [93, 95]
+  17330767:
+    template: Kindreds_Wyvern
+    at:       [-135.075, -28.756, 77.566, 111]
+    level:    [93, 95]
+  17330768:
+    template: Kindred_Summoner_HI
+    script:   Kindred_Summoner
+    at:       [-140.685, -26.405, 94.268, 97]
+    level:    [93, 95]
+  17330769:
+    template: Kindreds_Avatar
+    at:       [-138.982, -26.353, 94.275, 214]
+    level:    [93, 95]
+  17330770:
+    template: Vanguard_Eye
+    at:       [-137.835, -28.826, 79.377, 71]
+    level:    [85, 85]

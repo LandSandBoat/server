@@ -1,0 +1,2890 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Amaranth_Barrier:
+    id:      5265
+    species: unclassified
+    type:    [notorious]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2825
+        entity_flags: 129
+        hitbox:        20
+      spawn:
+        type: [scripted]
+
+  Apex_Bat:
+    id:            4847
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Apex_Ironclad:
+    id:            4846
+    species:       iron_giant
+    skill_list_id: 350
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:  4
+          ice:   6
+          wind:  4
+          earth: 4
+          water: 2
+          light: 4
+          dark:  4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2393
+        entity_flags:  2179
+        animation_sub:    5
+        name_vis:        92
+        model_size:       1
+        hitbox:          30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Apex_Twitherym:
+    id:            4845
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2535
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Astringent_Acuex:
+    id:            5248
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Bristlehair_Bat:
+    id:            5257
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        respawn: 300
+
+  Debauched_Unseelie:
+    id:            5240
+    species:       pixie
+    spell_list_id: 20
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2032
+        entity_flags:  517
+        animation_sub:   8
+        model_size:      2
+        hitbox:          9
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Dimensional_Tether:
+    id:      5261
+    species: unclassified
+    type:    [notorious]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2823
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Dreadhound:
+    id:            5246
+    species:       hound
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Dullahan_generic:
+    id:            5250
+    species:       dullahan
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2605
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Enshrouded_Cyhiraeth:
+    id:            5251
+    species:       corpselight
+    spell_list_id: 21
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          ice:    2
+          earth:  2
+          water:  2
+          light: -1
+          dark:   6
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1841
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Festering_Umbril:
+    id:            5264
+    species:       umbril
+    type:          [notorious]
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  131
+        animation_sub:   5
+        name_prefix:     2
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Fluturini:
+    id:            5243
+    species:       fluturini
+    skill_list_id: 448
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2540
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Horrific_Bhoot:
+    id:            5260
+    species:       bhoot
+    spell_list_id: 28
+    skill_list_id: 52
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      5
+          wind:    -1
+          thunder: -2
+          water:   -1
+          light:   -2
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 369
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Ironclad:
+    id:            5258
+    species:       iron_giant
+    skill_list_id: 350
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:  4
+          ice:   6
+          wind:  4
+          earth: 4
+          water: 2
+          light: 4
+          dark:  4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2393
+        entity_flags:  2179
+        animation_sub:    5
+        name_vis:        92
+        model_size:       1
+        hitbox:          30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Legionless_Draugar_blm:
+    id:            5316
+    display_name:  Legionless_Draugar
+    species:       draugar
+    spell_list_id: 21
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1766
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Legionless_Draugar_drg:
+    id:            5245
+    display_name:  Legionless_Draugar
+    species:       draugar
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1751
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Legionless_Draugar_drk:
+    id:            5244
+    display_name:  Legionless_Draugar
+    species:       draugar
+    spell_list_id: 5
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Obfuscous_Obdella:
+    id:            5249
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags: 131
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Phlegmatic_Byrgen:
+    id:            5241
+    species:       dark_elemental
+    spell_list_id: 21
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2148
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Procrustean_Draugar_drg:
+    id:            5263
+    display_name:  Procrustean_Draugar
+    species:       draugar
+    type:          [notorious]
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1751
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Procrustean_Draugar_drk:
+    id:            5262
+    display_name:  Procrustean_Draugar
+    species:       draugar
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Restless_Twitherym:
+    id:            5236
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2535
+        entity_flags: 131
+        name_prefix:   64
+        model_size:     1
+        hitbox:         8
+      spawn:
+        respawn: 300
+
+  Shunned_Deeparrow:
+    id:            5237
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2896
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shunned_Elementalist:
+    id:            5254
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2900
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shunned_Engraver:
+    id:            5255
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2902
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shunned_Fluteslinger:
+    id:            5253
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2892
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shunned_Hexer:
+    id:            5239
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2898
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shunned_Nightstalker:
+    id:            5238
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2894
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shunned_Saboteur:
+    id:            5252
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2890
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shunned_Valiant:
+    id:            5256
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2904
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Suspended_Sculpture:
+    id:            5247
+    species:       unclassified
+    type:          [notorious]
+    skill_list_id: 349
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 2824
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        respawn: 300
+
+  Undulating_Umbril:
+    id:            5242
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  131
+        animation_sub:   5
+        name_prefix:     2
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Vengeful_Shunned_1:
+    id:            5266
+    species:       fomor
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2898
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Vengeful_Shunned_2:
+    id:            5267
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2896
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vengeful_Shunned_3:
+    id:            5268
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2890
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vengeful_Shunned_4:
+    id:            5269
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2892
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vengeful_Shunned_5:
+    id:            5270
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2900
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vengeful_Shunned_6:
+    id:            5271
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2902
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vengeful_Shunned_7:
+    id:            5272
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2904
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vengeful_Shunned_8:
+    id:            5273
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2894
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17899521:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-224.400, -170.500, 21.374, 34]
+    level:    [113, 116]
+  17899522:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-230.200, -170.500, 28.747, 186]
+    level:    [113, 116]
+  17899523:
+    template: Legionless_Draugar_drg
+    script:   Legionless_Draugar
+    at:       [-228.700, -170.500, 50.517, 136]
+    level:    [113, 116]
+  17899524:
+    template: Legionless_Draugar_drg
+    script:   Legionless_Draugar
+    at:       [-230.600, -170.700, 59.518, 183]
+    level:    [113, 116]
+  17899525:
+    template: Dreadhound
+    at:       [-212.300, -170.600, 46.788, 36]
+    level:    [113, 116]
+  17899526:
+    template: Dreadhound
+    at:       [-233.200, -170.200, 50.760, 92]
+    level:    [113, 116]
+  17899527:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-261.000, -165.900, 35.369, 74]
+    level:    [113, 116]
+  17899528:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-261.500, -165.900, 48.584, 183]
+    level:    [113, 116]
+  17899529:
+    template: Dreadhound
+    at:       [-261.900, -165.900, 39.572, 181]
+    level:    [113, 116]
+  17899530:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-289.700, -160.700, 56.066, 221]
+    level:    [113, 116]
+  17899531:
+    template: Legionless_Draugar_drg
+    script:   Legionless_Draugar
+    at:       [-297.600, -160.700, 42.892, 44]
+    level:    [113, 116]
+  17899532:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-289.000, -160.500, 42.557, 62]
+    level:    [113, 116]
+  17899533:
+    template: Dreadhound
+    at:       [-297.600, -160.700, 50.553, 62]
+    level:    [113, 116]
+  17899534:
+    template: Restless_Twitherym
+    at:       [-300.700, -160.700, -91.375, 148]
+    level:    [113, 116]
+  17899535:
+    template: Restless_Twitherym
+    at:       [-263.400, -160.500, -100.160, 253]
+    level:    [113, 116]
+  17899536:
+    template: Shunned_Deeparrow
+    at:       [-272.100, -160.700, -60.505, 68]
+    level:    [113, 116]
+  17899537:
+    template: Shunned_Deeparrow
+    at:       [-295.500, -160.700, -73.430, 109]
+    level:    [113, 116]
+  17899538:
+    template: Shunned_Nightstalker
+    at:       [-271.000, -160.700, -70.252, 157]
+    level:    [113, 116]
+  17899539:
+    template: Shunned_Hexer
+    at:       [-282.700, -160.500, -92.333, 225]
+    level:    [113, 116]
+  17899540:
+    template: Shunned_Hexer
+    at:       [-265.700, -160.700, -87.834, 222]
+    level:    [113, 116]
+  17899541:
+    template: Shunned_Nightstalker
+    at:       [-274.300, -160.700, -85.978, 188]
+    level:    [113, 116]
+  17899542:
+    template: Debauched_Unseelie
+    at:       [-472.100, -179.800, 380.268, 167]
+    level:    [113, 116]
+  17899543:
+    template: Debauched_Unseelie
+    at:       [-470.400, -179.700, 376.601, 137]
+    level:    [113, 116]
+  17899544:
+    template: Phlegmatic_Byrgen
+    at:       [-491.800, -180.700, 377.225, 249]
+    level:    [113, 116]
+  17899545:
+    template: Phlegmatic_Byrgen
+    at:       [-468.300, -179.300, 372.259, 155]
+    level:    [113, 116]
+  17899546:
+    template: Debauched_Unseelie
+    at:       [-436.400, -180.600, 385.990, 225]
+    level:    [113, 116]
+  17899547:
+    template: Debauched_Unseelie
+    at:       [-428.000, -180.500, 383.959, 55]
+    level:    [113, 116]
+  17899548:
+    template: Phlegmatic_Byrgen
+    at:       [-455.300, -178.600, 363.674, 216]
+    level:    [113, 116]
+  17899549:
+    template: Phlegmatic_Byrgen
+    at:       [-448.400, -179.800, 385.994, 136]
+    level:    [113, 116]
+  17899550:
+    template: Debauched_Unseelie
+    at:       [-450.000, -170.800, 316.020, 175]
+    level:    [113, 116]
+  17899551:
+    template: Debauched_Unseelie
+    at:       [-470.800, -172.200, 324.989, 158]
+    level:    [113, 116]
+  17899552:
+    template: Phlegmatic_Byrgen
+    at:       [-453.600, -171.400, 322.571, 143]
+    level:    [113, 116]
+  17899553:
+    template: Phlegmatic_Byrgen
+    at:       [-466.300, -171.200, 320.839, 45]
+    level:    [113, 116]
+  17899554:
+    template: Phlegmatic_Byrgen
+    at:       [-438.100, -170.700, 300.069, 144]
+    level:    [113, 116]
+  17899555:
+    template: Phlegmatic_Byrgen
+    at:       [-476.700, -170.700, 301.964, 151]
+    level:    [113, 116]
+  17899556:
+    template: Undulating_Umbril
+    at:       [-521.500, -169.900, 207.233, 99]
+    level:    [113, 116]
+  17899557:
+    template: Undulating_Umbril
+    at:       [-527.100, -170.700, 225.201, 131]
+    level:    [113, 116]
+  17899558:
+    template: Undulating_Umbril
+    at:       [-529.200, -170.500, 211.220, 72]
+    level:    [113, 116]
+  17899559:
+    template: Undulating_Umbril
+    at:       [-517.600, -169.900, 209.455, 134]
+    level:    [113, 116]
+  17899560:
+    template: Phlegmatic_Byrgen
+    at:       [-527.700, -170.600, 217.751]
+    level:    [113, 116]
+  17899561:
+    template: Undulating_Umbril
+    at:       [-519.200, -165.100, 177.802, 169]
+    level:    [113, 116]
+  17899562:
+    template: Undulating_Umbril
+    at:       [-522.600, -168.400, 189.059, 251]
+    level:    [113, 116]
+  17899563:
+    template: Phlegmatic_Byrgen
+    at:       [-523.900, -161.800, 165.750, 103]
+    level:    [113, 116]
+  17899564:
+    template: Undulating_Umbril
+    at:       [-534.900, -160.500, 139.929, 7]
+    level:    [113, 116]
+  17899565:
+    template: Undulating_Umbril
+    at:       [-522.500, -160.500, 151.755, 225]
+    level:    [113, 116]
+  17899566:
+    template: Undulating_Umbril
+    at:       [-514.200, -160.700, 138.848]
+    level:    [113, 116]
+  17899567:
+    template: Phlegmatic_Byrgen
+    at:       [-519.700, -160.700, 144.794, 119]
+    level:    [113, 116]
+  17899568:
+    template: Fluturini
+    at:       [-379.579, -160.510, 140.505, 124]
+    level:    [113, 116]
+  17899569:
+    template: Fluturini
+    at:       [-400.100, -160.700, 141.990, 101]
+    level:    [113, 116]
+  17899570:
+    template: Restless_Twitherym
+    at:       [-391.260, -160.749, 140.536, 194]
+    level:    [113, 116]
+  17899571:
+    template: Restless_Twitherym
+    at:       [-388.700, -160.700, 148.688, 159]
+    level:    [113, 116]
+  17899572:
+    template: Restless_Twitherym
+    at:       [-374.500, -160.500, 139.986, 31]
+    level:    [113, 116]
+  17899573:
+    template: Restless_Twitherym
+    at:       [-413.300, -160.700, 139.136, 40]
+    level:    [113, 116]
+  17899574:
+    template: Restless_Twitherym
+    at:       [-413.819, -160.744, 151.280, 38]
+    level:    [113, 116]
+  17899575:
+    template: Restless_Twitherym
+    at:       [-405.928, -160.725, 164.354, 228]
+    level:    [113, 116]
+  17899576:
+    template: Astringent_Acuex
+    at:       [-432.800, -180.500, -426.620, 91]
+    level:    [113, 116]
+  17899577:
+    template: Astringent_Acuex
+    at:       [-447.600, -179.700, -416.520, 92]
+    level:    [113, 116]
+  17899578:
+    template: Obfuscous_Obdella
+    at:       [-444.100, -179.800, -424.320, 201]
+    level:    [113, 116]
+  17899579:
+    template: Obfuscous_Obdella
+    at:       [-436.600, -180.400, -414.490, 228]
+    level:    [113, 116]
+  17899580:
+    template: Astringent_Acuex
+    at:       [-489.900, -180.500, -420.240, 89]
+    level:    [113, 116]
+  17899581:
+    template: Astringent_Acuex
+    at:       [-481.500, -179.900, -407.510, 73]
+    level:    [113, 116]
+  17899582:
+    template: Astringent_Acuex
+    at:       [-465.500, -179.800, -421.420, 250]
+    level:    [113, 116]
+  17899583:
+    template: Obfuscous_Obdella
+    at:       [-484.500, -180.700, -429.190, 5]
+    level:    [113, 116]
+  17899584:
+    template: Astringent_Acuex
+    at:       [-456.900, -178.400, -394.500, 94]
+    level:    [113, 116]
+  17899585:
+    template: Astringent_Acuex
+    at:       [-449.600, -176.000, -378.790, 189]
+    level:    [113, 116]
+  17899586:
+    template: Obfuscous_Obdella
+    at:       [-465.600, -178.400, -386.860, 135]
+    level:    [113, 116]
+  17899587:
+    template: Obfuscous_Obdella
+    at:       [-450.600, -178.400, -393.090, 64]
+    level:    [113, 116]
+  17899588:
+    template: Obfuscous_Obdella
+    at:       [-429.100, -170.700, -339.210, 7]
+    level:    [113, 116]
+  17899589:
+    template: Obfuscous_Obdella
+    at:       [-449.300, -170.800, -343.940, 120]
+    level:    [113, 116]
+  17899590:
+    template: Obfuscous_Obdella
+    at:       [-485.400, -170.700, -343.200, 248]
+    level:    [113, 116]
+  17899591:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-381.200, -170.500, -268.530, 20]
+    level:    [113, 116]
+  17899592:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-401.500, -170.500, -268.480, 35]
+    level:    [113, 116]
+  17899593:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-387.800, -170.700, -253.300, 123]
+    level:    [113, 116]
+  17899594:
+    template: Obfuscous_Obdella
+    at:       [-389.800, -170.700, -267.980, 76]
+    level:    [113, 116]
+  17899595:
+    template: Legionless_Draugar_drg
+    script:   Legionless_Draugar
+    at:       [-408.600, -160.900, -200.190, 189]
+    level:    [113, 116]
+  17899596:
+    template: Legionless_Draugar_drg
+    script:   Legionless_Draugar
+    at:       [-402.200, -163.200, -208.080, 225]
+    level:    [113, 116]
+  17899597:
+    template: Obfuscous_Obdella
+    at:       [-400.100, -168.100, -226.980, 94]
+    level:    [113, 116]
+  17899598:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-398.900, -160.500, -190.330, 221]
+    level:    [113, 116]
+  17899599:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-407.600, -160.700, -184.000, 223]
+    level:    [113, 116]
+  17899600:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-417.900, -160.700, -181.670, 4]
+    level:    [113, 116]
+  17899601:
+    template: Obfuscous_Obdella
+    at:       [-389.600, -160.700, -181.240, 232]
+    level:    [113, 116]
+  17899602:
+    template: Fluturini
+    at:       [-534.800, -160.700, -217.310, 166]
+    level:    [113, 116]
+  17899603:
+    template: Fluturini
+    at:       [-525.500, -160.700, -206.280, 130]
+    level:    [113, 116]
+  17899604:
+    template: Restless_Twitherym
+    at:       [-530.700, -160.700, -181.250, 161]
+    level:    [113, 116]
+  17899605:
+    template: Restless_Twitherym
+    at:       [-510.600, -160.700, -181.220, 222]
+    level:    [113, 116]
+  17899606:
+    template: Restless_Twitherym
+    at:       [-510.600, -160.700, -180.670, 90]
+    level:    [113, 116]
+  17899607:
+    template: Restless_Twitherym
+    at:       [-540.200, -160.500, -219.540, 71]
+    level:    [113, 116]
+  17899608:
+    template: Restless_Twitherym
+    at:       [-499.100, -160.700, -211.040, 171]
+    level:    [113, 116]
+  17899609:
+    template: Restless_Twitherym
+    at:       [-521.300, -160.700, -219.980, 253]
+    level:    [113, 116]
+  17899610:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [-861.400, -180.500, -53.820, 248]
+    level:    [114, 118]
+  17899611:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [-857.400, -179.700, -36.178, 101]
+    level:    [114, 118]
+  17899612:
+    template: Horrific_Bhoot
+    at:       [-859.100, -180.500, -46.895, 190]
+    level:    [114, 118]
+  17899613:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [-857.700, -180.500, 12.303, 101]
+    level:    [114, 118]
+  17899614:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [-855.400, -179.500, -13.790, 246]
+    level:    [114, 118]
+  17899615:
+    template: Horrific_Bhoot
+    at:       [-835.100, -179.900, 12.561, 35]
+    level:    [114, 118]
+  17899616:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [-823.200, -177.800, -11.512, 154]
+    level:    [114, 118]
+  17899617:
+    template: Horrific_Bhoot
+    at:       [-802.800, -171.900, -17.920, 62]
+    level:    [114, 118]
+  17899618:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-695.800, -170.600, -98.622, 34]
+    level:    [113, 116]
+  17899619:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-687.100, -170.400, -71.503, 196]
+    level:    [113, 116]
+  17899620:
+    template: Legionless_Draugar_drg
+    script:   Legionless_Draugar
+    at:       [-685.900, -170.300, -87.797, 89]
+    level:    [113, 116]
+  17899621:
+    template: Legionless_Draugar_drg
+    script:   Legionless_Draugar
+    at:       [-710.300, -170.600, -91.208, 187]
+    level:    [113, 116]
+  17899622:
+    template: Dreadhound
+    at:       [-687.600, -170.500, -90.733, 194]
+    level:    [113, 116]
+  17899623:
+    template: Dreadhound
+    at:       [-697.200, -170.500, -76.781, 29]
+    level:    [113, 116]
+  17899624:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-656.500, -165.300, -85.517, 93]
+    level:    [113, 116]
+  17899625:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-649.100, -163.000, -72.549, 197]
+    level:    [113, 116]
+  17899626:
+    template: Dreadhound
+    at:       [-640.900, -160.600, -80.830, 199]
+    level:    [113, 116]
+  17899627:
+    template: Legionless_Draugar_blm
+    script:   Legionless_Draugar
+    at:       [-624.000, -160.700, -63.221, 189]
+    level:    [113, 116]
+  17899628:
+    template: Legionless_Draugar_drg
+    script:   Legionless_Draugar
+    at:       [-619.300, -160.700, -69.162, 192]
+    level:    [113, 116]
+  17899629:
+    template: Legionless_Draugar_drk
+    script:   Legionless_Draugar
+    at:       [-625.300, -160.700, -85.968, 64]
+    level:    [113, 116]
+  17899630:
+    template: Dreadhound
+    at:       [-618.700, -160.700, -81.544, 201]
+    level:    [113, 116]
+  17899631:
+    template: Fluturini
+    at:       [-635.100, -160.700, 59.997, 248]
+    level:    [113, 116]
+  17899632:
+    template: Fluturini
+    at:       [-659.900, -160.700, 28.883, 102]
+    level:    [113, 116]
+  17899633:
+    template: Restless_Twitherym
+    at:       [-646.600, -160.600, 51.838, 9]
+    level:    [113, 116]
+  17899634:
+    template: Restless_Twitherym
+    at:       [-634.700, -160.700, 51.832, 26]
+    level:    [113, 116]
+  17899635:
+    template: Restless_Twitherym
+    at:       [-625.100, -160.700, 49.332, 250]
+    level:    [113, 116]
+  17899636:
+    template: Restless_Twitherym
+    at:       [-659.400, -160.500, 13.477, 236]
+    level:    [113, 116]
+  17899637:
+    template: Restless_Twitherym
+    at:       [-650.300, -160.700, 17.815, 236]
+    level:    [113, 116]
+  17899638:
+    template: Restless_Twitherym
+    at:       [-660.100, -160.500, 20.263, 72]
+    level:    [113, 116]
+  17899639:
+    template: Suspended_Sculpture
+    at:       [-93.480, -170.500, 94.338, 27]
+    level:    [1, 1]
+  17899640:
+    template: Suspended_Sculpture
+    at:       [-151.000, -160.500, -220.300, 117]
+    level:    [1, 1]
+  17899641:
+    template: Suspended_Sculpture
+    at:       [-331.300, -170.500, -378.420, 99]
+    level:    [1, 1]
+  17899642:
+    template: Suspended_Sculpture
+    at:       [-574.700, -160.500, -345.290, 83]
+    level:    [1, 1]
+  17899643:
+    template: Suspended_Sculpture
+    at:       [-258.625, -150.750, 221.275, 30]
+    level:    [1, 1]
+  17899644:
+    template: Suspended_Sculpture
+    at:       [-663.900, -170.500, 336.397, 73]
+    level:    [1, 1]
+  17899645:
+    template: Suspended_Sculpture
+    at:       [-781.300, -160.700, 181.343, 125]
+    level:    [1, 1]
+  17899646:
+    template: Suspended_Sculpture
+    at:       [-820.400, -170.500, -229.900, 16]
+    level:    [1, 1]
+  17899647:
+    template: Undulating_Umbril
+    at:       [-174.200, -160.500, 184.760, 231]
+    level:    [113, 116]
+  17899648:
+    template: Undulating_Umbril
+    at:       [-177.900, -160.600, 177.322, 188]
+    level:    [113, 116]
+  17899649:
+    template: Undulating_Umbril
+    at:       [-214.200, -150.500, -212.220, 16]
+    level:    [113, 116]
+  17899650:
+    template: Undulating_Umbril
+    at:       [-214.700, -150.500, -224.520, 7]
+    level:    [113, 116]
+  17899651:
+    template: Undulating_Umbril
+    at:       [-262.200, -170.500, -386.210, 146]
+    level:    [113, 116]
+  17899652:
+    template: Undulating_Umbril
+    at:       [-257.600, -170.500, -369.670, 160]
+    level:    [113, 116]
+  17899653:
+    template: Undulating_Umbril
+    at:       [-576.600, -150.500, -265.820, 89]
+    level:    [113, 116]
+  17899654:
+    template: Undulating_Umbril
+    at:       [-583.300, -150.500, -263.140, 106]
+    level:    [113, 116]
+  17899655:
+    template: Undulating_Umbril
+    at:       [-260.834, -160.673, 299.919, 215]
+    level:    [113, 116]
+  17899656:
+    template: Undulating_Umbril
+    at:       [-262.093, -160.676, 303.018, 20]
+    level:    [113, 116]
+  17899657:
+    template: Undulating_Umbril
+    at:       [-654.900, -160.500, 258.148, 56]
+    level:    [113, 116]
+  17899658:
+    template: Undulating_Umbril
+    at:       [-668.200, -160.500, 258.180, 161]
+    level:    [113, 116]
+  17899659:
+    template: Undulating_Umbril
+    at:       [-706.300, -150.500, 178.046, 232]
+    level:    [113, 116]
+  17899660:
+    template: Undulating_Umbril
+    at:       [-700.100, -150.600, 181.580, 37]
+    level:    [113, 116]
+  17899661:
+    template: Undulating_Umbril
+    at:       [-739.500, -160.600, -217.370, 103]
+    level:    [113, 116]
+  17899662:
+    template: Undulating_Umbril
+    at:       [-748.600, -160.500, -223.170, 49]
+    level:    [113, 116]
+  17899663:
+    template: Debauched_Unseelie
+    at:       [617.730, 69.476, 295.329, 226]
+    level:    [113, 116]
+  17899664:
+    template: Phlegmatic_Byrgen
+    at:       [613.730, 69.269, 267.046, 220]
+    level:    [113, 116]
+  17899665:
+    template: Phlegmatic_Byrgen
+    at:       [617.150, 69.374, 267.441, 50]
+    level:    [113, 116]
+  17899666:
+    template: Debauched_Unseelie
+    at:       [580.030, 69.500, 271.937, 9]
+    level:    [113, 116]
+  17899667:
+    template: Debauched_Unseelie
+    at:       [575.280, 69.500, 272.553, 103]
+    level:    [113, 116]
+  17899668:
+    template: Debauched_Unseelie
+    at:       [559.510, 69.500, 280.808, 75]
+    level:    [113, 116]
+  17899669:
+    template: Debauched_Unseelie
+    at:       [549.240, 69.278, 284.914, 192]
+    level:    [113, 116]
+  17899670:
+    template: Phlegmatic_Byrgen
+    at:       [541.340, 69.250, 276.876, 189]
+    level:    [113, 116]
+  17899671:
+    template: Phlegmatic_Byrgen
+    at:       [540.940, 69.431, 292.463, 155]
+    level:    [113, 116]
+  17899672:
+    template: Astringent_Acuex
+    at:       [619.290, 69.308, -331.130, 187]
+    level:    [113, 116]
+  17899673:
+    template: Obfuscous_Obdella
+    at:       [609.860, 69.431, -319.310, 67]
+    level:    [113, 116]
+  17899674:
+    template: Obfuscous_Obdella
+    at:       [611.410, 69.252, -311.600, 80]
+    level:    [113, 116]
+  17899675:
+    template: Astringent_Acuex
+    at:       [567.690, 69.500, -314.620, 217]
+    level:    [113, 116]
+  17899676:
+    template: Astringent_Acuex
+    at:       [570.840, 69.500, -321.270, 135]
+    level:    [113, 116]
+  17899677:
+    template: Astringent_Acuex
+    at:       [567.680, 69.500, -319.710, 24]
+    level:    [113, 116]
+  17899678:
+    template: Astringent_Acuex
+    at:       [542.630, 69.250, -313.960, 224]
+    level:    [113, 116]
+  17899679:
+    template: Obfuscous_Obdella
+    at:       [542.670, 69.467, -337.160, 158]
+    level:    [113, 116]
+  17899680:
+    template: Obfuscous_Obdella
+    at:       [542.110, 69.482, -340.700, 63]
+    level:    [113, 116]
+  17899681:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [279.849, 69.251, 17.007, 228]
+    level:    [114, 118]
+  17899682:
+    template: Enshrouded_Cyhiraeth
+    at:       [298.867, 69.467, 19.341, 161]
+    level:    [113, 116]
+  17899683:
+    template: Enshrouded_Cyhiraeth
+    at:       [299.277, 69.486, 20.458, 138]
+    level:    [113, 116]
+  17899684:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [273.877, 69.500, -6.698, 119]
+    level:    [114, 118]
+  17899685:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [274.379, 69.500, -31.027, 133]
+    level:    [114, 118]
+  17899686:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [279.767, 69.500, -21.066, 42]
+    level:    [114, 118]
+  17899687:
+    template: Dullahan_generic
+    script:   Dullahan
+    at:       [295.100, 69.460, -58.094, 33]
+    level:    [114, 118]
+  17899688:
+    template: Enshrouded_Cyhiraeth
+    at:       [277.237, 69.261, -56.511, 3]
+    level:    [113, 116]
+  17899689:
+    template: Enshrouded_Cyhiraeth
+    at:       [281.530, 69.257, -56.712, 126]
+    level:    [113, 116]
+  17899690:
+    template: Shunned_Saboteur
+    at:       [761.300, 109.270, -19.975, 219]
+    level:    [113, 116]
+  17899691:
+    template: Shunned_Saboteur
+    at:       [767.550, 109.250, -11.001, 210]
+    level:    [113, 116]
+  17899692:
+    template: Shunned_Saboteur
+    at:       [715.170, 109.250, -17.638, 34]
+    level:    [113, 116]
+  17899693:
+    template: Shunned_Fluteslinger
+    at:       [739.530, 109.460, 21.460, 172]
+    level:    [113, 116]
+  17899694:
+    template: Shunned_Fluteslinger
+    at:       [740.140, 109.500, -16.711, 102]
+    level:    [113, 116]
+  17899695:
+    template: Shunned_Fluteslinger
+    at:       [735.150, 109.500, -9.080, 246]
+    level:    [113, 116]
+  17899696:
+    template: Shunned_Nightstalker
+    at:       [588.930, 109.280, 112.785, 85]
+    level:    [113, 116]
+  17899697:
+    template: Shunned_Nightstalker
+    at:       [607.400, 109.250, 131.860, 45]
+    level:    [113, 116]
+  17899698:
+    template: Shunned_Nightstalker
+    at:       [571.360, 109.250, 168.416, 120]
+    level:    [113, 116]
+  17899699:
+    template: Shunned_Deeparrow
+    at:       [579.590, 109.470, 179.897, 171]
+    level:    [113, 116]
+  17899700:
+    template: Shunned_Deeparrow
+    at:       [581.230, 109.500, 148.835, 138]
+    level:    [113, 116]
+  17899701:
+    template: Shunned_Deeparrow
+    at:       [569.580, 109.500, 139.498, 100]
+    level:    [113, 116]
+  17899702:
+    template: Shunned_Hexer
+    at:       [587.750, 109.250, -209.630, 20]
+    level:    [113, 116]
+  17899703:
+    template: Shunned_Hexer
+    at:       [586.160, 109.330, -214.250, 87]
+    level:    [113, 116]
+  17899704:
+    template: Shunned_Hexer
+    at:       [584.440, 109.250, -153.100, 251]
+    level:    [113, 116]
+  17899705:
+    template: Shunned_Elementalist
+    at:       [555.910, 109.250, -182.310, 239]
+    level:    [113, 116]
+  17899706:
+    template: Shunned_Elementalist
+    at:       [571.360, 109.500, -173.110, 164]
+    level:    [113, 116]
+  17899707:
+    template: Shunned_Elementalist
+    at:       [572.920, 109.500, -192.760, 117]
+    level:    [113, 116]
+  17899708:
+    template: Shunned_Engraver
+    at:       [434.670, 109.460, -31.059, 94]
+    level:    [113, 116]
+  17899709:
+    template: Shunned_Engraver
+    at:       [435.770, 109.480, -34.180, 151]
+    level:    [113, 116]
+  17899710:
+    template: Shunned_Engraver
+    at:       [402.960, 109.470, -4.394, 227]
+    level:    [113, 116]
+  17899711:
+    template: Shunned_Valiant
+    at:       [380.710, 109.460, -20.670, 137]
+    level:    [113, 116]
+  17899712:
+    template: Shunned_Valiant
+    at:       [425.430, 109.500, -17.028, 92]
+    level:    [113, 116]
+  17899713:
+    template: Shunned_Valiant
+    at:       [413.890, 109.500, -30.468, 117]
+    level:    [113, 116]
+  17899714:
+    template: Bristlehair_Bat
+    at:       [775.870, 99.469, 100.944, 119]
+    level:    [113, 116]
+  17899715:
+    template: Bristlehair_Bat
+    at:       [780.570, 99.250, 124.119, 250]
+    level:    [113, 116]
+  17899716:
+    template: Bristlehair_Bat
+    at:       [779.880, 99.257, 115.945, 168]
+    level:    [113, 116]
+  17899717:
+    template: Bristlehair_Bat
+    at:       [705.510, 99.250, 132.975, 248]
+    level:    [113, 116]
+  17899718:
+    template: Bristlehair_Bat
+    at:       [701.320, 99.262, 109.185, 138]
+    level:    [113, 116]
+  17899719:
+    template: Bristlehair_Bat
+    at:       [700.580, 99.250, 110.930, 100]
+    level:    [113, 116]
+  17899720:
+    template: Bristlehair_Bat
+    at:       [745.390, 99.494, -212.270, 247]
+    level:    [113, 116]
+  17899721:
+    template: Bristlehair_Bat
+    at:       [729.380, 99.266, -214.660, 99]
+    level:    [113, 116]
+  17899722:
+    template: Bristlehair_Bat
+    at:       [722.770, 99.250, -218.060, 58]
+    level:    [113, 116]
+  17899723:
+    template: Bristlehair_Bat
+    at:       [716.480, 99.250, -145.750, 127]
+    level:    [113, 116]
+  17899724:
+    template: Bristlehair_Bat
+    at:       [706.770, 99.302, -144.060, 69]
+    level:    [113, 116]
+  17899725:
+    template: Bristlehair_Bat
+    at:       [707.210, 99.274, -144.160, 227]
+    level:    [113, 116]
+  17899726:
+    template: Bristlehair_Bat
+    at:       [452.400, 99.497, -134.160, 184]
+    level:    [113, 116]
+  17899727:
+    template: Bristlehair_Bat
+    at:       [452.750, 99.278, -173.150, 165]
+    level:    [113, 116]
+  17899728:
+    template: Bristlehair_Bat
+    at:       [452.230, 99.499, -138.370, 75]
+    level:    [113, 116]
+  17899729:
+    template: Bristlehair_Bat
+    at:       [385.540, 99.442, -178.430, 54]
+    level:    [113, 116]
+  17899730:
+    template: Bristlehair_Bat
+    at:       [377.850, 99.475, -185.880, 75]
+    level:    [113, 116]
+  17899731:
+    template: Bristlehair_Bat
+    at:       [384.240, 99.300, -141.260, 247]
+    level:    [113, 116]
+  17899732:
+    template: Bristlehair_Bat
+    at:       [441.040, 99.250, 98.776, 30]
+    level:    [113, 116]
+  17899733:
+    template: Bristlehair_Bat
+    at:       [426.240, 99.290, 99.401, 27]
+    level:    [113, 116]
+  17899734:
+    template: Bristlehair_Bat
+    at:       [444.800, 99.250, 97.565, 120]
+    level:    [113, 116]
+  17899735:
+    template: Bristlehair_Bat
+    at:       [427.920, 99.250, 173.440, 72]
+    level:    [113, 116]
+  17899736:
+    template: Bristlehair_Bat
+    at:       [440.630, 99.250, 171.412]
+    level:    [113, 116]
+  17899737:
+    template: Bristlehair_Bat
+    at:       [437.890, 99.257, 179.602, 2]
+    level:    [113, 116]
+  17899738:
+    template: Ironclad
+    at:       [895.630, 69.250, 286.510, 105]
+    level:    [120, 120]
+  17899739:
+    template: Ironclad
+    at:       [895.410, 69.250, 273.539, 31]
+    level:    [120, 120]
+  17899740:
+    template: Restless_Twitherym
+    at:       [900.070, 69.411, 269.434, 190]
+    level:    [113, 116]
+  17899741:
+    template: Restless_Twitherym
+    at:       [899.920, 69.250, 291.292, 5]
+    level:    [113, 116]
+  17899742:
+    template: Ironclad
+    at:       [862.010, 69.250, 261.036, 75]
+    level:    [120, 120]
+  17899743:
+    template: Ironclad
+    at:       [868.750, 69.250, 266.407, 175]
+    level:    [120, 120]
+  17899744:
+    template: Restless_Twitherym
+    at:       [861.930, 69.250, 270.239, 109]
+    level:    [113, 116]
+  17899745:
+    template: Restless_Twitherym
+    at:       [864.750, 69.249, 284.764, 213]
+    level:    [113, 116]
+  17899746:
+    template: Ironclad
+    at:       [869.400, 69.500, 278.147, 179]
+    level:    [120, 120]
+  17899747:
+    template: Ironclad
+    at:       [901.260, 69.500, -349.500, 244]
+    level:    [120, 120]
+  17899748:
+    template: Ironclad
+    at:       [860.260, 69.500, -348.310, 48]
+    level:    [120, 120]
+  17899749:
+    template: Restless_Twitherym
+    at:       [903.900, 69.480, -342.390, 230]
+    level:    [113, 116]
+  17899750:
+    template: Restless_Twitherym
+    at:       [862.360, 69.410, -333.910, 225]
+    level:    [113, 116]
+  17899751:
+    template: Ironclad
+    at:       [900.950, 69.400, -300.210, 160]
+    level:    [120, 120]
+  17899752:
+    template: Ironclad
+    at:       [880.290, 69.250, -300.200, 172]
+    level:    [120, 120]
+  17899753:
+    template: Restless_Twitherym
+    at:       [878.690, 69.456, -308.620, 41]
+    level:    [113, 116]
+  17899754:
+    template: Restless_Twitherym
+    at:       [892.120, 69.250, -298.370, 145]
+    level:    [113, 116]
+  17899755:
+    template: Ironclad
+    at:       [877.810, 69.500, -309.390, 211]
+    level:    [120, 120]
+  17899756:
+    template: Suspended_Sculpture
+    at:       [867.570, 89.500, 104.665, 2]
+    level:    [1, 1]
+  17899757:
+    template: Suspended_Sculpture
+    at:       [780.800, 89.500, 229.751, 24]
+    level:    [1, 1]
+  17899758:
+    template: Suspended_Sculpture
+    at:       [906.260, 79.500, -226.220, 27]
+    level:    [1, 1]
+  17899759:
+    template: Suspended_Sculpture
+    at:       [700.750, 79.250, -380.720, 72]
+    level:    [1, 1]
+  17899760:
+    template: Suspended_Sculpture
+    at:       [370.230, 79.500, 339.291, 19]
+    level:    [1, 1]
+  17899761:
+    template: Suspended_Sculpture
+    at:       [338.684, 89.500, 168.223, 65]
+    level:    [1, 1]
+  17899762:
+    template: Suspended_Sculpture
+    at:       [448.910, 79.500, -340.360, 110]
+    level:    [1, 1]
+  17899763:
+    template: Suspended_Sculpture
+    at:       [215.880, 79.500, -216.330, 54]
+    level:    [1, 1]
+  17899764:
+    template: Undulating_Umbril
+    at:       [940.550, 79.472, 183.417, 134]
+    level:    [113, 116]
+  17899765:
+    template: Undulating_Umbril
+    at:       [942.970, 79.457, 183.014, 229]
+    level:    [113, 116]
+  17899766:
+    template: Undulating_Umbril
+    at:       [702.990, 89.498, 224.016, 249]
+    level:    [113, 116]
+  17899767:
+    template: Undulating_Umbril
+    at:       [705.780, 89.499, 222.121, 26]
+    level:    [113, 116]
+  17899768:
+    template: Undulating_Umbril
+    at:       [825.550, 89.499, -225.640, 56]
+    level:    [113, 116]
+  17899769:
+    template: Undulating_Umbril
+    at:       [816.350, 89.487, -214.710, 107]
+    level:    [113, 116]
+  17899770:
+    template: Undulating_Umbril
+    at:       [776.830, 79.497, -388.010, 131]
+    level:    [113, 116]
+  17899771:
+    template: Undulating_Umbril
+    at:       [781.720, 79.432, -388.160, 187]
+    level:    [113, 116]
+  17899772:
+    template: Undulating_Umbril
+    at:       [466.570, 79.499, 343.261, 134]
+    level:    [113, 116]
+  17899773:
+    template: Undulating_Umbril
+    at:       [463.410, 79.337, 340.592, 103]
+    level:    [113, 116]
+  17899774:
+    template: Undulating_Umbril
+    at:       [258.200, 79.499, 91.987, 143]
+    level:    [113, 116]
+  17899775:
+    template: Undulating_Umbril
+    at:       [254.560, 79.490, 103.660, 211]
+    level:    [113, 116]
+  17899776:
+    template: Undulating_Umbril
+    at:       [452.150, 79.499, -341.090, 155]
+    level:    [113, 116]
+  17899777:
+    template: Undulating_Umbril
+    at:       [455.980, 79.490, -335.980, 185]
+    level:    [113, 116]
+  17899778:
+    template: Undulating_Umbril
+    at:       [221.190, 79.335, -142.070, 106]
+    level:    [113, 116]
+  17899779:
+    template: Undulating_Umbril
+    at:       [212.630, 79.472, -139.010, 126]
+    level:    [113, 116]
+  17899780:
+    template: Dimensional_Tether
+    at:       [-380.000, -150.700, 60.000]
+    level:    [113, 116]
+  17899781:
+    template: Procrustean_Draugar_drg
+    script:   Procrustean_Draugar
+    at:       [-372.000, -150.500, 65.602, 175]
+    level:    [113, 116]
+  17899782:
+    template: Procrustean_Draugar_drk
+    script:   Procrustean_Draugar
+    at:       [-374.400, -150.500, 57.727, 43]
+    level:    [113, 116]
+  17899783:
+    template: Festering_Umbril
+    at:       [-371.700, -150.500, 63.689, 28]
+    level:    [113, 116]
+  17899784:
+    template: Dimensional_Tether
+    at:       [-380.000, -150.700, -100.000]
+    level:    [113, 116]
+  17899785:
+    template: Procrustean_Draugar_drg
+    script:   Procrustean_Draugar
+    at:       [-379.100, -150.600, -95.967, 86]
+    level:    [113, 116]
+  17899786:
+    template: Procrustean_Draugar_drk
+    script:   Procrustean_Draugar
+    at:       [-378.500, -150.600, -96.793, 8]
+    level:    [113, 116]
+  17899787:
+    template: Festering_Umbril
+    at:       [-379.900, -150.600, -96.186, 83]
+    level:    [113, 116]
+  17899788:
+    template: Dimensional_Tether
+    at:       [-540.000, -150.700, -100.000]
+    level:    [113, 116]
+  17899789:
+    template: Procrustean_Draugar_drg
+    script:   Procrustean_Draugar
+    at:       [-543.600, -150.600, -97.693, 20]
+    level:    [113, 116]
+  17899790:
+    template: Procrustean_Draugar_drk
+    script:   Procrustean_Draugar
+    at:       [-537.700, -150.500, -93.308, 251]
+    level:    [113, 116]
+  17899791:
+    template: Festering_Umbril
+    at:       [-543.100, -150.500, -94.357, 135]
+    level:    [113, 116]
+  17899792:
+    template: Dimensional_Tether
+    at:       [-540.000, -150.700, 60.000]
+    level:    [113, 116]
+  17899793:
+    template: Procrustean_Draugar_drg
+    script:   Procrustean_Draugar
+    at:       [-541.700, -150.500, 50.840, 59]
+    level:    [113, 116]
+  17899794:
+    template: Procrustean_Draugar_drk
+    script:   Procrustean_Draugar
+    at:       [-545.600, -150.500, 64.923, 133]
+    level:    [113, 116]
+  17899795:
+    template: Festering_Umbril
+    at:       [-539.200, -150.600, 58.583, 132]
+    level:    [113, 116]
+  17899796:
+    template: Amaranth_Barrier
+    at:       [740.000, 100.000, 122.550]
+    level:    [113, 116]
+  17899797:
+    template: Amaranth_Barrier
+    at:       [740.000, 100.000, 120.000]
+    level:    [113, 116]
+  17899798:
+    template: Amaranth_Barrier
+    at:       [740.000, 100.000, 117.449]
+    level:    [113, 116]
+  17899799:
+    template: Vengeful_Shunned_3
+    script:   Vengeful_Shunned
+    at:       [751.230, 99.484, 111.402, 118]
+    level:    [113, 116]
+  17899800:
+    template: Vengeful_Shunned_3
+    script:   Vengeful_Shunned
+    at:       [750.180, 99.497, 112.870, 73]
+    level:    [113, 116]
+  17899801:
+    template: Vengeful_Shunned_2
+    script:   Vengeful_Shunned
+    at:       [724.450, 99.499, 114.186, 136]
+    level:    [113, 116]
+  17899802:
+    template: Vengeful_Shunned_2
+    script:   Vengeful_Shunned
+    at:       [724.850, 99.499, 122.106, 144]
+    level:    [113, 116]
+  17899803:
+    template: Amaranth_Barrier
+    at:       [722.540, 100.000, -180.000, 64]
+    level:    [113, 116]
+  17899804:
+    template: Amaranth_Barrier
+    at:       [720.000, 100.000, -180.000, 64]
+    level:    [113, 116]
+  17899805:
+    template: Amaranth_Barrier
+    at:       [717.450, 100.000, -180.000, 64]
+    level:    [113, 116]
+  17899806:
+    template: Vengeful_Shunned_1
+    script:   Vengeful_Shunned
+    at:       [719.480, 99.500, -197.200, 122]
+    level:    [113, 116]
+  17899807:
+    template: Vengeful_Shunned_1
+    script:   Vengeful_Shunned
+    at:       [727.020, 99.500, -195.970, 121]
+    level:    [113, 116]
+  17899808:
+    template: Vengeful_Shunned_4
+    script:   Vengeful_Shunned
+    at:       [715.400, 99.500, -169.840, 122]
+    level:    [113, 116]
+  17899809:
+    template: Vengeful_Shunned_4
+    script:   Vengeful_Shunned
+    at:       [719.410, 99.746, -175.200, 90]
+    level:    [113, 116]
+  17899810:
+    template: Amaranth_Barrier
+    at:       [420.000, 100.000, -157.440]
+    level:    [113, 116]
+  17899811:
+    template: Amaranth_Barrier
+    at:       [420.000, 100.000, -160.000]
+    level:    [113, 116]
+  17899812:
+    template: Amaranth_Barrier
+    at:       [420.000, 100.000, -162.550]
+    level:    [113, 116]
+  17899813:
+    template: Vengeful_Shunned_5
+    script:   Vengeful_Shunned
+    at:       [431.800, 99.499, -164.590, 80]
+    level:    [113, 116]
+  17899814:
+    template: Vengeful_Shunned_5
+    script:   Vengeful_Shunned
+    at:       [435.670, 99.499, -148.130, 224]
+    level:    [113, 116]
+  17899815:
+    template: Vengeful_Shunned_7
+    script:   Vengeful_Shunned
+    at:       [403.870, 99.430, -152.780, 71]
+    level:    [113, 116]
+  17899816:
+    template: Vengeful_Shunned_7
+    script:   Vengeful_Shunned
+    at:       [407.920, 99.483, -160.070, 222]
+    level:    [113, 116]
+  17899817:
+    template: Amaranth_Barrier
+    at:       [442.540, 100.000, 140.000, 64]
+    level:    [113, 116]
+  17899818:
+    template: Amaranth_Barrier
+    at:       [440.000, 100.000, 140.000, 64]
+    level:    [113, 116]
+  17899819:
+    template: Amaranth_Barrier
+    at:       [437.450, 100.000, 140.000, 64]
+    level:    [113, 116]
+  17899820:
+    template: Vengeful_Shunned_6
+    script:   Vengeful_Shunned
+    at:       [432.090, 99.500, 129.356, 182]
+    level:    [113, 116]
+  17899821:
+    template: Vengeful_Shunned_6
+    script:   Vengeful_Shunned
+    at:       [444.310, 99.476, 125.253, 90]
+    level:    [113, 116]
+  17899822:
+    template: Vengeful_Shunned_8
+    script:   Vengeful_Shunned
+    at:       [443.860, 99.499, 150.703, 5]
+    level:    [113, 116]
+  17899823:
+    template: Vengeful_Shunned_8
+    script:   Vengeful_Shunned
+    at:       [427.620, 99.309, 155.354, 158]
+    level:    [113, 116]
+  17899824:
+    template: Apex_Twitherym
+    at:       [259.570, 69.251, -307.950, 125]
+    level:    [134, 136]
+  17899825:
+    template: Apex_Twitherym
+    at:       [262.280, 69.250, -326.460, 62]
+    level:    [134, 136]
+  17899826:
+    template: Apex_Twitherym
+    at:       [267.250, 69.300, -343.030, 238]
+    level:    [134, 136]
+  17899827:
+    template: Apex_Twitherym
+    at:       [259.460, 69.250, -320.200, 56]
+    level:    [134, 136]
+  17899828:
+    template: Apex_Twitherym
+    at:       [264.300, 69.258, -314.670, 112]
+    level:    [134, 136]
+  17899829:
+    template: Apex_Twitherym
+    at:       [251.970, 69.497, -300.760, 98]
+    level:    [134, 136]
+  17899830:
+    template: Apex_Ironclad
+    at:       [259.320, 69.500, -332.180, 166]
+    level:    [134, 136]
+  17899831:
+    template: Apex_Twitherym
+    at:       [296.290, 69.250, -329.160, 166]
+    level:    [134, 136]
+  17899832:
+    template: Apex_Twitherym
+    at:       [296.630, 69.250, -317.390, 172]
+    level:    [134, 136]
+  17899833:
+    template: Apex_Twitherym
+    at:       [289.060, 69.281, -312.560, 191]
+    level:    [134, 136]
+  17899834:
+    template: Apex_Twitherym
+    at:       [294.190, 69.276, -331.760, 4]
+    level:    [134, 136]
+  17899835:
+    template: Apex_Twitherym
+    at:       [300.510, 69.255, -311.920, 227]
+    level:    [134, 136]
+  17899836:
+    template: Apex_Twitherym
+    at:       [296.070, 69.250, -314.450, 34]
+    level:    [134, 136]
+  17899837:
+    template: Apex_Ironclad
+    at:       [302.620, 69.250, -311.070, 216]
+    level:    [134, 136]
+  17899838:
+    template: Apex_Twitherym
+    at:       [289.980, 69.471, -321.930, 192]
+    level:    [134, 136]
+  17899839:
+    template: Apex_Twitherym
+    at:       [289.140, 69.278, -330.280, 36]
+    level:    [134, 136]
+  17899840:
+    template: Apex_Twitherym
+    at:       [279.220, 69.472, -319.090, 120]
+    level:    [134, 136]
+  17899841:
+    template: Apex_Twitherym
+    at:       [274.310, 69.277, -330.520, 97]
+    level:    [134, 136]
+  17899842:
+    template: Apex_Bat
+    at:       [259.380, 69.294, 291.489, 44]
+    level:    [134, 136]
+  17899843:
+    template: Apex_Bat
+    at:       [261.740, 69.440, 297.305, 186]
+    level:    [134, 136]
+  17899844:
+    template: Apex_Bat
+    at:       [267.700, 69.472, 300.489, 225]
+    level:    [134, 136]
+  17899845:
+    template: Apex_Bat
+    at:       [279.320, 69.250, 299.652, 232]
+    level:    [134, 136]
+  17899846:
+    template: Apex_Bat
+    at:       [298.630, 69.250, 300.423, 3]
+    level:    [134, 136]
+  17899847:
+    template: Apex_Bat
+    at:       [291.880, 69.250, 293.152, 73]
+    level:    [134, 136]
+  17899848:
+    template: Apex_Ironclad
+    at:       [289.970, 69.250, 287.933, 48]
+    level:    [134, 136]
+  17899849:
+    template: Apex_Bat
+    at:       [281.350, 69.467, 272.526, 132]
+    level:    [134, 136]
+  17899850:
+    template: Apex_Bat
+    at:       [286.050, 69.257, 267.269, 82]
+    level:    [134, 136]
+  17899851:
+    template: Apex_Bat
+    at:       [259.230, 69.250, 268.596, 65]
+    level:    [134, 136]
+  17899852:
+    template: Apex_Bat
+    at:       [297.040, 69.462, 254.110, 22]
+    level:    [134, 136]
+  17899853:
+    template: Apex_Bat
+    at:       [287.570, 69.250, 267.688, 98]
+    level:    [134, 136]
+  17899854:
+    template: Apex_Bat
+    at:       [278.790, 69.458, 269.915, 185]
+    level:    [134, 136]
+  17899855:
+    template: Apex_Ironclad
+    at:       [292.170, 69.250, 272.269, 182]
+    level:    [134, 136]
+  17899856:
+    template: Apex_Bat
+    at:       [278.380, 69.486, 277.240, 179]
+    level:    [134, 136]
+  17899857:
+    template: Apex_Bat
+    at:       [271.700, 69.356, 275.942, 96]
+    level:    [134, 136]
+  17899858:
+    template: Apex_Bat
+    at:       [268.380, 69.278, 271.442, 107]
+    level:    [134, 136]
+  17899859:
+    template: Apex_Bat
+    at:       [279.980, 69.453, 280.805, 97]
+    level:    [134, 136]

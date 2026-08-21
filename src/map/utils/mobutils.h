@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/shared_types/mob_attributes/dataset.h"
 
 #include <common/types/hash_map.h>
 
@@ -83,6 +84,7 @@ void ApplyStatRanks(T& out, const xi::data::StatRanksData& stats)
 void LoadSpeciesData();
 auto GetSpeciesData(uint16 speciesId) -> const SpeciesInfo&;
 void ApplySpecies(CMobEntity* PMob);
+void ApplySpecies(CMobEntity* PMob, const xi::data::MobAttributesData& attributes);
 void CalculateMobStats(CMobEntity* PMob, bool recover = true);
 void SetupJob(CMobEntity* PMob);
 void SetupRoaming(CMobEntity* PMob);

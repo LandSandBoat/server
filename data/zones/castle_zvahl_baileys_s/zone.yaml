@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:           43
+  night:         43
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z3u0:
+    from:  [414.951, -16.608, -19.995]
+    to:    xarcabard_s
+    at:    [-414.000, -46.500, 20.000]
+    scale: [1.000, 5.000]
+
+  z3u2:
+    from:  [-185.026, -39.497, 20.000]
+    to:    castle_zvahl_keep_s
+    at:    [62.014, -1.907, -19.989, 3.141593]
+    scale: [1.000, 4.000]

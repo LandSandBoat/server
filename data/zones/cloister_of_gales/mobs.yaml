@@ -1,0 +1,482 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Air_Elemental_T:
+    id:            6139
+    display_name:  Air_Elemental
+    species:       air_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+  Garuda_Prime_ASA:
+    id:           7045
+    display_name: Garuda_Prime
+    species:      garuda
+    type:         [notorious, battlefield]
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:     6
+          wind:    11
+          earth:   11
+          thunder:  6
+          water:    6
+          light:    6
+          dark:     6
+        rank_status:
+          silence:     11
+          slow:        11
+          poison:       6
+          light_sleep:  6
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Garuda_Prime_TBW:
+    id:            4647
+    display_name:  Garuda_Prime
+    species:       garuda
+    type:          [notorious, battlefield]
+    skill_list_id: 324
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:     6
+          wind:    11
+          earth:   11
+          thunder:  6
+          water:    6
+          light:    6
+          dark:     6
+        rank_status:
+          silence:     11
+          slow:        11
+          poison:       6
+          light_sleep:  6
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Garuda_Prime_TBW_2:
+    id:            4647
+    display_name:  Garuda_Prime
+    species:       garuda
+    type:          [notorious, battlefield]
+    skill_list_id: 324
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:     6
+          wind:    11
+          earth:   11
+          thunder:  6
+          water:    6
+          light:    6
+          dark:     6
+        rank_status:
+          silence:     11
+          slow:        11
+          poison:       6
+          light_sleep:  6
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Garuda_Prime_TSTBW:
+    id:            7049
+    display_name:  Garuda_Prime
+    species:       garuda
+    type:          [notorious, battlefield]
+    skill_list_id: 1177
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     6
+          wind:    11
+          earth:   11
+          thunder:  6
+          water:    6
+          light:    6
+          dark:     6
+        rank_status:
+          silence:     11
+          slow:        11
+          poison:       6
+          light_sleep:  6
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 700
+
+  Garuda_Prime_WTB:
+    id:            1473
+    display_name:  Garuda_Prime
+    species:       garuda
+    type:          [notorious, battlefield]
+    skill_list_id: 2026
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -3
+          wind:    -3
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+  Ogmios:
+    id:            2951
+    species:       manticore
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 179
+    attributes:
+      combat:
+        skill: scythe
+        delay: 350
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         36
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+        mp: 11000
+
+spawns:
+  17600513:
+    template: Garuda_Prime_TBW
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [60, 60]
+  17600514:
+    template: Garuda_Prime_TBW
+    at:       [23.115, -19.001, 32.999, 105]
+    level:    [60, 60]
+  17600515:
+    template: Garuda_Prime_TBW
+    at:       [-376.940, -78.992, 512.872, 105]
+    level:    [60, 60]
+  17600516:
+    template: Ogmios
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [65, 65]
+  17600517:
+    template: Ogmios
+    at:       [23.115, -19.001, 32.999, 105]
+    level:    [65, 65]
+  17600518:
+    template: Ogmios
+    at:       [-376.940, -78.992, 512.872, 105]
+    level:    [65, 65]
+  17600519:
+    template: Garuda_Prime_TSTBW
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [20, 20]
+  17600520:
+    template: Garuda_Prime_TSTBW
+    at:       [23.115, -19.001, 32.999, 105]
+    level:    [20, 20]
+  17600521:
+    template: Garuda_Prime_TSTBW
+    at:       [-376.940, -78.992, 512.872, 105]
+    level:    [20, 20]
+  17600522:
+    template: Garuda_Prime_WTB
+    at:       [502.000, 41.000, -367.000, 105]
+    level:    [85, 85]
+  17600523:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [504.000, 41.000, -367.000]
+    level:    [75, 75]
+  17600524:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [498.000, 41.000, -367.000]
+    level:    [75, 75]
+  17600525:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [502.000, 41.000, -371.000]
+    level:    [75, 75]
+  17600526:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [502.000, 41.000, -363.000]
+    level:    [75, 75]
+  17600527:
+    template: Garuda_Prime_WTB
+    at:       [23.000, -19.000, 33.000, 105]
+    level:    [85, 85]
+  17600528:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [27.000, -19.000, 33.000]
+    level:    [75, 75]
+  17600529:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [19.000, -19.000, 33.000]
+    level:    [75, 75]
+  17600530:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [23.000, -19.000, 29.000]
+    level:    [75, 75]
+  17600531:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [23.000, -19.000, 37.000]
+    level:    [75, 75]
+  17600532:
+    template: Garuda_Prime_WTB
+    at:       [-377.000, -79.000, 513.000, 105]
+    level:    [85, 85]
+  17600533:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [-373.000, -79.000, 513.000]
+    level:    [75, 75]
+  17600534:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [-381.000, -79.000, 513.000]
+    level:    [75, 75]
+  17600535:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [-377.000, -79.000, 509.000]
+    level:    [75, 75]
+  17600536:
+    template: Air_Elemental_T
+    script:   Air_Elemental
+    at:       [-377.000, -79.000, 517.000]
+    level:    [75, 75]
+  17600537:
+    template: Garuda_Prime_ASA
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [40, 40]
+  17600538:
+    template: Garuda_Prime_ASA
+    at:       [23.115, -19.001, 32.999, 105]
+    level:    [40, 40]
+  17600539:
+    template: Garuda_Prime_ASA
+    at:       [-376.940, -78.992, 512.872, 105]
+    level:    [40, 40]
+  17600540:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600541:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600542:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600543:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600544:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600545:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600546:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600547:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600548:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600549:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600550:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600551:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600552:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600553:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]
+  17600554:
+    template: Garuda_Prime_TBW_2
+    script:   Garuda_Prime_HTBF
+    level:    [99, 99]

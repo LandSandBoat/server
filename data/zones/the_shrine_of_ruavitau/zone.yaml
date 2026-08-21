@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          207
+  night:        207
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z4y0:
+    from:  [-40.000, -4.452, -235.621]
+    to:    ruaun_gardens
+    at:    [-0.003, -46.609, -112.182, 1.570796]
+    scale: [1.000, 4.000]
+
+  z4y2:
+    from:  [-119.988, -20.414, -195.630]
+    to:    ruaun_gardens
+    at:    [-96.318, -33.737, -147.817, 2.145516]
+    scale: [1.000, 3.000]
+
+  z4y4:
+    from:  [119.993, -20.398, -195.610]
+    to:    ruaun_gardens
+    at:    [96.326, -33.663, -147.828, 0.995355]
+    scale: [1.000, 3.000]
+
+  z4y6:
+    from:  [355.705, -4.452, -159.993]
+    to:    ruaun_gardens
+    at:    [320.798, -9.770, -104.233, 0.313450]
+    scale: [1.000, 3.000]
+
+  z4y8:
+    from:  [239.985, -4.452, 355.654]
+    to:    ruaun_gardens
+    at:    [195.928, -9.654, 269.686, 5.334615]
+    scale: [1.000, 3.000]
+
+  z4ya:
+    from:  [-240.015, -4.452, 355.655]
+    to:    ruaun_gardens
+    at:    [-197.707, -9.589, 272.111, 4.080957]
+    scale: [1.000, 3.000]
+
+  z4yc:
+    from:  [-355.712, -4.452, -160.000]
+    to:    ruaun_gardens
+    at:    [-319.884, -9.696, -103.948, 2.827007]
+    scale: [1.000, 3.000]
+
+  z4ye:
+    from:  [-0.024, 43.363, 60.008]
+    to:    the_celestial_nexus
+    at:    [-697.114, -6.656, -32.351]
+    scale: [1.000, 4.000]

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z5p0:
+    from:  [299.994, 12.061, -85.013]
+    to:    yhoator_jungle
+    at:    [102.056, -1.571, 344.135, 2.650368]
+    scale: [1.000, 4.000]
+
+  z5p2:
+    from:  [100.340, -3.652, -323.961]
+    to:    yhoator_jungle
+    at:    [-100.461, -1.628, 255.806, 0.883077]
+    scale: [1.000, 4.000]
+
+  z5p4:
+    from:  [-58.748, 46.833, 110.261]
+    to:    cloister_of_flames
+    at:    [-698.729, -1.045, -646.659, 4.712389]
+    scale: [1.000, 3.000]
+
+  z5p6:
+    from:  [-419.271, 27.025, 227.968]
+    to:    yuhtunga_jungle
+    at:    [420.005, 18.650, 476.787, 1.570796]
+    scale: [1.000, 4.000]

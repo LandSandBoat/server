@@ -1,0 +1,1431 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Black_Shuck:
+    id:            438
+    species:       cerberus
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 62
+    attributes:
+      combat:
+        skill: scythe
+        delay: 380
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:  11
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 1793
+        entity_flags: 155
+        model_size:     1
+        hitbox:        40
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+  Brittle_Rock:
+    id:      534
+    species: rocks
+    type:    [notorious, battlefield]
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        immune_status: [blind, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 450
+        entity_flags: 131
+        name_vis:      80
+        name_prefix:    2
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+
+  Broken_Troll_Soldier_mnk:
+    id:            535
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1712
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Broken_Troll_Soldier_pld:
+    id:            5470
+    species:       troll
+    spell_list_id: 4
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1688
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Broken_Troll_Soldier_rdm:
+    id:            5472
+    species:       troll
+    spell_list_id: 3
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Broken_Troll_Soldier_war:
+    id:            5471
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1686
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Crimson_Eruca:
+    id:            837
+    species:       eruca
+    type:          [notorious]
+    skill_list_id: 107
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -2
+          dark:    -1
+        rank_status:
+          paralyze:   -1
+          bind:       -1
+          silence:    -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 406
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dahak:
+    id:            894
+    species:       dahak
+    skill_list_id: 2007
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 421
+        entity_flags: 133
+        model_size:     2
+        hitbox:        39
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Djahama:
+    id:            1070
+    species:       humes
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1963
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Jorporbor_the_Hellraker:
+    id:            2157
+    species:       troll
+    spell_list_id: 5
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1685
+        model_size:  1
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Kadjaya:
+    id:            2177
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      render:
+        look:
+          type:  equipped
+          race:  2
+          face:  11
+          body:  8327
+          hands: 12423
+          legs:  16559
+          feet:  20640
+          main:  24955
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Kudjreel:
+    id:            2291
+    species:       humes
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [blu, mnk]
+      render:
+        look:
+          type:  misc
+          model: 1960
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Nocuous_Inferno:
+    id:            2903
+    species:       fire_elemental
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags: 3
+        model_size:   1
+        hitbox:       3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Old_Troll:
+    id:            2967
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: axe
+        delay: 230
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1709
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+
+  Qiqirn_Ceramist:
+    id:            3248
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Eggler:
+    id:            3251
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 180
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Mine:
+    id:           5872
+    display_name: Qiqirn Mine
+    species:      bomb
+    type:         [unused, event]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 1790
+        entity_flags:  665
+        animation_sub:   8
+        name_vis:        2
+        name_prefix:    40
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Qiqirn_Volcanist:
+    id:            3268
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: axe
+        delay: 200
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      mob_mods:
+        hp_standback: 1
+      spawn:
+        type: [scripted]
+
+  Ranch_Wamoura:
+    id:            3318
+    species:       wamoura
+    skill_list_id: 253
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1808
+        entity_flags:  3
+        hitbox:       17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Ranch_Wamouracampa:
+    id:            3319
+    species:       wamouracampa
+    skill_list_id: 254
+    attributes:
+      combat:
+        skill: scythe
+        delay: 265
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1802
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Troll_Combatant:
+    id:            4012
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1712
+        entity_flags:  133
+        animation_sub:   1
+        model_size:      2
+        hitbox:         20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Volcanic_Bomb:
+    id:            4245
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 281
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vulcanian_Bomb:
+    id:            4263
+    species:       bomb
+    spell_list_id: 21
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Wamouracampa:
+    id:            4281
+    species:       wamouracampa
+    skill_list_id: 254
+    attributes:
+      combat:
+        skill: scythe
+        delay: 265
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1802
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Yanshaal:
+    id:            4465
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  misc
+          model: 1961
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+spawns:
+  17035265:
+    template: Volcanic_Bomb
+    at:       [104.849, -30.782, 71.223, 31]
+    level:    [76, 77]
+  17035266:
+    template: Volcanic_Bomb
+    at:       [171.747, -30.054, 56.534, 2]
+    level:    [76, 77]
+  17035267:
+    template: Volcanic_Bomb
+    at:       [183.383, -30.205, 128.727, 74]
+    level:    [76, 77]
+  17035268:
+    template: Qiqirn_Ceramist
+    at:       [182.794, -30.495, 175.626, 235]
+    level:    [77, 78]
+  17035269:
+    template: Qiqirn_Volcanist
+    at:       [174.561, -30.499, 173.275, 208]
+    level:    [77, 78]
+  17035270:
+    template: Volcanic_Bomb
+    at:       [187.156, -36.638, 225.025, 47]
+    level:    [76, 77]
+  17035271:
+    template: Volcanic_Bomb
+    at:       [180.990, -38.810, 239.351, 182]
+    level:    [76, 77]
+  17035272:
+    template: Volcanic_Bomb
+    at:       [180.053, -32.766, 208.615, 65]
+    level:    [76, 77]
+  17035273:
+    template: Qiqirn_Ceramist
+    at:       [183.520, -40.267, 255.747, 35]
+    level:    [77, 78]
+  17035274:
+    template: Qiqirn_Volcanist
+    at:       [161.072, -40.596, 319.473, 30]
+    level:    [77, 78]
+  17035275:
+    template: Qiqirn_Volcanist
+    at:       [160.968, -40.624, 326.377, 92]
+    level:    [77, 78]
+  17035276:
+    template: Qiqirn_Ceramist
+    at:       [257.380, -30.656, 191.686, 215]
+    level:    [77, 78]
+  17035277:
+    template: Qiqirn_Ceramist
+    at:       [285.401, -29.157, 261.043, 7]
+    level:    [77, 78]
+  17035278:
+    template: Qiqirn_Ceramist
+    at:       [299.235, -29.639, 249.027, 86]
+    level:    [77, 78]
+  17035279:
+    template: Qiqirn_Volcanist
+    at:       [330.191, -30.537, 339.250, 253]
+    level:    [77, 78]
+  17035280:
+    template: Volcanic_Bomb
+    at:       [372.723, -30.584, 332.945, 38]
+    level:    [76, 77]
+  17035281:
+    template: Volcanic_Bomb
+    at:       [252.169, -30.026, 341.965, 78]
+    level:    [76, 77]
+  17035282:
+    template: Brittle_Rock
+    at:       [179.000, -42.362, 380.000]
+    level:    [75, 75]
+  17035283:
+    template: Brittle_Rock
+    at:       [179.000, -42.362, 380.000]
+    level:    [75, 75]
+  17035284:
+    template: Brittle_Rock
+    at:       [179.000, -32.992, 100.000]
+    level:    [75, 75]
+  17035285:
+    template: Brittle_Rock
+    at:       [179.000, -32.992, 100.000]
+    level:    [75, 75]
+  17035286:
+    template: Brittle_Rock
+    at:       [259.000, -32.862, 220.000]
+    level:    [75, 75]
+  17035287:
+    template: Brittle_Rock
+    at:       [259.000, -32.862, 220.000]
+    level:    [75, 75]
+  17035288:
+    template: Brittle_Rock
+    at:       [300.000, -32.909, 341.000]
+    level:    [75, 75]
+  17035289:
+    template: Brittle_Rock
+    at:       [300.000, -32.909, 341.000]
+    level:    [75, 75]
+  17035290:
+    template: Brittle_Rock
+    at:       [339.000, -32.901, 300.000]
+    level:    [75, 75]
+  17035291:
+    template: Brittle_Rock
+    at:       [339.000, -32.901, 300.000]
+    level:    [75, 75]
+  17035304:
+    template: Crimson_Eruca
+    at:       [-400.341, -9.500, -383.901, 79]
+    level:    [77, 78]
+  17035305:
+    template: Crimson_Eruca
+    at:       [-311.642, -8.924, -219.153, 137]
+    level:    [77, 78]
+  17035306:
+    template: Crimson_Eruca
+    at:       [-319.234, -8.581, -177.190, 131]
+    level:    [77, 78]
+  17035307:
+    template: Crimson_Eruca
+    at:       [-512.092, -10.054, -162.526, 235]
+    level:    [77, 78]
+  17035308:
+    template: Crimson_Eruca
+    at:       [-555.575, -10.872, -149.561, 201]
+    level:    [77, 78]
+  17035309:
+    template: Crimson_Eruca
+    at:       [-154.116, -10.063, -279.954, 230]
+    level:    [77, 78]
+  17035310:
+    template: Broken_Troll_Soldier_pld
+    script:   Broken_Troll_Soldier
+    at:       [-367.600, -10.530, 230.561, 18]
+    level:    [77, 80]
+  17035311:
+    template: Broken_Troll_Soldier_war
+    script:   Broken_Troll_Soldier
+    at:       [-370.700, -10.490, 240.790, 177]
+    level:    [77, 80]
+  17035312:
+    template: Broken_Troll_Soldier_war
+    script:   Broken_Troll_Soldier
+    at:       [-348.100, -10.020, 232.170, 130]
+    level:    [77, 80]
+  17035313:
+    template: Broken_Troll_Soldier_rdm
+    script:   Broken_Troll_Soldier
+    at:       [-491.300, -10.570, 157.789, 74]
+    level:    [77, 80]
+  17035314:
+    template: Broken_Troll_Soldier_mnk
+    script:   Broken_Troll_Soldier
+    at:       [-473.500, -10.320, 159.927, 14]
+    level:    [78, 80]
+  17035315:
+    template: Broken_Troll_Soldier_mnk
+    script:   Broken_Troll_Soldier
+    at:       [-488.000, -10.520, 158.824, 209]
+    level:    [78, 80]
+  17035316:
+    template: Broken_Troll_Soldier_mnk
+    script:   Broken_Troll_Soldier
+    at:       [-294.200, -10.600, 183.402, 142]
+    level:    [78, 80]
+  17035317:
+    template: Broken_Troll_Soldier_pld
+    script:   Broken_Troll_Soldier
+    at:       [-460.700, -10.280, 89.837, 123]
+    level:    [77, 80]
+  17035318:
+    template: Broken_Troll_Soldier_rdm
+    script:   Broken_Troll_Soldier
+    at:       [-431.300, -10.440, -6.488, 200]
+    level:    [77, 80]
+  17035319:
+    template: Broken_Troll_Soldier_pld
+    script:   Broken_Troll_Soldier
+    at:       [-442.600, -10.390, 5.018, 45]
+    level:    [77, 80]
+  17035320:
+    template: Broken_Troll_Soldier_war
+    script:   Broken_Troll_Soldier
+    at:       [-503.700, -10.130, -17.160, 234]
+    level:    [77, 80]
+  17035321:
+    template: Broken_Troll_Soldier_rdm
+    script:   Broken_Troll_Soldier
+    at:       [-271.900, -10.090, 77.684, 221]
+    level:    [77, 80]
+  17035322:
+    template: Broken_Troll_Soldier_pld
+    script:   Broken_Troll_Soldier
+    at:       [-281.800, -10.390, 83.448, 16]
+    level:    [77, 80]
+  17035323:
+    template: Broken_Troll_Soldier_mnk
+    script:   Broken_Troll_Soldier
+    at:       [-273.500, -10.300, 77.054, 183]
+    level:    [78, 80]
+  17035324:
+    template: Broken_Troll_Soldier_rdm
+    script:   Broken_Troll_Soldier
+    at:       [-253.900, -24.060, 212.110, 218]
+    level:    [77, 80]
+  17035325:
+    template: Dahak
+    level:    [75, 75]
+  17035326:
+    template: Dahak
+    level:    [75, 75]
+  17035327:
+    template: Dahak
+    level:    [75, 75]
+  17035328:
+    template: Old_Troll
+    level:    [75, 75]
+  17035329:
+    template: Old_Troll
+    level:    [75, 75]
+  17035330:
+    template: Old_Troll
+    level:    [75, 75]
+  17035331:
+    template: Old_Troll
+    level:    [75, 75]
+  17035332:
+    template: Old_Troll
+    level:    [75, 75]
+  17035333:
+    template: Old_Troll
+    level:    [75, 75]
+  17035334:
+    template: Old_Troll
+    level:    [75, 75]
+  17035335:
+    template: Old_Troll
+    level:    [75, 75]
+  17035352:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035353:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035354:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035355:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035356:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035357:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035358:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035359:
+    template: Ranch_Wamouracampa
+    at:       [495.980, -40.090, 261.154, 5]
+    level:    [75, 75]
+  17035360:
+    template: Ranch_Wamouracampa
+    at:       [463.270, -40.290, 256.658, 120]
+    level:    [75, 75]
+  17035361:
+    template: Ranch_Wamouracampa
+    at:       [460.280, -40.250, 258.085, 147]
+    level:    [75, 75]
+  17035362:
+    template: Ranch_Wamouracampa
+    at:       [469.440, -40.470, 177.291, 18]
+    level:    [75, 75]
+  17035363:
+    template: Ranch_Wamouracampa
+    at:       [448.410, -40.400, 119.551, 181]
+    level:    [75, 75]
+  17035364:
+    template: Ranch_Wamoura
+    level:    [78, 78]
+  17035365:
+    template: Ranch_Wamouracampa
+    at:       [430.900, -40.110, 123.722, 92]
+    level:    [75, 75]
+  17035366:
+    template: Ranch_Wamoura
+    level:    [78, 78]
+  17035367:
+    template: Ranch_Wamouracampa
+    at:       [405.820, -40.380, 130.447, 241]
+    level:    [75, 75]
+  17035368:
+    template: Ranch_Wamouracampa
+    at:       [478.820, -40.500, 101.204, 1]
+    level:    [75, 75]
+  17035369:
+    template: Ranch_Wamouracampa
+    at:       [415.880, -39.540, 236.065, 230]
+    level:    [75, 75]
+  17035370:
+    template: Ranch_Wamouracampa
+    at:       [423.110, -40.190, 303.653, 41]
+    level:    [75, 75]
+  17035371:
+    template: Ranch_Wamouracampa
+    at:       [406.850, -40.400, 381.037, 2]
+    level:    [75, 75]
+  17035372:
+    template: Ranch_Wamouracampa
+    at:       [527.980, -40.540, 338.851, 174]
+    level:    [75, 75]
+  17035373:
+    template: Ranch_Wamouracampa
+    at:       [544.290, -40.470, 346.082, 161]
+    level:    [75, 75]
+  17035374:
+    template: Ranch_Wamouracampa
+    at:       [480.590, -46.440, 423.104, 2]
+    level:    [75, 75]
+  17035375:
+    template: Ranch_Wamoura
+    level:    [78, 78]
+  17035376:
+    template: Ranch_Wamouracampa
+    at:       [419.470, -60.140, 467.809, 178]
+    level:    [75, 75]
+  17035377:
+    template: Ranch_Wamouracampa
+    at:       [390.590, -60.480, 565.494, 241]
+    level:    [75, 75]
+  17035378:
+    template: Ranch_Wamouracampa
+    at:       [259.380, -40.470, 492.710, 195]
+    level:    [75, 75]
+  17035379:
+    template: Ranch_Wamoura
+    level:    [78, 78]
+  17035396:
+    template: Qiqirn_Eggler
+    level:    [77, 78]
+  17035397:
+    template: Qiqirn_Eggler
+    level:    [77, 78]
+  17035398:
+    template: Qiqirn_Eggler
+    level:    [77, 78]
+  17035399:
+    template: Qiqirn_Eggler
+    level:    [77, 78]
+  17035400:
+    template: Qiqirn_Eggler
+    level:    [77, 78]
+  17035401:
+    template: Qiqirn_Eggler
+    level:    [77, 78]
+  17035402:
+    template: Jorporbor_the_Hellraker
+    level:    [78, 78]
+  17035403:
+    template: Troll_Combatant
+    level:    [75, 75]
+  17035404:
+    template: Troll_Combatant
+    level:    [75, 75]
+  17035405:
+    template: Troll_Combatant
+    level:    [75, 75]
+  17035406:
+    template: Troll_Combatant
+    level:    [75, 75]
+  17035407:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035408:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035409:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035410:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035411:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035412:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035413:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035414:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035415:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035416:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035417:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035418:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035419:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035420:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035421:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035422:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035423:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035424:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035425:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035426:
+    template: Wamouracampa
+    level:    [75, 75]
+  17035427:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035428:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035429:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035430:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035431:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035432:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035433:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035434:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035435:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035436:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035437:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035438:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035439:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035440:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035441:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035442:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035443:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035444:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035445:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035446:
+    template: Crimson_Eruca
+    level:    [77, 78]
+  17035447:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035448:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035449:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035450:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035451:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035452:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035453:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035454:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035455:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035456:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035457:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035458:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035459:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035460:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035461:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035462:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035463:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035464:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035465:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035466:
+    template: Vulcanian_Bomb
+    level:    [72, 74]
+  17035467:
+    template: Kudjreel
+  17035468:
+    template: Yanshaal
+  17035469:
+    template: Djahama
+  17035470:
+    template: Black_Shuck
+    at:       [480.000, -0.500, -403.000, 64]
+    level:    [80, 82]
+  17035471:
+    template: Nocuous_Inferno
+    level:    [75, 75]
+  17035472:
+    template: Nocuous_Inferno
+    level:    [75, 75]
+  17035473:
+    template: Nocuous_Inferno
+    level:    [75, 75]
+  17035474:
+    template: Nocuous_Inferno
+    level:    [75, 75]
+  17035475:
+    template: Nocuous_Inferno
+    level:    [75, 75]
+  17035476:
+    template: Nocuous_Inferno
+    level:    [75, 75]
+  17035488:
+    template: Kadjaya

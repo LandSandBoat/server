@@ -1,0 +1,854 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16785727:
+    script: NPC[13f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16785728:
+    script: NPC[140]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16785729:
+    script:       qm_mycophile
+    display_name: ???
+    at:           [145.500, -9.000, -699.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16785730:
+    script:       qm_hercules_beetle
+    display_name: ???
+    at:           [-286.000, -8.000, -78.750]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: COP
+
+  16785731:
+    script:       qm_hercules_beetle
+    display_name: ???
+    at:           [-263.000, -8.000, -121.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: COP
+
+  16785732:
+    script:       qm_hercules_beetle
+    display_name: ???
+    at:           [-238.000, -8.000, -95.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: COP
+
+  16785733:
+    script:       qm_hercules_beetle
+    display_name: ???
+    at:           [94.000, -8.000, -597.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: COP
+
+  16785734:
+    script:       qm_hercules_beetle
+    display_name: ???
+    at:           [62.000, -8.000, -565.250]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: COP
+
+  16785735:
+    script:       qm_hercules_beetle
+    display_name: ???
+    at:           [117.500, -8.000, -565.750]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: COP
+
+  16785736:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16785737:
+    script: NPC[149]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16785738:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16785740:
+    script: NPC[14c]
+    at:     [0.000, 11.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16785741:
+    script: NPC[14d]
+    at:     [0.000, 11.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16785742:
+    script: NPC[14e]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16785743:
+    script: NPC[14f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16785744:
+    script: NPC[150]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16785745:
+    script:       Chuaie
+    display_name: Chuaie
+    at:           [231.384, -2.000, -531.830, 134]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  7
+        head:  4116
+        body:  8215
+        hands: 12288
+        legs:  16395
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785746:
+    script:       Ratoulle
+    display_name: Ratoulle
+    at:           [-133.959, -2.000, 60.839, 103]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  6
+        head:  4116
+        body:  8215
+        hands: 12288
+        legs:  16395
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785747:
+    script:       Felourie
+    display_name: Felourie
+    at:           [-300.134, -1.999, 505.016, 107]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  11
+        head:  4116
+        body:  8230
+        hands: 12296
+        legs:  16394
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785748:
+    display_name: ship
+    at:           [-125.042, 0.000, 72.786, 160]
+    render:
+      look:
+        type: ship
+      door_id:      16
+      entity_flags: 2051
+      animation:    animation_20
+      moving:       32774
+    look_at:  1
+    status:   normal
+    widescan: true
+
+  16785749:
+    script:       Guilloud
+    display_name: Guilloud
+    at:           [-123.770, -5.654, -469.062, 248]
+    render:
+      look:
+        type:  standard
+        model: 140
+      entity_flags: 27
+      name_prefix:  32
+      moving:        7
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785750:
+    script:       Louverance
+    display_name: Louverance
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4205
+        body:  8236
+        hands: 12288
+        legs:  16484
+        feet:  20580
+        main:  24640
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16785751:
+    script:       Louverance
+    display_name: Louverance
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4205
+        body:  8236
+        hands: 12288
+        legs:  16484
+        feet:  20580
+        main:  24640
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16785752:
+    script:       qm_cryptonberries
+    display_name: ???
+    at:           [120.615, -5.457, -390.133, 133]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16785753:
+    script:       Louverance
+    display_name: Louverance
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4158
+        body:  8236
+        hands: 12288
+        legs:  16484
+        feet:  20580
+        main:  24640
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16785754:
+    script:       Chocobo
+    display_name: Chocobo
+    at:           [-61.257, 8.199, 92.925, 137]
+    render:
+      look:
+        type:  standard
+        model: 86
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 80
+    widescan:        true
+    content:         COP
+
+  16785755:
+    script:       Beugungel
+    display_name: Beugungel
+    at:           [-333.729, -5.538, 475.647, 189]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  15
+        head:  4113
+        body:  8309
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         6
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785756:
+    script:       _02s
+    display_name: sdoor_s
+    at:           [232.547, -4.176, -529.924]
+    render:
+      look:
+        type: door
+      door_id:      1932669023
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16785757:
+    script:       _02t
+    display_name: sdoor_t
+    at:           [-134.909, 0.000, 63.070]
+    render:
+      look:
+        type: door
+      door_id:      1949446239
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16785758:
+    script:       _02u
+    display_name: sdoor_u
+    at:           [-301.181, 0.000, 507.121]
+    render:
+      look:
+        type: door
+      door_id:      1966223455
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16785759:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  16785760:
+    script: NPC[160]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16785761:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785762:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785763:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785764:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785765:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785766:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785767:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785768:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785769:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [47.619, -6.104, -737.026, 49]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16785770:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [47.619, -6.104, -737.026, 49]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16785771:
+    script:       qm
+    display_name: ???
+    at:           [-340.425, -100.249, 135.520]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16785772:
+    script:       Anguenet
+    display_name: Anguenet
+    at:           [214.672, -2.013, -527.561, 45]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  0
+        head:  4096
+        body:  8207
+        hands: 12303
+        legs:  16399
+        feet:  20495
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785773:
+    script:       Lourdaude
+    display_name: Lourdaude
+    at:           [215.597, -1.689, -526.021, 70]
+    render:
+      look:
+        type:  standard
+        model: 1198
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785774:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [-131.519, -6.982, -509.398]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status:  normal
+    content: COP
+
+  16785775:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [-203.982, -6.850, -118.981]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status:  normal
+    content: COP
+
+  16785776:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [-177.019, -6.722, -464.397]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status:  normal
+    content: COP
+
+  16785777:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [-242.410, -5.991, -22.328]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status:  normal
+    content: COP
+
+  16785778:
+    script:       Cofisephe
+    display_name: Cofisephe
+    at:           [210.327, -2.885, -532.511, 177]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  1
+        head:  4116
+        body:  8215
+        hands: 12288
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785779:
+    script:       Coupulie
+    display_name: Coupulie
+    at:           [-313.585, -2.628, 490.944, 131]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  0
+        head:  4116
+        body:  8230
+        hands: 12296
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785780:
+    script:       Echanie
+    display_name: Echanie
+    at:           [-148.424, -2.948, 45.675, 139]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  3
+        head:  4116
+        body:  8215
+        hands: 12288
+        legs:  16394
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        22
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16785781:
+    script:       qm_para
+    display_name: ???
+    at:           [-416.126, 0.000, -363.468]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16785782:
+    script:       qm_behind_the_smile
+    display_name: ???
+    at:           [39.877, -7.397, -565.422, 240]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16785783:
+    script: relic
+    at:     [-99.577, -0.016, -514.720, 126]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status: normal
+
+  16785784:
+    script:       Perseus
+    display_name: Perseus
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  1
+        head:  4173
+        body:  8269
+        hands: 12365
+        legs:  16461
+        feet:  20557
+        main:  24854
+        sub:   28723
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16785785:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+    content: COP
+
+  16785786:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [126.090, -6.840, -440.030]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:  normal
+    content: SOA
+
+  16785787:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [152.890, -8.740, -511.440]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:  normal
+    content: SOA
+
+  16785788:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [77.980, -6.000, -603.000]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:  normal
+    content: SOA
+
+  16785789:
+    script:       Survival_Guide
+    display_name: Survival Guide
+    at:           [225.000, -2.000, -528.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:  1
+      name_vis:      32
+      moving:        15
+    status:   normal
+    widescan: true
+    content:  SURVIVAL_GUIDE

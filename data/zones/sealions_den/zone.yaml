@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          245
+  night:        245
+  battle_solo:  220
+  battle_party: 220
+
+zonelines:
+
+  z0w0:
+    from:  [599.803, 129.570, 802.149]
+    to:    tavnazian_safehold
+    at:    [-0.173, -9.572, -39.706, 4.712389]
+    scale: [1.000, 5.000]

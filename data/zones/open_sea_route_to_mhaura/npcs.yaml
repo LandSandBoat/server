@@ -1,0 +1,295 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16969746:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16969748:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16969754:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16969756:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969757:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969758:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969759:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969760:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969761:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969762:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969763:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969764:
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  16969765:
+    at: [0.240, -9.671, 28.534, 188]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  16969766:
+    script:       Sheadon
+    display_name: Sheadon
+    at:           [0.340, -12.232, -4.120, 192]
+    render:
+      look:
+        type:  standard
+        model: 223
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:        26
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  16969767:
+    script:       Map
+    display_name: Map
+    at:           [0.278, -14.707, -1.411]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  16969768:
+    script:       _1b0
+    display_name: Cargo Ship Door
+    at:           [0.345, -8.694, -0.500]
+    render:
+      look:
+        type: door
+      door_id:      811741535
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969769:
+    script:       _1b1
+    display_name: Cargo Ship Door
+    at:           [3.750, -12.720, -10.581]
+    render:
+      look:
+        type: door
+      door_id:      828518751
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969770:
+    script:       _1b2
+    display_name: Cargo Ship Door
+    at:           [-3.075, -12.720, -10.579]
+    render:
+      look:
+        type: door
+      door_id:      845295967
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969771:
+    script:       _1b3
+    display_name: Door
+    at:           [5.862, -3.649, -5.599]
+    render:
+      look:
+        type: door
+      door_id:      862073183
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969772:
+    script:       _1b4
+    display_name: Door
+    at:           [-5.172, -3.650, -5.599]
+    render:
+      look:
+        type: door
+      door_id:      878850399
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969773:
+    script:       _1b5
+    display_name: Door
+    at:           [0.324, -3.650, 12.425]
+    render:
+      look:
+        type: door
+      door_id:      895627615
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16969774:
+    script:       Pashi_Maccaleh
+    display_name: Pashi Maccaleh
+    at:           [4.986, -2.101, -12.026, 153]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  12
+        head:  4215
+        body:  8327
+        hands: 12288
+        legs:  16415
+        feet:  20501
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU

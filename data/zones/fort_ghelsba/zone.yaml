@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z3x0:
+    from:  [-172.091, -23.874, 16.925]
+    to:    ghelsba_outpost
+    at:    [125.852, -22.097, 180.403, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3x2:
+    from:  [225.670, -87.001, 18.620]
+    to:    yughott_grotto
+    at:    [276.235, -42.359, 149.944]
+    scale: [1.000, 4.000]
+
+  z3x4:
+    from:  [232.903, -47.029, 101.886]
+    to:    yughott_grotto
+    at:    [295.374, -26.691, 249.657]
+    scale: [1.000, 4.000]
+
+  z3x6:
+    from:  [11.523, -23.930, -108.084]
+    to:    yughott_grotto
+    at:    [55.237, -14.923, 70.061]
+    scale: [1.000, 4.000]

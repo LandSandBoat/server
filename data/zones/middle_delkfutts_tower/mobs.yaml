@@ -1,0 +1,3228 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Banshee:
+    id:            338
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: rare
+          item:   scroll_of_escape
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Big_Bat:
+    id:            415
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Eurytos:
+    id:            1262
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 707
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 1550
+    loot:
+      drops:
+        - chance: always
+          item:   gigas_socks
+        - chance: common
+          item:   gigas_necklace
+        - chance: uncommon
+          item:   gigas_bracelets
+        - chance: very_common
+          item:   maple_shield
+
+  Evil_Spirit_MDT:
+    id:            6506
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1157
+        model_size:      2
+        hitbox:          9
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   revival_tree_root
+        - chance: rare
+          item:   delkfutt_chest_key
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Gerwitzs_Scythe:
+    id:            1502
+    species:       evil_weapon
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 476
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Giant_Gatekeeper:
+    id:            1526
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ram_leather_missive
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Giant_Guard:
+    id:            1528
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 320
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ram_leather_missive
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Giant_Lobber:
+    id:            1531
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   northern_fur
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Giant_Sentry:
+    id:            1538
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 710
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ram_leather_missive
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Jailer:
+    id:            1569
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 320
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Gigas_Kettlemaster:
+    id:            1570
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 710
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Quarrier:
+    id:            1580
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Gigas_Wallwatcher:
+    id:            1597
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigass_Bat:
+    id:            1589
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Gigass_Bats:
+    id:            1590
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Goblin_Furrier:
+    id:            1665
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 490
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   square_of_sheep_leather
+        - chance: very_rare
+          item:   square_of_dhalmel_leather
+        - chance: super_rare
+          item:   square_of_black_tiger_leather
+        - chance: ultra_rare
+          item:   square_of_coeurl_leather
+        - chance: super_rare
+          item:   studded_bandana
+        - chance: super_rare
+          item:   studded_gloves
+        - chance: super_rare
+          item:   studded_trousers
+        - chance: super_rare
+          item:   studded_boots
+      steal: crossbow_bolt
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Pathfinder:
+    id:            1694
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 487
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   brass_cuisses
+        - chance: very_rare
+          item:   brass_mask
+        - chance: very_rare
+          item:   brass_finger_gauntlets
+        - chance: very_rare
+          item:   brass_greaves
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Shaman:
+    id:            1710
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: ultra_rare
+          item:   wool_hat
+        - chance: ultra_rare
+          item:   wool_cuffs
+        - chance: ultra_rare
+          item:   wool_slops
+        - chance: ultra_rare
+          item:   chestnut_sabots
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Smithy:
+    id:            1715
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 497
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   iron_mask
+        - chance: very_rare
+          item:   chain_hose
+        - chance: very_rare
+          item:   chain_mittens
+        - chance: very_rare
+          item:   greaves
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblins_Bat:
+    id:            1720
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Jagd_Doll:
+    id:            2124
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  133
+        animation_sub:  12
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   doll_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+
+  Light_Elemental:
+    id:            2413
+    species:       light_elemental
+    spell_list_id: 19
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 442
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+
+  Magic_Jar:
+    id:            2477
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 643
+        model_size:     1
+        hitbox:        37
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+      despoil:
+        magic_pot_shard: 0
+
+  Magic_Pot:
+    id:            2480
+    species:       magic_pot
+    spell_list_id: 3
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 129
+        hitbox:        32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+      despoil:
+        magic_pot_shard: 0
+
+  Mold_Bats:
+    id:            2719
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+  Ogygos:
+    id:            2956
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 640
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 2450
+    loot:
+      drops:
+        - chance: always
+          item:   gigas_socks
+        - chance: common
+          item:   mahogany_shield
+        - chance: uncommon
+          item:   gigas_necklace
+        - chance: uncommon
+          item:   ogygoss_bracelets
+
+  Ophion:
+    id:            2988
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 640
+        entity_flags:  3
+        model_size:    2
+        hitbox:       34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 2100
+    loot:
+      drops:
+        - chance: always
+          item:   gigas_socks
+        - chance: common
+          item:   gigas_necklace
+        - chance: uncommon
+          item:   gigas_bracelets
+        - chance: very_common
+          item:   maple_shield
+
+  Panzer_Doll:
+    id:            3094
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  131
+        animation_sub:  12
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          item:   doll_shard
+      despoil:
+        doll_shard: 0
+
+  Polybotes:
+    id:            3171
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 640
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 2300
+    loot:
+      drops:
+        - chance: always
+          item:   gigas_socks
+        - chance: common
+          item:   gigas_necklace
+        - chance: uncommon
+          item:   gigas_bracelets
+        - chance: very_common
+          item:   maple_shield
+
+  Rhoikos:
+    id:            3359
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 643
+        entity_flags:  3
+        model_size:    2
+        hitbox:       34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 1880
+    loot:
+      drops:
+        - chance: always
+          item:   gigas_socks
+        - chance: common
+          item:   gigas_necklace
+        - chance: uncommon
+          item:   gigas_bracelets
+        - chance: very_common
+          item:   maple_shield
+
+  Rhoitos:
+    id:            3360
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 320
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 643
+        entity_flags:  3
+        model_size:    2
+        hitbox:       34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 2480
+    loot:
+      drops:
+        - chance: always
+          item:   gigas_socks
+        - chance: common
+          item:   gigas_necklace
+        - chance: uncommon
+          item:   gigas_bracelets
+        - chance: very_common
+          item:   maple_shield
+
+  Scythe_Victim_blm:
+    id:            6564
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1147
+        entity_flags:  643
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+
+  Scythe_Victim_war:
+    id:            3514
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1118
+        entity_flags:  643
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+
+  Stirge:
+    id:            3776
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Tower_Bats:
+    id:            3981
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  645
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      2
+        hitbox:         18
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+spawns:
+  17420289:
+    template: Mold_Bats
+    at:       [-26.534, -48.105, 20.348]
+    level:    [25, 27]
+  17420290:
+    template: Mold_Bats
+    at:       [-19.000, -48.105, -3.000, 50]
+    level:    [25, 27]
+  17420291:
+    template: Mold_Bats
+    at:       [-19.000, -48.105, 38.000, 54]
+    level:    [25, 27]
+  17420292:
+    template: Stirge
+    at:       [-59.000, -48.081, 36.000, 74]
+    level:    [27, 29]
+  17420293:
+    template: Stirge
+    at:       [-20.000, -48.000, -25.000, 58]
+    level:    [27, 29]
+  17420294:
+    template: Goblin_Pathfinder
+    at:       [10.462, -48.099, -60.410, 73]
+    level:    [30, 32]
+  17420295:
+    template: Goblins_Bat
+    at:       [12.352, -47.802, -65.073, 124]
+    level:    [23, 25]
+  17420296:
+    template: Goblin_Furrier
+    at:       [27.184, -48.099, -64.062, 8]
+    level:    [30, 32]
+  17420297:
+    template: Goblin_Smithy
+    at:       [23.201, -47.705, -59.101, 127]
+    level:    [30, 32]
+  17420298:
+    template: Goblin_Shaman
+    at:       [14.520, -47.705, -56.346, 127]
+    level:    [30, 32]
+  17420299:
+    template: Goblin_Pathfinder
+    at:       [25.939, -47.705, -52.678, 213]
+    level:    [30, 32]
+  17420300:
+    template: Goblins_Bat
+    at:       [23.217, -47.705, -53.459, 232]
+    level:    [23, 25]
+  17420301:
+    template: Goblin_Furrier
+    at:       [13.659, -48.099, -67.712, 117]
+    level:    [30, 32]
+  17420302:
+    template: Goblin_Smithy
+    at:       [20.149, -47.705, -69.412, 103]
+    level:    [30, 32]
+  17420303:
+    template: Goblin_Shaman
+    at:       [28.000, -48.099, -52.000, 127]
+    level:    [30, 32]
+  17420304:
+    template: Goblin_Pathfinder
+    at:       [87.289, -48.081, -20.620, 118]
+    level:    [30, 32]
+  17420305:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420306:
+    template: Goblin_Furrier
+    at:       [99.000, -48.105, -8.000, 127]
+    level:    [30, 32]
+  17420307:
+    template: Goblin_Smithy
+    at:       [76.000, -48.105, -59.000, 117]
+    level:    [30, 32]
+  17420308:
+    template: Goblin_Shaman
+    at:       [54.698, -48.106, -20.117, 105]
+    level:    [30, 32]
+  17420309:
+    template: Goblin_Pathfinder
+    at:       [99.000, -48.105, -39.000, 25]
+    level:    [30, 32]
+  17420310:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420311:
+    template: Goblin_Furrier
+    at:       [94.950, -48.105, -19.987, 89]
+    level:    [30, 32]
+  17420312:
+    template: Goblin_Smithy
+    at:       [37.000, -48.105, -20.000, 118]
+    level:    [30, 32]
+  17420313:
+    template: Goblin_Shaman
+    at:       [44.000, -48.500, -59.000, 64]
+    level:    [30, 32]
+  17420314:
+    template: Giant_Gatekeeper
+    at:       [29.016, -48.105, 58.521, 125]
+    level:    [30, 32]
+  17420315:
+    template: Giant_Guard
+    at:       [100.000, -48.105, 47.000, 15]
+    level:    [30, 32]
+  17420316:
+    template: Giant_Sentry
+    at:       [27.000, -47.000, 101.000, 127]
+    level:    [30, 32]
+  17420317:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420318:
+    template: Giant_Lobber
+    at:       [81.000, -48.105, 19.000, 74]
+    level:    [30, 32]
+  17420319:
+    template: Giant_Gatekeeper
+    at:       [59.000, -48.105, 28.000, 42]
+    level:    [30, 32]
+  17420320:
+    template: Giant_Guard
+    at:       [60.771, -48.105, 50.852, 56]
+    level:    [30, 32]
+  17420321:
+    template: Giant_Sentry
+    at:       [11.000, -47.000, 99.000, 127]
+    level:    [30, 32]
+  17420322:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420323:
+    template: Giant_Lobber
+    at:       [59.000, -48.500, -4.000, 68]
+    level:    [30, 32]
+  17420324:
+    template: Eurytos
+    at:       [20.000, -47.000, 94.000, 127]
+    level:    [32, 32]
+  17420325:
+    template: Giant_Gatekeeper
+    at:       [16.276, -47.708, 110.263, 125]
+    level:    [30, 32]
+  17420326:
+    template: Giant_Guard
+    at:       [-5.000, -47.705, 60.000, 21]
+    level:    [30, 32]
+  17420327:
+    template: Giant_Sentry
+    at:       [12.641, -47.711, 99.571, 89]
+    level:    [30, 32]
+  17420328:
+    template: Gigass_Bat
+    at:       [13.601, -47.705, 100.803, 82]
+    level:    [23, 25]
+  17420329:
+    template: Giant_Lobber
+    at:       [-58.557, -64.105, 28.637, 127]
+    level:    [30, 32]
+  17420330:
+    template: Goblin_Pathfinder
+    at:       [-12.441, -48.105, -58.357]
+    level:    [30, 32]
+  17420331:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420332:
+    template: Goblin_Furrier
+    at:       [-15.830, -48.500, -58.742, 111]
+    level:    [30, 32]
+  17420333:
+    template: Goblin_Smithy
+    at:       [10.414, -47.644, -58.753, 41]
+    level:    [30, 32]
+  17420334:
+    template: Goblin_Shaman
+    at:       [-28.625, -48.093, -57.318, 127]
+    level:    [30, 32]
+  17420335:
+    template: Goblin_Pathfinder
+    at:       [19.154, -48.500, -34.624, 114]
+    level:    [30, 32]
+  17420336:
+    template: Goblins_Bat
+    at:       [19.955, -48.013, -33.540, 110]
+    level:    [23, 25]
+  17420337:
+    template: Goblin_Furrier
+    at:       [19.047, -48.500, -29.611, 75]
+    level:    [30, 32]
+  17420338:
+    template: Goblin_Smithy
+    at:       [19.525, -48.105, -28.590, 74]
+    level:    [30, 32]
+  17420339:
+    template: Goblin_Shaman
+    at:       [20.000, -48.211, -37.000, 67]
+    level:    [30, 32]
+  17420340:
+    template: Magic_Pot
+    at:       [78.000, -48.105, 80.000, 127]
+    level:    [28, 29]
+  17420341:
+    template: Panzer_Doll
+    at:       [71.000, -63.000, 45.000, 127]
+    level:    [31, 32]
+  17420342:
+    template: Panzer_Doll
+    at:       [80.000, -63.000, 27.000, 56]
+    level:    [31, 32]
+  17420343:
+    template: Mold_Bats
+    at:       [79.000, -63.000, 16.000, 93]
+    level:    [25, 27]
+  17420344:
+    template: Mold_Bats
+    at:       [71.020, -64.113, 66.365, 127]
+    level:    [25, 27]
+  17420345:
+    template: Stirge
+    at:       [68.810, -64.085, 48.226, 75]
+    level:    [27, 29]
+  17420346:
+    template: Magic_Pot
+    at:       [73.467, -63.712, 8.356, 127]
+    level:    [28, 29]
+  17420347:
+    template: Magic_Pot
+    at:       [88.011, -63.764, 4.171, 127]
+    level:    [28, 29]
+  17420348:
+    template: Mold_Bats
+    at:       [99.709, -64.105, 10.060, 127]
+    level:    [25, 27]
+  17420349:
+    template: Stirge
+    at:       [97.621, -64.085, 28.153, 22]
+    level:    [27, 29]
+  17420350:
+    template: Stirge
+    at:       [75.912, -63.660, 3.169, 127]
+    level:    [27, 29]
+  17420351:
+    template: Banshee
+    at:       [68.819, -64.455, 10.644, 160]
+    level:    [32, 33]
+  17420352:
+    template: Stirge
+    at:       [60.000, -64.000, -36.000, 127]
+    level:    [27, 29]
+  17420353:
+    template: Stirge
+    at:       [59.000, -64.000, -14.000, 114]
+    level:    [27, 29]
+  17420354:
+    template: Banshee
+    at:       [39.000, -72.000, -60.000, 53]
+    level:    [32, 33]
+  17420355:
+    template: Goblin_Pathfinder
+    at:       [-35.000, -63.000, 80.000, 127]
+    level:    [30, 32]
+  17420356:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420357:
+    template: Goblin_Furrier
+    at:       [-42.000, -63.000, 72.000, 127]
+    level:    [30, 32]
+  17420358:
+    template: Goblin_Smithy
+    at:       [13.582, -64.494, 62.366, 127]
+    level:    [30, 32]
+  17420359:
+    template: Goblin_Shaman
+    at:       [-8.000, -64.232, 60.000, 127]
+    level:    [30, 32]
+  17420360:
+    template: Goblin_Pathfinder
+    at:       [-28.213, -64.036, 81.411, 127]
+    level:    [30, 32]
+  17420361:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420362:
+    template: Goblin_Furrier
+    at:       [-46.955, -64.153, 82.967, 127]
+    level:    [30, 32]
+  17420363:
+    template: Goblin_Smithy
+    at:       [43.000, -64.057, 60.000, 39]
+    level:    [30, 32]
+  17420364:
+    template: Goblin_Shaman
+    at:       [29.483, -64.500, 61.406, 31]
+    level:    [30, 32]
+  17420365:
+    template: Banshee
+    at:       [15.000, -63.000, 103.000, 127]
+    level:    [32, 33]
+  17420366:
+    template: Evil_Spirit_MDT
+    script:   Evil_Spirit
+    at:       [24.365, -63.707, 98.173, 97]
+    level:    [34, 35]
+  17420367:
+    template: Goblin_Pathfinder
+    at:       [29.018, -79.708, 104.290, 127]
+    level:    [30, 32]
+  17420368:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420369:
+    template: Goblin_Furrier
+    at:       [19.000, -64.517, 76.000, 127]
+    level:    [30, 32]
+  17420370:
+    template: Goblin_Smithy
+    at:       [-11.000, -79.692, 99.000, 113]
+    level:    [30, 32]
+  17420371:
+    template: Goblin_Shaman
+    at:       [-13.000, -64.025, 59.000, 41]
+    level:    [30, 32]
+  17420372:
+    template: Goblin_Pathfinder
+    at:       [20.603, -79.714, 91.081, 35]
+    level:    [30, 32]
+  17420373:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420374:
+    template: Goblin_Furrier
+    at:       [27.000, -80.099, 94.000, 127]
+    level:    [30, 32]
+  17420375:
+    template: Goblin_Smithy
+    at:       [14.848, -79.706, 99.546, 127]
+    level:    [30, 32]
+  17420376:
+    template: Goblin_Shaman
+    at:       [14.942, -79.709, 102.963, 87]
+    level:    [30, 32]
+  17420377:
+    template: Giant_Gatekeeper
+    at:       [-59.000, -64.500, 59.000, 127]
+    level:    [30, 32]
+  17420378:
+    template: Giant_Guard
+    at:       [-59.370, -64.105, 17.313, 63]
+    level:    [30, 32]
+  17420379:
+    template: Giant_Sentry
+    at:       [-59.000, -64.105, 45.000, 127]
+    level:    [30, 32]
+  17420380:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420381:
+    template: Giant_Lobber
+    at:       [-48.936, -64.114, 8.575, 127]
+    level:    [30, 32]
+  17420382:
+    template: Polybotes
+    at:       [-41.284, -63.636, 3.492, 127]
+    level:    [34, 34]
+  17420383:
+    template: Giant_Gatekeeper
+    at:       [-42.392, -63.535, -0.946, 127]
+    level:    [30, 32]
+  17420384:
+    template: Giant_Guard
+    at:       [-31.000, -63.713, -3.000, 127]
+    level:    [30, 32]
+  17420385:
+    template: Giant_Sentry
+    at:       [-55.122, -64.500, 7.676, 25]
+    level:    [30, 32]
+  17420386:
+    template: Gigass_Bat
+    at:       [-51.859, -64.054, 8.841]
+    level:    [23, 25]
+  17420387:
+    template: Giant_Lobber
+    at:       [-0.500, -72.000, -60.000, 127]
+    level:    [30, 32]
+  17420388:
+    template: Giant_Gatekeeper
+    at:       [-19.753, -65.961, -46.870, 127]
+    level:    [30, 32]
+  17420389:
+    template: Giant_Guard
+    at:       [-12.474, -69.003, -58.865, 127]
+    level:    [30, 32]
+  17420390:
+    template: Giant_Sentry
+    at:       [19.000, -75.000, -44.000, 127]
+    level:    [30, 32]
+  17420391:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420392:
+    template: Giant_Lobber
+    at:       [-9.648, -69.811, -60.456, 137]
+    level:    [30, 32]
+  17420393:
+    template: Giant_Gatekeeper
+    at:       [4.750, -80.055, -10.193, 124]
+    level:    [30, 32]
+  17420394:
+    template: Giant_Guard
+    at:       [20.440, -80.055, -12.671, 87]
+    level:    [30, 32]
+  17420395:
+    template: Giant_Sentry
+    at:       [42.000, -79.634, -3.197, 127]
+    level:    [30, 32]
+  17420396:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420397:
+    template: Giant_Lobber
+    at:       [-12.000, -80.000, 10.000, 36]
+    level:    [30, 32]
+  17420398:
+    template: Giant_Gatekeeper
+    at:       [-11.786, -80.040, 26.179, 127]
+    level:    [30, 32]
+  17420399:
+    template: Giant_Guard
+    at:       [-12.827, -80.063, 35.460, 85]
+    level:    [30, 32]
+  17420400:
+    template: Giant_Sentry
+    at:       [-7.143, -79.603, -2.069, 127]
+    level:    [30, 32]
+  17420401:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420402:
+    template: Giant_Lobber
+    at:       [50.131, -79.984, 0.391, 73]
+    level:    [30, 32]
+  17420403:
+    template: Giant_Gatekeeper
+    at:       [53.215, -79.836, 18.673, 127]
+    level:    [30, 32]
+  17420404:
+    template: Giant_Guard
+    at:       [43.658, -79.535, 14.091, 127]
+    level:    [30, 32]
+  17420405:
+    template: Giant_Sentry
+    at:       [58.297, -80.105, 24.076, 127]
+    level:    [30, 32]
+  17420406:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420407:
+    template: Giant_Lobber
+    at:       [-4.000, -79.612, 43.000, 127]
+    level:    [30, 32]
+  17420408:
+    template: Giant_Gatekeeper
+    at:       [18.000, -79.000, 49.000, 127]
+    level:    [30, 32]
+  17420409:
+    template: Giant_Guard
+    at:       [34.000, -79.830, 48.000, 127]
+    level:    [30, 32]
+  17420410:
+    template: Giant_Sentry
+    at:       [46.000, -79.844, 35.000, 127]
+    level:    [30, 32]
+  17420411:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420412:
+    template: Giant_Lobber
+    at:       [70.000, -80.094, 80.000, 127]
+    level:    [30, 32]
+  17420413:
+    template: Panzer_Doll
+    at:       [100.000, -79.707, 28.000, 127]
+    level:    [31, 32]
+  17420414:
+    template: Panzer_Doll
+    at:       [106.248, -79.743, 11.079, 13]
+    level:    [31, 32]
+  17420415:
+    template: Magic_Pot
+    at:       [72.000, -79.727, -46.000, 104]
+    level:    [28, 29]
+  17420416:
+    template: Magic_Pot
+    at:       [82.000, -79.000, -29.000, 77]
+    level:    [28, 29]
+  17420417:
+    template: Rhoitos
+    at:       [88.000, -79.000, 73.000, 127]
+    level:    [34, 34]
+  17420418:
+    template: Giant_Gatekeeper
+    at:       [81.445, -79.977, 71.427, 93]
+    level:    [30, 32]
+  17420419:
+    template: Giant_Guard
+    at:       [77.924, -80.084, 70.787, 124]
+    level:    [30, 32]
+  17420420:
+    template: Giant_Sentry
+    at:       [75.000, -79.823, 89.000, 127]
+    level:    [30, 32]
+  17420421:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420422:
+    template: Giant_Lobber
+    at:       [80.410, -80.020, 74.536, 12]
+    level:    [30, 32]
+  17420423:
+    template: Goblin_Pathfinder
+    at:       [-59.000, -80.105, 45.000, 127]
+    level:    [30, 32]
+  17420424:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420425:
+    template: Goblin_Furrier
+    at:       [20.738, -79.705, 97.889, 86]
+    level:    [30, 32]
+  17420426:
+    template: Goblin_Smithy
+    at:       [-59.569, -80.093, 90.609, 127]
+    level:    [30, 32]
+  17420427:
+    template: Goblin_Shaman
+    at:       [20.172, -79.757, 110.306, 127]
+    level:    [30, 32]
+  17420428:
+    template: Goblin_Pathfinder
+    at:       [-50.817, -79.708, 23.273, 31]
+    level:    [30, 32]
+  17420429:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420430:
+    template: Goblin_Furrier
+    at:       [-61.523, -80.500, 71.229, 40]
+    level:    [30, 32]
+  17420431:
+    template: Goblin_Smithy
+    at:       [-56.953, -80.099, 28.442, 1]
+    level:    [30, 32]
+  17420432:
+    template: Goblin_Shaman
+    at:       [-34.000, -80.105, 100.000, 127]
+    level:    [30, 32]
+  17420433:
+    template: Goblin_Pathfinder
+    at:       [-54.431, -79.707, 20.690, 39]
+    level:    [30, 32]
+  17420434:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420435:
+    template: Goblin_Furrier
+    at:       [-58.449, -80.099, 22.429, 127]
+    level:    [30, 32]
+  17420436:
+    template: Goblin_Smithy
+    at:       [-67.942, -79.599, 26.219, 127]
+    level:    [30, 32]
+  17420437:
+    template: Goblin_Shaman
+    at:       [-53.231, -80.105, 98.035, 120]
+    level:    [30, 32]
+  17420438:
+    template: Thunder_Elemental
+    at:       [-47.168, -80.105, 98.547, 127]
+    level:    [35, 36]
+  17420439:
+    template: Light_Elemental
+    at:       [-56.000, -80.105, 96.000, 127]
+    level:    [35, 36]
+  17420440:
+    template: Goblin_Pathfinder
+    at:       [-56.389, -79.706, 17.879, 241]
+    level:    [30, 32]
+  17420441:
+    template: Goblins_Bat
+    at:       [-58.224, -79.710, 15.431, 228]
+    level:    [23, 25]
+  17420442:
+    template: Goblin_Furrier
+    at:       [-62.792, -79.705, 21.362, 88]
+    level:    [30, 32]
+  17420443:
+    template: Goblin_Smithy
+    at:       [-43.000, -80.105, -27.000, 127]
+    level:    [30, 32]
+  17420444:
+    template: Goblin_Shaman
+    at:       [-59.896, -80.099, 13.802, 80]
+    level:    [30, 32]
+  17420445:
+    template: Goblin_Pathfinder
+    at:       [-30.498, -80.008, -34.872, 127]
+    level:    [30, 32]
+  17420446:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420447:
+    template: Goblin_Furrier
+    at:       [-58.740, -80.500, -13.160, 127]
+    level:    [30, 32]
+  17420448:
+    template: Goblin_Smithy
+    at:       [-53.814, -79.738, 10.954, 254]
+    level:    [30, 32]
+  17420449:
+    template: Goblin_Shaman
+    at:       [-59.421, -80.105, 0.643, 61]
+    level:    [30, 32]
+  17420450:
+    template: Goblin_Pathfinder
+    at:       [-450.284, -95.529, -35.169, 114]
+    level:    [32, 34]
+  17420451:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420452:
+    template: Goblin_Furrier
+    at:       [-59.117, -80.500, -11.332, 154]
+    level:    [32, 34]
+  17420453:
+    template: Goblin_Smithy
+    at:       [-482.261, -95.529, -20.183, 48]
+    level:    [32, 34]
+  17420454:
+    template: Goblin_Shaman
+    at:       [-33.756, -80.045, -46.854, 127]
+    level:    [32, 34]
+  17420455:
+    template: Goblin_Pathfinder
+    at:       [-463.207, -95.621, -45.528, 124]
+    level:    [32, 34]
+  17420456:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420457:
+    template: Goblin_Furrier
+    at:       [-483.339, -95.620, -9.918, 127]
+    level:    [32, 34]
+  17420458:
+    template: Goblin_Smithy
+    at:       [-469.929, -95.529, -23.335, 127]
+    level:    [32, 34]
+  17420459:
+    template: Goblin_Shaman
+    at:       [-38.030, -80.424, -29.483, 76]
+    level:    [32, 34]
+  17420460:
+    template: Goblin_Pathfinder
+    at:       [-477.408, -95.529, 39.437, 60]
+    level:    [32, 34]
+  17420461:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420462:
+    template: Goblin_Furrier
+    at:       [-470.382, -95.533, -42.850, 86]
+    level:    [32, 34]
+  17420463:
+    template: Goblin_Smithy
+    at:       [-375.000, -111.517, 59.000, 127]
+    level:    [32, 34]
+  17420464:
+    template: Goblin_Shaman
+    at:       [-457.092, -128.500, 98.334, 127]
+    level:    [32, 34]
+  17420465:
+    template: Goblin_Pathfinder
+    at:       [-350.000, -111.525, 48.000, 127]
+    level:    [32, 34]
+  17420466:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420467:
+    template: Goblin_Furrier
+    at:       [-461.000, -96.499, 55.000, 11]
+    level:    [32, 34]
+  17420468:
+    template: Goblin_Smithy
+    at:       [-492.676, -96.124, 16.449, 127]
+    level:    [32, 34]
+  17420469:
+    template: Goblin_Shaman
+    at:       [-404.000, -96.109, -38.000, 127]
+    level:    [32, 34]
+  17420470:
+    template: Tower_Bats
+    at:       [-461.154, -95.529, -25.026, 127]
+    level:    [27, 29]
+  17420471:
+    template: Tower_Bats
+    at:       [-453.704, -96.060, -54.063, 125]
+    level:    [27, 29]
+  17420472:
+    template: Goblin_Pathfinder
+    at:       [-386.654, -95.529, -28.523, 75]
+    level:    [32, 34]
+  17420473:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420474:
+    template: Goblin_Furrier
+    at:       [-365.000, -111.948, 31.000, 127]
+    level:    [32, 34]
+  17420475:
+    template: Goblin_Smithy
+    at:       [-381.118, -95.529, -38.969, 97]
+    level:    [32, 34]
+  17420476:
+    template: Goblin_Shaman
+    at:       [-482.337, -95.554, 34.758, 127]
+    level:    [32, 34]
+  17420477:
+    template: Goblin_Pathfinder
+    at:       [-363.582, -95.424, 57.170, 127]
+    level:    [32, 34]
+  17420478:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420479:
+    template: Goblin_Furrier
+    at:       [-372.057, -95.924, -37.517, 88]
+    level:    [32, 34]
+  17420480:
+    template: Goblin_Smithy
+    at:       [-373.270, -95.749, -47.176, 127]
+    level:    [32, 34]
+  17420481:
+    template: Goblin_Shaman
+    at:       [-370.642, -95.530, -19.658, 127]
+    level:    [32, 34]
+  17420482:
+    template: Big_Bat
+    at:       [-488.086, -95.848, 30.946, 5]
+    level:    [29, 31]
+  17420483:
+    template: Big_Bat
+    at:       [-482.056, -95.564, 51.882, 127]
+    level:    [29, 31]
+  17420484:
+    template: Magic_Jar
+    at:       [-479.000, -96.095, 81.000, 86]
+    level:    [31, 32]
+  17420485:
+    template: Thunder_Elemental
+    at:       [-410.892, -96.115, -53.905, 127]
+    level:    [35, 36]
+  17420486:
+    template: Light_Elemental
+    at:       [-421.455, -95.703, -45.212, 5]
+    level:    [35, 36]
+  17420487:
+    template: Goblin_Pathfinder
+    at:       [-362.518, -95.560, 55.899, 127]
+    level:    [32, 34]
+  17420488:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420489:
+    template: Goblin_Furrier
+    at:       [-373.319, -95.529, -24.048, 20]
+    level:    [32, 34]
+  17420490:
+    template: Goblin_Smithy
+    at:       [-379.616, -95.676, 54.279, 75]
+    level:    [32, 34]
+  17420491:
+    template: Goblin_Shaman
+    at:       [-374.164, -96.076, -52.269, 127]
+    level:    [32, 34]
+  17420492:
+    template: Goblin_Pathfinder
+    at:       [-370.056, -95.846, 66.555, 64]
+    level:    [32, 34]
+  17420493:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420494:
+    template: Goblin_Furrier
+    at:       [-369.464, -96.068, 64.833, 127]
+    level:    [32, 34]
+  17420495:
+    template: Goblin_Smithy
+    at:       [-357.950, -95.552, 66.300, 127]
+    level:    [32, 34]
+  17420496:
+    template: Goblin_Shaman
+    at:       [-354.118, -96.042, 56.809, 127]
+    level:    [32, 34]
+  17420497:
+    template: Tower_Bats
+    at:       [-378.372, -95.529, -22.519, 90]
+    level:    [27, 29]
+  17420498:
+    template: Tower_Bats
+    at:       [-382.228, -96.093, -59.621, 8]
+    level:    [27, 29]
+  17420499:
+    template: Goblin_Pathfinder
+    at:       [-458.423, -112.411, 88.846, 13]
+    level:    [32, 34]
+  17420500:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420501:
+    template: Goblin_Furrier
+    at:       [-356.416, -95.605, 19.158, 125]
+    level:    [32, 34]
+  17420502:
+    template: Goblin_Smithy
+    at:       [-438.463, -111.940, 77.093, 127]
+    level:    [32, 34]
+  17420503:
+    template: Goblin_Shaman
+    level:    [32, 34]
+  17420504:
+    template: Goblin_Pathfinder
+    at:       [-464.000, -111.528, 56.000, 127]
+    level:    [32, 34]
+  17420505:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420506:
+    template: Goblin_Furrier
+    at:       [-440.570, -111.587, 69.204, 127]
+    level:    [33, 33]
+  17420507:
+    template: Goblin_Smithy
+    at:       [-480.349, -111.585, 52.323, 56]
+    level:    [32, 32]
+  17420508:
+    template: Goblin_Shaman
+    at:       [-432.313, -111.983, 83.898, 127]
+    level:    [32, 32]
+  17420509:
+    template: Big_Bat
+    at:       [-349.806, -95.865, 57.304, 127]
+    level:    [29, 31]
+  17420510:
+    template: Big_Bat
+    at:       [-363.599, -95.533, 42.435, 127]
+    level:    [29, 31]
+  17420511:
+    template: Gigas_Wallwatcher
+    at:       [-462.342, -95.529, 25.403, 6]
+    level:    [32, 34]
+  17420512:
+    template: Gigas_Jailer
+    at:       [-400.769, -95.529, -22.130, 127]
+    level:    [32, 34]
+  17420513:
+    template: Gigas_Kettlemaster
+    at:       [-453.000, -95.529, -1.000, 7]
+    level:    [32, 34]
+  17420514:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420515:
+    template: Gigas_Quarrier
+    at:       [-448.000, -95.924, 45.000, 127]
+    level:    [32, 34]
+  17420516:
+    template: Gigas_Wallwatcher
+    at:       [-404.695, -95.529, -7.804, 127]
+    level:    [32, 34]
+  17420517:
+    template: Gigas_Jailer
+    at:       [-378.080, -95.924, 33.154, 65]
+    level:    [32, 34]
+  17420518:
+    template: Gigas_Kettlemaster
+    at:       [-409.937, -95.772, 48.785, 35]
+    level:    [32, 34]
+  17420519:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420520:
+    template: Gigas_Quarrier
+    at:       [-429.483, -95.529, -9.635, 54]
+    level:    [32, 34]
+  17420521:
+    template: Tower_Bats
+    at:       [-421.497, -95.529, -16.362, 69]
+    level:    [27, 29]
+  17420522:
+    template: Tower_Bats
+    at:       [-457.872, -95.529, -10.341, 127]
+    level:    [27, 29]
+  17420523:
+    template: Tower_Bats
+    at:       [-409.111, -95.529, -23.852, 69]
+    level:    [27, 29]
+  17420524:
+    template: Big_Bat
+    at:       [-384.993, -95.529, 4.480, 51]
+    level:    [29, 31]
+  17420525:
+    template: Big_Bat
+    at:       [-384.571, -95.529, 9.813, 127]
+    level:    [29, 31]
+  17420526:
+    template: Big_Bat
+    at:       [-447.460, -95.529, -8.266, 127]
+    level:    [29, 31]
+  17420527:
+    template: Gigas_Kettlemaster
+    at:       [-384.000, -95.529, 14.000, 127]
+    level:    [32, 34]
+  17420528:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420529:
+    template: Ophion
+    at:       [-444.000, -95.000, -3.000, 127]
+    level:    [34, 34]
+  17420530:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420531:
+    template: Evil_Spirit_MDT
+    script:   Evil_Spirit
+    at:       [-411.841, -95.910, 94.171, 127]
+    level:    [34, 35]
+  17420532:
+    template: Evil_Spirit_MDT
+    script:   Evil_Spirit
+    at:       [-423.663, -95.735, 104.889, 22]
+    level:    [34, 35]
+  17420533:
+    template: Thunder_Elemental
+    at:       [-416.453, -95.742, 90.580, 28]
+    level:    [35, 36]
+  17420534:
+    template: Light_Elemental
+    at:       [-424.192, -95.707, 93.958, 127]
+    level:    [35, 36]
+  17420535:
+    template: Goblin_Pathfinder
+    at:       [-421.268, -127.708, 91.432, 23]
+    level:    [32, 34]
+  17420536:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420537:
+    template: Goblin_Furrier
+    at:       [-453.533, -111.924, 68.095, 54]
+    level:    [32, 34]
+  17420538:
+    template: Goblin_Smithy
+    at:       [-423.547, -127.721, 110.207, 118]
+    level:    [32, 34]
+  17420539:
+    template: Goblin_Shaman
+    at:       [-431.006, -111.916, 69.983, 1]
+    level:    [32, 34]
+  17420540:
+    template: Goblin_Pathfinder
+    at:       [-475.000, -127.000, 73.000, 127]
+    level:    [32, 34]
+  17420541:
+    template: Goblins_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17420542:
+    template: Goblin_Furrier
+    at:       [-474.206, -128.109, 83.741, 84]
+    level:    [32, 34]
+  17420543:
+    template: Goblin_Smithy
+    at:       [-427.000, -127.724, 95.000, 127]
+    level:    [32, 34]
+  17420544:
+    template: Goblin_Shaman
+    at:       [-412.074, -128.099, 98.628, 27]
+    level:    [32, 34]
+  17420545:
+    template: Gigas_Wallwatcher
+    at:       [-440.761, -111.403, 43.559, 127]
+    level:    [32, 34]
+  17420546:
+    template: Gigas_Jailer
+    at:       [-405.071, -111.875, 49.876, 7]
+    level:    [32, 34]
+  17420547:
+    template: Gigas_Kettlemaster
+    at:       [-422.035, -111.615, 54.405, 126]
+    level:    [32, 34]
+  17420548:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420549:
+    template: Gigas_Quarrier
+    at:       [-442.085, -111.529, 31.797, 127]
+    level:    [32, 34]
+  17420550:
+    template: Gigas_Wallwatcher
+    at:       [-455.994, -111.560, 34.133, 102]
+    level:    [32, 34]
+  17420551:
+    template: Gigas_Jailer
+    at:       [-457.782, -112.104, 15.180, 55]
+    level:    [32, 34]
+  17420552:
+    template: Gigas_Kettlemaster
+    at:       [-417.784, -111.698, 49.810, 99]
+    level:    [32, 34]
+  17420553:
+    template: Gigass_Bats
+    at:       [-419.262, -111.577, 48.665, 181]
+    level:    [25, 27]
+  17420554:
+    template: Gigas_Quarrier
+    at:       [-402.000, -111.924, 46.000, 127]
+    level:    [32, 34]
+  17420555:
+    template: Rhoikos
+    at:       [-378.000, -111.000, 47.000, 225]
+    level:    [34, 34]
+  17420556:
+    template: Gigas_Quarrier
+    at:       [-416.718, -112.115, -13.175, 127]
+    level:    [32, 34]
+  17420557:
+    template: Gigas_Wallwatcher
+    at:       [-438.000, -111.000, -9.000, 93]
+    level:    [32, 34]
+  17420558:
+    template: Gigas_Jailer
+    at:       [-452.000, -112.119, -0.500, 127]
+    level:    [32, 34]
+  17420559:
+    template: Gigas_Kettlemaster
+    at:       [-396.400, -111.620, -1.636, 127]
+    level:    [32, 34]
+  17420560:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420561:
+    template: Gigas_Quarrier
+    at:       [-417.553, -112.076, -13.066, 78]
+    level:    [32, 34]
+  17420562:
+    template: Gigas_Wallwatcher
+    at:       [-380.908, -112.039, 21.328, 127]
+    level:    [32, 34]
+  17420563:
+    template: Gigas_Jailer
+    at:       [-387.000, -111.530, 7.000, 62]
+    level:    [32, 34]
+  17420564:
+    template: Gigas_Kettlemaster
+    at:       [-407.354, -111.914, -9.479, 37]
+    level:    [32, 34]
+  17420565:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420566:
+    template: Gigas_Quarrier
+    at:       [-389.084, -111.532, 35.374, 19]
+    level:    [32, 34]
+  17420567:
+    template: Tower_Bats
+    level:    [27, 29]
+  17420568:
+    template: Tower_Bats
+    at:       [-366.817, -111.696, 70.055, 127]
+    level:    [27, 29]
+  17420569:
+    template: Tower_Bats
+    at:       [-338.621, -112.105, 57.921, 33]
+    level:    [27, 29]
+  17420570:
+    template: Big_Bat
+    at:       [-361.840, -111.533, 51.406, 13]
+    level:    [29, 31]
+  17420571:
+    template: Big_Bat
+    at:       [-343.397, -112.109, 49.597, 18]
+    level:    [29, 31]
+  17420572:
+    template: Jagd_Doll
+    at:       [-429.000, -111.706, -61.000, 127]
+    level:    [33, 34]
+  17420573:
+    template: Jagd_Doll
+    at:       [-412.113, -111.705, -67.000, 41]
+    level:    [33, 34]
+  17420574:
+    template: Thunder_Elemental
+    at:       [-410.611, -111.706, -66.506, 71]
+    level:    [35, 36]
+  17420575:
+    template: Light_Elemental
+    at:       [-422.932, -111.705, -64.292, 127]
+    level:    [35, 36]
+  17420576:
+    template: Tower_Bats
+    at:       [-355.000, -127.000, -30.000, 38]
+    level:    [27, 29]
+  17420577:
+    template: Big_Bat
+    at:       [-340.000, -128.000, -24.000, 79]
+    level:    [29, 31]
+  17420578:
+    template: Big_Bat
+    at:       [-370.677, -112.104, -56.921, 86]
+    level:    [29, 31]
+  17420579:
+    template: Tower_Bats
+    at:       [-459.000, -128.000, -18.000, 127]
+    level:    [27, 29]
+  17420580:
+    template: Tower_Bats
+    at:       [-460.000, -111.529, -60.000, 80]
+    level:    [27, 29]
+  17420581:
+    template: Big_Bat
+    at:       [-467.000, -111.695, -58.000, 127]
+    level:    [29, 31]
+  17420582:
+    template: Evil_Spirit_MDT
+    script:   Evil_Spirit
+    at:       [-338.116, -127.705, 14.988, 127]
+    level:    [34, 35]
+  17420583:
+    template: Big_Bat
+    at:       [-350.000, -127.705, -42.000, 127]
+    level:    [29, 31]
+  17420584:
+    template: Big_Bat
+    at:       [-339.000, -127.706, 42.000, 127]
+    level:    [29, 31]
+  17420585:
+    template: Big_Bat
+    at:       [-340.640, -128.104, 53.507, 42]
+    level:    [29, 31]
+  17420586:
+    template: Big_Bat
+    at:       [-351.000, -128.105, 87.000, 63]
+    level:    [29, 31]
+  17420587:
+    template: Big_Bat
+    at:       [-397.000, -112.075, -60.000, 92]
+    level:    [29, 31]
+  17420588:
+    template: Big_Bat
+    at:       [-341.366, -128.105, -3.366, 127]
+    level:    [29, 31]
+  17420589:
+    template: Magic_Jar
+    at:       [-480.000, -111.000, -38.000, 127]
+    level:    [31, 32]
+  17420590:
+    template: Thunder_Elemental
+    at:       [-500.822, -128.105, -24.245, 127]
+    level:    [35, 36]
+  17420591:
+    template: Light_Elemental
+    at:       [-501.792, -128.105, -15.040, 63]
+    level:    [35, 36]
+  17420592:
+    template: Ogygos
+    at:       [-495.000, -128.000, 19.000, 127]
+    level:    [35, 35]
+  17420593:
+    template: Gigas_Wallwatcher
+    at:       [-503.000, -127.715, 24.000, 95]
+    level:    [32, 34]
+  17420594:
+    template: Gigas_Jailer
+    at:       [-499.000, -127.705, 13.000, 58]
+    level:    [32, 34]
+  17420595:
+    template: Gigas_Wallwatcher
+    at:       [-452.634, -128.047, 7.759, 92]
+    level:    [32, 34]
+  17420596:
+    template: Gigas_Jailer
+    at:       [-452.979, -128.098, 19.036, 38]
+    level:    [32, 34]
+  17420597:
+    template: Gigas_Kettlemaster
+    at:       [-445.955, -127.615, 34.264, 39]
+    level:    [32, 34]
+  17420598:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420599:
+    template: Gigas_Quarrier
+    at:       [-440.000, -128.124, -6.000, 127]
+    level:    [32, 34]
+  17420600:
+    template: Gigas_Wallwatcher
+    at:       [-405.121, -128.059, -13.063, 127]
+    level:    [32, 34]
+  17420601:
+    template: Gigas_Jailer
+    at:       [-427.000, -128.103, -11.000, 118]
+    level:    [32, 34]
+  17420602:
+    template: Gigas_Kettlemaster
+    at:       [-411.992, -127.769, -8.971, 127]
+    level:    [32, 34]
+  17420603:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420604:
+    template: Gigas_Quarrier
+    at:       [-386.504, -128.517, 30.815, 127]
+    level:    [32, 34]
+  17420605:
+    template: Gigas_Wallwatcher
+    at:       [-393.471, -127.614, 13.575, 127]
+    level:    [32, 34]
+  17420606:
+    template: Gigas_Jailer
+    at:       [-398.000, -128.115, -2.000, 59]
+    level:    [32, 34]
+  17420607:
+    template: Gigas_Kettlemaster
+    at:       [-394.939, -127.612, 40.913, 147]
+    level:    [32, 34]
+  17420608:
+    template: Gigass_Bats
+    at:       [-389.196, -127.905, 38.493, 146]
+    level:    [25, 27]
+  17420609:
+    template: Gigas_Quarrier
+    at:       [-390.372, -127.888, -2.405, 80]
+    level:    [32, 34]
+  17420610:
+    template: Gigas_Wallwatcher
+    at:       [-407.000, -128.087, 49.000, 127]
+    level:    [32, 34]
+  17420611:
+    template: Gigas_Jailer
+    at:       [-419.268, -128.499, 63.469, 185]
+    level:    [32, 34]
+  17420612:
+    template: Gigas_Kettlemaster
+    at:       [-426.793, -128.092, 46.668, 117]
+    level:    [32, 34]
+  17420613:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17420614:
+    template: Gigas_Quarrier
+    at:       [-398.000, -127.000, 43.000, 86]
+    level:    [32, 34]
+  17420615:
+    template: Goblin_Pathfinder
+    at:       [-423.394, -127.705, 100.966, 139]
+    level:    [32, 34]
+  17420616:
+    template: Goblins_Bat
+    at:       [-420.783, -127.705, 101.430, 134]
+    level:    [23, 25]
+  17420617:
+    template: Goblin_Furrier
+    at:       [-420.000, -128.099, 98.000, 107]
+    level:    [32, 34]
+  17420618:
+    template: Goblin_Smithy
+    at:       [-414.108, -128.099, 102.774, 58]
+    level:    [32, 34]
+  17420619:
+    template: Goblin_Shaman
+    at:       [-419.558, -127.705, 105.643, 42]
+    level:    [32, 34]
+  17420620:
+    template: Goblin_Pathfinder
+    at:       [-422.025, -128.450, 86.139, 56]
+    level:    [32, 34]
+  17420621:
+    template: Goblins_Bat
+    at:       [-421.404, -127.948, 87.270, 29]
+    level:    [23, 25]
+  17420622:
+    template: Goblin_Furrier
+    at:       [-419.670, -127.707, 95.345, 125]
+    level:    [32, 34]
+  17420623:
+    template: Goblin_Smithy
+    level:    [32, 34]
+  17420624:
+    template: Goblin_Shaman
+    at:       [-420.851, -128.481, 85.188, 68]
+    level:    [32, 34]
+  17420625:
+    template: Magic_Jar
+    at:       [-447.026, -128.105, 99.648, 127]
+    level:    [31, 32]
+  17420626:
+    template: Jagd_Doll
+    at:       [-418.000, -111.000, -49.000, 27]
+    level:    [33, 34]
+  17420627:
+    template: Thunder_Elemental
+    at:       [-486.591, -128.005, 70.810, 127]
+    level:    [35, 36]
+  17420628:
+    template: Light_Elemental
+    at:       [-471.704, -128.233, 82.256, 127]
+    level:    [35, 36]
+  17420629:
+    template: Gerwitzs_Scythe
+    at:       [86.047, -79.555, 80.074, 86]
+    level:    [60, 60]
+  17420630:
+    template: Scythe_Victim_war
+    at:       [83.791, -79.424, 79.464, 78]
+    level:    [58, 58]
+  17420631:
+    template: Scythe_Victim_blm
+    at:       [88.373, -79.721, 79.328, 101]
+    level:    [58, 58]
+
+slots:
+  - members:
+      17420289: {} # Mold_Bats
+      17420292: {} # Stirge
+  - members:
+      17420294: {} # Goblin_Pathfinder
+      17420296: {} # Goblin_Furrier
+      17420297: {} # Goblin_Smithy
+  - members:
+      17420298: {} # Goblin_Shaman
+      17420299: {} # Goblin_Pathfinder
+      17420301: {} # Goblin_Furrier
+  - members:
+      17420302: {} # Goblin_Smithy
+      17420303: {} # Goblin_Shaman
+  - members:
+      17420304: {} # Goblin_Pathfinder
+      17420306: {} # Goblin_Furrier
+  - members:
+      17420307: {} # Goblin_Smithy
+      17420308: {} # Goblin_Shaman
+  - members:
+      17420309: {} # Goblin_Pathfinder
+      17420312: {} # Goblin_Smithy
+  - members:
+      17420311: {} # Goblin_Furrier
+      17420313: {} # Goblin_Shaman
+  - members:
+      17420314: {} # Giant_Gatekeeper
+      17420315: {} # Giant_Guard
+      17420316: {} # Giant_Sentry
+  - members:
+      17420318: {} # Giant_Lobber
+      17420319: {} # Giant_Gatekeeper
+      17420320: {} # Giant_Guard
+  - members:
+      17420321: {} # Giant_Sentry
+      17420323: {} # Giant_Lobber
+  - members:
+      17420325: {} # Giant_Gatekeeper
+      17420326: {} # Giant_Guard
+  - members:
+      17420327: {} # Giant_Sentry
+      17420329: {} # Giant_Lobber
+  - members:
+      17420330: {} # Goblin_Pathfinder
+      17420332: {} # Goblin_Furrier
+      17420333: {} # Goblin_Smithy
+      17420334: {} # Goblin_Shaman
+  - members:
+      17420335: {} # Goblin_Pathfinder
+      17420337: {} # Goblin_Furrier
+      17420338: {} # Goblin_Smithy
+      17420339: {} # Goblin_Shaman
+  - members:
+      17420349: {} # Stirge
+      17420351: {} # Banshee
+  - members:
+      17420352: {} # Stirge
+      17420354: {} # Banshee
+  - members:
+      17420355: {} # Goblin_Pathfinder
+      17420357: {} # Goblin_Furrier
+  - members:
+      17420358: {} # Goblin_Smithy
+      17420359: {} # Goblin_Shaman
+      17420360: {} # Goblin_Pathfinder
+  - members:
+      17420362: {} # Goblin_Furrier
+      17420363: {} # Goblin_Smithy
+      17420364: {} # Goblin_Shaman
+  - members:
+      17420367: {} # Goblin_Pathfinder
+      17420369: {} # Goblin_Furrier
+  - members:
+      17420370: {} # Goblin_Smithy
+      17420371: {} # Goblin_Shaman
+  - members:
+      17420372: {} # Goblin_Pathfinder
+      17420376: {} # Goblin_Shaman
+  - members:
+      17420374: {} # Goblin_Furrier
+      17420375: {} # Goblin_Smithy
+  - members:
+      17420377: {} # Giant_Gatekeeper
+      17420378: {} # Giant_Guard
+      17420379: {} # Giant_Sentry
+      17420381: {} # Giant_Lobber
+  - members:
+      17420384: {} # Giant_Guard
+      17420385: {} # Giant_Sentry
+      17420387: {} # Giant_Lobber
+  - members:
+      17420388: {} # Giant_Gatekeeper
+      17420389: {} # Giant_Guard
+  - members:
+      17420390: {} # Giant_Sentry
+      17420392: {} # Giant_Lobber
+  - members:
+      17420393: {} # Giant_Gatekeeper
+      17420394: {} # Giant_Guard
+  - members:
+      17420395: {} # Giant_Sentry
+      17420397: {} # Giant_Lobber
+  - members:
+      17420398: {} # Giant_Gatekeeper
+      17420400: {} # Giant_Sentry
+  - members:
+      17420399: {} # Giant_Guard
+      17420402: {} # Giant_Lobber
+  - members:
+      17420403: {} # Giant_Gatekeeper
+      17420407: {} # Giant_Lobber
+  - members:
+      17420404: {} # Giant_Guard
+      17420405: {} # Giant_Sentry
+  - members:
+      17420408: {} # Giant_Gatekeeper
+      17420409: {} # Giant_Guard
+  - members:
+      17420410: {} # Giant_Sentry
+      17420412: {} # Giant_Lobber
+  - members:
+      17420418: {} # Giant_Gatekeeper
+      17420420: {} # Giant_Sentry
+      17420422: {} # Giant_Lobber
+  - members:
+      17420423: {} # Goblin_Pathfinder
+      17420425: {} # Goblin_Furrier
+  - members:
+      17420426: {} # Goblin_Smithy
+      17420427: {} # Goblin_Shaman
+      17420428: {} # Goblin_Pathfinder
+  - members:
+      17420430: {} # Goblin_Furrier
+      17420431: {} # Goblin_Smithy
+      17420432: {} # Goblin_Shaman
+  - members:
+      17420433: {} # Goblin_Pathfinder
+      17420435: {} # Goblin_Furrier
+  - members:
+      17420436: {} # Goblin_Smithy
+      17420437: {} # Goblin_Shaman
+  - members:
+      17420440: {} # Goblin_Pathfinder
+      17420442: {} # Goblin_Furrier
+      17420443: {} # Goblin_Smithy
+  - members:
+      17420444: {} # Goblin_Shaman
+      17420445: {} # Goblin_Pathfinder
+  - members:
+      17420447: {} # Goblin_Furrier
+      17420448: {} # Goblin_Smithy
+      17420449: {} # Goblin_Shaman
+  - members:
+      17420450: {} # Goblin_Pathfinder
+      17420452: {} # Goblin_Furrier
+      17420453: {} # Goblin_Smithy
+      17420454: {} # Goblin_Shaman
+  - members:
+      17420455: {} # Goblin_Pathfinder
+      17420458: {} # Goblin_Smithy
+  - members:
+      17420457: {} # Goblin_Furrier
+      17420459: {} # Goblin_Shaman
+  - members:
+      17420460: {} # Goblin_Pathfinder
+      17420462: {} # Goblin_Furrier
+  - members:
+      17420463: {} # Goblin_Smithy
+      17420464: {} # Goblin_Shaman
+  - members:
+      17420465: {} # Goblin_Pathfinder
+      17420468: {} # Goblin_Smithy
+  - members:
+      17420467: {} # Goblin_Furrier
+      17420469: {} # Goblin_Shaman
+  - members:
+      17420472: {} # Goblin_Pathfinder
+      17420474: {} # Goblin_Furrier
+  - members:
+      17420475: {} # Goblin_Smithy
+      17420476: {} # Goblin_Shaman
+  - members:
+      17420477: {} # Goblin_Pathfinder
+      17420481: {} # Goblin_Shaman
+  - members:
+      17420479: {} # Goblin_Furrier
+      17420480: {} # Goblin_Smithy
+  - members:
+      17420487: {} # Goblin_Pathfinder
+      17420489: {} # Goblin_Furrier
+  - members:
+      17420490: {} # Goblin_Smithy
+      17420491: {} # Goblin_Shaman
+  - members:
+      17420492: {} # Goblin_Pathfinder
+      17420495: {} # Goblin_Smithy
+  - members:
+      17420494: {} # Goblin_Furrier
+      17420496: {} # Goblin_Shaman
+  - members:
+      17420499: {} # Goblin_Pathfinder
+      17420501: {} # Goblin_Furrier
+  - members:
+      17420502: {} # Goblin_Smithy
+      17420503: {} # Goblin_Shaman
+  - members:
+      17420504: {} # Goblin_Pathfinder
+      17420508: {} # Goblin_Shaman
+  - members:
+      17420506: {} # Goblin_Furrier
+      17420507: {} # Goblin_Smithy
+  - members:
+      17420511: {} # Gigas_Wallwatcher
+      17420512: {} # Gigas_Jailer
+  - members:
+      17420513: {} # Gigas_Kettlemaster
+      17420515: {} # Gigas_Quarrier
+  - members:
+      17420516: {} # Gigas_Wallwatcher
+      17420520: {} # Gigas_Quarrier
+  - members:
+      17420517: {} # Gigas_Jailer
+      17420518: {} # Gigas_Kettlemaster
+  - members:
+      17420540: {} # Goblin_Pathfinder
+      17420543: {} # Goblin_Smithy
+  - members:
+      17420542: {} # Goblin_Furrier
+      17420544: {} # Goblin_Shaman
+  - members:
+      17420545: {} # Gigas_Wallwatcher
+      17420546: {} # Gigas_Jailer
+      17420547: {} # Gigas_Kettlemaster
+  - members:
+      17420549: {} # Gigas_Quarrier
+      17420550: {} # Gigas_Wallwatcher
+      17420551: {} # Gigas_Jailer
+  - members:
+      17420552: {} # Gigas_Kettlemaster
+      17420554: {} # Gigas_Quarrier
+  - members:
+      17420557: {} # Gigas_Wallwatcher
+      17420558: {} # Gigas_Jailer
+  - members:
+      17420559: {} # Gigas_Kettlemaster
+      17420561: {} # Gigas_Quarrier
+      17420562: {} # Gigas_Wallwatcher
+  - members:
+      17420563: {} # Gigas_Jailer
+      17420564: {} # Gigas_Kettlemaster
+      17420566: {} # Gigas_Quarrier
+  - members:
+      17420583: {} # Big_Bat
+      17420585: {} # Big_Bat
+      17420587: {} # Big_Bat
+  - members:
+      17420595: {} # Gigas_Wallwatcher
+      17420596: {} # Gigas_Jailer
+  - members:
+      17420597: {} # Gigas_Kettlemaster
+      17420599: {} # Gigas_Quarrier
+  - members:
+      17420600: {} # Gigas_Wallwatcher
+      17420604: {} # Gigas_Quarrier
+  - members:
+      17420601: {} # Gigas_Jailer
+      17420602: {} # Gigas_Kettlemaster
+  - members:
+      17420605: {} # Gigas_Wallwatcher
+      17420606: {} # Gigas_Jailer
+  - members:
+      17420607: {} # Gigas_Kettlemaster
+      17420609: {} # Gigas_Quarrier
+  - members:
+      17420610: {} # Gigas_Wallwatcher
+      17420611: {} # Gigas_Jailer
+      17420612: {} # Gigas_Kettlemaster
+      17420614: {} # Gigas_Quarrier
+  - members:
+      17420615: {} # Goblin_Pathfinder
+      17420617: {} # Goblin_Furrier
+  - members:
+      17420618: {} # Goblin_Smithy
+      17420619: {} # Goblin_Shaman
+      17420620: {} # Goblin_Pathfinder
+  - members:
+      17420622: {} # Goblin_Furrier
+      17420623: {} # Goblin_Smithy
+      17420624: {} # Goblin_Shaman

@@ -1,0 +1,2015 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+
+  Airi:
+    id:            70
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1157
+        model_size:      2
+        hitbox:          9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  2000
+        mp: 15000
+
+  Bahamut:
+    id:            325
+    species:       bahamut
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 726
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire: 4
+          dark: 6
+        rank_status:
+          dark_sleep: 6
+          blind:      6
+      render:
+        look:
+          type:  standard
+          model: 1307
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        54
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 26000
+        mp: 15000
+
+  Bahamut_2:
+    id:            325
+    display_name:  Bahamut
+    species:       bahamut
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 726
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire: 4
+          dark: 6
+        rank_status:
+          dark_sleep: 6
+          blind:      6
+      render:
+        look:
+          type:  standard
+          model: 1307
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        54
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 34000
+        mp: 20000
+    loot:
+      drops:
+        - chance: very_common
+          item:   chunk_of_kunwu_iron
+        - chance: very_common
+          item:   chunk_of_kunwu_ore
+        - chance: very_common
+          item:   chunk_of_molybdenum_ore
+        - chance: very_common
+          item:   chunk_of_molybdenum_ore
+        - chance: common
+          item:   square_of_cashmere_cloth
+        - chance: common
+          item:   spool_of_cashmere_thread
+        - chance: very_common
+          item:   wyrm_horn
+        - chance: always
+          one_of:
+            dragon_staff:   75
+            bahamuts_staff: 25
+        - chance: always
+          one_of:
+            bahamuts_hose:    45
+            bahamuts_mask:    30
+            bahamuts_zaghnal: 25
+        - chance: always
+          one_of:
+            lock_of_sirens_hair: 75
+            divine_log:          25
+
+  Blazedrake:
+    id:            4530
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   giant_scale
+        - chance: uncommon
+          item:   wyvern_skin
+        - chance: rare
+          item:   wyvern_wing
+        - chance: rare
+          item:   wyvern_tailskin
+      despoil:
+        handful_of_wyvern_scales: 0
+    content: ABYSSEA
+
+  Book_Browser_Bokabraq:
+    id:            503
+    species:       moblin
+    spell_list_id: 564
+    skill_list_id: 2067
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 687
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Boroka:
+    id:            513
+    species:       hippogryph
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 141
+    attributes:
+      combat:
+        skill: dagger
+        delay: 210
+      jobs: [brd, brd]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: always
+          item:   skulkers_cape
+        - chance: very_common
+          item:   horomusha_kote
+        - chance: very_common
+          item:   auditory_torque
+        - chance: very_common
+          item:   boroka_earring
+
+  Chemical_Cook_Chemachiq:
+    id:            708
+    species:       moblin
+    spell_list_id: 565
+    skill_list_id: 2068
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 688
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  2500
+        mp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Ignidrake:
+    id:            2051
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         36
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   giant_scale
+        - chance: rare
+          item:   wyvern_skin
+        - chance: very_rare
+          item:   wyvern_wing
+      steal: giant_scale
+      despoil:
+        handful_of_wyvern_scales: 0
+
+  Imdugud:
+    id:            2060
+    species:       hippogryph
+    type:          [notorious]
+    skill_list_id: 141
+    attributes:
+      combat:
+        skill: club
+        delay: 210
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: common
+          item:   knightly_earring
+        - chance: uncommon
+          item:   heavy_lance
+
+  Iruci:
+    id:            2105
+    species:       skeleton
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 1669
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  1800
+        mp: 15000
+
+  Jormungand_bv2:
+    id:            7552
+    display_name:  Jormungand
+    species:       blue_wyrm
+    type:          [notorious]
+    spell_list_id: 111
+    skill_list_id: 392
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire: -2
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 609
+        entity_flags: 157
+        name_prefix:   32
+        hitbox:        42
+      behaviors:
+        flags:          [no_assist, no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  6500
+        mp: 15000
+
+  Lesser_Roc:
+    id:            2399
+    species:       roc
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: club
+      jobs: [war, whm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 2100
+    loot:
+      drops:
+        - chance: common
+          item:   giant_bird_feather
+        - chance: rare
+          item:   giant_bird_plume
+      despoil:
+        giant_bird_feather: 0
+
+  Lunantishee:
+    id:            2452
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 180
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   malboro_vine
+        - chance: common
+          item:   malboro_vine
+        - chance: very_rare
+          item:   lacquer_tree_log
+      steal: malboro_vine
+
+  Nimbus_Hippogryph:
+    id:            2882
+    species:       hippogryph
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+        delay: 210
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: uncommon
+          item:   hippogryph_tailfeather
+        - chance: very_rare
+          item:   hippogryph_feather
+      despoil:
+        hippogryph_feather:     0
+        hippogryph_tailfeather: 0
+
+  Nitro_Cluster:
+    id:            2891
+    species:       cluster
+    skill_list_id: 68
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  3
+          water:    3
+          light:    3
+          dark:     3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 290
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: always
+          item:   cluster_core
+        - chance: common
+          item:   pot_of_clustered_tar
+        - chance: uncommon
+          item:   pinch_of_cluster_ash
+        - chance: rare
+          item:   cluster_arm
+      steal: cluster_core
+
+  Ouryu_bv2:
+    id:            7554
+    display_name:  Ouryu
+    species:       earth_wyrm
+    type:          [notorious, battlefield]
+    spell_list_id: 109
+    skill_list_id: 259
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -2
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 610
+        entity_flags: 1179
+        name_prefix:    32
+        hitbox:         42
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  6000
+        mp: 15000
+
+  Pey:
+    id:            3124
+    species:       skeleton
+    type:          [notorious]
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1900
+
+  Pyrodrake:
+    id:            3242
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   giant_scale
+        - chance: rare
+          item:   wyvern_skin
+        - chance: very_rare
+          item:   wyvern_wing
+      despoil:
+        handful_of_wyvern_scales: 0
+
+  Spell_Spitter_Spilospok:
+    id:            3725
+    species:       moblin
+    skill_list_id: 2066
+    attributes:
+      combat:
+        skill: katana
+        delay: 200
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 700
+        model_size:  2
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Strato_Hippogryph:
+    id:            3783
+    species:       hippogryph
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+        delay: 210
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: common
+          item:   hippogryph_tailfeather
+        - chance: uncommon
+          item:   hippogryph_tailfeather
+        - chance: very_rare
+          item:   hippogryph_feather
+      despoil:
+        hippogryph_feather:     0
+        hippogryph_tailfeather: 0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Tiamat_bv2:
+    id:            7551
+    display_name:  Tiamat
+    species:       orange_wyrm
+    type:          [notorious]
+    spell_list_id: 78
+    skill_list_id: 393
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -2
+      render:
+        look:
+          type:  standard
+          model: 608
+        entity_flags: 157
+        name_prefix:   32
+        hitbox:        42
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  6500
+        mp: 15000
+
+  Unstable_Cluster:
+    id:            4102
+    species:       cluster
+    type:          [notorious]
+    skill_list_id: 68
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 360
+      resists:
+        rank_element:
+          fire:    -2
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  3
+          water:    3
+          light:    3
+          dark:     3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 290
+        entity_flags:  1157
+        animation_sub:    4
+        model_size:       2
+        hitbox:          43
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10800
+    loot:
+      drops:
+        - chance: common
+          item:   soboro_sukehiro
+        - chance: always
+          item:   cluster_core
+        - chance: common
+          item:   pinch_of_cluster_ash
+        - chance: common
+          item:   cluster_arm
+
+  Vrtra_bv2:
+    id:            7553
+    display_name:  Vrtra
+    species:       black_wyrm
+    type:          [notorious]
+    spell_list_id: 57
+    skill_list_id: 391
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [blm, bst]
+      resists:
+        rank_element:
+          light: -2
+          dark:  11
+        rank_status:
+          light_sleep: -2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 611
+        entity_flags:  157
+        animation_sub:   4
+        name_prefix:    32
+        hitbox:         42
+      behaviors:
+        flags:          [no_assist, no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  5500
+        mp: 15000
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  2500
+        mp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Ziryu:
+    id:            4507
+    species:       worm
+    type:          [battlefield]
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  2500
+        mp: 15000
+
+spawns:
+  16896001:
+    template: Lesser_Roc
+    at:       [618.782, 0.556, -552.226, 185]
+    level:    [47, 51]
+  16896002:
+    template: Lesser_Roc
+    at:       [601.868, -0.208, -433.213, 35]
+    level:    [47, 51]
+  16896003:
+    template: Lesser_Roc
+    at:       [664.369, 0.216, -518.572, 15]
+    level:    [47, 51]
+  16896004:
+    template: Lesser_Roc
+    at:       [623.107, 0.385, -513.535, 73]
+    level:    [47, 51]
+  16896005:
+    template: Lesser_Roc
+    at:       [569.563, -0.258, -559.207, 240]
+    level:    [47, 51]
+  16896006:
+    template: Lesser_Roc
+    at:       [604.266, 0.534, -425.369, 38]
+    level:    [47, 51]
+  16896007:
+    template: Lesser_Roc
+    at:       [569.072, -0.105, -447.310, 246]
+    level:    [47, 51]
+  16896008:
+    template: Lesser_Roc
+    at:       [613.659, 0.120, -475.536, 37]
+    level:    [47, 51]
+  16896009:
+    template: Lesser_Roc
+    at:       [597.225, -0.630, -601.160, 175]
+    level:    [47, 51]
+  16896010:
+    template: Lesser_Roc
+    at:       [630.723, 0.070, -505.659, 121]
+    level:    [47, 51]
+  16896011:
+    template: Pyrodrake
+    at:       [588.951, -0.113, -564.747, 108]
+    level:    [50, 53]
+  16896012:
+    template: Pyrodrake
+    at:       [656.605, -0.665, -507.675, 38]
+    level:    [50, 53]
+  16896013:
+    template: Nimbus_Hippogryph
+    at:       [608.557, -0.174, -472.761, 198]
+    level:    [49, 52]
+  16896014:
+    template: Nimbus_Hippogryph
+    at:       [608.762, -0.640, -575.858, 1]
+    level:    [49, 52]
+  16896015:
+    template: Nimbus_Hippogryph
+    at:       [647.805, -0.474, -499.266, 149]
+    level:    [49, 52]
+  16896016:
+    template: Nimbus_Hippogryph
+    at:       [595.443, -0.213, -445.490, 59]
+    level:    [49, 52]
+  16896017:
+    template: Nimbus_Hippogryph
+    at:       [635.841, -0.114, -558.070, 175]
+    level:    [49, 52]
+  16896018:
+    template: Pyrodrake
+    at:       [524.476, 0.214, -654.849, 74]
+    level:    [50, 53]
+  16896019:
+    template: Nimbus_Hippogryph
+    at:       [478.130, 0.094, -627.015, 189]
+    level:    [49, 52]
+  16896020:
+    template: Nimbus_Hippogryph
+    at:       [480.457, -0.186, -631.589, 104]
+    level:    [49, 52]
+  16896021:
+    template: Thunder_Elemental
+    at:       [537.455, -0.137, -650.513, 11]
+    level:    [57, 64]
+  16896022:
+    template: Lesser_Roc
+    at:       [523.239, 0.173, -704.942, 123]
+    level:    [47, 51]
+  16896023:
+    template: Lesser_Roc
+    at:       [646.015, -0.189, -748.019, 73]
+    level:    [47, 51]
+  16896024:
+    template: Pyrodrake
+    at:       [579.663, 0.143, -746.822, 141]
+    level:    [50, 53]
+  16896025:
+    template: Pyrodrake
+    at:       [650.860, -0.348, -674.650, 87]
+    level:    [50, 53]
+  16896026:
+    template: Pyrodrake
+    at:       [644.581, 0.266, -669.874, 26]
+    level:    [50, 53]
+  16896027:
+    template: Pyrodrake
+    at:       [655.401, -0.377, -734.233, 104]
+    level:    [50, 53]
+  16896028:
+    template: Pyrodrake
+    at:       [576.929, 0.124, -746.003, 251]
+    level:    [50, 53]
+  16896029:
+    template: Nimbus_Hippogryph
+    at:       [654.809, 0.202, -681.336, 191]
+    level:    [49, 52]
+  16896030:
+    template: Nimbus_Hippogryph
+    at:       [683.102, -0.298, -708.909, 56]
+    level:    [49, 52]
+  16896031:
+    template: Pyrodrake
+    at:       [472.589, -2.392, -776.482, 97]
+    level:    [50, 53]
+  16896032:
+    template: Lesser_Roc
+    at:       [451.957, -0.317, -558.093, 222]
+    level:    [47, 51]
+  16896033:
+    template: Lesser_Roc
+    at:       [463.904, 0.445, -553.132, 15]
+    level:    [47, 51]
+  16896034:
+    template: Lesser_Roc
+    at:       [473.840, -0.073, -576.418, 129]
+    level:    [47, 51]
+  16896035:
+    template: Pyrodrake
+    at:       [478.397, -0.266, -555.436, 178]
+    level:    [50, 53]
+  16896036:
+    template: Pyrodrake
+    at:       [438.705, -0.615, -555.584, 199]
+    level:    [50, 53]
+  16896037:
+    template: Nimbus_Hippogryph
+    at:       [464.071, 0.264, -562.398, 208]
+    level:    [49, 52]
+  16896038:
+    template: Nimbus_Hippogryph
+    at:       [443.615, 0.393, -537.771, 159]
+    level:    [49, 52]
+  16896039:
+    template: Nimbus_Hippogryph
+    at:       [457.170, 0.215, -444.924, 185]
+    level:    [49, 52]
+  16896040:
+    template: Lesser_Roc
+    at:       [467.252, 0.001, -441.038, 185]
+    level:    [47, 51]
+  16896041:
+    template: Lesser_Roc
+    at:       [441.683, 0.298, -420.129, 163]
+    level:    [47, 51]
+  16896042:
+    template: Lesser_Roc
+    at:       [484.112, 0.249, -456.122, 20]
+    level:    [47, 51]
+  16896043:
+    template: Strato_Hippogryph
+    at:       [270.620, -0.071, -548.189, 159]
+    level:    [55, 57]
+  16896044:
+    template: Strato_Hippogryph
+    at:       [244.686, -0.050, -512.165, 177]
+    level:    [55, 57]
+  16896045:
+    template: Strato_Hippogryph
+    at:       [315.009, -0.589, -481.239, 89]
+    level:    [55, 57]
+  16896046:
+    template: Strato_Hippogryph
+    at:       [233.923, -0.225, -525.052, 127]
+    level:    [55, 57]
+  16896047:
+    template: Lunantishee
+    at:       [250.374, -0.167, -578.586, 51]
+    level:    [55, 58]
+  16896048:
+    template: Lunantishee
+    at:       [253.475, 0.385, -542.725, 168]
+    level:    [55, 58]
+  16896049:
+    template: Lunantishee
+    at:       [320.578, 0.433, -468.378, 246]
+    level:    [55, 58]
+  16896050:
+    template: Lunantishee
+    at:       [282.548, -0.168, -476.477, 195]
+    level:    [55, 58]
+  16896051:
+    template: Thunder_Elemental
+    at:       [302.667, -0.017, -488.452, 229]
+    level:    [57, 64]
+  16896052:
+    template: Ignidrake
+    at:       [241.727, -0.363, -649.640, 255]
+    level:    [57, 59]
+  16896053:
+    template: Ignidrake
+    at:       [225.270, -0.206, -663.026, 151]
+    level:    [57, 59]
+  16896054:
+    template: Ignidrake
+    at:       [237.403, -0.118, -653.896, 97]
+    level:    [57, 59]
+  16896055:
+    template: Ignidrake
+    at:       [189.087, 0.024, -717.392, 87]
+    level:    [57, 59]
+  16896056:
+    template: Ignidrake
+    at:       [228.136, -0.162, -648.792, 42]
+    level:    [57, 59]
+  16896057:
+    template: Nitro_Cluster
+    at:       [191.367, -0.136, -678.141, 177]
+    level:    [55, 57]
+  16896058:
+    template: Nitro_Cluster
+    at:       [210.442, -0.290, -656.935, 58]
+    level:    [55, 57]
+  16896059:
+    template: Nitro_Cluster
+    at:       [238.015, -0.505, -646.356, 48]
+    level:    [55, 57]
+  16896060:
+    template: Nitro_Cluster
+    at:       [218.499, 0.299, -663.388, 198]
+    level:    [55, 57]
+  16896061:
+    template: Nitro_Cluster
+    at:       [292.856, -2.825, -744.128, 12]
+    level:    [55, 57]
+  16896062:
+    template: Nitro_Cluster
+    at:       [293.546, -2.828, -744.053, 109]
+    level:    [55, 57]
+  16896063:
+    template: Blazedrake
+    at:       [108.569, -0.056, -640.167, 199]
+    level:    [85, 86]
+  16896064:
+    template: Blazedrake
+    at:       [107.711, -0.066, -633.047, 216]
+    level:    [85, 86]
+  16896065:
+    template: Blazedrake
+    at:       [87.499, -0.321, -635.022, 75]
+    level:    [85, 86]
+  16896066:
+    template: Blazedrake
+    at:       [86.181, 0.092, -670.764, 158]
+    level:    [85, 86]
+  16896067:
+    template: Blazedrake
+    at:       [122.594, 0.024, -653.131, 77]
+    level:    [85, 86]
+  16896068:
+    template: Blazedrake
+    at:       [122.019, -0.484, -678.382, 108]
+    level:    [85, 86]
+  16896069:
+    template: Blazedrake
+    at:       [125.550, -0.203, -642.603, 106]
+    level:    [85, 86]
+  16896070:
+    template: Strato_Hippogryph
+    at:       [207.332, 0.428, -514.146, 26]
+    level:    [55, 57]
+  16896071:
+    template: Strato_Hippogryph
+    at:       [192.769, 1.508, -509.765, 253]
+    level:    [55, 57]
+  16896072:
+    template: Lunantishee
+    at:       [147.625, 2.149, -536.975, 45]
+    level:    [55, 58]
+  16896073:
+    template: Lunantishee
+    at:       [181.230, 0.282, -520.359, 236]
+    level:    [55, 58]
+  16896074:
+    template: Strato_Hippogryph
+    at:       [63.114, 0.054, -536.704, 7]
+    level:    [55, 57]
+  16896075:
+    template: Strato_Hippogryph
+    at:       [53.153, 0.051, -525.581, 130]
+    level:    [55, 57]
+  16896076:
+    template: Lunantishee
+    at:       [41.239, 0.358, -540.138, 114]
+    level:    [55, 58]
+  16896077:
+    template: Lunantishee
+    at:       [48.337, 0.212, -548.815, 20]
+    level:    [55, 58]
+  16896078:
+    template: Blazedrake
+    at:       [-128.191, 0.836, -519.462, 180]
+    level:    [85, 86]
+  16896079:
+    template: Blazedrake
+    at:       [-72.528, -0.160, -482.515]
+    level:    [85, 86]
+  16896080:
+    template: Blazedrake
+    at:       [-91.290, -0.044, -519.208, 158]
+    level:    [85, 86]
+  16896081:
+    template: Blazedrake
+    at:       [-85.022, 0.396, -556.239, 249]
+    level:    [85, 86]
+  16896082:
+    template: Blazedrake
+    at:       [-87.503, -0.435, -604.957, 240]
+    level:    [85, 86]
+  16896083:
+    template: Blazedrake
+    at:       [-112.957, 0.353, -621.052, 220]
+    level:    [85, 86]
+  16896084:
+    template: Blazedrake
+    at:       [-77.261, -0.320, -595.166, 169]
+    level:    [85, 86]
+  16896085:
+    template: Blazedrake
+    at:       [-80.603, -0.209, -611.485, 50]
+    level:    [85, 86]
+  16896086:
+    template: Blazedrake
+    at:       [-58.833, 0.299, -671.534, 165]
+    level:    [85, 86]
+  16896087:
+    template: Blazedrake
+    at:       [-47.274, -0.388, -695.457, 249]
+    level:    [85, 86]
+  16896088:
+    template: Blazedrake
+    at:       [-36.567, -0.124, -691.426, 87]
+    level:    [85, 86]
+  16896089:
+    template: Blazedrake
+    at:       [-35.151, -0.010, -628.998, 179]
+    level:    [85, 86]
+  16896090:
+    template: Blazedrake
+    at:       [-32.648, 0.030, -630.365, 157]
+    level:    [85, 86]
+  16896091:
+    template: Blazedrake
+    at:       [-42.961, -0.148, -752.627, 215]
+    level:    [85, 86]
+  16896092:
+    template: Blazedrake
+    at:       [-40.900, -0.099, -747.118, 65]
+    level:    [85, 86]
+  16896093:
+    template: Lesser_Roc
+    at:       [716.873, -24.637, 356.425, 232]
+    level:    [47, 51]
+  16896094:
+    template: Lesser_Roc
+    at:       [678.360, -24.119, 393.556, 58]
+    level:    [47, 51]
+  16896095:
+    template: Lesser_Roc
+    at:       [714.281, -24.491, 355.088, 105]
+    level:    [47, 51]
+  16896096:
+    template: Lesser_Roc
+    at:       [723.062, -23.468, 348.277, 38]
+    level:    [47, 51]
+  16896097:
+    template: Air_Elemental
+    at:       [705.393, 20.780, 644.721, 104]
+    level:    [57, 60]
+  16896098:
+    template: Lesser_Roc
+    at:       [642.482, 20.070, 654.605, 80]
+    level:    [47, 51]
+  16896099:
+    template: Lesser_Roc
+    at:       [711.059, 20.317, 625.244, 107]
+    level:    [47, 51]
+  16896100:
+    template: Lesser_Roc
+    at:       [706.592, 20.782, 597.548, 125]
+    level:    [47, 51]
+  16896101:
+    template: Nimbus_Hippogryph
+    at:       [650.770, 20.052, 676.513, 251]
+    level:    [49, 52]
+  16896102:
+    template: Nimbus_Hippogryph
+    at:       [703.539, 20.846, 598.196, 13]
+    level:    [49, 52]
+  16896103:
+    template: Nimbus_Hippogryph
+    at:       [674.045, 19.826, 690.504, 163]
+    level:    [49, 52]
+  16896104:
+    template: Nimbus_Hippogryph
+    at:       [642.049, 20.000, 653.150, 158]
+    level:    [49, 52]
+  16896105:
+    template: Nimbus_Hippogryph
+    at:       [677.079, 19.668, 647.065, 244]
+    level:    [49, 52]
+  16896106:
+    template: Nimbus_Hippogryph
+    at:       [685.626, 20.592, 686.651, 27]
+    level:    [49, 52]
+  16896107:
+    template: Imdugud
+    at:       [655.263, 20.664, 651.320]
+    level:    [60, 60]
+  16896108:
+    template: Nimbus_Hippogryph
+    at:       [465.956, 39.729, 795.003]
+    level:    [49, 52]
+  16896109:
+    template: Nimbus_Hippogryph
+    at:       [466.661, 41.263, 808.644, 191]
+    level:    [49, 52]
+  16896110:
+    template: Nimbus_Hippogryph
+    at:       [473.229, 40.482, 804.938, 231]
+    level:    [49, 52]
+  16896111:
+    template: Lesser_Roc
+    at:       [391.337, 49.176, 678.110, 169]
+    level:    [47, 51]
+  16896112:
+    template: Pyrodrake
+    at:       [255.390, 88.066, 843.930, 234]
+    level:    [50, 53]
+  16896113:
+    template: Pyrodrake
+    at:       [266.573, 88.338, 860.591, 128]
+    level:    [50, 53]
+  16896114:
+    template: Pyrodrake
+    at:       [276.105, 87.788, 850.710, 52]
+    level:    [50, 53]
+  16896115:
+    template: Air_Elemental
+    at:       [191.265, 15.734, 692.917, 93]
+    level:    [57, 60]
+  16896116:
+    template: Lesser_Roc
+    at:       [215.707, 15.953, 692.298, 163]
+    level:    [47, 51]
+  16896117:
+    template: Nimbus_Hippogryph
+    at:       [215.778, 15.999, 708.160, 37]
+    level:    [49, 52]
+  16896118:
+    template: Nitro_Cluster
+    at:       [31.256, 28.037, 634.655, 66]
+    level:    [55, 57]
+  16896119:
+    template: Nitro_Cluster
+    at:       [32.780, 27.897, 642.489, 145]
+    level:    [55, 57]
+  16896120:
+    template: Lunantishee
+    at:       [-4.175, 51.820, 715.212, 119]
+    level:    [55, 58]
+  16896121:
+    template: Lunantishee
+    at:       [10.055, 51.769, 749.644, 181]
+    level:    [55, 58]
+  16896122:
+    template: Lunantishee
+    at:       [14.385, 51.817, 765.994, 169]
+    level:    [55, 58]
+  16896123:
+    template: Air_Elemental
+    at:       [-265.311, 32.163, 738.200, 21]
+    level:    [58, 61]
+  16896124:
+    template: Strato_Hippogryph
+    at:       [-248.278, 31.975, 760.307, 40]
+    level:    [55, 57]
+  16896125:
+    template: Strato_Hippogryph
+    at:       [-205.045, 32.378, 698.208, 60]
+    level:    [55, 57]
+  16896126:
+    template: Lunantishee
+    at:       [-242.658, 33.014, 671.419, 126]
+    level:    [55, 58]
+  16896127:
+    template: Lunantishee
+    at:       [-225.084, 34.747, 748.996, 193]
+    level:    [55, 58]
+  16896128:
+    template: Lunantishee
+    at:       [-224.062, 32.349, 690.891, 156]
+    level:    [55, 58]
+  16896129:
+    template: Lunantishee
+    at:       [-252.875, 32.281, 720.177, 135]
+    level:    [55, 58]
+  16896130:
+    template: Lunantishee
+    at:       [-286.212, 32.645, 765.466, 212]
+    level:    [55, 58]
+  16896131:
+    template: Boroka
+    at:       [-365.921, -31.255, 486.367, 161]
+    level:    [58, 60]
+  16896132:
+    template: Ignidrake
+    at:       [-514.442, -20.293, 549.121, 119]
+    level:    [57, 59]
+  16896133:
+    template: Lunantishee
+    at:       [-518.859, -19.841, 537.571, 216]
+    level:    [55, 58]
+  16896134:
+    template: Air_Elemental
+    at:       [-586.808, 1.079, 689.897, 193]
+    level:    [58, 61]
+  16896135:
+    template: Ignidrake
+    at:       [-540.059, 0.469, 677.800, 245]
+    level:    [57, 59]
+  16896136:
+    template: Ignidrake
+    at:       [-522.837, 0.877, 698.562, 89]
+    level:    [57, 59]
+  16896137:
+    template: Ignidrake
+    at:       [-573.918, 1.261, 688.083, 188]
+    level:    [57, 59]
+  16896138:
+    template: Ignidrake
+    at:       [-525.313, 0.061, 687.027, 233]
+    level:    [57, 59]
+  16896139:
+    template: Ignidrake
+    at:       [-574.300, 1.251, 687.879, 189]
+    level:    [57, 59]
+  16896140:
+    template: Nitro_Cluster
+    at:       [-540.147, 0.560, 679.156, 78]
+    level:    [55, 57]
+  16896141:
+    template: Nitro_Cluster
+    at:       [-542.171, 0.754, 684.231, 241]
+    level:    [55, 57]
+  16896142:
+    template: Air_Elemental
+    at:       [-721.281, -0.231, 530.199, 35]
+    level:    [58, 61]
+  16896143:
+    template: Strato_Hippogryph
+    at:       [-712.837, 1.579, 542.232, 58]
+    level:    [55, 57]
+  16896144:
+    template: Strato_Hippogryph
+    at:       [-721.057, -0.252, 529.731, 199]
+    level:    [55, 57]
+  16896145:
+    template: Strato_Hippogryph
+    at:       [-715.017, 0.586, 519.889, 215]
+    level:    [55, 57]
+  16896146:
+    template: Strato_Hippogryph
+    at:       [-734.437, 0.086, 526.615, 243]
+    level:    [55, 57]
+  16896147:
+    template: Strato_Hippogryph
+    at:       [-831.983, -31.565, 350.683, 1]
+    level:    [55, 57]
+  16896148:
+    template: Lunantishee
+    at:       [-854.882, -30.148, 307.899, 59]
+    level:    [55, 58]
+  16896149:
+    template: Ignidrake
+    at:       [-504.307, 0.564, 755.287, 74]
+    level:    [57, 59]
+  16896150:
+    template: Nitro_Cluster
+    at:       [-809.600, -43.681, 146.629, 105]
+    level:    [55, 57]
+  16896151:
+    template: Nitro_Cluster
+    at:       [-821.305, -44.016, 147.343, 248]
+    level:    [55, 57]
+  16896152:
+    template: Spell_Spitter_Spilospok
+    at:       [278.386, 88.067, 841.088, 27]
+    level:    [55, 55]
+  16896153:
+    template: Chemical_Cook_Chemachiq
+    at:       [273.748, 88.160, 840.823, 20]
+    level:    [55, 55]
+  16896154:
+    template: Book_Browser_Bokabraq
+    at:       [278.558, 88.079, 844.786, 25]
+    level:    [55, 55]
+  16896155:
+    template: Unstable_Cluster
+    at:       [309.500, -1.189, -706.500, 134]
+    level:    [56, 57]
+  16896156:
+    template: Bahamut
+    at:       [-706.661, 0.405, 820.898, 3]
+    level:    [85, 85]
+  16896157:
+    template: Bahamut_2
+    script:   Bahamut_bv2
+    at:       [-706.971, 0.208, 828.373, 41]
+    level:    [92, 92]
+  16896158:
+    template: Ouryu_bv2
+    at:       [-700.194, 0.490, 841.407, 67]
+    level:    [88, 88]
+  16896159:
+    template: Tiamat_bv2
+    at:       [-678.588, 0.776, 819.903, 126]
+    level:    [88, 88]
+  16896160:
+    template: Jormungand_bv2
+    at:       [-701.959, 0.869, 797.652, 156]
+    level:    [88, 88]
+  16896161:
+    template: Vrtra_bv2
+    at:       [-721.731, 0.456, 818.535, 23]
+    level:    [88, 88]
+  16896162:
+    template: Ziryu
+    at:       [-687.889, 0.321, 791.656]
+    level:    [74, 76]
+  16896163:
+    template: Ziryu
+    at:       [-697.289, 1.902, 788.694]
+    level:    [74, 76]
+  16896164:
+    template: Ziryu
+    at:       [-716.051, 0.816, 813.272]
+    level:    [74, 76]
+  16896165:
+    template: Ziryu
+    at:       [-693.144, 0.284, 816.515]
+    level:    [74, 76]
+  16896166:
+    template: Water_Elemental
+    at:       [-704.841, 0.661, 797.990, 212]
+    level:    [74, 76]
+  16896167:
+    template: Earth_Elemental
+    at:       [-696.848, 0.353, 805.876, 198]
+    level:    [74, 76]
+  16896168:
+    template: Pey
+    at:       [-688.086, -0.043, 836.809, 113]
+    level:    [78, 79]
+  16896169:
+    template: Pey
+    at:       [-684.670, 0.217, 824.265, 181]
+    level:    [78, 79]
+  16896170:
+    template: Iruci
+    at:       [-699.758, 0.285, 802.629, 104]
+    level:    [78, 79]
+  16896171:
+    template: Iruci
+    at:       [-686.287, 0.157, 828.709, 165]
+    level:    [78, 79]
+  16896172:
+    template: Airi
+    at:       [-701.484, 0.481, 802.338, 96]
+    level:    [78, 79]
+  16896173:
+    template: Airi
+    at:       [-709.580, 0.302, 827.196, 94]
+    level:    [78, 79]
+
+slots:
+  - members:
+      16896010: {} # Lesser_Roc
+      16896017: {} # Nimbus_Hippogryph
+  - members:
+      16896023: {} # Lesser_Roc
+      16896030: {} # Nimbus_Hippogryph
+  - members:
+      16896034: {} # Lesser_Roc
+      16896038: {} # Nimbus_Hippogryph
+  - members:
+      16896039: {} # Nimbus_Hippogryph
+      16896042: {} # Lesser_Roc
+  - members:
+      16896065: {} # Blazedrake
+      16896069: {} # Blazedrake
+  - members:
+      16896100: {} # Lesser_Roc
+      16896101: {} # Nimbus_Hippogryph

@@ -1,0 +1,3152 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Amoebic_Nodule:
+    id:            111
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Ancient_Bomb:
+    id:            121
+    species:       bomb
+    skill_list_id: 499
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: always
+          item:   pinch_of_hoary_bomb_ash
+        - chance: common
+          item:   pinch_of_hoary_bomb_ash
+        - chance: common
+          item:   pinch_of_hoary_bomb_ash
+        - chance: uncommon
+          item:   pinch_of_hoary_bomb_ash
+        - chance: rare
+          item:   oldton_chest_key
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Blind_Crab:
+    id:            451
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: very_rare
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Bugallug:
+    id:            556
+    species:       bugbear
+    type:          [notorious]
+    skill_list_id: 59
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  Bugbear_Bondman:
+    id:            560
+    species:       bugbear
+    skill_list_id: 59
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_kopparnickel_ore
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   bugbear_mask
+        - chance: very_rare
+          item:   igneous_rock
+      steal: igneous_rock
+      despoil:
+        bugbear_mask: 0
+
+  Bugbear_Muscleman:
+    id:            563
+    species:       bugbear
+    type:          [notorious]
+    skill_list_id: 1169
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 5700
+      stats:
+        hp: 4700
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_rugged_gold_thread
+    content: WOTG
+
+  Bugbear_Porterman:
+    id:            564
+    species:       bugbear
+    type:          [notorious]
+    skill_list_id: 59
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Bugbear_Servingman:
+    id:            565
+    species:       bugbear
+    skill_list_id: 59
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_kopparnickel_ore
+        - chance: rare
+          item:   bugbear_mask
+        - chance: very_rare
+          item:   igneous_rock
+      steal: igneous_rock
+      despoil:
+        bugbear_mask: 0
+
+  Bugbear_Servingman_2:
+    id:            565
+    display_name:  Bugbear_Servingman
+    species:       bugbear
+    skill_list_id: 59
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_kopparnickel_ore
+        - chance: rare
+          item:   bugbear_mask
+        - chance: very_rare
+          item:   igneous_rock
+      steal: igneous_rock
+      despoil:
+        bugbear_mask: 0
+
+  Bugbear_Strongman:
+    id:            566
+    species:       bugbear
+    type:          [notorious]
+    skill_list_id: 59
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: common
+          item:   aikido_koshita
+        - chance: uncommon
+          item:   shinimusha_haidate
+        - chance: rare
+          item:   bugbear_mask
+
+  Cutter_fished:
+    id:            5864
+    display_name:  Cutter
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Dark_Bats_Oldton_Movalpolos:
+    id:            7342
+    display_name:  Dark_Bats
+    species:       flock_bat
+    skill_list_id: 2015
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Dread_Dealing_Dredodak:
+    id:            1114
+    species:       moblin
+    spell_list_id: 5
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 719
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 900
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Ghost_Crab_fished:
+    id:            1516
+    display_name:  Ghost_Crab
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Goblin_Craftsman:
+    id:            1647
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 712
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Doorman:
+    id:            1650
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 713
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+        - chance: rare
+          item:   oldton_chest_key
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Freelance:
+    id:            1663
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 700
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        assist: 3
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: uncommon
+          item:   moblumin_ingot
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Gutterman:
+    id:            1673
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 678
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Hammerman:
+    id:            1674
+    species:       goblin
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 717
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: uncommon
+          item:   magicked_steel_ingot
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Leadman:
+    id:            1682
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 672
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: uncommon
+          item:   magicked_steel_ingot
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Oilman:
+    id:            1691
+    species:       goblin
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 713
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: uncommon
+          item:   magicked_steel_ingot
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Preceptor:
+    id:            1703
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 700
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Goblin_Shovelman:
+    id:            1712
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 673
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Tollman:
+    id:            1739
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 673
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: uncommon
+          item:   magicked_steel_ingot
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Wolfman:
+    id:            1746
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 462
+    skill_list_id: 1172
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 718
+        entity_flags: 133
+        model_size:     2
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7600
+    loot:
+      drops:
+        - chance: common
+          item:   parade_gorget
+        - chance: rare
+          item:   goblin_mail
+        - chance: very_rare
+          item:   goblin_helm
+
+  Goblins_Bat_Tier1_Oldton_Movalpo:
+    id:            7320
+    display_name:  Goblins_Bat
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Goblins_Bat_Tier2_Oldton_Movalpo:
+    id:            7321
+    display_name:  Goblins_Bat
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Grimoire_Guru_Grimogek:
+    id:            1816
+    species:       moblin
+    spell_list_id: 21
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 695
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Moblin_Ashman:
+    id:            2685
+    species:       moblin
+    spell_list_id: 3
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 696
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: common
+          item:   moblin_hotrok
+        - chance: uncommon
+          item:   moblumin_ingot
+        - chance: rare
+          item:   moblin_mail
+        - chance: very_rare
+          item:   moblin_helm
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Chapman:
+    id:            2687
+    species:       moblin
+    spell_list_id: 21
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 687
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   spool_of_moblin_thread
+        - chance: rare
+          item:   moblin_mask
+        - chance: uncommon
+          item:   moblin_sheepskin
+        - chance: very_rare
+          item:   moblin_armor
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Coalman:
+    id:            2689
+    species:       moblin
+    spell_list_id: 21
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: katana
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 693
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Coalman_2:
+    id:            2689
+    display_name:  Moblin_Coalman
+    species:       moblin
+    spell_list_id: 21
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: katana
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 693
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Gasman:
+    id:            2694
+    species:       moblin
+    spell_list_id: 20
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 688
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Gasman_2:
+    id:            2694
+    display_name:  Moblin_Gasman
+    species:       moblin
+    spell_list_id: 20
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 688
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Gurneyman:
+    id:            2696
+    species:       moblin
+    spell_list_id: 20
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 699
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: platinum_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Pickman:
+    id:            2698
+    species:       moblin
+    spell_list_id: 3
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 681
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Pikeman:
+    id:            2699
+    species:       moblin
+    spell_list_id: 3
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 682
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Pikeman_2:
+    id:            2699
+    display_name:  Moblin_Pikeman
+    species:       moblin
+    spell_list_id: 3
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 682
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Ragman:
+    id:            2700
+    species:       moblin
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: katana
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 681
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Repairman:
+    id:            2701
+    species:       moblin
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 682
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   moblin_mask
+        - chance: very_rare
+          item:   moblin_armor
+      steal: mythril_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Rodman:
+    id:            2703
+    species:       moblin
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 682
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Moblin_Witchman:
+    id:            2708
+    species:       moblin
+    spell_list_id: 20
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 687
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   spool_of_moblin_thread
+        - chance: uncommon
+          item:   moblin_mask
+        - chance: rare
+          item:   moblin_sheepskin
+        - chance: very_rare
+          item:   moblin_armor
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Snipper_fished:
+    id:            3682
+    display_name:  Snipper
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: very_rare
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Stirge_Oldton_Movalpolos:
+    id:            7330
+    display_name:  Stirge
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 900
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: rare
+          item:   oldton_chest_key
+
+spawns:
+  16822273:
+    template: Snipper_fished
+    script:   Snipper
+    at:       [1.000, 1.000, 1.000]
+    level:    [21, 24]
+  16822274:
+    template: Blind_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [21, 24]
+  16822275:
+    template: Cutter_fished
+    script:   Cutter
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 29]
+  16822276:
+    template: Ghost_Crab_fished
+    script:   Ghost_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 32]
+  16822277:
+    template: Amoebic_Nodule
+    at:       [1.000, 1.000, 1.000]
+    level:    [34, 36]
+  16822278:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-339.193, -8.473, 435.385, 189]
+    level:    [31, 33]
+  16822279:
+    template: Goblin_Craftsman
+    at:       [-348.198, -8.434, 385.297, 199]
+    level:    [33, 35]
+  16822280:
+    template: Goblin_Gutterman
+    at:       [-349.675, -7.243, 381.723, 76]
+    level:    [33, 35]
+  16822281:
+    template: Moblin_Pickman
+    at:       [-346.252, -8.639, 388.792, 216]
+    level:    [33, 35]
+  16822282:
+    template: Goblin_Leadman
+    at:       [-335.630, -3.437, 305.384, 38]
+    level:    [33, 35]
+  16822283:
+    template: Goblins_Bat_Tier1_Oldton_Movalpo
+    script:   Goblins_Bat
+    at:       [-337.643, -4.267, 307.932, 39]
+    level:    [28, 30]
+  16822284:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-325.221, -1.156, 299.926, 146]
+    level:    [31, 33]
+  16822285:
+    template: Moblin_Witchman
+    at:       [-325.263, -1.163, 300.795, 110]
+    level:    [33, 35]
+  16822286:
+    template: Goblin_Hammerman
+    at:       [-313.394, -0.476, 300.171, 141]
+    level:    [33, 35]
+  16822287:
+    template: Moblin_Witchman
+    at:       [-301.408, -0.474, 289.523, 189]
+    level:    [33, 35]
+  16822288:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-308.489, -0.475, 297.637, 159]
+    level:    [31, 33]
+  16822289:
+    template: Goblin_Gutterman
+    at:       [-299.688, -0.540, 225.807, 197]
+    level:    [33, 35]
+  16822290:
+    template: Moblin_Ragman
+    at:       [-301.056, -0.072, 216.073, 70]
+    level:    [33, 35]
+  16822291:
+    template: Moblin_Chapman
+    at:       [-283.413, -0.602, 180.261, 137]
+    level:    [33, 35]
+  16822292:
+    template: Goblin_Craftsman
+    at:       [-292.898, -0.602, 183.675, 19]
+    level:    [33, 35]
+  16822293:
+    template: Moblin_Witchman
+    at:       [-249.840, -0.527, 179.520, 61]
+    level:    [33, 35]
+  16822294:
+    template: Moblin_Ragman
+    at:       [-254.445, -0.605, 170.579, 127]
+    level:    [33, 35]
+  16822295:
+    template: Moblin_Pickman
+    at:       [-260.406, -0.575, 199.923, 192]
+    level:    [33, 35]
+  16822296:
+    template: Bugbear_Servingman
+    at:       [-257.500, -0.615, 210.837, 91]
+    level:    [32, 35]
+  16822297:
+    template: Bugbear_Servingman
+    at:       [-249.625, -0.511, 174.771, 217]
+    level:    [32, 35]
+  16822298:
+    template: Bugbear_Servingman
+    at:       [-249.764, -0.517, 182.454, 186]
+    level:    [32, 35]
+  16822299:
+    template: Goblin_Hammerman
+    at:       [-299.349, -0.475, 277.249, 61]
+    level:    [33, 35]
+  16822300:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-300.373, -0.589, 203.997, 66]
+    level:    [31, 33]
+  16822301:
+    template: Moblin_Chapman
+    at:       [-154.278, 7.520, 219.072, 137]
+    level:    [33, 35]
+  16822302:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-165.273, 6.944, 220.040, 111]
+    level:    [31, 33]
+  16822303:
+    template: Goblin_Craftsman
+    at:       [-258.840, 1.607, 100.742, 66]
+    level:    [33, 35]
+  16822304:
+    template: Moblin_Witchman
+    at:       [-258.837, 1.620, 100.987, 65]
+    level:    [33, 35]
+  16822305:
+    template: Goblin_Leadman
+    at:       [-258.558, 0.354, 104.961, 194]
+    level:    [33, 35]
+  16822306:
+    template: Goblins_Bat_Tier1_Oldton_Movalpo
+    script:   Goblins_Bat
+    at:       [-258.736, 0.858, 104.000, 66]
+    level:    [28, 30]
+  16822307:
+    template: Moblin_Ragman
+    at:       [-267.419, 7.285, 23.881, 207]
+    level:    [33, 35]
+  16822308:
+    template: Bugbear_Servingman
+    at:       [-268.868, 7.253, 21.935, 88]
+    level:    [32, 35]
+  16822309:
+    template: Earth_Elemental
+    at:       [-258.816, 7.400, 30.163, 147]
+    level:    [45, 50]
+  16822310:
+    template: Goblin_Leadman
+    at:       [-213.530, 7.400, 20.417]
+    level:    [33, 35]
+  16822311:
+    template: Goblins_Bat_Tier1_Oldton_Movalpo
+    script:   Goblins_Bat
+    at:       [-215.861, 7.489, 21.573, 12]
+    level:    [28, 30]
+  16822312:
+    template: Goblin_Hammerman
+    at:       [-219.467, 11.500, 34.864, 5]
+    level:    [33, 35]
+  16822313:
+    template: Bugbear_Servingman_2
+    script:   Bugbear_Servingman
+    at:       [-209.952, 11.424, 27.895, 10]
+    level:    [32, 35]
+  16822314:
+    template: Moblin_Chapman
+    at:       [-218.059, 11.500, 34.901, 7]
+    level:    [33, 35]
+  16822315:
+    template: Bugbear_Servingman_2
+    script:   Bugbear_Servingman
+    at:       [-216.634, 11.400, 34.897, 11]
+    level:    [32, 35]
+  16822316:
+    template: Goblin_Gutterman
+    at:       [-216.933, 7.397, -9.241, 41]
+    level:    [33, 35]
+  16822317:
+    template: Goblin_Craftsman
+    at:       [-229.335, 7.393, -22.834, 76]
+    level:    [33, 35]
+  16822318:
+    template: Moblin_Ragman
+    at:       [-228.946, 7.472, -25.505, 78]
+    level:    [33, 35]
+  16822319:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-219.935, 7.394, -30.747, 116]
+    level:    [31, 33]
+  16822320:
+    template: Bugbear_Servingman
+    at:       [-220.755, 7.472, -31.491, 147]
+    level:    [33, 35]
+  16822321:
+    template: Bugbear_Servingman
+    at:       [-222.269, 7.947, -32.106, 146]
+    level:    [33, 35]
+  16822322:
+    template: Bugbear_Muscleman
+    at:       [-221.275, 7.424, -32.727, 171]
+    level:    [52, 53]
+  16822323:
+    template: Moblin_Chapman
+    at:       [-265.640, 7.324, -20.257, 25]
+    level:    [33, 35]
+  16822324:
+    template: Goblin_Leadman
+    at:       [-261.952, 7.331, -18.424, 204]
+    level:    [33, 35]
+  16822325:
+    template: Goblins_Bat_Tier1_Oldton_Movalpo
+    script:   Goblins_Bat
+    at:       [-262.642, 7.341, -19.385, 165]
+    level:    [28, 30]
+  16822326:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-260.446, 6.757, -85.386, 63]
+    level:    [33, 35]
+  16822327:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-263.027, 4.974, -94.185, 223]
+    level:    [33, 35]
+  16822328:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-259.999, 6.778, -85.538, 62]
+    level:    [31, 33]
+  16822329:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-178.526, 7.535, 49.965, 203]
+    level:    [33, 35]
+  16822330:
+    template: Moblin_Ragman
+    at:       [-175.243, 7.529, 53.367, 222]
+    level:    [33, 35]
+  16822331:
+    template: Ancient_Bomb
+    at:       [-84.543, 7.525, 59.126, 130]
+    level:    [40, 40]
+  16822332:
+    template: Moblin_Pickman
+    at:       [-112.841, 7.625, 59.624, 124]
+    level:    [33, 35]
+  16822333:
+    template: Goblin_Hammerman
+    at:       [-120.653, 7.525, 58.990]
+    level:    [33, 35]
+  16822334:
+    template: Ancient_Bomb
+    at:       [-115.394, 7.625, 59.177, 137]
+    level:    [40, 40]
+  16822335:
+    template: Moblin_Witchman
+    at:       [-120.070, 7.542, 99.552, 1]
+    level:    [33, 35]
+  16822336:
+    template: Bugbear_Servingman
+    at:       [-138.147, 7.525, 109.234, 54]
+    level:    [33, 35]
+  16822337:
+    template: Moblin_Chapman
+    at:       [-138.239, 7.525, 109.821, 55]
+    level:    [33, 35]
+  16822338:
+    template: Goblin_Gutterman
+    at:       [-95.311, 7.507, 95.652, 250]
+    level:    [33, 35]
+  16822339:
+    template: Goblin_Leadman
+    at:       [-88.587, 7.536, 98.785, 114]
+    level:    [33, 35]
+  16822340:
+    template: Goblins_Bat_Tier1_Oldton_Movalpo
+    script:   Goblins_Bat
+    at:       [-85.516, 7.571, 100.033, 114]
+    level:    [28, 30]
+  16822341:
+    template: Goblin_Hammerman
+    at:       [-99.364, 7.385, 92.879, 195]
+    level:    [33, 35]
+  16822342:
+    template: Goblin_Craftsman
+    at:       [-88.858, 7.524, 62.384, 147]
+    level:    [33, 35]
+  16822343:
+    template: Moblin_Pickman
+    at:       [-79.731, 7.625, 60.769, 128]
+    level:    [33, 35]
+  16822344:
+    template: Bugbear_Servingman
+    at:       [-82.480, 7.525, 60.819, 1]
+    level:    [33, 35]
+  16822345:
+    template: Goblin_Craftsman
+    at:       [-25.987, 7.338, 55.171, 23]
+    level:    [34, 36]
+  16822346:
+    template: Moblin_Witchman
+    at:       [-28.740, 7.410, 56.796, 156]
+    level:    [34, 36]
+  16822347:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-23.446, 11.556, -11.662, 90]
+    level:    [32, 34]
+  16822348:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-25.206, 12.436, -14.179, 93]
+    level:    [32, 34]
+  16822349:
+    template: Thunder_Elemental
+    at:       [-25.400, 12.452, -14.412, 94]
+    level:    [45, 50]
+  16822350:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-180.272, 9.909, -48.116, 171]
+    level:    [32, 34]
+  16822351:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-177.588, 12.095, -53.745, 159]
+    level:    [33, 35]
+  16822352:
+    template: Earth_Elemental
+    at:       [-169.734, 13.948, -59.910, 20]
+    level:    [45, 50]
+  16822353:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-119.026, 15.478, -140.465, 1]
+    level:    [33, 35]
+  16822354:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-129.872, 13.817, -141.216, 122]
+    level:    [33, 35]
+  16822355:
+    template: Thunder_Elemental
+    at:       [-134.458, 12.887, -144.470, 100]
+    level:    [45, 50]
+  16822356:
+    template: Ancient_Bomb
+    at:       [-108.047, 15.524, -138.336, 122]
+    level:    [40, 40]
+  16822357:
+    template: Goblin_Hammerman
+    at:       [-139.690, 7.391, -205.577, 176]
+    level:    [34, 36]
+  16822358:
+    template: Moblin_Chapman
+    at:       [-134.841, 7.314, -214.812, 40]
+    level:    [34, 36]
+  16822359:
+    template: Bugbear_Servingman
+    at:       [-101.177, 7.397, -234.822, 183]
+    level:    [33, 35]
+  16822360:
+    template: Bugbear_Servingman
+    at:       [-141.470, 7.399, -256.686, 205]
+    level:    [33, 35]
+  16822361:
+    template: Moblin_Ragman
+    at:       [-151.862, 7.387, -301.422, 125]
+    level:    [34, 36]
+  16822362:
+    template: Moblin_Pickman
+    at:       [-151.038, 7.405, -301.348, 126]
+    level:    [34, 36]
+  16822363:
+    template: Moblin_Chapman
+    at:       [-101.740, 7.388, -289.296, 212]
+    level:    [34, 36]
+  16822364:
+    template: Moblin_Witchman
+    at:       [-96.275, 7.488, -270.593, 83]
+    level:    [34, 36]
+  16822365:
+    template: Goblin_Craftsman
+    at:       [-99.610, 7.390, -280.282, 74]
+    level:    [34, 36]
+  16822366:
+    template: Goblin_Leadman
+    at:       [-53.170, 7.525, -261.172, 129]
+    level:    [34, 36]
+  16822367:
+    template: Goblins_Bat_Tier1_Oldton_Movalpo
+    script:   Goblins_Bat
+    at:       [-49.802, 7.525, -261.022, 129]
+    level:    [28, 30]
+  16822368:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-42.805, 7.525, -260.264, 252]
+    level:    [33, 35]
+  16822369:
+    template: Ancient_Bomb
+    at:       [-28.193, 7.525, -258.723, 101]
+    level:    [40, 40]
+  16822370:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-193.521, 7.525, -299.586, 121]
+    level:    [31, 33]
+  16822371:
+    template: Ancient_Bomb
+    at:       [-199.902, 7.525, -299.623, 126]
+    level:    [40, 40]
+  16822372:
+    template: Moblin_Ragman
+    at:       [-213.007, 7.491, -295.843, 36]
+    level:    [34, 36]
+  16822373:
+    template: Bugbear_Servingman
+    at:       [-226.146, 11.256, -259.110, 114]
+    level:    [33, 35]
+  16822374:
+    template: Moblin_Pickman
+    at:       [-264.859, 8.062, -258.940, 255]
+    level:    [34, 36]
+  16822375:
+    template: Goblin_Gutterman
+    at:       [-258.452, 7.725, -258.886]
+    level:    [34, 36]
+  16822376:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-291.619, 7.409, -259.144, 254]
+    level:    [33, 35]
+  16822377:
+    template: Moblin_Rodman
+    at:       [-90.209, 19.400, -87.042, 7]
+    level:    [41, 43]
+  16822378:
+    template: Moblin_Rodman
+    at:       [-68.841, 19.400, -78.561, 58]
+    level:    [41, 43]
+  16822379:
+    template: Moblin_Rodman
+    at:       [-71.994, 19.400, -70.685, 34]
+    level:    [41, 43]
+  16822380:
+    template: Moblin_Rodman
+    at:       [-67.798, 19.400, -69.787, 30]
+    level:    [41, 43]
+  16822381:
+    template: Goblin_Craftsman
+    at:       [-61.151, 15.399, -45.266, 64]
+    level:    [35, 36]
+  16822382:
+    template: Goblin_Hammerman
+    at:       [-132.058, 15.488, -59.485, 245]
+    level:    [35, 36]
+  16822383:
+    template: Moblin_Pickman
+    at:       [-83.257, 22.112, -42.972, 74]
+    level:    [35, 36]
+  16822384:
+    template: Moblin_Ragman
+    at:       [-61.705, 15.155, -111.188, 174]
+    level:    [35, 36]
+  16822385:
+    template: Goblin_Hammerman
+    at:       [-125.262, 15.500, -60.292, 156]
+    level:    [35, 36]
+  16822386:
+    template: Goblin_Craftsman
+    at:       [-61.044, 15.374, -36.630, 65]
+    level:    [35, 36]
+  16822387:
+    template: Moblin_Chapman
+    at:       [-120.033, 22.197, -104.954, 143]
+    level:    [35, 36]
+  16822388:
+    template: Moblin_Witchman
+    at:       [-72.516, 22.170, -116.967, 239]
+    level:    [35, 36]
+  16822389:
+    template: Goblin_Gutterman
+    at:       [-99.851, 15.404, -112.667, 79]
+    level:    [35, 36]
+  16822390:
+    template: Moblin_Pickman
+    at:       [-79.620, 22.399, -37.251, 244]
+    level:    [35, 36]
+  16822391:
+    template: Moblin_Witchman
+    at:       [-68.072, 22.334, -119.000, 198]
+    level:    [35, 36]
+  16822392:
+    template: Moblin_Chapman
+    at:       [-120.371, 22.216, -108.694, 191]
+    level:    [35, 36]
+  16822393:
+    template: Moblin_Ragman
+    at:       [-60.763, 15.205, -111.960, 173]
+    level:    [35, 36]
+  16822394:
+    template: Goblin_Gutterman
+    at:       [-98.972, 15.408, -112.664, 80]
+    level:    [35, 36]
+  16822395:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [-27.674, 11.525, -139.376, 96]
+    level:    [32, 34]
+  16822396:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [-24.448, 11.525, -136.313, 225]
+    level:    [33, 35]
+  16822397:
+    template: Earth_Elemental
+    at:       [-24.347, 11.525, -136.066, 228]
+    level:    [45, 50]
+  16822398:
+    template: Ancient_Bomb
+    at:       [-19.501, 11.525, -129.167, 68]
+    level:    [40, 40]
+  16822399:
+    template: Bugbear_Bondman
+    at:       [-38.215, 7.500, 101.636, 126]
+    level:    [43, 45]
+  16822400:
+    template: Bugbear_Bondman
+    at:       [-38.805, 7.494, 98.486, 121]
+    level:    [43, 45]
+  16822401:
+    template: Goblin_Tollman
+    at:       [-19.952, 7.400, 99.856, 3]
+    level:    [42, 43]
+  16822402:
+    template: Goblins_Bat_Tier2_Oldton_Movalpo
+    script:   Goblins_Bat
+    at:       [-19.589, 7.400, 100.273, 130]
+    level:    [37, 38]
+  16822403:
+    template: Bugbear_Bondman
+    at:       [-8.933, 11.380, 109.457, 185]
+    level:    [42, 44]
+  16822404:
+    template: Moblin_Gasman
+    at:       [-9.922, 11.384, 109.896, 220]
+    level:    [42, 43]
+  16822405:
+    template: Moblin_Coalman
+    at:       [-13.112, 11.472, 114.571, 121]
+    level:    [42, 43]
+  16822406:
+    template: Moblin_Repairman
+    at:       [-17.329, 7.393, 69.596, 163]
+    level:    [42, 43]
+  16822407:
+    template: Goblin_Doorman
+    at:       [-17.597, 7.392, 69.662, 165]
+    level:    [42, 43]
+  16822408:
+    template: Goblin_Oilman
+    at:       [-5.144, 7.399, 61.449, 132]
+    level:    [42, 43]
+  16822409:
+    template: Moblin_Pikeman
+    at:       [26.816, 7.401, 69.280, 30]
+    level:    [42, 43]
+  16822410:
+    template: Goblin_Doorman
+    at:       [29.179, 7.393, 65.228, 41]
+    level:    [42, 43]
+  16822411:
+    template: Moblin_Pikeman
+    at:       [18.913, 7.397, 38.402, 63]
+    level:    [42, 43]
+  16822412:
+    template: Goblin_Oilman
+    at:       [18.607, 7.385, 43.233, 66]
+    level:    [42, 43]
+  16822413:
+    template: Bugbear_Bondman
+    at:       [14.672, 7.393, 57.058, 162]
+    level:    [42, 44]
+  16822414:
+    template: Bugbear_Bondman
+    at:       [14.654, 7.393, 57.062, 163]
+    level:    [42, 44]
+  16822415:
+    template: Bugbear_Bondman
+    at:       [19.058, 7.240, 110.204, 240]
+    level:    [42, 44]
+  16822416:
+    template: Bugbear_Bondman
+    at:       [26.784, 7.298, 95.528, 83]
+    level:    [42, 44]
+  16822417:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [18.698, 7.570, 4.266, 190]
+    level:    [34, 35]
+  16822418:
+    template: Ancient_Bomb
+    at:       [18.736, 7.567, 4.048, 191]
+    level:    [45, 45]
+  16822419:
+    template: Goblin_Doorman
+    at:       [15.600, 7.399, -50.544, 141]
+    level:    [42, 43]
+  16822420:
+    template: Moblin_Repairman
+    at:       [10.795, 7.399, -53.417, 102]
+    level:    [42, 43]
+  16822421:
+    template: Bugbear_Bondman
+    at:       [-0.920, 11.500, -98.408, 132]
+    level:    [43, 45]
+  16822422:
+    template: Bugbear_Bondman
+    at:       [-0.750, 11.500, -101.360, 126]
+    level:    [43, 45]
+  16822423:
+    template: Bugbear_Strongman
+    at:       [-0.920, 11.500, -98.408, 22]
+    level:    [50, 50]
+  16822424:
+    template: Goblin_Oilman
+    at:       [29.047, 9.399, -118.903, 114]
+    level:    [42, 43]
+  16822425:
+    template: Bugbear_Bondman
+    at:       [58.367, 15.500, -123.264, 67]
+    level:    [43, 45]
+  16822426:
+    template: Bugbear_Bondman
+    at:       [61.612, 15.500, -122.418, 80]
+    level:    [43, 45]
+  16822427:
+    template: Bugbear_Strongman
+    at:       [61.612, 15.500, -122.418, 198]
+    level:    [50, 50]
+  16822428:
+    template: Goblin_Shovelman
+    at:       [68.460, 15.387, -109.514, 8]
+    level:    [42, 43]
+  16822429:
+    template: Moblin_Repairman
+    at:       [66.254, 15.396, -109.277, 118]
+    level:    [42, 43]
+  16822430:
+    template: Goblin_Shovelman
+    at:       [59.446, 11.399, -76.484, 128]
+    level:    [42, 43]
+  16822431:
+    template: Goblin_Tollman
+    at:       [68.376, 11.392, -75.732, 250]
+    level:    [42, 43]
+  16822432:
+    template: Goblins_Bat_Tier2_Oldton_Movalpo
+    script:   Goblins_Bat
+    at:       [66.791, 11.393, -75.846, 249]
+    level:    [37, 38]
+  16822433:
+    template: Goblin_Freelance
+    at:       [38.352, 13.400, -61.223, 201]
+    level:    [46, 47]
+  16822434:
+    template: Moblin_Gasman
+    at:       [37.439, 13.402, -62.722, 208]
+    level:    [43, 44]
+  16822435:
+    template: Moblin_Coalman
+    at:       [36.494, 13.400, -63.253, 214]
+    level:    [43, 44]
+  16822436:
+    template: Moblin_Pikeman
+    at:       [36.001, 13.500, -64.365, 209]
+    level:    [43, 44]
+  16822437:
+    template: Goblin_Freelance
+    at:       [27.104, 9.397, -87.600, 51]
+    level:    [46, 47]
+  16822438:
+    template: Moblin_Gasman
+    at:       [26.633, 9.416, -85.691, 24]
+    level:    [43, 44]
+  16822439:
+    template: Moblin_Coalman
+    at:       [25.587, 9.394, -85.151, 4]
+    level:    [43, 44]
+  16822440:
+    template: Moblin_Pikeman
+    at:       [24.548, 9.440, -84.579, 11]
+    level:    [43, 44]
+  16822441:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [113.721, 11.525, -59.730, 124]
+    level:    [34, 36]
+  16822442:
+    template: Stirge_Oldton_Movalpolos
+    script:   Stirge
+    at:       [125.026, 11.525, -58.848, 251]
+    level:    [34, 36]
+  16822443:
+    template: Ancient_Bomb
+    at:       [-138.559, 7.525, 108.943, 36]
+    level:    [45, 45]
+  16822444:
+    template: Moblin_Gasman
+    at:       [158.240, 11.400, -58.642, 147]
+    level:    [43, 44]
+  16822445:
+    template: Moblin_Coalman
+    at:       [164.045, 11.399, -58.198, 231]
+    level:    [43, 44]
+  16822446:
+    template: Moblin_Pikeman
+    at:       [171.413, 16.994, -76.517, 9]
+    level:    [43, 44]
+  16822447:
+    template: Moblin_Repairman
+    at:       [171.493, 16.938, -76.835, 9]
+    level:    [43, 44]
+  16822448:
+    template: Goblin_Oilman
+    at:       [174.461, 15.825, -77.126, 255]
+    level:    [43, 44]
+  16822449:
+    template: Goblin_Doorman
+    at:       [163.952, 11.398, -89.082, 180]
+    level:    [43, 44]
+  16822450:
+    template: Moblin_Ashman
+    at:       [180.780, 19.416, -64.340, 33]
+    level:    [45, 45]
+  16822451:
+    template: Thunder_Elemental
+    at:       [177.265, 7.375, -28.733, 179]
+    level:    [45, 50]
+  16822452:
+    template: Earth_Elemental
+    at:       [180.623, 7.402, -42.921, 136]
+    level:    [45, 50]
+  16822453:
+    template: Dark_Bats_Oldton_Movalpolos
+    script:   Dark_Bats
+    at:       [179.462, 7.394, -92.602, 62]
+    level:    [34, 35]
+  16822454:
+    template: Thunder_Elemental
+    at:       [179.684, 7.504, -97.948, 63]
+    level:    [45, 50]
+  16822455:
+    template: Earth_Elemental
+    at:       [179.121, 7.520, -103.613, 69]
+    level:    [45, 50]
+  16822456:
+    template: Bugallug
+    at:       [161.970, 13.980, -42.190, 142]
+    level:    [45, 50]
+  16822457:
+    template: Moblin_Gurneyman
+    at:       [-30.020, 7.399, 98.798, 131]
+    level:    [46, 47]
+  16822458:
+    template: Moblin_Gurneyman
+    at:       [24.439, 9.393, -87.126, 132]
+    level:    [46, 47]
+  16822459:
+    template: Goblin_Wolfman
+    at:       [-150.910, 7.499, -251.817, 57]
+    level:    [50, 50]
+  16822460:
+    template: Goblin_Preceptor
+    at:       [-139.278, 7.500, 151.250, 203]
+    level:    [45, 49]
+  16822461:
+    template: Grimoire_Guru_Grimogek
+    at:       [-136.905, 7.500, 154.819, 91]
+    level:    [80, 80]
+  16822462:
+    template: Dread_Dealing_Dredodak
+    at:       [-139.853, 7.500, 150.096, 207]
+    level:    [80, 80]
+  16822463:
+    template: Bugbear_Porterman
+    at:       [-140.051, 7.688, 154.859, 48]
+    level:    [45, 50]
+  16822464:
+    template: Bugbear_Porterman
+    at:       [-139.663, 7.772, 152.956, 34]
+    level:    [45, 50]
+  16822465:
+    template: Bugbear_Porterman
+    at:       [-138.266, 7.735, 155.118, 73]
+    level:    [45, 50]
+  16822466:
+    template: Bugbear_Porterman
+    at:       [-137.062, 7.992, 153.616, 102]
+    level:    [45, 50]
+
+slots:
+  - members:
+      16822296: {} # Bugbear_Servingman
+      16822297: {} # Bugbear_Servingman
+  - members:
+      16822331: {} # Ancient_Bomb
+      16822334: {} # Ancient_Bomb
+  - members:
+      16822356: {} # Ancient_Bomb
+      16822369: {} # Ancient_Bomb
+  - members:
+      16822381: {} # Goblin_Craftsman
+      16822382: {} # Goblin_Hammerman
+  - members:
+      16822385: {} # Goblin_Hammerman
+      16822386: {} # Goblin_Craftsman
+  - members:
+      16822389: {} # Goblin_Gutterman
+      16822390: {} # Moblin_Pickman
+  - members:
+      16822391: {} # Moblin_Witchman
+      16822392: {} # Moblin_Chapman
+  - members:
+      16822393: {} # Moblin_Ragman
+      16822394: {} # Goblin_Gutterman
+  - members:
+      16822404: {} # Moblin_Gasman
+      16822405: {} # Moblin_Coalman
+  - members:
+      16822414: {} # Bugbear_Bondman
+      16822415: {} # Bugbear_Bondman
+  - members:
+      16822446: {} # Moblin_Pikeman
+      16822448: {} # Goblin_Oilman

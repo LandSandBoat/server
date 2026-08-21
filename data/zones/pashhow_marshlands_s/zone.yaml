@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z2i0:
+    from:  [-216.311, 20.719, -494.094]
+    to:    grauberg_s
+    at:    [495.063, 69.903, 924.102, 0.698132]
+    scale: [2.000, 10.000]
+
+  z2i2:
+    from:  [56.554, 21.417, -533.834]
+    to:    grauberg_s
+    at:    [759.684, 66.250, 829.356, 1.570796]
+    scale: [2.000, 10.000]
+
+  z2i4:
+    from:  [582.492, 21.080, -377.871]
+    to:    beadeaux_s
+    at:    [-297.109, 0.008, 96.002]
+    scale: [1.000, 4.000]
+
+  z2i6:
+    from:  [551.257, 20.719, 697.035]
+    to:    rolanberry_fields_s
+    at:    [-102.210, -3.017, -917.643]
+    scale: [1.000, 10.000]

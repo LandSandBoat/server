@@ -1,0 +1,1120 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Achuka:
+    id:            4677
+    species:       gabbrath
+    skill_list_id: 461
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    9
+          ice:     9
+          wind:    4
+          earth:   4
+          thunder: 2
+          water:   2
+          light:   6
+          dark:    4
+        rank_status:
+          paralyze:    9
+          bind:        9
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 6
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2515
+        entity_flags: 131
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Arciela:
+    id:            5496
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 3
+    skill_list_id: 486
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          ice:     11
+          wind:     2
+          earth:   11
+          thunder:  2
+          water:   11
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:      2
+          slow:        11
+          poison:      11
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2670
+        entity_flags:  1
+        name_prefix:  32
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Balamor:
+    id:            5505
+    species:       defiant
+    type:          [notorious]
+    skill_list_id: 492
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        rank_element:
+          fire:     2
+          ice:      6
+          wind:     6
+          earth:    8
+          thunder:  4
+          water:    8
+          light:    4
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         8
+          poison:       8
+          light_sleep:  4
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2630
+        entity_flags: 129
+        hitbox:        21
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Balamors_Sycophant:
+    id:            5503
+    species:       dullahan
+    type:          [notorious]
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2605
+        entity_flags: 153
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Colkhab:
+    id:            4927
+    species:       bztavian
+    skill_list_id: 456
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    9
+          earth:   9
+          thunder: 4
+          water:   4
+          light:   6
+          dark:    4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     9
+          slow:        9
+          poison:      4
+          light_sleep: 6
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2500
+        entity_flags: 131
+        hitbox:        19
+      spawn:
+        type: [scripted]
+
+  Darrcuiln:
+    id:            5499
+    species:       collared_lynx
+    skill_list_id: 489
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -2
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2662
+        entity_flags: 153
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Hurkan:
+    id:            4678
+    species:       waktza
+    skill_list_id: 460
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    4
+          ice:     2
+          wind:    9
+          earth:   2
+          thunder: 9
+          water:   4
+          light:   4
+          dark:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     9
+          slow:        2
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  6
+          blind:       6
+      render:
+        look:
+          type:  standard
+          model: 2580
+        entity_flags: 129
+        hitbox:        24
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Ingrid:
+    id:            5512
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      render:
+        look:
+          type:  standard
+          model: 2739
+        entity_flags: 129
+        name_prefix:   32
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Kumhau:
+    id:            4799
+    species:       cehuetzi
+    type:          [notorious]
+    skill_list_id: 457
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    2
+          ice:     9
+          wind:    9
+          earth:   4
+          thunder: 4
+          water:   4
+          light:   6
+          dark:    2
+        rank_status:
+          paralyze:    9
+          bind:        9
+          silence:     9
+          slow:        4
+          poison:      4
+          light_sleep: 6
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2585
+        entity_flags: 131
+        hitbox:        19
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mistdagger:
+    id:            5514
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 457
+    skill_list_id: 1159
+    attributes:
+      combat:
+        skill: sword
+      jobs: [nin, nin]
+      render:
+        look:
+          type:  equipped
+          race:  2
+          face:  2
+          head:  4096
+          body:  8421
+          hands: 12472
+          legs:  16472
+          feet:  20664
+          main:  24891
+          sub:   28987
+        entity_flags:  153
+        animation_sub:   8
+        name_prefix:    32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+
+  Morimar:
+    id:            5501
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 491
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          dark: -3
+        rank_status:
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2671
+        entity_flags: 129
+        name_prefix:   32
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Regicidal_Dullahan:
+    id:            5504
+    species:       dullahan
+    type:          [notorious]
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2605
+        entity_flags: 129
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Tchakka:
+    id:            4925
+    species:       rockfin
+    skill_list_id: 461
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    9
+          ice:     9
+          wind:    4
+          earth:   4
+          thunder: 2
+          water:   2
+          light:   6
+          dark:    4
+        rank_status:
+          paralyze:    9
+          bind:        9
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 6
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2505
+        entity_flags: 159
+        hitbox:        28
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  The_Briars_elv:
+    id:            5515
+    display_name:  The_Briars
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 458
+    skill_list_id: 1160
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, blm]
+      render:
+        look:
+          type:  equipped
+          race:  3
+          face:  1
+          head:  4441
+          body:  8293
+          hands: 12288
+          legs:  16387
+          feet:  20483
+          main:  24846
+          sub:   28672
+        entity_flags: 153
+        name_prefix:   32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17000
+
+  The_Briars_gal:
+    id:            5516
+    display_name:  The_Briars
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 459
+    skill_list_id: 1161
+    attributes:
+      combat:
+        skill: sword
+      render:
+        look:
+          type:  equipped
+          race:  8
+          face:  2
+          head:  4096
+          body:  8534
+          hands: 12630
+          legs:  16726
+          feet:  20822
+          main:  24671
+          sub:   28672
+        entity_flags: 153
+        name_prefix:   32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22000
+
+  The_Keeper:
+    id:            5513
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 456
+    skill_list_id: 1158
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sch, blm]
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  1
+          head:  4441
+          body:  8536
+          hands: 12288
+          legs:  16728
+          feet:  20483
+          main:  24756
+          sub:   28672
+        entity_flags: 153
+        name_prefix:   32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 24000
+
+  Yumcax:
+    id:            4926
+    species:       yggdreant
+    skill_list_id: 465
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          ice:      6
+          wind:     2
+          earth:   11
+          thunder: 11
+          water:   10
+          light:    4
+          dark:     6
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:        11
+          poison:      10
+          light_sleep:  4
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2510
+        entity_flags: 153
+        hitbox:        33
+      spawn:
+        type: [scripted]
+
+  Zurko-Bazurko:
+    id:            5507
+    species:       tarutaru
+    type:          [notorious]
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      jobs: [run, run]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  8
+          head:  4332
+          body:  8331
+          hands: 12296
+          legs:  16399
+          feet:  20480
+          main:  24646
+          sub:   28672
+        entity_flags: 153
+      spawn:
+        type: [scripted]
+
+spawns:
+  17838081:
+    script: Aquifer_Leech
+  17838082:
+    script: Aquifer_Leech
+  17838083:
+    script: Aquifer_Leech
+  17838084:
+    script: Aquifer_Leech
+  17838085:
+    script: Deft_Eft
+  17838086:
+    script: Deft_Eft
+  17838087:
+    script: Deft_Eft
+  17838088:
+    script: Coreborn_Spider
+  17838089:
+    script: Coreborn_Spider
+  17838090:
+    script: Coreborn_Spider
+  17838091:
+    script: Coreborn_Spider
+  17838092:
+    script: Anklebiter_Slug
+  17838093:
+    script: Anklebiter_Slug
+  17838094:
+    script: Ergoprowler
+  17838095:
+    script: Ergoprowler
+  17838096:
+    script: Ergoprowler
+  17838097:
+    script: Bonesoaked_Bandit
+  17838098:
+    script: Bonesoaked_Bandit
+  17838099:
+    script: Bonesoaked_Bandit
+  17838100:
+    script: Bonesoaked_Bandit
+  17838101:
+    script: Bufobrawler
+  17838102:
+    script: Bufobrawler
+  17838103:
+    script: Bufobrawler
+  17838104:
+    script: Bufobrawler
+  17838105:
+    script: Batroika
+  17838106:
+    script: Batroika
+  17838107:
+    script: Batroika
+  17838108:
+    script: Bonesoaked_Warmonger
+  17838109:
+    script: Bonesoaked_Warmonger
+  17838110:
+    script: Bonesoaked_Sorcerer
+  17838111:
+    script: Bonesoaked_Sorcerer
+  17838112:
+    script: Bufobrawler
+  17838113:
+    script: Bufobrawler
+  17838114:
+    script: Anklebiter_Slug
+  17838115:
+    script: Anklebiter_Slug
+  17838116:
+    script: Combustible_Gel
+  17838117:
+    script: Combustible_Gel
+  17838118:
+    script: Combustible_Gel
+  17838119:
+    script: Citrine_Slime
+  17838120:
+    script: Citrine_Slime
+  17838121:
+    script: Slashmaw_Pugil
+  17838122:
+    script: Slashmaw_Pugil
+  17838123:
+    script: Diremite_Assailant
+  17838124:
+    script: Diremite_Assailant
+  17838125:
+    script: Watermarked_Crab
+  17838126:
+    script: Watermarked_Crab
+  17838127:
+    script: Watermarked_Crab
+  17838128:
+    script: Woecroak_Toad
+  17838129:
+    script: Woecroak_Toad
+  17838130:
+    script: Forsaken_Obdella
+  17838131:
+    script: Forsaken_Obdella
+  17838132:
+    script: Sewer_Tarichuk
+  17838133:
+    script: Sewer_Tarichuk
+  17838134:
+    script: Skulking_Spider
+  17838135:
+    script: Skulking_Spider
+  17838136:
+    script: Photophobic_Bat
+  17838137:
+    script: Photophobic_Bat
+  17838138:
+    script: Crustnibbler_Twitherym
+  17838139:
+    script: Sludgeslither_Slime
+  17838140:
+    script: Sludgeslither_Slime
+  17838141:
+    script: Karst_Crab
+  17838142:
+    script: Karst_Crab
+  17838143:
+    template: Zurko-Bazurko
+    at:       [333.500, -13.010, -400.000, 128]
+  17838144:
+    script: Sverdhried_qm
+  17838145:
+    script: Sverdhried_qm
+  17838146:
+    template: Arciela
+    at:       [-130.000, -6.300, -370.000, 224]
+    level:    [108, 108]
+  17838147:
+    template: The_Keeper
+    at:       [-108.000, -6.267, -348.000, 96]
+    level:    [110, 110]
+  17838148:
+    template: Mistdagger
+    at:       [-111.000, -6.265, -351.000, 96]
+    level:    [108, 108]
+  17838149:
+    template: The_Briars_elv
+    script:   The_Briars
+    at:       [-114.000, -6.267, -348.000, 96]
+    level:    [108, 108]
+  17838150:
+    template: The_Briars_gal
+    script:   The_Briars
+    at:       [-108.000, -6.301, -354.000, 96]
+    level:    [108, 108]
+  17838151:
+    template: Zurko-Bazurko
+  17838152:
+    script: Stormy_Autochthon
+  17838153:
+    script: Stormy_Autochthon
+  17838154:
+    script: Stormy_Autochthon
+  17838155:
+    script: Stormy_Autochthon
+  17838156:
+    script: Stormy_Autochthon
+  17838157:
+    script: Stormy_Autochthon
+  17838158:
+    script: Stormy_Autochthon
+  17838159:
+    script: Stormy_Autochthon
+  17838160:
+    script: Stormy_Autochthon
+  17838161:
+    script: Stormy_Autochthon
+  17838162:
+    script: Stormy_Autochthon
+  17838163:
+    script: Stormy_Autochthon
+  17838164:
+    script: Stormy_Autochthon
+  17838165:
+    script: Stormy_Autochthon
+  17838166:
+    script: Stormy_Autochthon
+  17838167:
+    script: Stormy_Autochthon
+  17838168:
+    script: Stormy_Autochthon
+  17838169:
+    script: Stormy_Autochthon
+  17838170:
+    script: Stormy_Autochthon
+  17838171:
+    script: Stormy_Autochthon
+  17838172:
+    script: Stormy_Autochthon
+  17838173:
+    script: Stormy_Autochthon
+  17838174:
+    script: Stormy_Autochthon
+  17838175:
+    script: Stormy_Autochthon
+  17838176:
+    script: Stormy_Autochthon
+  17838177:
+    script: Stormy_Autochthon
+  17838178:
+    script: Stormy_Autochthon
+  17838179:
+    script: Stormy_Autochthon
+  17838180:
+    script: Stormy_Autochthon
+  17838181:
+    script: Stormy_Autochthon
+  17838182:
+    script: Stormy_Autochthon
+  17838183:
+    script: Stormy_Autochthon
+  17838184:
+    script: Stormy_Autochthon
+  17838185:
+    script: Stormy_Autochthon
+  17838186:
+    script: Stormy_Autochthon
+  17838187:
+    script: Stormy_Autochthon
+  17838188:
+    script: Stormy_Autochthon
+  17838189:
+    script: Stormy_Autochthon
+  17838190:
+    script: Stormy_Autochthon
+  17838191:
+    script: Stormy_Autochthon
+  17838192:
+    script: Stormy_Autochthon
+  17838193:
+    script: Stormy_Autochthon
+  17838194:
+    script: Stormy_Autochthon
+  17838195:
+    script: Stormy_Autochthon
+  17838196:
+    script: Stormy_Autochthon
+  17838197:
+    script: Stormy_Autochthon
+  17838198:
+    script: Stormy_Autochthon
+  17838199:
+    script: Stormy_Autochthon
+  17838200:
+    script: Stormy_Autochthon
+  17838201:
+    script: Stormy_Autochthon
+  17838202:
+    script: Stormy_Autochthon
+  17838203:
+    script: Stormy_Autochthon
+  17838204:
+    script: Stormy_Autochthon
+  17838205:
+    script: Stormy_Autochthon
+  17838206:
+    script: Stormy_Autochthon
+  17838207:
+    script: Stormy_Autochthon
+  17838208:
+    script: Stormy_Autochthon
+  17838209:
+    script: Stormy_Autochthon
+  17838210:
+    script: Stormy_Autochthon
+  17838211:
+    script: Stormy_Autochthon
+  17838212:
+    script: Stormy_Autochthon
+  17838213:
+    script: Stormy_Autochthon
+  17838214:
+    script: Stormy_Autochthon
+  17838215:
+    script: Stormy_Autochthon
+  17838216:
+    script: Stormy_Autochthon
+  17838217:
+    script: Stormy_Autochthon
+  17838218:
+    script: Stormy_Autochthon
+  17838219:
+    script: Stormy_Autochthon
+  17838220:
+    script: Stormy_Autochthon
+  17838221:
+    script: Stormy_Autochthon
+  17838222:
+    script: Stormy_Autochthon
+  17838223:
+    script: Stormy_Autochthon
+  17838224:
+    script: Stormy_Autochthon
+  17838225:
+    script: Stormy_Autochthon
+  17838226:
+    script: Stormy_Autochthon
+  17838227:
+    script: Stormy_Autochthon
+  17838228:
+    script: Stormy_Autochthon
+  17838229:
+    script: Stormy_Autochthon
+  17838230:
+    script: Stormy_Autochthon
+  17838231:
+    script: Stormy_Autochthon
+  17838232:
+    script: Stormy_Autochthon
+  17838233:
+    script: Stormy_Autochthon
+  17838234:
+    script: Stormy_Autochthon
+  17838235:
+    script: Stormy_Autochthon
+  17838236:
+    script: Stormy_Autochthon
+  17838237:
+    script: Stormy_Autochthon
+  17838238:
+    script: Stormy_Autochthon
+  17838239:
+    script: Stormy_Autochthon
+  17838240:
+    script: Stormy_Autochthon
+  17838241:
+    script: Stormy_Autochthon
+  17838242:
+    script: Stormy_Autochthon
+  17838243:
+    script: Stormy_Autochthon
+  17838244:
+    script: Stormy_Autochthon
+  17838245:
+    script: Stormy_Autochthon
+  17838246:
+    script: Stormy_Autochthon
+  17838247:
+    script: Stormy_Autochthon
+  17838248:
+    script: Stormy_Autochthon
+  17838249:
+    script: Stormy_Autochthon
+  17838250:
+    script: Stormy_Autochthon
+  17838251:
+    script: Stormy_Autochthon
+  17838252:
+    script: Stormy_Autochthon
+  17838253:
+    script: Stormy_Autochthon
+  17838254:
+    script: Stormy_Autochthon
+  17838255:
+    script: Stormy_Autochthon
+  17838256:
+    script: Stormy_Autochthon
+  17838257:
+    script: Stormy_Autochthon
+  17838258:
+    script: Stormy_Autochthon
+  17838259:
+    script: Stormy_Autochthon
+  17838260:
+    script: Stormy_Autochthon
+  17838261:
+    script: Stormy_Autochthon
+  17838262:
+    script: Stormy_Autochthon
+  17838263:
+    script: Stormy_Autochthon
+  17838264:
+    script: Stormy_Autochthon
+  17838265:
+    script: Stormy_Autochthon
+  17838266:
+    script: Stormy_Autochthon
+  17838267:
+    script: Stormy_Autochthon
+  17838268:
+    script: Stormy_Autochthon
+  17838269:
+    script: Stormy_Autochthon
+  17838270:
+    script: Stormy_Autochthon
+  17838271:
+    script: Stormy_Autochthon
+  17838272:
+    script: Stormy_Autochthon
+  17838273:
+    script: Stormy_Autochthon
+  17838274:
+    script: Windrender
+  17838275:
+    script: Reaving_Craklaw
+  17838276:
+    script: Shambling_Matamata
+  17838277:
+    script: Krabukelevu
+  17838278:
+    script: Erratic_Twitherym
+  17838279:
+    script: Harmonious_Heartwing
+  17838280:
+    script: Balamors_Adumbration
+  17838281:
+    script: Mistmaw_Kroni
+  17838282:
+    script: Mistmaw_Guayota
+  17838283:
+    script: Mistmaw_Leraje
+  17838284:
+    script: Mistmaw_Tecciztecatl
+  17838285:
+    template: Balamor
+    at:       [-120.000, -6.267, 20.000, 128]
+  17838286:
+    template: Arciela
+    at:       [-160.000, -6.267, 20.000]
+    level:    [108, 108]
+  17838287:
+    template: Balamors_Sycophant
+    at:       [-126.000, -6.267, 24.000, 128]
+  17838288:
+    template: Regicidal_Dullahan
+    at:       [-128.000, -6.267, 20.000, 128]
+  17838289:
+    template: Balamors_Sycophant
+    at:       [-126.000, -6.267, 16.000, 128]
+  17838290:
+    script: Teodor
+    at:     [360.000, -13.010, -390.000, 64]
+  17838291:
+    script: Pupadi_Dollmohr
+  17838292:
+    script: Celestin
+  17838293:
+    script: Fabioso
+  17838294:
+    script: Tuffle-Buffle
+  17838295:
+    script: Musto-Rusto
+  17838296:
+    template: Arciela
+    level:    [108, 108]
+  17838297:
+    script: Ygnas
+  17838298:
+    template: Darrcuiln
+  17838299:
+    template: Ingrid
+  17838300:
+    template: Morimar
+  17838301:
+    script: Rosulatia
+  17838302:
+    script: Cirrus
+  17838303:
+    script: Cirrus
+  17838304:
+    script: Cirrus
+  17838305:
+    script: Teodor
+  17838306:
+    template: Arciela
+    level:    [108, 108]
+  17838307:
+    template: Colkhab
+  17838308:
+    template: Achuka
+  17838309:
+    template: Tchakka
+  17838310:
+    template: Hurkan
+  17838311:
+    template: Yumcax
+  17838312:
+    template: Kumhau
+  17838313:
+    script: Sajjaka
+  17838314:
+    script: August

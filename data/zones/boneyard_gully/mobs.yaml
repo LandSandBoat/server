@@ -1,0 +1,1635 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Armored_Hunter:
+    id:            247
+    species:       antlion
+    type:          [notorious, battlefield]
+    roam:          [ambush]
+    skill_list_id: 26
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          wind:  -2
+          earth:  3
+          light: -3
+          dark:   3
+        rank_status:
+          silence:     -2
+          slow:         3
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1348
+        entity_flags: 1153
+        hitbox:         10
+      behaviors:
+        flags:          [aggro_ambush]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Bladmall:
+    id:            444
+    species:       uragnite
+    type:          [battlefield]
+    spell_list_id: 433
+    skill_list_id: 251
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, blm]
+      resists:
+        rank_element:
+          fire:     3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    3
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1361
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 5000
+
+  Cadaver_Warrior:
+    id:            598
+    species:       skeleton
+    type:          [battlefield]
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 2179
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cadaver_Witch:
+    id:            599
+    species:       skeleton
+    type:          [battlefield]
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 2691
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Erdgeist:
+    id:            1250
+    species:       ghost
+    type:          [battlefield]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 3203
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gwyn_Ap_Knudd:
+    id:            1860
+    species:       corse
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 74
+    attributes:
+      combat:
+        skill: staff
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:    2
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     3
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         2
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1363
+        entity_flags: 159
+        name_prefix:   32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nepionic_Bladmall:
+    id:            2832
+    species:       uragnite
+    type:          [battlefield]
+    spell_list_id: 434
+    skill_list_id: 251
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    3
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1361
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2100
+        mp: 2100
+
+  Nepionic_Parata:
+    id:            2833
+    species:       uragnite
+    type:          [battlefield]
+    skill_list_id: 251
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      resists:
+        rank_element:
+          fire:     3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    3
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1361
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+
+  Parata:
+    id:            3099
+    species:       uragnite
+    type:          [battlefield]
+    skill_list_id: 251
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    3
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1361
+        entity_flags: 645
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      mob_mods:
+        immunity: 23
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9500
+
+  Race_Runner:
+    id:            3301
+    species:       eft
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 133
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: staff
+        delay: 190
+      jobs: [blm, thf]
+      resists:
+        immune_status: [bind, stun, silence, paralyze, blind, poison, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 135
+      mods:
+        mdef: 100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 2000
+
+  Shikaree_X:
+    id:            3598
+    species:       mithra
+    type:          [notorious, battlefield]
+    spell_list_id: 464
+    skill_list_id: 1165
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [bst, nin]
+      render:
+        look:
+          type:  misc
+          model: 363
+        entity_flags: 537
+        name_prefix:   32
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2100
+        mp: 2000
+
+  Shikaree_X_2:
+    id:            3598
+    display_name:  Shikaree_X
+    species:       mithra
+    type:          [notorious, battlefield]
+    spell_list_id: 464
+    skill_list_id: 1165
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [bst, nin]
+      render:
+        look:
+          type:  misc
+          model: 363
+        entity_flags: 537
+        name_prefix:   32
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4200
+        mp: 4000
+
+  Shikaree_Xs_Rabbit:
+    id:            3599
+    species:       rabbit
+    type:          [notorious, battlefield]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 269
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+
+  Shikaree_Xs_Rabbit_2:
+    id:            3599
+    display_name:  Shikaree_Xs_Rabbit
+    species:       rabbit
+    type:          [notorious, battlefield]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 269
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+
+  Shikaree_Y:
+    id:            3600
+    species:       mithra
+    type:          [battlefield]
+    spell_list_id: 465
+    skill_list_id: 1166
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, mnk]
+      render:
+        look:
+          type:  misc
+          model: 362
+        entity_flags: 539
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1900
+        mp: 2000
+
+  Shikaree_Y_2:
+    id:            3600
+    display_name:  Shikaree_Y
+    species:       mithra
+    type:          [battlefield]
+    spell_list_id: 465
+    skill_list_id: 1166
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, mnk]
+      render:
+        look:
+          type:  misc
+          model: 362
+        entity_flags: 539
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+        mp: 4000
+
+  Shikaree_Z:
+    id:            3601
+    species:       mithra
+    type:          [notorious, battlefield]
+    spell_list_id: 466
+    skill_list_id: 1167
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, whm]
+      render:
+        look:
+          type:  misc
+          model: 361
+        entity_flags: 541
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  Shikaree_Z_2:
+    id:            3601
+    display_name:  Shikaree_Z
+    species:       mithra
+    type:          [notorious, battlefield]
+    spell_list_id: 466
+    skill_list_id: 1167
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, whm]
+      render:
+        look:
+          type:  misc
+          model: 361
+        entity_flags: 541
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4400
+        mp: 4000
+
+  Shikaree_Zs_Wyvern:
+    id:            3602
+    species:       blue_wyvern
+    type:          [notorious, battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        hitbox: 8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp:  100
+
+  Shikaree_Zs_Wyvern_2:
+    id:            3602
+    display_name:  Shikaree_Zs_Wyvern
+    species:       blue_wyvern
+    type:          [notorious, battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        hitbox: 8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp:  100
+
+  Shrewd_Hunter:
+    id:            3613
+    species:       antlion
+    type:          [notorious, battlefield]
+    roam:          [ambush]
+    skill_list_id: 26
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          wind:  -2
+          earth:  3
+          light: -3
+          dark:   3
+        rank_status:
+          silence:     -2
+          slow:         3
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1348
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        flags:          [aggro_ambush]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Swift_Hunter:
+    id:            3827
+    species:       antlion
+    type:          [notorious, battlefield]
+    roam:          [ambush]
+    skill_list_id: 26
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          wind:  -2
+          earth:  3
+          light: -3
+          dark:   3
+        rank_status:
+          silence:     -2
+          slow:         3
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1348
+        entity_flags: 2177
+        name_prefix:     2
+        hitbox:         10
+      behaviors:
+        flags:          [aggro_ambush]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Tuchulcha:
+    id:            4046
+    species:       antlion
+    type:          [battlefield]
+    roam:          [ambush]
+    skill_list_id: 26
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        immune_status: [gravity, paralyze, light_sleep, dark_sleep]
+        rank_element:
+          wind:  -2
+          earth:  3
+          light: -3
+          dark:   3
+        rank_status:
+          silence:     -2
+          slow:         3
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1348
+        entity_flags: 669
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        flags:          [aggro_ambush]
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        immunity: 6191
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+
+spawns:
+  16809985:
+    template: Shikaree_Z
+    script:   Shikaree_Z_HW
+    at:       [-565.000, 2.999, -431.000, 64]
+    level:    [52, 52]
+  16809986:
+    template: Shikaree_Y
+    script:   Shikaree_Y_HW
+    at:       [-560.000, 2.799, -431.000, 64]
+    level:    [51, 51]
+  16809987:
+    template: Shikaree_X
+    script:   Shikaree_X_HW
+    at:       [-570.000, 2.425, -431.000, 64]
+    level:    [50, 50]
+  16809988:
+    template: Shikaree_Zs_Wyvern
+    at:       [-564.318, 3.572, -430.988, 64]
+    level:    [48, 50]
+  16809989:
+    template: Shikaree_Xs_Rabbit
+    at:       [-567.611, 2.903, -427.431, 64]
+    level:    [48, 50]
+  16809990:
+    template: Shikaree_Z
+    script:   Shikaree_Z_HW
+    at:       [-3.743, 3.432, 127.413, 64]
+    level:    [52, 52]
+  16809991:
+    template: Shikaree_Y
+    script:   Shikaree_Y_HW
+    at:       [0.679, 3.087, 129.045, 64]
+    level:    [51, 51]
+  16809992:
+    template: Shikaree_X
+    script:   Shikaree_X_HW
+    at:       [-7.036, 2.763, 130.970, 64]
+    level:    [50, 50]
+  16809993:
+    template: Shikaree_Zs_Wyvern
+    at:       [-3.743, 3.432, 128.413, 64]
+    level:    [48, 50]
+  16809994:
+    template: Shikaree_Xs_Rabbit
+    at:       [-7.036, 2.763, 131.970, 64]
+    level:    [48, 50]
+  16809995:
+    template: Shikaree_Z
+    script:   Shikaree_Z_HW
+    at:       [475.306, 3.639, 609.579, 64]
+    level:    [52, 52]
+  16809996:
+    template: Shikaree_Y
+    script:   Shikaree_Y_HW
+    at:       [479.728, 3.294, 611.211, 64]
+    level:    [51, 51]
+  16809997:
+    template: Shikaree_X
+    script:   Shikaree_X_HW
+    at:       [472.013, 2.970, 613.136, 64]
+    level:    [50, 50]
+  16809998:
+    template: Shikaree_Zs_Wyvern
+    at:       [475.306, 3.639, 610.579, 64]
+    level:    [48, 50]
+  16809999:
+    template: Shikaree_Xs_Rabbit
+    at:       [472.013, 2.970, 614.136, 64]
+    level:    [48, 50]
+  16810001:
+    template: Tuchulcha
+    at:       [-610.000, -1.500, -490.000, 171]
+    level:    [83, 83]
+  16810002:
+    template: Swift_Hunter
+    at:       [-545.000, 0.749, -416.000, 64]
+    level:    [80, 80]
+  16810003:
+    template: Shrewd_Hunter
+    at:       [-517.000, -0.500, -518.000, 46]
+    level:    [80, 80]
+  16810004:
+    template: Armored_Hunter
+    at:       [-536.364, -0.500, -458.000, 175]
+    level:    [80, 80]
+  16810007:
+    template: Tuchulcha
+    at:       [-50.000, -1.300, 69.000, 112]
+    level:    [83, 83]
+  16810008:
+    template: Swift_Hunter
+    at:       [43.000, -0.500, 42.000, 64]
+    level:    [80, 80]
+  16810009:
+    template: Shrewd_Hunter
+    at:       [9.000, 0.899, 114.000, 64]
+    level:    [80, 80]
+  16810010:
+    template: Armored_Hunter
+    at:       [-15.000, -3.820, 97.000, 64]
+    level:    [80, 80]
+  16810013:
+    template: Tuchulcha
+    at:       [430.000, -1.300, 550.000, 116]
+    level:    [83, 83]
+  16810014:
+    template: Swift_Hunter
+    at:       [509.000, -0.149, 560.000, 64]
+    level:    [80, 80]
+  16810015:
+    template: Shrewd_Hunter
+    at:       [484.000, 2.725, 605.000, 179]
+    level:    [80, 80]
+  16810016:
+    template: Armored_Hunter
+    at:       [475.834, -1.015, 571.575, 78]
+    level:    [80, 80]
+  16810018:
+    template: Race_Runner
+    at:       [-538.865, 0.443, -481.338, 135]
+    level:    [75, 75]
+  16810020:
+    template: Race_Runner
+    at:       [21.710, 0.303, 78.063, 135]
+    level:    [75, 75]
+  16810022:
+    template: Race_Runner
+    at:       [500.759, 0.510, 560.229, 135]
+    level:    [75, 75]
+  16810024:
+    template: Parata
+    at:       [-568.000, 3.000, -439.000, 57]
+    level:    [80, 80]
+  16810025:
+    template: Bladmall
+    at:       [-562.000, 3.500, -437.000, 57]
+    level:    [80, 80]
+  16810026:
+    template: Nepionic_Parata
+    at:       [-568.000, 3.000, -439.000, 57]
+    level:    [73, 73]
+  16810027:
+    template: Nepionic_Parata
+    at:       [-568.000, 3.000, -439.000, 57]
+    level:    [73, 73]
+  16810028:
+    template: Nepionic_Parata
+    at:       [-568.000, 3.000, -439.000, 57]
+    level:    [73, 73]
+  16810029:
+    template: Nepionic_Bladmall
+    at:       [-562.000, 3.500, 437.000, 57]
+    level:    [73, 73]
+  16810030:
+    template: Nepionic_Bladmall
+    at:       [-562.000, 3.500, 437.000, 57]
+    level:    [73, 73]
+  16810031:
+    template: Nepionic_Bladmall
+    at:       [-562.000, 3.500, 437.000, 57]
+    level:    [73, 73]
+  16810033:
+    template: Parata
+    at:       [-6.500, 3.000, 120.000, 68]
+    level:    [80, 80]
+  16810034:
+    template: Bladmall
+    at:       [0.100, 3.500, 120.000, 68]
+    level:    [80, 80]
+  16810035:
+    template: Nepionic_Parata
+    at:       [-6.500, 3.000, 120.000, 68]
+    level:    [73, 73]
+  16810036:
+    template: Nepionic_Parata
+    at:       [-6.500, 3.000, 120.000, 68]
+    level:    [73, 73]
+  16810037:
+    template: Nepionic_Parata
+    at:       [-6.500, 3.000, 120.000, 68]
+    level:    [73, 73]
+  16810038:
+    template: Nepionic_Bladmall
+    at:       [0.100, 3.500, 120.000, 68]
+    level:    [73, 73]
+  16810039:
+    template: Nepionic_Bladmall
+    at:       [0.100, 3.500, 120.000, 68]
+    level:    [73, 73]
+  16810040:
+    template: Nepionic_Bladmall
+    at:       [0.100, 3.500, 120.000, 68]
+    level:    [73, 73]
+  16810042:
+    template: Parata
+    at:       [475.000, 3.200, 597.000, 66]
+    level:    [80, 80]
+  16810043:
+    template: Bladmall
+    at:       [480.000, 3.000, 599.000, 66]
+    level:    [80, 80]
+  16810044:
+    template: Nepionic_Parata
+    at:       [475.000, 3.200, 597.000, 66]
+    level:    [73, 73]
+  16810045:
+    template: Nepionic_Parata
+    at:       [475.000, 3.200, 597.000, 66]
+    level:    [73, 73]
+  16810046:
+    template: Nepionic_Parata
+    at:       [475.000, 3.200, 597.000, 66]
+    level:    [73, 73]
+  16810047:
+    template: Nepionic_Bladmall
+    at:       [480.000, 3.000, 599.000, 66]
+    level:    [73, 73]
+  16810048:
+    template: Nepionic_Bladmall
+    at:       [480.000, 3.000, 599.000, 66]
+    level:    [73, 73]
+  16810049:
+    template: Nepionic_Bladmall
+    at:       [480.000, 3.000, 599.000, 66]
+    level:    [73, 73]
+  16810051:
+    template: Gwyn_Ap_Knudd
+    at:       [-565.000, 2.999, -431.000, 107]
+    level:    [75, 75]
+  16810052:
+    template: Cadaver_Warrior
+    at:       [-539.103, -0.004, -425.733, 64]
+    level:    [75, 75]
+  16810053:
+    template: Cadaver_Warrior
+    at:       [-540.587, -0.213, -430.560, 64]
+    level:    [75, 75]
+  16810054:
+    template: Cadaver_Warrior
+    at:       [-562.209, 3.068, -434.418, 64]
+    level:    [75, 75]
+  16810055:
+    template: Cadaver_Witch
+    at:       [-570.718, 2.169, -429.408, 64]
+    level:    [75, 75]
+  16810056:
+    template: Cadaver_Witch
+    at:       [-580.026, 0.498, -480.156, 64]
+    level:    [75, 75]
+  16810057:
+    template: Cadaver_Witch
+    at:       [-542.928, -0.250, -445.372, 64]
+    level:    [75, 75]
+  16810058:
+    template: Erdgeist
+    at:       [-565.825, 2.274, -447.007, 193]
+    level:    [15, 17]
+  16810059:
+    template: Erdgeist
+    at:       [-544.757, -0.042, -443.543, 64]
+    level:    [15, 17]
+  16810060:
+    template: Erdgeist
+    at:       [-587.746, -1.557, -471.799, 64]
+    level:    [15, 17]
+  16810062:
+    template: Gwyn_Ap_Knudd
+    at:       [-6.000, 2.924, 129.000, 107]
+    level:    [75, 75]
+  16810063:
+    template: Cadaver_Warrior
+    at:       [21.472, -0.144, 133.668, 64]
+    level:    [75, 75]
+  16810064:
+    template: Cadaver_Warrior
+    at:       [1.409, 1.384, 110.937, 64]
+    level:    [75, 75]
+  16810065:
+    template: Cadaver_Warrior
+    at:       [-8.425, 2.191, 132.875, 64]
+    level:    [75, 75]
+  16810066:
+    template: Cadaver_Witch
+    at:       [-10.143, 2.029, 129.993, 64]
+    level:    [75, 75]
+  16810067:
+    template: Cadaver_Witch
+    at:       [-19.973, 0.296, 75.118, 64]
+    level:    [75, 75]
+  16810068:
+    template: Cadaver_Witch
+    at:       [17.647, -0.390, 114.029, 64]
+    level:    [75, 75]
+  16810069:
+    template: Erdgeist
+    at:       [-5.250, 2.134, 112.394, 193]
+    level:    [15, 17]
+  16810070:
+    template: Erdgeist
+    at:       [15.818, -0.182, 115.858, 64]
+    level:    [15, 17]
+  16810071:
+    template: Erdgeist
+    at:       [-27.171, -1.697, 87.602, 64]
+    level:    [15, 17]
+  16810073:
+    template: Gwyn_Ap_Knudd
+    at:       [474.624, 3.066, 610.567, 107]
+    level:    [75, 75]
+  16810074:
+    template: Cadaver_Warrior
+    at:       [500.521, 0.063, 615.834, 64]
+    level:    [75, 75]
+  16810075:
+    template: Cadaver_Warrior
+    at:       [499.037, -0.146, 611.007, 64]
+    level:    [75, 75]
+  16810076:
+    template: Cadaver_Warrior
+    at:       [477.415, 3.135, 607.149, 64]
+    level:    [75, 75]
+  16810077:
+    template: Cadaver_Witch
+    at:       [468.906, 2.236, 612.159, 64]
+    level:    [75, 75]
+  16810078:
+    template: Cadaver_Witch
+    at:       [459.598, 0.565, 561.411, 64]
+    level:    [75, 75]
+  16810079:
+    template: Cadaver_Witch
+    at:       [496.696, -0.183, 596.195, 64]
+    level:    [75, 75]
+  16810080:
+    template: Erdgeist
+    at:       [473.799, 2.341, 594.560, 193]
+    level:    [15, 17]
+  16810081:
+    template: Erdgeist
+    at:       [494.867, 0.025, 598.024, 64]
+    level:    [15, 17]
+  16810082:
+    template: Erdgeist
+    at:       [451.878, -1.490, 569.768, 64]
+    level:    [15, 17]
+  16810084:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z_ROS
+    at:       [-565.000, 2.999, -431.000, 64]
+    level:    [77, 78]
+  16810085:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y_ROS_TWT
+    at:       [-560.000, 2.799, -431.000, 64]
+    level:    [77, 78]
+  16810086:
+    template: Shikaree_X_2
+    script:   Shikaree_X_ROS_TWT
+    at:       [-570.000, 2.425, -431.000, 64]
+    level:    [77, 78]
+  16810087:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    at:       [-564.000, 2.999, -430.000, 108]
+    level:    [73, 74]
+  16810088:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    at:       [-570.000, 3.000, -431.000, 64]
+    level:    [73, 74]
+  16810090:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z_ROS
+    at:       [-4.425, 2.859, 128.401, 64]
+    level:    [77, 78]
+  16810091:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y_ROS_TWT
+    at:       [0.000, 3.300, 129.000, 64]
+    level:    [77, 78]
+  16810092:
+    template: Shikaree_X_2
+    script:   Shikaree_X_ROS_TWT
+    at:       [-10.000, -2.925, 129.000, 64]
+    level:    [77, 78]
+  16810093:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    at:       [-3.425, 2.859, 129.401, 108]
+    level:    [73, 74]
+  16810094:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    at:       [-10.000, 3.000, 129.000, 64]
+    level:    [73, 74]
+  16810096:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z_ROS
+    at:       [474.624, 3.066, 610.567, 64]
+    level:    [77, 78]
+  16810097:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y_ROS_TWT
+    at:       [479.000, 3.300, 611.000, 64]
+    level:    [77, 78]
+  16810098:
+    template: Shikaree_X_2
+    script:   Shikaree_X_ROS_TWT
+    at:       [469.000, 2.925, 611.000, 64]
+    level:    [77, 78]
+  16810099:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    at:       [475.624, 3.066, 611.567, 108]
+    level:    [73, 74]
+  16810100:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    at:       [469.000, 3.000, 611.000, 64]
+    level:    [73, 74]
+  16810102:
+    script: Antiphus
+  16810103:
+    script: Antiphuss_Spawn
+  16810104:
+    script: Antiphuss_Spawn
+  16810105:
+    script: Antiphuss_Spawn
+  16810106:
+    script: Antiphuss_Spawn
+  16810108:
+    script: Antiphus
+  16810109:
+    script: Antiphuss_Spawn
+  16810110:
+    script: Antiphuss_Spawn
+  16810111:
+    script: Antiphuss_Spawn
+  16810112:
+    script: Antiphuss_Spawn
+  16810114:
+    script: Antiphus
+  16810115:
+    script: Antiphuss_Spawn
+  16810116:
+    script: Antiphuss_Spawn
+  16810117:
+    script: Antiphuss_Spawn
+  16810118:
+    script: Antiphuss_Spawn
+  16810120:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810121:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810122:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810123:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810124:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810125:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810126:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810127:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810128:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810129:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810130:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810131:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810132:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810133:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810134:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810135:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810136:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810137:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810138:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810139:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810140:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810141:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810142:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810143:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810144:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810145:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810146:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810147:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810148:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810149:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810150:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810151:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810152:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810153:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810154:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810155:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810156:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810157:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810158:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810159:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810160:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810161:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810162:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810163:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810164:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810165:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810166:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810167:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810168:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810169:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810170:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810171:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810172:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810173:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810174:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810175:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810176:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810177:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810178:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810179:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810180:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810181:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810182:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810183:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810184:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810185:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810186:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810187:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810188:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810189:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]
+  16810190:
+    template: Shikaree_Z_2
+    script:   Shikaree_Z
+    level:    [74, 74]
+  16810191:
+    template: Shikaree_Y_2
+    script:   Shikaree_Y
+    level:    [74, 74]
+  16810192:
+    template: Shikaree_X_2
+    script:   Shikaree_X
+    level:    [74, 74]
+  16810193:
+    template: Shikaree_Zs_Wyvern_2
+    script:   Shikaree_Zs_Wyvern
+    level:    [73, 74]
+  16810194:
+    template: Shikaree_Xs_Rabbit_2
+    script:   Shikaree_Xs_Rabbit
+    level:    [73, 74]

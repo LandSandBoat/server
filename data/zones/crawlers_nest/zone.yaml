@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z5h0:
+    from:  [380.064, -35.332, 6.945]
+    to:    rolanberry_fields
+    at:    [-381.747, -31.068, -788.092, 4.945691]
+    scale: [1.000, 4.000]
+
+  z5h2:
+    from:  [87.469, -3.590, 380.545]
+    to:    rolanberry_fields
+    at:    [-788.664, -39.278, -502.067, 6.062613]
+    scale: [1.000, 4.000]

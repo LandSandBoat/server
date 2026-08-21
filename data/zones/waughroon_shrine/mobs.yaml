@@ -1,0 +1,4326 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Atori-Tutori_qm:
+    id:            6642
+    display_name:  Atori-Tutori_???
+    species:       tarutaru
+    type:          [notorious, battlefield]
+    skill_list_id: 1145
+    attributes:
+      combat:
+        skill:    hand_to_hand
+        delay:    480
+        dmg_mult: 110
+      jobs: [mnk, none]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  2
+          head:  4096
+          body:  8209
+          hands: 12288
+          legs:  16384
+          feet:  20480
+          main:  25074
+          sub:   29170
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 27000
+
+  Ayakashi:
+    id:            304
+    species:       carbuncle
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ayakashi_2:
+    id:            304
+    display_name:  Ayakashi
+    species:       carbuncle
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+
+  BiFho_Jestergrin:
+    id:            426
+    species:       quadav
+    type:          [battlefield]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 650
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3450
+
+  BiFho_Jestergrin_2:
+    id:            426
+    display_name:  BiFho_Jestergrin
+    species:       quadav
+    type:          [battlefield]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 650
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Chest_OPlenty:
+    id:            6868
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [blm, drk]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 967
+        entity_flags:  4227
+        animation_sub:    4
+        name_vis:       100
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Coffer_OPlenty:
+    id:            6869
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [blm, drk]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 966
+        entity_flags:  4227
+        animation_sub:    4
+        name_vis:       100
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  DaShu_Knightslayer:
+    id:            929
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 664
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Dark_Dragon:
+    id:            912
+    species:       dragon
+    type:          [notorious, battlefield]
+    skill_list_id: 2071
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags:  3
+        model_size:    1
+        hitbox:       34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1250
+
+  EaTho_Cruelheart:
+    id:            1167
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2124
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 3000
+
+  EaTho_Cruelheart_2:
+    id:            1167
+    display_name:  EaTho_Cruelheart
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2124
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Fee:
+    id:            1330
+    species:       sea_monk
+    type:          [notorious, battlefield]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: sword
+        delay: 140
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        model_size:  1
+        hitbox:     17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+
+  Flayer_Franz:
+    id:            1363
+    species:       worm
+    type:          [battlefield]
+    roam:          [worm]
+    spell_list_id: 1
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 425
+        entity_flags:  3
+        model_size:    3
+        hitbox:       18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 5000
+
+  Flayer_Franz_2:
+    id:            1363
+    display_name:  Flayer_Franz
+    species:       worm
+    type:          [battlefield]
+    roam:          [worm]
+    spell_list_id: 1
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 425
+        entity_flags:  3
+        model_size:    3
+        hitbox:       18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Flesh_Eater_WS:
+    id:            2975
+    species:       worm
+    type:          [battlefield]
+    roam:          [worm]
+    spell_list_id: 1
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1200
+        mp: 1200
+
+  Flesh_Eater_WS_2:
+    id:            2975
+    display_name:  Flesh_Eater_WS
+    species:       worm
+    type:          [battlefield]
+    roam:          [worm]
+    spell_list_id: 1
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Flesh_Eater_WS_Large:
+    id:            7295
+    display_name:  Flesh_Eater_WS
+    species:       worm
+    type:          [battlefield]
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        entity_flags: 131
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gaki:
+    id:            1447
+    species:       kindred
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 743
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+        mp: 6000
+
+  GoBha_Slaughterer:
+    id:            1777
+    species:       quadav
+    type:          [notorious, battlefield]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 647
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Heavy_Metal_Crab:
+    id:            1910
+    species:       crab
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        model_size:  2
+        hitbox:     16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 30
+
+  KaNha_Jabbertongue:
+    id:            2200
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 661
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3150
+        mp: 3150
+
+  KaNha_Jabbertongue_2:
+    id:            2200
+    display_name:  KaNha_Jabbertongue
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 661
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  KuJhu_Graniteskin:
+    id:            2304
+    species:       quadav
+    type:          [notorious, battlefield]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 646
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  KuTya_Hotblood:
+    id:            2305
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 651
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+        mp: 2500
+
+  KuTya_Hotblood_2:
+    id:            2305
+    display_name:  KuTya_Hotblood
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 651
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Maat_bst:
+    id:            4932
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+
+  Maat_rdm:
+    id:            4838
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 3
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2850
+        mp: 2000
+
+  Maat_thf:
+    id:            4839
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2100
+    loot:
+      steal: scroll_of_instant_warp
+
+  Maats_Pet:
+    id:            2462
+    species:       mandragora
+    type:          [notorious, called, battlefield]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        name_prefix: 32
+        hitbox:      12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 300
+
+  Macha:
+    id:            2468
+    species:       bird
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 445
+        entity_flags:  3
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+        mp: 1400
+
+  Metal_Crab:
+    id:            2635
+    species:       crab
+    type:          [battlefield]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  3
+        model_size:    1
+        hitbox:       13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15
+
+  Metsanhaltija:
+    id:            2645
+    species:       sapling
+    type:          [notorious, battlefield]
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Metsanneitsyt:
+    id:            2646
+    species:       sapling
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+        mp: 2200
+
+  Neman:
+    id:            2820
+    species:       bird
+    type:          [battlefield]
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags:  3
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+
+  Onibi:
+    id:            2981
+    species:       fire_elemental
+    type:          [battlefield]
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, war]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 8
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  800
+        mp: 2000
+
+  Onki:
+    id:            2983
+    species:       kindred
+    type:          [notorious, battlefield]
+    spell_list_id: 143
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 744
+        entity_flags: 1153
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 6000
+
+  Osschaart:
+    id:            3064
+    species:       ahriman
+    type:          [battlefield]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [bst, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 14000
+        mp: 14000
+
+  Osschaarts_Automaton:
+    id:            3065
+    species:       automaton
+    type:          [battlefield]
+    skill_list_id: 28
+    attributes:
+      combat:
+        skill: axe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+
+  Osschaarts_Avatar:
+    id:            3066
+    species:       carbuncle
+    type:          [battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+
+  Osschaarts_Bat:
+    id:            3067
+    species:       bat
+    type:          [notorious, battlefield]
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+
+  Osschaarts_Wyvern:
+    id:            3068
+    species:       blue_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        model_size: 1
+        hitbox:     8
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+
+  Platoon_Scorpion:
+    id:            3157
+    species:       scorpion
+    type:          [battlefield]
+    skill_list_id: 769
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Princess_Jelly:
+    id:            3196
+    species:       slime
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 641
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  600
+        mp: 1500
+
+  Queen_Jelly:
+    id:            3282
+    species:       slime
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 647
+        model_size:     3
+        hitbox:        33
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 4800
+
+  Rasetsu:
+    id:            3325
+    species:       kindred
+    type:          [notorious, battlefield]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 741
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 3500
+
+  SaNha_Soulsaver:
+    id:            3491
+    species:       quadav
+    type:          [notorious, battlefield]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 663
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Seeker:
+    id:            3536
+    species:       ahriman
+    type:          [notorious, battlefield]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags:  3
+        model_size:    1
+        hitbox:       55
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 575
+
+  Tartaruga_Gigante:
+    id:            3847
+    species:       adamantoise
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 401
+        entity_flags:  3
+        model_size:    1
+        hitbox:       32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 35000
+
+  The_Waughroon_Kid:
+    id:            3894
+    species:       goobbue
+    type:          [notorious, battlefield]
+    skill_list_id: 2063
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        model_size:  1
+        hitbox:     30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3200
+
+  Time_Bomb:
+    id:            3920
+    species:       bomb
+    type:          [notorious, battlefield]
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        immune_status: [gravity, bind, stun, paralyze, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 281
+        entity_flags:  4
+        model_size:    3
+        hitbox:       16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9999
+
+  Titanis_Dax:
+    id:            3927
+    species:       legendary_roc
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 2064
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [brd, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags:  3
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  Titanis_Jax:
+    id:            3928
+    species:       legendary_roc
+    type:          [notorious, battlefield]
+    spell_list_id: 6
+    skill_list_id: 2064
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [brd, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags:  3
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  Titanis_Max:
+    id:            3929
+    species:       legendary_roc
+    type:          [notorious, battlefield]
+    spell_list_id: 6
+    skill_list_id: 2064
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [brd, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags:  3
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  Titanis_Xax:
+    id:            3930
+    species:       legendary_roc
+    type:          [notorious, battlefield]
+    spell_list_id: 6
+    skill_list_id: 2064
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [brd, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags:  3
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  YoBhu_Hideousmask:
+    id:            4479
+    species:       quadav
+    type:          [battlefield]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 646
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3250
+
+  YoBhu_Hideousmask_2:
+    id:            4479
+    display_name:  YoBhu_Hideousmask
+    species:       quadav
+    type:          [battlefield]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 646
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  ZoDhu_Legslicer:
+    id:            4521
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 663
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4800
+        mp: 4800
+
+  ZoDhu_Legslicer_2:
+    id:            4521
+    display_name:  ZoDhu_Legslicer
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 663
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17367041:
+    template: Dark_Dragon
+    at:       [-177.000, 60.000, -141.000, 130]
+    level:    [25, 25]
+  17367042:
+    template: Seeker
+    at:       [-169.600, 59.800, -138.400, 130]
+    level:    [23, 23]
+  17367043:
+    template: Dark_Dragon
+    at:       [23.274, 0.000, 18.964, 130]
+    level:    [25, 25]
+  17367044:
+    template: Seeker
+    at:       [30.400, -0.200, 22.000, 130]
+    level:    [23, 23]
+  17367045:
+    template: Dark_Dragon
+    at:       [223.224, -60.000, 138.946, 130]
+    level:    [25, 25]
+  17367046:
+    template: Seeker
+    at:       [230.000, -60.200, 141.946, 130]
+    level:    [23, 23]
+  17367047:
+    template: KuJhu_Graniteskin
+    at:       [-179.030, 60.100, -140.500, 128]
+    level:    [68, 68]
+  17367048:
+    template: SaNha_Soulsaver
+    at:       [-175.830, 60.100, -140.500, 128]
+    level:    [68, 68]
+  17367049:
+    template: DaShu_Knightslayer
+    at:       [-175.830, 60.100, -143.700, 128]
+    level:    [68, 68]
+  17367050:
+    template: GoBha_Slaughterer
+    at:       [-179.030, 60.100, -143.700, 128]
+    level:    [68, 68]
+  17367051:
+    template: KuJhu_Graniteskin
+    at:       [21.244, 0.100, 19.464, 128]
+    level:    [68, 68]
+  17367052:
+    template: SaNha_Soulsaver
+    at:       [24.444, 0.100, 19.464, 128]
+    level:    [68, 68]
+  17367053:
+    template: DaShu_Knightslayer
+    at:       [24.444, 0.100, 16.264, 128]
+    level:    [68, 68]
+  17367054:
+    template: GoBha_Slaughterer
+    at:       [21.244, 0.100, 16.264, 128]
+    level:    [68, 68]
+  17367055:
+    template: KuJhu_Graniteskin
+    at:       [221.194, -59.900, 139.446, 128]
+    level:    [68, 68]
+  17367056:
+    template: SaNha_Soulsaver
+    at:       [224.394, -59.900, 139.446, 128]
+    level:    [68, 68]
+  17367057:
+    template: DaShu_Knightslayer
+    at:       [224.394, -59.900, 136.246, 128]
+    level:    [68, 68]
+  17367058:
+    template: GoBha_Slaughterer
+    at:       [221.194, -59.900, 136.246, 128]
+    level:    [68, 68]
+  17367059:
+    template: Gaki
+    at:       [-177.354, 59.769, -144.000, 130]
+    level:    [62, 62]
+  17367060:
+    template: Rasetsu
+    at:       [-177.354, 59.696, -142.000, 130]
+    level:    [63, 63]
+  17367061:
+    template: Onki
+    at:       [-177.354, 59.770, -140.000, 130]
+    level:    [61, 61]
+  17367062:
+    template: Onibi
+    at:       [-177.352, 59.770, -139.998, 130]
+    level:    [55, 55]
+  17367063:
+    template: Ayakashi
+    at:       [-182.116, 59.641, -139.434]
+    level:    [59, 59]
+  17367064:
+    template: Gaki
+    at:       [22.646, -0.230, 15.982, 130]
+    level:    [62, 62]
+  17367065:
+    template: Rasetsu
+    at:       [22.646, -0.304, 17.982, 130]
+    level:    [63, 63]
+  17367066:
+    template: Onki
+    at:       [22.646, -0.230, 19.982, 130]
+    level:    [61, 61]
+  17367067:
+    template: Onibi
+    at:       [22.646, -0.230, 19.982, 130]
+    level:    [55, 55]
+  17367068:
+    template: Ayakashi
+    at:       [18.130, -0.202, 17.401]
+    level:    [59, 59]
+  17367069:
+    template: Gaki
+    at:       [222.641, -60.230, 136.000, 130]
+    level:    [62, 62]
+  17367070:
+    template: Rasetsu
+    at:       [222.641, -60.303, 138.000, 130]
+    level:    [63, 63]
+  17367071:
+    template: Onki
+    at:       [222.641, -60.229, 140.000, 130]
+    level:    [61, 61]
+  17367072:
+    template: Onibi
+    at:       [222.641, -60.229, 140.001, 130]
+    level:    [55, 55]
+  17367073:
+    template: Ayakashi
+    level:    [59, 59]
+  17367074:
+    template: Maat_rdm
+    at:       [-177.354, 60.196, -142.000, 128]
+    level:    [70, 70]
+  17367075:
+    template: Maat_rdm
+    at:       [22.653, 0.186, 17.975, 128]
+    level:    [70, 70]
+  17367076:
+    template: Maat_rdm
+    at:       [222.636, -59.813, 137.951, 128]
+    level:    [70, 70]
+  17367077:
+    template: Maat_thf
+    at:       [-177.354, 60.196, -142.000, 128]
+    level:    [70, 70]
+  17367078:
+    template: Maat_thf
+    at:       [22.653, 0.186, 17.975, 128]
+    level:    [70, 70]
+  17367079:
+    template: Maat_thf
+    at:       [222.636, -59.813, 137.951, 128]
+    level:    [70, 70]
+  17367080:
+    template: Maat_bst
+    at:       [-177.354, 60.196, -142.000, 128]
+    level:    [70, 70]
+  17367081:
+    template: Maats_Pet
+    at:       [1.000, 1.000, 1.000, 128]
+    level:    [56, 56]
+  17367082:
+    template: Maat_bst
+    at:       [22.653, 0.186, 17.975, 128]
+    level:    [70, 70]
+  17367083:
+    template: Maats_Pet
+    at:       [201.274, -59.000, 160.964, 128]
+    level:    [56, 56]
+  17367084:
+    template: Maat_bst
+    at:       [222.636, -59.813, 137.951, 128]
+    level:    [70, 70]
+  17367085:
+    template: Maats_Pet
+    at:       [401.224, -119.000, 280.946, 128]
+    level:    [56, 56]
+  17367086:
+    template: Heavy_Metal_Crab
+    at:       [-177.354, 59.696, -142.000, 125]
+    level:    [22, 22]
+  17367087:
+    template: Metal_Crab
+    at:       [-177.354, 59.696, -138.000, 120]
+    level:    [19, 19]
+  17367088:
+    template: Metal_Crab
+    at:       [-177.354, 59.696, -146.000, 130]
+    level:    [19, 19]
+  17367090:
+    template: Heavy_Metal_Crab
+    at:       [22.500, 0.000, 17.964, 125]
+    level:    [22, 22]
+  17367091:
+    template: Metal_Crab
+    at:       [22.500, 0.000, 21.964, 120]
+    level:    [19, 19]
+  17367092:
+    template: Metal_Crab
+    at:       [22.500, 0.000, 13.964, 130]
+    level:    [19, 19]
+  17367094:
+    template: Heavy_Metal_Crab
+    at:       [222.500, -60.000, 137.946, 125]
+    level:    [22, 22]
+  17367095:
+    template: Metal_Crab
+    at:       [222.500, -60.000, 141.946, 120]
+    level:    [19, 19]
+  17367096:
+    template: Metal_Crab
+    at:       [222.500, -60.000, 133.946, 130]
+    level:    [19, 19]
+  17367098:
+    template: Macha
+    at:       [-177.354, 59.696, -142.000, 128]
+    level:    [32, 32]
+  17367099:
+    template: Neman
+    at:       [-177.354, 59.893, -138.500, 128]
+    level:    [30, 30]
+  17367100:
+    template: Neman
+    at:       [-177.354, 59.893, -145.500, 128]
+    level:    [30, 30]
+  17367102:
+    template: Macha
+    at:       [22.640, -0.301, 17.945, 128]
+    level:    [32, 32]
+  17367103:
+    template: Neman
+    at:       [22.640, -0.104, 21.445, 128]
+    level:    [30, 30]
+  17367104:
+    template: Neman
+    at:       [22.640, -0.104, 14.445, 128]
+    level:    [30, 30]
+  17367106:
+    template: Macha
+    at:       [222.736, -60.313, 138.024, 128]
+    level:    [32, 32]
+  17367107:
+    template: Neman
+    at:       [222.736, -60.116, 141.524, 128]
+    level:    [30, 30]
+  17367108:
+    template: Neman
+    at:       [222.736, -60.116, 134.524, 128]
+    level:    [30, 30]
+  17367110:
+    template: Metsanneitsyt
+    at:       [-177.399, 60.185, -141.958, 128]
+    level:    [36, 36]
+  17367111:
+    template: Metsanhaltija
+    at:       [-181.399, 60.101, -139.958, 128]
+    level:    [32, 33]
+  17367112:
+    template: Metsanhaltija
+    at:       [-181.399, 60.087, -143.958, 128]
+    level:    [32, 33]
+  17367114:
+    template: Metsanneitsyt
+    at:       [22.578, 0.176, 17.943, 128]
+    level:    [36, 36]
+  17367115:
+    template: Metsanhaltija
+    at:       [18.578, 0.092, 19.943, 128]
+    level:    [32, 33]
+  17367116:
+    template: Metsanhaltija
+    at:       [18.578, 0.078, 15.943, 128]
+    level:    [32, 33]
+  17367118:
+    template: Metsanneitsyt
+    at:       [222.633, -59.813, 137.950, 128]
+    level:    [36, 36]
+  17367119:
+    template: Metsanhaltija
+    at:       [218.633, -59.897, 139.950, 128]
+    level:    [32, 33]
+  17367120:
+    template: Metsanhaltija
+    at:       [218.633, -59.911, 135.950, 128]
+    level:    [32, 33]
+  17367122:
+    template: Flayer_Franz
+    at:       [-177.354, 59.696, -142.000, 128]
+    level:    [45, 45]
+  17367123:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-177.320, 59.864, -147.229, 128]
+    level:    [38, 40]
+  17367124:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-181.255, 59.771, -145.416, 128]
+    level:    [38, 40]
+  17367125:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-182.483, 59.740, -141.013, 128]
+    level:    [38, 40]
+  17367126:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-179.970, 59.778, -137.533, 128]
+    level:    [38, 40]
+  17367127:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-174.770, 59.789, -137.533, 128]
+    level:    [38, 40]
+  17367128:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-172.253, 59.754, -140.979, 128]
+    level:    [38, 40]
+  17367129:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-173.417, 59.777, -145.352, 128]
+    level:    [38, 40]
+  17367130:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-177.343, 59.410, -150.679, 128]
+    level:    [38, 40]
+  17367131:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-183.542, 59.314, -148.171, 128]
+    level:    [38, 40]
+  17367132:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-186.087, 59.013, -142.033, 128]
+    level:    [38, 40]
+  17367133:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-183.432, 59.314, -135.828, 128]
+    level:    [38, 40]
+  17367134:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-177.389, 59.410, -133.300, 128]
+    level:    [38, 40]
+  17367135:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-171.164, 59.244, -135.845, 128]
+    level:    [38, 40]
+  17367136:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-168.656, 59.280, -141.994, 128]
+    level:    [38, 40]
+  17367137:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [-171.207, 59.244, -148.238, 128]
+    level:    [38, 40]
+  17367139:
+    template: Flayer_Franz
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [45, 45]
+  17367140:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [22.534, 0.168, 12.735, 128]
+    level:    [38, 40]
+  17367141:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [18.599, 0.075, 14.548, 128]
+    level:    [38, 40]
+  17367142:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [17.371, 0.044, 18.951, 128]
+    level:    [38, 40]
+  17367143:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [19.884, 0.082, 22.431, 128]
+    level:    [38, 40]
+  17367144:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [25.084, 0.093, 22.431, 128]
+    level:    [38, 40]
+  17367145:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [27.601, 0.058, 18.985, 128]
+    level:    [38, 40]
+  17367146:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [26.437, 0.081, 14.612, 128]
+    level:    [38, 40]
+  17367147:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [22.511, -0.286, 9.285, 128]
+    level:    [38, 40]
+  17367148:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [16.312, -0.382, 11.793, 128]
+    level:    [38, 40]
+  17367149:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [13.767, -0.683, 17.931, 128]
+    level:    [38, 40]
+  17367150:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [16.422, -0.382, 24.136, 128]
+    level:    [38, 40]
+  17367151:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [22.465, -0.286, 26.664, 128]
+    level:    [38, 40]
+  17367152:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [28.690, -0.452, 24.119, 128]
+    level:    [38, 40]
+  17367153:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [31.198, -0.416, 17.970, 128]
+    level:    [38, 40]
+  17367154:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [28.647, -0.452, 11.726, 128]
+    level:    [38, 40]
+  17367156:
+    template: Flayer_Franz
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [45, 45]
+  17367157:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [222.534, -59.832, 132.717, 128]
+    level:    [38, 40]
+  17367158:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [218.599, -59.925, 134.530, 128]
+    level:    [38, 40]
+  17367159:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [217.371, -59.956, 138.933, 128]
+    level:    [38, 40]
+  17367160:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [219.884, -59.918, 142.413, 128]
+    level:    [38, 40]
+  17367161:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [225.084, -59.907, 142.413, 128]
+    level:    [38, 40]
+  17367162:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [227.601, -59.942, 138.967, 128]
+    level:    [38, 40]
+  17367163:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [226.437, -59.919, 134.594, 128]
+    level:    [38, 40]
+  17367164:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [222.511, -60.286, 129.267, 128]
+    level:    [38, 40]
+  17367165:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [216.312, -60.382, 131.775, 128]
+    level:    [38, 40]
+  17367166:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [213.767, -60.683, 137.913, 128]
+    level:    [38, 40]
+  17367167:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [216.422, -60.382, 144.118, 128]
+    level:    [38, 40]
+  17367168:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [222.465, -60.286, 146.646, 128]
+    level:    [38, 40]
+  17367169:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [228.690, -60.452, 144.101, 128]
+    level:    [38, 40]
+  17367170:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [231.198, -60.416, 137.952, 128]
+    level:    [38, 40]
+  17367171:
+    template: Flesh_Eater_WS
+    script:   Flesh_Eater
+    at:       [228.647, -60.452, 131.708, 128]
+    level:    [38, 40]
+  17367173:
+    template: Queen_Jelly
+    at:       [-177.500, 60.000, -142.000, 125]
+    level:    [41, 41]
+  17367174:
+    template: Princess_Jelly
+    at:       [-193.000, 58.000, -130.000, 20]
+    level:    [35, 35]
+  17367175:
+    template: Princess_Jelly
+    at:       [-183.000, 58.000, -125.000, 40]
+    level:    [35, 35]
+  17367176:
+    template: Princess_Jelly
+    at:       [-172.000, 58.000, -124.000, 65]
+    level:    [35, 35]
+  17367177:
+    template: Princess_Jelly
+    at:       [-160.000, 58.000, -132.000, 105]
+    level:    [35, 35]
+  17367178:
+    template: Princess_Jelly
+    at:       [-193.000, 58.000, -153.000, 230]
+    level:    [35, 35]
+  17367179:
+    template: Princess_Jelly
+    at:       [-183.000, 58.000, -159.000, 205]
+    level:    [35, 35]
+  17367180:
+    template: Princess_Jelly
+    at:       [-172.000, 58.000, -159.000, 180]
+    level:    [35, 35]
+  17367181:
+    template: Princess_Jelly
+    at:       [-160.000, 58.000, -154.000, 155]
+    level:    [35, 35]
+  17367183:
+    template: Queen_Jelly
+    at:       [22.500, 0.000, 18.000, 125]
+    level:    [41, 41]
+  17367184:
+    template: Princess_Jelly
+    at:       [7.274, -2.000, 29.964, 20]
+    level:    [35, 35]
+  17367185:
+    template: Princess_Jelly
+    at:       [17.274, -2.000, 34.964, 40]
+    level:    [35, 35]
+  17367186:
+    template: Princess_Jelly
+    at:       [28.274, -2.000, 35.964, 65]
+    level:    [35, 35]
+  17367187:
+    template: Princess_Jelly
+    at:       [40.274, -2.000, 27.964, 105]
+    level:    [35, 35]
+  17367188:
+    template: Princess_Jelly
+    at:       [7.274, -2.000, 6.964, 230]
+    level:    [35, 35]
+  17367189:
+    template: Princess_Jelly
+    at:       [17.274, -2.000, 0.964, 205]
+    level:    [35, 35]
+  17367190:
+    template: Princess_Jelly
+    at:       [28.274, -2.000, 0.964, 180]
+    level:    [35, 35]
+  17367191:
+    template: Princess_Jelly
+    at:       [40.274, -2.000, 5.964, 155]
+    level:    [35, 35]
+  17367193:
+    template: Queen_Jelly
+    at:       [222.500, -60.000, 138.000, 125]
+    level:    [41, 41]
+  17367194:
+    template: Princess_Jelly
+    at:       [207.224, -62.000, 149.946, 20]
+    level:    [35, 35]
+  17367195:
+    template: Princess_Jelly
+    at:       [217.224, -62.000, 154.946, 40]
+    level:    [35, 35]
+  17367196:
+    template: Princess_Jelly
+    at:       [228.224, -62.000, 155.946, 65]
+    level:    [35, 35]
+  17367197:
+    template: Princess_Jelly
+    at:       [240.224, -62.000, 147.946, 105]
+    level:    [35, 35]
+  17367198:
+    template: Princess_Jelly
+    at:       [207.224, -62.000, 126.946, 230]
+    level:    [35, 35]
+  17367199:
+    template: Princess_Jelly
+    at:       [217.224, -62.000, 120.946, 205]
+    level:    [35, 35]
+  17367200:
+    template: Princess_Jelly
+    at:       [228.224, -62.000, 120.946, 180]
+    level:    [35, 35]
+  17367201:
+    template: Princess_Jelly
+    at:       [240.224, -62.000, 125.946, 155]
+    level:    [35, 35]
+  17367203:
+    template: Time_Bomb
+    at:       [-177.354, 59.696, -142.000, 128]
+    level:    [55, 55]
+  17367205:
+    template: Time_Bomb
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [55, 55]
+  17367207:
+    template: Time_Bomb
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [55, 55]
+  17367209:
+    template: YoBhu_Hideousmask
+    at:       [-179.358, 59.695, -142.018, 128]
+    level:    [62, 64]
+  17367210:
+    template: ZoDhu_Legslicer
+    at:       [-175.358, 59.797, -139.018, 128]
+    level:    [62, 64]
+  17367211:
+    template: KaNha_Jabbertongue
+    at:       [-175.358, 59.797, -139.018, 128]
+    level:    [62, 64]
+  17367212:
+    template: BiFho_Jestergrin
+    at:       [-175.358, 59.695, -142.018, 128]
+    level:    [62, 64]
+  17367213:
+    template: KuTya_Hotblood
+    at:       [-179.358, 59.797, -139.018, 128]
+    level:    [62, 64]
+  17367214:
+    template: EaTho_Cruelheart
+    at:       [-179.358, 59.797, -145.018, 128]
+    level:    [62, 64]
+  17367216:
+    template: YoBhu_Hideousmask
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [62, 64]
+  17367217:
+    template: ZoDhu_Legslicer
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [62, 64]
+  17367218:
+    template: KaNha_Jabbertongue
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [62, 64]
+  17367219:
+    template: BiFho_Jestergrin
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [62, 64]
+  17367220:
+    template: KuTya_Hotblood
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [62, 64]
+  17367221:
+    template: EaTho_Cruelheart
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [62, 64]
+  17367223:
+    template: YoBhu_Hideousmask
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [62, 64]
+  17367224:
+    template: ZoDhu_Legslicer
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [62, 64]
+  17367225:
+    template: KaNha_Jabbertongue
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [62, 64]
+  17367226:
+    template: BiFho_Jestergrin
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [62, 64]
+  17367227:
+    template: KuTya_Hotblood
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [62, 64]
+  17367228:
+    template: EaTho_Cruelheart
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [62, 64]
+  17367230:
+    template: Tartaruga_Gigante
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [85, 85]
+  17367232:
+    template: Tartaruga_Gigante
+    at:       [22.916, 0.188, 17.987, 124]
+    level:    [85, 85]
+  17367234:
+    template: Tartaruga_Gigante
+    at:       [222.866, -59.812, 137.969, 124]
+    level:    [85, 85]
+  17367236:
+    template: The_Waughroon_Kid
+    at:       [-177.354, 59.696, -142.000, 128]
+    level:    [53, 53]
+  17367238:
+    template: The_Waughroon_Kid
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [53, 53]
+  17367240:
+    template: The_Waughroon_Kid
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [53, 53]
+  17367242:
+    template: Fee
+    at:       [-177.354, 59.696, -142.000, 128]
+    level:    [62, 62]
+  17367244:
+    template: Fee
+    at:       [22.500, 0.000, 17.964, 128]
+    level:    [62, 62]
+  17367246:
+    template: Fee
+    at:       [222.500, -60.000, 137.946, 128]
+    level:    [62, 62]
+  17367248:
+    template: Osschaart
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [79, 79]
+  17367250:
+    template: Osschaarts_Bat
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [71, 71]
+  17367251:
+    template: Osschaarts_Wyvern
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [71, 71]
+  17367252:
+    template: Osschaarts_Avatar
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [71, 71]
+  17367253:
+    template: Osschaarts_Automaton
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [71, 71]
+  17367254:
+    template: Osschaart
+    at:       [22.916, 0.188, 17.987, 124]
+    level:    [79, 79]
+  17367256:
+    template: Osschaarts_Bat
+    at:       [22.916, 0.188, 17.987, 124]
+    level:    [71, 71]
+  17367257:
+    template: Osschaarts_Wyvern
+    at:       [22.916, 0.188, 17.987, 124]
+    level:    [71, 71]
+  17367258:
+    template: Osschaarts_Avatar
+    at:       [22.916, 0.188, 17.987, 124]
+    level:    [71, 71]
+  17367259:
+    template: Osschaarts_Automaton
+    at:       [22.916, 0.188, 17.987, 124]
+    level:    [71, 71]
+  17367260:
+    template: Osschaart
+    at:       [222.866, -59.812, 137.969, 124]
+    level:    [79, 79]
+  17367262:
+    template: Osschaarts_Bat
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [71, 71]
+  17367263:
+    template: Osschaarts_Wyvern
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [71, 71]
+  17367264:
+    template: Osschaarts_Avatar
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [71, 71]
+  17367265:
+    template: Osschaarts_Automaton
+    at:       [-177.358, 60.188, -141.977, 124]
+    level:    [71, 71]
+  17367266:
+    template: Platoon_Scorpion
+    at:       [-179.358, 59.695, -142.018, 128]
+    level:    [73, 73]
+  17367267:
+    template: Platoon_Scorpion
+    at:       [-175.358, 59.797, -145.018, 128]
+    level:    [73, 73]
+  17367268:
+    template: Platoon_Scorpion
+    at:       [-175.358, 59.797, -139.018, 128]
+    level:    [73, 73]
+  17367269:
+    template: Platoon_Scorpion
+    at:       [-175.358, 59.695, -142.018, 128]
+    level:    [73, 73]
+  17367270:
+    template: Platoon_Scorpion
+    at:       [-179.358, 59.797, -139.018, 128]
+    level:    [73, 73]
+  17367271:
+    template: Platoon_Scorpion
+    at:       [-179.358, 59.797, -145.018, 128]
+    level:    [73, 73]
+  17367273:
+    template: Platoon_Scorpion
+    at:       [25.274, -0.305, 17.964, 128]
+    level:    [73, 73]
+  17367274:
+    template: Platoon_Scorpion
+    at:       [29.274, -0.203, 14.964, 128]
+    level:    [73, 73]
+  17367275:
+    template: Platoon_Scorpion
+    at:       [29.274, -0.203, 20.964, 128]
+    level:    [73, 73]
+  17367276:
+    template: Platoon_Scorpion
+    at:       [29.274, -0.305, 17.964, 128]
+    level:    [73, 73]
+  17367277:
+    template: Platoon_Scorpion
+    at:       [25.274, -0.203, 20.964, 128]
+    level:    [73, 73]
+  17367278:
+    template: Platoon_Scorpion
+    at:       [25.274, -0.203, 14.964, 128]
+    level:    [73, 73]
+  17367280:
+    template: Platoon_Scorpion
+    at:       [225.224, -60.305, 137.946, 128]
+    level:    [73, 73]
+  17367281:
+    template: Platoon_Scorpion
+    at:       [229.224, -60.203, 134.946, 128]
+    level:    [73, 73]
+  17367282:
+    template: Platoon_Scorpion
+    at:       [229.224, -60.203, 140.946, 128]
+    level:    [73, 73]
+  17367283:
+    template: Platoon_Scorpion
+    at:       [229.224, -60.305, 137.946, 128]
+    level:    [73, 73]
+  17367284:
+    template: Platoon_Scorpion
+    at:       [225.224, -60.203, 140.946, 128]
+    level:    [73, 73]
+  17367285:
+    template: Platoon_Scorpion
+    at:       [225.224, -60.203, 134.946, 128]
+    level:    [73, 73]
+  17367287:
+    template: Titanis_Max
+    at:       [-179.358, 59.778, -140.518, 128]
+    level:    [76, 76]
+  17367288:
+    template: Titanis_Jax
+    at:       [-175.358, 59.776, -140.518, 128]
+    level:    [76, 76]
+  17367289:
+    template: Titanis_Xax
+    at:       [-175.358, 59.775, -143.518, 128]
+    level:    [76, 76]
+  17367290:
+    template: Titanis_Dax
+    at:       [-179.358, 59.778, -143.518, 128]
+    level:    [76, 76]
+  17367292:
+    template: Titanis_Max
+    at:       [20.500, -0.223, 19.400, 128]
+    level:    [76, 76]
+  17367293:
+    template: Titanis_Jax
+    at:       [24.500, -0.223, 19.400, 128]
+    level:    [76, 76]
+  17367294:
+    template: Titanis_Xax
+    at:       [24.500, -0.223, 16.400, 128]
+    level:    [76, 76]
+  17367295:
+    template: Titanis_Dax
+    at:       [20.500, -0.223, 16.400, 128]
+    level:    [76, 76]
+  17367297:
+    template: Titanis_Max
+    at:       [220.650, -60.223, 139.500, 128]
+    level:    [76, 76]
+  17367298:
+    template: Titanis_Jax
+    at:       [224.650, -60.223, 139.500, 128]
+    level:    [76, 76]
+  17367299:
+    template: Titanis_Xax
+    at:       [224.650, -60.223, 136.500, 128]
+    level:    [76, 76]
+  17367300:
+    template: Titanis_Dax
+    at:       [220.650, -60.223, 136.500, 128]
+    level:    [76, 76]
+  17367302:
+    script: Mahuika
+  17367303:
+    script: Nga_Manawa
+  17367304:
+    script: Nga_Manawa
+  17367305:
+    script: Nga_Manawa
+  17367307:
+    script: Mahuika
+  17367308:
+    script: Nga_Manawa
+  17367309:
+    script: Nga_Manawa
+  17367310:
+    script: Nga_Manawa
+  17367312:
+    script: Mahuika
+  17367313:
+    script: Nga_Manawa
+  17367314:
+    script: Nga_Manawa
+  17367315:
+    script: Nga_Manawa
+  17367317:
+    script: VuDhe_Impervious
+  17367318:
+    script: GaKhu_Bloodglee
+  17367319:
+    script: ZiPha_Foecrippler
+  17367320:
+    script: RoMho_Unrelenting
+  17367322:
+    script: VuDhe_Impervious
+  17367323:
+    script: GaKhu_Bloodglee
+  17367324:
+    script: ZiPha_Foecrippler
+  17367325:
+    script: RoMho_Unrelenting
+  17367327:
+    script: VuDhe_Impervious
+  17367328:
+    script: GaKhu_Bloodglee
+  17367329:
+    script: ZiPha_Foecrippler
+  17367330:
+    script: RoMho_Unrelenting
+  17367332:
+    template: Atori-Tutori_qm
+    at:       [-177.000, 60.000, -141.000, 130]
+    level:    [102, 102]
+  17367333:
+    template: Atori-Tutori_qm
+    at:       [23.274, 0.000, 18.964, 130]
+    level:    [102, 102]
+  17367334:
+    template: Atori-Tutori_qm
+    at:       [223.224, -60.000, 138.946, 130]
+    level:    [102, 102]
+  17367335:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367336:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367337:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367338:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367339:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367340:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367341:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367342:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367343:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367344:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367345:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367346:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367347:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367348:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367349:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367350:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367352:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367353:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367354:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367355:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367356:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367357:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367358:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367359:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367360:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367361:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367362:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367363:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367364:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367365:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367366:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367367:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367369:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367370:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367371:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367372:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367373:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367374:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367375:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367376:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367377:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367378:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367379:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367380:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367381:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367382:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367383:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367384:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367386:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367387:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367388:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367389:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367390:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367391:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367392:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367393:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367394:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367395:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367396:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367397:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367398:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367399:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367400:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367401:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367403:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367404:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367405:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367406:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367407:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367408:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367409:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367410:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367411:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367412:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367413:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367414:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367415:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367416:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367417:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367418:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367420:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367421:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367422:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367423:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367424:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367425:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367426:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367427:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367428:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367429:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367430:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367431:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367432:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367433:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367434:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367435:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367437:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367438:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367439:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367440:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367441:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367442:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367443:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367444:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367445:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367446:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367447:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367448:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367449:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367450:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367451:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367452:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367454:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367455:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367456:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367457:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367458:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367459:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367460:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367461:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367462:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367463:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367464:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367465:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367466:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367467:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367468:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367469:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367471:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367472:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367473:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367474:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367475:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367476:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367477:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367478:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367479:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367480:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367481:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367482:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367483:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367484:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367485:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367486:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367488:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367489:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367490:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367491:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367492:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367493:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367494:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367495:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367496:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367497:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367498:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367499:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367500:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367501:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367502:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367503:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367505:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367506:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367507:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367508:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367509:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367510:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367511:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367512:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367513:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367514:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367515:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367516:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367517:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367518:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367519:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367520:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367522:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367523:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367524:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367525:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367526:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367527:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367528:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367529:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367530:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367531:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367532:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367533:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367534:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367535:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367536:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367537:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367539:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367540:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367541:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367542:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367543:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367544:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367545:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367546:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367547:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367548:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367549:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367550:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367551:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367552:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367553:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367554:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367556:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367557:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367558:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367559:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367560:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367561:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367562:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367563:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367564:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367565:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367566:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367567:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367568:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367569:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367570:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367571:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367573:
+    template: Flayer_Franz_2
+    script:   Flayer_Franz
+  17367574:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367575:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367576:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367577:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367578:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367579:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367580:
+    template: Flesh_Eater_WS_Large
+    script:   Flesh_Eater
+  17367581:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367582:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367583:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367584:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367585:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367586:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367587:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367588:
+    template: Flesh_Eater_WS_2
+    script:   Flesh_Eater
+  17367590:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367591:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367592:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367593:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367594:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367595:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367597:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367598:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367599:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367600:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367601:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367602:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367604:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367605:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367606:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367607:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367608:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367609:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367611:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367612:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367613:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367614:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367615:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367616:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367618:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367619:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367620:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367621:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367622:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367623:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367625:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367626:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367627:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367628:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367629:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367630:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367632:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367633:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367634:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367635:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367636:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367637:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367639:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367640:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367641:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367642:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367643:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367644:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367646:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367647:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367648:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367649:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367650:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367651:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367653:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367654:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367655:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367656:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367657:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367658:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367660:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367661:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367662:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367663:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367664:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367665:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367667:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367668:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367669:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367670:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367671:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367672:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367674:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367675:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367676:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367677:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367678:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367679:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367681:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367682:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367683:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367684:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367685:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367686:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367688:
+    template: YoBhu_Hideousmask_2
+    script:   YoBhu_Hideousmask
+  17367689:
+    template: ZoDhu_Legslicer_2
+    script:   ZoDhu_Legslicer
+  17367690:
+    template: KaNha_Jabbertongue_2
+    script:   KaNha_Jabbertongue
+  17367691:
+    template: BiFho_Jestergrin_2
+    script:   BiFho_Jestergrin
+  17367692:
+    template: KuTya_Hotblood_2
+    script:   KuTya_Hotblood
+  17367693:
+    template: EaTho_Cruelheart_2
+    script:   EaTho_Cruelheart
+  17367695:
+    script: Bahamute
+  17367696:
+    script: Bahamute
+  17367697:
+    script: Bahamute
+  17367698:
+    template: Chest_OPlenty
+    at:       [-181.424, 59.230, -134.764, 128]
+  17367699:
+    template: Chest_OPlenty
+    at:       [-181.424, 59.742, -138.364, 128]
+  17367700:
+    template: Chest_OPlenty
+    at:       [-181.424, 59.798, -141.964, 128]
+  17367701:
+    template: Chest_OPlenty
+    at:       [-181.424, 59.756, -145.565, 128]
+  17367702:
+    template: Chest_OPlenty
+    at:       [-181.424, 59.230, -149.164, 128]
+  17367703:
+    template: Chest_OPlenty
+    at:       [-173.824, 59.164, -134.764, 128]
+  17367704:
+    template: Chest_OPlenty
+    at:       [-173.824, 59.739, -138.364, 128]
+  17367705:
+    template: Chest_OPlenty
+    at:       [-173.824, 59.798, -141.964, 128]
+  17367706:
+    template: Chest_OPlenty
+    at:       [-173.824, 59.752, -145.565, 128]
+  17367707:
+    template: Chest_OPlenty
+    at:       [-173.824, 59.164, -149.164, 128]
+  17367709:
+    template: Chest_OPlenty
+    at:       [18.850, -0.770, 25.200, 128]
+  17367710:
+    template: Chest_OPlenty
+    at:       [18.850, -0.258, 21.600, 128]
+  17367711:
+    template: Chest_OPlenty
+    at:       [18.850, -0.202, 18.000, 128]
+  17367712:
+    template: Chest_OPlenty
+    at:       [18.850, -0.244, 14.399, 128]
+  17367713:
+    template: Chest_OPlenty
+    at:       [18.850, -0.770, 10.800, 128]
+  17367714:
+    template: Chest_OPlenty
+    at:       [26.450, -0.836, 25.200, 128]
+  17367715:
+    template: Chest_OPlenty
+    at:       [26.450, -0.261, 21.600, 128]
+  17367716:
+    template: Chest_OPlenty
+    at:       [26.450, -0.202, 18.000, 128]
+  17367717:
+    template: Chest_OPlenty
+    at:       [26.450, -0.248, 14.399, 128]
+  17367718:
+    template: Chest_OPlenty
+    at:       [26.450, -0.836, 10.800, 128]
+  17367720:
+    template: Chest_OPlenty
+    at:       [218.800, -60.770, 145.182, 128]
+  17367721:
+    template: Chest_OPlenty
+    at:       [218.800, -60.258, 141.582, 128]
+  17367722:
+    template: Chest_OPlenty
+    at:       [218.800, -60.202, 137.982, 128]
+  17367723:
+    template: Chest_OPlenty
+    at:       [218.800, -60.244, 134.381, 128]
+  17367724:
+    template: Chest_OPlenty
+    at:       [218.800, -60.770, 130.782, 128]
+  17367725:
+    template: Chest_OPlenty
+    at:       [226.400, -60.836, 145.182, 128]
+  17367726:
+    template: Chest_OPlenty
+    at:       [226.400, -60.261, 141.582, 128]
+  17367727:
+    template: Chest_OPlenty
+    at:       [226.400, -60.202, 137.982, 128]
+  17367728:
+    template: Chest_OPlenty
+    at:       [226.400, -60.248, 134.381, 128]
+  17367729:
+    template: Chest_OPlenty
+    at:       [226.400, -60.836, 130.782, 128]
+  17367731:
+    template: Coffer_OPlenty
+    at:       [-181.424, 59.230, -134.764, 128]
+  17367732:
+    template: Coffer_OPlenty
+    at:       [-181.424, 59.742, -138.364, 128]
+  17367733:
+    template: Coffer_OPlenty
+    at:       [-181.424, 59.798, -141.964, 128]
+  17367734:
+    template: Coffer_OPlenty
+    at:       [-181.424, 59.756, -145.565, 128]
+  17367735:
+    template: Coffer_OPlenty
+    at:       [-181.424, 59.230, -149.164, 128]
+  17367736:
+    template: Coffer_OPlenty
+    at:       [-173.824, 59.164, -134.764, 128]
+  17367737:
+    template: Coffer_OPlenty
+    at:       [-173.824, 59.739, -138.364, 128]
+  17367738:
+    template: Coffer_OPlenty
+    at:       [-173.824, 59.798, -141.964, 128]
+  17367739:
+    template: Coffer_OPlenty
+    at:       [-173.824, 59.752, -145.565, 128]
+  17367740:
+    template: Coffer_OPlenty
+    at:       [-173.824, 59.164, -149.164, 43]
+  17367742:
+    template: Coffer_OPlenty
+    at:       [18.850, -0.770, 25.200, 128]
+  17367743:
+    template: Coffer_OPlenty
+    at:       [18.850, -0.258, 21.600, 128]
+  17367744:
+    template: Coffer_OPlenty
+    at:       [18.850, -0.202, 18.000, 128]
+  17367745:
+    template: Coffer_OPlenty
+    at:       [18.850, -0.244, 14.399, 128]
+  17367746:
+    template: Coffer_OPlenty
+    at:       [18.850, -0.770, 10.800, 128]
+  17367747:
+    template: Coffer_OPlenty
+    at:       [26.450, -0.836, 25.200, 128]
+  17367748:
+    template: Coffer_OPlenty
+    at:       [26.450, -0.261, 21.600, 128]
+  17367749:
+    template: Coffer_OPlenty
+    at:       [26.450, -0.202, 18.000, 128]
+  17367750:
+    template: Coffer_OPlenty
+    at:       [26.450, -0.248, 14.399, 128]
+  17367751:
+    template: Coffer_OPlenty
+    at:       [26.450, -0.836, 10.800, 43]
+  17367753:
+    template: Coffer_OPlenty
+    at:       [218.800, -60.770, 145.182, 128]
+  17367754:
+    template: Coffer_OPlenty
+    at:       [218.800, -60.258, 141.582, 128]
+  17367755:
+    template: Coffer_OPlenty
+    at:       [218.800, -60.202, 137.982, 128]
+  17367756:
+    template: Coffer_OPlenty
+    at:       [218.800, -60.244, 134.381, 128]
+  17367757:
+    template: Coffer_OPlenty
+    at:       [218.800, -60.770, 130.782, 128]
+  17367758:
+    template: Coffer_OPlenty
+    at:       [226.400, -60.836, 145.182, 128]
+  17367759:
+    template: Coffer_OPlenty
+    at:       [226.400, -60.261, 141.582, 128]
+  17367760:
+    template: Coffer_OPlenty
+    at:       [226.400, -60.202, 137.982, 128]
+  17367761:
+    template: Coffer_OPlenty
+    at:       [226.400, -60.248, 134.381, 128]
+  17367762:
+    template: Coffer_OPlenty
+    at:       [226.400, -60.836, 130.782, 43]
+  17367764:
+    script: Naji
+  17367765:
+    script: Naji
+  17367766:
+    script: Naji
+  17367767:
+    script: Naji
+  17367768:
+    script: Kupipi
+  17367769:
+    script: Excenmille
+  17367770:
+    script: Naji
+  17367771:
+    script: Kupipi
+  17367772:
+    script: Excenmille
+  17367773:
+    script: Naji
+  17367774:
+    script: Kupipi
+  17367775:
+    script: Excenmille

@@ -44,8 +44,8 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 #include "map_constants.h"
 
-#include "data/loader.h"
 #include "lua/luautils.h"
+#include "utils/dataset_loader.h"
 
 #include "ai/ai_container.h"
 #include "ai/states/inactive_state.h"

@@ -1,0 +1,4619 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Bakru:
+    id:            327
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags: 3
+        model_size:   2
+        hitbox:       9
+      spawn:
+        type: [scripted]
+
+  Balloon:
+    id:            332
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [fog]
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      steal: [pinch_of_bomb_ash, bomb_arm] # audit needed
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Bull_[Herd1]:
+    id:            579
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags: 133
+      spawn:
+        type: [scripted]
+
+  Bull_[Herd2]:
+    id:            580
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags: 133
+      spawn:
+        type: [scripted]
+
+  Bull_[Herd3]:
+    id:            581
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags: 133
+      spawn:
+        type: [scripted]
+
+  Bumblebee:
+    id:            583
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          8
+      spawn:
+        respawn: 60
+    loot:
+      drops:
+        - chance: uncommon
+          item:   insect_wing
+        - chance: uncommon
+          item:   rarab_tail
+        - chance: rare
+          item:   pot_of_honey
+      steal: pot_of_honey
+      despoil:
+        beehive_chip:  0
+        giant_stinger: 0
+        pot_of_honey:  0
+
+  Calf_[Herd1]:
+    id:            611
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2920
+        entity_flags:  641
+        animation_sub:  16
+        hitbox:          8
+      spawn:
+        type: [scripted]
+
+  Calf_[Herd2]:
+    id:            612
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2920
+        entity_flags:  641
+        animation_sub:  16
+      spawn:
+        type: [scripted]
+
+  Calf_[Herd3]:
+    id:            613
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2920
+        entity_flags:  641
+        animation_sub:  16
+      spawn:
+        type: [scripted]
+
+  Carrion_Crow:
+    id:            650
+    species:       bird
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 445
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         17
+      spawn:
+        respawn: 180
+    loot:
+      drops:
+        - chance: common
+          item:   bird_feather
+        - chance: uncommon
+          item:   bird_egg
+      steal: bird_feather
+      despoil:
+        bird_feather: 0
+        bird_egg:     0
+
+  Chepelle:
+    id:      7065
+    species: tarutaru
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: sword
+      jobs: [bst, war]
+      render:
+        look:
+          type:  equipped
+          race:  4
+          face:  14
+          head:  4123
+          body:  8205
+          hands: 12293
+          legs:  16396
+          feet:  20492
+          main:  24658
+          sub:   28672
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chepelles_Hare:
+    id:            7068
+    species:       lapinion
+    type:          [called]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chepelles_Sheep:
+    id:            7067
+    species:       sheep
+    type:          [called]
+    skill_list_id: 226
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 340
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chepelles_Tiger:
+    id:            7066
+    species:       tiger
+    type:          [called]
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cow_[Herd1]:
+    id:            821
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags:  643
+        animation_sub:   8
+      spawn:
+        type: [scripted]
+
+  Cow_[Herd2]:
+    id:            822
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags:  643
+        animation_sub:   8
+      spawn:
+        type: [scripted]
+
+  Cow_[Herd3]:
+    id:            823
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags:  643
+        animation_sub:   8
+      spawn:
+        type: [scripted]
+
+  Crawler:
+    id:            831
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_silk_thread
+        - chance: uncommon
+          item:   crawler_calculus
+        - chance: rare
+          item:   smooth_stone
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Crawler_2:
+    id:            831
+    display_name:  Crawler
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_silk_thread
+        - chance: uncommon
+          item:   crawler_calculus
+        - chance: rare
+          item:   smooth_stone
+        - chance: rare
+          item:   meteorite
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Farruca_Fly:
+    id:            7009
+    species:       fly
+    type:          [notorious]
+    spell_list_id: 438
+    skill_list_id: 1153
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze, light_sleep, dark_sleep]
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 18200
+    loot:
+      drops:
+        - chance: uncommon
+          item:   alert_ring
+    content: WOTG
+
+  Giant_Bee:
+    id:            1524
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          8
+      spawn:
+        respawn: 180
+    loot:
+      drops:
+        - chance: common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   pot_of_honey
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   giant_stinger
+      steal: pot_of_honey
+      despoil:
+        beehive_chip:  0
+        giant_stinger: 0
+        pot_of_honey:  0
+
+  Goblin_Digger_near:
+    id:            1648
+    display_name:  Goblin_Digger
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 484
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        vermin_killer: 5
+      mob_mods:
+        no_despawn: 1
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+      steal: [pickaxe, beastcoin] # audit needed
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Fisher:
+    id:            1659
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 492
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+        - chance: very_rare
+          item:   beastcoin
+        - chance: very_rare
+          item:   yew_fishing_rod
+        - chance: very_rare
+          item:   bamboo_fishing_rod
+        - chance: super_rare
+          item:   clothespole
+        - chance: super_rare
+          item:   fastwater_fishing_rod
+      steal: [beastcoin, willow_fishing_rod] # audit needed
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Thug:
+    id:            1737
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 484
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   wild_onion
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   beastcoin
+      steal: beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Weaver:
+    id:            1744
+    species:       goblin
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 489
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   spool_of_grass_thread
+        - chance: very_rare
+          item:   square_of_grass_cloth
+        - chance: very_rare
+          item:   spool_of_cotton_thread
+        - chance: super_rare
+          item:   square_of_cotton_cloth
+        - chance: very_rare
+          item:   beastcoin
+      steal: spool_of_grass_thread
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Jyeshtha:
+    id:            7008
+    species:       scorpion
+    type:          [notorious]
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, blm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze, light_sleep, dark_sleep]
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        model_size:  2
+        hitbox:     32
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 11917
+    loot:
+      drops:
+        - chance: uncommon
+          item:   fatality_belt
+    content: WOTG
+
+  Land_Crab_fished:
+    id:            6771
+    display_name:  Land_Crab
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: very_rare
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Mad_Fox:
+    id:            2472
+    species:       hound
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 129
+        hitbox:        21
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   wolf_hide
+        - chance: rare
+          item:   revival_tree_root
+      despoil:
+        wolf_hide:         0
+        revival_tree_root: 0
+
+  Magicked_Bones_blm:
+    id:            6562
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Magicked_Bones_club:
+    id:            2475
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Mandragora:
+    id:            2546
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          6
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cornette
+        - chance: uncommon
+          item:   two-leaf_mandragora_bud
+        - chance: rare
+          item:   pinch_of_yuhtunga_sulfur
+        - chance: very_rare
+          item:   four-leaf_mandragora_bud
+      steal: ball_of_saruta_cotton
+      despoil:
+        two-leaf_mandragora_bud: 0
+        ball_of_saruta_cotton:   0
+
+  Mugger_Crab:
+    id:            2769
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  3
+        hitbox:       11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: very_rare
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Numbing_Norman:
+    id:            5737
+    species:       yellow_bee
+    type:          [notorious]
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        immune_status: [paralyze]
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 440
+    loot:
+      drops:
+        - chance: common
+          item:   pike
+    content: WOTG
+
+  Nunyenunc:
+    id:            2921
+    species:       bird
+    type:          [notorious]
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        immune_status: [requiem, light_sleep]
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 445
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 335
+    loot:
+      drops:
+        - chance: always
+          item:   pilgrims_wand
+
+  Orcus:
+    id:      7010
+    species: antlion
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [paralyze, slow]
+        rank_element:
+          wind:  -2
+          earth:  3
+          light: -3
+          dark:   3
+        rank_status:
+          silence:     -2
+          slow:         3
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 2214
+        model_size:  3
+        hitbox:     21
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 39000
+    loot:
+      drops:
+        - chance: very_common
+          item:   orcus_mandible
+        - chance: uncommon
+          item:   corneus_ring
+        - chance: uncommon
+          item:   bobcat_belt
+        - chance: common
+          item:   kidney_stone
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+    content: WOTG
+
+  Palm_Crab:
+    id:            3088
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: very_rare
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Passage_Crab:
+    id:            3102
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Passage_Crab_Small:
+    id:            7289
+    display_name:  Passage_Crab
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Pixie:
+    id:            3148
+    species:       pixie
+    spell_list_id: 20
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags:  513
+        animation_sub:   8
+        hitbox:          6
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   pinch_of_stygian_ash
+
+  Pyracmon:
+    id:            3241
+    species:       ahriman
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          one_of: [kingdom_stables_collar, republic_stables_medal, federation_stables_scarf]
+        - chance: always
+          one_of: [kingdom_stables_collar, republic_stables_medal, federation_stables_scarf]
+        - chance: uncommon
+          one_of: [kingdom_stables_collar, republic_stables_medal, federation_stables_scarf]
+        - chance: uncommon
+          one_of: [kingdom_stables_collar, republic_stables_medal, federation_stables_scarf]
+
+  Raker_Bee:
+    id:            7006
+    species:       yellow_bee
+    type:          [notorious]
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 408
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4900
+    content: WOTG
+
+  River_Crab:
+    id:            3371
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      spawn:
+        respawn: 180
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: very_rare
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Rummager_Beetle:
+    id:            7007
+    species:       beetle
+    type:          [notorious]
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 272
+        hitbox: 11
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5150
+    content: WOTG
+
+  Savanna_Crab:
+    id:            3488
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: very_rare
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Savanna_Rarab:
+    id:            3490
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 269
+        entity_flags: 129
+        hitbox:        11
+      spawn:
+        respawn: 180
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rabbit_hide
+        - chance: rare
+          item:   torn_epistle
+      steal: slice_of_hare_meat
+      despoil:
+        rabbit_hide:        0
+        slice_of_hare_meat: 0
+
+  Tiny_Mandragora:
+    id:            3924
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          6
+      mob_mods:
+        h2h_single_swing: 1
+      spawn:
+        respawn: 60
+    loot:
+      drops:
+        - chance: rare
+          item:   two-leaf_mandragora_bud
+      steal: two-leaf_mandragora_bud
+      despoil:
+        two-leaf_mandragora_bud: 0
+        ball_of_saruta_cotton:   0
+
+  Tom_Tit_Tat:
+    id:            3947
+    species:       mandragora
+    type:          [notorious]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 540
+    loot:
+      drops:
+        - chance: very_common
+          item:   two-leaf_mandragora_bud
+        - chance: common
+          item:   ball_of_saruta_cotton
+        - chance: common
+          item:   fruit_punches
+        - chance: very_rare
+          item:   four-leaf_mandragora_bud
+      steal: four-leaf_mandragora_bud
+
+  Virvatuli:
+    id:            5148
+    species:       corpselight
+    type:          [notorious]
+    spell_list_id: 21
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          ice:    2
+          earth:  2
+          water:  2
+          light: -1
+          dark:   6
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2215
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Wraith_Bat:
+    id:            4381
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Yagudo_Acolyte:
+    id:            4405
+    species:       yagudo
+    spell_list_id: 20
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 583
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_bead_necklace
+        - chance: very_rare
+          item:   scroll_of_paralyze
+        - chance: very_rare
+          item:   scroll_of_protectra
+        - chance: very_rare
+          item:   scroll_of_barsleep
+        - chance: very_rare
+          item:   scroll_of_sneak
+      steal: beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Condottiere_G:
+    id:            6979
+    display_name:  Yagudo_Condottiere
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 587
+        entity_flags: 133
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Yagudo_Follower:
+    id:            4419
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 598
+        entity_flags: 131
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Yagudo_Initiate:
+    id:            4426
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 580
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_bead_necklace
+        - chance: very_rare
+          item:   skull_locust
+      steal: beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Priest_G:
+    id:            6978
+    display_name:  Yagudo_Priest
+    species:       yagudo
+    spell_list_id: 20
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 583
+        entity_flags: 131
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Yagudo_Scribe:
+    id:            4448
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 584
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_bead_necklace
+        - chance: rare
+          item:   scroll_of_blind
+        - chance: rare
+          item:   scroll_of_bind
+      steal: beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Theologist_G:
+    id:            6972
+    display_name:  Yagudo_Theologist
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 584
+        entity_flags: 131
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Yagudo_Votary_G:
+    id:            6971
+    display_name:  Yagudo_Votary
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 580
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Yilbegan:
+    id:            6999
+    species:       zilant
+    type:          [notorious]
+    spell_list_id: 454
+    skill_list_id: 470
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, drk]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     2
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    4
+          dark:    11
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        4
+          poison:      4
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 2174
+        model_size:  3
+        hitbox:     55
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 90000
+        mp:  5000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lucky_coin
+        - chance: rare
+          item:   zilant_ring
+        - chance: rare
+          item:   galdr_ring
+        - chance: uncommon
+          item:   agronas_leggings
+        - chance: common
+          item:   square_of_scarlet_kadife
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+    content: WOTG
+
+spawns:
+  17248257:
+    template: Palm_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [2, 4]
+  17248258:
+    template: Savanna_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [2, 4]
+  17248259:
+    template: Land_Crab_fished
+    script:   Land_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [5, 6]
+  17248260:
+    template: Mugger_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [7, 8]
+  17248261:
+    template: Passage_Crab_Small
+    script:   Passage_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [9, 10]
+  17248262:
+    template: Tiny_Mandragora
+    at:       [81.748, -0.563, -271.270, 34]
+    level:    [1, 1]
+  17248263:
+    template: Tiny_Mandragora
+    at:       [22.326, 0.281, -350.662, 127]
+    level:    [1, 1]
+  17248264:
+    template: Tiny_Mandragora
+    at:       [58.595, -1.558, -324.030, 127]
+    level:    [1, 1]
+  17248265:
+    template: Tiny_Mandragora
+    at:       [58.004, -0.139, -298.099, 127]
+    level:    [1, 1]
+  17248266:
+    template: Tiny_Mandragora
+    at:       [100.000, -1.000, -281.000, 39]
+    level:    [1, 1]
+  17248267:
+    template: Tiny_Mandragora
+    at:       [2.766, -1.250, -347.136, 127]
+    level:    [1, 1]
+  17248268:
+    template: Bumblebee
+    at:       [48.190, -1.231, -364.085, 62]
+    level:    [1, 1]
+  17248269:
+    template: Bumblebee
+    at:       [47.589, -1.071, -266.796, 127]
+    level:    [1, 1]
+  17248270:
+    template: Bumblebee
+    at:       [47.658, -0.944, -274.880, 127]
+    level:    [1, 1]
+  17248271:
+    template: Bumblebee
+    at:       [53.268, 0.135, -316.739, 119]
+    level:    [1, 1]
+  17248272:
+    template: Savanna_Rarab
+    at:       [22.597, -1.500, -341.177, 127]
+    level:    [2, 3]
+  17248273:
+    template: Savanna_Rarab
+    at:       [79.112, -1.608, -258.494, 49]
+    level:    [2, 3]
+  17248274:
+    template: Tiny_Mandragora
+    at:       [284.223, -5.116, 65.791, 127]
+    level:    [1, 1]
+  17248275:
+    template: Tiny_Mandragora
+    at:       [330.459, -5.012, 75.235, 115]
+    level:    [1, 1]
+  17248276:
+    template: Tiny_Mandragora
+    at:       [300.000, -5.000, 5.000, 35]
+    level:    [1, 1]
+  17248277:
+    template: Tiny_Mandragora
+    at:       [313.477, -6.017, 59.351, 127]
+    level:    [1, 1]
+  17248278:
+    template: Tiny_Mandragora
+    at:       [390.056, -4.899, 38.792, 29]
+    level:    [1, 1]
+  17248279:
+    template: Bumblebee
+    at:       [285.000, -4.000, 33.000, 127]
+    level:    [1, 1]
+  17248280:
+    template: Bumblebee
+    at:       [301.933, -3.752, 89.062, 78]
+    level:    [1, 1]
+  17248281:
+    template: Bumblebee
+    at:       [380.585, -5.476, 38.678, 97]
+    level:    [1, 1]
+  17248282:
+    template: Savanna_Rarab
+    at:       [353.000, -4.000, 5.000, 82]
+    level:    [2, 3]
+  17248283:
+    template: Savanna_Rarab
+    at:       [307.870, -4.357, 29.711, 88]
+    level:    [2, 3]
+  17248284:
+    template: Tiny_Mandragora
+    at:       [98.126, 2.825, -438.103, 121]
+    level:    [1, 1]
+  17248285:
+    template: Tiny_Mandragora
+    at:       [104.000, -1.000, -312.000, 21]
+    level:    [1, 1]
+  17248286:
+    template: Tiny_Mandragora
+    at:       [122.000, -1.000, -322.000, 127]
+    level:    [1, 1]
+  17248287:
+    template: Tiny_Mandragora
+    at:       [104.000, -1.000, -359.000, 128]
+    level:    [1, 1]
+  17248288:
+    template: Tiny_Mandragora
+    at:       [145.399, 2.798, -440.488, 127]
+    level:    [1, 1]
+  17248289:
+    template: Tiny_Mandragora
+    at:       [75.947, 2.990, -477.340, 126]
+    level:    [1, 1]
+  17248290:
+    template: Bumblebee
+    at:       [-1.417, -1.053, -414.101, 127]
+    level:    [1, 1]
+  17248291:
+    template: Bumblebee
+    at:       [73.000, 3.000, -441.000, 104]
+    level:    [1, 1]
+  17248292:
+    template: Bumblebee
+    at:       [-24.000, -2.000, -360.000, 12]
+    level:    [1, 1]
+  17248293:
+    template: River_Crab
+    at:       [104.000, 6.000, -459.000, 127]
+    level:    [2, 3]
+  17248294:
+    template: River_Crab
+    at:       [89.000, 4.000, -481.000, 75]
+    level:    [2, 3]
+  17248295:
+    template: River_Crab
+    at:       [135.246, 5.407, -453.189, 21]
+    level:    [2, 3]
+  17248296:
+    template: Crawler
+    at:       [-72.222, -4.813, -389.866, 71]
+    level:    [4, 5]
+  17248297:
+    template: Crawler
+    at:       [-212.867, -0.963, -360.607, 127]
+    level:    [4, 5]
+  17248298:
+    template: Savanna_Rarab
+    at:       [-207.333, -0.990, -382.393, 127]
+    level:    [2, 3]
+  17248299:
+    template: Savanna_Rarab
+    at:       [-194.350, -1.381, -337.210, 127]
+    level:    [2, 3]
+  17248300:
+    template: Savanna_Rarab
+    at:       [-245.000, -1.000, -396.000, 59]
+    level:    [2, 3]
+  17248301:
+    template: Savanna_Rarab
+    at:       [-99.186, -5.492, -392.620, 100]
+    level:    [2, 3]
+  17248302:
+    template: Carrion_Crow
+    at:       [-21.189, -2.700, -391.333, 127]
+    level:    [3, 4]
+  17248303:
+    template: Carrion_Crow
+    at:       [-144.452, -2.608, -406.263, 101]
+    level:    [3, 4]
+  17248304:
+    template: Carrion_Crow
+    at:       [-72.216, -5.086, -375.708, 127]
+    level:    [3, 4]
+  17248305:
+    template: Goblin_Thug
+    at:       [-139.589, -2.895, -397.908, 127]
+    level:    [3, 4]
+  17248306:
+    template: Goblin_Thug
+    at:       [-212.323, -0.941, -345.777, 95]
+    level:    [3, 4]
+  17248307:
+    template: Crawler
+    at:       [6.613, -0.936, -226.094, 127]
+    level:    [4, 5]
+  17248308:
+    template: Crawler
+    at:       [65.001, -1.353, -168.179, 127]
+    level:    [4, 5]
+  17248309:
+    template: Crawler
+    at:       [40.065, -1.351, -141.516, 127]
+    level:    [4, 5]
+  17248310:
+    template: Crawler
+    at:       [79.000, -1.000, -54.000, 127]
+    level:    [4, 5]
+  17248311:
+    template: Savanna_Rarab
+    at:       [75.122, -0.672, -88.027, 127]
+    level:    [2, 3]
+  17248312:
+    template: Savanna_Rarab
+    at:       [46.000, -0.425, -88.000, 92]
+    level:    [2, 3]
+  17248313:
+    template: Savanna_Rarab
+    at:       [-56.825, -5.050, -241.828, 127]
+    level:    [2, 3]
+  17248314:
+    template: Savanna_Rarab
+    at:       [42.376, -0.526, -183.944, 127]
+    level:    [2, 3]
+  17248315:
+    template: Savanna_Rarab
+    at:       [-4.000, -1.000, -192.000, 127]
+    level:    [2, 3]
+  17248316:
+    template: Savanna_Rarab
+    at:       [59.340, -0.218, -123.724, 102]
+    level:    [2, 3]
+  17248317:
+    template: Savanna_Rarab
+    at:       [86.000, -1.000, -191.000, 114]
+    level:    [2, 3]
+  17248318:
+    template: Savanna_Rarab
+    at:       [-280.000, -16.000, 395.000, 127]
+    level:    [2, 3]
+  17248319:
+    template: Savanna_Rarab
+    at:       [-49.068, -4.617, -225.605, 79]
+    level:    [2, 3]
+  17248320:
+    template: Carrion_Crow
+    at:       [95.000, -1.000, -128.000, 127]
+    level:    [3, 4]
+  17248321:
+    template: Carrion_Crow
+    at:       [67.748, -0.632, -230.707, 101]
+    level:    [3, 4]
+  17248322:
+    template: Carrion_Crow
+    at:       [121.173, -1.140, -99.807, 127]
+    level:    [3, 4]
+  17248323:
+    template: Carrion_Crow
+    at:       [75.683, -0.807, -166.390, 62]
+    level:    [3, 4]
+  17248324:
+    template: Goblin_Thug
+    at:       [111.537, -0.873, -106.274, 35]
+    level:    [3, 4]
+  17248325:
+    template: Goblin_Thug
+    at:       [68.281, -0.238, -205.215, 127]
+    level:    [3, 4]
+  17248326:
+    template: Goblin_Weaver
+    at:       [77.567, -0.470, -114.337, 2]
+    level:    [3, 4]
+  17248327:
+    template: Crawler
+    at:       [81.690, -0.034, -5.733, 127]
+    level:    [4, 5]
+  17248328:
+    template: Crawler
+    at:       [116.754, -0.181, -35.827, 90]
+    level:    [4, 5]
+  17248329:
+    template: Crawler
+    at:       [109.907, -1.571, -64.519, 111]
+    level:    [4, 5]
+  17248330:
+    template: Crawler
+    at:       [157.779, -2.478, -22.602, 127]
+    level:    [4, 5]
+  17248331:
+    template: Savanna_Rarab
+    at:       [205.994, -5.347, 45.930, 43]
+    level:    [2, 3]
+  17248332:
+    template: Savanna_Rarab
+    at:       [137.914, -1.489, -38.924, 127]
+    level:    [2, 3]
+  17248333:
+    template: Savanna_Rarab
+    at:       [152.480, -4.072, 42.575, 127]
+    level:    [2, 3]
+  17248334:
+    template: Savanna_Rarab
+    at:       [155.870, -4.997, 23.399, 127]
+    level:    [2, 3]
+  17248335:
+    template: Savanna_Rarab
+    at:       [-351.000, -17.000, 377.000, 127]
+    level:    [2, 3]
+  17248336:
+    template: Savanna_Rarab
+    at:       [170.490, -5.161, 85.110, 127]
+    level:    [2, 3]
+  17248337:
+    template: Savanna_Rarab
+    at:       [203.852, -5.016, -11.164, 127]
+    level:    [2, 3]
+  17248338:
+    template: Savanna_Rarab
+    at:       [162.373, -1.026, -49.043, 127]
+    level:    [2, 3]
+  17248339:
+    template: Savanna_Rarab
+    at:       [194.818, -4.637, 75.189, 127]
+    level:    [2, 3]
+  17248340:
+    template: Carrion_Crow
+    at:       [89.010, -0.143, 3.944, 29]
+    level:    [3, 4]
+  17248341:
+    template: Carrion_Crow
+    at:       [167.464, -4.039, 16.278, 127]
+    level:    [3, 4]
+  17248342:
+    template: Carrion_Crow
+    at:       [152.307, -4.855, 23.984, 12]
+    level:    [3, 4]
+  17248343:
+    template: Carrion_Crow
+    at:       [217.000, -5.000, 121.000, 54]
+    level:    [3, 4]
+  17248344:
+    template: Goblin_Thug
+    at:       [113.715, -1.764, -19.344, 116]
+    level:    [3, 4]
+  17248345:
+    template: Goblin_Thug
+    at:       [195.092, -3.833, 103.430, 70]
+    level:    [3, 4]
+  17248346:
+    template: Goblin_Weaver
+    at:       [147.163, -2.764, -6.098, 127]
+    level:    [3, 4]
+  17248347:
+    template: Crawler
+    at:       [306.486, -6.960, 156.738, 127]
+    level:    [4, 5]
+  17248348:
+    template: Crawler
+    at:       [338.455, -5.653, 118.878, 110]
+    level:    [4, 5]
+  17248349:
+    template: Savanna_Rarab
+    at:       [281.549, -5.410, 137.158, 127]
+    level:    [2, 3]
+  17248350:
+    template: Savanna_Rarab
+    at:       [394.767, -4.811, 119.513, 127]
+    level:    [2, 3]
+  17248351:
+    template: Savanna_Rarab
+    at:       [274.379, -4.602, 111.067, 127]
+    level:    [2, 3]
+  17248352:
+    template: Savanna_Rarab
+    at:       [359.353, -7.621, 148.047, 2]
+    level:    [2, 3]
+  17248353:
+    template: Savanna_Rarab
+    at:       [301.072, -5.142, 117.693, 105]
+    level:    [2, 3]
+  17248354:
+    template: Carrion_Crow
+    at:       [354.165, -4.839, 115.266, 30]
+    level:    [3, 4]
+  17248355:
+    template: Carrion_Crow
+    at:       [323.993, -7.883, 151.359, 127]
+    level:    [3, 4]
+  17248356:
+    template: Goblin_Thug
+    at:       [403.347, -5.239, 109.722, 127]
+    level:    [3, 4]
+  17248357:
+    template: Goblin_Weaver
+    at:       [337.866, -9.447, 161.174, 127]
+    level:    [3, 4]
+  17248358:
+    template: River_Crab
+    at:       [-272.000, 5.000, -450.000, 127]
+    level:    [2, 3]
+  17248359:
+    template: River_Crab
+    at:       [-369.000, 4.000, -388.000, 127]
+    level:    [2, 3]
+  17248360:
+    template: River_Crab
+    at:       [-398.622, 3.926, -364.970, 18]
+    level:    [2, 3]
+  17248361:
+    template: River_Crab
+    at:       [-351.000, 4.000, -446.000, 52]
+    level:    [2, 3]
+  17248362:
+    template: River_Crab
+    at:       [-259.000, 8.000, -481.000, 89]
+    level:    [2, 3]
+  17248363:
+    template: River_Crab
+    at:       [-323.000, 4.000, -446.000, 107]
+    level:    [2, 3]
+  17248364:
+    template: River_Crab
+    at:       [-258.000, 6.000, -458.000, 127]
+    level:    [2, 3]
+  17248365:
+    template: River_Crab
+    at:       [-287.000, 4.000, -449.000, 127]
+    level:    [2, 3]
+  17248366:
+    template: Goblin_Thug
+    at:       [-303.000, 2.000, -379.000, 23]
+    level:    [3, 4]
+  17248367:
+    template: Goblin_Weaver
+    at:       [-320.772, 2.897, -425.115, 54]
+    level:    [3, 4]
+  17248368:
+    template: Goblin_Fisher
+    at:       [-301.183, 2.639, -410.352, 24]
+    level:    [3, 4]
+  17248369:
+    template: Goblin_Fisher
+    at:       [-268.584, 3.702, -447.277, 127]
+    level:    [3, 4]
+  17248370:
+    template: Goblin_Fisher
+    at:       [-348.723, 2.397, -435.091, 13]
+    level:    [3, 4]
+  17248371:
+    template: Crawler
+    at:       [-114.125, -4.721, -236.760, 93]
+    level:    [4, 5]
+  17248372:
+    template: Crawler
+    at:       [-124.677, -4.717, -168.971, 127]
+    level:    [4, 5]
+  17248373:
+    template: Crawler
+    at:       [-233.943, -0.433, -283.561, 127]
+    level:    [4, 5]
+  17248374:
+    template: Crawler
+    at:       [-265.000, -1.000, -318.000, 127]
+    level:    [4, 5]
+  17248375:
+    template: Savanna_Rarab
+    at:       [-141.823, -5.610, -219.243, 127]
+    level:    [2, 3]
+  17248376:
+    template: Savanna_Rarab
+    at:       [-160.801, -4.953, -212.011, 50]
+    level:    [2, 3]
+  17248377:
+    template: Savanna_Rarab
+    at:       [-243.363, -0.196, -251.188, 127]
+    level:    [2, 3]
+  17248378:
+    template: Savanna_Rarab
+    at:       [-94.268, -5.387, -123.833, 103]
+    level:    [2, 3]
+  17248379:
+    template: Savanna_Rarab
+    at:       [-327.000, -1.000, -315.000, 11]
+    level:    [2, 3]
+  17248380:
+    template: Savanna_Rarab
+    at:       [-289.689, -1.394, -276.775, 110]
+    level:    [2, 3]
+  17248381:
+    template: Savanna_Rarab
+    at:       [-305.869, 2.114, -343.517, 62]
+    level:    [2, 3]
+  17248382:
+    template: Savanna_Rarab
+    at:       [-293.258, 0.271, -329.474, 127]
+    level:    [2, 3]
+  17248383:
+    template: Savanna_Rarab
+    at:       [-99.691, -5.717, -116.898, 13]
+    level:    [2, 3]
+  17248384:
+    template: Carrion_Crow
+    at:       [-105.614, -5.432, -246.014, 127]
+    level:    [3, 4]
+  17248385:
+    template: Carrion_Crow
+    at:       [-90.983, -5.230, -215.546, 127]
+    level:    [3, 4]
+  17248386:
+    template: Carrion_Crow
+    at:       [-114.432, -5.455, -137.033, 127]
+    level:    [3, 4]
+  17248387:
+    template: Carrion_Crow
+    at:       [-204.473, -4.037, -209.063, 113]
+    level:    [3, 4]
+  17248388:
+    template: Goblin_Thug
+    at:       [-185.940, -1.753, -280.140, 108]
+    level:    [4, 5]
+  17248389:
+    template: Goblin_Thug
+    at:       [-113.459, -5.259, -209.271, 61]
+    level:    [4, 5]
+  17248390:
+    template: Goblin_Weaver
+    at:       [-206.868, -1.401, -246.383, 12]
+    level:    [4, 5]
+  17248391:
+    template: Goblin_Thug
+    at:       [-174.000, -5.000, -149.000, 127]
+    level:    [4, 5]
+  17248392:
+    template: Goblin_Thug
+    at:       [-178.407, -6.279, -147.221, 127]
+    level:    [4, 5]
+  17248393:
+    template: Goblin_Weaver
+    at:       [-179.000, -6.352, -150.000, 124]
+    level:    [4, 5]
+  17248394:
+    template: Mandragora
+    at:       [63.437, -5.960, 90.056, 127]
+    level:    [4, 5]
+  17248395:
+    template: Mandragora
+    at:       [139.062, -5.285, 81.947, 127]
+    level:    [4, 5]
+  17248396:
+    template: Mandragora
+    at:       [36.716, -1.162, 18.953, 127]
+    level:    [4, 5]
+  17248397:
+    template: Mandragora
+    at:       [26.555, -7.943, 106.358, 127]
+    level:    [4, 5]
+  17248398:
+    template: Mandragora
+    at:       [98.374, -7.019, 99.096, 127]
+    level:    [4, 5]
+  17248399:
+    template: Crawler
+    at:       [35.482, -8.730, 128.151, 79]
+    level:    [5, 6]
+  17248400:
+    template: Crawler
+    at:       [58.854, -2.690, 56.479, 23]
+    level:    [5, 6]
+  17248401:
+    template: Crawler
+    at:       [64.530, -9.016, 142.134, 127]
+    level:    [5, 6]
+  17248402:
+    template: Savanna_Rarab
+    at:       [57.796, -0.477, 40.589, 127]
+    level:    [4, 5]
+  17248403:
+    template: Savanna_Rarab
+    at:       [96.258, -2.705, 58.418, 127]
+    level:    [4, 5]
+  17248404:
+    template: Savanna_Rarab
+    at:       [71.590, -3.392, 64.300, 127]
+    level:    [4, 5]
+  17248405:
+    template: Savanna_Rarab
+    at:       [113.086, -6.353, 92.558, 26]
+    level:    [4, 5]
+  17248406:
+    template: Carrion_Crow
+    at:       [81.418, -2.899, 59.641, 127]
+    level:    [4, 5]
+  17248407:
+    template: Carrion_Crow
+    at:       [-3.000, -4.000, 80.000, 127]
+    level:    [4, 5]
+  17248408:
+    template: Carrion_Crow
+    at:       [-10.968, -5.529, 22.895, 20]
+    level:    [4, 5]
+  17248409:
+    template: Yagudo_Initiate
+    at:       [54.514, -8.106, 129.178, 127]
+    level:    [4, 5]
+  17248410:
+    template: Yagudo_Acolyte
+    at:       [64.588, -9.160, 144.923, 43]
+    level:    [4, 5]
+  17248411:
+    template: Yagudo_Scribe
+    at:       [37.018, -1.042, 37.272, 3]
+    level:    [4, 5]
+  17248412:
+    template: Balloon
+    at:       [-41.426, -8.619, 78.680, 127]
+    level:    [8, 10]
+  17248413:
+    template: Mandragora
+    at:       [-95.384, -17.345, 299.281, 127]
+    level:    [4, 5]
+  17248414:
+    template: Mandragora
+    at:       [-4.269, -12.729, 242.019, 100]
+    level:    [4, 5]
+  17248415:
+    template: Mandragora
+    at:       [-4.703, -13.400, 270.752, 124]
+    level:    [4, 5]
+  17248416:
+    template: Mandragora
+    at:       [-39.000, -12.000, 319.000, 77]
+    level:    [4, 5]
+  17248417:
+    template: Mandragora
+    at:       [-26.243, -12.678, 291.313, 50]
+    level:    [4, 5]
+  17248418:
+    template: Crawler
+    at:       [-132.460, -17.463, 396.822, 127]
+    level:    [5, 6]
+  17248419:
+    template: Crawler
+    at:       [-161.935, -16.904, 382.379, 27]
+    level:    [5, 6]
+  17248420:
+    template: Crawler
+    at:       [-69.529, -15.934, 366.459, 58]
+    level:    [5, 6]
+  17248421:
+    template: Savanna_Rarab
+    at:       [-59.030, -13.682, 265.524, 127]
+    level:    [4, 5]
+  17248422:
+    template: Savanna_Rarab
+    at:       [-40.023, -12.607, 242.778, 127]
+    level:    [4, 5]
+  17248423:
+    template: Savanna_Rarab
+    at:       [-69.117, -16.029, 297.000, 31]
+    level:    [4, 5]
+  17248424:
+    template: Savanna_Rarab
+    at:       [-86.680, -13.155, 246.950, 127]
+    level:    [4, 5]
+  17248425:
+    template: Carrion_Crow
+    at:       [-81.266, -11.619, 230.977, 127]
+    level:    [4, 5]
+  17248426:
+    template: Carrion_Crow
+    at:       [-21.812, -12.382, 231.438, 127]
+    level:    [4, 5]
+  17248427:
+    template: Carrion_Crow
+    at:       [-40.312, -10.860, 224.928, 127]
+    level:    [4, 5]
+  17248428:
+    template: Yagudo_Initiate
+    at:       [-6.424, -11.815, 231.389, 127]
+    level:    [4, 5]
+  17248429:
+    template: Yagudo_Acolyte
+    at:       [-81.267, -16.657, 291.470, 68]
+    level:    [4, 5]
+  17248430:
+    template: Yagudo_Scribe
+    at:       [-44.192, -12.603, 356.077, 127]
+    level:    [4, 5]
+  17248431:
+    template: Mad_Fox
+    at:       [-67.601, -15.030, 281.626, 127]
+    level:    [4, 6]
+  17248432:
+    template: Magicked_Bones_club
+    script:   Magicked_Bones
+    at:       [-28.931, -12.587, 232.717, 49]
+    level:    [4, 8]
+  17248433:
+    template: Balloon
+    at:       [-108.252, -16.115, 356.243, 29]
+    level:    [8, 10]
+  17248434:
+    template: Mandragora
+    at:       [314.790, -19.904, 288.276, 64]
+    level:    [4, 5]
+  17248435:
+    template: Mandragora
+    at:       [315.783, -17.755, 411.539, 127]
+    level:    [4, 5]
+  17248436:
+    template: Crawler
+    at:       [317.414, -16.674, 365.212, 34]
+    level:    [5, 6]
+  17248437:
+    template: Crawler
+    at:       [271.000, -21.000, 296.000, 40]
+    level:    [5, 6]
+  17248438:
+    template: Crawler
+    at:       [354.532, -20.357, 356.230, 6]
+    level:    [5, 6]
+  17248439:
+    template: Savanna_Rarab
+    at:       [320.690, -17.507, 408.743, 127]
+    level:    [4, 5]
+  17248440:
+    template: Savanna_Rarab
+    at:       [345.752, -19.460, 397.321, 20]
+    level:    [4, 5]
+  17248441:
+    template: Savanna_Rarab
+    at:       [321.151, -16.727, 365.545, 74]
+    level:    [4, 5]
+  17248442:
+    template: Carrion_Crow
+    at:       [320.256, -17.712, 411.364, 127]
+    level:    [4, 5]
+  17248443:
+    template: Mad_Fox
+    at:       [294.765, -17.118, 437.473, 125]
+    level:    [4, 6]
+  17248444:
+    template: Mandragora
+    at:       [57.000, -18.000, 260.000, 92]
+    level:    [4, 5]
+  17248445:
+    template: Mandragora
+    at:       [246.967, -24.908, 261.980, 47]
+    level:    [4, 5]
+  17248446:
+    template: Crawler_2
+    script:   Crawler
+    at:       [123.000, -32.000, 282.000, 93]
+    level:    [7, 8]
+  17248447:
+    template: Crawler_2
+    script:   Crawler
+    at:       [158.000, -40.000, 318.000, 91]
+    level:    [7, 8]
+  17248448:
+    template: Giant_Bee
+    at:       [92.305, -14.906, 202.505, 127]
+    level:    [7, 8]
+  17248449:
+    template: Giant_Bee
+    at:       [259.497, -17.572, 217.120, 75]
+    level:    [7, 8]
+  17248450:
+    template: Giant_Bee
+    at:       [112.397, -18.985, 198.166, 127]
+    level:    [7, 8]
+  17248451:
+    template: Giant_Bee
+    at:       [269.468, -17.978, 237.457, 91]
+    level:    [7, 8]
+  17248452:
+    template: Giant_Bee
+    at:       [278.620, -16.619, 200.447, 57]
+    level:    [7, 8]
+  17248453:
+    template: Giant_Bee
+    at:       [194.175, -22.256, 214.724, 123]
+    level:    [7, 8]
+  17248454:
+    template: Carrion_Crow
+    at:       [154.520, -32.600, 281.810, 126]
+    level:    [5, 6]
+  17248455:
+    template: Carrion_Crow
+    at:       [190.000, -24.000, 248.000, 127]
+    level:    [5, 6]
+  17248456:
+    template: Yagudo_Initiate
+    at:       [59.789, -13.359, 202.220, 127]
+    level:    [5, 6]
+  17248457:
+    template: Yagudo_Acolyte
+    at:       [256.561, -20.374, 252.968, 101]
+    level:    [5, 6]
+  17248458:
+    template: Yagudo_Scribe
+    at:       [116.202, -12.585, 170.251, 66]
+    level:    [5, 6]
+  17248459:
+    template: Magicked_Bones_club
+    script:   Magicked_Bones
+    at:       [105.425, -11.493, 165.723, 101]
+    level:    [4, 8]
+  17248460:
+    template: Magicked_Bones_blm
+    script:   Magicked_Bones
+    at:       [222.063, -17.300, 161.724, 32]
+    level:    [5, 8]
+  17248461:
+    template: Magicked_Bones_blm
+    script:   Magicked_Bones
+    at:       [153.772, -21.525, 210.283, 127]
+    level:    [5, 8]
+  17248462:
+    template: Balloon
+    at:       [224.298, -25.643, 264.326, 18]
+    level:    [8, 10]
+  17248463:
+    template: Yagudo_Initiate
+    at:       [221.277, -17.128, 183.560, 127]
+    level:    [5, 6]
+  17248464:
+    template: Yagudo_Acolyte
+    at:       [224.896, -16.854, 181.709, 65]
+    level:    [5, 6]
+  17248465:
+    template: Yagudo_Scribe
+    at:       [222.568, -17.130, 184.717, 127]
+    level:    [5, 6]
+  17248466:
+    template: Mandragora
+    at:       [77.509, -20.719, 434.757, 127]
+    level:    [4, 5]
+  17248467:
+    template: Mandragora
+    at:       [31.149, -20.045, 358.265, 61]
+    level:    [4, 5]
+  17248468:
+    template: Tom_Tit_Tat
+    at:       [139.943, -35.719, 299.835, 127]
+    level:    [9, 10]
+  17248469:
+    template: Crawler_2
+    script:   Crawler
+    at:       [221.000, -34.000, 360.000, 127]
+    level:    [7, 8]
+  17248470:
+    template: Crawler_2
+    script:   Crawler
+    at:       [119.000, -30.000, 378.000, 127]
+    level:    [7, 8]
+  17248471:
+    template: Giant_Bee
+    at:       [36.269, -19.959, 332.570, 127]
+    level:    [7, 8]
+  17248472:
+    template: Giant_Bee
+    at:       [27.459, -18.435, 328.847, 127]
+    level:    [7, 8]
+  17248473:
+    template: Giant_Bee
+    at:       [99.666, -22.386, 439.796, 40]
+    level:    [7, 8]
+  17248474:
+    template: Giant_Bee
+    at:       [94.159, -23.862, 388.244, 51]
+    level:    [7, 8]
+  17248475:
+    template: Giant_Bee
+    at:       [76.958, -22.995, 373.200, 106]
+    level:    [7, 8]
+  17248476:
+    template: Carrion_Crow
+    at:       [120.934, -35.018, 324.168, 53]
+    level:    [5, 6]
+  17248477:
+    template: Yagudo_Initiate
+    at:       [98.998, -22.746, 424.631, 115]
+    level:    [5, 6]
+  17248478:
+    template: Yagudo_Acolyte
+    at:       [114.098, -31.118, 356.473, 5]
+    level:    [5, 6]
+  17248479:
+    template: Yagudo_Scribe
+    at:       [150.000, -31.000, 397.000, 127]
+    level:    [5, 6]
+  17248480:
+    template: Magicked_Bones_club
+    script:   Magicked_Bones
+    at:       [68.268, -20.073, 443.830, 127]
+    level:    [4, 8]
+  17248481:
+    template: Magicked_Bones_blm
+    script:   Magicked_Bones
+    at:       [148.756, -24.347, 455.157, 117]
+    level:    [5, 8]
+  17248482:
+    template: Magicked_Bones_blm
+    script:   Magicked_Bones
+    at:       [102.507, -25.211, 386.947, 103]
+    level:    [5, 8]
+  17248483:
+    template: Balloon
+    at:       [11.546, -13.848, 287.677, 91]
+    level:    [8, 10]
+  17248484:
+    template: Mandragora
+    at:       [284.830, -23.668, 350.717, 41]
+    level:    [4, 5]
+  17248485:
+    template: Mandragora
+    at:       [245.293, -22.125, 423.282, 127]
+    level:    [4, 5]
+  17248486:
+    template: Tom_Tit_Tat
+    at:       [255.782, -26.431, 382.877, 19]
+    level:    [9, 10]
+  17248487:
+    template: Crawler_2
+    script:   Crawler
+    at:       [212.000, -28.000, 282.000, 127]
+    level:    [7, 8]
+  17248488:
+    template: Crawler_2
+    script:   Crawler
+    at:       [157.000, -40.000, 363.000, 48]
+    level:    [7, 8]
+  17248489:
+    template: Giant_Bee
+    at:       [198.575, -20.399, 474.479, 113]
+    level:    [7, 8]
+  17248490:
+    template: Giant_Bee
+    at:       [190.000, -34.000, 384.000, 122]
+    level:    [7, 8]
+  17248491:
+    template: Giant_Bee
+    at:       [253.999, -22.043, 412.483, 69]
+    level:    [7, 8]
+  17248492:
+    template: Giant_Bee
+    at:       [281.750, -22.548, 380.852, 34]
+    level:    [7, 8]
+  17248493:
+    template: Giant_Bee
+    at:       [230.849, -26.081, 394.268, 127]
+    level:    [7, 8]
+  17248494:
+    template: Carrion_Crow
+    at:       [241.934, -21.235, 454.672, 127]
+    level:    [5, 6]
+  17248495:
+    template: Yagudo_Initiate
+    at:       [257.360, -18.633, 436.611, 127]
+    level:    [5, 6]
+  17248496:
+    template: Yagudo_Acolyte
+    at:       [191.000, -21.000, 505.000, 127]
+    level:    [5, 6]
+  17248497:
+    template: Yagudo_Scribe
+    at:       [208.795, -23.330, 445.269, 30]
+    level:    [5, 6]
+  17248498:
+    template: Magicked_Bones_club
+    script:   Magicked_Bones
+    at:       [280.695, -18.393, 414.562, 127]
+    level:    [4, 8]
+  17248499:
+    template: Magicked_Bones_blm
+    script:   Magicked_Bones
+    at:       [205.537, -33.802, 334.169, 62]
+    level:    [5, 8]
+  17248500:
+    template: Magicked_Bones_blm
+    script:   Magicked_Bones
+    at:       [227.888, -29.861, 314.742, 110]
+    level:    [5, 8]
+  17248501:
+    template: Balloon
+    at:       [283.609, -21.045, 391.122, 46]
+    level:    [8, 10]
+  17248502:
+    template: Yagudo_Initiate
+    at:       [225.000, -20.000, 459.000, 127]
+    level:    [4, 5]
+  17248503:
+    template: Yagudo_Acolyte
+    at:       [223.539, -20.782, 463.885, 127]
+    level:    [4, 5]
+  17248504:
+    template: Yagudo_Scribe
+    at:       [221.744, -21.470, 459.561, 127]
+    level:    [4, 5]
+  17248505:
+    template: Mandragora
+    at:       [22.027, -21.285, 496.959, 127]
+    level:    [4, 5]
+  17248506:
+    template: Mandragora
+    at:       [151.484, -21.133, 494.038, 120]
+    level:    [4, 5]
+  17248507:
+    template: Mandragora
+    at:       [139.154, -21.418, 505.416, 127]
+    level:    [4, 5]
+  17248508:
+    template: Crawler
+    at:       [-32.000, -16.000, 424.000, 20]
+    level:    [5, 6]
+  17248509:
+    template: Crawler
+    at:       [41.512, -21.361, 527.488, 47]
+    level:    [5, 6]
+  17248510:
+    template: Crawler
+    at:       [-42.076, -16.246, 393.777, 41]
+    level:    [5, 6]
+  17248511:
+    template: Savanna_Rarab
+    at:       [-1.344, -16.886, 407.080, 127]
+    level:    [4, 5]
+  17248512:
+    template: Savanna_Rarab
+    at:       [41.973, -21.007, 497.173, 127]
+    level:    [4, 5]
+  17248513:
+    template: Savanna_Rarab
+    at:       [14.576, -17.892, 420.890, 127]
+    level:    [4, 5]
+  17248514:
+    template: Carrion_Crow
+    at:       [159.501, -20.117, 485.528, 31]
+    level:    [4, 5]
+  17248515:
+    template: Carrion_Crow
+    at:       [-7.194, -17.288, 431.604, 127]
+    level:    [4, 5]
+  17248516:
+    template: Carrion_Crow
+    at:       [53.159, -24.540, 554.652, 93]
+    level:    [4, 5]
+  17248517:
+    template: Nunyenunc
+    at:       [-25.000, -15.000, 385.000, 127]
+    level:    [12, 12]
+  17248518:
+    template: Yagudo_Initiate
+    at:       [150.455, -20.699, 507.810, 127]
+    level:    [4, 5]
+  17248519:
+    template: Yagudo_Acolyte
+    at:       [-8.391, -12.875, 349.658, 127]
+    level:    [4, 5]
+  17248520:
+    template: Yagudo_Scribe
+    at:       [92.937, -20.202, 508.446, 2]
+    level:    [4, 5]
+  17248521:
+    template: Mad_Fox
+    at:       [45.260, -20.880, 477.101, 98]
+    level:    [4, 6]
+  17248522:
+    template: Magicked_Bones_club
+    script:   Magicked_Bones
+    at:       [93.773, -20.881, 519.139, 127]
+    level:    [4, 8]
+  17248523:
+    template: Mandragora
+    at:       [-84.265, -21.114, 141.736, 127]
+    level:    [4, 5]
+  17248524:
+    template: Mandragora
+    at:       [-93.778, -20.823, 169.774, 127]
+    level:    [4, 5]
+  17248525:
+    template: Giant_Bee
+    at:       [-49.558, -16.782, 8.425, 125]
+    level:    [7, 8]
+  17248526:
+    template: Giant_Bee
+    at:       [-146.672, -16.711, -119.087, 127]
+    level:    [7, 8]
+  17248527:
+    template: Giant_Bee
+    at:       [-81.736, -20.260, 79.743, 127]
+    level:    [7, 8]
+  17248528:
+    template: Giant_Bee
+    at:       [-154.370, -16.508, -122.088, 75]
+    level:    [7, 8]
+  17248529:
+    template: Giant_Bee
+    at:       [-165.337, -16.696, -115.157, 106]
+    level:    [7, 8]
+  17248530:
+    template: Savanna_Rarab
+    at:       [-69.954, -20.381, 160.661, 127]
+    level:    [4, 5]
+  17248531:
+    template: Savanna_Rarab
+    at:       [-154.131, -17.372, -93.350, 127]
+    level:    [4, 5]
+  17248532:
+    template: Savanna_Rarab
+    at:       [-156.730, -16.653, -82.972, 127]
+    level:    [4, 5]
+  17248533:
+    template: Carrion_Crow
+    at:       [-148.594, -17.902, -102.452, 127]
+    level:    [5, 6]
+  17248534:
+    template: Carrion_Crow
+    at:       [-156.382, -16.986, -110.534, 50]
+    level:    [5, 6]
+  17248535:
+    template: Yagudo_Initiate
+    at:       [-71.026, -20.286, 120.326, 208]
+    level:    [5, 6]
+  17248536:
+    template: Yagudo_Acolyte
+    at:       [-70.360, -20.528, 146.665, 98]
+    level:    [5, 6]
+  17248537:
+    template: Yagudo_Scribe
+    at:       [-77.158, -16.652, 31.548, 127]
+    level:    [5, 6]
+  17248538:
+    template: Mad_Fox
+    level:    [4, 5]
+  17248539:
+    template: Magicked_Bones_club
+    script:   Magicked_Bones
+    level:    [4, 8]
+  17248540:
+    template: Yagudo_Initiate
+    at:       [-106.383, -21.996, 174.206, 127]
+    level:    [5, 6]
+  17248541:
+    template: Yagudo_Acolyte
+    at:       [-105.760, -21.972, 172.212, 52]
+    level:    [5, 6]
+  17248542:
+    template: Yagudo_Scribe
+    at:       [-106.318, -22.498, 174.302, 177]
+    level:    [5, 6]
+  17248543:
+    template: Mandragora
+    at:       [211.910, -19.944, 546.316, 127]
+    level:    [4, 5]
+  17248544:
+    template: Mandragora
+    at:       [239.421, -19.659, 583.122, 127]
+    level:    [4, 5]
+  17248545:
+    template: Mandragora
+    at:       [274.296, -20.357, 587.339, 41]
+    level:    [4, 5]
+  17248546:
+    template: Mandragora
+    at:       [211.099, -20.673, 568.574, 127]
+    level:    [4, 5]
+  17248547:
+    template: Crawler
+    at:       [199.047, -21.135, 585.533, 71]
+    level:    [6, 7]
+  17248548:
+    template: Crawler
+    at:       [317.483, -20.557, 598.166, 127]
+    level:    [6, 7]
+  17248549:
+    template: Crawler
+    at:       [225.119, -20.828, 517.797, 19]
+    level:    [6, 7]
+  17248550:
+    template: Savanna_Rarab
+    at:       [262.505, -20.891, 603.184, 118]
+    level:    [4, 5]
+  17248551:
+    template: Savanna_Rarab
+    at:       [233.839, -20.301, 573.959, 127]
+    level:    [4, 5]
+  17248552:
+    template: Savanna_Rarab
+    at:       [218.250, -20.617, 554.114, 11]
+    level:    [4, 5]
+  17248553:
+    template: Carrion_Crow
+    at:       [236.674, -22.824, 628.339, 11]
+    level:    [5, 6]
+  17248554:
+    template: Carrion_Crow
+    at:       [238.949, -20.703, 609.123, 127]
+    level:    [5, 6]
+  17248555:
+    template: Yagudo_Initiate
+    at:       [199.254, -21.107, 597.438, 75]
+    level:    [5, 6]
+  17248556:
+    template: Yagudo_Acolyte
+    at:       [219.428, -21.102, 543.320, 127]
+    level:    [5, 6]
+  17248557:
+    template: Yagudo_Scribe
+    at:       [237.409, -20.230, 527.789, 127]
+    level:    [5, 6]
+  17248558:
+    template: Mad_Fox
+    level:    [4, 6]
+  17248559:
+    template: Magicked_Bones_club
+    script:   Magicked_Bones
+    at:       [193.058, -20.576, 541.771, 109]
+    level:    [4, 8]
+  17248560:
+    template: Mandragora
+    at:       [-297.408, -17.063, 353.975, 35]
+    level:    [4, 5]
+  17248561:
+    template: Mandragora
+    at:       [-332.558, -16.703, 312.921, 127]
+    level:    [4, 5]
+  17248562:
+    template: Mandragora
+    at:       [-296.594, -19.359, 307.971, 127]
+    level:    [4, 5]
+  17248563:
+    template: Crawler
+    at:       [-284.501, -20.023, 324.259, 80]
+    level:    [5, 6]
+  17248564:
+    template: Crawler
+    at:       [-369.781, -17.120, 334.355, 4]
+    level:    [5, 6]
+  17248565:
+    template: Crawler
+    at:       [-323.237, -21.425, 209.837, 127]
+    level:    [5, 6]
+  17248566:
+    template: Crawler
+    at:       [-348.550, -16.861, 278.209, 127]
+    level:    [5, 6]
+  17248567:
+    template: Savanna_Rarab
+    at:       [-202.432, -16.838, 372.774, 61]
+    level:    [4, 5]
+  17248568:
+    template: Savanna_Rarab
+    at:       [-308.507, -17.808, 388.128, 127]
+    level:    [4, 5]
+  17248569:
+    template: Savanna_Rarab
+    at:       [-226.000, -16.000, 419.000, 127]
+    level:    [4, 5]
+  17248570:
+    template: Carrion_Crow
+    at:       [-217.757, -17.191, 386.133, 39]
+    level:    [4, 5]
+  17248571:
+    template: Carrion_Crow
+    at:       [-320.000, -18.000, 262.000, 47]
+    level:    [4, 5]
+  17248572:
+    template: Yagudo_Initiate
+    at:       [-279.063, -17.032, 363.694, 127]
+    level:    [5, 6]
+  17248573:
+    template: Yagudo_Initiate
+    at:       [-335.178, -21.551, 215.658, 35]
+    level:    [5, 6]
+  17248574:
+    template: Yagudo_Initiate
+    at:       [-321.661, -17.446, 302.626, 2]
+    level:    [5, 6]
+  17248575:
+    template: Yagudo_Acolyte
+    at:       [-303.209, -22.500, 241.839, 127]
+    level:    [5, 6]
+  17248576:
+    template: Yagudo_Scribe
+    at:       [-356.598, -17.427, 312.453, 127]
+    level:    [5, 6]
+  17248577:
+    template: Magicked_Bones_club
+    script:   Magicked_Bones
+    at:       [-226.596, -17.639, 438.999, 127]
+    level:    [4, 8]
+  17248578:
+    template: Magicked_Bones_blm
+    script:   Magicked_Bones
+    at:       [-257.514, -17.409, 360.324, 11]
+    level:    [5, 8]
+  17248579:
+    template: Yagudo_Initiate
+    at:       [-301.329, -16.715, 415.405, 37]
+    level:    [5, 6]
+  17248580:
+    template: Yagudo_Initiate
+    at:       [-298.932, -16.906, 418.458, 127]
+    level:    [5, 6]
+  17248581:
+    template: Yagudo_Acolyte
+    at:       [-301.233, -16.749, 419.537, 127]
+    level:    [5, 6]
+  17248582:
+    template: Giant_Bee
+    at:       [-380.650, -29.324, 447.569, 127]
+    level:    [7, 8]
+  17248583:
+    template: Giant_Bee
+    at:       [-371.527, -29.366, 432.002, 100]
+    level:    [7, 8]
+  17248584:
+    template: Giant_Bee
+    at:       [-396.253, -28.661, 375.657, 127]
+    level:    [7, 8]
+  17248585:
+    template: Giant_Bee
+    at:       [-393.979, -28.336, 367.297, 127]
+    level:    [7, 8]
+  17248586:
+    template: Savanna_Rarab
+    at:       [-374.194, -29.453, 452.951, 127]
+    level:    [4, 5]
+  17248587:
+    template: Savanna_Rarab
+    at:       [-328.583, -28.676, 468.765, 113]
+    level:    [4, 5]
+  17248588:
+    template: Numbing_Norman
+    at:       [-409.000, -28.000, 351.000, 113]
+    level:    [12, 13]
+  17248589:
+    template: Mandragora
+    at:       [-210.731, -25.499, 524.202, 127]
+    level:    [4, 5]
+  17248590:
+    template: Mandragora
+    at:       [-168.139, -20.956, 637.569, 57]
+    level:    [4, 5]
+  17248591:
+    template: Giant_Bee
+    at:       [-245.488, -29.477, 501.622, 70]
+    level:    [7, 8]
+  17248592:
+    template: Giant_Bee
+    at:       [-212.206, -25.496, 504.904, 127]
+    level:    [7, 8]
+  17248593:
+    template: Giant_Bee
+    at:       [-206.040, -24.749, 488.029, 66]
+    level:    [7, 8]
+  17248594:
+    template: Giant_Bee
+    at:       [-166.924, -22.862, 617.294, 46]
+    level:    [7, 8]
+  17248595:
+    template: Savanna_Rarab
+    at:       [-241.855, -31.463, 547.105, 127]
+    level:    [4, 5]
+  17248596:
+    template: Carrion_Crow
+    at:       [-203.581, -25.260, 495.907, 70]
+    level:    [4, 5]
+  17248597:
+    template: Goblin_Digger_near
+    script:   Goblin_Digger
+    at:       [237.793, -16.801, 204.498, 104]
+    level:    [5, 6]
+  17248598:
+    template: Yagudo_Votary_G
+    script:   Yagudo_Votary
+    at:       [-37.541, -12.485, 318.528, 221]
+    level:    [20, 25]
+  17248599:
+    template: Yagudo_Votary_G
+    script:   Yagudo_Votary
+    at:       [-37.660, -13.101, 307.611, 212]
+    level:    [20, 25]
+  17248600:
+    template: Yagudo_Theologist_G
+    script:   Yagudo_Theologist
+    at:       [-20.000, -13.250, 322.000, 149]
+    level:    [20, 25]
+  17248601:
+    template: Yagudo_Theologist_G
+    script:   Yagudo_Theologist
+    at:       [-20.001, -13.411, 312.699, 191]
+    level:    [20, 25]
+  17248602:
+    template: Yagudo_Follower
+    at:       [-28.717, -12.861, 336.837, 5]
+    level:    [20, 25]
+  17248603:
+    template: Yagudo_Follower
+    at:       [-16.538, -13.111, 335.575, 100]
+    level:    [20, 25]
+  17248604:
+    template: Yagudo_Priest_G
+    script:   Yagudo_Priest
+    at:       [-28.192, -12.096, 319.598, 226]
+    level:    [20, 25]
+  17248605:
+    template: Yagudo_Priest_G
+    script:   Yagudo_Priest
+    at:       [-37.298, -13.323, 294.588, 200]
+    level:    [20, 25]
+  17248606:
+    template: Yagudo_Condottiere_G
+    script:   Yagudo_Condottiere
+    at:       [-38.000, -12.500, 318.000]
+    level:    [25, 25]
+  17248607:
+    template: Pixie
+    level:    [51, 54]
+  17248608:
+    template: Pixie
+    level:    [51, 54]
+  17248609:
+    template: Pixie
+    level:    [51, 54]
+  17248610:
+    template: Pixie
+    level:    [51, 54]
+  17248611:
+    template: Pixie
+    level:    [51, 54]
+  17248612:
+    template: Bakru
+    level:    [1, 1]
+  17248613:
+    template: Yilbegan
+    at:       [1.000, 1.000, 1.000]
+    level:    [90, 92]
+  17248614:
+    template: Orcus
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17248615:
+    template: Farruca_Fly
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17248616:
+    template: Jyeshtha
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17248617:
+    template: Rummager_Beetle
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17248618:
+    template: Rummager_Beetle
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17248619:
+    template: Rummager_Beetle
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17248620:
+    template: Rummager_Beetle
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17248621:
+    template: Raker_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17248622:
+    template: Raker_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17248623:
+    template: Raker_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17248624:
+    template: Raker_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17248625:
+    template: Virvatuli
+    at:       [120.000, 3.500, -440.000, 44]
+    level:    [89, 90]
+  17248626:
+    template: Virvatuli
+    at:       [-441.000, 3.500, -357.000, 8]
+    level:    [89, 90]
+  17248627:
+    template: Virvatuli
+    at:       [0.000, -28.500, 560.000, 235]
+    level:    [89, 90]
+  17248628:
+    script: Tatenashi_Armor
+  17248629:
+    script: Hizamaru_Armor
+  17248630:
+    script: Ubuginu_Armor
+  17248631:
+    script: Hachiryu_Armor
+  17248632:
+    script: Omodaka_Armor
+  17248633:
+    template: Bull_[Herd1]
+    level:    [1, 1]
+  17248634:
+    template: Cow_[Herd1]
+    level:    [1, 1]
+  17248635:
+    template: Cow_[Herd1]
+    level:    [1, 1]
+  17248636:
+    template: Cow_[Herd1]
+    level:    [1, 1]
+  17248637:
+    template: Calf_[Herd1]
+    level:    [1, 1]
+  17248638:
+    template: Calf_[Herd1]
+    level:    [1, 1]
+  17248639:
+    template: Calf_[Herd1]
+    level:    [1, 1]
+  17248640:
+    template: Calf_[Herd1]
+    level:    [1, 1]
+  17248641:
+    template: Calf_[Herd1]
+    level:    [1, 1]
+  17248642:
+    template: Calf_[Herd1]
+    level:    [1, 1]
+  17248643:
+    template: Bull_[Herd2]
+    level:    [1, 1]
+  17248644:
+    template: Cow_[Herd2]
+    level:    [1, 1]
+  17248645:
+    template: Cow_[Herd2]
+    level:    [1, 1]
+  17248646:
+    template: Cow_[Herd2]
+    level:    [1, 1]
+  17248647:
+    template: Calf_[Herd2]
+    level:    [1, 1]
+  17248648:
+    template: Calf_[Herd2]
+    level:    [1, 1]
+  17248649:
+    template: Calf_[Herd2]
+    level:    [1, 1]
+  17248650:
+    template: Calf_[Herd2]
+    level:    [1, 1]
+  17248651:
+    template: Calf_[Herd2]
+    level:    [1, 1]
+  17248652:
+    template: Calf_[Herd2]
+    level:    [1, 1]
+  17248653:
+    template: Bull_[Herd3]
+    level:    [1, 1]
+  17248654:
+    template: Cow_[Herd3]
+    level:    [1, 1]
+  17248655:
+    template: Cow_[Herd3]
+    level:    [1, 1]
+  17248656:
+    template: Cow_[Herd3]
+    level:    [1, 1]
+  17248657:
+    template: Calf_[Herd3]
+    level:    [1, 1]
+  17248658:
+    template: Calf_[Herd3]
+    level:    [1, 1]
+  17248659:
+    template: Calf_[Herd3]
+    level:    [1, 1]
+  17248660:
+    template: Calf_[Herd3]
+    level:    [1, 1]
+  17248661:
+    template: Calf_[Herd3]
+    level:    [1, 1]
+  17248662:
+    template: Calf_[Herd3]
+    level:    [1, 1]
+  17248673:
+    template: Pyracmon
+    level:    [1, 1]
+  17248674:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248675:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248676:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248677:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248678:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248679:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248680:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248681:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248682:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248683:
+    template: Wraith_Bat
+    level:    [1, 1]
+  17248684:
+    script: Astral_Box
+  17248685:
+    script: Astral_Box
+  17248686:
+    script: Astral_Box
+  17248687:
+    script: Astral_Box
+  17248688:
+    script: Astral_Box
+  17248689:
+    script: Astral_Box
+  17248690:
+    script: Astral_Box
+  17248691:
+    script: Astral_Box
+  17248692:
+    script: Astral_Box
+  17248693:
+    script: Astral_Box
+  17248694:
+    script: Astral_Box
+  17248695:
+    script: Astral_Box
+  17248696:
+    script: Astral_Box
+  17248697:
+    script: Astral_Box
+  17248698:
+    script: Astral_Box
+  17248699:
+    script: Astral_Box
+  17248700:
+    script: Astral_Box
+  17248701:
+    script: Astral_Box
+  17248702:
+    script: Astral_Box
+  17248703:
+    script: Astral_Box
+  17248704:
+    script: Astral_Box
+  17248705:
+    script: Astral_Box
+  17248706:
+    script: Astral_Box
+  17248707:
+    script: Astral_Box
+  17248708:
+    script: Astral_Box
+  17248709:
+    script: Astral_Box
+  17248710:
+    script: Astral_Box
+  17248711:
+    script: Astral_Box
+  17248712:
+    script: Astral_Box
+  17248713:
+    script: Astral_Box
+  17248714:
+    script: Astral_Box
+  17248715:
+    script: Astral_Box
+  17248716:
+    script: Astral_Box
+  17248717:
+    script: Astral_Box
+  17248718:
+    script: Astral_Box
+  17248719:
+    script: Astral_Box
+  17248720:
+    script: Astral_Box
+  17248721:
+    script: Astral_Box
+  17248722:
+    script: Astral_Box
+  17248723:
+    script: Astral_Box
+  17248724:
+    script: Astral_Box
+  17248725:
+    script: Astral_Box
+  17248726:
+    script: Spriggan_Sifter
+  17248727:
+    script: Spriggan_Sifter
+  17248728:
+    script: Spriggan_Sifter
+  17248729:
+    script: Spriggan_Sifter
+  17248730:
+    script: Spriggan_Sifter
+  17248731:
+    script: Spriggan_Sifter
+  17248732:
+    script: Spriggan_Sifter
+  17248733:
+    script: Spriggan_Sifter
+  17248734:
+    script: Spriggan_Sifter
+  17248735:
+    script: Spriggan_Sifter
+  17248736:
+    script: Spriggan_Sifter
+  17248737:
+    script: Spriggan_Sifter
+  17248738:
+    script: Spriggan_Sifter
+  17248739:
+    script: Spriggan_Sifter
+  17248740:
+    script: Spriggan_Sifter
+  17248741:
+    script: Spriggan_Crier
+  17248742:
+    script: Spriggan_Crier
+  17248743:
+    script: Spriggan_Crier
+  17248744:
+    script: Spriggan_Crier
+  17248745:
+    script: Spriggan_Crier
+  17248746:
+    script: Spriggan_Crier
+  17248747:
+    script: Spriggan_Crier
+  17248748:
+    script: Spriggan_Crier
+  17248749:
+    script: Spriggan_Graverobber
+  17248750:
+    script: Spriggan_Graverobber
+  17248751:
+    script: Spriggan_Graverobber
+  17248752:
+    script: Spriggan_Graverobber
+  17248753:
+    script: Spriggan_Graverobber
+  17248754:
+    script: Spriggan_Graverobber
+  17248755:
+    script: Spriggan_Graverobber
+  17248756:
+    template: Chepelle
+    at:       [253.846, -5.230, -0.666, 172]
+    level:    [139, 139]
+  17248757:
+    template: Chepelles_Tiger
+    at:       [252.306, -4.680, 1.938, 41]
+    level:    [139, 139]
+  17248758:
+    template: Chepelles_Sheep
+    at:       [256.305, -4.641, 0.297, 139]
+    level:    [139, 139]
+  17248759:
+    template: Chepelles_Hare
+    at:       [255.220, -4.723, -0.282, 151]
+    level:    [139, 139]
+
+slots:
+  - members:
+      17248388: {} # Goblin_Thug
+      17248389: {} # Goblin_Thug
+  - members:
+      17248390: {} # Goblin_Weaver
+      17248393: {} # Goblin_Weaver
+  - members:
+      17248391: {} # Goblin_Thug
+      17248392: {} # Goblin_Thug
+  - members:
+      17248421: {} # Savanna_Rarab
+      17248431: {} # Mad_Fox
+  - members:
+      17248428: {} # Yagudo_Initiate
+      17248432: {} # Magicked_Bones
+  - members:
+      17248439: {} # Savanna_Rarab
+      17248443: {} # Mad_Fox
+  - members:
+      17248456: {} # Yagudo_Initiate
+      17248459: {} # Magicked_Bones
+  - members:
+      17248457: {} # Yagudo_Acolyte
+      17248460: {} # Magicked_Bones
+  - members:
+      17248458: {} # Yagudo_Scribe
+      17248461: {} # Magicked_Bones
+  - members:
+      17248477: {} # Yagudo_Initiate
+      17248480: {} # Magicked_Bones
+  - members:
+      17248478: {} # Yagudo_Acolyte
+      17248481: {} # Magicked_Bones
+  - members:
+      17248479: {} # Yagudo_Scribe
+      17248482: {} # Magicked_Bones
+  - members:
+      17248495: {} # Yagudo_Initiate
+      17248498: {} # Magicked_Bones
+  - members:
+      17248496: {} # Yagudo_Acolyte
+      17248499: {} # Magicked_Bones
+  - members:
+      17248497: {} # Yagudo_Scribe
+      17248500: {} # Magicked_Bones
+  - members:
+      17248511: {} # Savanna_Rarab
+      17248521: {} # Mad_Fox
+  - members:
+      17248518: {} # Yagudo_Initiate
+      17248522: {} # Magicked_Bones
+  - members:
+      17248530: {} # Savanna_Rarab
+      17248538: {} # Mad_Fox
+  - members:
+      17248535: {} # Yagudo_Initiate
+      17248539: {} # Magicked_Bones
+  - members:
+      17248550: {} # Savanna_Rarab
+      17248558: {} # Mad_Fox
+  - members:
+      17248555: {} # Yagudo_Initiate
+      17248559: {} # Magicked_Bones
+  - members:
+      17248572: {} # Yagudo_Initiate
+      17248577: {} # Magicked_Bones
+  - members:
+      17248575: {} # Yagudo_Acolyte
+      17248578: {} # Magicked_Bones

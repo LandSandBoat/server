@@ -1,0 +1,2431 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Chariotbuster_Byakzak:
+    id:            697
+    species:       orc
+    type:          [notorious]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 616
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1350
+    loot:
+      drops:
+        - chance: always
+          item:   auriga_xiphos
+
+  Cheiroptera_FG:
+    id:            6454
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 480
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Giant_Pugil_fished:
+    id:            6766
+    display_name:  Giant_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Hundredscar_Hajwaj:
+    id:            2009
+    species:       orc
+    type:          [notorious]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1019
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: always
+          one_of:
+            coarse_leggings: 90
+            wild_cudgel:     10
+      steal: beastcoin
+
+  Kegpaunch_Doshgnosh:
+    id:            5845
+    species:       orcish_warmachine
+    type:          [notorious]
+    roam:          [none0]
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 428
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 800
+    loot:
+      drops:
+        - chance: common
+          item:   frugal_cape
+    content: WOTG
+
+  Land_Pugil_fished:
+    id:            6764
+    display_name:  Land_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Orcish_Cursemaker:
+    id:            3004
+    species:       orc
+    spell_list_id: 21
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 628
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+    loot:
+      drops:
+        - chance: uncommon
+          item:   bulb_of_shaman_garlic
+        - chance: rare
+          item:   ghelsba_chest_key
+        - chance: super_rare
+          item:   white_mitts
+        - chance: super_rare
+          item:   black_slacks
+        - chance: super_rare
+          item:   sandals
+      steal: silver_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Fighter:
+    id:            3009
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 616
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: common
+          item:   cathedral_tapestry
+        - chance: rare
+          item:   ghelsba_chest_key
+        - chance: rare
+          item:   red_cryptex
+        - chance: very_rare
+          item:   lizard_helm
+        - chance: very_rare
+          item:   lizard_gloves
+        - chance: very_rare
+          item:   lizard_trousers
+        - chance: very_rare
+          item:   lizard_ledelsens
+      steal: silver_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Fighter_2:
+    id:            3009
+    display_name:  Orcish_Fighter
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 616
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   cathedral_tapestry
+        - chance: rare
+          item:   ghelsba_chest_key
+        - chance: rare
+          item:   red_cryptex
+        - chance: very_rare
+          item:   lizard_helm
+        - chance: very_rare
+          item:   lizard_gloves
+        - chance: very_rare
+          item:   lizard_trousers
+        - chance: very_rare
+          item:   lizard_ledelsens
+      steal: silver_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Flamethrower:
+    id:            3012
+    species:       orcish_warmachine
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 428
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+
+  Orcish_Fodder:
+    id:            3013
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 614
+        entity_flags: 1153
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: uncommon
+          item:   orcish_axe
+        - chance: very_rare
+          item:   bronze_cap
+        - chance: very_rare
+          item:   bronze_mittens
+        - chance: very_rare
+          item:   bronze_subligar
+        - chance: very_rare
+          item:   bronze_leggings
+      steal: beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Grappler:
+    id:            3016
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 624
+        entity_flags: 1153
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: very_rare
+          item:   bronze_cap
+        - chance: very_rare
+          item:   bronze_subligar
+        - chance: very_rare
+          item:   bronze_leggings
+        - chance: very_rare
+          item:   bronze_mittens
+      steal: beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Grunt:
+    id:            3017
+    species:       orc
+    skill_list_id: 713
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 612
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: very_rare
+          item:   scale_greaves
+        - chance: very_rare
+          item:   faceguard
+        - chance: very_rare
+          item:   scale_finger_gauntlets
+        - chance: very_rare
+          item:   scale_cuisses
+      steal: beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Mesmerizer:
+    id:            3022
+    species:       orc
+    spell_list_id: 21
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 621
+        entity_flags: 1153
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: rare
+          item:   scroll_of_bind
+        - chance: rare
+          item:   scroll_of_blind
+        - chance: very_rare
+          item:   circlet
+        - chance: very_rare
+          item:   cuffs
+        - chance: very_rare
+          item:   slops
+        - chance: very_rare
+          item:   ash_clogs
+      steal: beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Neckchopper:
+    id:            3023
+    species:       orc
+    spell_list_id: 5
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 615
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: very_rare
+          item:   scale_greaves
+        - chance: very_rare
+          item:   faceguard
+        - chance: very_rare
+          item:   scale_finger_gauntlets
+        - chance: very_rare
+          item:   scale_cuisses
+      steal: beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Panzer:
+    id:            3028
+    species:       orcish_warmachine
+    type:          [notorious]
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 428
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 760
+
+  Orcish_Serjeant:
+    id:            3032
+    species:       orc
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 629
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+    loot:
+      drops:
+        - chance: rare
+          item:   ghelsba_chest_key
+        - chance: rare
+          item:   copy_of_the_castle_floor_plans
+      steal: silver_beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Orcish_Stonechucker:
+    id:            3033
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 613
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: very_rare
+          item:   leather_bandana
+        - chance: very_rare
+          item:   leather_gloves
+        - chance: very_rare
+          item:   leather_trousers
+        - chance: very_rare
+          item:   leather_highboots
+      steal: beastcoin
+      despoil:
+        strip_of_meat_jerky:    0
+        dhalmel_steak:          0
+        strip_of_buffalo_jerky: 0
+
+  Puffer_Pugil:
+    id:            3220
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Pug_Pugil_fished:
+    id:            6769
+    display_name:  Pug_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Sentry_Lizard:
+    id:            3545
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lizard_tail
+        - chance: very_rare
+          item:   lizard_skin
+      despoil:
+        lizard_skin: 0
+        lizard_tail: 0
+        lizard_egg:  0
+
+  Spectacled_Bats_FG:
+    id:            3721
+    display_name:  Spectacled_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  641
+        animation_sub:   8
+        name_prefix:    64
+        hitbox:         13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 480
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+spawns:
+  17354753:
+    template: Pug_Pugil_fished
+    script:   Pug_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [6, 8]
+  17354754:
+    template: Pug_Pugil_fished
+    script:   Pug_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [6, 8]
+  17354755:
+    template: Giant_Pugil_fished
+    script:   Giant_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [10, 12]
+  17354756:
+    template: Puffer_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [14, 16]
+  17354757:
+    template: Land_Pugil_fished
+    script:   Land_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [18, 20]
+  17354758:
+    template: Orcish_Fodder
+    at:       [-95.708, -17.328, 165.872, 193]
+    level:    [8, 10]
+  17354759:
+    template: Orcish_Mesmerizer
+    at:       [-94.785, -15.666, 100.900, 127]
+    level:    [8, 10]
+  17354760:
+    template: Orcish_Grappler
+    at:       [-98.638, -15.952, 129.706, 85]
+    level:    [8, 10]
+  17354761:
+    template: Orcish_Fodder
+    at:       [-96.095, -16.151, 64.657, 127]
+    level:    [8, 10]
+  17354762:
+    template: Orcish_Mesmerizer
+    at:       [-108.895, -16.591, 113.953, 36]
+    level:    [8, 10]
+  17354763:
+    template: Orcish_Grappler
+    at:       [-97.865, -16.193, 161.051, 71]
+    level:    [8, 10]
+  17354764:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-104.432, -15.757, 133.818, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354765:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-106.503, -15.791, 38.992, 82]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354766:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [-103.503, -15.221, 40.992]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354767:
+    template: Orcish_Fodder
+    at:       [-4.769, -28.000, 104.165, 50]
+    level:    [8, 10]
+  17354768:
+    template: Orcish_Mesmerizer
+    at:       [-95.015, -16.146, -37.734, 186]
+    level:    [8, 10]
+  17354769:
+    template: Orcish_Grappler
+    at:       [-97.760, -16.203, -7.032, 66]
+    level:    [8, 10]
+  17354770:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-96.824, -16.251, -30.328, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354771:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [-97.477, -16.021, -20.057, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354772:
+    template: Orcish_Fodder
+    at:       [-69.000, -16.091, -70.000, 127]
+    level:    [8, 10]
+  17354773:
+    template: Orcish_Mesmerizer
+    at:       [-79.000, -16.472, -69.000, 127]
+    level:    [8, 10]
+  17354774:
+    template: Orcish_Grappler
+    at:       [-88.803, -15.700, -62.104, 127]
+    level:    [8, 10]
+  17354775:
+    template: Orcish_Fodder
+    at:       [-24.000, -28.000, 2.000, 93]
+    level:    [8, 10]
+  17354776:
+    template: Orcish_Mesmerizer
+    at:       [-93.251, -15.702, -62.740, 127]
+    level:    [8, 10]
+  17354777:
+    template: Orcish_Grappler
+    at:       [-91.625, -16.044, -55.928, 127]
+    level:    [8, 10]
+  17354778:
+    template: Orcish_Fodder
+    at:       [-12.133, -20.063, -105.874, 127]
+    level:    [8, 10]
+  17354779:
+    template: Orcish_Mesmerizer
+    at:       [-12.163, -20.293, -99.954, 127]
+    level:    [8, 10]
+  17354780:
+    template: Orcish_Grappler
+    at:       [-32.000, -19.000, -96.000, 118]
+    level:    [8, 10]
+  17354781:
+    template: Orcish_Fodder
+    at:       [-54.178, -16.469, -75.888, 127]
+    level:    [8, 10]
+  17354782:
+    template: Orcish_Mesmerizer
+    at:       [-26.272, -20.500, -107.883, 127]
+    level:    [8, 10]
+  17354783:
+    template: Orcish_Grappler
+    at:       [-56.000, -23.000, -5.000, 50]
+    level:    [8, 10]
+  17354784:
+    template: Orcish_Flamethrower
+    at:       [-25.006, -20.855, -83.545, 65]
+    level:    [16, 18]
+  17354785:
+    template: Orcish_Fodder
+    at:       [-54.999, -24.132, 23.085, 21]
+    level:    [8, 10]
+  17354786:
+    template: Orcish_Mesmerizer
+    at:       [-49.936, -19.562, -41.322, 127]
+    level:    [8, 10]
+  17354787:
+    template: Orcish_Grappler
+    at:       [-51.000, -20.000, -25.000, 74]
+    level:    [8, 10]
+  17354788:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-54.986, -16.139, -69.972, 57]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354789:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-51.395, -16.193, -62.095, 59]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354790:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [-50.231, -16.190, -61.132]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354791:
+    template: Orcish_Fodder
+    at:       [-54.000, -24.344, 12.000, 127]
+    level:    [8, 10]
+  17354792:
+    template: Orcish_Mesmerizer
+    at:       [-55.137, -24.131, 29.322, 127]
+    level:    [8, 10]
+  17354793:
+    template: Orcish_Grappler
+    at:       [-64.710, -24.018, 25.524, 205]
+    level:    [8, 10]
+  17354794:
+    template: Orcish_Fodder
+    at:       [-56.000, -24.120, 120.000, 127]
+    level:    [8, 10]
+  17354795:
+    template: Orcish_Mesmerizer
+    at:       [-12.364, -28.500, 91.693, 127]
+    level:    [8, 10]
+  17354796:
+    template: Orcish_Grappler
+    at:       [-86.000, -18.000, 177.000, 22]
+    level:    [8, 10]
+  17354797:
+    template: Orcish_Fodder
+    at:       [-68.456, -20.055, 175.911, 95]
+    level:    [8, 10]
+  17354798:
+    template: Orcish_Mesmerizer
+    at:       [-43.579, -23.999, 142.476, 127]
+    level:    [8, 10]
+  17354799:
+    template: Orcish_Grappler
+    at:       [-52.000, -20.000, 168.000, 53]
+    level:    [8, 10]
+  17354800:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-51.719, -24.000, 142.370, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17354801:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-56.852, -23.983, 129.629, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354802:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [-53.912, -24.004, 140.691, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354803:
+    template: Orcish_Fodder
+    at:       [-64.669, -20.000, 177.233, 56]
+    level:    [8, 10]
+  17354804:
+    template: Orcish_Mesmerizer
+    at:       [-64.722, -20.000, 175.120]
+    level:    [8, 10]
+  17354805:
+    template: Orcish_Grappler
+    at:       [-53.000, -24.037, 133.000, 127]
+    level:    [8, 10]
+  17354806:
+    template: Orcish_Fodder
+    at:       [-73.252, -20.625, 173.952, 147]
+    level:    [8, 10]
+  17354807:
+    template: Orcish_Mesmerizer
+    at:       [-64.761, -20.000, 182.068, 90]
+    level:    [8, 10]
+  17354808:
+    template: Orcish_Grappler
+    at:       [-30.385, -24.000, 137.425, 88]
+    level:    [8, 10]
+  17354809:
+    template: Orcish_Fodder
+    at:       [-28.454, -24.000, 135.279, 135]
+    level:    [8, 10]
+  17354810:
+    template: Orcish_Mesmerizer
+    at:       [-31.154, -24.000, 135.025, 123]
+    level:    [8, 10]
+  17354811:
+    template: Orcish_Grappler
+    at:       [-15.000, -28.167, 59.000, 69]
+    level:    [8, 10]
+  17354812:
+    template: Orcish_Fodder
+    at:       [-23.107, -28.018, 27.855, 127]
+    level:    [8, 10]
+  17354813:
+    template: Orcish_Mesmerizer
+    at:       [-22.008, -24.500, 136.462, 134]
+    level:    [8, 10]
+  17354814:
+    template: Orcish_Grappler
+    at:       [-8.939, -28.000, -58.637, 39]
+    level:    [8, 10]
+  17354815:
+    template: Orcish_Flamethrower
+    at:       [-32.396, -24.173, 127.006, 198]
+    level:    [16, 18]
+  17354816:
+    template: Orcish_Fodder
+    at:       [-16.000, -28.002, -35.000, 11]
+    level:    [8, 10]
+  17354817:
+    template: Orcish_Mesmerizer
+    at:       [-16.000, -28.500, -16.000, 80]
+    level:    [8, 10]
+  17354818:
+    template: Orcish_Grappler
+    at:       [-62.000, -24.000, 19.000, 127]
+    level:    [8, 10]
+  17354819:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-25.731, -28.146, 19.114, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354820:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [-37.831, -26.880, 20.664, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17354821:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [-16.377, -28.004, 54.160, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354822:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [-24.083, -28.011, 5.181, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17354823:
+    template: Orcish_Fodder
+    at:       [1.000, -28.000, -52.000, 123]
+    level:    [8, 10]
+  17354824:
+    template: Orcish_Mesmerizer
+    at:       [-17.247, -28.023, -49.230, 122]
+    level:    [8, 10]
+  17354825:
+    template: Orcish_Grappler
+    at:       [0.000, -28.346, 91.000, 31]
+    level:    [8, 10]
+  17354826:
+    template: Orcish_Mesmerizer
+    at:       [-2.474, -28.508, -63.953, 90]
+    level:    [8, 10]
+  17354827:
+    template: Orcish_Grappler
+    at:       [-5.252, -28.135, -61.602, 231]
+    level:    [8, 10]
+  17354828:
+    template: Hundredscar_Hajwaj
+    at:       [1.000, -28.000, -52.000, 123]
+    level:    [12, 13]
+  17354829:
+    template: Orcish_Fodder
+    at:       [-10.765, -28.000, 99.279, 3]
+    level:    [8, 10]
+  17354830:
+    template: Orcish_Mesmerizer
+    at:       [-4.000, -28.500, 97.000, 57]
+    level:    [8, 10]
+  17354831:
+    template: Orcish_Grappler
+    at:       [2.595, -28.492, 91.158, 249]
+    level:    [8, 10]
+  17354832:
+    template: Orcish_Fodder
+    at:       [-10.120, -28.087, 105.535, 132]
+    level:    [8, 10]
+  17354833:
+    template: Orcish_Mesmerizer
+    at:       [-16.000, -28.069, 60.000, 127]
+    level:    [8, 10]
+  17354834:
+    template: Orcish_Grappler
+    at:       [-5.269, -28.001, 95.861, 35]
+    level:    [8, 10]
+  17354835:
+    template: Orcish_Grunt
+    at:       [22.128, -27.819, 138.503, 127]
+    level:    [11, 13]
+  17354836:
+    template: Orcish_Stonechucker
+    at:       [49.000, -28.000, 139.000, 127]
+    level:    [11, 13]
+  17354837:
+    template: Orcish_Neckchopper
+    at:       [35.400, -27.999, 146.266, 127]
+    level:    [11, 13]
+  17354838:
+    template: Orcish_Grunt
+    at:       [60.831, -27.991, 142.960, 92]
+    level:    [11, 13]
+  17354839:
+    template: Orcish_Stonechucker
+    at:       [42.000, -28.199, 140.000, 127]
+    level:    [11, 13]
+  17354840:
+    template: Orcish_Neckchopper
+    at:       [41.694, -28.000, 149.646, 127]
+    level:    [11, 13]
+  17354841:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [25.000, -27.000, 142.000, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354842:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [59.234, -27.918, 135.163, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354843:
+    template: Orcish_Stonechucker
+    at:       [21.000, -27.592, 145.000, 104]
+    level:    [11, 13]
+  17354844:
+    template: Orcish_Grunt
+    at:       [169.517, -32.005, 160.963, 84]
+    level:    [11, 13]
+  17354845:
+    template: Orcish_Stonechucker
+    at:       [149.000, -31.000, 151.000, 127]
+    level:    [11, 13]
+  17354846:
+    template: Orcish_Neckchopper
+    at:       [141.306, -32.071, 161.071, 127]
+    level:    [11, 13]
+  17354847:
+    template: Orcish_Grunt
+    at:       [150.320, -32.368, 160.469, 178]
+    level:    [11, 13]
+  17354848:
+    template: Orcish_Stonechucker
+    at:       [165.913, -32.000, 168.877, 127]
+    level:    [11, 13]
+  17354849:
+    template: Orcish_Neckchopper
+    at:       [174.571, -32.005, 163.406, 54]
+    level:    [11, 12]
+  17354850:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [168.079, -32.000, 171.937, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354851:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [153.606, -32.001, 156.455, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354852:
+    template: Orcish_Grunt
+    at:       [192.000, -43.000, 140.000, 127]
+    level:    [11, 13]
+  17354853:
+    template: Orcish_Neckchopper
+    at:       [166.000, -44.000, 117.000, 127]
+    level:    [11, 13]
+  17354854:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [227.153, -38.860, 152.583, 62]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17354855:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [224.000, -35.000, 164.000, 126]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354856:
+    template: Orcish_Grunt
+    at:       [140.030, -45.065, 111.477, 127]
+    level:    [11, 13]
+  17354857:
+    template: Orcish_Stonechucker
+    at:       [146.152, -44.144, 121.681, 127]
+    level:    [11, 13]
+  17354858:
+    template: Orcish_Neckchopper
+    at:       [133.000, -44.000, 119.000, 31]
+    level:    [11, 13]
+  17354859:
+    template: Orcish_Grunt
+    at:       [188.000, -43.000, 129.000, 127]
+    level:    [11, 13]
+  17354860:
+    template: Orcish_Stonechucker
+    at:       [173.048, -44.352, 121.318, 127]
+    level:    [11, 13]
+  17354861:
+    template: Orcish_Neckchopper
+    at:       [159.972, -43.999, 108.248, 104]
+    level:    [11, 13]
+  17354862:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [144.264, -44.837, 107.700, 112]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354863:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [168.219, -44.773, 107.678, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354864:
+    template: Orcish_Stonechucker
+    at:       [183.152, -46.597, 101.022, 61]
+    level:    [11, 13]
+  17354865:
+    template: Orcish_Fighter
+    at:       [183.865, -46.357, 103.986, 6]
+    level:    [21, 21]
+  17354866:
+    template: Orcish_Grunt
+    at:       [92.325, -50.984, 113.955, 67]
+    level:    [11, 13]
+  17354867:
+    template: Orcish_Stonechucker
+    at:       [72.799, -51.991, 96.433, 107]
+    level:    [11, 13]
+  17354868:
+    template: Orcish_Neckchopper
+    at:       [88.000, -52.000, 96.000, 127]
+    level:    [11, 13]
+  17354869:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [72.084, -52.004, 95.144, 109]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354870:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [77.310, -52.098, 100.535, 19]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354871:
+    template: Orcish_Grunt
+    at:       [49.981, -51.347, 85.212, 127]
+    level:    [11, 13]
+  17354872:
+    template: Orcish_Stonechucker
+    at:       [81.000, -52.000, 105.000, 53]
+    level:    [11, 13]
+  17354873:
+    template: Orcish_Neckchopper
+    at:       [49.000, -52.000, 95.000, 127]
+    level:    [11, 13]
+  17354874:
+    template: Orcish_Grunt
+    at:       [31.394, -51.923, 98.771, 52]
+    level:    [11, 13]
+  17354875:
+    template: Orcish_Stonechucker
+    at:       [86.000, -60.000, 31.000, 127]
+    level:    [11, 13]
+  17354876:
+    template: Orcish_Neckchopper
+    at:       [93.000, -55.000, 85.000, 127]
+    level:    [11, 13]
+  17354877:
+    template: Spectacled_Bats_FG
+    script:   Spectacled_Bats
+    at:       [40.366, -51.997, 103.596, 127]
+    level:    [6, 8]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17354878:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [33.000, -52.000, 103.000, 102]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17354879:
+    template: Orcish_Flamethrower
+    at:       [72.732, -51.576, 84.155, 197]
+    level:    [16, 18]
+  17354880:
+    template: Orcish_Grunt
+    at:       [33.610, -48.000, 49.958, 127]
+    level:    [12, 15]
+  17354881:
+    template: Orcish_Stonechucker
+    at:       [20.001, -48.131, 51.000, 60]
+    level:    [12, 15]
+  17354882:
+    template: Orcish_Neckchopper
+    at:       [36.271, -48.000, 58.974, 127]
+    level:    [12, 15]
+  17354883:
+    template: Orcish_Grunt
+    at:       [38.343, -47.977, 60.983, 25]
+    level:    [12, 15]
+  17354884:
+    template: Orcish_Stonechucker
+    at:       [43.179, -47.997, 56.094, 127]
+    level:    [12, 15]
+  17354885:
+    template: Orcish_Neckchopper
+    at:       [50.474, -48.376, 67.989, 127]
+    level:    [12, 15]
+  17354886:
+    template: Sentry_Lizard
+    at:       [31.000, -48.376, 44.000, 14]
+    level:    [11, 14]
+  17354887:
+    template: Orcish_Grunt
+    at:       [7.208, -48.021, 9.032, 110]
+    level:    [12, 15]
+  17354888:
+    template: Orcish_Stonechucker
+    at:       [4.457, -47.999, 17.822, 100]
+    level:    [12, 15]
+  17354889:
+    template: Orcish_Neckchopper
+    at:       [17.000, -48.000, -16.000, 67]
+    level:    [12, 15]
+  17354890:
+    template: Orcish_Grunt
+    at:       [15.000, -48.259, 26.000, 127]
+    level:    [12, 15]
+  17354891:
+    template: Orcish_Stonechucker
+    at:       [16.128, -48.210, 38.846, 26]
+    level:    [12, 15]
+  17354892:
+    template: Orcish_Neckchopper
+    at:       [63.000, -52.000, 98.000, 19]
+    level:    [12, 15]
+  17354893:
+    template: Sentry_Lizard
+    at:       [15.586, -47.999, 43.127, 124]
+    level:    [11, 14]
+  17354894:
+    template: Orcish_Panzer
+    at:       [23.935, -48.474, 35.489, 73]
+    level:    [20, 21]
+  17354895:
+    template: Orcish_Fighter_2
+    script:   Orcish_Fighter
+    at:       [19.099, -48.178, 35.343, 127]
+    level:    [21, 21]
+  17354896:
+    template: Chariotbuster_Byakzak
+    at:       [49.000, -44.000, -132.000, 127]
+    level:    [23, 24]
+  17354897:
+    template: Orcish_Flamethrower
+    at:       [51.361, -49.007, 21.917, 127]
+    level:    [16, 18]
+  17354898:
+    template: Orcish_Grunt
+    at:       [45.566, -48.034, -7.457, 106]
+    level:    [12, 15]
+  17354899:
+    template: Orcish_Stonechucker
+    at:       [52.740, -48.000, -22.213, 3]
+    level:    [12, 15]
+  17354900:
+    template: Orcish_Neckchopper
+    at:       [34.000, -48.500, 17.000, 127]
+    level:    [12, 15]
+  17354901:
+    template: Orcish_Grunt
+    at:       [38.027, -48.000, -19.456, 14]
+    level:    [12, 15]
+  17354902:
+    template: Orcish_Stonechucker
+    at:       [21.000, -48.362, -0.500, 127]
+    level:    [12, 15]
+  17354903:
+    template: Orcish_Neckchopper
+    at:       [34.428, -48.500, 1.345, 55]
+    level:    [12, 15]
+  17354904:
+    template: Sentry_Lizard
+    at:       [28.000, -48.216, 1.000, 127]
+    level:    [11, 14]
+  17354905:
+    template: Orcish_Stonechucker
+    at:       [74.000, -51.000, -60.000, 127]
+    level:    [12, 15]
+  17354906:
+    template: Sentry_Lizard
+    at:       [42.823, -52.068, -68.756, 102]
+    level:    [11, 14]
+  17354907:
+    template: Sentry_Lizard
+    at:       [70.385, -51.859, -59.284, 127]
+    level:    [11, 14]
+  17354908:
+    template: Sentry_Lizard
+    at:       [62.679, -51.686, -67.150, 127]
+    level:    [11, 14]
+  17354909:
+    template: Sentry_Lizard
+    at:       [32.000, -51.000, -64.000, 127]
+    level:    [11, 14]
+  17354910:
+    template: Sentry_Lizard
+    at:       [45.470, -52.114, -59.251, 123]
+    level:    [11, 14]
+  17354911:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [79.734, -52.045, -56.280, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354912:
+    template: Orcish_Stonechucker
+    at:       [43.000, -52.000, -61.000, 79]
+    level:    [12, 15]
+  17354913:
+    template: Orcish_Stonechucker
+    at:       [30.000, -52.000, -69.000, 127]
+    level:    [12, 15]
+  17354914:
+    template: Orcish_Grunt
+    at:       [46.808, -44.000, -113.703, 127]
+    level:    [12, 15]
+  17354915:
+    template: Orcish_Stonechucker
+    at:       [58.000, -44.500, -120.000, 127]
+    level:    [12, 15]
+  17354916:
+    template: Orcish_Neckchopper
+    at:       [31.275, -44.000, -105.058, 127]
+    level:    [12, 15]
+  17354917:
+    template: Orcish_Grunt
+    at:       [31.114, -44.000, -104.844, 200]
+    level:    [12, 15]
+  17354918:
+    template: Orcish_Stonechucker
+    at:       [44.919, -44.000, -123.161, 64]
+    level:    [12, 15]
+  17354919:
+    template: Orcish_Neckchopper
+    at:       [52.428, -44.500, -140.501, 159]
+    level:    [12, 15]
+  17354920:
+    template: Orcish_Flamethrower
+    at:       [55.405, -44.000, -123.898, 123]
+    level:    [16, 18]
+  17354921:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [28.197, -44.000, -123.943, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354922:
+    template: Kegpaunch_Doshgnosh
+    at:       [43.773, -44.000, -119.706]
+    level:    [22, 23]
+  17354923:
+    template: Orcish_Grunt
+    at:       [116.256, -43.999, -110.829, 127]
+    level:    [12, 15]
+  17354924:
+    template: Orcish_Stonechucker
+    at:       [97.340, -44.027, -127.838, 127]
+    level:    [12, 15]
+  17354925:
+    template: Orcish_Neckchopper
+    at:       [127.000, -44.030, -132.000, 127]
+    level:    [12, 15]
+  17354926:
+    template: Orcish_Grunt
+    at:       [124.675, -44.000, -116.271, 127]
+    level:    [12, 15]
+  17354927:
+    template: Orcish_Stonechucker
+    at:       [126.010, -44.000, -118.000, 42]
+    level:    [12, 15]
+  17354928:
+    template: Orcish_Neckchopper
+    at:       [124.675, -44.000, -116.271]
+    level:    [12, 15]
+  17354929:
+    template: Orcish_Flamethrower
+    at:       [117.415, -44.000, -115.950, 248]
+    level:    [16, 18]
+  17354930:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [107.000, -44.000, -125.000, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17354931:
+    template: Orcish_Stonechucker
+    at:       [145.000, -45.599, -108.000, 127]
+    level:    [11, 13]
+  17354932:
+    template: Orcish_Fighter
+    at:       [140.382, -45.599, -104.377, 127]
+    level:    [21, 21]
+  17354933:
+    template: Orcish_Flamethrower
+    at:       [111.626, -43.474, -96.720, 58]
+    level:    [16, 18]
+  17354934:
+    template: Orcish_Grunt
+    at:       [102.000, -60.000, 57.000, 127]
+    level:    [14, 17]
+  17354935:
+    template: Orcish_Stonechucker
+    at:       [98.000, -60.040, 36.000, 127]
+    level:    [14, 17]
+  17354936:
+    template: Orcish_Neckchopper
+    at:       [96.208, -60.484, 50.231, 127]
+    level:    [14, 17]
+  17354937:
+    template: Orcish_Grunt
+    at:       [94.586, -59.152, 72.498, 127]
+    level:    [14, 17]
+  17354938:
+    template: Orcish_Stonechucker
+    at:       [109.000, -60.000, 35.000, 69]
+    level:    [14, 17]
+  17354939:
+    template: Orcish_Neckchopper
+    at:       [129.607, -60.037, 62.166, 168]
+    level:    [14, 17]
+  17354940:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [98.217, -60.049, 63.470, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354941:
+    template: Orcish_Grunt
+    at:       [86.693, -59.990, 20.176, 127]
+    level:    [14, 17]
+  17354942:
+    template: Orcish_Stonechucker
+    at:       [80.000, -60.000, 4.000, 62]
+    level:    [14, 17]
+  17354943:
+    template: Orcish_Neckchopper
+    at:       [84.990, -60.003, 11.218, 127]
+    level:    [14, 17]
+  17354944:
+    template: Orcish_Grunt
+    at:       [160.000, -44.000, 118.000, 127]
+    level:    [14, 17]
+  17354945:
+    template: Orcish_Stonechucker
+    at:       [96.658, -59.999, 19.296, 1]
+    level:    [14, 17]
+  17354946:
+    template: Orcish_Neckchopper
+    at:       [99.770, -60.488, 21.006, 127]
+    level:    [14, 17]
+  17354947:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [80.000, -60.002, 35.000, 8]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354948:
+    template: Orcish_Grunt
+    at:       [106.257, -60.000, -2.223, 33]
+    level:    [14, 17]
+  17354949:
+    template: Orcish_Stonechucker
+    at:       [93.000, -60.000, -4.000]
+    level:    [14, 17]
+  17354950:
+    template: Orcish_Neckchopper
+    at:       [111.325, -59.999, 0.595, 29]
+    level:    [14, 17]
+  17354951:
+    template: Orcish_Grunt
+    at:       [116.190, -59.891, 7.526, 252]
+    level:    [14, 17]
+  17354952:
+    template: Orcish_Stonechucker
+    at:       [106.271, -60.000, 7.793, 127]
+    level:    [14, 17]
+  17354953:
+    template: Orcish_Neckchopper
+    at:       [190.000, -46.000, 105.000, 127]
+    level:    [14, 17]
+  17354954:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [106.086, -60.007, -18.171, 50]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17354955:
+    template: Orcish_Grunt
+    at:       [115.911, -61.595, 49.595, 42]
+    level:    [14, 17]
+  17354956:
+    template: Orcish_Cursemaker
+    at:       [121.879, -61.595, 51.185, 127]
+    level:    [21, 21]
+  17354957:
+    template: Orcish_Stonechucker
+    at:       [69.992, -61.599, 16.824, 79]
+    level:    [14, 17]
+  17354958:
+    template: Orcish_Cursemaker
+    at:       [67.789, -61.599, 20.341, 127]
+    level:    [21, 21]
+  17354959:
+    template: Orcish_Neckchopper
+    at:       [121.202, -61.599, -7.981, 127]
+    level:    [14, 17]
+  17354960:
+    template: Orcish_Cursemaker
+    at:       [118.591, -62.084, -11.813, 124]
+    level:    [21, 21]
+  17354961:
+    template: Orcish_Flamethrower
+    at:       [130.026, -60.693, 18.403, 253]
+    level:    [16, 18]
+  17354962:
+    template: Orcish_Grunt
+    at:       [159.000, -84.000, 31.000, 127]
+    level:    [14, 17]
+  17354963:
+    template: Orcish_Stonechucker
+    at:       [99.327, -62.239, -42.913, 196]
+    level:    [14, 17]
+  17354964:
+    template: Orcish_Neckchopper
+    at:       [94.000, -60.000, -8.000, 127]
+    level:    [14, 17]
+  17354965:
+    template: Orcish_Grunt
+    at:       [177.000, -86.362, 20.000, 127]
+    level:    [14, 17]
+  17354966:
+    template: Orcish_Stonechucker
+    at:       [153.000, -84.000, 23.000, 118]
+    level:    [14, 17]
+  17354967:
+    template: Orcish_Neckchopper
+    at:       [181.000, -83.000, -6.000, 127]
+    level:    [14, 17]
+  17354968:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [109.067, -64.045, -55.944, 105]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17354969:
+    template: Cheiroptera_FG
+    script:   Cheiroptera
+    at:       [182.644, -79.986, -29.548, 127]
+    level:    [8, 10]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17354970:
+    template: Orcish_Grunt
+    at:       [162.761, -84.086, -2.048, 122]
+    level:    [14, 17]
+  17354971:
+    template: Orcish_Stonechucker
+    at:       [165.763, -84.500, 4.628, 208]
+    level:    [14, 17]
+  17354972:
+    template: Orcish_Neckchopper
+    at:       [173.775, -84.500, 2.911, 127]
+    level:    [14, 17]
+  17354973:
+    template: Orcish_Grunt
+    at:       [153.000, -83.995, 5.000, 84]
+    level:    [14, 17]
+  17354974:
+    template: Orcish_Stonechucker
+    at:       [144.000, -84.000, 18.000, 127]
+    level:    [14, 17]
+  17354975:
+    template: Orcish_Neckchopper
+    at:       [162.577, -84.138, 17.617, 53]
+    level:    [14, 17]
+  17354976:
+    template: Orcish_Grunt
+    at:       [143.366, -84.083, 31.077, 127]
+    level:    [14, 17]
+  17354977:
+    template: Orcish_Stonechucker
+    at:       [162.970, -84.500, 43.924, 51]
+    level:    [14, 17]
+  17354978:
+    template: Orcish_Neckchopper
+    at:       [162.000, -84.500, 23.000, 84]
+    level:    [14, 17]
+  17354979:
+    template: Orcish_Grunt
+    at:       [155.000, -83.997, 42.000, 103]
+    level:    [14, 17]
+  17354980:
+    template: Orcish_Stonechucker
+    at:       [169.558, -84.066, 31.110, 127]
+    level:    [14, 17]
+  17354981:
+    template: Orcish_Neckchopper
+    at:       [168.069, -84.089, 46.430, 2]
+    level:    [14, 17]
+  17354982:
+    template: Orcish_Cursemaker
+    at:       [185.888, -86.599, 17.192, 111]
+    level:    [21, 21]
+  17354983:
+    template: Orcish_Serjeant
+    at:       [188.487, -86.342, 20.457, 91]
+    level:    [21, 21]
+
+slots:
+  - members:
+      17354758: {} # Orcish_Fodder
+      17354759: {} # Orcish_Mesmerizer
+  - members:
+      17354760: {} # Orcish_Grappler
+      17354761: {} # Orcish_Fodder
+  - members:
+      17354762: {} # Orcish_Mesmerizer
+      17354763: {} # Orcish_Grappler
+  - members:
+      17354765: {} # Spectacled_Bats
+      17354766: {} # Cheiroptera
+  - members:
+      17354767: {} # Orcish_Fodder
+      17354768: {} # Orcish_Mesmerizer
+      17354769: {} # Orcish_Grappler
+  - members:
+      17354770: {} # Spectacled_Bats
+      17354771: {} # Cheiroptera
+  - members:
+      17354775: {} # Orcish_Fodder
+      17354776: {} # Orcish_Mesmerizer
+      17354777: {} # Orcish_Grappler
+  - members:
+      17354778: {} # Orcish_Fodder
+      17354779: {} # Orcish_Mesmerizer
+  - members:
+      17354780: {} # Orcish_Grappler
+      17354781: {} # Orcish_Fodder
+  - members:
+      17354782: {} # Orcish_Mesmerizer
+      17354783: {} # Orcish_Grappler
+  - members:
+      17354784: {} # Orcish_Flamethrower
+      17354815: {} # Orcish_Flamethrower
+  - members:
+      17354786: {} # Orcish_Mesmerizer
+      17354787: {} # Orcish_Grappler
+  - members:
+      17354789: {} # Spectacled_Bats
+      17354790: {} # Cheiroptera
+  - members:
+      17354791: {} # Orcish_Fodder
+      17354792: {} # Orcish_Mesmerizer
+  - members:
+      17354793: {} # Orcish_Grappler
+      17354794: {} # Orcish_Fodder
+  - members:
+      17354795: {} # Orcish_Mesmerizer
+      17354796: {} # Orcish_Grappler
+  - members:
+      17354798: {} # Orcish_Mesmerizer
+      17354799: {} # Orcish_Grappler
+  - members:
+      17354803: {} # Orcish_Fodder
+      17354804: {} # Orcish_Mesmerizer
+      17354805: {} # Orcish_Grappler
+  - members:
+      17354806: {} # Orcish_Fodder
+      17354807: {} # Orcish_Mesmerizer
+      17354808: {} # Orcish_Grappler
+  - members:
+      17354809: {} # Orcish_Fodder
+      17354810: {} # Orcish_Mesmerizer
+      17354811: {} # Orcish_Grappler
+  - members:
+      17354812: {} # Orcish_Fodder
+      17354813: {} # Orcish_Mesmerizer
+      17354814: {} # Orcish_Grappler
+  - members:
+      17354817: {} # Orcish_Mesmerizer
+      17354818: {} # Orcish_Grappler
+  - members:
+      17354820: {} # Spectacled_Bats
+      17354822: {} # Cheiroptera
+  - members:
+      17354823: {} # Orcish_Fodder
+      17354824: {} # Orcish_Mesmerizer
+  - members:
+      17354826: {} # Orcish_Mesmerizer
+      17354827: {} # Orcish_Grappler
+  - members:
+      17354829: {} # Orcish_Fodder
+      17354830: {} # Orcish_Mesmerizer
+  - members:
+      17354831: {} # Orcish_Grappler
+      17354832: {} # Orcish_Fodder
+  - members:
+      17354833: {} # Orcish_Mesmerizer
+      17354834: {} # Orcish_Grappler
+  - members:
+      17354838: {} # Orcish_Grunt
+      17354839: {} # Orcish_Stonechucker
+      17354840: {} # Orcish_Neckchopper
+  - members:
+      17354847: {} # Orcish_Grunt
+      17354848: {} # Orcish_Stonechucker
+      17354849: {} # Orcish_Neckchopper
+  - members:
+      17354852: {} # Orcish_Grunt
+      17354853: {} # Orcish_Neckchopper
+  - members:
+      17354859: {} # Orcish_Grunt
+      17354860: {} # Orcish_Stonechucker
+      17354861: {} # Orcish_Neckchopper
+  - members:
+      17354871: {} # Orcish_Grunt
+      17354872: {} # Orcish_Stonechucker
+  - members:
+      17354873: {} # Orcish_Neckchopper
+      17354874: {} # Orcish_Grunt
+  - members:
+      17354875: {} # Orcish_Stonechucker
+      17354876: {} # Orcish_Neckchopper
+  - members:
+      17354880: {} # Orcish_Grunt
+      17354881: {} # Orcish_Stonechucker
+  - members:
+      17354882: {} # Orcish_Neckchopper
+      17354883: {} # Orcish_Grunt
+  - members:
+      17354884: {} # Orcish_Stonechucker
+      17354885: {} # Orcish_Neckchopper
+  - members:
+      17354887: {} # Orcish_Grunt
+      17354888: {} # Orcish_Stonechucker
+  - members:
+      17354889: {} # Orcish_Neckchopper
+      17354890: {} # Orcish_Grunt
+  - members:
+      17354891: {} # Orcish_Stonechucker
+      17354892: {} # Orcish_Neckchopper
+  - members:
+      17354898: {} # Orcish_Grunt
+      17354899: {} # Orcish_Stonechucker
+  - members:
+      17354900: {} # Orcish_Neckchopper
+      17354901: {} # Orcish_Grunt
+  - members:
+      17354902: {} # Orcish_Stonechucker
+      17354903: {} # Orcish_Neckchopper
+  - members:
+      17354917: {} # Orcish_Grunt
+      17354918: {} # Orcish_Stonechucker
+      17354919: {} # Orcish_Neckchopper
+  - members:
+      17354926: {} # Orcish_Grunt
+      17354927: {} # Orcish_Stonechucker
+      17354928: {} # Orcish_Neckchopper
+  - members:
+      17354934: {} # Orcish_Grunt
+      17354935: {} # Orcish_Stonechucker
+  - members:
+      17354936: {} # Orcish_Neckchopper
+      17354937: {} # Orcish_Grunt
+  - members:
+      17354938: {} # Orcish_Stonechucker
+      17354939: {} # Orcish_Neckchopper
+  - members:
+      17354941: {} # Orcish_Grunt
+      17354942: {} # Orcish_Stonechucker
+  - members:
+      17354943: {} # Orcish_Neckchopper
+      17354944: {} # Orcish_Grunt
+  - members:
+      17354945: {} # Orcish_Stonechucker
+      17354946: {} # Orcish_Neckchopper
+  - members:
+      17354948: {} # Orcish_Grunt
+      17354949: {} # Orcish_Stonechucker
+  - members:
+      17354950: {} # Orcish_Neckchopper
+      17354951: {} # Orcish_Grunt
+  - members:
+      17354952: {} # Orcish_Stonechucker
+      17354953: {} # Orcish_Neckchopper
+  - members:
+      17354955: {} # Orcish_Grunt
+      17354956: {} # Orcish_Cursemaker
+  - members:
+      17354957: {} # Orcish_Stonechucker
+      17354958: {} # Orcish_Cursemaker
+  - members:
+      17354959: {} # Orcish_Neckchopper
+      17354960: {} # Orcish_Cursemaker
+  - members:
+      17354962: {} # Orcish_Grunt
+      17354963: {} # Orcish_Stonechucker
+      17354964: {} # Orcish_Neckchopper
+  - members:
+      17354965: {} # Orcish_Grunt
+      17354966: {} # Orcish_Stonechucker
+      17354967: {} # Orcish_Neckchopper
+  - members:
+      17354970: {} # Orcish_Grunt
+      17354971: {} # Orcish_Stonechucker
+  - members:
+      17354972: {} # Orcish_Neckchopper
+      17354973: {} # Orcish_Grunt
+  - members:
+      17354974: {} # Orcish_Stonechucker
+      17354975: {} # Orcish_Neckchopper
+  - members:
+      17354976: {} # Orcish_Grunt
+      17354977: {} # Orcish_Stonechucker
+  - members:
+      17354978: {} # Orcish_Neckchopper
+      17354979: {} # Orcish_Grunt
+  - members:
+      17354980: {} # Orcish_Stonechucker
+      17354981: {} # Orcish_Neckchopper

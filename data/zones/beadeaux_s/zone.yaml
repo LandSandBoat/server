@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:           44
+  night:         44
+  battle_solo:  115
+  battle_party: 216
+
+zonelines:
+
+  z2k0:
+    from:  [-300.088, -1.085, 96.044]
+    to:    pashhow_marshlands_s
+    at:    [578.786, 23.416, -376.731, 3.141593]
+    scale: [1.000, 4.000]

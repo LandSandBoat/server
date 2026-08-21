@@ -193,7 +193,7 @@ struct look_t
         ranged  = 0;
     }
 
-    look_t(uint16 look[10])
+    look_t(const uint16* look)
     {
         size    = look[0];
         modelid = look[1];

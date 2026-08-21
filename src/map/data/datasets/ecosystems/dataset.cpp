@@ -39,58 +39,6 @@ namespace xi::data::datasets::ecosystems
 namespace
 {
 
-auto convertRanks(const wire::StatRanks& source) -> StatRanksOverrides
-{
-    const auto resolveOptionalEnum = []<class Enum>(const std::optional<yaml::EnumToken<Enum>>& token) -> std::optional<Enum>
-    {
-        return token ? std::optional{ yaml::resolveEnum(*token) } : std::nullopt;
-    };
-
-    return {
-        .Str = resolveOptionalEnum(source.str),
-        .Dex = resolveOptionalEnum(source.dex),
-        .Vit = resolveOptionalEnum(source.vit),
-        .Agi = resolveOptionalEnum(source.agi),
-        .Int = resolveOptionalEnum(source.intelligence),
-        .Mnd = resolveOptionalEnum(source.mnd),
-        .Chr = resolveOptionalEnum(source.chr),
-        .Def = resolveOptionalEnum(source.def),
-        .Eva = resolveOptionalEnum(source.eva),
-        .Att = resolveOptionalEnum(source.att),
-        .Acc = resolveOptionalEnum(source.acc),
-    };
-}
-
-auto convertAttributes(const wire::MobAttributes& source) -> MobAttributesOverrides
-{
-    MobAttributesOverrides attributes{};
-    if (source.element)
-    {
-        attributes.Element = yaml::resolveEnum(*source.element);
-    }
-
-    if (source.stats)
-    {
-        attributes.Stats = convertRanks(*source.stats);
-    }
-
-    if (source.detects)
-    {
-        attributes.Detects = yaml::resolveFlags(source.detects);
-    }
-
-    attributes.Speed     = source.speed;
-    attributes.Charmable = source.charmable;
-    attributes.Mods      = yaml::resolveKeys(source.mods);
-    attributes.MobMods   = yaml::resolveKeys(source.mob_mods);
-    return attributes;
-}
-
-auto convertAttributes(const std::optional<wire::MobAttributes>& source) -> MobAttributesOverrides
-{
-    return source ? convertAttributes(*source) : MobAttributesOverrides{};
-}
-
 auto convertSpecies(const std::optional<std::map<std::string, wire::Species>>& entries)
     -> HashMap<xi::Species, SpeciesData>
 {
@@ -109,7 +57,7 @@ auto convertSpecies(const std::optional<std::map<std::string, wire::Species>>& e
         }
 
         const auto id = static_cast<xi::Species>(source.id);
-        if (!species.try_emplace(id, SpeciesData{ id, convertAttributes(source.attributes) }).second)
+        if (!species.try_emplace(id, SpeciesData{ id, convertAttributes(source.attributes, name) }).second)
         {
             throw std::runtime_error(fmt::format("duplicate species id {}", source.id));
         }
@@ -135,7 +83,7 @@ auto convertFamilies(const std::optional<std::map<std::string, wire::Family>>& e
         }
 
         const auto id = static_cast<xi::Family>(source.id);
-        FamilyData family{ id, convertAttributes(source.attributes), convertSpecies(source.species) };
+        FamilyData family{ id, convertAttributes(source.attributes, name), convertSpecies(source.species) };
         if (!families.try_emplace(id, std::move(family)).second)
         {
             throw std::runtime_error(fmt::format("duplicate family id {}", source.id));
@@ -155,7 +103,7 @@ auto Dataset::decode(const std::string_view text) -> Records
     {
         yaml::verifyNamedMapEntry<xi::Ecosystem>(name, source.id);
         const auto    id = static_cast<xi::Ecosystem>(source.id);
-        EcosystemData ecosystem{ id, convertAttributes(source.attributes), convertFamilies(source.families) };
+        EcosystemData ecosystem{ id, convertAttributes(source.attributes, name), convertFamilies(source.families) };
         if (!records.try_emplace(id, std::move(ecosystem)).second)
         {
             throw std::runtime_error(fmt::format("duplicate ecosystem id {}", source.id));

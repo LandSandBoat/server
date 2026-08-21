@@ -1,0 +1,329 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17936386:
+    script:       Oscarnot
+    display_name: Oscarnot
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936387:
+    script:       Andelmine
+    display_name: Andelmine
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936388:
+    script:       Zemerine
+    display_name: Zemerine
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936389:
+    script:       Dusky_Forest
+    display_name: Dusky Forest
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936390:
+    script:       Reglert
+    display_name: Reglert
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936391:
+    script:       Wuger
+    display_name: Wuger
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936392:
+    script:       Joliese
+    display_name: Joliese
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936393:
+    script:       Estevanie
+    display_name: Estevanie
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936394:
+    script:       Stepholange
+    display_name: Stepholange
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936396:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936397:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936398:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936399:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936400:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936401:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936402:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936403:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936404:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936406:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936407:
+    script:       Gama-Shama
+    display_name: Gama-Shama
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936408:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936409:
+    script:       Oshasha
+    display_name: Oshasha
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936410:
+    script:       Skhoh_Undhreh
+    display_name: Skhoh Undhreh
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936411:
+    script:       Gloom_Phantom
+    display_name: Gloom Phantom
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936412:
+    script:       Magh_Bihu
+    display_name: Magh Bihu
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936413:
+    script:       Dazbog
+    display_name: Dazbog
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936414:
+    script:       Rabid_Chameleon
+    display_name: Rabid Chameleon
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936415:
+    script:       Falbala
+    display_name: Falbala
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936416:
+    script:       Kagu_1
+    display_name: Kagu_1
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936417:
+    script:       Kagu_2
+    display_name: Kagu_2
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936418:
+    script:       Kagu_3
+    display_name: Kagu_3
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936419:
+    script:       Kagu_10
+    display_name: Kagu_10
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936420:
+    script:       Kagu_11
+    display_name: Kagu_11
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936421:
+    script:       Kagu_20
+    display_name: Kagu_20
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936422:
+    script:       MyKagu_1
+    display_name: MyKagu_1
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936423:
+    script:       MyKagu_2
+    display_name: MyKagu_2
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936424:
+    script:       MyKagu_3
+    display_name: MyKagu_3
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936425:
+    script:       MyKagu_4
+    display_name: MyKagu_4
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936426:
+    script:       MyKagu_5
+    display_name: MyKagu_5
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936427:
+    script:       MyKagu_6
+    display_name: MyKagu_6
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17936428:
+    script:       MyKagu_7
+    display_name: MyKagu_7
+    render:
+      look:
+        type:  standard
+        model: 50

@@ -1,0 +1,387 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17633323:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17633324:
+    script: NPC[2c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17633325:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17633327:
+    script: NPC[2f]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17633328:
+    script: NPC[30]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17633329:
+    script: NPC[31]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17633330:
+    script:       EP_Entrance
+    display_name: Earth Protocrystal
+    at:           [-539.946, 0.455, -493.872]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17633331:
+    script:       Earth_Protocrystal
+    display_name: Earth Protocrystal
+    at:           [501.157, 54.379, -437.096]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17633332:
+    script:       Earth_Protocrystal
+    display_name: Earth Protocrystal
+    at:           [21.278, -5.620, -37.085]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17633333:
+    script:       Earth_Protocrystal
+    display_name: Earth Protocrystal
+    at:           [-378.790, -65.637, 442.884]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17633334:
+    script: NPC[36]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17633335:
+    script: NPC[37]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17633336:
+    script: NPC[38]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17633337:
+    script: NPC[39]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17633338:
+    script:       Titan
+    display_name: Titan
+    render:
+      look:
+        type:  standard
+        model: 794
+      entity_flags: 31
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17633339:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 794
+      entity_flags: 31
+      name_prefix:  32
+    status: cutscene_only
+
+  17633340:
+    script: NPC[3c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17633341:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17633342:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17633343:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17633344:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17633345:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17633346:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17633347:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17633348:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17633349:
+    script:       Ildy-Goldy
+    display_name: Ildy-Goldy
+    at:           [43.730, 7.499, -43.380, 138]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  8
+        head:  4125
+        body:  8232
+        hands: 12304
+        legs:  16397
+        feet:  20493
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17633350:
+    script:       Rukususu
+    display_name: Rukususu
+    at:           [22.516, -18.185, 31.496, 224]
+    render:
+      look:
+        type:  standard
+        model: 165
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17633351:
+    script:       Uran-Mafran
+    display_name: Uran-Mafran
+    at:           [12.640, -22.410, 19.121, 223]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  4
+        head:  4096
+        body:  8238
+        hands: 12334
+        legs:  16430
+        feet:  20526
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17633352:
+    script:       Talking_Doll
+    display_name: Talking Doll
+    at:           [24.857, -18.308, 30.831, 92]
+    render:
+      look:
+        type:  standard
+        model: 970
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17633353:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-564.000, 0.000, -536.000, 45]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17633354:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-564.000, 0.000, -536.000, 45]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17633355:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17633356:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+
+  17633357:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17633358:
+    script:       qm2
+    display_name: ???
+    at:           [-545.184, 1.855, -495.693, 56]
+    render:
+      look:
+        type:  standard
+        model: 1336
+      entity_flags:  27
+      name_vis:     112
+      name_prefix:   34
+      moving:         1
+    status:  normal
+    content: WOTG

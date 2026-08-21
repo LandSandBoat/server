@@ -1,0 +1,2892 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Beady_Panopt:
+    id:            5027
+    species:       panopt
+    spell_list_id: 9
+    skill_list_id: 376
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          ice:     2
+          wind:    4
+          earth:   2
+          thunder: 1
+          water:   2
+          light:   3
+          dark:    5
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     4
+          slow:        2
+          poison:      2
+          light_sleep: 3
+          dark_sleep:  5
+          blind:       5
+      render:
+        look:
+          type:  standard
+          model: 517
+        entity_flags:  129
+        animation_sub:   6
+        hitbox:         10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+
+  Bight_Uragnite:
+    id:            5002
+    species:       uragnite
+    skill_list_id: 251
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      resists:
+        rank_element:
+          fire:     3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    3
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1361
+        entity_flags:  641
+        animation_sub:  12
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Bothersome_Chapuli:
+    id:            6908
+    species:       chapuli
+    type:          [notorious]
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Broad_Scarlet:
+    id:            5028
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 449
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Burning_Mantis:
+    id:            5023
+    species:       red_mantid
+    spell_list_id: 21
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2066
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Calfcleaving_Chapuli:
+    id:            5021
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Canopycrusher_Beetle:
+    id:            5022
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 410
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Cerise_Wasp:
+    id:            4745
+    species:       yellow_bee
+    type:          [notorious]
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+
+  Edacious_Orobon:
+    id:            5024
+    species:       orobon
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags: 1153
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Fiery_Wasp:
+    id:            5036
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 273
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Frondescent_Leafkin:
+    id:            4747
+    species:       leafkin
+    skill_list_id: 455
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    8
+          light:   11
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      2
+          slow:         4
+          poison:       8
+          light_sleep: 11
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2530
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+
+  Hinterland_Peiste:
+    id:            5033
+    species:       peiste
+    skill_list_id: 192
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          earth: 2
+          water: 3
+        rank_status:
+          slow:   2
+          poison: 3
+      render:
+        look:
+          type:  standard
+          model: 2015
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Jungle_Baelfyr:
+    id:            4861
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 2149
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [weather]
+      stats:
+        mp: 5000
+
+  Knotted_Root_YHG_CB:
+    id:           5064
+    display_name: Knotted_Root
+    species:      unclassified
+    type:         [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 1580
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Lancing_Wasp:
+    id:            4739
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1936
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:   999
+
+  Luckybug_Hoarder:
+    id:            5029
+    species:       ladybug
+    skill_list_id: 170
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:  4
+          dark: 4
+        rank_status:
+          paralyze:   4
+          bind:       4
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2019
+        entity_flags: 641
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Monstrosiraptor:
+    id:            5030
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 317
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Nettled_Wasp:
+    id:            5026
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1936
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Numbing_Blossom:
+    id:            5013
+    species:       unclassified
+    type:          [notorious]
+    skill_list_id: 341
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2776
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Pinetorum:
+    id:            5025
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 129
+        hitbox:         6
+      spawn:
+        respawn: 300
+
+  Quivering_Twitherym:
+    id:            4744
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2535
+        entity_flags: 131
+        name_prefix:   64
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:   999
+
+  Red_Dropwing:
+    id:            4743
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 449
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+
+  Shrubshredder_Chapuli:
+    id:            4742
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:   999
+
+  Shy_Heartwing:
+    id:            4748
+    species:       heartwing
+    spell_list_id: 21
+    skill_list_id: 343
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2575
+        entity_flags: 129
+        hitbox:         4
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+
+  Startled_Uragnite:
+    id:            4746
+    species:       uragnite
+    type:          [notorious]
+    skill_list_id: 251
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      resists:
+        rank_element:
+          fire:     3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    3
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1361
+        entity_flags:  643
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+
+  Temblor_Beetle:
+    id:            4741
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 410
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:   999
+
+  Thrashing_Mantis:
+    id:            4740
+    species:       green_mantid
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2066
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+
+  Twitherym_Infestation:
+    id:            5020
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2535
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Ulbukan_Sheep:
+    id:            5031
+    species:       sheep
+    skill_list_id: 226
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 340
+        entity_flags:  1153
+        animation_sub:   16
+        hitbox:          20
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Umbril:
+    id:            5032
+    species:       umbril
+    skill_list_id: 337
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:      2
+        hitbox:           6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+
+  Velkk_Marauder:
+    id:            5035
+    species:       blue_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Verdant_Treant:
+    id:            5034
+    species:       treant
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 388
+        entity_flags: 129
+        hitbox:        32
+      spawn:
+        respawn: 300
+
+  Wasp_Nest:
+    id:      4798
+    species: unclassified
+    type:    [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2781
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:          4
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+
+  Wooded_Ungeweder:
+    id:            4738
+    species:       earth_elemental
+    spell_list_id: 3
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 2150
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         15
+      spawn:
+        type: [weather]
+      stats:
+        mp: 5000
+
+spawns:
+  17842177:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17842178:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17842179:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17842180:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17842181:
+    script: Barnacled_Orobon
+    at:     [1.000, 1.000, 1.000]
+  17842182:
+    template: Calfcleaving_Chapuli
+    at:       [421.530, 0.090, 350.283, 108]
+    level:    [100, 101]
+  17842183:
+    template: Calfcleaving_Chapuli
+    at:       [420.510, 0.085, 349.446, 209]
+    level:    [100, 101]
+  17842184:
+    template: Calfcleaving_Chapuli
+    at:       [425.730, -0.017, 350.268, 88]
+    level:    [100, 101]
+  17842185:
+    template: Canopycrusher_Beetle
+    at:       [415.070, 0.055, 355.037, 156]
+    level:    [100, 101]
+  17842186:
+    template: Canopycrusher_Beetle
+    at:       [431.610, -0.165, 349.273, 134]
+    level:    [100, 101]
+  17842187:
+    template: Umbril
+    at:       [406.900, -0.172, 357.714, 73]
+    level:    [100, 101]
+  17842188:
+    template: Burning_Mantis
+    at:       [423.610, 0.030, 348.830, 37]
+    level:    [100, 102]
+  17842189:
+    template: Calfcleaving_Chapuli
+    at:       [421.880, 0.049, 326.253, 37]
+    level:    [100, 101]
+  17842190:
+    template: Calfcleaving_Chapuli
+    at:       [424.050, 0.063, 335.875, 170]
+    level:    [100, 101]
+  17842191:
+    template: Calfcleaving_Chapuli
+    at:       [433.710, 0.095, 336.174, 228]
+    level:    [100, 101]
+  17842192:
+    template: Canopycrusher_Beetle
+    at:       [410.600, 0.052, 329.947, 140]
+    level:    [100, 101]
+  17842193:
+    template: Canopycrusher_Beetle
+    at:       [409.440, 0.051, 332.268, 83]
+    level:    [100, 101]
+  17842194:
+    template: Umbril
+    at:       [407.610, 0.089, 331.180, 39]
+    level:    [100, 101]
+  17842195:
+    template: Burning_Mantis
+    at:       [431.500, 0.069, 335.920, 250]
+    level:    [100, 102]
+  17842196:
+    template: Twitherym_Infestation
+    at:       [355.560, -0.493, 395.937, 13]
+    level:    [100, 101]
+  17842197:
+    template: Twitherym_Infestation
+    at:       [354.080, -0.448, 404.393, 230]
+    level:    [100, 101]
+  17842198:
+    template: Twitherym_Infestation
+    at:       [353.800, -0.495, 398.796, 153]
+    level:    [100, 101]
+  17842199:
+    template: Twitherym_Infestation
+    at:       [363.230, -0.499, 392.212, 226]
+    level:    [100, 101]
+  17842200:
+    template: Twitherym_Infestation
+    at:       [360.610, -0.499, 399.372, 131]
+    level:    [100, 101]
+  17842201:
+    template: Umbril
+    at:       [357.200, -0.499, 391.907, 85]
+    level:    [100, 101]
+  17842202:
+    template: Calfcleaving_Chapuli
+    at:       [237.020, -0.093, 387.976, 190]
+    level:    [100, 101]
+  17842203:
+    template: Calfcleaving_Chapuli
+    at:       [232.640, -0.499, 395.812, 106]
+    level:    [100, 101]
+  17842204:
+    template: Canopycrusher_Beetle
+    at:       [245.300, -0.488, 397.757, 169]
+    level:    [100, 101]
+  17842205:
+    template: Umbril
+    at:       [238.680, -0.460, 398.915, 185]
+    level:    [100, 101]
+  17842206:
+    template: Calfcleaving_Chapuli
+    at:       [248.100, -0.483, 355.653, 212]
+    level:    [100, 101]
+  17842207:
+    template: Calfcleaving_Chapuli
+    at:       [247.780, -0.488, 362.394, 194]
+    level:    [100, 101]
+  17842208:
+    template: Canopycrusher_Beetle
+    at:       [235.410, -0.391, 364.894, 220]
+    level:    [100, 101]
+  17842209:
+    template: Umbril
+    at:       [242.690, -0.499, 358.459, 113]
+    level:    [100, 101]
+  17842210:
+    template: Twitherym_Infestation
+    at:       [309.500, -0.006, 227.089, 117]
+    level:    [100, 101]
+  17842211:
+    template: Twitherym_Infestation
+    at:       [281.770, -0.483, 241.052, 183]
+    level:    [100, 101]
+  17842212:
+    template: Twitherym_Infestation
+    at:       [280.830, -0.462, 241.067, 195]
+    level:    [100, 101]
+  17842213:
+    template: Twitherym_Infestation
+    at:       [315.910, 0.093, 221.621, 121]
+    level:    [100, 101]
+  17842214:
+    template: Umbril
+    at:       [311.320, 0.017, 226.085, 235]
+    level:    [100, 101]
+  17842215:
+    template: Burning_Mantis
+    at:       [317.400, 0.062, 226.649, 255]
+    level:    [100, 102]
+  17842216:
+    template: Twitherym_Infestation
+    at:       [283.840, -0.123, 209.755, 25]
+    level:    [100, 101]
+  17842217:
+    template: Twitherym_Infestation
+    at:       [296.800, -0.043, 216.343, 211]
+    level:    [100, 101]
+  17842218:
+    template: Twitherym_Infestation
+    at:       [289.930, -0.092, 202.847, 182]
+    level:    [100, 101]
+  17842219:
+    template: Twitherym_Infestation
+    at:       [297.120, -0.029, 209.490, 180]
+    level:    [100, 101]
+  17842220:
+    template: Umbril
+    at:       [291.810, -0.054, 217.167, 134]
+    level:    [100, 101]
+  17842221:
+    template: Burning_Mantis
+    at:       [313.310, -0.405, 199.141, 58]
+    level:    [100, 102]
+  17842222:
+    template: Calfcleaving_Chapuli
+    at:       [205.530, -0.188, 288.468, 217]
+    level:    [100, 101]
+  17842223:
+    template: Calfcleaving_Chapuli
+    at:       [192.590, -0.497, 282.877, 128]
+    level:    [100, 101]
+  17842224:
+    template: Calfcleaving_Chapuli
+    at:       [200.030, -0.499, 287.872, 198]
+    level:    [100, 101]
+  17842225:
+    template: Calfcleaving_Chapuli
+    at:       [204.820, -0.479, 280.833, 30]
+    level:    [100, 101]
+  17842226:
+    template: Wooded_Ungeweder
+    at:       [206.800, -0.423, 284.634, 50]
+    level:    [100, 101]
+  17842227:
+    template: Nettled_Wasp
+    at:       [169.620, -0.075, 199.776, 8]
+    level:    [100, 101]
+  17842228:
+    template: Nettled_Wasp
+    at:       [198.890, -0.483, 197.042, 240]
+    level:    [100, 101]
+  17842229:
+    template: Nettled_Wasp
+    at:       [195.000, -0.363, 199.539, 147]
+    level:    [100, 101]
+  17842230:
+    template: Nettled_Wasp
+    at:       [153.730, -0.499, 198.475, 97]
+    level:    [100, 101]
+  17842231:
+    template: Nettled_Wasp
+    at:       [200.220, -0.469, 204.473, 245]
+    level:    [100, 101]
+  17842232:
+    template: Nettled_Wasp
+    at:       [205.410, -0.499, 196.882, 241]
+    level:    [100, 101]
+  17842233:
+    template: Umbril
+    at:       [192.570, -0.012, 191.263, 80]
+    level:    [100, 101]
+  17842234:
+    template: Nettled_Wasp
+    at:       [183.050, -0.120, 163.845, 43]
+    level:    [100, 101]
+  17842235:
+    template: Nettled_Wasp
+    at:       [182.470, -0.165, 155.708, 28]
+    level:    [100, 101]
+  17842236:
+    template: Nettled_Wasp
+    at:       [177.380, -0.216, 156.796, 10]
+    level:    [100, 101]
+  17842237:
+    template: Twitherym_Infestation
+    at:       [153.310, -0.416, 82.258, 81]
+    level:    [100, 101]
+  17842238:
+    template: Twitherym_Infestation
+    at:       [154.320, -0.499, 80.732, 133]
+    level:    [100, 101]
+  17842239:
+    template: Twitherym_Infestation
+    at:       [154.270, -0.499, 77.890, 84]
+    level:    [100, 101]
+  17842240:
+    template: Twitherym_Infestation
+    at:       [168.010, -0.441, 83.514, 204]
+    level:    [100, 101]
+  17842241:
+    template: Twitherym_Infestation
+    at:       [154.400, -0.499, 82.550, 109]
+    level:    [100, 101]
+  17842242:
+    template: Umbril
+    at:       [157.670, -0.370, 87.974, 250]
+    level:    [100, 101]
+  17842243:
+    template: Nettled_Wasp
+    at:       [281.860, -0.493, 87.593, 228]
+    level:    [100, 101]
+  17842244:
+    template: Nettled_Wasp
+    at:       [276.040, -0.370, 77.703, 84]
+    level:    [100, 101]
+  17842245:
+    template: Nettled_Wasp
+    at:       [280.410, -0.347, 79.422, 104]
+    level:    [100, 101]
+  17842246:
+    template: Umbril
+    at:       [297.250, 0.036, 81.482, 252]
+    level:    [100, 101]
+  17842247:
+    template: Nettled_Wasp
+    at:       [318.300, -0.499, 79.468, 72]
+    level:    [100, 101]
+  17842248:
+    template: Nettled_Wasp
+    at:       [319.730, -0.497, 78.346, 102]
+    level:    [100, 101]
+  17842249:
+    template: Nettled_Wasp
+    at:       [322.420, -0.486, 80.391, 17]
+    level:    [100, 101]
+  17842250:
+    template: Calfcleaving_Chapuli
+    at:       [50.280, -0.064, 134.539, 205]
+    level:    [100, 101]
+  17842251:
+    template: Calfcleaving_Chapuli
+    at:       [51.469, 0.146, 117.392, 32]
+    level:    [100, 101]
+  17842252:
+    template: Calfcleaving_Chapuli
+    at:       [83.646, -0.657, 125.966, 226]
+    level:    [100, 101]
+  17842253:
+    template: Burning_Mantis
+    at:       [52.631, 0.052, 130.240, 135]
+    level:    [100, 102]
+  17842254:
+    template: Jungle_Baelfyr
+    at:       [52.134, 0.049, 123.259, 63]
+    level:    [100, 101]
+  17842255:
+    template: Calfcleaving_Chapuli
+    at:       [31.697, -0.495, 82.692, 93]
+    level:    [100, 101]
+  17842256:
+    template: Calfcleaving_Chapuli
+    at:       [32.341, -0.479, 84.593, 202]
+    level:    [100, 101]
+  17842257:
+    template: Calfcleaving_Chapuli
+    at:       [34.213, -0.446, 85.544, 134]
+    level:    [100, 101]
+  17842258:
+    template: Burning_Mantis
+    at:       [39.199, -0.204, 112.077, 106]
+    level:    [100, 102]
+  17842259:
+    template: Calfcleaving_Chapuli
+    at:       [12.883, 0.006, 198.949, 1]
+    level:    [100, 101]
+  17842260:
+    template: Calfcleaving_Chapuli
+    at:       [-0.310, -0.499, 199.266, 188]
+    level:    [100, 101]
+  17842261:
+    template: Burning_Mantis
+    at:       [1.396, -0.449, 197.975, 68]
+    level:    [100, 102]
+  17842262:
+    template: Calfcleaving_Chapuli
+    at:       [45.470, -0.236, 205.263, 215]
+    level:    [100, 101]
+  17842263:
+    template: Calfcleaving_Chapuli
+    at:       [46.823, -0.225, 205.070, 196]
+    level:    [100, 101]
+  17842264:
+    template: Calfcleaving_Chapuli
+    at:       [38.563, -0.446, 199.619, 117]
+    level:    [100, 101]
+  17842265:
+    template: Burning_Mantis
+    at:       [44.960, -0.451, 202.212, 153]
+    level:    [100, 102]
+  17842266:
+    template: Umbril
+    at:       [46.722, -0.238, 205.130, 216]
+    level:    [100, 101]
+  17842267:
+    template: Ulbukan_Sheep
+    at:       [86.151, -0.666, 274.851, 73]
+    level:    [100, 101]
+  17842268:
+    template: Ulbukan_Sheep
+    at:       [85.206, -0.685, 274.368, 15]
+    level:    [100, 101]
+  17842269:
+    template: Ulbukan_Sheep
+    at:       [74.873, -0.435, 276.634, 181]
+    level:    [100, 101]
+  17842270:
+    template: Umbril
+    at:       [78.486, -0.488, 286.375, 219]
+    level:    [100, 101]
+  17842271:
+    template: Ulbukan_Sheep
+    at:       [84.120, -0.426, 354.317, 102]
+    level:    [100, 101]
+  17842272:
+    template: Ulbukan_Sheep
+    at:       [101.050, 0.087, 352.257, 232]
+    level:    [100, 101]
+  17842273:
+    template: Ulbukan_Sheep
+    at:       [108.540, -0.008, 347.986, 33]
+    level:    [100, 101]
+  17842274:
+    template: Twitherym_Infestation
+    at:       [89.593, -0.391, 366.803, 175]
+    level:    [100, 101]
+  17842275:
+    template: Twitherym_Infestation
+    at:       [93.733, -0.224, 368.315, 211]
+    level:    [100, 101]
+  17842276:
+    template: Twitherym_Infestation
+    at:       [86.077, -0.273, 355.321, 12]
+    level:    [100, 101]
+  17842277:
+    template: Ulbukan_Sheep
+    at:       [118.720, -0.174, 368.363, 235]
+    level:    [100, 101]
+  17842278:
+    template: Ulbukan_Sheep
+    at:       [113.200, -0.166, 364.773, 72]
+    level:    [100, 101]
+  17842279:
+    template: Twitherym_Infestation
+    at:       [113.170, -0.470, 392.638, 97]
+    level:    [100, 101]
+  17842280:
+    template: Twitherym_Infestation
+    at:       [118.730, 0.045, 380.584, 209]
+    level:    [100, 101]
+  17842281:
+    template: Twitherym_Infestation
+    at:       [118.480, -0.125, 390.781, 49]
+    level:    [100, 101]
+  17842282:
+    template: Ulbukan_Sheep
+    at:       [5.182, -0.503, 400.645, 229]
+    level:    [100, 101]
+  17842283:
+    template: Ulbukan_Sheep
+    at:       [-0.828, -0.514, 407.707, 182]
+    level:    [100, 101]
+  17842284:
+    template: Ulbukan_Sheep
+    at:       [-6.293, -0.657, 396.321, 64]
+    level:    [100, 101]
+  17842285:
+    template: Ulbukan_Sheep
+    at:       [-1.090, -0.490, 398.604, 178]
+    level:    [100, 101]
+  17842286:
+    template: Ulbukan_Sheep
+    at:       [-163.200, -0.486, 235.085, 40]
+    level:    [100, 101]
+  17842287:
+    template: Ulbukan_Sheep
+    at:       [-160.600, -0.542, 241.860, 95]
+    level:    [100, 101]
+  17842288:
+    template: Ulbukan_Sheep
+    at:       [-167.500, -0.493, 241.651, 99]
+    level:    [100, 101]
+  17842289:
+    template: Ulbukan_Sheep
+    at:       [-160.500, -0.435, 237.871, 157]
+    level:    [100, 101]
+  17842290:
+    template: Twitherym_Infestation
+    at:       [-234.900, -0.560, 241.863, 48]
+    level:    [100, 101]
+  17842291:
+    template: Twitherym_Infestation
+    at:       [-239.600, -0.568, 246.033, 143]
+    level:    [100, 101]
+  17842292:
+    template: Twitherym_Infestation
+    at:       [-245.400, -0.657, 234.660, 105]
+    level:    [100, 101]
+  17842293:
+    template: Twitherym_Infestation
+    at:       [-243.000, -0.563, 236.438, 221]
+    level:    [100, 101]
+  17842294:
+    template: Umbril
+    at:       [-243.200, -0.513, 238.746, 11]
+    level:    [100, 101]
+  17842295:
+    template: Calfcleaving_Chapuli
+    at:       [-192.200, -0.209, 355.794, 168]
+    level:    [100, 101]
+  17842296:
+    template: Calfcleaving_Chapuli
+    at:       [-192.300, -0.216, 355.704, 175]
+    level:    [100, 101]
+  17842297:
+    template: Calfcleaving_Chapuli
+    at:       [-164.600, -0.305, 357.014, 141]
+    level:    [100, 101]
+  17842298:
+    template: Canopycrusher_Beetle
+    at:       [-173.400, -0.078, 342.575, 206]
+    level:    [100, 101]
+  17842299:
+    template: Canopycrusher_Beetle
+    at:       [-182.900, -0.052, 339.190, 117]
+    level:    [100, 101]
+  17842300:
+    template: Wooded_Ungeweder
+    at:       [-163.900, 0.095, 339.118, 118]
+    level:    [100, 101]
+  17842301:
+    template: Calfcleaving_Chapuli
+    at:       [-180.800, 0.087, 325.286, 224]
+    level:    [100, 101]
+  17842302:
+    template: Calfcleaving_Chapuli
+    at:       [-170.600, 0.029, 321.010, 84]
+    level:    [100, 101]
+  17842303:
+    template: Calfcleaving_Chapuli
+    at:       [-171.100, 0.036, 321.552, 71]
+    level:    [100, 101]
+  17842304:
+    template: Canopycrusher_Beetle
+    at:       [-180.000, 0.078, 318.828, 236]
+    level:    [100, 101]
+  17842305:
+    template: Canopycrusher_Beetle
+    at:       [-173.100, 0.049, 320.647, 10]
+    level:    [100, 101]
+  17842306:
+    template: Twitherym_Infestation
+    at:       [17.200, -0.421, -87.277, 15]
+    level:    [100, 101]
+  17842307:
+    template: Twitherym_Infestation
+    at:       [10.526, -0.224, -79.541, 129]
+    level:    [100, 101]
+  17842308:
+    template: Twitherym_Infestation
+    at:       [2.841, -0.503, -72.435, 159]
+    level:    [100, 101]
+  17842309:
+    template: Burning_Mantis
+    at:       [17.920, 0.100, -79.558, 135]
+    level:    [100, 102]
+  17842310:
+    template: Twitherym_Infestation
+    at:       [38.437, -0.407, -80.024, 231]
+    level:    [100, 101]
+  17842311:
+    template: Twitherym_Infestation
+    at:       [25.826, -0.514, -87.669, 82]
+    level:    [100, 101]
+  17842312:
+    template: Twitherym_Infestation
+    at:       [26.464, -0.245, -85.845, 201]
+    level:    [100, 101]
+  17842313:
+    template: Wooded_Ungeweder
+    at:       [25.537, -0.469, -87.773, 89]
+    level:    [100, 101]
+  17842314:
+    template: Twitherym_Infestation
+    at:       [39.384, -0.317, -113.260, 183]
+    level:    [100, 101]
+  17842315:
+    template: Twitherym_Infestation
+    at:       [36.458, 0.085, -99.609, 239]
+    level:    [100, 101]
+  17842316:
+    template: Twitherym_Infestation
+    at:       [31.320, -0.367, -109.310, 66]
+    level:    [100, 101]
+  17842317:
+    template: Burning_Mantis
+    at:       [36.519, -0.500, -117.320, 203]
+    level:    [100, 102]
+  17842318:
+    template: Pinetorum
+    at:       [231.570, -0.389, -76.345, 76]
+    level:    [100, 101]
+  17842319:
+    template: Pinetorum
+    at:       [233.220, -0.499, -80.156, 138]
+    level:    [100, 101]
+  17842320:
+    template: Pinetorum
+    at:       [239.150, -0.497, -74.402, 169]
+    level:    [100, 101]
+  17842321:
+    template: Pinetorum
+    at:       [232.900, -0.503, -78.624, 101]
+    level:    [100, 101]
+  17842322:
+    template: Wooded_Ungeweder
+    at:       [239.700, -0.455, -81.751, 157]
+    level:    [100, 101]
+  17842323:
+    template: Nettled_Wasp
+    at:       [45.056, -0.437, -235.100, 211]
+    level:    [100, 101]
+  17842324:
+    template: Nettled_Wasp
+    at:       [37.869, -0.507, -246.700, 52]
+    level:    [100, 101]
+  17842325:
+    template: Nettled_Wasp
+    at:       [44.599, -0.500, -237.740, 195]
+    level:    [100, 101]
+  17842326:
+    template: Nettled_Wasp
+    at:       [44.084, -0.689, -245.820, 15]
+    level:    [100, 101]
+  17842327:
+    template: Nettled_Wasp
+    at:       [45.505, -0.679, -245.410, 74]
+    level:    [100, 101]
+  17842328:
+    template: Wooded_Ungeweder
+    at:       [45.462, -0.708, -246.230, 77]
+    level:    [100, 101]
+  17842329:
+    template: Pinetorum
+    at:       [274.850, -0.254, -289.210, 119]
+    level:    [100, 101]
+  17842330:
+    template: Pinetorum
+    at:       [279.360, -0.439, -282.270, 214]
+    level:    [100, 101]
+  17842331:
+    template: Pinetorum
+    at:       [286.050, -0.451, -283.690, 237]
+    level:    [100, 101]
+  17842332:
+    template: Pinetorum
+    at:       [278.950, -0.446, -278.070, 17]
+    level:    [100, 101]
+  17842333:
+    template: Pinetorum
+    at:       [277.260, -0.349, -275.370, 155]
+    level:    [100, 101]
+  17842334:
+    template: Umbril
+    at:       [284.120, -0.412, -277.560, 109]
+    level:    [100, 101]
+  17842335:
+    template: Twitherym_Infestation
+    at:       [163.770, -0.493, -282.430, 139]
+    level:    [100, 101]
+  17842336:
+    template: Twitherym_Infestation
+    at:       [157.320, -0.508, -284.780, 55]
+    level:    [100, 101]
+  17842337:
+    template: Twitherym_Infestation
+    at:       [162.220, -0.493, -273.660, 184]
+    level:    [100, 101]
+  17842338:
+    template: Twitherym_Infestation
+    at:       [169.060, -0.515, -279.950, 32]
+    level:    [100, 101]
+  17842339:
+    template: Calfcleaving_Chapuli
+    at:       [215.220, 0.053, -362.320, 79]
+    level:    [100, 101]
+  17842340:
+    template: Calfcleaving_Chapuli
+    at:       [205.560, -0.386, -358.400, 232]
+    level:    [100, 101]
+  17842341:
+    template: Calfcleaving_Chapuli
+    at:       [234.120, -0.254, -361.570, 54]
+    level:    [100, 101]
+  17842342:
+    template: Calfcleaving_Chapuli
+    at:       [232.810, -0.273, -358.400, 233]
+    level:    [100, 101]
+  17842343:
+    template: Calfcleaving_Chapuli
+    at:       [221.580, 0.003, -373.240, 53]
+    level:    [100, 101]
+  17842344:
+    template: Calfcleaving_Chapuli
+    at:       [223.740, -0.086, -370.460, 219]
+    level:    [100, 101]
+  17842345:
+    template: Umbril
+    at:       [220.940, 0.005, -373.730, 53]
+    level:    [100, 101]
+  17842346:
+    template: Pinetorum
+    at:       [363.430, 0.045, 150.386, 229]
+    level:    [100, 101]
+  17842347:
+    template: Pinetorum
+    at:       [368.950, 0.245, 153.285, 29]
+    level:    [100, 101]
+  17842348:
+    template: Pinetorum
+    at:       [368.520, 0.300, 150.029, 228]
+    level:    [100, 101]
+  17842349:
+    template: Pinetorum
+    at:       [367.830, 0.113, 127.857, 153]
+    level:    [100, 101]
+  17842350:
+    template: Pinetorum
+    at:       [367.290, -0.164, 122.358, 117]
+    level:    [100, 101]
+  17842351:
+    template: Pinetorum
+    at:       [359.930, 0.103, 134.675, 159]
+    level:    [100, 101]
+  17842352:
+    template: Edacious_Orobon
+    at:       [392.960, 3.360, 151.660, 183]
+    level:    [100, 102]
+  17842353:
+    template: Edacious_Orobon
+    at:       [394.980, 3.390, 139.981, 125]
+    level:    [100, 102]
+  17842354:
+    template: Edacious_Orobon
+    at:       [401.080, 3.499, 121.380, 88]
+    level:    [100, 102]
+  17842355:
+    template: Edacious_Orobon
+    at:       [405.470, 3.499, 127.741, 59]
+    level:    [100, 102]
+  17842356:
+    template: Pinetorum
+    at:       [326.080, -0.034, -9.341, 147]
+    level:    [100, 101]
+  17842357:
+    template: Pinetorum
+    at:       [331.410, 0.201, -11.196, 113]
+    level:    [100, 101]
+  17842358:
+    template: Pinetorum
+    at:       [325.230, -0.261, -3.258, 49]
+    level:    [100, 101]
+  17842359:
+    template: Pinetorum
+    at:       [323.760, -0.059, -32.124, 42]
+    level:    [100, 101]
+  17842360:
+    template: Pinetorum
+    at:       [326.150, 0.016, -32.007, 79]
+    level:    [100, 101]
+  17842361:
+    template: Pinetorum
+    at:       [324.970, 0.040, -29.429, 208]
+    level:    [100, 101]
+  17842362:
+    template: Bight_Uragnite
+    at:       [360.430, 3.428, -8.344, 244]
+    level:    [100, 101]
+  17842363:
+    template: Bight_Uragnite
+    at:       [358.010, 3.481, -16.378, 170]
+    level:    [100, 101]
+  17842364:
+    template: Bight_Uragnite
+    at:       [359.110, 3.470, -39.292, 102]
+    level:    [100, 101]
+  17842365:
+    template: Bight_Uragnite
+    at:       [352.480, 2.904, -33.408, 97]
+    level:    [100, 101]
+  17842366:
+    template: Wooded_Ungeweder
+    at:       [365.130, 3.498, -27.850, 144]
+    level:    [100, 101]
+  17842367:
+    template: Luckybug_Hoarder
+    at:       [-230.600, -0.158, 127.386, 248]
+    level:    [100, 101]
+  17842368:
+    template: Luckybug_Hoarder
+    at:       [-242.300, -0.490, 120.211, 126]
+    level:    [100, 101]
+  17842369:
+    template: Luckybug_Hoarder
+    at:       [-239.700, -0.428, 118.897, 233]
+    level:    [100, 101]
+  17842370:
+    template: Numbing_Blossom
+    level:    [1, 1]
+  17842371:
+    template: Beady_Panopt
+    at:       [-315.100, -0.633, 166.320]
+    level:    [100, 101]
+  17842372:
+    template: Beady_Panopt
+    at:       [-317.700, -0.126, 150.526]
+    level:    [100, 101]
+  17842373:
+    template: Beady_Panopt
+    at:       [-314.100, -0.703, 165.386]
+    level:    [100, 101]
+  17842374:
+    template: Numbing_Blossom
+    at:       [-321.500, 0.023, 147.074, 8]
+    level:    [1, 1]
+  17842375:
+    template: Beady_Panopt
+    at:       [-312.000, -0.500, 119.847]
+    level:    [100, 101]
+  17842376:
+    template: Beady_Panopt
+    at:       [-325.400, 0.035, 130.759]
+    level:    [100, 101]
+  17842377:
+    template: Beady_Panopt
+    at:       [-313.000, -0.500, 118.872]
+    level:    [100, 101]
+  17842378:
+    template: Numbing_Blossom
+    level:    [1, 1]
+  17842379:
+    template: Beady_Panopt
+    at:       [-339.500, -0.023, 132.889]
+    level:    [100, 101]
+  17842380:
+    template: Monstrosiraptor
+    at:       [-387.500, 0.084, 247.481, 27]
+    level:    [100, 101]
+  17842381:
+    template: Monstrosiraptor
+    at:       [-396.600, -0.331, 241.800, 14]
+    level:    [100, 101]
+  17842382:
+    template: Hinterland_Peiste
+    at:       [-388.155, -0.153, 250.625, 238]
+    level:    [101, 103]
+  17842383:
+    template: Jungle_Baelfyr
+    at:       [-393.700, -0.136, 246.957, 101]
+    level:    [100, 101]
+  17842384:
+    template: Monstrosiraptor
+    at:       [-366.800, -0.180, 247.240, 138]
+    level:    [100, 101]
+  17842385:
+    template: Monstrosiraptor
+    at:       [-380.400, 0.089, 244.154, 182]
+    level:    [100, 101]
+  17842386:
+    template: Hinterland_Peiste
+    at:       [-361.800, -0.476, 244.957, 203]
+    level:    [101, 103]
+  17842387:
+    template: Numbing_Blossom
+    at:       [-378.600, 0.100, 246.934, 39]
+    level:    [1, 1]
+  17842388:
+    template: Monstrosiraptor
+    at:       [-427.300, 0.034, 353.962, 77]
+    level:    [100, 101]
+  17842389:
+    template: Monstrosiraptor
+    at:       [-419.500, 0.074, 356.963, 149]
+    level:    [100, 101]
+  17842390:
+    template: Monstrosiraptor
+    at:       [-401.800, 0.053, 340.075, 38]
+    level:    [100, 101]
+  17842391:
+    template: Monstrosiraptor
+    at:       [-406.100, -0.259, 355.964, 163]
+    level:    [100, 101]
+  17842392:
+    template: Jungle_Baelfyr
+    at:       [-401.700, -0.435, 357.626]
+    level:    [100, 101]
+  17842393:
+    template: Hinterland_Peiste
+    at:       [-418.700, 0.092, 355.770, 169]
+    level:    [101, 103]
+  17842394:
+    template: Numbing_Blossom
+    at:       [-406.300, -0.321, 354.061, 71]
+    level:    [1, 1]
+  17842395:
+    template: Monstrosiraptor
+    at:       [-412.600, 0.007, 330.010, 198]
+    level:    [100, 101]
+  17842396:
+    template: Monstrosiraptor
+    at:       [-399.200, -0.144, 327.794, 51]
+    level:    [100, 101]
+  17842397:
+    template: Monstrosiraptor
+    at:       [-430.800, -0.090, 324.165, 176]
+    level:    [100, 101]
+  17842398:
+    template: Monstrosiraptor
+    at:       [-423.300, 0.023, 326.028, 35]
+    level:    [100, 101]
+  17842399:
+    template: Hinterland_Peiste
+    at:       [-417.489, 0.062, 329.008, 79]
+    level:    [101, 103]
+  17842400:
+    template: Numbing_Blossom
+    at:       [-397.237, -0.055, 330.891, 34]
+    level:    [1, 1]
+  17842401:
+    template: Beady_Panopt
+    at:       [-529.000, -0.500, 241.735]
+    level:    [100, 101]
+  17842402:
+    template: Beady_Panopt
+    at:       [-520.500, -0.500, 239.718]
+    level:    [100, 101]
+  17842403:
+    template: Beady_Panopt
+    at:       [-524.900, -0.639, 234.270]
+    level:    [100, 101]
+  17842404:
+    template: Numbing_Blossom
+    at:       [-526.900, -0.500, 240.744, 22]
+    level:    [1, 1]
+  17842405:
+    template: Luckybug_Hoarder
+    at:       [-397.700, -0.497, 80.084, 159]
+    level:    [100, 101]
+  17842406:
+    template: Luckybug_Hoarder
+    at:       [-399.900, -0.517, 86.729, 209]
+    level:    [100, 101]
+  17842407:
+    template: Verdant_Treant
+    at:       [-392.900, -0.500, 79.659, 211]
+    level:    [100, 102]
+  17842408:
+    template: Numbing_Blossom
+    at:       [-404.800, -0.419, 74.940, 99]
+    level:    [1, 1]
+  17842409:
+    template: Luckybug_Hoarder
+    at:       [-404.951, -0.483, 45.908, 159]
+    level:    [100, 101]
+  17842410:
+    template: Luckybug_Hoarder
+    at:       [-400.838, -0.093, 52.030, 159]
+    level:    [100, 101]
+  17842411:
+    template: Verdant_Treant
+    at:       [-405.524, -0.454, 46.528, 96]
+    level:    [100, 102]
+  17842412:
+    template: Numbing_Blossom
+    at:       [-395.592, -0.478, 44.285, 78]
+    level:    [1, 1]
+  17842413:
+    template: Twitherym_Infestation
+    at:       [-473.325, -0.384, -36.286, 64]
+    level:    [100, 101]
+  17842414:
+    template: Twitherym_Infestation
+    at:       [-475.449, -0.503, -37.827, 23]
+    level:    [100, 101]
+  17842415:
+    template: Twitherym_Infestation
+    at:       [-484.059, -0.523, -40.567, 244]
+    level:    [100, 101]
+  17842416:
+    template: Numbing_Blossom
+    at:       [-484.285, -0.541, -33.849, 26]
+    level:    [1, 1]
+  17842417:
+    template: Beady_Panopt
+    at:       [-191.768, -0.500, 0.979, 11]
+    level:    [100, 101]
+  17842418:
+    template: Beady_Panopt
+    at:       [-206.219, -0.500, 1.495]
+    level:    [100, 101]
+  17842419:
+    template: Beady_Panopt
+    at:       [-194.977, -0.649, -6.121]
+    level:    [100, 101]
+  17842420:
+    template: Wooded_Ungeweder
+    at:       [-205.932, -0.680, 3.816, 26]
+    level:    [100, 101]
+  17842421:
+    template: Numbing_Blossom
+    at:       [-200.735, -0.500, 8.272, 124]
+    level:    [1, 1]
+  17842422:
+    template: Luckybug_Hoarder
+    at:       [-235.978, -0.658, -75.604, 230]
+    level:    [100, 101]
+  17842423:
+    template: Luckybug_Hoarder
+    at:       [-247.710, -0.189, -88.153, 97]
+    level:    [100, 101]
+  17842424:
+    template: Luckybug_Hoarder
+    at:       [-235.845, -0.641, -75.180, 252]
+    level:    [100, 101]
+  17842425:
+    template: Jungle_Baelfyr
+    at:       [-245.054, -0.686, -75.471, 123]
+    level:    [100, 101]
+  17842426:
+    template: Numbing_Blossom
+    at:       [-241.408, -0.500, -73.258, 71]
+    level:    [1, 1]
+  17842427:
+    template: Verdant_Treant
+    at:       [-455.690, -0.014, -168.438, 136]
+    level:    [100, 102]
+  17842428:
+    template: Verdant_Treant
+    at:       [-436.306, -0.565, -159.869, 93]
+    level:    [100, 102]
+  17842429:
+    template: Hinterland_Peiste
+    at:       [-448.155, -0.318, -165.197, 218]
+    level:    [101, 103]
+  17842430:
+    template: Verdant_Treant
+    at:       [-476.000, -0.048, -175.880, 165]
+    level:    [100, 102]
+  17842431:
+    template: Verdant_Treant
+    at:       [-455.600, -0.014, -168.430, 136]
+    level:    [100, 102]
+  17842432:
+    template: Hinterland_Peiste
+    at:       [-471.200, -0.416, -192.550, 40]
+    level:    [101, 103]
+  17842433:
+    template: Verdant_Treant
+    at:       [-478.200, -0.328, -165.000, 53]
+    level:    [100, 102]
+  17842434:
+    template: Jungle_Baelfyr
+    at:       [-484.500, -0.500, -161.070, 154]
+    level:    [100, 101]
+  17842435:
+    template: Numbing_Blossom
+    at:       [-468.100, -0.006, -163.780, 96]
+    level:    [1, 1]
+  17842436:
+    template: Nettled_Wasp
+    at:       [-400.900, -0.528, -317.380, 17]
+    level:    [100, 101]
+  17842437:
+    template: Nettled_Wasp
+    at:       [-403.200, -0.199, -333.470, 155]
+    level:    [100, 101]
+  17842438:
+    template: Luckybug_Hoarder
+    at:       [-404.600, -0.577, -315.490, 193]
+    level:    [100, 101]
+  17842439:
+    template: Luckybug_Hoarder
+    at:       [-401.900, -0.046, -336.820, 19]
+    level:    [100, 101]
+  17842440:
+    template: Nettled_Wasp
+    at:       [-411.400, 0.153, -352.320, 137]
+    level:    [100, 101]
+  17842441:
+    template: Nettled_Wasp
+    at:       [-408.200, -0.127, -360.130, 56]
+    level:    [100, 101]
+  17842442:
+    template: Luckybug_Hoarder
+    at:       [-402.000, -0.238, -349.520, 27]
+    level:    [100, 101]
+  17842443:
+    template: Luckybug_Hoarder
+    at:       [-409.100, -0.160, -360.530, 207]
+    level:    [100, 101]
+  17842444:
+    template: Nettled_Wasp
+    at:       [-430.200, -0.067, -359.410, 249]
+    level:    [100, 101]
+  17842445:
+    template: Nettled_Wasp
+    at:       [-426.800, -0.175, -352.640, 171]
+    level:    [100, 101]
+  17842446:
+    template: Numbing_Blossom
+    at:       [-433.700, -0.354, -353.930, 51]
+    level:    [1, 1]
+  17842447:
+    template: Broad_Scarlet
+    at:       [-161.500, -0.488, -125.020, 73]
+    level:    [100, 101]
+  17842448:
+    template: Broad_Scarlet
+    at:       [-156.200, -0.490, -115.020, 216]
+    level:    [100, 101]
+  17842449:
+    template: Broad_Scarlet
+    at:       [-131.500, -0.150, -120.160, 1]
+    level:    [100, 101]
+  17842450:
+    template: Broad_Scarlet
+    at:       [-126.100, -0.435, -124.650, 167]
+    level:    [100, 101]
+  17842451:
+    template: Fiery_Wasp
+    at:       [-211.300, -0.252, -205.710, 98]
+    level:    [100, 101]
+  17842452:
+    template: Fiery_Wasp
+    at:       [-206.800, -0.444, -207.040, 101]
+    level:    [100, 101]
+  17842453:
+    template: Fiery_Wasp
+    at:       [-206.300, -0.449, -207.970, 114]
+    level:    [100, 101]
+  17842454:
+    template: Fiery_Wasp
+    at:       [-203.600, -0.423, -195.540, 239]
+    level:    [100, 101]
+  17842455:
+    template: Fiery_Wasp
+    at:       [-229.800, -0.086, -213.880, 211]
+    level:    [100, 101]
+  17842456:
+    template: Fiery_Wasp
+    at:       [-239.200, -0.409, -204.190, 181]
+    level:    [100, 101]
+  17842457:
+    template: Broad_Scarlet
+    at:       [-228.900, 0.049, -209.370, 142]
+    level:    [100, 101]
+  17842458:
+    template: Broad_Scarlet
+    at:       [-226.400, 0.124, -205.640, 49]
+    level:    [100, 101]
+  17842459:
+    template: Jungle_Baelfyr
+    at:       [-234.200, -0.181, -207.650, 1]
+    level:    [100, 101]
+  17842460:
+    template: Broad_Scarlet
+    at:       [-241.100, 0.049, -227.560, 248]
+    level:    [100, 101]
+  17842461:
+    template: Broad_Scarlet
+    at:       [-231.900, -0.358, -224.220, 233]
+    level:    [100, 101]
+  17842462:
+    template: Broad_Scarlet
+    at:       [-234.900, -0.243, -231.270, 166]
+    level:    [100, 101]
+  17842463:
+    template: Broad_Scarlet
+    at:       [-231.500, -0.465, -230.240, 225]
+    level:    [100, 101]
+  17842464:
+    template: Broad_Scarlet
+    at:       [-83.380, -0.499, -200.860, 144]
+    level:    [100, 101]
+  17842465:
+    template: Broad_Scarlet
+    at:       [-76.320, -0.500, -200.190, 132]
+    level:    [100, 101]
+  17842466:
+    template: Broad_Scarlet
+    at:       [-85.210, -0.433, -201.450, 183]
+    level:    [100, 101]
+  17842467:
+    template: Broad_Scarlet
+    at:       [-85.890, -0.217, -192.500, 190]
+    level:    [100, 101]
+  17842468:
+    template: Wooded_Ungeweder
+    at:       [-72.830, -0.492, -198.810, 248]
+    level:    [100, 101]
+  17842469:
+    template: Fiery_Wasp
+    at:       [-56.110, -0.064, -333.510, 92]
+    level:    [100, 101]
+  17842470:
+    template: Fiery_Wasp
+    at:       [-57.410, 0.081, -319.210, 139]
+    level:    [100, 101]
+  17842471:
+    template: Fiery_Wasp
+    at:       [-54.390, 0.057, -320.870, 203]
+    level:    [100, 101]
+  17842472:
+    template: Fiery_Wasp
+    at:       [-69.160, -0.071, -318.390]
+    level:    [100, 101]
+  17842473:
+    template: Fiery_Wasp
+    at:       [-67.830, 0.022, -320.660, 205]
+    level:    [100, 101]
+  17842474:
+    template: Fiery_Wasp
+    at:       [-85.990, -0.495, -318.890, 141]
+    level:    [100, 101]
+  17842475:
+    template: Jungle_Baelfyr
+    at:       [-81.110, -0.490, -320.330, 183]
+    level:    [100, 101]
+  17842476:
+    template: Fiery_Wasp
+    at:       [-195.800, -0.497, -359.150, 243]
+    level:    [100, 101]
+  17842477:
+    template: Fiery_Wasp
+    at:       [-198.800, -0.527, -359.940, 137]
+    level:    [100, 101]
+  17842478:
+    template: Fiery_Wasp
+    at:       [-208.400, -0.282, -356.110, 226]
+    level:    [100, 101]
+  17842479:
+    template: Wooded_Ungeweder
+    at:       [-200.700, -0.499, -353.780, 167]
+    level:    [100, 101]
+  17842480:
+    template: Nettled_Wasp
+    at:       [-242.600, -0.526, -363.030, 58]
+    level:    [100, 101]
+  17842481:
+    template: Nettled_Wasp
+    at:       [-238.800, -0.500, -353.920, 144]
+    level:    [100, 101]
+  17842482:
+    template: Nettled_Wasp
+    at:       [-246.800, -0.546, -359.050, 15]
+    level:    [100, 101]
+  17842483:
+    template: Twitherym_Infestation
+    at:       [334.750, 2.382, 300.713, 177]
+    level:    [100, 101]
+  17842484:
+    template: Twitherym_Infestation
+    at:       [344.110, 1.451, 301.295, 228]
+    level:    [100, 101]
+  17842485:
+    template: Twitherym_Infestation
+    at:       [342.020, 0.781, 296.351, 99]
+    level:    [100, 101]
+  17842486:
+    template: Twitherym_Infestation
+    at:       [335.270, 2.306, 298.578, 74]
+    level:    [100, 101]
+  17842487:
+    template: Luckybug_Hoarder
+    at:       [-457.600, 1.768, 218.789, 160]
+    level:    [100, 101]
+  17842488:
+    template: Luckybug_Hoarder
+    at:       [-456.700, 0.837, 216.419, 100]
+    level:    [100, 101]
+  17842489:
+    template: Luckybug_Hoarder
+    at:       [-454.400, 1.725, 222.194, 248]
+    level:    [100, 101]
+  17842490:
+    template: Twitherym_Infestation
+    at:       [-377.800, 2.002, 138.259, 187]
+    level:    [100, 101]
+  17842491:
+    template: Twitherym_Infestation
+    at:       [-373.600, 1.847, 143.701, 12]
+    level:    [100, 101]
+  17842492:
+    template: Twitherym_Infestation
+    at:       [-379.000, 2.251, 139.240, 221]
+    level:    [100, 101]
+  17842493:
+    template: Calfcleaving_Chapuli
+    at:       [-420.400, 2.810, -27.825, 195]
+    level:    [100, 101]
+  17842494:
+    template: Calfcleaving_Chapuli
+    at:       [-419.700, 1.818, -20.482, 45]
+    level:    [100, 101]
+  17842495:
+    template: Calfcleaving_Chapuli
+    at:       [-421.200, 2.349, -25.826, 36]
+    level:    [100, 101]
+  17842496:
+    template: Luckybug_Hoarder
+    at:       [-260.800, 2.331, -25.142, 49]
+    level:    [100, 101]
+  17842497:
+    template: Luckybug_Hoarder
+    at:       [-259.400, 2.695, -25.163, 85]
+    level:    [100, 101]
+  17842498:
+    template: Luckybug_Hoarder
+    at:       [-261.600, 2.347, -25.200, 29]
+    level:    [100, 101]
+  17842499:
+    template: Twitherym_Infestation
+    at:       [284.070, 0.021, 420.977, 255]
+    level:    [100, 101]
+  17842500:
+    template: Twitherym_Infestation
+    at:       [281.780, 0.052, 421.225, 128]
+    level:    [100, 101]
+  17842501:
+    template: Twitherym_Infestation
+    at:       [309.610, 0.948, 419.187, 117]
+    level:    [100, 101]
+  17842502:
+    template: Twitherym_Infestation
+    at:       [317.340, 0.023, 421.239, 127]
+    level:    [100, 101]
+  17842503:
+    template: Nettled_Wasp
+    at:       [139.200, 0.120, 247.505, 183]
+    level:    [100, 101]
+  17842504:
+    template: Nettled_Wasp
+    at:       [137.880, 0.393, 250.781, 47]
+    level:    [100, 101]
+  17842505:
+    template: Nettled_Wasp
+    at:       [138.500, 2.617, 266.855, 192]
+    level:    [100, 101]
+  17842506:
+    template: Nettled_Wasp
+    at:       [146.040, 1.492, 267.994, 146]
+    level:    [100, 101]
+  17842507:
+    template: Twitherym_Infestation
+    at:       [217.450, 0.089, 156.764, 75]
+    level:    [100, 101]
+  17842508:
+    template: Twitherym_Infestation
+    at:       [237.400, -0.048, 141.123, 123]
+    level:    [100, 101]
+  17842509:
+    template: Twitherym_Infestation
+    at:       [259.210, 0.028, 113.246, 63]
+    level:    [100, 101]
+  17842510:
+    template: Twitherym_Infestation
+    at:       [218.770, -0.020, 38.263, 197]
+    level:    [100, 101]
+  17842511:
+    template: Twitherym_Infestation
+    at:       [218.430, -0.027, 42.247, 187]
+    level:    [100, 101]
+  17842512:
+    template: Twitherym_Infestation
+    at:       [230.820, 0.496, 65.007, 152]
+    level:    [100, 101]
+  17842513:
+    template: Twitherym_Infestation
+    at:       [235.570, 0.103, 60.535, 125]
+    level:    [100, 101]
+  17842514:
+    template: Calfcleaving_Chapuli
+    at:       [257.890, -0.001, -120.040, 63]
+    level:    [100, 101]
+  17842515:
+    template: Calfcleaving_Chapuli
+    at:       [260.510, 1.893, -144.320, 128]
+    level:    [100, 101]
+  17842516:
+    template: Nettled_Wasp
+    at:       [179.080, 0.055, -84.044, 61]
+    level:    [100, 101]
+  17842517:
+    template: Nettled_Wasp
+    at:       [137.780, 2.493, -96.574, 163]
+    level:    [100, 101]
+  17842518:
+    template: Nettled_Wasp
+    at:       [139.160, -0.004, -123.350, 190]
+    level:    [100, 101]
+  17842519:
+    template: Twitherym_Infestation
+    at:       [-23.060, 1.706, -17.533, 251]
+    level:    [100, 101]
+  17842520:
+    template: Twitherym_Infestation
+    at:       [-50.130, -0.064, -20.107, 140]
+    level:    [100, 101]
+  17842521:
+    template: Twitherym_Infestation
+    at:       [-19.170, -0.068, -39.401, 193]
+    level:    [100, 101]
+  17842522:
+    template: Calfcleaving_Chapuli
+    at:       [-141.500, 1.220, 51.904, 181]
+    level:    [100, 101]
+  17842523:
+    template: Calfcleaving_Chapuli
+    at:       [-139.100, 0.044, 81.849, 192]
+    level:    [100, 101]
+  17842524:
+    template: Beady_Panopt
+    at:       [-218.600, 2.761, 53.864]
+    level:    [100, 101]
+  17842525:
+    template: Beady_Panopt
+    at:       [-239.300, -0.197, 61.584]
+    level:    [100, 101]
+  17842526:
+    template: Beady_Panopt
+    at:       [-222.400, -0.082, 92.090]
+    level:    [100, 101]
+  17842527:
+    template: Broad_Scarlet
+    at:       [-133.300, 1.724, -216.280, 53]
+    level:    [100, 101]
+  17842528:
+    template: Broad_Scarlet
+    at:       [-142.200, 2.257, -219.420, 78]
+    level:    [100, 101]
+  17842529:
+    template: Broad_Scarlet
+    at:       [-132.300, 0.840, -219.130, 54]
+    level:    [100, 101]
+  17842530:
+    template: Shy_Heartwing
+    at:       [338.870, -0.024, 270.743, 207]
+    level:    [100, 101]
+  17842531:
+    template: Frondescent_Leafkin
+    at:       [71.702, -0.068, 268.074, 78]
+    level:    [100, 101]
+  17842532:
+    template: Velkk_Marauder
+    at:       [-345.400, 0.078, 141.557, 130]
+    level:    [100, 103]
+  17842533:
+    template: Velkk_Marauder
+    at:       [-85.260, -0.226, -191.320, 164]
+    level:    [100, 103]
+  17842534:
+    template: Velkk_Marauder
+    at:       [-127.400, -0.337, 166.201, 57]
+    level:    [100, 103]
+  17842535:
+    template: Velkk_Marauder
+    at:       [204.070, -0.433, 201.652, 70]
+    level:    [100, 103]
+  17842536:
+    script: Alluring_Orobon
+  17842537:
+    template: Startled_Uragnite
+    at:       [353.960, 3.127, 8.217]
+    level:    [100, 101]
+  17842538:
+    template: Bothersome_Chapuli
+    at:       [26.180, -0.227, 205.247, 22]
+  17842539:
+    template: Wasp_Nest
+    at:       [280.100, -0.500, 321.200, 21]
+    level:    [100, 101]
+  17842540:
+    template: Cerise_Wasp
+    at:       [279.780, -0.493, 316.063, 101]
+    level:    [100, 101]
+  17842541:
+    template: Cerise_Wasp
+    at:       [276.850, -0.493, 326.049, 175]
+    level:    [100, 101]
+  17842542:
+    template: Temblor_Beetle
+    at:       [276.650, -0.493, 317.704, 211]
+    level:    [100, 103]
+  17842543:
+    template: Wasp_Nest
+    at:       [-39.290, -0.500, 280.600, 3]
+    level:    [100, 101]
+  17842544:
+    template: Cerise_Wasp
+    at:       [-43.830, -0.564, 277.709, 216]
+    level:    [100, 101]
+  17842545:
+    template: Cerise_Wasp
+    at:       [-29.480, 0.037, 274.128, 1]
+    level:    [100, 101]
+  17842546:
+    template: Thrashing_Mantis
+    at:       [-32.350, -0.006, 272.925, 105]
+    level:    [100, 101]
+  17842547:
+    template: Wasp_Nest
+    at:       [-440.000, -0.500, 160.000, 121]
+    level:    [100, 101]
+  17842548:
+    template: Cerise_Wasp
+    at:       [-441.200, -0.509, 153.391, 69]
+    level:    [100, 101]
+  17842549:
+    template: Cerise_Wasp
+    at:       [-439.400, -0.513, 164.886, 155]
+    level:    [100, 101]
+  17842550:
+    template: Shrubshredder_Chapuli
+    at:       [-427.400, -0.074, 149.712, 21]
+    level:    [100, 103]
+  17842551:
+    template: Wasp_Nest
+    at:       [-360.000, -0.500, -80.000, 122]
+    level:    [100, 101]
+  17842552:
+    template: Cerise_Wasp
+    at:       [-358.600, -0.418, -83.410, 182]
+    level:    [100, 101]
+  17842553:
+    template: Cerise_Wasp
+    at:       [-361.700, -0.446, -82.519, 226]
+    level:    [100, 101]
+  17842554:
+    template: Quivering_Twitherym
+    at:       [-365.600, -0.675, -85.301, 55]
+    level:    [100, 103]
+  17842555:
+    template: Wasp_Nest
+    at:       [-40.000, -0.500, -240.000, 22]
+    level:    [100, 101]
+  17842556:
+    template: Cerise_Wasp
+    at:       [-37.590, -0.500, -247.070, 89]
+    level:    [100, 101]
+  17842557:
+    template: Cerise_Wasp
+    at:       [-36.660, -0.481, -247.190, 103]
+    level:    [100, 101]
+  17842558:
+    template: Red_Dropwing
+    at:       [-39.860, -0.513, -234.750, 215]
+    level:    [100, 101]
+  17842559:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [120.500, -1.000, -173.000, 46]
+    level:    [100, 103]
+  17842560:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [120.500, -1.000, -178.000, 49]
+    level:    [100, 103]
+  17842561:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [120.500, -1.000, -183.000, 10]
+    level:    [100, 103]
+  17842562:
+    template: Shrubshredder_Chapuli
+    at:       [148.990, -0.032, -182.180, 196]
+    level:    [100, 103]
+  17842563:
+    template: Shrubshredder_Chapuli
+    at:       [131.820, -0.112, -182.140, 65]
+    level:    [100, 103]
+  17842564:
+    template: Shrubshredder_Chapuli
+    at:       [104.550, 0.485, -180.340, 30]
+    level:    [100, 103]
+  17842565:
+    template: Shrubshredder_Chapuli
+    at:       [107.490, 0.230, -179.310, 243]
+    level:    [100, 103]
+  17842566:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [160.500, -1.000, -13.000, 114]
+    level:    [100, 103]
+  17842567:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [160.500, -1.000, -18.000, 100]
+    level:    [100, 103]
+  17842568:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [160.500, -1.000, -23.000, 99]
+    level:    [100, 103]
+  17842569:
+    template: Lancing_Wasp
+    at:       [167.780, -0.601, -10.420, 181]
+    level:    [100, 103]
+  17842570:
+    template: Lancing_Wasp
+    at:       [178.100, -0.064, -21.895, 63]
+    level:    [100, 103]
+  17842571:
+    template: Lancing_Wasp
+    at:       [147.970, -0.014, -16.791, 154]
+    level:    [100, 103]
+  17842572:
+    template: Lancing_Wasp
+    at:       [134.380, 1.487, -15.782, 190]
+    level:    [100, 103]
+  17842573:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-159.500, -1.000, 147.000, 88]
+    level:    [100, 103]
+  17842574:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-159.500, -1.000, 142.000, 39]
+    level:    [100, 103]
+  17842575:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-159.500, -1.000, 137.000, 87]
+    level:    [100, 103]
+  17842576:
+    template: Temblor_Beetle
+    at:       [-148.600, -0.136, 145.675, 168]
+    level:    [100, 103]
+  17842577:
+    template: Temblor_Beetle
+    at:       [-148.900, -0.138, 135.897, 160]
+    level:    [100, 103]
+  17842578:
+    template: Temblor_Beetle
+    at:       [-137.900, -0.018, 138.908, 154]
+    level:    [100, 103]
+  17842579:
+    template: Temblor_Beetle
+    at:       [-173.900, 0.130, 137.255, 177]
+    level:    [100, 103]
+  17842580:
+    template: Temblor_Beetle
+    at:       [-170.000, -0.526, 146.152, 116]
+    level:    [100, 103]
+  17842581:
+    template: Temblor_Beetle
+    at:       [-181.400, 1.233, 143.766, 228]
+    level:    [100, 103]
+  17842582:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-97.000, -1.000, -39.500, 44]
+    level:    [100, 103]
+  17842583:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-102.000, -1.000, -39.500, 104]
+    level:    [100, 103]
+  17842584:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-107.000, -1.000, -39.500, 49]
+    level:    [100, 103]
+  17842585:
+    template: Lancing_Wasp
+    at:       [-106.800, -0.185, -28.215, 226]
+    level:    [100, 103]
+  17842586:
+    template: Lancing_Wasp
+    at:       [-99.460, 0.084, -25.087, 198]
+    level:    [100, 103]
+  17842587:
+    template: Lancing_Wasp
+    at:       [-99.460, 0.075, -28.363, 209]
+    level:    [100, 103]
+  17842588:
+    template: Lancing_Wasp
+    at:       [-101.700, 0.333, -54.943, 216]
+    level:    [100, 103]
+  17842589:
+    template: Lancing_Wasp
+    at:       [-104.300, 0.575, -58.199, 190]
+    level:    [100, 103]
+  17842590:
+    template: Lancing_Wasp
+    at:       [-96.130, -0.068, -51.497, 196]
+    level:    [100, 103]
+  17842591:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-320.500, -1.000, -217.000, 13]
+    level:    [100, 103]
+  17842592:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-320.500, -1.000, -222.000, 84]
+    level:    [100, 103]
+  17842593:
+    template: Knotted_Root_YHG_CB
+    script:   Knotted_Root
+    at:       [-320.500, -1.000, -227.000, 68]
+    level:    [100, 103]
+  17842594:
+    template: Quivering_Twitherym
+    at:       [-337.600, 0.013, -218.630, 65]
+    level:    [100, 103]
+  17842595:
+    template: Quivering_Twitherym
+    at:       [-334.300, 0.076, -221.920, 54]
+    level:    [100, 103]
+  17842596:
+    template: Quivering_Twitherym
+    at:       [-337.100, 0.042, -219.710, 154]
+    level:    [100, 103]
+  17842597:
+    template: Quivering_Twitherym
+    at:       [-305.700, 0.214, -221.890, 183]
+    level:    [100, 103]
+  17842598:
+    template: Quivering_Twitherym
+    at:       [-305.300, 0.054, -224.260, 126]
+    level:    [100, 103]
+  17842599:
+    template: Quivering_Twitherym
+    at:       [-296.200, 1.558, -221.810, 180]
+    level:    [100, 103]

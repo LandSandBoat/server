@@ -1,0 +1,746 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16810000:
+    script:       qm
+    display_name: ???
+    at:           [-565.000, 2.999, -431.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 1348
+      entity_flags:  665
+      animation:     despawn
+      animation_sub: 8
+      name_prefix:   32
+      moving:        7
+    status:  status_7
+    content: COP
+
+  16810005:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-563.149, 2.989, -429.273, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810006:
+    script:       qm
+    display_name: ???
+    at:           [-6.000, 2.924, 129.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 1348
+      entity_flags:  665
+      animation:     despawn
+      animation_sub: 8
+      name_prefix:   32
+      moving:        7
+    status:  status_7
+    content: COP
+
+  16810011:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-3.236, 2.996, 130.630, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810012:
+    script:       qm
+    display_name: ???
+    at:           [474.000, 2.924, 609.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 1348
+      entity_flags:  665
+      animation:     despawn
+      animation_sub: 8
+      name_prefix:   32
+      moving:        7
+    status:  status_7
+    content: COP
+
+  16810017:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [476.777, 2.993, 610.709, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810019:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-563.149, 2.989, -429.273, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810021:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-3.236, 2.996, 130.630, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810023:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [476.777, 2.993, 610.709, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810032:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-563.149, 2.989, -429.273, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810041:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-3.236, 2.996, 130.630, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810050:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [476.777, 2.993, 610.709, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810061:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-563.149, 2.989, -429.273, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810072:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-3.236, 2.996, 130.630, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810083:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [476.777, 2.993, 610.709, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810089:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-563.149, 2.989, -429.273, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810095:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-3.236, 2.996, 130.630, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810101:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [476.777, 2.993, 610.709, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810107:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-563.149, 2.989, -429.273, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           6
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810113:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-3.236, 2.996, 130.630, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810119:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [476.777, 2.993, 610.709, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810195:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16810196:
+    script: NPC[d4]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16810197:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16810199:
+    script: NPC[d7]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16810200:
+    script: NPC[d8]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16810201:
+    script: NPC[d9]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16810202:
+    script: NPC[da]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16810203:
+    script: NPC[db]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16810204:
+    script: NPC[dc]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16810205:
+    script: NPC[dd]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16810206:
+    script: NPC[de]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16810207:
+    script:       _081
+    display_name: Dark Miasma
+    at:           [-619.425, -1.522, 505.673]
+    render:
+      look:
+        type: door
+      door_id:      825765983
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16810208:
+    script:       _082
+    display_name: Dark Miasma
+    at:           [-619.480, -1.518, -534.297]
+    render:
+      look:
+        type: door
+      door_id:      842543199
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16810209:
+    script: _083
+    at:     [-500.539, -1.508, -545.690]
+    render:
+      look:
+        type: door
+      door_id:      859320415
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16810210:
+    script:       _084
+    display_name: Dark Miasma
+    at:           [-59.452, -1.509, 25.708]
+    render:
+      look:
+        type: door
+      door_id:      876097631
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16810211:
+    script: _085
+    at:     [59.441, -1.508, 14.322]
+    render:
+      look:
+        type: door
+      door_id:      892874847
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16810212:
+    script:       _086
+    display_name: Dark Miasma
+    at:           [420.544, -1.510, 505.696]
+    render:
+      look:
+        type: door
+      door_id:      909652063
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16810213:
+    script: _087
+    at:     [539.424, -1.512, 494.304]
+    render:
+      look:
+        type: door
+      door_id:      926429279
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16810214:
+    script: _088
+    at:     [539.472, -1.509, -545.703]
+    render:
+      look:
+        type: door
+      door_id:      943206495
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16810215:
+    script:       qm
+    display_name: ???
+    at:           [-1.498, 3.175, 119.681, 169]
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:  cutscene_only
+    content: COP
+
+  16810216:
+    script:       Prishe
+    display_name: Prishe
+    at:           [-5.171, 3.390, 122.424, 169]
+    render:
+      look:
+        type:  standard
+        model: 1457
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 54
+    widescan:        true
+    content:         COP
+
+  16810217:
+    script:       Ulmia
+    display_name: Ulmia
+    at:           [-4.230, 3.288, 118.895, 172]
+    render:
+      look:
+        type:  standard
+        model: 1472
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810218:
+    script:       Shikaree_Z
+    display_name: Shikaree Z
+    at:           [-9.618, 2.809, 130.205, 40]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  2
+        head:  4159
+        body:  8247
+        hands: 12348
+        legs:  16472
+        feet:  20540
+        main:  24792
+        sub:   28672
+      entity_flags: 29
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810219:
+    script:       Shikaree_Y
+    display_name: Shikaree Y
+    at:           [-9.671, 3.191, 126.565, 29]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  7
+        head:  4118
+        body:  8252
+        hands: 12348
+        legs:  16391
+        feet:  20538
+        main:  24777
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810220:
+    script:       Shikaree_X
+    display_name: Shikaree X
+    at:           [-4.898, 3.521, 128.413, 52]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  5
+        head:  4147
+        body:  8246
+        hands: 12398
+        legs:  16468
+        feet:  20590
+        main:  24756
+        sub:   28852
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810221:
+    script: blank
+    at:     [-549.128, -2.889, -433.142, 103]
+    render:
+      look:
+        type:  standard
+        model: 608
+      entity_flags:     27
+      animation_sub:     1
+      name_prefix:      32
+      moving:        32768
+    status: cutscene_only
+
+  16810222:
+    script: NPC[ee]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16810223:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16810224:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16810225:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16810226:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16810227:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16810228:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16810229:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16810230:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16810231:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-579.373, -1.475, 418.256, 235]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16810232:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-579.373, -1.475, 418.256, 235]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP

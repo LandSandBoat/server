@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [mount, mazurka, tractor, pet, trust]
+music:
+  day:          60
+  night:        60
+  battle_solo:  57
+  battle_party: 57
+
+zonelines:
+
+  z7d0:
+    from:  [580.000, -11.650, -482.000]
+    to:    moh_gates
+    at:    [100.000, 7.297, 121.000, 4.712389]
+    scale: [1.000, 5.000]
+
+  z7d2:
+    from:  [-540.000, -27.866, -405.000]
+    to:    woh_gates
+    at:    [500.000, 7.918, 400.500, 1.570796]
+    scale: [1.000, 4.000]

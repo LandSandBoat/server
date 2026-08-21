@@ -24,6 +24,7 @@
 #include "ai/ai_container.h"
 #include "common/mmo.h"
 #include "common/utils.h"
+#include "data/enums/claim_type.h"
 #include "data/enums/mob_mod.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"

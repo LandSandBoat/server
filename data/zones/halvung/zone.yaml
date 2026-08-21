@@ -1,0 +1,87 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 139
+
+zonelines:
+
+  z1q0:
+    from:  [122.076, -32.975, -379.992]
+    to:    wajaom_woodlands
+    at:    [-848.503, -20.835, 100.583]
+    scale: [1.000, 3.500]
+
+  z1q2:
+    from:  [-19.996, 16.655, -442.020]
+    to:    aydeewa_subterrane
+    at:    [-539.567, 14.996, -163.887, 1.832596]
+    scale: [1.000, 4.000]
+
+  z1q4:
+    from:  [522.040, -13.900, 260.010]
+    to:    bhaflau_thickets
+    at:    [-38.306, -5.500, 300.018]
+    scale: [1.000, 4.000]
+
+  z1q6:
+    from:  [-574.919, -8.759, -107.016]
+    to:    bhaflau_thickets
+    at:    [-559.439, -1.500, 100.023, 3.141593]
+    scale: [1.000, 4.000]
+
+  z1q8:
+    from:  [157.974, -24.159, 140.047]
+    to:    mount_zhayolm
+    at:    [897.992, -10.195, 182.576, 3.141593]
+    scale: [1.500, 4.000]
+
+  z1qa:
+    from:  [59.975, -13.402, 121.036]
+    to:    mount_zhayolm
+    at:    [657.948, 1.019, 14.117, 4.712389]
+    scale: [1.500, 4.000]
+
+  z1qc:
+    from:  [-99.974, -23.760, -38.030]
+    to:    mount_zhayolm
+    at:    [341.609, -12.590, -101.977, 4.712389]
+    scale: [1.500, 4.000]
+
+  z1qe:
+    from:  [-197.984, -4.091, 99.981]
+    to:    mount_zhayolm
+    at:    [136.983, -24.148, 101.415]
+    scale: [1.500, 4.000]
+
+  z1qg:
+    from:  [-340.027, -13.824, -198.010]
+    to:    mount_zhayolm
+    at:    [-138.312, -1.912, -223.010, 4.712389]
+    scale: [1.500, 4.000]
+
+  z1qi:
+    from:  [-411.154, -39.692, 383.152]
+    to:    mount_zhayolm
+    at:    [-58.721, -19.525, 288.952, 1.570796]
+    scale: [1.500, 4.000]
+
+  z1qk:
+    from:  [-539.989, -44.292, 398.060]
+    to:    mount_zhayolm
+    at:    [-381.807, -2.737, 301.066, 1.570796]
+    scale: [1.500, -4.000]
+
+  z1qm:
+    from:  [-601.957, -14.122, 179.948]
+    to:    mount_zhayolm
+    at:    [-376.457, 13.497, -177.608, 3.141593]
+    scale: [1.500, 4.000]
+
+  z1qo:
+    from:  [-539.948, -13.966, 81.993]
+    to:    mount_zhayolm
+    at:    [-462.072, -7.018, -265.969, 4.712389]
+    scale: [1.500, 4.000]

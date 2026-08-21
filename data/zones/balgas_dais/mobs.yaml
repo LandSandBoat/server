@@ -1,0 +1,4331 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aa_Nawu_the_Thunderblade:
+    id:            15
+    species:       yagudo
+    type:          [battlefield]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 598
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4200
+
+  Aa_Nawu_the_Thunderblade_2:
+    id:            15
+    display_name:  Aa_Nawu_the_Thunderblade
+    species:       yagudo
+    type:          [battlefield]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 598
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Atori-Tutori_qm:
+    id:            6642
+    display_name:  Atori-Tutori_???
+    species:       tarutaru
+    type:          [notorious, battlefield]
+    skill_list_id: 1145
+    attributes:
+      combat:
+        skill:    hand_to_hand
+        delay:    480
+        dmg_mult: 110
+      jobs: [mnk, none]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  2
+          head:  4096
+          body:  8209
+          hands: 12288
+          legs:  16384
+          feet:  20480
+          main:  25074
+          sub:   29170
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 27000
+
+  Bitoso:
+    id:            425
+    species:       crawler
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 397
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1500
+        mp: 1200
+
+  Black_Dragon:
+    id:            435
+    species:       dragon
+    type:          [notorious, battlefield]
+    skill_list_id: 2070
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 131
+        model_size:     1
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1250
+
+  Buu_Xolo_the_Bloodfaced:
+    id:            588
+    species:       yagudo
+    type:          [notorious, battlefield]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 598
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3100
+
+  Chaa_Paqa_the_Profound:
+    id:            684
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 30
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 582
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3100
+        mp:  310
+
+  Chest_OPlenty:
+    id:            6868
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [blm, drk]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 967
+        entity_flags:  4227
+        animation_sub:    4
+        name_vis:       100
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Coffer_OPlenty:
+    id:            6869
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [blm, drk]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 966
+        entity_flags:  4227
+        animation_sub:    4
+        name_vis:       100
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cuu_Doko_the_Blizzard:
+    id:            874
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 583
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5100
+        mp: 5100
+
+  Cuu_Doko_the_Blizzard_2:
+    id:            874
+    display_name:  Cuu_Doko_the_Blizzard
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 583
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Domovoi:
+    id:            1078
+    species:       mandragora
+    type:          [battlefield]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2700
+
+  Domovoi_2:
+    id:            1078
+    display_name:  Domovoi
+    species:       mandragora
+    type:          [battlefield]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Dromiceiomimus:
+    id:            1121
+    species:       raptor
+    type:          [notorious, battlefield]
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 317
+        entity_flags: 3
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+  Dvorovoi:
+    id:            1149
+    species:       mandragora
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 135
+        model_size:     3
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+        mp: 4500
+
+  Dvorovoi_2:
+    id:            1149
+    display_name:  Dvorovoi
+    species:       mandragora
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 135
+        model_size:     3
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Giant_Moa:
+    id:            1532
+    species:       cockatrice
+    type:          [notorious, battlefield]
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 288
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Gii_Jaha_the_Raucous:
+    id:            1601
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 6
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 591
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3600
+
+  Gii_Jaha_the_Raucous_2:
+    id:            1601
+    display_name:  Gii_Jaha_the_Raucous
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 6
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 591
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gilagoge_Tlugvi:
+    id:            1602
+    species:       treant
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, war]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 394
+        entity_flags: 129
+        hitbox:        32
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9600
+        mp: 5000
+
+  Goga_Tlugvi:
+    id:            1747
+    species:       treant
+    type:          [battlefield]
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, war]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 388
+        entity_flags: 129
+        hitbox:        32
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8250
+
+  Gola_Tlugvi:
+    id:            1748
+    species:       treant
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 395
+        entity_flags: 129
+        hitbox:        32
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7700
+        mp: 5000
+
+  Juu_Zeni_the_Poisonmist:
+    id:            2171
+    species:       yagudo
+    type:          [notorious, battlefield]
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 587
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3100
+
+  Kaa_Xehi_the_Doomsayer:
+    id:            6875
+    species:       yagudo
+    type:          [notorious, battlefield]
+    spell_list_id: 6
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1085
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  King_of_Batons:
+    id:            2258
+    species:       batons
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+        mp: 11000
+
+  King_of_Coins:
+    id:            2259
+    species:       coins
+    type:          [notorious, battlefield]
+    spell_list_id: 3
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: club
+        delay: 180
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+        mp: 11000
+
+  King_of_Cups:
+    id:            2260
+    species:       cups
+    type:          [notorious, battlefield]
+    spell_list_id: 20
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: club
+        delay: 180
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+        mp: 11000
+
+  King_of_Swords:
+    id:            2261
+    species:       swords
+    type:          [notorious, battlefield]
+    spell_list_id: 4
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+        mp: 11000
+
+  Kutkha:
+    id:            6870
+    species:       bird
+    type:          [notorious, battlefield]
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kutkhas_Get:
+    id:            6871
+    species:       bird
+    type:          [battlefield]
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags: 139
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Large_Box:
+    id:            2376
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 230
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags: 645
+        model_size:     2
+        hitbox:        14
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3200
+
+  Maat_mnk:
+    id:            2460
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill:    hand_to_hand
+        delay:    400
+        dmg_mult: 110
+      jobs: [mnk, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+  Maat_smn:
+    id:            5274
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: staff
+        delay: 400
+      jobs: [smn, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1650
+        mp: 1000
+
+  Maat_whm:
+    id:            5232
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 20
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: club
+        delay: 300
+      jobs: [whm, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+        mp: 2000
+
+  Maats_Avatar:
+    id:            2461
+    species:       carbuncle
+    type:          [notorious, called, battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 375
+
+  Macan_Gadangan:
+    id:            2467
+    species:       coeurl
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 469
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 367
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+
+  Medium_Box:
+    id:            2605
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags: 643
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3200
+
+  Myrmidon_Apu-apu:
+    id:            2787
+    species:       opo_opo
+    type:          [battlefield]
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags:  3
+        model_size:    1
+        hitbox:       18
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1200
+
+  Myrmidon_Epa-epa:
+    id:            2788
+    species:       opo_opo
+    type:          [battlefield]
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags:  3
+        hitbox:       18
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1200
+
+  Myrmidon_Spo-spo:
+    id:            2789
+    species:       opo_opo
+    type:          [battlefield]
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags:  3
+        hitbox:       18
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1200
+
+  Nenaunir:
+    id:            2822
+    species:       dhalmel
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 80
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          wind:    -3
+          thunder: -3
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 332
+        entity_flags:  3
+        model_size:    2
+        hitbox:       43
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1800
+        mp: 1800
+
+  Nenaunirs_Wife:
+    id:            2823
+    species:       dhalmel
+    type:          [battlefield]
+    skill_list_id: 80
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -3
+          thunder: -3
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 332
+        hitbox: 32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1200
+
+  Nuu_Kofu_the_Gentle:
+    id:            2927
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 583
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3100
+        mp:  310
+
+  Opo-opo_Heir:
+    id:            2989
+    species:       opo_opo
+    type:          [battlefield]
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags:  3
+        hitbox:       16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+
+  Opo-opo_Monarch:
+    id:            2990
+    species:       opo_opo
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drk, rdm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags:  3
+        model_size:    3
+        hitbox:       26
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+
+  Pepper:
+    id:            3116
+    species:       leech
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 724
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, war]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 669
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 600
+
+  Pha_Groxo_the_Aloof:
+    id:            6872
+    species:       yagudo
+    type:          [notorious, battlefield]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1081
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Phoedme:
+    id:            3132
+    species:       leech
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 723
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, war]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags:  6
+        model_size:    2
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 600
+
+  Prune:
+    id:            3214
+    species:       leech
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 722
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, war]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags:  6
+        model_size:    2
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 600
+
+  Queen_of_Batons:
+    id:            3283
+    species:       batons
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags:  645
+        animation_sub:   8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 7000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   queen_of_batons_card
+
+  Queen_of_Cups:
+    id:            3285
+    species:       cups
+    type:          [notorious, battlefield]
+    spell_list_id: 20
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags:  645
+        animation_sub:   8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 7000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   queen_of_cups_card
+
+  Searcher:
+    id:            3515
+    species:       ahriman
+    type:          [notorious, battlefield]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 575
+
+  Small_Box:
+    id:            3675
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags: 641
+        hitbox:        11
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3200
+
+  Ulagohvsdi_Tlugvi:
+    id:            4077
+    species:       treant
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [nin, war]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 391
+        entity_flags: 1153
+        hitbox:         32
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Voo_Tolu_the_Ghostfist:
+    id:            4254
+    species:       yagudo
+    type:          [battlefield]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 580
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3700
+
+  Voo_Tolu_the_Ghostfist_2:
+    id:            4254
+    display_name:  Voo_Tolu_the_Ghostfist
+    species:       yagudo
+    type:          [battlefield]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 580
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Wyrm:
+    id:            4385
+    species:       black_wyrm
+    type:          [notorious, battlefield]
+    skill_list_id: 262
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -2
+      render:
+        look:
+          type:  standard
+          model: 783
+        entity_flags: 131
+        model_size:     1
+        hitbox:        50
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+        mp: 15000
+
+  Xee_Khoyi_the_Shrouded:
+    id:            6874
+    species:       yagudo
+    type:          [notorious, battlefield]
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1083
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudos_Avatar:
+    id:            4453
+    species:       carbuncle
+    type:          [battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      spawn:
+        type: [scripted]
+
+  Yagudos_Elemental:
+    id:            4454
+    species:       air_elemental
+    spell_list_id: 21
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  129
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Yoo_Mihi_the_Haze:
+    id:            4474
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 587
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4200
+
+  Yoo_Mihi_the_Haze_2:
+    id:            4474
+    display_name:  Yoo_Mihi_the_Haze
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 587
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Zuu_Feya_the_Impassive:
+    id:            6873
+    species:       yagudo
+    type:          [notorious, battlefield]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1082
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Zuu_Xowu_the_Darksmoke:
+    id:            4526
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 584
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3900
+        mp: 3900
+
+  Zuu_Xowu_the_Darksmoke_2:
+    id:            4526
+    display_name:  Zuu_Xowu_the_Darksmoke
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 584
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17375233:
+    template: Black_Dragon
+    at:       [-138.000, 56.000, -224.000, 189]
+    level:    [25, 25]
+  17375234:
+    template: Searcher
+    at:       [-135.000, 56.000, -232.000, 189]
+    level:    [23, 23]
+  17375235:
+    template: Black_Dragon
+    at:       [22.231, -4.000, -24.076, 189]
+    level:    [25, 25]
+  17375236:
+    template: Searcher
+    at:       [25.300, -3.800, -32.000, 189]
+    level:    [23, 23]
+  17375237:
+    template: Black_Dragon
+    at:       [182.059, -64.000, 175.999, 189]
+    level:    [25, 25]
+  17375238:
+    template: Searcher
+    at:       [184.600, -63.800, 167.600, 189]
+    level:    [23, 23]
+  17375239:
+    template: Buu_Xolo_the_Bloodfaced
+    at:       [-140.460, 56.127, -222.270, 192]
+    level:    [64, 64]
+  17375240:
+    template: Nuu_Kofu_the_Gentle
+    at:       [-140.460, 56.124, -226.270, 192]
+    level:    [64, 64]
+  17375241:
+    template: Juu_Zeni_the_Poisonmist
+    at:       [-137.460, 56.125, -222.270, 192]
+    level:    [64, 64]
+  17375242:
+    template: Chaa_Paqa_the_Profound
+    at:       [-137.460, 56.122, -226.270, 192]
+    level:    [64, 64]
+  17375243:
+    template: Yagudos_Elemental
+    at:       [-137.458, 56.122, -226.268, 192]
+    level:    [52, 52]
+  17375244:
+    template: Yagudos_Avatar
+    at:       [-141.621, 55.322, -211.784, 40]
+    level:    [52, 52]
+  17375245:
+    template: Buu_Xolo_the_Bloodfaced
+    at:       [19.771, -3.873, -22.346, 192]
+    level:    [64, 64]
+  17375246:
+    template: Nuu_Kofu_the_Gentle
+    at:       [19.771, -3.876, -26.346, 192]
+    level:    [64, 64]
+  17375247:
+    template: Juu_Zeni_the_Poisonmist
+    at:       [22.771, -3.875, -22.346, 192]
+    level:    [64, 64]
+  17375248:
+    template: Chaa_Paqa_the_Profound
+    at:       [22.771, -3.878, -26.346, 192]
+    level:    [64, 64]
+  17375249:
+    template: Yagudos_Elemental
+    at:       [22.773, -3.878, -26.344, 192]
+    level:    [52, 52]
+  17375250:
+    template: Yagudos_Avatar
+    at:       [18.610, -4.678, -11.860, 40]
+    level:    [52, 52]
+  17375251:
+    template: Buu_Xolo_the_Bloodfaced
+    at:       [179.599, -63.873, 177.729, 192]
+    level:    [64, 64]
+  17375252:
+    template: Nuu_Kofu_the_Gentle
+    at:       [179.599, -63.876, 173.729, 192]
+    level:    [64, 64]
+  17375253:
+    template: Juu_Zeni_the_Poisonmist
+    at:       [182.599, -63.875, 177.729, 192]
+    level:    [64, 64]
+  17375254:
+    template: Chaa_Paqa_the_Profound
+    at:       [182.599, -63.878, 173.729, 192]
+    level:    [64, 64]
+  17375255:
+    template: Yagudos_Elemental
+    at:       [182.601, -63.878, 173.731, 192]
+    level:    [52, 52]
+  17375256:
+    template: Yagudos_Avatar
+    at:       [178.438, -64.678, 188.215, 40]
+    level:    [52, 52]
+  17375257:
+    template: Maat_mnk
+    at:       [-139.000, 56.543, -224.199, 192]
+    level:    [70, 70]
+  17375258:
+    template: Maat_mnk
+    at:       [21.002, -3.464, -24.271, 192]
+    level:    [70, 70]
+  17375259:
+    template: Maat_mnk
+    at:       [180.985, -63.468, 175.675, 192]
+    level:    [70, 70]
+  17375260:
+    template: Maat_whm
+    at:       [-139.000, 56.543, -224.199, 192]
+    level:    [70, 70]
+  17375261:
+    template: Maat_whm
+    at:       [21.002, -3.464, -24.271, 192]
+    level:    [70, 70]
+  17375262:
+    template: Maat_whm
+    at:       [180.985, -63.468, 175.675, 192]
+    level:    [70, 70]
+  17375263:
+    template: Maat_smn
+    at:       [-139.000, 56.543, -224.199, 192]
+    level:    [70, 70]
+  17375264:
+    template: Maats_Avatar
+    at:       [1.000, 1.000, 1.000, 192]
+    level:    [67, 67]
+  17375265:
+    template: Maat_smn
+    at:       [21.002, -3.464, -24.271, 192]
+    level:    [70, 70]
+  17375266:
+    template: Maats_Avatar
+    at:       [161.231, -59.000, 200.924, 192]
+    level:    [67, 67]
+  17375267:
+    template: Maat_smn
+    at:       [180.985, -63.468, 175.675, 192]
+    level:    [70, 70]
+  17375268:
+    template: Maats_Avatar
+    at:       [321.059, -119.000, 400.999, 192]
+    level:    [67, 67]
+  17375269:
+    template: Prune
+    at:       [-136.000, 56.240, -224.200, 192]
+    level:    [21, 21]
+  17375270:
+    template: Pepper
+    at:       [-139.000, 56.043, -224.200, 192]
+    level:    [21, 21]
+  17375271:
+    template: Phoedme
+    at:       [-142.000, 56.240, -224.200, 192]
+    level:    [21, 21]
+  17375273:
+    template: Prune
+    at:       [24.045, -3.760, -24.260, 192]
+    level:    [21, 21]
+  17375274:
+    template: Pepper
+    at:       [21.045, -3.956, -24.260, 192]
+    level:    [21, 21]
+  17375275:
+    template: Phoedme
+    at:       [18.045, -3.760, -24.260, 192]
+    level:    [21, 21]
+  17375277:
+    template: Prune
+    at:       [184.090, -63.758, 175.681, 192]
+    level:    [21, 21]
+  17375278:
+    template: Pepper
+    at:       [181.090, -63.955, 175.681, 192]
+    level:    [21, 21]
+  17375279:
+    template: Phoedme
+    at:       [178.090, -63.758, 175.681, 192]
+    level:    [21, 21]
+  17375281:
+    template: Bitoso
+    at:       [-139.000, 56.043, -224.199, 192]
+    level:    [33, 33]
+  17375283:
+    template: Bitoso
+    at:       [21.089, -3.463, -24.282, 192]
+    level:    [33, 33]
+  17375285:
+    template: Bitoso
+    at:       [181.039, -63.471, 175.760, 192]
+    level:    [33, 33]
+  17375287:
+    template: Nenaunir
+    at:       [-139.000, 55.813, -231.000, 192]
+    level:    [33, 33]
+  17375288:
+    template: Nenaunirs_Wife
+    at:       [-139.000, 55.471, -217.000, 192]
+    level:    [27, 28]
+  17375289:
+    template: Nenaunirs_Wife
+    at:       [-144.500, 55.765, -227.500, 192]
+    level:    [27, 28]
+  17375290:
+    template: Nenaunirs_Wife
+    at:       [-133.500, 55.781, -227.500, 192]
+    level:    [27, 28]
+  17375291:
+    template: Nenaunirs_Wife
+    at:       [-133.500, 55.870, -221.500, 192]
+    level:    [27, 28]
+  17375292:
+    template: Nenaunirs_Wife
+    at:       [-144.500, 55.857, -221.500, 192]
+    level:    [27, 28]
+  17375294:
+    template: Nenaunir
+    at:       [21.000, -4.173, -31.045, 192]
+    level:    [33, 33]
+  17375295:
+    template: Nenaunirs_Wife
+    at:       [21.000, -4.515, -17.045, 192]
+    level:    [27, 28]
+  17375296:
+    template: Nenaunirs_Wife
+    at:       [15.500, -4.221, -27.545, 192]
+    level:    [27, 28]
+  17375297:
+    template: Nenaunirs_Wife
+    at:       [26.500, -4.205, -27.545, 192]
+    level:    [27, 28]
+  17375298:
+    template: Nenaunirs_Wife
+    at:       [26.500, -4.116, -21.545, 192]
+    level:    [27, 28]
+  17375299:
+    template: Nenaunirs_Wife
+    at:       [15.500, -4.129, -21.545, 192]
+    level:    [27, 28]
+  17375301:
+    template: Nenaunir
+    at:       [181.014, -64.172, 168.939, 192]
+    level:    [33, 33]
+  17375302:
+    template: Nenaunirs_Wife
+    at:       [181.014, -64.514, 182.939, 192]
+    level:    [27, 28]
+  17375303:
+    template: Nenaunirs_Wife
+    at:       [175.514, -64.220, 172.439, 192]
+    level:    [27, 28]
+  17375304:
+    template: Nenaunirs_Wife
+    at:       [186.514, -64.204, 172.439, 192]
+    level:    [27, 28]
+  17375305:
+    template: Nenaunirs_Wife
+    at:       [186.514, -64.115, 178.439, 192]
+    level:    [27, 28]
+  17375306:
+    template: Nenaunirs_Wife
+    at:       [175.514, -64.128, 178.439, 192]
+    level:    [27, 28]
+  17375308:
+    template: Dvorovoi
+    at:       [-139.000, 56.043, -224.199, 192]
+    level:    [45, 45]
+  17375309:
+    template: Domovoi
+    at:       [-136.332, 55.999, -219.548, 192]
+    level:    [40, 41]
+  17375310:
+    template: Domovoi
+    at:       [-133.610, 56.083, -223.360, 192]
+    level:    [40, 41]
+  17375311:
+    template: Domovoi
+    at:       [-134.373, 55.948, -227.442, 192]
+    level:    [40, 41]
+  17375312:
+    template: Domovoi
+    at:       [-138.673, 56.144, -229.348, 192]
+    level:    [40, 41]
+  17375313:
+    template: Domovoi
+    at:       [-142.811, 56.087, -227.824, 192]
+    level:    [40, 41]
+  17375314:
+    template: Domovoi
+    at:       [-144.119, 56.182, -223.468, 192]
+    level:    [40, 41]
+  17375315:
+    template: Domovoi
+    at:       [-141.341, 56.144, -219.820, 192]
+    level:    [40, 41]
+  17375317:
+    template: Dvorovoi
+    at:       [22.231, -4.000, -25.076, 192]
+    level:    [45, 45]
+  17375318:
+    template: Domovoi
+    at:       [24.899, -4.044, -20.425, 192]
+    level:    [40, 41]
+  17375319:
+    template: Domovoi
+    at:       [27.621, -3.960, -24.237, 192]
+    level:    [40, 41]
+  17375320:
+    template: Domovoi
+    at:       [26.858, -4.095, -28.319, 192]
+    level:    [40, 41]
+  17375321:
+    template: Domovoi
+    at:       [22.558, -3.899, -30.225, 192]
+    level:    [40, 41]
+  17375322:
+    template: Domovoi
+    at:       [18.420, -3.956, -28.701, 192]
+    level:    [40, 41]
+  17375323:
+    template: Domovoi
+    at:       [17.112, -3.861, -24.345, 192]
+    level:    [40, 41]
+  17375324:
+    template: Domovoi
+    at:       [19.890, -3.899, -20.697, 192]
+    level:    [40, 41]
+  17375326:
+    template: Dvorovoi
+    at:       [182.059, -64.000, 174.999, 192]
+    level:    [45, 45]
+  17375327:
+    template: Domovoi
+    at:       [184.727, -64.044, 179.650, 192]
+    level:    [40, 41]
+  17375328:
+    template: Domovoi
+    at:       [187.449, -63.960, 175.838, 192]
+    level:    [40, 41]
+  17375329:
+    template: Domovoi
+    at:       [186.686, -64.095, 171.756, 192]
+    level:    [40, 41]
+  17375330:
+    template: Domovoi
+    at:       [182.386, -63.899, 169.850, 192]
+    level:    [40, 41]
+  17375331:
+    template: Domovoi
+    at:       [178.248, -63.956, 171.374, 192]
+    level:    [40, 41]
+  17375332:
+    template: Domovoi
+    at:       [176.940, -63.861, 175.730, 192]
+    level:    [40, 41]
+  17375333:
+    template: Domovoi
+    at:       [179.718, -63.899, 179.378, 192]
+    level:    [40, 41]
+  17375335:
+    template: Opo-opo_Monarch
+    at:       [-139.200, 56.044, -224.305, 192]
+    level:    [40, 40]
+  17375336:
+    template: Opo-opo_Heir
+    at:       [-139.179, 55.844, -230.726, 192]
+    level:    [38, 38]
+  17375337:
+    template: Myrmidon_Spo-spo
+    at:       [-139.232, 55.631, -217.486, 192]
+    level:    [34, 34]
+  17375338:
+    template: Myrmidon_Apu-apu
+    at:       [-134.815, 55.765, -219.489, 192]
+    level:    [34, 34]
+  17375339:
+    template: Myrmidon_Epa-epa
+    at:       [-143.672, 55.742, -219.454, 192]
+    level:    [34, 34]
+  17375341:
+    template: Opo-opo_Monarch
+    at:       [21.031, -3.956, -24.381, 192]
+    level:    [40, 40]
+  17375342:
+    template: Opo-opo_Heir
+    at:       [21.052, -4.156, -30.802, 192]
+    level:    [38, 38]
+  17375343:
+    template: Myrmidon_Spo-spo
+    at:       [20.999, -4.369, -17.562, 192]
+    level:    [34, 34]
+  17375344:
+    template: Myrmidon_Apu-apu
+    at:       [25.416, -4.235, -19.565, 192]
+    level:    [34, 34]
+  17375345:
+    template: Myrmidon_Epa-epa
+    at:       [16.559, -4.258, -19.530, 192]
+    level:    [34, 34]
+  17375347:
+    template: Opo-opo_Monarch
+    at:       [180.859, -63.956, 175.694, 192]
+    level:    [40, 40]
+  17375348:
+    template: Opo-opo_Heir
+    at:       [180.880, -64.156, 169.273, 192]
+    level:    [38, 38]
+  17375349:
+    template: Myrmidon_Spo-spo
+    at:       [180.827, -64.369, 182.513, 192]
+    level:    [34, 34]
+  17375350:
+    template: Myrmidon_Apu-apu
+    at:       [185.244, -64.235, 180.510, 192]
+    level:    [34, 34]
+  17375351:
+    template: Myrmidon_Epa-epa
+    at:       [176.387, -64.258, 180.545, 192]
+    level:    [34, 34]
+  17375353:
+    template: Small_Box
+    at:       [-136.186, 56.241, -224.183, 192]
+    level:    [55, 55]
+  17375354:
+    template: Medium_Box
+    at:       [-139.186, 56.044, -224.183, 192]
+    level:    [55, 55]
+  17375355:
+    template: Large_Box
+    at:       [-142.186, 56.241, -224.183, 192]
+    level:    [55, 55]
+  17375357:
+    template: Small_Box
+    at:       [24.045, -3.759, -24.259, 192]
+    level:    [55, 55]
+  17375358:
+    template: Medium_Box
+    at:       [21.045, -3.956, -24.259, 192]
+    level:    [55, 55]
+  17375359:
+    template: Large_Box
+    at:       [18.045, -3.759, -24.259, 192]
+    level:    [55, 55]
+  17375361:
+    template: Small_Box
+    at:       [183.873, -63.759, 175.816, 192]
+    level:    [55, 55]
+  17375362:
+    template: Medium_Box
+    at:       [180.873, -63.956, 175.816, 192]
+    level:    [55, 55]
+  17375363:
+    template: Large_Box
+    at:       [177.873, -63.759, 175.816, 192]
+    level:    [55, 55]
+  17375365:
+    template: Voo_Tolu_the_Ghostfist
+    at:       [-135.960, 56.144, -222.270, 192]
+    level:    [62, 64]
+  17375366:
+    template: Cuu_Doko_the_Blizzard
+    at:       [-135.960, 56.144, -226.270, 192]
+    level:    [62, 64]
+  17375367:
+    template: Zuu_Xowu_the_Darksmoke
+    at:       [-141.960, 56.144, -226.270, 192]
+    level:    [62, 64]
+  17375368:
+    template: Gii_Jaha_the_Raucous
+    at:       [-138.960, 56.043, -226.270, 192]
+    level:    [62, 64]
+  17375369:
+    template: Aa_Nawu_the_Thunderblade
+    at:       [-138.960, 56.043, -222.270, 192]
+    level:    [62, 64]
+  17375370:
+    template: Yoo_Mihi_the_Haze
+    at:       [-141.960, 56.144, -222.270, 192]
+    level:    [62, 64]
+  17375372:
+    template: Voo_Tolu_the_Ghostfist
+    at:       [21.231, -4.000, -25.076, 192]
+    level:    [62, 64]
+  17375373:
+    template: Cuu_Doko_the_Blizzard
+    at:       [21.231, -4.000, -25.076, 192]
+    level:    [62, 64]
+  17375374:
+    template: Zuu_Xowu_the_Darksmoke
+    at:       [21.231, -4.000, -25.076, 192]
+    level:    [62, 64]
+  17375375:
+    template: Gii_Jaha_the_Raucous
+    at:       [21.231, -4.000, -25.076, 192]
+    level:    [62, 64]
+  17375376:
+    template: Aa_Nawu_the_Thunderblade
+    at:       [21.231, -4.000, -25.076, 192]
+    level:    [62, 64]
+  17375377:
+    template: Yoo_Mihi_the_Haze
+    at:       [21.231, -4.000, -25.076, 192]
+    level:    [62, 64]
+  17375379:
+    template: Voo_Tolu_the_Ghostfist
+    at:       [181.059, -64.000, 174.999, 192]
+    level:    [62, 64]
+  17375380:
+    template: Cuu_Doko_the_Blizzard
+    at:       [181.059, -64.000, 174.999, 192]
+    level:    [62, 64]
+  17375381:
+    template: Zuu_Xowu_the_Darksmoke
+    at:       [181.059, -64.000, 174.999, 192]
+    level:    [62, 64]
+  17375382:
+    template: Gii_Jaha_the_Raucous
+    at:       [181.059, -64.000, 174.999, 192]
+    level:    [62, 64]
+  17375383:
+    template: Aa_Nawu_the_Thunderblade
+    at:       [181.059, -64.000, 174.999, 192]
+    level:    [62, 64]
+  17375384:
+    template: Yoo_Mihi_the_Haze
+    at:       [181.059, -64.000, 174.999, 192]
+    level:    [62, 64]
+  17375386:
+    template: Wyrm
+    at:       [-139.000, 56.000, -225.000, 194]
+    level:    [80, 80]
+  17375388:
+    template: Wyrm
+    at:       [21.231, -4.000, -25.076, 194]
+    level:    [80, 80]
+  17375390:
+    template: Wyrm
+    at:       [181.059, -64.000, 174.999, 194]
+    level:    [80, 80]
+  17375392:
+    template: Dromiceiomimus
+    at:       [-136.186, 56.241, -224.183, 192]
+    level:    [52, 53]
+  17375393:
+    template: Dromiceiomimus
+    at:       [-142.186, 56.241, -224.183, 192]
+    level:    [52, 53]
+  17375395:
+    template: Dromiceiomimus
+    at:       [24.045, -3.759, -24.259, 192]
+    level:    [52, 53]
+  17375396:
+    template: Dromiceiomimus
+    at:       [18.045, -3.759, -24.259, 192]
+    level:    [52, 53]
+  17375398:
+    template: Dromiceiomimus
+    at:       [183.873, -63.759, 175.816, 192]
+    level:    [52, 53]
+  17375399:
+    template: Dromiceiomimus
+    at:       [177.873, -63.759, 175.816, 192]
+    level:    [52, 53]
+  17375401:
+    template: Macan_Gadangan
+    at:       [-139.000, 56.043, -224.199, 192]
+    level:    [62, 62]
+  17375403:
+    template: Macan_Gadangan
+    at:       [21.089, -3.463, -24.282, 192]
+    level:    [62, 62]
+  17375405:
+    template: Macan_Gadangan
+    at:       [181.039, -63.471, 175.760, 192]
+    level:    [62, 62]
+  17375407:
+    template: Gilagoge_Tlugvi
+    at:       [-137.460, 56.630, -222.270, 223]
+    level:    [76, 76]
+  17375408:
+    template: Goga_Tlugvi
+    at:       [-137.460, 56.620, -226.270, 32]
+    level:    [76, 76]
+  17375409:
+    template: Ulagohvsdi_Tlugvi
+    at:       [-140.460, 56.620, -226.270, 96]
+    level:    [75, 75]
+  17375410:
+    template: Gola_Tlugvi
+    at:       [-140.460, 56.630, -222.270, 159]
+    level:    [76, 76]
+  17375412:
+    template: Gilagoge_Tlugvi
+    at:       [22.500, -4.000, -23.000, 223]
+    level:    [76, 76]
+  17375413:
+    template: Goga_Tlugvi
+    at:       [22.500, -4.000, -27.000, 32]
+    level:    [76, 76]
+  17375414:
+    template: Ulagohvsdi_Tlugvi
+    at:       [19.500, -4.000, -27.000, 96]
+    level:    [75, 75]
+  17375415:
+    template: Gola_Tlugvi
+    at:       [19.500, -4.000, -23.000, 159]
+    level:    [76, 76]
+  17375417:
+    template: Gilagoge_Tlugvi
+    at:       [182.600, -63.370, 177.700, 223]
+    level:    [76, 76]
+  17375418:
+    template: Goga_Tlugvi
+    at:       [182.600, -63.380, 173.700, 32]
+    level:    [76, 76]
+  17375419:
+    template: Ulagohvsdi_Tlugvi
+    at:       [179.600, -63.380, 173.700, 96]
+    level:    [75, 75]
+  17375420:
+    template: Gola_Tlugvi
+    at:       [179.600, -63.370, 177.700, 159]
+    level:    [76, 76]
+  17375422:
+    template: King_of_Cups
+    at:       [-133.000, 55.500, -224.300, 192]
+    level:    [79, 79]
+  17375423:
+    template: King_of_Batons
+    at:       [-144.900, 55.500, -224.300, 192]
+    level:    [79, 79]
+  17375424:
+    template: King_of_Swords
+    at:       [-137.000, 55.500, -224.300, 192]
+    level:    [79, 79]
+  17375425:
+    template: King_of_Coins
+    at:       [-140.900, 55.500, -224.300, 192]
+    level:    [79, 79]
+  17375426:
+    template: Queen_of_Cups
+    at:       [-140.611, 56.118, -227.774, 192]
+    level:    [75, 75]
+  17375427:
+    template: Queen_of_Batons
+    at:       [-137.186, 56.115, -227.730, 192]
+    level:    [75, 75]
+  17375429:
+    template: King_of_Cups
+    at:       [26.131, -4.000, -25.076, 192]
+    level:    [79, 79]
+  17375430:
+    template: King_of_Batons
+    at:       [15.231, -4.000, -25.076, 192]
+    level:    [79, 79]
+  17375431:
+    template: King_of_Swords
+    at:       [22.131, -4.000, -25.076, 192]
+    level:    [79, 79]
+  17375432:
+    template: King_of_Coins
+    at:       [18.231, -4.000, -25.076, 192]
+    level:    [79, 79]
+  17375433:
+    template: Queen_of_Cups
+    at:       [18.542, -3.882, -28.550, 192]
+    level:    [75, 75]
+  17375434:
+    template: Queen_of_Batons
+    at:       [21.967, -3.885, -28.506, 192]
+    level:    [75, 75]
+  17375436:
+    template: King_of_Cups
+    at:       [185.959, -64.000, 174.999, 192]
+    level:    [79, 79]
+  17375437:
+    template: King_of_Batons
+    at:       [177.159, -64.000, 174.999, 192]
+    level:    [79, 79]
+  17375438:
+    template: King_of_Swords
+    at:       [182.959, -64.000, 174.999, 192]
+    level:    [79, 79]
+  17375439:
+    template: King_of_Coins
+    at:       [179.159, -64.000, 174.999, 192]
+    level:    [79, 79]
+  17375440:
+    template: Queen_of_Cups
+    at:       [179.370, -63.882, 171.525, 192]
+    level:    [75, 75]
+  17375441:
+    template: Queen_of_Batons
+    at:       [182.795, -63.885, 171.569, 192]
+    level:    [75, 75]
+  17375443:
+    template: Giant_Moa
+    at:       [-142.000, 56.700, -224.200, 192]
+    level:    [77, 77]
+  17375444:
+    template: Giant_Moa
+    at:       [-136.200, 56.700, -224.200, 192]
+    level:    [77, 77]
+  17375446:
+    template: Giant_Moa
+    at:       [18.140, -3.250, -24.300, 192]
+    level:    [77, 77]
+  17375447:
+    template: Giant_Moa
+    at:       [24.090, -3.250, -20.000, 192]
+    level:    [77, 77]
+  17375449:
+    template: Giant_Moa
+    at:       [178.026, -63.759, 175.727, 192]
+    level:    [77, 77]
+  17375450:
+    template: Giant_Moa
+    at:       [184.026, -63.759, 175.727, 192]
+    level:    [77, 77]
+  17375452:
+    template: Kutkha
+    at:       [-140.798, 57.016, -184.553, 94]
+  17375453:
+    template: Kutkhas_Get
+    at:       [-138.893, 56.872, -185.262, 113]
+  17375454:
+    template: Kutkhas_Get
+    at:       [-142.106, 56.758, -184.845, 78]
+  17375455:
+    template: Kutkhas_Get
+    at:       [-141.761, 56.835, -185.232, 200]
+  17375456:
+    template: Kutkhas_Get
+    at:       [-140.646, 56.758, -184.654, 183]
+  17375457:
+    template: Kutkhas_Get
+    at:       [-138.642, 57.097, -186.537, 213]
+  17375458:
+    template: Kutkhas_Get
+    at:       [-140.670, 57.007, -186.203, 184]
+  17375460:
+    template: Kutkha
+    at:       [19.433, -2.984, 15.371, 94]
+  17375461:
+    template: Kutkhas_Get
+    at:       [21.338, -3.128, 14.662, 113]
+  17375462:
+    template: Kutkhas_Get
+    at:       [18.125, -3.242, 15.079, 78]
+  17375463:
+    template: Kutkhas_Get
+    at:       [18.470, -3.165, 14.692, 200]
+  17375464:
+    template: Kutkhas_Get
+    at:       [19.585, -3.242, 15.270, 183]
+  17375465:
+    template: Kutkhas_Get
+    at:       [21.589, -2.903, 13.387, 213]
+  17375466:
+    template: Kutkhas_Get
+    at:       [19.561, -2.993, 13.721, 184]
+  17375468:
+    template: Kutkha
+    at:       [179.261, -62.984, 215.446, 94]
+  17375469:
+    template: Kutkhas_Get
+    at:       [181.166, -63.128, 214.737, 113]
+  17375470:
+    template: Kutkhas_Get
+    at:       [177.953, -63.242, 215.154, 78]
+  17375471:
+    template: Kutkhas_Get
+    at:       [178.298, -63.165, 214.767, 200]
+  17375472:
+    template: Kutkhas_Get
+    at:       [179.413, -63.242, 215.345, 183]
+  17375473:
+    template: Kutkhas_Get
+    at:       [181.417, -62.903, 213.462, 213]
+  17375474:
+    template: Kutkhas_Get
+    at:       [179.389, -62.993, 213.796, 184]
+  17375476:
+    template: Pha_Groxo_the_Aloof
+    at:       [-141.483, 54.641, -203.784, 255]
+  17375477:
+    template: Zuu_Feya_the_Impassive
+    at:       [-140.100, 54.233, -201.820, 12]
+  17375478:
+    template: Xee_Khoyi_the_Shrouded
+    at:       [-140.597, 54.187, -203.331, 243]
+  17375479:
+    template: Kaa_Xehi_the_Doomsayer
+    at:       [-140.670, 54.563, -204.774, 231]
+  17375481:
+    template: Pha_Groxo_the_Aloof
+    at:       [18.748, -5.359, -3.860, 255]
+  17375482:
+    template: Zuu_Feya_the_Impassive
+    at:       [20.131, -5.767, -1.896, 12]
+  17375483:
+    template: Xee_Khoyi_the_Shrouded
+    at:       [19.634, -5.813, -3.407, 243]
+  17375484:
+    template: Kaa_Xehi_the_Doomsayer
+    at:       [19.561, -5.437, -4.850, 231]
+  17375486:
+    template: Pha_Groxo_the_Aloof
+    at:       [178.576, -65.359, 196.215, 255]
+  17375487:
+    template: Zuu_Feya_the_Impassive
+    at:       [179.959, -65.767, 198.179, 12]
+  17375488:
+    template: Xee_Khoyi_the_Shrouded
+    at:       [179.462, -65.813, 196.668, 243]
+  17375489:
+    template: Kaa_Xehi_the_Doomsayer
+    at:       [179.389, -65.437, 195.225, 231]
+  17375491:
+    template: Atori-Tutori_qm
+    at:       [-138.000, 56.000, -224.000, 189]
+    level:    [102, 102]
+  17375492:
+    template: Atori-Tutori_qm
+    at:       [22.231, -4.000, -24.076, 189]
+    level:    [102, 102]
+  17375493:
+    template: Atori-Tutori_qm
+    at:       [182.059, -64.000, 175.999, 189]
+    level:    [102, 102]
+  17375494:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [-140.924, 55.859, -218.639, 164]
+  17375495:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-136.332, 55.999, -219.548, 95]
+  17375496:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-137.321, 56.144, -219.960, 56]
+  17375497:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-140.157, 55.498, -215.658, 29]
+  17375498:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-139.293, 56.144, -220.091, 51]
+  17375499:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-140.829, 56.144, -219.866, 222]
+  17375500:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-140.563, 55.606, -216.617, 11]
+  17375501:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-141.168, 55.571, -217.342, 254]
+  17375503:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [-139.328, 55.874, -218.426, 204]
+  17375504:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-136.332, 55.999, -219.548, 170]
+  17375505:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-135.749, 55.611, -216.069, 123]
+  17375506:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-140.809, 55.887, -218.726, 91]
+  17375507:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-140.699, 55.598, -216.107, 117]
+  17375508:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-141.725, 55.610, -216.229, 211]
+  17375509:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-140.859, 55.577, -215.043, 26]
+  17375510:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-141.068, 55.636, -217.631, 108]
+  17375512:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [-141.442, 56.144, -219.887, 173]
+  17375513:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-136.332, 55.999, -219.548, 151]
+  17375514:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-137.626, 55.892, -219.004, 30]
+  17375515:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-138.800, 56.144, -221.050, 87]
+  17375516:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-138.320, 55.825, -218.257, 227]
+  17375517:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-141.335, 55.696, -218.700, 165]
+  17375518:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-139.908, 56.144, -220.753, 64]
+  17375519:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [-139.273, 55.836, -217.784, 62]
+  17375521:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+  17375522:
+    template: Domovoi_2
+    script:   Domovoi
+  17375523:
+    template: Domovoi_2
+    script:   Domovoi
+  17375524:
+    template: Domovoi_2
+    script:   Domovoi
+  17375525:
+    template: Domovoi_2
+    script:   Domovoi
+  17375526:
+    template: Domovoi_2
+    script:   Domovoi
+  17375527:
+    template: Domovoi_2
+    script:   Domovoi
+  17375528:
+    template: Domovoi_2
+    script:   Domovoi
+  17375530:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+  17375531:
+    template: Domovoi_2
+    script:   Domovoi
+  17375532:
+    template: Domovoi_2
+    script:   Domovoi
+  17375533:
+    template: Domovoi_2
+    script:   Domovoi
+  17375534:
+    template: Domovoi_2
+    script:   Domovoi
+  17375535:
+    template: Domovoi_2
+    script:   Domovoi
+  17375536:
+    template: Domovoi_2
+    script:   Domovoi
+  17375537:
+    template: Domovoi_2
+    script:   Domovoi
+  17375539:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [18.098, -4.292, -18.251, 164]
+  17375540:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [23.899, -4.001, -19.624, 95]
+  17375541:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [22.910, -3.856, -20.036, 56]
+  17375542:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [21.020, -4.590, -16.610, 29]
+  17375543:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [20.938, -3.856, -20.167, 51]
+  17375544:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [19.402, -3.856, -19.942, 222]
+  17375545:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [20.745, -4.503, -15.627, 11]
+  17375546:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [19.063, -4.429, -17.418, 254]
+  17375548:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [20.903, -4.126, -18.502, 204]
+  17375549:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [23.899, -4.001, -19.624, 170]
+  17375550:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [22.671, -4.417, -15.314, 123]
+  17375551:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [19.422, -4.113, -18.802, 91]
+  17375552:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [19.532, -4.402, -16.183, 117]
+  17375553:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [18.822, -4.403, -16.027, 211]
+  17375554:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [18.822, -4.423, -15.079, 26]
+  17375555:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [19.126, -4.138, -18.631, 108]
+  17375557:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [18.789, -3.856, -19.963, 173]
+  17375558:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [23.899, -4.001, -19.624, 151]
+  17375559:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [22.605, -4.108, -19.080, 30]
+  17375560:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [21.431, -3.856, -21.126, 87]
+  17375561:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [21.911, -4.175, -18.333, 227]
+  17375562:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [18.896, -4.304, -18.776, 165]
+  17375563:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [20.323, -3.856, -20.829, 64]
+  17375564:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [20.958, -4.164, -17.860, 62]
+  17375566:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+  17375567:
+    template: Domovoi_2
+    script:   Domovoi
+  17375568:
+    template: Domovoi_2
+    script:   Domovoi
+  17375569:
+    template: Domovoi_2
+    script:   Domovoi
+  17375570:
+    template: Domovoi_2
+    script:   Domovoi
+  17375571:
+    template: Domovoi_2
+    script:   Domovoi
+  17375572:
+    template: Domovoi_2
+    script:   Domovoi
+  17375573:
+    template: Domovoi_2
+    script:   Domovoi
+  17375575:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+  17375576:
+    template: Domovoi_2
+    script:   Domovoi
+  17375577:
+    template: Domovoi_2
+    script:   Domovoi
+  17375578:
+    template: Domovoi_2
+    script:   Domovoi
+  17375579:
+    template: Domovoi_2
+    script:   Domovoi
+  17375580:
+    template: Domovoi_2
+    script:   Domovoi
+  17375581:
+    template: Domovoi_2
+    script:   Domovoi
+  17375582:
+    template: Domovoi_2
+    script:   Domovoi
+  17375584:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [179.135, -64.141, 181.360, 164]
+  17375585:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [183.727, -64.001, 180.451, 95]
+  17375586:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [182.738, -63.856, 180.039, 56]
+  17375587:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [179.902, -64.502, 184.341, 29]
+  17375588:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [180.766, -63.856, 179.908, 51]
+  17375589:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [179.230, -63.856, 180.133, 222]
+  17375590:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [179.496, -64.394, 183.382, 11]
+  17375591:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [178.891, -64.429, 182.657, 254]
+  17375593:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [180.731, -64.126, 181.573, 204]
+  17375594:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [183.727, -64.001, 180.451, 170]
+  17375595:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [184.310, -64.389, 183.930, 123]
+  17375596:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [179.250, -64.113, 181.273, 91]
+  17375597:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [179.360, -64.402, 183.892, 117]
+  17375598:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [178.334, -64.390, 183.770, 211]
+  17375599:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [179.200, -64.423, 184.956, 26]
+  17375600:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [178.991, -64.364, 182.368, 108]
+  17375602:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+    at:       [178.617, -63.856, 180.112, 173]
+  17375603:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [183.727, -64.001, 180.451, 151]
+  17375604:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [182.433, -64.108, 180.995, 30]
+  17375605:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [181.259, -63.856, 178.949, 87]
+  17375606:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [181.739, -64.175, 181.742, 227]
+  17375607:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [178.724, -64.304, 181.299, 165]
+  17375608:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [180.151, -63.856, 179.246, 64]
+  17375609:
+    template: Domovoi_2
+    script:   Domovoi
+    at:       [180.786, -64.164, 182.215, 62]
+  17375611:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+  17375612:
+    template: Domovoi_2
+    script:   Domovoi
+  17375613:
+    template: Domovoi_2
+    script:   Domovoi
+  17375614:
+    template: Domovoi_2
+    script:   Domovoi
+  17375615:
+    template: Domovoi_2
+    script:   Domovoi
+  17375616:
+    template: Domovoi_2
+    script:   Domovoi
+  17375617:
+    template: Domovoi_2
+    script:   Domovoi
+  17375618:
+    template: Domovoi_2
+    script:   Domovoi
+  17375620:
+    template: Dvorovoi_2
+    script:   Dvorovoi
+  17375621:
+    template: Domovoi_2
+    script:   Domovoi
+  17375622:
+    template: Domovoi_2
+    script:   Domovoi
+  17375623:
+    template: Domovoi_2
+    script:   Domovoi
+  17375624:
+    template: Domovoi_2
+    script:   Domovoi
+  17375625:
+    template: Domovoi_2
+    script:   Domovoi
+  17375626:
+    template: Domovoi_2
+    script:   Domovoi
+  17375627:
+    template: Domovoi_2
+    script:   Domovoi
+  17375629:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [-138.132, 55.463, -216.736, 218]
+  17375630:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [-137.011, 55.576, -215.020, 208]
+  17375631:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [-142.867, 56.237, -225.346, 85]
+  17375632:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [-139.866, 55.463, -216.089, 116]
+  17375633:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [-139.477, 55.435, -215.723, 118]
+  17375634:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [-141.960, 56.144, -222.270, 83]
+  17375636:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [-144.047, 55.655, -215.276, 222]
+  17375637:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [-137.073, 55.291, -209.563, 247]
+  17375638:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [-144.381, 55.662, -217.978, 141]
+  17375639:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [-146.999, 55.755, -224.474, 191]
+  17375640:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [-144.860, 55.557, -219.601, 127]
+  17375641:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [-141.009, 56.144, -219.962, 175]
+  17375643:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [-135.378, 55.591, -215.483, 240]
+  17375644:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [-130.676, 55.352, -213.588, 235]
+  17375645:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [-143.032, 56.240, -224.604, 62]
+  17375646:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [-138.212, 55.319, -213.089, 163]
+  17375647:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [-138.314, 55.450, -216.476, 98]
+  17375648:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [-141.682, 56.144, -221.641, 185]
+  17375650:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+  17375651:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+  17375652:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+  17375653:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+  17375654:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+  17375655:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+  17375657:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [-150.952, 55.107, -214.863, 169]
+  17375658:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [-149.714, 55.314, -217.064, 7]
+  17375659:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [-145.675, 55.644, -221.433, 198]
+  17375660:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [-143.192, 55.672, -218.889, 224]
+  17375661:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [-149.691, 55.307, -215.672, 24]
+  17375662:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [-142.718, 56.110, -220.672, 27]
+  17375664:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [20.236, -4.560, -14.961, 218]
+  17375665:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [23.220, -4.424, -15.096, 208]
+  17375666:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [16.105, -3.759, -24.543, 85]
+  17375667:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [20.365, -4.537, -16.165, 116]
+  17375668:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [21.497, -4.597, -15.185, 118]
+  17375669:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [18.058, -3.855, -20.978, 83]
+  17375671:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [16.184, -4.345, -15.352, 222]
+  17375672:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [23.158, -4.709, -9.639, 247]
+  17375673:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [15.850, -4.338, -18.054, 141]
+  17375674:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [13.232, -4.245, -24.550, 191]
+  17375675:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [15.371, -4.443, -19.677, 127]
+  17375676:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [18.659, -3.855, -21.018, 175]
+  17375678:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [24.853, -4.409, -15.559, 240]
+  17375679:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [29.555, -4.648, -13.664, 235]
+  17375680:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [16.864, -3.759, -23.839, 62]
+  17375681:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [22.019, -4.681, -13.165, 163]
+  17375682:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [21.917, -4.550, -16.552, 98]
+  17375683:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [20.053, -3.855, -21.610, 185]
+  17375685:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+  17375686:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+  17375687:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+  17375688:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+  17375689:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+  17375690:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+  17375692:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [9.279, -4.893, -14.939, 169]
+  17375693:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [10.517, -4.686, -17.140, 7]
+  17375694:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [14.556, -4.356, -21.509, 198]
+  17375695:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [17.039, -4.328, -18.965, 224]
+  17375696:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [10.540, -4.693, -15.748, 24]
+  17375697:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [17.513, -3.890, -20.748, 27]
+  17375699:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [181.927, -64.537, 183.263, 218]
+  17375700:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [183.048, -64.424, 184.979, 208]
+  17375701:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [177.192, -63.763, 174.653, 85]
+  17375702:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [180.193, -64.537, 183.910, 116]
+  17375703:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [180.582, -64.565, 184.276, 118]
+  17375704:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [178.099, -63.856, 177.729, 83]
+  17375706:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [176.012, -64.345, 184.723, 222]
+  17375707:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [182.986, -64.709, 190.436, 247]
+  17375708:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [175.678, -64.338, 182.021, 141]
+  17375709:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [173.060, -64.245, 175.525, 191]
+  17375710:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [175.199, -64.443, 180.398, 127]
+  17375711:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [179.050, -63.856, 180.037, 175]
+  17375713:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [184.681, -64.409, 184.516, 240]
+  17375714:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [189.383, -64.648, 186.411, 235]
+  17375715:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [177.027, -63.760, 175.395, 62]
+  17375716:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [181.847, -64.681, 186.910, 163]
+  17375717:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [181.745, -64.550, 183.523, 98]
+  17375718:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [178.377, -63.856, 178.358, 185]
+  17375720:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+  17375721:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+  17375722:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+  17375723:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+  17375724:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+  17375725:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+  17375727:
+    template: Voo_Tolu_the_Ghostfist_2
+    script:   Voo_Tolu_the_Ghostfist
+    at:       [169.107, -64.893, 185.136, 169]
+  17375728:
+    template: Cuu_Doko_the_Blizzard_2
+    script:   Cuu_Doko_the_Blizzard
+    at:       [170.345, -64.686, 182.935, 7]
+  17375729:
+    template: Zuu_Xowu_the_Darksmoke_2
+    script:   Zuu_Xowu_the_Darksmoke
+    at:       [174.384, -64.356, 178.566, 198]
+  17375730:
+    template: Gii_Jaha_the_Raucous_2
+    script:   Gii_Jaha_the_Raucous
+    at:       [176.867, -64.328, 181.110, 224]
+  17375731:
+    template: Aa_Nawu_the_Thunderblade_2
+    script:   Aa_Nawu_the_Thunderblade
+    at:       [170.368, -64.693, 184.327, 24]
+  17375732:
+    template: Yoo_Mihi_the_Haze_2
+    script:   Yoo_Mihi_the_Haze
+    at:       [177.341, -63.890, 179.327, 27]
+  17375734:
+    script: Bahamute
+  17375735:
+    script: Bahamute
+  17375736:
+    script: Bahamute
+  17375737:
+    template: Chest_OPlenty
+    at:       [-131.800, 55.577, -220.500, 192]
+  17375738:
+    template: Chest_OPlenty
+    at:       [-135.399, 56.120, -220.500, 192]
+  17375739:
+    template: Chest_OPlenty
+    at:       [-139.000, 56.144, -220.500, 192]
+  17375740:
+    template: Chest_OPlenty
+    at:       [-142.600, 56.089, -220.500, 192]
+  17375741:
+    template: Chest_OPlenty
+    at:       [-146.199, 55.576, -220.500, 192]
+  17375742:
+    template: Chest_OPlenty
+    at:       [-131.800, 55.516, -228.000, 192]
+  17375743:
+    template: Chest_OPlenty
+    at:       [-135.399, 56.144, -228.000, 192]
+  17375744:
+    template: Chest_OPlenty
+    at:       [-139.000, 56.144, -228.000, 192]
+  17375745:
+    template: Chest_OPlenty
+    at:       [-142.600, 56.113, -228.000, 192]
+  17375746:
+    template: Chest_OPlenty
+    at:       [-146.199, 55.515, -228.000, 192]
+  17375748:
+    template: Chest_OPlenty
+    at:       [28.200, -4.419, -20.250, 192]
+  17375749:
+    template: Chest_OPlenty
+    at:       [24.600, -3.993, -20.250, 192]
+  17375750:
+    template: Chest_OPlenty
+    at:       [21.000, -3.855, -20.250, 192]
+  17375751:
+    template: Chest_OPlenty
+    at:       [17.399, -4.016, -20.250, 192]
+  17375752:
+    template: Chest_OPlenty
+    at:       [13.800, -4.420, -20.250, 192]
+  17375753:
+    template: Chest_OPlenty
+    at:       [28.200, -4.483, -28.000, 192]
+  17375754:
+    template: Chest_OPlenty
+    at:       [24.600, -3.855, -28.000, 192]
+  17375755:
+    template: Chest_OPlenty
+    at:       [21.000, -3.855, -28.000, 192]
+  17375756:
+    template: Chest_OPlenty
+    at:       [17.399, -3.886, -28.000, 192]
+  17375757:
+    template: Chest_OPlenty
+    at:       [13.800, -4.484, -28.000, 192]
+  17375759:
+    template: Chest_OPlenty
+    at:       [188.259, -64.423, 179.499, 192]
+  17375760:
+    template: Chest_OPlenty
+    at:       [184.660, -63.880, 179.499, 192]
+  17375761:
+    template: Chest_OPlenty
+    at:       [181.059, -63.856, 179.499, 192]
+  17375762:
+    template: Chest_OPlenty
+    at:       [177.459, -63.911, 179.499, 192]
+  17375763:
+    template: Chest_OPlenty
+    at:       [173.860, -64.424, 179.499, 192]
+  17375764:
+    template: Chest_OPlenty
+    at:       [188.259, -64.484, 171.999, 192]
+  17375765:
+    template: Chest_OPlenty
+    at:       [184.660, -63.856, 171.999, 192]
+  17375766:
+    template: Chest_OPlenty
+    at:       [181.059, -63.856, 171.999, 192]
+  17375767:
+    template: Chest_OPlenty
+    at:       [177.459, -63.887, 171.999, 192]
+  17375768:
+    template: Chest_OPlenty
+    at:       [173.860, -64.485, 171.999, 192]
+  17375770:
+    template: Coffer_OPlenty
+    at:       [-131.800, 55.577, -220.500, 192]
+  17375771:
+    template: Coffer_OPlenty
+    at:       [-135.399, 56.120, -220.500, 192]
+  17375772:
+    template: Coffer_OPlenty
+    at:       [-139.000, 56.144, -220.500, 192]
+  17375773:
+    template: Coffer_OPlenty
+    at:       [-142.600, 56.089, -220.500, 192]
+  17375774:
+    template: Coffer_OPlenty
+    at:       [-146.199, 55.576, -220.500, 192]
+  17375775:
+    template: Coffer_OPlenty
+    at:       [-131.800, 55.516, -228.000, 192]
+  17375776:
+    template: Coffer_OPlenty
+    at:       [-135.399, 56.144, -228.000, 192]
+  17375777:
+    template: Coffer_OPlenty
+    at:       [-139.000, 56.144, -228.000, 192]
+  17375778:
+    template: Coffer_OPlenty
+    at:       [-142.600, 56.113, -228.000, 192]
+  17375779:
+    template: Coffer_OPlenty
+    at:       [-146.199, 55.515, -228.000, 192]
+  17375781:
+    template: Coffer_OPlenty
+    at:       [28.200, -4.419, -20.250, 192]
+  17375782:
+    template: Coffer_OPlenty
+    at:       [24.600, -3.993, -20.250, 192]
+  17375783:
+    template: Coffer_OPlenty
+    at:       [21.000, -3.855, -20.250, 192]
+  17375784:
+    template: Coffer_OPlenty
+    at:       [17.399, -4.016, -20.250, 192]
+  17375785:
+    template: Coffer_OPlenty
+    at:       [13.800, -4.420, -20.250, 192]
+  17375786:
+    template: Coffer_OPlenty
+    at:       [28.200, -4.483, -28.000, 192]
+  17375787:
+    template: Coffer_OPlenty
+    at:       [24.600, -3.855, -28.000, 192]
+  17375788:
+    template: Coffer_OPlenty
+    at:       [21.000, -3.855, -28.000, 192]
+  17375789:
+    template: Coffer_OPlenty
+    at:       [17.399, -3.886, -28.000, 192]
+  17375790:
+    template: Coffer_OPlenty
+    at:       [13.800, -4.484, -28.000, 192]
+  17375792:
+    template: Coffer_OPlenty
+    at:       [188.259, -64.423, 179.499, 192]
+  17375793:
+    template: Coffer_OPlenty
+    at:       [184.660, -63.880, 179.499, 192]
+  17375794:
+    template: Coffer_OPlenty
+    at:       [181.059, -63.856, 179.499, 192]
+  17375795:
+    template: Coffer_OPlenty
+    at:       [177.459, -63.911, 179.499, 192]
+  17375796:
+    template: Coffer_OPlenty
+    at:       [173.860, -64.424, 179.499, 192]
+  17375797:
+    template: Coffer_OPlenty
+    at:       [188.259, -64.484, 171.999, 192]
+  17375798:
+    template: Coffer_OPlenty
+    at:       [184.660, -63.856, 171.999, 192]
+  17375799:
+    template: Coffer_OPlenty
+    at:       [181.059, -63.856, 171.999, 192]
+  17375800:
+    template: Coffer_OPlenty
+    at:       [177.459, -63.887, 171.999, 192]
+  17375801:
+    template: Coffer_OPlenty
+    at:       [173.860, -64.485, 171.999, 192]
+  17375803:
+    script: Kupipi
+  17375804:
+    script: Kupipi
+  17375805:
+    script: Kupipi
+  17375806:
+    script: Kupipi
+  17375807:
+    script: Excenmille
+  17375808:
+    script: Naji
+  17375809:
+    script: Kupipi
+  17375810:
+    script: Excenmille
+  17375811:
+    script: Naji
+  17375812:
+    script: Kupipi
+  17375813:
+    script: Excenmille
+  17375814:
+    script: Naji

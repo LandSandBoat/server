@@ -1,0 +1,307 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17965060:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: ROV
+
+  17965061:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: ROV
+
+  17965069:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17965070:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17965071:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17965072:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17965073:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17965074:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17965075:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17965076:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17965077:
+    script: csnpc
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+
+  17965078:
+    script: csnpc
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+
+  17965079:
+    script:       Sempurne
+    display_name: Sempurne
+    render:
+      look:
+        type:  standard
+        model: 2367
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17965080:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17965081:
+    script:       Cait_Sith
+    display_name: Cait Sith
+    at:           [536.305, -500.000, -573.915, 255]
+    render:
+      look:
+        type:  standard
+        model: 2255
+      entity_flags: 27
+      name_prefix:  32
+      moving:       21
+    status:   normal
+    widescan: true
+
+  17965082:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 2051
+      name_prefix:    32
+    widescan: true
+
+  17965083:
+    script:       qm
+    display_name: ???
+    at:           [535.305, -500.000, -573.915, 255]
+    render:
+      look:
+        type:  standard
+        model: 2255
+      entity_flags: 27
+      moving:       20
+    status:   normal
+    widescan: true
+
+  17965084:
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17965085:
+    script:       Transcendental_Radiance
+    display_name: Transcendental Radiance
+    at:           [540.000, -500.000, -599.000]
+    render:
+      look:
+        type:  standard
+        model: 2410
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17965086:
+    script:       Trailmix
+    display_name: Trailmix
+    at:           [548.341, -500.000, -561.971, 96]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17965087:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [548.341, -500.000, -561.971, 96]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17965088:
+    script:       Dimensional_Portal
+    display_name: Dimensional Portal
+    at:           [539.998, -500.000, -564.174, 64]
+    render:
+      look:
+        type:  standard
+        model: 1339
+      name_vis: 96
+      moving:    1
+    status:   normal
+    widescan: true
+
+  17965089:
+    script:       Transcendental_Radiance
+    display_name: Transcendental Radiance
+    at:           [-480.000, 0.000, 480.000]
+    render:
+      look:
+        type:  standard
+        model: 2410
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17965090:
+    script:       Transcendental_Radiance
+    display_name: Transcendental Radiance
+    at:           [520.000, -500.000, 480.000, 195]
+    render:
+      look:
+        type:  standard
+        model: 2410
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17965091:
+    script:       Transcendental_Radiance
+    display_name: Transcendental Radiance
+    at:           [-480.000, -1000.000, -520.000, 203]
+    render:
+      look:
+        type:  standard
+        model: 2410
+      entity_flags: 515
+      name_vis:      96
+      name_prefix:    2
+    widescan: true
+
+  17965092:
+    script:       exit
+    display_name: exit
+    at:           [-525.000, -406.000, 480.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17965093:
+    script:       exit
+    display_name: exit
+    at:           [-525.000, 394.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50

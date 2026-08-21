@@ -32,6 +32,8 @@
 #include <common/types/flat_hash_map.h>
 #include <common/types/fn.h>
 
+#include "data/datasets/zones/settings/dataset.h"
+
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
 #include "map_config.h"
@@ -47,8 +49,8 @@
 
 #include <common/types/hash_map.h>
 #include <list>
-#include <map>
 #include <memory>
+#include <optional>
 
 //
 // Forward Declarations
@@ -227,7 +229,7 @@ using QueryByNameResult_t = std::vector<CBaseEntity*>;
 class CZone
 {
 public:
-    CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
+    CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings);
     virtual ~CZone();
 
     DISALLOW_COPY_AND_MOVE(CZone);
@@ -362,8 +364,8 @@ protected:
     HashMap<std::string, uint32> localVars_;
 
 private:
-    void LoadZoneSettings();
-    void LoadZoneLines();
+    void LoadZoneSettings(const std::optional<xi::data::ZoneSettings>& settings);
+    void LoadZoneLines(const std::optional<xi::data::ZoneSettings>& settings);
     void LoadZoneWeather();
 
     std::unique_ptr<NavMesh> navMesh_;

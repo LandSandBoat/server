@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z3z0:
+    from:  [1.494, -3.051, 59.893]
+    to:    north_gustaberg
+    at:    [495.999, -36.647, 1172.910, 2.443461]
+    scale: [1.000, 4.000]
+
+  z3z2:
+    from:  [117.365, -43.612, -140.074]
+    to:    waughroon_shrine
+    at:    [-361.434, 101.798, -259.996]
+    scale: [1.000, 4.000]
+
+  z3z4:
+    from:  [180.841, -42.417, -73.497]
+    to:    waughroon_shrine
+    at:    [340.017, -118.107, 277.484, 1.570796]
+    scale: [1.000, 4.000]

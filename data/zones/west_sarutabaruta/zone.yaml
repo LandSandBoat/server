@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          113
+  night:        113
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z370:
+    from:  [320.010, -8.222, -48.071]
+    to:    windurst_waters
+    at:    [-39.996, -7.640, 244.035, 1.570796]
+    scale: [1.000, 6.000]
+
+  z372:
+    from:  [169.197, -3.751, -320.032]
+    to:    port_windurst
+    at:    [-244.532, -10.765, 199.974]
+    scale: [1.000, 5.000]
+
+  z374:
+    from:  [504.436, -13.689, 133.854]
+    to:    east_sarutabaruta
+    at:    [-341.494, -12.089, 106.469]
+    scale: [1.000, 3.000]
+
+  z376:
+    from:  [425.197, -29.483, 693.491]
+    to:    east_sarutabaruta
+    at:    [-422.940, -28.935, 601.463]
+    scale: [1.000, 8.000]
+
+  z378:
+    from:  [-374.546, -25.351, 61.091]
+    to:    giddeus
+    at:    [-100.050, -2.664, 406.818, 1.570796]
+    scale: [1.000, 4.000]
+
+  z37a:
+    from:  [-279.160, -12.112, 660.050]
+    to:    outer_horutoto_ruins
+    at:    [-316.779, -9.680, 860.009, 3.141593]
+    scale: [1.000, 4.000]
+
+  z37c:
+    from:  [-340.006, 8.097, -399.521]
+    to:    outer_horutoto_ruins
+    at:    [-579.995, -9.667, -636.951, 1.570796]
+    scale: [1.000, 4.000]
+
+  z37e:
+    from:  [221.245, -0.634, 39.306]
+    to:    inner_horutoto_ruins
+    at:    [-200.937, -11.573, 59.994, 3.141593]
+    scale: [1.000, 4.000]
+
+  z37g:
+    from:  [-228.613, -10.402, -186.111]
+    to:    balgas_dais
+    at:    [-259.648, 113.723, -358.869, 4.712389]
+    scale: [1.000, 4.000]

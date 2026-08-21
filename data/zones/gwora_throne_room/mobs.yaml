@@ -1,0 +1,430 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Bahamut:
+    id:            325
+    species:       bahamut
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 726
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire: 4
+          dark: 6
+        rank_status:
+          dark_sleep: 6
+          blind:      6
+      render:
+        look:
+          type:  standard
+          model: 1307
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        54
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chaos_Gwora_Throne:
+    id:           3867
+    display_name: Chaos
+    species:      bahamut
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cornelia:
+    id:      6156
+    species: humes
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Dazbog_Gwora_Throne:
+    id:           6694
+    display_name: Dazbog
+    species:      meeble
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Dazbog_Gwora_Throne_2:
+    id:           6694
+    display_name: Dazbog
+    species:      meeble
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Fickblix:
+    id:      6158
+    species: goblin
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Garazu-Horeizu:
+    id:      6152
+    species: tarutaru
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gloom_Phantom_Gwora_Throne:
+    id:           3869
+    display_name: Gloom_Phantom
+    species:      goblin
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, drk]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Gloom_Phantom_Gwora_Throne_2:
+    id:           3869
+    display_name: Gloom_Phantom
+    species:      goblin
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, drk]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gurebu-Ogurebu:
+    id:      6154
+    species: tarutaru
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Lehko_Habhoka:
+    id:      6157
+    species: mithra
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Magh_Bihu_Gwora_Throne:
+    id:           6080
+    display_name: Magh_Bihu
+    species:      citrullus
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Magh_Bihu_Gwora_Throne_2:
+    id:           6080
+    display_name: Magh_Bihu
+    species:      citrullus
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Medada:
+    id:      6155
+    species: tarutaru
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Paragons_Gloam:
+    id:      6159
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Profane_Circle:
+    id:      6153
+    species: gyre
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ragelise:
+    id:            3305
+    species:       shadow
+    type:          [notorious, battlefield]
+    spell_list_id: 4
+    skill_list_id: 446
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  equipped
+          race:  3
+          face:  31
+          head:  4096
+          body:  8434
+          hands: 12530
+          legs:  16626
+          feet:  20722
+          main:  24980
+          sub:   28702
+        entity_flags: 153
+        hitbox:        12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  luzaf:
+    id:            5928
+    display_name:  Luzaf
+    species:       elvaan
+    skill_list_id: 1043
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, nin]
+      render:
+        look:
+          type:  standard
+          model: 3032
+        entity_flags:  3
+        name_prefix:  32
+        model_size:    2
+        hitbox:       22
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+spawns:
+  18001921:
+    template: Chaos_Gwora_Throne
+    script:   Chaos
+    level:    [139, 139]
+  18001922:
+    template: Profane_Circle
+    level:    [139, 139]
+  18001923:
+    template: Profane_Circle
+    level:    [139, 139]
+  18001924:
+    template: Profane_Circle
+    level:    [139, 139]
+  18001925:
+    template: Profane_Circle
+    level:    [139, 139]
+  18001926:
+    template: Gurebu-Ogurebu
+    level:    [139, 139]
+  18001927:
+    template: Medada
+    level:    [139, 139]
+  18001928:
+    template: Cornelia
+    level:    [139, 139]
+  18001929:
+    template: Ragelise
+    level:    [139, 139]
+  18001930:
+    template: Lehko_Habhoka
+    level:    [139, 139]
+  18001931:
+    template: Fickblix
+    level:    [139, 139]
+  18001932:
+    template: luzaf
+    script:   Luzaf
+    level:    [139, 139]
+  18001933:
+    template: Garazu-Horeizu
+    level:    [139, 139]
+  18001934:
+    template: Gloom_Phantom_Gwora_Throne
+    script:   Gloom_Phantom
+    level:    [139, 139]
+  18001935:
+    template: Magh_Bihu_Gwora_Throne
+    script:   Magh_Bihu
+    level:    [139, 139]
+  18001936:
+    template: Dazbog_Gwora_Throne
+    script:   Dazbog
+    level:    [139, 139]
+  18001937:
+    template: Paragons_Gloam
+    level:    [139, 139]
+  18001938:
+    template: Gloom_Phantom_Gwora_Throne_2
+    script:   Gloom_Phantom
+    level:    [139, 139]
+  18001939:
+    template: Magh_Bihu_Gwora_Throne_2
+    script:   Magh_Bihu
+    level:    [139, 139]
+  18001940:
+    template: Dazbog_Gwora_Throne_2
+    script:   Dazbog
+    level:    [139, 139]
+  18001941:
+    template: Bahamut
+  18001942:
+    template: Chaos_Gwora_Throne
+    script:   Chaos

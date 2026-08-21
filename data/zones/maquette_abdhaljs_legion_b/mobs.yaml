@@ -1,0 +1,1531 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Lofty_Adamantoise:
+    id:            5746
+    species:       adamantoise
+    type:          [notorious]
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    380
+        dmg_mult: 125
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 400
+        entity_flags: 135
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lofty_Behemoth:
+    id:            5744
+    species:       behemoth
+    type:          [notorious]
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill:    great_axe
+        delay:    380
+        dmg_mult: 125
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags: 135
+        model_size:     3
+        hitbox:        63
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lofty_Elasmoth:
+    id:            5747
+    species:       behemoth
+    type:          [notorious]
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 405
+        entity_flags: 647
+        model_size:     3
+        hitbox:        63
+      spawn:
+        type: [scripted]
+
+  Lofty_Ferromantoise:
+    id:            5749
+    species:       adamantoise
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2376
+        entity_flags: 135
+        model_size:     3
+        hitbox:        64
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lofty_Harpeia:
+    id:            5750
+    species:       harpeia
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 471
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    1
+          wind:    9
+          earth:   5
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          silence:     9
+          slow:        5
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 2110
+        entity_flags:  647
+        animation_sub:   8
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lofty_Wyrm:
+    id:            5745
+    species:       black_wyrm
+    type:          [notorious]
+    skill_list_id: 263
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+          light: -2
+        rank_status:
+          poison:      -2
+          light_sleep:  6
+          dark_sleep:   6
+      render:
+        look:
+          type:  standard
+          model: 609
+        entity_flags: 129
+        hitbox:        42
+      spawn:
+        type: [scripted]
+
+  Lofty_Zilant:
+    id:            5748
+    species:       zilant
+    type:          [notorious]
+    skill_list_id: 470
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          fire:     2
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    4
+          dark:    11
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        4
+          poison:      4
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 2174
+        entity_flags: 135
+        model_size:     3
+        hitbox:        55
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mired_Alfard:
+    id:            5792
+    species:       hydra
+    type:          [notorious]
+    skill_list_id: 164
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, thf]
+      resists:
+        dmg_physical:
+          blunt: -1250
+        rank_element:
+          fire:    6
+          ice:     6
+          wind:    6
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 1797
+        entity_flags: 135
+      spawn:
+        type: [scripted]
+
+  Mired_Cerberus:
+    id:            5791
+    species:       cerberus
+    type:          [notorious]
+    skill_list_id: 62
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    200
+        dmg_mult: 175
+      resists:
+        immune_status: [gravity, light_sleep, dark_sleep]
+        rank_element:
+          fire:  11
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 1793
+        entity_flags: 135
+        name_prefix:   32
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mired_Hydra:
+    id:            5789
+    species:       hydra
+    type:          [notorious]
+    skill_list_id: 164
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      resists:
+        dmg_physical:
+          blunt: -1250
+        rank_element:
+          fire:    6
+          ice:     6
+          wind:    6
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 1796
+        entity_flags: 647
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mired_Khimaira:
+    id:            5790
+    species:       khimaira
+    type:          [notorious]
+    skill_list_id: 168
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    320
+        dmg_mult: 125
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    8
+          ice:     5
+          wind:    8
+          earth:   7
+          thunder: 9
+          water:   5
+          light:   7
+          dark:    5
+        rank_status:
+          paralyze:    7
+          bind:        7
+          silence:     7
+          slow:        7
+          poison:      7
+          light_sleep: 7
+          dark_sleep:  7
+          blind:       7
+      render:
+        look:
+          type:  standard
+          model: 1805
+        entity_flags: 647
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mired_Khrysokhimaira:
+    id:            5793
+    species:       khimaira
+    type:          [notorious]
+    skill_list_id: 168
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    8
+          ice:     5
+          wind:    8
+          earth:   7
+          thunder: 9
+          water:   5
+          light:   7
+          dark:    5
+        rank_status:
+          paralyze:    7
+          bind:        7
+          silence:     7
+          slow:        7
+          poison:      7
+          light_sleep: 7
+          dark_sleep:  7
+          blind:       7
+      render:
+        look:
+          type:  standard
+          model: 1807
+        entity_flags: 647
+      spawn:
+        type: [scripted]
+
+  Mired_Mantis:
+    id:            5783
+    species:       green_mantid
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2104
+        entity_flags:  647
+        animation_sub:   8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Mired_Orthrus:
+    id:            5794
+    species:       cerberus
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 62
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:  11
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 1794
+        entity_flags: 135
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Paramount_Botulus:
+    id:            5776
+    species:       botulus
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    1
+          ice:     6
+          wind:    6
+          earth:   6
+          thunder: 1
+          water:   9
+          light:   3
+          dark:    4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        6
+          poison:      9
+          light_sleep: 3
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2060
+        entity_flags: 135
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Paramount_Gallu:
+    id:            5777
+    species:       gallu
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 467
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:     3
+          ice:      4
+          wind:     3
+          earth:    4
+          thunder:  3
+          water:    4
+          light:   -1
+          dark:     9
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         4
+          poison:       4
+          light_sleep: -1
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2059
+        entity_flags: 135
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Paramount_Harpeia:
+    id:            5780
+    species:       harpeia
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 471
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    1
+          wind:    9
+          earth:   5
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          silence:     9
+          slow:        5
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 2106
+        entity_flags: 647
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Paramount_Ironclad:
+    id:            5778
+    species:       iron_giant
+    type:          [notorious]
+    skill_list_id: 350
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:  4
+          ice:   6
+          wind:  4
+          earth: 4
+          water: 2
+          light: 4
+          dark:  4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2136
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Paramount_Mantis:
+    id:            5779
+    species:       red_mantid
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2066
+        entity_flags:  647
+        animation_sub:   8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Paramount_Naraka:
+    id:            5781
+    species:       naraka
+    type:          [notorious]
+    skill_list_id: 472
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          ice:     5
+          wind:    2
+          earth:   3
+          thunder: 2
+          water:   2
+          dark:    9
+        rank_status:
+          paralyze:   5
+          bind:       5
+          silence:    2
+          slow:       3
+          poison:     2
+          dark_sleep: 9
+          blind:      9
+      render:
+        look:
+          type:  standard
+          model: 2105
+        entity_flags: 135
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Soaring_Corse:
+    id:            5797
+    species:       corse
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 74
+    attributes:
+      combat:
+        skill: staff
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:    2
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     3
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         2
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1364
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Soaring_Dvergr:
+    id:            5796
+    species:       dvergr
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1839
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Soaring_Dweorg:
+    id:            5799
+    species:       dvergr
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1840
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Soaring_Kumakatok:
+    id:            5800
+    species:       kumakatok
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 74
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:    2
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     3
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         2
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 2389
+        entity_flags: 135
+      spawn:
+        type: [scripted]
+
+  Soaring_Naraka:
+    id:            5784
+    species:       naraka
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 472
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          ice:     5
+          wind:    2
+          earth:   3
+          thunder: 2
+          water:   2
+          dark:    9
+        rank_status:
+          paralyze:   5
+          bind:       5
+          silence:    2
+          slow:       3
+          poison:     2
+          dark_sleep: 9
+          blind:      9
+      render:
+        look:
+          type:  standard
+          model: 2111
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Soaring_Strigoi:
+    id:            5798
+    species:       vampyr
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 309
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1846
+        entity_flags: 135
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Soaring_Vampyr:
+    id:            5795
+    species:       vampyr
+    spell_list_id: 5
+    skill_list_id: 252
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1845
+        entity_flags: 135
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Varanus:
+    id:      4203
+    species: unclassified
+    type:    [notorious, battlefield]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2175
+        entity_flags: 129
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Veiled_Alicorn:
+    id:            5803
+    species:       monoceros
+    skill_list_id: 39
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:   -2
+          thunder:  6
+          water:    2
+          dark:     4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:       -2
+          poison:      2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2227
+        entity_flags: 647
+      spawn:
+        type: [scripted]
+
+  Veiled_Amphiptere:
+    id:            5805
+    species:       amphiptere
+    type:          [notorious]
+    roam:          [stealth]
+    spell_list_id: 21
+    skill_list_id: 6
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    8
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    4
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     8
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2222
+        entity_flags: 135
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Veiled_Gigaworm:
+    id:            5804
+    species:       sandworm
+    type:          [notorious]
+    spell_list_id: 5
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     1
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      1
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2029
+        entity_flags: 133
+      spawn:
+        type: [scripted]
+
+  Veiled_Ironclad:
+    id:            5782
+    species:       iron_giant
+    type:          [notorious]
+    skill_list_id: 350
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:  4
+          ice:   6
+          wind:  4
+          earth: 4
+          water: 2
+          light: 4
+          dark:  4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2393
+        entity_flags: 135
+      spawn:
+        type: [scripted]
+
+  Veiled_Ixion:
+    id:            5806
+    species:       monoceros
+    type:          [notorious]
+    skill_list_id: 39
+    attributes:
+      combat:
+        skill:    great_axe
+        dmg_mult: 125
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:   -2
+          thunder:  6
+          water:    2
+          dark:     4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:       -2
+          poison:      2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2226
+        entity_flags: 135
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Veiled_Sandworm:
+    id:            5801
+    species:       sandworm
+    skill_list_id: 214
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     1
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      1
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2027
+        entity_flags: 135
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Veiled_Sanguiptere:
+    id:            5802
+    species:       amphiptere
+    type:          [notorious]
+    skill_list_id: 6
+    attributes:
+      combat:
+        skill: club
+      jobs: [sch, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    8
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    4
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     8
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2391
+        entity_flags: 135
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17952769:
+    template: Lofty_Behemoth
+  17952770:
+    template: Lofty_Wyrm
+  17952771:
+    template: Lofty_Adamantoise
+  17952772:
+    template: Lofty_Elasmoth
+  17952773:
+    template: Lofty_Zilant
+  17952774:
+    template: Lofty_Ferromantoise
+  17952775:
+    template: Lofty_Harpeia
+  17952776:
+    template: Varanus
+  17952777:
+    template: Varanus
+  17952778:
+    template: Varanus
+  17952779:
+    template: Lofty_Behemoth
+  17952780:
+    template: Lofty_Wyrm
+  17952781:
+    template: Lofty_Adamantoise
+  17952782:
+    template: Lofty_Elasmoth
+  17952783:
+    template: Lofty_Zilant
+  17952784:
+    template: Lofty_Ferromantoise
+  17952785:
+    template: Lofty_Harpeia
+  17952786:
+    template: Varanus
+  17952787:
+    template: Varanus
+  17952788:
+    template: Varanus
+  17952789:
+    template: Mired_Cerberus
+  17952790:
+    template: Mired_Khimaira
+  17952791:
+    template: Mired_Hydra
+  17952792:
+    template: Mired_Orthrus
+  17952793:
+    template: Mired_Khrysokhimaira
+  17952794:
+    template: Mired_Alfard
+  17952795:
+    template: Mired_Mantis
+  17952796:
+    template: Mired_Cerberus
+  17952797:
+    template: Mired_Khimaira
+  17952798:
+    template: Mired_Hydra
+  17952799:
+    template: Mired_Orthrus
+  17952800:
+    template: Mired_Khrysokhimaira
+  17952801:
+    template: Mired_Alfard
+  17952802:
+    template: Mired_Mantis
+  17952803:
+    template: Soaring_Corse
+  17952804:
+    template: Soaring_Dvergr
+  17952805:
+    template: Soaring_Vampyr
+  17952806:
+    template: Soaring_Kumakatok
+  17952807:
+    template: Soaring_Dweorg
+  17952808:
+    template: Soaring_Strigoi
+  17952809:
+    template: Soaring_Naraka
+  17952810:
+    template: Soaring_Corse
+  17952811:
+    template: Soaring_Dvergr
+  17952812:
+    template: Soaring_Vampyr
+  17952813:
+    template: Soaring_Kumakatok
+  17952814:
+    template: Soaring_Dweorg
+  17952815:
+    template: Soaring_Strigoi
+  17952816:
+    template: Soaring_Naraka
+  17952817:
+    template: Veiled_Amphiptere
+  17952818:
+    template: Veiled_Ixion
+  17952819:
+    template: Veiled_Sandworm
+  17952820:
+    template: Veiled_Sanguiptere
+  17952821:
+    template: Veiled_Alicorn
+  17952822:
+    template: Veiled_Gigaworm
+  17952823:
+    template: Veiled_Ironclad
+  17952824:
+    template: Veiled_Amphiptere
+  17952825:
+    template: Veiled_Ixion
+  17952826:
+    template: Veiled_Sandworm
+  17952827:
+    template: Veiled_Sanguiptere
+  17952828:
+    template: Veiled_Alicorn
+  17952829:
+    template: Veiled_Gigaworm
+  17952830:
+    template: Veiled_Ironclad
+  17952831:
+    template: Lofty_Harpeia
+  17952832:
+    template: Mired_Mantis
+  17952833:
+    template: Soaring_Naraka
+  17952834:
+    template: Veiled_Ironclad
+  17952835:
+    template: Paramount_Naraka
+  17952836:
+    template: Paramount_Harpeia
+  17952837:
+    template: Paramount_Mantis
+  17952838:
+    template: Paramount_Ironclad
+  17952839:
+    template: Paramount_Gallu
+  17952840:
+    template: Paramount_Botulus
+  17952841:
+    template: Lofty_Harpeia
+  17952842:
+    template: Mired_Mantis
+  17952843:
+    template: Soaring_Naraka
+  17952844:
+    template: Veiled_Ironclad
+  17952845:
+    template: Paramount_Naraka
+  17952846:
+    template: Paramount_Harpeia
+  17952847:
+    template: Paramount_Mantis
+  17952848:
+    template: Paramount_Ironclad
+  17952849:
+    template: Paramount_Gallu
+  17952850:
+    template: Paramount_Botulus
+  17952851:
+    script: Paramount_Avatar
+  17952852:
+    script: Paramount_Avatar
+  17952853:
+    script: Paramount_Avatar
+  17952854:
+    script: Paramount_Avatar
+  17952855:
+    script: Paramount_Avatar
+  17952856:
+    script: Paramount_Avatar
+  17952857:
+    script: Auspicious_Entity
+  17952858:
+    script: Auspicious_Entity
+  17952859:
+    script: Auspicious_Entity
+  17952860:
+    script: Auspicious_Entity
+  17952861:
+    script: Auspicious_Entity
+  17952862:
+    script: Auspicious_Entity
+  17952863:
+    script: Auspicious_Entity
+  17952864:
+    script: Auspicious_Entity
+  17952865:
+    script: Auspicious_Entity
+  17952866:
+    script: Auspicious_Entity
+  17952867:
+    script: Bozzetto_Breadwinner
+    at:     [160.000, 12.000, -160.000, 160]
+    level:  [119, 0]
