@@ -74,8 +74,38 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.PORT_WINDURST] =
+        {
+            ['Janshura-Rashura'] = mission:event(469),
+
+            ['Nine_of_Clubs'] = mission:event(470),
+
+            ['Puo_Rhen'] = mission:event(472),
+
+            ['Ten_of_Clubs'] = mission:event(471),
+        },
+
+        [xi.zone.WINDURST_WALLS] =
+        {
+            ['Chawo_Shipeynyo'] = mission:event(364),
+
+            ['Keo-Koruo'] = mission:event(363),
+
+            ['Pakke-Pokke'] = mission:event(362),
+
+            ['Zokima-Rokima'] = mission:event(361),
+        },
+
         [xi.zone.WINDURST_WATERS] =
         {
+            ['Dagoza-Beruza'] = mission:event(713),
+
+            ['Mokyokyo'] = mission:event(711),
+
+            ['Panna-Donna'] = mission:event(712),
+
+            ['Ten_of_Hearts'] = mission:event(714),
+
             ['Tosuka-Porika'] =
             {
                 onTrigger = function(player, npc)
@@ -84,7 +114,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(715, 0, xi.ki.OPTISTERY_RING)
                     elseif missionStatus == 1 then
-                        return mission:progressEvent(716, 0, xi.ki.OPTISTERY_RING)
+                        return mission:event(716, 0, xi.ki.OPTISTERY_RING)
                     elseif missionStatus == 2 then
                         return mission:progressEvent(724)
                     end
@@ -105,6 +135,17 @@ mission.sections =
                 end
             },
         },
+
+        [xi.zone.WINDURST_WOODS] =
+        {
+            ['Miiri-Wohri'] = mission:event(570),
+
+            ['Rakoh_Buuma'] = mission:event(569),
+
+            ['Sola_Jaab'] = mission:event(571),
+
+            ['Tih_Pikeh'] = mission:event(572),
+        },
     },
 
     {
@@ -121,12 +162,12 @@ mission.sections =
                     for i = toraimaraiID.mob.HINGE_OILS_OFFSET, toraimaraiID.mob.HINGE_OILS_OFFSET + 3 do
                         if not GetMobByID(i):isDead() then
                             -- At least one Hinge Oil is alive
-                            return mission:progressEvent(70, 0, 0, 0, 1)
+                            return mission:event(70, 0, 0, 0, 1)
                         end
                     end
 
                     -- All four Hinge Oils are dead
-                    return mission:progressEvent(70, 0, 0, 0, 2)
+                    return mission:progressCutscene(70, 0, 0, 0, 2)
                 end,
             },
 
@@ -137,9 +178,10 @@ mission.sections =
 
                     if
                         tomeOffset == 4 and
+                        player:getCurrentMission(mission.areaId) == mission.missionId and
                         player:getMissionStatus(mission.areaId) == 1
                     then
-                        return mission:progressEvent(69)
+                        return mission:progressEvent(69, 0, xi.ki.OPTISTERY_RING)
                     end
                 end,
             },

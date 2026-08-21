@@ -76,19 +76,45 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.PORT_WINDURST] =
+        {
+            ['Janshura-Rashura'] = mission:event(474),
+
+            ['Nine_of_Clubs'] = mission:event(475),
+
+            ['Puo_Rhen'] = mission:event(477),
+
+            ['Ten_of_Clubs'] = mission:event(476),
+        },
+
+        [xi.zone.WINDURST_WALLS] =
+        {
+            ['Chawo_Shipeynyo'] = mission:event(369),
+
+            ['Keo-Koruo'] = mission:event(368),
+
+            ['Pakke-Pokke'] = mission:event(367),
+
+            ['Zokima-Rokima'] = mission:event(366),
+        },
+
         [xi.zone.WINDURST_WATERS] =
         {
+            ['Dagoza-Beruza'] = mission:event(731),
+
+            ['Kenapa-Keppa'] = mission:event(740),
+
             ['Kerutoto'] =
             {
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(737)
+                        return mission:event(737)
                     elseif missionStatus == 1 then
                         return mission:progressEvent(736)
-                    elseif missionStatus == 2 then
-                        return mission:progressEvent(738)
+                    elseif missionStatus >= 2 then
+                        return mission:event(738)
                     end
                 end,
             },
@@ -101,14 +127,22 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(734)
                     elseif missionStatus == 1 then
-                        return mission:progressEvent(735)
-                    elseif missionStatus == 2 then
-                        return mission:progressEvent(739)
+                        return mission:event(735)
+                    elseif missionStatus >= 2 and missionStatus <= 4 then
+                        return mission:event(739)
                     elseif missionStatus == 5 and player:hasKeyItem(xi.ki.BOOK_OF_THE_GODS) then
                         return mission:progressEvent(742)
                     end
                 end,
             },
+
+            ['Mokyokyo'] = mission:event(730),
+
+            ['Ohbiru-Dohbiru'] = mission:event(741),
+
+            ['Panna-Donna'] = mission:event(732),
+
+            ['Ten_of_Hearts'] = mission:event(733),
 
             onEventFinish =
             {
@@ -126,13 +160,24 @@ mission.sections =
             },
         },
 
+        [xi.zone.WINDURST_WOODS] =
+        {
+            ['Miiri-Wohri'] = mission:event(575),
+
+            ['Rakoh_Buuma'] = mission:event(574),
+
+            ['Sola_Jaab'] = mission:event(576),
+
+            ['Tih_Pikeh'] = mission:event(577),
+        },
+
         [xi.zone.KAZHAM] =
         {
             ['Jakoh_Wahcondalo'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 2 then
-                        return mission:progressEvent(265)
+                        return mission:event(265)
                     end
                 end,
             },
@@ -144,8 +189,10 @@ mission.sections =
 
                     if missionStatus == 2 then
                         return mission:progressEvent(266)
-                    elseif missionStatus == 3 then
-                        return mission:progressEvent(267)
+                    elseif missionStatus == 3 or missionStatus == 4 then
+                        return mission:event(267)
+                    elseif missionStatus >= 5 then
+                        return mission:event(263)
                     end
                 end,
             },
@@ -158,7 +205,7 @@ mission.sections =
                     if missionStatus == 3 then
                         return mission:progressEvent(264)
                     elseif missionStatus > 3 then
-                        return mission:progressEvent(268)
+                        return mission:event(268)
                     end
                 end,
             },
@@ -180,12 +227,16 @@ mission.sections =
             ['_4fx'] =
             {
                 onTrade = function(player, npc, trade)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
                     if
                         npcUtil.tradeMatches(trade, { { xi.item.CURSED_KEY, 1 } }) and
                         player:getZPos() < 332 and
-                        player:getMissionStatus(mission.areaId) >= 3
+                        missionStatus >= 3 and
+                        missionStatus <= 4
                     then
-                        return mission:progressEvent(23)
+                        -- TODO: The decompiled event shows a param[7]. Might be based on race?
+                        return mission:progressCutscene(23, 0, 0, 1, 0, 0, 0, 0, 0)
                     end
                 end,
             },
@@ -194,7 +245,6 @@ mission.sections =
             {
                 [23] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:setPos(340, 0, 333)
                     player:delKeyItem(xi.ki.BLANK_BOOK_OF_THE_GODS)
                     player:setMissionStatus(mission.areaId, 5)
                     npcUtil.giveKeyItem(player, xi.ki.BOOK_OF_THE_GODS)
