@@ -32,6 +32,7 @@ describe('Gambit', function()
             'Using Flabra 3 times should have 3 runes'
         )
 
+        player.entities:moveTo(euvhi)
         player.actions:useAbility(euvhi, xi.jobAbility.GAMBIT)
         xi.test.world:tick()
 
