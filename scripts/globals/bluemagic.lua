@@ -358,7 +358,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     spell:setCritical(anyCrit)
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget), hitslanded
 end
 
 -- Get the damage for a magical Blue Magic spell. Called from spell scripts.
