@@ -10,20 +10,31 @@ itemObject.onItemCheck = function(target, item, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target, user)
-    local worked = false
-    if not target:hasStatusEffect(xi.effect.REGEN) then
+itemObject.onItemUse = function(target, user, item, action)
+    local regenEffect     = target:getStatusEffect(xi.effect.REGEN)
+    local refreshEffect   = target:getStatusEffect(xi.effect.REFRESH)
+    local canApplyRegen   = not regenEffect or regenEffect:getTier() == 0
+    local canApplyRefresh = not refreshEffect or refreshEffect:getTier() == 0
+
+    if canApplyRegen then
+        target:delStatusEffectSilent(xi.effect.REGEN) -- All Regen items overwrite freely, and their effect expires silently if overwritten.
+
         target:addStatusEffect(xi.effect.REGEN, { power = 2, duration = 90, origin = user, tick = 3 })
-        worked = true
     end
 
-    if not target:hasStatusEffect(xi.effect.REFRESH) then
+    if canApplyRefresh then
+        target:delStatusEffectSilent(xi.effect.REFRESH) -- All Refresh items overwrite freely, and their effect expires silently if overwritten.
+
         target:addStatusEffect(xi.effect.REFRESH, { power = 2, duration = 90, origin = user, tick = 3 })
-        worked = true
     end
 
-    if not worked then
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    if
+        not canApplyRegen and
+        not canApplyRefresh
+    then
+        action:messageID(target:getID(), xi.msg.basic.ITEM_NO_EFFECT) -- Displays no effect when both Regen and Refresh are protected by tiered spell effects.
+
+        return 0
     end
 end
 
