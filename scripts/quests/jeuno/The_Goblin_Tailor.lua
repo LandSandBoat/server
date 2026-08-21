@@ -20,22 +20,9 @@ local rseTable =
     [xi.race.GALKA   ] = { xi.item.ELDERS_SURCOAT,   xi.item.ELDERS_BRACERS,   xi.item.ELDERS_BRAGUETTE, xi.item.ELDERS_SANDALS    },
 }
 
-local function hasRSE(player)
-    local mask = 0
-    local rse  = rseTable[player:getRace()]
-
-    for i = 1, #rse do
-        if player:hasItem(rse[i]) then
-            mask = mask + 2 ^ (i - 1)
-        end
-    end
-
-    return mask
-end
-
 quest.reward =
 {
-    title    = xi.title.GOBLINS_EXCLUSIVE_FASHION_MANNEQUIN,
+    title = xi.title.GOBLINS_EXCLUSIVE_FASHION_MANNEQUIN,
 }
 
 quest.sections =
@@ -98,17 +85,17 @@ quest.sections =
             ['Guttrix'] =
             {
                 onTrigger = function(player, npc)
+                    local rseTracker = player:getCharVar('[RSE]Gear')
+                    if rseTracker == 15 then
+                        return quest:event(10019)
+                    end
+
                     if player:getMainLvl() < 10 then
                         return quest:event(10020)
                     end
 
-                    local rseGear = hasRSE(player)
-                    if rseGear >= 15 then
-                        return quest:event(10019)
-                    end
-
                     if player:hasKeyItem(xi.ki.MAGICAL_PATTERN) then
-                        return quest:progressEvent(10018, rseGear)
+                        return quest:progressEvent(10018, rseTracker)
                     else
                         return quest:event(10017, VanadielRSELocation(), VanadielRSERace())
                     end
@@ -118,21 +105,31 @@ quest.sections =
             onEventFinish =
             {
                 [10018] = function(player, csid, option, npc)
-                    if
-                        option >= 1 and
-                        option <= 4 and
-                        player:hasKeyItem(xi.keyItem.MAGICAL_PATTERN)
-                    then
-                        if npcUtil.giveItem(player, rseTable[player:getRace()][option]) then
-                            player:delKeyItem(xi.keyItem.MAGICAL_PATTERN)
+                    if not player:hasKeyItem(xi.keyItem.MAGICAL_PATTERN) then
+                        return
+                    end
 
-                            if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                                quest:complete(player)
-                                player:addFame(xi.fameArea.SANDORIA, 5)
-                                player:addFame(xi.fameArea.BASTOK, 5)
-                                player:addFame(xi.fameArea.WINDURST, 5)
-                            end
-                        end
+                    if option < 1 then
+                        return
+                    end
+
+                    if option > 4 then
+                        return
+                    end
+
+                    local rseTracker = player:getCharVar('[RSE]Gear')
+                    if utils.mask.getBit(rseTracker, option - 1) then
+                        return
+                    end
+
+                    if npcUtil.giveItem(player, rseTable[player:getRace()][option]) then
+                        player:delKeyItem(xi.keyItem.MAGICAL_PATTERN)
+                        player:incrementCharVar('[RSE]Gear', bit.lshift(1, option - 1))
+
+                        quest:complete(player)
+                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.BASTOK, 5)
+                        player:addFame(xi.fameArea.WINDURST, 5)
                     end
                 end,
             },
