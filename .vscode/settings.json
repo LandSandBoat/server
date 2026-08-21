@@ -363,6 +363,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "yaml.format.enable": false,
+    "yaml.maxItemsComputed": 100000,
     "customLocalFormatters.formatters": [
         {
             "command": "python tools/yaml/format.py --stdin",
