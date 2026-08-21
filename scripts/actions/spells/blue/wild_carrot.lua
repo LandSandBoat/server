@@ -15,23 +15,29 @@
 ---@type TSpell
 local spellObject = {}
 
+local cureTiers =
+{
+    old =
+    {
+        { powerFloor = 299, divisor = 15.6666, constant = 170.43 },
+        { powerFloor = 179, divisor =       2, constant =    105 },
+        { powerFloor =   0, divisor =       1, constant =     60 },
+    },
+}
+
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.minCure = 120
-    params.divisor0 = 1
-    params.constant0 = 60
-    params.powerThreshold1 = 179
-    params.divisor1 = 2
-    params.constant1 = 105
-    params.powerThreshold2 = 299
-    params.divisor2 = 15.6666
-    params.constant2 = 170.43
+    local params =
+    {
+        baseCure  = xi.combat.action.calculateSpellCureBase(caster, cureTiers),
+        minCure   = 120,
+        skillType = xi.skill.BLUE_MAGIC,
+    }
 
-    return xi.spells.blue.useCuringSpell(caster, target, spell, params)
+    return xi.combat.action.executeSpellCure(caster, target, spell, params)
 end
 
 return spellObject

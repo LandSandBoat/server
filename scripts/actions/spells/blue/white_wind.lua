@@ -15,24 +15,28 @@
 ---@type TSpell
 local spellObject = {}
 
+local cureTiers =
+{
+    old =
+    {
+        { powerFloor = 0, divisor = 6.5, constant = 144.6666 },
+    },
+}
+
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
     -- Need to confirm increases by Divine Seal and Cure Potency equipment
-    local params = {}
-    params.minCure = math.floor(caster:getMaxHP() / 7) * 2
-    params.divisor0 = 0.6666
-    params.constant0 = -45
-    params.powerThreshold1 = 0
-    params.divisor1 = 2
-    params.constant1 = 65
-    params.powerThreshold2 = 0
-    params.divisor2 = 6.5
-    params.constant2 = 144.6666
+    local params =
+    {
+        baseCure  = xi.combat.action.calculateSpellCureBase(caster, cureTiers),
+        minCure   = math.floor(caster:getMaxHP() / 7) * 2,
+        skillType = xi.skill.BLUE_MAGIC,
+    }
 
-    return xi.spells.blue.useCuringSpell(caster, target, spell, params)
+    return xi.combat.action.executeSpellCure(caster, target, spell, params)
 end
 
 return spellObject
