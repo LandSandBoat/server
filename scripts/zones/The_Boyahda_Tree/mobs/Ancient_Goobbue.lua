@@ -2,11 +2,7 @@
 -- Area: The Boyahda Tree
 --   NM: Ancient Goobbue
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/job_special'),
-    require('scripts/mixins/draw_in'),
-}
+mixins = { require('scripts/mixins/draw_in'), }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -38,13 +34,32 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.CRITHITRATE, 25)
-    xi.mix.jobSpecial.config(mob, {
-        specials =
-        {
-            { id = xi.mobSkill.HUNDRED_FISTS_1 },
-            { id = xi.mobSkill.HUNDRED_FISTS_1, cooldown = 65, hpp = math.randomInt(98, 99) },
-        },
-    })
+    mob:setLocalVar('[2hour]HPP', math.randomInt(98, 99))
+end
+
+entity.onMobFight = function(mob, target)
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    if mob:getHPP() >= mob:getLocalVar('[2hour]HPP') then
+        return
+    end
+
+    local currentTime = GetSystemTime()
+    local twoHourTime = mob:getLocalVar('[2hour]Time')
+    if twoHourTime == 0 then
+        mob:setLocalVar('[2hour]Time', currentTime)
+        return
+    end
+
+    if currentTime < twoHourTime then
+        return
+    end
+
+    -- Handle 2 Hour
+    mob:useMobAbility(xi.mobSkill.HUNDRED_FISTS_1)
+    mob:setLocalVar('[2hour]Time', currentTime + 65)
 end
 
 entity.onMobDespawn = function(mob)
