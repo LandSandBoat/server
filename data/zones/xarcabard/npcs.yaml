@@ -83,7 +83,7 @@ npcs:
       name_prefix:     34
       moving:       32769
     status:  normal
-    content: TVR
+    content: tvr
 
   17236257:
     script: NPC[121]
@@ -273,7 +273,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17236276:
     script: NPC[134]
@@ -291,7 +291,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17236279:
     script: NPC[137]
@@ -1137,7 +1137,7 @@ npcs:
         model: 50
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17236343:
     script:       Diabolos
@@ -1148,7 +1148,7 @@ npcs:
         model: 50
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17236344:
     script:       Diabolos
@@ -1159,7 +1159,7 @@ npcs:
         model: 50
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17236345:
     script: NPC[179]
@@ -1193,7 +1193,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17236348:
     script:       qm9
@@ -1261,7 +1261,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17236354:
     script:       Field_Manual
@@ -1275,7 +1275,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17236355:
     script:       Field_Manual
@@ -1289,7 +1289,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17236356:
     script:       Field_Parchment
@@ -1302,7 +1302,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17236357:
     script:       Ethereal_Junction
@@ -1317,7 +1317,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17236358:
     script:       Ethereal_Junction
@@ -1332,7 +1332,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17236359:
     script:       Ethereal_Junction
@@ -1347,7 +1347,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17236360:
     script:       Mogball-Local
@@ -1392,7 +1392,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17236364:
     script:       Option_Two
@@ -1406,7 +1406,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17236365:
     script:       Option_Three
@@ -1420,7 +1420,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17236366:
     script:       Summoner
@@ -1488,7 +1488,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17236372:
     script: NPC[194]
@@ -1517,7 +1517,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17236375:
     script: blank
@@ -1541,7 +1541,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17236377:
     script:       Gloom_Phantom

@@ -298,7 +298,7 @@ templates:
         vial_of_fiend_blood:    0
         vial_of_beastman_blood: 0
         vial_of_bird_blood:     0
-    content: ABYSSEA
+    content: abyssea
 
   Carnivorous_Crawler_MS:
     id:            6313
@@ -438,7 +438,7 @@ templates:
           item:   bat_wing
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Combat_MoS:
     id:            6455
@@ -532,7 +532,7 @@ templates:
       despoil:
         piece_of_crawler_cocoon: 0
         crawler_egg:             0
-    content: ABYSSEA
+    content: abyssea
 
   Dark_Elemental_SA:
     id:            5533
@@ -711,7 +711,7 @@ templates:
       drops:
         - chance: common
           item:   penumbral_brass_ingot
-    content: WOTG
+    content: wotg
 
   Goblin_Ambusher:
     id:            1635
@@ -1557,7 +1557,7 @@ templates:
       drops:
         - chance: common
           item:   esse_earring
-    content: WOTG
+    content: wotg
 
   Lost_Soul_NM:
     id:            4675
@@ -1977,7 +1977,7 @@ templates:
       drops:
         - chance: common
           item:   grimy_bronze_sheet
-    content: WOTG
+    content: wotg
 
   Warren_Bat:
     id:            6451
@@ -2028,7 +2028,7 @@ templates:
           item:   vial_of_fiend_blood
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Wendigo_blm_MoS:
     id:            6568

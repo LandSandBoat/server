@@ -536,7 +536,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17305915:
     script: NPC[13a]

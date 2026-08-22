@@ -23,7 +23,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: SOA
+    content: soa
 
   17838364:
     script:       _p7b
@@ -359,7 +359,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17838428:
     script:       Moogle
@@ -374,7 +374,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17838429:
     script:       Moogle
@@ -389,7 +389,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17838430:
     script:       Moogle
@@ -404,7 +404,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17838431:
     script:       Moogle
@@ -419,7 +419,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17838432:
     script:       Moogle
@@ -434,7 +434,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17838433:
     script:       Moogle
@@ -449,7 +449,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17838434:
     script:       Moogle
@@ -464,4 +464,4 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa

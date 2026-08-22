@@ -133,7 +133,7 @@ templates:
       drops:
         - chance: uncommon
           item:   cinquedea
-    content: WOTG
+    content: wotg
 
   Brekekekex:
     id:            5207
@@ -2120,7 +2120,7 @@ templates:
         respawn: 60
       stats:
         hp: 267000
-    content: TVR
+    content: tvr
 
   Magh_Bihu:
     id:      6123
@@ -3067,7 +3067,7 @@ templates:
       despoil:
         bird_feather: 0
         bird_egg:     0
-    content: ABYSSEA
+    content: abyssea
 
   Soulflayer:
     id:            3704
@@ -3405,7 +3405,7 @@ templates:
           item:   insect_wing
       despoil:
         insect_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Verdelet:
     id:            4221

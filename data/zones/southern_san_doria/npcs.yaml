@@ -1098,7 +1098,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17719353:
     script:       Helbort
@@ -1819,7 +1819,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719390:
     script:       Michilca
@@ -2630,7 +2630,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719433:
     script:       HomePoint#3
@@ -2643,7 +2643,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719434:
     script:       HomePoint#4
@@ -2656,7 +2656,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719435:
     script:       HomePoint#5
@@ -2666,7 +2666,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719436:
     script:       Hae_Jakhya
@@ -4214,7 +4214,7 @@ npcs:
       name_prefix:  32
       moving:       8
     widescan: true
-    content:  ROTZ
+    content:  rotz
 
   17719535:
     script:       Ominous_Cloud
@@ -4229,7 +4229,7 @@ npcs:
       name_prefix:   32
       moving:         1
     widescan: true
-    content:  COP
+    content:  cop
 
   17719536:
     script:       Trail_Markings
@@ -4400,7 +4400,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17719546:
     script:       Diabolos
@@ -4413,7 +4413,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17719547:
     script:       Diabolos
@@ -4426,7 +4426,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17719548:
     script:       Alivatand
@@ -4450,7 +4450,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  ROTZ
+    content:  rotz
 
   17719549:
     script:       Gizel
@@ -4818,7 +4818,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17719570:
     script:       Hantileon
@@ -4841,7 +4841,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17719571:
     script: blank
@@ -5279,7 +5279,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17719600:
     script: blank
@@ -5310,7 +5310,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17719602:
     script: blank
@@ -5342,7 +5342,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17719604:
     script: blank
@@ -5379,7 +5379,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17719606:
     script:       Palabelle
@@ -5402,7 +5402,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17719607:
     script:       Claiborne
@@ -5447,7 +5447,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   17719610:
     script:       Atelloune
@@ -5471,7 +5471,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17719611:
     script:       Esmallegue
@@ -5626,7 +5626,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17719619:
     script: blank
@@ -5696,7 +5696,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17719626:
     script:       Synergy_Engineer
@@ -5717,7 +5717,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17719627:
     script:       Synergy_Engineer
@@ -5738,7 +5738,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17719628:
     script:       Synergy_Furnace
@@ -5756,7 +5756,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17719629:
     script:       Synergy_Furnace
@@ -5774,7 +5774,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17719630:
     script:       Synergy_Furnace
@@ -5792,7 +5792,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17719631:
     script:       Synergy_Furnace
@@ -5810,7 +5810,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17719632:
     script:       Synergy_Enthusiast
@@ -5831,7 +5831,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17719633:
     script:       Artisan_Moogle
@@ -5846,7 +5846,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719634:
     script:       Atmacite_Refiner
@@ -5867,7 +5867,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17719635:
     script:       Voidwatch_Officer
@@ -5888,7 +5888,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17719636:
     script:       Voidwatch_Purveyor
@@ -5909,7 +5909,7 @@ npcs:
       moving: 21
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17719637:
     script:       Voidwatch_Purveyor
@@ -5930,7 +5930,7 @@ npcs:
       moving: 15
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17719638:
     script:       Rolandienne
@@ -5953,7 +5953,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719639:
     script:       qm9
@@ -5985,7 +5985,7 @@ npcs:
       moving: 21
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719641:
     script:       Mystrix
@@ -6000,7 +6000,7 @@ npcs:
       moving:       32783
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17719642:
     script:       Treasure_Coffer
@@ -6016,7 +6016,7 @@ npcs:
       moving:           1
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17719643:
     script:       Urbiolaine
@@ -6039,7 +6039,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719644:
     script:       qm10
@@ -8695,7 +8695,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17719838:
     script: blank
@@ -10510,7 +10510,7 @@ npcs:
       name_prefix:   32
       moving:        15
     status:  normal
-    content: TRUST_QUESTS
+    content: trust_quests
 
   17719986:
     script:       Mystic_Retriever
@@ -10526,7 +10526,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17719987:
     script:       Achieve_Master
@@ -10535,7 +10535,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17719988:
     script: NPC[2b4]
@@ -10553,7 +10553,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17719990:
     script: blank
@@ -10884,7 +10884,7 @@ npcs:
       moving:    21
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17720013:
     script:       Wolden-Bolden
@@ -10907,7 +10907,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17720014:
     script:       Enigmatic_Footprints
@@ -10921,7 +10921,7 @@ npcs:
       name_prefix:     2
       moving:      32769
     status:  normal
-    content: TVR
+    content: tvr
 
   17720015:
     script:       Enigmatic_Footprints_#2
@@ -10936,7 +10936,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17720016:
     script:       Layer_Reserve
@@ -10968,7 +10968,7 @@ npcs:
       moving: 14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17720018:
     script:       AMAN_Liaison
@@ -10989,7 +10989,7 @@ npcs:
       name_vis: 1
       moving:   8
     status:  normal
-    content: SOA
+    content: soa
 
   17720019:
     script:       RepairerMoogle
@@ -11004,7 +11004,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17720020:
     script: blank
@@ -11033,4 +11033,4 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

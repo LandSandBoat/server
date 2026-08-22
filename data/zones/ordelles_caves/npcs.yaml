@@ -193,7 +193,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17568165:
     script: NPC[1a5]
@@ -211,7 +211,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17568168:
     script: NPC[1a8]
@@ -589,7 +589,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17568200:
     script:       Planar_Rift
@@ -605,7 +605,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17568201:
     script:       Planar_Rift
@@ -621,7 +621,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17568202:
     script:       Riftworn_Pyxis
@@ -636,7 +636,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17568203:
     script:       Riftworn_Pyxis
@@ -651,7 +651,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17568204:
     script:       Riftworn_Pyxis
@@ -666,7 +666,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17568205:
     script:       Grounds_Tome
@@ -680,7 +680,7 @@ npcs:
       moving:   16
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17568206:
     script:       Grounds_Tome
@@ -694,7 +694,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17568207:
     script:       Geomagnetic_Fount
@@ -707,7 +707,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17568208:
     script: blank
@@ -763,7 +763,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17568213:
     script:       Survival_Guide
@@ -778,4 +778,4 @@ npcs:
       moving:        16
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

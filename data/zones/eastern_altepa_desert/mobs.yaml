@@ -1255,7 +1255,7 @@ templates:
       drops:
         - chance: uncommon
           item:   piece_of_thunder_coral
-    content: WOTG
+    content: wotg
 
   Doom_Scorpion:
     id:            1084
@@ -2629,7 +2629,7 @@ templates:
       drops:
         - chance: uncommon
           item:   rathe_earring
-    content: WOTG
+    content: wotg
 
   Princeps_XIII-LXXXIX:
     id:            3195
@@ -2770,7 +2770,7 @@ templates:
           item:   aptant_of_ishis
         - chance: uncommon
           item:   aptant_of_tachus
-    content: WOTG
+    content: wotg
 
   Sagittarius_XIII-XXVI:
     id:            3439

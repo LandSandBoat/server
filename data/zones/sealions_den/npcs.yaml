@@ -16,7 +16,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16908414:
     script: NPC[7e]
@@ -34,7 +34,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16908417:
     script: NPC[81]
@@ -75,7 +75,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16908421:
     script:       Airship_Door
@@ -87,7 +87,7 @@ npcs:
         model: 50
       moving: 32769
     status:  normal
-    content: COP
+    content: cop
 
   16908422:
     script:       Airship_Door
@@ -99,7 +99,7 @@ npcs:
         model: 50
       moving: 32769
     status:  normal
-    content: COP
+    content: cop
 
   16908423:
     script:       Airship_Door
@@ -111,7 +111,7 @@ npcs:
         model: 50
       moving: 32769
     status:  normal
-    content: COP
+    content: cop
 
   16908424:
     script: NPC[88]
@@ -160,7 +160,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16908430:
     script:       Prishe
@@ -175,7 +175,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16908431:
     script:       Ulmia
@@ -188,7 +188,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908432:
     script:       Tenzen
@@ -201,7 +201,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908433:
     script:       Cherukiki
@@ -214,7 +214,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908434:
     script:       Kukki-Chebukki
@@ -227,7 +227,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908435:
     script:       Makki-Chebukki
@@ -240,7 +240,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908436:
     script:       Jabbos
@@ -261,7 +261,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908437:
     script:       Shikaree_Z
@@ -282,7 +282,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908438:
     script:       Louverance
@@ -303,7 +303,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908439:
     script:       Eshantarl
@@ -316,7 +316,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908440:
     script: blank
@@ -411,7 +411,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908449:
     script:       Bahamut
@@ -424,7 +424,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908450:
     script:       qm1
@@ -435,7 +435,7 @@ npcs:
         type:  standard
         model: 52
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16908451:
     script:       Selhteus
@@ -449,7 +449,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908452:
     script:       Shikaree_Z
@@ -471,7 +471,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908453:
     script:       Jabbos
@@ -493,7 +493,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908454:
     script:       Jovial_Rat
@@ -509,7 +509,7 @@ npcs:
       moving:       8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16908455:
     script:       Justinius
@@ -530,7 +530,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908456:
     script:       Tressia
@@ -552,7 +552,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908457:
     script:       Sueleen
@@ -576,7 +576,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16908458:
     script:       Chemioue
@@ -599,7 +599,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908459:
     script:       Mengrenaux
@@ -621,7 +621,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908460:
     script:       Parelbriaux
@@ -643,7 +643,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908461:
     script:       Ondieulix
@@ -665,7 +665,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908462:
     script:       Cid
@@ -678,7 +678,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908463:
     script:       Shikaree_Y
@@ -699,7 +699,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908464:
     script:       Shikaree_X
@@ -720,7 +720,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908465:
     script: NPC[b1]
@@ -737,7 +737,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16908467:
     script:       Moogle
@@ -747,7 +747,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16908468:
     script:       Moogle
@@ -757,7 +757,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16908469:
     script:       Moogle
@@ -767,7 +767,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16908470:
     script:       Moogle
@@ -777,7 +777,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16908471:
     script:       Moogle
@@ -787,7 +787,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16908472:
     script:       Moogle
@@ -797,7 +797,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16908473:
     script:       Moogle
@@ -807,7 +807,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16908474:
     script:       Prishe
@@ -821,7 +821,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16908475:
     script:       Ulmia
@@ -834,7 +834,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908476:
     script:       Prishe
@@ -848,7 +848,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16908477:
     script:       Ulmia
@@ -861,7 +861,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16908478:
     script: blank
@@ -902,4 +902,4 @@ npcs:
       name_prefix:     34
       moving:       32769
     status:  normal
-    content: SOA
+    content: soa

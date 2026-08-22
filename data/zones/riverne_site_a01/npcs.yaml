@@ -40,7 +40,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: COP
+    content: cop
 
   16900326:
     script:       qm_shieldtrap
@@ -52,7 +52,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16900327:
     script:       Achieve_Master
@@ -61,7 +61,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16900328:
     script: NPC[e8]
@@ -79,7 +79,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16900331:
     script: NPC[eb]
@@ -126,7 +126,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900336:
     script:       Spatial_Displacement
@@ -139,7 +139,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900337:
     script:       Spatial_Displacement
@@ -152,7 +152,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900338:
     script: NPC[f2]
@@ -179,7 +179,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900341:
     script:       _0u1
@@ -193,7 +193,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: COP
+    content: cop
 
   16900342:
     script:       Spatial_Displacement
@@ -206,7 +206,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900343:
     script:       Spatial_Displacement
@@ -219,7 +219,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900344:
     script:       Spatial_Displacement
@@ -232,7 +232,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900345:
     script:       Spatial_Displacement
@@ -245,7 +245,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900346:
     script:       Spatial_Displacement
@@ -258,7 +258,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900347:
     script:       Spatial_Displacement
@@ -271,7 +271,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900348:
     script:       Spatial_Displacement
@@ -284,7 +284,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900349:
     script:       Spatial_Displacement
@@ -297,7 +297,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900350:
     script:       Spatial_Displacement
@@ -310,7 +310,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900351:
     script:       Spatial_Displacement
@@ -323,7 +323,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900352:
     script:       _0u2
@@ -337,7 +337,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: COP
+    content: cop
 
   16900353:
     script:       Spatial_Displacement
@@ -350,7 +350,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900354:
     script:       _0u3
@@ -364,7 +364,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: COP
+    content: cop
 
   16900355:
     script:       Spatial_Displacement
@@ -377,7 +377,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900356:
     script:       Spatial_Displacement
@@ -390,7 +390,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900357:
     script:       Spatial_Displacement
@@ -403,7 +403,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900358:
     script:       Spatial_Displacement
@@ -416,7 +416,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900359:
     script:       Spatial_Displacement_BC
@@ -429,7 +429,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900360:
     script:       Spatial_Displacement
@@ -442,7 +442,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900361:
     script:       Spatial_Displacement
@@ -455,7 +455,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900362:
     script:       Spatial_Displacement
@@ -468,7 +468,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900363:
     script:       Spatial_Displacement
@@ -481,7 +481,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900364:
     script:       Spatial_Displacement
@@ -494,7 +494,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900365:
     script:       Spatial_Displacement
@@ -507,7 +507,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900366:
     script:       Spatial_Displacement
@@ -520,7 +520,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900367:
     script:       _0u4
@@ -534,7 +534,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: COP
+    content: cop
 
   16900368:
     script:       Spatial_Displacement
@@ -547,7 +547,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900369:
     script:       Spatial_Displacement
@@ -560,7 +560,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900370:
     script:       Spatial_Displacement
@@ -573,7 +573,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900371:
     script:       Spatial_Displacement
@@ -586,7 +586,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900372:
     script:       Spatial_Displacement
@@ -599,7 +599,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900373:
     script:       Spatial_Displacement
@@ -612,7 +612,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900374:
     script:       Spatial_Displacement
@@ -625,7 +625,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900375:
     script:       Stone_Monument
@@ -638,7 +638,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900376:
     script:       Prishe
@@ -652,7 +652,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16900377:
     script:       Ulmia
@@ -665,7 +665,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900378:
     script:       Cherukiki
@@ -678,7 +678,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900379:
     script:       Kukki-Chebukki
@@ -691,7 +691,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900380:
     script:       Makki-Chebukki
@@ -704,7 +704,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900381:
     script:       Nagmolada
@@ -717,7 +717,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900382:
     script: NPC[11e]
@@ -734,7 +734,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16900384:
     script:       Moogle
@@ -744,7 +744,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16900385:
     script:       Moogle
@@ -754,7 +754,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16900386:
     script:       Moogle
@@ -764,7 +764,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16900387:
     script:       Moogle
@@ -774,7 +774,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16900388:
     script:       Moogle
@@ -784,7 +784,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16900389:
     script:       Moogle
@@ -794,7 +794,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16900390:
     script:       Moogle
@@ -804,7 +804,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16900391:
     script:       Ramblix
@@ -818,7 +818,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900392:
     script:       Goblin_Footprint
@@ -830,7 +830,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16900393:
     script:       qm_rivernewort
@@ -842,7 +842,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16900394:
     script:       qm
@@ -853,7 +853,7 @@ npcs:
         type:  standard
         model: 52
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16900395:
     script:       Trunk
@@ -866,7 +866,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16900396:
     script:       Sanctia
@@ -889,7 +889,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900397:
     script:       Novice_Moogle
@@ -904,7 +904,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900398:
     script:       qm
@@ -925,7 +925,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16900399:
     script:       Albanus
@@ -947,7 +947,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16900400:
     script:       HomePoint#1
@@ -960,7 +960,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16900401:
     script:       Home_Point_#2
@@ -1008,7 +1008,7 @@ npcs:
         model: 2447
       name_vis:   112
       moving:   32769
-    content: SOA
+    content: soa
 
   16900406:
     script:       Ethereal_Junction
@@ -1020,7 +1020,7 @@ npcs:
         model: 2447
       name_vis:   112
       moving:   32769
-    content: SOA
+    content: soa
 
   16900407:
     script:       Ethereal_Junction
@@ -1032,4 +1032,4 @@ npcs:
         model: 2447
       name_vis:   112
       moving:   32769
-    content: SOA
+    content: soa

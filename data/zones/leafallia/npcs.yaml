@@ -61,7 +61,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: SOA
+    content: soa
 
   17928201:
     script:       Moogle
@@ -70,7 +70,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: SOA
+    content: soa
 
   17928202:
     script:       Moogle
@@ -79,7 +79,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: SOA
+    content: soa
 
   17928203:
     script:       Moogle
@@ -88,7 +88,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: SOA
+    content: soa
 
   17928204:
     script:       Moogle
@@ -97,7 +97,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: SOA
+    content: soa
 
   17928205:
     script:       Moogle
@@ -106,7 +106,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: SOA
+    content: soa
 
   17928206:
     script:       Moogle
@@ -115,7 +115,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: SOA
+    content: soa
 
   17928207:
     script:       Moogle
@@ -124,7 +124,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: SOA
+    content: soa
 
   17928208:
     script:       Meandering_Leafkin
@@ -139,7 +139,7 @@ npcs:
       moving:       20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928209:
     script:       Meandering_Leafkin
@@ -154,7 +154,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928210:
     script:       Meandering_Leafkin
@@ -169,7 +169,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928211:
     script:       Meandering_Leafkin
@@ -184,7 +184,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928212:
     script:       Meandering_Leafkin
@@ -199,7 +199,7 @@ npcs:
       moving:       20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928213:
     script:       Meandering_Leafkin
@@ -214,7 +214,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928214:
     script:       Meandering_Leafkin
@@ -229,7 +229,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928215:
     script:       Meandering_Leafkin
@@ -244,7 +244,7 @@ npcs:
       moving:           653
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928216:
     script:       Meandering_Leafkin
@@ -259,7 +259,7 @@ npcs:
       moving:       20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928217:
     script:       Meandering_Leafkin
@@ -274,7 +274,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928218:
     script:       Meandering_Leafkin
@@ -289,7 +289,7 @@ npcs:
       moving:           113
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928219:
     script:       Meandering_Leafkin
@@ -304,7 +304,7 @@ npcs:
       moving:          2977
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928220:
     script: blank
@@ -323,7 +323,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928222:
     script: NPC[1e]
@@ -353,7 +353,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928225:
     script:       Heroic_Footprints
@@ -366,7 +366,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928226:
     script:       Morimar
@@ -607,7 +607,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928247:
     script: blank
@@ -625,7 +625,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2051
-    content: SOA
+    content: soa
 
   17928249:
     script: blank
@@ -715,7 +715,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928257:
     script:       Goblin_Footprint
@@ -727,7 +727,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   17928258:
     script: _7t0
@@ -752,7 +752,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928260:
     script:       HomePoint#2
@@ -762,7 +762,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928261:
     script:       HomePoint#3
@@ -772,7 +772,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928262:
     script:       HomePoint#4
@@ -782,7 +782,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928263:
     script:       HomePoint#5
@@ -792,7 +792,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17928264:
     script:       UnityMaster

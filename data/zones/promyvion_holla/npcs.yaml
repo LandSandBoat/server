@@ -193,7 +193,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16843047:
     script: NPC[127]
@@ -211,7 +211,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16843050:
     script: NPC[12a]
@@ -259,7 +259,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843055:
     script:       _0g2
@@ -273,7 +273,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843056:
     script:       _0g3
@@ -287,7 +287,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843057:
     script:       _0g4
@@ -301,7 +301,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843058:
     script:       _0g5
@@ -315,7 +315,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843059:
     script:       _0g6
@@ -329,7 +329,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843060:
     script:       _0g7
@@ -343,7 +343,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843061:
     script:       _0g8
@@ -357,7 +357,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843062:
     script:       _0g9
@@ -371,7 +371,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843063:
     script:       _0ga
@@ -385,7 +385,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843064:
     script:       _0gb
@@ -399,7 +399,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16843065:
     script:       _0g0
@@ -412,7 +412,7 @@ npcs:
       animation: close_door
       moving:    1
     status:  normal
-    content: COP
+    content: cop
 
   16843066:
     script:       _0gc
@@ -425,7 +425,7 @@ npcs:
       animation: close_door
       moving:    1
     status:  normal
-    content: COP
+    content: cop
 
   16843067:
     script:       _0gd
@@ -438,7 +438,7 @@ npcs:
       animation: close_door
       moving:    1
     status:  normal
-    content: COP
+    content: cop
 
   16843068:
     script:       kiokudama_a
@@ -452,7 +452,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16843069:
     script:       kiokudama_b
@@ -466,7 +466,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16843070:
     script:       kiokudama_c
@@ -480,7 +480,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16843071:
     script:       qm_map
@@ -492,7 +492,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: COP
+    content: cop
 
   16843072:
     script: NPC[140]
@@ -509,7 +509,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16843074:
     script:       Moogle
@@ -519,7 +519,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16843075:
     script:       Moogle
@@ -529,7 +529,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16843076:
     script:       Moogle
@@ -539,7 +539,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16843077:
     script:       Moogle
@@ -549,7 +549,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16843078:
     script:       Moogle
@@ -559,7 +559,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16843079:
     script:       Moogle
@@ -569,7 +569,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16843080:
     script:       Moogle
@@ -579,7 +579,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16843081:
     script:       Rendezvous_Point
@@ -592,7 +592,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16843082:
     script:       qm
@@ -604,7 +604,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16843083:
     script:       qm
@@ -616,7 +616,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16843084:
     script:       qm
@@ -628,7 +628,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16843085:
     script:       qm
@@ -640,7 +640,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16843086:
     script:       qm
@@ -652,7 +652,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16843087:
     script: blank

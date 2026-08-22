@@ -790,7 +790,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  SOA
+    content:  soa
 
   17261130:
     script: NPC[24a]
@@ -808,7 +808,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17261133:
     script: NPC[24d]
@@ -1561,7 +1561,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17261192:
     script:       Ulrich
@@ -1720,7 +1720,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17261201:
     script:       Diabolos
@@ -1733,7 +1733,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17261202:
     script:       Diabolos
@@ -1746,7 +1746,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17261203:
     script:       Field_Manual
@@ -1760,7 +1760,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17261204:
     script:       Field_Manual
@@ -1774,7 +1774,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17261205:
     script:       Field_Parchment
@@ -1787,7 +1787,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17261206:
     script:       Ethereal_Junction
@@ -1802,7 +1802,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17261207:
     script:       Ethereal_Junction
@@ -1817,7 +1817,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17261208:
     script:       Ethereal_Junction
@@ -1832,7 +1832,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17261209:
     script:       Mogball-Local
@@ -1884,7 +1884,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17261214:
     script: blank
@@ -1953,7 +1953,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17261220:
     script:       Planar_Rift
@@ -1969,7 +1969,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17261221:
     script:       Planar_Rift
@@ -1985,7 +1985,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17261222:
     script:       Riftworn_Pyxis
@@ -2000,7 +2000,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17261223:
     script:       Riftworn_Pyxis
@@ -2015,7 +2015,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17261224:
     script:       Riftworn_Pyxis
@@ -2030,7 +2030,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17261225:
     script:       Survival_Guide
@@ -2045,4 +2045,4 @@ npcs:
       moving:        16
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

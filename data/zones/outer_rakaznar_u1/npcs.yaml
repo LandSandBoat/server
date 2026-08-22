@@ -235,7 +235,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17903961:
     script:       Moogle
@@ -246,7 +246,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17903962:
     script:       Moogle
@@ -257,7 +257,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17903963:
     script:       Moogle
@@ -268,7 +268,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17903964:
     script:       Moogle
@@ -279,7 +279,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17903965:
     script:       Moogle
@@ -290,7 +290,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17903966:
     script:       Moogle
@@ -301,7 +301,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17903967:
     script:       Moogle
@@ -312,4 +312,4 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa

@@ -84,7 +84,7 @@ auto Dataset::decode(const std::string_view text) -> Records
             .Speed           = source.speed.value_or(kDefaultSpeed),
             .AnimationSpeed  = source.animation_speed.value_or(kDefaultAnimationSpeed),
             .Widescan        = source.widescan.value_or(false),
-            .Content         = source.content.value_or(std::string{}),
+            .Content         = yaml::resolveEnum(source.content),
         });
     }
 

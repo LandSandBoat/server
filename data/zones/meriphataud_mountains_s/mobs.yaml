@@ -945,7 +945,7 @@ templates:
       despoil:
         bird_feather: 0
         bird_egg:     0
-    content: ABYSSEA
+    content: abyssea
 
   Confederate_Belfry:
     id:      775

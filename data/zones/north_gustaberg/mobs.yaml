@@ -128,7 +128,7 @@ templates:
       drops:
         - chance: common
           item:   flawed_garnet
-    content: WOTG
+    content: wotg
 
   Black_Wolf:
     id:            441
@@ -346,7 +346,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Brass_Quadav:
     id:            525
@@ -1028,7 +1028,7 @@ templates:
         respawn: 300
       stats:
         hp: 5100
-    content: WOTG
+    content: wotg
 
   Goblin_Digger_near:
     id:            1648
@@ -1457,7 +1457,7 @@ templates:
         respawn: 300
       stats:
         hp: 3000
-    content: WOTG
+    content: wotg
 
   Heliodor_Quadav_G:
     id:            6974
@@ -1582,7 +1582,7 @@ templates:
       drops:
         - chance: uncommon
           item:   hirudinea_earring
-    content: WOTG
+    content: wotg
 
   Land_Crab_fished:
     id:            6771
@@ -2279,7 +2279,7 @@ templates:
         type: [scripted]
       stats:
         hp: 1400
-    content: WOTG
+    content: wotg
 
   Shoggoth:
     id:            7003
@@ -2328,7 +2328,7 @@ templates:
       drops:
         - chance: uncommon
           item:   jinx_ampulla
-    content: WOTG
+    content: wotg
 
   Shrapnel:
     id:            3611
@@ -2865,7 +2865,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Young_Quadav:
     id:            4477

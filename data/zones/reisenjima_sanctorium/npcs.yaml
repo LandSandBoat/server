@@ -1406,7 +1406,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17977500:
     script:       Moogle
@@ -1415,7 +1415,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17977501:
     script:       Moogle
@@ -1424,7 +1424,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17977502:
     script:       Moogle
@@ -1433,7 +1433,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17977503:
     script:       Moogle
@@ -1442,7 +1442,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17977504:
     script:       Moogle
@@ -1451,7 +1451,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17977505:
     script:       Moogle
@@ -1460,7 +1460,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17977506:
     script:       Moogle
@@ -1469,7 +1469,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17977507:
     script:       Ramblix
@@ -1483,7 +1483,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977508:
     script:       Goblin_Footprint
@@ -1495,7 +1495,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ROV
+    content: rov
 
   17977509:
     script:       Etched_Rock
@@ -1508,7 +1508,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977510:
     script:       Reisen_Crystal
@@ -1521,7 +1521,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977511:
     script:       qm
@@ -1531,7 +1531,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2051
-    content: ROV
+    content: rov
 
   17977512:
     script: blank
@@ -1549,7 +1549,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2051
-    content: ROV
+    content: rov
 
   17977514:
     script:       qm
@@ -1559,7 +1559,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2051
-    content: ROV
+    content: rov
 
   17977515:
     script: blank
@@ -1581,7 +1581,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: ROV
+    content: rov
 
   17977517:
     script:       Iroha
@@ -1594,7 +1594,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977518:
     script:       Selhteus
@@ -1607,7 +1607,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977519:
     script:       Disjoined_One
@@ -1640,7 +1640,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977521:
     script:       Lion
@@ -1653,7 +1653,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977522:
     script:       Prishe
@@ -1666,7 +1666,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977523:
     script:       Nashmeira
@@ -1679,7 +1679,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977524:
     script:       Lilisette
@@ -1692,7 +1692,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977525:
     script:       Arciela
@@ -1705,7 +1705,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977526:
     script:       Aldo
@@ -1718,7 +1718,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977527:
     script:       Gilgamesh
@@ -1731,7 +1731,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977528:
     script: blank
@@ -1872,7 +1872,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17977536:
     script:       exit

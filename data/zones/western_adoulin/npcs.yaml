@@ -116,7 +116,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825809:
     script:       JGL_BUILD_MASTER_1
@@ -127,7 +127,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825810:
     script:       JGL_BUILD_MASTER_2
@@ -138,7 +138,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825811:
     script:       JGL_BUILD_MASTER_3
@@ -149,7 +149,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825812:
     script:       JGL_BUILD_MASTER_4
@@ -160,7 +160,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825813:
     script:       JGL_BUILD_MASTER_5
@@ -171,7 +171,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825814:
     script: NPC[16]
@@ -498,7 +498,7 @@ npcs:
       entity_flags: 2051
       name_vis:      120
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825843:
     script:       Soul_Pyre
@@ -510,7 +510,7 @@ npcs:
       entity_flags: 2051
       name_vis:      120
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825844:
     script:       Soul_Pyre
@@ -522,7 +522,7 @@ npcs:
       entity_flags: 2051
       name_vis:      120
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825845:
     script:       Soul_Pyre
@@ -534,7 +534,7 @@ npcs:
       entity_flags: 2051
       name_vis:      120
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825846:
     script:       Soul_Pyre
@@ -546,7 +546,7 @@ npcs:
       entity_flags: 2051
       name_vis:      120
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825847:
     script:       Soul_Pyre
@@ -558,7 +558,7 @@ npcs:
       entity_flags: 2051
       name_vis:      120
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825848:
     script:       Task_Delegator
@@ -580,7 +580,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825849:
     script:       Task_Delegator
@@ -602,7 +602,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825850:
     script:       Task_Delegator
@@ -624,7 +624,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825851:
     script:       Task_Delegator
@@ -646,7 +646,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825852:
     script:       Civil_Registrar
@@ -668,7 +668,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825853:
     script:       Civil_Registrar
@@ -690,7 +690,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825854:
     script:       Civil_Registrar
@@ -712,7 +712,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825855:
     script:       Civil_Registrar
@@ -734,7 +734,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825856:
     script:       GLD_BUILD_MASTER
@@ -747,7 +747,7 @@ npcs:
       entity_flags: 2051
       moving:          1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825857:
     script:       Achieve_Master
@@ -757,7 +757,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825858:
     script: NPC[42]
@@ -1213,7 +1213,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825898:
     script:       Ivoh_Haalameb
@@ -1229,7 +1229,7 @@ npcs:
       moving:       7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825899:
     script: NPC[6b]
@@ -1248,7 +1248,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17825901:
     script:       Moogle
@@ -1260,7 +1260,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17825902:
     script:       Moogle
@@ -1272,7 +1272,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17825903:
     script:       Moogle
@@ -1284,7 +1284,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17825904:
     script:       Moogle
@@ -1296,7 +1296,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17825905:
     script:       Moogle
@@ -1308,7 +1308,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17825906:
     script:       Moogle
@@ -1320,7 +1320,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17825907:
     script:       Moogle
@@ -1332,7 +1332,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17825908:
     script:       HomePoint#1
@@ -1345,7 +1345,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825909:
     script:       HomePoint#2
@@ -1358,7 +1358,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825910:
     script:       HomePoint#3
@@ -1368,7 +1368,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825911:
     script:       HomePoint#4
@@ -1378,7 +1378,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825912:
     script:       HomePoint#5
@@ -1388,7 +1388,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825913:
     script:       Debadle-Levadle
@@ -1404,7 +1404,7 @@ npcs:
       moving:       8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825914:
     script:       Auction_Counter
@@ -1416,7 +1416,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: SOA
+    content: soa
 
   17825915:
     script:       Auction_Counter
@@ -1428,7 +1428,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: SOA
+    content: soa
 
   17825916:
     script:       Auction_Counter
@@ -1440,7 +1440,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: SOA
+    content: soa
 
   17825917:
     script:       Auction_Counter
@@ -1452,7 +1452,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: SOA
+    content: soa
 
   17825918:
     script:       Auction_Counter
@@ -1464,7 +1464,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: SOA
+    content: soa
 
   17825919:
     script:       Auction_Counter
@@ -1476,7 +1476,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: SOA
+    content: soa
 
   17825920:
     script:       Gemmerick
@@ -1500,7 +1500,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825921:
     script:       Moogle
@@ -1513,7 +1513,7 @@ npcs:
       animation_sub:     1
       moving:        32782
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825922:
     script: blank
@@ -1534,7 +1534,7 @@ npcs:
       name_prefix:    32
     speed:           0
     animation_speed: 0
-    content:         SOA
+    content:         soa
 
   17825924:
     script: blank
@@ -1554,7 +1554,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825926:
     script:       Symphonic_Curator
@@ -1566,7 +1566,7 @@ npcs:
         model: 1847
       moving: 32775
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825927:
     script: blank
@@ -1587,7 +1587,7 @@ npcs:
       name_prefix:    32
     speed:           0
     animation_speed: 0
-    content:         SOA
+    content:         soa
 
   17825929:
     script: blank
@@ -1619,7 +1619,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825931:
     script: blank
@@ -1682,7 +1682,7 @@ npcs:
       moving:       32788
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825937:
     script:       Levil
@@ -1705,7 +1705,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825938:
     script:       Tiana
@@ -1718,7 +1718,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825939:
     script:       Brenna
@@ -1739,7 +1739,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825940:
     script:       Lhe_Lhangavo
@@ -1752,7 +1752,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825941:
     script:       Flaviria
@@ -1773,7 +1773,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825942:
     script:       Teodor
@@ -1786,7 +1786,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825943:
     script: blank
@@ -1831,7 +1831,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825948:
     script:       Ingrid
@@ -1844,7 +1844,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825949:
     script:       Vortimere
@@ -1857,7 +1857,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825950:
     script:       HEISHI_A
@@ -1878,7 +1878,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825951:
     script:       HEISHI_B
@@ -1899,7 +1899,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825952:
     script: blank
@@ -1991,7 +1991,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825960:
     script:       Arciela
@@ -2007,7 +2007,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825961:
     script:       Fontis_Xanira
@@ -2021,7 +2021,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825962:
     script:       Sunrise_Beacon
@@ -2034,7 +2034,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825963:
     script:       Svenja
@@ -2048,7 +2048,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825964:
     script:       Gratzigg
@@ -2069,7 +2069,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825965:
     script:       Port_Storage
@@ -2082,7 +2082,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825966:
     script:       Margret
@@ -2199,7 +2199,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825973:
     script:       Waypoint
@@ -2214,7 +2214,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825974:
     script:       Waypoint
@@ -2229,7 +2229,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825975:
     script:       Waypoint
@@ -2244,7 +2244,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825976:
     script:       Waypoint
@@ -2259,7 +2259,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825977:
     script:       Waypoint
@@ -2274,7 +2274,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825978:
     script:       Waypoint
@@ -2303,7 +2303,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825980:
     script:       Waypoint
@@ -2318,7 +2318,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825981:
     script:       Waypoint
@@ -2333,7 +2333,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825982:
     script:       Dewalt
@@ -2348,7 +2348,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825983:
     script:       Barenngo
@@ -2371,7 +2371,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825984:
     script:       Ari-Barali
@@ -2392,7 +2392,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825985:
     script:       Alianne
@@ -2413,7 +2413,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825986:
     script:       Othellius
@@ -2434,7 +2434,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825987:
     script:       Door_Svenjas_Manor
@@ -2446,7 +2446,7 @@ npcs:
         model: 50
       moving: 32769
     status:  normal
-    content: SOA
+    content: soa
 
   17825988:
     script:       Door_Hospital
@@ -2459,7 +2459,7 @@ npcs:
       entity_flags:   515
       moving:       32769
     status:  normal
-    content: SOA
+    content: soa
 
   17825989:
     script:       Logan
@@ -2480,7 +2480,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825990:
     script: blank
@@ -2510,7 +2510,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825992:
     script:       Eamonn
@@ -2533,7 +2533,7 @@ npcs:
       moving:       20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825993:
     script:       Pagnelle
@@ -2556,7 +2556,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825994:
     script:       Wesley
@@ -2569,7 +2569,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825995:
     script:       Aristide
@@ -2590,7 +2590,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825996:
     script: blank
@@ -2629,7 +2629,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825998:
     script:       Distrova
@@ -2642,7 +2642,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17825999:
     script:       Gontrain
@@ -2657,7 +2657,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826000:
     script: blank
@@ -2791,7 +2791,7 @@ npcs:
     status:   normal
     speed:    25
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826009:
     script:       Mischief_Marker
@@ -2806,7 +2806,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826010:
     script:       Tuffle-Buffle
@@ -2828,7 +2828,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826011:
     script:       Musto-Rusto
@@ -2850,7 +2850,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826012:
     script:       Minnifi_Delqabba
@@ -2873,7 +2873,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826013:
     script:       Patrillaut
@@ -2895,7 +2895,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826014:
     script: blank
@@ -3081,7 +3081,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826024:
     script:       Sauce_Barrel
@@ -3096,7 +3096,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826025:
     script: blank
@@ -3172,7 +3172,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826029:
     script:       Amchuchu
@@ -3194,7 +3194,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826030:
     script:       Midras
@@ -3216,7 +3216,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826031:
     script:       Hektor
@@ -3238,7 +3238,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826032:
     script:       Contemplation_Site
@@ -3253,7 +3253,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826033:
     script: blank
@@ -3366,7 +3366,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826043:
     script:       Rising_Solstice
@@ -3390,7 +3390,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826044:
     script:       Ruth
@@ -3413,7 +3413,7 @@ npcs:
       moving:       20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826045:
     script:       Berstrogus
@@ -3437,7 +3437,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826046:
     script:       Zaoso
@@ -3461,7 +3461,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826047:
     script:       Nikkhail
@@ -3477,7 +3477,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826048:
     script:       Oka_Qhantari
@@ -3501,7 +3501,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826049:
     script:       Orenna
@@ -3516,7 +3516,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826050:
     script:       Mosil-Nosil
@@ -3540,7 +3540,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826051:
     script:       Behff_Oibbah
@@ -3565,7 +3565,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826052:
     script:       Flapano
@@ -3580,7 +3580,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826053:
     script:       Lollano
@@ -3595,7 +3595,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826054:
     script:       Fervent_Horizon
@@ -3619,7 +3619,7 @@ npcs:
       moving:       7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826055:
     script:       Ribbolian
@@ -3643,7 +3643,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826056:
     script:       Clemmar
@@ -3667,7 +3667,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826057:
     script:       Vaulois
@@ -3691,7 +3691,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826058:
     script:       Orfbis
@@ -3714,7 +3714,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826059:
     script:       Mastan
@@ -3738,7 +3738,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826060:
     script:       Shipilolo
@@ -3762,7 +3762,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826061:
     script:       Chanteillie
@@ -3786,7 +3786,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826062:
     script:       Terwok
@@ -3810,7 +3810,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826063:
     script:       Nylene
@@ -3834,7 +3834,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826064:
     script:       Quam_Jitahr
@@ -3858,7 +3858,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826065:
     script:       Charutata
@@ -3882,7 +3882,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826066:
     script:       Phileem
@@ -3906,7 +3906,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826067:
     script:       Marjoirelle
@@ -3930,7 +3930,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826068:
     script:       Virsaint
@@ -3954,7 +3954,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826069:
     script:       Grevan
@@ -3977,7 +3977,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826070:
     script:       Gorad
@@ -3992,7 +3992,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826071:
     script:       Merleg
@@ -4007,7 +4007,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826072:
     script:       Noan
@@ -4023,7 +4023,7 @@ npcs:
     status:   normal
     speed:    40
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826073:
     script:       Clautaire
@@ -4038,7 +4038,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826074:
     script:       Dangueubert
@@ -4062,7 +4062,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826075:
     script:       Defliaa
@@ -4077,7 +4077,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826076:
     script:       Ansegusele
@@ -4092,7 +4092,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826077:
     script:       Tevigogo
@@ -4115,7 +4115,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826078:
     script:       Safrick
@@ -4140,7 +4140,7 @@ npcs:
     status:   normal
     speed:    25
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826079:
     script:       Andrival
@@ -4165,7 +4165,7 @@ npcs:
     status:   normal
     speed:    25
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826080:
     script:       Westerly_Breeze
@@ -4190,7 +4190,7 @@ npcs:
     status:   normal
     speed:    25
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826081:
     script:       Coltrone
@@ -4215,7 +4215,7 @@ npcs:
     status:   normal
     speed:    25
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826082:
     script:       Neivaig
@@ -4240,7 +4240,7 @@ npcs:
     status:   normal
     speed:    25
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826083:
     script:       Nargoht
@@ -4256,7 +4256,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826084:
     script:       Kongramm
@@ -4280,7 +4280,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826085:
     script:       Katya
@@ -4304,7 +4304,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826086:
     script:       Jorin
@@ -4328,7 +4328,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826087:
     script:       Ledericus
@@ -4344,7 +4344,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826088:
     script:       Ishvad
@@ -4368,7 +4368,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826089:
     script:       Eukalline
@@ -4391,7 +4391,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826090:
     script:       Delionna
@@ -4415,7 +4415,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826091:
     script:       Preterig
@@ -4431,7 +4431,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826092:
     script:       Hujette
@@ -4446,7 +4446,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826093:
     script:       Kanil
@@ -4462,7 +4462,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826094:
     script:       Theophylacte
@@ -4477,7 +4477,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826095:
     script:       Illi-Milli
@@ -4501,7 +4501,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826096:
     script:       Aindemont
@@ -4525,7 +4525,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826097:
     script:       Kipligg
@@ -4549,7 +4549,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826098:
     script:       Herchambaut
@@ -4572,7 +4572,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826099:
     script:       Brenna
@@ -4594,7 +4594,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826100:
     script:       DIRECTOR_by_yaeko
@@ -4608,7 +4608,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17826101:
     script:       Lhaiso_Neftereh
@@ -4630,7 +4630,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826102:
     script:       Berghent
@@ -4646,7 +4646,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826103:
     script:       Wescolina
@@ -4661,7 +4661,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826104:
     script:       Eternal_Flame
@@ -4684,7 +4684,7 @@ npcs:
       moving:       20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826105:
     script:       qm
@@ -4696,7 +4696,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: SOA
+    content: soa
 
   17826106:
     script:       Duberasson
@@ -4719,7 +4719,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826107:
     script:       Waypoint
@@ -4732,7 +4732,7 @@ npcs:
       name_prefix: 2
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826108:
     script: blank
@@ -4779,7 +4779,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826112:
     script:       Runic_Overflow
@@ -4793,7 +4793,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826113:
     script:       Gaddiux
@@ -4816,7 +4816,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826114:
     script:       Inconspicuous_Barrel
@@ -4831,7 +4831,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826115:
     script: blank
@@ -4964,7 +4964,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826123:
     script:       Louisareaux
@@ -4979,7 +4979,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826124:
     script:       Palomel
@@ -5001,7 +5001,7 @@ npcs:
       name_prefix:     32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826125:
     script: blank
@@ -5031,7 +5031,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826127:
     script:       Mikolulu
@@ -5052,7 +5052,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826128:
     script: blank
@@ -5086,7 +5086,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826130:
     script:       Sebohl_Reccohta
@@ -5102,7 +5102,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826131:
     script:       Zenicca
@@ -5126,7 +5126,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826132:
     script:       Kithvalio
@@ -5150,7 +5150,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826133:
     script:       Auscanard
@@ -5174,7 +5174,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826134:
     script:       Jausephiane
@@ -5198,7 +5198,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826135:
     script:       Farso-Dafarso
@@ -5222,7 +5222,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826136:
     script:       Rispa-Merispa
@@ -5246,7 +5246,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826137:
     script:       Micah
@@ -5270,7 +5270,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826138:
     script:       Cefantia
@@ -5294,7 +5294,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826139:
     script:       Ugtoor
@@ -5318,7 +5318,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826140:
     script:       Wortherton
@@ -5342,7 +5342,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826141:
     script:       Ceciliotte
@@ -5366,7 +5366,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826142:
     script:       Rienne
@@ -5390,7 +5390,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826143:
     script:       Heemo-Weemo
@@ -5414,7 +5414,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826144:
     script:       Divainy-Gamainy
@@ -5438,7 +5438,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826145:
     script:       Benjamien
@@ -5462,7 +5462,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826146:
     script:       Ornery_Dhole
@@ -5486,7 +5486,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826147:
     script:       Forri-Porri
@@ -5510,7 +5510,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826148:
     script:       Detrovio
@@ -5534,7 +5534,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826149:
     script:       Masad
@@ -5558,7 +5558,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826150:
     script:       Kerney
@@ -5582,7 +5582,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826151:
     script:       Bastingart
@@ -5606,7 +5606,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826152:
     script:       Iscandelle
@@ -5630,7 +5630,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826153:
     script:       Etienne
@@ -5654,7 +5654,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826154:
     script: blank
@@ -5691,7 +5691,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826156:
     script:       Olivaine
@@ -5715,7 +5715,7 @@ npcs:
       moving:        32788
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826157:
     script:       Ravoignac
@@ -5738,7 +5738,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826158:
     script: blank
@@ -5809,7 +5809,7 @@ npcs:
       moving:       20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826165:
     script: NPC[175]
@@ -5913,7 +5913,7 @@ npcs:
       moving: 32788
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826173:
     script: NPC[17d]
@@ -5945,7 +5945,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826175:
     script:       Delivery_Specialist
@@ -5968,7 +5968,7 @@ npcs:
       moving:          7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826176:
     script:       Prah_Janimhar
@@ -5991,7 +5991,7 @@ npcs:
       moving:       20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826177:
     script:       Rewardox
@@ -6006,7 +6006,7 @@ npcs:
       moving:       32782
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17826178:
     script:       Treasure_Coffer
@@ -6020,7 +6020,7 @@ npcs:
       name_vis:        36
       moving:           1
     status:  normal
-    content: DAILY_TALLY
+    content: daily_tally
 
   17826179:
     script:       Nunaarl_Bthtrogg
@@ -6035,7 +6035,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826180:
     script:       qm1
@@ -6048,7 +6048,7 @@ npcs:
       name_vis:     112
       name_prefix:   32
     status:  cutscene_only
-    content: SOA
+    content: soa
 
   17826181:
     script:       qm2
@@ -6069,7 +6069,7 @@ npcs:
       name_vis:     112
       name_prefix:   32
     status:  cutscene_only
-    content: SOA
+    content: soa
 
   17826182:
     script:       Invincible_Shield
@@ -6091,7 +6091,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826183:
     script:       Jakoh_Wahcondalo
@@ -6113,7 +6113,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17826184:
     script: blank
@@ -6144,7 +6144,7 @@ npcs:
       name_prefix:  32
       moving:        7
     status:  normal
-    content: SOA
+    content: soa
 
   17826187:
     script: blank

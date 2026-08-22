@@ -18,7 +18,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  SOA
+    content:  soa
 
   17924099:
     script: NPC[3]
@@ -1351,7 +1351,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17924201:
     display_name: DIRECTOR3
@@ -1513,7 +1513,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17924214:
     script:       Moogle
@@ -1524,7 +1524,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17924215:
     script:       Moogle
@@ -1535,7 +1535,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17924216:
     script:       Moogle
@@ -1546,7 +1546,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17924217:
     script:       Moogle
@@ -1557,7 +1557,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17924218:
     script:       Moogle
@@ -1568,7 +1568,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17924219:
     script:       Moogle
@@ -1579,7 +1579,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17924220:
     script:       Moogle
@@ -1590,7 +1590,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17924221:
     script:       Porter_Moogle

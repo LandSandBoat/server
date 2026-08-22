@@ -219,7 +219,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17502602:
     script: NPC[18a]
@@ -237,7 +237,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17502605:
     script: NPC[18d]
@@ -1439,7 +1439,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17502702:
     script:       Planar_Rift
@@ -1455,7 +1455,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17502703:
     script:       Planar_Rift
@@ -1471,7 +1471,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17502704:
     script:       Riftworn_Pyxis
@@ -1486,7 +1486,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17502705:
     script:       Riftworn_Pyxis
@@ -1501,7 +1501,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17502706:
     script:       Riftworn_Pyxis
@@ -1516,7 +1516,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17502707:
     script:       Grounds_Tome
@@ -1530,7 +1530,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502708:
     script:       Grounds_Tome
@@ -1544,7 +1544,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502709:
     script:       Grounds_Tome
@@ -1558,7 +1558,7 @@ npcs:
       moving:   16
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502710:
     script:       Grounds_Tome
@@ -1572,7 +1572,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502711:
     script:       Grounds_Tome
@@ -1586,7 +1586,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502712:
     script:       Grounds_Tome
@@ -1600,7 +1600,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502713:
     script:       Grounds_Tome
@@ -1614,7 +1614,7 @@ npcs:
       moving:   16
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502714:
     script:       Grounds_Tome
@@ -1628,7 +1628,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502715:
     script:       Grounds_Tome
@@ -1642,7 +1642,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17502716:
     script:       Grounds_Tome
@@ -1656,4 +1656,4 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes

@@ -10,7 +10,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  SOA
+    content:  soa
 
   17518594:
     script: NPC[2]
@@ -28,7 +28,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17518723:
     script: NPC[83]

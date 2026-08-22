@@ -200,7 +200,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  SOA
+    content:  soa
 
   17645868:
     script: NPC[12c]
@@ -218,7 +218,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17645871:
     script: NPC[12f]
@@ -638,7 +638,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ASA
+    content:  asa
 
   17645908:
     script:       Ethereal_Junction
@@ -653,7 +653,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17645909:
     script:       Ethereal_Junction
@@ -668,7 +668,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17645910:
     script:       Ethereal_Junction
@@ -683,7 +683,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17645911:
     script:       Grounds_Tome
@@ -697,7 +697,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17645912:
     script:       Grounds_Tome
@@ -711,7 +711,7 @@ npcs:
       moving:   21
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17645913:
     script:       Grounds_Tome
@@ -725,7 +725,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17645914:
     script:       Grounds_Tome
@@ -739,7 +739,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17645915:
     script:       Geomagnetic_Fount
@@ -752,7 +752,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17645916:
     script:       Survival_Guide
@@ -767,4 +767,4 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

@@ -853,7 +853,7 @@ templates:
       despoil:
         slice_of_land_crab_meat: 0
         crab_shell:              0
-    content: ABYSSEA
+    content: abyssea
 
   Emperor_Apkallu:
     id:            1211
@@ -1107,7 +1107,7 @@ templates:
       drops:
         - chance: rare
           item:   lyft_jambiya
-    content: WOTG
+    content: wotg
 
   Fallen_Imperial_Trooper:
     id:            1285
@@ -3697,7 +3697,7 @@ templates:
         vial_of_fiend_blood:    0
         vial_of_beastman_blood: 0
         vial_of_bird_blood:     0
-    content: ROV
+    content: rov
 
   Nix_Bladedancer:
     id:            2893
@@ -3952,7 +3952,7 @@ templates:
           item:   shall_shell
       despoil:
         seashell: 0
-    content: ROV
+    content: rov
 
   Nuhn:
     id:            2920

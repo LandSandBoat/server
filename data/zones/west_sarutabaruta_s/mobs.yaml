@@ -2409,7 +2409,7 @@ templates:
       despoil:
         rabbit_hide:        0
         slice_of_hare_meat: 0
-    content: ABYSSEA
+    content: abyssea
 
   Ice_Fiend:
     id:            2044

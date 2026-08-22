@@ -23,7 +23,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16781332:
     script: NPC[14]
@@ -41,7 +41,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16781335:
     script: NPC[17]
@@ -108,7 +108,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16781341:
     script:       Luquillaue
@@ -131,7 +131,7 @@ npcs:
       name_prefix:   32
       moving:        14
     widescan: true
-    content:  COP
+    content:  cop
 
   16781342:
     script:       FXTEST
@@ -144,7 +144,7 @@ npcs:
       moving: 32768
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16781343:
     script:       Riche
@@ -159,7 +159,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16781344:
     script:       Roi
@@ -173,7 +173,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  COP
+    content:  cop
 
   16781345:
     script: blank
@@ -205,7 +205,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16781347:
     script:       Eunirange
@@ -227,7 +227,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  COP
+    content:  cop
 
   16781348:
     script: NPC[24]
@@ -244,7 +244,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16781350:
     script:       Moogle
@@ -254,7 +254,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16781351:
     script:       Moogle
@@ -264,7 +264,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16781352:
     script:       Moogle
@@ -274,7 +274,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16781353:
     script:       Moogle
@@ -284,7 +284,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16781354:
     script:       Moogle
@@ -294,7 +294,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16781355:
     script:       Moogle
@@ -304,7 +304,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16781356:
     script:       Moogle
@@ -314,4 +314,4 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop

@@ -165,7 +165,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17510698:
     script:       Achieve_Master
@@ -174,7 +174,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17510699:
     script: NPC[11c]
@@ -192,7 +192,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17510702:
     script: NPC[11f]

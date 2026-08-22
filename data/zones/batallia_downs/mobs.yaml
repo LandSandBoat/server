@@ -79,7 +79,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Awoken_Freke:
     id:            6106
@@ -223,7 +223,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Cherufe:
     id:            5185
@@ -399,7 +399,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Earth_Elemental:
     id:            1160
@@ -478,7 +478,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Evil_Spirit:
     id:            1266
@@ -608,7 +608,7 @@ templates:
         - chance: common
           item:   brawn_earring
       steal: bird_feather
-    content: WOTG
+    content: wotg
 
   Goblin_Bounty_Hunter:
     id:            1642
@@ -1345,7 +1345,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Land_Pugil_fished:
     id:            6764
@@ -1494,7 +1494,7 @@ templates:
           model: 431
         name_vis: 32
         hitbox:   10
-    content: TVR
+    content: tvr
 
   Mauthe_Doog_BD:
     id:            2589
@@ -1936,7 +1936,7 @@ templates:
       drops:
         - chance: common
           item:   volant_belt
-    content: WOTG
+    content: wotg
 
   Pruina:
     id:            7022
@@ -1972,7 +1972,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Puretos:
     id:            7028
@@ -2007,7 +2007,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Sabertooth_Tiger_CL_BD:
     id:            3424
@@ -2079,7 +2079,7 @@ templates:
       drops:
         - chance: common
           item:   stormer_earring
-    content: WOTG
+    content: wotg
 
   Skuld:
     id:            7030
@@ -2130,7 +2130,7 @@ templates:
       drops:
         - chance: uncommon
           item:   veela_cape
-    content: WOTG
+    content: wotg
 
   Snipper_fished:
     id:            3682
@@ -2480,7 +2480,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Tottering_Toby:
     id:            3979
@@ -2619,7 +2619,7 @@ templates:
       drops:
         - chance: uncommon
           item:   choreia_earring
-    content: WOTG
+    content: wotg
 
   Vegnix_Greenthumb:
     id:            4215
@@ -2828,7 +2828,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Weeping_Willow:
     id:            4318
@@ -3132,7 +3132,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
 spawns:
   17207297:

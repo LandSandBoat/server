@@ -47,7 +47,7 @@ npcs:
         model: 52
       name_vis: 112
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158298:
     script:       Twilight_Aureola
@@ -58,7 +58,7 @@ npcs:
         model: 52
       name_vis: 112
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158299:
     script:       Lacuna_Whorl
@@ -69,7 +69,7 @@ npcs:
         model: 52
       name_vis: 112
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158300:
     script: NPC[9c]
@@ -78,7 +78,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158301:
     script:       ctrl_mission
@@ -88,7 +88,7 @@ npcs:
         type:  standard
         model: 52
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158302:
     script: NPC[9e]
@@ -102,7 +102,7 @@ npcs:
       moving:          1
     status:   invisible
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158304:
     script:       Achieve_Master
@@ -111,7 +111,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17158307:
     script: NPC[a2]
@@ -121,7 +121,7 @@ npcs:
         model: 50
       entity_flags: 1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158308:
     script: NPC[a3]
@@ -133,7 +133,7 @@ npcs:
       animation_sub:  16
       name_vis:       32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158309:
     script: NPC[a4]
@@ -142,7 +142,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158310:
     script: NPC[a5]
@@ -151,7 +151,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158311:
     script:       DOOR_MASTER
@@ -164,7 +164,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158312:
     script:       _2l0
@@ -398,7 +398,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158335:
     script:       _2ln
@@ -412,7 +412,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158336:
     script:       _2lo
@@ -446,7 +446,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158339:
     script:       _2lr
@@ -460,7 +460,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158340:
     script:       _2ls
@@ -474,7 +474,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158341:
     script:       _2lt
@@ -568,7 +568,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158350:
     script:       _kl2
@@ -582,7 +582,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158351:
     script:       _kl3
@@ -636,7 +636,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158356:
     script:       _kl8
@@ -650,7 +650,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158357:
     script:       _kl9
@@ -664,7 +664,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158358:
     script:       _kla
@@ -708,7 +708,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158362:
     script:       _kle
@@ -772,7 +772,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158368:
     script:       _klk
@@ -786,7 +786,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17158369:
     script:       _kll
@@ -876,7 +876,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158378:
     script: blank
@@ -886,7 +886,7 @@ npcs:
         model: 50
       entity_flags: 2051
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158379:
     script: npc[ea]
@@ -895,7 +895,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158380:
     script:       Moogle
@@ -904,7 +904,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: WOTG
+    content: wotg
 
   17158381:
     script:       Moogle
@@ -913,7 +913,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: WOTG
+    content: wotg
 
   17158382:
     script:       Moogle
@@ -922,7 +922,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: WOTG
+    content: wotg
 
   17158383:
     script:       Moogle
@@ -931,7 +931,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: WOTG
+    content: wotg
 
   17158384:
     script:       Moogle
@@ -940,7 +940,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: WOTG
+    content: wotg
 
   17158385:
     script:       Moogle
@@ -949,7 +949,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: WOTG
+    content: wotg
 
   17158386:
     script:       Moogle
@@ -958,7 +958,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: WOTG
+    content: wotg
 
   17158387:
     script:       Moogle
@@ -967,7 +967,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: WOTG
+    content: wotg
 
   17158388:
     script:       Volker
@@ -980,7 +980,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158389:
     script: csnpc
@@ -1000,7 +1000,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158390:
     script: csnpc
@@ -1012,7 +1012,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158391:
     script: csnpc
@@ -1024,7 +1024,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158392:
     script: csnpc
@@ -1036,7 +1036,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158393:
     script: csnpc
@@ -1048,7 +1048,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158394:
     render:
@@ -1078,7 +1078,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158398:
     script: csnpc
@@ -1090,7 +1090,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158399:
     script:       medic_pop_ctrl
@@ -1100,7 +1100,7 @@ npcs:
         type:  standard
         model: 52
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17158400:
     script:       Ninzu-CallKun
@@ -1113,4 +1113,4 @@ npcs:
       name_prefix:  32
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg

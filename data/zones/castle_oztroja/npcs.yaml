@@ -32,7 +32,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17396147:
     script: NPC[1b3]
@@ -50,7 +50,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17396150:
     script: NPC[1b6]
@@ -1439,7 +1439,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17396256:
     script: blank
@@ -1568,7 +1568,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17396264:
     script:       Isakoth
@@ -1664,7 +1664,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17396269:
     script:       Geomantic_Reservoir
@@ -1678,7 +1678,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17396270:
     script: NPC[22e]
@@ -1707,4 +1707,4 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

@@ -338,7 +338,7 @@ templates:
       drops:
         - chance: very_common
           item:   ceres_spica
-    content: WOTG
+    content: wotg
 
   Meat_Maggot:
     id:            2602
@@ -697,7 +697,7 @@ templates:
       drops:
         - chance: very_common
           item:   lump_of_tokkyu_tama-hagane
-    content: WOTG
+    content: wotg
 
   Tzee_Xicu_the_Manifest:
     id:            4072

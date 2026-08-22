@@ -778,7 +778,7 @@ templates:
       steal: bone_chip
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Hellbound_Warrior:
     id:            6531
@@ -819,7 +819,7 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
-    content: ABYSSEA
+    content: abyssea
 
   Ice_Elemental:
     id:            2043
@@ -1520,7 +1520,7 @@ templates:
       despoil:
         wolf_hide:         0
         revival_tree_root: 0
-    content: ABYSSEA
+    content: abyssea
 
   Owl_Guardian:
     id:            3081

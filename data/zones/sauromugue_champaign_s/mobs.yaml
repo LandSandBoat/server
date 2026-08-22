@@ -2106,7 +2106,7 @@ templates:
         insect_wing:  0
         beetle_shell: 0
         beetle_jaw:   0
-    content: ABYSSEA
+    content: abyssea
 
   Gugalanna:
     id:            5150

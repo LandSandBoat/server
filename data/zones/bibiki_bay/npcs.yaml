@@ -26,7 +26,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16793971:
     script:       Achieve_Master
@@ -35,7 +35,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16793972:
     script: NPC[174]
@@ -53,7 +53,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16793975:
     script: NPC[177]
@@ -108,7 +108,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16793981:
     script:       TAKARA_GOB_NPC
@@ -122,7 +122,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16793982:
     script:       Fheli_Lapatzuo
@@ -146,7 +146,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793983:
     script:       Noih_Tahparawh
@@ -170,7 +170,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793984:
     display_name: ship
@@ -233,7 +233,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793988:
     script:       Mep_Nhapopoluko
@@ -257,7 +257,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793989:
     script: blank
@@ -290,7 +290,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793991:
     script:       Clamming_Point_1
@@ -303,7 +303,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793992:
     script:       Clamming_Point_2
@@ -316,7 +316,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793993:
     script:       Clamming_Point_3
@@ -329,7 +329,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793994:
     script:       Clamming_Point_4
@@ -342,7 +342,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793995:
     script:       Clamming_Point_5
@@ -355,7 +355,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793996:
     script:       Clamming_Point_6
@@ -368,7 +368,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793997:
     script:       Clamming_Point_7
@@ -381,7 +381,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793998:
     script:       Clamming_Point_8
@@ -394,7 +394,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16793999:
     script: blank
@@ -417,7 +417,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794001:
     script:       Warmachine
@@ -432,7 +432,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16794002:
     script:       Vukki-Chebukki
@@ -455,7 +455,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794003:
     script:       Louverance
@@ -477,7 +477,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794004:
     script:       Mame01
@@ -491,7 +491,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794005:
     script:       Mame02
@@ -505,7 +505,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794006:
     script:       Mame03
@@ -519,7 +519,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794007:
     script:       Tori01
@@ -533,7 +533,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794008:
     script:       qm_deed
@@ -545,7 +545,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16794009:
     script:       Weathered_Boat
@@ -558,7 +558,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16794010:
     script:       Rohemolipaud
@@ -581,7 +581,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794011:
     script:       Sanctia
@@ -604,7 +604,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794012:
     script:       Novice_Moogle
@@ -619,7 +619,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794013:
     script:       Rhalo_Davigoh
@@ -634,7 +634,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16794014:
     script:       qm_dalham
@@ -646,7 +646,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16794015:
     script:       Shikaree_Z
@@ -668,7 +668,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794016:
     script:       Shikaree_Y
@@ -690,7 +690,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794017:
     script:       Shikaree_X
@@ -712,7 +712,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794018:
     script: NPC[1a2]
@@ -731,7 +731,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794020:
     script:       Moogle
@@ -743,7 +743,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794021:
     script:       Moogle
@@ -755,7 +755,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794022:
     script:       Moogle
@@ -767,7 +767,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794023:
     script:       Moogle
@@ -779,7 +779,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794024:
     script:       Moogle
@@ -791,7 +791,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794025:
     script:       Moogle
@@ -803,7 +803,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794026:
     script:       Moogle
@@ -815,7 +815,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16794027:
     script:       Ramblix
@@ -829,7 +829,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794028:
     script:       Goblin_Footprint
@@ -841,7 +841,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16794029:
     script:       Tswe_Panipahr
@@ -864,7 +864,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16794030:
     script: blank
@@ -892,7 +892,7 @@ npcs:
         type:  standard
         model: 50
       entity_flags: 2051
-    content: COP
+    content: cop
 
   16794033:
     script:       Makki-Chebukki
@@ -905,7 +905,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794034:
     script:       Kukki-Chebukki
@@ -918,7 +918,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794035:
     script:       Cherukiki
@@ -931,7 +931,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16794036:
     script:       Kiteh_Nanjyea
@@ -954,7 +954,7 @@ npcs:
       name_prefix:   32
       moving:         1
     widescan: true
-    content:  COP
+    content:  cop
 
   16794037:
     script: blank
@@ -981,7 +981,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16794039:
     script:       Planar_Rift
@@ -997,7 +997,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16794040:
     script:       Planar_Rift
@@ -1013,7 +1013,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16794041:
     script:       Riftworn_Pyxis
@@ -1028,7 +1028,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16794042:
     script:       Riftworn_Pyxis
@@ -1043,7 +1043,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16794043:
     script:       Riftworn_Pyxis
@@ -1058,7 +1058,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16794044:
     script:       Ethereal_Junction
@@ -1072,7 +1072,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   16794045:
     script:       Ethereal_Junction
@@ -1086,7 +1086,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   16794046:
     script:       Ethereal_Junction
@@ -1100,7 +1100,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   16794047:
     script:       Survival_Guide
@@ -1115,7 +1115,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   16794048:
     script: blank

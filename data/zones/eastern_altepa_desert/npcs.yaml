@@ -713,7 +713,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17244613:
     script: NPC[1c5]
@@ -731,7 +731,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17244616:
     script: NPC[1c8]
@@ -1257,7 +1257,7 @@ npcs:
       moving:       32790
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17244657:
     script:       Field_Manual
@@ -1271,7 +1271,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17244658:
     script:       Field_Manual
@@ -1285,7 +1285,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17244659:
     script:       Field_Manual
@@ -1299,7 +1299,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17244660:
     script:       Field_Parchment
@@ -1312,7 +1312,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17244661:
     script:       Ethereal_Junction
@@ -1327,7 +1327,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17244662:
     script:       Ethereal_Junction
@@ -1342,7 +1342,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17244663:
     script:       Ethereal_Junction
@@ -1357,7 +1357,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17244664:
     script:       Mogball-Local
@@ -1420,4 +1420,4 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

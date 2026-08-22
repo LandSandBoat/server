@@ -1258,7 +1258,7 @@ templates:
       drops:
         - chance: uncommon
           item:   loop_of_aramid_fiber
-    content: WOTG
+    content: wotg
 
 spawns:
   17530881:

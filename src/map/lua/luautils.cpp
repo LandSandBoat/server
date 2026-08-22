@@ -2340,7 +2340,7 @@ auto GetTextIDVariable(const xi::ZoneId ZoneID, const char* variable) -> int32
  *                                                                       *
  ************************************************************************/
 
-bool IsContentEnabled(const std::string& contentTag)
+auto IsContentEnabled(const std::string& contentTag) -> bool
 {
     TracyZoneScoped;
 
@@ -2360,6 +2360,17 @@ bool IsContentEnabled(const std::string& contentTag)
     }
 
     return true;
+}
+
+// Use the uppercased enum slug as ENABLE_ suffix
+auto IsContentEnabled(const xi::Content content) -> bool
+{
+    if (content == xi::Content::None)
+    {
+        return true;
+    }
+
+    return IsContentEnabled(to_upper(std::string{ xi::data::EnumTraits<xi::Content>::toName(content) }));
 }
 
 void OnZoneInitialize(const xi::ZoneId ZoneID)

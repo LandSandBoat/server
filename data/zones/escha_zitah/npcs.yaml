@@ -9,7 +9,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: ROV
+    content: rov
 
   17957411:
     script: NPC[223]
@@ -35,7 +35,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: ROV
+    content: rov
 
   17957414:
     script: NPC[226]
@@ -99,7 +99,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957421:
     script:       Grimslight
@@ -113,7 +113,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957422:
     script:       Grimslight
@@ -127,7 +127,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957423:
     script:       Grimslight
@@ -141,7 +141,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957424:
     script:       Grimslight
@@ -155,7 +155,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957425:
     script:       Grimslight
@@ -169,7 +169,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957426:
     script:       Grimslight
@@ -183,7 +183,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957427:
     script:       Grimslight
@@ -197,7 +197,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957428:
     script:       Grimslight
@@ -211,7 +211,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957429:
     script:       Grumblix
@@ -225,7 +225,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957430:
     script:       Goblin_Footprint
@@ -237,7 +237,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ROV
+    content: rov
 
   17957431:
     script: blank
@@ -258,7 +258,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957433:
     script:       Lion
@@ -271,7 +271,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957434:
     script:       Zeid
@@ -284,7 +284,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957435:
     script:       Undulating_Confluence
@@ -297,7 +297,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957436:
     script: blank
@@ -320,7 +320,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957438:
     script:       qm
@@ -334,7 +334,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957439:
     script:       qm
@@ -348,7 +348,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957440:
     script:       qm
@@ -362,7 +362,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957441:
     script:       qm
@@ -376,7 +376,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957442:
     script:       qm
@@ -390,7 +390,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957443:
     script:       qm
@@ -404,7 +404,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957444:
     script:       qm
@@ -418,7 +418,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957445:
     script:       qm
@@ -432,7 +432,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957446:
     script:       qm
@@ -446,7 +446,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957447:
     script:       qm
@@ -460,7 +460,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957448:
     script:       qm
@@ -474,7 +474,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17957449:
     script:       Affi
@@ -497,7 +497,7 @@ npcs:
       moving:       32784
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957450:
     script:       Register_of_Deeds
@@ -510,7 +510,7 @@ npcs:
       moving: 9
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957451:
     script:       Eschan_Portal_#1
@@ -525,7 +525,7 @@ npcs:
       moving:       32774
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957452:
     script:       Eschan_Portal_#2
@@ -540,7 +540,7 @@ npcs:
       moving:       32774
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957453:
     script:       Eschan_Portal_#3
@@ -555,7 +555,7 @@ npcs:
       moving:       32774
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957454:
     script:       Eschan_Portal_#4
@@ -570,7 +570,7 @@ npcs:
       moving:       32774
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957455:
     script:       Eschan_Portal_#5
@@ -585,7 +585,7 @@ npcs:
       moving:       32794
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957456:
     script:       Eschan_Portal_#6
@@ -600,7 +600,7 @@ npcs:
       moving:       32795
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957457:
     script:       Eschan_Portal_#7
@@ -615,7 +615,7 @@ npcs:
       moving:       32794
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957458:
     script:       Eschan_Portal_#8
@@ -630,7 +630,7 @@ npcs:
       moving:       32794
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957459:
     script: NPC[253]
@@ -646,7 +646,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17957461:
     script:       Moogle
@@ -655,7 +655,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17957462:
     script:       Moogle
@@ -664,7 +664,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17957463:
     script:       Moogle
@@ -673,7 +673,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17957464:
     script:       Moogle
@@ -682,7 +682,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17957465:
     script:       Moogle
@@ -691,7 +691,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17957466:
     script:       Moogle
@@ -700,7 +700,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17957467:
     script:       Moogle
@@ -709,7 +709,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17957468:
     script:       Emblazoned_Reliquary
@@ -719,7 +719,7 @@ npcs:
         type:  standard
         model: 965
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957469:
     script:       Emblazoned_Reliquary
@@ -733,7 +733,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957470:
     script:       Emblazoned_Reliquary
@@ -746,7 +746,7 @@ npcs:
       name_vis:      4
       moving:        7
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957471:
     script:       Emblazoned_Reliquary
@@ -760,7 +760,7 @@ npcs:
       name_vis:        12
       moving:           7
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957472:
     script:       Emblazoned_Reliquary
@@ -773,7 +773,7 @@ npcs:
       name_vis:      4
       moving:        7
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957473:
     script:       Emblazoned_Reliquary
@@ -786,7 +786,7 @@ npcs:
       name_vis:      4
       moving:        7
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957474:
     script:       Emblazoned_Reliquary
@@ -798,7 +798,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957475:
     script:       Emblazoned_Reliquary
@@ -810,7 +810,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957476:
     script:       Emblazoned_Reliquary
@@ -822,7 +822,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957477:
     script:       Emblazoned_Reliquary
@@ -834,7 +834,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957478:
     script:       Emblazoned_Reliquary
@@ -846,7 +846,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957479:
     script:       Emblazoned_Reliquary
@@ -858,7 +858,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957480:
     script:       Emblazoned_Reliquary
@@ -870,7 +870,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957481:
     script:       Emblazoned_Reliquary
@@ -882,7 +882,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957482:
     script:       Emblazoned_Reliquary
@@ -894,7 +894,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957483:
     script:       Emblazoned_Reliquary
@@ -906,7 +906,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957484:
     script:       Emblazoned_Reliquary
@@ -918,7 +918,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957485:
     script:       Emblazoned_Reliquary
@@ -930,7 +930,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957486:
     script:       Emblazoned_Reliquary
@@ -942,7 +942,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957487:
     script:       Emblazoned_Reliquary
@@ -954,7 +954,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957488:
     script:       Emblazoned_Reliquary
@@ -966,7 +966,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957489:
     script:       Emblazoned_Reliquary
@@ -978,7 +978,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957490:
     script:       Emblazoned_Reliquary
@@ -992,7 +992,7 @@ npcs:
       name_vis:        12
       moving:           7
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957491:
     script:       Emblazoned_Reliquary
@@ -1004,7 +1004,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957492:
     script:       Emblazoned_Reliquary
@@ -1016,7 +1016,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957493:
     script:       Emblazoned_Reliquary
@@ -1028,7 +1028,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957494:
     script:       Emblazoned_Reliquary
@@ -1042,7 +1042,7 @@ npcs:
       name_vis:        12
       moving:           7
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957495:
     script:       Emblazoned_Reliquary
@@ -1054,7 +1054,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957496:
     script:       Emblazoned_Reliquary
@@ -1066,7 +1066,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957497:
     script:       Emblazoned_Reliquary
@@ -1078,7 +1078,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957498:
     script:       Emblazoned_Reliquary
@@ -1090,7 +1090,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957499:
     script:       Emblazoned_Reliquary
@@ -1102,7 +1102,7 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov
 
   17957500:
     script:       Emblazoned_Reliquary
@@ -1114,4 +1114,4 @@ npcs:
       animation_sub: 4
       name_vis:      4
     widescan: true
-    content:  ROV
+    content:  rov

@@ -15,7 +15,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17023024:
     script:       Ancient_Lockbox
@@ -31,7 +31,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17023025:
     script:       Ancient_Lockbox
@@ -47,7 +47,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17023030:
     script:       Ancient_Lockbox
@@ -62,7 +62,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17023031:
     script:       Ancient_Lockbox
@@ -77,7 +77,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17023038:
     script: NPC[38]
@@ -86,7 +86,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023039:
     script: NPC[39]
@@ -95,7 +95,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023040:
     script:       Ancient_Lockbox
@@ -111,7 +111,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17023041:
     script: NPC[3b]
@@ -121,7 +121,7 @@ npcs:
         model: 50
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023042:
     script: NPC[3c]
@@ -130,7 +130,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023043:
     script: NPC[3d]
@@ -140,7 +140,7 @@ npcs:
         model: 50
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023044:
     script: NPC[3e]
@@ -150,7 +150,7 @@ npcs:
         model: 50
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023045:
     script:       Achieve_Master
@@ -160,7 +160,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023047:
     script: NPC[41]
@@ -170,7 +170,7 @@ npcs:
         model: 50
       entity_flags: 1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023048:
     script: NPC[42]
@@ -182,7 +182,7 @@ npcs:
       animation_sub:  16
       name_vis:       32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023049:
     script: NPC[43]
@@ -191,7 +191,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023050:
     script: NPC[44]
@@ -200,7 +200,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023051:
     script: NPC[45]
@@ -209,7 +209,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023053:
     script:       Moogle
@@ -218,7 +218,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: TOAU
+    content: toau
 
   17023054:
     script:       Moogle
@@ -227,7 +227,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: TOAU
+    content: toau
 
   17023055:
     script:       Moogle
@@ -236,7 +236,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: TOAU
+    content: toau
 
   17023056:
     script:       Moogle
@@ -245,7 +245,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: TOAU
+    content: toau
 
   17023057:
     script:       Moogle
@@ -254,7 +254,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: TOAU
+    content: toau
 
   17023058:
     script:       Moogle
@@ -263,7 +263,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: TOAU
+    content: toau
 
   17023059:
     script:       Moogle
@@ -272,7 +272,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: TOAU
+    content: toau
 
   17023060:
     script:       Moogle
@@ -281,7 +281,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: TOAU
+    content: toau
 
   17023061:
     script: blank
@@ -292,7 +292,7 @@ npcs:
       entity_flags: 2051
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023062:
     script: blank
@@ -302,7 +302,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023063:
     script:       qm
@@ -316,7 +316,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17023064:
     script:       _1o0
@@ -330,7 +330,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17023065:
     script:       _1o1
@@ -344,7 +344,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17023066:
     script:       _1o2
@@ -358,7 +358,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17023067:
     script:       _1o3
@@ -372,4 +372,4 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau

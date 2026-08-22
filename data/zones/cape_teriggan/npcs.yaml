@@ -219,7 +219,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  SOA
+    content:  soa
 
   17240463:
     script: NPC[18f]
@@ -237,7 +237,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17240466:
     script: NPC[192]
@@ -1052,7 +1052,7 @@ npcs:
       moving:   14
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17240522:
     script:       Field_Manual
@@ -1066,7 +1066,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17240523:
     script:       Field_Parchment
@@ -1079,7 +1079,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17240524:
     script:       Ethereal_Junction
@@ -1094,7 +1094,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17240525:
     script:       Ethereal_Junction
@@ -1109,7 +1109,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17240526:
     script:       Ethereal_Junction
@@ -1124,7 +1124,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17240527:
     script:       Mogball-Local
@@ -1158,7 +1158,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17240530:
     script:       HomePoint#1
@@ -1171,7 +1171,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17240531:
     script:       HomePoint#2
@@ -1181,7 +1181,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17240532:
     script:       HomePoint#3
@@ -1191,7 +1191,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17240533:
     script:       HomePoint#4
@@ -1201,7 +1201,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17240534:
     script:       HomePoint#5
@@ -1211,4 +1211,4 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa

@@ -219,7 +219,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16904326:
     script: NPC[86]
@@ -237,7 +237,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16904329:
     script: NPC[89]
@@ -314,7 +314,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16904338:
     script:       SD_Entrance
@@ -327,7 +327,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16904339:
     script:       SD_BCNM_Exit_1
@@ -340,7 +340,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16904340:
     script:       SD_BCNM_Exit_2
@@ -353,7 +353,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16904341:
     script:       SD_BCNM_Exit_3
@@ -366,7 +366,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16904342:
     script:       SD_Exit
@@ -379,7 +379,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16904343:
     script:       Prishe
@@ -393,7 +393,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16904344:
     script:       Ulmia
@@ -406,7 +406,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904345:
     script:       Tenzen
@@ -419,7 +419,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904346:
     script:       Cherukiki
@@ -432,7 +432,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904347:
     script:       Kukki-Chebukki
@@ -445,7 +445,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904348:
     script:       Makki-Chebukki
@@ -458,7 +458,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904349:
     script:       qm
@@ -470,7 +470,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16904350:
     script: blank
@@ -543,7 +543,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904357:
     script:       Bahamut
@@ -556,7 +556,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904358:
     script: blank
@@ -649,7 +649,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904367:
     display_name: ship
@@ -681,7 +681,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904369:
     script:       qm
@@ -693,7 +693,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16904370:
     script:       qm
@@ -706,7 +706,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16904371:
     script:       Bahamut
@@ -718,7 +718,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904372:
     script:       Nagmolada
@@ -732,7 +732,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904373:
     script:       Eshantarl
@@ -746,7 +746,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904374:
     script:       Kenkyuin_A
@@ -760,7 +760,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904375:
     script:       Kenkyuin_B
@@ -774,7 +774,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904376:
     script:       Kenkyuin_C
@@ -788,7 +788,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904377:
     script:       Kenkyuin_D
@@ -802,7 +802,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904378:
     script:       Kenkyuin_E
@@ -816,7 +816,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904379:
     script:       Kenkyuin_F
@@ -830,7 +830,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904380:
     script:       Kenkyuin_G
@@ -844,7 +844,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904381:
     script:       _iya
@@ -858,7 +858,7 @@ npcs:
       animation:    close_door
       moving:       32768
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16904382:
     script: _f00
@@ -885,7 +885,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16904385:
     script:       Moogle
@@ -895,7 +895,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16904386:
     script:       Moogle
@@ -905,7 +905,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16904387:
     script:       Moogle
@@ -915,7 +915,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16904388:
     script:       Moogle
@@ -925,7 +925,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16904389:
     script:       Moogle
@@ -935,7 +935,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16904390:
     script:       Moogle
@@ -945,7 +945,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16904391:
     script:       Moogle
@@ -955,7 +955,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16904392:
     script:       Ramblix
@@ -969,7 +969,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16904393:
     script:       Goblin_Footprint
@@ -981,4 +981,4 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop

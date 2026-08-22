@@ -201,7 +201,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17461505:
     script: NPC[101]
@@ -219,7 +219,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17461508:
     script: NPC[104]
@@ -1207,7 +1207,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17461587:
     script:       Grounds_Tome
@@ -1221,7 +1221,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17461588:
     script:       Grounds_Tome
@@ -1235,7 +1235,7 @@ npcs:
       moving:   21
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17461589:
     script:       Geomantic_Reservoir
@@ -1249,7 +1249,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17461590:
     script: NPC[156]
@@ -1278,7 +1278,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17461593:
     script:       Ethereal_Junction
@@ -1293,7 +1293,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17461594:
     script:       Ethereal_Junction
@@ -1308,7 +1308,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17461595:
     script:       Ethereal_Junction
@@ -1323,7 +1323,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17461596:
     script: blank
@@ -1345,7 +1345,7 @@ npcs:
       name_prefix:    32
     status:   cutscene_only
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17461598:
     script:       Frigid_Confluence
@@ -1360,4 +1360,4 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

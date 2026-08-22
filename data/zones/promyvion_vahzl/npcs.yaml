@@ -192,7 +192,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16867708:
     script:       qm_wailer
@@ -204,7 +204,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16867709:
     script:       qm_provoker
@@ -216,7 +216,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16867710:
     script:       Achieve_Master
@@ -225,7 +225,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16867711:
     script: NPC[17f]
@@ -243,7 +243,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16867714:
     script: NPC[182]
@@ -293,7 +293,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867719:
     script:       _0m2
@@ -307,7 +307,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867720:
     script:       _0m3
@@ -321,7 +321,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867721:
     script:       _0m4
@@ -335,7 +335,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867722:
     script:       _0m5
@@ -349,7 +349,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867723:
     script:       _0m6
@@ -363,7 +363,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867724:
     script:       _0m7
@@ -377,7 +377,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867725:
     script:       _0m8
@@ -391,7 +391,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867726:
     script:       _0m9
@@ -405,7 +405,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867727:
     script:       _0ma
@@ -419,7 +419,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867728:
     script:       _0mb
@@ -433,7 +433,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16867729:
     script:       _0m0
@@ -446,7 +446,7 @@ npcs:
       animation: close_door
       moving:    1
     status:  normal
-    content: COP
+    content: cop
 
   16867730:
     script:       _0mc
@@ -459,7 +459,7 @@ npcs:
       animation: close_door
       moving:    1
     status:  normal
-    content: COP
+    content: cop
 
   16867731:
     script:       _0md
@@ -472,7 +472,7 @@ npcs:
       animation: close_door
       moving:    1
     status:  normal
-    content: COP
+    content: cop
 
   16867732:
     script:       kiokudama_a
@@ -486,7 +486,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16867733:
     script:       kiokudama_b
@@ -500,7 +500,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16867734:
     script:       kiokudama_c
@@ -514,7 +514,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16867735:
     script:       qm_map
@@ -526,7 +526,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: COP
+    content: cop
 
   16867736:
     script:       qm
@@ -537,7 +537,7 @@ npcs:
         type:  standard
         model: 52
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16867737:
     script:       Tenzen
@@ -551,7 +551,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867738:
     script:       Louverance
@@ -573,7 +573,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867739:
     script:       Ulmia
@@ -587,7 +587,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867740:
     script:       Nagmolada
@@ -601,7 +601,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867741:
     script:       Selhteus
@@ -615,7 +615,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867742:
     script:       Yvenoile
@@ -630,7 +630,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 30
     widescan:        true
-    content:         COP
+    content:         cop
 
   16867743:
     script:       KODAI01
@@ -644,7 +644,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867744:
     script:       KODAI02
@@ -658,7 +658,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867745:
     script:       KODAI03
@@ -672,7 +672,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867746:
     script:       KODAI04
@@ -686,7 +686,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867747:
     script:       Graviton
@@ -701,7 +701,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867748:
     script:       KODAI05
@@ -715,7 +715,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867749:
     script:       KODAI06
@@ -729,7 +729,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867750:
     script:       KODAI07
@@ -743,7 +743,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867751:
     script:       KODAI08
@@ -757,7 +757,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867752:
     script:       KODAI09
@@ -771,7 +771,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867753:
     script:       KODAI10
@@ -785,7 +785,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867754:
     script:       Grumblix
@@ -799,7 +799,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16867755:
     script:       Goblin_Footprint
@@ -811,7 +811,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16867756:
     script: NPC[1ac]
@@ -828,7 +828,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16867758:
     script:       Moogle
@@ -838,7 +838,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16867759:
     script:       Moogle
@@ -848,7 +848,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16867760:
     script:       Moogle
@@ -858,7 +858,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16867761:
     script:       Moogle
@@ -868,7 +868,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16867762:
     script:       Moogle
@@ -878,7 +878,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16867763:
     script:       Moogle
@@ -888,7 +888,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16867764:
     script:       Moogle
@@ -898,4 +898,4 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop

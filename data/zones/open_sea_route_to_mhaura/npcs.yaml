@@ -9,7 +9,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16969748:
     script:       Unity_Master
@@ -20,7 +20,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16969754:
     render:
@@ -38,7 +38,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969757:
     script:       Moogle
@@ -50,7 +50,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969758:
     script:       Moogle
@@ -62,7 +62,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969759:
     script:       Moogle
@@ -74,7 +74,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969760:
     script:       Moogle
@@ -86,7 +86,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969761:
     script:       Moogle
@@ -98,7 +98,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969762:
     script:       Moogle
@@ -110,7 +110,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969763:
     script:       Moogle
@@ -122,7 +122,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969764:
     render:
@@ -155,7 +155,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   16969767:
     script:       Map
@@ -170,7 +170,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   16969768:
     script:       _1b0
@@ -186,7 +186,7 @@ npcs:
     status:          normal
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969769:
     script:       _1b1
@@ -202,7 +202,7 @@ npcs:
     status:          normal
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969770:
     script:       _1b2
@@ -218,7 +218,7 @@ npcs:
     status:          normal
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969771:
     script:       _1b3
@@ -234,7 +234,7 @@ npcs:
     status:          normal
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969772:
     script:       _1b4
@@ -250,7 +250,7 @@ npcs:
     status:          normal
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969773:
     script:       _1b5
@@ -266,7 +266,7 @@ npcs:
     status:          normal
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16969774:
     script:       Pashi_Maccaleh
@@ -292,4 +292,4 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau

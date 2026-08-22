@@ -352,7 +352,7 @@ npcs:
       name_prefix:     2
       moving:      32769
     status:  normal
-    content: ACP
+    content: acp
 
   17228321:
     script:       Treasure_Casket
@@ -542,7 +542,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17228339:
     script: NPC[233]
@@ -560,7 +560,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17228342:
     script: NPC[236]
@@ -825,7 +825,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17228365:
     script:       qm2
@@ -865,7 +865,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17228369:
     script:       Regal_Feline
@@ -1028,7 +1028,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17228383:
     script:       Field_Manual
@@ -1042,7 +1042,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17228384:
     script:       Field_Parchment
@@ -1055,7 +1055,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17228385:
     script:       Ethereal_Junction
@@ -1070,7 +1070,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17228386:
     script:       Ethereal_Junction
@@ -1085,7 +1085,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17228387:
     script:       Ethereal_Junction
@@ -1100,7 +1100,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17228388:
     script:       Mogball-Local
@@ -1135,7 +1135,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17228391:
     script:       Planar_Rift
@@ -1151,7 +1151,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17228392:
     script:       Planar_Rift
@@ -1167,7 +1167,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17228393:
     script:       Riftworn_Pyxis
@@ -1182,7 +1182,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17228394:
     script:       Riftworn_Pyxis
@@ -1197,7 +1197,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17228395:
     script:       Riftworn_Pyxis
@@ -1212,7 +1212,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17228396:
     script:       Atmacite_Refiner
@@ -1233,7 +1233,7 @@ npcs:
       moving: 23
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17228397:
     script:       Voidwatch_Officer
@@ -1254,7 +1254,7 @@ npcs:
       moving: 16
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17228398:
     script:       Saarlan
@@ -1277,7 +1277,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17228399:
     script:       Legion_Tome
@@ -1291,7 +1291,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17228400:
     script:       Mayuyu
@@ -1314,7 +1314,7 @@ npcs:
       moving:       23
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17228401:
     script: blank
@@ -1420,7 +1420,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17228411:
     script:       Smile_Helper
@@ -1666,7 +1666,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17228424:
     script: NPC[288]
@@ -1695,7 +1695,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17228427:
     script:       Lilisette
@@ -1739,7 +1739,7 @@ npcs:
         model: 2424
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   17228431:
     script:       Pellio
@@ -1762,4 +1762,4 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa

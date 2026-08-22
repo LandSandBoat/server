@@ -211,7 +211,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17617199:
     script: NPC[12f]
@@ -229,7 +229,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17617202:
     script: NPC[132]
@@ -1040,7 +1040,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17617263:
     script:       Planar_Rift
@@ -1056,7 +1056,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17617264:
     script:       Planar_Rift
@@ -1072,7 +1072,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17617265:
     script:       Riftworn_Pyxis
@@ -1087,7 +1087,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17617266:
     script:       Riftworn_Pyxis
@@ -1102,7 +1102,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17617267:
     script:       Riftworn_Pyxis
@@ -1117,7 +1117,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17617268:
     script:       Grounds_Tome
@@ -1131,7 +1131,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17617269:
     script:       Grounds_Tome
@@ -1145,7 +1145,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17617270:
     script:       Grounds_Tome
@@ -1159,7 +1159,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17617271:
     script:       Grounds_Tome
@@ -1173,7 +1173,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17617272:
     script:       Grounds_Tome
@@ -1187,7 +1187,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17617273:
     script:       Grounds_Tome
@@ -1201,7 +1201,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17617274:
     script:       Grounds_Tome
@@ -1215,7 +1215,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17617275:
     script:       Grounds_Tome
@@ -1229,7 +1229,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17617276:
     script:       HomePoint#1
@@ -1242,7 +1242,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17617277:
     script:       HomePoint#2
@@ -1252,7 +1252,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17617278:
     script:       HomePoint#3
@@ -1262,7 +1262,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17617279:
     script:       HomePoint#4
@@ -1272,7 +1272,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17617280:
     script:       HomePoint#5
@@ -1282,7 +1282,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17617281:
     script:       Ethereal_Junction
@@ -1297,7 +1297,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17617282:
     script:       Ethereal_Junction
@@ -1312,7 +1312,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17617283:
     script:       Ethereal_Junction
@@ -1327,7 +1327,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17617284:
     script:       Survival_Guide
@@ -1342,7 +1342,7 @@ npcs:
       moving:        22
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17617285:
     script: blank

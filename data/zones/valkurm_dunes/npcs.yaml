@@ -734,7 +734,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17199689:
     script: NPC[249]
@@ -752,7 +752,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17199692:
     script: NPC[24c]
@@ -1331,7 +1331,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17199736:
     script: blank
@@ -1440,7 +1440,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17199744:
     script:       Ulrich
@@ -1599,7 +1599,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17199753:
     script:       Diabolos
@@ -1612,7 +1612,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17199754:
     script:       Diabolos
@@ -1625,7 +1625,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   17199755:
     script:       Field_Manual
@@ -1639,7 +1639,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17199756:
     script:       Field_Manual
@@ -1653,7 +1653,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17199757:
     script:       Field_Manual
@@ -1667,7 +1667,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17199758:
     script:       Field_Parchment
@@ -1680,7 +1680,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17199759:
     script:       Ethereal_Junction
@@ -1695,7 +1695,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17199760:
     script:       Ethereal_Junction
@@ -1710,7 +1710,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17199761:
     script:       Ethereal_Junction
@@ -1725,7 +1725,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17199762:
     script:       Mogball-Local
@@ -1760,7 +1760,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17199765:
     script:       Planar_Rift
@@ -1776,7 +1776,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17199766:
     script:       Planar_Rift
@@ -1792,7 +1792,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17199767:
     script:       Riftworn_Pyxis
@@ -1807,7 +1807,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17199768:
     script:       Riftworn_Pyxis
@@ -1822,7 +1822,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17199769:
     script:       Riftworn_Pyxis
@@ -1837,7 +1837,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17199770:
     script:       Summoner
@@ -1870,7 +1870,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17199773:
     script:       Survival_Guide
@@ -1885,7 +1885,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17199774:
     script: blank

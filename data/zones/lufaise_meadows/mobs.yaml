@@ -1027,7 +1027,7 @@ templates:
       drops:
         - chance: uncommon
           item:   woolly_pelage
-    content: WOTG
+    content: wotg
 
   Fomor_Bard_LM:
     id:            6515
@@ -3092,7 +3092,7 @@ templates:
         type: [scripted]
       stats:
         hp: 6000
-    content: WOTG
+    content: wotg
 
   Splinterspine_Grukjuk:
     id:            3736
@@ -3518,7 +3518,7 @@ templates:
         type: [scripted]
       stats:
         hp: 5000
-    content: WOTG
+    content: wotg
 
 spawns:
   16875521:

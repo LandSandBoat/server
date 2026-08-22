@@ -178,7 +178,7 @@ templates:
       drops:
         - chance: common
           item:   malebolge_mandrel
-    content: WOTG
+    content: wotg
 
   Cold_Gigas:
     id:            764
@@ -303,7 +303,7 @@ templates:
       drops:
         - chance: uncommon
           item:   nyx_gorget
-    content: WOTG
+    content: wotg
 
   Excenmille_Beaucedine:
     id:            6049
@@ -378,7 +378,7 @@ templates:
       drops:
         - chance: uncommon
           item:   pagondas_earring
-    content: WOTG
+    content: wotg
 
   Gargantua:
     id:            1461
@@ -818,7 +818,7 @@ templates:
         respawn: 300
       stats:
         hp: 4900
-    content: WOTG
+    content: wotg
 
   Goblin_Furrier:
     id:            1665
@@ -1303,7 +1303,7 @@ templates:
         respawn: 300
       stats:
         hp: 5000
-    content: WOTG
+    content: wotg
 
   Greater_Pugil_fished:
     id:            5868
@@ -1718,7 +1718,7 @@ templates:
       drops:
         - chance: common
           item:   square_of_radiant_velvet
-    content: WOTG
+    content: wotg
 
   Ice_Elemental:
     id:            2043
@@ -2151,7 +2151,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Lugat:
     id:            2447
@@ -2875,7 +2875,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
 spawns:
   17231873:

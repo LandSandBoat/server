@@ -722,7 +722,7 @@ templates:
       drops:
         - chance: uncommon
           item:   alert_ring
-    content: WOTG
+    content: wotg
 
   Giant_Bee:
     id:            1524
@@ -1033,7 +1033,7 @@ templates:
       drops:
         - chance: uncommon
           item:   fatality_belt
-    content: WOTG
+    content: wotg
 
   Land_Crab_fished:
     id:            6771
@@ -1373,7 +1373,7 @@ templates:
       drops:
         - chance: common
           item:   pike
-    content: WOTG
+    content: wotg
 
   Nunyenunc:
     id:            2921
@@ -1578,7 +1578,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Palm_Crab:
     id:            3088
@@ -1854,7 +1854,7 @@ templates:
         respawn: 300
       stats:
         hp: 4900
-    content: WOTG
+    content: wotg
 
   River_Crab:
     id:            3371
@@ -1929,7 +1929,7 @@ templates:
         respawn: 300
       stats:
         hp: 5150
-    content: WOTG
+    content: wotg
 
   Savanna_Crab:
     id:            3488
@@ -2744,7 +2744,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
 spawns:
   17248257:

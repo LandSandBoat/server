@@ -189,7 +189,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17649884:
     script: NPC[dc]
@@ -207,7 +207,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17649887:
     script: NPC[df]
@@ -381,7 +381,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17649904:
     script:       Grounds_Tome
@@ -395,7 +395,7 @@ npcs:
       moving:   23
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17649905:
     script:       Grounds_Tome
@@ -409,7 +409,7 @@ npcs:
       moving:   16
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17649906:
     script:       Geomagnetic_Fount
@@ -422,7 +422,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17649907:
     script:       Survival_Guide
@@ -437,7 +437,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17649908:
     script:       Ethereal_Junction
@@ -451,7 +451,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   17649909:
     script:       Ethereal_Junction
@@ -465,7 +465,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   17649910:
     script:       Ethereal_Junction
@@ -479,4 +479,4 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa

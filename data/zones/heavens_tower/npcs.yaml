@@ -191,7 +191,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17768463:
     script:       Mhabi_Molkot
@@ -213,7 +213,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17768464:
     script:       Matrimonial_Coffer
@@ -225,7 +225,7 @@ npcs:
         model: 961
     status:   cutscene_only
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17768465:
     script:       Celebratory_Chest
@@ -237,7 +237,7 @@ npcs:
         model: 960
     status:   cutscene_only
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17768466:
     script:       Kupipi
@@ -1836,7 +1836,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17768553:
     script:       Wolfgang
@@ -1971,7 +1971,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17768561:
     script:       Matrimonial_Coffer
@@ -1984,7 +1984,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17768562:
     script:       Celebratory_Chest
@@ -1997,7 +1997,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17768563:
     script: blank
@@ -2070,7 +2070,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17768568:
     script:       Kierron
@@ -2093,7 +2093,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17768569:
     script:       Achieve_Master
@@ -2102,7 +2102,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17768570:
     script: NPC[7a]
@@ -2120,7 +2120,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17768572:
     script: blank

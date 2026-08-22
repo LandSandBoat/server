@@ -234,7 +234,7 @@ templates:
       drops:
         - chance: uncommon
           item:   fierce_belt
-    content: WOTG
+    content: wotg
 
   Cernunnos:
     id:            682
@@ -2034,7 +2034,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Kumbaba:
     id:            2297
@@ -2857,7 +2857,7 @@ templates:
         respawn: 300
       stats:
         hp: 5200
-    content: WOTG
+    content: wotg
 
   Sappy_Sycamore:
     id:      5739
@@ -2898,7 +2898,7 @@ templates:
       drops:
         - chance: common
           item:   seeker_earring
-    content: WOTG
+    content: wotg
 
   Scavenging_Hound:
     id:            3497
@@ -3311,7 +3311,7 @@ templates:
         respawn: 300
       stats:
         hp: 4930
-    content: WOTG
+    content: wotg
 
   Supplespine_Mujwuj:
     id:            5768
@@ -3356,7 +3356,7 @@ templates:
       drops:
         - chance: common
           item:   blue_jasper
-    content: WOTG
+    content: wotg
 
   Thread_Leech_fished:
     id:            5133
@@ -3671,7 +3671,7 @@ templates:
       drops:
         - chance: uncommon
           item:   backlash_torque
-    content: WOTG
+    content: wotg
 
   Yilbegan:
     id:            6999
@@ -3838,7 +3838,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Zombie_blm:
     id:            6574

@@ -743,7 +743,7 @@ templates:
         respawn: 2700
       stats:
         hp: 3240000
-    content: TVR
+    content: tvr
 
   Hidhaegg:
     id:            6877
@@ -1225,7 +1225,7 @@ templates:
       despoil:
         piece_of_crawler_cocoon: 0
         crawler_egg:             0
-    content: ABYSSEA
+    content: abyssea
 
   Old_Goobbue:
     id:            2962
@@ -1514,7 +1514,7 @@ templates:
         puk_wing:              0
         puk_egg:               0
         vial_of_chimera_blood: 0
-    content: ABYSSEA
+    content: abyssea
 
   Steelshell:
     id:            3768
@@ -1856,7 +1856,7 @@ templates:
       despoil:
         slice_of_land_crab_meat: 0
         crab_shell:              0
-    content: ABYSSEA
+    content: abyssea
 
   Voluptuous_Vivian:
     id:            4253

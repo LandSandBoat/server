@@ -936,7 +936,7 @@ templates:
         hitbox:        16
       spawn:
         respawn: 300
-    content: ABYSSEA
+    content: abyssea
 
   Land_Worm_Korroloka:
     id:            2412
@@ -1314,7 +1314,7 @@ templates:
         vial_of_fiend_blood:    0
         vial_of_beastman_blood: 0
         vial_of_bird_blood:     0
-    content: ABYSSEA
+    content: abyssea
 
   Thoon:
     id:            4831
@@ -1351,7 +1351,7 @@ templates:
       drops:
         - chance: uncommon
           item:   impetus_earring
-    content: WOTG
+    content: wotg
 
   Thread_Leech:
     id:            3901

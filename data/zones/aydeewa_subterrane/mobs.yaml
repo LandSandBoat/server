@@ -608,7 +608,7 @@ templates:
       despoil:
         piece_of_crawler_cocoon: 0
         crawler_egg:             0
-    content: ABYSSEA
+    content: abyssea
 
   Fossorial_Flea:
     id:            1411
@@ -751,7 +751,7 @@ templates:
       drops:
         - chance: rare
           item:   fenrirs_crown
-    content: WOTG
+    content: wotg
 
   Missabikong:
     id:            6131
@@ -994,7 +994,7 @@ templates:
         sleepshroom:       0
         danceshroom:       0
         agaricus_mushroom: 0
-    content: ABYSSEA
+    content: abyssea
 
   Nosferatu:
     id:            2910
@@ -2146,7 +2146,7 @@ templates:
         chunk_of_iron_ore:   0
         chunk_of_silver_ore: 0
         chunk_of_zinc_ore:   0
-    content: ABYSSEA
+    content: abyssea
 
   Slime_Mold:
     id:            3670

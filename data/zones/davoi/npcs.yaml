@@ -23,7 +23,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17387976:
     script: NPC[1c8]
@@ -41,7 +41,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17387979:
     script: NPC[1cb]
@@ -997,7 +997,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17388053:
     script:       Geomantic_Reservoir
@@ -1011,7 +1011,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17388054:
     script: NPC[216]
@@ -1040,7 +1040,7 @@ npcs:
       moving:        22
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17388057:
     script: blank

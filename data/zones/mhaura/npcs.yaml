@@ -774,7 +774,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797163:
     script:       HomePoint#3
@@ -784,7 +784,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797164:
     script:       HomePoint#4
@@ -794,7 +794,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797165:
     script:       HomePoint#5
@@ -804,7 +804,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797166:
     script:       _6x0
@@ -1877,7 +1877,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ROTZ
+    content:  rotz
 
   17797232:
     script:       Keshab-Menjab
@@ -2146,7 +2146,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17797246:
     script:       Wilhelm
@@ -2161,7 +2161,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17797247:
     script:       Kamaal
@@ -2224,7 +2224,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17797250:
     script:       Panoru-Kanoru
@@ -2247,7 +2247,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17797251:
     script:       Nomad_Moogle
@@ -2261,7 +2261,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17797252:
     script:       Nomad_Moogle
@@ -2275,7 +2275,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17797253:
     script:       Explorer_Moogle
@@ -2288,7 +2288,7 @@ npcs:
       animation_sub:  1
       moving:        14
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17797254:
     script:       mgtest
@@ -2332,7 +2332,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797256:
     script:       Porter_Moogle
@@ -2345,7 +2345,7 @@ npcs:
       moving: 21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17797257:
     script: NPC[89]
@@ -2376,7 +2376,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797259:
     script:       Proto-Waypoint
@@ -2391,7 +2391,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797260:
     script: blank
@@ -2450,7 +2450,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17797265:
     script: NPC[91]
@@ -2468,7 +2468,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17797267:
     script:       Marilionne
@@ -2491,7 +2491,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797268:
     script: blank
@@ -2547,7 +2547,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797272:
     script:       Layer_Reserve
@@ -2594,7 +2594,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797275:
     script:       Debug_Book
@@ -2634,7 +2634,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17797278:
     script: blank

@@ -146,7 +146,7 @@ templates:
       drops:
         - chance: uncommon
           item:   bastet_fang
-    content: WOTG
+    content: wotg
 
   Bigclaw_fished:
     id:            1268
@@ -241,7 +241,7 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
-    content: ASA
+    content: asa
 
   Cath_Palug:
     id:            4732
@@ -422,7 +422,7 @@ templates:
       drops:
         - chance: uncommon
           item:   forte_earring
-    content: WOTG
+    content: wotg
 
   Goblin_Bouncer:
     id:            1641
@@ -1815,7 +1815,7 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
-    content: ASA
+    content: asa
 
   Huwasi:
     id:            4572
@@ -1863,7 +1863,7 @@ templates:
       drops:
         - chance: uncommon
           item:   imperial_topaz
-    content: WOTG
+    content: wotg
 
   Isonade:
     id:            2108
@@ -2568,7 +2568,7 @@ templates:
         links:      true
       spawn:
         type: [scripted]
-    content: ASA
+    content: asa
 
   Thunder_Elemental:
     id:            3912

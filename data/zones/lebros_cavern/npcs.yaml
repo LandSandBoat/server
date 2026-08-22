@@ -22,7 +22,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035293:
     script:       Imperial_Stormer
@@ -44,7 +44,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035294:
     script:       Imperial_Stormer
@@ -66,7 +66,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035295:
     script:       Imperial_Stormer
@@ -88,7 +88,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035296:
     script:       Imperial_Stormer
@@ -110,7 +110,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035297:
     script:       Imperial_Stormer
@@ -132,7 +132,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035298:
     script:       Imperial_Stormer
@@ -154,7 +154,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035299:
     script:       Imperial_Stormer
@@ -176,7 +176,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035300:
     script:       Imperial_Stormer
@@ -198,7 +198,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035301:
     script:       Imperial_Stormer
@@ -220,7 +220,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035302:
     script:       Imperial_Stormer
@@ -242,7 +242,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035303:
     script:       Imperial_Stormer
@@ -264,7 +264,7 @@ npcs:
       name_vis:        1
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035336:
     script:       Lebros_Apkallu
@@ -638,7 +638,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17035479:
     script:       Rune_of_Release
@@ -653,7 +653,7 @@ npcs:
       name_prefix:   32
       moving:         6
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035480:
     script:       Yazuhma
@@ -675,7 +675,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035481:
     script:       Switch
@@ -778,7 +778,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17035489:
     script:       Achieve_Master
@@ -787,7 +787,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17035490:
     script: NPC[e2]
@@ -849,7 +849,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   17035498:
     script:       Moogle
@@ -861,7 +861,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   17035499:
     script:       Moogle
@@ -873,7 +873,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   17035500:
     script:       Moogle
@@ -885,7 +885,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   17035501:
     script:       Moogle
@@ -897,7 +897,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   17035502:
     script:       Moogle
@@ -909,7 +909,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   17035503:
     script:       Moogle
@@ -921,7 +921,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   17035504:
     script:       Moogle
@@ -933,7 +933,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   17035505:
     script:       DOOR_MASTER
@@ -994,7 +994,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035510:
     script: _1r5
@@ -1031,7 +1031,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035513:
     script: _1r8
@@ -1044,7 +1044,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035514:
     script: _1r9
@@ -1057,7 +1057,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035515:
     script: _1ra
@@ -1094,7 +1094,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035518:
     script: _1rd
@@ -1107,7 +1107,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035519:
     script: _1re
@@ -1120,7 +1120,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035520:
     script: _1rf
@@ -1145,7 +1145,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035522:
     script: _1rh
@@ -1158,7 +1158,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035523:
     script: _1ri
@@ -1171,7 +1171,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035524:
     script: _1rj
@@ -1220,7 +1220,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035528:
     script: _1rn
@@ -1233,7 +1233,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035529:
     script: _1ro
@@ -1258,7 +1258,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035531:
     script: _1rq
@@ -1355,7 +1355,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035539:
     script: _1ry
@@ -1368,7 +1368,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035540:
     script: _1rz
@@ -1381,7 +1381,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035541:
     script: _jr0
@@ -1418,7 +1418,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035544:
     script: _jr3
@@ -1431,7 +1431,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035545:
     script: _jr4
@@ -1456,7 +1456,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035547:
     script: _jr6
@@ -1469,7 +1469,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035548:
     script: _jr7
@@ -1482,7 +1482,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035549:
     script: _jr8
@@ -1495,7 +1495,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035550:
     script: _jr9
@@ -1508,7 +1508,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035551:
     script: _jra
@@ -1521,7 +1521,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035552:
     script: _jrb
@@ -1546,7 +1546,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035554:
     script: _jrd
@@ -1571,7 +1571,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   17035556:
     script: _jrf

@@ -11,7 +11,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: ROV
+    content: rov
 
   17961652:
     script: NPC[2b4]
@@ -28,7 +28,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: ROV
+    content: rov
 
   17961654:
     script: NPC[2b6]
@@ -83,7 +83,7 @@ npcs:
       moving:   32774
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961661:
     script:       Grimslight
@@ -97,7 +97,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961662:
     script:       Grimslight
@@ -111,7 +111,7 @@ npcs:
       moving:   32774
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961663:
     script:       Grimslight
@@ -125,7 +125,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961664:
     script:       Grimslight
@@ -139,7 +139,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961665:
     script:       Grimslight
@@ -177,7 +177,7 @@ npcs:
       moving:   32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961668:
     script:       Grimslight
@@ -205,7 +205,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17961671:
     script:       Moogle
@@ -214,7 +214,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17961672:
     script:       Moogle
@@ -223,7 +223,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17961673:
     script:       Moogle
@@ -232,7 +232,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17961674:
     script:       Moogle
@@ -241,7 +241,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17961675:
     script:       Moogle
@@ -250,7 +250,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17961676:
     script:       Moogle
@@ -259,7 +259,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17961677:
     script:       Moogle
@@ -268,7 +268,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17961678:
     script: blank
@@ -291,7 +291,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961680:
     script:       Goblin_Footprint
@@ -303,7 +303,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ROV
+    content: rov
 
   17961681:
     script: blank
@@ -323,7 +323,7 @@ npcs:
         model: 2424
       moving: 1
     status:  normal
-    content: ROV
+    content: rov
 
   17961683:
     script:       qm_rov_balamor
@@ -335,7 +335,7 @@ npcs:
         model: 2424
       moving: 1
     status:  normal
-    content: ROV
+    content: rov
 
   17961684:
     script:       Tenzen
@@ -348,7 +348,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961685:
     script:       Siren
@@ -361,7 +361,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961686:
     script:       Siren_Prime
@@ -374,7 +374,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961687:
     script: blank
@@ -407,7 +407,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961690:
     script:       Naji
@@ -429,7 +429,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961691:
     script:       Ayame
@@ -452,7 +452,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961692:
     script:       Selhteus
@@ -465,7 +465,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961693:
     script:       Balamor
@@ -478,7 +478,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961694:
     script: blank
@@ -501,7 +501,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961696:
     script:       Volto_Oscuro
@@ -522,7 +522,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961697:
     script:       Kagero
@@ -543,7 +543,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961698:
     script:       Undulating_Confluence
@@ -556,7 +556,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961699:
     script:       qm_tribulens
@@ -570,7 +570,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961700:
     script:       qm_tribulens
@@ -584,7 +584,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961701:
     script:       qm_tribulens
@@ -598,7 +598,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961702:
     script:       qm_tribulens
@@ -612,7 +612,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961703:
     script:       qm_tribulens
@@ -626,7 +626,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961704:
     script:       qm_tribulens
@@ -640,7 +640,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961705:
     script:       qm_tribulens
@@ -654,7 +654,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961706:
     script:       qm_tribulens
@@ -668,7 +668,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961707:
     script:       qm_tribulens
@@ -682,7 +682,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961708:
     script:       qm_tribulens
@@ -696,7 +696,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961709:
     script:       qm_tribulens
@@ -710,7 +710,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961710:
     script:       qm_tribulens
@@ -724,7 +724,7 @@ npcs:
       name_prefix:   2
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17961711:
     script:       Dremi
@@ -747,7 +747,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961712:
     script:       Register_of_Deeds
@@ -760,7 +760,7 @@ npcs:
       moving: 23
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961713:
     script:       Eschan_Portal_#1
@@ -775,7 +775,7 @@ npcs:
       moving:       32774
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961714:
     script:       Eschan_Portal_#2
@@ -790,7 +790,7 @@ npcs:
       moving:       32795
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961715:
     script:       Eschan_Portal_#3
@@ -805,7 +805,7 @@ npcs:
       moving:       32794
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961716:
     script:       Eschan_Portal_#4
@@ -820,7 +820,7 @@ npcs:
       moving:       32795
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961717:
     script:       Eschan_Portal_#5
@@ -835,7 +835,7 @@ npcs:
       moving:       32794
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961718:
     script:       Eschan_Portal_#6
@@ -850,7 +850,7 @@ npcs:
       moving:       32794
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961719:
     script:       Eschan_Portal_#7
@@ -865,7 +865,7 @@ npcs:
       moving:       32794
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961720:
     script:       Eschan_Portal_#8
@@ -880,7 +880,7 @@ npcs:
       moving:       32795
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961721:
     script:       Eschan_Portal_#9
@@ -895,7 +895,7 @@ npcs:
       moving:       32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961722:
     script:       Eschan_Portal_#10
@@ -910,7 +910,7 @@ npcs:
       moving:       32795
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961723:
     script:       Eschan_Portal_#11
@@ -925,7 +925,7 @@ npcs:
       moving:       32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961724:
     script:       Eschan_Portal_#12
@@ -940,7 +940,7 @@ npcs:
       moving:       32794
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961725:
     script:       Eschan_Portal_#13
@@ -955,7 +955,7 @@ npcs:
       moving:       32795
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961726:
     script:       Eschan_Portal_#14
@@ -970,7 +970,7 @@ npcs:
       moving:       32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961727:
     script:       Eschan_Portal_#15
@@ -985,7 +985,7 @@ npcs:
       moving:       32775
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17961728:
     script:       qm_droplet
@@ -997,7 +997,7 @@ npcs:
         model: 52
       moving: 6
     status:  normal
-    content: ROV
+    content: rov
 
   17961729:
     script:       qm_droplet
@@ -1009,7 +1009,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961730:
     script:       qm_droplet
@@ -1021,7 +1021,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961731:
     script:       qm_droplet
@@ -1033,7 +1033,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961732:
     script:       qm_droplet
@@ -1045,7 +1045,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961733:
     script:       qm_droplet
@@ -1057,7 +1057,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961734:
     script:       qm_droplet
@@ -1069,7 +1069,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961735:
     script:       qm_droplet
@@ -1081,7 +1081,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961736:
     script:       qm_droplet
@@ -1093,7 +1093,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961737:
     script:       qm_droplet
@@ -1105,7 +1105,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961738:
     script:       qm_droplet
@@ -1117,7 +1117,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961739:
     script:       qm_droplet
@@ -1129,7 +1129,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961740:
     script:       qm_droplet
@@ -1141,7 +1141,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961741:
     script:       qm_droplet
@@ -1153,7 +1153,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961742:
     script:       qm_droplet
@@ -1165,7 +1165,7 @@ npcs:
         model: 52
       moving: 7
     status:  normal
-    content: ROV
+    content: rov
 
   17961743:
     script:       Emblazoned_Reliquary
@@ -1567,7 +1567,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2051
-    content: ROV
+    content: rov
 
   17961778:
     script: blank

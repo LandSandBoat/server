@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/content.h"
 #include "data/enums/status.h"
 #include "data/shared_types/look.h"
 #include "data/shared_types/render.h"
@@ -40,16 +41,16 @@ namespace xi::data::datasets::zones::npcs::wire
 
 struct Npc
 {
-    std::optional<std::string>                 script;
-    std::optional<std::string>                 display_name;
-    std::optional<std::vector<float>>          at;
-    shared::Render                             render;
-    std::optional<uint16>                      look_at;
-    std::optional<yaml::EnumToken<xi::Status>> status;
-    std::optional<uint8>                       speed;
-    std::optional<uint8>                       animation_speed;
-    std::optional<bool>                        widescan;
-    std::optional<std::string>                 content; // TODO: Enum
+    std::optional<std::string>                  script;
+    std::optional<std::string>                  display_name;
+    std::optional<std::vector<float>>           at;
+    shared::Render                              render;
+    std::optional<uint16>                       look_at;
+    std::optional<yaml::EnumToken<xi::Status>>  status;
+    std::optional<uint8>                        speed;
+    std::optional<uint8>                        animation_speed;
+    std::optional<bool>                         widescan;
+    std::optional<yaml::EnumToken<xi::Content>> content;
 };
 
 struct Document

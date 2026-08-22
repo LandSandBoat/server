@@ -82,7 +82,7 @@ templates:
         chunk_of_iron_ore:   0
         chunk_of_silver_ore: 0
         chunk_of_zinc_ore:   0
-    content: ABYSSEA
+    content: abyssea
 
   Colliery_Bat:
     id:            6469
@@ -129,7 +129,7 @@ templates:
           item:   pinch_of_zeruhn_soot
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Copper_Quadav_TVR:
     id:            6037
@@ -394,7 +394,7 @@ templates:
       despoil:
         slice_of_land_crab_meat: 0
         crab_shell:              0
-    content: ABYSSEA
+    content: abyssea
 
   Veindigger_Leech:
     id:            6399
@@ -438,7 +438,7 @@ templates:
         vial_of_fiend_blood:    0
         vial_of_beastman_blood: 0
         vial_of_bird_blood:     0
-    content: ABYSSEA
+    content: abyssea
 
 spawns:
   17481729:

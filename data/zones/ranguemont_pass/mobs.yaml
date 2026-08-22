@@ -91,7 +91,7 @@ templates:
           item:   vial_of_fiend_blood
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Blade_Bat_Ranguemont_Pass:
     id:            8169
@@ -298,7 +298,7 @@ templates:
       drops:
         - chance: common
           item:   wit_pendant
-    content: WOTG
+    content: wotg
 
   Goblin_Artificer:
     id:            6662
@@ -351,7 +351,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Chaser:
     id:            6668
@@ -405,7 +405,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Gambler:
     id:            1666
@@ -516,7 +516,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Leecher:
     id:            1683
@@ -701,7 +701,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Thug:
     id:            1737
@@ -859,7 +859,7 @@ templates:
         links: true
       spawn:
         type: [scripted]
-    content: ABYSSEA
+    content: abyssea
 
   Harnessed_Smilodon_Ranguemont:
     id:            6042
@@ -989,7 +989,7 @@ templates:
       despoil:
         bottle_of_ahriman_tears: 0
         ahriman_wing:            0
-    content: ABYSSEA
+    content: abyssea
 
   Hyakume:
     id:            6883
@@ -1038,7 +1038,7 @@ templates:
       stats:
         hp: 2900
         mp: 2900
-    content: WOTG
+    content: wotg
 
   Metallic_Slime:
     id:            2633
@@ -1133,7 +1133,7 @@ templates:
       drops:
         - chance: common
           item:   spellcasters_ecu
-    content: WOTG
+    content: wotg
 
   Oil_Slick_RP:
     id:            6412

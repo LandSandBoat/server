@@ -168,7 +168,7 @@ templates:
       drops:
         - chance: common
           item:   ingot_of_quadav_silver
-    content: WOTG
+    content: wotg
 
   Brass_Quadav:
     id:            525
@@ -920,7 +920,7 @@ templates:
       drops:
         - chance: common
           item:   guerilla_gloves
-    content: WOTG
+    content: wotg
 
   Rabid_Rat:
     id:            3300

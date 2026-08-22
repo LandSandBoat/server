@@ -124,7 +124,7 @@ templates:
       drops:
         - chance: common
           item:   rovers_gloves
-    content: WOTG
+    content: wotg
 
   Beist:
     id:            4857
@@ -804,7 +804,7 @@ templates:
       drops:
         - chance: common
           item:   ingot_of_tenebrium
-    content: WOTG
+    content: wotg
 
   Erebus:
     id:            7013
@@ -849,7 +849,7 @@ templates:
       drops:
         - chance: uncommon
           item:   nyx_gorget
-    content: WOTG
+    content: wotg
 
   Ereshkigal:
     id:            1252
@@ -1047,7 +1047,7 @@ templates:
       drops:
         - chance: uncommon
           item:   pagondas_earring
-    content: WOTG
+    content: wotg
 
   Frost_Gigas:
     id:            1431
@@ -1260,7 +1260,7 @@ templates:
         respawn: 300
       stats:
         hp: 4900
-    content: WOTG
+    content: wotg
 
   Goblins_Tiger:
     id:            1733
@@ -1322,7 +1322,7 @@ templates:
         respawn: 300
       stats:
         hp: 5000
-    content: WOTG
+    content: wotg
 
   Graupel_Gigas:
     id:            1794
@@ -1982,7 +1982,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Lost_Soul_blm:
     id:            2442
@@ -2219,7 +2219,7 @@ templates:
       drops:
         - chance: uncommon
           item:   jasper_tathlum
-    content: WOTG
+    content: wotg
 
   Yilbegan:
     id:            6999
@@ -2386,7 +2386,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
 spawns:
   17235969:

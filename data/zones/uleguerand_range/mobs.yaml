@@ -760,7 +760,7 @@ templates:
           item:   aptant_of_fyrst
         - chance: uncommon
           item:   aptant_of_geoc
-    content: WOTG
+    content: wotg
 
   Geush_Urvan:
     id:            1507
@@ -1434,7 +1434,7 @@ templates:
       drops:
         - chance: uncommon
           item:   pygme_sainti
-    content: WOTG
+    content: wotg
 
   Mindgazer:
     id:            2669
@@ -1918,7 +1918,7 @@ templates:
       despoil:
         bottle_of_ahriman_tears: 0
         ahriman_wing:            0
-    content: ABYSSEA
+    content: abyssea
 
   Skvader:
     id:            5860
@@ -1964,7 +1964,7 @@ templates:
           item:   aptant_of_geoc
         - chance: uncommon
           item:   aptant_of_haelan
-    content: WOTG
+    content: wotg
 
   Smolenkos:
     id:            3679

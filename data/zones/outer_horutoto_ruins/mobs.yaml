@@ -48,7 +48,7 @@ templates:
       drops:
         - chance: very_common
           item:   spiro_staff
-    content: WOTG
+    content: wotg
 
   Balloon_OHR:
     id:            6584
@@ -465,7 +465,7 @@ templates:
       drops:
         - chance: common
           item:   fidelity_mantle
-    content: WOTG
+    content: wotg
 
   Doppelganger_Dio:
     id:            1089
@@ -785,7 +785,7 @@ templates:
           item:   bat_wing
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Five_of_Batons:
     id:            1350
@@ -1212,7 +1212,7 @@ templates:
           item:   vial_of_slime_oil
       despoil:
         vial_of_slime_oil: 0
-    content: ABYSSEA
+    content: abyssea
 
   Ghoul_blm:
     id:            1518
@@ -1825,7 +1825,7 @@ templates:
       drops:
         - chance: common
           item:   piece_of_hefty_oak_lumber
-    content: WOTG
+    content: wotg
 
   Nine_of_Batons:
     id:            2883
@@ -2818,7 +2818,7 @@ templates:
           item:   vial_of_fiend_blood
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Three_of_Batons:
     id:            3903

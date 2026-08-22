@@ -25,6 +25,7 @@
 #include "common/types/maybe.h"
 #include "common/types/position.h"
 #include "data/enums/animation.h"
+#include "data/enums/content.h"
 #include "data/enums/entity_flags.h"
 #include "data/enums/name_vis.h"
 #include "data/enums/status.h"
@@ -59,7 +60,7 @@ struct NpcData
     uint8                  Speed{};
     uint8                  AnimationSpeed{};
     bool                   Widescan{};
-    std::string            Content;
+    xi::Content            Content{};
 };
 
 // Ordered by targid, matching the order the SQL loader saw.

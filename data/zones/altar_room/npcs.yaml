@@ -19,7 +19,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17399820:
     script: NPC[c]
@@ -38,7 +38,7 @@ npcs:
       entity_flags: 2051
       name_vis:       96
     widescan: true
-    content:  SOA
+    content:  soa
 
   17399823:
     script: NPC[f]

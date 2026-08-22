@@ -86,7 +86,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126056:
     script:       qm
@@ -98,7 +98,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126057:
     script: NPC[2a9]
@@ -114,7 +114,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17126059:
     script: NPC[2ab]
@@ -132,7 +132,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17126061:
     script: NPC[2ad]
@@ -374,7 +374,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126080:
     script:       Infomation2
@@ -396,7 +396,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126081:
     script: NPC[2c1]
@@ -509,7 +509,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126095:
     script:       Aloysius_IM
@@ -531,7 +531,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126096:
     script:       Flasco-Rasco_CC
@@ -553,7 +553,7 @@ npcs:
       name_prefix:  32
       moving:       21
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126097:
     script: blank
@@ -624,7 +624,7 @@ npcs:
       name_prefix:  32
       moving:       14
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126102:
     script:       _2d0
@@ -638,7 +638,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126103:
     script: NPC[2d7]
@@ -680,7 +680,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126108:
     script:       _2d3
@@ -694,7 +694,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126109:
     script:       _2d5
@@ -708,7 +708,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126110:
     script:       _2d7
@@ -722,7 +722,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126111:
     script:       _2d2
@@ -736,7 +736,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126112:
     script:       _2d4
@@ -750,7 +750,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126113:
     script:       _2d6
@@ -764,7 +764,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126114:
     script:       _2d8
@@ -778,7 +778,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126115:
     script:       New-turned_Earth
@@ -791,7 +791,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126116:
     script: blank
@@ -819,7 +819,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126119:
     script:       Moogle
@@ -831,7 +831,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126120:
     script:       Moogle
@@ -843,7 +843,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126121:
     script:       Moogle
@@ -855,7 +855,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126122:
     script:       Moogle
@@ -867,7 +867,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126123:
     script:       Moogle
@@ -879,7 +879,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126124:
     script:       Moogle
@@ -891,7 +891,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126125:
     script:       Moogle
@@ -903,7 +903,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126126:
     script:       Allied_Commissary
@@ -924,7 +924,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126127:
     script: blank
@@ -1017,7 +1017,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126133:
     script:       Goblin_Footprint
@@ -1029,7 +1029,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17126134:
     script:       qm
@@ -1041,7 +1041,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17126135:
     script: blank
@@ -1070,7 +1070,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126138:
     script:       Portia
@@ -1091,7 +1091,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126139:
     script:       Ragelise
@@ -1112,7 +1112,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126140:
     script:       Ragelise
@@ -1133,7 +1133,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126141:
     script:       Mayakov
@@ -1154,7 +1154,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126142:
     script:       Haudrale
@@ -1167,7 +1167,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126143:
     script:       Aquila
@@ -1180,7 +1180,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126144:
     script:       Galarhigg
@@ -1193,7 +1193,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126145:
     script:       Vestillet
@@ -1214,7 +1214,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126146:
     script:       Hauramus
@@ -1228,7 +1228,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126147:
     script:       Eusmard
@@ -1242,7 +1242,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126148:
     script:       '03'
@@ -1256,7 +1256,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126149:
     script:       Dionaste
@@ -1277,7 +1277,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126150:
     script:       Hagreface
@@ -1298,7 +1298,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126151:
     script:       Gallauciond
@@ -1319,7 +1319,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126152:
     script:       Merfanont
@@ -1340,7 +1340,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126153:
     script:       '08'
@@ -1361,7 +1361,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126154:
     script:       '09'
@@ -1382,7 +1382,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126155:
     script:       Haudrale
@@ -1403,7 +1403,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126156:
     script:       Demon_Ken
@@ -1416,7 +1416,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126157:
     script:       Demon_Kama
@@ -1429,7 +1429,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126158:
     script:       Demon_Tue
@@ -1442,7 +1442,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126159:
     script:       Demon_Ken_2
@@ -1455,7 +1455,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126160:
     script:       Demon_Kama_2
@@ -1468,7 +1468,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126161:
     script:       Eye_1
@@ -1481,7 +1481,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126162:
     script:       Eye_2
@@ -1494,7 +1494,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126163:
     script:       Eye_3
@@ -1507,7 +1507,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126164:
     script:       Dixon
@@ -1520,7 +1520,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126165:
     script:       '2'
@@ -1533,7 +1533,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126166:
     script:       Big_1
@@ -1546,7 +1546,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126167:
     script:       Big_2
@@ -1559,7 +1559,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126168:
     script:       Big_3
@@ -1572,7 +1572,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126169:
     script:       Big_4
@@ -1585,7 +1585,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126170:
     script:       '1'
@@ -1598,7 +1598,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126171:
     script:       '2'
@@ -1611,7 +1611,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126172:
     script:       '3'
@@ -1624,7 +1624,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126173:
     script:       '4'
@@ -1637,7 +1637,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126174:
     script:       '5'
@@ -1650,7 +1650,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17126175:
     script:       Cait_Sith
@@ -1663,7 +1663,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126176:
     script:       Cait_Sith_Aon
@@ -1676,7 +1676,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126177:
     script:       Cait_Sith_Dha
@@ -1689,7 +1689,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126178:
     script:       Cait_Sith_Tri
@@ -1702,7 +1702,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126179:
     script:       Cait_Sith_Ceithir
@@ -1715,7 +1715,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126180:
     script:       Cait_Sith_Coig
@@ -1728,7 +1728,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126181:
     script:       Cait_Sith_Sia
@@ -1741,7 +1741,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126182:
     script:       Cait_Sith_Seachd
@@ -1754,7 +1754,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126183:
     script:       Cait_Sith_Ochd
@@ -1767,7 +1767,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126184:
     script:       Cait_Sith_Naoi
@@ -1780,7 +1780,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126185:
     script: blank
@@ -1882,7 +1882,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17126195:
     script: blank

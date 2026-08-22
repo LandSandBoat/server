@@ -188,7 +188,7 @@ templates:
         vial_of_fiend_blood:    0
         vial_of_beastman_blood: 0
         vial_of_bird_blood:     0
-    content: ABYSSEA
+    content: abyssea
 
   Fire_Elemental_SA:
     id:            5528
@@ -279,7 +279,7 @@ templates:
         lizard_skin: 0
         lizard_tail: 0
         lizard_egg:  0
-    content: ABYSSEA
+    content: abyssea
 
   Geyser_Lizard:
     id:            1508
@@ -441,7 +441,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Brigand:
     id:            6666
@@ -495,7 +495,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Bushwhacker:
     id:            6665
@@ -554,7 +554,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Butcher:
     id:            1643
@@ -668,7 +668,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Fisher:
     id:            1659
@@ -780,7 +780,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Healer:
     id:            6664
@@ -834,7 +834,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Thug:
     id:            1737
@@ -1152,7 +1152,7 @@ templates:
           item:   bunch_of_pamamas
       despoil:
         bunch_of_pamamas: 0
-    content: ABYSSEA
+    content: abyssea
 
   Prim_Pika:
     id:            5354
@@ -1201,7 +1201,7 @@ templates:
       despoil:
         rabbit_hide:        0
         slice_of_hare_meat: 0
-    content: ABYSSEA
+    content: abyssea
 
   Rock_Lizard:
     id:            3381
@@ -1388,7 +1388,7 @@ templates:
       drops:
         - chance: very_common
           item:   succubus_grip
-    content: WOTG
+    content: wotg
 
   Thread_Leech_fished:
     id:            5133
@@ -1489,7 +1489,7 @@ templates:
       despoil:
         slice_of_land_crab_meat: 0
         crab_shell:              0
-    content: ABYSSEA
+    content: abyssea
 
   Wadi_Crab:
     id:            4271
@@ -1729,7 +1729,7 @@ templates:
         chunk_of_iron_ore:   0
         chunk_of_silver_ore: 0
         chunk_of_zinc_ore:   0
-    content: ABYSSEA
+    content: abyssea
 
 spawns:
   17559553:

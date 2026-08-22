@@ -36,7 +36,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Arke:
     id:            6840
@@ -167,7 +167,7 @@ templates:
       drops:
         - chance: common
           item:   affinity_earring
-    content: WOTG
+    content: wotg
 
   Beorht:
     id:            7024
@@ -202,7 +202,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Big_Jaw_fished:
     id:            417
@@ -292,7 +292,7 @@ templates:
       drops:
         - chance: common
           item:   cassandras_earring
-    content: WOTG
+    content: wotg
 
   Champaign_Coeurl:
     id:            690
@@ -524,7 +524,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Diving_Beetle:
     id:            1065
@@ -682,7 +682,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Evil_Spirit:
     id:            1266
@@ -1538,7 +1538,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Macro_Test:
     id:      7354
@@ -1553,7 +1553,7 @@ templates:
           model: 431
         name_vis: 32
         hitbox:   10
-    content: TVR
+    content: tvr
 
   Midnight_Wings:
     id:            2649
@@ -1714,7 +1714,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Puretos:
     id:            7028
@@ -1749,7 +1749,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Roc:
     id:            3376
@@ -1943,7 +1943,7 @@ templates:
       drops:
         - chance: uncommon
           item:   veela_cape
-    content: WOTG
+    content: wotg
 
   Snipper_fished:
     id:            3682
@@ -2183,7 +2183,7 @@ templates:
       drops:
         - chance: uncommon
           item:   psyche_earring
-    content: WOTG
+    content: wotg
 
   Thunor:
     id:            7027
@@ -2217,7 +2217,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Urd:
     id:            7031
@@ -2266,7 +2266,7 @@ templates:
       drops:
         - chance: uncommon
           item:   choreia_earring
-    content: WOTG
+    content: wotg
 
   Verthandi:
     id:            7032
@@ -2437,7 +2437,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Wight_blm:
     id:            6570
@@ -3119,7 +3119,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
 spawns:
   17268737:

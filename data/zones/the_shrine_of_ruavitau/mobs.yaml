@@ -251,7 +251,7 @@ templates:
       despoil:
         chunk_of_mythril_ore: 0
         golem_shard:          0
-    content: ABYSSEA
+    content: abyssea
 
   Aura_Statue:
     id:            289
@@ -375,7 +375,7 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
-    content: ABYSSEA
+    content: abyssea
 
   Bai_Hu:
     id:            4715
@@ -505,7 +505,7 @@ templates:
         respawn: 300
       stats:
         mp: 999
-    content: ABYSSEA
+    content: abyssea
 
   Dark_Elemental:
     id:            913
@@ -787,7 +787,7 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
-    content: ABYSSEA
+    content: abyssea
 
   Genbu_pet:
     id:            4670
@@ -1546,7 +1546,7 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
-    content: ABYSSEA
+    content: abyssea
 
   Water_Elemental:
     id:            4309

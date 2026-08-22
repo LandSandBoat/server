@@ -520,7 +520,7 @@ templates:
       drops:
         - chance: uncommon
           item:   lyft_hexagun
-    content: WOTG
+    content: wotg
 
   Forbidding_Koheel_Ja:
     id:            1400
@@ -2797,7 +2797,7 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
-    content: WOTG
+    content: wotg
 
   Wartkin:
     id:            4295

@@ -10,7 +10,7 @@ npcs:
         type:  standard
         model: 50
     widescan: true
-    content:  SOA
+    content:  soa
 
   17821704:
     script: NPC[8]
@@ -28,7 +28,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17821707:
     script: NPC[b]
@@ -68,7 +68,7 @@ npcs:
       moving: 6
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17821711:
     script:       Atma_Infusionist
@@ -82,7 +82,7 @@ npcs:
       moving:          7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17821712:
     script: NPC[10]
@@ -104,7 +104,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17821714:
     script:       TR_Entrance
@@ -120,7 +120,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17821715:
     script:       Transcendental_Radiance
@@ -136,7 +136,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17821716:
     script:       Transcendental_Radiance
@@ -152,7 +152,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17821717:
     script:       Transcendental_Radiance
@@ -168,7 +168,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17821718:
     script: NPC[16]
@@ -210,7 +210,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17821723:
     script:       Goblin_Footprint
@@ -222,7 +222,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17821724:
     script: blank
@@ -246,7 +246,7 @@ npcs:
     status:          normal
     animation_speed: 54
     widescan:        true
-    content:         ABYSSEA
+    content:         abyssea
 
   17821726:
     script: blank
@@ -264,7 +264,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2051
-    content: ABYSSEA
+    content: abyssea
 
   17821728:
     script: blank
@@ -291,7 +291,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17821731:
     script:       Moogle
@@ -303,7 +303,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17821732:
     script:       Moogle
@@ -315,7 +315,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17821733:
     script:       Moogle
@@ -327,7 +327,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17821734:
     script:       Moogle
@@ -339,7 +339,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17821735:
     script:       Moogle
@@ -351,7 +351,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17821736:
     script:       Moogle
@@ -363,7 +363,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17821737:
     script:       Moogle
@@ -375,4 +375,4 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea

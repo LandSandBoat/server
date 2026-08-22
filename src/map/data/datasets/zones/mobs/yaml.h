@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "data/enums/allegiance.h"
+#include "data/enums/content.h"
 #include "data/enums/drop_rate.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
@@ -89,7 +90,7 @@ struct Template
     std::optional<Loot>                                       loot;
 
     std::optional<yaml::EnumToken<xi::Allegiance>> allegiance;
-    std::optional<std::string>                     content; // TODO: Provide an enum
+    std::optional<yaml::EnumToken<xi::Content>>    content;
 };
 
 struct Spawn

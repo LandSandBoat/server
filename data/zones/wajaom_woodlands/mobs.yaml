@@ -637,7 +637,7 @@ templates:
           item:   aptant_of_arkhe
         - chance: uncommon
           item:   aptant_of_tachus
-    content: WOTG
+    content: wotg
 
   Chigoe:
     id:            714
@@ -1689,7 +1689,7 @@ templates:
       drops:
         - chance: uncommon
           item:   tartaglia
-    content: WOTG
+    content: wotg
 
   Girzorhor_the_Imprudent:
     id:            1608

@@ -29,7 +29,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17469765:
     script:       qm2
@@ -44,7 +44,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17469766:
     script:       qm3
@@ -59,7 +59,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17469767:
     script:       qm4
@@ -74,7 +74,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17469768:
     script:       qm5
@@ -89,7 +89,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17469769:
     script:       qm6
@@ -104,7 +104,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17469770:
     script:       qm7
@@ -119,7 +119,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17469771:
     script:       qm8
@@ -134,7 +134,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17469772:
     script:       Treasure_Casket
@@ -303,7 +303,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17469789:
     script: NPC[15d]
@@ -321,7 +321,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17469792:
     script: NPC[160]
@@ -1024,7 +1024,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17469852:
     script:       Grounds_Tome
@@ -1038,7 +1038,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17469853:
     script:       Grounds_Tome
@@ -1052,7 +1052,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17469854:
     script:       Grounds_Tome
@@ -1066,7 +1066,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17469855:
     script:       Geomagnetic_Fount
@@ -1079,7 +1079,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17469856:
     script:       Survival_Guide
@@ -1094,7 +1094,7 @@ npcs:
       moving:        22
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17469857:
     script:       HomePoint#1
@@ -1107,7 +1107,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17469858:
     script:       Home_Point_#2
@@ -1117,7 +1117,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17469859:
     script:       Home_Point_#3
@@ -1127,7 +1127,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17469860:
     script:       Home_Point_#4
@@ -1137,7 +1137,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17469861:
     script:       Home_Point_#5
@@ -1147,4 +1147,4 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa

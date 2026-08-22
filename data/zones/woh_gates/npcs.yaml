@@ -564,7 +564,7 @@ npcs:
       moving:     6
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895844:
     script:       Soul_Pyre
@@ -577,7 +577,7 @@ npcs:
       name_vis:      120
       moving:          7
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895845:
     script:       Soul_Pyre
@@ -590,7 +590,7 @@ npcs:
       moving:     6
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895846:
     script:       Soul_Pyre
@@ -603,7 +603,7 @@ npcs:
       moving:     8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895847:
     script:       Soul_Pyre
@@ -616,7 +616,7 @@ npcs:
       moving:     7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895848:
     script:       Soul_Pyre
@@ -629,7 +629,7 @@ npcs:
       moving:     7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895849:
     script: NPC[1a9]
@@ -645,7 +645,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17895851:
     script: NPC[1ab]
@@ -663,7 +663,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17895853:
     script:       qm
@@ -675,7 +675,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   17895855:
     script: NPC[1af]
@@ -769,7 +769,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895864:
     script:       Ergon_Locus
@@ -783,7 +783,7 @@ npcs:
       moving:   32792
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895865:
     script:       Ergon_Locus
@@ -822,7 +822,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17895868:
     script: NPC[1bc]
@@ -847,7 +847,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17895871:
     script:       Moogle
@@ -858,7 +858,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17895872:
     script:       Moogle
@@ -869,7 +869,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17895873:
     script:       Moogle
@@ -880,7 +880,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17895874:
     script:       Moogle
@@ -891,7 +891,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17895875:
     script:       Moogle
@@ -902,7 +902,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17895876:
     script:       Moogle
@@ -913,7 +913,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17895877:
     script:       Moogle
@@ -924,7 +924,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17895878:
     script: blank
@@ -948,7 +948,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895880:
     script:       Scalable_Area
@@ -963,7 +963,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895881:
     script:       Liseran_Door_Entrance
@@ -976,7 +976,7 @@ npcs:
       entity_flags:   515
       moving:       32769
     status:  normal
-    content: SOA
+    content: soa
 
   17895882:
     script:       Dummy
@@ -1001,7 +1001,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895884:
     script: Darrcuiln
@@ -1132,7 +1132,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   17895899:
     script:       Ramblix
@@ -1170,7 +1170,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17895902:
     script: blank
@@ -1192,7 +1192,7 @@ npcs:
       name_vis:    32
       moving:   32769
     status:  normal
-    content: SOA
+    content: soa
 
   17895904:
     script:       qm
@@ -1205,7 +1205,7 @@ npcs:
       name_vis:    32
       moving:   32769
     status:  normal
-    content: SOA
+    content: soa
 
   17895905:
     script:       qm2

@@ -1295,7 +1295,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17735750:
     script:       HomePoint#3
@@ -1308,7 +1308,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17735751:
     script:       HomePoint#4
@@ -1318,7 +1318,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17735752:
     script:       HomePoint#5
@@ -1328,7 +1328,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17735753:
     script:       Arva
@@ -2091,7 +2091,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17735808:
     script:       Diabolos
@@ -2104,7 +2104,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17735809:
     script:       Diabolos
@@ -2117,7 +2117,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17735810:
     script:       Hemewmew
@@ -2141,7 +2141,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  ROTZ
+    content:  rotz
 
   17735811:
     script:       qm3
@@ -2190,7 +2190,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17735814:
     script: blank
@@ -2707,7 +2707,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17735847:
     script:       Door_House
@@ -2770,7 +2770,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17735851:
     script: blank
@@ -2802,7 +2802,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17735853:
     script: blank
@@ -2838,7 +2838,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17735855:
     script:       Claiborne
@@ -2872,7 +2872,7 @@ npcs:
       animation_sub:  1
       moving:        21
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17735857:
     script:       mgtest
@@ -2904,7 +2904,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: WOTG
+    content: wotg
 
   17735859:
     script:       Conrad
@@ -2941,7 +2941,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17735861:
     script:       Selliste
@@ -2964,7 +2964,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17735862:
     script:       Synergy_Furnace
@@ -2981,7 +2981,7 @@ npcs:
       moving:           1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17735863:
     script:       Synergy_Furnace
@@ -2998,7 +2998,7 @@ npcs:
       moving:           1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17735864:
     script:       Synergy_Engineer
@@ -3019,7 +3019,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17735865:
     script:       Synergy_Engineer
@@ -3040,7 +3040,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17735866:
     script:       Synergy_Furnace
@@ -3058,7 +3058,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17735867:
     script:       Synergy_Furnace
@@ -3076,7 +3076,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17735868:
     script:       Synergy_Furnace
@@ -3094,7 +3094,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17735869:
     script:       Synergy_Furnace
@@ -3112,7 +3112,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17735870:
     script:       Synergy_Enthusiast
@@ -3133,7 +3133,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17735871:
     script:       Voidwatch_Purveyor
@@ -3154,7 +3154,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17735872:
     script:       Bountibox
@@ -3169,7 +3169,7 @@ npcs:
       moving:       32789
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17735873:
     script:       Treasure_Coffer
@@ -3185,7 +3185,7 @@ npcs:
       moving:           1
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17735874:
     script:       Moogle
@@ -4319,7 +4319,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17735952:
     script: blank
@@ -5001,7 +5001,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736010:
     script:       Shard_of_Sunlight
@@ -5016,7 +5016,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736011:
     script:       Shard_of_Sunlight
@@ -5031,7 +5031,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736012:
     script:       Shard_of_Sunlight
@@ -5046,7 +5046,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736013:
     script:       Shard_of_Sunlight
@@ -5061,7 +5061,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736014:
     script:       Shard_of_Sunlight
@@ -5076,7 +5076,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736015:
     script:       Shard_of_Sunlight
@@ -5091,7 +5091,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736016:
     script:       Shard_of_Sunlight
@@ -5106,7 +5106,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736017:
     script:       Shard_of_Sunlight
@@ -5121,7 +5121,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736018:
     script:       Shard_of_Sunlight
@@ -5136,7 +5136,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736019:
     script:       Shard_of_Sunlight
@@ -5151,7 +5151,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736020:
     script:       Shard_of_Sunlight
@@ -5166,7 +5166,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736021:
     script:       Shard_of_Sunlight
@@ -5181,7 +5181,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736022:
     script:       Shard_of_Sunlight
@@ -5196,7 +5196,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736023:
     script:       Shard_of_Sunlight
@@ -5211,7 +5211,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736024:
     script:       Shard_of_Sunlight
@@ -5226,7 +5226,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736025:
     script:       Shard_of_Sunlight
@@ -5241,7 +5241,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736026:
     script:       Shard_of_Sunlight
@@ -5256,7 +5256,7 @@ npcs:
       name_prefix:   34
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736027:
     script:       Abenzio
@@ -5361,7 +5361,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17736036:
     script: NPC[164]
@@ -5383,7 +5383,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17736038:
     script:       Unity_Master
@@ -5394,7 +5394,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17736039:
     script: blank
@@ -5714,7 +5714,7 @@ npcs:
       moving:    14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736062:
     script:       Yek_Falimeygo
@@ -5737,7 +5737,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736063:
     script:       Enigmatic_Footprints
@@ -5751,7 +5751,7 @@ npcs:
       name_prefix:     2
       moving:      32769
     status:  normal
-    content: TVR
+    content: tvr
 
   17736064:
     script:       Enigmatic_Footprints_#2
@@ -5766,7 +5766,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17736065:
     script:       Layer_Reserve
@@ -5840,7 +5840,7 @@ npcs:
       name_vis:  1
       moving:   14
     status:  normal
-    content: SOA
+    content: soa
 
   17736070:
     script:       Linkshell_Concierge
@@ -5861,7 +5861,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736071:
     script:       Chat_Manual
@@ -5875,7 +5875,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17736072:
     script: blank
@@ -5904,4 +5904,4 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

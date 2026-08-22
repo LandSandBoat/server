@@ -10,7 +10,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932295:
     script:       Arciela
@@ -25,7 +25,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932296:
     script:       Winged_Scourge
@@ -45,7 +45,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932298:
     script: blank
@@ -55,7 +55,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932299:
     script: blank
@@ -65,7 +65,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932300:
     script: blank
@@ -75,7 +75,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932301:
     script: blank
@@ -85,7 +85,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932302:
     script: csnpc
@@ -105,7 +105,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932303:
     script: blank
@@ -130,7 +130,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932305:
     script:       Goblin_Footprint
@@ -143,7 +143,7 @@ npcs:
       entity_flags: 27
       moving:        1
     status:  cutscene_only
-    content: SOA
+    content: soa
 
   17932306:
     script:       qm
@@ -154,7 +154,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932307:
     script: blank
@@ -164,7 +164,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  SOA
+    content:  soa
 
   17932308:
     render:

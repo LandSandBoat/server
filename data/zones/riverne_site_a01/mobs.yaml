@@ -323,7 +323,7 @@ templates:
           item:   insect_wing
       despoil:
         insect_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Earth_Elemental:
     id:            1160

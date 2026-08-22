@@ -25,7 +25,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17940484:
     script:       Moogle
@@ -36,7 +36,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17940485:
     script:       Moogle
@@ -47,7 +47,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17940486:
     script:       Moogle
@@ -58,7 +58,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17940487:
     script:       Moogle
@@ -69,7 +69,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17940488:
     script:       Moogle
@@ -80,7 +80,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17940489:
     script:       Moogle
@@ -91,7 +91,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17940490:
     script:       Moogle
@@ -102,7 +102,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17940491:
     script:       Jedelaih
@@ -118,7 +118,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940492:
     script: blank
@@ -146,7 +146,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940494:
     script:       Svenja
@@ -160,7 +160,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940495:
     script:       Andreine
@@ -183,7 +183,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940496:
     script:       Erfimia
@@ -266,7 +266,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940500:
     script:       Reja_Ygridhi
@@ -290,7 +290,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940501:
     script:       Institutions
@@ -303,7 +303,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940502:
     script:       Personages
@@ -316,7 +316,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940503:
     script:       Geography
@@ -329,7 +329,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940504:
     script:       History
@@ -342,7 +342,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940505:
     script:       Bestiary
@@ -355,7 +355,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940506:
     script:       Vainrachault
@@ -371,7 +371,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940507:
     script:       Trystol
@@ -386,7 +386,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940508:
     script:       Door_Back_to_Town
@@ -398,7 +398,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: SOA
+    content: soa
 
   17940509:
     script: blank
@@ -429,7 +429,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940511:
     script:       Arciela
@@ -445,7 +445,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940512:
     script: blank
@@ -482,7 +482,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940515:
     script:       Estienneux
@@ -503,7 +503,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940516:
     script: blank
@@ -531,7 +531,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2051
-    content: SOA
+    content: soa
 
   17940519:
     script: blank
@@ -583,7 +583,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17940524:
     script:       Achieve_Master
@@ -592,7 +592,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17940525:
     script: NPC[2d]

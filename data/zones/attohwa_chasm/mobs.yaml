@@ -2102,7 +2102,7 @@ templates:
           item:   aptant_of_primus
         - chance: uncommon
           item:   aptant_of_aecus
-    content: WOTG
+    content: wotg
 
   Sekhmet:
     id:            5537
@@ -2154,7 +2154,7 @@ templates:
       drops:
         - chance: uncommon
           item:   layqa_seraweels
-    content: WOTG
+    content: wotg
 
   Tiamat:
     id:            3916

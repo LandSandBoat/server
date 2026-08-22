@@ -155,7 +155,7 @@ templates:
       despoil:
         handful_of_pugil_scales: 0
         handful_of_fish_scales:  0
-    content: ABYSSEA
+    content: abyssea
 
   Bloodsucker_TC:
     id:            6394
@@ -349,7 +349,7 @@ templates:
       drops:
         - chance: common
           item:   larans_pendant
-    content: WOTG
+    content: wotg
 
   Canal_Bats_TC:
     id:            617
@@ -485,7 +485,7 @@ templates:
           item:   aptant_of_pera
         - chance: uncommon
           item:   aptant_of_geoc
-    content: ABYSSEA
+    content: abyssea
 
   Dark_Aspic:
     id:            908
@@ -593,7 +593,7 @@ templates:
           item:   seasoning_stone
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Dire_Bat_UDT_TC_SSG:
     id:            6456
@@ -811,7 +811,7 @@ templates:
           item:   bone_chip
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Fallen_Knight:
     id:            1287
@@ -958,7 +958,7 @@ templates:
           item:   fossilized_bone
       despoil:
         poroggo_hat: 0
-    content: ABYSSEA
+    content: abyssea
 
   Girtab:
     id:            1606
@@ -1209,7 +1209,7 @@ templates:
           item:   aptant_of_aecus
         - chance: common
           item:   aptant_of_durus
-    content: ABYSSEA
+    content: abyssea
 
   Lich:
     id:            2407
@@ -1651,7 +1651,7 @@ templates:
       despoil:
         slice_of_land_crab_meat: 0
         crab_shell:              0
-    content: ABYSSEA
+    content: abyssea
 
   Poroggo_Excavator:
     id:            6377
@@ -1695,7 +1695,7 @@ templates:
           item:   fossilized_bone
       despoil:
         poroggo_hat: 0
-    content: ABYSSEA
+    content: abyssea
 
   Rapier_Scorpion:
     id:            6335
@@ -1742,7 +1742,7 @@ templates:
       despoil:
         scorpion_shell: 0
         scorpion_claw:  0
-    content: ABYSSEA
+    content: abyssea
 
   Rock_Crab_fished:
     id:            6777
@@ -1947,7 +1947,7 @@ templates:
           item:   revival_tree_root
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Starborer:
     id:            6073
@@ -1988,7 +1988,7 @@ templates:
           item:   fossilized_bone
         - chance: rare
           item:   seasoning_stone
-    content: ABYSSEA
+    content: abyssea
 
   Starmite:
     id:            3755

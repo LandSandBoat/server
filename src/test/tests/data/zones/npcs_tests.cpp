@@ -95,7 +95,7 @@ TEST_CASE("npcs: omitted fields fall back to their defaults", "[data][npc]")
     REQUIRE(npc.Speed == 50);
     REQUIRE(npc.AnimationSpeed == 50);
     REQUIRE_FALSE(npc.Widescan);
-    REQUIRE(npc.Content == "SOA");
+    REQUIRE(npc.Content == xi::Content::Soa);
 
     // look 0x0000 0x0032: standard, model 50
     REQUIRE(npc.Look[0] == 0);

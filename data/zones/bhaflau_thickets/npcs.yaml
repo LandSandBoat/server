@@ -74,7 +74,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: TOAU
+    content: toau
 
   16990605:
     script:       qm2
@@ -94,7 +94,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16990607:
     script: NPC[18f]
@@ -112,7 +112,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16990609:
     script: NPC[191]
@@ -197,7 +197,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16990619:
     script:       Moogle
@@ -209,7 +209,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16990620:
     script:       Moogle
@@ -221,7 +221,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16990621:
     script:       Moogle
@@ -233,7 +233,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16990622:
     script:       Moogle
@@ -321,7 +321,7 @@ npcs:
         model: 964
       moving: 1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990629:
     script:       _1g0
@@ -335,7 +335,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16990630:
     script:       _1g1
@@ -349,7 +349,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16990631:
     script:       _1g2
@@ -363,7 +363,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16990632:
     script:       Runic_Portal
@@ -376,7 +376,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990633:
     script:       _1g3
@@ -390,7 +390,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16990634:
     script:       _1g4
@@ -404,7 +404,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16990635:
     script:       Kamih_Mapokhalam
@@ -427,7 +427,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990636:
     script:       Hamta-Iramta
@@ -450,7 +450,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990637:
     script: NPC[1ad]
@@ -471,7 +471,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: TOAU
+    content: toau
 
   16990639:
     script:       Alcander
@@ -493,7 +493,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990640:
     script:       Tinga-Matonga
@@ -514,7 +514,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990641:
     script: blank
@@ -539,7 +539,7 @@ npcs:
       name_prefix:  32
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16990643:
     script: blank
@@ -584,7 +584,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990646:
     script:       Ramblix
@@ -598,7 +598,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990647:
     script:       Goblin_Footprint
@@ -610,7 +610,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: TOAU
+    content: toau
 
   16990648:
     script:       Ahmibi_Watchtower
@@ -623,7 +623,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990649:
     script:       Harvesting_Point
@@ -635,7 +635,7 @@ npcs:
         model: 2422
       moving: 32775
     status:  normal
-    content: TOAU
+    content: toau
 
   16990650:
     script:       Harvesting_Point
@@ -647,7 +647,7 @@ npcs:
         model: 2422
       moving: 32775
     status:  normal
-    content: TOAU
+    content: toau
 
   16990651:
     script:       Harvesting_Point
@@ -671,7 +671,7 @@ npcs:
         model: 2422
       moving: 32775
     status:  normal
-    content: TOAU
+    content: toau
 
   16990653:
     script:       Harvesting_Point
@@ -717,7 +717,7 @@ npcs:
         type:  standard
         model: 52
       moving: 1
-    content: SOA
+    content: soa
 
   16990657:
     script:       Mythralline_Wellspring
@@ -730,7 +730,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990658:
     script:       qm9
@@ -755,7 +755,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16990660:
     script:       HomePoint#1
@@ -768,7 +768,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16990661:
     script:       Home_Point_#2

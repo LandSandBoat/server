@@ -57,7 +57,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17424522:
     script:       Seed_Afterglow
@@ -72,7 +72,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17424523:
     script:       Seed_Afterglow
@@ -87,7 +87,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17424524:
     script:       Seed_Afterglow
@@ -102,7 +102,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17424525:
     script:       Treasure_Casket
@@ -277,7 +277,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17424542:
     script: NPC[9e]
@@ -295,7 +295,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17424545:
     script: NPC[a1]
@@ -536,7 +536,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17424567:
     script:       Grounds_Tome
@@ -550,7 +550,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17424568:
     script:       Grounds_Tome
@@ -564,7 +564,7 @@ npcs:
       moving:   21
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17424569:
     script:       Geomantic_Reservoir
@@ -578,7 +578,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17424570:
     script: NPC[ba]
@@ -605,7 +605,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17424573:
     script:       HomePoint#2
@@ -615,7 +615,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17424574:
     script:       HomePoint#3
@@ -625,7 +625,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17424575:
     script:       HomePoint#4
@@ -635,7 +635,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17424576:
     script:       HomePoint#5
@@ -645,4 +645,4 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa

@@ -151,7 +151,7 @@ templates:
           item:   vial_of_fiend_blood
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Bloodsucker_BO:
     id:            6393
@@ -392,7 +392,7 @@ templates:
       despoil:
         wolf_hide:         0
         revival_tree_root: 0
-    content: ABYSSEA
+    content: abyssea
 
   Dark_Aspic:
     id:            908
@@ -1056,7 +1056,7 @@ templates:
           item:   fossilized_fang
       despoil:
         square_of_cotton_cloth: 0
-    content: ABYSSEA
+    content: abyssea
 
   Panna_Cotta:
     id:            6411
@@ -1109,7 +1109,7 @@ templates:
           item:   seasoning_stone
         - chance: rare
           item:   fossilized_fang
-    content: ABYSSEA
+    content: abyssea
 
   Phanduron_the_Condemned:
     id:            3125
@@ -1385,7 +1385,7 @@ templates:
           item:   seasoning_stone
         - chance: rare
           item:   fossilized_fang
-    content: ABYSSEA
+    content: abyssea
 
 spawns:
   17461249:

@@ -258,7 +258,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Bloodpool_Vorax:
     id:            460
@@ -926,7 +926,7 @@ templates:
         respawn: 300
       stats:
         hp: 5100
-    content: WOTG
+    content: wotg
 
   Goblin_Ambusher:
     id:            1635
@@ -1459,7 +1459,7 @@ templates:
         respawn: 300
       stats:
         hp: 3000
-    content: WOTG
+    content: wotg
 
   Heliodor_Quadav:
     id:            1917
@@ -1913,7 +1913,7 @@ templates:
       drops:
         - chance: uncommon
           item:   hirudinea_earring
-    content: WOTG
+    content: wotg
 
   Land_Pugil:
     id:            2373
@@ -2345,7 +2345,7 @@ templates:
       drops:
         - chance: common
           item:   muffle_earring
-    content: WOTG
+    content: wotg
 
   Night_Bats_MM_PM:
     id:            2815
@@ -2631,7 +2631,7 @@ templates:
         type: [scripted]
       stats:
         hp: 1400
-    content: WOTG
+    content: wotg
 
   Shoggoth:
     id:            7003
@@ -2680,7 +2680,7 @@ templates:
       drops:
         - chance: uncommon
           item:   jinx_ampulla
-    content: WOTG
+    content: wotg
 
   Snipper:
     id:            5733
@@ -3107,7 +3107,7 @@ templates:
       drops:
         - chance: very_common
           item:   piece_of_mahogany_heartwood
-    content: WOTG
+    content: wotg
 
   Veteran_Quadav:
     id:            4226
@@ -3414,7 +3414,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Zombie_blm:
     id:            6574
