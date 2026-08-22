@@ -180,16 +180,13 @@ xi.campaignTeleport.zoneArbiterOnEventUpdate = function(player, csid, option, np
     end
 end
 
--- Closing the menu without choosing still fires onEventFinish with option ==
--- utils.EVENT_CANCELLED_OPTION -- same sentinel used elsewhere (ancestry_moogle.lua,
--- campaign.lua, festive_moogle.lua).
+-- option == 1 is the only real confirm (single-destination menu, no bitmask).
+-- Escaping sends utils.EVENT_CANCELLED_OPTION, picking "No" sends 0 -- an
+-- allowlist on 1 rejects both plus anything else, rather than chasing each
+-- decline value individually.
 xi.campaignTeleport.zoneArbiterOnEventFinish = function(player, csid, option, npc)
     local events = xi.campaignTeleport.zoneArbiterEvents[npc:getName()]
-    if
-        events == nil or
-        csid ~= events.teleport or
-        option == utils.EVENT_CANCELLED_OPTION
-    then
+    if events == nil or csid ~= events.teleport or option ~= 1 then
         return
     end
 
