@@ -10647,7 +10647,7 @@ INSERT INTO `item_equipment` VALUES (21531,'prime_fists',99,119,131074,134,0,0,1
 INSERT INTO `item_equipment` VALUES (21532,'varga_purnikawa',99,119,131074,475,0,0,1,0,0,0);
 INSERT INTO `item_equipment` VALUES (21533,'varga_purnikawa',99,119,131074,475,0,0,1,0,0,0);
 INSERT INTO `item_equipment` VALUES (21534,'varga_purnikawa',99,119,131074,475,0,0,1,0,0,0);
-INSERT INTO `item_equipment` VALUES (21535,'varga_purnikawa',99,119,131074,917,0,0,1,0,0,0);
+INSERT INTO `item_equipment` VALUES (21535,'varga_purnikawa',99,119,131074,474,0,0,1,0,0,0);
 INSERT INTO `item_equipment` VALUES (21536,'dazbogs_knuckles',1,0,4194303,0,0,0,1,0,0,0);  -- TODO: Not implemented, verify model
 INSERT INTO `item_equipment` VALUES (21537,'lizard_fangs',1,0,4194303,0,0,0,1,0,0,0);      -- TODO: Not implemented, verify model
 INSERT INTO `item_equipment` VALUES (21538,'lizard_fangs_+1',1,0,4194303,0,0,0,1,0,0,0);   -- TODO: Not implemented, verify model
@@ -13509,7 +13509,7 @@ INSERT INTO `item_equipment` VALUES (26491,'prime_shield',99,119,64,0,3,0,2,0,0,
 INSERT INTO `item_equipment` VALUES (26492,'duban',99,119,64,0,6,0,2,0,0,0);        -- TODO: Not implemented
 INSERT INTO `item_equipment` VALUES (26493,'duban',99,119,64,0,6,0,2,0,0,0);        -- TODO: Not implemented
 INSERT INTO `item_equipment` VALUES (26494,'duban',99,119,64,0,6,0,2,0,0,0);        -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (26495,'duban',99,119,64,40836,6,0,2,0,0,0);        -- TODO: Not implemented
+INSERT INTO `item_equipment` VALUES (26495,'duban',99,119,64,676,6,0,2,0,0,0);        -- TODO: Not implemented
 INSERT INTO `item_equipment` VALUES (26496,'ageist',1,0,4194303,677,3,0,2,0,0,0);
 INSERT INTO `item_equipment` VALUES (26497,'regis',1,0,4194303,0,3,0,2,0,0,0);             -- TODO: Not implemented
 INSERT INTO `item_equipment` VALUES (26498,'skia_shield',99,0,0,0,0,0,2,0,0,4);            -- TODO: MId
