@@ -18,13 +18,15 @@ CREATE TABLE IF NOT EXISTS `auction_house` (
   `seller_name` varchar(15) DEFAULT NULL,
   `date` int(10) unsigned NOT NULL DEFAULT '0',
   `price` int(10) unsigned NOT NULL DEFAULT '0',
+  `buyer` int(10) unsigned NOT NULL DEFAULT '0',
   `buyer_name` varchar(15) DEFAULT NULL,
   `sale` int(10) unsigned NOT NULL DEFAULT '0',
   `sell_date` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_ah_active` (`buyer_name`, `itemid`, `stack`, `price`),
   KEY `idx_ah_history` (`itemid`, `stack`, `sell_date`),
-  KEY `charid` (`seller`)
+  KEY `charid` (`seller`),
+  KEY `buyer` (`buyer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=1 ;
 
 --

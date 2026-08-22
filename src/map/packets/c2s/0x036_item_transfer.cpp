@@ -38,28 +38,6 @@ namespace
 // 8 trade window slots plus gil
 constexpr uint8 MAX_TRADE_SLOTS = 9;
 
-const auto auditTrade = [](Scheduler& scheduler, const CCharEntity* PChar, const CBaseEntity* PNpc, uint32_t itemId, uint32_t quantity)
-{
-    if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
-    {
-        const auto  sender       = PChar->id;
-        const auto& senderName   = PChar->getName();
-        const auto  receiver     = PNpc->id;
-        const auto& receiverName = PNpc->getName();
-
-        scheduler.postToWorkerThread(
-            [itemId, quantity, sender, senderName, receiver, receiverName]()
-            {
-                const auto tradeDate = earth_time::timestamp();
-                const auto query     = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                if (!db::preparedStmt(query, itemId, quantity, sender, senderName, receiver, receiverName, tradeDate))
-                {
-                    ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemId, quantity, sender, receiver, tradeDate);
-                }
-            });
-    }
-};
-
 } // namespace
 
 auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -138,7 +116,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
         tradeItems[slotId] = PItem;
     }
 
-    auto* transaction = PChar->addTransaction(NpcTradeTransaction::start(PChar));
+    auto* transaction = PChar->addTransaction(NpcTradeTransaction::start(PChar, PNpc));
     if (!transaction)
     {
         return;
@@ -157,9 +135,6 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
             return;
         }
-
-        // TODO: Don't pass around Scheduler& through PSession
-        auditTrade(*PSession->scheduler, PChar, PNpc, PItem->getID(), quantity);
 
         PChar->TradeContainer->setItem(slotId, PItem->getID(), PItem->getSlotID(), quantity);
     }
