@@ -37,14 +37,15 @@ local rocks =
 -----------------------------------
 
 local function doesToolBreak(player, info)
-    local roll  = math.randomInt(1, 100)
-    local mod   = info.mod
+    local roll        = math.randomFloat(0, 100)
+    local mod         = info.mod
+    local breakChance = info.zone[player:getZoneID()].breakRate
 
     if mod then
         roll = roll + (player:getMod(mod) / 10)
     end
 
-    if roll <= info.settingBreak then
+    if roll < breakChance then
         player:tradeComplete()
         return true
     end
