@@ -27,7 +27,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17408035:
     script: NPC[23]
@@ -45,7 +45,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17408038:
     script: NPC[26]
@@ -501,4 +501,4 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

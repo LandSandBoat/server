@@ -23,7 +23,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16789522:
     script: NPC[12]
@@ -41,7 +41,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16789525:
     script: NPC[15]
@@ -112,7 +112,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16789531:
     script: NPC[1b]
@@ -133,7 +133,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16789533:
     script: blank
@@ -166,7 +166,7 @@ npcs:
       moving:       8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16789535:
     script: NPC[1f]
@@ -183,7 +183,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16789537:
     script:       Moogle
@@ -193,7 +193,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16789538:
     script:       Moogle
@@ -203,7 +203,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16789539:
     script:       Moogle
@@ -213,7 +213,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16789540:
     script:       Moogle
@@ -223,7 +223,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16789541:
     script:       Moogle
@@ -233,7 +233,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16789542:
     script:       Moogle
@@ -243,7 +243,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16789543:
     script:       Moogle
@@ -253,4 +253,4 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop

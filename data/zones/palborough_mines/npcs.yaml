@@ -28,7 +28,7 @@ npcs:
       name_vis:        96
       name_prefix:     34
       moving:       32769
-    content: TVR
+    content: tvr
 
   17363325:
     script:       Achieve_Master
@@ -40,7 +40,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17363326:
     script: NPC[17e]
@@ -58,7 +58,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17363329:
     script: NPC[181]
@@ -650,7 +650,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17363381:
     script:       HomePoint#1
@@ -663,7 +663,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17363382:
     script:       HomePoint#2
@@ -673,7 +673,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17363383:
     script:       HomePoint#3
@@ -683,7 +683,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17363384:
     script:       HomePoint#4
@@ -693,7 +693,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17363385:
     script:       HomePoint#5
@@ -703,7 +703,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17363386:
     script: blank
@@ -727,7 +727,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17363388:
     script:       Sirius
@@ -954,7 +954,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17363405:
     script:       Memorian

@@ -36,7 +36,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16924734:
     script: NPC[3e]
@@ -54,7 +54,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16924737:
     script: NPC[41]
@@ -95,7 +95,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16924741:
     script:       Transcendental_Radiance
@@ -109,7 +109,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16924742:
     script:       Transcendental_Radiance
@@ -123,7 +123,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16924743:
     script:       Transcendental_Radiance
@@ -137,7 +137,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16924744:
     script: NPC[48]
@@ -186,7 +186,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16924750:
     script:       Trailmix
@@ -200,7 +200,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924751:
     script:       Goblin_Footprint
@@ -212,7 +212,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16924752:
     script: NPC[50]
@@ -231,7 +231,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16924754:
     script:       Moogle
@@ -243,7 +243,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16924755:
     script:       Moogle
@@ -255,7 +255,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16924756:
     script:       Moogle
@@ -267,7 +267,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16924757:
     script:       Moogle
@@ -279,7 +279,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16924758:
     script:       Moogle
@@ -291,7 +291,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16924759:
     script:       Moogle
@@ -303,7 +303,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16924760:
     script:       Moogle
@@ -315,7 +315,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16924761:
     script:       Prishe
@@ -330,7 +330,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16924762:
     script:       Selhteus
@@ -343,7 +343,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924763:
     script:       Ulmia
@@ -356,7 +356,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924764:
     script:       Tenzen
@@ -369,7 +369,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924765:
     script:       Jabbos
@@ -390,7 +390,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924766:
     script:       Shikaree_Z
@@ -411,7 +411,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924767:
     script:       Louverance
@@ -432,7 +432,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924768:
     script:       Makki-Chebukki
@@ -445,7 +445,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924769:
     script:       Kukki-Chebukki
@@ -458,7 +458,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924770:
     script:       Cherukiki
@@ -471,7 +471,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924771:
     script:       Promathia
@@ -484,7 +484,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924772:
     script:       Promathia
@@ -497,7 +497,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924773:
     script:       Prishe
@@ -511,7 +511,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16924774:
     script:       Prishe
@@ -526,7 +526,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16924775:
     script:       Selhteus
@@ -539,7 +539,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924776:
     script:       Mildaurion
@@ -552,7 +552,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924777:
     script:       Aldo
@@ -565,7 +565,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924778:
     script:       Zeid
@@ -578,7 +578,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924779:
     script:       Lion
@@ -591,7 +591,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924780:
     script:       Ealdnarche
@@ -628,7 +628,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924783:
     script:       Nagmolada
@@ -641,7 +641,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924784:
     script: blank
@@ -704,7 +704,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924790:
     script:       Lion
@@ -717,7 +717,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16924791:
     script:       qm1
@@ -729,7 +729,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: COP
+    content: cop
 
   16924792:
     script: blank
@@ -758,7 +758,7 @@ npcs:
         model: 50
       entity_flags: 2051
     widescan: true
-    content:  COP
+    content:  cop
 
   16924795:
     script:       qm2
@@ -768,7 +768,7 @@ npcs:
         type:  standard
         model: 50
       entity_flags: 2051
-    content: COP
+    content: cop
 
   16924796:
     script: blank
@@ -800,7 +800,7 @@ npcs:
       moving:   14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16924798:
     script:       Resume_Point
@@ -816,7 +816,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16924799:
     script:       qm
@@ -1046,4 +1046,4 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa

@@ -690,7 +690,7 @@ templates:
       drops:
         - chance: common
           item:   square_of_ephemeral_cloth
-    content: WOTG
+    content: wotg
 
   Vaa_Huja_the_Erudite:
     id:            4113

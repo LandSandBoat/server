@@ -1419,7 +1419,7 @@ templates:
       drops:
         - chance: common
           item:   likho_talon
-    content: WOTG
+    content: wotg
 
   Marquis_Allocen:
     id:            2568
@@ -1565,7 +1565,7 @@ templates:
       drops:
         - chance: common
           item:   yellow_brass_chain
-    content: WOTG
+    content: wotg
 
   Marquis_Sabnock:
     id:            5763
@@ -1599,7 +1599,7 @@ templates:
       drops:
         - chance: common
           item:   astrolabe
-    content: WOTG
+    content: wotg
 
   Mimic:
     id:            2664

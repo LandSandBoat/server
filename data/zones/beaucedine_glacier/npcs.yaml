@@ -75,7 +75,7 @@ npcs:
       name_vis:        96
       name_prefix:     34
       moving:       32769
-    content: TVR
+    content: tvr
 
   17232181:
     script: NPC[135]
@@ -265,7 +265,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17232200:
     script: NPC[148]
@@ -283,7 +283,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17232203:
     script: NPC[14b]
@@ -995,7 +995,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17232252:
     script:       Diabolos
@@ -1008,7 +1008,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17232253:
     script:       Diabolos
@@ -1021,7 +1021,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17232254:
     script: relic
@@ -1634,7 +1634,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17232292:
     script:       Field_Manual
@@ -1648,7 +1648,7 @@ npcs:
       moving:   21
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17232293:
     script:       Field_Manual
@@ -1662,7 +1662,7 @@ npcs:
       moving:   14
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17232294:
     script:       Field_Manual
@@ -1676,7 +1676,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17232295:
     script:       Field_Parchment
@@ -1689,7 +1689,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17232296:
     script:       Ethereal_Junction
@@ -1704,7 +1704,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17232297:
     script:       Ethereal_Junction
@@ -1719,7 +1719,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17232298:
     script:       Ethereal_Junction
@@ -1734,7 +1734,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17232299:
     script:       Mogball-Local
@@ -1794,7 +1794,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17232304:
     script: blank
@@ -1807,7 +1807,7 @@ npcs:
       animation_sub:    1
       moving:           1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17232305:
     script:       Goblin_Grenadier
@@ -1820,7 +1820,7 @@ npcs:
       moving: 14
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17232306:
     script:       Element
@@ -1846,7 +1846,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17232308:
     script:       Western_Pip
@@ -1859,7 +1859,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17232309:
     script:       Southwestern_Pip
@@ -1872,7 +1872,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17232310:
     script:       Northeastern_Pip
@@ -1885,7 +1885,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17232311:
     script:       Eastern_Pip
@@ -1898,7 +1898,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17232312:
     script:       Southeastern_Pip
@@ -1911,7 +1911,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17232313:
     script:       Summoner
@@ -1945,7 +1945,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17232316:
     script:       Planar_Rift
@@ -1961,7 +1961,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17232317:
     script:       Planar_Rift
@@ -1977,7 +1977,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17232318:
     script:       Riftworn_Pyxis
@@ -1992,7 +1992,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17232319:
     script:       Riftworn_Pyxis
@@ -2007,7 +2007,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17232320:
     script:       Riftworn_Pyxis
@@ -2022,7 +2022,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17232321:
     script:       Geomantic_Reservoir
@@ -2036,7 +2036,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17232322:
     script: NPC[1c2]
@@ -2064,7 +2064,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17232325:
     script: NPC[1c5]
@@ -2093,7 +2093,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17232328:
     script: blank
@@ -2343,7 +2343,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17232348:
     script:       Point_of_Interest
@@ -2358,4 +2358,4 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

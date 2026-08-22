@@ -646,7 +646,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17129715:
     script:       Moogle
@@ -658,7 +658,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17129716:
     script:       Moogle
@@ -670,7 +670,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17129717:
     script:       Moogle
@@ -682,7 +682,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17129718:
     script:       Moogle
@@ -694,7 +694,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17129719:
     script:       Moogle
@@ -706,7 +706,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17129720:
     script:       Moogle
@@ -718,7 +718,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17129721:
     script:       Moogle
@@ -730,7 +730,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17129722:
     script:       qm3

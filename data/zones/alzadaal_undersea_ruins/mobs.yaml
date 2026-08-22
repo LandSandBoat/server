@@ -46,7 +46,7 @@ templates:
         respawn: 2700
       stats:
         hp: 3240000
-    content: TVR
+    content: tvr
 
   Apex_Archaic_Cog:
     id:            7577
@@ -89,7 +89,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Archaic_Cogs:
     id:            7578
@@ -134,7 +134,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Armed_Gears:
     id:            243
@@ -233,7 +233,7 @@ templates:
       drops:
         - chance: uncommon
           item:   surge_subligar
-    content: WOTG
+    content: wotg
 
   Cheese_Hoarder_Gigiroon:
     id:            705
@@ -326,7 +326,7 @@ templates:
       drops:
         - chance: uncommon
           item:   lyft_crossbow
-    content: WOTG
+    content: wotg
 
   Nepionic_Soulflayer:
     id:            2834
@@ -514,7 +514,7 @@ templates:
           item:   vial_of_ebur_pigment
         - chance: uncommon
           item:   narigitsune
-    content: WOTG
+    content: wotg
 
   Panaiveriyamman:
     id:            7579

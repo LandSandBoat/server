@@ -50,7 +50,7 @@ templates:
       steal: bone_chip
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Accursed_Sorcerer:
     id:            6537
@@ -100,7 +100,7 @@ templates:
       steal: bone_chip
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Amphisbaena:
     id:            113
@@ -1299,7 +1299,7 @@ templates:
           item:   insect_wing
       despoil:
         insect_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Mauthe_Doog_GM:
     id:            6528
@@ -1808,7 +1808,7 @@ templates:
         chunk_of_iron_ore:   0
         chunk_of_silver_ore: 0
         chunk_of_zinc_ore:   0
-    content: ABYSSEA
+    content: abyssea
 
   Sadfly:
     id:            3435

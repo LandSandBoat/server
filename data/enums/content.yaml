@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+
+values:
+  none:            0 # No gate. Always enabled.
+  rotz:            1
+  cop:             2
+  toau:            3
+  wotg:            4
+  acp:             5
+  amk:             6
+  asa:             7
+  abyssea:         8
+  soa:             9
+  rov:            10
+  tvr:            11
+  voidwatch:      12
+  field_manuals:  13
+  grounds_tomes:  14
+  survival_guide: 15
+  daily_tally:    16
+  trust_quests:   17

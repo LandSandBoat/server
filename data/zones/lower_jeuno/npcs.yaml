@@ -2466,7 +2466,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780875:
     script:       HomePoint#3
@@ -2476,7 +2476,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780876:
     script:       HomePoint#4
@@ -2486,7 +2486,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780877:
     script:       HomePoint#5
@@ -2496,7 +2496,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780878:
     script:       Alrauverat
@@ -2933,7 +2933,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17780912:
     script:       Caruvinda
@@ -2948,7 +2948,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17780913:
     script: blank
@@ -3170,7 +3170,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17780925:
     script:       Game_Table
@@ -3229,7 +3229,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780929:
     script:       Talking_Doll
@@ -3275,7 +3275,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17780932:
     script: blank
@@ -3415,7 +3415,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780942:
     script:       Treasure_Coffer_Tenshodo
@@ -3427,7 +3427,7 @@ npcs:
         model: 968
       moving: 1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17780943:
     script:       Chatnachoq
@@ -3442,7 +3442,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780944:
     script:       Maze_Mongers_Shopfront
@@ -3458,7 +3458,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780945:
     script:       TABULA-MAKER
@@ -3486,7 +3486,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780947:
     script:       Duplidoc
@@ -3501,7 +3501,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780948:
     script: NPC[d4]
@@ -3637,7 +3637,7 @@ npcs:
       moving:          7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780958:
     script:       Chimh_Dlesbah
@@ -3653,7 +3653,7 @@ npcs:
       moving:       8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780959:
     script:       Darcia
@@ -3668,7 +3668,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780960:
     script:       Waypoint
@@ -3683,7 +3683,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780961:
     script: blank
@@ -3736,7 +3736,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17780964:
     script: blank
@@ -3878,7 +3878,7 @@ npcs:
         sub:   28672
       moving: 1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780972:
     script:       Synergy_Engineer
@@ -3898,7 +3898,7 @@ npcs:
         sub:   28672
       moving: 1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780973:
     script:       Synergy_Furnace
@@ -3915,7 +3915,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17780974:
     script:       Synergy_Furnace
@@ -3932,7 +3932,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17780975:
     script:       Synergy_Furnace
@@ -3949,7 +3949,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17780976:
     script:       Synergy_Furnace
@@ -3966,7 +3966,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17780977:
     script:       Synergy_Enthusiast
@@ -3986,7 +3986,7 @@ npcs:
         sub:   28672
       moving: 1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17780978:
     script:       Porter_Moogle
@@ -3999,7 +3999,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17780979:
     script: NPC[f3]
@@ -4030,7 +4030,7 @@ npcs:
       moving: 21
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17780981:
     script:       Domenic
@@ -4054,7 +4054,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17780982:
     script:       Nantoto
@@ -4078,7 +4078,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780983:
     script:       qm
@@ -4110,7 +4110,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780985:
     script:       Isakoth
@@ -4151,7 +4151,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780987:
     script:       Eternal_Flame
@@ -4232,7 +4232,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780991:
     script:       Fhelm_Jobeizat
@@ -4253,7 +4253,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17780992:
     script:       Isakoth
@@ -4348,7 +4348,7 @@ npcs:
       moving:       32776
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17780999:
     script:       Treasure_Coffer_Gobbie
@@ -4363,7 +4363,7 @@ npcs:
       name_vis:        36
       moving:           1
     status:  normal
-    content: DAILY_TALLY
+    content: daily_tally
 
   17781000:
     script:       Greyson
@@ -4386,7 +4386,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17781001:
     script:       Kavivian
@@ -4725,7 +4725,7 @@ npcs:
         model: 50
       name_prefix: 32
     widescan: true
-    content:  SOA
+    content:  soa
 
   17781023:
     script: NPC[11f]
@@ -4743,7 +4743,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17781025:
     script:       Susuroon
@@ -5441,4 +5441,4 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

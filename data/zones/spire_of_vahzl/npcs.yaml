@@ -18,7 +18,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16871465:
     script:       Armoury_Crate
@@ -36,7 +36,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16871475:
     script:       Armoury_Crate
@@ -54,7 +54,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16871572:
     script:       Achieve_Master
@@ -63,7 +63,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16871573:
     script: NPC[95]
@@ -81,7 +81,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16871576:
     script: NPC[98]
@@ -124,7 +124,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16871580:
     script:       _0n2
@@ -138,7 +138,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16871581:
     script:       _0n1
@@ -152,7 +152,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16871582:
     script:       _0n3
@@ -166,7 +166,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16871583:
     script: NPC[9f]
@@ -215,7 +215,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16871589:
     script:       Radiant_Aureole
@@ -228,7 +228,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16871590:
     script:       qm
@@ -241,7 +241,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871591:
     script:       Tenzen
@@ -255,7 +255,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871592:
     script:       Louverance
@@ -277,7 +277,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871593:
     script:       Ulmia
@@ -291,7 +291,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871594:
     script:       Nagmolada
@@ -305,7 +305,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871595:
     script:       BOX2
@@ -320,7 +320,7 @@ npcs:
       moving:       32768
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871596:
     script: blank
@@ -350,7 +350,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871599:
     script:       Prishe
@@ -365,7 +365,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16871600:
     script:       Tenzen
@@ -379,7 +379,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871601:
     script:       Ulmia
@@ -393,7 +393,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871602:
     script:       Nagmolada
@@ -407,7 +407,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871603:
     script:       Louverance
@@ -429,7 +429,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871604:
     script:       Diabolos
@@ -443,7 +443,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871605:
     script: blank
@@ -476,7 +476,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16871608:
     script:       Goblin_Footprint
@@ -488,7 +488,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16871609:
     script: NPC[b9]
@@ -507,7 +507,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871611:
     script:       Moogle
@@ -519,7 +519,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871612:
     script:       Moogle
@@ -531,7 +531,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871613:
     script:       Moogle
@@ -543,7 +543,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871614:
     script:       Moogle
@@ -555,7 +555,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871615:
     script:       Moogle
@@ -567,7 +567,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871616:
     script:       Moogle
@@ -579,7 +579,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16871617:
     script:       Moogle
@@ -591,4 +591,4 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop

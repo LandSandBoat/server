@@ -1977,7 +1977,7 @@ templates:
           item:   aptant_of_fyrst
         - chance: uncommon
           item:   aptant_of_arkhe
-    content: WOTG
+    content: wotg
 
   Thunder_Elemental:
     id:            3912

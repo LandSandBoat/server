@@ -5012,7 +5012,7 @@ templates:
           item:   insect_wing
       despoil:
         insect_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Tusked_Tigon:
     id:            4055

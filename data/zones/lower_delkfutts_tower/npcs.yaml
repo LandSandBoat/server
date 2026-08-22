@@ -22,7 +22,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17531131:
     script:       Seed_Afterglow
@@ -37,7 +37,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17531132:
     script:       Seed_Afterglow
@@ -52,7 +52,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17531133:
     script:       Seed_Afterglow
@@ -67,7 +67,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17531134:
     script:       Treasure_Casket
@@ -243,7 +243,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17531151:
     script: NPC[10f]
@@ -261,7 +261,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17531154:
     script: NPC[112]
@@ -1315,7 +1315,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17531228:
     script:       Planar_Rift
@@ -1331,7 +1331,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17531229:
     script:       Planar_Rift
@@ -1347,7 +1347,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17531230:
     script:       Riftworn_Pyxis
@@ -1362,7 +1362,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17531231:
     script:       Riftworn_Pyxis
@@ -1377,7 +1377,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17531232:
     script:       Riftworn_Pyxis
@@ -1392,7 +1392,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17531233:
     script:       Grounds_Tome
@@ -1406,7 +1406,7 @@ npcs:
       moving:   16
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17531234:
     script:       Grounds_Tome
@@ -1420,7 +1420,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17531235:
     script:       Grounds_Tome
@@ -1434,7 +1434,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17531236:
     script:       Geomantic_Reservoir
@@ -1448,7 +1448,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17531237:
     script: NPC[165]
@@ -1477,7 +1477,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17531240:
     script:       qm
@@ -1557,4 +1557,4 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

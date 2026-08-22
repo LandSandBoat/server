@@ -1578,7 +1578,7 @@ templates:
           item:   aptant_of_bellum
         - chance: uncommon
           item:   aptant_of_primus
-    content: WOTG
+    content: wotg
 
   Haunt:
     id:            1900
@@ -2503,7 +2503,7 @@ templates:
       despoil:
         colibri_feather: 0
         colibri_beak:    0
-    content: ROV
+    content: rov
 
   Locus_Wivre:
     id:            4355
@@ -2549,7 +2549,7 @@ templates:
           item:   wivre_horn
         - chance: very_rare
           item:   wivre_hide
-    content: ROV
+    content: rov
 
   Mahishasura:
     id:            5139
@@ -2593,7 +2593,7 @@ templates:
       drops:
         - chance: uncommon
           item:   veuglaire
-    content: WOTG
+    content: wotg
 
   Mamool_Ja_Blusterer:
     id:            2507
@@ -3546,7 +3546,7 @@ templates:
       drops:
         - chance: uncommon
           item:   tempest_belt
-    content: WOTG
+    content: wotg
 
   Olden_Treant:
     id:            2961

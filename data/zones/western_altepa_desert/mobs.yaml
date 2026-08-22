@@ -601,7 +601,7 @@ templates:
       drops:
         - chance: uncommon
           item:   fuchingiri
-    content: WOTG
+    content: wotg
 
   Celphie:
     id:            670
@@ -692,7 +692,7 @@ templates:
       drops:
         - chance: uncommon
           item:   lock_of_dahu_hair
-    content: WOTG
+    content: wotg
 
   Desert_Beetle:
     id:            1004
@@ -1719,7 +1719,7 @@ templates:
       drops:
         - chance: common
           item:   thrakon_breastplate
-    content: WOTG
+    content: wotg
 
   Razorjaw_Pugil_fished:
     id:            6776

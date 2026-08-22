@@ -19,7 +19,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16798098:
     script: NPC[192]
@@ -45,7 +45,7 @@ npcs:
         model: 52
       moving: 7
     widescan: true
-    content:  COP
+    content:  cop
 
   16798101:
     script:       Achieve_Master
@@ -57,7 +57,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   16798102:
     script: NPC[196]
@@ -75,7 +75,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16798105:
     script: NPC[199]
@@ -133,7 +133,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798111:
     script:       Fissure
@@ -147,7 +147,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798112:
     script:       Fissure
@@ -160,7 +160,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798113:
     script: _058
@@ -269,7 +269,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798122:
     script:       Eternal_Ice
@@ -282,7 +282,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798123:
     script:       Eternal_Ice
@@ -295,7 +295,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798124:
     script:       Chamnaet_Spring
@@ -308,7 +308,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798125:
     script:       qm
@@ -321,7 +321,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798126:
     script:       Buffalostalker_Dodzbraz
@@ -336,7 +336,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798127:
     script:       Louverance
@@ -358,7 +358,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16798128:
     script:       qm_moblin_hotrok
@@ -370,7 +370,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16798129:
     script:       Ramblix
@@ -384,7 +384,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16798130:
     script:       Goblin_Footprint
@@ -396,7 +396,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16798131:
     script: NPC[1b3]
@@ -415,7 +415,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798133:
     script:       Moogle
@@ -427,7 +427,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798134:
     script:       Moogle
@@ -439,7 +439,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798135:
     script:       Moogle
@@ -451,7 +451,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798136:
     script:       Moogle
@@ -463,7 +463,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798137:
     script:       Moogle
@@ -475,7 +475,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798138:
     script:       Moogle
@@ -487,7 +487,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798139:
     script:       Moogle
@@ -499,7 +499,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16798140:
     script:       Zebada
@@ -522,7 +522,7 @@ npcs:
       moving:       22
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16798141:
     script:       Louverance
@@ -543,7 +543,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16798142:
     script:       Louverance
@@ -564,7 +564,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16798143:
     script: blank
@@ -595,7 +595,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16798145:
     script:       Planar_Rift
@@ -611,7 +611,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16798146:
     script:       Planar_Rift
@@ -627,7 +627,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16798147:
     script:       Planar_Rift
@@ -643,7 +643,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16798148:
     script:       Riftworn_Pyxis
@@ -658,7 +658,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16798149:
     script:       Riftworn_Pyxis
@@ -673,7 +673,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16798150:
     script:       Riftworn_Pyxis
@@ -688,7 +688,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16798151:
     script:       Geomagnetic_Fount
@@ -701,7 +701,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16798152:
     script:       HomePoint#1
@@ -713,7 +713,7 @@ npcs:
         model: 51
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   16798153:
     script:       HomePoint#2
@@ -725,7 +725,7 @@ npcs:
         model: 51
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   16798154:
     script:       HomePoint#3
@@ -737,7 +737,7 @@ npcs:
         model: 51
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   16798155:
     script:       HomePoint#4
@@ -749,7 +749,7 @@ npcs:
         model: 51
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   16798156:
     script:       HomePoint#5
@@ -761,7 +761,7 @@ npcs:
         model: 51
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   16798157:
     script:       Ethereal_Junction
@@ -775,7 +775,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   16798158:
     script:       Ethereal_Junction
@@ -789,7 +789,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   16798159:
     script:       Ethereal_Junction
@@ -803,4 +803,4 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa

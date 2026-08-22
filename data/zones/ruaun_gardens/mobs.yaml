@@ -775,7 +775,7 @@ templates:
         respawn: 2700
       stats:
         hp: 3240000
-    content: TVR
+    content: tvr
 
   Kirins_Avatar_Strange_Happenings:
     id:            7360
@@ -815,7 +815,7 @@ templates:
         links: true
       spawn:
         type: [scripted]
-    content: TVR
+    content: tvr
 
   Light_Elemental:
     id:            2413

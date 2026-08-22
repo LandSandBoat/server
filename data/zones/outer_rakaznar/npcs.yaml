@@ -493,7 +493,7 @@ npcs:
       moving: 32775
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899910:
     script:       Mining_Point
@@ -506,7 +506,7 @@ npcs:
       moving: 32774
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899911:
     script:       Mining_Point
@@ -518,7 +518,7 @@ npcs:
         model: 2424
       moving: 32775
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899912:
     script:       Mining_Point
@@ -531,7 +531,7 @@ npcs:
       moving: 32775
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899913:
     script:       Mining_Point
@@ -544,7 +544,7 @@ npcs:
       moving: 32775
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899914:
     script:       Mining_Point
@@ -557,7 +557,7 @@ npcs:
       moving: 32775
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899915:
     script:       Mining_Point
@@ -570,7 +570,7 @@ npcs:
       moving: 32775
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899916:
     script:       Mining_Point
@@ -583,7 +583,7 @@ npcs:
       moving: 32775
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899917:
     script:       Mining_Point
@@ -596,7 +596,7 @@ npcs:
       moving: 32775
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899918:
     script:       Mining_Point
@@ -609,7 +609,7 @@ npcs:
       moving: 32774
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17899919:
     script:       Mining_Point
@@ -794,7 +794,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17899938:
     script:       Moogle
@@ -805,7 +805,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17899939:
     script:       Moogle
@@ -816,7 +816,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17899940:
     script:       Moogle
@@ -827,7 +827,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17899941:
     script:       Moogle
@@ -838,7 +838,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17899942:
     script:       Moogle
@@ -849,7 +849,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17899943:
     script:       Moogle
@@ -860,7 +860,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17899944:
     script:       Moogle
@@ -871,7 +871,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17899945:
     script: _7m0
@@ -1574,7 +1574,7 @@ npcs:
       moving:          8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900003:
     script: blank
@@ -1622,7 +1622,7 @@ npcs:
       name_vis: 112
       moving:     8
     status:  normal
-    content: SOA
+    content: soa
 
   17900007:
     script:       Ramblix
@@ -1636,7 +1636,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900008:
     script:       Goblin_Footprint
@@ -1648,7 +1648,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   17900009:
     script:       DIRECTORbyyae
@@ -1684,7 +1684,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900011:
     script: blank
@@ -1723,7 +1723,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900015:
     script:       Entwined_Roots_2
@@ -1738,7 +1738,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900016:
     script:       Entwined_Roots_3
@@ -1753,7 +1753,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900017:
     script:       Entwined_Roots_4
@@ -1768,7 +1768,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900018:
     script:       Entwined_Roots_5
@@ -1783,7 +1783,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900019:
     script:       Entwined_Roots_6
@@ -1798,7 +1798,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900020:
     script:       Vertical_Transit_Device_1
@@ -1812,7 +1812,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900021:
     script:       Vertical_Transit_Device_2
@@ -1826,7 +1826,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900022:
     script:       Vertical_Transit_Device_3
@@ -1840,7 +1840,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900023:
     script:       Vertical_Transit_Device_4
@@ -1854,7 +1854,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900024:
     script:       Vertical_Transit_Device_5
@@ -1868,7 +1868,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900025:
     script:       Vertical_Transit_Device_6
@@ -1882,7 +1882,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900026:
     script:       Vertical_Transit_Device_7
@@ -1896,7 +1896,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900027:
     script: blank
@@ -1917,7 +1917,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900029:
     script:       Meeting_Point
@@ -1931,7 +1931,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900030:
     script: blank
@@ -2026,7 +2026,7 @@ npcs:
       entity_flags:   515
       moving:       32769
     status:  normal
-    content: SOA
+    content: soa
 
   17900037:
     script:       Liseran_Door_Exit
@@ -2039,7 +2039,7 @@ npcs:
       entity_flags:   515
       moving:       32769
     status:  normal
-    content: SOA
+    content: soa
 
   17900038:
     script: blank
@@ -2102,7 +2102,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900043:
     script:       Effigy_of_Sealing_1
@@ -2118,7 +2118,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900044:
     script:       Effigy_of_Sealing_2
@@ -2134,7 +2134,7 @@ npcs:
       moving:       32789
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17900045:
     script: blank

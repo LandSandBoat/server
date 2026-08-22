@@ -51,7 +51,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433015:
     script:       qm_shiny_2
@@ -66,7 +66,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433016:
     script:       qm_shiny_3
@@ -81,7 +81,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433017:
     script:       qm_shiny_4
@@ -96,7 +96,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433018:
     script:       qm_shiny_5
@@ -111,7 +111,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433019:
     script:       qm_shiny_6
@@ -126,7 +126,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433020:
     script:       qm_shiny_7
@@ -141,7 +141,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433021:
     script:       qm_shiny_8
@@ -156,7 +156,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433022:
     script:       qm_shiny_9
@@ -171,7 +171,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433023:
     script:       qm_shiny_10
@@ -186,7 +186,7 @@ npcs:
       name_prefix:   32
       moving:         1
     status:  normal
-    content: ASA
+    content: asa
 
   17433024:
     script:       Treasure_Casket
@@ -375,7 +375,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17433041:
     script: NPC[1d1]
@@ -393,7 +393,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17433044:
     script: NPC[1d4]
@@ -943,7 +943,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17433092:
     script:       Grounds_Tome
@@ -957,7 +957,7 @@ npcs:
       moving:   24
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17433093:
     script:       Grounds_Tome
@@ -971,7 +971,7 @@ npcs:
       moving:   17
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17433094:
     script:       Grounds_Tome
@@ -985,7 +985,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17433095:
     script:       Grounds_Tome
@@ -999,7 +999,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17433096:
     script:       Grounds_Tome
@@ -1013,7 +1013,7 @@ npcs:
       moving:   24
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17433097:
     script:       HomePoint#1
@@ -1026,7 +1026,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17433098:
     script:       HomePoint#2
@@ -1039,7 +1039,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17433099:
     script:       HomePoint#3
@@ -1049,7 +1049,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17433100:
     script:       HomePoint#4
@@ -1059,7 +1059,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17433101:
     script:       HomePoint#5
@@ -1069,7 +1069,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17433102:
     script:       Ethereal_Junction
@@ -1084,7 +1084,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17433103:
     script:       Ethereal_Junction
@@ -1099,7 +1099,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17433104:
     script:       Ethereal_Junction
@@ -1114,4 +1114,4 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa

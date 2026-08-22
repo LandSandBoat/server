@@ -42,7 +42,7 @@ templates:
           item:   aptant_of_ishis
         - chance: uncommon
           item:   aptant_of_pera
-    content: WOTG
+    content: wotg
 
   Awd_Goggie:
     id:            297
@@ -267,7 +267,7 @@ templates:
           item:   insect_wing
       despoil:
         insect_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Death_Jacket_CN_RFS:
     id:            6305
@@ -603,7 +603,7 @@ templates:
       drops:
         - chance: common
           item:   dasras_ring
-    content: WOTG
+    content: wotg
 
   Exoray:
     id:            1271
@@ -943,7 +943,7 @@ templates:
       despoil:
         piece_of_crawler_cocoon: 0
         crawler_egg:             0
-    content: ABYSSEA
+    content: abyssea
 
   Knight_Crawler_CN:
     id:            6318
@@ -1365,7 +1365,7 @@ templates:
         sleepshroom:       0
         danceshroom:       0
         agaricus_mushroom: 0
-    content: ABYSSEA
+    content: abyssea
 
   Puroboros:
     id:            3232
@@ -1659,7 +1659,7 @@ templates:
         beehive_chip:  0
         giant_stinger: 0
         pot_of_honey:  0
-    content: ABYSSEA
+    content: abyssea
 
   Water_Elemental:
     id:            4309

@@ -20,7 +20,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16892098:
     script:       Stale_Draft
@@ -33,7 +33,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16892099:
     script:       Stale_Draft
@@ -46,7 +46,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16892100:
     script:       Stale_Draft
@@ -59,7 +59,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16892101:
     script:       Stale_Draft
@@ -72,7 +72,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16892102:
     script:       Achieve_Master
@@ -81,7 +81,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16892103:
     script: NPC[c7]
@@ -99,7 +99,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16892106:
     script: NPC[ca]
@@ -146,7 +146,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16892111:
     script:       _0sb
@@ -160,7 +160,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892112:
     script:       _0sf
@@ -174,7 +174,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892113:
     script:       _0sh
@@ -188,7 +188,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892114:
     script:       _0sm
@@ -202,7 +202,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892115:
     script:       _0sp
@@ -216,7 +216,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892116:
     script:       _0ss
@@ -230,7 +230,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892117:
     script:       _0sc
@@ -244,7 +244,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892118:
     script:       _0sg
@@ -258,7 +258,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892119:
     script:       _0sj
@@ -272,7 +272,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892120:
     script:       _0sk
@@ -286,7 +286,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892121:
     script:       _0so
@@ -300,7 +300,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892122:
     script:       _0sr
@@ -314,7 +314,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892123:
     script:       _0sd
@@ -328,7 +328,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892124:
     script:       _0se
@@ -342,7 +342,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892125:
     script:       _0si
@@ -356,7 +356,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892126:
     script:       _0sl
@@ -370,7 +370,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892127:
     script:       _0sn
@@ -384,7 +384,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892128:
     script:       _0sq
@@ -398,7 +398,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892129:
     script:       _0s0
@@ -412,7 +412,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892130:
     script:       _0s1
@@ -426,7 +426,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892131:
     script:       _0s2
@@ -440,7 +440,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892132:
     script:       _0s3
@@ -454,7 +454,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892133:
     script:       _0s4
@@ -468,7 +468,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892134:
     script:       _0s5
@@ -482,7 +482,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892135:
     script:       _0s6
@@ -496,7 +496,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892136:
     script:       _0s7
@@ -510,7 +510,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892137:
     script:       _0s8
@@ -524,7 +524,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892138:
     script:       _0s9
@@ -538,7 +538,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892139:
     script:       _0sa
@@ -552,7 +552,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892140:
     script:       _0st
@@ -566,7 +566,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892141:
     script:       _0su
@@ -580,7 +580,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892142:
     script:       Large_Keyhole
@@ -593,7 +593,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16892143:
     script:       Small_Keyhole
@@ -606,7 +606,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16892144:
     script:       _0sv
@@ -620,7 +620,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892145:
     script:       _0sw
@@ -634,7 +634,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16892146:
     script:       Prishe
@@ -649,7 +649,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16892147:
     script:       Tenzen
@@ -663,7 +663,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892148:
     script:       qm
@@ -674,7 +674,7 @@ npcs:
         type:  standard
         model: 52
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16892149:
     script:       Ulmia
@@ -688,7 +688,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892150:
     script:       Justinius
@@ -710,7 +710,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892151:
     script:       Tressia
@@ -733,7 +733,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892152:
     script:       Chemioue
@@ -756,7 +756,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892153:
     script:       Mengrenaux
@@ -778,7 +778,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892154:
     script:       Parelbriaux
@@ -800,7 +800,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892155:
     script:       Ondieulix
@@ -823,7 +823,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892156:
     script:       qm_prof_0
@@ -835,7 +835,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16892157:
     script:       qm_prof_1
@@ -847,7 +847,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16892158:
     script:       qm_prof_2
@@ -859,7 +859,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16892159:
     script:       qm_prof_3
@@ -871,7 +871,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16892160:
     script:       qm_prof_4
@@ -883,7 +883,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16892161:
     script:       qm_prof_5
@@ -895,7 +895,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16892162:
     script:       Muchavatte
@@ -910,7 +910,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 21
     widescan:        true
-    content:         COP
+    content:         cop
 
   16892163:
     script:       Chasalvige
@@ -924,7 +924,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892164:
     script:       Halaviabeau
@@ -938,7 +938,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892165:
     script:       Olbergieut
@@ -952,7 +952,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892166:
     script:       Mildaurion
@@ -966,7 +966,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892167:
     script:       _6fc
@@ -978,7 +978,7 @@ npcs:
       door_id:   1667642975
       animation: close_door
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16892168:
     script:       Diabolos
@@ -992,7 +992,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892169:
     script:       Diabolos
@@ -1006,7 +1006,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892170:
     script:       Diabolos
@@ -1020,7 +1020,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892171:
     script:       qm
@@ -1033,7 +1033,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16892172:
     script:       Yvenoile
@@ -1048,7 +1048,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 30
     widescan:        true
-    content:         COP
+    content:         cop
 
   16892173:
     script: NPC[10d]
@@ -1065,7 +1065,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16892175:
     script:       Moogle
@@ -1075,7 +1075,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16892176:
     script:       Moogle
@@ -1085,7 +1085,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16892177:
     script:       Moogle
@@ -1095,7 +1095,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16892178:
     script:       Moogle
@@ -1105,7 +1105,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16892179:
     script:       Moogle
@@ -1115,7 +1115,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16892180:
     script:       Moogle
@@ -1125,7 +1125,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16892181:
     script:       Moogle
@@ -1135,7 +1135,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16892182:
     script:       Ramblix
@@ -1149,7 +1149,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16892183:
     script:       Goblin_Footprint
@@ -1161,7 +1161,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16892184:
     script:       Treasure_Chest
@@ -1172,7 +1172,7 @@ npcs:
         model: 960
       moving: 7
     status:  normal
-    content: COP
+    content: cop
 
   16892185:
     script:       qm_tavnazian_cookbook
@@ -1184,7 +1184,7 @@ npcs:
         model: 52
       moving: 32775
     status:  normal
-    content: COP
+    content: cop
 
   16892186:
     script:       Survival_Guide
@@ -1199,4 +1199,4 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

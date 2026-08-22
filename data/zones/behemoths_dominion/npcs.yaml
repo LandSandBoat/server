@@ -19,7 +19,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17297460:
     script:       Treasure_Casket
@@ -199,7 +199,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17297478:
     script: NPC[46]
@@ -217,7 +217,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17297481:
     script: NPC[49]
@@ -380,7 +380,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17297496:
     script:       Field_Parchment
@@ -393,7 +393,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17297497:
     script:       Ethereal_Junction
@@ -408,7 +408,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17297498:
     script:       Ethereal_Junction
@@ -423,7 +423,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17297499:
     script:       Ethereal_Junction
@@ -438,7 +438,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17297500:
     script:       Mogball-Local
@@ -473,7 +473,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17297503:
     script:       Planar_Rift
@@ -489,7 +489,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17297504:
     script:       Planar_Rift
@@ -505,7 +505,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17297505:
     script:       Riftworn_Pyxis
@@ -520,7 +520,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17297506:
     script:       Riftworn_Pyxis
@@ -535,7 +535,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17297507:
     script:       Riftworn_Pyxis
@@ -550,7 +550,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17297508:
     script:       Geomantic_Reservoir
@@ -564,7 +564,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17297509:
     script: NPC[65]
@@ -597,4 +597,4 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

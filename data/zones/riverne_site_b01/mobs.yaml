@@ -242,7 +242,7 @@ templates:
           item:   wyvern_tailskin
       despoil:
         handful_of_wyvern_scales: 0
-    content: ABYSSEA
+    content: abyssea
 
   Book_Browser_Bokabraq:
     id:            503

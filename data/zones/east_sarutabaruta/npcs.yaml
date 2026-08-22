@@ -637,7 +637,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17253023:
     script: NPC[29f]
@@ -655,7 +655,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17253026:
     script: NPC[2a2]
@@ -1298,7 +1298,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17253075:
     script:       Field_Manual
@@ -1312,7 +1312,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17253076:
     script:       Field_Manual
@@ -1326,7 +1326,7 @@ npcs:
       moving:   21
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17253077:
     script:       Field_Parchment
@@ -1339,7 +1339,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17253078:
     script:       Ethereal_Junction
@@ -1354,7 +1354,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17253079:
     script:       Ethereal_Junction
@@ -1369,7 +1369,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17253080:
     script:       Ethereal_Junction
@@ -1384,7 +1384,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17253081:
     script:       Mogball-Local
@@ -1533,7 +1533,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17253092:
     script:       Planar_Rift
@@ -1549,7 +1549,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17253093:
     script:       Planar_Rift
@@ -1565,7 +1565,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17253094:
     script:       Riftworn_Pyxis
@@ -1580,7 +1580,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17253095:
     script:       Riftworn_Pyxis
@@ -1595,7 +1595,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17253096:
     script:       Riftworn_Pyxis
@@ -1610,7 +1610,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17253097:
     script:       Summoner
@@ -1817,7 +1817,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17253114:
     script:       Smile_Helper
@@ -2155,4 +2155,4 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

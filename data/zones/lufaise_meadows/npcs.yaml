@@ -26,7 +26,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16875825:
     script:       qm_kurrea
@@ -38,7 +38,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16875826:
     script: NPC[132]
@@ -103,7 +103,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16875835:
     script: NPC[13b]
@@ -121,7 +121,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16875838:
     script: NPC[13e]
@@ -168,7 +168,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16875843:
     script:       Swirling_Vortex
@@ -180,7 +180,7 @@ npcs:
       moving: 32768
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875844:
     script: blank
@@ -206,7 +206,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16875846:
     script:       _0o1
@@ -220,7 +220,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: COP
+    content: cop
 
   16875847:
     script: blank
@@ -240,7 +240,7 @@ npcs:
         type:  standard
         model: 52
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16875849:
     script:       Nagmolada
@@ -254,7 +254,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875850:
     script:       Makki-Chebukki
@@ -268,7 +268,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875851:
     script:       Kukki-Chebukki
@@ -282,7 +282,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875852:
     script:       Cherukiki
@@ -296,7 +296,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875853:
     script:       qm_hard_days_knight
@@ -308,7 +308,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16875854:
     script:       qm_chains_and_bonds
@@ -320,7 +320,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16875855:
     script:       Sanctia
@@ -343,7 +343,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875856:
     script:       Novice_Moogle
@@ -358,7 +358,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875857:
     script: NPC[151]
@@ -376,7 +376,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16875859:
     script:       Moogle
@@ -387,7 +387,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16875860:
     script:       Moogle
@@ -398,7 +398,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16875861:
     script:       Moogle
@@ -409,7 +409,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16875862:
     script:       Moogle
@@ -420,7 +420,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16875863:
     script:       Moogle
@@ -431,7 +431,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16875864:
     script:       Moogle
@@ -442,7 +442,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16875865:
     script:       Moogle
@@ -453,7 +453,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16875866:
     script:       Jemmoquel_RK
@@ -475,7 +475,7 @@ npcs:
       name_prefix:  32
       moving:        8
     widescan: true
-    content:  COP
+    content:  cop
 
   16875867:
     script:       Yoram_IM
@@ -497,7 +497,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  COP
+    content:  cop
 
   16875868:
     script:       Teldo-Moroldo_WW
@@ -520,7 +520,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16875869:
     script: Conquest_Banner
@@ -583,7 +583,7 @@ npcs:
       name_prefix:  32
       moving:       14
     widescan: true
-    content:  COP
+    content:  cop
 
   16875874:
     script:       Ghost_Talker_IM
@@ -605,7 +605,7 @@ npcs:
       name_prefix:  32
       moving:        8
     widescan: true
-    content:  COP
+    content:  cop
 
   16875875:
     script:       Cotete_WW
@@ -628,7 +628,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16875876:
     script:       Jersey
@@ -651,7 +651,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16875877:
     script: Conquest_Banner
@@ -706,7 +706,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875882:
     script:       Goblin_Footprint
@@ -718,7 +718,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16875883:
     script:       Travonce
@@ -740,7 +740,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  COP
+    content:  cop
 
   16875884:
     script:       Logging_Point
@@ -752,7 +752,7 @@ npcs:
         model: 2423
       moving: 32775
     status:  normal
-    content: COP
+    content: cop
 
   16875885:
     script:       Logging_Point
@@ -764,7 +764,7 @@ npcs:
         model: 2423
       moving: 32775
     status:  normal
-    content: COP
+    content: cop
 
   16875886:
     script:       Logging_Point
@@ -776,7 +776,7 @@ npcs:
         model: 2423
       moving: 32775
     status:  normal
-    content: COP
+    content: cop
 
   16875887:
     script:       Logging_Point
@@ -788,7 +788,7 @@ npcs:
         model: 2423
       moving: 32775
     status:  normal
-    content: COP
+    content: cop
 
   16875888:
     script:       Logging_Point
@@ -800,7 +800,7 @@ npcs:
         model: 2423
       moving: 32775
     status:  normal
-    content: COP
+    content: cop
 
   16875889:
     script:       Logging_Point
@@ -812,7 +812,7 @@ npcs:
         model: 2423
       moving: 32775
     status:  normal
-    content: COP
+    content: cop
 
   16875890:
     script:       qm_bitter_past
@@ -824,7 +824,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16875891:
     script:       qm_baumesel
@@ -836,7 +836,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16875892:
     script:       Chemioue
@@ -859,7 +859,7 @@ npcs:
       name_prefix:   32
       moving:         1
     widescan: true
-    content:  COP
+    content:  cop
 
   16875893:
     script: blank
@@ -888,7 +888,7 @@ npcs:
         type:  standard
         model: 52
       moving: 1
-    content: COP
+    content: cop
 
   16875896:
     script:       Prishe
@@ -902,7 +902,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16875897:
     script:       Ulmia
@@ -915,7 +915,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875898:
     script:       Makki-Chebukki
@@ -928,7 +928,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875899:
     script:       Kukki-Chebukki
@@ -941,7 +941,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875900:
     script:       Cherukiki
@@ -954,7 +954,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875901:
     script:       Vukki-Chebukki
@@ -976,7 +976,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875902:
     script:       Luck_Rune
@@ -989,7 +989,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16875903:
     script:       Tenzen
@@ -1002,7 +1002,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875904:
     script:       Jabbos
@@ -1023,7 +1023,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875905:
     script:       Shikaree_Z
@@ -1044,7 +1044,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875906:
     script:       Louverance
@@ -1065,7 +1065,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875907:
     script:       Louverance
@@ -1086,7 +1086,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875908:
     script: blank
@@ -1120,7 +1120,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16875911:
     script:       Planar_Rift
@@ -1136,7 +1136,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16875912:
     script:       Planar_Rift
@@ -1152,7 +1152,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16875913:
     script:       Planar_Rift
@@ -1168,7 +1168,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16875914:
     script:       Riftworn_Pyxis
@@ -1183,7 +1183,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16875915:
     script:       Riftworn_Pyxis
@@ -1198,7 +1198,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16875916:
     script:       Riftworn_Pyxis
@@ -1213,7 +1213,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16875917:
     script:       Survival_Guide
@@ -1228,7 +1228,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   16875918:
     script:       Ethereal_Junction
@@ -1242,7 +1242,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   16875919:
     script:       Ethereal_Junction
@@ -1256,7 +1256,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   16875920:
     script:       Ethereal_Junction
@@ -1270,7 +1270,7 @@ npcs:
       name_vis:        116
       moving:        32769
     status:  normal
-    content: SOA
+    content: soa
 
   16875921:
     script: blank

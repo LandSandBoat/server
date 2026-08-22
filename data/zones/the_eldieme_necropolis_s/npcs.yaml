@@ -18,7 +18,7 @@ npcs:
         model: 52
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494621:
     script:       Raigegue_R_dOraguille
@@ -31,7 +31,7 @@ npcs:
       name_vis:     128
       name_prefix:   32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494622:
     script:       Lewenhart
@@ -53,7 +53,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494623:
     script: NPC[25f]
@@ -105,7 +105,7 @@ npcs:
       look:
         type: door
       door_id: 1768448833
-    content: SOA
+    content: soa
 
   17494628:
     script: NPC[264]
@@ -123,7 +123,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17494630:
     script: NPC[266]
@@ -358,7 +358,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494648:
     script:       Infomation2
@@ -380,7 +380,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494649:
     script: NPC[279]
@@ -493,7 +493,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494663:
     script:       Johann_IM
@@ -515,7 +515,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494664:
     script:       Rululu_CC
@@ -537,7 +537,7 @@ npcs:
       name_prefix:  32
       moving:       23
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494665:
     script: blank
@@ -608,7 +608,7 @@ npcs:
       name_prefix:  32
       moving:       17
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494670:
     script: _4v1
@@ -621,7 +621,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494671:
     script: _4v2
@@ -634,7 +634,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494672:
     script: _4v3
@@ -647,7 +647,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494673:
     script: _4v4
@@ -660,7 +660,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494674:
     script:       _4v5
@@ -674,7 +674,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494675:
     script:       _4v6
@@ -688,7 +688,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494676:
     script:       _4v7
@@ -702,7 +702,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494677:
     script:       _4v8
@@ -716,7 +716,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494678:
     script:       _4v9
@@ -730,7 +730,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494679:
     script:       _4va
@@ -744,7 +744,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494680:
     script:       _4vb
@@ -758,7 +758,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494681:
     script:       _4vc
@@ -772,7 +772,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494682:
     script:       _4vd
@@ -786,7 +786,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494683:
     script:       _4ve
@@ -800,7 +800,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494684:
     script:       _4vf
@@ -814,7 +814,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494685:
     script:       _4vg
@@ -828,7 +828,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494686:
     script:       _4vh
@@ -842,7 +842,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494687:
     script:       _4vi
@@ -856,7 +856,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494688:
     script:       _4vj
@@ -870,7 +870,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494689:
     script:       _4vk
@@ -884,7 +884,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494690:
     script:       _4vt
@@ -898,7 +898,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494691:
     script:       _mv2
@@ -912,7 +912,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494692:
     script:       _mv1
@@ -926,7 +926,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494693:
     script:       _mv3
@@ -940,7 +940,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494694:
     script:       _4vl
@@ -954,7 +954,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494695:
     script:       _4vm
@@ -968,7 +968,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494696:
     script:       _4vn
@@ -982,7 +982,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494697:
     script:       _4vo
@@ -996,7 +996,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494698:
     script:       _4vp
@@ -1010,7 +1010,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494699:
     script:       _4vq
@@ -1024,7 +1024,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494700:
     script:       _4vr
@@ -1038,7 +1038,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494701:
     script:       _4vs
@@ -1052,7 +1052,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494702:
     script:       _mv5
@@ -1066,7 +1066,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494703:
     script:       _mv6
@@ -1080,7 +1080,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494704:
     script:       _4vu
@@ -1094,7 +1094,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494705:
     script:       _4vv
@@ -1108,7 +1108,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494706:
     script:       _4vw
@@ -1122,7 +1122,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494707:
     script:       _4vx
@@ -1136,7 +1136,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494708:
     script:       _4vy
@@ -1150,7 +1150,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494709:
     script:       _4vz
@@ -1164,7 +1164,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494710:
     script:       _mv0
@@ -1178,7 +1178,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494711:
     script: _mv7
@@ -1191,7 +1191,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494712:
     script: _mv8
@@ -1204,7 +1204,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494713:
     script: _mv9
@@ -1217,7 +1217,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494714:
     script: _mva
@@ -1230,7 +1230,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494715:
     script: _mvb
@@ -1243,7 +1243,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494716:
     script: _mvc
@@ -1256,7 +1256,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494717:
     script: _mvd
@@ -1269,7 +1269,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494718:
     script: _mve
@@ -1282,7 +1282,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494719:
     script: _mvf
@@ -1295,7 +1295,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494720:
     script:       Layton
@@ -1318,7 +1318,7 @@ npcs:
       moving:       23
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494721:
     script:       Erik
@@ -1341,7 +1341,7 @@ npcs:
       moving:       17
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494722:
     script:       Theodor
@@ -1364,7 +1364,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494723:
     script:       Red_Axe
@@ -1387,7 +1387,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494724:
     script:       Gravestone
@@ -1400,7 +1400,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494725:
     script:       Sarcophagus_map_quest
@@ -1413,7 +1413,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494726:
     script:       Ramblix
@@ -1427,7 +1427,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494727:
     script:       Goblin_Footprint
@@ -1439,7 +1439,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17494728:
     script:       qm1
@@ -1451,7 +1451,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494729:
     script: blank
@@ -1490,7 +1490,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494732:
     script:       Erlene
@@ -1513,7 +1513,7 @@ npcs:
       moving:       23
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494733:
     script:       Ulbrecht
@@ -1534,7 +1534,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494734:
     script:       Schultz
@@ -1555,7 +1555,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494735:
     script:       '9'
@@ -1575,7 +1575,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: WOTG
+    content: wotg
 
   17494736:
     script: blank
@@ -1643,7 +1643,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494740:
     script:       Carrel
@@ -1664,7 +1664,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494741:
     script:       Dillon
@@ -1685,7 +1685,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494742:
     script: blank
@@ -1761,7 +1761,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494748:
     script: blank
@@ -1820,7 +1820,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494754:
     script:       Moogle
@@ -1832,7 +1832,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494755:
     script:       Moogle
@@ -1844,7 +1844,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494756:
     script:       Moogle
@@ -1856,7 +1856,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494757:
     script:       Moogle
@@ -1868,7 +1868,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494758:
     script:       Moogle
@@ -1880,7 +1880,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494759:
     script:       Moogle
@@ -1892,7 +1892,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494760:
     script:       Moogle
@@ -1904,7 +1904,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17494761:
     script:       Sarcophagus
@@ -1917,7 +1917,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494762:
     script:       Zeid
@@ -1930,7 +1930,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494763:
     script:       Volker
@@ -1943,7 +1943,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494764:
     script: blank
@@ -1974,7 +1974,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494766:
     script: blank
@@ -2091,7 +2091,7 @@ npcs:
       moving:       17
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494774:
     script:       Allied_Commissary
@@ -2112,7 +2112,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494775:
     script: blank
@@ -2204,7 +2204,7 @@ npcs:
         model: 2292
       name_vis: 16
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494781:
     script:       Royal_Provisioner
@@ -2215,7 +2215,7 @@ npcs:
         model: 2292
       name_vis: 16
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494782:
     script:       Royal_Provisioner
@@ -2226,7 +2226,7 @@ npcs:
         model: 2292
       name_vis: 16
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494783:
     script: NPC[2ff]
@@ -2246,7 +2246,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17494785:
     script: blank
@@ -2331,7 +2331,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17494790:
     script:       Planar_Rift
@@ -2347,7 +2347,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17494791:
     script:       Planar_Rift
@@ -2363,7 +2363,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17494792:
     script:       Riftworn_Pyxis
@@ -2378,7 +2378,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17494793:
     script:       Riftworn_Pyxis
@@ -2393,7 +2393,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17494794:
     script:       Riftworn_Pyxis
@@ -2408,7 +2408,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17494795:
     script:       Survival_Guide
@@ -2423,7 +2423,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17494796:
     script: blank

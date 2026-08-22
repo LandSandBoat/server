@@ -2248,7 +2248,7 @@ templates:
       despoil:
         demon_horn:  0
         demon_skull: 0
-    content: ABYSSEA
+    content: abyssea
 
   Fortification_NV80:
     id:           6880
@@ -4703,7 +4703,7 @@ templates:
       despoil:
         demon_horn:  0
         demon_skull: 0
-    content: ABYSSEA
+    content: abyssea
 
   Spinebeak_Neckchopper:
     id:            3730
@@ -4963,7 +4963,7 @@ templates:
       despoil:
         demon_horn:  0
         demon_skull: 0
-    content: ABYSSEA
+    content: abyssea
 
   Yagudo_Chanter_past:
     id:            5493

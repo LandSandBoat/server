@@ -371,7 +371,7 @@ templates:
           item:   aptant_of_arkhe
         - chance: uncommon
           item:   aptant_of_ishis
-    content: WOTG
+    content: wotg
 
   Claret:
     id:            738
@@ -813,7 +813,7 @@ templates:
       drops:
         - chance: uncommon
           item:   lyft_ferule
-    content: WOTG
+    content: wotg
 
   Fire_Elemental:
     id:            1341
@@ -1426,7 +1426,7 @@ templates:
       drops:
         - chance: uncommon
           item:   octant
-    content: WOTG
+    content: wotg
 
   Khromasoul_Bhurborlor:
     id:            2223
@@ -1678,7 +1678,7 @@ templates:
       despoil:
         slice_of_land_crab_meat: 0
         crab_shell:              0
-    content: ABYSSEA
+    content: abyssea
 
   Phasma:
     id:            3130
@@ -1857,7 +1857,7 @@ templates:
       despoil:
         piece_of_crawler_cocoon: 0
         crawler_egg:             0
-    content: ABYSSEA
+    content: abyssea
 
   Sicklemoon_Crab:
     id:            3615
@@ -2003,7 +2003,7 @@ templates:
       despoil:
         handful_of_pugil_scales: 0
         handful_of_fish_scales:  0
-    content: ABYSSEA
+    content: abyssea
 
   Sweeping_Cluster:
     id:            3825

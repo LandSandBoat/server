@@ -36,6 +36,8 @@
 #include <common/types/flag.h>
 #include <common/types/maybe.h>
 
+#include "data/enums/content.h"
+
 #include <string>
 #include <string_view>
 #include <type_traits>
@@ -357,7 +359,8 @@ void  ClearCharVarFromAll(const std::string& varName);                          
 void  Terminate();                                                                                   // Logs off all characters and terminates the server
 
 auto GetTextIDVariable(xi::ZoneId ZoneID, const char* variable) -> int32; // Load the value of the TextID variable of the specified zone
-bool IsContentEnabled(const std::string& content);
+auto IsContentEnabled(const std::string& content) -> bool;
+auto IsContentEnabled(xi::Content content) -> bool;
 
 void OnGameDay(CZone* PZone);
 void OnGameHour(CZone* PZone);

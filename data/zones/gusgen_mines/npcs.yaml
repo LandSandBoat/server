@@ -196,7 +196,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17580365:
     script: NPC[14d]
@@ -214,7 +214,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17580368:
     script: NPC[150]
@@ -734,7 +734,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17580412:
     script:       Planar_Rift
@@ -750,7 +750,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17580413:
     script:       Planar_Rift
@@ -766,7 +766,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17580414:
     script:       Riftworn_Pyxis
@@ -781,7 +781,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17580415:
     script:       Riftworn_Pyxis
@@ -796,7 +796,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17580416:
     script:       Riftworn_Pyxis
@@ -811,7 +811,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17580417:
     script:       Grounds_Tome
@@ -825,7 +825,7 @@ npcs:
       moving:   18
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17580418:
     script:       Grounds_Tome
@@ -839,7 +839,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17580419:
     script:       Grounds_Tome
@@ -853,7 +853,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17580420:
     script:       Geomagnetic_Fount
@@ -866,7 +866,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17580421:
     script:       Geomantic_Reservoir
@@ -880,7 +880,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17580422:
     script: NPC[186]
@@ -950,7 +950,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17580429:
     script:       Survival_Guide
@@ -965,7 +965,7 @@ npcs:
       moving:        18
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17580430:
     script: blank
@@ -989,7 +989,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17580432:
     script:       Magh_Bihu

@@ -428,7 +428,7 @@ templates:
           item:   vial_of_fiend_blood
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Droma_GC:
     id:            6597
@@ -1109,7 +1109,7 @@ templates:
           item:   bat_wing
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Frogamander:
     id:            5888
@@ -1156,7 +1156,7 @@ templates:
       drops:
         - chance: common
           item:   selemnus_belt
-    content: WOTG
+    content: wotg
 
   Funnel_Bats_GC:
     id:            6424
@@ -1304,7 +1304,7 @@ templates:
       drops:
         - chance: common
           item:   promptitude_solea
-    content: WOTG
+    content: wotg
 
   Hellmine:
     id:            1922
@@ -1399,7 +1399,7 @@ templates:
       drops:
         - chance: uncommon
           item:   sleight_kukri
-    content: WOTG
+    content: wotg
 
   Kaboom:
     id:            6588
@@ -1446,7 +1446,7 @@ templates:
           item:   bomb_arm
       despoil:
         pinch_of_bomb_ash: 0
-    content: ABYSSEA
+    content: abyssea
 
   Light_Elemental_SA:
     id:            5531
@@ -2230,7 +2230,7 @@ templates:
         insect_wing:  0
         beetle_shell: 0
         beetle_jaw:   0
-    content: ABYSSEA
+    content: abyssea
 
   Wingrats_GC:
     id:            6439

@@ -23,7 +23,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16965651:
     script: NPC[13]
@@ -41,7 +41,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16965654:
     script: NPC[16]
@@ -105,7 +105,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16965661:
     script:       Moogle
@@ -117,7 +117,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16965662:
     script:       Moogle
@@ -129,7 +129,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16965663:
     script:       Moogle
@@ -141,7 +141,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16965664:
     script:       Moogle
@@ -153,7 +153,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16965665:
     script:       Moogle
@@ -165,7 +165,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16965666:
     script:       Moogle
@@ -177,7 +177,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16965667:
     script:       Moogle
@@ -189,7 +189,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16965668:
     script: blank
@@ -225,7 +225,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16965671:
     script:       Map
@@ -238,7 +238,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16965672:
     script:       _1a0
@@ -252,7 +252,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16965673:
     script:       _1a1
@@ -266,7 +266,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16965674:
     script:       _1a2
@@ -280,7 +280,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16965675:
     script:       _1a3
@@ -294,7 +294,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16965676:
     script:       _1a4
@@ -308,7 +308,7 @@ npcs:
       animation:    close_door
       moving:       32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16965677:
     script:       _1a5
@@ -322,7 +322,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16965678:
     script:       Cehn_Teyohngo
@@ -346,4 +346,4 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau

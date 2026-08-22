@@ -9,7 +9,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17633324:
     script: NPC[2c]
@@ -27,7 +27,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17633327:
     script: NPC[2f]
@@ -384,4 +384,4 @@ npcs:
       name_prefix:   34
       moving:         1
     status:  normal
-    content: WOTG
+    content: wotg

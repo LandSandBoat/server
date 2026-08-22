@@ -62,7 +62,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982025:
     script:       Moogle
@@ -74,7 +74,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982026:
     script:       Moogle
@@ -86,7 +86,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982027:
     script:       Moogle
@@ -98,7 +98,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982028:
     script:       Moogle
@@ -110,7 +110,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982029:
     script:       Moogle
@@ -122,7 +122,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982030:
     script:       Moogle
@@ -134,7 +134,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982031:
     script:       Moogle
@@ -146,7 +146,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982032:
     script:       Tazhaal
@@ -170,7 +170,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982033:
     script:       Zarfhid
@@ -194,7 +194,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982034:
     script:       Atiza
@@ -218,7 +218,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982035:
     script:       Muyadah
@@ -242,7 +242,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982036:
     script:       Burnished_Bones
@@ -266,7 +266,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982037:
     script:       Esoteric_Hound
@@ -290,7 +290,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982038:
     script:       Furious_Boulder
@@ -314,7 +314,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982039:
     script:       Somnolent_Rooster
@@ -338,7 +338,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982040:
     script:       Kuhn_Tsahnpri
@@ -363,7 +363,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982041:
     script:       Baya_Hiramayuh
@@ -388,7 +388,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982042:
     script:       Khoi_Gamduhla
@@ -412,7 +412,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982043:
     script:       Muji_Tsalahn
@@ -436,7 +436,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982044:
     script: _1es
@@ -494,7 +494,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982048:
     script:       Moogle
@@ -507,7 +507,7 @@ npcs:
       animation_sub:     1
       moving:        32789
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982049:
     script: blank
@@ -525,7 +525,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2075
-    content: TOAU
+    content: toau
 
   16982051:
     script: blank
@@ -545,7 +545,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982053:
     script:       Symphonic_Curator
@@ -557,7 +557,7 @@ npcs:
         model: 1847
       moving: 32783
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982054:
     script:       HomePoint#1
@@ -570,7 +570,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982055:
     script:       HomePoint#2
@@ -583,7 +583,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16982056:
     script:       HomePoint#3
@@ -596,7 +596,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16982057:
     script:       HomePoint#4
@@ -609,7 +609,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16982058:
     script:       HomePoint#5
@@ -619,7 +619,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   16982059:
     script:       Ironbound_Gate
@@ -631,7 +631,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982060:
     script:       Ironbound_Gate
@@ -643,7 +643,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982061:
     script:       _1eb
@@ -657,7 +657,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982062:
     script:       _1ea
@@ -671,7 +671,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982063:
     script:       _1ec
@@ -685,7 +685,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982064:
     script:       _1ed
@@ -699,7 +699,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982065:
     script:       _1e0
@@ -713,7 +713,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982066:
     script: _1ef
@@ -751,7 +751,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982069:
     script:       Sharin-Garin
@@ -775,7 +775,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982070:
     script:       _1e6
@@ -789,7 +789,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982071:
     script:       Door_Kokba_Hostel
@@ -801,7 +801,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982072:
     script:       _1e8
@@ -815,7 +815,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982073:
     script:       Door_Kokba_Hostel
@@ -841,7 +841,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982075:
     script:       _1e9
@@ -855,7 +855,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982076:
     script:       Runic_Portal
@@ -868,7 +868,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982077:
     script:       _1eg
@@ -882,7 +882,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982078:
     script:       _1eh
@@ -896,7 +896,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982079:
     script:       _1ei
@@ -910,7 +910,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982080:
     script:       _1ej
@@ -924,7 +924,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982081:
     script:       Imperial_Whitegate
@@ -937,7 +937,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982082:
     script:       _fj0
@@ -951,7 +951,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982083:
     script:       Gate_Chocobo_Circuit
@@ -963,7 +963,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982084:
     script:       Auction_Counter
@@ -975,7 +975,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982085:
     script:       Auction_Counter
@@ -987,7 +987,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982086:
     script:       Auction_Counter
@@ -999,7 +999,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982087:
     script:       Riyadahf
@@ -1023,7 +1023,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982088:
     script:       Gavrie
@@ -1038,7 +1038,7 @@ npcs:
       moving:        6
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982089:
     script:       Malfud
@@ -1062,7 +1062,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982090:
     script:       Rubahah
@@ -1086,7 +1086,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982091:
     script:       Mulnith
@@ -1101,7 +1101,7 @@ npcs:
       moving:        6
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982092:
     script:       Saluhwa
@@ -1125,7 +1125,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982093:
     script:       Dwago
@@ -1149,7 +1149,7 @@ npcs:
       moving:         6
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982094:
     script:       Kulh_Amariyo
@@ -1173,7 +1173,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982095:
     script:       Khaf_Jhifanm
@@ -1197,7 +1197,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982096:
     script:       Hagakoff
@@ -1221,7 +1221,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982097:
     script:       Bajahb
@@ -1245,7 +1245,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982098:
     script:       Mazween
@@ -1269,7 +1269,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982099:
     script:       Fayeewah
@@ -1293,7 +1293,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982100:
     script:       Yafaaf
@@ -1317,7 +1317,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982101:
     script:       Wahnid
@@ -1341,7 +1341,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982102:
     script:       Gathweeda
@@ -1365,7 +1365,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982103:
     script:       Wahraga
@@ -1389,7 +1389,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982104:
     script:       Maudaal
@@ -1413,7 +1413,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982105:
     script:       Milazahn
@@ -1437,7 +1437,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982106:
     script:       Musdahl
@@ -1461,7 +1461,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982107:
     script:       Jumaaf
@@ -1485,7 +1485,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982108:
     script:       Qahzwin
@@ -1509,7 +1509,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982109:
     script:       Kabihyam
@@ -1533,7 +1533,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982110:
     script:       Arzizah
@@ -1557,7 +1557,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982111:
     script:       Mafwahb
@@ -1581,7 +1581,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982112:
     script:       Kalimahf
@@ -1605,7 +1605,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982113:
     script:       Eunheem
@@ -1629,7 +1629,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982114:
     script:       Sajahb
@@ -1653,7 +1653,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982115:
     script:       Zwinam
@@ -1677,7 +1677,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982116:
     script:       Ahtuuzah
@@ -1700,7 +1700,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982117:
     script:       Ugrihd
@@ -1724,7 +1724,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982118:
     script:       Kaduru-Haiduru
@@ -1748,7 +1748,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982119:
     script:       Sulbahn
@@ -1772,7 +1772,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982120:
     script:       Hadayah
@@ -1796,7 +1796,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982121:
     script:       Shahau
@@ -1820,7 +1820,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982122:
     script:       Kemha_Flasehp
@@ -1844,7 +1844,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982123:
     script:       Koyol-Futenol
@@ -1860,7 +1860,7 @@ npcs:
       moving:       7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982124:
     script:       Zyfhil
@@ -1883,7 +1883,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982125:
     script:       Petrino
@@ -1900,7 +1900,7 @@ npcs:
       moving:        32782
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982126:
     script:       Tafeesa
@@ -1916,7 +1916,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982127:
     script:       Talwahn
@@ -1940,7 +1940,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982128:
     script:       Hamnahb
@@ -1956,7 +1956,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982129:
     script:       Bujahwa
@@ -1980,7 +1980,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982130:
     script:       Galzweesh
@@ -2004,7 +2004,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982131:
     script:       Shahbizu
@@ -2028,7 +2028,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982132:
     script:       Nonoroon
@@ -2043,7 +2043,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982133:
     script:       Nafiwaa
@@ -2067,7 +2067,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982134:
     script:       Kubhe_Ijyuhla
@@ -2091,7 +2091,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982135:
     script:       Tohka_Telposkha
@@ -2115,7 +2115,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982136:
     script:       Gigirk
@@ -2140,7 +2140,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982137:
     script:       Rodin-Comidin
@@ -2164,7 +2164,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982138:
     script:       Hajaom
@@ -2188,7 +2188,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982139:
     script:       Rujen-Gorgen
@@ -2212,7 +2212,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982140:
     script:       Zaranf
@@ -2228,7 +2228,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982141:
     script:       Kelsha-Melansha
@@ -2252,7 +2252,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982142:
     script:       Halbeeya
@@ -2276,7 +2276,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982143:
     script:       Teteroon
@@ -2291,7 +2291,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982144:
     script:       Ubahrid
@@ -2316,7 +2316,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982145:
     script:       Nijaom
@@ -2332,7 +2332,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982146:
     script:       Zubyahn
@@ -2348,7 +2348,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982147:
     script:       Amajal
@@ -2364,7 +2364,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982148:
     script:       Hashayra
@@ -2389,7 +2389,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982149:
     script:       Kamnahb
@@ -2413,7 +2413,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982150:
     script:       Drahbah
@@ -2428,7 +2428,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982151:
     script:       Kazween
@@ -2443,7 +2443,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982152:
     script:       Mariyaam
@@ -2458,7 +2458,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982153:
     script:       Shajaf
@@ -2482,7 +2482,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982154:
     script:       Nadee_Periyaha
@@ -2506,7 +2506,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982155:
     script:       _1e1
@@ -2520,7 +2520,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982156:
     script:       Naja_Salaheem
@@ -2536,7 +2536,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982157:
     script:       Abquhbah
@@ -2559,7 +2559,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982158:
     script:       Naja_Salaheem
@@ -2581,7 +2581,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982159:
     script:       Naja_Salaheem
@@ -2602,7 +2602,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982160:
     script:       _1e2
@@ -2616,7 +2616,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982161:
     script:       Ghatsad
@@ -2632,7 +2632,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982162:
     script:       Abda-Lurabda
@@ -2656,7 +2656,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982163:
     script:       Tateeya
@@ -2680,7 +2680,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982164:
     script: blank
@@ -2714,7 +2714,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982166:
     script:       Automaton
@@ -2728,7 +2728,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982167:
     script: blank
@@ -2772,7 +2772,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982171:
     script:       Rytaal
@@ -2796,7 +2796,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982172:
     script:       Kantila
@@ -2819,7 +2819,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982173:
     script:       Qulsun
@@ -2842,7 +2842,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982174:
     script:       Yahsra
@@ -2866,7 +2866,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982175:
     script:       Isdebaaq
@@ -2890,7 +2890,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982176:
     script:       Famad
@@ -2914,7 +2914,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982177:
     script:       Lageegee
@@ -2938,7 +2938,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982178:
     script:       Bhoy_Yhupplo
@@ -2962,7 +2962,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982179:
     script:       Sorrowful_Sage
@@ -2986,7 +2986,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982180:
     script:       Berangere
@@ -3010,7 +3010,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16982181:
     script: blank
@@ -3062,7 +3062,7 @@ npcs:
       moving: 32768
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982185:
     script:       Razfahd
@@ -3076,7 +3076,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982186:
     script:       qm
@@ -3097,7 +3097,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982187:
     script:       qm
@@ -3118,7 +3118,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982188:
     script:       qm
@@ -3139,7 +3139,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982189:
     script:       qm
@@ -3160,7 +3160,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982190:
     script:       qm
@@ -3181,7 +3181,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982191:
     script:       qm
@@ -3202,7 +3202,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982192:
     script:       qm
@@ -3223,7 +3223,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982193:
     script:       qm
@@ -3244,7 +3244,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982194:
     script:       qm
@@ -3265,7 +3265,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982195:
     script:       qm
@@ -3286,7 +3286,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982196:
     script:       qm
@@ -3307,7 +3307,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982197:
     script:       qm
@@ -3328,7 +3328,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982198:
     script:       qm
@@ -3349,7 +3349,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982199:
     script:       qm
@@ -3370,7 +3370,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982200:
     script:       qm
@@ -3391,7 +3391,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982201:
     script:       qm
@@ -3412,7 +3412,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982202:
     script:       qm
@@ -3433,7 +3433,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982203:
     script:       qm
@@ -3454,7 +3454,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982204:
     script:       qm
@@ -3475,7 +3475,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982205:
     script:       qm
@@ -3496,7 +3496,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982206:
     script:       qm
@@ -3517,7 +3517,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982207:
     script:       qm
@@ -3538,7 +3538,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982208:
     script: blank
@@ -3624,7 +3624,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982213:
     script:       Rishfee
@@ -3645,7 +3645,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982214:
     script:       Amnaf
@@ -3666,7 +3666,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982215:
     script:       Ovjang
@@ -3680,7 +3680,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982216:
     script:       Aphmau
@@ -3693,7 +3693,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982217:
     script:       qm24
@@ -3705,7 +3705,7 @@ npcs:
       entity_flags: 25
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16982218:
     script:       Aphmau
@@ -3718,7 +3718,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982219:
     script:       Nashmeira
@@ -3731,7 +3731,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982220:
     script:       Nashmeira
@@ -3744,7 +3744,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982221:
     script:       Raillefal
@@ -3756,7 +3756,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982222:
     script:       Gessho
@@ -3768,7 +3768,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982223:
     script: blank
@@ -3789,7 +3789,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982225:
     script: blank
@@ -3824,7 +3824,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982227:
     script:       Falzum
@@ -3845,7 +3845,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982228:
     script: blank
@@ -3887,7 +3887,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982231:
     script:       King_of_Hearts
@@ -3901,7 +3901,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982232:
     script:       Naja_Salaheem
@@ -3914,7 +3914,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982233:
     script:       Luzaf
@@ -3926,7 +3926,7 @@ npcs:
       entity_flags: 2077
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982234:
     script:       Flit
@@ -3939,7 +3939,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982235:
     script: blank
@@ -3993,7 +3993,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982239:
     script: blank
@@ -4024,7 +4024,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982241:
     script:       Abquhbah
@@ -4045,7 +4045,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982242:
     script:       Naji
@@ -4066,7 +4066,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982243:
     script:       Volker
@@ -4079,7 +4079,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982244:
     script:       Wolfgang
@@ -4101,7 +4101,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982245:
     script:       Halver
@@ -4123,7 +4123,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982246:
     script:       Bharifhal
@@ -4145,7 +4145,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982247:
     script: blank
@@ -4167,7 +4167,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982249:
     script: blank
@@ -4202,7 +4202,7 @@ npcs:
       entity_flags:  1027
       moving:       32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982252:
     script:       Cacaroon
@@ -4217,7 +4217,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982253:
     script:       Giehnz
@@ -4240,7 +4240,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982254:
     script:       Sashosho
@@ -4264,7 +4264,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982255:
     script:       _1e3
@@ -4278,7 +4278,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16982256:
     script:       qm25
@@ -4290,7 +4290,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16982257:
     script:       Nadeey
@@ -4314,7 +4314,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982258:
     script:       Kuhmden
@@ -4338,7 +4338,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982259:
     script:       Ugahar
@@ -4362,7 +4362,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982260:
     script:       Prillaure
@@ -4378,7 +4378,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982261:
     script:       Ahaadah
@@ -4402,7 +4402,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982262:
     script:       Tinga-Matonga
@@ -4424,7 +4424,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982263:
     script:       Alcander
@@ -4447,7 +4447,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982264:
     script:       Ratihb
@@ -4470,7 +4470,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982265:
     script:       Imeeya
@@ -4492,7 +4492,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982266:
     script:       Yazweel
@@ -4514,7 +4514,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982267:
     script:       Taishu-Yaashu
@@ -4536,7 +4536,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982268:
     script: blank
@@ -4578,7 +4578,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982271:
     script:       Topok-Hippok
@@ -4600,7 +4600,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982272:
     script:       Maudadt
@@ -4622,7 +4622,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982273:
     script:       Qutiba
@@ -4645,7 +4645,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982274:
     script:       Ulamaal
@@ -4668,7 +4668,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982275:
     script:       Saliyahf
@@ -4691,7 +4691,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982276:
     script:       Wazyih
@@ -4715,7 +4715,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982277:
     script:       Caradoc
@@ -4738,7 +4738,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982278:
     script:       Achetragond
@@ -4760,7 +4760,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982279:
     script:       Munahda
@@ -4783,7 +4783,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982280:
     script: blank
@@ -4811,7 +4811,7 @@ npcs:
       entity_flags: 25
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982282:
     script:       Faihal
@@ -4831,7 +4831,7 @@ npcs:
       entity_flags: 25
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982283:
     script:       Galiwao
@@ -4851,7 +4851,7 @@ npcs:
       entity_flags: 25
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982284:
     script:       Kobdyu
@@ -4871,7 +4871,7 @@ npcs:
       entity_flags: 25
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982285:
     script:       Deminza
@@ -4891,7 +4891,7 @@ npcs:
       entity_flags: 25
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982286:
     script:       Bernahn
@@ -4911,7 +4911,7 @@ npcs:
       entity_flags: 25
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982287:
     script:       Faihal
@@ -4931,7 +4931,7 @@ npcs:
       entity_flags: 25
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982288:
     script: blank
@@ -4960,7 +4960,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982290:
     script: blank
@@ -5000,7 +5000,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982293:
     script:       Ahkk_Jharcham
@@ -5015,7 +5015,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982294:
     script:       qm1
@@ -5096,7 +5096,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982298:
     script:       Raubahn
@@ -5117,7 +5117,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982299:
     script: blank
@@ -5167,7 +5167,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982303:
     script:       Kushdeel
@@ -5188,7 +5188,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982304:
     script:       qm4
@@ -5228,7 +5228,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982306:
     script:       Wathdeeh
@@ -5249,7 +5249,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982307:
     script:       Harjeel
@@ -5270,7 +5270,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982308:
     script: blank
@@ -5301,7 +5301,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982310:
     script: blank
@@ -5340,7 +5340,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982313:
     script:       Mushayra
@@ -5355,7 +5355,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982314:
     script:       Ekhu_Pesshyadha
@@ -5379,7 +5379,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982315:
     script:       Mathlouq
@@ -5403,7 +5403,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982316:
     script:       Zabahf
@@ -5427,7 +5427,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982317:
     script:       Mhasbaf
@@ -5450,7 +5450,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982318:
     script:       Matifa
@@ -5473,7 +5473,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982319:
     script:       Tehf_Kimasnahya
@@ -5496,7 +5496,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982320:
     script:       Bashraf
@@ -5518,7 +5518,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982321:
     script:       Foudeel
@@ -5540,7 +5540,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982322:
     script:       Wahboud
@@ -5562,7 +5562,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982323:
     script:       Adahva
@@ -5575,7 +5575,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982324:
     script: blank
@@ -5607,7 +5607,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982326:
     script: blank
@@ -5627,7 +5627,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982328:
     script:       Yafahb
@@ -5647,7 +5647,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982329:
     script:       Abeesha
@@ -5667,7 +5667,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982330:
     script:       Laruha
@@ -5687,7 +5687,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982331:
     script:       Dhima_Polevhia
@@ -5710,7 +5710,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982332:
     script:       Qarimul
@@ -5730,7 +5730,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982333:
     script:       Warjal
@@ -5750,7 +5750,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982334:
     script:       Zaldur
@@ -5770,7 +5770,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982335:
     script: blank
@@ -5801,7 +5801,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982338:
     script:       Hishahma
@@ -5824,7 +5824,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982339:
     script:       Dabhuh
@@ -5848,7 +5848,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982340:
     script: blank
@@ -5905,7 +5905,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982345:
     script:       Nizahluf
@@ -5926,7 +5926,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982346:
     script:       Yazhaal
@@ -5947,7 +5947,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982347:
     script:       Minfram
@@ -5968,7 +5968,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982348:
     script:       Yajahm
@@ -5989,7 +5989,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982349:
     script:       Rafsween
@@ -6010,7 +6010,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982350:
     script: blank
@@ -6097,7 +6097,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982355:
     script: _1c6
@@ -6147,7 +6147,7 @@ npcs:
       animation_sub:  1
       name_prefix:   32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982358:
     script: blank
@@ -6194,7 +6194,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982361:
     script: blank
@@ -6231,7 +6231,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982364:
     script:       Fari-Wari
@@ -6254,7 +6254,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982365:
     script:       Biyaada
@@ -6275,7 +6275,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982366:
     script:       Rughadjeen
@@ -6296,7 +6296,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982367:
     script:       Rughadjeen
@@ -6317,7 +6317,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982368:
     script:       Gadalar
@@ -6338,7 +6338,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982369:
     script:       Najelith
@@ -6359,7 +6359,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982370:
     script:       Zazarg
@@ -6380,7 +6380,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982371:
     script:       Mihli_Aliapoh
@@ -6401,7 +6401,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982372:
     script:       Nateeyu
@@ -6414,7 +6414,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982373:
     script:       Gadalar
@@ -6435,7 +6435,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982374:
     script:       Missahd
@@ -6456,7 +6456,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982375:
     script:       Yamuld
@@ -6477,7 +6477,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982376:
     script:       Vatharad
@@ -6498,7 +6498,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982377:
     script: blank
@@ -6573,7 +6573,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982381:
     script: blank
@@ -6727,7 +6727,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982396:
     script:       Ratihb
@@ -6750,7 +6750,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982397:
     script:       Qutiba
@@ -6772,7 +6772,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982398:
     script:       Mutihb
@@ -6795,7 +6795,7 @@ npcs:
       moving:       32768
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982399:
     script:       Yazquhl
@@ -6817,7 +6817,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982400:
     script:       Mafwahb
@@ -6839,7 +6839,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982401:
     script:       Qultada
@@ -6861,7 +6861,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982402:
     script:       Qultada
@@ -6883,7 +6883,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982403:
     script:       Zweeha
@@ -6905,7 +6905,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982404:
     script:       Aznahf
@@ -6927,7 +6927,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982405:
     script:       Gowam
@@ -6950,7 +6950,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982406:
     script:       BLU01
@@ -6972,7 +6972,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982407:
     script:       BLU02
@@ -6994,7 +6994,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982408:
     script:       BLU03
@@ -7016,7 +7016,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982409:
     script:       BLU03
@@ -7038,7 +7038,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982410:
     script:       BLU03
@@ -7060,7 +7060,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982411:
     script: blank
@@ -7110,7 +7110,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982415:
     script:       Balajaha
@@ -7132,7 +7132,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982416:
     script:       Teepapa
@@ -7154,7 +7154,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982417:
     script:       Liliroon
@@ -7167,7 +7167,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982418:
     script:       Wiyaom
@@ -7189,7 +7189,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982419:
     script:       Sazog
@@ -7211,7 +7211,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982420:
     script: blank
@@ -7241,7 +7241,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982422:
     script:       Rhub_Wusthamoi
@@ -7262,7 +7262,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982423:
     script:       Gadalar
@@ -7283,7 +7283,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982424:
     script:       Iron_Eater
@@ -7304,7 +7304,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982425:
     script:       Talhaal
@@ -7325,7 +7325,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982426:
     script:       Zazarg
@@ -7346,7 +7346,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982427:
     script:       Odilon
@@ -7367,7 +7367,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982428:
     script:       Joaquin
@@ -7388,7 +7388,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982429:
     script: blank
@@ -7543,7 +7543,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982441:
     script:       Dalfhum
@@ -7564,7 +7564,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982442:
     script:       Mihli_Aliapoh
@@ -7585,7 +7585,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982443:
     script: blank
@@ -7624,7 +7624,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982445:
     script: blank
@@ -7655,7 +7655,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982447:
     script:       Isween
@@ -7675,7 +7675,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982448:
     script:       Gukool_Ja
@@ -7687,7 +7687,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982449:
     script:       Briallen
@@ -7707,7 +7707,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982450:
     script:       Attendant
@@ -7730,7 +7730,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982451:
     script:       Attendant
@@ -7753,7 +7753,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982452:
     script:       Attendant
@@ -7776,7 +7776,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982453:
     script:       Attendant
@@ -7799,7 +7799,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982454:
     script:       Ohsi_Shomahl
@@ -7815,7 +7815,7 @@ npcs:
       moving:       8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982455:
     script:       Fubruhn
@@ -7839,7 +7839,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982456:
     script: blank
@@ -7870,7 +7870,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982458:
     script: blank
@@ -7902,7 +7902,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982460:
     script:       Hajawaa
@@ -7925,7 +7925,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982461:
     script:       Jarafah
@@ -7940,7 +7940,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982462:
     script:       Pursuivant
@@ -7961,7 +7961,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982463:
     script:       Tsih_Kolgimih
@@ -7977,7 +7977,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982464:
     script: blank
@@ -8039,7 +8039,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982470:
     script:       Rongelouts
@@ -8060,7 +8060,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982471:
     script:       Rongelouts
@@ -8081,7 +8081,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982472:
     script:       Koja_Salaheem
@@ -8094,7 +8094,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982473:
     script:       Arcuhbah
@@ -8115,7 +8115,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982474:
     script:       Yasmeel
@@ -8136,7 +8136,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982475:
     script:       Neosaliat
@@ -8157,7 +8157,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982476:
     script:       Silver_Kettle
@@ -8178,7 +8178,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982477:
     script:       Ugrihd
@@ -8198,7 +8198,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982478:
     script:       Fubruhn
@@ -8218,7 +8218,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982479:
     script:       qm32
@@ -8228,7 +8228,7 @@ npcs:
         type:  standard
         model: 50
       moving: 1
-    content: TOAU
+    content: toau
 
   16982480:
     script:       BomePC
@@ -8242,7 +8242,7 @@ npcs:
       name_vis:       4
       name_prefix:   32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982481:
     script:       BomeNPC
@@ -8256,7 +8256,7 @@ npcs:
       name_vis:       4
       name_prefix:   32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982482:
     script:       Bome3
@@ -8270,7 +8270,7 @@ npcs:
       name_vis:       4
       name_prefix:   32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982483:
     script:       magicman
@@ -8290,7 +8290,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982484:
     script:       PC_B
@@ -8302,7 +8302,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982485:
     script:       NPC_B
@@ -8314,7 +8314,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982486:
     script:       PC_C
@@ -8326,7 +8326,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982487:
     script:       NPC_C
@@ -8338,7 +8338,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982488:
     script:       PC_G
@@ -8350,7 +8350,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982489:
     script:       NPC_G
@@ -8362,7 +8362,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982490:
     script:       '1'
@@ -8383,7 +8383,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982491:
     script:       '2'
@@ -8404,7 +8404,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982492:
     script:       '3'
@@ -8425,7 +8425,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982493:
     script:       '4'
@@ -8446,7 +8446,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982494:
     script:       '5'
@@ -8467,7 +8467,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982495:
     script:       '6'
@@ -8488,7 +8488,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982496:
     script:       '7'
@@ -8509,7 +8509,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982497:
     script:       '8'
@@ -8530,7 +8530,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982498:
     script:       '9'
@@ -8551,7 +8551,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982499:
     script:       '10'
@@ -8572,7 +8572,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982500:
     script:       '11'
@@ -8593,7 +8593,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982501:
     script:       '12'
@@ -8614,7 +8614,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982502:
     script:       '1'
@@ -8626,7 +8626,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982503:
     script:       '2'
@@ -8638,7 +8638,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982504:
     script:       '3'
@@ -8650,7 +8650,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982505:
     script:       '4'
@@ -8662,7 +8662,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982506:
     script:       '5'
@@ -8674,7 +8674,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982507:
     script:       '6'
@@ -8686,7 +8686,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982508:
     script:       '7'
@@ -8698,7 +8698,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982509:
     script:       '8'
@@ -8710,7 +8710,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982510:
     script:       '9'
@@ -8722,7 +8722,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982511:
     script:       '10'
@@ -8734,7 +8734,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982512:
     script:       '11'
@@ -8746,7 +8746,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982513:
     script:       '12'
@@ -8758,7 +8758,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982514:
     script:       Abquhbah
@@ -8778,7 +8778,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982515:
     script: blank
@@ -9009,7 +9009,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982539:
     script: blank
@@ -9055,7 +9055,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982543:
     script:       Mikilulu
@@ -9077,7 +9077,7 @@ npcs:
       name_prefix:   32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982544:
     script:       Clavauert
@@ -9098,7 +9098,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982545:
     script: blank
@@ -9322,7 +9322,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982566:
     script: blank
@@ -9347,7 +9347,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982568:
     script:       Sanraku
@@ -9362,7 +9362,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982569:
     script:       Ryo
@@ -9385,7 +9385,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982570:
     script: blank
@@ -9414,7 +9414,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982572:
     script:       Wajran
@@ -9435,7 +9435,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982573:
     script:       PAKU02
@@ -9456,7 +9456,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982574:
     script:       PAKU03
@@ -9477,7 +9477,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982575:
     script:       Kalidaaf
@@ -9498,7 +9498,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982576:
     script:       Shaeema
@@ -9519,7 +9519,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982577:
     script:       Rhub_Wusthamoi
@@ -9540,7 +9540,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982578:
     script:       kenbutsu04
@@ -9561,7 +9561,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982579:
     script:       kenbutsu09
@@ -9582,7 +9582,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982580:
     script:       kenbutsu10
@@ -9603,7 +9603,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982581:
     script: blank
@@ -9635,7 +9635,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982584:
     script:       qm36
@@ -9647,7 +9647,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982585:
     script:       qm37
@@ -9659,7 +9659,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982586:
     script: blank
@@ -9696,7 +9696,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982589:
     script:       PAKU02
@@ -9717,7 +9717,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982590:
     script:       PAKU03
@@ -9738,7 +9738,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982591:
     script:       Habadahl
@@ -9759,7 +9759,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982592:
     script:       Malzaab
@@ -9780,7 +9780,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982593:
     script:       FAN3
@@ -9801,7 +9801,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982594:
     script:       FAN4
@@ -9822,7 +9822,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982595:
     script:       FAN5
@@ -9843,7 +9843,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982596:
     script:       FAN6
@@ -9864,7 +9864,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982597:
     script:       FAN7
@@ -9885,7 +9885,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982598:
     script:       FAN8
@@ -9906,7 +9906,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982599:
     script:       HEI1
@@ -9927,7 +9927,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982600:
     script:       HEI2
@@ -9948,7 +9948,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982601:
     script:       HEI3
@@ -9969,7 +9969,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982602:
     script:       HEI4
@@ -9990,7 +9990,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982603:
     script:       HEI5
@@ -10011,7 +10011,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982604:
     script:       HEI6
@@ -10032,7 +10032,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982605:
     script:       HEI7
@@ -10053,7 +10053,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982606:
     script:       HEI8
@@ -10074,7 +10074,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982607:
     script:       Hunt_Registry
@@ -10088,7 +10088,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   16982608:
     script:       Synergy_Engineer
@@ -10108,7 +10108,7 @@ npcs:
         sub:   28672
       moving: 1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   16982609:
     script:       Synergy_Engineer
@@ -10128,7 +10128,7 @@ npcs:
         sub:   28672
       moving: 1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   16982610:
     script:       Synergy_Furnace
@@ -10145,7 +10145,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   16982611:
     script:       Synergy_Furnace
@@ -10162,7 +10162,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   16982612:
     script:       Synergy_Furnace
@@ -10179,7 +10179,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   16982613:
     script:       Synergy_Furnace
@@ -10196,7 +10196,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   16982614:
     script:       Synergy_Enthusiast
@@ -10216,7 +10216,7 @@ npcs:
         sub:   28672
       moving: 1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   16982615:
     script: blank
@@ -10238,7 +10238,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982617:
     script: blank
@@ -10267,7 +10267,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982620:
     script: blank
@@ -10316,7 +10316,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982625:
     script:       qm
@@ -10328,7 +10328,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982626:
     script:       qm
@@ -10340,7 +10340,7 @@ npcs:
       entity_flags: 2051
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16982627:
     script:       _260
@@ -10353,7 +10353,7 @@ npcs:
       entity_flags: 6147
       animation:    close_door
       moving:       1
-    content: TOAU
+    content: toau
 
   16982628:
     script:       '01'
@@ -10373,7 +10373,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982629:
     script:       '02'
@@ -10393,7 +10393,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982630:
     script:       '03'
@@ -10413,7 +10413,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982631:
     script:       '04'
@@ -10433,7 +10433,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982632:
     script:       Porter_Moogle
@@ -10446,7 +10446,7 @@ npcs:
       moving: 21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   16982633:
     script: NPC[269]
@@ -10467,7 +10467,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16982635:
     script: blank
@@ -10507,7 +10507,7 @@ npcs:
       moving: 21
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16982637:
     script:       Mrohk_Sahjuuli
@@ -10530,7 +10530,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16982638:
     script:       Achieve_Master
@@ -10539,7 +10539,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16982639:
     script: NPC[26f]
@@ -10561,7 +10561,7 @@ npcs:
       moving:       32789
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   16982641:
     script:       Treasure_Coffer
@@ -10576,7 +10576,7 @@ npcs:
       name_vis:        36
       moving:           1
     status:  normal
-    content: DAILY_TALLY
+    content: daily_tally
 
   16982642:
     script:       Unity_Master
@@ -10587,7 +10587,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16982643:
     script:       Survival_Guide
@@ -10602,7 +10602,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   16982644:
     script:       Resume_Point
@@ -10618,7 +10618,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   16982645:
     script: blank

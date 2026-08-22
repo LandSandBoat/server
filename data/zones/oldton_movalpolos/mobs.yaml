@@ -296,7 +296,7 @@ templates:
       drops:
         - chance: uncommon
           item:   spool_of_rugged_gold_thread
-    content: WOTG
+    content: wotg
 
   Bugbear_Porterman:
     id:            564

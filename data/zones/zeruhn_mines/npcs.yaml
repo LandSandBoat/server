@@ -171,7 +171,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17481812:
     script: NPC[54]
@@ -196,7 +196,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17481816:
     script: NPC[58]
@@ -723,7 +723,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17481856:
     script:       Survival_Guide
@@ -738,7 +738,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17481857:
     script: blank
@@ -985,7 +985,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17481877:
     script:       Quadav_Inquest
@@ -1000,4 +1000,4 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

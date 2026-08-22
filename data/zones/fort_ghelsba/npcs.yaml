@@ -28,7 +28,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17354987:
     script: NPC[eb]
@@ -46,7 +46,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17354990:
     script: NPC[ee]
@@ -319,4 +319,4 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

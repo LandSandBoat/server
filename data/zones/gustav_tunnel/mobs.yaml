@@ -273,7 +273,7 @@ templates:
         chunk_of_iron_ore:   0
         chunk_of_silver_ore: 0
         chunk_of_zinc_ore:   0
-    content: ABYSSEA
+    content: abyssea
 
   Bune:
     id:            584
@@ -1747,7 +1747,7 @@ templates:
           item:   fossilized_fang
         - chance: rare
           item:   chunk_of_adaman_ore
-    content: ABYSSEA
+    content: abyssea
 
   Renfred:
     id:            6903

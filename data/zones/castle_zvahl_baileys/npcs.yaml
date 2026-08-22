@@ -16,7 +16,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17436973:
     script: NPC[12d]
@@ -34,7 +34,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17436976:
     script: NPC[130]
@@ -495,7 +495,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17437017:
     script:       Flame_of_Fate
@@ -509,7 +509,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  AMK
+    content:  amk
 
   17437018:
     script:       Survival_Guide
@@ -524,4 +524,4 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

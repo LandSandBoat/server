@@ -37,7 +37,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16929272:
     script: NPC[321]
@@ -57,7 +57,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16929275:
     script: NPC[324]
@@ -101,7 +101,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929279:
     script:       Temenos_Operator
@@ -114,7 +114,7 @@ npcs:
       moving: 23
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   16929280:
     script:       Temenos_Furnace
@@ -129,7 +129,7 @@ npcs:
       moving:        16
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   16929281:
     script: _110
@@ -754,7 +754,7 @@ npcs:
       entity_flags: 2051
       moving:          1
     widescan: true
-    content:  TVR
+    content:  tvr
 
   16929333:
     script:       Temenos_Operator
@@ -767,7 +767,7 @@ npcs:
       entity_flags: 2051
       moving:          1
     widescan: true
-    content:  TVR
+    content:  tvr
 
   16929334:
     script:       Temenos_Operator
@@ -780,7 +780,7 @@ npcs:
       entity_flags: 2051
       moving:          1
     widescan: true
-    content:  TVR
+    content:  tvr
 
   16929335:
     script:       Temenos_Operator
@@ -793,7 +793,7 @@ npcs:
       entity_flags: 2051
       moving:          1
     widescan: true
-    content:  TVR
+    content:  tvr
 
   16929336:
     script:       Matter_Diffusion_Module
@@ -805,7 +805,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929337:
     script:       Matter_Diffusion_Module
@@ -889,7 +889,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929344:
     script:       Matter_Diffusion_Module
@@ -973,7 +973,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929351:
     script:       Matter_Diffusion_Module
@@ -985,7 +985,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929352:
     script:       Matter_Diffusion_Module
@@ -997,7 +997,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929353:
     script:       Matter_Diffusion_Module
@@ -1009,7 +1009,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929354:
     script:       Matter_Diffusion_Module
@@ -1021,7 +1021,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929355:
     script:       Matter_Diffusion_Module
@@ -1033,7 +1033,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929356:
     script:       Matter_Diffusion_Module
@@ -1045,7 +1045,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929357:
     script:       Matter_Diffusion_Module
@@ -1057,7 +1057,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929358:
     script:       Matter_Diffusion_Module
@@ -1069,7 +1069,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929359:
     script:       Matter_Diffusion_Module
@@ -1081,7 +1081,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929360:
     script:       Matter_Diffusion_Module
@@ -1093,7 +1093,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929361:
     script:       Matter_Diffusion_Module
@@ -1105,7 +1105,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16929362:
     script:       Temenos_Coffer_#1
@@ -1175,7 +1175,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16929368:
     script:       Moogle
@@ -1187,7 +1187,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         COP
+    content:         cop
 
   16929369:
     script:       Moogle

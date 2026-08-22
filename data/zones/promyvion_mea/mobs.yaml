@@ -34,7 +34,7 @@ templates:
         respawn: 960
       stats:
         hp: 260000
-    content: ABYSSEA
+    content: abyssea
 
   Apex_Livid_Rager:
     id:            4527
@@ -69,7 +69,7 @@ templates:
         respawn: 960
       stats:
         hp: 260000
-    content: ABYSSEA
+    content: abyssea
 
   Apex_Woeful_Lamenter:
     id:            298
@@ -102,7 +102,7 @@ templates:
         respawn: 960
       stats:
         hp: 260000
-    content: ABYSSEA
+    content: abyssea
 
   Coveter:
     id:            820

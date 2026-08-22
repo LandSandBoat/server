@@ -1147,7 +1147,7 @@ templates:
         chunk_of_iron_ore:   0
         chunk_of_silver_ore: 0
         chunk_of_zinc_ore:   0
-    content: ABYSSEA
+    content: abyssea
 
   Kuftal_Digger:
     id:            2292
@@ -1288,7 +1288,7 @@ templates:
       despoil:
         smilodon_hide:  0
         smilodon_liver: 0
-    content: ABYSSEA
+    content: abyssea
 
   Mimic:
     id:            2664

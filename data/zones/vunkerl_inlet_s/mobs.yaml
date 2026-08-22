@@ -1516,7 +1516,7 @@ templates:
         hitbox:         13
       spawn:
         respawn: 300
-    content: ABYSSEA
+    content: abyssea
 
   Dusk_Raider:
     id:            1143

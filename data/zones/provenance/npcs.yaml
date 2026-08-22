@@ -11,7 +11,7 @@ npcs:
         model: 50
       name_prefix: 32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686580:
     script:       Unity_Master
@@ -23,7 +23,7 @@ npcs:
       entity_flags: 2051
       name_vis:       96
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686586:
     script:       Provenance_Crystal
@@ -38,7 +38,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686587:
     script:       Provenance_Protocrystal
@@ -53,7 +53,7 @@ npcs:
       moving:      20
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686588:
     script:       Provenance_Crystal
@@ -69,7 +69,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686589:
     script:       Provenance_Crystal
@@ -84,7 +84,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686590:
     script:       Provenance_Crystal
@@ -132,7 +132,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686595:
     script:       Provenance_Protocrystal
@@ -232,7 +232,7 @@ npcs:
       moving:          6
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686609:
     render:
@@ -276,7 +276,7 @@ npcs:
       moving:          7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686615:
     render:
@@ -320,7 +320,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686621:
     script:       Goblin_Footprint
@@ -332,7 +332,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17686622:
     script:       ???
@@ -356,7 +356,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686625:
     script: blank
@@ -366,7 +366,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686626:
     script: blank
@@ -376,7 +376,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686627:
     script: blank
@@ -387,7 +387,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686628:
     script: blank
@@ -398,7 +398,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686629:
     script: blank
@@ -409,7 +409,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686630:
     script: blank
@@ -420,7 +420,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686631:
     script:       Cait_Sith_Ceithir
@@ -432,7 +432,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686632:
     script: blank
@@ -443,7 +443,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686633:
     script: blank
@@ -454,7 +454,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686634:
     script:       Cait_Sith_Seachd
@@ -466,7 +466,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686635:
     script: blank
@@ -477,7 +477,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686636:
     script: blank
@@ -488,7 +488,7 @@ npcs:
       entity_flags: 2075
       name_prefix:    32
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686637:
     script:       Glimmering_Trove
@@ -510,7 +510,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686639:
     script:       Glimmering_Trove
@@ -524,7 +524,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686640:
     script:       Glimmering_Trove
@@ -538,7 +538,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686641:
     script:       Glimmering_Trove
@@ -552,7 +552,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686642:
     script:       Regal_Pawprints
@@ -566,7 +566,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17686643:
     script:       Planar_Rift
@@ -582,7 +582,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17686645:
     script:       Moogle
@@ -594,7 +594,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17686646:
     script:       Moogle
@@ -606,7 +606,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17686647:
     script:       Moogle
@@ -618,7 +618,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17686648:
     script:       Moogle
@@ -630,7 +630,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17686649:
     script:       Moogle
@@ -642,7 +642,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17686650:
     script:       Moogle
@@ -654,7 +654,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17686651:
     script:       Moogle
@@ -666,7 +666,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17686652:
     script:       Moogle
@@ -678,4 +678,4 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg

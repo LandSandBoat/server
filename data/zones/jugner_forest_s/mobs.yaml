@@ -1926,7 +1926,7 @@ templates:
           item:   flytrap_leaf
       despoil:
         flytrap_leaf: 0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Bombardier:
     id:            1639

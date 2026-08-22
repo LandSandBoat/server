@@ -96,7 +96,7 @@ templates:
       drops:
         - chance: very_common
           item:   astaroth_cane
-    content: WOTG
+    content: wotg
 
   Arcus_Blades:
     id:            6889
@@ -183,7 +183,7 @@ templates:
       drops:
         - chance: common
           item:   felling_axe
-    content: WOTG
+    content: wotg
 
   Carrion_Worm:
     id:            656
@@ -1288,7 +1288,7 @@ templates:
       drops:
         - chance: common
           item:   gosha_sarashi
-    content: WOTG
+    content: wotg
 
   Hahava:
     id:            5164
@@ -1468,7 +1468,7 @@ templates:
         insect_wing:  0
         beetle_shell: 0
         beetle_jaw:   0
-    content: ROV
+    content: rov
 
   Locus_Cutlass_Scorpion:
     id:            6801
@@ -1514,7 +1514,7 @@ templates:
       despoil:
         scorpion_shell: 0
         scorpion_claw:  0
-    content: ROV
+    content: rov
 
   Locus_Dire_Bat:
     id:            6460
@@ -1567,7 +1567,7 @@ templates:
           item:   vial_of_fiend_blood
       despoil:
         bat_wing: 0
-    content: ROV
+    content: rov
 
   Locus_Hati:
     id:            7058
@@ -1617,7 +1617,7 @@ templates:
       despoil:
         wolf_hide:         0
         revival_tree_root: 0
-    content: ROV
+    content: rov
 
   Locus_Lemures:
     id:            2388
@@ -1669,7 +1669,7 @@ templates:
           item:   square_of_wool_cloth
       despoil:
         square_of_cotton_cloth: 0
-    content: ROV
+    content: rov
 
   Locus_Spartoi_Sorcerer:
     id:            7059
@@ -1733,7 +1733,7 @@ templates:
       steal: bone_chip
       despoil:
         bone_chip: 0
-    content: ROV
+    content: rov
 
   Locus_Spartoi_Warrior:
     id:            7060
@@ -1785,7 +1785,7 @@ templates:
       steal: bone_chip
       despoil:
         bone_chip: 0
-    content: ROV
+    content: rov
 
   Locus_Thousand_Eyes:
     id:            6391
@@ -1839,7 +1839,7 @@ templates:
           item:   hecteyes_eye
         - chance: rare
           item:   scroll_of_fire_iii
-    content: ROV
+    content: rov
 
   Locus_Tomb_Worm:
     id:            3946
@@ -1894,7 +1894,7 @@ templates:
         chunk_of_iron_ore:   0
         chunk_of_silver_ore: 0
         chunk_of_zinc_ore:   0
-    content: ROV
+    content: rov
 
   Mouse_Bat_KRT:
     id:            2763

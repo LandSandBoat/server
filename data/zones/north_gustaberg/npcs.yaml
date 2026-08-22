@@ -363,7 +363,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17212040:
     script: NPC[288]
@@ -381,7 +381,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17212043:
     script: NPC[28b]
@@ -1279,7 +1279,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17212105:
     script: Lyco_Sparkles_0
@@ -1293,7 +1293,7 @@ npcs:
       name_prefix:     34
       moving:       32769
     status:  normal
-    content: WOTG
+    content: wotg
 
   17212106:
     script: Lyco_Sparkles_1
@@ -1307,7 +1307,7 @@ npcs:
       name_prefix:     34
       moving:       32769
     status:  normal
-    content: WOTG
+    content: wotg
 
   17212107:
     script: blank
@@ -1321,7 +1321,7 @@ npcs:
       name_prefix:     34
       moving:       32768
     status:  cutscene_only
-    content: WOTG
+    content: wotg
 
   17212108:
     script:       Lycopodium
@@ -1337,7 +1337,7 @@ npcs:
       moving:       32768
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17212109:
     script:       Cavernous_Maw_2
@@ -1352,7 +1352,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17212110:
     script:       Field_Manual
@@ -1366,7 +1366,7 @@ npcs:
       moving:    8
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17212111:
     script:       Field_Manual
@@ -1380,7 +1380,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17212112:
     script:       Field_Manual
@@ -1394,7 +1394,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17212113:
     script:       Field_Parchment
@@ -1407,7 +1407,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17212114:
     script:       Mogball-Local
@@ -1449,7 +1449,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17212117:
     script:       Planar_Rift
@@ -1465,7 +1465,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17212118:
     script:       Planar_Rift
@@ -1481,7 +1481,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17212119:
     script:       Riftworn_Pyxis
@@ -1496,7 +1496,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17212120:
     script:       Riftworn_Pyxis
@@ -1511,7 +1511,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17212121:
     script:       Riftworn_Pyxis
@@ -1526,7 +1526,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17212122:
     script:       Survival_Guide
@@ -1541,7 +1541,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17212123:
     script:       Summoner
@@ -1813,4 +1813,4 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa

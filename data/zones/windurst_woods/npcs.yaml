@@ -1145,7 +1145,7 @@ npcs:
       moving:        6
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17764420:
     script: blank
@@ -1441,7 +1441,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17764441:
     script:       Kiria-Romaria
@@ -1456,7 +1456,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17764442:
     script: blank
@@ -1487,7 +1487,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17764444:
     script: blank
@@ -3192,7 +3192,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764538:
     script:       HomePoint#3
@@ -3205,7 +3205,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764539:
     script:       HomePoint#4
@@ -3218,7 +3218,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764540:
     script:       HomePoint#5
@@ -3231,7 +3231,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764541:
     script:       Mushuhi-Metahi
@@ -3807,7 +3807,7 @@ npcs:
       name_prefix:  32
       moving:       14
     widescan: true
-    content:  ROTZ
+    content:  rotz
 
   17764582:
     script:       Ominous_Cloud
@@ -3821,7 +3821,7 @@ npcs:
       name_prefix:  32
       moving:        7
     widescan: true
-    content:  COP
+    content:  cop
 
   17764583:
     script:       Samigo-Pormigo
@@ -3845,7 +3845,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ROTZ
+    content:  rotz
 
   17764584:
     script:       Hauh_Colphioh
@@ -3869,7 +3869,7 @@ npcs:
       moving:        20
     status:   normal
     widescan: true
-    content:  ROTZ
+    content:  rotz
 
   17764585:
     script:       Kopua-Mobua_AMAN
@@ -3892,7 +3892,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764586:
     script:       qm1
@@ -3971,7 +3971,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17764590:
     script:       Istvan
@@ -4017,7 +4017,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17764592:
     script: blank
@@ -4049,7 +4049,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17764594:
     script: blank
@@ -4085,7 +4085,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17764596:
     script:       Claiborne
@@ -4174,7 +4174,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17764601:
     script:       Artisan_Moogle
@@ -4189,7 +4189,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17764602:
     script:       Voidwatch_Purveyor
@@ -4210,7 +4210,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17764603:
     script:       Fhelm_Jobeizat
@@ -4233,7 +4233,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764604:
     script:       qm3
@@ -4245,7 +4245,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: SOA
+    content: soa
 
   17764605:
     script:       AMAN_Reclaimer
@@ -4266,7 +4266,7 @@ npcs:
       moving: 14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764606:
     script:       Funtrox
@@ -4281,7 +4281,7 @@ npcs:
       moving:       32775
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17764607:
     script:       Treasure_Coffer
@@ -4297,7 +4297,7 @@ npcs:
       moving:           1
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17764608:
     script:       Teldro-Kesdrodo
@@ -4320,7 +4320,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764609:
     script:       Yonolala
@@ -4343,7 +4343,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764610:
     script:       qm4
@@ -4450,7 +4450,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17764617:
     script: blank
@@ -5539,7 +5539,7 @@ npcs:
       entity_flags: 4194307
       moving:             1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17764696:
     script: blank
@@ -6812,7 +6812,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TRUST_QUESTS
+    content:  trust_quests
 
   17764795:
     script:       Mystic_Retriever
@@ -6828,7 +6828,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764796:
     script:       Achieve_Master
@@ -6837,7 +6837,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17764797:
     script: NPC[1bd]
@@ -6880,7 +6880,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17764802:
     script: blank
@@ -7200,7 +7200,7 @@ npcs:
       moving:    20
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764825:
     script:       Ephemeral_Moogle_Cloth
@@ -7214,7 +7214,7 @@ npcs:
       moving:    14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764826:
     script:       Julissois
@@ -7237,7 +7237,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17764827:
     script:       Tergil
@@ -7260,7 +7260,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17764828:
     script:       AMAN_Validator
@@ -7281,7 +7281,7 @@ npcs:
       moving: 21
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764829:
     script: blank
@@ -7311,7 +7311,7 @@ npcs:
       name_vis: 1
       moving:   7
     status:  normal
-    content: SOA
+    content: soa
 
   17764831:
     script:       RepairerMoogle
@@ -7326,7 +7326,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17764832:
     script: blank
@@ -7355,4 +7355,4 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

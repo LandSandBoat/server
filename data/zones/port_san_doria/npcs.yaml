@@ -1756,7 +1756,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727576:
     script:       HomePoint#3
@@ -1769,7 +1769,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727577:
     script:       HomePoint#4
@@ -1779,7 +1779,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727578:
     script:       HomePoint#5
@@ -1789,7 +1789,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727579:
     script:       Moogle
@@ -2413,7 +2413,7 @@ npcs:
         model: 981
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17727624:
     script:       Bonanza_Moogle
@@ -2426,7 +2426,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17727625:
     script:       Dealer_Moogle
@@ -2439,7 +2439,7 @@ npcs:
       moving: 14
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17727626:
     script:       Dealer_Moogle
@@ -2452,7 +2452,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17727627:
     script:       Synergy_Engineer
@@ -2473,7 +2473,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17727628:
     script:       Synergy_Engineer
@@ -2494,7 +2494,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17727629:
     script:       Synergy_Furnace
@@ -2512,7 +2512,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17727630:
     script:       Synergy_Furnace
@@ -2530,7 +2530,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17727631:
     script:       Synergy_Furnace
@@ -2548,7 +2548,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17727632:
     script:       Synergy_Furnace
@@ -2566,7 +2566,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17727633:
     script:       Synergy_Enthusiast
@@ -2587,7 +2587,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17727634:
     script:       Habitox
@@ -2602,7 +2602,7 @@ npcs:
       moving:       32775
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17727635:
     script:       Treasure_Coffer
@@ -2618,7 +2618,7 @@ npcs:
       moving:           1
     status:   normal
     widescan: true
-    content:  DAILY_TALLY
+    content:  daily_tally
 
   17727636:
     script:       Moogle
@@ -2834,7 +2834,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17727654:
     script:       Ivan
@@ -2857,7 +2857,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17727655:
     script:       Greeter_Moogle
@@ -2870,7 +2870,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727656:
     script:       Mog_Dinghy
@@ -2884,7 +2884,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727657:
     script:       Skipper_Moogle
@@ -2898,7 +2898,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727658:
     script:       Achieve_Master
@@ -2907,7 +2907,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17727659:
     script: NPC[ab]
@@ -2925,7 +2925,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17727661:
     script: blank
@@ -3244,7 +3244,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727684:
     script:       AMAN_Liaison
@@ -3265,7 +3265,7 @@ npcs:
       name_vis:  1
       moving:   21
     status:  normal
-    content: SOA
+    content: soa
 
   17727685:
     script: blank
@@ -3294,7 +3294,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17727687:
     script:       Ancestry_Moogle
@@ -3307,7 +3307,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17727688:
     script: blank
@@ -3347,4 +3347,4 @@ npcs:
       entity_flags: 25
       name_prefix:  32
       moving:        1
-    content: SOA
+    content: soa

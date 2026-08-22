@@ -43,7 +43,7 @@ templates:
       drops:
         - chance: common
           item:   slick_dart
-    content: WOTG
+    content: wotg
 
   Bigclaw_fished:
     id:            1268
@@ -1455,7 +1455,7 @@ templates:
       drops:
         - chance: uncommon
           item:   aegas_doublet
-    content: WOTG
+    content: wotg
 
   Lake_Sahagin:
     id:            2321
@@ -1892,7 +1892,7 @@ templates:
       drops:
         - chance: uncommon
           item:   ingot_of_sahagin_gold
-    content: WOTG
+    content: wotg
 
   River_Sahagin:
     id:            3373

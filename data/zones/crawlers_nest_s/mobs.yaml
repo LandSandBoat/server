@@ -490,7 +490,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Doom_Scorpion:
     id:            7570
@@ -526,7 +526,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Dragonfly:
     id:            7564
@@ -568,7 +568,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Fire_Elemental:
     id:            7571
@@ -609,7 +609,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Helm_Elytra:
     id:            7574
@@ -644,7 +644,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Hornfly:
     id:            7557
@@ -686,7 +686,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Knight_Lugcrawler:
     id:            7576
@@ -725,7 +725,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Lugcrawler:
     id:            7555
@@ -763,7 +763,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Lugcrawler_Hunter:
     id:            7575
@@ -799,7 +799,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Mycelar:
     id:            7561
@@ -845,7 +845,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Nest_Elytra:
     id:            7563
@@ -880,7 +880,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Rumble_Lugcrawler:
     id:            7573
@@ -919,7 +919,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Soldier_Lugcrawler:
     id:            7569
@@ -958,7 +958,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Water_Elemental:
     id:            7572
@@ -997,7 +997,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Apex_Worker_Lugcrawler:
     id:            7559
@@ -1036,7 +1036,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Areuhat:
     id:            227
@@ -3013,7 +3013,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Locus_Dragonfly:
     id:            7565
@@ -3055,7 +3055,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Locus_Hornfly:
     id:            7558
@@ -3097,7 +3097,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Locus_Lugcrawler:
     id:            7556
@@ -3135,7 +3135,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Locus_Nest_Elytra:
     id:            7562
@@ -3170,7 +3170,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Locus_Soldier_Lugcrawler:
     id:            7566
@@ -3209,7 +3209,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Locus_Worker_Lugcrawler:
     id:            7560
@@ -3248,7 +3248,7 @@ templates:
         respawn: 960
       stats:
         hp: 305000
-    content: ROV
+    content: rov
 
   Ludwig:
     id:            2445

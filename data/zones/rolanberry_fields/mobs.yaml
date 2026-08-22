@@ -36,7 +36,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Beorht:
     id:            7024
@@ -71,7 +71,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Berry_Grub:
     id:            394
@@ -541,7 +541,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Drooling_Daisy:
     id:            1124
@@ -637,7 +637,7 @@ templates:
       drops:
         - chance: common
           item:   helenuss_earring
-    content: WOTG
+    content: wotg
 
   Eorthe:
     id:            7025
@@ -671,7 +671,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Evil_Spirit:
     id:            1266
@@ -1534,7 +1534,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Macro_Test:
     id:      7354
@@ -1549,7 +1549,7 @@ templates:
           model: 431
         name_vis: 32
         hitbox:   10
-    content: TVR
+    content: tvr
 
   Midnight_Wings:
     id:            2649
@@ -1815,7 +1815,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Puretos:
     id:            7028
@@ -1850,7 +1850,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Ravenous_Crawler:
     id:            6025
@@ -1893,7 +1893,7 @@ templates:
       drops:
         - chance: common
           item:   survivor_earring
-    content: WOTG
+    content: wotg
 
   Silk_Caterpillar:
     id:            3625
@@ -2084,7 +2084,7 @@ templates:
       drops:
         - chance: uncommon
           item:   veela_cape
-    content: WOTG
+    content: wotg
 
   Snipper_fished:
     id:            3682
@@ -2264,7 +2264,7 @@ templates:
         respawn: 300
       stats:
         hp: 4400
-    content: WOTG
+    content: wotg
 
   Urayuli:
     id:            4107
@@ -2341,7 +2341,7 @@ templates:
       drops:
         - chance: uncommon
           item:   choreia_earring
-    content: WOTG
+    content: wotg
 
   Verthandi:
     id:            7032
@@ -2512,7 +2512,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Water_Elemental:
     id:            4309
@@ -2870,7 +2870,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Zircon_Quadav:
     id:            4506

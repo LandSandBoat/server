@@ -1907,7 +1907,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17748084:
     script:       Cornelia
@@ -2051,7 +2051,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ROTZ
+    content:  rotz
 
   17748092:
     script:       Viresefilant
@@ -2140,7 +2140,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17748096:
     script: relic
@@ -3411,7 +3411,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17748170:
     script:       Cloud_Walker
@@ -3434,7 +3434,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17748171:
     script:       Matrimonial_Coffer
@@ -3447,7 +3447,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17748172:
     script:       Celebratory_Chest
@@ -3460,7 +3460,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17748173:
     script:       Synergy_Furnace
@@ -3477,7 +3477,7 @@ npcs:
       moving:           1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17748174:
     script: blank
@@ -3605,7 +3605,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17748183:
     script:       HomePoint#2
@@ -3618,7 +3618,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17748184:
     script:       HomePoint#3
@@ -3628,7 +3628,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17748185:
     script:       HomePoint#4
@@ -3638,7 +3638,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17748186:
     script:       HomePoint#5
@@ -3648,7 +3648,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17748187:
     script:       Achieve_Master
@@ -3657,7 +3657,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17748188:
     script: NPC[dc]
@@ -3758,7 +3758,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17748197:
     script: blank
@@ -3780,7 +3780,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17748199:
     script:       Curator_Moogle
@@ -3793,4 +3793,4 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa

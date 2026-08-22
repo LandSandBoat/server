@@ -378,7 +378,7 @@ templates:
       drops:
         - chance: uncommon
           item:   wayang_kulit_mantle
-    content: WOTG
+    content: wotg
 
   Dahak:
     id:            894
@@ -756,7 +756,7 @@ templates:
       stats:
         hp: 22500
         mp:  5000
-    content: WOTG
+    content: wotg
 
   Friars_Lantern:
     id:            1426

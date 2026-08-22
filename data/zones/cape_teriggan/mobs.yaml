@@ -1423,7 +1423,7 @@ templates:
       drops:
         - chance: uncommon
           item:   fendoir
-    content: WOTG
+    content: wotg
 
   Kreutzet:
     id:            2287
@@ -1864,7 +1864,7 @@ templates:
           item:   aptant_of_bellum
         - chance: uncommon
           item:   aptant_of_durus
-    content: WOTG
+    content: wotg
 
   Terror_Pugil:
     id:            3882
@@ -2041,7 +2041,7 @@ templates:
           item:   aptant_of_primus
         - chance: uncommon
           item:   aptant_of_durus
-    content: WOTG
+    content: wotg
 
 spawns:
   17240065:

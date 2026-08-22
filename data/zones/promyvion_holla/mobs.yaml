@@ -34,7 +34,7 @@ templates:
         respawn: 960
       stats:
         hp: 260000
-    content: ABYSSEA
+    content: abyssea
 
   Apex_Livid_Rager:
     id:            4527
@@ -73,7 +73,7 @@ templates:
       drops:
         - chance: uncommon
           one_of: [remnant_of_a_burning_memory, remnant_of_a_bitter_memory, remnant_of_a_fleeting_memory, remnant_of_a_profane_memory, remnant_of_a_startling_memory, remnant_of_a_somber_memory, remnant_of_a_radiant_memory, remnant_of_a_malevolent_memory]
-    content: ABYSSEA
+    content: abyssea
 
   Apex_Woeful_Lamenter:
     id:            298
@@ -110,7 +110,7 @@ templates:
       drops:
         - chance: uncommon
           one_of: [remnant_of_a_burning_memory, remnant_of_a_bitter_memory, remnant_of_a_fleeting_memory, remnant_of_a_profane_memory, remnant_of_a_startling_memory, remnant_of_a_somber_memory, remnant_of_a_radiant_memory, remnant_of_a_malevolent_memory]
-    content: ABYSSEA
+    content: abyssea
 
   Cerebrator:
     id:            681

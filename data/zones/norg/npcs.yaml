@@ -1041,7 +1041,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17809462:
     script:       HomePoint#3
@@ -1051,7 +1051,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17809463:
     script:       HomePoint#4
@@ -1061,7 +1061,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17809464:
     script:       HomePoint#5
@@ -1071,7 +1071,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17809465:
     at: [-105.547, 2.000, -4.824]
@@ -1782,7 +1782,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17809511:
     script:       Hayris
@@ -1805,7 +1805,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17809512:
     script:       Vishwas
@@ -1828,7 +1828,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17809513:
     script:       Novice_Moogle
@@ -2077,7 +2077,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17809526:
     script:       Andrause
@@ -2100,7 +2100,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  ASA
+    content:  asa
 
   17809527:
     script:       Porter_Moogle
@@ -2113,7 +2113,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17809528:
     script: NPC[78]
@@ -2146,7 +2146,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17809530:
     script: blank
@@ -2204,7 +2204,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17809535:
     script:       Wistful_Bison
@@ -2227,7 +2227,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17809536:
     script:       Proto-Waypoint
@@ -2242,7 +2242,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17809537:
     script:       Achieve_Master
@@ -2254,7 +2254,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17809538:
     script: NPC[82]
@@ -2272,7 +2272,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17809540:
     script:       Survival_Guide
@@ -2287,7 +2287,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17809541:
     script:       qm3
@@ -2430,7 +2430,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17809551:
     script:       Oseem
@@ -2454,7 +2454,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17809552:
     script:       Zurim
@@ -2478,7 +2478,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17809553:
     script: blank
@@ -2507,4 +2507,4 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

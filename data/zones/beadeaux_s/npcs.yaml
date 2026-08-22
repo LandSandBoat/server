@@ -79,7 +79,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154758:
     script:       _qm1
@@ -91,7 +91,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154759:
     script: NPC[2c7]
@@ -107,7 +107,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17154761:
     script: NPC[2c9]
@@ -125,7 +125,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17154763:
     script: NPC[2cb]
@@ -367,7 +367,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17154782:
     script:       Infomation2
@@ -389,7 +389,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17154783:
     script: NPC[2df]
@@ -501,7 +501,7 @@ npcs:
       name_prefix:  32
       moving:       22
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17154797:
     script:       Detlef_IM
@@ -523,7 +523,7 @@ npcs:
       name_prefix:  32
       moving:       16
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17154798:
     script:       Perna-Parna_CC
@@ -545,7 +545,7 @@ npcs:
       name_prefix:  32
       moving:        8
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17154799:
     script: blank
@@ -617,7 +617,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17154804:
     script:       _2k0
@@ -631,7 +631,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154805:
     script:       _2k1
@@ -645,7 +645,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154806:
     script:       _2kd
@@ -659,7 +659,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154807:
     script:       _2ke
@@ -673,7 +673,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154808:
     script:       _2k2
@@ -687,7 +687,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154809:
     script:       _2k3
@@ -701,7 +701,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154810:
     script:       _2kg
@@ -715,7 +715,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154811:
     script:       _2kh
@@ -729,7 +729,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154812:
     script:       _2ki
@@ -743,7 +743,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154813:
     script:       _2kj
@@ -757,7 +757,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154814:
     script:       _2k4
@@ -771,7 +771,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154815:
     script: NPC[2ff]
@@ -813,7 +813,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154820:
     script:       _2k7
@@ -827,7 +827,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154821:
     script:       _2k9
@@ -841,7 +841,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154822:
     script:       _2kb
@@ -855,7 +855,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154823:
     script: _2k6
@@ -868,7 +868,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154824:
     script: _2k8
@@ -881,7 +881,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154825:
     script: _2ka
@@ -894,7 +894,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154826:
     script: _2kc
@@ -907,7 +907,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17154827:
     script:       Allied_Commissary
@@ -928,7 +928,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17154828:
     script: blank
@@ -1026,7 +1026,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154835:
     script:       Moogle
@@ -1038,7 +1038,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154836:
     script:       Moogle
@@ -1050,7 +1050,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154837:
     script:       Moogle
@@ -1062,7 +1062,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154838:
     script:       Moogle
@@ -1074,7 +1074,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154839:
     script:       Moogle
@@ -1086,7 +1086,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154840:
     script:       Moogle
@@ -1098,7 +1098,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154841:
     script:       Moogle
@@ -1110,7 +1110,7 @@ npcs:
       entity_flags: 4194307
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154842:
     script:       Ramblix
@@ -1147,7 +1147,7 @@ npcs:
       name_vis: 16
     speed:           40
     animation_speed: 40
-    content:         WOTG
+    content:         wotg
 
   17154845:
     script: blank
@@ -1225,7 +1225,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17154851:
     script:       Rainer
@@ -1397,7 +1397,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: WOTG
+    content: wotg
 
   17154860:
     script:       '01'

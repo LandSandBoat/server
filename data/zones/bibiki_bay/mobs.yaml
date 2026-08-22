@@ -137,7 +137,7 @@ templates:
       despoil:
         rabbit_hide:        0
         slice_of_hare_meat: 0
-    content: ABYSSEA
+    content: abyssea
 
   Bismarck:
     id:            4669
@@ -225,7 +225,7 @@ templates:
         slice_of_dhalmel_meat: 0
         dhalmel_hide:          0
         giant_femur:           0
-    content: ABYSSEA
+    content: abyssea
 
   Catoblepas:
     id:            660
@@ -1181,7 +1181,7 @@ templates:
       despoil:
         lizard_egg: 0
         eft_skin:   0
-    content: ABYSSEA
+    content: abyssea
 
   Ignis_Fatuus_Bibiki_Bay:
     id:            7338
@@ -1608,7 +1608,7 @@ templates:
       despoil:
         rabbit_hide:        0
         slice_of_hare_meat: 0
-    content: ROV
+    content: rov
 
   Locus_Camelopard:
     id:            7063
@@ -1658,7 +1658,7 @@ templates:
         slice_of_dhalmel_meat: 0
         dhalmel_hide:          0
         giant_femur:           0
-    content: ROV
+    content: rov
 
   Locus_Fiddler_Crab:
     id:            7357
@@ -1703,7 +1703,7 @@ templates:
         type:    [scripted]
       stats:
         hp: 327500
-    content: ROV
+    content: rov
 
   Locus_Ghost_Crab:
     id:            7061
@@ -1756,7 +1756,7 @@ templates:
         - chance: uncommon
           item:   crab_shell
       steal: chunk_of_rock_salt
-    content: ROV
+    content: rov
 
   Locus_Hypnos_Eft:
     id:            7064
@@ -1810,7 +1810,7 @@ templates:
       despoil:
         lizard_egg: 0
         eft_skin:   0
-    content: ROV
+    content: rov
 
   Marine_Dhalmel:
     id:            2565
@@ -2118,7 +2118,7 @@ templates:
       drops:
         - chance: uncommon
           item:   adoubeurs_pavise
-    content: WOTG
+    content: wotg
 
   Shen:
     id:            3591
@@ -2253,7 +2253,7 @@ templates:
       drops:
         - chance: uncommon
           item:   knack_pendant
-    content: WOTG
+    content: wotg
 
   Tartarus_Eft:
     id:            3848

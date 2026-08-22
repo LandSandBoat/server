@@ -15,7 +15,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801809:
     script:       Armoury_Crate
@@ -30,7 +30,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801816:
     script:       Armoury_Crate
@@ -45,7 +45,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801817:
     script: blank
@@ -68,7 +68,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801825:
     script: blank
@@ -91,7 +91,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801833:
     script: blank
@@ -114,7 +114,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801843:
     script:       Armoury_Crate
@@ -129,7 +129,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801846:
     script:       Armoury_Crate
@@ -144,7 +144,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801849:
     script:       Armoury_Crate
@@ -159,7 +159,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801851:
     script:       Armoury_Crate
@@ -175,7 +175,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16801853:
     script:       Armoury_Crate
@@ -190,7 +190,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801855:
     script:       Armoury_Crate
@@ -205,7 +205,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801856:
     script: blank
@@ -237,7 +237,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   16801863:
     script: blank
@@ -260,7 +260,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801870:
     script: blank
@@ -283,7 +283,7 @@ npcs:
       moving:           6
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801877:
     script:       Achieve_Master
@@ -292,7 +292,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16801878:
     script: NPC[56]
@@ -310,7 +310,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16801881:
     script: NPC[59]
@@ -385,7 +385,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801890:
     script:       Wind_Pillar_Exit
@@ -398,7 +398,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801891:
     script:       Wind_Pillar_2
@@ -411,7 +411,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801892:
     script:       Wind_Pillar_Exit
@@ -424,7 +424,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801893:
     script:       Wind_Pillar_3
@@ -437,7 +437,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801894:
     script:       Wind_Pillar_Exit
@@ -450,7 +450,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801895:
     script:       Wind_Pillar_4
@@ -463,7 +463,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801896:
     script:       Wind_Pillar_Exit
@@ -476,7 +476,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801897:
     script:       Wind_Pillar_5
@@ -489,7 +489,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801898:
     script:       Wind_Pillar_Exit
@@ -502,7 +502,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801899:
     script:       exit_01
@@ -516,7 +516,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801900:
     script:       exit_02
@@ -530,7 +530,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801901:
     script:       exit_03
@@ -544,7 +544,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801902:
     script:       exit_04
@@ -558,7 +558,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801903:
     script:       exit_05
@@ -572,7 +572,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16801904:
     script: _061
@@ -643,7 +643,7 @@ npcs:
         type:  standard
         model: 52
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16801910:
     script:       Prishe
@@ -658,7 +658,7 @@ npcs:
     status:          cutscene_only
     animation_speed: 54
     widescan:        true
-    content:         COP
+    content:         cop
 
   16801911:
     script:       Ulmia
@@ -672,7 +672,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801912:
     script:       Louverance
@@ -694,7 +694,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801913:
     script:       Shikaree_Z
@@ -716,7 +716,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801914:
     script:       Shikaree_Y
@@ -738,7 +738,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801915:
     script:       Shikaree_X
@@ -760,7 +760,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801916:
     script: blank
@@ -784,7 +784,7 @@ npcs:
         type:  standard
         model: 52
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16801918:
     script:       qm
@@ -795,7 +795,7 @@ npcs:
         type:  standard
         model: 52
     status:  cutscene_only
-    content: COP
+    content: cop
 
   16801919:
     script:       Louverance2
@@ -817,7 +817,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801920:
     script: NPC[80]
@@ -834,7 +834,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16801922:
     script:       Moogle
@@ -844,7 +844,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16801923:
     script:       Moogle
@@ -854,7 +854,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16801924:
     script:       Moogle
@@ -864,7 +864,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16801925:
     script:       Moogle
@@ -874,7 +874,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16801926:
     script:       Moogle
@@ -884,7 +884,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16801927:
     script:       Moogle
@@ -894,7 +894,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16801928:
     script:       Moogle
@@ -904,7 +904,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: COP
+    content: cop
 
   16801929:
     script:       Ramblix
@@ -918,7 +918,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  COP
+    content:  cop
 
   16801930:
     script:       Goblin_Footprint
@@ -930,4 +930,4 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop

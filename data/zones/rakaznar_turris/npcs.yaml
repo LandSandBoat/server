@@ -123,7 +123,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17911990:
     script:       Moogle
@@ -134,7 +134,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17911991:
     script:       Moogle
@@ -145,7 +145,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17911992:
     script:       Moogle
@@ -156,7 +156,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17911993:
     script:       Moogle
@@ -167,7 +167,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17911994:
     script:       Moogle
@@ -178,7 +178,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17911995:
     script:       Moogle
@@ -189,7 +189,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17911996:
     script:       Moogle
@@ -200,7 +200,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17911997:
     script: _7p0
@@ -213,7 +213,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: SOA
+    content: soa
 
   17911998:
     script:       _7p1
@@ -227,7 +227,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: SOA
+    content: soa
 
   17911999:
     script: _7p2
@@ -240,7 +240,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: SOA
+    content: soa
 
   17912000:
     render:
@@ -257,7 +257,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912002:
     script: blank
@@ -267,7 +267,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912003:
     script: blank
@@ -277,7 +277,7 @@ npcs:
         model: 52
       entity_flags: 2051
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912004:
     script: csnpc
@@ -289,7 +289,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912005:
     script: csnpc
@@ -301,7 +301,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912006:
     script:       Arciela
@@ -314,7 +314,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912007:
     script:       Arciela
@@ -327,7 +327,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912008:
     script:       Hades
@@ -340,7 +340,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912009:
     script: blank
@@ -350,7 +350,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912010:
     script: blank
@@ -360,7 +360,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912011:
     script: blank
@@ -370,7 +370,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912012:
     script: blank
@@ -380,7 +380,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912013:
     script: blank
@@ -390,7 +390,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912014:
     script: blank
@@ -400,7 +400,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912015:
     script: blank
@@ -410,7 +410,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912016:
     script: blank
@@ -420,7 +420,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912017:
     script: blank
@@ -430,7 +430,7 @@ npcs:
         model: 52
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912018:
     render:
@@ -452,7 +452,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912020:
     script:       Ramblix
@@ -466,7 +466,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912021:
     script:       Goblin_Footprint
@@ -480,7 +480,7 @@ npcs:
       name_prefix:  34
       moving:        1
     status:  normal
-    content: SOA
+    content: soa
 
   17912022:
     script:       Ominous_Postern
@@ -493,7 +493,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912023:
     script:       exit
@@ -505,7 +505,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912024:
     script:       exit
@@ -551,7 +551,7 @@ npcs:
       moving:   32768
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17912035:
     render:

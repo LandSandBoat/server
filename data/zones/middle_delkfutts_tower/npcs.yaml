@@ -22,7 +22,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17420634:
     script:       Seed_Afterglow
@@ -37,7 +37,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17420635:
     script:       Seed_Afterglow
@@ -52,7 +52,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17420636:
     script:       Seed_Afterglow
@@ -67,7 +67,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17420637:
     script:       Seed_Afterglow
@@ -82,7 +82,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17420638:
     script:       Seed_Afterglow
@@ -97,7 +97,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17420639:
     script:       Seed_Afterglow
@@ -112,7 +112,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17420640:
     script:       Treasure_Casket
@@ -286,7 +286,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17420657:
     script: NPC[171]
@@ -304,7 +304,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17420660:
     script: NPC[174]
@@ -535,7 +535,7 @@ npcs:
       moving:   21
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17420681:
     script:       Grounds_Tome
@@ -549,7 +549,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17420682:
     script:       Grounds_Tome
@@ -563,7 +563,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17420683:
     script:       Grounds_Tome
@@ -577,4 +577,4 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes

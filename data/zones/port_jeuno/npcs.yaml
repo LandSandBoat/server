@@ -1216,7 +1216,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17784891:
     script:       HomePoint#3
@@ -1226,7 +1226,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17784892:
     script:       HomePoint#4
@@ -1236,7 +1236,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17784893:
     script:       HomePoint#5
@@ -1246,7 +1246,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17784894:
     script:       Leffquen
@@ -2339,7 +2339,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: WOTG
+    content: wotg
 
   17784966:
     script:       Squintrox_Dryeyes
@@ -2354,7 +2354,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  ACP
+    content:  acp
 
   17784967:
     script:       Synergy_Engineer
@@ -2375,7 +2375,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17784968:
     script:       Synergy_Engineer
@@ -2396,7 +2396,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17784969:
     script:       Synergy_Furnace
@@ -2414,7 +2414,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17784970:
     script:       Synergy_Furnace
@@ -2432,7 +2432,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17784971:
     script:       Synergy_Furnace
@@ -2450,7 +2450,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17784972:
     script:       Synergy_Furnace
@@ -2468,7 +2468,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         WOTG
+    content:         wotg
 
   17784973:
     script:       Synergy_Enthusiast
@@ -2489,7 +2489,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17784974:
     script:       qm4
@@ -2555,7 +2555,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17784980:
     script:       Zuah_Lepahnyu
@@ -2593,7 +2593,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17784982:
     script:       Treasure_Coffer
@@ -2605,7 +2605,7 @@ npcs:
         model: 968
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17784983:
     script:       Abyssea_Campaign
@@ -2618,7 +2618,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17784984:
     script:       Kindlix
@@ -2633,7 +2633,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17784985:
     script:       Pyropox
@@ -2648,7 +2648,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17784986:
     script:       Voidwatch_Purveyor
@@ -2669,7 +2669,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17784987:
     script:       Shemo
@@ -2684,7 +2684,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17784988:
     script:       Oboro
@@ -2707,7 +2707,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17784989:
     script:       Monisette
@@ -2730,7 +2730,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17784990:
     script:       Shamis_Coffer
@@ -2772,7 +2772,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17784994:
     script: NPC[a2]
@@ -2790,7 +2790,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17784996:
     script:       qm
@@ -2872,7 +2872,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17785003:
     script:       Mewk_Chorosap
@@ -2895,7 +2895,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17785004:
     script:       SynthesisFocus
@@ -2910,7 +2910,7 @@ npcs:
       moving:      21
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17785005:
     script: NPC[ad]
@@ -2971,7 +2971,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17785010:
     script: blank
@@ -3000,4 +3000,4 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

@@ -194,7 +194,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17498596:
     script: NPC[1e4]
@@ -212,7 +212,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17498599:
     script: NPC[1e7]
@@ -1051,7 +1051,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17498657:
     script:       Waterfall_Basin
@@ -1126,7 +1126,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17498664:
     script:       Grounds_Tome
@@ -1140,7 +1140,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17498665:
     script:       Grounds_Tome
@@ -1154,7 +1154,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17498666:
     script:       Grounds_Tome
@@ -1168,7 +1168,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17498667:
     script:       Grounds_Tome
@@ -1182,7 +1182,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  GROUNDS_TOMES
+    content:  grounds_tomes
 
   17498668:
     script:       Geomagnetic_Fount
@@ -1195,7 +1195,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17498669:
     script:       Survival_Guide
@@ -1210,7 +1210,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17498670:
     script: blank
@@ -1230,7 +1230,7 @@ npcs:
         model: 2424
       moving: 1
     status:  normal
-    content: ROV
+    content: rov
 
   17498672:
     script:       Iroha
@@ -1328,7 +1328,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17498680:
     script:       Ethereal_Junction
@@ -1343,7 +1343,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17498681:
     script:       Ethereal_Junction
@@ -1358,4 +1358,4 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa

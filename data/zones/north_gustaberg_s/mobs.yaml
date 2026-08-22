@@ -1684,7 +1684,7 @@ templates:
         lizard_skin: 0
         lizard_tail: 0
         lizard_egg:  0
-    content: ABYSSEA
+    content: abyssea
 
   Dusk_Raider:
     id:            1143

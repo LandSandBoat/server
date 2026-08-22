@@ -443,7 +443,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17888226:
     script:       Moogle
@@ -454,7 +454,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17888227:
     script:       Moogle
@@ -465,7 +465,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17888228:
     script:       Moogle
@@ -476,7 +476,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17888229:
     script:       Moogle
@@ -487,7 +487,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17888230:
     script:       Moogle
@@ -498,7 +498,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17888231:
     script:       Moogle
@@ -509,7 +509,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17888232:
     script:       Moogle
@@ -520,7 +520,7 @@ npcs:
         model: 82
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17888233:
     script:       Hollowed_Pathway
@@ -534,7 +534,7 @@ npcs:
       moving:     1
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17888234:
     script:       Rusted_Transmitter

@@ -100,7 +100,7 @@ templates:
           item:   revival_tree_root
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Boribaba:
     id:            6538
@@ -155,7 +155,7 @@ templates:
           item:   revival_tree_root
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Cockatrice:
     id:            758

@@ -33,7 +33,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670592:
     script:       qm_amarok
@@ -45,7 +45,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670593:
     script:       qm_shaula
@@ -57,7 +57,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670594:
     script:       qm_emperador_de_altepa
@@ -69,7 +69,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670595:
     script:       qm_tablilla
@@ -81,7 +81,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670596:
     script:       qm_sharabha
@@ -93,7 +93,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670597:
     script:       qm_waugyl
@@ -105,7 +105,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670598:
     script:       qm_chickcharney
@@ -117,7 +117,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670599:
     script:       qm_vadleany
@@ -129,7 +129,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670600:
     script:       qm_bugul_noz
@@ -141,7 +141,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670601:
     script:       qm_rani_1
@@ -153,7 +153,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670602:
     script:       qm_orthus_1
@@ -165,7 +165,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670603:
     script:       qm_dragua_1
@@ -177,7 +177,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670604:
     script:       qm_bennu_1
@@ -189,7 +189,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670605:
     script:       qm_rani_2
@@ -201,7 +201,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670606:
     script:       qm_orthus_2
@@ -213,7 +213,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670607:
     script:       qm_dragua_2
@@ -225,7 +225,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670608:
     script:       qm_bennu_2
@@ -237,7 +237,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670609:
     script:       qm_rani_3
@@ -249,7 +249,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670610:
     script:       qm_orthus_3
@@ -261,7 +261,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670611:
     script:       qm_dragua_3
@@ -273,7 +273,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670612:
     script:       qm_bennu_3
@@ -285,7 +285,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670613:
     script:       Achieve_Master
@@ -294,7 +294,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17670614:
     script: NPC[1d6]
@@ -312,7 +312,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17670617:
     script: NPC[1d9]
@@ -363,7 +363,7 @@ npcs:
       moving:         6
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670621:
     script:       Cruor_Prospector
@@ -384,7 +384,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670622:
     script:       Atma_Infusionist
@@ -406,7 +406,7 @@ npcs:
       moving:          7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670623:
     script:       Atma_Fabricant
@@ -428,7 +428,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670624:
     script:       Time_Master_Debug
@@ -449,7 +449,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
       moving:       21
-    content: ABYSSEA
+    content: abyssea
 
   17670625:
     script:       AP_Master_Debug
@@ -470,7 +470,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
       moving:       14
-    content: ABYSSEA
+    content: abyssea
 
   17670626:
     script: NPC[1e2]
@@ -511,7 +511,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670629:
     script:       Sturdy_Pyxis
@@ -526,7 +526,7 @@ npcs:
       moving:           6
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670630:
     script:       Sturdy_Pyxis
@@ -541,7 +541,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670631:
     script:       Sturdy_Pyxis
@@ -556,7 +556,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670632:
     script:       Sturdy_Pyxis
@@ -571,7 +571,7 @@ npcs:
       moving:           6
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670633:
     script:       Sturdy_Pyxis
@@ -586,7 +586,7 @@ npcs:
       moving:           6
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670634:
     script:       Sturdy_Pyxis
@@ -601,7 +601,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670635:
     script:       Sturdy_Pyxis
@@ -616,7 +616,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670636:
     script:       Sturdy_Pyxis
@@ -631,7 +631,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670637:
     script:       Sturdy_Pyxis
@@ -646,7 +646,7 @@ npcs:
       moving:           6
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670638:
     script:       Sturdy_Pyxis
@@ -661,7 +661,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670639:
     script:       Sturdy_Pyxis
@@ -676,7 +676,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670640:
     script:       Sturdy_Pyxis
@@ -691,7 +691,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670641:
     script:       Sturdy_Pyxis
@@ -706,7 +706,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670642:
     script:       Sturdy_Pyxis
@@ -721,7 +721,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670643:
     script:       Sturdy_Pyxis
@@ -736,7 +736,7 @@ npcs:
       moving:           6
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670644:
     script:       Sturdy_Pyxis
@@ -751,7 +751,7 @@ npcs:
       moving:           6
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670645:
     script:       Sturdy_Pyxis
@@ -766,7 +766,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670646:
     script:       Sturdy_Pyxis
@@ -781,7 +781,7 @@ npcs:
       moving:           7
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670647:
     script:       Sturdy_Pyxis
@@ -795,7 +795,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670648:
     script:       Sturdy_Pyxis
@@ -809,7 +809,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670649:
     script:       Sturdy_Pyxis
@@ -823,7 +823,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670650:
     script:       Sturdy_Pyxis
@@ -837,7 +837,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670651:
     script:       Sturdy_Pyxis
@@ -851,7 +851,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670652:
     script:       Sturdy_Pyxis
@@ -865,7 +865,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670653:
     script:       Sturdy_Pyxis
@@ -879,7 +879,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670654:
     script:       Sturdy_Pyxis
@@ -893,7 +893,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670655:
     script:       Sturdy_Pyxis
@@ -907,7 +907,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670656:
     script:       Sturdy_Pyxis
@@ -921,7 +921,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670657:
     script:       Sturdy_Pyxis
@@ -935,7 +935,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670658:
     script:       Sturdy_Pyxis
@@ -949,7 +949,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670659:
     script:       Sturdy_Pyxis
@@ -963,7 +963,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670660:
     script:       Sturdy_Pyxis
@@ -977,7 +977,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670661:
     script:       Sturdy_Pyxis
@@ -991,7 +991,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670662:
     script:       Sturdy_Pyxis
@@ -1005,7 +1005,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670663:
     script:       Sturdy_Pyxis
@@ -1019,7 +1019,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670664:
     script:       Sturdy_Pyxis
@@ -1033,7 +1033,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670665:
     script:       Sturdy_Pyxis
@@ -1047,7 +1047,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670666:
     script:       Sturdy_Pyxis
@@ -1061,7 +1061,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670667:
     script:       Sturdy_Pyxis
@@ -1075,7 +1075,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670668:
     script:       Sturdy_Pyxis
@@ -1089,7 +1089,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670669:
     script:       Sturdy_Pyxis
@@ -1103,7 +1103,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670670:
     script:       Sturdy_Pyxis
@@ -1117,7 +1117,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670671:
     script:       Sturdy_Pyxis
@@ -1131,7 +1131,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670672:
     script:       Sturdy_Pyxis
@@ -1145,7 +1145,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670673:
     script:       Sturdy_Pyxis
@@ -1159,7 +1159,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670674:
     script:       Sturdy_Pyxis
@@ -1173,7 +1173,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670675:
     script:       Sturdy_Pyxis
@@ -1187,7 +1187,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670676:
     script:       Sturdy_Pyxis
@@ -1201,7 +1201,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670677:
     script:       Sturdy_Pyxis
@@ -1215,7 +1215,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670678:
     script:       Sturdy_Pyxis
@@ -1229,7 +1229,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670679:
     script:       Sturdy_Pyxis
@@ -1243,7 +1243,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670680:
     script:       Sturdy_Pyxis
@@ -1257,7 +1257,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670681:
     script:       Sturdy_Pyxis
@@ -1271,7 +1271,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670682:
     script:       Sturdy_Pyxis
@@ -1285,7 +1285,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670683:
     script:       Sturdy_Pyxis
@@ -1299,7 +1299,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670684:
     script:       Sturdy_Pyxis
@@ -1313,7 +1313,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670685:
     script:       Sturdy_Pyxis
@@ -1327,7 +1327,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670686:
     script:       Sturdy_Pyxis
@@ -1341,7 +1341,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670687:
     script:       Sturdy_Pyxis
@@ -1355,7 +1355,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670688:
     script:       Sturdy_Pyxis
@@ -1369,7 +1369,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670689:
     script:       Sturdy_Pyxis
@@ -1383,7 +1383,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670690:
     script:       Sturdy_Pyxis
@@ -1397,7 +1397,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670691:
     script:       Sturdy_Pyxis
@@ -1411,7 +1411,7 @@ npcs:
       name_vis:       108
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670692:
     script:       Sturdy_Pyxis
@@ -1427,7 +1427,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670693:
     script:       Sturdy_Pyxis
@@ -1443,7 +1443,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670694:
     script:       Sturdy_Pyxis
@@ -1459,7 +1459,7 @@ npcs:
     status:          normal
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670695:
     script:       Sturdy_Pyxis
@@ -1475,7 +1475,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670696:
     script:       Sturdy_Pyxis
@@ -1491,7 +1491,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670697:
     script:       Sturdy_Pyxis
@@ -1507,7 +1507,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670698:
     script:       Sturdy_Pyxis
@@ -1523,7 +1523,7 @@ npcs:
     status:          normal
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670699:
     script:       Sturdy_Pyxis
@@ -1539,7 +1539,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670700:
     script:       Sturdy_Pyxis
@@ -1555,7 +1555,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670701:
     script:       Sturdy_Pyxis
@@ -1571,7 +1571,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670702:
     script:       Sturdy_Pyxis
@@ -1587,7 +1587,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670703:
     script:       Sturdy_Pyxis
@@ -1603,7 +1603,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670704:
     script:       Sturdy_Pyxis
@@ -1619,7 +1619,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670705:
     script:       Sturdy_Pyxis
@@ -1635,7 +1635,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670706:
     script:       Sturdy_Pyxis
@@ -1651,7 +1651,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670707:
     script:       Sturdy_Pyxis
@@ -1667,7 +1667,7 @@ npcs:
     status:          cutscene_only
     speed:           40
     animation_speed: 40
-    content:         ABYSSEA
+    content:         abyssea
 
   17670708:
     script:       Veridical_Conflux_#01
@@ -1682,7 +1682,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670709:
     script:       Veridical_Conflux_#02
@@ -1697,7 +1697,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670710:
     script:       Veridical_Conflux_#03
@@ -1712,7 +1712,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670711:
     script:       Veridical_Conflux_#04
@@ -1727,7 +1727,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670712:
     script:       Veridical_Conflux_#05
@@ -1742,7 +1742,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670713:
     script:       Veridical_Conflux_#06
@@ -1757,7 +1757,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670714:
     script:       Veridical_Conflux_#07
@@ -1772,7 +1772,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670715:
     script:       Veridical_Conflux_#08
@@ -1787,7 +1787,7 @@ npcs:
       moving:       1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670716:
     script:       AL-01_Martello
@@ -1804,7 +1804,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         ABYSSEA
+    content:         abyssea
 
   17670717:
     script:       AL-02_Martello
@@ -1837,7 +1837,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         ABYSSEA
+    content:         abyssea
 
   17670719:
     script:       AL-04_Martello
@@ -1854,7 +1854,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         ABYSSEA
+    content:         abyssea
 
   17670720:
     script:       AL-05_Martello
@@ -1871,7 +1871,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         ABYSSEA
+    content:         abyssea
 
   17670721:
     script:       AL-06_Martello
@@ -1888,7 +1888,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         ABYSSEA
+    content:         abyssea
 
   17670722:
     script:       AL-07_Martello
@@ -1905,7 +1905,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         ABYSSEA
+    content:         abyssea
 
   17670723:
     script:       AL-08_Martello
@@ -1922,7 +1922,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         ABYSSEA
+    content:         abyssea
 
   17670724:
     script:       Dominion_Tactician
@@ -1944,7 +1944,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670725:
     script:       Debug_Koryakudo_NPC
@@ -1965,7 +1965,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
       moving:        1
-    content: ABYSSEA
+    content: abyssea
 
   17670726:
     script: NPC[246]
@@ -1987,7 +1987,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670728:
     script: 010da244
@@ -2203,7 +2203,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670744:
     script:       Nogelle
@@ -2226,7 +2226,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670745:
     script:       Alisa
@@ -2249,7 +2249,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670746:
     script:       Malene
@@ -2264,7 +2264,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670747:
     script:       qm
@@ -2278,7 +2278,7 @@ npcs:
       name_prefix:     2
       moving:      32769
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670748:
     script:       Zacc
@@ -2301,7 +2301,7 @@ npcs:
       name_prefix:     34
       moving:       32769
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670749:
     script:       Enu
@@ -2324,7 +2324,7 @@ npcs:
       name_prefix:     34
       moving:       32769
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670750:
     script:       Titus
@@ -2347,7 +2347,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670751:
     script:       Chumimi
@@ -2370,7 +2370,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670752:
     script:       Oiheaurese
@@ -2385,7 +2385,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670753:
     script:       Morjean
@@ -2408,7 +2408,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670754:
     script:       Yachemidot
@@ -2431,7 +2431,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670755:
     script:       Brygid
@@ -2454,7 +2454,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670756:
     script:       Chemioue
@@ -2477,7 +2477,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670757:
     script:       Tapoh_Lihzeh
@@ -2500,7 +2500,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670758:
     script:       Biggorf
@@ -2523,7 +2523,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670759:
     script:       Ken
@@ -2546,7 +2546,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670760:
     script:       Lined_Casket
@@ -2560,7 +2560,7 @@ npcs:
       name_vis:     96
       moving:        1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670761:
     script:       Lined_Casket
@@ -2574,7 +2574,7 @@ npcs:
       name_vis:     96
       moving:        1
     status:  normal
-    content: ABYSSEA
+    content: abyssea
 
   17670762:
     script:       Excenmille
@@ -2597,7 +2597,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670763:
     script:       Volker
@@ -2612,7 +2612,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670764:
     script:       Nanaa_Mihgo
@@ -2627,7 +2627,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670765:
     script:       Ajido-Marujido
@@ -2642,7 +2642,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670766:
     script:       Honoi-Gomoi
@@ -2665,7 +2665,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670767:
     script:       Sola_Jaab
@@ -2688,7 +2688,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670768:
     script:       Taraihi-Perunhi
@@ -2712,7 +2712,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670769:
     script:       Maunadolace
@@ -2736,7 +2736,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670770:
     script:       Bonarpant
@@ -2760,7 +2760,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670771:
     script:       Rielle
@@ -2784,7 +2784,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670772:
     script:       Yuhito-Kubhito
@@ -2808,7 +2808,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670773:
     script:       Hildith
@@ -2831,7 +2831,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670774:
     script:       Justinius
@@ -2854,7 +2854,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670775:
     script:       Ronta-Onta
@@ -2878,7 +2878,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670776:
     script:       Mheca_Khetashipah
@@ -2893,7 +2893,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670777:
     script:       Event_Master
@@ -2907,7 +2907,7 @@ npcs:
       name_prefix:  32
       moving:       14
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670778:
     script:       DSgt_Excenmille
@@ -2930,7 +2930,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670779:
     script:       DSgt_Nanaa
@@ -2953,7 +2953,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670780:
     script:       DSgt_Volker
@@ -2976,7 +2976,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670781:
     script:       Machine_Outfitter
@@ -2997,7 +2997,7 @@ npcs:
       moving: 14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17670782:
     script: NPC[27e]
@@ -3014,7 +3014,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: ABYSSEA
+    content: abyssea
 
   17670784:
     script:       Moogle
@@ -3024,7 +3024,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: ABYSSEA
+    content: abyssea
 
   17670785:
     script:       Moogle
@@ -3034,7 +3034,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: ABYSSEA
+    content: abyssea
 
   17670786:
     script:       Moogle
@@ -3044,7 +3044,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: ABYSSEA
+    content: abyssea
 
   17670787:
     script:       Moogle
@@ -3054,7 +3054,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: ABYSSEA
+    content: abyssea
 
   17670788:
     script:       Moogle
@@ -3064,7 +3064,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: ABYSSEA
+    content: abyssea
 
   17670789:
     script:       Moogle
@@ -3074,7 +3074,7 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: ABYSSEA
+    content: abyssea
 
   17670790:
     script:       Moogle
@@ -3084,4 +3084,4 @@ npcs:
         type:  standard
         model: 82
       entity_flags: 4194307
-    content: ABYSSEA
+    content: abyssea

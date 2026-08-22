@@ -1111,7 +1111,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17367778:
     script: NPC[2e2]
@@ -1129,7 +1129,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17367781:
     script: NPC[2e5]

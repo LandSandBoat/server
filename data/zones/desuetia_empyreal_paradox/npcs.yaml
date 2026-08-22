@@ -11,7 +11,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: ROV
+    content: rov
 
   17965061:
     script:       Achieve_Master
@@ -20,7 +20,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: ROV
+    content: rov
 
   17965069:
     script:       Moogle
@@ -29,7 +29,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17965070:
     script:       Moogle
@@ -38,7 +38,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17965071:
     script:       Moogle
@@ -47,7 +47,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17965072:
     script:       Moogle
@@ -56,7 +56,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17965073:
     script:       Moogle
@@ -65,7 +65,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17965074:
     script:       Moogle
@@ -74,7 +74,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17965075:
     script:       Moogle
@@ -83,7 +83,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17965076:
     script:       Moogle
@@ -92,7 +92,7 @@ npcs:
       look:
         type:  standard
         model: 82
-    content: ROV
+    content: rov
 
   17965077:
     script: csnpc

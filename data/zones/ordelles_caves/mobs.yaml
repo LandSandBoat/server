@@ -50,7 +50,7 @@ templates:
       drops:
         - chance: uncommon
           item:   soarer_earring
-    content: WOTG
+    content: wotg
 
   Air_Elemental:
     id:            71
@@ -283,7 +283,7 @@ templates:
         vial_of_fiend_blood:    0
         vial_of_beastman_blood: 0
         vial_of_bird_blood:     0
-    content: ABYSSEA
+    content: abyssea
 
   Blood_Bunny:
     id:            471
@@ -381,7 +381,7 @@ templates:
       drops:
         - chance: common
           item:   ardent_earring
-    content: WOTG
+    content: wotg
 
   Buds_Bunny:
     id:            5356
@@ -428,7 +428,7 @@ templates:
       despoil:
         rabbit_hide:        0
         slice_of_hare_meat: 0
-    content: ABYSSEA
+    content: abyssea
 
   Clipper:
     id:            743
@@ -522,7 +522,7 @@ templates:
       drops:
         - chance: common
           item:   fidelity_earring
-    content: WOTG
+    content: wotg
 
   Dung_Beetle:
     id:            1139
@@ -2410,7 +2410,7 @@ templates:
         bag_of_vegetable_seeds: 0
         treant_bulb:            0
         bag_of_wildgrass_seeds: 0
-    content: ABYSSEA
+    content: abyssea
 
   Targe_Beetle:
     id:            6074
@@ -2451,7 +2451,7 @@ templates:
         insect_wing:  0
         beetle_shell: 0
         beetle_jaw:   0
-    content: ABYSSEA
+    content: abyssea
 
   Thread_Leech_OC:
     id:            6403

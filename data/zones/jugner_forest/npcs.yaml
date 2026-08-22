@@ -989,7 +989,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17203803:
     script: NPC[25b]
@@ -1007,7 +1007,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17203806:
     script: NPC[25e]
@@ -2147,7 +2147,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17203887:
     script:       Field_Manual
@@ -2161,7 +2161,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17203888:
     script:       Field_Manual
@@ -2175,7 +2175,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17203889:
     script:       Humus-rich_Earth
@@ -2188,7 +2188,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17203890:
     script:       Lilisette
@@ -2253,7 +2253,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17203896:
     script:       Ethereal_Junction
@@ -2268,7 +2268,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17203897:
     script:       Ethereal_Junction
@@ -2283,7 +2283,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17203898:
     script:       Ethereal_Junction
@@ -2298,7 +2298,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17203899:
     script:       Mogball-Local
@@ -2628,7 +2628,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17203924:
     script: blank
@@ -2738,7 +2738,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17203936:
     script: blank
@@ -2790,7 +2790,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17203940:
     script:       Planar_Rift
@@ -2806,7 +2806,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17203941:
     script:       Planar_Rift
@@ -2822,7 +2822,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17203942:
     script:       Riftworn_Pyxis
@@ -2837,7 +2837,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17203943:
     script:       Riftworn_Pyxis
@@ -2852,7 +2852,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17203944:
     script:       Riftworn_Pyxis
@@ -2867,7 +2867,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17203945:
     script:       Ardrick
@@ -2891,7 +2891,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17203946:
     script:       Geomagnetic_Fount
@@ -2904,7 +2904,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17203947:
     script:       Survival_Guide
@@ -2919,4 +2919,4 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide

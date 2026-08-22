@@ -16,7 +16,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16937578:
     script: NPC[26a]
@@ -34,7 +34,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16937581:
     script: NPC[26d]
@@ -83,7 +83,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   16937586:
     script:       qm0
@@ -95,7 +95,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16937587:
     script:       qm1
@@ -107,7 +107,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16937588:
     script:       qm2
@@ -119,7 +119,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16937589:
     script:       qm3
@@ -131,7 +131,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: COP
+    content: cop
 
   16937590:
     script:       qm4
@@ -141,7 +141,7 @@ npcs:
         type:  standard
         model: 52
       moving: 1
-    content: COP
+    content: cop
 
   16937591:
     script: NPC[277]
@@ -159,7 +159,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16937593:
     script:       Moogle
@@ -170,7 +170,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16937594:
     script:       Moogle
@@ -181,7 +181,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16937595:
     script:       Moogle
@@ -192,7 +192,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16937596:
     script:       Moogle
@@ -203,7 +203,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16937597:
     script:       Moogle
@@ -214,7 +214,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16937598:
     script:       Moogle
@@ -225,7 +225,7 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop
 
   16937599:
     script:       Moogle
@@ -236,4 +236,4 @@ npcs:
         model: 82
       entity_flags: 4194307
     widescan: true
-    content:  COP
+    content:  cop

@@ -2118,7 +2118,7 @@ templates:
         bag_of_vegetable_seeds: 0
         treant_bulb:            0
         bag_of_wildgrass_seeds: 0
-    content: ABYSSEA
+    content: abyssea
 
   Field_Woundpatcher:
     id:            1332

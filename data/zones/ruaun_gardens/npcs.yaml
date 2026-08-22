@@ -246,7 +246,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17310023:
     script: NPC[147]
@@ -264,7 +264,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17310025:
     script:       Treasure_Chest
@@ -1330,7 +1330,7 @@ npcs:
       moving:   21
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17310109:
     script:       Field_Manual
@@ -1344,7 +1344,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17310110:
     script:       Field_Manual
@@ -1358,7 +1358,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17310111:
     script:       Field_Manual
@@ -1372,7 +1372,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17310112:
     script:       Field_Manual
@@ -1386,7 +1386,7 @@ npcs:
       moving:   21
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17310113:
     script:       Field_Manual
@@ -1400,7 +1400,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17310114:
     script:       Field_Parchment
@@ -1413,7 +1413,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17310115:
     script:       Planar_Rift
@@ -1429,7 +1429,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17310116:
     script:       Planar_Rift
@@ -1445,7 +1445,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17310117:
     script:       Planar_Rift
@@ -1461,7 +1461,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17310118:
     script:       Riftworn_Pyxis
@@ -1476,7 +1476,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17310119:
     script:       Riftworn_Pyxis
@@ -1491,7 +1491,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17310120:
     script:       Riftworn_Pyxis
@@ -1506,7 +1506,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17310121:
     script:       HomePoint#1
@@ -1519,7 +1519,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17310122:
     script:       HomePoint#2
@@ -1532,7 +1532,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17310123:
     script:       HomePoint#3
@@ -1545,7 +1545,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17310124:
     script:       HomePoint#4
@@ -1558,7 +1558,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17310125:
     script:       HomePoint#5
@@ -1571,7 +1571,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17310126:
     script: blank
@@ -1681,7 +1681,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17310136:
     script: blank

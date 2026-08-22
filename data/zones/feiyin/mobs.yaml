@@ -168,7 +168,7 @@ templates:
           item:   vial_of_fiend_blood
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Borealis_Shadow:
     id:            6893
@@ -886,7 +886,7 @@ templates:
           item:   aptant_of_haelan
         - chance: uncommon
           item:   aptant_of_secan
-    content: WOTG
+    content: wotg
 
   Killing_Weapon:
     id:            2231
@@ -969,7 +969,7 @@ templates:
       drops:
         - chance: uncommon
           item:   lleus_charm
-    content: WOTG
+    content: wotg
 
   Miser_Murphy:
     id:            2678
@@ -1293,7 +1293,7 @@ templates:
           item:   vial_of_mercury
       despoil:
         magic_pot_shard: 0
-    content: ABYSSEA
+    content: abyssea
 
   Shadow_blm:
     id:            5317
@@ -1507,7 +1507,7 @@ templates:
       drops:
         - chance: common
           item:   square_of_ensanguined_cloth
-    content: WOTG
+    content: wotg
 
   Southern_Shadow:
     id:            3709
@@ -2049,7 +2049,7 @@ templates:
       steal: square_of_cotton_cloth
       despoil:
         square_of_cotton_cloth: 0
-    content: ABYSSEA
+    content: abyssea
 
   Western_Shadow:
     id:            4323

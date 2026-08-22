@@ -58,7 +58,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17416255:
     script: NPC[3f]
@@ -76,7 +76,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17416257:
     script: NPC[41]
@@ -291,7 +291,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17416279:
     script:       _4c4
@@ -305,7 +305,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: WOTG
+    content: wotg
 
   17416280:
     script: NPC[58]

@@ -1466,7 +1466,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17731674:
     script:       Matrimonial_Coffer
@@ -1479,7 +1479,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17731675:
     script:       Celebratory_Chest
@@ -1492,7 +1492,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17731676:
     script: blank
@@ -1557,7 +1557,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17731682:
     script: NPC[62]
@@ -1575,7 +1575,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17731684:
     script: blank
@@ -1917,4 +1917,4 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa

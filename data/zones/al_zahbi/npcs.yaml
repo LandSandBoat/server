@@ -17,7 +17,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   16974224:
     script: NPC[190]
@@ -35,7 +35,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   16974226:
     script: NPC[192]
@@ -338,7 +338,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974258:
     script: _jc2
@@ -351,7 +351,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974259:
     script: _jc3
@@ -364,7 +364,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974260:
     script:       Shield_master
@@ -378,7 +378,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974261:
     script: _1cw
@@ -391,7 +391,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974262:
     script: _1cx
@@ -404,7 +404,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974263:
     script: _1cy
@@ -417,7 +417,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974264:
     script: _1cz
@@ -430,7 +430,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974265:
     script: _jc0
@@ -443,7 +443,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974266:
     script: _1c6
@@ -456,7 +456,7 @@ npcs:
       animation:    close_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974267:
     script: _jc4
@@ -469,7 +469,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974268:
     script: _jc5
@@ -482,7 +482,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974269:
     script:       Door
@@ -494,7 +494,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   16974270:
     script: _jc1
@@ -507,7 +507,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974271:
     script: _1c7
@@ -520,7 +520,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974272:
     script: _1cp
@@ -557,7 +557,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974275:
     script: _1ci
@@ -594,7 +594,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974278:
     script: _1cv
@@ -775,7 +775,7 @@ npcs:
       animation:    open_door
       moving:       1
     status:  normal
-    content: TOAU
+    content: toau
 
   16974293:
     script: _1cr
@@ -835,7 +835,7 @@ npcs:
       moving:         7
     speed:           40
     animation_speed: 40
-    content:         TOAU
+    content:         toau
 
   16974298:
     script: blank
@@ -867,7 +867,7 @@ npcs:
         model: 1847
       moving: 32789
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974301:
     script:       Saraware_test
@@ -879,7 +879,7 @@ npcs:
         model: 52
       moving: 32769
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974302:
     script:       Chayaya
@@ -903,7 +903,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974303:
     script:       Allard
@@ -927,7 +927,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974304:
     script:       Kahah_Hobichai
@@ -951,7 +951,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974305:
     script:       Zafif
@@ -975,7 +975,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974306:
     script:       Numaaf
@@ -999,7 +999,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974307:
     script:       Taten-Bilten
@@ -1023,7 +1023,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974308:
     script:       Bornahn
@@ -1047,7 +1047,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974309:
     script:       Ndego
@@ -1071,7 +1071,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974310:
     script:       Dehbi_Moshal
@@ -1095,7 +1095,7 @@ npcs:
       moving:         6
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974311:
     script:       Nudahaal
@@ -1119,7 +1119,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974312:
     script:       Zwaluh
@@ -1143,7 +1143,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974313:
     script:       Gidappa
@@ -1167,7 +1167,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974314:
     script:       Rajaaha
@@ -1191,7 +1191,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974315:
     script:       Macici
@@ -1215,7 +1215,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974316:
     script:       Yudi_Yolhbi
@@ -1239,7 +1239,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974317:
     script:       Goyuyu
@@ -1263,7 +1263,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974318:
     script:       Sojan-Tamjan
@@ -1287,7 +1287,7 @@ npcs:
       moving:         6
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974319:
     script:       Yando-Memondo
@@ -1311,7 +1311,7 @@ npcs:
       moving:         8
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974320:
     script:       Mabebe
@@ -1335,7 +1335,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974321:
     script:       Opococo
@@ -1359,7 +1359,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974322:
     script:       Djinabaha
@@ -1383,7 +1383,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974323:
     script:       Dabigo
@@ -1407,7 +1407,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974324:
     script:       Chochoroon
@@ -1422,7 +1422,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974325:
     script:       Rughadjeen
@@ -1445,7 +1445,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974326:
     script:       Gadalar
@@ -1468,7 +1468,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974327:
     script:       Mihli_Aliapoh
@@ -1491,7 +1491,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974328:
     script:       Zazarg
@@ -1536,7 +1536,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974330:
     script:       Yayaroon
@@ -1551,7 +1551,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974331:
     script:       Dahaaba
@@ -1575,7 +1575,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974332:
     script:       Chocobo
@@ -1590,7 +1590,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974333:
     script:       Shihu-Danhu
@@ -1614,7 +1614,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974334:
     script:       Suldiran
@@ -1638,7 +1638,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974335:
     script:       Biyaada
@@ -1661,7 +1661,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974336:
     script:       Shayadar
@@ -1684,7 +1684,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974337:
     script:       Iphaaf
@@ -1707,7 +1707,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974338:
     script:       Talhaal
@@ -1730,7 +1730,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974339:
     script:       Gaweesh
@@ -1753,7 +1753,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974340:
     script:       qm4
@@ -2026,7 +2026,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: TOAU
+    content: toau
 
   16974366:
     script: HomePoint#2
@@ -2037,7 +2037,7 @@ npcs:
       entity_flags: 27
       name_prefix:  32
     status:  cutscene_only
-    content: SOA
+    content: soa
 
   16974367:
     script:       Mutarid
@@ -2058,7 +2058,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974368:
     script:       Syaid
@@ -2079,7 +2079,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974369:
     script:       Azwil
@@ -2100,7 +2100,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974370:
     script:       Gulool_Ja_Ja
@@ -2114,7 +2114,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974371:
     script:       Gurfurlur
@@ -2128,7 +2128,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974372:
     script:       Medusa
@@ -2142,7 +2142,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974373:
     script:       Megomak
@@ -2156,7 +2156,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974374:
     script:       Zazarg
@@ -2190,7 +2190,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974376:
     script:       Goblin_Footprint
@@ -2203,7 +2203,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974377:
     script:       Home_Point_#1
@@ -2235,7 +2235,7 @@ npcs:
       name_prefix:  32
       moving:        1
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974380:
     script:       Home_Point_#4
@@ -2249,7 +2249,7 @@ npcs:
       name_prefix:  32
       moving:       21
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974381:
     script:       Home_Point_#5
@@ -2287,7 +2287,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974383:
     script:       Gajaad
@@ -2311,7 +2311,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974384:
     script:       Falzuuk
@@ -2334,7 +2334,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974385:
     script:       Famatar
@@ -2357,7 +2357,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974386:
     script: blank
@@ -2394,7 +2394,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974389:
     script:       Salaifa
@@ -2419,7 +2419,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974390:
     script:       Ugahar
@@ -2442,7 +2442,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974391:
     script:       Eumoa-Tajimoa
@@ -2465,7 +2465,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974392:
     script:       Truffle
@@ -2480,7 +2480,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974393:
     script:       Najaaj
@@ -2505,7 +2505,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974394:
     script:       Sujyahn
@@ -2521,7 +2521,7 @@ npcs:
     status:   normal
     speed:    13
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16974395:
     script:       Talruf
@@ -2545,7 +2545,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974396:
     script:       Gadaana
@@ -2568,7 +2568,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974397:
     script:       Hadibal
@@ -2592,7 +2592,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974398:
     script:       Zwiyaam
@@ -2615,7 +2615,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974399:
     script:       Danaaba
@@ -2630,7 +2630,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974400:
     script:       Devonte
@@ -2653,7 +2653,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974401:
     script:       Banjanu
@@ -2676,7 +2676,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974402:
     script:       Bjibar
@@ -2699,7 +2699,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974403:
     script:       Dahaeel
@@ -2722,7 +2722,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   16974404:
     script: blank
@@ -2761,7 +2761,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   16974407:
     script:       Voidwatch_Purveyor
@@ -2782,4 +2782,4 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch

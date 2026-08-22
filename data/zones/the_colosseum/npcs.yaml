@@ -208,7 +208,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17068455:
     script: NPC[1a7]
@@ -226,7 +226,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17068458:
     script: NPC[1aa]
@@ -281,7 +281,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17068464:
     script:       Moogle
@@ -293,7 +293,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17068465:
     script:       Moogle
@@ -305,7 +305,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17068466:
     script:       Moogle
@@ -317,7 +317,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17068467:
     script:       Moogle
@@ -329,7 +329,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17068468:
     script:       Moogle
@@ -341,7 +341,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17068469:
     script:       Moogle
@@ -353,7 +353,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17068470:
     script:       Moogle
@@ -365,7 +365,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         TOAU
+    content:         toau
 
   17068471:
     script:       _1z0
@@ -1063,7 +1063,7 @@ npcs:
         model: 52
       moving: 32769
     status:  normal
-    content: TOAU
+    content: toau
 
   17068521:
     script:       Cage_Fence
@@ -1163,7 +1163,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17068529:
     script:       Walzharn

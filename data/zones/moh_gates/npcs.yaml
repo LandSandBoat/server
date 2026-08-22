@@ -116,7 +116,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879340:
     script:       JGL_BUILD_MASTER_1
@@ -127,7 +127,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879341:
     script:       JGL_BUILD_MASTER_2
@@ -138,7 +138,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879342:
     script:       JGL_BUILD_MASTER_3
@@ -149,7 +149,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879343:
     script:       JGL_BUILD_MASTER_4
@@ -160,7 +160,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879344:
     script:       JGL_BUILD_MASTER_5
@@ -171,7 +171,7 @@ npcs:
         model: 50
       moving: 1
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879345:
     script: NPC[131]
@@ -498,7 +498,7 @@ npcs:
         model: 2424
       moving: 32775
     status:  normal
-    content: SOA
+    content: soa
 
   17879374:
     script:       Mining_Point
@@ -510,7 +510,7 @@ npcs:
         model: 2424
       moving: 32775
     status:  normal
-    content: SOA
+    content: soa
 
   17879375:
     script:       Mining_Point
@@ -522,7 +522,7 @@ npcs:
         model: 2424
       moving: 32775
     status:  normal
-    content: SOA
+    content: soa
 
   17879376:
     script:       Mining_Point
@@ -534,7 +534,7 @@ npcs:
         model: 2424
       moving: 32774
     status:  normal
-    content: SOA
+    content: soa
 
   17879377:
     script:       Mining_Point
@@ -546,7 +546,7 @@ npcs:
         model: 2424
       moving: 32775
     status:  normal
-    content: SOA
+    content: soa
 
   17879378:
     script:       Mining_Point
@@ -558,7 +558,7 @@ npcs:
         model: 2424
       moving: 32775
     status:  normal
-    content: SOA
+    content: soa
 
   17879379:
     script:       Soul_Pyre
@@ -571,7 +571,7 @@ npcs:
       moving:     7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879380:
     script:       Soul_Pyre
@@ -584,7 +584,7 @@ npcs:
       moving:     7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879381:
     script:       Soul_Pyre
@@ -597,7 +597,7 @@ npcs:
       name_vis:      120
       moving:          6
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879382:
     script:       Soul_Pyre
@@ -610,7 +610,7 @@ npcs:
       name_vis:      120
       moving:          7
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879383:
     script:       Soul_Pyre
@@ -623,7 +623,7 @@ npcs:
       name_vis:      120
       moving:          7
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879384:
     script:       Soul_Pyre
@@ -636,7 +636,7 @@ npcs:
       name_vis:      120
       moving:          7
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879385:
     script: NPC[159]
@@ -652,7 +652,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17879387:
     script: NPC[15b]
@@ -670,7 +670,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17879389:
     script:       qm
@@ -682,7 +682,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   17879391:
     script: NPC[15f]
@@ -784,7 +784,7 @@ npcs:
       moving:   32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879401:
     script: blank
@@ -843,7 +843,7 @@ npcs:
         sub:   28672
       entity_flags: 2075
       name_prefix:    32
-    content: SOA
+    content: soa
 
   17879405:
     script: blank
@@ -972,7 +972,7 @@ npcs:
       moving: 32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879417:
     script:       Ergon_Locus
@@ -986,7 +986,7 @@ npcs:
       moving:   32783
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879418:
     script:       Ergon_Locus
@@ -1000,7 +1000,7 @@ npcs:
       moving:   32776
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879419:
     script:       Ergon_Locus
@@ -1012,7 +1012,7 @@ npcs:
       name_vis:   112
       moving:   32769
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879420:
     script:       Ergon_Locus
@@ -1024,7 +1024,7 @@ npcs:
       name_vis:   112
       moving:   32769
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879421:
     script:       Lost_Article
@@ -1041,7 +1041,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17879422:
     script: NPC[17e]
@@ -1069,7 +1069,7 @@ npcs:
       moving:       1
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17879425:
     script:       Moogle
@@ -1083,7 +1083,7 @@ npcs:
       moving:       1
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17879426:
     script:       Moogle
@@ -1097,7 +1097,7 @@ npcs:
       moving:       1
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17879427:
     script:       Moogle
@@ -1111,7 +1111,7 @@ npcs:
       moving:       1
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17879428:
     script:       Moogle
@@ -1125,7 +1125,7 @@ npcs:
       moving:       1
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17879429:
     script:       Moogle
@@ -1139,7 +1139,7 @@ npcs:
       moving:       1
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17879430:
     script:       Moogle
@@ -1153,7 +1153,7 @@ npcs:
       moving:       1
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17879431:
     script:       Moogle
@@ -1167,7 +1167,7 @@ npcs:
       moving:       1
     speed:           40
     animation_speed: 40
-    content:         SOA
+    content:         soa
 
   17879432:
     script:       Scalable_Area
@@ -1182,7 +1182,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879433:
     script:       Scalable_Area
@@ -1197,7 +1197,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879434:
     script:       Scalable_Area
@@ -1212,7 +1212,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879435:
     script:       Scalable_Area
@@ -1227,7 +1227,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879436:
     script:       Ramblix
@@ -1241,7 +1241,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  SOA
+    content:  soa
 
   17879437:
     script:       Goblin_Footprint
@@ -1253,7 +1253,7 @@ npcs:
         model: 52
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   17879438:
     script:       qm1

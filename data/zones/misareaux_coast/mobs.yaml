@@ -1458,7 +1458,7 @@ templates:
       drops:
         - chance: rare
           item:   altdorfs_earring
-    content: WOTG
+    content: wotg
 
   Gration:
     id:            1792
@@ -1872,7 +1872,7 @@ templates:
       drops:
         - chance: rare
           item:   shepherds_chain
-    content: WOTG
+    content: wotg
 
   Orcish_Bowshooter_MC:
     id:            6277
@@ -2188,7 +2188,7 @@ templates:
       despoil:
         bird_feather: 0
         bird_egg:     0
-    content: ABYSSEA
+    content: abyssea
 
   Tavnazian_Sheep:
     id:            3854

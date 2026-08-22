@@ -1002,7 +1002,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17257025:
     script: NPC[241]
@@ -1020,7 +1020,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17257028:
     script: NPC[244]
@@ -1196,7 +1196,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17257043:
     script:       Shattered_Telepoint
@@ -1209,7 +1209,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17257044:
     script: NPC[254]
@@ -1643,7 +1643,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17257078:
     script:       Luck_Rune
@@ -1669,7 +1669,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17257080:
     script:       Field_Manual
@@ -1683,7 +1683,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17257081:
     script:       Field_Manual
@@ -1697,7 +1697,7 @@ npcs:
       moving:   15
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17257082:
     script:       Field_Parchment
@@ -1710,7 +1710,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17257083:
     script:       Ethereal_Junction
@@ -1725,7 +1725,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17257084:
     script:       Ethereal_Junction
@@ -1740,7 +1740,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17257085:
     script:       Ethereal_Junction
@@ -1755,7 +1755,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17257086:
     script:       Mogball-Local
@@ -1790,7 +1790,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17257089:
     script:       Planar_Rift
@@ -1806,7 +1806,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17257090:
     script:       Planar_Rift
@@ -1822,7 +1822,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17257091:
     script:       Riftworn_Pyxis
@@ -1837,7 +1837,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17257092:
     script:       Riftworn_Pyxis
@@ -1852,7 +1852,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17257093:
     script:       Riftworn_Pyxis
@@ -1867,7 +1867,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17257094:
     script:       Summoner
@@ -1962,7 +1962,7 @@ npcs:
       moving:         6
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17257103:
     script:       Smile_Helper
@@ -2277,7 +2277,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17257122:
     script:       Ergon_Locus
@@ -2290,7 +2290,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17257123:
     script:       Geomantic_Reservoir
@@ -2304,7 +2304,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17257124:
     script: NPC[2a4]
@@ -2337,7 +2337,7 @@ npcs:
       moving:         7
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17257127:
     script: blank

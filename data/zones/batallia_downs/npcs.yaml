@@ -394,7 +394,7 @@ npcs:
       name_prefix:     2
       moving:      32769
     status:  normal
-    content: ACP
+    content: acp
 
   17207798:
     script:       Peculiar_Footprints
@@ -410,7 +410,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17207799:
     script:       Treasure_Casket
@@ -607,7 +607,7 @@ npcs:
       look:
         type:  standard
         model: 50
-    content: SOA
+    content: soa
 
   17207817:
     script: NPC[209]
@@ -625,7 +625,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17207820:
     script: NPC[20c]
@@ -1123,7 +1123,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17207857:
     script: Lyco_Sparkles
@@ -1137,7 +1137,7 @@ npcs:
       name_prefix:     34
       moving:       32769
     status:  normal
-    content: WOTG
+    content: wotg
 
   17207858:
     script: blank
@@ -1151,7 +1151,7 @@ npcs:
       name_prefix:     34
       moving:       32768
     status:  cutscene_only
-    content: WOTG
+    content: wotg
 
   17207859:
     script:       Lycopodium
@@ -1167,7 +1167,7 @@ npcs:
       moving:       32768
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17207860:
     script:       qm6
@@ -1207,7 +1207,7 @@ npcs:
       name_prefix:  32
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17207864:
     script:       Regal_Feline
@@ -1346,7 +1346,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17207876:
     script:       Field_Manual
@@ -1360,7 +1360,7 @@ npcs:
       moving:   22
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17207877:
     script:       Field_Parchment
@@ -1373,7 +1373,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17207878:
     script:       Ethereal_Junction
@@ -1388,7 +1388,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17207879:
     script:       Ethereal_Junction
@@ -1403,7 +1403,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17207880:
     script:       Ethereal_Junction
@@ -1418,7 +1418,7 @@ npcs:
       moving:        32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17207881:
     script:       Mogball-Local
@@ -2177,7 +2177,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17207937:
     script:       Planar_Rift
@@ -2193,7 +2193,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17207938:
     script:       Planar_Rift
@@ -2209,7 +2209,7 @@ npcs:
       moving:          1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17207939:
     script:       Riftworn_Pyxis
@@ -2224,7 +2224,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17207940:
     script:       Riftworn_Pyxis
@@ -2239,7 +2239,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17207941:
     script:       Riftworn_Pyxis
@@ -2254,7 +2254,7 @@ npcs:
       name_prefix:     2
       moving:          1
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17207942:
     script:       Atmacite_Refiner
@@ -2275,7 +2275,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17207943:
     script:       Voidwatch_Officer
@@ -2296,7 +2296,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  VOIDWATCH
+    content:  voidwatch
 
   17207944:
     script:       Wotark
@@ -2311,7 +2311,7 @@ npcs:
       moving:       22
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17207945:
     script: blank
@@ -2341,7 +2341,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17207947:
     script:       Dungeon_Entrance
@@ -2392,7 +2392,7 @@ npcs:
       moving:       15
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17207950:
     script:       Summoner
@@ -2487,7 +2487,7 @@ npcs:
       moving:         6
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17207959:
     script:       Smile_Helper
@@ -2725,7 +2725,7 @@ npcs:
       moving:     1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17207971:
     script: NPC[2a3]
@@ -2754,7 +2754,7 @@ npcs:
       moving:        15
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17207974:
     script: blank
@@ -2786,7 +2786,7 @@ npcs:
         model: 2424
       moving: 1
     status:  normal
-    content: SOA
+    content: soa
 
   17207977:
     script:       Resume_Point
@@ -2802,7 +2802,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17207978:
     script:       Syrillia
@@ -2825,7 +2825,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17207979:
     script: NPC[2ab]
@@ -2943,7 +2943,7 @@ npcs:
       name_prefix: 130
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17207988:
     script:       Raptors_Food_1
@@ -2957,7 +2957,7 @@ npcs:
       name_prefix: 130
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17207989:
     script:       Raptors_Food_2
@@ -2971,7 +2971,7 @@ npcs:
       name_prefix: 130
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17207990:
     script:       Raptors_Food_3
@@ -2985,7 +2985,7 @@ npcs:
       name_prefix: 130
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17207991:
     script:       Raptors_Food_4
@@ -2999,7 +2999,7 @@ npcs:
       name_prefix: 130
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17207992:
     script:       Raptors_Food_5
@@ -3013,7 +3013,7 @@ npcs:
       name_prefix: 130
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17207993:
     script:       Raptors_Food_6
@@ -3027,7 +3027,7 @@ npcs:
       name_prefix: 130
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17207994:
     script:       Raptors_Food_7
@@ -3041,7 +3041,7 @@ npcs:
       name_prefix: 130
       moving:        1
     status:  normal
-    content: ROV
+    content: rov
 
   17207995:
     script:       Raptor
@@ -3133,4 +3133,4 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr

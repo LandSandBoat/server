@@ -26,6 +26,7 @@
 #include "common/types/position.h"
 #include "data/datasets/ecosystems/dataset.h"
 #include "data/enums/allegiance.h"
+#include "data/enums/content.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
 #include "data/enums/species.h"
@@ -75,7 +76,7 @@ struct MobTemplateData
 
     LootData       Loot{};
     xi::Allegiance Allegiance{};
-    std::string    Content;
+    xi::Content    Content{};
 };
 
 struct MobSpawnData

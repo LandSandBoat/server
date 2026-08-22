@@ -310,7 +310,7 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
-    content: ASA
+    content: asa
 
   Infernal_Weapon:
     id:            2077
@@ -498,7 +498,7 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
-    content: ASA
+    content: asa
 
   Magic_Flagon:
     id:            2476
@@ -611,7 +611,7 @@ templates:
           item:   aptant_of_pera
         - chance: uncommon
           item:   aptant_of_aecus
-    content: WOTG
+    content: wotg
 
   Mimic_Jester:
     id:            4726
@@ -847,7 +847,7 @@ templates:
           item:   aptant_of_pera
         - chance: uncommon
           item:   aptant_of_arkhe
-    content: WOTG
+    content: wotg
 
   Nightmare_Vase:
     id:            2873
@@ -1000,7 +1000,7 @@ templates:
       drops:
         - chance: uncommon
           item:   lyricists_gonnelle
-    content: WOTG
+    content: wotg
 
   Shikigami_Weapon:
     id:            3603
@@ -1079,7 +1079,7 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
-    content: ASA
+    content: asa
 
   Thunder_Elemental:
     id:            3912

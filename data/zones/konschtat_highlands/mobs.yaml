@@ -168,7 +168,7 @@ templates:
       drops:
         - chance: uncommon
           item:   halting_stole
-    content: WOTG
+    content: wotg
 
   Dawon:
     id:            7020
@@ -321,7 +321,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Earth_Elemental:
     id:            1160
@@ -455,7 +455,7 @@ templates:
       drops:
         - chance: common
           item:   estramacon
-    content: WOTG
+    content: wotg
 
   Ghost:
     id:            1514
@@ -1123,7 +1123,7 @@ templates:
       drops:
         - chance: common
           item:   immortal_molt
-    content: WOTG
+    content: wotg
 
   Huge_Wasp:
     id:            2003
@@ -1461,7 +1461,7 @@ templates:
         respawn: 300
       stats:
         hp: 5300
-    content: WOTG
+    content: wotg
 
   Rampaging_Ram:
     id:            3316
@@ -1884,7 +1884,7 @@ templates:
       drops:
         - chance: uncommon
           item:   repelling_collar
-    content: WOTG
+    content: wotg
 
   Thunder_Elemental:
     id:            3912
@@ -2098,7 +2098,7 @@ templates:
         respawn: 300
       stats:
         hp: 4900
-    content: WOTG
+    content: wotg
 
   Wolf_Zombie:
     id:            4359
@@ -2313,7 +2313,7 @@ templates:
             phoenix_feather:          0.5
             slab_of_granite:          0.5
             wyvern_skin:              0.5
-    content: WOTG
+    content: wotg
 
   Young_Quadav:
     id:            4477

@@ -1004,7 +1004,7 @@ npcs:
       moving:         6
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772599:
     script:       Magicite
@@ -1574,7 +1574,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17772639:
     script:       Diabolos
@@ -1587,7 +1587,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17772640:
     script:       Diabolos
@@ -1600,7 +1600,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         COP
+    content:         cop
 
   17772641:
     script: relic
@@ -1965,7 +1965,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17772660:
     script:       Item_box
@@ -2897,7 +2897,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  COP
+    content:  cop
 
   17772727:
     script: blank
@@ -3128,7 +3128,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  TOAU
+    content:  toau
 
   17772741:
     script:       Trion
@@ -3476,7 +3476,7 @@ npcs:
       moving: 32768
     status:   cutscene_only
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772765:
     script:       Degenhard
@@ -3583,7 +3583,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772772:
     script:       Explorer_Moogle
@@ -3595,7 +3595,7 @@ npcs:
         model: 981
       moving: 21
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772773:
     script:       Explorer_Moogle
@@ -3608,7 +3608,7 @@ npcs:
       moving: 7
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772774:
     script:       Hunt_Registry
@@ -3622,7 +3622,7 @@ npcs:
       moving:    1
     status:   normal
     widescan: true
-    content:  FIELD_MANUALS
+    content:  field_manuals
 
   17772775:
     script: blank
@@ -3653,7 +3653,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17772777:
     script:       Abyssea_Ticket_Master
@@ -3687,7 +3687,7 @@ npcs:
       moving: 32776
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772779:
     script: blank
@@ -3714,7 +3714,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17772781:
     script:       Splintery_Chest
@@ -3729,7 +3729,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17772782:
     script:       Magian_Moogle_Blue
@@ -3742,7 +3742,7 @@ npcs:
       moving: 32776
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772783:
     script:       Magian_MoogleHood
@@ -3755,7 +3755,7 @@ npcs:
       entity_flags:  2051
       moving:       32769
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772784:
     script:       Magian_Moogle_Green
@@ -3768,7 +3768,7 @@ npcs:
       moving: 32789
     status:   normal
     widescan: true
-    content:  WOTG
+    content:  wotg
 
   17772785:
     script:       Chacharoon
@@ -3831,7 +3831,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17772790:
     script: blank
@@ -4343,7 +4343,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772834:
     script: blank
@@ -4392,7 +4392,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17772837:
     script:       Vincent
@@ -4415,7 +4415,7 @@ npcs:
       moving:       14
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17772838:
     script:       Voidwatch_Purveyor
@@ -4436,7 +4436,7 @@ npcs:
       moving: 8
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17772839:
     script: blank
@@ -4494,7 +4494,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772844:
     script:       Proto-Waypoint
@@ -4509,7 +4509,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772845:
     script:       HomePoint#1
@@ -4522,7 +4522,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772846:
     script:       HomePoint#2
@@ -4535,7 +4535,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772847:
     script:       HomePoint#3
@@ -4548,7 +4548,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772848:
     script:       HomePoint#4
@@ -4558,7 +4558,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772849:
     script:       HomePoint#5
@@ -4568,7 +4568,7 @@ npcs:
         type:  standard
         model: 51
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772850:
     script:       Achieve_Master
@@ -4580,7 +4580,7 @@ npcs:
     speed:           40
     animation_speed: 40
     widescan:        true
-    content:         SOA
+    content:         soa
 
   17772851:
     script: NPC[133]
@@ -4611,7 +4611,7 @@ npcs:
       moving:        21
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772853:
     script:       Marjory
@@ -4635,7 +4635,7 @@ npcs:
       moving:        14
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772854:
     script:       Syndella
@@ -4672,7 +4672,7 @@ npcs:
       moving:         1
     status:   normal
     widescan: true
-    content:  SURVIVAL_GUIDE
+    content:  survival_guide
 
   17772856:
     script:       Unity_Master
@@ -4683,7 +4683,7 @@ npcs:
         model: 52
       entity_flags: 2051
       name_vis:       96
-    content: SOA
+    content: soa
 
   17772857:
     script:       Resume_Point
@@ -4699,7 +4699,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  SOA
+    content:  soa
 
   17772858:
     script:       Iroha
@@ -4791,7 +4791,7 @@ npcs:
       moving:       32769
     status:   normal
     widescan: true
-    content:  ROV
+    content:  rov
 
   17772865:
     script:       Aurix
@@ -4827,7 +4827,7 @@ npcs:
         model: 52
       name_vis:   112
       moving:   32769
-    content: TVR
+    content: tvr
 
   17772868:
     script:       Enigmatic_Footprints
@@ -4841,7 +4841,7 @@ npcs:
       name_prefix:     2
       moving:      32769
     status:  normal
-    content: TVR
+    content: tvr
 
   17772869:
     script:       Enigmatic_Footprints_#2
@@ -4856,7 +4856,7 @@ npcs:
       moving:      32769
     status:   normal
     widescan: true
-    content:  TVR
+    content:  tvr
 
   17772870:
     script:       Layer_Reserve

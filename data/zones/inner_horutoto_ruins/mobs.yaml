@@ -329,7 +329,7 @@ templates:
           item:   vial_of_fiend_blood
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Deathwatch_Beetle:
     id:            6077
@@ -370,7 +370,7 @@ templates:
         insect_wing:  0
         beetle_shell: 0
         beetle_jaw:   0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Flesher:
     id:            6667
@@ -423,7 +423,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Gambler:
     id:            1666
@@ -611,7 +611,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Metallurgist:
     id:            6663
@@ -666,7 +666,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Mugger:
     id:            1690
@@ -833,7 +833,7 @@ templates:
         chunk_of_goblin_chocolate: 0
         bowl_of_goblin_stew:       0
         goblin_mushpot:            0
-    content: ABYSSEA
+    content: abyssea
 
   Goblin_Weaver:
     id:            1744
@@ -1090,7 +1090,7 @@ templates:
       drops:
         - chance: common
           item:   disciple_grip
-    content: WOTG
+    content: wotg
 
   Skinnymajinx:
     id:            6535
@@ -1140,7 +1140,7 @@ templates:
       steal: bone_chip
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Skinnymalinks:
     id:            6530
@@ -1190,7 +1190,7 @@ templates:
       steal: bone_chip
       despoil:
         bone_chip: 0
-    content: ABYSSEA
+    content: abyssea
 
   Slendlix_Spindlethumb:
     id:            3669
@@ -1286,7 +1286,7 @@ templates:
           item:   bat_wing
       despoil:
         bat_wing: 0
-    content: ABYSSEA
+    content: abyssea
 
   Wendigo_blm:
     id:            4320

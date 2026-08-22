@@ -54,7 +54,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17526914:
     script:       Legion_Libretto
@@ -129,7 +129,7 @@ npcs:
       moving:    7
     status:   normal
     widescan: true
-    content:  ABYSSEA
+    content:  abyssea
 
   17526920:
     script:       Moogle
