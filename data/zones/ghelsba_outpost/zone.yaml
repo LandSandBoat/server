@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z3w0:
+    from:  [99.723, -2.166, -45.669]
+    to:    west_ronfaure
+    at:    [-738.178, -67.173, 619.325, 0.905795]
+    scale: [1.000, 6.000]
+
+  z3w2:
+    from:  [-7.915, -2.391, -60.877]
+    to:    yughott_grotto
+    at:    [-255.961, -2.711, -69.828, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3w4:
+    from:  [130.046, -22.812, 181.572]
+    to:    fort_ghelsba
+    at:    [-161.497, -21.977, 19.985]
+    scale: [1.000, 5.000]

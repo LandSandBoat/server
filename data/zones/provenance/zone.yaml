@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [pet, los_player_block]
+music:
+  day:          56
+  night:        56
+  battle_solo:  56
+  battle_party: 56

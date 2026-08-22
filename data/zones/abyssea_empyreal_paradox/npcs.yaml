@@ -1,0 +1,378 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17821703:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  SOA
+
+  17821704:
+    script: NPC[8]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17821705:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17821707:
+    script: NPC[b]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17821708:
+    script: NPC[c]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17821709:
+    script: NPC[d]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17821710:
+    script:       Cruor_Prospector
+    display_name: Cruor Prospector
+    at:           [535.000, -500.500, -584.000, 226]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      moving: 6
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17821711:
+    script:       Atma_Infusionist
+    display_name: Atma Infusionist
+    at:           [545.000, -500.500, -584.000, 201]
+    render:
+      look:
+        type:  standard
+        model: 1045
+      entity_flags: 1539
+      moving:          7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17821712:
+    script: NPC[10]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17821713:
+    script:       Cavernous_Maw
+    display_name: Cavernous Maw
+    at:           [540.018, -499.999, -565.867, 64]
+    render:
+      look:
+        type:  standard
+        model: 2325
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17821714:
+    script:       TR_Entrance
+    display_name: Transcendental Radiance
+    at:           [540.000, -500.000, -599.000]
+    render:
+      look:
+        type:  standard
+        model: 2410
+      entity_flags: 515
+      name_vis:      96
+      name_prefix:    2
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17821715:
+    script:       Transcendental_Radiance
+    display_name: Transcendental Radiance
+    at:           [-480.000, 0.000, 480.000]
+    render:
+      look:
+        type:  standard
+        model: 2410
+      entity_flags: 515
+      name_vis:      96
+      name_prefix:    2
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17821716:
+    script:       Transcendental_Radiance
+    display_name: Transcendental Radiance
+    at:           [520.000, -500.000, 480.000, 195]
+    render:
+      look:
+        type:  standard
+        model: 2410
+      entity_flags: 515
+      name_vis:      96
+      name_prefix:    2
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17821717:
+    script:       Transcendental_Radiance
+    display_name: Transcendental Radiance
+    at:           [-480.000, -1000.000, -520.000, 203]
+    render:
+      look:
+        type:  standard
+        model: 2410
+      entity_flags: 515
+      name_vis:      96
+      name_prefix:    2
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17821718:
+    script: NPC[16]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17821719:
+    script: NPC[17]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17821720:
+    script: NPC[18]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17821721:
+    script: NPC[19]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17821722:
+    script:       Trailmix
+    display_name: Trailmix
+    at:           [547.979, -500.000, -561.832, 87]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  ABYSSEA
+
+  17821723:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [547.979, -500.000, -561.832, 87]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17821724:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17821725:
+    script:       Prishe
+    display_name: Prishe
+    at:           [536.353, -499.999, -591.338, 229]
+    render:
+      look:
+        type:  standard
+        model: 1463
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:          normal
+    animation_speed: 54
+    widescan:        true
+    content:         ABYSSEA
+
+  17821726:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17821727:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    content: ABYSSEA
+
+  17821728:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17821729:
+    script: NPC[21]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17821730:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17821731:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17821732:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17821733:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17821734:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17821735:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17821736:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17821737:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA

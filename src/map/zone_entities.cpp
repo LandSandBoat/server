@@ -22,6 +22,7 @@
 #include "zone_entities.h"
 
 #include "common/logging_context.h"
+#include "data/enums/detects.h"
 #include "data/enums/mob_mod.h"
 #include "enmity_container.h"
 #include "instance.h"

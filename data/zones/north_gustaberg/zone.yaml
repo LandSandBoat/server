@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          116
+  night:        116
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z2y0:
+    from:  [660.046, -3.085, 302.725]
+    to:    port_bastok
+    at:    [142.002, 4.969, -2.008, 2.356194]
+    scale: [1.000, 5.000]
+
+  z2y2:
+    from:  [0.735, -5.555, -79.065]
+    to:    south_gustaberg
+    at:    [0.840, -5.027, 76.838, 1.570796]
+    scale: [1.000, 10.000]
+
+  z2y4:
+    from:  [-440.639, 33.094, -276.308]
+    to:    south_gustaberg
+    at:    [-440.502, 35.486, -121.753, 1.570796]
+    scale: [1.000, 10.000]
+
+  z2y6:
+    from:  [-518.828, 33.034, 592.074]
+    to:    konschtat_highlands
+    at:    [101.543, -75.453, -607.531, 4.712389]
+    scale: [1.000, 5.000]
+
+  z2y8:
+    from:  [497.899, -37.517, 1174.924]
+    to:    palborough_mines
+    at:    [4.923, -2.383, 59.551]
+    scale: [1.000, 4.000]
+
+  z2ya:
+    from:  [-697.012, 92.175, 311.829]
+    to:    dangruf_wadi
+    at:    [2.871, -2.986, 619.342, 3.141593]
+    scale: [1.000, 5.000]
+
+  z2yc:
+    from:  [580.986, -17.809, 695.899]
+    to:    oldton_movalpolos
+    at:    [-322.031, 6.251, -259.946]
+    scale: [1.000, 3.500]
+
+  z2ye:
+    from:  [461.255, -8.139, 736.063]
+    to:    oldton_movalpolos
+    at:    [-304.061, -8.651, -99.272]
+    scale: [1.000, 3.500]

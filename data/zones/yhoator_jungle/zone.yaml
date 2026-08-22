@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          134
+  night:        134
+  battle_solo:  101
+  battle_party: 191
+
+zonelines:
+
+  z3g0:
+    from:  [-360.018, 4.000, 140.012]
+    to:    yuhtunga_jungle
+    at:    [116.825, 6.613, 100.000, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3g2:
+    from:  [-480.012, 4.222, 59.973]
+    to:    yuhtunga_jungle
+    at:    [116.805, 6.613, 19.989, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3g4:
+    from:  [-589.975, 4.407, -263.321]
+    to:    yuhtunga_jungle
+    at:    [116.813, 6.428, -299.969, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3g6:
+    from:  [-479.986, 4.279, -499.997]
+    to:    yuhtunga_jungle
+    at:    [108.189, 6.375, -456.889, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3g8:
+    from:  [-102.098, -2.930, 258.741]
+    to:    ifrits_cauldron
+    at:    [100.285, -1.768, -320.749, 4.712389]
+    scale: [1.000, 4.000]
+
+  z3ga:
+    from:  [105.101, -3.384, 345.912]
+    to:    ifrits_cauldron
+    at:    [299.938, 14.160, -81.802, 4.712389]
+    scale: [1.000, 4.000]
+
+  z3gc:
+    from:  [299.955, -6.708, -627.151]
+    to:    temple_of_uggalepih
+    at:    [179.986, -9.694, 41.971, 1.570796]
+    scale: [1.000, 4.000]
+
+  z3ge:
+    from:  [65.003, -12.874, -507.206]
+    to:    temple_of_uggalepih
+    at:    [59.996, -9.598, 81.988, 1.570796]
+    scale: [1.000, 4.000]
+
+  z3gg:
+    from:  [7.971, -12.884, -507.240]
+    to:    temple_of_uggalepih
+    at:    [-59.956, -9.725, 81.957, 1.570796]
+    scale: [1.000, 4.000]
+
+  z3gi:
+    from:  [347.445, -12.797, -225.017]
+    to:    temple_of_uggalepih
+    at:    [238.951, -9.730, 179.998]
+    scale: [1.000, 4.000]
+
+  z3gk:
+    from:  [347.382, -12.750, -168.008]
+    to:    temple_of_uggalepih
+    at:    [198.942, -17.706, 300.020]
+    scale: [1.000, 4.000]
+
+  z3gm:
+    from:  [380.022, 4.321, 80.029]
+    to:    den_of_rancor
+    at:    [260.019, -15.728, 319.871, 1.570796]
+    scale: [1.000, 4.000]

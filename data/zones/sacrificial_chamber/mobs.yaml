@@ -1,0 +1,1611 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Cyaneous-toed_Yallberry:
+    id:            877
+    species:       tonberry
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1200
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+  Cyaneous-toed_Yallberry_2:
+    id:            877
+    display_name:  Cyaneous-toed_Yallberry
+    species:       tonberry
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1200
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Graviton:
+    id:            1798
+    species:       tonberry
+    type:          [notorious, battlefield]
+    skill_list_id: 282
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1239
+        name_prefix: 32
+        model_size:   3
+        hitbox:      13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5200
+
+  Hyohh_the_Conchblower:
+    id:            2038
+    species:       blue_sahagin
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1337
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+  Hyohh_the_Conchblower_2:
+    id:            2038
+    display_name:  Hyohh_the_Conchblower
+    species:       blue_sahagin
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1337
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Molybiton:
+    id:            2729
+    species:       tonberry
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 336
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1213
+        name_prefix: 32
+        model_size:   2
+        hitbox:      11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4700
+
+  Pevv_the_Riverleaper:
+    id:            3123
+    species:       blue_sahagin
+    type:          [notorious, battlefield]
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1311
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+  Pevv_the_Riverleaper_2:
+    id:            3123
+    display_name:  Pevv_the_Riverleaper
+    species:       blue_sahagin
+    type:          [notorious, battlefield]
+    skill_list_id: 712
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1311
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Qull_the_Fallstopper:
+    id:            3290
+    species:       blue_sahagin
+    type:          [notorious, battlefield]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1321
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+  Qull_the_Fallstopper_2:
+    id:            3290
+    display_name:  Qull_the_Fallstopper
+    species:       blue_sahagin
+    type:          [notorious, battlefield]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1321
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Rauu_the_Whaleswooner:
+    id:            3328
+    species:       blue_sahagin
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1326
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+        mp: 4500
+
+  Rauu_the_Whaleswooner_2:
+    id:            3328
+    display_name:  Rauu_the_Whaleswooner
+    species:       blue_sahagin
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1326
+        model_size:  2
+        hitbox:     14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Sable-tongued_Gonberry:
+    id:            3425
+    species:       tonberry
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1222
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 3000
+
+  Sable-tongued_Gonberry_2:
+    id:            3425
+    display_name:  Sable-tongued_Gonberry
+    species:       tonberry
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1222
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Sahagins_Wyvern:
+    id:            3442
+    species:       blue_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 1155
+        model_size:      1
+        hitbox:          8
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1100
+        mp: 1100
+
+  Sahagins_Wyvern_2:
+    id:            3442
+    display_name:  Sahagins_Wyvern
+    species:       blue_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 1155
+        model_size:      1
+        hitbox:          8
+      spawn:
+        type: [scripted]
+
+  Shantotto:
+    id:            3584
+    species:       tarutaru
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 153
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  misc
+          model: 1095
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      spawn:
+        type: [scripted]
+
+  Tonberrys_Avatar:
+    id:            3970
+    species:       carbuncle
+    type:          [called, battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 129
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Tonberrys_Elemental_SC:
+    id:            4674
+    display_name:  Tonberrys_Elemental
+    species:       fire_elemental
+    type:          [battlefield]
+    spell_list_id: 19
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Tungsiton:
+    id:            4052
+    species:       tonberry
+    type:          [notorious, battlefield]
+    skill_list_id: 336
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1225
+        name_prefix: 32
+        model_size:   2
+        hitbox:      11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+
+  Vermilion-eared_Noberry:
+    id:            4224
+    species:       tonberry
+    type:          [notorious, battlefield]
+    spell_list_id: 141
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1225
+        entity_flags: 157
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 3000
+
+  Vermilion-eared_Noberry_2:
+    id:            4224
+    display_name:  Vermilion-eared_Noberry
+    species:       tonberry
+    type:          [notorious, battlefield]
+    spell_list_id: 141
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1225
+        entity_flags: 157
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Virid-faced_Shanberry:
+    id:            4235
+    species:       tonberry
+    type:          [notorious, battlefield]
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1194
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+  Virid-faced_Shanberry_2:
+    id:            4235
+    display_name:  Virid-faced_Shanberry
+    species:       tonberry
+    type:          [notorious, battlefield]
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 1194
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17444865:
+    template: Graviton
+    at:       [-283.000, -32.000, 323.000, 32]
+    level:    [65, 65]
+  17444866:
+    template: Molybiton
+    at:       [-285.000, -32.000, 323.000, 32]
+    level:    [63, 63]
+  17444867:
+    template: Tungsiton
+    at:       [-281.000, -32.000, 323.000, 32]
+    level:    [63, 63]
+  17444868:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+    at:       [-282.000, -32.000, 323.000, 32]
+    level:    [60, 60]
+  17444869:
+    template: Tonberrys_Avatar
+    at:       [-281.500, -32.000, 323.000, 32]
+    level:    [60, 60]
+  17444870:
+    template: Graviton
+    at:       [-2.986, 0.000, 43.032, 32]
+    level:    [65, 65]
+  17444871:
+    template: Molybiton
+    at:       [-4.986, 0.000, 43.032, 32]
+    level:    [63, 63]
+  17444872:
+    template: Tungsiton
+    at:       [-0.986, 0.000, 43.032, 32]
+    level:    [63, 63]
+  17444873:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+    at:       [-1.986, 0.000, 43.032, 32]
+    level:    [60, 60]
+  17444874:
+    template: Tonberrys_Avatar
+    at:       [-1.486, 0.000, 43.032, 32]
+    level:    [60, 60]
+  17444875:
+    template: Graviton
+    at:       [277.077, 31.999, -277.401, 32]
+    level:    [65, 65]
+  17444876:
+    template: Molybiton
+    at:       [275.077, 31.999, -277.401, 32]
+    level:    [63, 63]
+  17444877:
+    template: Tungsiton
+    at:       [279.077, 31.999, -277.401, 32]
+    level:    [63, 63]
+  17444878:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+    at:       [278.077, 31.999, -277.401, 32]
+    level:    [60, 60]
+  17444879:
+    template: Tonberrys_Avatar
+    at:       [278.577, 31.999, -277.401, 32]
+    level:    [60, 60]
+  17444880:
+    template: Sable-tongued_Gonberry
+    at:       [-280.878, -32.500, 326.971, 32]
+    level:    [63, 63]
+  17444881:
+    template: Virid-faced_Shanberry
+    at:       [-282.990, -32.500, 325.069, 32]
+    level:    [64, 64]
+  17444882:
+    template: Cyaneous-toed_Yallberry
+    at:       [-285.101, -32.488, 323.167, 32]
+    level:    [63, 63]
+  17444883:
+    template: Vermilion-eared_Noberry
+    at:       [-287.213, -32.500, 321.266, 32]
+    level:    [64, 64]
+  17444885:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+    at:       [-287.212, -32.500, 321.266, 32]
+    level:    [60, 60]
+  17444886:
+    template: Tonberrys_Avatar
+    at:       [-286.368, -32.000, 319.647, 32]
+    level:    [60, 60]
+  17444887:
+    template: Sable-tongued_Gonberry
+    at:       [-1.093, -0.500, 47.607, 32]
+    level:    [63, 63]
+  17444888:
+    template: Virid-faced_Shanberry
+    at:       [-3.205, -0.500, 45.705, 32]
+    level:    [64, 64]
+  17444889:
+    template: Cyaneous-toed_Yallberry
+    at:       [-5.316, -0.488, 43.803, 32]
+    level:    [63, 63]
+  17444890:
+    template: Vermilion-eared_Noberry
+    at:       [-7.428, -0.500, 41.902, 32]
+    level:    [64, 64]
+  17444892:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+    at:       [-7.428, -0.500, 41.902, 32]
+    level:    [60, 60]
+  17444893:
+    template: Tonberrys_Avatar
+    at:       [-6.583, 0.000, 39.284, 32]
+    level:    [60, 60]
+  17444894:
+    template: Sable-tongued_Gonberry
+    at:       [281.130, 31.500, -273.224, 32]
+    level:    [63, 63]
+  17444895:
+    template: Virid-faced_Shanberry
+    at:       [279.017, 31.500, -275.126, 32]
+    level:    [64, 64]
+  17444896:
+    template: Cyaneous-toed_Yallberry
+    at:       [276.906, 31.512, -277.028, 32]
+    level:    [63, 63]
+  17444897:
+    template: Vermilion-eared_Noberry
+    at:       [274.795, 31.500, -278.929, 32]
+    level:    [64, 64]
+  17444899:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+    at:       [274.796, 31.500, -278.929, 32]
+    level:    [60, 60]
+  17444900:
+    template: Tonberrys_Avatar
+    at:       [275.639, 32.000, -281.548, 32]
+    level:    [60, 60]
+  17444901:
+    template: Qull_the_Fallstopper
+    at:       [-280.878, -32.500, 326.971, 32]
+    level:    [63, 63]
+  17444902:
+    template: Rauu_the_Whaleswooner
+    at:       [-282.990, -32.500, 325.069, 32]
+    level:    [64, 64]
+  17444903:
+    template: Hyohh_the_Conchblower
+    at:       [-285.101, -32.488, 323.167, 32]
+    level:    [65, 65]
+  17444904:
+    template: Pevv_the_Riverleaper
+    at:       [-287.213, -32.500, 321.266, 32]
+    level:    [65, 65]
+  17444906:
+    template: Sahagins_Wyvern
+    at:       [-287.212, -32.500, 321.266, 32]
+    level:    [62, 62]
+  17444907:
+    template: Qull_the_Fallstopper
+    at:       [-1.093, -0.500, 47.607, 32]
+    level:    [63, 63]
+  17444908:
+    template: Rauu_the_Whaleswooner
+    at:       [-3.205, -0.500, 45.705, 32]
+    level:    [64, 64]
+  17444909:
+    template: Hyohh_the_Conchblower
+    at:       [-5.316, -0.488, 43.803, 32]
+    level:    [65, 65]
+  17444910:
+    template: Pevv_the_Riverleaper
+    at:       [-7.428, -0.500, 41.902, 32]
+    level:    [65, 65]
+  17444912:
+    template: Sahagins_Wyvern
+    at:       [-7.428, -0.500, 41.902, 32]
+    level:    [62, 62]
+  17444913:
+    template: Qull_the_Fallstopper
+    at:       [281.130, 31.500, -273.224, 32]
+    level:    [63, 63]
+  17444914:
+    template: Rauu_the_Whaleswooner
+    at:       [279.017, 31.500, -275.126, 32]
+    level:    [64, 64]
+  17444915:
+    template: Hyohh_the_Conchblower
+    at:       [276.906, 31.512, -277.028, 32]
+    level:    [65, 65]
+  17444916:
+    template: Pevv_the_Riverleaper
+    at:       [274.795, 31.500, -278.929, 32]
+    level:    [65, 65]
+  17444918:
+    template: Sahagins_Wyvern
+    at:       [274.796, 31.500, -278.929, 32]
+    level:    [62, 62]
+  17444919:
+    template: Shantotto
+  17444920:
+    script: D_Shantotto
+  17444921:
+    template: Shantotto
+  17444922:
+    script: D_Shantotto
+  17444923:
+    template: Shantotto
+  17444924:
+    script: D_Shantotto
+  17444925:
+    script: Grievous_Gozar
+  17444926:
+    script: Zymotic_Zuulie
+  17444927:
+    script: Puffy_Marshmaw
+  17444928:
+    script: Slimey_Simeon
+  17444930:
+    script: Grievous_Gozar
+  17444931:
+    script: Zymotic_Zuulie
+  17444932:
+    script: Puffy_Marshmaw
+  17444933:
+    script: Slimey_Simeon
+  17444935:
+    script: Grievous_Gozar
+  17444936:
+    script: Zymotic_Zuulie
+  17444937:
+    script: Puffy_Marshmaw
+  17444938:
+    script: Slimey_Simeon
+  17444940:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444941:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444942:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444943:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17444945:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17444946:
+    template: Tonberrys_Avatar
+  17444947:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444948:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444949:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444950:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17444952:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17444953:
+    template: Tonberrys_Avatar
+  17444954:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444955:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444956:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444957:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17444959:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17444960:
+    template: Tonberrys_Avatar
+  17444961:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444962:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444963:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444964:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17444966:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17444967:
+    template: Tonberrys_Avatar
+  17444968:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444969:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444970:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444971:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17444973:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17444974:
+    template: Tonberrys_Avatar
+  17444975:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444976:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444977:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444978:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17444980:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17444981:
+    template: Tonberrys_Avatar
+  17444982:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444983:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444984:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444985:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17444987:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17444988:
+    template: Tonberrys_Avatar
+  17444989:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444990:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444991:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444992:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17444994:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17444995:
+    template: Tonberrys_Avatar
+  17444996:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17444997:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17444998:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17444999:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17445001:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17445002:
+    template: Tonberrys_Avatar
+  17445003:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17445004:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17445005:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17445006:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17445008:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17445009:
+    template: Tonberrys_Avatar
+  17445010:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17445011:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17445012:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17445013:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17445015:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17445016:
+    template: Tonberrys_Avatar
+  17445017:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17445018:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17445019:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17445020:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17445022:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17445023:
+    template: Tonberrys_Avatar
+  17445024:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17445025:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17445026:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17445027:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17445029:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17445030:
+    template: Tonberrys_Avatar
+  17445031:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17445032:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17445033:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17445034:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17445036:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17445037:
+    template: Tonberrys_Avatar
+  17445038:
+    template: Sable-tongued_Gonberry_2
+    script:   Sable-tongued_Gonberry
+  17445039:
+    template: Virid-faced_Shanberry_2
+    script:   Virid-faced_Shanberry
+  17445040:
+    template: Cyaneous-toed_Yallberry_2
+    script:   Cyaneous-toed_Yallberry
+  17445041:
+    template: Vermilion-eared_Noberry_2
+    script:   Vermilion-eared_Noberry
+  17445043:
+    template: Tonberrys_Elemental_SC
+    script:   Tonberrys_Elemental
+  17445044:
+    template: Tonberrys_Avatar
+  17445045:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445046:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445047:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445048:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445050:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445051:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445052:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445053:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445054:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445056:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445057:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445058:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445059:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445060:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445062:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445063:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445064:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445065:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445066:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445068:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445069:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445070:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445071:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445072:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445074:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445075:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445076:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445077:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445078:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445080:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445081:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445082:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445083:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445084:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445086:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445087:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445088:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445089:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445090:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445092:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445093:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445094:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445095:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445096:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445098:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445099:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445100:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445101:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445102:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445104:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445105:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445106:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445107:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445108:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445110:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445111:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445112:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445113:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445114:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445116:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445117:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445118:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445119:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445120:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445122:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445123:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445124:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445125:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445126:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445128:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern
+  17445129:
+    template: Qull_the_Fallstopper_2
+    script:   Qull_the_Fallstopper
+  17445130:
+    template: Rauu_the_Whaleswooner_2
+    script:   Rauu_the_Whaleswooner
+  17445131:
+    template: Hyohh_the_Conchblower_2
+    script:   Hyohh_the_Conchblower
+  17445132:
+    template: Pevv_the_Riverleaper_2
+    script:   Pevv_the_Riverleaper
+  17445134:
+    template: Sahagins_Wyvern_2
+    script:   Sahagins_Wyvern

@@ -1,0 +1,478 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17399818:
+    script: NPC[a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17399819:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         SOA
+
+  17399820:
+    script: NPC[c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17399821:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    widescan: true
+    content:  SOA
+
+  17399823:
+    script: NPC[f]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17399824:
+    script: NPC[10]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17399825:
+    script: NPC[11]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17399826:
+    script:       Fickblix
+    display_name: Fickblix
+    at:           [-265.716, 13.569, -99.236, 253]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 31
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399827:
+    script:       Verena
+    display_name: Verena
+    at:           [-261.823, 13.881, -98.929, 122]
+    render:
+      look:
+        type:  standard
+        model: 79
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 24
+    widescan:        true
+
+  17399828:
+    script:       DIRECTOR
+    display_name: DIRECTOR
+    at:           [-256.841, 13.940, -101.703, 176]
+    render:
+      look:
+        type:  standard
+        model: 74
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399829:
+    script:       Star_Sibyl
+    display_name: Star Sibyl
+    at:           [142.992, 12.999, -22.203, 192]
+    render:
+      look:
+        type:  standard
+        model: 75
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 21
+    widescan:        true
+
+  17399830:
+    script:       Karaha-Baruha
+    display_name: Karaha-Baruha
+    at:           [145.058, 12.999, -15.836, 34]
+    render:
+      look:
+        type:  standard
+        model: 922
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399831:
+    script:       Yagudo_Avatar
+    display_name: Yagudo Avatar
+    at:           [-99.787, -72.000, 101.733, 64]
+    render:
+      look:
+        type:  standard
+        model: 589
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399832:
+    script:       Yagudo_Templar
+    display_name: Yagudo Templar
+    at:           [-102.381, -72.000, 99.688, 39]
+    render:
+      look:
+        type:  standard
+        model: 592
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399833:
+    script:       Yagudo_Templar
+    display_name: Yagudo Templar
+    at:           [-97.507, -72.000, 99.640, 61]
+    render:
+      look:
+        type:  standard
+        model: 592
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399834:
+    script:       Yagudo_High_Priest
+    display_name: Yagudo High Priest
+    at:           [-109.413, -72.000, 89.582, 223]
+    render:
+      look:
+        type:  standard
+        model: 583
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399835:
+    script:       Yagudo_High_Priest
+    display_name: Yagudo High Priest
+    at:           [-87.224, -72.000, 95.234, 138]
+    render:
+      look:
+        type:  standard
+        model: 583
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399836:
+    script:       Yagudo_High_Priest
+    display_name: Yagudo High Priest
+    at:           [-111.130, -72.000, 100.718, 187]
+    render:
+      look:
+        type:  standard
+        model: 583
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399837:
+    script:       Yagudo_High_Priest
+    display_name: Yagudo High Priest
+    at:           [-95.786, -72.000, 87.266, 200]
+    render:
+      look:
+        type:  standard
+        model: 583
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399838:
+    script:       Ajido-Marujido
+    display_name: Ajido-Marujido
+    at:           [26.320, 23.964, -22.498, 151]
+    render:
+      look:
+        type:  standard
+        model: 74
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399839:
+    script: blank
+    at:     [3.302, -47.000, 0.000, 126]
+    render:
+      look:
+        type:  standard
+        model: 73
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 6
+
+  17399840:
+    script:       Magicite
+    display_name: Magicite
+    at:           [-346.776, 21.833, 46.173, 173]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17399841:
+    script:       Lion
+    display_name: Lion
+    at:           [26.320, 23.964, -22.498, 151]
+    render:
+      look:
+        type:  standard
+        model: 60
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399842:
+    script:       Shadow_of_Darkness
+    display_name: Shadow of Darkness
+    at:           [-367.115, 23.999, 45.640, 36]
+    render:
+      look:
+        type:  standard
+        model: 789
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399843:
+    script: NPC[23]
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+
+  17399844:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17399845:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17399846:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17399847:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17399848:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17399849:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17399850:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17399851:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17399852:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-257.830, 13.228, -104.161, 201]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17399853:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-257.830, 13.228, -104.161, 201]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17399854:
+    script:       Hooknox
+    display_name: Hooknox
+    at:           [-265.248, 12.693, -102.547, 216]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+
+  17399855:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+
+  17399856:
+    script:       Yagudo_Avatar
+    display_name: Yagudo Avatar
+    render:
+      look:
+        type:  standard
+        model: 607
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+
+  17399857:
+    script:       Tzee_Xicu_the_Manifest
+    display_name: Tzee Xicu the Manifest
+    render:
+      look:
+        type:  standard
+        model: 781
+      entity_flags: 29
+      name_prefix:  32
+    widescan: true
+
+  17399858:
+    script:       Tsoo_Haja_the_Umbra
+    display_name: Tsoo Haja the Umbra
+    render:
+      look:
+        type:  standard
+        model: 1083
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+
+  17399859:
+    script:       Stone_Lid
+    display_name: Stone Lid
+    at:           [-316.439, 24.765, 10.159, 156]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true

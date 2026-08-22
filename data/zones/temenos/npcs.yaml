@@ -1,0 +1,1272 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16929268:
+    script: NPC[31d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16929269:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 2423
+      name_vis:    112
+      name_prefix:   2
+
+  16929270:
+    script: NPC[31f]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16929271:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16929272:
+    script: NPC[321]
+    at:     [580.000, -2.375, 104.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+
+  16929273:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16929275:
+    script: NPC[324]
+    at:     [340.000, 72.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      1531138126
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+
+  16929276:
+    script: NPC[325]
+    at:     [220.000, -82.000, 400.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16929277:
+    script: NPC[326]
+    at:     [20.000, 72.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:  1531138126
+      name_vis:          4
+
+  16929278:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [580.000, -2.375, 104.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929279:
+    script:       Temenos_Operator
+    display_name: Temenos Operator
+    at:           [584.000, 0.620, 66.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 315
+      moving: 23
+    status:   normal
+    widescan: true
+    content:  TVR
+
+  16929280:
+    script:       Temenos_Furnace
+    display_name: Temenos Furnace
+    at:           [588.000, 0.500, 60.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      animation_sub:  5
+      name_vis:       4
+      moving:        16
+    status:   normal
+    widescan: true
+    content:  TVR
+
+  16929281:
+    script: _110
+    at:     [340.000, 72.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      808530271
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929282:
+    script: _111
+    at:     [220.000, -82.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      825307487
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929283:
+    script: _112
+    at:     [20.000, 72.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      842084703
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929284:
+    script: _113
+    at:     [-100.000, -82.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      858861919
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929285:
+    script: _114
+    at:     [-300.000, 78.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      875639135
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929286:
+    script: _115
+    at:     [-420.000, -82.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      892416351
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929287:
+    script: _116
+    at:     [-620.000, 78.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      909193567
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929288:
+    script: _117
+    at:     [340.000, -2.000, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      925970783
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929289:
+    script: _118
+    at:     [220.000, -162.000, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      942747999
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929290:
+    script: _119
+    at:     [20.000, -2.000, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      959525215
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929291:
+    script: _11a
+    at:     [-100.000, -162.000, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      1630613855
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929292:
+    script: _11b
+    at:     [-300.000, -2.000, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      1647391071
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929293:
+    script: _11c
+    at:     [-420.000, -162.000, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      1664168287
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929294:
+    script: _11d
+    at:     [-620.000, -2.000, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      1680945503
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929295:
+    script: _11e
+    at:     [340.000, 72.000, -160.000]
+    render:
+      look:
+        type: door
+      door_id:      1697722719
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929296:
+    script: _11f
+    at:     [220.000, -82.000, -160.000]
+    render:
+      look:
+        type: door
+      door_id:      1714499935
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929297:
+    script: _11g
+    at:     [20.000, 72.000, -160.000]
+    render:
+      look:
+        type: door
+      door_id:      1731277151
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929298:
+    script: _11h
+    at:     [-100.000, -82.000, -160.000]
+    render:
+      look:
+        type: door
+      door_id:      1748054367
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929299:
+    script: _11i
+    at:     [-300.000, 78.000, -160.000]
+    render:
+      look:
+        type: door
+      door_id:      1764831583
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929300:
+    script: _11j
+    at:     [-420.000, -82.000, -160.000]
+    render:
+      look:
+        type: door
+      door_id:      1781608799
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929301:
+    script: _11k
+    at:     [-620.000, 78.000, -160.000]
+    render:
+      look:
+        type: door
+      door_id:      1798386015
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929302:
+    script: _11l
+    at:     [540.000, -2.000, -520.000]
+    render:
+      look:
+        type: door
+      door_id:      1815163231
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929303:
+    script: _11m
+    at:     [300.000, -162.000, -480.000]
+    render:
+      look:
+        type: door
+      door_id:      1831940447
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929304:
+    script: _11n
+    at:     [-20.000, -2.000, -520.000]
+    render:
+      look:
+        type: door
+      door_id:      1848717663
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929305:
+    script: _11o
+    at:     [-240.000, -162.000, -500.000]
+    render:
+      look:
+        type: door
+      door_id:      1865494879
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929306:
+    script: _11p
+    at:     [-580.000, -2.000, -560.000]
+    render:
+      look:
+        type: door
+      door_id:      1882272095
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16929307:
+    script: _11q
+    at:     [340.000, 74.000, 376.000]
+    render:
+      look:
+        type: door
+      door_id:      1899049311
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929308:
+    script: _11r
+    at:     [220.000, -80.000, 376.000]
+    render:
+      look:
+        type: door
+      door_id:      1915826527
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929309:
+    script: _11s
+    at:     [20.000, 74.000, 376.000]
+    render:
+      look:
+        type: door
+      door_id:      1932603743
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929310:
+    script: _11t
+    at:     [-100.000, -80.000, 376.000]
+    render:
+      look:
+        type: door
+      door_id:      1949380959
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929311:
+    script: _11u
+    at:     [-300.000, 80.000, 376.000]
+    render:
+      look:
+        type: door
+      door_id:      1966158175
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929312:
+    script: _11v
+    at:     [-420.000, -80.000, 376.000]
+    render:
+      look:
+        type: door
+      door_id:      1982935391
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929313:
+    script: _11w
+    at:     [-620.000, 80.000, 376.000]
+    render:
+      look:
+        type: door
+      door_id:      1999712607
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929314:
+    script: _11x
+    at:     [340.000, 0.000, 96.000]
+    render:
+      look:
+        type: door
+      door_id:      2016489823
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929315:
+    script: _11y
+    at:     [220.000, -160.000, 96.000]
+    render:
+      look:
+        type: door
+      door_id:      2033267039
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929316:
+    script: _11z
+    at:     [20.000, 0.000, 96.000]
+    render:
+      look:
+        type: door
+      door_id:      2050044255
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929317:
+    script: _j10
+    at:     [-100.000, -160.000, 96.000]
+    render:
+      look:
+        type: door
+      door_id:      808544863
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929318:
+    script: _j11
+    at:     [-300.000, 0.000, 96.000]
+    render:
+      look:
+        type: door
+      door_id:      825322079
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929319:
+    script: _j12
+    at:     [-420.000, -160.000, 96.000]
+    render:
+      look:
+        type: door
+      door_id:      842099295
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929320:
+    script: _j13
+    at:     [-620.000, 0.000, 96.000]
+    render:
+      look:
+        type: door
+      door_id:      858876511
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929321:
+    script: _j14
+    at:     [340.000, 74.000, -184.000]
+    render:
+      look:
+        type: door
+      door_id:      875653727
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929322:
+    script: _j15
+    at:     [220.000, -80.000, -184.000]
+    render:
+      look:
+        type: door
+      door_id:      892430943
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929323:
+    script: _j16
+    at:     [20.000, 74.000, -184.000]
+    render:
+      look:
+        type: door
+      door_id:      909208159
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929324:
+    script: _j17
+    at:     [-100.000, -80.000, -184.000]
+    render:
+      look:
+        type: door
+      door_id:      925985375
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929325:
+    script: _j18
+    at:     [-300.000, 80.000, -184.000]
+    render:
+      look:
+        type: door
+      door_id:      942762591
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929326:
+    script: _j19
+    at:     [-420.000, -80.000, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929327:
+    script: _j1a
+    at:     [-620.000, 80.000, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929328:
+    script: _j1b
+    at:     [540.000, 0.000, -544.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929329:
+    script: _j1c
+    at:     [300.000, -160.000, -504.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929330:
+    script: _j1d
+    at:     [-20.000, 0.000, -544.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929331:
+    script: _j1e
+    at:     [-580.000, 0.000, -584.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16929332:
+    script:       Temenos_Operator
+    display_name: Temenos Operator
+    at:           [-600.000, 84.000, 456.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+    content:  TVR
+
+  16929333:
+    script:       Temenos_Operator
+    display_name: Temenos Operator
+    at:           [-600.000, 4.000, 176.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+    content:  TVR
+
+  16929334:
+    script:       Temenos_Operator
+    display_name: Temenos Operator
+    at:           [-600.000, 84.000, -104.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+    content:  TVR
+
+  16929335:
+    script:       Temenos_Operator
+    display_name: Temenos Operator
+    at:           [-280.000, -162.000, -424.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+    content:  TVR
+
+  16929336:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [340.000, 71.620, 376.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929337:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [220.000, -82.380, 376.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929338:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [20.000, 71.620, 376.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929339:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-100.000, -82.380, 376.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929340:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-300.000, 77.620, 376.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929341:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-420.000, -82.380, 376.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929342:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-620.000, 77.620, 376.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929343:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [340.000, -2.380, 96.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929344:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [220.000, -162.380, 96.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929345:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [20.000, -2.380, 96.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929346:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-100.000, -162.380, 96.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929347:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-300.000, -2.380, 96.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929348:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-420.000, -162.380, 96.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929349:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-620.000, -2.380, 96.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929350:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [340.000, 71.620, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929351:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [220.000, -82.380, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929352:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [20.000, 71.620, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929353:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-100.000, -82.380, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929354:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-300.000, 77.620, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929355:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-420.000, -82.380, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929356:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-620.000, 77.620, -184.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929357:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [540.000, -2.380, -544.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929358:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [300.000, -162.380, -504.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929359:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-20.000, -2.380, -544.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929360:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-264.000, -162.380, -500.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929361:
+    script:       Matter_Diffusion_Module
+    display_name: Matter Diffusion Module
+    at:           [-580.000, -2.380, -584.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16929362:
+    script:       Temenos_Coffer_#1
+    display_name: 'Temenos Coffer #1'
+    at:           [-600.000, 84.000, 456.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 969
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929363:
+    script:       Temenos_Coffer_#2
+    display_name: 'Temenos Coffer #2'
+    at:           [-600.000, 4.000, 176.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 969
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929364:
+    script:       Temenos_Coffer_#3
+    display_name: 'Temenos Coffer #3'
+    at:           [-600.000, 84.000, -104.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 969
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929365:
+    script:       Temenos_Coffer_#4
+    display_name: 'Temenos Coffer #4'
+    at:           [-280.000, -162.000, -424.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 969
+      moving: 1
+    status:   normal
+    widescan: true
+
+  16929366:
+    script: NPC[37f]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  16929367:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16929368:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16929369:
+    script:       Moogle
+    display_name: Moogle
+    at:           [588.000, 0.000, 20.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    widescan: true
+
+  16929370:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    widescan: true
+
+  16929371:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  16929372:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  16929373:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  16929374:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  16929375:
+    script:       ticket_w
+    display_name: ticket_w
+    at:           [588.000, 0.000, 20.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  16929376:
+    script:       ticket_r
+    display_name: ticket_r
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true

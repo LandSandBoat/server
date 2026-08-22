@@ -1,0 +1,5625 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aither:
+    id:            7021
+    species:       air_elemental
+    type:          [notorious]
+    spell_list_id: 443
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4400
+    content: WOTG
+
+  Beorht:
+    id:            7024
+    species:       light_elemental
+    type:          [notorious]
+    spell_list_id: 446
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, rdm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 14
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4400
+    content: WOTG
+
+  Berry_Grub:
+    id:            394
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Big_Jaw_fished:
+    id:            417
+    display_name:  Big_Jaw
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Big_Leech:
+    id:            418
+    species:       leech
+    type:          [fished]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags:  3
+        model_size:    1
+        hitbox:       11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Black_Triple_Stars:
+    id:            440
+    species:       flock_bat
+    type:          [notorious]
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags: 645
+        name_prefix:   64
+        model_size:     2
+        hitbox:        18
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: always
+          item:   bat_fang
+        - chance: common
+          item:   bat_fang
+        - chance: common
+          item:   bat_fang
+        - chance: common
+          item:   bat_fang
+
+  Brass_Quadav:
+    id:            525
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 652
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   shell_bug
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Bronze_Quadav:
+    id:            538
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 651
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Chuglix_Berrypaws:
+    id:            726
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 505
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Clipper:
+    id:            743
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Copper_Quadav:
+    id:            791
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 650
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Death_Wasp:
+    id:            941
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   pot_of_honey
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   giant_stinger
+      steal: pot_of_honey
+      despoil:
+        beehive_chip:  0
+        giant_stinger: 0
+        pot_of_honey:  0
+
+  Deorc:
+    id:            7023
+    species:       dark_elemental
+    type:          [notorious]
+    spell_list_id: 445
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: staff
+      jobs: [rdm, drk]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 15
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4400
+    content: WOTG
+
+  Drooling_Daisy:
+    id:            1124
+    species:       morbol
+    type:          [notorious]
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         36
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 1400
+    loot:
+      drops:
+        - chance: common
+          item:   malboro_vine
+        - chance: common
+          item:   malboro_vine
+        - chance: common
+          item:   malboro_vine
+        - chance: common
+          item:   dodge_headband
+      steal: malboro_vine
+
+  Eldritch_Edge:
+    id:            5729
+    species:       evil_weapon
+    type:          [notorious]
+    skill_list_id: 238
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 5096
+    loot:
+      drops:
+        - chance: common
+          item:   helenuss_earring
+    content: WOTG
+
+  Eorthe:
+    id:            7025
+    species:       earth_elemental
+    type:          [notorious]
+    spell_list_id: 447
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 11
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4400
+    content: WOTG
+
+  Evil_Spirit:
+    id:            1266
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1155
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Evil_Weapon:
+    id:            1267
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Garnet_Quadav:
+    id:            1472
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 663
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   maul
+        - chance: uncommon
+          item:   scroll_of_silence
+        - chance: very_rare
+          item:   scroll_of_invisible
+        - chance: rare
+          item:   scroll_of_barpoison
+        - chance: very_rare
+          item:   scroll_of_deodorize
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Goblin_Digger_far:
+    id:            6658
+    display_name:  Goblin_Digger
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 484
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+      steal: [pickaxe, beastcoin] # audit needed
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Furrier:
+    id:            1665
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 490
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   square_of_sheep_leather
+        - chance: very_rare
+          item:   square_of_dhalmel_leather
+        - chance: super_rare
+          item:   square_of_black_tiger_leather
+        - chance: ultra_rare
+          item:   square_of_coeurl_leather
+      steal: crossbow_bolt
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Gambler:
+    id:            1666
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 494
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   bag_of_poison_flour
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Leecher:
+    id:            1683
+    species:       goblin
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 488
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: rare
+          item:   scroll_of_paralyze
+        - chance: very_rare
+          item:   scroll_of_barsleep
+        - chance: very_rare
+          item:   silver_beastcoin
+        - chance: very_rare
+          item:   scroll_of_silence
+        - chance: very_rare
+          item:   scroll_of_barpoison
+        - chance: very_rare
+          item:   scroll_of_protectra
+        - chance: very_rare
+          item:   scroll_of_sneak
+        - chance: super_rare
+          item:   scroll_of_invisible
+        - chance: super_rare
+          item:   scroll_of_deodorize
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Mugger:
+    id:            1690
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 485
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   silver_beastcoin
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Pathfinder:
+    id:            1694
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 487
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   handful_of_counterfeit_gil
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   mythril_beastcoin
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Shaman:
+    id:            1710
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   mythril_beastcoin
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Smithy:
+    id:            1715
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 497
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblins_Bee:
+    id:            1722
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags: 643
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Goobbue_Farmer:
+    id:            1757
+    species:       goobbue
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 320
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   treant_bulb
+        - chance: rare
+          item:   bag_of_tree_cuttings
+        - chance: rare
+          item:   dahlia
+      despoil:
+        clump_of_boyahda_moss: 0
+        bag_of_tree_cuttings:  0
+
+  Greater_Pugil_fished:
+    id:            5868
+    display_name:  Greater_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Horrid_Fluke:
+    id:            1991
+    species:       leech
+    type:          [fished]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Ignis_Fatuus:
+    id:            2054
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [fog]
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Lacus:
+    id:            7029
+    species:       water_elemental
+    type:          [notorious]
+    spell_list_id: 450
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 12
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4400
+    content: WOTG
+
+  Macro_Test:
+    id:      7354
+    species: batons
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 431
+        name_vis: 32
+        hitbox:   10
+    content: TVR
+
+  Midnight_Wings:
+    id:            2649
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags: 643
+        name_prefix:   64
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+  Moon_Bat:
+    id:            2735
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Ochu:
+    id:            2940
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   malboro_vine
+        - chance: common
+          item:   malboro_vine
+        - chance: rare
+          item:   naphille_pochette
+        - chance: rare
+          item:   dodge_headband
+      steal: malboro_vine
+
+  Old_Quadav:
+    id:            2965
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 645
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Poison_Leech:
+    id:            3165
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Pruina:
+    id:            7022
+    species:       ice_elemental
+    type:          [notorious]
+    spell_list_id: 444
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, slow, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 9
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4400
+    content: WOTG
+
+  Puretos:
+    id:            7028
+    species:       fire_elemental
+    type:          [notorious]
+    spell_list_id: 449
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 8
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4400
+    content: WOTG
+
+  Ravenous_Crawler:
+    id:            6025
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 163
+    attributes:
+      combat:
+        skill: club
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 3500
+    loot:
+      drops:
+        - chance: common
+          item:   survivor_earring
+    content: WOTG
+
+  Silk_Caterpillar:
+    id:            3625
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 700
+    loot:
+      drops:
+        - chance: always
+          item:   silkworm_egg
+        - chance: common
+          item:   spool_of_silk_thread
+
+  Silver_Quadav:
+    id:            3628
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 658
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Simurgh:
+    id:            3630
+    species:       legendary_roc
+    type:          [notorious]
+    spell_list_id: 45
+    skill_list_id: 1004
+    attributes:
+      combat:
+        skill:    axe
+        delay:    200
+        dmg_mult: 125
+      jobs: [war, brd]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 51000
+    loot:
+      drops:
+        - chance: always
+          item:   reraiser
+        - chance: always
+          item:   vile_elixir
+        - chance: always
+          item:   arcana_breaker
+        - chance: common
+          item:   trotter_boots
+        - chance: rare
+          item:   damascus_ingot
+
+  Skuld:
+    id:            7030
+    species:       pixie
+    type:          [notorious]
+    spell_list_id: 451
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: staff
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        model_size: 2
+        hitbox:     9
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 12900
+    loot:
+      drops:
+        - chance: uncommon
+          item:   veela_cape
+    content: WOTG
+
+  Snipper_fished:
+    id:            3682
+    display_name:  Snipper
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Sprite:
+    id:            3745
+    species:       pixie
+    spell_list_id: 20
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags:  515
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   pinch_of_stygian_ash
+
+  Strix:
+    id:            6833
+    species:       roc
+    type:          [notorious]
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: club
+      jobs: [brd, brd]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Thunor:
+    id:            7027
+    species:       thunder_elemental
+    type:          [notorious]
+    spell_list_id: 448
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 13
+        hitbox: 8
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4400
+    content: WOTG
+
+  Urayuli:
+    id:            4107
+    species:       goobbue
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 300
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         34
+      spawn:
+        type: [scripted]
+
+  Urd:
+    id:            7031
+    species:       pixie
+    type:          [notorious]
+    spell_list_id: 452
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, dnc]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 12900
+    loot:
+      drops:
+        - chance: uncommon
+          item:   choreia_earring
+    content: WOTG
+
+  Verthandi:
+    id:            7032
+    species:       pixie
+    type:          [notorious]
+    spell_list_id: 453
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2031
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 25500
+    loot:
+      drops:
+        - chance: very_common
+          item:   eye_of_verthandi
+        - chance: very_common
+          item:   eye_of_verthandi
+        - chance: uncommon
+          item:   veela_ring
+        - chance: uncommon
+          item:   verthandis_gem
+        - chance: common
+          item:   ethereal_squama
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+    content: WOTG
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Wight_blm:
+    id:            6570
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_tractor
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Wight_war:
+    id:            4337
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_tractor
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Yatagarasu:
+    id:            4703
+    species:       gagana
+    type:          [notorious]
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 339
+        entity_flags: 159
+        model_size:     3
+        hitbox:        64
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yilbegan:
+    id:            6999
+    species:       zilant
+    type:          [notorious]
+    spell_list_id: 454
+    skill_list_id: 470
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, drk]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     2
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    4
+          dark:    11
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        4
+          poison:      4
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 2174
+        model_size:  3
+        hitbox:     55
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 90000
+        mp:  5000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lucky_coin
+        - chance: rare
+          item:   zilant_ring
+        - chance: rare
+          item:   galdr_ring
+        - chance: uncommon
+          item:   agronas_leggings
+        - chance: common
+          item:   square_of_scarlet_kadife
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+    content: WOTG
+
+  Zircon_Quadav:
+    id:            4506
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 661
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+spawns:
+  17227777:
+    template: Snipper_fished
+    script:   Snipper
+    at:       [1.000, 1.000, 1.000]
+    level:    [22, 23]
+  17227778:
+    template: Big_Jaw_fished
+    script:   Big_Jaw
+    at:       [1.000, 1.000, 1.000]
+    level:    [22, 23]
+  17227779:
+    template: Horrid_Fluke
+    at:       [1.000, 1.000, 1.000]
+    level:    [29, 30]
+  17227780:
+    template: Greater_Pugil_fished
+    script:   Greater_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [29, 30]
+  17227781:
+    template: Big_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [34, 36]
+  17227782:
+    template: Silk_Caterpillar
+    at:       [340.000, 0.380, 179.000, 127]
+    level:    [28, 30]
+  17227783:
+    template: Death_Wasp
+    at:       [-48.345, -9.267, -693.279, 127]
+    level:    [25, 26]
+  17227784:
+    template: Death_Wasp
+    at:       [-5.195, 0.136, -813.223, 40]
+    level:    [25, 26]
+  17227785:
+    template: Death_Wasp
+    at:       [48.698, -8.080, -689.458, 17]
+    level:    [25, 26]
+  17227786:
+    template: Death_Wasp
+    at:       [-25.934, -4.863, -689.032, 127]
+    level:    [25, 26]
+  17227787:
+    template: Moon_Bat
+    at:       [15.146, -3.192, -826.552, 61]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227788:
+    template: Moon_Bat
+    at:       [-21.000, -6.187, -706.617, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227789:
+    template: Moon_Bat
+    at:       [-19.937, -3.435, -675.620, 120]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227790:
+    template: Goobbue_Farmer
+    at:       [-4.981, -1.130, -648.119, 116]
+    level:    [31, 32]
+  17227791:
+    template: Berry_Grub
+    at:       [-36.544, -6.517, -735.386, 127]
+    level:    [27, 28]
+  17227792:
+    template: Berry_Grub
+    at:       [-21.073, -5.854, -742.824, 107]
+    level:    [27, 28]
+  17227793:
+    template: Berry_Grub
+    at:       [66.267, -8.551, -737.068, 31]
+    level:    [27, 28]
+  17227794:
+    template: Berry_Grub
+    at:       [-100.847, -5.859, -619.436, 127]
+    level:    [27, 28]
+  17227795:
+    template: Death_Wasp
+    at:       [-160.248, -7.737, -607.978, 127]
+    level:    [25, 26]
+  17227796:
+    template: Death_Wasp
+    at:       [-88.124, -7.194, -654.235, 119]
+    level:    [25, 26]
+  17227797:
+    template: Death_Wasp
+    at:       [-28.365, 2.392, -598.413, 122]
+    level:    [25, 26]
+  17227798:
+    template: Death_Wasp
+    at:       [-57.795, 3.730, -555.583, 112]
+    level:    [25, 26]
+  17227799:
+    template: Moon_Bat
+    at:       [-8.326, 2.292, -625.871, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227800:
+    template: Moon_Bat
+    at:       [-180.067, -8.347, -615.935, 90]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227801:
+    template: Moon_Bat
+    at:       [-40.960, 0.436, -550.934, 75]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227802:
+    template: Goobbue_Farmer
+    at:       [-27.249, 0.437, -565.683, 35]
+    level:    [31, 32]
+  17227803:
+    template: Berry_Grub
+    at:       [-96.468, -7.567, -647.508, 127]
+    level:    [27, 28]
+  17227804:
+    template: Berry_Grub
+    at:       [-149.619, -7.521, -621.630, 127]
+    level:    [27, 28]
+  17227805:
+    template: Berry_Grub
+    at:       [-130.993, -7.599, -627.434, 15]
+    level:    [27, 28]
+  17227806:
+    template: Berry_Grub
+    at:       [-72.994, 0.361, -584.919, 127]
+    level:    [27, 28]
+  17227807:
+    template: Berry_Grub
+    at:       [-63.000, -0.736, -511.000, 87]
+    level:    [27, 28]
+  17227808:
+    template: Berry_Grub
+    at:       [-79.000, -0.174, -499.000, 127]
+    level:    [27, 28]
+  17227809:
+    template: Death_Wasp
+    at:       [-139.300, 2.284, -500.728, 127]
+    level:    [25, 26]
+  17227810:
+    template: Death_Wasp
+    at:       [-205.050, -0.037, -525.542, 31]
+    level:    [25, 26]
+  17227811:
+    template: Death_Wasp
+    at:       [-191.042, -3.095, -536.380, 23]
+    level:    [25, 26]
+  17227812:
+    template: Death_Wasp
+    at:       [-93.089, -0.574, -510.639, 127]
+    level:    [25, 26]
+  17227813:
+    template: Moon_Bat
+    at:       [-167.886, -1.098, -561.463, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227814:
+    template: Moon_Bat
+    at:       [-166.256, 4.350, -497.802, 125]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227815:
+    template: Moon_Bat
+    at:       [-208.633, 4.604, -498.459, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227816:
+    template: Goobbue_Farmer
+    at:       [-120.482, 3.952, -536.600, 16]
+    level:    [31, 32]
+  17227817:
+    template: Berry_Grub
+    at:       [-54.000, -0.908, -516.000, 127]
+    level:    [27, 28]
+  17227818:
+    template: Berry_Grub
+    at:       [-58.352, -0.268, -493.549, 127]
+    level:    [27, 28]
+  17227819:
+    template: Berry_Grub
+    at:       [-165.483, -1.284, -529.779, 127]
+    level:    [27, 28]
+  17227820:
+    template: Berry_Grub
+    at:       [-169.323, -0.389, -539.580, 33]
+    level:    [27, 28]
+  17227821:
+    template: Berry_Grub
+    at:       [32.164, -7.845, -620.960, 127]
+    level:    [27, 28]
+  17227822:
+    template: Old_Quadav
+    at:       [-24.467, 4.113, -614.182, 127]
+    level:    [27, 28]
+  17227823:
+    template: Copper_Quadav
+    at:       [-73.795, -0.009, -612.551, 50]
+    level:    [27, 28]
+  17227824:
+    template: Bronze_Quadav
+    at:       [4.514, -1.232, -646.615, 127]
+    level:    [32, 33]
+  17227825:
+    template: Brass_Quadav
+    at:       [-167.058, -7.940, -639.854, 64]
+    level:    [27, 28]
+  17227826:
+    template: Silver_Quadav
+    at:       [-160.927, -0.170, -552.050, 72]
+    level:    [32, 33]
+  17227827:
+    template: Zircon_Quadav
+    at:       [-84.198, 1.905, -550.255, 127]
+    level:    [32, 33]
+  17227828:
+    template: Garnet_Quadav
+    at:       [19.438, -7.346, -683.309, 117]
+    level:    [32, 33]
+  17227829:
+    template: Wight_war
+    script:   Wight
+    at:       [-78.953, 0.637, -557.610, 127]
+    level:    [32, 34]
+  17227830:
+    template: Wight_blm
+    script:   Wight
+    at:       [-44.751, -6.203, -672.086, 127]
+    level:    [32, 34]
+  17227831:
+    template: Fire_Elemental
+    at:       [-0.593, -7.964, -769.307, 84]
+    level:    [38, 40]
+  17227832:
+    template: Berry_Grub
+    at:       [43.695, -7.928, -630.779, 127]
+    level:    [27, 28]
+  17227833:
+    template: Berry_Grub
+    at:       [124.023, -15.647, -746.315, 44]
+    level:    [27, 28]
+  17227834:
+    template: Berry_Grub
+    at:       [43.453, -7.982, -640.625, 69]
+    level:    [27, 28]
+  17227835:
+    template: Berry_Grub
+    at:       [-290.302, -8.695, -526.615, 88]
+    level:    [27, 28]
+  17227836:
+    template: Ochu
+    at:       [77.579, -15.219, -662.028, 42]
+    level:    [36, 37]
+  17227837:
+    template: Ochu
+    at:       [91.236, -13.909, -699.929, 3]
+    level:    [36, 37]
+  17227838:
+    template: Midnight_Wings
+    at:       [41.242, -7.858, -606.041, 125]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227839:
+    template: Midnight_Wings
+    at:       [60.196, -9.902, -623.181, 116]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227840:
+    template: Midnight_Wings
+    at:       [45.353, -7.620, -586.829, 45]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227841:
+    template: Midnight_Wings
+    at:       [44.105, -7.858, -635.237, 60]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227842:
+    template: Berry_Grub
+    at:       [-265.341, -7.059, -513.174, 127]
+    level:    [27, 28]
+  17227843:
+    template: Berry_Grub
+    at:       [-154.000, -0.010, -559.000, 127]
+    level:    [27, 28]
+  17227844:
+    template: Berry_Grub
+    at:       [-282.169, -8.812, -572.090, 51]
+    level:    [27, 28]
+  17227845:
+    template: Berry_Grub
+    at:       [-340.788, -15.637, -507.732, 127]
+    level:    [27, 28]
+  17227846:
+    template: Ochu
+    at:       [-403.530, -8.815, -451.048, 35]
+    level:    [36, 37]
+  17227847:
+    template: Ochu
+    at:       [-254.000, -8.000, -555.000, 127]
+    level:    [36, 37]
+  17227848:
+    template: Midnight_Wings
+    at:       [-262.392, -7.868, -528.647, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227849:
+    template: Midnight_Wings
+    at:       [-349.945, -8.147, -428.828, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227850:
+    template: Midnight_Wings
+    at:       [-279.732, -7.661, -514.795, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227851:
+    template: Midnight_Wings
+    at:       [-348.589, -8.285, -442.198, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227852:
+    template: Berry_Grub
+    at:       [-406.366, -15.792, -477.113, 127]
+    level:    [27, 28]
+  17227853:
+    template: Berry_Grub
+    at:       [-430.333, -14.946, -440.119, 6]
+    level:    [27, 28]
+  17227854:
+    template: Berry_Grub
+    at:       [-345.522, -15.568, -523.987, 127]
+    level:    [27, 28]
+  17227855:
+    template: Berry_Grub
+    at:       [-258.313, -15.478, -611.462, 127]
+    level:    [27, 28]
+  17227856:
+    template: Ochu
+    at:       [-445.144, -15.406, -462.756, 127]
+    level:    [36, 37]
+  17227857:
+    template: Ochu
+    at:       [-425.421, -15.142, -453.780, 127]
+    level:    [36, 37]
+  17227858:
+    template: Midnight_Wings
+    at:       [-348.014, -16.460, -527.984, 33]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227859:
+    template: Midnight_Wings
+    at:       [-325.323, -15.629, -486.789, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227860:
+    template: Midnight_Wings
+    at:       [-366.173, -15.564, -496.296, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227861:
+    template: Midnight_Wings
+    at:       [-397.305, -15.959, -485.936, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227862:
+    template: Berry_Grub
+    at:       [-332.400, -20.837, -619.828, 127]
+    level:    [27, 28]
+  17227863:
+    template: Berry_Grub
+    at:       [-342.535, -23.796, -655.053, 96]
+    level:    [27, 28]
+  17227864:
+    template: Berry_Grub
+    at:       [-327.119, -17.102, -595.016, 127]
+    level:    [27, 28]
+  17227865:
+    template: Berry_Grub
+    at:       [-377.955, -23.664, -549.600, 127]
+    level:    [27, 28]
+  17227866:
+    template: Ochu
+    at:       [-374.000, -23.000, -652.000, 103]
+    level:    [36, 37]
+  17227867:
+    template: Ochu
+    at:       [-294.930, -23.551, -672.106, 57]
+    level:    [36, 37]
+  17227868:
+    template: Midnight_Wings
+    at:       [-215.999, -16.155, -631.995, 100]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227869:
+    template: Midnight_Wings
+    at:       [-214.104, -16.429, -647.805, 3]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227870:
+    template: Midnight_Wings
+    at:       [-239.950, -15.511, -652.671, 57]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227871:
+    template: Midnight_Wings
+    at:       [-216.190, -14.830, -618.737, 19]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227872:
+    template: Berry_Grub
+    at:       [-400.104, -23.663, -539.452, 115]
+    level:    [27, 28]
+  17227873:
+    template: Berry_Grub
+    at:       [-371.935, -23.684, -582.112, 127]
+    level:    [27, 28]
+  17227874:
+    template: Berry_Grub
+    at:       [-458.088, -24.278, -506.554, 126]
+    level:    [27, 28]
+  17227875:
+    template: Berry_Grub
+    at:       [-128.599, -5.169, -456.551, 127]
+    level:    [27, 28]
+  17227876:
+    template: Ochu
+    at:       [-363.640, -23.747, -570.474, 113]
+    level:    [36, 37]
+  17227877:
+    template: Ochu
+    at:       [-378.243, -23.479, -569.385, 96]
+    level:    [36, 37]
+  17227878:
+    template: Midnight_Wings
+    at:       [-505.831, -24.654, -460.309, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227879:
+    template: Midnight_Wings
+    at:       [-398.391, -23.580, -604.347, 51]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227880:
+    template: Midnight_Wings
+    at:       [-490.055, -23.910, -482.000, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227881:
+    template: Midnight_Wings
+    at:       [-396.133, -23.966, -523.818, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227882:
+    template: Goblin_Mugger
+    at:       [-249.152, -14.598, -588.042, 125]
+    level:    [26, 27]
+  17227883:
+    template: Goblin_Pathfinder
+    at:       [-451.295, -22.926, -505.127, 3]
+    level:    [31, 32]
+  17227884:
+    template: Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17227885:
+    template: Goblin_Leecher
+    at:       [-345.903, -23.349, -690.102, 2]
+    level:    [26, 27]
+  17227886:
+    template: Goblin_Furrier
+    at:       [-409.305, -14.243, -462.304, 127]
+    level:    [31, 32]
+  17227887:
+    template: Goblin_Gambler
+    at:       [-442.402, -15.925, -472.100, 124]
+    level:    [26, 27]
+  17227888:
+    template: Goblin_Smithy
+    at:       [-457.203, -17.109, -426.492, 127]
+    level:    [31, 32]
+  17227889:
+    template: Goblin_Shaman
+    at:       [-195.414, -15.090, -630.760, 127]
+    level:    [31, 31]
+  17227890:
+    template: Wight_war
+    script:   Wight
+    at:       [-380.972, -24.197, -544.068, 127]
+    level:    [31, 33]
+  17227891:
+    template: Wight_blm
+    script:   Wight
+    at:       [-514.596, -23.573, -449.658, 81]
+    level:    [31, 33]
+  17227892:
+    template: Berry_Grub
+    at:       [-100.946, -5.847, -456.680, 127]
+    level:    [27, 28]
+  17227893:
+    template: Berry_Grub
+    at:       [-89.768, -4.642, -342.903, 127]
+    level:    [27, 28]
+  17227894:
+    template: Berry_Grub
+    at:       [1.802, -0.524, -390.863, 18]
+    level:    [27, 28]
+  17227895:
+    template: Berry_Grub
+    at:       [-322.126, -8.578, -379.559, 127]
+    level:    [27, 28]
+  17227896:
+    template: Ochu
+    at:       [-132.000, -7.000, -429.000, 127]
+    level:    [36, 37]
+  17227897:
+    template: Ochu
+    at:       [-81.081, -3.824, -386.116, 71]
+    level:    [36, 37]
+  17227898:
+    template: Midnight_Wings
+    at:       [-69.560, 0.156, -403.596, 31]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227899:
+    template: Midnight_Wings
+    at:       [-17.360, -1.243, -378.408, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227900:
+    template: Midnight_Wings
+    at:       [-135.849, -7.756, -378.543, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227901:
+    template: Midnight_Wings
+    at:       [-169.616, -6.691, -425.617, 79]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227902:
+    template: Ignis_Fatuus
+    at:       [-79.347, -5.668, -455.139, 127]
+    level:    [34, 36]
+  17227903:
+    template: Death_Wasp
+    at:       [-206.375, 1.572, -370.296, 127]
+    level:    [25, 26]
+  17227904:
+    template: Death_Wasp
+    at:       [-231.450, 2.095, -358.873, 127]
+    level:    [25, 26]
+  17227905:
+    template: Death_Wasp
+    at:       [-169.280, -0.529, -375.054, 107]
+    level:    [25, 26]
+  17227906:
+    template: Death_Wasp
+    at:       [-220.703, 4.314, -413.192, 59]
+    level:    [25, 26]
+  17227907:
+    template: Moon_Bat
+    at:       [-191.384, 0.775, -371.158, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227908:
+    template: Moon_Bat
+    at:       [-154.408, -0.114, -357.811, 95]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227909:
+    template: Moon_Bat
+    at:       [-234.951, 0.854, -452.044, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227910:
+    template: Goobbue_Farmer
+    at:       [-150.186, -0.468, -363.019, 127]
+    level:    [31, 32]
+  17227911:
+    template: Berry_Grub
+    at:       [-336.439, -8.063, -441.305, 124]
+    level:    [27, 28]
+  17227912:
+    template: Berry_Grub
+    at:       [-356.931, -8.497, -397.144, 44]
+    level:    [27, 28]
+  17227913:
+    template: Berry_Grub
+    at:       [-291.646, -7.053, -411.692, 19]
+    level:    [27, 28]
+  17227914:
+    template: Berry_Grub
+    at:       [-105.940, 0.497, -260.391, 127]
+    level:    [27, 28]
+  17227915:
+    template: Death_Wasp
+    at:       [-190.258, 2.374, -349.430, 37]
+    level:    [25, 26]
+  17227916:
+    template: Death_Wasp
+    at:       [-176.718, 1.966, -344.592, 12]
+    level:    [25, 26]
+  17227917:
+    template: Death_Wasp
+    at:       [-166.053, 4.087, -301.327, 127]
+    level:    [25, 26]
+  17227918:
+    template: Death_Wasp
+    at:       [-188.422, 2.200, -316.902, 122]
+    level:    [25, 26]
+  17227919:
+    template: Moon_Bat
+    at:       [-251.008, 2.422, -330.970, 92]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227920:
+    template: Moon_Bat
+    at:       [-166.625, 2.855, -310.951, 104]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227921:
+    template: Moon_Bat
+    at:       [-172.462, 2.492, -321.957, 63]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227922:
+    template: Goobbue_Farmer
+    at:       [-198.047, 3.735, -341.258, 127]
+    level:    [31, 32]
+  17227923:
+    template: Berry_Grub
+    at:       [-69.630, 0.590, -300.581, 127]
+    level:    [27, 28]
+  17227924:
+    template: Berry_Grub
+    at:       [-182.731, -0.741, -250.018, 127]
+    level:    [27, 28]
+  17227925:
+    template: Death_Wasp
+    at:       [-150.938, -0.275, -156.961, 127]
+    level:    [25, 26]
+  17227926:
+    template: Death_Wasp
+    at:       [-132.152, 2.231, -274.935, 57]
+    level:    [25, 26]
+  17227927:
+    template: Death_Wasp
+    at:       [-143.714, 0.449, -195.824, 127]
+    level:    [25, 26]
+  17227928:
+    template: Death_Wasp
+    at:       [-126.880, 1.001, -263.441, 127]
+    level:    [25, 26]
+  17227929:
+    template: Moon_Bat
+    at:       [-150.078, 1.112, -253.592, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227930:
+    template: Moon_Bat
+    at:       [-167.621, 0.545, -172.933, 101]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227931:
+    template: Moon_Bat
+    at:       [-54.582, 0.516, -279.421, 27]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227932:
+    template: Goobbue_Farmer
+    at:       [-138.928, 0.170, -192.667, 127]
+    level:    [31, 32]
+  17227933:
+    template: Berry_Grub
+    at:       [-172.925, -0.643, -261.184, 51]
+    level:    [27, 28]
+  17227934:
+    template: Berry_Grub
+    at:       [16.507, -9.113, -265.656, 127]
+    level:    [27, 28]
+  17227935:
+    template: Old_Quadav
+    at:       [-172.898, 0.672, -290.526, 6]
+    level:    [27, 28]
+  17227936:
+    template: Copper_Quadav
+    at:       [-171.747, -0.688, -377.078, 127]
+    level:    [27, 28]
+  17227937:
+    template: Bronze_Quadav
+    at:       [-212.832, 4.157, -343.416, 106]
+    level:    [32, 33]
+  17227938:
+    template: Brass_Quadav
+    at:       [-342.398, -7.317, -355.302, 57]
+    level:    [27, 28]
+  17227939:
+    template: Silver_Quadav
+    at:       [-178.260, -0.225, -375.509, 122]
+    level:    [32, 33]
+  17227940:
+    template: Zircon_Quadav
+    at:       [-271.315, 1.174, -323.625, 127]
+    level:    [32, 33]
+  17227941:
+    template: Garnet_Quadav
+    at:       [-189.326, 3.087, -194.854, 127]
+    level:    [32, 33]
+  17227942:
+    template: Wight_war
+    script:   Wight
+    at:       [-137.336, 1.896, -210.520, 127]
+    level:    [32, 34]
+  17227943:
+    template: Wight_blm
+    script:   Wight
+    at:       [-182.234, 4.636, -328.340, 127]
+    level:    [32, 34]
+  17227944:
+    template: Fire_Elemental
+    at:       [-109.356, 0.391, -234.225, 200]
+    level:    [38, 40]
+  17227945:
+    template: Berry_Grub
+    at:       [-15.801, -8.053, -261.255, 127]
+    level:    [27, 28]
+  17227946:
+    template: Berry_Grub
+    at:       [-32.693, -7.951, -246.288, 127]
+    level:    [27, 28]
+  17227947:
+    template: Berry_Grub
+    at:       [-43.824, -8.130, -107.980, 127]
+    level:    [27, 28]
+  17227948:
+    template: Ochu
+    at:       [0.500, -7.715, -324.000, 127]
+    level:    [36, 37]
+  17227949:
+    template: Ochu
+    at:       [-54.074, -7.557, -235.799, 110]
+    level:    [36, 37]
+  17227950:
+    template: Midnight_Wings
+    at:       [-28.000, -8.777, -210.000, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227951:
+    template: Midnight_Wings
+    at:       [1.416, -8.117, -230.862, 108]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227952:
+    template: Midnight_Wings
+    at:       [11.100, -8.389, -336.433, 34]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227953:
+    template: Midnight_Wings
+    at:       [-29.921, -7.663, -231.135, 118]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227954:
+    template: Berry_Grub
+    at:       [-63.000, -8.281, -205.000, 127]
+    level:    [27, 28]
+  17227955:
+    template: Berry_Grub
+    at:       [-110.334, -7.781, -175.172, 109]
+    level:    [27, 28]
+  17227956:
+    template: Berry_Grub
+    at:       [-6.000, -16.012, -144.000, 127]
+    level:    [27, 28]
+  17227957:
+    template: Ochu
+    at:       [-38.837, -7.707, -149.442, 102]
+    level:    [36, 37]
+  17227958:
+    template: Ochu
+    at:       [-80.000, -7.000, -129.000, 20]
+    level:    [36, 37]
+  17227959:
+    template: Midnight_Wings
+    at:       [-102.000, -7.000, -135.000, 63]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227960:
+    template: Midnight_Wings
+    at:       [-63.000, -7.000, -141.000, 34]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227961:
+    template: Midnight_Wings
+    at:       [-25.620, -9.951, -143.526, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227962:
+    template: Midnight_Wings
+    at:       [-52.000, -7.000, -151.000, 78]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227963:
+    template: Berry_Grub
+    at:       [53.256, -16.367, -161.702, 48]
+    level:    [27, 28]
+  17227964:
+    template: Berry_Grub
+    at:       [13.898, -16.373, -102.201, 80]
+    level:    [27, 28]
+  17227965:
+    template: Berry_Grub
+    at:       [32.874, -15.989, -280.514, 127]
+    level:    [27, 28]
+  17227966:
+    template: Ochu
+    at:       [-0.500, -15.661, -69.000, 29]
+    level:    [36, 37]
+  17227967:
+    template: Ochu
+    at:       [22.000, -15.000, -162.000, 119]
+    level:    [36, 37]
+  17227968:
+    template: Midnight_Wings
+    at:       [4.000, -16.000, -119.000, 54]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227969:
+    template: Midnight_Wings
+    at:       [5.551, -15.261, -175.506, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227970:
+    template: Midnight_Wings
+    at:       [42.119, -15.519, -174.449, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227971:
+    template: Midnight_Wings
+    at:       [-8.722, -15.518, -183.142, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227972:
+    template: Black_Triple_Stars
+    at:       [5.000, -15.000, -142.000, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    6
+  17227973:
+    template: Goblin_Mugger
+    at:       [-66.749, -8.112, -177.084, 127]
+    level:    [26, 27]
+  17227974:
+    template: Goblin_Pathfinder
+    at:       [-89.561, -7.541, -194.824, 127]
+    level:    [31, 32]
+  17227975:
+    template: Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17227976:
+    template: Goblin_Leecher
+    at:       [-177.742, -7.293, -83.656, 127]
+    level:    [26, 27]
+  17227977:
+    template: Goblin_Furrier
+    at:       [-138.070, -8.189, -90.229, 22]
+    level:    [31, 32]
+  17227978:
+    template: Goblin_Gambler
+    at:       [-198.803, -7.191, -62.552, 18]
+    level:    [26, 27]
+  17227979:
+    template: Goblin_Smithy
+    at:       [16.133, -7.884, -344.030, 127]
+    level:    [31, 32]
+  17227980:
+    template: Goblin_Shaman
+    at:       [30.000, -7.000, -239.000, 104]
+    level:    [31, 32]
+  17227981:
+    template: Wight_war
+    script:   Wight
+    at:       [0.023, -14.892, -211.381, 86]
+    level:    [28, 33]
+  17227982:
+    template: Wight_blm
+    script:   Wight
+    at:       [39.215, -8.027, -356.326, 180]
+    level:    [28, 33]
+  17227983:
+    template: Berry_Grub
+    at:       [75.799, -15.591, -345.296, 68]
+    level:    [27, 28]
+  17227984:
+    template: Berry_Grub
+    at:       [28.734, -14.819, -313.646, 11]
+    level:    [27, 28]
+  17227985:
+    template: Berry_Grub
+    at:       [25.707, -23.276, -102.957, 102]
+    level:    [27, 28]
+  17227986:
+    template: Ochu
+    at:       [48.792, -15.319, -301.595, 127]
+    level:    [36, 37]
+  17227987:
+    template: Ochu
+    at:       [79.000, -15.000, -368.000, 87]
+    level:    [36, 37]
+  17227988:
+    template: Midnight_Wings
+    at:       [76.000, -15.000, -209.000, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227989:
+    template: Midnight_Wings
+    at:       [81.784, -15.991, -310.662, 108]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227990:
+    template: Midnight_Wings
+    at:       [47.666, -15.005, -212.265, 45]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17227991:
+    template: Midnight_Wings
+    at:       [83.638, -15.754, -296.826, 30]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17227992:
+    template: Black_Triple_Stars
+    at:       [76.000, -15.000, -209.000, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    6
+  17227993:
+    template: Berry_Grub
+    at:       [48.333, -24.076, -127.291, 127]
+    level:    [27, 28]
+  17227994:
+    template: Berry_Grub
+    at:       [119.000, -24.000, -284.000, 58]
+    level:    [27, 28]
+  17227995:
+    template: Berry_Grub
+    at:       [259.110, -31.674, -225.993, 127]
+    level:    [27, 28]
+  17227996:
+    template: Ochu
+    at:       [79.093, -23.601, -149.828, 127]
+    level:    [36, 37]
+  17227997:
+    template: Ochu
+    at:       [37.000, -24.257, -82.000, 127]
+    level:    [36, 37]
+  17227998:
+    template: Midnight_Wings
+    at:       [64.809, -23.823, -124.777, 94]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17227999:
+    template: Midnight_Wings
+    at:       [105.463, -20.885, -308.107, 76]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228000:
+    template: Midnight_Wings
+    at:       [106.064, -22.612, -281.583, 59]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228001:
+    template: Midnight_Wings
+    at:       [141.045, -23.636, -262.190, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228002:
+    template: Berry_Grub
+    at:       [274.333, -31.865, -295.219, 127]
+    level:    [27, 28]
+  17228003:
+    template: Berry_Grub
+    at:       [-169.319, 0.052, -153.956, 4]
+    level:    [27, 28]
+  17228004:
+    template: Poison_Leech
+    at:       [241.131, -31.509, -264.584, 127]
+    level:    [25, 26]
+  17228005:
+    template: Poison_Leech
+    at:       [165.320, -31.103, -208.931, 44]
+    level:    [25, 26]
+  17228006:
+    template: Poison_Leech
+    at:       [268.763, -31.550, -272.414, 107]
+    level:    [25, 26]
+  17228007:
+    template: Poison_Leech
+    at:       [284.150, -31.462, -303.105, 33]
+    level:    [25, 26]
+  17228008:
+    template: Midnight_Wings
+    at:       [283.970, -32.379, -281.682, 65]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228009:
+    template: Midnight_Wings
+    at:       [312.314, -31.605, -272.031, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228010:
+    template: Goblin_Mugger
+    at:       [198.025, -31.749, -162.098, 127]
+    level:    [26, 27]
+  17228011:
+    template: Goblin_Pathfinder
+    at:       [83.539, -23.976, -162.273, 55]
+    level:    [31, 32]
+  17228012:
+    template: Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17228013:
+    template: Goblin_Leecher
+    at:       [134.000, -23.983, -248.000, 84]
+    level:    [26, 27]
+  17228014:
+    template: Goblin_Furrier
+    at:       [188.016, -24.141, -281.973, 127]
+    level:    [31, 32]
+  17228015:
+    template: Goblin_Gambler
+    at:       [226.007, -31.349, -223.786, 117]
+    level:    [26, 27]
+  17228016:
+    template: Goblin_Smithy
+    at:       [126.692, -23.672, -208.948, 12]
+    level:    [31, 32]
+  17228017:
+    template: Goblin_Shaman
+    at:       [114.000, -23.000, -267.000, 88]
+    level:    [31, 32]
+  17228018:
+    template: Wight_war
+    script:   Wight
+    at:       [72.827, -16.007, -226.665, 181]
+    level:    [28, 33]
+  17228019:
+    template: Wight_blm
+    script:   Wight
+    at:       [120.811, -23.620, -188.944, 7]
+    level:    [28, 33]
+  17228020:
+    template: Clipper
+    at:       [255.294, -30.470, -244.418, 29]
+    level:    [24, 25]
+  17228021:
+    template: Clipper
+    at:       [249.267, -32.009, -239.087, 127]
+    level:    [24, 25]
+  17228022:
+    template: Clipper
+    at:       [266.707, -31.791, -287.295, 67]
+    level:    [24, 25]
+  17228023:
+    template: Water_Elemental
+    at:       [241.765, -31.873, -252.888, 49]
+    level:    [38, 40]
+  17228024:
+    template: Goobbue_Farmer
+    at:       [312.789, -24.434, -369.710, 127]
+    level:    [31, 32]
+  17228025:
+    template: Midnight_Wings
+    at:       [347.679, -31.273, -406.395, 90]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228026:
+    template: Midnight_Wings
+    at:       [357.413, -31.790, -394.848, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228027:
+    template: Evil_Weapon
+    at:       [318.000, -31.000, -313.000, 106]
+    level:    [37, 38]
+  17228028:
+    template: Evil_Weapon
+    at:       [311.664, -32.634, -339.734, 127]
+    level:    [37, 38]
+  17228029:
+    template: Evil_Weapon
+    at:       [297.323, -37.509, -344.220, 127]
+    level:    [37, 38]
+  17228030:
+    template: Death_Wasp
+    at:       [-146.539, -0.572, -114.044, 127]
+    level:    [25, 26]
+  17228031:
+    template: Death_Wasp
+    at:       [-295.590, -0.717, -106.140, 109]
+    level:    [25, 26]
+  17228032:
+    template: Death_Wasp
+    at:       [-275.505, 0.159, -162.957, 126]
+    level:    [25, 26]
+  17228033:
+    template: Death_Wasp
+    at:       [-216.863, -1.201, -98.084, 127]
+    level:    [25, 26]
+  17228034:
+    template: Moon_Bat
+    at:       [-240.712, -0.078, -162.300, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228035:
+    template: Moon_Bat
+    at:       [-279.689, 0.131, -160.676, 117]
+    level:    [25, 26]
+  17228036:
+    template: Moon_Bat
+    at:       [-287.821, -0.278, -126.565, 79]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228037:
+    template: Goobbue_Farmer
+    at:       [-237.291, 0.208, -76.225, 119]
+    level:    [31, 32]
+  17228038:
+    template: Berry_Grub
+    at:       [-193.538, 0.085, -112.884, 127]
+    level:    [27, 28]
+  17228039:
+    template: Berry_Grub
+    at:       [-165.029, 0.015, -121.767, 127]
+    level:    [27, 28]
+  17228040:
+    template: Berry_Grub
+    at:       [-376.729, 0.313, -63.612, 72]
+    level:    [27, 28]
+  17228041:
+    template: Death_Wasp
+    at:       [-339.377, 0.449, -39.040, 127]
+    level:    [25, 26]
+  17228042:
+    template: Death_Wasp
+    at:       [-311.894, -0.663, -90.253, 77]
+    level:    [25, 26]
+  17228043:
+    template: Death_Wasp
+    at:       [-354.374, -0.369, -47.299, 17]
+    level:    [25, 26]
+  17228044:
+    template: Death_Wasp
+    at:       [-302.336, 4.452, -43.631, 127]
+    level:    [25, 26]
+  17228045:
+    template: Moon_Bat
+    at:       [-331.659, 3.176, -4.463, 113]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228046:
+    template: Moon_Bat
+    at:       [-307.587, 0.546, -84.692, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228047:
+    template: Moon_Bat
+    at:       [-317.082, 4.374, 20.068, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228048:
+    template: Goobbue_Farmer
+    at:       [-335.921, 2.559, -30.674, 127]
+    level:    [31, 32]
+  17228049:
+    template: Berry_Grub
+    at:       [-350.392, 0.294, -65.868, 127]
+    level:    [27, 28]
+  17228050:
+    template: Berry_Grub
+    at:       [-369.420, 0.224, -43.718, 127]
+    level:    [27, 28]
+  17228051:
+    template: Berry_Grub
+    at:       [-345.207, 7.950, 132.697, 127]
+    level:    [27, 28]
+  17228052:
+    template: Death_Wasp
+    at:       [-343.463, 5.993, 174.766, 127]
+    level:    [25, 26]
+  17228053:
+    template: Death_Wasp
+    at:       [-375.910, -0.380, 49.592, 127]
+    level:    [25, 26]
+  17228054:
+    template: Death_Wasp
+    at:       [-394.637, -0.265, 157.155, 127]
+    level:    [25, 26]
+  17228055:
+    template: Death_Wasp
+    at:       [-286.482, 1.127, 34.380, 127]
+    level:    [25, 26]
+  17228056:
+    template: Moon_Bat
+    at:       [-284.299, 2.635, 89.738, 11]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228057:
+    template: Moon_Bat
+    at:       [-299.732, 11.821, 156.942, 27]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228058:
+    template: Moon_Bat
+    at:       [-287.995, 4.557, 98.496, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228059:
+    template: Goobbue_Farmer
+    at:       [-307.039, 3.278, 36.413, 58]
+    level:    [31, 32]
+  17228060:
+    template: Berry_Grub
+    at:       [-332.109, 6.161, 197.918, 127]
+    level:    [27, 28]
+  17228061:
+    template: Berry_Grub
+    at:       [-360.074, 7.500, 117.610, 123]
+    level:    [27, 28]
+  17228062:
+    template: Berry_Grub
+    at:       [-413.877, -0.345, 151.339, 46]
+    level:    [27, 28]
+  17228063:
+    template: Berry_Grub
+    at:       [-413.412, -0.229, 175.936, 127]
+    level:    [27, 28]
+  17228064:
+    template: Berry_Grub
+    at:       [-389.175, 1.059, 156.439, 24]
+    level:    [27, 28]
+  17228065:
+    template: Berry_Grub
+    at:       [-415.570, -0.116, 167.766, 127]
+    level:    [27, 28]
+  17228066:
+    template: Berry_Grub
+    at:       [-470.360, -8.117, -19.607, 127]
+    level:    [27, 28]
+  17228067:
+    template: Old_Quadav
+    at:       [-211.654, 1.636, -130.779, 127]
+    level:    [27, 28]
+  17228068:
+    template: Copper_Quadav
+    at:       [-293.837, 1.801, 22.596, 127]
+    level:    [27, 28]
+  17228069:
+    template: Bronze_Quadav
+    at:       [-265.024, 2.707, -107.130, 127]
+    level:    [32, 33]
+  17228070:
+    template: Brass_Quadav
+    at:       [-290.007, 2.170, 58.365, 13]
+    level:    [27, 28]
+  17228071:
+    template: Silver_Quadav
+    at:       [-316.402, 1.616, -32.242, 91]
+    level:    [32, 33]
+  17228072:
+    template: Zircon_Quadav
+    at:       [-339.519, 0.288, 70.384, 127]
+    level:    [32, 33]
+  17228073:
+    template: Garnet_Quadav
+    at:       [-314.952, 8.651, 178.544, 127]
+    level:    [32, 33]
+  17228074:
+    template: Wight_war
+    script:   Wight
+    at:       [-264.730, 0.571, -158.487, 114]
+    level:    [32, 34]
+  17228075:
+    template: Wight_blm
+    script:   Wight
+    at:       [-240.617, 0.340, -90.076, 127]
+    level:    [32, 34]
+  17228076:
+    template: Ignis_Fatuus
+    at:       [-299.428, 2.090, -19.368, 83]
+    level:    [34, 36]
+  17228077:
+    template: Berry_Grub
+    at:       [-397.000, -0.010, -39.000, 127]
+    level:    [27, 28]
+  17228078:
+    template: Berry_Grub
+    at:       [-400.311, -4.175, -98.375, 127]
+    level:    [27, 28]
+  17228079:
+    template: Berry_Grub
+    at:       [-387.592, -6.455, 13.234, 12]
+    level:    [27, 28]
+  17228080:
+    template: Ochu
+    at:       [-423.847, -7.602, -15.953, 127]
+    level:    [36, 37]
+  17228081:
+    template: Ochu
+    at:       [-312.866, -7.012, -125.709, 25]
+    level:    [36, 37]
+  17228082:
+    template: Midnight_Wings
+    at:       [-398.790, -7.774, -128.887, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228083:
+    template: Midnight_Wings
+    at:       [-421.903, -3.132, -47.701, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228084:
+    template: Midnight_Wings
+    at:       [-445.000, -7.000, -58.000, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228085:
+    template: Midnight_Wings
+    at:       [-480.611, -7.983, -47.753, 72]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228086:
+    template: Ravenous_Crawler
+    at:       [-488.800, -8.000, -37.888, 127]
+    level:    [42, 43]
+  17228087:
+    template: Berry_Grub
+    at:       [-470.705, -15.174, -95.671, 40]
+    level:    [27, 28]
+  17228088:
+    template: Ochu
+    at:       [-423.345, -8.063, 50.354, 127]
+    level:    [36, 37]
+  17228089:
+    template: Midnight_Wings
+    at:       [-453.823, -0.952, 150.970, 56]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228090:
+    template: Midnight_Wings
+    at:       [-442.230, -6.999, 98.825, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228091:
+    template: Midnight_Wings
+    at:       [-427.697, -0.139, 177.070, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228092:
+    template: Berry_Grub
+    at:       [-435.343, -15.870, -307.545, 127]
+    level:    [27, 28]
+  17228093:
+    template: Ochu
+    at:       [-456.189, -12.442, -139.450, 127]
+    level:    [36, 37]
+  17228094:
+    template: Midnight_Wings
+    at:       [-505.275, -15.729, -97.115, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228095:
+    template: Midnight_Wings
+    at:       [-463.346, -13.499, -118.013, 63]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228096:
+    template: Midnight_Wings
+    at:       [-501.013, -15.526, -77.520, 58]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228097:
+    template: Goblin_Mugger
+    at:       [-398.073, -4.168, -98.574, 127]
+    level:    [26, 27]
+  17228098:
+    template: Goblin_Pathfinder
+    at:       [-312.993, -6.988, -131.676, 127]
+    level:    [31, 32]
+  17228099:
+    template: Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17228100:
+    template: Goblin_Leecher
+    at:       [-432.370, -8.009, -13.862, 105]
+    level:    [26, 27]
+  17228101:
+    template: Goblin_Furrier
+    at:       [-423.891, -7.464, 79.309, 127]
+    level:    [31, 32]
+  17228102:
+    template: Goblin_Gambler
+    at:       [-418.656, -7.846, -100.935, 127]
+    level:    [26, 27]
+  17228103:
+    template: Goblin_Smithy
+    at:       [-451.570, -6.621, -12.140, 46]
+    level:    [31, 32]
+  17228104:
+    template: Goblin_Shaman
+    at:       [-445.684, -7.829, 4.001, 127]
+    level:    [31, 32]
+  17228105:
+    template: Wight_war
+    script:   Wight
+    at:       [-391.094, -7.790, 42.948, 36]
+    level:    [28, 33]
+  17228106:
+    template: Wight_blm
+    script:   Wight
+    at:       [-475.890, -15.913, -157.121, 116]
+    level:    [28, 33]
+  17228107:
+    template: Berry_Grub
+    at:       [-450.610, -16.112, -248.336, 127]
+    level:    [27, 28]
+  17228108:
+    template: Berry_Grub
+    at:       [-525.639, -15.183, -213.920, 44]
+    level:    [27, 28]
+  17228109:
+    template: Evil_Spirit
+    at:       [-413.499, -9.333, -297.513, 127]
+    level:    [35, 36]
+  17228110:
+    template: Fire_Elemental
+    at:       [-406.194, -7.875, -249.450, 218]
+    level:    [38, 40]
+  17228111:
+    template: Berry_Grub
+    at:       [-590.097, -21.987, -267.555, 127]
+    level:    [27, 28]
+  17228112:
+    template: Berry_Grub
+    at:       [-563.633, -23.455, -101.543, 127]
+    level:    [27, 28]
+  17228113:
+    template: Poison_Leech
+    at:       [-575.114, -18.694, -196.455, 127]
+    level:    [25, 26]
+  17228114:
+    template: Poison_Leech
+    at:       [-577.861, -15.802, -242.438, 65]
+    level:    [25, 26]
+  17228115:
+    template: Midnight_Wings
+    at:       [-564.362, -15.688, -188.096, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228116:
+    template: Midnight_Wings
+    at:       [-511.883, -17.998, -197.738, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228117:
+    template: Clipper
+    at:       [-556.725, -15.764, -186.266, 64]
+    level:    [24, 25]
+  17228118:
+    template: Clipper
+    at:       [-549.375, -15.618, -160.806, 127]
+    level:    [24, 25]
+  17228119:
+    template: Water_Elemental
+    at:       [-535.719, -15.530, -202.402, 14]
+    level:    [38, 40]
+  17228120:
+    template: Berry_Grub
+    at:       [-574.904, -23.699, -102.693, 14]
+    level:    [27, 28]
+  17228121:
+    template: Berry_Grub
+    at:       [225.101, 15.273, 269.709, 127]
+    level:    [27, 28]
+  17228122:
+    template: Ochu
+    at:       [-552.216, -23.530, -121.511, 95]
+    level:    [36, 37]
+  17228123:
+    template: Poison_Leech
+    at:       [-616.189, -23.978, -74.471, 108]
+    level:    [25, 26]
+  17228124:
+    template: Poison_Leech
+    at:       [-636.574, -23.366, -241.027, 127]
+    level:    [25, 26]
+  17228125:
+    template: Poison_Leech
+    at:       [-568.272, -23.738, -114.040, 67]
+    level:    [25, 26]
+  17228126:
+    template: Poison_Leech
+    at:       [-613.317, -22.723, -189.383, 127]
+    level:    [25, 26]
+  17228127:
+    template: Poison_Leech
+    at:       [-620.110, -24.201, -94.421, 127]
+    level:    [25, 26]
+  17228128:
+    template: Midnight_Wings
+    at:       [-587.139, -22.992, -47.234, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228129:
+    template: Midnight_Wings
+    at:       [-654.688, -24.972, -308.366, 63]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228130:
+    template: Clipper
+    at:       [-637.324, -20.230, -136.400, 127]
+    level:    [24, 25]
+  17228131:
+    template: Clipper
+    at:       [-711.374, -22.413, -156.395, 127]
+    level:    [24, 25]
+  17228132:
+    template: Clipper
+    at:       [-605.731, -22.742, -168.206, 127]
+    level:    [24, 25]
+  17228133:
+    template: Clipper
+    at:       [-708.801, -20.812, -171.996, 1]
+    level:    [24, 25]
+  17228134:
+    template: Water_Elemental
+    at:       [-660.632, -20.111, -132.782, 112]
+    level:    [38, 40]
+  17228135:
+    template: Ochu
+    at:       [-568.150, -23.749, -113.643, 127]
+    level:    [36, 37]
+  17228136:
+    template: Goblin_Mugger
+    at:       [-705.388, -22.693, -215.646, 33]
+    level:    [26, 27]
+  17228137:
+    template: Goblin_Pathfinder
+    at:       [-549.026, -22.840, -73.052, 127]
+    level:    [31, 32]
+  17228138:
+    template: Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17228139:
+    template: Goblin_Leecher
+    at:       [-584.484, -23.273, -115.127, 127]
+    level:    [26, 27]
+  17228140:
+    template: Goblin_Furrier
+    at:       [-723.717, -23.647, -165.072, 66]
+    level:    [31, 32]
+  17228141:
+    template: Goblin_Gambler
+    at:       [-594.636, -19.979, -259.418, 35]
+    level:    [26, 27]
+  17228142:
+    template: Goblin_Smithy
+    at:       [-608.632, -22.499, -210.415, 84]
+    level:    [31, 32]
+  17228143:
+    template: Goblin_Shaman
+    at:       [-621.052, -20.572, -150.984, 48]
+    level:    [31, 32]
+  17228144:
+    template: Wight_war
+    script:   Wight
+    at:       [-543.954, -21.037, -111.476, 48]
+    level:    [28, 33]
+  17228145:
+    template: Wight_blm
+    script:   Wight
+    at:       [-428.833, -15.218, -262.510, 127]
+    level:    [28, 33]
+  17228146:
+    template: Evil_Spirit
+    at:       [386.833, -25.657, -123.291, 127]
+    level:    [35, 36]
+  17228147:
+    template: Evil_Spirit
+    at:       [455.675, -23.779, -81.502, 127]
+    level:    [35, 36]
+  17228148:
+    template: Evil_Weapon
+    at:       [396.992, -24.010, -152.613, 59]
+    level:    [37, 38]
+  17228149:
+    template: Evil_Weapon
+    at:       [389.529, -25.065, -146.909, 127]
+    level:    [37, 38]
+  17228150:
+    template: Eldritch_Edge
+    at:       [395.000, -24.000, -147.000, 127]
+    level:    [55, 55]
+  17228151:
+    template: Evil_Weapon
+    at:       [431.693, -21.979, -61.798, 44]
+    level:    [37, 38]
+  17228152:
+    template: Evil_Weapon
+    at:       [440.000, -28.000, -44.000, 57]
+    level:    [37, 38]
+  17228153:
+    template: Evil_Weapon
+    at:       [312.000, 8.000, 252.000, 7]
+    level:    [37, 38]
+  17228154:
+    template: Evil_Weapon
+    at:       [292.517, 15.263, 292.345, 127]
+    level:    [37, 38]
+  17228155:
+    template: Evil_Weapon
+    at:       [300.000, 16.000, 316.000, 40]
+    level:    [37, 38]
+  17228156:
+    template: Evil_Weapon
+    at:       [300.000, 9.000, 258.000, 127]
+    level:    [37, 38]
+  17228157:
+    template: Death_Wasp
+    at:       [-185.633, 12.954, 226.421, 127]
+    level:    [25, 26]
+  17228158:
+    template: Death_Wasp
+    at:       [-177.362, 10.939, 225.128, 25]
+    level:    [25, 26]
+  17228159:
+    template: Death_Wasp
+    at:       [-112.765, 8.627, 271.178, 127]
+    level:    [25, 26]
+  17228160:
+    template: Death_Wasp
+    at:       [-260.077, 10.025, 224.356, 52]
+    level:    [25, 26]
+  17228161:
+    template: Midnight_Wings
+    at:       [-66.674, 9.899, 357.464, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228162:
+    template: Midnight_Wings
+    at:       [-294.377, 8.311, 211.237, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228163:
+    template: Midnight_Wings
+    at:       [-108.151, 10.237, 318.696, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228164:
+    template: Moon_Bat
+    at:       [-245.706, 9.357, 182.077, 2]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228165:
+    template: Moon_Bat
+    at:       [-184.755, 10.762, 218.230, 11]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228166:
+    template: Moon_Bat
+    at:       [-150.708, 12.753, 263.780, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228167:
+    template: Goobbue_Farmer
+    at:       [-259.361, 10.163, 224.918, 127]
+    level:    [31, 32]
+  17228168:
+    template: Death_Wasp
+    at:       [-322.781, 7.861, 253.564, 18]
+    level:    [25, 26]
+  17228169:
+    template: Death_Wasp
+    at:       [-391.419, 1.054, 254.959, 99]
+    level:    [25, 26]
+  17228170:
+    template: Death_Wasp
+    at:       [-405.963, -0.001, 219.556, 38]
+    level:    [25, 26]
+  17228171:
+    template: Death_Wasp
+    at:       [-378.057, 7.430, 314.015, 127]
+    level:    [25, 26]
+  17228172:
+    template: Midnight_Wings
+    at:       [-392.182, 5.029, 302.039, 252]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228173:
+    template: Midnight_Wings
+    at:       [-346.120, 8.258, 262.868, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228174:
+    template: Moon_Bat
+    at:       [-393.522, 0.734, 286.345, 98]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228175:
+    template: Moon_Bat
+    at:       [-371.133, 5.281, 266.123, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228176:
+    template: Berry_Grub
+    at:       [279.190, 1.589, 105.115, 36]
+    level:    [27, 28]
+  17228177:
+    template: Berry_Grub
+    at:       [250.593, 8.152, 84.543, 56]
+    level:    [27, 28]
+  17228178:
+    template: Berry_Grub
+    at:       [252.621, 15.055, 289.784, 178]
+    level:    [27, 28]
+  17228179:
+    template: Death_Wasp
+    at:       [253.982, 8.847, 238.760, 86]
+    level:    [25, 26]
+  17228180:
+    template: Death_Wasp
+    at:       [222.043, 8.028, 74.158, 83]
+    level:    [25, 26]
+  17228181:
+    template: Midnight_Wings
+    at:       [230.844, 9.100, 246.190, 44]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228182:
+    template: Midnight_Wings
+    at:       [270.055, 16.429, 296.999, 118]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228183:
+    template: Moon_Bat
+    at:       [250.788, 15.208, 290.330, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228184:
+    template: Moon_Bat
+    at:       [327.152, -2.302, 182.623, 41]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228185:
+    template: Goobbue_Farmer
+    at:       [232.941, 14.955, 266.017, 13]
+    level:    [31, 32]
+  17228186:
+    template: Ochu
+    at:       [236.797, 16.297, 280.600, 127]
+    level:    [36, 37]
+  17228187:
+    template: Evil_Spirit
+    at:       [214.643, 10.583, 102.784, 81]
+    level:    [35, 36]
+  17228188:
+    template: Old_Quadav
+    at:       [-39.093, 14.304, 249.033, 127]
+    level:    [27, 28]
+  17228189:
+    template: Copper_Quadav
+    at:       [-41.406, 15.977, 293.650, 127]
+    level:    [27, 28]
+  17228190:
+    template: Bronze_Quadav
+    at:       [133.517, 16.086, 185.229, 127]
+    level:    [32, 33]
+  17228191:
+    template: Brass_Quadav
+    at:       [-168.563, 12.857, 257.298, 127]
+    level:    [27, 28]
+  17228192:
+    template: Silver_Quadav
+    at:       [-50.351, 14.265, 312.475, 55]
+    level:    [32, 33]
+  17228193:
+    template: Zircon_Quadav
+    at:       [-187.337, 10.025, 250.075, 127]
+    level:    [32, 33]
+  17228194:
+    template: Garnet_Quadav
+    at:       [-178.581, 8.010, 287.152, 118]
+    level:    [32, 33]
+  17228195:
+    template: Wight_war
+    script:   Wight
+    at:       [168.783, 16.038, 200.582, 127]
+    level:    [32, 34]
+  17228196:
+    template: Wight_blm
+    script:   Wight
+    at:       [-68.807, 9.012, 359.016, 61]
+    level:    [32, 34]
+  17228197:
+    template: Ignis_Fatuus
+    at:       [-56.221, 14.263, 347.572, 14]
+    level:    [34, 36]
+  17228198:
+    template: Evil_Spirit
+    at:       [-171.952, 10.553, 267.279, 127]
+    level:    [35, 36]
+  17228199:
+    template: Death_Wasp
+    at:       [50.971, 18.725, 389.813, 127]
+    level:    [25, 26]
+  17228200:
+    template: Death_Wasp
+    at:       [-31.431, 16.347, 320.568, 43]
+    level:    [25, 26]
+  17228201:
+    template: Death_Wasp
+    at:       [98.247, 16.377, 398.480, 127]
+    level:    [25, 26]
+  17228202:
+    template: Death_Wasp
+    at:       [6.940, 16.000, 323.061, 116]
+    level:    [25, 26]
+  17228203:
+    template: Midnight_Wings
+    at:       [98.836, 17.190, 368.134, 11]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228204:
+    template: Midnight_Wings
+    at:       [1.237, 20.095, 340.612, 119]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228205:
+    template: Moon_Bat
+    at:       [-30.324, 17.473, 332.220, 2]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228206:
+    template: Moon_Bat
+    at:       [-37.016, 16.056, 365.179, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228207:
+    template: Death_Wasp
+    at:       [166.385, 17.345, 332.870, 127]
+    level:    [25, 26]
+  17228208:
+    template: Death_Wasp
+    at:       [189.780, 16.248, 319.691, 127]
+    level:    [25, 26]
+  17228209:
+    template: Death_Wasp
+    at:       [148.503, 26.288, 378.935, 127]
+    level:    [25, 26]
+  17228210:
+    template: Death_Wasp
+    at:       [212.250, 22.823, 363.977, 116]
+    level:    [25, 26]
+  17228211:
+    template: Midnight_Wings
+    at:       [180.296, 24.392, 357.572, 127]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228212:
+    template: Midnight_Wings
+    at:       [133.434, 22.388, 377.057, 36]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228213:
+    template: Moon_Bat
+    at:       [215.375, 17.979, 338.073, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228214:
+    template: Moon_Bat
+    at:       [148.790, 15.477, 310.068, 74]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228215:
+    template: Death_Wasp
+    at:       [221.402, 24.006, 432.802, 127]
+    level:    [25, 26]
+  17228216:
+    template: Death_Wasp
+    at:       [183.776, 24.773, 429.114, 55]
+    level:    [25, 26]
+  17228217:
+    template: Death_Wasp
+    at:       [113.316, 16.202, 402.408, 127]
+    level:    [25, 26]
+  17228218:
+    template: Death_Wasp
+    at:       [72.191, 15.526, 426.605, 73]
+    level:    [25, 26]
+  17228219:
+    template: Midnight_Wings
+    at:       [211.982, 23.026, 450.594, 122]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228220:
+    template: Midnight_Wings
+    at:       [197.365, 24.412, 451.771, 103]
+    level:    [22, 23]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17228221:
+    template: Moon_Bat
+    at:       [112.260, 24.041, 450.105, 127]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17228222:
+    template: Moon_Bat
+    at:       [80.640, 24.053, 522.384, 65]
+    level:    [25, 26]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17228223:
+    template: Goblin_Mugger
+    at:       [289.971, 23.379, 435.686, 126]
+    level:    [26, 27]
+  17228224:
+    template: Goblin_Pathfinder
+    at:       [168.013, 24.104, 480.386, 9]
+    level:    [31, 32]
+  17228225:
+    template: Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [23, 25]
+  17228226:
+    template: Goblin_Leecher
+    at:       [15.291, 18.615, 355.977, 112]
+    level:    [26, 27]
+  17228227:
+    template: Goblin_Furrier
+    at:       [211.911, 17.588, 333.557, 19]
+    level:    [31, 32]
+  17228228:
+    template: Goblin_Gambler
+    at:       [119.034, 24.700, 469.874, 27]
+    level:    [26, 27]
+  17228229:
+    template: Goblin_Smithy
+    at:       [145.377, 23.483, 385.610, 6]
+    level:    [31, 32]
+  17228230:
+    template: Goblin_Shaman
+    at:       [100.416, 21.475, 469.245, 57]
+    level:    [31, 32]
+  17228231:
+    template: Poison_Leech
+    at:       [-660.565, -31.932, -342.338, 127]
+    level:    [25, 26]
+  17228232:
+    template: Poison_Leech
+    at:       [-635.103, -31.766, -357.275, 64]
+    level:    [25, 26]
+  17228233:
+    template: Poison_Leech
+    at:       [-756.205, -31.688, -451.196, 127]
+    level:    [25, 26]
+  17228234:
+    template: Poison_Leech
+    at:       [-686.605, -31.476, -471.422, 75]
+    level:    [25, 26]
+  17228235:
+    template: Ochu
+    at:       [-691.786, -34.802, -335.763, 127]
+    level:    [36, 37]
+  17228236:
+    template: Drooling_Daisy
+    at:       [-763.000, -31.000, -414.000, 127]
+    level:    [39, 40]
+  17228237:
+    template: Clipper
+    at:       [-749.667, -28.636, -428.092, 127]
+    level:    [24, 25]
+  17228238:
+    template: Clipper
+    at:       [-723.348, -28.962, -464.443, 123]
+    level:    [24, 25]
+  17228239:
+    template: Clipper
+    at:       [-745.057, -27.493, -421.336, 127]
+    level:    [24, 25]
+  17228240:
+    template: Clipper
+    at:       [-748.740, -31.345, -363.878, 127]
+    level:    [24, 25]
+  17228241:
+    template: Goblin_Digger_far
+    script:   Goblin_Digger
+    at:       [-124.602, 1.062, -218.029, 18]
+    level:    [28, 29]
+  17228242:
+    template: Simurgh
+    at:       [-681.000, -31.000, -447.000, 127]
+    level:    [58, 58]
+  17228243:
+    template: Sprite
+    level:    [61, 63]
+  17228244:
+    template: Sprite
+    level:    [61, 63]
+  17228245:
+    template: Sprite
+    level:    [61, 63]
+  17228246:
+    template: Sprite
+    level:    [61, 63]
+  17228247:
+    template: Sprite
+    level:    [61, 63]
+  17228248:
+    template: Urayuli
+    level:    [1, 1]
+  17228249:
+    template: Chuglix_Berrypaws
+    at:       [-686.216, -31.556, -369.723]
+    level:    [1, 1]
+  17228250:
+    template: Yilbegan
+    at:       [1.000, 1.000, 1.000]
+    level:    [90, 92]
+  17228251:
+    template: Verthandi
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17228252:
+    template: Urd
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17228253:
+    template: Skuld
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17228254:
+    template: Aither
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17228255:
+    template: Deorc
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17228256:
+    template: Eorthe
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17228257:
+    template: Puretos
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17228258:
+    template: Pruina
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17228259:
+    template: Beorht
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17228260:
+    template: Thunor
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17228261:
+    template: Lacus
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17228262:
+    template: Yatagarasu
+    at:       [-360.000, 7.500, 279.000, 149]
+    level:    [94, 95]
+  17228263:
+    template: Yatagarasu
+    at:       [-435.000, -8.406, 15.000, 212]
+    level:    [94, 95]
+  17228264:
+    template: Yatagarasu
+    at:       [-630.000, -24.266, -270.000, 19]
+    level:    [94, 95]
+  17228265:
+    template: Strix
+  17228266:
+    template: Strix
+    at:       [-481.160, -8.500, 117.660, 118]
+  17228267:
+    template: Strix
+  17228277:
+    script: Wayward_Worm
+  17228278:
+    script: Wayward_Worm
+  17228279:
+    script: Wayward_Worm
+  17228289:
+    script: Wayward_Worm
+  17228290:
+    script: Wayward_Worm
+  17228291:
+    script: Wayward_Worm
+  17228301:
+    script: Wayward_Worm
+  17228302:
+    script: Wayward_Worm
+  17228303:
+    script: Wayward_Worm
+  17228304:
+    script: Tatenashi_Armor
+  17228305:
+    script: Hizamaru_Armor
+  17228306:
+    script: Ubuginu_Armor
+  17228307:
+    script: Hachiryu_Armor
+  17228308:
+    script: Omodaka_Armor
+  17228309:
+    template: Macro_Test
+    at:       [221.589, 23.516, 463.339, 184]
+    level:    [1, 1]
+  17228310:
+    template: Macro_Test
+    at:       [225.399, 24.354, 464.200, 184]
+    level:    [1, 1]
+  17228311:
+    template: Macro_Test
+    at:       [230.000, 24.573, 465.149, 184]
+    level:    [1, 1]
+
+slots:
+  - members:
+      17227783: {} # Death_Wasp
+      17227787: {} # Moon_Bat
+  - members:
+      17227795: {} # Death_Wasp
+      17227799: {} # Moon_Bat
+  - members:
+      17227809: {} # Death_Wasp
+      17227813: {} # Moon_Bat
+  - members:
+      17227822: {} # Old_Quadav
+      17227829: {} # Wight
+  - members:
+      17227827: {} # Zircon_Quadav
+      17227830: {} # Wight
+  - members:
+      17227883: {} # Goblin_Pathfinder
+      17227890: {} # Wight
+  - members:
+      17227889: {} # Goblin_Shaman
+      17227891: {} # Wight
+  - members:
+      17227903: {} # Death_Wasp
+      17227907: {} # Moon_Bat
+  - members:
+      17227915: {} # Death_Wasp
+      17227919: {} # Moon_Bat
+  - members:
+      17227925: {} # Death_Wasp
+      17227929: {} # Moon_Bat
+  - members:
+      17227935: {} # Old_Quadav
+      17227942: {} # Wight
+  - members:
+      17227940: {} # Zircon_Quadav
+      17227943: {} # Wight
+  - members:
+      17227974: {} # Goblin_Pathfinder
+      17227981: {} # Wight
+  - members:
+      17227980: {} # Goblin_Shaman
+      17227982: {} # Wight
+  - members:
+      17228011: {} # Goblin_Pathfinder
+      17228018: {} # Wight
+  - members:
+      17228017: {} # Goblin_Shaman
+      17228019: {} # Wight
+  - members:
+      17228024: {} # Goobbue_Farmer
+      17228025: {} # Midnight_Wings
+  - members:
+      17228030: {} # Death_Wasp
+      17228034: {} # Moon_Bat
+  - members:
+      17228041: {} # Death_Wasp
+      17228045: {} # Moon_Bat
+  - members:
+      17228052: {} # Death_Wasp
+      17228056: {} # Moon_Bat
+  - members:
+      17228067: {} # Old_Quadav
+      17228074: {} # Wight
+  - members:
+      17228072: {} # Zircon_Quadav
+      17228075: {} # Wight
+  - members:
+      17228098: {} # Goblin_Pathfinder
+      17228105: {} # Wight
+  - members:
+      17228104: {} # Goblin_Shaman
+      17228106: {} # Wight
+  - members:
+      17228137: {} # Goblin_Pathfinder
+      17228144: {} # Wight
+  - members:
+      17228143: {} # Goblin_Shaman
+      17228145: {} # Wight
+  - members:
+      17228148: {} # Evil_Weapon
+      17228151: {} # Evil_Weapon
+  - members:
+      17228149: {} # Evil_Weapon
+      17228152: {} # Evil_Weapon
+  - members:
+      17228157: {} # Death_Wasp
+      17228161: {} # Midnight_Wings
+  - members:
+      17228158: {} # Death_Wasp
+      17228164: {} # Moon_Bat
+  - members:
+      17228168: {} # Death_Wasp
+      17228172: {} # Midnight_Wings
+  - members:
+      17228169: {} # Death_Wasp
+      17228174: {} # Moon_Bat
+  - members:
+      17228191: {} # Brass_Quadav
+  - members:
+      17228193: {} # Zircon_Quadav
+  - members:
+      17228199: {} # Death_Wasp
+      17228203: {} # Midnight_Wings
+  - members:
+      17228200: {} # Death_Wasp
+      17228205: {} # Moon_Bat
+  - members:
+      17228207: {} # Death_Wasp
+      17228211: {} # Midnight_Wings
+  - members:
+      17228208: {} # Death_Wasp
+      17228213: {} # Moon_Bat
+  - members:
+      17228215: {} # Death_Wasp
+      17228219: {} # Midnight_Wings
+  - members:
+      17228216: {} # Death_Wasp
+      17228221: {} # Moon_Bat

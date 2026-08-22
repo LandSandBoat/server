@@ -1,0 +1,3616 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Awoken_Angantyr:
+    id:            6110
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 3608
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Awoken_Hjorvarth:
+    id:            6111
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 3657
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Awoken_Hrani:
+    id:            6112
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 3658
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Barbaric_Weapon:
+    id:            6027
+    species:       evil_weapon
+    type:          [notorious]
+    skill_list_id: 417
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 6700
+    loot:
+      drops:
+        - chance: common
+          item:   rovers_gloves
+    content: WOTG
+
+  Beist:
+    id:            4857
+    species:       dragon
+    type:          [notorious, battlefield]
+    skill_list_id: 87
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        39
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Biast:
+    id:            410
+    species:       dragon
+    type:          [notorious]
+    skill_list_id: 2071
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        39
+      behaviors:
+        aggressive: true
+      mods:
+        humanoid_killer: 20
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 19550
+    loot:
+      drops:
+        - chance: very_common
+          item:   patrocluss_helm
+
+  Blizzard_Gigas:
+    id:            453
+    species:       gigas
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire: -2
+          ice:   4
+        rank_status:
+          paralyze: 4
+          bind:     4
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   piece_of_hickory_lumber
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Boreal_Coeurl:
+    id:            509
+    species:       coeurl
+    type:          [notorious]
+    spell_list_id: 102
+    skill_list_id: 71
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 367
+        entity_flags: 133
+        model_size:     2
+        hitbox:        18
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 26000
+
+  Boreal_Hound:
+    id:            510
+    species:       hound
+    type:          [notorious]
+    spell_list_id: 100
+    skill_list_id: 142
+    attributes:
+      combat:
+        skill: sword
+        delay: 220
+      jobs: [drk, blm]
+      resists:
+        dmg_physical:
+          slashing: 5000
+          piercing: 5000
+          blunt:    5000
+          h2h:      5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 133
+        model_size:     2
+        hitbox:        28
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 26000
+
+  Boreal_Tiger:
+    id:            511
+    species:       tiger
+    type:          [notorious]
+    spell_list_id: 101
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 133
+        model_size:     2
+        hitbox:        29
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 26000
+
+  Chaos_Elemental:
+    id:            693
+    species:       light_elemental
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 442
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item:   glowstone
+
+  Cursed_Weapon:
+    id:            868
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   bruised_starfruit
+
+  Dark_Elemental:
+    id:            913
+    species:       dark_elemental
+    spell_list_id: 18
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        immune_status: [blind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 443
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+
+  Demon_Aristocrat:
+    id:            981
+    species:       kindred
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Demon_Knight:
+    id:            988
+    species:       kindred
+    spell_list_id: 5
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 743
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   behemoth_leather_missive
+        - chance: rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+      despoil:
+        demon_horn:  0
+        demon_skull: 0
+
+  Demon_Knight_2:
+    id:            988
+    display_name:  Demon_Knight
+    species:       kindred
+    spell_list_id: 5
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 743
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Demon_Pawn:
+    id:            991
+    species:       kindred
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 740
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   behemoth_leather_missive
+      despoil:
+        demon_horn:  0
+        demon_skull: 0
+
+  Demon_Warlock:
+    id:            995
+    species:       kindred
+    spell_list_id: 31
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 744
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      despoil:
+        demon_horn:  0
+        demon_skull: 0
+
+  Demon_Wizard:
+    id:            997
+    species:       kindred
+    spell_list_id: 21
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 741
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   behemoth_leather_missive
+      despoil:
+        demon_horn:  0
+        demon_skull: 0
+
+  Demon_Wizard_2:
+    id:            997
+    display_name:  Demon_Wizard
+    species:       kindred
+    spell_list_id: 21
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 741
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Demons_Elemental:
+    id:            994
+    species:       dark_elemental
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, war]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 13
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Duke_Focalor:
+    id:            5423
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 399
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 740
+        entity_flags: 139
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4400
+    loot:
+      drops:
+        - chance: common
+          item:   ingot_of_tenebrium
+    content: WOTG
+
+  Erebus:
+    id:            7013
+    species:       skeleton
+    type:          [notorious]
+    spell_list_id: 440
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   nyx_gorget
+    content: WOTG
+
+  Ereshkigal:
+    id:            1252
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 553
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:          9
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5800
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: common
+          item:   lucent_cape
+        - chance: uncommon
+          item:   square_of_cotton_cloth
+        - chance: uncommon
+          item:   revival_tree_root
+      steal: square_of_cotton_cloth
+
+  Etemmu:
+    id:            1260
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1155
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: rare
+          item:   revival_tree_root
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Evil_Eye:
+    id:            1264
+    species:       ahriman
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: club
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:          24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   bottle_of_ahriman_tears
+        - chance: rare
+          item:   ahriman_lens
+      steal: bottle_of_ahriman_tears
+      despoil:
+        bottle_of_ahriman_tears: 0
+        ahriman_wing:            0
+
+  Feuerunke:
+    id:            7014
+    species:       doomed
+    type:          [notorious]
+    spell_list_id: 441
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [gravity, bind, paralyze, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        model_size:  2
+        hitbox:     34
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 15500
+    loot:
+      drops:
+        - chance: uncommon
+          item:   pagondas_earring
+    content: WOTG
+
+  Frost_Gigas:
+    id:            1431
+    species:       gigas
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 710
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   piece_of_hickory_lumber
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Beastmaster:
+    id:            1551
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [bst, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 710
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gigas_Monk:
+    id:            1575
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 129
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 340
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gigas_Ranger:
+    id:            1581
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 129
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gigas_Warrior:
+    id:            1598
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gigass_Tiger:
+    id:            1594
+    species:       tiger
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      spawn:
+        type: [scripted]
+
+  Gjenganger:
+    id:            7012
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 439
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        hitbox: 6
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4900
+    content: WOTG
+
+  Goblins_Tiger:
+    id:            1733
+    species:       tiger
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      spawn:
+        type: [scripted]
+
+  Gorehound:
+    id:            7011
+    species:       hound
+    type:          [notorious]
+    skill_list_id: 142
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        hitbox: 21
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5000
+    content: WOTG
+
+  Graupel_Gigas:
+    id:            1794
+    species:       gigas
+    skill_list_id: 129
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 320
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   piece_of_hickory_lumber
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Hail_Gigas:
+    id:            1874
+    species:       gigas
+    skill_list_id: 129
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   piece_of_hickory_lumber
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Hobgoblin_Beastmaster:
+    id:            1971
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 492
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Black_Mage:
+    id:            1972
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Dark_Knight:
+    id:            1974
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 509
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Ranger:
+    id:            1978
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 499
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Red_Mage:
+    id:            1979
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 504
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Thief:
+    id:            1980
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 485
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Warrior:
+    id:            1983
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 508
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_White_Mage:
+    id:            1984
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 488
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ice_Elemental:
+    id:            2043
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 437
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+
+  Koenigstiger:
+    id:            2276
+    species:       tiger
+    type:          [notorious]
+    spell_list_id: 2
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22000
+        mp: 10000
+
+  Kulili:
+    id:            2295
+    species:       dragon
+    type:          [notorious]
+    skill_list_id: 87
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        34
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Lord_Ruthven:
+    id:            7015
+    species:       vampyr
+    type:          [notorious]
+    skill_list_id: 1155
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        immune_status: [gravity, bind, paralyze, blind, poison, light_sleep, dark_sleep]
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1846
+        model_size:  3
+        hitbox:     25
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 32600
+    loot:
+      drops:
+        - chance: very_common
+          item:   ruthvens_nail
+        - chance: very_common
+          item:   ruthvens_nail
+        - chance: uncommon
+          item:   strigoi_ring
+        - chance: uncommon
+          item:   marching_belt
+        - chance: common
+          item:   ingot_of_befouled_silver
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+    content: WOTG
+
+  Lost_Soul_blm:
+    id:            2442
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Lost_Soul_war:
+    id:            6558
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Shadow_Dragon:
+    id:            3575
+    species:       dragon
+    skill_list_id: 2071
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 131
+        model_size:     1
+        hitbox:        34
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 600
+
+  Shadow_Eye:
+    id:            3576
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags:  133
+        animation_sub:  16
+        model_size:      2
+        hitbox:         27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: always
+          item:   bottle_of_ahriman_tears
+        - chance: common
+          item:   moon_amulet
+        - chance: common
+          item:   ahriman_wing
+
+  Timeworn_Warrior:
+    id:      5851
+    species: skeleton
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   jasper_tathlum
+    content: WOTG
+
+  Yilbegan:
+    id:            6999
+    species:       zilant
+    type:          [notorious]
+    spell_list_id: 454
+    skill_list_id: 470
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, drk]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     2
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    4
+          dark:    11
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        4
+          poison:      4
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 2174
+        model_size:  3
+        hitbox:     55
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 90000
+        mp:  5000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lucky_coin
+        - chance: rare
+          item:   zilant_ring
+        - chance: rare
+          item:   galdr_ring
+        - chance: uncommon
+          item:   agronas_leggings
+        - chance: common
+          item:   square_of_scarlet_kadife
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+    content: WOTG
+
+spawns:
+  17235969:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [516.950, 0.007, -260.931, 127]
+    level:    [42, 45]
+  17235970:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [564.529, -0.527, -279.526, 25]
+    level:    [42, 45]
+  17235971:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [535.266, -1.340, -254.953, 127]
+    level:    [42, 45]
+  17235972:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [518.664, -0.342, -269.722, 127]
+    level:    [42, 45]
+  17235973:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [316.884, 7.037, -210.776, 127]
+    level:    [42, 45]
+  17235974:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [309.298, 4.974, -237.709, 127]
+    level:    [42, 45]
+  17235975:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [403.335, -0.300, -165.684, 127]
+    level:    [42, 45]
+  17235976:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [370.381, 6.034, -166.986, 127]
+    level:    [42, 45]
+  17235977:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [252.159, -14.285, -190.496, 127]
+    level:    [42, 45]
+  17235978:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [321.246, 0.685, -267.019, 49]
+    level:    [42, 45]
+  17235979:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [444.050, -0.593, -199.797, 16]
+    level:    [42, 45]
+  17235980:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [238.092, -16.383, -191.151, 63]
+    level:    [42, 45]
+  17235981:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [423.001, -1.352, -212.330, 127]
+    level:    [42, 45]
+  17235982:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [242.262, -14.507, -203.133, 48]
+    level:    [42, 45]
+  17235983:
+    template: Etemmu
+    at:       [262.723, -7.677, -191.815, 127]
+    level:    [43, 46]
+  17235984:
+    template: Etemmu
+    at:       [426.335, -0.087, -200.880, 40]
+    level:    [43, 46]
+  17235985:
+    template: Evil_Eye
+    at:       [315.214, 6.887, -195.901, 124]
+    level:    [45, 46]
+  17235986:
+    template: Evil_Eye
+    at:       [324.648, -0.263, -274.715, 127]
+    level:    [45, 46]
+  17235987:
+    template: Shadow_Dragon
+    at:       [347.000, 7.223, -205.000, 127]
+    level:    [52, 53]
+  17235988:
+    template: Biast
+    at:       [180.000, -19.000, -147.000, 127]
+    level:    [67, 67]
+  17235989:
+    template: Ice_Elemental
+    at:       [383.716, 0.619, -186.026, 16]
+    level:    [48, 50]
+  17235990:
+    template: Cursed_Weapon
+    at:       [399.390, 0.007, -140.021, 127]
+    level:    [43, 45]
+  17235991:
+    template: Cursed_Weapon
+    at:       [412.379, -0.455, -147.695, 127]
+    level:    [43, 45]
+  17235992:
+    template: Cursed_Weapon
+    at:       [298.000, -5.000, -124.000, 95]
+    level:    [43, 45]
+  17235993:
+    template: Cursed_Weapon
+    at:       [290.000, -6.000, -131.000, 1]
+    level:    [43, 45]
+  17235994:
+    template: Etemmu
+    at:       [341.333, -0.292, -325.756, 127]
+    level:    [43, 46]
+  17235995:
+    template: Etemmu
+    at:       [338.000, -0.357, -378.000, 67]
+    level:    [43, 46]
+  17235996:
+    template: Dark_Elemental
+    at:       [340.112, -0.375, -324.439, 127]
+    level:    [48, 50]
+  17235997:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [355.552, -8.061, -83.315, 127]
+    level:    [42, 45]
+  17235998:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [388.310, -3.152, -100.755, 127]
+    level:    [42, 45]
+  17235999:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [249.699, -8.552, -85.061, 116]
+    level:    [42, 45]
+  17236000:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [404.585, 0.237, -104.467, 127]
+    level:    [42, 45]
+  17236001:
+    template: Evil_Eye
+    at:       [318.388, -8.243, -78.416, 127]
+    level:    [45, 46]
+  17236002:
+    template: Evil_Eye
+    at:       [375.296, -6.742, -78.524, 127]
+    level:    [45, 46]
+  17236003:
+    template: Ice_Elemental
+    at:       [399.422, -0.237, -124.894, 127]
+    level:    [48, 50]
+  17236004:
+    template: Cursed_Weapon
+    at:       [246.000, -13.000, -105.000, 67]
+    level:    [43, 45]
+  17236005:
+    template: Cursed_Weapon
+    at:       [237.177, -15.117, -105.774, 148]
+    level:    [43, 45]
+  17236006:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [221.000, -12.000, -241.000, 55]
+    level:    [42, 45]
+  17236007:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [186.625, -19.280, -164.310, 127]
+    level:    [42, 45]
+  17236008:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [218.001, -9.818, -60.722, 127]
+    level:    [42, 45]
+  17236009:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [227.906, -16.930, -130.877, 81]
+    level:    [42, 45]
+  17236010:
+    template: Etemmu
+    at:       [200.180, -19.108, -102.046, 127]
+    level:    [43, 46]
+  17236011:
+    template: Etemmu
+    at:       [198.677, -9.263, -80.090, 75]
+    level:    [43, 46]
+  17236012:
+    template: Evil_Eye
+    at:       [143.023, -19.077, -124.367, 15]
+    level:    [45, 46]
+  17236013:
+    template: Evil_Eye
+    at:       [167.485, -18.628, -106.740, 127]
+    level:    [45, 46]
+  17236014:
+    template: Ice_Elemental
+    at:       [130.626, -22.859, -121.418, 47]
+    level:    [48, 50]
+  17236015:
+    template: Demon_Pawn
+    at:       [234.942, -20.900, -166.407, 81]
+    level:    [48, 50]
+  17236016:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [27.160, -16.359, 46.947, 127]
+    level:    [42, 45]
+  17236017:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [32.610, -24.390, -48.243, 127]
+    level:    [42, 45]
+  17236018:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [72.509, -16.394, -12.208, 127]
+    level:    [42, 45]
+  17236019:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [37.898, -15.779, 23.346, 48]
+    level:    [42, 45]
+  17236020:
+    template: Etemmu
+    at:       [50.213, -16.356, 19.807, 127]
+    level:    [43, 46]
+  17236021:
+    template: Etemmu
+    at:       [79.417, -15.913, -19.673, 127]
+    level:    [43, 46]
+  17236022:
+    template: Evil_Eye
+    at:       [87.849, -17.619, -17.633]
+    level:    [45, 46]
+  17236023:
+    template: Evil_Eye
+    at:       [39.244, -16.179, 11.642, 28]
+    level:    [45, 46]
+  17236024:
+    template: Ice_Elemental
+    at:       [63.820, -23.664, -81.960, 80]
+    level:    [48, 50]
+  17236025:
+    template: Cursed_Weapon
+    at:       [66.983, -19.594, -16.816, 127]
+    level:    [43, 45]
+  17236026:
+    template: Cursed_Weapon
+    at:       [57.000, -21.108, -24.000, 16]
+    level:    [43, 45]
+  17236027:
+    template: Barbaric_Weapon
+    at:       [57.000, -21.108, -24.000, 16]
+    level:    [73, 74]
+  17236028:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [35.494, -24.380, -192.142, 127]
+    level:    [42, 45]
+  17236029:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [69.364, -23.955, -99.908]
+    level:    [42, 45]
+  17236030:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [89.333, -24.406, -122.686, 90]
+    level:    [42, 45]
+  17236031:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [34.611, -24.147, -71.175, 127]
+    level:    [42, 45]
+  17236032:
+    template: Etemmu
+    at:       [67.559, -24.470, -133.876, 127]
+    level:    [43, 46]
+  17236033:
+    template: Etemmu
+    at:       [41.778, -23.914, -226.056, 127]
+    level:    [43, 46]
+  17236034:
+    template: Evil_Eye
+    at:       [9.794, -24.005, -98.235, 127]
+    level:    [45, 46]
+  17236035:
+    template: Evil_Eye
+    at:       [69.062, -24.006, -239.102, 127]
+    level:    [45, 46]
+  17236036:
+    template: Ice_Elemental
+    at:       [87.570, -24.128, -90.441, 127]
+    level:    [48, 50]
+  17236037:
+    template: Demon_Pawn
+    at:       [118.887, -29.056, -112.005, 72]
+    level:    [48, 50]
+  17236038:
+    template: Demon_Pawn
+    at:       [39.646, -28.883, -138.735, 71]
+    level:    [48, 50]
+  17236039:
+    template: Demon_Pawn
+    at:       [60.258, -28.549, -196.303, 127]
+    level:    [48, 50]
+  17236040:
+    template: Demon_Pawn
+    at:       [-6.399, -28.425, -98.901, 121]
+    level:    [48, 50]
+  17236041:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [102.529, -24.412, -356.760, 58]
+    level:    [42, 45]
+  17236042:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [35.164, -24.746, -350.609, 127]
+    level:    [42, 45]
+  17236043:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [67.800, -24.676, -377.157, 12]
+    level:    [42, 45]
+  17236044:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [77.025, -24.402, -376.238, 121]
+    level:    [42, 45]
+  17236045:
+    template: Timeworn_Warrior
+    at:       [47.210, -24.020, -367.510, 60]
+    level:    [57, 58]
+  17236046:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [11.412, -24.659, -351.330, 127]
+    level:    [42, 45]
+  17236047:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [4.805, -24.397, -356.666, 127]
+    level:    [42, 45]
+  17236048:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [25.773, -25.829, -340.764, 31]
+    level:    [42, 45]
+  17236049:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [39.591, -24.502, -363.713, 127]
+    level:    [42, 45]
+  17236050:
+    template: Etemmu
+    at:       [29.233, -24.343, -354.310, 56]
+    level:    [43, 46]
+  17236051:
+    template: Etemmu
+    at:       [21.059, -24.399, -319.573, 72]
+    level:    [43, 46]
+  17236052:
+    template: Etemmu
+    at:       [22.728, -24.086, -349.482, 127]
+    level:    [43, 46]
+  17236053:
+    template: Dark_Elemental
+    at:       [100.807, -25.921, -329.665, 127]
+    level:    [48, 50]
+  17236054:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [-21.723, -15.907, 44.006, 99]
+    level:    [42, 45]
+  17236055:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [-77.387, -24.414, -80.855, 111]
+    level:    [42, 45]
+  17236056:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [-28.236, -24.504, -108.620, 111]
+    level:    [42, 45]
+  17236057:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [-17.110, -16.141, 33.260, 62]
+    level:    [42, 45]
+  17236058:
+    template: Etemmu
+    at:       [-70.418, -24.425, -60.984, 127]
+    level:    [43, 46]
+  17236059:
+    template: Ereshkigal
+    at:       [-137.143, -19.278, -19.996]
+    level:    [48, 50]
+  17236060:
+    template: Evil_Eye
+    at:       [-38.836, -24.534, -76.967, 127]
+    level:    [45, 46]
+  17236061:
+    template: Evil_Eye
+    at:       [-86.391, -25.110, -67.980, 112]
+    level:    [45, 46]
+  17236062:
+    template: Ice_Elemental
+    at:       [-65.995, -16.391, 29.262, 127]
+    level:    [48, 50]
+  17236063:
+    template: Blizzard_Gigas
+    at:       [327.137, -8.639, 36.454, 63]
+    level:    [45, 48]
+  17236064:
+    template: Graupel_Gigas
+    at:       [404.920, -8.363, 0.310, 24]
+    level:    [45, 48]
+  17236065:
+    template: Frost_Gigas
+    at:       [392.108, -8.442, 9.572, 78]
+    level:    [45, 48]
+  17236066:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17236067:
+    template: Hail_Gigas
+    at:       [471.575, -0.450, 33.917, 13]
+    level:    [45, 48]
+  17236068:
+    template: Blizzard_Gigas
+    at:       [387.054, -8.294, -4.420, 117]
+    level:    [45, 48]
+  17236069:
+    template: Graupel_Gigas
+    at:       [429.613, -1.549, 31.720, 127]
+    level:    [45, 48]
+  17236070:
+    template: Frost_Gigas
+    at:       [334.454, -7.854, -3.705, 39]
+    level:    [45, 48]
+  17236071:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17236072:
+    template: Hail_Gigas
+    at:       [366.142, -8.469, 0.203, 127]
+    level:    [45, 48]
+  17236073:
+    template: Evil_Eye
+    at:       [332.018, -8.108, -0.751, 52]
+    level:    [45, 46]
+  17236074:
+    template: Evil_Eye
+    at:       [438.182, -0.118, -9.131, 49]
+    level:    [45, 46]
+  17236075:
+    template: Ice_Elemental
+    at:       [359.639, -8.513, 2.314, 102]
+    level:    [48, 50]
+  17236076:
+    template: Blizzard_Gigas
+    at:       [467.004, -1.228, 50.394, 114]
+    level:    [45, 48]
+  17236077:
+    template: Graupel_Gigas
+    at:       [432.443, -8.272, 111.015, 127]
+    level:    [45, 48]
+  17236078:
+    template: Frost_Gigas
+    at:       [417.490, -7.641, 118.970, 127]
+    level:    [45, 48]
+  17236079:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17236080:
+    template: Hail_Gigas
+    at:       [421.711, -8.188, 126.325, 127]
+    level:    [45, 48]
+  17236081:
+    template: Blizzard_Gigas
+    at:       [358.000, -8.545, 118.000, 127]
+    level:    [45, 48]
+  17236082:
+    template: Graupel_Gigas
+    at:       [393.550, -8.622, 36.518, 42]
+    level:    [45, 48]
+  17236083:
+    template: Frost_Gigas
+    at:       [403.692, -8.301, 72.023, 70]
+    level:    [45, 48]
+  17236084:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17236085:
+    template: Hail_Gigas
+    at:       [393.255, -7.872, 104.054, 65]
+    level:    [45, 48]
+  17236086:
+    template: Evil_Eye
+    at:       [426.847, -6.517, 61.033, 127]
+    level:    [45, 46]
+  17236087:
+    template: Evil_Eye
+    at:       [429.904, -8.425, 125.345, 127]
+    level:    [45, 46]
+  17236088:
+    template: Ice_Elemental
+    at:       [388.451, -8.440, 105.193, 115]
+    level:    [48, 49]
+  17236089:
+    template: Blizzard_Gigas
+    at:       [521.065, -0.428, 15.732, 127]
+    level:    [45, 48]
+  17236090:
+    template: Graupel_Gigas
+    at:       [537.606, -0.720, 16.767, 11]
+    level:    [45, 48]
+  17236091:
+    template: Frost_Gigas
+    at:       [490.627, -0.690, 28.100, 127]
+    level:    [45, 48]
+  17236092:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [39, 40]
+  17236093:
+    template: Hail_Gigas
+    at:       [529.152, -0.307, 18.568, 127]
+    level:    [45, 48]
+  17236094:
+    template: Dark_Elemental
+    at:       [542.231, -1.406, 21.863, 127]
+    level:    [48, 50]
+  17236095:
+    template: Blizzard_Gigas
+    at:       [527.207, -8.455, 216.028, 9]
+    level:    [45, 48]
+  17236096:
+    template: Graupel_Gigas
+    at:       [503.929, -8.392, 195.907, 76]
+    level:    [45, 48]
+  17236097:
+    template: Frost_Gigas
+    at:       [545.021, -9.697, 220.422, 96]
+    level:    [45, 48]
+  17236098:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [39, 40]
+  17236099:
+    template: Hail_Gigas
+    at:       [495.777, -8.618, 191.381, 67]
+    level:    [45, 48]
+  17236100:
+    template: Blizzard_Gigas
+    at:       [537.354, -8.529, 220.852, 127]
+    level:    [45, 48]
+  17236101:
+    template: Graupel_Gigas
+    at:       [499.691, -9.731, 172.810, 63]
+    level:    [45, 48]
+  17236102:
+    template: Frost_Gigas
+    at:       [503.498, -8.689, 183.349, 86]
+    level:    [45, 48]
+  17236103:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17236104:
+    template: Hail_Gigas
+    at:       [503.026, -8.408, 205.434, 127]
+    level:    [45, 48]
+  17236105:
+    template: Dark_Elemental
+    at:       [525.282, -8.370, 222.145, 127]
+    level:    [48, 50]
+  17236106:
+    template: Blizzard_Gigas
+    at:       [325.000, -7.000, 116.000, 127]
+    level:    [45, 48]
+  17236107:
+    template: Graupel_Gigas
+    at:       [332.279, -8.652, 136.227, 79]
+    level:    [45, 48]
+  17236108:
+    template: Frost_Gigas
+    at:       [313.188, -8.604, 162.241, 127]
+    level:    [45, 48]
+  17236109:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [38, 40]
+  17236110:
+    template: Hail_Gigas
+    at:       [294.283, -7.733, 118.252, 11]
+    level:    [45, 48]
+  17236111:
+    template: Evil_Eye
+    at:       [284.347, -8.091, 60.823, 113]
+    level:    [45, 46]
+  17236112:
+    template: Evil_Eye
+    at:       [298.419, -8.102, 47.876, 64]
+    level:    [45, 46]
+  17236113:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [189.838, -8.771, 30.705, 127]
+    level:    [42, 45]
+  17236114:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [-156.053, -23.945, -65.562, 127]
+    level:    [42, 45]
+  17236115:
+    template: Evil_Eye
+    at:       [235.256, -28.326, 71.488, 80]
+    level:    [45, 46]
+  17236116:
+    template: Demon_Pawn
+    at:       [280.667, -27.808, 174.356, 127]
+    level:    [49, 50]
+  17236117:
+    template: Demon_Wizard
+    at:       [248.606, -28.407, 164.681, 66]
+    level:    [48, 50]
+  17236118:
+    template: Demon_Knight
+    at:       [225.827, -26.534, 102.761, 127]
+    level:    [48, 50]
+  17236119:
+    template: Demon_Pawn
+    at:       [262.974, -27.632, 86.652, 127]
+    level:    [48, 50]
+  17236120:
+    template: Demon_Wizard
+    at:       [256.814, -27.762, 163.982, 127]
+    level:    [49, 50]
+  17236121:
+    template: Demon_Knight
+    at:       [217.376, -19.896, 119.688, 64]
+    level:    [48, 50]
+  17236122:
+    template: Evil_Eye
+    at:       [258.928, -27.040, 92.852, 29]
+    level:    [47, 48]
+  17236123:
+    template: Evil_Eye
+    at:       [176.223, -33.200, 68.192, 127]
+    level:    [47, 48]
+  17236124:
+    template: Ice_Elemental
+    at:       [253.569, -27.926, 155.087, 23]
+    level:    [48, 50]
+  17236125:
+    template: Demon_Pawn
+    at:       [338.790, -28.379, 281.877, 127]
+    level:    [48, 50]
+  17236126:
+    template: Demon_Wizard
+    at:       [329.047, -28.399, 261.570, 108]
+    level:    [48, 50]
+  17236127:
+    template: Demon_Knight
+    at:       [338.358, -28.418, 279.117, 70]
+    level:    [48, 50]
+  17236128:
+    template: Dark_Elemental
+    at:       [341.531, -28.359, 290.617, 127]
+    level:    [48, 50]
+  17236129:
+    template: Demon_Pawn
+    at:       [189.303, -30.767, 97.939, 127]
+    level:    [48, 50]
+  17236130:
+    template: Demon_Wizard
+    at:       [160.644, -35.672, 61.269, 127]
+    level:    [48, 50]
+  17236131:
+    template: Demon_Knight
+    at:       [164.899, -29.132, 152.740, 127]
+    level:    [48, 50]
+  17236132:
+    template: Demon_Pawn
+    at:       [183.525, -28.218, 167.305, 45]
+    level:    [48, 50]
+  17236133:
+    template: Demon_Wizard
+    at:       [167.181, -36.086, 72.935, 127]
+    level:    [48, 50]
+  17236134:
+    template: Demon_Knight
+    at:       [145.561, -35.826, 123.377, 117]
+    level:    [48, 50]
+  17236135:
+    template: Evil_Eye
+    at:       [161.427, -36.963, 29.772, 127]
+    level:    [47, 48]
+  17236136:
+    template: Evil_Eye
+    at:       [0.688, -35.653, 140.513, 127]
+    level:    [47, 48]
+  17236137:
+    template: Ice_Elemental
+    at:       [171.895, -28.767, 169.665, 127]
+    level:    [49, 50]
+  17236138:
+    template: Demon_Pawn
+    at:       [20.905, -33.916, 143.355, 127]
+    level:    [48, 50]
+  17236139:
+    template: Demon_Wizard
+    at:       [25.293, -35.709, 155.195, 76]
+    level:    [48, 50]
+  17236140:
+    template: Demon_Knight
+    at:       [73.755, -36.448, 161.694, 127]
+    level:    [48, 50]
+  17236141:
+    template: Demon_Pawn
+    at:       [42.954, -36.485, 122.532, 41]
+    level:    [48, 50]
+  17236142:
+    template: Demon_Wizard
+    at:       [-3.380, -36.416, 125.926, 127]
+    level:    [48, 50]
+  17236143:
+    template: Demon_Knight
+    at:       [28.705, -36.193, 151.206, 125]
+    level:    [48, 50]
+  17236144:
+    template: Evil_Eye
+    at:       [-4.963, -35.992, 99.595, 39]
+    level:    [47, 48]
+  17236145:
+    template: Evil_Eye
+    at:       [-90.015, -36.373, 58.299, 48]
+    level:    [47, 48]
+  17236146:
+    template: Duke_Focalor
+    at:       [36.000, -36.000, 160.000, 32]
+    level:    [51, 52]
+  17236147:
+    template: Demon_Pawn
+    at:       [-37.707, -36.024, 55.407, 10]
+    level:    [50, 52]
+  17236148:
+    template: Demon_Pawn
+    at:       [-54.874, -35.544, 57.911, 123]
+    level:    [50, 52]
+  17236149:
+    template: Evil_Eye
+    at:       [-223.872, -11.784, 80.972, 127]
+    level:    [47, 48]
+  17236150:
+    template: Demon_Pawn
+    at:       [-105.421, -40.059, 40.246, 127]
+    level:    [50, 52]
+  17236151:
+    template: Demon_Knight
+    at:       [-110.155, -39.986, 38.252, 105]
+    level:    [50, 52]
+  17236152:
+    template: Demon_Pawn
+    at:       [-138.463, -36.629, 35.923, 127]
+    level:    [50, 52]
+  17236153:
+    template: Demon_Wizard
+    at:       [-110.765, -36.251, 61.612, 21]
+    level:    [50, 52]
+  17236154:
+    template: Demon_Knight
+    at:       [-128.863, -36.525, 126.693, 127]
+    level:    [50, 52]
+  17236155:
+    template: Demon_Warlock
+    at:       [-118.558, -35.772, 62.275, 127]
+    level:    [50, 52]
+  17236156:
+    template: Demons_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [43, 45]
+  17236157:
+    template: Demon_Wizard
+    at:       [-138.592, -27.520, 86.084, 101]
+    level:    [50, 52]
+  17236158:
+    template: Demon_Knight
+    at:       [-142.574, -20.233, 113.974, 127]
+    level:    [50, 52]
+  17236159:
+    template: Demon_Warlock
+    at:       [-139.587, -21.634, 122.550, 127]
+    level:    [50, 52]
+  17236160:
+    template: Demons_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [43, 45]
+  17236161:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [-156.414, -15.620, 19.402, 18]
+    level:    [42, 45]
+  17236162:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [-146.592, -24.390, -46.382, 62]
+    level:    [42, 45]
+  17236163:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [-155.385, -16.622, -3.505, 45]
+    level:    [42, 45]
+  17236164:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [-151.388, -16.481, 34.608, 34]
+    level:    [42, 45]
+  17236165:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [-146.616, -20.181, -19.438, 127]
+    level:    [42, 45]
+  17236166:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [-180.184, -3.083, 39.267, 127]
+    level:    [42, 45]
+  17236167:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [-200.346, -4.477, -80.225, 79]
+    level:    [42, 45]
+  17236168:
+    template: Lost_Soul_war
+    script:   Lost_Soul
+    at:       [-184.714, -3.297, -0.147, 127]
+    level:    [42, 45]
+  17236169:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [-206.051, -5.284, 38.246, 117]
+    level:    [42, 45]
+  17236170:
+    template: Lost_Soul_blm
+    script:   Lost_Soul
+    at:       [-203.057, -4.326, -42.531, 191]
+    level:    [42, 45]
+  17236171:
+    template: Etemmu
+    at:       [-201.098, -4.082, 17.762, 65]
+    level:    [43, 46]
+  17236172:
+    template: Etemmu
+    at:       [-205.500, -4.216, -61.530, 127]
+    level:    [43, 46]
+  17236173:
+    template: Etemmu
+    at:       [-188.468, -3.805, 37.832, 127]
+    level:    [43, 46]
+  17236174:
+    template: Evil_Eye
+    at:       [-237.997, -12.559, 36.987, 47]
+    level:    [45, 46]
+  17236175:
+    template: Evil_Eye
+    at:       [-216.724, -7.610, 35.211, 232]
+    level:    [45, 46]
+  17236176:
+    template: Evil_Eye
+    at:       [-233.593, -11.914, 9.169, 38]
+    level:    [45, 46]
+  17236177:
+    template: Evil_Eye
+    at:       [-255.674, -14.830, -17.943, 184]
+    level:    [45, 46]
+  17236178:
+    template: Evil_Eye
+    at:       [-236.923, -12.164, -33.878, 93]
+    level:    [45, 46]
+  17236179:
+    template: Evil_Eye
+    at:       [-242.547, -11.594, 16.760, 126]
+    level:    [45, 46]
+  17236180:
+    template: Shadow_Eye
+    at:       [-236.734, -11.177, -23.543, 127]
+    level:    [48, 49]
+  17236181:
+    template: Demon_Pawn
+    at:       [-228.561, -10.890, -127.956, 63]
+    level:    [48, 50]
+  17236182:
+    template: Demon_Pawn
+    at:       [-283.275, -20.379, -81.644, 108]
+    level:    [48, 50]
+  17236183:
+    template: Demon_Wizard
+    at:       [-277.136, -20.172, -122.657, 127]
+    level:    [48, 50]
+  17236184:
+    template: Demon_Pawn
+    at:       [-289.381, -21.263, 14.761, 115]
+    level:    [48, 50]
+  17236185:
+    template: Demon_Knight
+    at:       [-257.241, -19.400, 26.355, 30]
+    level:    [50, 52]
+  17236186:
+    template: Demon_Pawn
+    at:       [-315.028, -27.839, 113.455, 127]
+    level:    [48, 50]
+  17236187:
+    template: Demon_Pawn
+    at:       [-301.468, -25.176, 50.633, 71]
+    level:    [48, 50]
+  17236188:
+    template: Demon_Pawn
+    at:       [-258.130, -20.270, 99.651, 36]
+    level:    [48, 50]
+  17236189:
+    template: Demon_Wizard
+    at:       [-280.919, -20.602, 123.686, 51]
+    level:    [48, 50]
+  17236190:
+    template: Demon_Pawn
+    at:       [-303.283, -26.507, -27.451, 127]
+    level:    [48, 50]
+  17236191:
+    template: Demon_Pawn
+    at:       [-314.592, -27.955, -13.729, 60]
+    level:    [48, 50]
+  17236192:
+    template: Demon_Knight
+    at:       [-315.601, -28.511, 31.759, 2]
+    level:    [48, 50]
+  17236193:
+    template: Demon_Pawn
+    at:       [-340.222, -35.576, 39.506, 127]
+    level:    [48, 50]
+  17236194:
+    template: Demon_Wizard
+    at:       [-344.199, -34.562, 30.032, 127]
+    level:    [48, 50]
+  17236195:
+    template: Demon_Knight
+    at:       [-359.344, -36.528, -38.528, 127]
+    level:    [48, 50]
+  17236196:
+    template: Evil_Eye
+    at:       [-376.085, -39.112, 21.464, 126]
+    level:    [47, 48]
+  17236197:
+    template: Demon_Wizard
+    at:       [-412.146, -44.632, 49.683, 127]
+    level:    [48, 50]
+  17236198:
+    template: Demon_Knight
+    at:       [-400.393, -44.522, 65.374, 65]
+    level:    [48, 50]
+  17236199:
+    template: Demon_Wizard
+    at:       [-404.000, -43.000, -12.000, 42]
+    level:    [48, 50]
+  17236200:
+    template: Demon_Knight
+    at:       [-399.107, -44.431, -34.532, 127]
+    level:    [48, 50]
+  17236201:
+    template: Chaos_Elemental
+    at:       [-331.000, -29.000, -49.000, 3]
+    level:    [42, 42]
+  17236202:
+    template: Boreal_Hound
+    at:       [-22.162, -24.674, -495.609, 127]
+    level:    [53, 53]
+  17236203:
+    template: Boreal_Coeurl
+    at:       [583.522, -8.858, 295.294, 64]
+    level:    [53, 53]
+  17236204:
+    template: Boreal_Tiger
+    at:       [342.267, -28.927, 373.998, 64]
+    level:    [53, 53]
+  17236205:
+    template: Koenigstiger
+    at:       [-296.000, -25.054, 151.250, 194]
+    level:    [63, 63]
+  17236206:
+    template: Hobgoblin_Warrior
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236207:
+    template: Hobgoblin_White_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236208:
+    template: Hobgoblin_Black_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236209:
+    template: Hobgoblin_Red_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236210:
+    template: Hobgoblin_Thief
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236211:
+    template: Hobgoblin_Dark_Knight
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236212:
+    template: Hobgoblin_Ranger
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236213:
+    template: Hobgoblin_Beastmaster
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236214:
+    template: Goblins_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [48, 50]
+  17236215:
+    template: Gigas_Warrior
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236216:
+    template: Gigas_Monk
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236217:
+    template: Gigas_Beastmaster
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236218:
+    template: Gigas_Ranger
+    at:       [1.000, 1.000, 1.000]
+    level:    [50, 53]
+  17236219:
+    template: Gigass_Tiger
+    at:       [1.000, 1.000, 1.000]
+    level:    [48, 50]
+  17236220:
+    template: Demon_Wizard_2
+    script:   Demon_Wizard
+    at:       [219.774, -20.312, -194.792, 80]
+    level:    [50, 55]
+  17236221:
+    template: Demon_Wizard_2
+    script:   Demon_Wizard
+    at:       [224.706, -19.215, -198.858, 75]
+    level:    [50, 55]
+  17236222:
+    template: Demon_Knight_2
+    script:   Demon_Knight
+    at:       [223.537, -19.732, -204.459, 65]
+    level:    [50, 55]
+  17236223:
+    template: Demon_Knight_2
+    script:   Demon_Knight
+    at:       [217.510, -18.440, -217.884, 70]
+    level:    [50, 55]
+  17236224:
+    template: Demon_Wizard_2
+    script:   Demon_Wizard
+    at:       [212.448, -19.253, -220.718, 60]
+    level:    [50, 55]
+  17236225:
+    template: Demon_Wizard_2
+    script:   Demon_Wizard
+    at:       [206.226, -19.887, -219.857, 65]
+    level:    [50, 55]
+  17236226:
+    template: Demon_Knight_2
+    script:   Demon_Knight
+    at:       [207.030, -21.532, -212.956, 75]
+    level:    [50, 55]
+  17236227:
+    template: Demon_Knight_2
+    script:   Demon_Knight
+    at:       [210.307, -19.586, -219.722, 70]
+    level:    [50, 55]
+  17236228:
+    template: Demon_Aristocrat
+    at:       [247.114, -15.394, -200.155, 55]
+    level:    [55, 55]
+  17236229:
+    template: Kulili
+    level:    [1, 1]
+  17236230:
+    template: Yilbegan
+    at:       [1.000, 1.000, 1.000]
+    level:    [90, 92]
+  17236231:
+    template: Lord_Ruthven
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17236232:
+    template: Feuerunke
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17236233:
+    template: Erebus
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17236234:
+    template: Gjenganger
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17236235:
+    template: Gjenganger
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17236236:
+    template: Gjenganger
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17236237:
+    template: Gjenganger
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17236238:
+    template: Gorehound
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17236239:
+    template: Gorehound
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17236240:
+    template: Gorehound
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17236241:
+    template: Gorehound
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17236242:
+    template: Beist
+    at:       [394.604, -0.482, -245.037, 38]
+  17236243:
+    template: Beist
+    at:       [353.100, -8.296, -67.059, 200]
+  17236244:
+    template: Beist
+  17236245:
+    template: Awoken_Hrani
+    at:       [-421.500, -44.560, -13.010, 238]
+    level:    [119, 119]
+  17236246:
+    template: Awoken_Hjorvarth
+    at:       [-420.220, -44.360, -15.980, 190]
+    level:    [119, 119]
+  17236247:
+    template: Awoken_Angantyr
+    at:       [-423.350, -44.660, -13.040, 65]
+    level:    [119, 119]
+
+slots:
+  - members:
+      17235990: {} # Cursed_Weapon
+      17235992: {} # Cursed_Weapon
+  - members:
+      17235991: {} # Cursed_Weapon
+      17235993: {} # Cursed_Weapon
+  - members:
+      17236004: {} # Cursed_Weapon
+      17236025: {} # Cursed_Weapon
+  - members:
+      17236005: {} # Cursed_Weapon
+      17236026: {} # Cursed_Weapon
+  - members:
+      17236068: {} # Blizzard_Gigas
+      17236072: {} # Hail_Gigas
+  - members:
+      17236069: {} # Graupel_Gigas
+      17236070: {} # Frost_Gigas
+  - members:
+      17236081: {} # Blizzard_Gigas
+      17236085: {} # Hail_Gigas
+  - members:
+      17236082: {} # Graupel_Gigas
+      17236083: {} # Frost_Gigas
+  - members:
+      17236089: {} # Blizzard_Gigas
+      17236093: {} # Hail_Gigas
+  - members:
+      17236090: {} # Graupel_Gigas
+      17236091: {} # Frost_Gigas
+  - members:
+      17236095: {} # Blizzard_Gigas
+      17236099: {} # Hail_Gigas
+  - members:
+      17236096: {} # Graupel_Gigas
+      17236097: {} # Frost_Gigas
+  - members:
+      17236100: {} # Blizzard_Gigas
+      17236101: {} # Graupel_Gigas
+      17236102: {} # Frost_Gigas
+      17236104: {} # Hail_Gigas
+  - members:
+      17236120: {} # Demon_Wizard
+      17236121: {} # Demon_Knight
+  - members:
+      17236142: {} # Demon_Wizard
+      17236143: {} # Demon_Knight
+  - members:
+      17236155: {} # Demon_Warlock
+      17236159: {} # Demon_Warlock

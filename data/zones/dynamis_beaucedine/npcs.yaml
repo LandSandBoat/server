@@ -1,0 +1,301 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17326791:
+    script: NPC[2c7]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17326792:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         SOA
+
+  17326793:
+    script: NPC[2c9]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17326794:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17326796:
+    script: NPC[2cc]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17326797:
+    script: NPC[2cd]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17326798:
+    script: NPC[2ce]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17326799:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17326800:
+    script:       Somnial_Threshold
+    display_name: Somnial Threshold
+    at:           [-262.000, -40.913, -414.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17326801:
+    script:       qm0
+    display_name: ???
+    at:           [280.000, 20.394, 468.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326802:
+    script:       qm1
+    display_name: ???
+    at:           [-170.314, -59.936, -178.112]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326803:
+    script:       qm2
+    display_name: ???
+    at:           [18.006, -80.000, 162.811]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326804:
+    script:       qm3
+    display_name: ???
+    at:           [-108.811, -100.444, 61.472]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326805:
+    script:       qm4
+    display_name: ???
+    at:           [-340.000, -100.249, 138.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326806:
+    script:       qm5
+    display_name: ???
+    at:           [100.000, -22.300, 134.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326807:
+    script:       qm6
+    display_name: ???
+    at:           [-90.000, 0.000, -367.674]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326808:
+    script:       qm7
+    display_name: ???
+    at:           [60.000, -2.300, -334.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326809:
+    script:       qm8
+    display_name: ???
+    at:           [266.000, -2.300, -20.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326810:
+    script:       qm9
+    display_name: ???
+    at:           [-174.000, -40.000, -220.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17326811:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17326812:
+    script: NPC[2dc]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17326813:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17326814:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17326815:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17326816:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17326817:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17326818:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17326819:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17326820:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40

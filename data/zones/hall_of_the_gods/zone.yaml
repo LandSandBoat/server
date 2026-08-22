@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, los_player_block]
+music:
+  day:          213
+  night:        213
+  battle_solo:  213
+  battle_party: 213
+
+zonelines:
+
+  z6z0:
+    from:  [0.004, -3.526, -180.057]
+    to:    romaeve
+    at:    [-0.008, -33.595, 123.478, 1.570796]
+    scale: [1.000, 4.000]
+
+  z6z2:
+    from:  [0.000, -3.316, 365.058]
+    to:    ruaun_gardens
+    at:    [-1.122, -56.846, -638.232, 4.712389]
+    scale: [1.000, 3.000]

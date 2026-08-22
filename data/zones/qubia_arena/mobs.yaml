@@ -1,0 +1,4627 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Adam:
+    id:            42
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type: equipped
+          race: 1
+          face: 0
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Air_Pot:
+    id:            72
+    species:       magic_pot
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, blm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 1159
+        model_size:      3
+        hitbox:         53
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Anansi:
+    id:            117
+    species:       spider
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 313
+        entity_flags: 1695
+        name_prefix:    32
+        model_size:      3
+        hitbox:         19
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9500
+        mp: 9500
+
+  Ancient_Sorcerer:
+    id:            127
+    species:       skeleton
+    type:          [notorious, battlefield]
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        model_size:  2
+        hitbox:     13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+
+  Ancient_Warrior:
+    id:            129
+    species:       skeleton
+    type:          [battlefield]
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 100
+
+  Annihilated_Anthony:
+    id:            160
+    species:       ghost
+    type:          [notorious, battlefield]
+    spell_list_id: 28
+    skill_list_id: 2065
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:          9
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+        mp: 7500
+
+  Archlich_Taberquoan:
+    id:            223
+    species:       skeleton
+    type:          [notorious, battlefield]
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 576
+        entity_flags: 1157
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8300
+
+  Atori-Tutori_qm:
+    id:            6642
+    display_name:  Atori-Tutori_???
+    species:       tarutaru
+    type:          [notorious, battlefield]
+    skill_list_id: 1145
+    attributes:
+      combat:
+        skill:    hand_to_hand
+        delay:    480
+        dmg_mult: 110
+      jobs: [mnk, none]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  2
+          head:  4096
+          body:  8209
+          hands: 12288
+          legs:  16384
+          feet:  20480
+          main:  25074
+          sub:   29170
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 27000
+
+  Beelzebub:
+    id:            385
+    species:       yellow_bee
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 2060
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Capelthwaite:
+    id:            629
+    species:       hound
+    type:          [battlefield]
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1300
+
+  Chahnameed:
+    id:            685
+    species:       doomed
+    type:          [notorious, battlefield]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  3
+        model_size:    3
+        hitbox:       41
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 23000
+
+  Chahnameeds_Intestines:
+    id:            686
+    species:       doomed
+    type:          [notorious, battlefield]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 290
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        hitbox: 25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+  Chahnameeds_Liver:
+    id:            687
+    species:       doomed
+    type:          [notorious, battlefield]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 290
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        hitbox: 25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+  Chahnameeds_Stomach:
+    id:            688
+    species:       doomed
+    type:          [notorious, battlefield]
+    skill_list_id: 861
+    attributes:
+      combat:
+        skill: sword
+        delay: 290
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        model_size:  1
+        hitbox:     30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11500
+
+  Crabshaw:
+    id:            824
+    species:       crab
+    type:          [battlefield]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 155
+        name_prefix:   32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Death_Clan_Destroyer:
+    id:            938
+    species:       orcish_warmachine
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, whm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 428
+        model_size:  2
+        hitbox:     28
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8300
+
+  Disfaurit_B_DAurphe:
+    id:            1050
+    species:       shadow
+    type:          [battlefield]
+    skill_list_id: 898
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [thf, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 551
+        model_size:  1
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6200
+
+  Disfaurit_B_DAurphe_2:
+    id:            1050
+    display_name:  Disfaurit_B_DAurphe
+    species:       shadow
+    type:          [battlefield]
+    skill_list_id: 898
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [thf, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 551
+        model_size:  1
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Doll_Factory:
+    id:            1076
+    species:       spheroid
+    type:          [notorious, battlefield]
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 315
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 500
+
+  Earth_Golem:
+    id:            1161
+    species:       golem
+    type:          [notorious, battlefield]
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 300
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags:  3
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2600
+
+  Earth_Pot:
+    id:            1163
+    species:       magic_pot
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, blm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 1159
+        model_size:      3
+        hitbox:         53
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Fire_Golem:
+    id:            1342
+    species:       golem
+    type:          [notorious, battlefield]
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 300
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags:  3
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2600
+
+  Fire_Pot:
+    id:            1343
+    species:       magic_pot
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, blm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 135
+        model_size:     3
+        hitbox:        53
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Freybug:
+    id:            1424
+    species:       hound
+    type:          [battlefield]
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1350
+
+  Generic_Doll:
+    id:            1497
+    species:       doll
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+        mp: 2200
+
+  Generic_Doll_Small:
+    id:            7292
+    display_name:  Generic_Doll
+    species:       doll
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  3
+        hitbox:       25
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+        mp: 2200
+
+  Generic_Doll_XLarge:
+    id:            7293
+    display_name:  Generic_Doll
+    species:       doll
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  3
+        model_size:    3
+        hitbox:       41
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+        mp: 2200
+
+  Ghul-I-Beaban_BLM:
+    id:            6069
+    display_name:  Ghul-I-Beaban
+    species:       skeleton
+    type:          [battlefield]
+    spell_list_id: 305
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  Ghul-I-Beaban_DRK:
+    id:            1519
+    display_name:  Ghul-I-Beaban
+    species:       skeleton
+    type:          [battlefield]
+    spell_list_id: 304
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: staff
+      jobs: [drk, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  Gladiatorial_Weapon:
+    id:            1620
+    species:       evil_weapon
+    type:          [battlefield]
+    skill_list_id: 2062
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 479
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        sound_range: 18
+        magic_range: 22
+      spawn:
+        type: [scripted]
+
+  Guytrash:
+    id:            1854
+    species:       hound
+    type:          [battlefield]
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1350
+
+  Hell_Fly:
+    id:            1925
+    species:       yellow_bee
+    type:          [notorious, battlefield]
+    skill_list_id: 2060
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags: 643
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+
+  Ice_Pot:
+    id:            2045
+    species:       magic_pot
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, blm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 1159
+        model_size:      3
+        hitbox:         53
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Jeumouque_B_DAurphe:
+    id:            2147
+    species:       shadow
+    type:          [battlefield]
+    skill_list_id: 898
+    attributes:
+      combat:
+        skill: katana
+        delay: 360
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 546
+        model_size:  1
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  Jeumouque_B_DAurphe_2:
+    id:            2147
+    display_name:  Jeumouque_B_DAurphe
+    species:       shadow
+    type:          [battlefield]
+    skill_list_id: 898
+    attributes:
+      combat:
+        skill: katana
+        delay: 360
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 546
+        model_size:  1
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Laila:
+    id:            2319
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [dnc, dnc]
+      render:
+        look:
+          type:  equipped
+          race:  2
+          face:  2
+          head:  4307
+          body:  8403
+          hands: 12499
+          legs:  16595
+          feet:  20691
+          main:  24955
+          sub:   28672
+        entity_flags: 539
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+        mp: 1000
+
+  Maat_brd:
+    id:            5413
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 6
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      jobs: [brd, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+
+  Maat_drk:
+    id:            5409
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 5
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 480
+      jobs: [drk, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3300
+        mp: 1000
+
+  Maat_pld:
+    id:            5408
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 4
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [pld, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+        mp: 1000
+
+  Maldaramet_B_DAurphe:
+    id:            2494
+    species:       shadow
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 898
+    attributes:
+      combat:
+        skill: club
+        delay: 360
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 538
+        model_size:  1
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5800
+        mp: 5800
+
+  Maldaramet_B_DAurphe_2:
+    id:            2494
+    display_name:  Maldaramet_B_DAurphe
+    species:       shadow
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 898
+    attributes:
+      combat:
+        skill: club
+        delay: 360
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 538
+        model_size:  1
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mauled_Murdock:
+    id:            2588
+    species:       ghost
+    type:          [notorious, battlefield]
+    spell_list_id: 28
+    skill_list_id: 2065
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+        mp: 7500
+
+  Nephiyl_Keepcollapser:
+    id:            2828
+    species:       gigas
+    type:          [notorious, battlefield]
+    skill_list_id: 129
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 642
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 4200
+
+  Nephiyl_Keepcollapser_2:
+    id:            2828
+    display_name:  Nephiyl_Keepcollapser
+    species:       gigas
+    type:          [notorious, battlefield]
+    skill_list_id: 129
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 642
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nephiyl_Moatfiller:
+    id:            2829
+    species:       gigas
+    type:          [notorious, battlefield]
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 640
+        entity_flags: 135
+        model_size:     3
+        hitbox:        41
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4400
+
+  Nephiyl_Moatfiller_2:
+    id:            2829
+    display_name:  Nephiyl_Moatfiller
+    species:       gigas
+    type:          [notorious, battlefield]
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 640
+        entity_flags: 135
+        model_size:     3
+        hitbox:        41
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nephiyl_Pinnacletosser:
+    id:            2830
+    species:       gigas
+    type:          [notorious, battlefield]
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: club
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 707
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4200
+
+  Nephiyl_Pinnacletosser_2:
+    id:            2830
+    display_name:  Nephiyl_Pinnacletosser
+    species:       gigas
+    type:          [notorious, battlefield]
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: club
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 707
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nephiyl_Rampartbreacher:
+    id:            2831
+    species:       gigas
+    type:          [notorious, battlefield]
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 703
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4200
+
+  Nephiyl_Rampartbreacher_2:
+    id:            2831
+    display_name:  Nephiyl_Rampartbreacher
+    species:       gigas
+    type:          [notorious, battlefield]
+    skill_list_id: 128
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 703
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Punctured_Percy:
+    id:            3227
+    species:       ghost
+    type:          [notorious, battlefield]
+    spell_list_id: 28
+    skill_list_id: 2065
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+        mp: 7500
+
+  Rallbrog_of_Clan_Death:
+    id:            3315
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 627
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1490
+
+  Rojgnojs_Left_Hand:
+    id:            3385
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 628
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4150
+        mp: 4000
+
+  Rojgnojs_Right_Hand:
+    id:            3386
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 622
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4200
+        mp: 4000
+
+  Rongeur_Dos:
+    id:            3390
+    species:       hound
+    type:          [battlefield]
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1300
+
+  Seed_Goblin:
+    id:            3530
+    species:       goblin
+    type:          [battlefield]
+    skill_list_id: 410
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 2353
+        entity_flags:  5
+        name_prefix:   1
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Seed_Orc:
+    id:            3532
+    species:       orc
+    type:          [battlefield]
+    skill_list_id: 407
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2354
+        entity_flags:  5
+        name_prefix:   1
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Seed_Quadav:
+    id:            3533
+    species:       quadav
+    type:          [battlefield]
+    spell_list_id: 3
+    skill_list_id: 408
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2355
+        entity_flags:  5
+        name_prefix:   1
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Seed_Yagudo:
+    id:            3535
+    species:       yagudo
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 409
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2356
+        entity_flags:  5
+        name_prefix:   1
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Shredded_Samson:
+    id:            3612
+    species:       ghost
+    type:          [notorious, battlefield]
+    spell_list_id: 28
+    skill_list_id: 2065
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+        mp: 7500
+
+  Son_of_Anansi:
+    id:            3701
+    species:       spider
+    type:          [battlefield]
+    skill_list_id: 501
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 311
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  Thunder_Pot:
+    id:            3915
+    species:       magic_pot
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, blm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 135
+        model_size:     3
+        hitbox:        53
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Trion:
+    id:            4006
+    species:       elvaan
+    type:          [battlefield]
+    skill_list_id: 483
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      render:
+        look:
+          type:  standard
+          model: 774
+        entity_flags:  3
+        name_prefix:  32
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+    allegiance: player
+
+  Vaicoliaux_B_DAurphe:
+    id:            4119
+    species:       shadow
+    type:          [battlefield]
+    skill_list_id: 898
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 533
+        model_size:  1
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  Vaicoliaux_B_DAurphe_2:
+    id:            4119
+    display_name:  Vaicoliaux_B_DAurphe
+    species:       shadow
+    type:          [battlefield]
+    skill_list_id: 898
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 533
+        model_size:  1
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Vangknok_of_Clan_Death:
+    id:            4132
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 713
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 636
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1460
+
+  Vassago:
+    id:            4205
+    species:       kindred
+    type:          [battlefield]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 751
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Warlord_Rojgnoj:
+    id:            4294
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1011
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 6000
+
+  Water_Golem:
+    id:            4310
+    species:       golem
+    type:          [notorious, battlefield]
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 300
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags:  3
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2600
+
+  Water_Pot:
+    id:            4312
+    species:       magic_pot
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, blm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 135
+        model_size:     3
+        hitbox:        53
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Wind_Golem:
+    id:            4350
+    species:       golem
+    type:          [notorious, battlefield]
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 300
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags:  3
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2600
+
+  Worgbut_of_Clan_Death:
+    id:            4374
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 624
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1600
+
+  Yukvok_of_Clan_Death:
+    id:            4483
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 626
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+spawns:
+  17620993:
+    template: Archlich_Taberquoan
+    at:       [-399.908, -201.625, 386.934, 196]
+    level:    [45, 45]
+  17620994:
+    template: Ancient_Sorcerer
+    at:       [-416.616, -201.625, 409.581]
+    level:    [40, 40]
+  17620995:
+    template: Ancient_Sorcerer
+    at:       [-382.831, -201.625, 409.757, 128]
+    level:    [40, 40]
+  17620996:
+    template: Ancient_Warrior
+    at:       [-426.327, -199.125, 463.157]
+    level:    [40, 40]
+  17620997:
+    template: Ancient_Warrior
+    at:       [-426.188, -199.125, 476.989]
+    level:    [40, 40]
+  17620998:
+    template: Ancient_Warrior
+    at:       [-373.796, -199.125, 476.857]
+    level:    [40, 40]
+  17620999:
+    template: Ancient_Warrior
+    at:       [-373.951, -199.125, 463.279]
+    level:    [40, 40]
+  17621000:
+    template: Archlich_Taberquoan
+    at:       [0.165, -1.625, -12.967, 196]
+    level:    [45, 45]
+  17621001:
+    template: Ancient_Sorcerer
+    at:       [-16.543, -1.625, 9.680]
+    level:    [40, 40]
+  17621002:
+    template: Ancient_Sorcerer
+    at:       [17.242, -1.625, 9.856, 128]
+    level:    [40, 40]
+  17621003:
+    template: Ancient_Warrior
+    at:       [-26.254, 0.875, 63.256]
+    level:    [40, 40]
+  17621004:
+    template: Ancient_Warrior
+    at:       [-26.115, 0.875, 77.088]
+    level:    [40, 40]
+  17621005:
+    template: Ancient_Warrior
+    at:       [26.277, 0.875, 76.956]
+    level:    [40, 40]
+  17621006:
+    template: Ancient_Warrior
+    at:       [26.122, 0.875, 63.378]
+    level:    [40, 40]
+  17621007:
+    template: Archlich_Taberquoan
+    at:       [400.120, 198.375, -412.743, 196]
+    level:    [45, 45]
+  17621008:
+    template: Ancient_Sorcerer
+    at:       [383.412, 198.375, -390.096]
+    level:    [40, 40]
+  17621009:
+    template: Ancient_Sorcerer
+    at:       [417.197, 198.375, -389.920, 128]
+    level:    [40, 40]
+  17621010:
+    template: Ancient_Warrior
+    at:       [373.701, 200.875, -336.520]
+    level:    [40, 40]
+  17621011:
+    template: Ancient_Warrior
+    at:       [373.840, 200.875, -322.688]
+    level:    [40, 40]
+  17621012:
+    template: Ancient_Warrior
+    at:       [426.232, 200.875, -322.820]
+    level:    [40, 40]
+  17621013:
+    template: Ancient_Warrior
+    at:       [426.077, 200.875, -336.398]
+    level:    [40, 40]
+  17621014:
+    template: Warlord_Rojgnoj
+    at:       [-400.000, -201.000, 389.000, 191]
+    level:    [75, 75]
+  17621015:
+    template: Rojgnojs_Left_Hand
+    at:       [-396.000, -201.000, 389.000, 191]
+    level:    [70, 70]
+  17621016:
+    template: Rojgnojs_Right_Hand
+    at:       [-404.000, -201.000, 389.000, 191]
+    level:    [70, 70]
+  17621017:
+    template: Yukvok_of_Clan_Death
+    at:       [-400.000, -201.000, 396.000, 191]
+    level:    [65, 65]
+  17621018:
+    template: Vangknok_of_Clan_Death
+    at:       [-405.000, -201.000, 390.000, 191]
+    level:    [55, 55]
+  17621019:
+    template: Vangknok_of_Clan_Death
+    at:       [-400.000, -201.000, 390.000, 191]
+    level:    [55, 55]
+  17621020:
+    template: Vangknok_of_Clan_Death
+    at:       [-395.000, -201.000, 390.000, 191]
+    level:    [55, 55]
+  17621021:
+    template: Rallbrog_of_Clan_Death
+    at:       [-417.000, -201.000, 399.000, 191]
+    level:    [55, 55]
+  17621022:
+    template: Rallbrog_of_Clan_Death
+    at:       [-413.000, -201.000, 396.000, 191]
+    level:    [55, 55]
+  17621023:
+    template: Rallbrog_of_Clan_Death
+    at:       [-409.000, -201.000, 393.000, 191]
+    level:    [55, 55]
+  17621024:
+    template: Worgbut_of_Clan_Death
+    at:       [-391.000, -201.000, 393.000, 191]
+    level:    [55, 55]
+  17621025:
+    template: Worgbut_of_Clan_Death
+    at:       [-387.000, -201.000, 396.000, 191]
+    level:    [55, 55]
+  17621026:
+    template: Worgbut_of_Clan_Death
+    at:       [-383.000, -201.000, 399.000, 191]
+    level:    [55, 55]
+  17621027:
+    template: Death_Clan_Destroyer
+    at:       [-400.000, -201.000, 386.000, 191]
+    level:    [60, 60]
+  17621028:
+    template: Warlord_Rojgnoj
+    at:       [0.073, -1.000, -10.901, 191]
+    level:    [75, 75]
+  17621029:
+    template: Rojgnojs_Left_Hand
+    at:       [4.073, -1.000, -10.901, 191]
+    level:    [70, 70]
+  17621030:
+    template: Rojgnojs_Right_Hand
+    at:       [-3.927, -1.000, -10.901, 191]
+    level:    [70, 70]
+  17621031:
+    template: Yukvok_of_Clan_Death
+    at:       [0.073, -1.000, -3.901, 191]
+    level:    [65, 65]
+  17621032:
+    template: Vangknok_of_Clan_Death
+    at:       [-4.927, -1.000, -9.901, 191]
+    level:    [55, 55]
+  17621033:
+    template: Vangknok_of_Clan_Death
+    at:       [0.073, -1.000, -9.901, 191]
+    level:    [55, 55]
+  17621034:
+    template: Vangknok_of_Clan_Death
+    at:       [5.073, -1.000, -9.901, 191]
+    level:    [55, 55]
+  17621035:
+    template: Rallbrog_of_Clan_Death
+    at:       [-16.927, -1.000, -0.901, 191]
+    level:    [55, 55]
+  17621036:
+    template: Rallbrog_of_Clan_Death
+    at:       [-12.927, -1.000, -3.901, 191]
+    level:    [55, 55]
+  17621037:
+    template: Rallbrog_of_Clan_Death
+    at:       [-8.927, -1.000, -6.901, 191]
+    level:    [55, 55]
+  17621038:
+    template: Worgbut_of_Clan_Death
+    at:       [9.073, -1.000, -6.901, 191]
+    level:    [55, 55]
+  17621039:
+    template: Worgbut_of_Clan_Death
+    at:       [13.073, -1.000, -3.901, 191]
+    level:    [55, 55]
+  17621040:
+    template: Worgbut_of_Clan_Death
+    at:       [17.073, -1.000, -0.901, 191]
+    level:    [55, 55]
+  17621041:
+    template: Death_Clan_Destroyer
+    at:       [0.073, -1.000, -13.901, 191]
+    level:    [60, 60]
+  17621042:
+    template: Warlord_Rojgnoj
+    at:       [400.028, 199.000, -410.677, 191]
+    level:    [75, 75]
+  17621043:
+    template: Rojgnojs_Left_Hand
+    at:       [404.028, 199.000, -410.677, 191]
+    level:    [70, 70]
+  17621044:
+    template: Rojgnojs_Right_Hand
+    at:       [396.028, 199.000, -410.677, 191]
+    level:    [70, 70]
+  17621045:
+    template: Yukvok_of_Clan_Death
+    at:       [400.028, 199.000, -403.677, 191]
+    level:    [65, 65]
+  17621046:
+    template: Vangknok_of_Clan_Death
+    at:       [395.028, 199.000, -409.677, 191]
+    level:    [55, 55]
+  17621047:
+    template: Vangknok_of_Clan_Death
+    at:       [400.028, 199.000, -409.677, 191]
+    level:    [55, 55]
+  17621048:
+    template: Vangknok_of_Clan_Death
+    at:       [405.028, 199.000, -409.677, 191]
+    level:    [55, 55]
+  17621049:
+    template: Rallbrog_of_Clan_Death
+    at:       [383.028, 199.000, -400.677, 191]
+    level:    [55, 55]
+  17621050:
+    template: Rallbrog_of_Clan_Death
+    at:       [387.028, 199.000, -403.677, 191]
+    level:    [55, 55]
+  17621051:
+    template: Rallbrog_of_Clan_Death
+    at:       [391.028, 199.000, -406.677, 191]
+    level:    [55, 55]
+  17621052:
+    template: Worgbut_of_Clan_Death
+    at:       [409.028, 199.000, -406.677, 191]
+    level:    [55, 55]
+  17621053:
+    template: Worgbut_of_Clan_Death
+    at:       [413.028, 199.000, -403.677, 191]
+    level:    [55, 55]
+  17621054:
+    template: Worgbut_of_Clan_Death
+    at:       [417.028, 199.000, -400.677, 191]
+    level:    [55, 55]
+  17621055:
+    template: Death_Clan_Destroyer
+    at:       [400.028, 199.000, -413.677, 191]
+    level:    [60, 60]
+  17621056:
+    template: Maat_pld
+    at:       [-400.001, -201.625, 400.001, 192]
+    level:    [70, 70]
+  17621057:
+    template: Maat_pld
+    at:       [0.025, -1.625, -0.055, 192]
+    level:    [70, 70]
+  17621058:
+    template: Maat_pld
+    at:       [400.100, 198.375, -400.054, 192]
+    level:    [70, 70]
+  17621059:
+    template: Maat_drk
+    at:       [-400.001, -201.625, 400.001, 192]
+    level:    [70, 70]
+  17621060:
+    template: Maat_drk
+    at:       [0.025, -1.625, -0.055, 192]
+    level:    [70, 70]
+  17621061:
+    template: Maat_drk
+    at:       [400.100, 198.375, -400.054, 192]
+    level:    [70, 70]
+  17621062:
+    template: Maat_brd
+    at:       [-400.001, -201.625, 400.001, 192]
+    level:    [70, 70]
+  17621063:
+    template: Maat_brd
+    at:       [0.025, -1.625, -0.055, 192]
+    level:    [70, 70]
+  17621064:
+    template: Maat_brd
+    at:       [400.100, 198.375, -400.054, 192]
+    level:    [70, 70]
+  17621065:
+    template: Gladiatorial_Weapon
+    at:       [-393.000, -201.000, 399.000, 185]
+    level:    [30, 30]
+  17621066:
+    template: Gladiatorial_Weapon
+    at:       [-399.000, -201.000, 395.000, 190]
+    level:    [30, 30]
+  17621067:
+    template: Gladiatorial_Weapon
+    at:       [-404.000, -201.000, 399.000, 195]
+    level:    [30, 30]
+  17621069:
+    template: Gladiatorial_Weapon
+    at:       [-393.000, -201.000, -0.901, 185]
+    level:    [30, 30]
+  17621070:
+    template: Gladiatorial_Weapon
+    at:       [-399.000, -201.000, -0.901, 190]
+    level:    [30, 30]
+  17621071:
+    template: Gladiatorial_Weapon
+    at:       [-404.000, -201.000, -0.901, 195]
+    level:    [30, 30]
+  17621073:
+    template: Gladiatorial_Weapon
+    at:       [-393.000, -201.000, 399.000, 185]
+    level:    [30, 30]
+  17621074:
+    template: Gladiatorial_Weapon
+    at:       [-399.000, -201.000, 395.000, 190]
+    level:    [30, 30]
+  17621075:
+    template: Gladiatorial_Weapon
+    at:       [-404.000, -201.000, 399.000, 195]
+    level:    [30, 30]
+  17621077:
+    template: Capelthwaite
+    at:       [-400.000, -202.125, 396.000, 192]
+    level:    [31, 31]
+  17621078:
+    template: Freybug
+    at:       [-396.000, -202.125, 400.000, 192]
+    level:    [32, 32]
+  17621079:
+    template: Rongeur_Dos
+    at:       [-400.000, -202.125, 404.000, 192]
+    level:    [31, 31]
+  17621080:
+    template: Guytrash
+    at:       [-404.000, -202.125, 400.000, 192]
+    level:    [32, 32]
+  17621082:
+    template: Capelthwaite
+    at:       [0.000, -2.125, -4.000, 192]
+    level:    [31, 31]
+  17621083:
+    template: Freybug
+    at:       [4.000, -2.125, 0.000, 192]
+    level:    [32, 32]
+  17621084:
+    template: Rongeur_Dos
+    at:       [0.000, -2.125, 4.000, 192]
+    level:    [31, 31]
+  17621085:
+    template: Guytrash
+    at:       [-4.000, -2.125, 0.000, 192]
+    level:    [32, 32]
+  17621087:
+    template: Capelthwaite
+    at:       [400.000, 197.875, -404.000, 192]
+    level:    [31, 31]
+  17621088:
+    template: Freybug
+    at:       [404.000, 197.875, -400.000, 192]
+    level:    [32, 32]
+  17621089:
+    template: Rongeur_Dos
+    at:       [400.000, 197.875, -396.000, 192]
+    level:    [31, 31]
+  17621090:
+    template: Guytrash
+    at:       [396.000, 197.875, -400.000, 192]
+    level:    [32, 32]
+  17621092:
+    template: Doll_Factory
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [40, 40]
+  17621093:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    at:       [-399.000, -201.000, 399.000, 190]
+    level:    [40, 40]
+  17621094:
+    template: Generic_Doll
+    at:       [-393.000, -201.000, 399.000, 185]
+    level:    [40, 40]
+  17621095:
+    template: Generic_Doll
+    at:       [-397.000, -201.000, 395.000, 185]
+    level:    [40, 40]
+  17621096:
+    template: Generic_Doll
+    at:       [-404.000, -201.000, 399.000, 195]
+    level:    [40, 40]
+  17621097:
+    template: Generic_Doll
+    at:       [-402.000, -201.000, 395.000, 195]
+    level:    [40, 40]
+  17621099:
+    template: Doll_Factory
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [40, 40]
+  17621100:
+    template: Generic_Doll
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [40, 40]
+  17621101:
+    template: Generic_Doll
+    at:       [7.073, -1.000, -0.901, 185]
+    level:    [40, 40]
+  17621102:
+    template: Generic_Doll
+    at:       [3.073, -1.000, -4.901, 185]
+    level:    [40, 40]
+  17621103:
+    template: Generic_Doll
+    at:       [-3.927, -1.000, -0.901, 195]
+    level:    [40, 40]
+  17621104:
+    template: Generic_Doll
+    at:       [-1.927, -1.000, -4.901, 195]
+    level:    [40, 40]
+  17621106:
+    template: Doll_Factory
+    at:       [400.000, 199.000, -400.677, 192]
+    level:    [40, 40]
+  17621107:
+    template: Generic_Doll
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [40, 40]
+  17621108:
+    template: Generic_Doll
+    at:       [407.028, 199.000, -400.677, 185]
+    level:    [40, 40]
+  17621109:
+    template: Generic_Doll
+    at:       [403.028, 199.000, -404.677, 185]
+    level:    [40, 40]
+  17621110:
+    template: Generic_Doll
+    at:       [396.028, 199.000, -400.677, 195]
+    level:    [40, 40]
+  17621111:
+    template: Generic_Doll
+    at:       [398.028, 199.000, -404.677, 195]
+    level:    [40, 40]
+  17621113:
+    template: Ghul-I-Beaban_DRK
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [40, 40]
+  17621114:
+    template: Ghul-I-Beaban_BLM
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [40, 40]
+  17621116:
+    template: Ghul-I-Beaban_DRK
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [40, 40]
+  17621117:
+    template: Ghul-I-Beaban_BLM
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [40, 40]
+  17621119:
+    template: Ghul-I-Beaban_DRK
+    at:       [400.000, 199.000, -400.677, 192]
+    level:    [40, 40]
+  17621120:
+    template: Ghul-I-Beaban_BLM
+    at:       [400.000, 199.000, -400.677, 192]
+    level:    [40, 40]
+  17621122:
+    template: Fire_Golem
+    at:       [-400.000, -202.125, 396.000, 192]
+    level:    [50, 50]
+  17621123:
+    template: Water_Golem
+    at:       [-396.000, -202.125, 400.000, 192]
+    level:    [50, 50]
+  17621124:
+    template: Wind_Golem
+    at:       [-400.000, -202.125, 404.000, 192]
+    level:    [50, 50]
+  17621125:
+    template: Earth_Golem
+    at:       [-404.000, -202.125, 400.000, 192]
+    level:    [50, 50]
+  17621127:
+    template: Fire_Golem
+    at:       [-0.020, -1.625, -3.990, 192]
+    level:    [50, 50]
+  17621128:
+    template: Water_Golem
+    at:       [3.980, -1.625, 0.010, 192]
+    level:    [50, 50]
+  17621129:
+    template: Wind_Golem
+    at:       [-0.020, -1.625, 4.010, 192]
+    level:    [50, 50]
+  17621130:
+    template: Earth_Golem
+    at:       [-4.020, -1.625, 0.010, 192]
+    level:    [50, 50]
+  17621132:
+    template: Fire_Golem
+    at:       [399.920, 198.375, -403.874, 192]
+    level:    [50, 50]
+  17621133:
+    template: Water_Golem
+    at:       [403.920, 198.375, -399.874, 192]
+    level:    [50, 50]
+  17621134:
+    template: Wind_Golem
+    at:       [399.920, 198.375, -395.874, 192]
+    level:    [50, 50]
+  17621135:
+    template: Earth_Golem
+    at:       [395.920, 198.375, -399.874, 192]
+    level:    [50, 50]
+  17621137:
+    template: Nephiyl_Rampartbreacher
+    at:       [-405.001, -202.125, 400.001, 192]
+    level:    [64, 64]
+  17621138:
+    template: Nephiyl_Keepcollapser
+    at:       [-395.001, -202.125, 400.001, 192]
+    level:    [64, 64]
+  17621139:
+    template: Nephiyl_Moatfiller
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [64, 64]
+  17621140:
+    template: Nephiyl_Pinnacletosser
+    at:       [-400.001, -202.125, 395.001, 192]
+    level:    [64, 64]
+  17621142:
+    template: Nephiyl_Rampartbreacher
+    at:       [-3.940, -1.625, -0.900, 192]
+    level:    [64, 64]
+  17621143:
+    template: Nephiyl_Keepcollapser
+    at:       [6.060, -1.625, -0.900, 192]
+    level:    [64, 64]
+  17621144:
+    template: Nephiyl_Moatfiller
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [64, 64]
+  17621145:
+    template: Nephiyl_Pinnacletosser
+    at:       [1.060, -1.625, -5.900, 192]
+    level:    [64, 64]
+  17621147:
+    template: Nephiyl_Rampartbreacher
+    at:       [395.000, 199.000, -400.677, 192]
+    level:    [64, 64]
+  17621148:
+    template: Nephiyl_Keepcollapser
+    at:       [405.000, 199.000, -400.677, 192]
+    level:    [64, 64]
+  17621149:
+    template: Nephiyl_Moatfiller
+    at:       [400.000, 199.000, -400.677, 192]
+    level:    [64, 64]
+  17621150:
+    template: Nephiyl_Pinnacletosser
+    at:       [400.000, 199.000, -405.677, 192]
+    level:    [64, 64]
+  17621152:
+    template: Vaicoliaux_B_DAurphe
+    at:       [-401.366, -202.107, 400.448, 203]
+    level:    [64, 64]
+  17621153:
+    template: Maldaramet_B_DAurphe
+    at:       [-404.071, -202.125, 400.831, 211]
+    level:    [64, 64]
+  17621154:
+    template: Disfaurit_B_DAurphe
+    at:       [-398.439, -202.076, 401.298, 193]
+    level:    [64, 64]
+  17621155:
+    template: Jeumouque_B_DAurphe
+    at:       [-395.501, -202.125, 400.001, 192]
+    level:    [64, 64]
+  17621157:
+    template: Vaicoliaux_B_DAurphe
+    at:       [-1.413, -2.107, 0.571, 203]
+    level:    [64, 64]
+  17621158:
+    template: Maldaramet_B_DAurphe
+    at:       [-4.118, -2.125, 0.954, 211]
+    level:    [64, 64]
+  17621159:
+    template: Disfaurit_B_DAurphe
+    at:       [1.514, -2.076, 1.421, 193]
+    level:    [64, 64]
+  17621160:
+    template: Jeumouque_B_DAurphe
+    at:       [4.452, -2.125, 0.124, 192]
+    level:    [64, 64]
+  17621162:
+    template: Vaicoliaux_B_DAurphe
+    at:       [398.635, 197.893, -399.715, 203]
+    level:    [64, 64]
+  17621163:
+    template: Maldaramet_B_DAurphe
+    at:       [395.930, 197.875, -399.332, 211]
+    level:    [64, 64]
+  17621164:
+    template: Disfaurit_B_DAurphe
+    at:       [401.562, 197.924, -398.865, 193]
+    level:    [64, 64]
+  17621165:
+    template: Jeumouque_B_DAurphe
+    at:       [404.500, 197.875, -400.162, 192]
+    level:    [64, 64]
+  17621167:
+    template: Chahnameeds_Stomach
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [52, 52]
+  17621168:
+    template: Chahnameeds_Intestines
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [47, 47]
+  17621169:
+    template: Chahnameeds_Liver
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [47, 47]
+  17621170:
+    template: Chahnameed
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [55, 55]
+  17621172:
+    template: Chahnameeds_Stomach
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [52, 52]
+  17621173:
+    template: Chahnameeds_Intestines
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [47, 47]
+  17621174:
+    template: Chahnameeds_Liver
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [47, 47]
+  17621175:
+    template: Chahnameed
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [55, 55]
+  17621177:
+    template: Chahnameeds_Stomach
+    at:       [407.028, 199.000, -400.677, 185]
+    level:    [52, 52]
+  17621178:
+    template: Chahnameeds_Intestines
+    at:       [403.028, 199.000, -404.677, 185]
+    level:    [47, 47]
+  17621179:
+    template: Chahnameeds_Liver
+    at:       [396.028, 199.000, -400.677, 195]
+    level:    [47, 47]
+  17621180:
+    template: Chahnameed
+    level:    [55, 55]
+  17621182:
+    template: Annihilated_Anthony
+    at:       [-402.001, -202.125, 400.001, 192]
+    level:    [63, 63]
+  17621183:
+    template: Shredded_Samson
+    at:       [-394.001, -202.125, 400.001, 192]
+    level:    [62, 62]
+  17621184:
+    template: Mauled_Murdock
+    at:       [-398.001, -202.125, 400.001, 192]
+    level:    [62, 62]
+  17621185:
+    template: Punctured_Percy
+    at:       [-406.001, -202.125, 400.001, 192]
+    level:    [62, 62]
+  17621187:
+    template: Annihilated_Anthony
+    at:       [-1.655, -1.625, -0.651, 192]
+    level:    [63, 63]
+  17621188:
+    template: Shredded_Samson
+    at:       [6.345, -1.625, -0.651, 192]
+    level:    [62, 62]
+  17621189:
+    template: Mauled_Murdock
+    at:       [2.345, -1.625, -0.651, 192]
+    level:    [62, 62]
+  17621190:
+    template: Punctured_Percy
+    at:       [-5.655, -1.625, -0.651, 192]
+    level:    [62, 62]
+  17621192:
+    template: Annihilated_Anthony
+    at:       [398.402, 198.375, -400.427, 192]
+    level:    [63, 63]
+  17621193:
+    template: Shredded_Samson
+    at:       [406.402, 198.375, -400.427, 192]
+    level:    [62, 62]
+  17621194:
+    template: Mauled_Murdock
+    at:       [402.402, 198.375, -400.427, 192]
+    level:    [62, 62]
+  17621195:
+    template: Punctured_Percy
+    at:       [394.402, 198.375, -400.427, 192]
+    level:    [62, 62]
+  17621197:
+    template: Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [75, 75]
+  17621199:
+    template: Son_of_Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [70, 70]
+  17621200:
+    template: Son_of_Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [70, 70]
+  17621201:
+    template: Son_of_Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [70, 70]
+  17621202:
+    template: Son_of_Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [70, 70]
+  17621203:
+    template: Son_of_Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [70, 70]
+  17621204:
+    template: Son_of_Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [70, 70]
+  17621205:
+    template: Son_of_Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [70, 70]
+  17621206:
+    template: Son_of_Anansi
+    at:       [-400.001, -202.125, 400.001, 192]
+    level:    [70, 70]
+  17621207:
+    template: Anansi
+    at:       [1.060, -1.625, -0.900, 192]
+    level:    [75, 75]
+  17621209:
+    template: Son_of_Anansi
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [70, 70]
+  17621210:
+    template: Son_of_Anansi
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [70, 70]
+  17621211:
+    template: Son_of_Anansi
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [70, 70]
+  17621212:
+    template: Son_of_Anansi
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [70, 70]
+  17621213:
+    template: Son_of_Anansi
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [70, 70]
+  17621214:
+    template: Son_of_Anansi
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [70, 70]
+  17621215:
+    template: Son_of_Anansi
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [70, 70]
+  17621216:
+    template: Son_of_Anansi
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [70, 70]
+  17621217:
+    template: Anansi
+    at:       [400.000, 199.000, -400.677, 192]
+    level:    [75, 75]
+  17621219:
+    template: Son_of_Anansi
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [70, 70]
+  17621220:
+    template: Son_of_Anansi
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [70, 70]
+  17621221:
+    template: Son_of_Anansi
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [70, 70]
+  17621222:
+    template: Son_of_Anansi
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [70, 70]
+  17621223:
+    template: Son_of_Anansi
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [70, 70]
+  17621224:
+    template: Son_of_Anansi
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [70, 70]
+  17621225:
+    template: Son_of_Anansi
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [70, 70]
+  17621226:
+    template: Son_of_Anansi
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [70, 70]
+  17621227:
+    template: Fire_Pot
+    at:       [-395.800, -202.125, 407.200, 192]
+    level:    [75, 75]
+  17621228:
+    template: Ice_Pot
+    at:       [-391.700, -202.125, 400.001, 192]
+    level:    [75, 75]
+  17621229:
+    template: Air_Pot
+    at:       [-395.800, -202.125, 392.800, 192]
+    level:    [75, 75]
+  17621230:
+    template: Earth_Pot
+    at:       [-404.200, -202.125, 392.800, 192]
+    level:    [75, 75]
+  17621231:
+    template: Thunder_Pot
+    at:       [-408.300, -202.125, 400.001, 192]
+    level:    [75, 75]
+  17621232:
+    template: Water_Pot
+    at:       [-404.200, -202.125, 407.200, 192]
+    level:    [75, 75]
+  17621234:
+    template: Fire_Pot
+    at:       [5.273, -1.000, 6.299, 192]
+    level:    [75, 75]
+  17621235:
+    template: Ice_Pot
+    at:       [9.373, -1.000, -0.901, 192]
+    level:    [75, 75]
+  17621236:
+    template: Air_Pot
+    at:       [5.273, -1.000, -8.101, 192]
+    level:    [75, 75]
+  17621237:
+    template: Earth_Pot
+    at:       [-3.127, -1.000, -8.101, 192]
+    level:    [75, 75]
+  17621238:
+    template: Thunder_Pot
+    at:       [-7.227, -1.000, -0.901, 192]
+    level:    [75, 75]
+  17621239:
+    template: Water_Pot
+    at:       [-3.127, -1.000, 6.299, 192]
+    level:    [75, 75]
+  17621241:
+    template: Fire_Pot
+    at:       [405.228, 199.000, -393.477, 192]
+    level:    [75, 75]
+  17621242:
+    template: Ice_Pot
+    at:       [409.328, 199.000, -400.677, 192]
+    level:    [75, 75]
+  17621243:
+    template: Air_Pot
+    at:       [405.228, 199.000, -407.877, 192]
+    level:    [75, 75]
+  17621244:
+    template: Earth_Pot
+    at:       [396.828, 199.000, -407.877, 192]
+    level:    [75, 75]
+  17621245:
+    template: Thunder_Pot
+    at:       [392.728, 199.000, -400.677, 192]
+    level:    [75, 75]
+  17621246:
+    template: Water_Pot
+    at:       [396.828, 199.000, -393.477, 192]
+    level:    [75, 75]
+  17621248:
+    template: Beelzebub
+    at:       [-400.001, -202.125, 388.700, 192]
+    level:    [75, 75]
+  17621249:
+    template: Hell_Fly
+    at:       [-406.001, -202.125, 396.001, 192]
+    level:    [70, 70]
+  17621250:
+    template: Hell_Fly
+    at:       [-402.001, -202.125, 396.001, 192]
+    level:    [70, 70]
+  17621251:
+    template: Hell_Fly
+    at:       [-398.001, -202.125, 396.001, 192]
+    level:    [70, 70]
+  17621252:
+    template: Hell_Fly
+    at:       [-394.001, -202.125, 396.001, 192]
+    level:    [70, 70]
+  17621253:
+    template: Hell_Fly
+    at:       [-394.001, -202.125, 392.001, 192]
+    level:    [70, 70]
+  17621254:
+    template: Hell_Fly
+    at:       [-402.001, -202.125, 392.001, 192]
+    level:    [70, 70]
+  17621255:
+    template: Hell_Fly
+    at:       [-406.001, -202.125, 392.001, 192]
+    level:    [70, 70]
+  17621256:
+    template: Hell_Fly
+    at:       [-398.001, -202.125, 392.001, 192]
+    level:    [70, 70]
+  17621258:
+    template: Beelzebub
+    at:       [0.072, -2.125, -11.201, 192]
+    level:    [75, 75]
+  17621259:
+    template: Hell_Fly
+    at:       [-5.928, -2.125, -7.900, 192]
+    level:    [70, 70]
+  17621260:
+    template: Hell_Fly
+    at:       [-5.928, -2.125, -3.900, 192]
+    level:    [70, 70]
+  17621261:
+    template: Hell_Fly
+    at:       [-1.928, -2.125, -7.900, 192]
+    level:    [70, 70]
+  17621262:
+    template: Hell_Fly
+    at:       [-1.928, -2.125, -3.900, 192]
+    level:    [70, 70]
+  17621263:
+    template: Hell_Fly
+    at:       [2.072, -2.125, -7.900, 192]
+    level:    [70, 70]
+  17621264:
+    template: Hell_Fly
+    at:       [2.072, -2.125, -3.900, 192]
+    level:    [70, 70]
+  17621265:
+    template: Hell_Fly
+    at:       [6.072, -2.125, -3.900, 192]
+    level:    [70, 70]
+  17621266:
+    template: Hell_Fly
+    at:       [6.072, -2.125, -7.900, 192]
+    level:    [70, 70]
+  17621268:
+    template: Beelzebub
+    at:       [400.145, 197.875, -411.102, 192]
+    level:    [75, 75]
+  17621269:
+    template: Hell_Fly
+    at:       [394.145, 197.875, -407.801, 192]
+    level:    [70, 70]
+  17621270:
+    template: Hell_Fly
+    at:       [394.145, 197.875, -403.801, 192]
+    level:    [70, 70]
+  17621271:
+    template: Hell_Fly
+    at:       [398.145, 197.875, -407.801, 192]
+    level:    [70, 70]
+  17621272:
+    template: Hell_Fly
+    at:       [398.145, 197.875, -403.801, 192]
+    level:    [70, 70]
+  17621273:
+    template: Hell_Fly
+    at:       [402.145, 197.875, -407.801, 192]
+    level:    [70, 70]
+  17621274:
+    template: Hell_Fly
+    at:       [402.145, 197.875, -403.801, 192]
+    level:    [70, 70]
+  17621275:
+    template: Hell_Fly
+    at:       [406.145, 197.875, -403.801, 192]
+    level:    [70, 70]
+  17621276:
+    template: Hell_Fly
+    at:       [406.145, 197.875, -407.801, 192]
+    level:    [70, 70]
+  17621278:
+    template: Vassago
+    level:    [50, 50]
+  17621279:
+    template: Vassago
+    level:    [50, 50]
+  17621280:
+    template: Vassago
+    level:    [50, 50]
+  17621281:
+    template: Laila
+    level:    [70, 70]
+  17621282:
+    template: Laila
+    level:    [70, 70]
+  17621283:
+    template: Laila
+    level:    [70, 70]
+  17621284:
+    template: Adam
+  17621285:
+    template: Crabshaw
+  17621286:
+    template: Adam
+  17621287:
+    template: Crabshaw
+  17621288:
+    template: Adam
+  17621289:
+    template: Crabshaw
+  17621290:
+    template: Seed_Orc
+    at:       [-400.000, -202.125, 400.000, 192]
+    level:    [50, 50]
+  17621291:
+    template: Seed_Quadav
+    at:       [-396.000, -202.500, 392.500, 192]
+    level:    [50, 50]
+  17621292:
+    template: Seed_Yagudo
+    at:       [-404.000, -202.125, 392.500, 192]
+    level:    [50, 50]
+  17621293:
+    template: Seed_Goblin
+    at:       [-400.000, -202.125, 389.000, 192]
+    level:    [50, 50]
+  17621294:
+    template: Seed_Orc
+    at:       [0.073, -2.125, 0.099, 192]
+    level:    [50, 50]
+  17621295:
+    template: Seed_Quadav
+    at:       [4.073, -2.500, -7.401, 192]
+    level:    [50, 50]
+  17621296:
+    template: Seed_Yagudo
+    at:       [-3.927, -2.125, -7.401, 192]
+    level:    [50, 50]
+  17621297:
+    template: Seed_Goblin
+    at:       [0.073, -2.125, -10.901, 192]
+    level:    [50, 50]
+  17621298:
+    template: Seed_Orc
+    at:       [400.028, 197.875, -399.677, 192]
+    level:    [50, 50]
+  17621299:
+    template: Seed_Quadav
+    at:       [404.028, 197.500, -407.177, 192]
+    level:    [50, 50]
+  17621300:
+    template: Seed_Yagudo
+    at:       [396.028, 197.875, -407.177, 192]
+    level:    [50, 50]
+  17621301:
+    template: Seed_Goblin
+    at:       [400.028, 197.875, -410.677, 192]
+    level:    [50, 50]
+  17621302:
+    template: Atori-Tutori_qm
+    at:       [-399.000, -201.000, 399.000, 190]
+    level:    [102, 102]
+  17621303:
+    template: Atori-Tutori_qm
+    at:       [1.073, -1.000, -0.901, 190]
+    level:    [102, 102]
+  17621304:
+    template: Atori-Tutori_qm
+    at:       [401.028, 199.000, -400.677, 190]
+    level:    [102, 102]
+  17621305:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621306:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621307:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621308:
+    template: Generic_Doll_XLarge
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621309:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621310:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621312:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621313:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621314:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621315:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621316:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621317:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621319:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621320:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621321:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621322:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621323:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621324:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621326:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621327:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621328:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621329:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621330:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621331:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621333:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621334:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621335:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621336:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621337:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621338:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621340:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621341:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621342:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621343:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621344:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621345:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621347:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621348:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621349:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621350:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621351:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621352:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621354:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621355:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621356:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621357:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621358:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621359:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621361:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621362:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621363:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621364:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621365:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621366:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621368:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621369:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621370:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621371:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621372:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621373:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621375:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621376:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621377:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621378:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621379:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621380:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621382:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621383:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621384:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621385:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621386:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621387:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621389:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621390:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621391:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621392:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621393:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621394:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621396:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621397:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621398:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621399:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621400:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621401:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621403:
+    template: Doll_Factory
+    level:    [40, 40]
+  17621404:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621405:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621406:
+    template: Generic_Doll_Small
+    script:   Generic_Doll
+    level:    [40, 40]
+  17621407:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621408:
+    template: Generic_Doll
+    level:    [40, 40]
+  17621410:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621411:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621412:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621413:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621415:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621416:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621417:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621418:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621420:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621421:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621422:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621423:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621425:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621426:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621427:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621428:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621430:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621431:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621432:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621433:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621435:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621436:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621437:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621438:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621440:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621441:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621442:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621443:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621445:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621446:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621447:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621448:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621450:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621451:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621452:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621453:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621455:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621456:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621457:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621458:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621460:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621461:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621462:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621463:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621465:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621466:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621467:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621468:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621470:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621471:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621472:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621473:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621475:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621476:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621477:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621478:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621480:
+    template: Nephiyl_Rampartbreacher_2
+    script:   Nephiyl_Rampartbreacher
+  17621481:
+    template: Nephiyl_Keepcollapser_2
+    script:   Nephiyl_Keepcollapser
+  17621482:
+    template: Nephiyl_Moatfiller_2
+    script:   Nephiyl_Moatfiller
+  17621483:
+    template: Nephiyl_Pinnacletosser_2
+    script:   Nephiyl_Pinnacletosser
+  17621485:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621486:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621487:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621488:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621490:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621491:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621492:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621493:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621495:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621496:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621497:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621498:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621500:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621501:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621502:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621503:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621505:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621506:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621507:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621508:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621510:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621511:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621512:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621513:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621515:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621516:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621517:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621518:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621520:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621521:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621522:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621523:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621525:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621526:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621527:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621528:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621530:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621531:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621532:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621533:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621535:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621536:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621537:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621538:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621540:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621541:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621542:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621543:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621545:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621546:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621547:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621548:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621550:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621551:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621552:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621553:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621555:
+    template: Vaicoliaux_B_DAurphe_2
+    script:   Vaicoliaux_B_DAurphe
+  17621556:
+    template: Maldaramet_B_DAurphe_2
+    script:   Maldaramet_B_DAurphe
+  17621557:
+    template: Disfaurit_B_DAurphe_2
+    script:   Disfaurit_B_DAurphe
+  17621558:
+    template: Jeumouque_B_DAurphe_2
+    script:   Jeumouque_B_DAurphe
+  17621560:
+    script: Ullegore
+  17621561:
+    script: Ullegore
+  17621562:
+    script: Mumor
+  17621564:
+    script: Ullegore
+  17621565:
+    script: Ullegore
+  17621566:
+    script: Mumor
+  17621568:
+    script: Ullegore
+  17621569:
+    script: Ullegore
+  17621570:
+    script: Mumor

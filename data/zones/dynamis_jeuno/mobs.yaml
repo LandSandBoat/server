@@ -1,0 +1,6545 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Anvilix_Sootwrists:
+    id:            194
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Arch_Goblin_Golem:
+    id:            4844
+    species:       goblin_statue
+    type:          [notorious]
+    spell_list_id: 47
+    skill_list_id: 92
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1063
+        entity_flags:  135
+        animation_sub:   5
+        model_size:      3
+        hitbox:         30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   oneiros_knife
+        - chance: uncommon
+          item:   oneiros_coif
+        - chance: uncommon
+          item:   oneiros_grip
+        - chance: uncommon
+          item:   infinity_core
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: common
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Bandrix_Rockjaw:
+    id:            336
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Blazox_Boneybod:
+    id:            449
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Bootrix_Jaggedelbow:
+    id:            505
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Buffrix_Eargone:
+    id:            554
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Cloktix_Longnail:
+    id:            745
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Distilix_Stickytoes:
+    id:            1052
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Elixmix_Hooknose:
+    id:            1199
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Eremix_Snottynostril:
+    id:            1251
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Feralox_Honeylips:
+    id:            4653
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [brd, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_18
+        - chance: common
+          item:   oneiros_tathlum
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: common
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+
+  Feraloxs_Slime:
+    id:            2841
+    species:       slime
+    type:          [called]
+    spell_list_id: 54
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gabblox_Magpietongue:
+    id:            1444
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Goblin_Golem:
+    id:            1668
+    species:       goblin_statue
+    type:          [notorious]
+    spell_list_id: 47
+    skill_list_id: 92
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1063
+        entity_flags:  135
+        animation_sub:   5
+        model_size:      3
+        hitbox:         30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+        mp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_16
+        - chance: uncommon
+          item:   infinity_core
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+
+  Goblin_Replica:
+    id:            1707
+    species:       goblin_statue
+    spell_list_id: 20
+    skill_list_id: 92
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1062
+        entity_flags: 135
+        model_size:     3
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   infinity_core
+        - chance: very_rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          one_of: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Goblin_Statue:
+    id:            1716
+    species:       goblin_statue
+    type:          [notorious]
+    spell_list_id: 40
+    skill_list_id: 92
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1062
+        entity_flags: 647
+        model_size:     3
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Hermitrix_Toothrot:
+    id:            1935
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Humnox_Drumbelly:
+    id:            2007
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Jabbrox_Grannyguise:
+    id:            2115
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Jabkix_Pigeonpecs:
+    id:            2116
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Karashix_Swollenskull:
+    id:            2191
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Kikklix_Longlegs:
+    id:            2225
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Lurklox_Dhalmelneck:
+    id:            2453
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Mobpix_Mucousmouth:
+    id:            2711
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Morgmox_Moldnoggin:
+    id:            2747
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 141
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Mortilox_Wartpaws:
+    id:            2751
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 141
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Prowlox_Barrelbelly:
+    id:            3213
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Quicktrix_Hexhands:
+    id:            4241
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_17
+        - chance: common
+          item:   mujin_mantle
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: common
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+
+  Rutrix_Hamgams:
+    id:            3419
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Scourquix_Scaleskin:
+    id:            2846
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rng, drg]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_19
+        - chance: common
+          item:   oneiros_pearl
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: common
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+
+  Scourquixs_Wyvern:
+    id:            3778
+    species:       blue_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: sword
+        delay: 200
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Scruffix_Shaggychest:
+    id:            3507
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Slystix_Megapeepers:
+    id:            3674
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Smeltix_Thickhide:
+    id:            3676
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Snypestix_Eaglebeak:
+    id:            3692
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Sparkspox_Sweatbrow:
+    id:            3718
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Ticktox_Beadyeyes:
+    id:            3917
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Trailblix_Goatmug:
+    id:            3985
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Tufflix_Loglimbs:
+    id:            4047
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Tymexox_Ninefingers:
+    id:            4064
+    species:       armored_goblin
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Alchemist:
+    id:            4133
+    species:       goblin
+    spell_list_id: 20
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Alchemist_2:
+    id:            4133
+    display_name:  Vanguard_Alchemist
+    species:       goblin
+    spell_list_id: 20
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_mask
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Alchemist_Large:
+    id:            7255
+    display_name:  Vanguard_Alchemist
+    species:       goblin
+    spell_list_id: 20
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_mask
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Ambusher:
+    id:            4134
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Ambusher_2:
+    id:            4134
+    display_name:  Vanguard_Ambusher
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cup
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Ambusher_Large:
+    id:            7249
+    display_name:  Vanguard_Ambusher
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cup
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Armorer:
+    id:            4136
+    species:       goblin
+    spell_list_id: 4
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Armorer_2:
+    id:            4136
+    display_name:  Vanguard_Armorer
+    species:       goblin
+    spell_list_id: 4
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_die
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Armorer_Large:
+    id:            7246
+    display_name:  Vanguard_Armorer
+    species:       goblin
+    spell_list_id: 4
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_die
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Dragontamer:
+    id:            4649
+    species:       goblin
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Dragontamer_2:
+    id:            4649
+    display_name:  Vanguard_Dragontamer
+    species:       goblin
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_die
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Dragontamer_Large:
+    id:            7254
+    display_name:  Vanguard_Dragontamer
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_die
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Enchanter:
+    id:            4147
+    species:       goblin
+    spell_list_id: 3
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Enchanter_2:
+    id:            4147
+    display_name:  Vanguard_Enchanter
+    species:       goblin
+    spell_list_id: 3
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cup
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Enchanter_Large:
+    id:            7244
+    display_name:  Vanguard_Enchanter
+    species:       goblin
+    spell_list_id: 3
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cup
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Hitman:
+    id:            4155
+    species:       goblin
+    spell_list_id: 7
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Hitman_2:
+    id:            4155
+    display_name:  Vanguard_Hitman
+    species:       goblin
+    spell_list_id: 7
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_mask
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Hitman_Large:
+    id:            7252
+    display_name:  Vanguard_Hitman
+    species:       goblin
+    spell_list_id: 7
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_mask
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Maestro:
+    id:            4160
+    species:       goblin
+    spell_list_id: 6
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Maestro_2:
+    id:            4160
+    display_name:  Vanguard_Maestro
+    species:       goblin
+    spell_list_id: 6
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_mask
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Maestro_Large:
+    id:            7248
+    display_name:  Vanguard_Maestro
+    species:       goblin
+    spell_list_id: 6
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1089
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_mask
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Necromancer:
+    id:            4166
+    species:       goblin
+    spell_list_id: 141
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Necromancer_2:
+    id:            4166
+    display_name:  Vanguard_Necromancer
+    species:       goblin
+    spell_list_id: 141
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cup
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Necromancer_Large:
+    id:            7250
+    display_name:  Vanguard_Necromancer
+    species:       goblin
+    spell_list_id: 141
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cup
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Pathfinder:
+    id:            4170
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Pathfinder_2:
+    id:            4170
+    display_name:  Vanguard_Pathfinder
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_grenade
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Pathfinder_Large:
+    id:            7257
+    display_name:  Vanguard_Pathfinder
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_grenade
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Pitfighter:
+    id:            4173
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Pitfighter_2:
+    id:            4173
+    display_name:  Vanguard_Pitfighter
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_grenade
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Pitfighter_Large:
+    id:            7253
+    display_name:  Vanguard_Pitfighter
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_grenade
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Ronin:
+    id:            4179
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Ronin_2:
+    id:            4179
+    display_name:  Vanguard_Ronin
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_grenade
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Ronin_Large:
+    id:            7251
+    display_name:  Vanguard_Ronin
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_grenade
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Shaman:
+    id:            4182
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Shaman_2:
+    id:            4182
+    display_name:  Vanguard_Shaman
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_die
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Shaman_Large:
+    id:            7247
+    display_name:  Vanguard_Shaman
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1090
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_die
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Smithy:
+    id:            4184
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Smithy_2:
+    id:            4184
+    display_name:  Vanguard_Smithy
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_grenade
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Smithy_Large:
+    id:            7243
+    display_name:  Vanguard_Smithy
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1088
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_grenade
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Tinkerer:
+    id:            4192
+    species:       goblin
+    spell_list_id: 5
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Tinkerer_2:
+    id:            4192
+    display_name:  Vanguard_Tinkerer
+    species:       goblin
+    spell_list_id: 5
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cup
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Tinkerer_Large:
+    id:            7256
+    display_name:  Vanguard_Tinkerer
+    species:       goblin
+    spell_list_id: 5
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cup
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Welldigger:
+    id:            4199
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Welldigger_2:
+    id:            4199
+    display_name:  Vanguard_Welldigger
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_die
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguard_Welldigger_Large:
+    id:            7245
+    display_name:  Vanguard_Welldigger
+    species:       goblin
+    skill_list_id: 2108
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 131
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_die
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: uncommon
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Vanguards_Avatar:
+    id:            4185
+    species:       carbuncle
+    type:          [called]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags: 131
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+        mp: 1000
+
+  Vanguards_Slime:
+    id:            4189
+    species:       slime
+    type:          [called]
+    spell_list_id: 54
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        silenceres: 15
+      mob_mods:
+        magic_cool:     20
+        standback_cool:  0
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+        mp: 1000
+
+  Vanguards_Wyvern:
+    id:            4190
+    species:       shadow_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: sword
+        delay: 200
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+        mp: 1000
+
+  Wasabix_Callusdigit:
+    id:            4303
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+  Wilywox_Tenderpalm:
+    id:            3843
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1086
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_20
+        - chance: common
+          item:   mujin_stud
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: common
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+
+  Wyrmwix_Snakespecs:
+    id:            4388
+    species:       armored_goblin
+    type:          [notorious]
+    skill_list_id: 373
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1087
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: common
+          item:   roving_bijou
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   jar_of_goblin_grease
+        - chance: very_rare
+          one_of: [relic_shield, relic_staff, relic_horn, relic_bow]
+        - chance: very_rare
+          one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
+        - chance: rare
+          one_of: [forgotten_step, forgotten_touch, forgotten_journey]
+        - chance: rare
+          one_of: [warriors_mufflers, koga_kyahan, scouts_beret, melee_gloves, clerics_pantaloons, duelists_tights, abyss_flanchard, sorcerers_sabots, assassins_poulaines, bards_slippers, saotome_sune-ate, wyrm_finger_gauntlets]
+        - chance: very_rare
+          one_of: [pantin_churidars, commodore_gants, etoile_toe_shoes]
+      steal: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
+
+spawns:
+  17547265:
+    template: Goblin_Golem
+    at:       [-0.153, -0.516, -100.577, 63]
+    level:    [85, 85]
+  17547266:
+    template: Vanguard_Smithy
+    at:       [39.570, 8.400, -52.820, 228]
+    level:    [75, 77]
+  17547267:
+    template: Vanguard_Welldigger
+    at:       [0.659, 8.500, -55.955, 186]
+    level:    [75, 77]
+  17547268:
+    template: Vanguard_Pathfinder
+    at:       [38.415, 8.400, -51.157, 201]
+    level:    [75, 77]
+  17547269:
+    template: Vanguards_Slime
+    at:       [38.869, 8.400, -49.894, 125]
+    level:    [75, 77]
+  17547270:
+    template: Vanguard_Shaman
+    at:       [30.440, 8.401, -53.121, 25]
+    level:    [75, 77]
+  17547271:
+    template: Vanguard_Enchanter
+    at:       [14.227, 1.750, -7.314, 208]
+    level:    [75, 77]
+  17547272:
+    template: Vanguard_Pathfinder
+    at:       [22.187, 8.400, -52.261, 65]
+    level:    [75, 77]
+  17547273:
+    template: Vanguards_Slime
+    at:       [23.992, 8.400, -51.349, 149]
+    level:    [75, 77]
+  17547274:
+    template: Vanguard_Tinkerer
+    at:       [13.162, 8.400, -50.063, 3]
+    level:    [75, 77]
+  17547275:
+    template: Vanguard_Armorer
+    at:       [2.179, 8.500, -61.613, 30]
+    level:    [75, 77]
+  17547276:
+    template: Vanguard_Hitman
+    at:       [-2.148, 4.000, -15.060, 196]
+    level:    [75, 77]
+  17547277:
+    template: Gabblox_Magpietongue
+    at:       [-0.250, 8.500, -53.982, 209]
+    level:    [75, 77]
+  17547278:
+    template: Vanguard_Pitfighter
+    at:       [3.835, 8.400, -51.100]
+    level:    [75, 77]
+  17547279:
+    template: Vanguard_Alchemist
+    at:       [-10.168, 8.972, -48.570, 220]
+    level:    [75, 77]
+  17547280:
+    template: Vanguard_Maestro
+    at:       [-1.622, 8.408, -51.594, 126]
+    level:    [75, 77]
+  17547281:
+    template: Vanguard_Tinkerer
+    at:       [-1.422, 8.500, -51.684, 25]
+    level:    [75, 77]
+  17547282:
+    template: Vanguard_Dragontamer
+    at:       [-7.068, 8.400, -35.005, 215]
+    level:    [75, 77]
+  17547283:
+    template: Vanguards_Wyvern
+    at:       [-9.984, 8.964, -46.873, 243]
+    level:    [75, 77]
+  17547284:
+    template: Vanguard_Enchanter
+    at:       [-9.088, 8.400, -38.517, 120]
+    level:    [75, 77]
+  17547285:
+    template: Vanguard_Ambusher
+    at:       [7.667, 8.400, -41.682, 72]
+    level:    [75, 77]
+  17547286:
+    template: Vanguard_Necromancer
+    at:       [7.250, 8.400, -45.459, 62]
+    level:    [75, 77]
+  17547287:
+    template: Vanguards_Avatar
+    at:       [7.577, 8.400, -45.212, 65]
+    level:    [75, 77]
+  17547288:
+    template: Vanguard_Ronin
+    at:       [15.411, 8.500, -36.876, 120]
+    level:    [75, 77]
+  17547289:
+    template: Vanguard_Armorer
+    at:       [15.499, 8.384, -36.562, 114]
+    level:    [75, 77]
+  17547290:
+    template: Vanguard_Hitman
+    at:       [18.201, 8.500, -34.451, 7]
+    level:    [75, 77]
+  17547291:
+    template: Tufflix_Loglimbs
+    at:       [12.244, 1.999, -4.306, 5]
+    level:    [75, 77]
+  17547292:
+    template: Vanguard_Armorer
+    at:       [-17.690, 8.321, -51.944, 66]
+    level:    [75, 77]
+  17547293:
+    template: Vanguard_Hitman
+    at:       [22.562, 8.500, -50.935]
+    level:    [75, 77]
+  17547294:
+    template: Cloktix_Longnail
+    at:       [3.285, 8.753, -54.795, 57]
+    level:    [75, 77]
+  17547295:
+    template: Goblin_Replica
+    at:       [5.371, 8.400, -36.954, 26]
+    level:    [65, 65]
+  17547296:
+    template: Goblin_Replica
+    at:       [-6.586, 8.401, -42.966, 83]
+    level:    [65, 65]
+  17547297:
+    template: Goblin_Replica
+    at:       [6.932, 8.456, -35.915, 52]
+    level:    [65, 65]
+  17547298:
+    template: Smeltix_Thickhide
+    at:       [4.606, 8.400, -51.115, 255]
+    level:    [75, 77]
+  17547299:
+    template: Jabkix_Pigeonpecs
+    at:       [16.211, 8.502, -34.077, 109]
+    level:    [75, 77]
+  17547300:
+    template: Wasabix_Callusdigit
+    at:       [19.399, 8.500, -35.754, 233]
+    level:    [73, 73]
+  17547301:
+    template: Goblin_Statue
+    at:       [-20.330, 8.458, -48.888, 205]
+    level:    [65, 65]
+  17547302:
+    template: Goblin_Statue
+    at:       [23.127, 8.500, -35.830, 119]
+    level:    [65, 65]
+  17547303:
+    template: Goblin_Statue
+    at:       [2.647, 8.332, -62.581, 198]
+    level:    [65, 65]
+  17547304:
+    template: Vanguard_Smithy
+    at:       [31.406, -0.364, -21.094, 58]
+    level:    [75, 77]
+  17547305:
+    template: Vanguard_Welldigger
+    at:       [48.716, -0.856, -21.995, 26]
+    level:    [75, 77]
+  17547306:
+    template: Vanguard_Ambusher
+    at:       [49.599, -0.820, -21.351, 69]
+    level:    [75, 77]
+  17547307:
+    template: Vanguard_Armorer
+    at:       [33.959, -0.495, -18.323, 66]
+    level:    [75, 77]
+  17547308:
+    template: Vanguard_Alchemist
+    at:       [41.295, -0.597, -18.355, 201]
+    level:    [75, 77]
+  17547309:
+    template: Vanguard_Welldigger
+    at:       [26.626, -0.599, -25.061, 88]
+    level:    [75, 77]
+  17547310:
+    template: Vanguard_Enchanter
+    at:       [31.808, -0.566, -25.768, 1]
+    level:    [75, 77]
+  17547311:
+    template: Hermitrix_Toothrot
+    at:       [31.785, -0.500, -25.679, 230]
+    level:    [75, 77]
+  17547312:
+    template: Wyrmwix_Snakespecs
+    at:       [29.040, -0.535, -21.201, 188]
+    level:    [75, 77]
+  17547313:
+    template: Vanguards_Wyvern
+    at:       [28.487, -0.292, -21.805, 181]
+    level:    [75, 77]
+  17547314:
+    template: Vanguard_Smithy
+    at:       [26.245, -0.598, -2.773, 134]
+    level:    [75, 77]
+  17547315:
+    template: Vanguard_Pitfighter
+    at:       [9.021, 2.554, -6.874, 20]
+    level:    [75, 77]
+  17547316:
+    template: Vanguard_Ronin
+    at:       [26.255, -0.497, -8.034, 216]
+    level:    [75, 77]
+  17547317:
+    template: Vanguard_Necromancer
+    at:       [30.495, -0.595, -10.316, 126]
+    level:    [75, 77]
+  17547318:
+    template: Vanguards_Avatar
+    at:       [32.522, -0.597, -9.860, 120]
+    level:    [75, 77]
+  17547319:
+    template: Vanguard_Alchemist
+    at:       [16.928, 0.988, -6.826, 6]
+    level:    [75, 77]
+  17547320:
+    template: Vanguard_Shaman
+    at:       [18.693, 0.598, -9.927, 101]
+    level:    [75, 77]
+  17547321:
+    template: Vanguard_Enchanter
+    at:       [21.160, 0.000, -7.386, 214]
+    level:    [75, 77]
+  17547322:
+    template: Morgmox_Moldnoggin
+    at:       [18.300, 0.766, -9.597, 60]
+    level:    [75, 77]
+  17547323:
+    template: Vanguards_Avatar
+    at:       [17.362, 1.050, -7.853, 46]
+    level:    [75, 77]
+  17547324:
+    template: Sparkspox_Sweatbrow
+    at:       [14.046, 1.874, -7.569, 218]
+    level:    [75, 77]
+  17547325:
+    template: Vanguard_Welldigger
+    at:       [8.018, 2.399, -9.850, 122]
+    level:    [75, 77]
+  17547326:
+    template: Vanguard_Maestro
+    at:       [12.683, 2.250, -7.074, 239]
+    level:    [75, 77]
+  17547327:
+    template: Vanguard_Necromancer
+    at:       [10.314, 2.400, -4.385, 54]
+    level:    [75, 77]
+  17547328:
+    template: Vanguards_Avatar
+    at:       [8.713, 2.399, -3.411, 11]
+    level:    [75, 77]
+  17547329:
+    template: Sparkspox_Sweatbrow
+    at:       [-4.832, 2.400, -5.100, 69]
+    level:    [75, 77]
+  17547330:
+    template: Vanguard_Ronin
+    at:       [-4.855, 2.400, -5.046, 71]
+    level:    [75, 77]
+  17547331:
+    template: Vanguard_Maestro
+    at:       [-10.124, 2.500, -3.340, 108]
+    level:    [75, 77]
+  17547332:
+    template: Vanguard_Dragontamer
+    at:       [-17.152, 2.633, -4.719, 238]
+    level:    [75, 77]
+  17547333:
+    template: Vanguards_Wyvern
+    at:       [-19.259, 2.500, -5.104, 193]
+    level:    [75, 77]
+  17547334:
+    template: Vanguard_Alchemist
+    at:       [-18.457, 2.405, -8.218, 36]
+    level:    [75, 77]
+  17547335:
+    template: Vanguard_Shaman
+    at:       [-21.299, 2.400, -4.747, 101]
+    level:    [75, 77]
+  17547336:
+    template: Vanguard_Enchanter
+    at:       [-20.459, 2.500, -4.210]
+    level:    [75, 77]
+  17547337:
+    template: Morgmox_Moldnoggin
+    at:       [-19.515, 2.988, -6.545, 217]
+    level:    [75, 77]
+  17547338:
+    template: Vanguards_Avatar
+    at:       [-17.191, 2.400, -3.679, 6]
+    level:    [75, 77]
+  17547339:
+    template: Vanguard_Welldigger
+    at:       [-29.294, 2.400, -12.833, 144]
+    level:    [75, 77]
+  17547340:
+    template: Vanguard_Ambusher
+    at:       [-29.829, 2.400, -17.725, 134]
+    level:    [75, 77]
+  17547341:
+    template: Vanguard_Pathfinder
+    at:       [-30.602, 2.400, -18.634, 182]
+    level:    [75, 77]
+  17547342:
+    template: Vanguards_Slime
+    at:       [-31.598, 2.400, -17.565, 1]
+    level:    [75, 77]
+  17547343:
+    template: Vanguard_Pitfighter
+    at:       [-31.209, 0.622, -30.461, 216]
+    level:    [75, 77]
+  17547344:
+    template: Vanguard_Enchanter
+    at:       [-34.238, -0.500, -35.540, 39]
+    level:    [75, 77]
+  17547345:
+    template: Vanguard_Maestro
+    at:       [-34.045, 0.989, -29.197, 74]
+    level:    [75, 77]
+  17547346:
+    template: Vanguard_Ambusher
+    at:       [-36.999, -0.599, -39.221, 132]
+    level:    [75, 77]
+  17547347:
+    template: Vanguard_Ambusher
+    at:       [-37.623, -0.599, -39.861, 195]
+    level:    [75, 77]
+  17547348:
+    template: Vanguard_Dragontamer
+    at:       [-37.335, -0.186, -48.216, 121]
+    level:    [75, 77]
+  17547349:
+    template: Vanguards_Wyvern
+    at:       [-38.000, -0.219, -49.151, 136]
+    level:    [75, 77]
+  17547350:
+    template: Vanguard_Pitfighter
+    at:       [-28.800, -0.597, -55.027, 137]
+    level:    [75, 77]
+  17547351:
+    template: Vanguard_Alchemist
+    at:       [-38.148, -0.495, -53.222, 65]
+    level:    [75, 77]
+  17547352:
+    template: Vanguard_Tinkerer
+    at:       [-29.402, -0.598, -57.856, 65]
+    level:    [75, 77]
+  17547353:
+    template: Vanguard_Armorer
+    at:       [-37.690, -0.594, -48.335, 66]
+    level:    [75, 77]
+  17547354:
+    template: Vanguard_Hitman
+    at:       [-37.662, -0.495, -51.629, 194]
+    level:    [75, 77]
+  17547355:
+    template: Elixmix_Hooknose
+    at:       [-38.217, -0.495, -50.561, 155]
+    level:    [75, 77]
+  17547356:
+    template: Bandrix_Rockjaw
+    at:       [-37.337, -0.595, -49.359, 65]
+    level:    [79, 79]
+  17547357:
+    template: Vanguard_Smithy
+    at:       [-29.724, -0.595, -66.052, 28]
+    level:    [75, 77]
+  17547358:
+    template: Vanguard_Shaman
+    at:       [-28.159, -0.597, -62.402, 137]
+    level:    [75, 77]
+  17547359:
+    template: Vanguard_Maestro
+    at:       [-26.190, -0.593, -62.638, 225]
+    level:    [75, 77]
+  17547360:
+    template: Vanguard_Welldigger
+    at:       [-26.648, -0.595, -73.024, 152]
+    level:    [75, 77]
+  17547361:
+    template: Vanguard_Tinkerer
+    at:       [-25.953, -0.597, -76.961]
+    level:    [75, 77]
+  17547362:
+    template: Vanguard_Ambusher
+    at:       [-29.106, -0.595, -74.760, 185]
+    level:    [75, 77]
+  17547363:
+    template: Vanguard_Smithy
+    at:       [-14.384, -0.595, -70.565, 232]
+    level:    [75, 77]
+  17547364:
+    template: Vanguard_Armorer
+    at:       [-11.514, -0.495, -75.751, 235]
+    level:    [75, 77]
+  17547365:
+    template: Vanguard_Pathfinder
+    at:       [-14.506, -0.595, -76.689, 4]
+    level:    [75, 77]
+  17547366:
+    template: Vanguards_Slime
+    at:       [-15.243, -0.594, -73.061, 90]
+    level:    [75, 77]
+  17547367:
+    template: Vanguard_Ronin
+    at:       [14.121, -0.599, -73.273, 28]
+    level:    [75, 77]
+  17547368:
+    template: Vanguard_Hitman
+    at:       [14.563, -0.500, -75.930, 134]
+    level:    [75, 77]
+  17547369:
+    template: Vanguard_Pathfinder
+    at:       [17.222, -0.597, -76.573, 23]
+    level:    [75, 77]
+  17547370:
+    template: Vanguards_Slime
+    at:       [14.395, -0.597, -74.495, 26]
+    level:    [75, 77]
+  17547371:
+    template: Vanguard_Armorer
+    at:       [25.885, -0.615, -72.608, 76]
+    level:    [75, 77]
+  17547372:
+    template: Vanguard_Shaman
+    at:       [25.951, -0.596, -76.739, 101]
+    level:    [75, 77]
+  17547373:
+    template: Vanguard_Necromancer
+    at:       [19.471, -0.168, -74.662, 177]
+    level:    [75, 77]
+  17547374:
+    template: Vanguards_Avatar
+    at:       [19.849, -0.498, -73.261, 105]
+    level:    [75, 77]
+  17547375:
+    template: Vanguard_Pitfighter
+    at:       [32.641, -2.009, -58.566, 229]
+    level:    [75, 77]
+  17547376:
+    template: Vanguard_Tinkerer
+    at:       [29.979, -1.925, -60.967, 210]
+    level:    [75, 77]
+  17547377:
+    template: Buffrix_Eargone
+    at:       [29.326, -2.000, -56.153, 53]
+    level:    [75, 77]
+  17547378:
+    template: Humnox_Drumbelly
+    at:       [26.200, -1.069, -65.960, 1]
+    level:    [75, 77]
+  17547379:
+    template: Vanguard_Smithy
+    at:       [27.170, -1.321, -51.659, 182]
+    level:    [75, 77]
+  17547380:
+    template: Vanguard_Alchemist
+    at:       [29.606, -1.594, -53.292, 228]
+    level:    [75, 77]
+  17547381:
+    template: Buffrix_Eargone
+    at:       [32.774, -1.742, -53.411, 137]
+    level:    [75, 77]
+  17547382:
+    template: Humnox_Drumbelly
+    at:       [29.090, -0.498, -46.690, 44]
+    level:    [75, 77]
+  17547383:
+    template: Vanguard_Ronin
+    at:       [29.694, -0.597, -35.367, 227]
+    level:    [75, 77]
+  17547384:
+    template: Vanguard_Hitman
+    at:       [31.211, -0.500, -45.383, 73]
+    level:    [75, 77]
+  17547385:
+    template: Vanguard_Alchemist
+    at:       [33.484, -0.597, -31.116, 218]
+    level:    [75, 77]
+  17547386:
+    template: Vanguard_Maestro
+    at:       [31.326, -2.000, -59.492, 166]
+    level:    [75, 77]
+  17547387:
+    template: Buffrix_Eargone
+    at:       [32.307, -0.500, -36.192, 79]
+    level:    [75, 77]
+  17547388:
+    template: Humnox_Drumbelly
+    at:       [29.478, -0.495, -31.992, 200]
+    level:    [75, 77]
+  17547389:
+    template: Goblin_Statue
+    at:       [-40.581, -0.495, -51.727]
+    level:    [70, 70]
+  17547390:
+    template: Goblin_Statue
+    at:       [-32.949, 2.399, -17.375, 65]
+    level:    [70, 70]
+  17547391:
+    template: Goblin_Replica
+    at:       [5.895, 2.497, -3.213, 129]
+    level:    [65, 65]
+  17547392:
+    template: Goblin_Replica
+    at:       [-37.115, -0.595, -55.282, 189]
+    level:    [65, 65]
+  17547393:
+    template: Goblin_Replica
+    at:       [28.890, -1.519, -59.533, 221]
+    level:    [65, 65]
+  17547394:
+    template: Ticktox_Beadyeyes
+    at:       [-10.025, 2.400, -5.321, 27]
+    level:    [79, 79]
+  17547395:
+    template: Lurklox_Dhalmelneck
+    at:       [11.207, 2.500, -8.584, 126]
+    level:    [75, 77]
+  17547396:
+    template: Trailblix_Goatmug
+    at:       [33.958, -1.499, -56.897, 86]
+    level:    [75, 77]
+  17547397:
+    template: Vanguards_Slime
+    at:       [30.940, -1.902, -61.476, 99]
+    level:    [75, 77]
+  17547398:
+    template: Vanguard_Smithy_Large
+    script:   Vanguard_Smithy
+    at:       [-73.626, 5.400, 9.305, 176]
+    level:    [90, 92]
+  17547399:
+    template: Vanguard_Pitfighter_Large
+    script:   Vanguard_Pitfighter
+    at:       [-69.024, 5.400, 3.028, 122]
+    level:    [90, 92]
+  17547400:
+    template: Vanguard_Welldigger_Large
+    script:   Vanguard_Welldigger
+    at:       [-58.763, 5.400, -0.782, 93]
+    level:    [90, 92]
+  17547401:
+    template: Vanguard_Alchemist_Large
+    script:   Vanguard_Alchemist
+    at:       [-66.778, 5.400, 9.239, 198]
+    level:    [90, 92]
+  17547402:
+    template: Kikklix_Longlegs
+    at:       [-73.041, 5.400, 6.496, 133]
+    level:    [90, 92]
+  17547403:
+    template: Vanguard_Smithy_Large
+    script:   Vanguard_Smithy
+    at:       [-58.156, 5.400, -6.159, 167]
+    level:    [90, 92]
+  17547404:
+    template: Vanguard_Pitfighter_Large
+    script:   Vanguard_Pitfighter
+    at:       [-56.806, 5.999, -1.818, 16]
+    level:    [90, 92]
+  17547405:
+    template: Vanguard_Welldigger_Large
+    script:   Vanguard_Welldigger
+    at:       [-67.983, 5.400, -4.665, 31]
+    level:    [90, 92]
+  17547406:
+    template: Vanguard_Shaman_Large
+    script:   Vanguard_Shaman
+    at:       [-66.103, 5.399, -9.686, 125]
+    level:    [90, 92]
+  17547407:
+    template: Kikklix_Longlegs
+    at:       [-55.608, 5.906, -0.608, 42]
+    level:    [90, 92]
+  17547408:
+    template: Vanguard_Smithy_Large
+    script:   Vanguard_Smithy
+    at:       [-60.177, 5.400, -15.276]
+    level:    [90, 92]
+  17547409:
+    template: Vanguard_Pitfighter_Large
+    script:   Vanguard_Pitfighter
+    at:       [-55.643, 5.405, -7.396, 176]
+    level:    [90, 92]
+  17547410:
+    template: Vanguard_Welldigger_Large
+    script:   Vanguard_Welldigger
+    at:       [-67.806, 5.400, -18.190, 8]
+    level:    [90, 92]
+  17547411:
+    template: Vanguard_Enchanter_Large
+    script:   Vanguard_Enchanter
+    at:       [-66.984, 5.400, -17.737, 53]
+    level:    [90, 92]
+  17547412:
+    template: Vanguard_Alchemist_Large
+    script:   Vanguard_Alchemist
+    at:       [-56.234, 5.500, -5.880, 154]
+    level:    [90, 92]
+  17547413:
+    template: Vanguard_Shaman_Large
+    script:   Vanguard_Shaman
+    at:       [-65.010, 5.500, -16.206, 202]
+    level:    [90, 92]
+  17547414:
+    template: Vanguard_Smithy_Large
+    script:   Vanguard_Smithy
+    at:       [-56.118, 11.479, -27.656, 82]
+    level:    [90, 92]
+  17547415:
+    template: Vanguard_Pitfighter_Large
+    script:   Vanguard_Pitfighter
+    at:       [-57.349, 11.399, -22.852, 135]
+    level:    [90, 92]
+  17547416:
+    template: Vanguard_Alchemist_Large
+    script:   Vanguard_Alchemist
+    at:       [-59.190, 11.500, -28.240, 239]
+    level:    [90, 92]
+  17547417:
+    template: Vanguard_Shaman_Large
+    script:   Vanguard_Shaman
+    at:       [-57.058, 11.400, -30.582, 118]
+    level:    [90, 92]
+  17547418:
+    template: Vanguard_Enchanter_Large
+    script:   Vanguard_Enchanter
+    at:       [-54.720, 11.400, -23.187, 225]
+    level:    [90, 92]
+  17547419:
+    template: Vanguard_Welldigger_Large
+    script:   Vanguard_Welldigger
+    at:       [-57.498, 11.377, -33.822, 196]
+    level:    [90, 92]
+  17547420:
+    template: Goblin_Statue
+    at:       [-60.326, 11.395, -31.103, 155]
+    level:    [80, 80]
+  17547421:
+    template: Goblin_Replica
+    at:       [-53.960, 5.409, -10.837, 162]
+    level:    [80, 80]
+  17547422:
+    template: Goblin_Replica
+    at:       [-48.690, 9.718, -22.325, 149]
+    level:    [80, 80]
+  17547423:
+    template: Goblin_Replica
+    at:       [-48.401, 9.641, -22.195, 126]
+    level:    [80, 80]
+  17547424:
+    template: Karashix_Swollenskull
+    at:       [0.095, 1.500, 44.937, 144]
+    level:    [90, 92]
+  17547425:
+    template: Vanguard_Tinkerer_2
+    script:   Vanguard_Tinkerer
+    at:       [13.523, 1.400, 39.323, 41]
+    level:    [90, 92]
+  17547426:
+    template: Vanguard_Dragontamer_2
+    script:   Vanguard_Dragontamer
+    at:       [13.736, 1.400, 46.026, 246]
+    level:    [90, 92]
+  17547427:
+    template: Vanguards_Wyvern
+    at:       [10.027, 1.500, 54.662, 67]
+    level:    [90, 92]
+  17547428:
+    template: Vanguard_Pathfinder_2
+    script:   Vanguard_Pathfinder
+    at:       [13.080, 1.400, 44.113, 163]
+    level:    [90, 92]
+  17547429:
+    template: Vanguards_Slime
+    at:       [11.863, 1.400, 45.700, 161]
+    level:    [90, 92]
+  17547430:
+    template: Vanguard_Maestro_2
+    script:   Vanguard_Maestro
+    at:       [11.534, 1.400, 53.911, 160]
+    level:    [90, 92]
+  17547431:
+    template: Vanguard_Ronin_2
+    script:   Vanguard_Ronin
+    at:       [11.470, 1.400, 54.486, 134]
+    level:    [90, 92]
+  17547432:
+    template: Vanguard_Armorer_2
+    script:   Vanguard_Armorer
+    at:       [10.661, 1.500, 61.717, 179]
+    level:    [90, 92]
+  17547433:
+    template: Vanguard_Maestro_2
+    script:   Vanguard_Maestro
+    at:       [10.886, 1.400, 59.295, 87]
+    level:    [90, 92]
+  17547434:
+    template: Vanguard_Tinkerer_2
+    script:   Vanguard_Tinkerer
+    at:       [6.577, 1.500, 74.292, 39]
+    level:    [90, 92]
+  17547435:
+    template: Vanguard_Ronin_Large
+    script:   Vanguard_Ronin
+    at:       [10.761, 1.400, 70.619, 117]
+    level:    [90, 92]
+  17547436:
+    template: Vanguard_Necromancer_Large
+    script:   Vanguard_Necromancer
+    at:       [12.442, 1.400, 69.607, 228]
+    level:    [90, 92]
+  17547437:
+    template: Vanguards_Avatar
+    at:       [8.561, 1.400, 70.903, 53]
+    level:    [90, 92]
+  17547438:
+    template: Mortilox_Wartpaws
+    at:       [13.664, 1.615, 66.393, 4]
+    level:    [90, 92]
+  17547439:
+    template: Vanguards_Avatar
+    at:       [13.436, 1.500, 68.693, 29]
+    level:    [90, 92]
+  17547440:
+    template: Karashix_Swollenskull
+    at:       [1.111, 1.402, 70.975, 47]
+    level:    [90, 92]
+  17547441:
+    template: Vanguard_Tinkerer_Large
+    script:   Vanguard_Tinkerer
+    at:       [-13.471, 1.400, 70.353, 100]
+    level:    [90, 92]
+  17547442:
+    template: Vanguard_Ronin_Large
+    script:   Vanguard_Ronin
+    at:       [2.539, 1.999, 44.504, 80]
+    level:    [90, 92]
+  17547443:
+    template: Vanguard_Necromancer_Large
+    script:   Vanguard_Necromancer
+    at:       [-9.120, 1.400, 67.003, 97]
+    level:    [90, 92]
+  17547444:
+    template: Vanguards_Avatar
+    at:       [-10.568, 1.400, 68.006, 21]
+    level:    [90, 92]
+  17547445:
+    template: Vanguard_Maestro_Large
+    script:   Vanguard_Maestro
+    at:       [-13.537, 1.405, 60.792, 170]
+    level:    [90, 92]
+  17547446:
+    template: Vanguard_Ronin_Large
+    script:   Vanguard_Ronin
+    at:       [-11.210, 1.400, 57.836, 33]
+    level:    [90, 92]
+  17547447:
+    template: Vanguard_Armorer_Large
+    script:   Vanguard_Armorer
+    at:       [-13.852, 1.400, 52.596, 186]
+    level:    [90, 92]
+  17547448:
+    template: Vanguard_Maestro_Large
+    script:   Vanguard_Maestro
+    at:       [-12.928, 1.432, 49.408, 119]
+    level:    [90, 92]
+  17547449:
+    template: Vanguard_Tinkerer_Large
+    script:   Vanguard_Tinkerer
+    at:       [-9.932, 1.399, 38.362, 62]
+    level:    [90, 92]
+  17547450:
+    template: Vanguard_Pathfinder_Large
+    script:   Vanguard_Pathfinder
+    at:       [-13.402, 1.400, 44.330, 190]
+    level:    [90, 92]
+  17547451:
+    template: Vanguards_Slime
+    at:       [-11.114, 1.400, 40.683, 174]
+    level:    [90, 92]
+  17547452:
+    template: Vanguard_Dragontamer_Large
+    script:   Vanguard_Dragontamer
+    at:       [0.144, 1.756, 43.922, 81]
+    level:    [90, 92]
+  17547453:
+    template: Vanguards_Wyvern
+    at:       [-10.587, 1.500, 61.318, 75]
+    level:    [90, 92]
+  17547454:
+    template: Rutrix_Hamgams
+    at:       [-14.354, -5.000, 66.490, 42]
+    level:    [75, 77]
+  17547455:
+    template: Vanguards_Slime
+    at:       [-10.102, -5.500, 65.898, 121]
+    level:    [90, 92]
+  17547456:
+    template: Goblin_Replica
+    at:       [-1.741, 2.492, 115.207, 159]
+    level:    [80, 80]
+  17547457:
+    template: Goblin_Replica
+    at:       [-0.422, 1.418, 42.069, 71]
+    level:    [80, 80]
+  17547458:
+    template: Goblin_Replica
+    at:       [10.959, 1.400, 43.162, 67]
+    level:    [80, 80]
+  17547459:
+    template: Vanguard_Ambusher_Large
+    script:   Vanguard_Ambusher
+    at:       [7.319, -5.901, 66.798, 24]
+    level:    [90, 92]
+  17547460:
+    template: Vanguard_Hitman_Large
+    script:   Vanguard_Hitman
+    at:       [3.091, -5.903, 65.102, 88]
+    level:    [90, 92]
+  17547461:
+    template: Vanguard_Ambusher_Large
+    script:   Vanguard_Ambusher
+    at:       [14.839, -5.849, 43.733, 195]
+    level:    [90, 92]
+  17547462:
+    template: Vanguard_Hitman_Large
+    script:   Vanguard_Hitman
+    at:       [14.511, -5.849, 42.249, 67]
+    level:    [90, 92]
+  17547463:
+    template: Vanguard_Ambusher_Large
+    script:   Vanguard_Ambusher
+    at:       [1.501, -5.787, 39.184, 134]
+    level:    [90, 92]
+  17547464:
+    template: Vanguard_Hitman_Large
+    script:   Vanguard_Hitman
+    at:       [-7.506, -5.911, 38.049, 127]
+    level:    [90, 92]
+  17547465:
+    template: Vanguard_Ambusher_Large
+    script:   Vanguard_Ambusher
+    at:       [-14.460, -5.922, 41.967, 59]
+    level:    [90, 92]
+  17547466:
+    template: Vanguard_Hitman_Large
+    script:   Vanguard_Hitman
+    at:       [-14.347, -5.922, 39.553, 59]
+    level:    [90, 92]
+  17547467:
+    template: Goblin_Statue
+    at:       [-0.657, -5.757, 37.722, 190]
+    level:    [75, 75]
+  17547468:
+    template: Snypestix_Eaglebeak
+    at:       [1.370, -5.798, 38.835, 132]
+    level:    [90, 92]
+  17547469:
+    template: Vanguard_Smithy_Large
+    script:   Vanguard_Smithy
+    at:       [-2.563, 2.706, 112.752, 201]
+    level:    [90, 92]
+  17547470:
+    template: Vanguard_Pitfighter_Large
+    script:   Vanguard_Pitfighter
+    at:       [-2.487, 2.418, 106.984, 76]
+    level:    [90, 92]
+  17547471:
+    template: Vanguard_Welldigger_Large
+    script:   Vanguard_Welldigger
+    at:       [-0.508, 2.499, 112.929, 190]
+    level:    [90, 92]
+  17547472:
+    template: Anvilix_Sootwrists
+    at:       [-2.267, 2.402, 105.319, 76]
+    level:    [75, 77]
+  17547473:
+    template: Bootrix_Jaggedelbow
+    at:       [-2.432, 2.945, 114.931, 215]
+    level:    [75, 77]
+  17547474:
+    template: Mobpix_Mucousmouth
+    at:       [1.255, 2.486, 111.045, 63]
+    level:    [75, 77]
+  17547475:
+    template: Vanguard_Alchemist_2
+    script:   Vanguard_Alchemist
+    at:       [-2.164, 2.500, 106.255, 209]
+    level:    [90, 92]
+  17547476:
+    template: Vanguard_Shaman_2
+    script:   Vanguard_Shaman
+    at:       [1.584, 2.499, 111.664, 131]
+    level:    [90, 92]
+  17547477:
+    template: Vanguard_Enchanter_2
+    script:   Vanguard_Enchanter
+    at:       [0.371, 2.663, 115.674, 189]
+    level:    [90, 92]
+  17547478:
+    template: Distilix_Stickytoes
+    at:       [1.122, 2.500, 105.777, 71]
+    level:    [75, 77]
+  17547479:
+    template: Eremix_Snottynostril
+    at:       [-2.084, 2.500, 107.186, 57]
+    level:    [90, 92]
+  17547480:
+    template: Jabbrox_Grannyguise
+    at:       [1.115, 2.500, 105.376, 69]
+    level:    [75, 77]
+  17547481:
+    template: Vanguard_Armorer_2
+    script:   Vanguard_Armorer
+    at:       [-0.428, 2.599, 117.675, 201]
+    level:    [90, 92]
+  17547482:
+    template: Vanguard_Tinkerer_2
+    script:   Vanguard_Tinkerer
+    at:       [2.257, 2.489, 117.621, 11]
+    level:    [90, 92]
+  17547483:
+    template: Vanguard_Pathfinder_2
+    script:   Vanguard_Pathfinder
+    at:       [-1.698, 2.493, 116.454, 57]
+    level:    [90, 92]
+  17547484:
+    template: Vanguards_Slime
+    at:       [1.588, 2.410, 116.397, 88]
+    level:    [90, 92]
+  17547485:
+    template: Scruffix_Shaggychest
+    at:       [0.671, 2.599, 115.613, 126]
+    level:    [75, 77]
+  17547486:
+    template: Tymexox_Ninefingers
+    at:       [-0.592, 2.599, 116.860, 41]
+    level:    [90, 92]
+  17547487:
+    template: Blazox_Boneybod
+    at:       [0.588, 2.350, 120.430, 96]
+    level:    [75, 77]
+  17547488:
+    template: Vanguards_Slime
+    at:       [2.456, 2.599, 118.885, 139]
+    level:    [90, 92]
+  17547489:
+    template: Vanguard_Ambusher_Large
+    script:   Vanguard_Ambusher
+    at:       [7.509, 2.500, 118.109, 126]
+    level:    [90, 92]
+  17547490:
+    template: Prowlox_Barrelbelly
+    at:       [7.549, 2.599, 118.240, 114]
+    level:    [90, 92]
+  17547491:
+    template: Vanguard_Hitman_Large
+    script:   Vanguard_Hitman
+    at:       [-8.440, 2.500, 118.349, 129]
+    level:    [90, 92]
+  17547492:
+    template: Slystix_Megapeepers
+    at:       [0.320, 2.599, 114.251, 169]
+    level:    [75, 77]
+  17547493:
+    template: Quicktrix_Hexhands
+    at:       [0.000, -5.500, 68.000, 56]
+    level:    [95, 95]
+  17547494:
+    template: Feralox_Honeylips
+    at:       [-23.000, 1.500, 64.000, 183]
+    level:    [95, 95]
+  17547495:
+    template: Feraloxs_Slime
+    at:       [-21.772, 1.500, 64.560, 47]
+    level:    [92, 92]
+  17547496:
+    template: Scourquix_Scaleskin
+    at:       [23.000, 1.500, 64.000, 55]
+    level:    [95, 95]
+  17547497:
+    template: Scourquixs_Wyvern
+    at:       [22.540, 1.500, 62.816, 143]
+    level:    [92, 92]
+  17547498:
+    template: Wilywox_Tenderpalm
+    at:       [-0.140, 1.500, 125.726, 205]
+    level:    [95, 95]
+  17547499:
+    template: Arch_Goblin_Golem
+    at:       [0.000, -0.500, -101.000, 190]
+    level:    [99, 99]

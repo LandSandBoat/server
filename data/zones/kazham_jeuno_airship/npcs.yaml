@@ -1,0 +1,314 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17702913:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17702914:
+    script:       Joosef
+    display_name: Joosef
+    at:           [0.000, 4.529, 21.950, 192]
+    render:
+      look:
+        type:  standard
+        model: 827
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17702915:
+    script:       Oslam
+    display_name: Oslam
+    at:           [0.000, -7.460, -12.977, 192]
+    render:
+      look:
+        type:  standard
+        model: 836
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17702916:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-0.004, -7.391, 19.384, 197]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4155
+        body:  8208
+        hands: 12392
+        legs:  16387
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17702917:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-0.121, -3.082, 0.110, 63]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4155
+        body:  8208
+        hands: 12309
+        legs:  16488
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17702918:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-0.029, -6.614, -16.971, 193]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4155
+        body:  8208
+        hands: 12393
+        legs:  16407
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17702919:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-2.676, 5.102, 21.175, 159]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4155
+        body:  8208
+        hands: 12311
+        legs:  16396
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17702920:
+    script:       Passenger
+    display_name: Passenger
+    at:           [0.002, 2.062, 6.975, 192]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4155
+        body:  8208
+        hands: 12395
+        legs:  16385
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17702921:
+    script:       Passenger
+    display_name: Passenger
+    at:           [3.424, -3.281, -14.713, 231]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4155
+        body:  8208
+        hands: 12312
+        legs:  16483
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17702922:
+    script:       Passenger
+    display_name: Passenger
+    at:           [5.240, 1.062, -11.176, 218]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4155
+        body:  8208
+        hands: 12291
+        legs:  16401
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17702923:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-3.650, 4.261, 10.875, 189]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4155
+        body:  8208
+        hands: 12338
+        legs:  16389
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17702924:
+    script: NPC[c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17702925:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  17702926:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  17702927:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  17702928:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  17702929:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  17702930:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  17702931:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  17702932:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  17702933:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17702934:
+    script: NPC[16]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17702935:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    widescan: true
+
+  17702936:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50

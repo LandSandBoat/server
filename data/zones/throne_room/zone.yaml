@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          155
+  night:        155
+  battle_solo:  119
+  battle_party: 119
+
+zonelines:
+
+  z4l0:
+    from:  [117.118, -8.712, 0.007]
+    to:    castle_zvahl_keep
+    at:    [-555.996, -71.691, 59.989]
+    scale: [1.000, 3.000]

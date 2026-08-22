@@ -1,0 +1,3098 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Amber_Quadav:
+    id:            103
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 666
+        entity_flags: 1153
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: very_rare
+          item:   scroll_of_bind
+        - chance: very_rare
+          item:   scroll_of_blind
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Amethyst_Quadav:
+    id:            107
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 665
+        entity_flags: 1153
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: common
+          item:   quadav_backplate
+        - chance: very_rare
+          item:   scroll_of_paralyze
+        - chance: very_rare
+          item:   scroll_of_sneak
+        - chance: very_rare
+          item:   scroll_of_protectra
+        - chance: very_rare
+          item:   scroll_of_barsleep
+        - chance: very_rare
+          item:   cuffs
+        - chance: very_rare
+          item:   ash_clogs
+        - chance: very_rare
+          item:   circlet
+        - chance: very_rare
+          item:   slops
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Awoken_Ariri_Samariri:
+    id:            6101
+    species:       red_poroggo
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 2053
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 3598
+        entity_flags: 3
+        model_size:   2
+        hitbox:       9
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  BeHya_Hundredwall:
+    id:            5774
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 651
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 775
+    loot:
+      drops:
+        - chance: common
+          item:   ingot_of_quadav_silver
+    content: WOTG
+
+  Brass_Quadav:
+    id:            525
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 652
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+    loot:
+      drops:
+        - chance: common
+          item:   shell_bug
+        - chance: rare
+          item:   quadav_backscale
+        - chance: rare
+          item:   palborough_chest_key
+        - chance: very_rare
+          item:   brass_subligar
+        - chance: very_rare
+          item:   brass_cap
+        - chance: very_rare
+          item:   brass_leggings
+        - chance: very_rare
+          item:   brass_mittens
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  BuGhi_Howlblade:
+    id:            590
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 648
+        entity_flags:  667
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: always
+          one_of:
+            marine_shield: 95
+            scale_gorget:   5
+
+  Cave_Funguar:
+    id:            663
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: very_common
+          item:   sleepshroom
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Copper_Beetle:
+    id:            790
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   beetle_jaw
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+
+  Copper_Quadav:
+    id:            791
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 650
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+    loot:
+      drops:
+        - chance: common
+          item:   snapping_mole
+        - chance: rare
+          item:   palborough_chest_key
+        - chance: rare
+          item:   darksteel_engraving
+        - chance: rare
+          item:   quadav_backscale
+        - chance: very_rare
+          item:   brass_subligar
+        - chance: very_rare
+          item:   brass_cap
+        - chance: very_rare
+          item:   brass_leggings
+        - chance: very_rare
+          item:   brass_mittens
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Coral_Crab:
+    id:            794
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: very_rare
+          item:   slice_of_land_crab_meat
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Greater_Quadav:
+    id:            1808
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 647
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: common
+          item:   silver_name_tag
+        - chance: rare
+          item:   quadav_backscale
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: beastcoin
+
+  Incensed_Pineapple:
+    id:      6725
+    species: bomb
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 282
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Mind-warped_Scorpion:
+    id:            6078
+    species:       scorpion
+    type:          [notorious]
+    skill_list_id: 194
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:    1
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep:  1
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 3591
+        entity_flags: 133
+        name_vis:       4
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mine_Crab:
+    id:            2673
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  3
+        hitbox:       11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Mine_Scorpion:
+    id:            2674
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: rare
+          item:   plantreaper
+        - chance: very_common
+          item:   scorpion_claw
+        - chance: uncommon
+          item:   scorpion_shell
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  NiGhu_Nestfender:
+    id:            2897
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 644
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5500
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item:   mottled_quadav_egg
+
+  NoMho_Crimsonarmor:
+    id:            2916
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+      jobs: [war, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 663
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 880
+    loot:
+      drops:
+        - chance: always
+          one_of:
+            bonzes_circlet: 90
+            pixie_mace:     10
+
+  Old_Quadav:
+    id:            2965
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 645
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+    loot:
+      drops:
+        - chance: rare
+          item:   palborough_chest_key
+        - chance: rare
+          item:   quadav_backscale
+        - chance: common
+          item:   snapping_mole
+        - chance: rare
+          item:   snapping_mole
+        - chance: very_rare
+          item:   brass_subligar
+        - chance: very_rare
+          item:   brass_cap
+        - chance: very_rare
+          item:   brass_leggings
+        - chance: very_rare
+          item:   brass_mittens
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Onyx_Quadav:
+    id:            2986
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 664
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: rare
+          item:   quadav_backscale
+        - chance: very_rare
+          item:   poets_circlet
+        - chance: very_rare
+          item:   linen_cuffs
+        - chance: very_rare
+          item:   linen_slops
+        - chance: very_rare
+          item:   holly_clogs
+        - chance: common
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Pit_Hare:
+    id:            3143
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rabbit_hide
+        - chance: common
+          item:   slice_of_hare_meat
+      steal: slice_of_hare_meat
+      despoil:
+        rabbit_hide:        0
+        slice_of_hare_meat: 0
+
+  QuVho_Deathhurler:
+    id:            5420
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 397
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 646
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 480
+    loot:
+      drops:
+        - chance: common
+          item:   guerilla_gloves
+    content: WOTG
+
+  Rabid_Rat:
+    id:            3300
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rabbit_hide
+        - chance: common
+          item:   slice_of_hare_meat
+      steal: slice_of_hare_meat
+      despoil:
+        rabbit_hide:        0
+        slice_of_hare_meat: 0
+
+  Scimitar_Scorpion:
+    id:            3500
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: rare
+          item:   palborough_chest_key
+        - chance: always
+          item:   scorpion_claw
+        - chance: uncommon
+          item:   scorpion_shell
+        - chance: rare
+          item:   plantreaper
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Snipper_fished:
+    id:            3682
+    display_name:  Snipper
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Stag_Crab:
+    id:            3753
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Veteran_Quadav:
+    id:            4226
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 646
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: rare
+          item:   quadav_backscale
+        - chance: very_rare
+          item:   faceguard
+        - chance: very_rare
+          item:   scale_finger_gauntlets
+        - chance: very_rare
+          item:   scale_cuisses
+        - chance: very_rare
+          item:   scale_greaves
+        - chance: common
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Young_Quadav:
+    id:            4477
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 646
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 480
+    loot:
+      drops:
+        - chance: uncommon
+          item:   shell_shield
+        - chance: very_rare
+          item:   bronze_cap
+        - chance: very_rare
+          item:   bronze_mittens
+        - chance: very_rare
+          item:   bronze_subligar
+        - chance: very_rare
+          item:   bronze_leggings
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  ZiGhi_Boneeater:
+    id:            4511
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 647
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 625
+    loot:
+      drops:
+        - chance: always
+          one_of:
+            coarse_gauntlets: 90
+            braveheart:       10
+
+spawns:
+  17362945:
+    template: Mine_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [3, 4]
+  17362946:
+    template: Mine_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [3, 4]
+  17362947:
+    template: Coral_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [9, 10]
+  17362948:
+    template: Stag_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [13, 15]
+  17362949:
+    template: Snipper_fished
+    script:   Snipper
+    at:       [1.000, 1.000, 1.000]
+    level:    [18, 20]
+  17362950:
+    template: Young_Quadav
+    at:       [56.000, -0.506, 66.000, 127]
+    level:    [3, 4]
+  17362951:
+    template: Young_Quadav
+    at:       [62.000, -0.597, 57.000, 114]
+    level:    [3, 4]
+  17362952:
+    template: Amethyst_Quadav
+    at:       [77.000, -0.405, 59.000, 127]
+    level:    [3, 4]
+  17362953:
+    template: Amber_Quadav
+    at:       [52.000, -0.708, 60.000, 3]
+    level:    [3, 4]
+  17362954:
+    template: Pit_Hare
+    at:       [58.192, 0.062, 61.254, 5]
+    level:    [2, 4]
+  17362955:
+    template: Young_Quadav
+    at:       [60.000, -0.276, 98.000, 127]
+    level:    [3, 4]
+  17362956:
+    template: Young_Quadav
+    at:       [63.000, -0.179, 100.000, 84]
+    level:    [3, 4]
+  17362957:
+    template: Amethyst_Quadav
+    at:       [61.556, -0.396, 109.154, 108]
+    level:    [3, 4]
+  17362958:
+    template: Amber_Quadav
+    at:       [74.000, -0.556, 99.000, 38]
+    level:    [3, 4]
+  17362959:
+    template: Pit_Hare
+    at:       [58.926, -0.360, 95.924, 70]
+    level:    [2, 4]
+  17362960:
+    template: Young_Quadav
+    at:       [18.459, -0.413, 118.548, 63]
+    level:    [3, 4]
+  17362961:
+    template: Pit_Hare
+    at:       [26.000, -0.569, 137.000, 127]
+    level:    [2, 4]
+  17362962:
+    template: Pit_Hare
+    at:       [25.000, -0.491, 104.000, 67]
+    level:    [2, 4]
+  17362963:
+    template: Young_Quadav
+    at:       [59.103, -0.508, 130.616, 95]
+    level:    [3, 4]
+  17362964:
+    template: Amethyst_Quadav
+    at:       [59.000, -0.735, 147.000, 127]
+    level:    [3, 4]
+  17362965:
+    template: Amber_Quadav
+    at:       [51.149, -0.244, 142.555, 127]
+    level:    [3, 4]
+  17362966:
+    template: Young_Quadav
+    at:       [63.418, 0.133, 141.072, 127]
+    level:    [3, 4]
+  17362967:
+    template: Amethyst_Quadav
+    at:       [55.000, -0.514, 171.000, 56]
+    level:    [3, 4]
+  17362968:
+    template: Amber_Quadav
+    at:       [58.904, -0.483, 123.259, 127]
+    level:    [3, 4]
+  17362969:
+    template: Pit_Hare
+    at:       [59.379, -0.661, 122.016, 127]
+    level:    [2, 4]
+  17362970:
+    template: Young_Quadav
+    at:       [293.000, -15.000, 19.000, 32]
+    level:    [3, 5]
+  17362971:
+    template: Amethyst_Quadav
+    at:       [109.752, -0.648, 138.287, 2]
+    level:    [3, 5]
+  17362972:
+    template: Amber_Quadav
+    at:       [300.480, -15.385, 226.454, 127]
+    level:    [3, 5]
+  17362973:
+    template: Pit_Hare
+    at:       [104.251, -0.410, 138.735, 127]
+    level:    [2, 4]
+  17362974:
+    template: Pit_Hare
+    at:       [101.016, -0.375, 133.879, 127]
+    level:    [2, 4]
+  17362975:
+    template: Young_Quadav
+    at:       [100.397, -0.046, 167.559, 23]
+    level:    [3, 5]
+  17362976:
+    template: Amethyst_Quadav
+    at:       [77.176, 0.104, 169.432, 103]
+    level:    [3, 5]
+  17362977:
+    template: Amber_Quadav
+    at:       [87.120, -0.186, 172.118, 127]
+    level:    [3, 5]
+  17362978:
+    template: Pit_Hare
+    at:       [61.847, -0.234, 166.764, 103]
+    level:    [2, 4]
+  17362979:
+    template: Young_Quadav
+    at:       [50.118, -7.346, 180.535, 110]
+    level:    [3, 5]
+  17362980:
+    template: Amethyst_Quadav
+    at:       [56.000, -5.000, 190.000, 127]
+    level:    [3, 5]
+  17362981:
+    template: Amber_Quadav
+    at:       [104.811, -2.108, 187.422, 127]
+    level:    [3, 5]
+  17362982:
+    template: Young_Quadav
+    at:       [72.940, -3.592, 196.050, 127]
+    level:    [3, 5]
+  17362983:
+    template: Amethyst_Quadav
+    at:       [60.000, -2.000, 180.000, 4]
+    level:    [3, 5]
+  17362984:
+    template: Amber_Quadav
+    at:       [79.347, -2.661, 184.401, 91]
+    level:    [3, 5]
+  17362985:
+    template: Pit_Hare
+    at:       [48.198, -7.147, 183.302, 127]
+    level:    [2, 4]
+  17362986:
+    template: Young_Quadav
+    at:       [127.093, 0.024, 179.610, 127]
+    level:    [3, 5]
+  17362987:
+    template: Amethyst_Quadav
+    at:       [139.000, -0.253, 167.000, 127]
+    level:    [3, 5]
+  17362988:
+    template: Amber_Quadav
+    at:       [139.068, 0.052, 148.395, 52]
+    level:    [3, 5]
+  17362989:
+    template: Young_Quadav
+    at:       [138.676, -0.015, 155.830, 127]
+    level:    [3, 5]
+  17362990:
+    template: Amethyst_Quadav
+    at:       [116.366, -0.136, 182.005, 127]
+    level:    [3, 5]
+  17362991:
+    template: Amber_Quadav
+    at:       [142.000, -0.076, 154.000, 2]
+    level:    [3, 5]
+  17362992:
+    template: Pit_Hare
+    at:       [128.242, 0.082, 178.859, 79]
+    level:    [2, 4]
+  17362993:
+    template: Young_Quadav
+    at:       [100.000, -0.320, 79.000, 127]
+    level:    [4, 5]
+  17362994:
+    template: Amethyst_Quadav
+    at:       [104.000, -0.338, 107.000, 127]
+    level:    [4, 5]
+  17362995:
+    template: Amber_Quadav
+    at:       [208.000, -1.000, 59.000, 127]
+    level:    [4, 5]
+  17362996:
+    template: Pit_Hare
+    at:       [107.594, -0.326, 97.214, 67]
+    level:    [3, 6]
+  17362997:
+    template: Pit_Hare
+    at:       [102.297, -0.436, 89.844, 6]
+    level:    [3, 6]
+  17362998:
+    template: Young_Quadav
+    at:       [118.000, -0.259, 60.000, 43]
+    level:    [4, 5]
+  17362999:
+    template: Amethyst_Quadav
+    at:       [96.000, -0.519, 59.000, 127]
+    level:    [4, 5]
+  17363000:
+    template: Amber_Quadav
+    at:       [198.688, -0.528, 58.840, 127]
+    level:    [4, 5]
+  17363001:
+    template: Pit_Hare
+    at:       [92.160, -0.369, 61.543, 127]
+    level:    [3, 6]
+  17363002:
+    template: Pit_Hare
+    at:       [103.827, -0.483, 58.306, 127]
+    level:    [3, 6]
+  17363003:
+    template: Pit_Hare
+    at:       [163.000, 0.500, 59.000, 127]
+    level:    [3, 6]
+  17363004:
+    template: Pit_Hare
+    at:       [168.000, -2.000, 104.000, 127]
+    level:    [3, 6]
+  17363005:
+    template: Pit_Hare
+    at:       [169.000, -0.100, 79.000, 127]
+    level:    [3, 6]
+  17363006:
+    template: Pit_Hare
+    at:       [170.674, -1.223, 94.178, 99]
+    level:    [3, 6]
+  17363007:
+    template: Young_Quadav
+    at:       [108.101, -8.344, -16.768, 127]
+    level:    [4, 5]
+  17363008:
+    template: Amethyst_Quadav
+    at:       [140.920, -8.291, -8.685, 127]
+    level:    [4, 5]
+  17363009:
+    template: Amber_Quadav
+    at:       [99.000, -4.000, 15.000, 38]
+    level:    [4, 5]
+  17363010:
+    template: Pit_Hare
+    at:       [135.536, -8.282, -15.597, 91]
+    level:    [3, 6]
+  17363011:
+    template: Pit_Hare
+    at:       [122.593, -8.209, -19.685, 125]
+    level:    [3, 6]
+  17363012:
+    template: Young_Quadav
+    at:       [186.594, -15.177, 27.075, 108]
+    level:    [5, 7]
+  17363013:
+    template: Amethyst_Quadav
+    at:       [177.416, -14.969, 19.550, 99]
+    level:    [5, 7]
+  17363014:
+    template: Amber_Quadav
+    at:       [148.000, -12.000, 18.000, 127]
+    level:    [5, 7]
+  17363015:
+    template: Young_Quadav
+    at:       [168.000, -15.000, 18.000, 8]
+    level:    [5, 7]
+  17363016:
+    template: Amethyst_Quadav
+    at:       [190.267, -15.325, 22.516, 127]
+    level:    [5, 7]
+  17363017:
+    template: Amber_Quadav
+    at:       [185.000, -14.000, 13.000, 118]
+    level:    [5, 7]
+  17363018:
+    template: Young_Quadav
+    at:       [219.000, -7.000, 44.000, 96]
+    level:    [5, 7]
+  17363019:
+    template: Amethyst_Quadav
+    at:       [215.246, -11.656, 26.810, 127]
+    level:    [5, 7]
+  17363020:
+    template: Amber_Quadav
+    at:       [213.891, -3.682, 56.039, 127]
+    level:    [5, 7]
+  17363021:
+    template: Pit_Hare
+    at:       [218.727, -9.766, 33.567, 62]
+    level:    [3, 6]
+  17363022:
+    template: Pit_Hare
+    at:       [193.153, -0.401, 101.914, 127]
+    level:    [3, 6]
+  17363023:
+    template: Pit_Hare
+    at:       [191.000, -0.980, 81.000, 57]
+    level:    [3, 6]
+  17363024:
+    template: Pit_Hare
+    at:       [186.554, -0.670, 66.606, 84]
+    level:    [3, 6]
+  17363025:
+    template: Pit_Hare
+    at:       [190.974, -0.048, 97.691, 127]
+    level:    [3, 6]
+  17363026:
+    template: Pit_Hare
+    at:       [188.747, -0.378, 44.913, 127]
+    level:    [3, 6]
+  17363027:
+    template: Young_Quadav
+    at:       [14.340, -8.361, 183.541, 121]
+    level:    [4, 5]
+  17363028:
+    template: Amethyst_Quadav
+    at:       [-14.996, -8.403, 179.159, 2]
+    level:    [4, 5]
+  17363029:
+    template: Amber_Quadav
+    at:       [29.000, -8.336, 182.000, 2]
+    level:    [4, 5]
+  17363030:
+    template: Pit_Hare
+    at:       [0.850, -8.086, 179.179, 127]
+    level:    [3, 6]
+  17363031:
+    template: Pit_Hare
+    at:       [9.448, -8.461, 180.510, 107]
+    level:    [3, 6]
+  17363032:
+    template: Cave_Funguar
+    at:       [-67.468, -7.652, 180.117, 127]
+    level:    [9, 11]
+  17363033:
+    template: Cave_Funguar
+    at:       [-60.043, -7.783, 175.545, 127]
+    level:    [9, 11]
+  17363034:
+    template: Cave_Funguar
+    at:       [-57.065, -7.560, 179.535, 127]
+    level:    [9, 11]
+  17363035:
+    template: Cave_Funguar
+    at:       [-58.385, -8.013, 172.215, 114]
+    level:    [9, 11]
+  17363036:
+    template: Young_Quadav
+    at:       [187.193, -0.412, 138.850, 127]
+    level:    [4, 5]
+  17363037:
+    template: Amethyst_Quadav
+    at:       [166.547, -0.466, 139.211, 127]
+    level:    [4, 5]
+  17363038:
+    template: Amber_Quadav
+    at:       [172.213, -0.269, 139.367, 125]
+    level:    [4, 5]
+  17363039:
+    template: Pit_Hare
+    at:       [187.670, -0.408, 139.608, 127]
+    level:    [3, 6]
+  17363040:
+    template: Young_Quadav
+    at:       [222.000, -0.598, 148.000, 127]
+    level:    [5, 7]
+  17363041:
+    template: Amethyst_Quadav
+    at:       [224.438, -1.249, 143.303, 51]
+    level:    [5, 7]
+  17363042:
+    template: Amber_Quadav
+    at:       [214.137, -0.412, 146.336, 127]
+    level:    [5, 7]
+  17363043:
+    template: Young_Quadav
+    at:       [212.810, -0.315, 135.944, 59]
+    level:    [5, 7]
+  17363044:
+    template: Amethyst_Quadav
+    at:       [222.447, -0.415, 133.033, 58]
+    level:    [5, 7]
+  17363045:
+    template: Amber_Quadav
+    at:       [230.794, 0.011, 140.524, 127]
+    level:    [5, 7]
+  17363046:
+    template: Pit_Hare
+    at:       [201.796, -0.203, 101.411, 127]
+    level:    [3, 6]
+  17363047:
+    template: Pit_Hare
+    at:       [209.401, -0.280, 101.192, 127]
+    level:    [3, 6]
+  17363048:
+    template: Young_Quadav
+    at:       [254.480, -0.288, 146.293, 95]
+    level:    [5, 7]
+  17363049:
+    template: Amethyst_Quadav
+    at:       [259.375, -1.722, 167.714, 40]
+    level:    [5, 7]
+  17363050:
+    template: Amber_Quadav
+    at:       [259.773, -0.434, 159.703, 60]
+    level:    [5, 7]
+  17363051:
+    template: Pit_Hare
+    at:       [250.085, -0.284, 141.771, 94]
+    level:    [3, 6]
+  17363052:
+    template: Young_Quadav
+    at:       [19.015, -8.775, 206.887, 50]
+    level:    [5, 7]
+  17363053:
+    template: Amethyst_Quadav
+    at:       [9.649, -10.597, 207.821, 62]
+    level:    [5, 7]
+  17363054:
+    template: Amber_Quadav
+    at:       [-38.000, -7.000, 179.000, 27]
+    level:    [5, 7]
+  17363055:
+    template: Young_Quadav
+    at:       [3.044, -10.833, 220.882, 127]
+    level:    [5, 7]
+  17363056:
+    template: Young_Quadav
+    at:       [9.000, -14.000, 231.000, 125]
+    level:    [5, 7]
+  17363057:
+    template: Amethyst_Quadav
+    at:       [26.000, -15.000, 230.000, 92]
+    level:    [5, 7]
+  17363058:
+    template: Amber_Quadav
+    at:       [22.688, -12.268, 216.017, 82]
+    level:    [5, 7]
+  17363059:
+    template: Young_Quadav
+    at:       [233.216, -8.788, 179.023, 127]
+    level:    [7, 10]
+  17363060:
+    template: Amethyst_Quadav
+    at:       [243.000, -7.000, 179.000, 127]
+    level:    [7, 10]
+  17363061:
+    template: Amber_Quadav
+    at:       [228.847, -10.563, 168.167, 127]
+    level:    [7, 10]
+  17363062:
+    template: Young_Quadav
+    at:       [217.000, -12.000, 180.000, 26]
+    level:    [7, 10]
+  17363063:
+    template: Young_Quadav
+    at:       [211.858, -13.427, 173.432, 99]
+    level:    [7, 10]
+  17363064:
+    template: Amethyst_Quadav
+    at:       [225.073, -9.805, 175.571, 127]
+    level:    [7, 10]
+  17363065:
+    template: Amber_Quadav
+    at:       [219.333, -12.137, 170.542, 52]
+    level:    [7, 10]
+  17363066:
+    template: Young_Quadav
+    at:       [53.641, -16.234, 218.654, 124]
+    level:    [7, 10]
+  17363067:
+    template: Young_Quadav
+    at:       [73.718, -16.278, 218.597, 127]
+    level:    [7, 10]
+  17363068:
+    template: Amethyst_Quadav
+    at:       [95.000, -15.000, 220.000, 2]
+    level:    [7, 10]
+  17363069:
+    template: Amber_Quadav
+    at:       [34.000, -15.000, 220.000, 127]
+    level:    [7, 10]
+  17363070:
+    template: Pit_Hare
+    at:       [64.873, -16.254, 219.362, 127]
+    level:    [5, 6]
+  17363071:
+    template: Young_Quadav
+    at:       [110.987, -15.977, 227.906, 96]
+    level:    [7, 10]
+  17363072:
+    template: Amethyst_Quadav
+    at:       [128.111, -15.192, 236.003, 127]
+    level:    [7, 10]
+  17363073:
+    template: Amber_Quadav
+    at:       [105.000, -15.765, 252.000, 127]
+    level:    [7, 10]
+  17363074:
+    template: Young_Quadav
+    at:       [134.489, -15.409, 229.328, 68]
+    level:    [7, 10]
+  17363075:
+    template: Amethyst_Quadav
+    at:       [111.426, -15.313, 239.499, 127]
+    level:    [7, 10]
+  17363076:
+    template: Amber_Quadav
+    at:       [132.971, -15.844, 225.911, 127]
+    level:    [7, 10]
+  17363077:
+    template: Pit_Hare
+    at:       [148.110, -16.040, 249.982, 55]
+    level:    [5, 6]
+  17363078:
+    template: Pit_Hare
+    at:       [148.647, -15.630, 233.501, 127]
+    level:    [5, 6]
+  17363079:
+    template: Pit_Hare
+    at:       [139.708, -16.378, 231.103, 127]
+    level:    [5, 6]
+  17363080:
+    template: QuVho_Deathhurler
+    at:       [124.000, -15.000, 242.000, 124]
+    level:    [17, 17]
+  17363081:
+    template: Young_Quadav
+    at:       [151.624, -15.317, 230.741, 127]
+    level:    [7, 10]
+  17363082:
+    template: Amethyst_Quadav
+    at:       [174.390, -15.851, 240.178, 9]
+    level:    [8, 10]
+  17363083:
+    template: Amber_Quadav
+    at:       [164.259, -15.180, 244.365, 12]
+    level:    [7, 10]
+  17363084:
+    template: Young_Quadav
+    at:       [185.000, -15.347, 260.000, 127]
+    level:    [7, 10]
+  17363085:
+    template: Amethyst_Quadav
+    at:       [167.460, -15.363, 232.122, 127]
+    level:    [7, 10]
+  17363086:
+    template: Amber_Quadav
+    at:       [151.000, -15.170, 255.000, 127]
+    level:    [7, 10]
+  17363087:
+    template: Young_Quadav
+    at:       [127.000, -15.000, 254.000, 127]
+    level:    [7, 10]
+  17363088:
+    template: Amethyst_Quadav
+    at:       [180.000, -15.000, 216.000, 47]
+    level:    [7, 10]
+  17363089:
+    template: Amber_Quadav
+    at:       [180.000, -16.429, 202.000, 63]
+    level:    [7, 10]
+  17363090:
+    template: Pit_Hare
+    at:       [175.551, -16.406, 256.913, 127]
+    level:    [5, 6]
+  17363091:
+    template: Young_Quadav
+    at:       [216.757, -15.901, 259.523, 13]
+    level:    [7, 10]
+  17363092:
+    template: Amethyst_Quadav
+    at:       [213.000, -15.000, 266.000, 127]
+    level:    [7, 10]
+  17363093:
+    template: Amber_Quadav
+    at:       [221.496, -16.937, 269.031, 127]
+    level:    [7, 10]
+  17363094:
+    template: Young_Quadav
+    at:       [210.486, -16.171, 259.431, 83]
+    level:    [7, 10]
+  17363095:
+    template: Amethyst_Quadav
+    at:       [230.000, -16.256, 262.000, 33]
+    level:    [7, 10]
+  17363096:
+    template: Amber_Quadav
+    at:       [221.000, -16.085, 254.000, 127]
+    level:    [7, 10]
+  17363097:
+    template: Young_Quadav
+    at:       [212.000, -15.000, 188.000, 127]
+    level:    [7, 10]
+  17363098:
+    template: Young_Quadav
+    at:       [219.000, -15.000, 214.000, 127]
+    level:    [7, 10]
+  17363099:
+    template: Amethyst_Quadav
+    at:       [222.750, -16.280, 189.104, 27]
+    level:    [7, 10]
+  17363100:
+    template: Amber_Quadav
+    at:       [219.000, -16.497, 232.000, 127]
+    level:    [7, 10]
+  17363101:
+    template: Pit_Hare
+    at:       [221.167, -16.081, 199.667, 127]
+    level:    [5, 6]
+  17363102:
+    template: Pit_Hare
+    at:       [257.204, -16.364, 257.151, 127]
+    level:    [5, 6]
+  17363103:
+    template: Pit_Hare
+    at:       [263.283, -16.719, 253.244, 71]
+    level:    [5, 6]
+  17363104:
+    template: Young_Quadav
+    at:       [257.000, -16.104, 257.000, 106]
+    level:    [7, 10]
+  17363105:
+    template: Young_Quadav
+    at:       [260.000, -15.798, 244.000, 126]
+    level:    [7, 10]
+  17363106:
+    template: Amethyst_Quadav
+    at:       [299.000, -16.047, 243.000, 96]
+    level:    [7, 10]
+  17363107:
+    template: Amber_Quadav
+    at:       [272.506, -16.098, 260.085, 12]
+    level:    [7, 10]
+  17363108:
+    template: Young_Quadav
+    at:       [287.002, -16.177, 256.680, 127]
+    level:    [7, 10]
+  17363109:
+    template: Amethyst_Quadav
+    at:       [299.203, -15.745, 258.150, 70]
+    level:    [7, 10]
+  17363110:
+    template: Amber_Quadav
+    at:       [289.435, -16.250, 263.320, 55]
+    level:    [7, 10]
+  17363111:
+    template: Veteran_Quadav
+    at:       [254.000, -16.640, 226.000, 68]
+    level:    [11, 12]
+  17363112:
+    template: Greater_Quadav
+    at:       [261.898, -16.278, 211.793, 51]
+    level:    [11, 13]
+  17363113:
+    template: Onyx_Quadav
+    at:       [300.000, -16.497, 206.000, 127]
+    level:    [11, 13]
+  17363114:
+    template: Copper_Beetle
+    at:       [288.482, -16.462, 220.427, 127]
+    level:    [9, 12]
+  17363115:
+    template: Copper_Beetle
+    at:       [251.543, -16.307, 214.536, 66]
+    level:    [9, 12]
+  17363116:
+    template: Veteran_Quadav
+    at:       [306.084, -16.500, 187.199, 34]
+    level:    [11, 13]
+  17363117:
+    template: Greater_Quadav
+    at:       [299.000, -15.000, 171.000, 77]
+    level:    [11, 13]
+  17363118:
+    template: Onyx_Quadav
+    at:       [266.000, -15.000, 183.000, 127]
+    level:    [11, 13]
+  17363119:
+    template: Copper_Beetle
+    at:       [307.000, -16.204, 171.000, 127]
+    level:    [9, 12]
+  17363120:
+    template: Copper_Beetle
+    at:       [296.000, -15.000, 144.000, 21]
+    level:    [9, 12]
+  17363121:
+    template: Veteran_Quadav
+    at:       [260.143, -16.411, 134.131, 127]
+    level:    [12, 15]
+  17363122:
+    template: Greater_Quadav
+    at:       [285.000, -15.000, 140.000, 127]
+    level:    [12, 15]
+  17363123:
+    template: Onyx_Quadav
+    at:       [258.887, -16.184, 124.499, 57]
+    level:    [12, 15]
+  17363124:
+    template: Veteran_Quadav
+    at:       [266.000, -15.000, 103.000, 54]
+    level:    [12, 15]
+  17363125:
+    template: Greater_Quadav
+    at:       [275.000, -15.000, 100.000, 127]
+    level:    [12, 15]
+  17363126:
+    template: Onyx_Quadav
+    at:       [227.000, -17.000, 142.000, 127]
+    level:    [12, 15]
+  17363127:
+    template: Copper_Beetle
+    at:       [266.014, -16.179, 94.224, 119]
+    level:    [9, 12]
+  17363128:
+    template: Copper_Beetle
+    at:       [265.000, -16.496, 136.000, 103]
+    level:    [9, 12]
+  17363129:
+    template: Veteran_Quadav
+    at:       [260.000, -15.000, 86.000, 127]
+    level:    [12, 15]
+  17363130:
+    template: Greater_Quadav
+    at:       [261.636, -15.823, 61.545, 101]
+    level:    [12, 15]
+  17363131:
+    template: Onyx_Quadav
+    at:       [265.897, -16.364, 53.043, 127]
+    level:    [12, 15]
+  17363132:
+    template: Veteran_Quadav
+    at:       [259.798, -16.227, 51.791, 127]
+    level:    [12, 15]
+  17363133:
+    template: Greater_Quadav
+    at:       [262.197, -16.020, 67.301, 42]
+    level:    [12, 15]
+  17363134:
+    template: Onyx_Quadav
+    at:       [266.040, -16.159, 65.618, 11]
+    level:    [12, 15]
+  17363135:
+    template: Veteran_Quadav
+    at:       [294.000, -15.783, 65.000, 40]
+    level:    [12, 15]
+  17363136:
+    template: Greater_Quadav
+    at:       [299.088, -15.662, 62.825, 115]
+    level:    [12, 15]
+  17363137:
+    template: Onyx_Quadav
+    at:       [308.948, -16.060, 65.639, 127]
+    level:    [12, 15]
+  17363138:
+    template: Veteran_Quadav
+    at:       [310.000, -15.460, 57.000, 31]
+    level:    [12, 15]
+  17363139:
+    template: Greater_Quadav
+    at:       [304.171, -15.539, 60.400, 127]
+    level:    [12, 15]
+  17363140:
+    template: Onyx_Quadav
+    at:       [300.941, -15.775, 54.900, 100]
+    level:    [12, 15]
+  17363141:
+    template: Veteran_Quadav
+    at:       [221.934, -15.966, 53.788, 124]
+    level:    [12, 15]
+  17363142:
+    template: Greater_Quadav
+    at:       [225.313, -15.805, 59.981, 127]
+    level:    [12, 15]
+  17363143:
+    template: Onyx_Quadav
+    at:       [221.000, -15.672, 67.000, 127]
+    level:    [12, 15]
+  17363144:
+    template: Veteran_Quadav
+    at:       [213.000, -15.996, 59.000, 78]
+    level:    [12, 15]
+  17363145:
+    template: Greater_Quadav
+    at:       [226.660, -15.984, 56.944, 127]
+    level:    [12, 15]
+  17363146:
+    template: Onyx_Quadav
+    at:       [213.000, -15.641, 54.000, 36]
+    level:    [12, 15]
+  17363147:
+    template: Young_Quadav
+    at:       [-2.000, -15.000, 260.000, 105]
+    level:    [7, 10]
+  17363148:
+    template: Young_Quadav
+    at:       [103.586, -15.439, 140.626, 28]
+    level:    [7, 10]
+  17363149:
+    template: Amethyst_Quadav
+    at:       [12.397, -16.243, 261.169, 127]
+    level:    [9, 10]
+  17363150:
+    template: Amber_Quadav
+    at:       [-20.000, -15.000, 244.000, 127]
+    level:    [7, 10]
+  17363151:
+    template: Pit_Hare
+    at:       [-19.000, -15.000, 233.000, 127]
+    level:    [5, 6]
+  17363152:
+    template: Pit_Hare
+    at:       [-16.961, -16.344, 256.327, 127]
+    level:    [5, 6]
+  17363153:
+    template: Cave_Funguar
+    at:       [-57.664, -16.172, 267.844, 127]
+    level:    [9, 11]
+  17363154:
+    template: Cave_Funguar
+    at:       [-67.959, -16.106, 253.315, 125]
+    level:    [9, 11]
+  17363155:
+    template: Cave_Funguar
+    at:       [-61.340, -15.508, 261.833, 127]
+    level:    [9, 11]
+  17363156:
+    template: Cave_Funguar
+    at:       [-33.704, -16.200, 215.172, 127]
+    level:    [9, 11]
+  17363157:
+    template: Cave_Funguar
+    at:       [-29.000, -15.000, 223.000, 4]
+    level:    [9, 11]
+  17363158:
+    template: Cave_Funguar
+    at:       [-39.568, -16.089, 221.226, 89]
+    level:    [9, 11]
+  17363159:
+    template: Cave_Funguar
+    at:       [-51.287, -16.297, 220.407, 127]
+    level:    [9, 11]
+  17363160:
+    template: Mine_Scorpion
+    at:       [-49.692, -15.987, 215.426, 43]
+    level:    [14, 16]
+  17363161:
+    template: Young_Quadav
+    at:       [12.000, -16.141, 180.000, 125]
+    level:    [7, 10]
+  17363162:
+    template: Young_Quadav
+    at:       [45.000, -15.000, 180.000]
+    level:    [7, 10]
+  17363163:
+    template: Amethyst_Quadav
+    at:       [78.000, -15.808, 140.000]
+    level:    [7, 10]
+  17363164:
+    template: Amber_Quadav
+    at:       [-20.000, -15.000, 199.000, 127]
+    level:    [7, 10]
+  17363165:
+    template: Veteran_Quadav
+    at:       [102.407, -16.386, 133.531, 127]
+    level:    [11, 13]
+  17363166:
+    template: Greater_Quadav
+    at:       [60.000, -15.000, 121.000, 127]
+    level:    [11, 13]
+  17363167:
+    template: Onyx_Quadav
+    at:       [99.090, -15.842, 135.425, 127]
+    level:    [11, 13]
+  17363168:
+    template: Veteran_Quadav
+    at:       [100.000, -15.992, 164.000, 121]
+    level:    [11, 13]
+  17363169:
+    template: Greater_Quadav
+    at:       [92.739, -16.028, 138.319, 127]
+    level:    [11, 13]
+  17363170:
+    template: Onyx_Quadav
+    at:       [99.868, -16.414, 143.549, 127]
+    level:    [11, 13]
+  17363171:
+    template: Copper_Beetle
+    at:       [120.000, -15.000, 140.000, 79]
+    level:    [9, 12]
+  17363172:
+    template: Veteran_Quadav
+    at:       [114.280, -16.475, 100.752, 127]
+    level:    [11, 13]
+  17363173:
+    template: Greater_Quadav
+    at:       [69.148, -16.554, 102.505, 127]
+    level:    [11, 13]
+  17363174:
+    template: Onyx_Quadav
+    at:       [90.800, -16.376, 101.162, 127]
+    level:    [11, 13]
+  17363175:
+    template: Copper_Beetle
+    at:       [66.072, -16.322, 105.198, 30]
+    level:    [9, 12]
+  17363176:
+    template: Copper_Beetle
+    at:       [140.000, -16.377, 129.000, 127]
+    level:    [9, 12]
+  17363177:
+    template: Copper_Beetle
+    at:       [170.000, -15.000, 179.000, 127]
+    level:    [9, 12]
+  17363178:
+    template: Copper_Beetle
+    at:       [170.000, -16.000, 165.000, 120]
+    level:    [9, 12]
+  17363179:
+    template: Copper_Beetle
+    at:       [166.000, -16.000, 135.000, 127]
+    level:    [9, 12]
+  17363180:
+    template: Copper_Beetle
+    at:       [167.207, -18.027, 159.374, 44]
+    level:    [9, 12]
+  17363181:
+    template: BuGhi_Howlblade
+    at:       [185.502, -31.864, 175.730, 130]
+    level:    [12, 12]
+  17363182:
+    template: Veteran_Quadav
+    at:       [203.447, -32.086, 180.682, 21]
+    level:    [12, 15]
+  17363183:
+    template: Greater_Quadav
+    at:       [181.000, -32.207, 166.000, 127]
+    level:    [12, 15]
+  17363184:
+    template: Onyx_Quadav
+    at:       [191.715, -32.293, 179.310, 4]
+    level:    [12, 15]
+  17363185:
+    template: Copper_Beetle
+    at:       [214.376, -27.351, 174.064, 127]
+    level:    [9, 12]
+  17363186:
+    template: Veteran_Quadav
+    at:       [135.000, -18.000, 141.000, 101]
+    level:    [12, 15]
+  17363187:
+    template: Greater_Quadav
+    at:       [152.757, -30.516, 179.048, 5]
+    level:    [12, 15]
+  17363188:
+    template: Onyx_Quadav
+    at:       [170.308, -32.634, 176.294, 39]
+    level:    [12, 15]
+  17363189:
+    template: Copper_Beetle
+    at:       [174.015, -32.587, 169.594, 44]
+    level:    [9, 12]
+  17363190:
+    template: Veteran_Quadav
+    at:       [24.000, -31.000, -104.000, 89]
+    level:    [12, 15]
+  17363191:
+    template: Greater_Quadav
+    at:       [177.013, -32.309, 138.449, 1]
+    level:    [12, 15]
+  17363192:
+    template: Onyx_Quadav
+    at:       [140.000, -31.000, 112.000, 127]
+    level:    [12, 15]
+  17363193:
+    template: Veteran_Quadav
+    at:       [144.000, -31.000, 138.000, 127]
+    level:    [12, 15]
+  17363194:
+    template: Greater_Quadav
+    at:       [133.915, -32.312, 142.804, 127]
+    level:    [12, 15]
+  17363195:
+    template: Onyx_Quadav
+    at:       [133.960, -32.198, 90.589, 123]
+    level:    [12, 15]
+  17363196:
+    template: Veteran_Quadav
+    at:       [149.000, -32.473, 99.000, 127]
+    level:    [12, 15]
+  17363197:
+    template: Greater_Quadav
+    at:       [182.690, -32.285, 103.385, 127]
+    level:    [12, 15]
+  17363198:
+    template: Onyx_Quadav
+    at:       [174.000, -32.284, 98.000, 127]
+    level:    [12, 15]
+  17363199:
+    template: Veteran_Quadav
+    at:       [224.863, -32.308, 135.234, 127]
+    level:    [12, 15]
+  17363200:
+    template: Greater_Quadav
+    at:       [227.000, -31.000, 138.000, 127]
+    level:    [12, 15]
+  17363201:
+    template: Onyx_Quadav
+    at:       [227.012, -32.313, 144.549, 127]
+    level:    [12, 15]
+  17363202:
+    template: Veteran_Quadav
+    at:       [140.939, -32.462, 101.245, 108]
+    level:    [12, 15]
+  17363203:
+    template: Greater_Quadav
+    at:       [76.847, -32.630, 58.112, 67]
+    level:    [12, 15]
+  17363204:
+    template: Onyx_Quadav
+    at:       [141.660, -32.301, 105.150, 127]
+    level:    [12, 15]
+  17363205:
+    template: Veteran_Quadav
+    at:       [130.386, -32.313, 73.967, 5]
+    level:    [12, 15]
+  17363206:
+    template: Greater_Quadav
+    at:       [122.222, -32.500, 81.160, 20]
+    level:    [12, 15]
+  17363207:
+    template: Onyx_Quadav
+    at:       [129.000, -31.000, 63.000, 101]
+    level:    [12, 15]
+  17363208:
+    template: ZiGhi_Boneeater
+    at:       [138.839, -32.500, 72.357, 17]
+    level:    [15, 16]
+  17363209:
+    template: Veteran_Quadav
+    at:       [141.820, -32.049, 36.366, 40]
+    level:    [12, 15]
+  17363210:
+    template: Greater_Quadav
+    at:       [140.553, -30.813, 20.561, 127]
+    level:    [12, 15]
+  17363211:
+    template: Onyx_Quadav
+    at:       [139.460, -32.469, 47.174, 127]
+    level:    [12, 15]
+  17363212:
+    template: Veteran_Quadav
+    at:       [223.954, -32.290, 67.640]
+    level:    [12, 15]
+  17363213:
+    template: Greater_Quadav
+    at:       [234.263, -32.292, 61.285, 125]
+    level:    [12, 15]
+  17363214:
+    template: Onyx_Quadav
+    at:       [219.753, -32.308, 54.350, 89]
+    level:    [12, 15]
+  17363215:
+    template: Veteran_Quadav
+    at:       [180.000, -33.441, 23.000, 127]
+    level:    [14, 18]
+  17363216:
+    template: Greater_Quadav
+    at:       [180.000, -32.705, 9.010, 63]
+    level:    [14, 18]
+  17363217:
+    template: Onyx_Quadav
+    at:       [179.000, -32.000, -2.000, 71]
+    level:    [14, 18]
+  17363218:
+    template: Rabid_Rat
+    at:       [180.000, -31.000, -13.000, 127]
+    level:    [11, 13]
+  17363219:
+    template: Rabid_Rat
+    at:       [172.000, -31.000, -14.000, 11]
+    level:    [11, 13]
+  17363220:
+    template: Rabid_Rat
+    at:       [181.512, -31.589, -23.665, 42]
+    level:    [11, 13]
+  17363221:
+    template: Rabid_Rat
+    at:       [186.330, -31.829, -20.754, 1]
+    level:    [11, 13]
+  17363222:
+    template: Rabid_Rat
+    at:       [170.745, -32.265, -20.600, 127]
+    level:    [11, 13]
+  17363223:
+    template: Veteran_Quadav
+    at:       [210.721, -32.294, 98.998, 127]
+    level:    [12, 15]
+  17363224:
+    template: Greater_Quadav
+    at:       [233.000, -32.285, 100.000, 127]
+    level:    [12, 15]
+  17363225:
+    template: Onyx_Quadav
+    at:       [220.313, -32.280, 88.193, 67]
+    level:    [12, 15]
+  17363226:
+    template: Rabid_Rat
+    at:       [264.436, -32.343, 92.218, 90]
+    level:    [11, 12]
+  17363227:
+    template: Rabid_Rat
+    at:       [248.000, -32.438, 99.000, 127]
+    level:    [11, 13]
+  17363228:
+    template: Rabid_Rat
+    at:       [269.871, -32.256, 105.973, 127]
+    level:    [11, 13]
+  17363229:
+    template: Veteran_Quadav
+    at:       [259.000, -31.000, 124.000, 2]
+    level:    [12, 15]
+  17363230:
+    template: Greater_Quadav
+    at:       [262.193, -32.266, 139.036, 124]
+    level:    [12, 15]
+  17363231:
+    template: Onyx_Quadav
+    at:       [268.530, -32.298, 139.698, 127]
+    level:    [14, 18]
+  17363232:
+    template: Veteran_Quadav
+    at:       [298.000, -32.294, 129.000, 127]
+    level:    [14, 18]
+  17363233:
+    template: Greater_Quadav
+    at:       [292.144, -32.610, 138.929, 127]
+    level:    [14, 18]
+  17363234:
+    template: Onyx_Quadav
+    at:       [301.583, -32.447, 120.078, 61]
+    level:    [14, 18]
+  17363235:
+    template: Veteran_Quadav
+    at:       [288.000, -31.000, 179.000, 127]
+    level:    [14, 18]
+  17363236:
+    template: Greater_Quadav
+    at:       [300.000, -31.000, 158.000, 5]
+    level:    [14, 18]
+  17363237:
+    template: Onyx_Quadav
+    at:       [300.000, -31.000, 74.000, 62]
+    level:    [14, 18]
+  17363238:
+    template: Rabid_Rat
+    at:       [296.363, -32.267, 145.369, 127]
+    level:    [11, 13]
+  17363239:
+    template: Rabid_Rat
+    at:       [295.829, -32.393, 135.425, 42]
+    level:    [11, 13]
+  17363240:
+    template: Mine_Scorpion
+    at:       [250.456, -31.799, 182.662, 76]
+    level:    [14, 16]
+  17363241:
+    template: Scimitar_Scorpion
+    at:       [257.723, -31.665, 182.547, 49]
+    level:    [19, 21]
+  17363242:
+    template: Veteran_Quadav
+    at:       [260.000, -31.000, 1.000, 127]
+    level:    [14, 18]
+  17363243:
+    template: Greater_Quadav
+    at:       [260.041, -32.394, 34.683, 77]
+    level:    [14, 18]
+  17363244:
+    template: Onyx_Quadav
+    at:       [260.000, -33.000, 18.000, 127]
+    level:    [14, 18]
+  17363245:
+    template: Veteran_Quadav
+    at:       [262.052, -32.342, 61.285, 86]
+    level:    [14, 18]
+  17363246:
+    template: Greater_Quadav
+    at:       [261.171, -32.405, 77.404, 59]
+    level:    [14, 18]
+  17363247:
+    template: Onyx_Quadav
+    at:       [277.000, -31.000, 60.000, 61]
+    level:    [14, 18]
+  17363248:
+    template: Veteran_Quadav
+    at:       [263.680, -32.182, -26.892, 127]
+    level:    [14, 18]
+  17363249:
+    template: Greater_Quadav
+    at:       [254.177, -31.869, -17.303, 127]
+    level:    [14, 18]
+  17363250:
+    template: Onyx_Quadav
+    at:       [266.884, -32.250, -16.804, 127]
+    level:    [14, 18]
+  17363251:
+    template: Old_Quadav
+    at:       [255.000, -32.000, -27.000, 127]
+    level:    [21, 23]
+  17363252:
+    template: Copper_Quadav
+    at:       [238.000, -31.976, -19.000, 127]
+    level:    [21, 23]
+  17363253:
+    template: Veteran_Quadav
+    at:       [252.000, -31.584, -56.000, 127]
+    level:    [14, 18]
+  17363254:
+    template: Greater_Quadav
+    at:       [260.744, -31.931, -53.847, 127]
+    level:    [14, 18]
+  17363255:
+    template: Onyx_Quadav
+    at:       [266.614, -32.081, -62.895, 86]
+    level:    [14, 18]
+  17363256:
+    template: Old_Quadav
+    at:       [253.869, -31.740, -69.220, 127]
+    level:    [21, 23]
+  17363257:
+    template: Copper_Quadav
+    at:       [264.534, -31.961, -68.647, 104]
+    level:    [21, 23]
+  17363258:
+    template: BeHya_Hundredwall
+    at:       [258.800, -31.230, -63.300]
+    level:    [23, 24]
+  17363259:
+    template: Old_Quadav
+    at:       [223.000, -31.000, -25.000, 44]
+    level:    [21, 23]
+  17363260:
+    template: Copper_Quadav
+    at:       [220.613, -32.366, -8.115, 127]
+    level:    [21, 23]
+  17363261:
+    template: Veteran_Quadav
+    at:       [220.084, -31.911, -71.034, 14]
+    level:    [14, 18]
+  17363262:
+    template: Greater_Quadav
+    at:       [225.000, -31.950, -55.000, 127]
+    level:    [14, 18]
+  17363263:
+    template: Onyx_Quadav
+    at:       [218.190, -31.694, -58.543, 206]
+    level:    [14, 18]
+  17363264:
+    template: Old_Quadav
+    at:       [226.673, -31.982, -63.429, 46]
+    level:    [21, 23]
+  17363265:
+    template: Copper_Quadav
+    at:       [213.000, -31.637, -58.000, 51]
+    level:    [21, 23]
+  17363266:
+    template: Veteran_Quadav
+    at:       [162.000, -31.000, 99.000]
+    level:    [14, 18]
+  17363267:
+    template: Greater_Quadav
+    at:       [99.000, -31.000, 130.000, 57]
+    level:    [14, 18]
+  17363268:
+    template: Onyx_Quadav
+    at:       [109.730, -32.334, 144.932, 38]
+    level:    [14, 18]
+  17363269:
+    template: Rabid_Rat
+    at:       [104.698, -32.066, 134.271, 127]
+    level:    [11, 13]
+  17363270:
+    template: Rabid_Rat
+    at:       [99.935, -32.313, 151.641, 127]
+    level:    [11, 13]
+  17363271:
+    template: Veteran_Quadav
+    at:       [51.000, -31.919, 104.000, 72]
+    level:    [14, 18]
+  17363272:
+    template: Greater_Quadav
+    at:       [68.112, -31.965, 99.753, 127]
+    level:    [16, 18]
+  17363273:
+    template: Onyx_Quadav
+    at:       [64.675, -32.023, 94.869, 8]
+    level:    [14, 17]
+  17363274:
+    template: Veteran_Quadav
+    at:       [108.000, -31.000, 93.000]
+    level:    [14, 18]
+  17363275:
+    template: Greater_Quadav
+    at:       [89.135, -32.486, 101.753, 49]
+    level:    [14, 18]
+  17363276:
+    template: Onyx_Quadav
+    at:       [99.401, -32.283, 104.235, 61]
+    level:    [14, 16]
+  17363277:
+    template: Veteran_Quadav
+    at:       [103.345, -33.083, 76.058, 127]
+    level:    [14, 18]
+  17363278:
+    template: Greater_Quadav
+    at:       [112.000, -32.000, 81.000, 70]
+    level:    [14, 18]
+  17363279:
+    template: Onyx_Quadav
+    at:       [106.864, -32.319, 71.132, 127]
+    level:    [14, 18]
+  17363280:
+    template: Veteran_Quadav
+    at:       [48.019, -32.077, 59.795, 127]
+    level:    [14, 18]
+  17363281:
+    template: Greater_Quadav
+    at:       [59.863, -31.864, 68.322, 127]
+    level:    [14, 18]
+  17363282:
+    template: Onyx_Quadav
+    at:       [67.867, -32.081, 59.731, 127]
+    level:    [14, 18]
+  17363283:
+    template: Mine_Scorpion
+    at:       [19.502, -32.339, 73.759, 59]
+    level:    [14, 16]
+  17363284:
+    template: Scimitar_Scorpion
+    at:       [19.372, -32.156, 80.410, 127]
+    level:    [19, 21]
+  17363285:
+    template: Veteran_Quadav
+    at:       [99.000, -33.000, 21.000, 127]
+    level:    [14, 18]
+  17363286:
+    template: Greater_Quadav
+    at:       [99.106, -33.215, 11.927, 127]
+    level:    [14, 18]
+  17363287:
+    template: Onyx_Quadav
+    at:       [100.000, -31.997, 44.000, 81]
+    level:    [14, 18]
+  17363288:
+    template: Old_Quadav
+    at:       [103.000, -32.309, -15.000, 1]
+    level:    [21, 23]
+  17363289:
+    template: Copper_Quadav
+    at:       [104.793, -32.575, -23.287, 127]
+    level:    [21, 23]
+  17363290:
+    template: Brass_Quadav
+    at:       [92.851, -32.297, -14.360, 127]
+    level:    [21, 23]
+  17363291:
+    template: Old_Quadav
+    at:       [56.000, -31.000, -27.000, 11]
+    level:    [21, 23]
+  17363292:
+    template: Copper_Quadav
+    at:       [56.000, -31.000, -14.000, 24]
+    level:    [21, 23]
+  17363293:
+    template: Brass_Quadav
+    at:       [68.335, -32.075, -21.215, 127]
+    level:    [21, 23]
+  17363294:
+    template: Old_Quadav
+    at:       [66.000, -31.000, -67.000, 127]
+    level:    [21, 23]
+  17363295:
+    template: Copper_Quadav
+    at:       [59.033, -32.307, -53.663, 1]
+    level:    [21, 23]
+  17363296:
+    template: Brass_Quadav
+    at:       [55.000, -31.000, -66.000, 127]
+    level:    [21, 23]
+  17363297:
+    template: Old_Quadav
+    at:       [67.000, -32.301, -13.000, 127]
+    level:    [21, 23]
+  17363298:
+    template: Copper_Quadav
+    at:       [93.000, -31.000, -66.000, 127]
+    level:    [21, 23]
+  17363299:
+    template: Brass_Quadav
+    at:       [105.406, -32.313, -66.458, 32]
+    level:    [21, 22]
+  17363300:
+    template: Old_Quadav
+    at:       [101.000, -32.311, -51.000, 127]
+    level:    [21, 23]
+  17363301:
+    template: Copper_Quadav
+    at:       [69.296, -32.484, -59.497, 111]
+    level:    [21, 23]
+  17363302:
+    template: Brass_Quadav
+    at:       [93.000, -32.493, -55.000, 127]
+    level:    [21, 22]
+  17363303:
+    template: Old_Quadav
+    at:       [54.854, -32.646, -94.692, 127]
+    level:    [21, 23]
+  17363304:
+    template: Old_Quadav
+    at:       [25.387, -32.577, -91.954, 3]
+    level:    [21, 23]
+  17363305:
+    template: NoMho_Crimsonarmor
+    at:       [20.433, -31.675, -97.176, 127]
+    level:    [22, 23]
+  17363306:
+    template: Old_Quadav
+    at:       [94.000, -35.000, -133.000, 127]
+    level:    [21, 23]
+  17363307:
+    template: Copper_Quadav
+    at:       [100.000, -32.000, -93.000, 96]
+    level:    [21, 23]
+  17363308:
+    template: Brass_Quadav
+    at:       [95.143, -32.490, -18.583, 127]
+    level:    [21, 23]
+  17363309:
+    template: Old_Quadav
+    at:       [97.000, -35.000, -138.000, 127]
+    level:    [21, 23]
+  17363310:
+    template: Copper_Quadav
+    at:       [100.916, -34.302, -130.674, 127]
+    level:    [22, 23]
+  17363311:
+    template: Brass_Quadav
+    at:       [106.704, -34.026, -128.147, 110]
+    level:    [21, 22]
+  17363312:
+    template: Old_Quadav
+    at:       [109.000, -38.000, -143.000, 127]
+    level:    [21, 23]
+  17363313:
+    template: Copper_Quadav
+    at:       [106.000, -38.000, -152.000, 127]
+    level:    [21, 23]
+  17363314:
+    template: Brass_Quadav
+    at:       [90.000, -36.000, -149.000, 127]
+    level:    [21, 23]
+  17363315:
+    template: Old_Quadav
+    at:       [91.658, -36.179, -140.044, 89]
+    level:    [21, 23]
+  17363316:
+    template: Copper_Quadav
+    at:       [97.000, -37.326, -150.000, 127]
+    level:    [21, 23]
+  17363317:
+    template: Brass_Quadav
+    at:       [87.000, -35.000, -132.000, 45]
+    level:    [21, 23]
+  17363318:
+    template: NiGhu_Nestfender
+    at:       [14.000, -31.000, -94.000, 16]
+    level:    [53, 53]
+  17363319:
+    template: Incensed_Pineapple
+    at:       [18.790, -32.401, 80.129, 63]
+  17363320:
+    template: Mind-warped_Scorpion
+    at:       [94.909, -32.487, -61.151, 120]
+    level:    [139, 139]
+  17363321:
+    template: Awoken_Ariri_Samariri
+    at:       [23.880, -31.000, -103.910, 162]
+    level:    [119, 119]
+
+slots:
+  - members:
+      17362951: {} # Young_Quadav
+      17362952: {} # Amethyst_Quadav
+      17362953: {} # Amber_Quadav
+  - members:
+      17362956: {} # Young_Quadav
+      17362957: {} # Amethyst_Quadav
+      17362958: {} # Amber_Quadav
+  - members:
+      17362963: {} # Young_Quadav
+      17362964: {} # Amethyst_Quadav
+  - members:
+      17362965: {} # Amber_Quadav
+      17362966: {} # Young_Quadav
+  - members:
+      17362967: {} # Amethyst_Quadav
+      17362968: {} # Amber_Quadav
+  - members:
+      17362970: {} # Young_Quadav
+      17362971: {} # Amethyst_Quadav
+      17362972: {} # Amber_Quadav
+  - members:
+      17362976: {} # Amethyst_Quadav
+      17362977: {} # Amber_Quadav
+  - members:
+      17362979: {} # Young_Quadav
+      17362980: {} # Amethyst_Quadav
+  - members:
+      17362981: {} # Amber_Quadav
+      17362982: {} # Young_Quadav
+  - members:
+      17362983: {} # Amethyst_Quadav
+      17362984: {} # Amber_Quadav
+  - members:
+      17362986: {} # Young_Quadav
+      17362987: {} # Amethyst_Quadav
+  - members:
+      17362988: {} # Amber_Quadav
+      17362989: {} # Young_Quadav
+  - members:
+      17362990: {} # Amethyst_Quadav
+      17362991: {} # Amber_Quadav
+  - members:
+      17362993: {} # Young_Quadav
+      17362994: {} # Amethyst_Quadav
+      17362995: {} # Amber_Quadav
+  - members:
+      17362999: {} # Amethyst_Quadav
+      17363000: {} # Amber_Quadav
+  - members:
+      17363008: {} # Amethyst_Quadav
+      17363009: {} # Amber_Quadav
+  - members:
+      17363012: {} # Young_Quadav
+      17363013: {} # Amethyst_Quadav
+  - members:
+      17363014: {} # Amber_Quadav
+      17363015: {} # Young_Quadav
+  - members:
+      17363016: {} # Amethyst_Quadav
+      17363017: {} # Amber_Quadav
+  - members:
+      17363018: {} # Young_Quadav
+      17363019: {} # Amethyst_Quadav
+      17363020: {} # Amber_Quadav
+  - members:
+      17363028: {} # Amethyst_Quadav
+      17363029: {} # Amber_Quadav
+  - members:
+      17363036: {} # Young_Quadav
+      17363037: {} # Amethyst_Quadav
+      17363038: {} # Amber_Quadav
+  - members:
+      17363040: {} # Young_Quadav
+      17363041: {} # Amethyst_Quadav
+      17363042: {} # Amber_Quadav
+  - members:
+      17363043: {} # Young_Quadav
+      17363044: {} # Amethyst_Quadav
+      17363045: {} # Amber_Quadav
+  - members:
+      17363048: {} # Young_Quadav
+      17363049: {} # Amethyst_Quadav
+      17363050: {} # Amber_Quadav
+  - members:
+      17363052: {} # Young_Quadav
+      17363053: {} # Amethyst_Quadav
+      17363054: {} # Amber_Quadav
+  - members:
+      17363056: {} # Young_Quadav
+      17363057: {} # Amethyst_Quadav
+      17363058: {} # Amber_Quadav
+  - members:
+      17363059: {} # Young_Quadav
+      17363060: {} # Amethyst_Quadav
+      17363061: {} # Amber_Quadav
+  - members:
+      17363063: {} # Young_Quadav
+      17363064: {} # Amethyst_Quadav
+      17363065: {} # Amber_Quadav
+  - members:
+      17363067: {} # Young_Quadav
+      17363068: {} # Amethyst_Quadav
+      17363069: {} # Amber_Quadav
+  - members:
+      17363071: {} # Young_Quadav
+      17363072: {} # Amethyst_Quadav
+  - members:
+      17363073: {} # Amber_Quadav
+      17363074: {} # Young_Quadav
+  - members:
+      17363075: {} # Amethyst_Quadav
+      17363076: {} # Amber_Quadav
+  - members:
+      17363081: {} # Young_Quadav
+      17363082: {} # Amethyst_Quadav
+  - members:
+      17363083: {} # Amber_Quadav
+      17363084: {} # Young_Quadav
+  - members:
+      17363085: {} # Amethyst_Quadav
+      17363086: {} # Amber_Quadav
+  - members:
+      17363087: {} # Young_Quadav
+      17363088: {} # Amethyst_Quadav
+      17363089: {} # Amber_Quadav
+  - members:
+      17363091: {} # Young_Quadav
+      17363092: {} # Amethyst_Quadav
+      17363093: {} # Amber_Quadav
+  - members:
+      17363094: {} # Young_Quadav
+      17363095: {} # Amethyst_Quadav
+      17363096: {} # Amber_Quadav
+  - members:
+      17363098: {} # Young_Quadav
+      17363099: {} # Amethyst_Quadav
+      17363100: {} # Amber_Quadav
+  - members:
+      17363105: {} # Young_Quadav
+      17363106: {} # Amethyst_Quadav
+  - members:
+      17363107: {} # Amber_Quadav
+      17363108: {} # Young_Quadav
+  - members:
+      17363109: {} # Amethyst_Quadav
+      17363110: {} # Amber_Quadav
+  - members:
+      17363111: {} # Veteran_Quadav
+      17363112: {} # Greater_Quadav
+      17363113: {} # Onyx_Quadav
+  - members:
+      17363116: {} # Veteran_Quadav
+      17363117: {} # Greater_Quadav
+      17363118: {} # Onyx_Quadav
+  - members:
+      17363121: {} # Veteran_Quadav
+      17363122: {} # Greater_Quadav
+      17363123: {} # Onyx_Quadav
+  - members:
+      17363124: {} # Veteran_Quadav
+      17363125: {} # Greater_Quadav
+      17363126: {} # Onyx_Quadav
+  - members:
+      17363129: {} # Veteran_Quadav
+      17363130: {} # Greater_Quadav
+      17363131: {} # Onyx_Quadav
+  - members:
+      17363132: {} # Veteran_Quadav
+      17363133: {} # Greater_Quadav
+      17363134: {} # Onyx_Quadav
+  - members:
+      17363135: {} # Veteran_Quadav
+      17363136: {} # Greater_Quadav
+      17363137: {} # Onyx_Quadav
+  - members:
+      17363138: {} # Veteran_Quadav
+      17363139: {} # Greater_Quadav
+      17363140: {} # Onyx_Quadav
+  - members:
+      17363141: {} # Veteran_Quadav
+      17363142: {} # Greater_Quadav
+      17363143: {} # Onyx_Quadav
+  - members:
+      17363144: {} # Veteran_Quadav
+      17363145: {} # Greater_Quadav
+      17363146: {} # Onyx_Quadav
+  - members:
+      17363148: {} # Young_Quadav
+      17363149: {} # Amethyst_Quadav
+      17363150: {} # Amber_Quadav
+  - members:
+      17363159: {} # Cave_Funguar
+      17363160: {} # Mine_Scorpion
+  - members:
+      17363163: {} # Amethyst_Quadav
+      17363164: {} # Amber_Quadav
+  - members:
+      17363165: {} # Veteran_Quadav
+      17363166: {} # Greater_Quadav
+      17363167: {} # Onyx_Quadav
+  - members:
+      17363168: {} # Veteran_Quadav
+      17363169: {} # Greater_Quadav
+      17363170: {} # Onyx_Quadav
+  - members:
+      17363172: {} # Veteran_Quadav
+      17363173: {} # Greater_Quadav
+      17363174: {} # Onyx_Quadav
+  - members:
+      17363182: {} # Veteran_Quadav
+      17363183: {} # Greater_Quadav
+      17363184: {} # Onyx_Quadav
+  - members:
+      17363186: {} # Veteran_Quadav
+      17363187: {} # Greater_Quadav
+      17363188: {} # Onyx_Quadav
+  - members:
+      17363190: {} # Veteran_Quadav
+      17363191: {} # Greater_Quadav
+      17363192: {} # Onyx_Quadav
+  - members:
+      17363194: {} # Greater_Quadav
+      17363195: {} # Onyx_Quadav
+  - members:
+      17363196: {} # Veteran_Quadav
+      17363198: {} # Onyx_Quadav
+  - members:
+      17363199: {} # Veteran_Quadav
+      17363200: {} # Greater_Quadav
+  - members:
+      17363202: {} # Veteran_Quadav
+      17363203: {} # Greater_Quadav
+      17363204: {} # Onyx_Quadav
+  - members:
+      17363210: {} # Greater_Quadav
+      17363211: {} # Onyx_Quadav
+  - members:
+      17363212: {} # Veteran_Quadav
+      17363214: {} # Onyx_Quadav
+  - members:
+      17363215: {} # Veteran_Quadav
+      17363216: {} # Greater_Quadav
+      17363217: {} # Onyx_Quadav
+  - members:
+      17363223: {} # Veteran_Quadav
+      17363224: {} # Greater_Quadav
+      17363225: {} # Onyx_Quadav
+  - members:
+      17363229: {} # Veteran_Quadav
+      17363230: {} # Greater_Quadav
+      17363231: {} # Onyx_Quadav
+  - members:
+      17363232: {} # Veteran_Quadav
+      17363233: {} # Greater_Quadav
+  - members:
+      17363234: {} # Onyx_Quadav
+      17363235: {} # Veteran_Quadav
+  - members:
+      17363236: {} # Greater_Quadav
+      17363237: {} # Onyx_Quadav
+  - members:
+      17363240: {} # Mine_Scorpion
+      17363241: {} # Scimitar_Scorpion
+  - members:
+      17363242: {} # Veteran_Quadav
+      17363243: {} # Greater_Quadav
+  - members:
+      17363244: {} # Onyx_Quadav
+      17363245: {} # Veteran_Quadav
+  - members:
+      17363246: {} # Greater_Quadav
+      17363247: {} # Onyx_Quadav
+  - members:
+      17363248: {} # Veteran_Quadav
+      17363249: {} # Greater_Quadav
+      17363250: {} # Onyx_Quadav
+  - members:
+      17363251: {} # Old_Quadav
+      17363252: {} # Copper_Quadav
+  - members:
+      17363253: {} # Veteran_Quadav
+      17363254: {} # Greater_Quadav
+      17363255: {} # Onyx_Quadav
+  - members:
+      17363256: {} # Old_Quadav
+      17363257: {} # Copper_Quadav
+      17363258: {} # BeHya_Hundredwall
+  - members:
+      17363261: {} # Veteran_Quadav
+      17363262: {} # Greater_Quadav
+      17363263: {} # Onyx_Quadav
+  - members:
+      17363264: {} # Old_Quadav
+      17363265: {} # Copper_Quadav
+  - members:
+      17363266: {} # Veteran_Quadav
+      17363267: {} # Greater_Quadav
+  - members:
+      17363272: {} # Greater_Quadav
+      17363273: {} # Onyx_Quadav
+  - members:
+      17363274: {} # Veteran_Quadav
+      17363275: {} # Greater_Quadav
+      17363276: {} # Onyx_Quadav
+  - members:
+      17363280: {} # Veteran_Quadav
+      17363282: {} # Onyx_Quadav
+  - members:
+      17363283: {} # Mine_Scorpion
+      17363284: {} # Scimitar_Scorpion
+  - members:
+      17363285: {} # Veteran_Quadav
+      17363286: {} # Greater_Quadav
+      17363287: {} # Onyx_Quadav
+  - members:
+      17363289: {} # Copper_Quadav
+      17363290: {} # Brass_Quadav
+  - members:
+      17363291: {} # Old_Quadav
+      17363293: {} # Brass_Quadav
+  - members:
+      17363294: {} # Old_Quadav
+      17363295: {} # Copper_Quadav
+  - members:
+      17363297: {} # Old_Quadav
+      17363298: {} # Copper_Quadav
+      17363299: {} # Brass_Quadav
+  - members:
+      17363300: {} # Old_Quadav
+      17363301: {} # Copper_Quadav
+      17363302: {} # Brass_Quadav
+  - members:
+      17363306: {} # Old_Quadav
+      17363307: {} # Copper_Quadav
+      17363308: {} # Brass_Quadav
+  - members:
+      17363309: {} # Old_Quadav
+      17363310: {} # Copper_Quadav
+      17363311: {} # Brass_Quadav
+  - members:
+      17363312: {} # Old_Quadav
+      17363313: {} # Copper_Quadav
+      17363314: {} # Brass_Quadav
+  - members:
+      17363315: {} # Old_Quadav
+      17363316: {} # Copper_Quadav
+      17363317: {} # Brass_Quadav

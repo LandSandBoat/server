@@ -1,0 +1,3294 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Bashful_Heartwing:
+    id:            5098
+    species:       heartwing
+    spell_list_id: 21
+    skill_list_id: 343
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2575
+        entity_flags: 129
+        hitbox:         4
+      spawn:
+        respawn: 300
+
+  Bellicose_Tarichuk:
+    id:            5097
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1350
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lizard_egg
+        - chance: rare
+          item:   eft_skin
+        - chance: rare
+          item:   zaffre_yggrete_shard_ii
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        lizard_egg: 0
+        eft_skin:   0
+
+  Blood_Toad:
+    id:            4898
+    species:       blue_poroggo
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2666
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Broadleaf_Palm:
+    id:      4897
+    species: unclassified
+    type:    [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 1580
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Careening_Twitherym:
+    id:            5007
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2535
+        entity_flags: 129
+        name_prefix:   64
+        hitbox:         6
+      spawn:
+        respawn: 300
+
+  Cinder_Crab:
+    id:            4895
+    species:       crab
+    type:          [notorious]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Craklaw_FdH:
+    id:            4886
+    species:       craklaw
+    type:          [notorious]
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Cunning_Craklaw:
+    id:            6372
+    species:       craklaw
+    type:          [notorious]
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Delectable_Orobon:
+    id:            6915
+    species:       orobon
+    type:          [fished]
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divagating_Jagil:
+    id:            6917
+    species:       pugil
+    type:          [notorious]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 135
+        model_size:     3
+        hitbox:        39
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Epigean_Leafkin:
+    id:            4965
+    species:       leafkin
+    skill_list_id: 455
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    8
+          light:   11
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      2
+          slow:         4
+          poison:       8
+          light_sleep: 11
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2530
+        entity_flags: 1153
+        hitbox:          6
+      spawn:
+        respawn: 300
+
+  Faded_Craklaw:
+    id:            6916
+    species:       craklaw
+    type:          [notorious]
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 135
+        model_size:     3
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Famished_Jagil:
+    id:            6914
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Glutinous_Clot:
+    id:            4964
+    species:       clot
+    skill_list_id: 67
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -8750
+          h2h:      -8750
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags: 129
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Gurgling_Crab:
+    id:            6913
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Hoary_Craklaw:
+    id:            5095
+    species:       craklaw
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 129
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   craklaw_pincer
+        - chance: rare
+          item:   zaffre_yggrete_shard_iii
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        craklaw_pincer: 0
+
+  Insidio:
+    id:            6920
+    species:       orobon
+    type:          [notorious]
+    skill_list_id: 889
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1730
+        entity_flags: 129
+        hitbox:        32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Krabakarpo:
+    id:            6919
+    species:       crab
+    type:          [notorious]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 358
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nerrivik:
+    id:            6918
+    species:       orobon
+    type:          [notorious]
+    skill_list_id: 889
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1730
+        entity_flags:  1695
+        animation_sub:    5
+        name_prefix:     32
+        model_size:       3
+        hitbox:          40
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Numbing_Blossom:
+    id:            5013
+    species:       unclassified
+    type:          [notorious]
+    skill_list_id: 341
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2776
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Perfidious_Crab:
+    id:            5096
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   slice_of_land_crab_meat
+        - chance: rare
+          item:   crab_shell
+        - chance: rare
+          item:   zaffre_yggrete_shard_ii
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Phantasmagoric_Umbril:
+    id:            4970
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  129
+        animation_sub:   5
+        name_prefix:     2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+      stats:
+        mp: 500
+    loot:
+      drops:
+        - chance: rare
+          item:   jar_of_umbril_ooze
+        - chance: rare
+          item:   leafkin_frond
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        leafkin_frond:      0
+        jar_of_umbril_ooze: 0
+
+  Primordial_Orobon:
+    id:            4973
+    species:       orobon
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   chunk_of_orobon_meat
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        orobon_lure:          0
+        chunk_of_orobon_meat: 0
+
+  Primrose_Jagil:
+    id:            4768
+    species:       pugil
+    skill_list_id: 709
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Pungent_Patricia:
+    id:            6921
+    species:       morbol
+    type:          [notorious]
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 382
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Riverwashed_Toad:
+    id:      5093
+    species: toad
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2666
+        entity_flags: 129
+        hitbox:         6
+      spawn:
+        respawn: 300
+
+  Scummy_Slug:
+    id:            4969
+    species:       slug
+    skill_list_id: 231
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          thunder: -1
+          water:   11
+        rank_status:
+          paralyze: -1
+          bind:     -1
+          poison:   11
+      render:
+        look:
+          type:  standard
+          model: 2021
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   slug_eye
+        - chance: rare
+          item:   zaffre_yggrete_shard_iv
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        slug_eye: 0
+
+  Sere_Stump:
+    id:      4893
+    species: unclassified
+    type:    [notorious]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2780
+        entity_flags: 641
+        hitbox:         8
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Shrouded_Obdella:
+    id:            4916
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Skinsipper_Chigoe:
+    id:            4971
+    species:       chigoe
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: club
+        delay: 12
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1748
+        entity_flags: 2689
+        name_vis:       24
+        hitbox:          5
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   zaffre_yggrete_shard_i
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+
+  Tchakka:
+    id:            4925
+    species:       rockfin
+    skill_list_id: 461
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    9
+          ice:     9
+          wind:    4
+          earth:   4
+          thunder: 2
+          water:   2
+          light:   6
+          dark:    4
+        rank_status:
+          paralyze:    9
+          bind:        9
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 6
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2505
+        entity_flags: 159
+        hitbox:        28
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Treefrost_Gefyrst:
+    id:            4972
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 500
+
+  Vampire_Leech:
+    id:            4966
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 641
+        hitbox:         9
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: rare
+          item:   zaffre_yggrete_shard_v
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Velkk_Destructeur:
+    id:            4968
+    species:       red_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   velkk_necklace
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        velkk_necklace: 0
+        velkk_mask:     0
+
+  Velkk_Sage:
+    id:            4967
+    species:       blue_velkk
+    spell_list_id: 20
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   velkk_mask
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        velkk_necklace: 0
+        velkk_mask:     0
+
+  Vorst_Gnat:
+    id:            4974
+    species:       gnat
+    skill_list_id: 131
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2013
+        entity_flags: 129
+        hitbox:         8
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   gnat_wing
+        - chance: rare
+          item:   zaffre_yggrete_shard_iv
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        gnat_wing: 0
+
+  Wetlands_Orobon:
+    id:            4894
+    species:       orobon
+    type:          [notorious]
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Zoldeff_Jagil:
+    id:            5094
+    species:       pugil
+    skill_list_id: 709
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 129
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+        - chance: rare
+          item:   shall_shell
+        - chance: rare
+          item:   zaffre_yggrete_shard_i
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Zoldeff_Jagil_Small:
+    id:            7260
+    display_name:  Zoldeff_Jagil
+    species:       pugil
+    skill_list_id: 709
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+        - chance: rare
+          item:   shall_shell
+        - chance: rare
+          item:   zaffre_yggrete_shard_i
+        - chance: very_rare
+          item:   zaffre_yggrete_rock
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+spawns:
+  17850369:
+    template: Gurgling_Crab
+    at:       [1.000, 1.000, 1.000]
+  17850370:
+    template: Gurgling_Crab
+    at:       [1.000, 1.000, 1.000]
+  17850371:
+    template: Gurgling_Crab
+    at:       [1.000, 1.000, 1.000]
+  17850372:
+    template: Famished_Jagil
+    at:       [1.000, 1.000, 1.000]
+  17850373:
+    template: Famished_Jagil
+    at:       [1.000, 1.000, 1.000]
+  17850374:
+    template: Delectable_Orobon
+    at:       [1.000, 1.000, 1.000]
+  17850375:
+    template: Riverwashed_Toad
+    at:       [231.129, -1.998, 371.588, 33]
+    level:    [102, 110]
+  17850376:
+    template: Riverwashed_Toad
+    at:       [231.998, -1.963, 366.346, 98]
+    level:    [102, 110]
+  17850377:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [229.802, -2.014, 377.722, 198]
+    level:    [102, 110]
+  17850378:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [238.501, -2.415, 367.437, 25]
+    level:    [102, 110]
+  17850379:
+    template: Riverwashed_Toad
+    at:       [233.283, -2.269, 357.486, 246]
+    level:    [102, 110]
+  17850380:
+    template: Riverwashed_Toad
+    at:       [224.597, -1.217, 355.908, 173]
+    level:    [102, 110]
+  17850381:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [234.440, -2.353, 356.483, 134]
+    level:    [102, 110]
+  17850382:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [224.092, -1.498, 346.434, 99]
+    level:    [102, 110]
+  17850383:
+    template: Riverwashed_Toad
+    at:       [288.985, -2.174, 401.777, 204]
+    level:    [102, 110]
+  17850384:
+    template: Riverwashed_Toad
+    at:       [287.714, -2.236, 402.837, 245]
+    level:    [102, 110]
+  17850385:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [282.066, -2.574, 404.490, 52]
+    level:    [102, 110]
+  17850386:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [269.907, -2.644, 397.188, 96]
+    level:    [102, 110]
+  17850387:
+    template: Riverwashed_Toad
+    at:       [313.510, -1.899, 385.289, 157]
+    level:    [102, 110]
+  17850388:
+    template: Riverwashed_Toad
+    at:       [308.645, -2.160, 400.728, 215]
+    level:    [102, 110]
+  17850389:
+    template: Riverwashed_Toad
+    at:       [316.092, -2.497, 400.018, 182]
+    level:    [102, 110]
+  17850390:
+    template: Riverwashed_Toad
+    at:       [308.441, -2.196, 407.989, 245]
+    level:    [102, 110]
+  17850391:
+    template: Riverwashed_Toad
+    at:       [326.813, -2.259, 367.465, 254]
+    level:    [102, 110]
+  17850392:
+    template: Riverwashed_Toad
+    at:       [321.929, -1.898, 372.284, 246]
+    level:    [102, 110]
+  17850393:
+    template: Riverwashed_Toad
+    at:       [315.542, -2.198, 368.964, 25]
+    level:    [102, 110]
+  17850394:
+    template: Riverwashed_Toad
+    at:       [327.339, -1.988, 373.859, 252]
+    level:    [102, 110]
+  17850395:
+    template: Riverwashed_Toad
+    at:       [269.997, -4.570, 213.502, 216]
+    level:    [102, 110]
+  17850396:
+    template: Riverwashed_Toad
+    at:       [281.316, -2.658, 205.755, 88]
+    level:    [102, 110]
+  17850397:
+    template: Hoary_Craklaw
+    at:       [277.286, -2.603, 197.633, 27]
+    level:    [101, 104]
+  17850398:
+    template: Riverwashed_Toad
+    at:       [288.267, -2.996, 193.797, 39]
+    level:    [102, 110]
+  17850399:
+    template: Riverwashed_Toad
+    at:       [295.144, -4.342, 190.214, 169]
+    level:    [102, 110]
+  17850400:
+    template: Hoary_Craklaw
+    at:       [291.019, -3.292, 192.250, 60]
+    level:    [101, 104]
+  17850401:
+    template: Treefrost_Gefyrst
+    at:       [286.374, -3.176, 189.300, 151]
+    level:    [104, 104]
+  17850402:
+    template: Hoary_Craklaw
+    at:       [305.749, -2.773, 256.148, 42]
+    level:    [101, 104]
+  17850403:
+    template: Hoary_Craklaw
+    at:       [306.145, -2.656, 262.210, 54]
+    level:    [101, 104]
+  17850404:
+    template: Perfidious_Crab
+    at:       [409.368, -2.769, 84.861, 9]
+    level:    [102, 110]
+  17850405:
+    template: Perfidious_Crab
+    at:       [396.180, -2.279, 72.862, 205]
+    level:    [102, 110]
+  17850406:
+    template: Perfidious_Crab
+    at:       [390.791, -2.743, 79.670, 66]
+    level:    [102, 110]
+  17850407:
+    template: Perfidious_Crab
+    at:       [401.872, -2.462, 77.049, 234]
+    level:    [102, 110]
+  17850408:
+    template: Perfidious_Crab
+    at:       [398.946, -1.748, 65.040, 37]
+    level:    [102, 110]
+  17850409:
+    template: Perfidious_Crab
+    at:       [402.268, -2.042, 53.715, 198]
+    level:    [102, 110]
+  17850410:
+    template: Perfidious_Crab
+    at:       [406.098, -1.798, 63.540, 225]
+    level:    [102, 110]
+  17850411:
+    template: Bellicose_Tarichuk
+    at:       [408.524, -1.801, 60.577, 58]
+    level:    [102, 110]
+  17850412:
+    template: Phantasmagoric_Umbril
+    at:       [407.046, -1.843, 57.306, 227]
+    level:    [102, 104]
+  17850413:
+    template: Perfidious_Crab
+    at:       [402.904, -2.572, 35.991, 180]
+    level:    [102, 110]
+  17850414:
+    template: Perfidious_Crab
+    at:       [413.087, -2.507, 32.724, 38]
+    level:    [102, 110]
+  17850415:
+    template: Bellicose_Tarichuk
+    at:       [409.420, -2.150, 41.867, 173]
+    level:    [102, 110]
+  17850416:
+    template: Bellicose_Tarichuk
+    at:       [412.660, -1.853, 42.071, 228]
+    level:    [102, 110]
+  17850417:
+    template: Perfidious_Crab
+    at:       [407.186, -2.240, 48.254, 222]
+    level:    [102, 110]
+  17850418:
+    template: Bellicose_Tarichuk
+    at:       [434.053, -2.515, 34.692, 205]
+    level:    [102, 110]
+  17850419:
+    template: Bellicose_Tarichuk
+    at:       [445.442, -2.643, 40.360, 227]
+    level:    [102, 110]
+  17850420:
+    template: Bellicose_Tarichuk
+    at:       [429.926, -2.246, 46.506, 245]
+    level:    [102, 110]
+  17850421:
+    template: Phantasmagoric_Umbril
+    at:       [429.578, -2.263, 42.893, 95]
+    level:    [102, 104]
+  17850422:
+    template: Perfidious_Crab
+    at:       [478.033, -2.074, 146.918, 148]
+    level:    [102, 110]
+  17850423:
+    template: Perfidious_Crab
+    at:       [484.092, -2.469, 159.628, 185]
+    level:    [102, 110]
+  17850424:
+    template: Perfidious_Crab
+    at:       [491.816, -2.074, 160.037, 175]
+    level:    [102, 110]
+  17850425:
+    template: Hoary_Craklaw
+    at:       [487.455, -2.085, 148.128, 245]
+    level:    [101, 104]
+  17850426:
+    template: Perfidious_Crab
+    at:       [507.395, -1.738, 148.739, 245]
+    level:    [102, 110]
+  17850427:
+    template: Perfidious_Crab
+    at:       [509.136, -1.814, 147.626, 201]
+    level:    [102, 110]
+  17850428:
+    template: Perfidious_Crab
+    at:       [502.061, -1.601, 157.261, 40]
+    level:    [102, 110]
+  17850429:
+    template: Perfidious_Crab
+    at:       [504.635, -1.700, 157.193, 98]
+    level:    [102, 110]
+  17850430:
+    template: Treefrost_Gefyrst
+    at:       [504.526, -1.637, 155.004, 160]
+    level:    [104, 104]
+  17850431:
+    template: Perfidious_Crab
+    at:       [482.069, -2.345, 126.700, 32]
+    level:    [102, 110]
+  17850432:
+    template: Perfidious_Crab
+    at:       [486.700, -1.624, 137.324, 139]
+    level:    [102, 110]
+  17850433:
+    template: Perfidious_Crab
+    at:       [489.500, -1.957, 132.173, 30]
+    level:    [102, 110]
+  17850434:
+    template: Hoary_Craklaw
+    at:       [478.630, -1.859, 134.638, 180]
+    level:    [101, 104]
+  17850435:
+    template: Perfidious_Crab
+    at:       [503.606, -1.827, 137.354, 191]
+    level:    [102, 110]
+  17850436:
+    template: Perfidious_Crab
+    at:       [509.666, -2.115, 123.693, 202]
+    level:    [102, 110]
+  17850437:
+    template: Perfidious_Crab
+    at:       [522.942, -2.325, 128.525, 111]
+    level:    [102, 110]
+  17850438:
+    template: Perfidious_Crab
+    at:       [504.144, -1.720, 121.029, 227]
+    level:    [102, 110]
+  17850439:
+    template: Treefrost_Gefyrst
+    at:       [516.060, -2.482, 120.035, 56]
+    level:    [104, 104]
+  17850440:
+    template: Riverwashed_Toad
+    at:       [429.881, -2.579, -41.207, 77]
+    level:    [102, 110]
+  17850441:
+    template: Riverwashed_Toad
+    at:       [436.394, -2.543, -37.701, 212]
+    level:    [102, 110]
+  17850442:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [434.345, -2.049, -46.182, 205]
+    level:    [102, 110]
+  17850443:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [434.428, -2.563, -40.247, 213]
+    level:    [102, 110]
+  17850444:
+    template: Riverwashed_Toad
+    at:       [446.156, -2.562, -39.741, 216]
+    level:    [102, 110]
+  17850445:
+    template: Riverwashed_Toad
+    at:       [447.286, -2.641, -41.790, 44]
+    level:    [102, 110]
+  17850446:
+    template: Zoldeff_Jagil
+    at:       [447.022, -2.625, -42.091, 41]
+    level:    [102, 110]
+  17850447:
+    template: Zoldeff_Jagil
+    at:       [448.342, -3.283, -32.013, 189]
+    level:    [102, 110]
+  17850448:
+    template: Bellicose_Tarichuk
+    at:       [87.754, -3.241, 430.858, 11]
+    level:    [102, 110]
+  17850449:
+    template: Bellicose_Tarichuk
+    at:       [87.522, -2.249, 437.094, 121]
+    level:    [102, 110]
+  17850450:
+    template: Bellicose_Tarichuk
+    at:       [87.906, -3.091, 431.035, 203]
+    level:    [102, 110]
+  17850451:
+    template: Bellicose_Tarichuk
+    at:       [87.933, -2.236, 441.919, 245]
+    level:    [102, 110]
+  17850452:
+    template: Phantasmagoric_Umbril
+    at:       [89.334, -2.413, 434.591, 204]
+    level:    [102, 104]
+  17850453:
+    template: Treefrost_Gefyrst
+    at:       [84.731, -2.505, 442.821, 103]
+    level:    [104, 104]
+  17850454:
+    template: Bellicose_Tarichuk
+    at:       [108.649, -2.119, 441.458, 245]
+    level:    [102, 110]
+  17850455:
+    template: Bellicose_Tarichuk
+    at:       [104.731, -1.840, 440.125, 187]
+    level:    [102, 110]
+  17850456:
+    template: Bellicose_Tarichuk
+    at:       [115.988, -2.472, 439.963, 204]
+    level:    [102, 110]
+  17850457:
+    template: Bellicose_Tarichuk
+    at:       [116.307, -2.609, 433.702, 206]
+    level:    [102, 110]
+  17850458:
+    template: Phantasmagoric_Umbril
+    at:       [111.587, -3.170, 430.243, 95]
+    level:    [102, 104]
+  17850459:
+    template: Treefrost_Gefyrst
+    at:       [119.116, -2.509, 441.418, 139]
+    level:    [104, 104]
+  17850460:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [85.246, -2.562, 356.605, 87]
+    level:    [102, 110]
+  17850461:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [85.517, -2.557, 356.664, 91]
+    level:    [102, 110]
+  17850462:
+    template: Hoary_Craklaw
+    at:       [89.761, -2.741, 356.100, 32]
+    level:    [101, 104]
+  17850463:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [89.636, -2.522, 343.369, 40]
+    level:    [102, 110]
+  17850464:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [72.477, -3.167, 344.556, 70]
+    level:    [102, 110]
+  17850465:
+    template: Hoary_Craklaw
+    at:       [79.318, -2.178, 349.456, 130]
+    level:    [101, 104]
+  17850466:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [90.041, -2.660, 322.874, 226]
+    level:    [102, 110]
+  17850467:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [79.220, -2.505, 322.774, 166]
+    level:    [102, 110]
+  17850468:
+    template: Hoary_Craklaw
+    at:       [89.102, -2.641, 324.544, 254]
+    level:    [101, 104]
+  17850469:
+    template: Skinsipper_Chigoe
+    at:       [44.755, -2.608, 288.769, 185]
+    level:    [102, 104]
+  17850470:
+    template: Skinsipper_Chigoe
+    at:       [42.531, -2.618, 289.706, 55]
+    level:    [102, 104]
+  17850471:
+    template: Skinsipper_Chigoe
+    at:       [39.675, -2.679, 289.870, 124]
+    level:    [102, 104]
+  17850472:
+    template: Phantasmagoric_Umbril
+    at:       [44.301, -2.622, 290.004, 166]
+    level:    [102, 104]
+  17850473:
+    template: Skinsipper_Chigoe
+    at:       [30.103, -3.314, 273.474, 66]
+    level:    [102, 104]
+  17850474:
+    template: Skinsipper_Chigoe
+    at:       [40.765, -2.557, 279.558, 21]
+    level:    [102, 104]
+  17850475:
+    template: Skinsipper_Chigoe
+    at:       [35.381, -2.777, 273.152, 51]
+    level:    [102, 104]
+  17850476:
+    template: Hoary_Craklaw
+    at:       [40.198, -2.608, 273.558, 18]
+    level:    [101, 104]
+  17850477:
+    template: Skinsipper_Chigoe
+    at:       [74.204, -2.595, 199.820, 36]
+    level:    [102, 104]
+  17850478:
+    template: Skinsipper_Chigoe
+    at:       [74.197, -2.658, 196.748, 217]
+    level:    [102, 104]
+  17850479:
+    template: Hoary_Craklaw
+    at:       [74.890, -2.611, 196.161, 197]
+    level:    [101, 104]
+  17850480:
+    template: Treefrost_Gefyrst
+    at:       [75.579, -2.537, 198.316, 63]
+    level:    [104, 104]
+  17850481:
+    template: Skinsipper_Chigoe
+    at:       [81.675, -2.641, 207.569, 179]
+    level:    [102, 104]
+  17850482:
+    template: Scummy_Slug
+    at:       [-198.895, -2.125, 530.763, 12]
+    level:    [102, 104]
+  17850483:
+    template: Scummy_Slug
+    at:       [-192.202, -2.161, 525.455, 63]
+    level:    [102, 104]
+  17850484:
+    template: Scummy_Slug
+    at:       [-192.323, -1.672, 535.486, 202]
+    level:    [102, 104]
+  17850485:
+    template: Phantasmagoric_Umbril
+    at:       [-193.259, -2.301, 521.805, 226]
+    level:    [102, 104]
+  17850486:
+    template: Scummy_Slug
+    at:       [-163.018, -2.496, 516.461, 116]
+    level:    [102, 104]
+  17850487:
+    template: Scummy_Slug
+    at:       [-163.864, -2.477, 517.870, 64]
+    level:    [102, 104]
+  17850488:
+    template: Scummy_Slug
+    at:       [-164.419, -2.203, 527.919, 208]
+    level:    [102, 104]
+  17850489:
+    template: Scummy_Slug
+    at:       [-173.800, -1.865, 560.553, 163]
+    level:    [102, 104]
+  17850490:
+    template: Scummy_Slug
+    at:       [-162.343, -2.170, 548.470, 143]
+    level:    [102, 104]
+  17850491:
+    template: Scummy_Slug
+    at:       [-172.160, -1.998, 553.541, 221]
+    level:    [102, 104]
+  17850492:
+    template: Phantasmagoric_Umbril
+    at:       [-176.277, -1.649, 547.489, 70]
+    level:    [102, 104]
+  17850493:
+    template: Scummy_Slug
+    at:       [-160.785, -2.606, 445.200, 182]
+    level:    [102, 104]
+  17850494:
+    template: Scummy_Slug
+    at:       [-167.998, -2.797, 437.848, 76]
+    level:    [102, 104]
+  17850495:
+    template: Scummy_Slug
+    at:       [-137.611, -1.682, 443.064, 253]
+    level:    [102, 104]
+  17850496:
+    template: Scummy_Slug
+    at:       [-142.661, -1.919, 435.000, 177]
+    level:    [102, 104]
+  17850497:
+    template: Phantasmagoric_Umbril
+    at:       [-130.720, -2.079, 441.721, 53]
+    level:    [102, 104]
+  17850498:
+    template: Scummy_Slug
+    at:       [-118.004, -2.518, 442.856, 252]
+    level:    [102, 104]
+  17850499:
+    template: Scummy_Slug
+    at:       [-112.189, -2.628, 442.059, 227]
+    level:    [102, 104]
+  17850500:
+    template: Skinsipper_Chigoe
+    at:       [-206.142, -3.183, 330.241, 137]
+    level:    [102, 104]
+  17850501:
+    template: Skinsipper_Chigoe
+    at:       [-207.566, -2.801, 324.929, 103]
+    level:    [102, 104]
+  17850502:
+    template: Skinsipper_Chigoe
+    at:       [-201.800, -2.778, 313.199, 69]
+    level:    [102, 104]
+  17850503:
+    template: Scummy_Slug
+    at:       [-203.953, -2.799, 329.566, 221]
+    level:    [102, 104]
+  17850504:
+    template: Skinsipper_Chigoe
+    at:       [-176.600, -1.772, 322.591, 56]
+    level:    [102, 104]
+  17850505:
+    template: Skinsipper_Chigoe
+    at:       [-177.468, -3.042, 313.097, 22]
+    level:    [102, 104]
+  17850506:
+    template: Skinsipper_Chigoe
+    at:       [-179.410, -2.365, 315.568, 150]
+    level:    [102, 104]
+  17850507:
+    template: Phantasmagoric_Umbril
+    at:       [-183.596, -1.684, 319.634, 9]
+    level:    [102, 104]
+  17850508:
+    template: Skinsipper_Chigoe
+    at:       [-166.289, -2.426, 323.848, 51]
+    level:    [102, 104]
+  17850509:
+    template: Skinsipper_Chigoe
+    at:       [-170.258, -2.253, 325.869, 190]
+    level:    [102, 104]
+  17850510:
+    template: Skinsipper_Chigoe
+    at:       [-164.315, -2.577, 315.808, 181]
+    level:    [102, 104]
+  17850511:
+    template: Scummy_Slug
+    at:       [-170.496, -2.256, 328.718, 186]
+    level:    [102, 104]
+  17850512:
+    template: Skinsipper_Chigoe
+    at:       [-225.068, -2.629, 424.617, 139]
+    level:    [102, 104]
+  17850513:
+    template: Skinsipper_Chigoe
+    at:       [-226.697, -2.868, 419.200, 135]
+    level:    [102, 104]
+  17850514:
+    template: Skinsipper_Chigoe
+    at:       [-219.621, -2.789, 423.279, 163]
+    level:    [102, 104]
+  17850515:
+    template: Treefrost_Gefyrst
+    at:       [-221.153, -5.426, 409.236, 28]
+    level:    [104, 104]
+  17850516:
+    template: Careening_Twitherym
+    at:       [471.292, -2.436, -155.741, 103]
+    level:    [101, 103]
+  17850517:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [473.014, -2.569, -162.285, 15]
+    level:    [102, 110]
+  17850518:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [464.317, -1.929, -150.421, 83]
+    level:    [102, 110]
+  17850519:
+    template: Treefrost_Gefyrst
+    at:       [471.426, -2.512, -156.588, 103]
+    level:    [104, 104]
+  17850520:
+    template: Careening_Twitherym
+    at:       [493.640, -2.319, -154.449, 97]
+    level:    [101, 103]
+  17850521:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [484.158, -2.386, -158.663, 190]
+    level:    [102, 110]
+  17850522:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [493.534, -1.981, -151.415, 221]
+    level:    [102, 110]
+  17850523:
+    template: Treefrost_Gefyrst
+    at:       [489.861, -2.734, -162.369, 39]
+    level:    [104, 104]
+  17850524:
+    template: Careening_Twitherym
+    at:       [449.493, -2.809, -237.228, 26]
+    level:    [101, 103]
+  17850525:
+    template: Careening_Twitherym
+    at:       [444.915, -2.799, -232.294, 166]
+    level:    [101, 103]
+  17850526:
+    template: Careening_Twitherym
+    at:       [442.165, -2.794, -231.158, 241]
+    level:    [101, 103]
+  17850527:
+    template: Hoary_Craklaw
+    at:       [446.920, -2.631, -240.829, 88]
+    level:    [101, 104]
+  17850528:
+    template: Careening_Twitherym
+    at:       [447.487, -2.258, -260.733, 226]
+    level:    [101, 103]
+  17850529:
+    template: Careening_Twitherym
+    at:       [447.352, -1.878, -259.826, 156]
+    level:    [101, 103]
+  17850530:
+    template: Careening_Twitherym
+    at:       [436.091, -2.167, -256.243, 10]
+    level:    [101, 103]
+  17850531:
+    template: Phantasmagoric_Umbril
+    at:       [443.495, -2.127, -251.132, 225]
+    level:    [102, 104]
+  17850532:
+    template: Careening_Twitherym
+    at:       [444.498, -2.485, -280.424, 64]
+    level:    [101, 103]
+  17850533:
+    template: Careening_Twitherym
+    at:       [448.489, -2.612, -274.864, 164]
+    level:    [101, 103]
+  17850534:
+    template: Careening_Twitherym
+    at:       [433.045, -2.671, -274.413, 118]
+    level:    [101, 103]
+  17850535:
+    template: Hoary_Craklaw
+    at:       [442.509, -2.292, -270.745, 216]
+    level:    [101, 104]
+  17850536:
+    template: Careening_Twitherym
+    at:       [562.183, -2.776, -230.317, 199]
+    level:    [101, 103]
+  17850537:
+    template: Careening_Twitherym
+    at:       [560.721, -2.531, -240.006, 22]
+    level:    [101, 103]
+  17850538:
+    template: Careening_Twitherym
+    at:       [557.517, -2.516, -237.839, 70]
+    level:    [101, 103]
+  17850539:
+    template: Careening_Twitherym
+    at:       [554.951, -2.748, -231.139, 55]
+    level:    [101, 103]
+  17850540:
+    template: Treefrost_Gefyrst
+    at:       [455.639, -0.500, -401.881, 115]
+    level:    [104, 104]
+  17850541:
+    template: Careening_Twitherym
+    at:       [448.922, -2.196, -360.887, 83]
+    level:    [101, 103]
+  17850542:
+    template: Careening_Twitherym
+    at:       [442.452, -2.509, -360.761, 73]
+    level:    [101, 103]
+  17850543:
+    template: Careening_Twitherym
+    at:       [439.337, -2.275, -365.901, 100]
+    level:    [101, 103]
+  17850544:
+    template: Careening_Twitherym
+    at:       [443.061, -2.123, -368.487, 91]
+    level:    [101, 103]
+  17850545:
+    template: Primordial_Orobon
+    at:       [195.895, -0.500, -402.351, 102]
+    level:    [103, 104]
+  17850546:
+    template: Primordial_Orobon
+    at:       [189.271, -0.500, -395.316, 106]
+    level:    [103, 104]
+  17850547:
+    template: Treefrost_Gefyrst
+    at:       [209.736, -0.500, -397.375, 140]
+    level:    [104, 104]
+  17850548:
+    template: Primordial_Orobon
+    at:       [226.873, -0.500, -398.162, 219]
+    level:    [103, 104]
+  17850549:
+    template: Primordial_Orobon
+    at:       [223.795, -0.500, -395.461, 105]
+    level:    [103, 104]
+  17850550:
+    template: Treefrost_Gefyrst
+    at:       [242.550, -0.500, -398.670, 194]
+    level:    [104, 104]
+  17850551:
+    template: Vorst_Gnat
+    at:       [212.976, -1.923, -364.486, 10]
+    level:    [102, 104]
+  17850552:
+    template: Vorst_Gnat
+    at:       [214.063, -2.005, -356.399, 27]
+    level:    [102, 104]
+  17850553:
+    template: Vorst_Gnat
+    at:       [202.453, -2.485, -359.354, 218]
+    level:    [102, 104]
+  17850554:
+    template: Vorst_Gnat
+    at:       [242.148, -2.509, -363.076, 38]
+    level:    [102, 104]
+  17850555:
+    template: Vorst_Gnat
+    at:       [236.070, -2.360, -366.255, 204]
+    level:    [102, 104]
+  17850556:
+    template: Vorst_Gnat
+    at:       [228.792, -3.417, -351.138, 134]
+    level:    [102, 104]
+  17850557:
+    template: Vorst_Gnat
+    at:       [215.676, -2.763, -297.562, 198]
+    level:    [102, 104]
+  17850558:
+    template: Vorst_Gnat
+    at:       [222.943, -3.787, -305.080, 106]
+    level:    [102, 104]
+  17850559:
+    template: Vorst_Gnat
+    at:       [216.319, -3.017, -301.513, 115]
+    level:    [102, 104]
+  17850560:
+    template: Vorst_Gnat
+    at:       [223.021, -2.745, -297.671, 253]
+    level:    [102, 104]
+  17850561:
+    template: Phantasmagoric_Umbril
+    at:       [219.364, -2.855, -300.200, 248]
+    level:    [102, 104]
+  17850562:
+    template: Vorst_Gnat
+    at:       [219.926, -2.668, -174.708, 243]
+    level:    [102, 104]
+  17850563:
+    template: Vorst_Gnat
+    at:       [216.317, -4.135, -184.512, 125]
+    level:    [102, 104]
+  17850564:
+    template: Vorst_Gnat
+    at:       [215.441, -4.586, -185.871, 165]
+    level:    [102, 104]
+  17850565:
+    template: Vorst_Gnat
+    at:       [220.977, -4.530, -185.950, 184]
+    level:    [102, 104]
+  17850566:
+    template: Phantasmagoric_Umbril
+    at:       [226.052, -3.289, -180.549, 58]
+    level:    [102, 104]
+  17850567:
+    template: Scummy_Slug
+    at:       [151.095, -3.229, -230.873, 192]
+    level:    [102, 104]
+  17850568:
+    template: Scummy_Slug
+    at:       [155.738, -2.817, -229.621, 219]
+    level:    [102, 104]
+  17850569:
+    template: Scummy_Slug
+    at:       [164.166, -2.577, -240.833, 106]
+    level:    [102, 104]
+  17850570:
+    template: Scummy_Slug
+    at:       [162.644, -2.516, -20.082, 70]
+    level:    [102, 104]
+  17850571:
+    template: Primordial_Orobon
+    at:       [54.251, -0.492, -437.022, 202]
+    level:    [103, 104]
+  17850572:
+    template: Primordial_Orobon
+    at:       [47.255, -0.499, -430.889, 216]
+    level:    [103, 104]
+  17850573:
+    template: Treefrost_Gefyrst
+    at:       [52.777, -0.500, -435.079, 186]
+    level:    [104, 104]
+  17850574:
+    template: Primordial_Orobon
+    at:       [68.501, -0.499, -430.938, 163]
+    level:    [103, 104]
+  17850575:
+    template: Primordial_Orobon
+    at:       [61.488, -0.499, -435.827, 101]
+    level:    [103, 104]
+  17850576:
+    template: Treefrost_Gefyrst
+    at:       [73.322, -0.489, -442.690, 40]
+    level:    [104, 104]
+  17850577:
+    template: Vorst_Gnat
+    at:       [42.103, -2.824, -391.985, 215]
+    level:    [102, 104]
+  17850578:
+    template: Vorst_Gnat
+    at:       [42.959, -2.140, -409.200, 85]
+    level:    [102, 104]
+  17850579:
+    template: Vorst_Gnat
+    at:       [47.045, -3.117, -392.888, 184]
+    level:    [102, 104]
+  17850580:
+    template: Vorst_Gnat
+    at:       [74.066, -2.338, -407.144, 68]
+    level:    [102, 104]
+  17850581:
+    template: Vorst_Gnat
+    at:       [61.306, -1.690, -402.781, 10]
+    level:    [102, 104]
+  17850582:
+    template: Vorst_Gnat
+    at:       [62.451, -1.682, -400.621, 247]
+    level:    [102, 104]
+  17850583:
+    template: Scummy_Slug
+    at:       [71.657, -2.416, -182.091, 87]
+    level:    [102, 104]
+  17850584:
+    template: Scummy_Slug
+    at:       [78.167, -1.748, -177.876, 95]
+    level:    [102, 104]
+  17850585:
+    template: Vorst_Gnat
+    at:       [84.813, -2.554, -197.600, 115]
+    level:    [102, 104]
+  17850586:
+    template: Vorst_Gnat
+    at:       [89.388, -1.820, -181.802, 249]
+    level:    [102, 104]
+  17850587:
+    template: Scummy_Slug
+    at:       [86.318, -2.408, -165.481, 138]
+    level:    [102, 104]
+  17850588:
+    template: Scummy_Slug
+    at:       [86.176, -2.170, -171.009, 125]
+    level:    [102, 104]
+  17850589:
+    template: Vorst_Gnat
+    at:       [83.790, -2.499, -163.089, 164]
+    level:    [102, 104]
+  17850590:
+    template: Vorst_Gnat
+    at:       [94.463, -2.006, -165.804, 220]
+    level:    [102, 104]
+  17850591:
+    template: Scummy_Slug
+    at:       [118.436, -2.572, -165.098, 235]
+    level:    [102, 104]
+  17850592:
+    template: Scummy_Slug
+    at:       [116.834, -2.696, -151.580, 27]
+    level:    [102, 104]
+  17850593:
+    template: Vorst_Gnat
+    at:       [106.464, -1.786, -161.114, 75]
+    level:    [102, 104]
+  17850594:
+    template: Vorst_Gnat
+    at:       [112.434, -2.251, -157.960, 4]
+    level:    [102, 104]
+  17850595:
+    template: Scummy_Slug
+    at:       [151.859, -2.782, -118.125, 10]
+    level:    [102, 104]
+  17850596:
+    template: Velkk_Destructeur
+    at:       [156.993, -3.000, -129.613, 231]
+    level:    [103, 105]
+  17850597:
+    template: Scummy_Slug
+    at:       [-163.968, -2.591, -113.583, 58]
+    level:    [102, 104]
+  17850598:
+    template: Velkk_Destructeur
+    at:       [164.839, -2.753, -111.029, 72]
+    level:    [103, 105]
+  17850599:
+    template: Velkk_Destructeur
+    at:       [180.028, -3.109, -59.951, 210]
+    level:    [103, 105]
+  17850600:
+    template: Velkk_Sage
+    at:       [181.212, -3.144, -59.852, 217]
+    level:    [103, 105]
+  17850601:
+    template: Vampire_Leech
+    at:       [-160.955, -2.746, -149.335, 50]
+    level:    [102, 103]
+  17850602:
+    template: Vampire_Leech
+    at:       [-169.578, -3.190, -150.688, 185]
+    level:    [102, 103]
+  17850603:
+    template: Phantasmagoric_Umbril
+    at:       [-166.889, -2.653, -158.238, 229]
+    level:    [102, 104]
+  17850604:
+    template: Vampire_Leech
+    at:       [-151.624, -4.290, -173.723, 37]
+    level:    [102, 103]
+  17850605:
+    template: Vampire_Leech
+    at:       [-159.252, -2.575, -158.348, 219]
+    level:    [102, 103]
+  17850606:
+    template: Numbing_Blossom
+    at:       [-158.102, -2.552, -164.843, 106]
+    level:    [1, 1]
+  17850607:
+    template: Vampire_Leech
+    at:       [-255.238, -4.290, -189.737, 206]
+    level:    [102, 103]
+  17850608:
+    template: Vampire_Leech
+    at:       [-251.160, -4.410, -185.024, 193]
+    level:    [102, 103]
+  17850609:
+    template: Phantasmagoric_Umbril
+    at:       [-249.500, -2.704, -200.377, 84]
+    level:    [102, 104]
+  17850610:
+    template: Vampire_Leech
+    at:       [-231.069, -3.086, -203.834, 187]
+    level:    [102, 103]
+  17850611:
+    template: Vampire_Leech
+    at:       [-235.049, -2.661, -201.261, 101]
+    level:    [102, 103]
+  17850612:
+    template: Numbing_Blossom
+    at:       [-224.399, -4.681, -210.041, 36]
+    level:    [1, 1]
+  17850613:
+    template: Vampire_Leech
+    at:       [-201.380, -2.769, -130.923, 121]
+    level:    [102, 103]
+  17850614:
+    template: Vampire_Leech
+    at:       [-208.583, -2.746, -123.301, 111]
+    level:    [102, 103]
+  17850615:
+    template: Vampire_Leech
+    at:       [-194.791, -2.725, -128.953, 89]
+    level:    [102, 103]
+  17850616:
+    template: Hoary_Craklaw
+    at:       [-200.559, -2.791, -131.284, 123]
+    level:    [101, 104]
+  17850617:
+    template: Phantasmagoric_Umbril
+    at:       [-197.629, -2.536, -118.053, 230]
+    level:    [102, 104]
+  17850618:
+    template: Vampire_Leech
+    at:       [-278.243, -2.755, -171.453, 14]
+    level:    [102, 103]
+  17850619:
+    template: Vampire_Leech
+    at:       [-285.901, -2.677, -165.086, 159]
+    level:    [102, 103]
+  17850620:
+    template: Vampire_Leech
+    at:       [-279.791, -2.818, -170.828, 122]
+    level:    [102, 103]
+  17850621:
+    template: Hoary_Craklaw
+    at:       [-284.011, -2.565, -159.100, 204]
+    level:    [101, 104]
+  17850622:
+    template: Phantasmagoric_Umbril
+    at:       [-276.169, -2.751, -152.447, 190]
+    level:    [102, 104]
+  17850623:
+    template: Vampire_Leech
+    at:       [-162.902, -2.576, 37.505, 233]
+    level:    [102, 103]
+  17850624:
+    template: Vampire_Leech
+    at:       [-157.051, -2.423, 45.069, 180]
+    level:    [102, 103]
+  17850625:
+    template: Velkk_Destructeur
+    at:       [-164.842, -2.425, 48.678, 242]
+    level:    [103, 105]
+  17850626:
+    template: Vampire_Leech
+    at:       [-157.484, -1.647, 63.282, 13]
+    level:    [102, 103]
+  17850627:
+    template: Vampire_Leech
+    at:       [-156.432, -2.464, 75.008, 27]
+    level:    [102, 103]
+  17850628:
+    template: Velkk_Sage
+    at:       [-160.708, -2.421, 75.172, 162]
+    level:    [103, 105]
+  17850629:
+    template: Vampire_Leech
+    at:       [-182.985, -1.805, 85.290, 23]
+    level:    [102, 103]
+  17850630:
+    template: Vampire_Leech
+    at:       [-177.004, -1.717, 77.793, 248]
+    level:    [102, 103]
+  17850631:
+    template: Velkk_Destructeur
+    at:       [-177.067, -1.927, 72.562, 14]
+    level:    [103, 105]
+  17850632:
+    template: Numbing_Blossom
+    at:       [-190.708, -2.220, 72.939, 93]
+    level:    [1, 1]
+  17850633:
+    template: Hoary_Craklaw
+    at:       [-309.869, -3.091, -74.040, 136]
+    level:    [101, 104]
+  17850634:
+    template: Hoary_Craklaw
+    at:       [-311.149, -2.805, -77.879, 118]
+    level:    [101, 104]
+  17850635:
+    template: Hoary_Craklaw
+    at:       [-330.354, -2.793, -80.438, 100]
+    level:    [101, 104]
+  17850636:
+    template: Hoary_Craklaw
+    at:       [-319.998, -2.617, -85.904, 157]
+    level:    [101, 104]
+  17850637:
+    template: Velkk_Sage
+    at:       [-409.291, -2.634, -202.339, 11]
+    level:    [103, 105]
+  17850638:
+    template: Velkk_Sage
+    at:       [-397.071, -1.922, -213.449, 88]
+    level:    [103, 105]
+  17850639:
+    template: Glutinous_Clot
+    at:       [-405.290, -2.551, -198.492, 166]
+    level:    [102, 104]
+  17850640:
+    template: Glutinous_Clot
+    at:       [-392.177, -2.596, -207.371, 10]
+    level:    [102, 104]
+  17850641:
+    template: Glutinous_Clot
+    at:       [-399.350, -2.555, -244.397, 42]
+    level:    [102, 104]
+  17850642:
+    template: Glutinous_Clot
+    at:       [-391.945, -2.209, -232.504, 40]
+    level:    [102, 104]
+  17850643:
+    template: Glutinous_Clot
+    at:       [-399.033, -2.506, -242.580, 216]
+    level:    [102, 104]
+  17850644:
+    template: Velkk_Destructeur
+    at:       [-393.019, -2.274, -242.976, 9]
+    level:    [103, 105]
+  17850645:
+    template: Scummy_Slug
+    at:       [-372.951, -2.033, -233.919, 230]
+    level:    [102, 104]
+  17850646:
+    template: Scummy_Slug
+    at:       [-377.989, -1.940, -246.292, 229]
+    level:    [102, 104]
+  17850647:
+    template: Glutinous_Clot
+    at:       [-382.846, -1.710, -238.775, 123]
+    level:    [102, 104]
+  17850648:
+    template: Glutinous_Clot
+    at:       [-379.029, -1.690, -236.861, 119]
+    level:    [102, 104]
+  17850649:
+    template: Numbing_Blossom
+    at:       [-371.195, -2.121, -230.976, 73]
+    level:    [1, 1]
+  17850650:
+    template: Scummy_Slug
+    at:       [-406.030, -2.082, -370.310, 4]
+    level:    [102, 104]
+  17850651:
+    template: Scummy_Slug
+    at:       [-393.275, -2.466, -371.432, 250]
+    level:    [102, 104]
+  17850652:
+    template: Treefrost_Gefyrst
+    at:       [-441.975, -0.498, -390.939, 153]
+    level:    [104, 104]
+  17850653:
+    template: Shrouded_Obdella
+    at:       [-431.593, -2.605, 80.179, 34]
+    level:    [102, 103]
+  17850654:
+    template: Shrouded_Obdella
+    at:       [-435.288, -2.480, 79.319, 63]
+    level:    [102, 103]
+  17850655:
+    template: Hoary_Craklaw
+    at:       [-435.453, -2.561, 73.001, 68]
+    level:    [101, 104]
+  17850656:
+    template: Shrouded_Obdella
+    at:       [-440.306, -1.897, 105.642, 105]
+    level:    [102, 103]
+  17850657:
+    template: Shrouded_Obdella
+    at:       [-442.427, -1.929, 106.890, 52]
+    level:    [102, 103]
+  17850658:
+    template: Hoary_Craklaw
+    at:       [-432.957, -2.797, 107.831, 27]
+    level:    [101, 104]
+  17850659:
+    template: Numbing_Blossom
+    at:       [-442.907, -2.214, 110.299, 44]
+    level:    [1, 1]
+  17850660:
+    template: Shrouded_Obdella
+    at:       [-431.335, -2.722, 117.430, 4]
+    level:    [102, 103]
+  17850661:
+    template: Shrouded_Obdella
+    at:       [-435.696, -2.514, 119.709, 72]
+    level:    [102, 103]
+  17850662:
+    template: Hoary_Craklaw
+    at:       [-438.163, -2.500, 118.469, 10]
+    level:    [101, 104]
+  17850663:
+    template: Shrouded_Obdella
+    at:       [-357.242, -2.536, 117.318, 208]
+    level:    [102, 103]
+  17850664:
+    template: Shrouded_Obdella
+    at:       [-362.445, -2.535, 122.104, 187]
+    level:    [102, 103]
+  17850665:
+    template: Hoary_Craklaw
+    at:       [-364.453, -2.704, 117.238, 217]
+    level:    [101, 104]
+  17850666:
+    template: Numbing_Blossom
+    level:    [1, 1]
+  17850667:
+    template: Shrouded_Obdella
+    at:       [-355.528, -2.898, 129.875, 151]
+    level:    [102, 103]
+  17850668:
+    template: Shrouded_Obdella
+    at:       [-355.720, -3.222, 131.789, 104]
+    level:    [102, 103]
+  17850669:
+    template: Hoary_Craklaw
+    at:       [-350.870, -3.115, 126.327, 76]
+    level:    [101, 104]
+  17850670:
+    template: Numbing_Blossom
+    at:       [-372.280, -2.274, -250.469, 25]
+    level:    [1, 1]
+  17850671:
+    template: Scummy_Slug
+    at:       [-371.140, -2.299, 195.649, 67]
+    level:    [102, 104]
+  17850672:
+    template: Glutinous_Clot
+    at:       [-357.263, -2.730, 195.160, 174]
+    level:    [102, 104]
+  17850673:
+    template: Glutinous_Clot
+    at:       [-366.029, -2.566, 195.007, 146]
+    level:    [102, 104]
+  17850674:
+    template: Velkk_Destructeur
+    at:       [-354.365, -2.371, 205.147, 139]
+    level:    [103, 105]
+  17850675:
+    template: Numbing_Blossom
+    at:       [-351.753, -2.788, 195.644, 122]
+    level:    [1, 1]
+  17850676:
+    template: Velkk_Sage
+    at:       [-358.179, -2.394, 232.988, 145]
+    level:    [103, 105]
+  17850677:
+    template: Velkk_Sage
+    at:       [-355.631, -2.311, 227.167, 73]
+    level:    [103, 105]
+  17850678:
+    template: Glutinous_Clot
+    at:       [-361.575, -2.502, -235.517, 72]
+    level:    [102, 104]
+  17850679:
+    template: Glutinous_Clot
+    at:       [-360.000, -2.500, 236.160, 113]
+    level:    [102, 104]
+  17850680:
+    template: Scummy_Slug
+    at:       [-397.522, -2.512, 196.785, 115]
+    level:    [102, 104]
+  17850681:
+    template: Glutinous_Clot
+    at:       [-400.000, -2.663, 206.359, 97]
+    level:    [102, 104]
+  17850682:
+    template: Glutinous_Clot
+    at:       [-399.646, -2.494, 201.142, 73]
+    level:    [102, 104]
+  17850683:
+    template: Velkk_Destructeur
+    at:       [-377.364, -1.669, 203.902, 137]
+    level:    [103, 105]
+  17850684:
+    template: Numbing_Blossom
+    level:    [1, 1]
+  17850685:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [263.714, -6.793, 254.861, 68]
+    level:    [102, 110]
+  17850686:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [268.678, -6.881, 258.098, 138]
+    level:    [102, 110]
+  17850687:
+    template: Perfidious_Crab
+    at:       [434.419, -6.653, 138.509, 134]
+    level:    [102, 110]
+  17850688:
+    template: Perfidious_Crab
+    at:       [425.365, -6.922, 133.240, 63]
+    level:    [102, 110]
+  17850689:
+    template: Zoldeff_Jagil_Small
+    script:   Zoldeff_Jagil
+    at:       [461.625, -6.748, -7.015, 55]
+    level:    [102, 110]
+  17850690:
+    template: Skinsipper_Chigoe
+    at:       [21.546, -6.752, 239.324, 182]
+    level:    [102, 104]
+  17850691:
+    template: Skinsipper_Chigoe
+    at:       [27.125, -6.855, 226.112, 233]
+    level:    [102, 104]
+  17850692:
+    template: Scummy_Slug
+    at:       [-140.035, -6.795, 471.403, 55]
+    level:    [102, 104]
+  17850693:
+    template: Skinsipper_Chigoe
+    at:       [-223.507, -6.556, 385.985, 192]
+    level:    [102, 104]
+  17850694:
+    template: Skinsipper_Chigoe
+    at:       [-220.758, -6.778, 385.918, 1]
+    level:    [102, 104]
+  17850695:
+    template: Careening_Twitherym
+    at:       [497.634, -6.754, -212.517, 83]
+    level:    [101, 103]
+  17850696:
+    template: Careening_Twitherym
+    at:       [494.859, -6.789, -219.654, 207]
+    level:    [101, 103]
+  17850697:
+    template: Careening_Twitherym
+    at:       [505.407, -6.683, -223.447, 222]
+    level:    [101, 103]
+  17850698:
+    template: Primordial_Orobon
+    at:       [358.825, -1.281, -331.196, 129]
+    level:    [103, 104]
+  17850699:
+    template: Primordial_Orobon
+    at:       [385.127, -1.347, -350.214, 183]
+    level:    [103, 104]
+  17850700:
+    template: Primordial_Orobon
+    at:       [385.690, -1.416, -391.300, 63]
+    level:    [103, 104]
+  17850701:
+    template: Primordial_Orobon
+    at:       [290.761, -1.509, -350.633, 190]
+    level:    [103, 104]
+  17850702:
+    template: Primordial_Orobon
+    at:       [290.799, -1.459, -379.047, 56]
+    level:    [103, 104]
+  17850703:
+    template: Primordial_Orobon
+    at:       [290.090, -1.299, -405.224, 213]
+    level:    [103, 104]
+  17850704:
+    template: Vorst_Gnat
+    at:       [217.843, -6.769, -327.207, 65]
+    level:    [102, 104]
+  17850705:
+    template: Scummy_Slug
+    at:       [138.688, -6.739, -195.108, 63]
+    level:    [102, 104]
+  17850706:
+    template: Vampire_Leech
+    at:       [-202.759, -6.756, -180.473, 129]
+    level:    [102, 103]
+  17850707:
+    template: Vampire_Leech
+    at:       [-236.039, -6.755, -140.970, 91]
+    level:    [102, 103]
+  17850708:
+    template: Glutinous_Clot
+    at:       [-374.524, -6.842, -145.248, 54]
+    level:    [102, 104]
+  17850709:
+    template: Numbing_Blossom
+    at:       [-379.193, -6.781, -162.805, 3]
+    level:    [1, 1]
+  17850710:
+    template: Scummy_Slug
+    at:       [-340.700, -6.761, -282.400, 66]
+    level:    [102, 104]
+  17850711:
+    template: Scummy_Slug
+    at:       [-378.200, -6.895, -311.270, 86]
+    level:    [102, 104]
+  17850712:
+    template: Shrouded_Obdella
+    at:       [-409.794, -6.792, 99.550, 133]
+    level:    [102, 103]
+  17850713:
+    template: Numbing_Blossom
+    level:    [1, 1]
+  17850714:
+    template: Bashful_Heartwing
+    at:       [340.530, -6.598, 119.981, 221]
+    level:    [101, 104]
+  17850715:
+    template: Epigean_Leafkin
+    at:       [-223.022, -6.788, 372.723, 189]
+    level:    [101, 104]
+  17850716:
+    template: Zoldeff_Jagil
+    at:       [69.001, -2.744, -210.050, 99]
+    level:    [102, 110]
+  17850717:
+    template: Zoldeff_Jagil
+    at:       [192.981, -2.041, -351.986, 251]
+    level:    [102, 110]
+  17850718:
+    template: Zoldeff_Jagil
+    at:       [292.227, -2.000, 205.409, 21]
+    level:    [102, 110]
+  17850719:
+    template: Zoldeff_Jagil
+    at:       [87.682, -2.000, 311.864, 146]
+    level:    [102, 110]
+  17850720:
+    template: Zoldeff_Jagil
+    at:       [-152.100, -2.000, 327.767, 115]
+    level:    [102, 110]
+  17850721:
+    template: Zoldeff_Jagil
+    at:       [-193.507, -2.080, -109.158, 6]
+    level:    [102, 110]
+  17850722:
+    template: Zoldeff_Jagil
+    at:       [-289.178, -2.102, -150.761, 215]
+    level:    [102, 110]
+  17850723:
+    template: Cunning_Craklaw
+    at:       [460.699, -1.225, -52.355, 106]
+    level:    [103, 103]
+  17850724:
+    template: Sere_Stump
+    at:       [359.500, -2.000, 160.500, 1]
+    level:    [103, 103]
+  17850725:
+    template: Craklaw_FdH
+    script:   Craklaw
+    at:       [356.279, -2.588, 165.110, 244]
+    level:    [103, 103]
+  17850726:
+    template: Cinder_Crab
+    at:       [368.558, -2.766, 160.552, 167]
+    level:    [103, 103]
+  17850727:
+    template: Cinder_Crab
+    at:       [365.690, -2.625, 164.197, 169]
+    level:    [103, 103]
+  17850728:
+    template: Cinder_Crab
+    at:       [357.833, -2.517, 161.839, 72]
+    level:    [103, 103]
+  17850729:
+    template: Sere_Stump
+    at:       [0.001, -2.500, 120.000, 64]
+    level:    [103, 103]
+  17850730:
+    template: Craklaw_FdH
+    script:   Craklaw
+    at:       [2.223, -2.506, 122.959, 204]
+    level:    [103, 103]
+  17850731:
+    template: Blood_Toad
+    at:       [-1.763, -2.467, 121.872, 233]
+    level:    [103, 103]
+  17850732:
+    template: Blood_Toad
+    at:       [-15.880, -1.105, 119.579, 72]
+    level:    [103, 103]
+  17850733:
+    template: Blood_Toad
+    at:       [2.779, -2.558, 119.732, 95]
+    level:    [103, 103]
+  17850734:
+    template: Sere_Stump
+    at:       [80.000, -2.500, -320.000, 7]
+    level:    [103, 103]
+  17850735:
+    template: Craklaw_FdH
+    script:   Craklaw
+    at:       [73.990, -2.927, -310.450, 243]
+    level:    [103, 103]
+  17850736:
+    template: Wetlands_Orobon
+    at:       [80.915, -2.528, -318.463, 200]
+    level:    [103, 103]
+  17850737:
+    template: Wetlands_Orobon
+    at:       [82.808, -2.908, -310.953, 143]
+    level:    [103, 103]
+  17850738:
+    template: Sere_Stump
+    at:       [-160.000, -2.500, -40.000, 10]
+    level:    [103, 103]
+  17850739:
+    template: Craklaw_FdH
+    script:   Craklaw
+    at:       [-169.136, -3.297, -50.226, 121]
+    level:    [103, 103]
+  17850740:
+    template: Primrose_Jagil
+    at:       [-166.085, -2.634, -39.159, 246]
+    level:    [103, 103]
+  17850741:
+    template: Primrose_Jagil
+    at:       [-150.877, -2.881, -41.983, 62]
+    level:    [103, 103]
+  17850742:
+    template: Primrose_Jagil
+    at:       [-161.212, -2.519, -39.021, 130]
+    level:    [103, 103]
+  17850743:
+    template: Broadleaf_Palm
+    at:       [182.500, -2.800, 221.100, 1]
+    level:    [103, 103]
+  17850744:
+    template: Cinder_Crab
+    at:       [185.773, -1.757, 223.916, 53]
+    level:    [103, 103]
+  17850745:
+    template: Cinder_Crab
+    at:       [190.102, -1.932, 221.122, 100]
+    level:    [103, 103]
+  17850746:
+    template: Blood_Toad
+    at:       [187.373, -1.873, 223.512, 120]
+    level:    [103, 103]
+  17850747:
+    template: Broadleaf_Palm
+    at:       [137.500, -2.799, 258.899, 65]
+    level:    [103, 103]
+  17850748:
+    template: Cinder_Crab
+    at:       [135.241, -1.080, 266.071, 196]
+    level:    [103, 103]
+  17850749:
+    template: Cinder_Crab
+    at:       [136.708, -1.112, 245.024, 64]
+    level:    [103, 103]
+  17850750:
+    template: Blood_Toad
+    at:       [136.630, -1.293, 251.607, 36]
+    level:    [103, 103]
+  17850751:
+    template: Broadleaf_Palm
+    at:       [-17.500, -2.799, 381.100, 96]
+    level:    [103, 103]
+  17850752:
+    template: Blood_Toad
+    at:       [-13.116, -1.072, 373.722, 63]
+    level:    [103, 103]
+  17850753:
+    template: Blood_Toad
+    at:       [-7.132, -2.218, 386.891, 90]
+    level:    [103, 103]
+  17850754:
+    template: Cinder_Crab
+    at:       [-11.073, -2.009, 385.803, 2]
+    level:    [103, 103]
+  17850755:
+    template: Broadleaf_Palm
+    at:       [-62.500, -2.799, 418.900, 65]
+    level:    [103, 103]
+  17850756:
+    template: Blood_Toad
+    at:       [-66.487, -1.129, 423.449, 33]
+    level:    [103, 103]
+  17850757:
+    template: Blood_Toad
+    at:       [-73.628, -2.260, 413.404, 144]
+    level:    [103, 103]
+  17850758:
+    template: Cinder_Crab
+    at:       [-66.915, -1.205, 405.598, 47]
+    level:    [103, 103]
+  17850759:
+    template: Broadleaf_Palm
+    at:       [342.500, -2.799, -298.899, 22]
+    level:    [103, 103]
+  17850760:
+    template: Primrose_Jagil
+    at:       [346.699, -1.344, -314.110, 38]
+    level:    [103, 103]
+  17850761:
+    template: Primrose_Jagil
+    at:       [343.504, -1.515, -290.880, 153]
+    level:    [103, 103]
+  17850762:
+    template: Wetlands_Orobon
+    at:       [345.925, -1.108, -311.986, 165]
+    level:    [103, 103]
+  17850763:
+    template: Broadleaf_Palm
+    at:       [297.500, -2.799, -261.100, 49]
+    level:    [103, 103]
+  17850764:
+    template: Primrose_Jagil
+    at:       [292.251, -1.684, -262.450, 42]
+    level:    [103, 103]
+  17850765:
+    template: Primrose_Jagil
+    at:       [290.992, -1.853, -270.231, 83]
+    level:    [103, 103]
+  17850766:
+    template: Wetlands_Orobon
+    at:       [290.928, -1.828, -262.889, 81]
+    level:    [103, 103]
+  17850767:
+    template: Broadleaf_Palm
+    at:       [-17.500, -2.799, -218.899, 42]
+    level:    [103, 103]
+  17850768:
+    template: Wetlands_Orobon
+    at:       [-8.537, -1.288, -225.634, 198]
+    level:    [103, 103]
+  17850769:
+    template: Wetlands_Orobon
+    at:       [-9.920, -1.425, -223.146, 9]
+    level:    [103, 103]
+  17850770:
+    template: Primrose_Jagil
+    at:       [-8.381, -0.850, -227.777, 38]
+    level:    [103, 103]
+  17850771:
+    template: Broadleaf_Palm
+    at:       [-62.500, -2.799, -181.100, 61]
+    level:    [103, 103]
+  17850772:
+    template: Wetlands_Orobon
+    at:       [-67.388, -1.834, -188.494, 86]
+    level:    [103, 103]
+  17850773:
+    template: Wetlands_Orobon
+    at:       [-68.779, -1.605, -177.860, 174]
+    level:    [103, 103]
+  17850774:
+    template: Primrose_Jagil
+    at:       [-69.404, -2.007, -183.954, 235]
+    level:    [103, 103]
+  17850775:
+    template: Broadleaf_Palm
+    at:       [-381.250, -2.800, 22.500, 118]
+    level:    [103, 103]
+  17850776:
+    template: Craklaw_FdH
+    script:   Craklaw
+    at:       [-381.098, -1.998, 28.887, 68]
+    level:    [103, 103]
+  17850777:
+    template: Primrose_Jagil
+    at:       [-378.158, -0.955, 26.246, 112]
+    level:    [103, 103]
+  17850778:
+    template: Primrose_Jagil
+    at:       [-379.436, -1.083, 27.209, 93]
+    level:    [103, 103]
+  17850779:
+    template: Broadleaf_Palm
+    at:       [-418.899, -2.799, -22.500, 80]
+    level:    [103, 103]
+  17850780:
+    template: Craklaw_FdH
+    script:   Craklaw
+    at:       [-415.941, -1.516, -24.490, 192]
+    level:    [103, 103]
+  17850781:
+    template: Primrose_Jagil
+    at:       [-417.283, -1.453, -25.130, 204]
+    level:    [103, 103]
+  17850782:
+    template: Primrose_Jagil
+    at:       [-415.493, -1.857, -26.194, 189]
+    level:    [103, 103]
+  17850783:
+    template: Tchakka
+    at:       [-121.000, 0.001, -525.000, 194]
+    level:    [117, 119]
+  17850784:
+    template: Craklaw_FdH
+    script:   Craklaw
+    level:    [103, 103]
+  17850785:
+    template: Craklaw_FdH
+    script:   Craklaw
+    level:    [103, 103]
+  17850786:
+    template: Craklaw_FdH
+    script:   Craklaw
+    level:    [103, 103]
+  17850787:
+    template: Craklaw_FdH
+    script:   Craklaw
+    level:    [103, 103]
+  17850788:
+    template: Wetlands_Orobon
+    level:    [103, 103]
+  17850789:
+    template: Wetlands_Orobon
+    level:    [103, 103]
+  17850790:
+    template: Wetlands_Orobon
+    level:    [103, 103]
+  17850791:
+    template: Wetlands_Orobon
+    level:    [103, 103]
+  17850792:
+    template: Primrose_Jagil
+    level:    [103, 103]
+  17850793:
+    template: Primrose_Jagil
+    level:    [103, 103]
+  17850794:
+    template: Primrose_Jagil
+    level:    [103, 103]
+  17850795:
+    template: Primrose_Jagil
+    level:    [103, 103]
+  17850796:
+    template: Primrose_Jagil
+    level:    [103, 103]
+  17850797:
+    template: Primrose_Jagil
+    level:    [103, 103]
+  17850798:
+    template: Primrose_Jagil
+    level:    [103, 103]
+  17850799:
+    template: Faded_Craklaw
+    at:       [36.853, -6.897, 337.292, 3]
+  17850800:
+    script: Aberrant_Uragnite
+    at:     [428.000, -6.524, 140.000]
+  17850801:
+    template: Divagating_Jagil
+    at:       [451.290, -2.282, -271.894, 63]
+  17850802:
+    template: Nerrivik
+    at:       [63.691, -6.837, -259.862, 97]
+  17850803:
+    template: Krabakarpo
+    at:       [-195.000, -2.000, -106.000]
+  17850804:
+    template: Insidio
+    at:       [465.138, -1.813, -356.476, 37]
+  17850805:
+    template: Pungent_Patricia
+    at:       [438.062, -2.874, -290.055, 112]

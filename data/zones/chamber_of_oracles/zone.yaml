@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  193
+  battle_party: 193
+
+zonelines:
+
+  z4o0:
+    from:  [-179.547, -3.431, -42.006]
+    to:    quicksand_caves
+    at:    [-980.193, 14.913, -282.863, 1.570796]
+    scale: [1.000, 4.000]
+
+  z4o2:
+    from:  [184.919, -1.794, -100.041]
+    to:    quicksand_caves
+    at:    [-900.334, 14.849, -245.438, 1.800036]
+    scale: [1.000, 4.000]

@@ -1,0 +1,4061 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Acrophies:
+    id:            40
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Ancient_Bat_Qufim:
+    id:            53
+    display_name:  Ancient_Bat
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Atkorkamuy:
+    id:            6854
+    species:       sea_monk
+    type:          [notorious]
+    skill_list_id: 2003
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 1800
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aptant_of_durus
+        - chance: uncommon
+          item:   aptant_of_tachus
+    content: WOTG
+
+  Awoken_Tanngrisnir:
+    id:            6113
+    species:       dragon
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 2049
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 3604
+        entity_flags:  3
+        model_size:    2
+        hitbox:       39
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Banshee:
+    id:            338
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: rare
+          item:   scroll_of_escape
+        - chance: very_rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Clipper:
+    id:            743
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Dancing_Weapon:
+    id:            900
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   kaiser_sword
+
+  Dark_Bats:
+    id:            909
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+  Dazbog_Qufim:
+    id:           6146
+    display_name: Dazbog
+    species:      meeble
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 3586
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Dosetsu_Tree:
+    id:            1093
+    species:       treant
+    type:          [notorious]
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 395
+        entity_flags: 135
+        model_size:     3
+        hitbox:        53
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+    loot:
+      drops:
+        - chance: common
+          item:   raikiri
+
+  Echion:
+    id:      6143
+    species: gigas
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 3640
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Giant_Ascetic:
+    id:            1521
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 320
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ram_leather_missive
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Giant_Beastmaster:
+    id:            1523
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [bst, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 710
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Giant_High_Ranger:
+    id:            1529
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: club
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        model_size:  1
+        hitbox:     30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Giant_Hunter:
+    id:            1530
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   northern_fur
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Giant_Hunter_2:
+    id:            1530
+    display_name:  Giant_Hunter
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Giant_Monk:
+    id:            1533
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Giant_Ranger:
+    id:            1536
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ram_leather_missive
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Giant_Ranger_2:
+    id:            1536
+    display_name:  Giant_Ranger
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Giant_Trapper:
+    id:            1540
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 710
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ram_leather_missive
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Giant_Warrior:
+    id:            1541
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gigass_Leech:
+    id:            1591
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Gloom_Phantom_Qufim:
+    id:           6144
+    display_name: Gloom_Phantom
+    species:      goblin
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 3584
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Glow_Bat:
+    id:            1625
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Goblin_Bounty_Hunter:
+    id:            1642
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 497
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblins_Leech:
+    id:            1728
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Greater_Pugil_QI:
+    id:            1807
+    display_name:  Greater_Pugil
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+        - chance: rare
+          item:   shall_shell
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Greater_Pugil_fished:
+    id:            5868
+    display_name:  Greater_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   handful_of_pugil_scales
+        - chance: very_rare
+          item:   shall_shell
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Hobgoblin_Beastmaster:
+    id:            1971
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 492
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Black_Mage:
+    id:            1972
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Dark_Knight:
+    id:            1974
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 509
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Ranger:
+    id:            1978
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 499
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Red_Mage:
+    id:            1979
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 504
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Thief:
+    id:            1980
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 485
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Warrior:
+    id:            1983
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 508
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_White_Mage:
+    id:            1984
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 488
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hunting_Chief:
+    id:            2012
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Ingaevon:
+    id:            2079
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Jester_Malatrix:
+    id:            4855
+    species:       evil_weapon
+    type:          [notorious]
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Kaggen:
+    id:            4694
+    species:       green_mantid
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2104
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Kraken:
+    id:            2286
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 1800
+      stats:
+        hp: 1220
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: very_rare
+          item:   shall_shell
+      despoil:
+        seashell: 0
+
+  Kraken_fished_NM:
+    id:            6030
+    display_name:  Kraken
+    species:       sea_monk
+    type:          [notorious, fished]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1580
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: rare
+          item:   shall_shell
+        - chance: rare
+          item:   egret_fishing_rod
+        - chance: very_rare
+          item:   blue_rock
+
+  Land_Worm_Qufim:
+    id:            2374
+    display_name:  Land_Worm
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   flint_stone
+        - chance: uncommon
+          item:   chunk_of_copper_ore
+        - chance: rare
+          item:   chunk_of_zinc_ore
+        - chance: very_rare
+          item:   chunk_of_silver_ore
+      steal: pebble
+      despoil:
+        chunk_of_copper_ore: 0
+        chunk_of_iron_ore:   0
+        chunk_of_silver_ore: 0
+        chunk_of_zinc_ore:   0
+
+  Light_Elemental:
+    id:            2413
+    species:       light_elemental
+    spell_list_id: 19
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 442
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+
+  Magh_Bihu_Qufim:
+    id:           6145
+    display_name: Magh_Bihu
+    species:      citrullus
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 3585
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Malefic_Fencer:
+    id:            2496
+    species:       evil_weapon
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ophiotaurus:
+    id:            6169
+    species:       yztarg
+    skill_list_id: 1009
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    2
+          wind:    2
+          earth:   7
+          thunder: 2
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          silence:     2
+          slow:        7
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 2922
+        entity_flags:  133
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         51
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Qoofim:
+    id:            6024
+    species:       pugil
+    type:          [notorious]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        links: true
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: common
+          item:   sylph_earring
+    content: WOTG
+
+  Qufim_Pugil:
+    id:            3287
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Sea_Bishop:
+    id:            3518
+    species:       sea_monk
+    type:          [fished]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: rare
+          item:   shall_shell
+        - chance: very_rare
+          item:   blue_rock
+
+  Seed_Mandragora:
+    id:            3531
+    species:       mandragora
+    type:          [notorious]
+    skill_list_id: 406
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2352
+        entity_flags:  643
+        animation_sub:  13
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Seeker_Bats_KT_RP_Qufim:
+    id:            3642
+    display_name:  Seeker_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+  Slippery_Sucker:
+    id:            5848
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        immune_status: [gravity, bind, silence, light_sleep, dark_sleep]
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 131
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3500
+    loot:
+      drops:
+        - chance: common
+          item:   mystique_earring
+    content: WOTG
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Trickster_Kinetix:
+    id:            4004
+    species:       evil_weapon
+    type:          [notorious]
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: common
+          item:   tabar
+
+  Vepar:
+    id:            4220
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Wight_blm:
+    id:            6570
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_tractor
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Wight_war:
+    id:            4337
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   scroll_of_tractor
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+spawns:
+  17293313:
+    template: Qufim_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 27]
+  17293314:
+    template: Greater_Pugil_fished
+    script:   Greater_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 29]
+  17293315:
+    template: Sea_Bishop
+    at:       [1.000, 1.000, 1.000]
+    level:    [31, 32]
+  17293316:
+    template: Vepar
+    at:       [1.000, 1.000, 1.000]
+    level:    [35, 36]
+  17293317:
+    template: Kraken_fished_NM
+    script:   Kraken
+    at:       [1.000, 1.000, 1.000]
+    level:    [39, 40]
+  17293318:
+    template: Kraken_fished_NM
+    script:   Kraken
+    at:       [1.000, 1.000, 1.000]
+    level:    [39, 40]
+  17293319:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [154.295, 19.536, -361.910]
+    level:    [26, 27]
+  17293320:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [150.404, 19.908, -364.501, 46]
+    level:    [26, 27]
+  17293321:
+    template: Dancing_Weapon
+    at:       [154.515, 19.888, -367.215, 127]
+    level:    [28, 29]
+  17293322:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [202.526, 19.987, -152.188, 127]
+    level:    [26, 27]
+  17293323:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [162.328, 19.610, -204.208, 108]
+    level:    [26, 27]
+  17293324:
+    template: Dancing_Weapon
+    at:       [211.774, 19.326, -164.058, 101]
+    level:    [28, 29]
+  17293325:
+    template: Dancing_Weapon
+    at:       [175.054, 20.370, -202.962, 127]
+    level:    [28, 29]
+  17293326:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [232.845, 3.358, -60.768, 80]
+    level:    [26, 27]
+  17293327:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [234.855, 2.706, -59.326, 10]
+    level:    [26, 27]
+  17293328:
+    template: Dancing_Weapon
+    at:       [257.587, -8.303, -27.606, 55]
+    level:    [28, 29]
+  17293329:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [166.179, -20.339, -20.844, 92]
+    level:    [26, 27]
+  17293330:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [155.386, -20.489, -17.656, 127]
+    level:    [26, 27]
+  17293331:
+    template: Clipper
+    at:       [73.138, -20.011, -16.400, 98]
+    level:    [28, 29]
+  17293332:
+    template: Clipper
+    at:       [128.205, -20.917, -10.987, 52]
+    level:    [28, 29]
+  17293333:
+    template: Clipper
+    at:       [98.359, -19.984, -8.054, 127]
+    level:    [28, 29]
+  17293334:
+    template: Clipper
+    at:       [97.405, -19.943, 30.225, 104]
+    level:    [28, 29]
+  17293335:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [58.229, -19.703, 1.176, 127]
+    level:    [26, 27]
+  17293336:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [79.295, -20.472, -38.793, 21]
+    level:    [26, 27]
+  17293337:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [126.788, -20.561, -5.557, 37]
+    level:    [26, 27]
+  17293338:
+    template: Dark_Bats
+    at:       [97.931, -20.146, 54.796, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293339:
+    template: Dark_Bats
+    at:       [51.297, -19.930, -18.015, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293340:
+    template: Glow_Bat
+    at:       [93.010, -20.118, -5.074, 24]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293341:
+    template: Giant_Ranger
+    at:       [97.597, -19.730, 37.542, 127]
+    level:    [29, 30]
+  17293342:
+    template: Giant_Ascetic
+    at:       [111.750, -20.287, 38.986, 117]
+    level:    [29, 30]
+  17293343:
+    template: Giant_Trapper
+    at:       [84.515, -19.946, 25.945, 64]
+    level:    [29, 30]
+  17293344:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293345:
+    template: Giant_Hunter
+    at:       [116.000, -20.500, 120.000, 127]
+    level:    [29, 30]
+  17293346:
+    template: Giant_Ranger
+    at:       [127.642, -19.847, 26.319, 119]
+    level:    [29, 30]
+  17293347:
+    template: Giant_Ascetic
+    at:       [133.000, -19.000, 92.000, 40]
+    level:    [29, 30]
+  17293348:
+    template: Giant_Trapper
+    at:       [81.100, -19.520, 60.416, 64]
+    level:    [29, 30]
+  17293349:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293350:
+    template: Giant_Hunter
+    at:       [115.523, -19.538, 20.287, 83]
+    level:    [29, 30]
+  17293351:
+    template: Wight_war
+    script:   Wight
+    at:       [100.618, -19.796, 10.374, 62]
+    level:    [28, 29]
+  17293352:
+    template: Wight_blm
+    script:   Wight
+    at:       [67.996, -20.026, -37.896, 127]
+    level:    [28, 29]
+  17293353:
+    template: Light_Elemental
+    at:       [121.291, -20.500, 2.152, 58]
+    level:    [35, 36]
+  17293354:
+    template: Dancing_Weapon
+    at:       [132.000, -20.329, 51.000, 127]
+    level:    [28, 29]
+  17293355:
+    template: Clipper
+    at:       [26.713, -20.598, -65.649, 127]
+    level:    [28, 29]
+  17293356:
+    template: Clipper
+    at:       [-7.569, -20.255, -98.655, 69]
+    level:    [28, 29]
+  17293357:
+    template: Clipper
+    at:       [4.205, -19.892, -102.179, 126]
+    level:    [28, 29]
+  17293358:
+    template: Clipper
+    at:       [-33.394, -19.919, -63.579, 127]
+    level:    [28, 29]
+  17293359:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [85.000, -19.000, -63.000, 32]
+    level:    [28, 29]
+  17293360:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [68.233, -20.712, -58.283, 127]
+    level:    [28, 29]
+  17293361:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [18.003, -19.775, -74.207, 108]
+    level:    [28, 29]
+  17293362:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-39.253, -20.268, -63.281, 43]
+    level:    [28, 29]
+  17293363:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-11.850, -20.004, -95.809, 127]
+    level:    [28, 29]
+  17293364:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [25.000, -19.000, -95.000, 64]
+    level:    [28, 29]
+  17293365:
+    template: Banshee
+    at:       [93.812, -21.756, -57.691, 52]
+    level:    [31, 32]
+  17293366:
+    template: Thunder_Elemental
+    at:       [-18.441, -20.746, -56.717, 127]
+    level:    [35, 36]
+  17293367:
+    template: Clipper
+    at:       [51.281, -20.151, -43.546, 127]
+    level:    [28, 29]
+  17293368:
+    template: Clipper
+    at:       [18.827, -21.515, -20.228, 127]
+    level:    [28, 29]
+  17293369:
+    template: Clipper
+    at:       [127.000, -20.000, 7.000, 127]
+    level:    [28, 29]
+  17293370:
+    template: Clipper
+    at:       [23.850, -19.843, -7.737, 127]
+    level:    [28, 29]
+  17293371:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [-0.039, -20.616, 4.913, 127]
+    level:    [26, 27]
+  17293372:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [40.167, -19.617, -20.335, 84]
+    level:    [26, 27]
+  17293373:
+    template: Dark_Bats
+    at:       [17.795, -20.564, -14.370]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293374:
+    template: Dark_Bats
+    at:       [2.534, -19.825, -54.687, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293375:
+    template: Glow_Bat
+    at:       [52.197, -20.236, -42.598, 127]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293376:
+    template: Giant_Ranger
+    at:       [74.000, -19.000, 7.000, 119]
+    level:    [29, 30]
+  17293377:
+    template: Giant_Ascetic
+    at:       [-1.926, -19.806, -14.932, 127]
+    level:    [29, 30]
+  17293378:
+    template: Giant_Trapper
+    at:       [77.477, -20.500, 38.876, 127]
+    level:    [29, 30]
+  17293379:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293380:
+    template: Giant_Hunter
+    at:       [51.665, -20.414, -26.076, 75]
+    level:    [29, 30]
+  17293381:
+    template: Giant_Ranger
+    at:       [12.640, -20.527, -13.221, 111]
+    level:    [29, 30]
+  17293382:
+    template: Giant_Ascetic
+    at:       [-2.000, -20.000, -41.000, 85]
+    level:    [29, 30]
+  17293383:
+    template: Giant_Trapper
+    at:       [20.400, -19.578, -0.345, 21]
+    level:    [29, 30]
+  17293384:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293385:
+    template: Giant_Hunter
+    at:       [25.481, -20.217, -52.306, 127]
+    level:    [29, 30]
+  17293386:
+    template: Wight_war
+    script:   Wight
+    at:       [7.254, -20.318, -49.260, 126]
+    level:    [28, 29]
+  17293387:
+    template: Wight_war
+    script:   Wight
+    at:       [14.317, -20.471, -29.944, 17]
+    level:    [28, 29]
+  17293388:
+    template: Light_Elemental
+    at:       [39.310, -20.596, 6.468, 218]
+    level:    [35, 36]
+  17293389:
+    template: Slippery_Sucker
+    at:       [16.350, -21.300, -25.500, 60]
+    level:    [41, 42]
+  17293390:
+    template: Clipper
+    at:       [140.093, -20.155, 107.071, 127]
+    level:    [28, 29]
+  17293391:
+    template: Clipper
+    at:       [158.450, -20.491, 79.228, 127]
+    level:    [28, 29]
+  17293392:
+    template: Clipper
+    at:       [154.468, -20.272, 46.753, 127]
+    level:    [28, 29]
+  17293393:
+    template: Clipper
+    at:       [165.827, -20.386, 107.081, 127]
+    level:    [28, 29]
+  17293394:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [122.702, -19.724, 100.475, 114]
+    level:    [26, 27]
+  17293395:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [161.793, -20.445, 84.897, 127]
+    level:    [26, 27]
+  17293396:
+    template: Dark_Bats
+    at:       [128.123, -20.193, 64.695, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293397:
+    template: Dark_Bats
+    at:       [132.243, -20.063, 116.502, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293398:
+    template: Glow_Bat
+    at:       [146.104, -20.246, 112.231, 23]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293399:
+    template: Giant_Ranger
+    at:       [90.540, -20.397, 85.499, 127]
+    level:    [29, 30]
+  17293400:
+    template: Giant_Ascetic
+    at:       [138.488, -20.106, 69.028, 127]
+    level:    [29, 30]
+  17293401:
+    template: Giant_Trapper
+    at:       [169.804, -20.842, 104.269, 127]
+    level:    [29, 30]
+  17293402:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293403:
+    template: Giant_Hunter
+    at:       [151.342, -20.500, 108.603, 127]
+    level:    [29, 30]
+  17293404:
+    template: Wight_war
+    script:   Wight
+    at:       [118.649, -20.477, 78.957, 127]
+    level:    [28, 29]
+  17293405:
+    template: Wight_blm
+    script:   Wight
+    at:       [148.543, -19.992, 43.302, 127]
+    level:    [28, 29]
+  17293406:
+    template: Light_Elemental
+    at:       [139.842, -19.704, 115.860, 127]
+    level:    [35, 36]
+  17293407:
+    template: Banshee
+    at:       [203.302, -20.631, 113.160, 28]
+    level:    [31, 32]
+  17293408:
+    template: Banshee
+    at:       [204.455, -20.519, 117.017, 127]
+    level:    [31, 32]
+  17293409:
+    template: Clipper
+    at:       [114.831, -20.446, 134.955, 123]
+    level:    [28, 29]
+  17293410:
+    template: Clipper
+    at:       [145.320, -20.824, 138.083, 127]
+    level:    [28, 29]
+  17293411:
+    template: Clipper
+    at:       [108.759, -20.458, 167.470, 96]
+    level:    [28, 29]
+  17293412:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [168.622, -20.796, 146.188, 127]
+    level:    [26, 27]
+  17293413:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [94.104, -20.648, 176.468, 56]
+    level:    [26, 27]
+  17293414:
+    template: Dark_Bats
+    at:       [133.508, -20.134, 166.219, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293415:
+    template: Glow_Bat
+    at:       [130.448, -20.350, 150.973, 60]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293416:
+    template: Glow_Bat
+    at:       [155.404, -20.348, 154.127, 127]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293417:
+    template: Giant_Ranger
+    at:       [108.174, -20.348, 166.835, 127]
+    level:    [29, 30]
+  17293418:
+    template: Giant_Ascetic
+    at:       [150.733, -20.274, 130.439, 104]
+    level:    [29, 30]
+  17293419:
+    template: Giant_Trapper
+    at:       [80.891, -20.286, 168.266, 127]
+    level:    [29, 30]
+  17293420:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293421:
+    template: Giant_Hunter
+    at:       [161.947, -19.796, 144.966, 19]
+    level:    [29, 30]
+  17293422:
+    template: Wight_war
+    script:   Wight
+    at:       [145.771, -20.364, 114.513, 16]
+    level:    [28, 29]
+  17293423:
+    template: Wight_blm
+    script:   Wight
+    at:       [133.997, -19.968, 165.512, 127]
+    level:    [28, 29]
+  17293424:
+    template: Light_Elemental
+    at:       [168.190, -20.220, 118.955, 5]
+    level:    [35, 36]
+  17293425:
+    template: Clipper
+    at:       [-118.315, -20.406, 17.336, 51]
+    level:    [28, 29]
+  17293426:
+    template: Clipper
+    at:       [-122.955, -20.274, 18.869, 127]
+    level:    [28, 29]
+  17293427:
+    template: Clipper
+    at:       [-79.159, -20.366, 17.701, 9]
+    level:    [28, 29]
+  17293428:
+    template: Wight_war
+    script:   Wight
+    at:       [-58.427, -20.754, 13.732, 76]
+    level:    [28, 29]
+  17293429:
+    template: Wight_blm
+    script:   Wight
+    at:       [-60.019, -20.374, 0.984, 127]
+    level:    [28, 29]
+  17293430:
+    template: Clipper
+    at:       [-34.386, -19.546, 107.177, 127]
+    level:    [28, 29]
+  17293431:
+    template: Clipper
+    at:       [-44.323, -20.952, 128.315, 127]
+    level:    [28, 29]
+  17293432:
+    template: Clipper
+    at:       [-13.000, -19.000, 121.000, 127]
+    level:    [28, 29]
+  17293433:
+    template: Clipper
+    at:       [-40.070, -19.514, 99.493, 116]
+    level:    [28, 29]
+  17293434:
+    template: Clipper
+    at:       [-31.033, -20.369, 91.914, 51]
+    level:    [28, 29]
+  17293435:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [-0.237, -20.500, 120.259, 127]
+    level:    [26, 27]
+  17293436:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [-9.000, -19.000, 77.000, 88]
+    level:    [26, 27]
+  17293437:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [-33.680, -20.359, 83.788, 127]
+    level:    [26, 27]
+  17293438:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [-32.522, -20.515, 125.889, 127]
+    level:    [26, 27]
+  17293439:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [-50.277, -21.257, 99.448, 127]
+    level:    [26, 27]
+  17293440:
+    template: Banshee
+    at:       [-8.638, -19.998, 94.708, 108]
+    level:    [31, 32]
+  17293441:
+    template: Banshee
+    at:       [-35.267, -19.591, 104.986, 127]
+    level:    [31, 32]
+  17293442:
+    template: Clipper
+    at:       [29.783, -20.276, 225.066, 127]
+    level:    [28, 29]
+  17293443:
+    template: Clipper
+    at:       [56.030, -19.987, 198.334, 127]
+    level:    [28, 29]
+  17293444:
+    template: Clipper
+    at:       [37.017, -20.207, 210.765, 49]
+    level:    [28, 29]
+  17293445:
+    template: Clipper
+    at:       [-20.705, -20.299, 261.622, 115]
+    level:    [28, 29]
+  17293446:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [-7.408, -20.661, 238.485, 56]
+    level:    [26, 27]
+  17293447:
+    template: Land_Worm_Qufim
+    script:   Land_Worm
+    at:       [25.322, -20.148, 247.269, 127]
+    level:    [26, 27]
+  17293448:
+    template: Dark_Bats
+    at:       [16.206, -20.554, 222.769, 22]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293449:
+    template: Dark_Bats
+    at:       [50.482, -20.320, 209.640, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293450:
+    template: Glow_Bat
+    at:       [-5.017, -20.578, 203.191, 127]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293451:
+    template: Giant_Ranger
+    at:       [11.573, -20.561, 224.654, 38]
+    level:    [29, 30]
+  17293452:
+    template: Giant_Ascetic
+    at:       [-5.341, -20.068, 214.995, 127]
+    level:    [29, 30]
+  17293453:
+    template: Giant_Trapper
+    at:       [67.965, -20.090, 201.971, 127]
+    level:    [29, 30]
+  17293454:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293455:
+    template: Giant_Hunter
+    at:       [0.510, -20.454, 245.121, 10]
+    level:    [29, 30]
+  17293456:
+    template: Wight_war
+    script:   Wight
+    at:       [50.569, -21.260, 264.128, 127]
+    level:    [28, 29]
+  17293457:
+    template: Wight_blm
+    script:   Wight
+    at:       [40.916, -19.883, 254.015, 127]
+    level:    [28, 29]
+  17293458:
+    template: Clipper
+    at:       [4.000, -20.000, 281.000, 9]
+    level:    [28, 29]
+  17293459:
+    template: Clipper
+    at:       [9.000, -20.000, 267.000, 107]
+    level:    [28, 29]
+  17293460:
+    template: Clipper
+    at:       [8.000, -19.000, 272.000, 94]
+    level:    [28, 29]
+  17293461:
+    template: Clipper
+    at:       [-2.695, -19.775, 294.761, 109]
+    level:    [28, 29]
+  17293462:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [41.000, -20.000, 286.000, 127]
+    level:    [28, 29]
+  17293463:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-2.906, -20.257, 310.320, 127]
+    level:    [28, 29]
+  17293464:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [5.722, -20.519, 318.156, 34]
+    level:    [28, 29]
+  17293465:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [8.958, -20.395, 318.346, 127]
+    level:    [28, 29]
+  17293466:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [19.251, -21.636, 289.331, 35]
+    level:    [28, 29]
+  17293467:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [13.000, -20.327, 301.000, 127]
+    level:    [28, 29]
+  17293468:
+    template: Banshee
+    at:       [-8.542, -20.773, 300.196, 99]
+    level:    [31, 32]
+  17293469:
+    template: Thunder_Elemental
+    at:       [15.900, -21.316, 293.636, 127]
+    level:    [35, 36]
+  17293470:
+    template: Clipper
+    at:       [-210.276, -19.546, -18.915, 71]
+    level:    [28, 29]
+  17293471:
+    template: Clipper
+    at:       [-301.420, -20.515, 58.317, 127]
+    level:    [28, 29]
+  17293472:
+    template: Clipper
+    at:       [-330.418, -19.675, 50.818, 39]
+    level:    [28, 29]
+  17293473:
+    template: Clipper
+    at:       [-220.840, -20.054, -5.086, 65]
+    level:    [28, 29]
+  17293474:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-209.178, -19.657, -18.833, 115]
+    level:    [28, 29]
+  17293475:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-295.000, -19.000, 23.000, 127]
+    level:    [28, 29]
+  17293476:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-201.795, -20.234, -20.957, 37]
+    level:    [28, 29]
+  17293477:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-226.000, -19.000, 10.000, 52]
+    level:    [28, 29]
+  17293478:
+    template: Acrophies
+    at:       [-337.272, -20.362, 43.476, 127]
+    level:    [33, 34]
+  17293479:
+    template: Acrophies
+    at:       [-338.573, -20.418, 37.145, 73]
+    level:    [33, 34]
+  17293480:
+    template: Acrophies
+    at:       [-215.274, -20.524, 28.980, 127]
+    level:    [33, 34]
+  17293481:
+    template: Acrophies
+    at:       [-268.192, -20.066, 35.315, 127]
+    level:    [33, 34]
+  17293482:
+    template: Banshee
+    at:       [-292.246, -20.813, 50.106, 127]
+    level:    [31, 32]
+  17293483:
+    template: Banshee
+    at:       [-244.268, -20.527, 43.688, 80]
+    level:    [31, 32]
+  17293484:
+    template: Thunder_Elemental
+    at:       [-281.007, -20.646, 87.674, 127]
+    level:    [35, 36]
+  17293485:
+    template: Atkorkamuy
+    at:       [-200.381, -20.821, -8.813, 92]
+    level:    [73, 74]
+  17293486:
+    template: Kraken
+    at:       [-265.044, -4.116, 26.452, 82]
+    level:    [37, 37]
+  17293487:
+    template: Clipper
+    at:       [-205.046, -20.309, 71.582, 127]
+    level:    [28, 29]
+  17293488:
+    template: Clipper
+    at:       [-163.906, -20.522, 36.138, 121]
+    level:    [28, 29]
+  17293489:
+    template: Clipper
+    at:       [-202.887, -20.445, 84.563, 127]
+    level:    [28, 29]
+  17293490:
+    template: Clipper
+    at:       [-155.116, -20.374, 48.954, 127]
+    level:    [28, 29]
+  17293491:
+    template: Dark_Bats
+    at:       [-208.629, -20.743, 70.208, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293492:
+    template: Dark_Bats
+    at:       [-166.723, -20.917, 86.685, 72]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293493:
+    template: Acrophies
+    at:       [-173.199, -20.105, 82.409, 127]
+    level:    [33, 34]
+  17293494:
+    template: Acrophies
+    at:       [-207.187, -20.330, 37.518, 127]
+    level:    [33, 34]
+  17293495:
+    template: Glow_Bat
+    at:       [-169.356, -20.541, 31.888, 127]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293496:
+    template: Giant_Ranger
+    at:       [-203.012, -19.587, 141.747, 61]
+    level:    [29, 30]
+  17293497:
+    template: Giant_Ascetic
+    at:       [-183.256, -19.704, 35.952, 127]
+    level:    [29, 30]
+  17293498:
+    template: Giant_Trapper
+    at:       [-155.357, -19.821, 56.320, 41]
+    level:    [29, 30]
+  17293499:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293500:
+    template: Giant_Hunter
+    at:       [-205.806, -20.480, 71.884, 102]
+    level:    [29, 30]
+  17293501:
+    template: Wight_war
+    script:   Wight
+    at:       [-211.072, -20.926, 63.614, 127]
+    level:    [28, 29]
+  17293502:
+    template: Wight_war
+    script:   Wight
+    at:       [-165.873, -20.399, 74.991, 127]
+    level:    [28, 29]
+  17293503:
+    template: Wight_blm
+    script:   Wight
+    at:       [-188.438, -21.307, 101.146, 127]
+    level:    [28, 29]
+  17293504:
+    template: Light_Elemental
+    at:       [-174.144, -20.287, 56.401, 127]
+    level:    [35, 36]
+  17293505:
+    template: Clipper
+    at:       [4.000, -19.000, 90.000, 64]
+    level:    [28, 29]
+  17293506:
+    template: Wight_war
+    script:   Wight
+    at:       [-59.981, -20.746, 169.939, 127]
+    level:    [28, 29]
+  17293507:
+    template: Clipper
+    at:       [-204.842, -19.907, 217.130, 89]
+    level:    [28, 29]
+  17293508:
+    template: Clipper
+    at:       [-247.290, -20.308, 267.122, 127]
+    level:    [28, 29]
+  17293509:
+    template: Clipper
+    at:       [-230.245, -20.189, 214.686, 127]
+    level:    [28, 29]
+  17293510:
+    template: Clipper
+    at:       [-199.598, -19.549, 220.712, 66]
+    level:    [28, 29]
+  17293511:
+    template: Clipper
+    at:       [-178.389, -21.370, 220.464, 127]
+    level:    [28, 29]
+  17293512:
+    template: Dark_Bats
+    at:       [-193.434, -20.381, 193.800, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293513:
+    template: Dark_Bats
+    at:       [-132.884, -20.448, 226.253, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293514:
+    template: Acrophies
+    at:       [-146.361, -20.277, 229.592, 127]
+    level:    [33, 34]
+  17293515:
+    template: Acrophies
+    at:       [-251.752, -20.387, 234.141, 127]
+    level:    [33, 34]
+  17293516:
+    template: Acrophies
+    at:       [-124.312, -20.409, 208.198, 25]
+    level:    [33, 34]
+  17293517:
+    template: Glow_Bat
+    at:       [-179.304, -19.763, 207.884, 82]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293518:
+    template: Glow_Bat
+    at:       [-205.430, -20.268, 211.144, 127]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293519:
+    template: Giant_Ranger
+    at:       [-187.000, -19.000, 359.000, 127]
+    level:    [29, 30]
+  17293520:
+    template: Giant_Ascetic
+    at:       [-177.398, -20.682, 190.872, 72]
+    level:    [29, 30]
+  17293521:
+    template: Giant_Trapper
+    at:       [-202.000, -19.000, 176.000, 23]
+    level:    [29, 30]
+  17293522:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293523:
+    template: Giant_Hunter
+    at:       [-201.834, -20.500, 200.950, 109]
+    level:    [29, 30]
+  17293524:
+    template: Giant_Ranger
+    at:       [-185.000, -19.000, 71.000, 73]
+    level:    [29, 30]
+  17293525:
+    template: Giant_Ascetic
+    at:       [-172.299, -20.432, 227.098, 87]
+    level:    [29, 30]
+  17293526:
+    template: Giant_Trapper
+    at:       [-155.590, -20.479, 199.600, 107]
+    level:    [29, 30]
+  17293527:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293528:
+    template: Giant_Hunter
+    at:       [-133.569, -20.469, 224.158, 127]
+    level:    [29, 30]
+  17293529:
+    template: Wight_war
+    script:   Wight
+    at:       [-124.359, -20.357, 204.701, 127]
+    level:    [28, 29]
+  17293530:
+    template: Wight_blm
+    script:   Wight
+    at:       [-226.132, -20.794, 189.292, 45]
+    level:    [28, 29]
+  17293531:
+    template: Wight_blm
+    script:   Wight
+    at:       [-204.294, -20.408, 195.454, 127]
+    level:    [28, 29]
+  17293532:
+    template: Light_Elemental
+    at:       [-258.393, -20.497, 264.160, 127]
+    level:    [35, 36]
+  17293533:
+    template: Dancing_Weapon
+    at:       [-138.180, -20.928, 228.793, 10]
+    level:    [28, 29]
+  17293534:
+    template: Dancing_Weapon
+    at:       [-157.659, -25.501, 235.862, 127]
+    level:    [28, 29]
+  17293535:
+    template: Dancing_Weapon
+    at:       [-152.269, -20.000, 243.000, 127]
+    level:    [28, 29]
+  17293536:
+    template: Dancing_Weapon
+    at:       [-137.651, -23.507, 231.528, 127]
+    level:    [28, 29]
+  17293537:
+    template: Trickster_Kinetix
+    at:       [-159.000, -19.000, 244.000, 127]
+    level:    [35, 36]
+  17293538:
+    template: Clipper
+    at:       [-135.855, -20.144, 269.486, 37]
+    level:    [28, 29]
+  17293539:
+    template: Clipper
+    at:       [-225.000, -19.000, 304.000, 92]
+    level:    [28, 29]
+  17293540:
+    template: Clipper
+    at:       [-142.773, -20.283, 300.440, 127]
+    level:    [28, 29]
+  17293541:
+    template: Clipper
+    at:       [-86.042, -20.438, 246.677, 127]
+    level:    [28, 29]
+  17293542:
+    template: Clipper
+    at:       [-138.300, -19.629, 281.239, 112]
+    level:    [28, 29]
+  17293543:
+    template: Dark_Bats
+    at:       [-132.607, -20.261, 311.274, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293544:
+    template: Dark_Bats
+    at:       [-206.858, -20.097, 288.513, 54]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293545:
+    template: Dark_Bats
+    at:       [-170.683, -20.273, 306.084, 111]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293546:
+    template: Acrophies
+    at:       [-99.571, -21.144, 226.513, 51]
+    level:    [33, 34]
+  17293547:
+    template: Acrophies
+    at:       [-75.343, -19.811, 259.543, 73]
+    level:    [33, 34]
+  17293548:
+    template: Acrophies
+    at:       [-125.655, -20.394, 277.309, 114]
+    level:    [33, 34]
+  17293549:
+    template: Glow_Bat
+    at:       [-134.231, -19.846, 285.949, 115]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17293550:
+    template: Giant_Ranger
+    at:       [-129.000, -20.000, 252.000, 100]
+    level:    [29, 30]
+  17293551:
+    template: Giant_Ascetic
+    at:       [-227.000, -19.000, 240.000, 127]
+    level:    [29, 30]
+  17293552:
+    template: Giant_Trapper
+    at:       [-160.987, -19.649, 302.987, 120]
+    level:    [29, 30]
+  17293553:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293554:
+    template: Giant_Hunter
+    at:       [-126.000, -19.000, 284.000, 53]
+    level:    [29, 30]
+  17293555:
+    template: Giant_Ranger
+    at:       [-106.174, -19.917, 276.835, 124]
+    level:    [29, 30]
+  17293556:
+    template: Giant_Ascetic
+    at:       [-98.000, -19.000, 247.000, 127]
+    level:    [29, 30]
+  17293557:
+    template: Giant_Trapper
+    at:       [-189.863, -20.193, 280.965, 127]
+    level:    [29, 30]
+  17293558:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293559:
+    template: Giant_Hunter
+    at:       [-163.000, -20.000, 280.000, 127]
+    level:    [29, 30]
+  17293560:
+    template: Wight_war
+    script:   Wight
+    at:       [-79.880, -20.519, 279.671, 127]
+    level:    [28, 29]
+  17293561:
+    template: Wight_war
+    script:   Wight
+    at:       [-178.913, -19.620, 277.697, 58]
+    level:    [28, 29]
+  17293562:
+    template: Wight_blm
+    script:   Wight
+    at:       [-202.466, -20.384, 267.475, 127]
+    level:    [28, 29]
+  17293563:
+    template: Light_Elemental
+    at:       [-173.685, -20.224, 311.977, 127]
+    level:    [35, 36]
+  17293564:
+    template: Clipper
+    at:       [-233.701, -20.501, 327.792, 13]
+    level:    [28, 29]
+  17293565:
+    template: Clipper
+    at:       [-253.625, -20.482, 368.971, 127]
+    level:    [28, 29]
+  17293566:
+    template: Clipper
+    at:       [-186.287, -20.115, 319.164, 86]
+    level:    [28, 29]
+  17293567:
+    template: Clipper
+    at:       [-237.884, -19.789, 381.362, 127]
+    level:    [28, 29]
+  17293568:
+    template: Dark_Bats
+    at:       [-247.216, -20.158, 391.798, 127]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293569:
+    template: Dark_Bats
+    at:       [-172.082, -20.164, 364.322, 80]
+    level:    [26, 27]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293570:
+    template: Acrophies
+    at:       [-182.773, -19.936, 329.292, 127]
+    level:    [33, 34]
+  17293571:
+    template: Acrophies
+    at:       [-213.870, -20.087, 409.474, 127]
+    level:    [33, 34]
+  17293572:
+    template: Glow_Bat
+    at:       [-220.006, -20.357, 446.058, 127]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17293573:
+    template: Glow_Bat
+    at:       [-206.592, -20.223, 319.932, 79]
+    level:    [28, 29]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17293574:
+    template: Giant_Ranger
+    at:       [-163.754, -19.678, 336.425, 30]
+    level:    [29, 30]
+  17293575:
+    template: Giant_Ascetic
+    at:       [-188.392, -21.169, 387.908, 127]
+    level:    [29, 30]
+  17293576:
+    template: Giant_Trapper
+    at:       [-221.000, -19.000, 366.000, 31]
+    level:    [29, 30]
+  17293577:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [24, 25]
+  17293578:
+    template: Giant_Hunter
+    at:       [-248.000, -19.000, 376.000, 127]
+    level:    [29, 30]
+  17293579:
+    template: Wight_war
+    script:   Wight
+    at:       [-260.565, -20.601, 364.715, 123]
+    level:    [28, 29]
+  17293580:
+    template: Wight_blm
+    script:   Wight
+    at:       [-238.000, -20.000, 396.000, 127]
+    level:    [28, 29]
+  17293581:
+    template: Light_Elemental
+    at:       [-248.703, -20.264, 397.951, 50]
+    level:    [35, 36]
+  17293582:
+    template: Clipper
+    at:       [-144.994, -21.597, 377.807, 96]
+    level:    [28, 29]
+  17293583:
+    template: Clipper
+    at:       [-193.000, -19.000, 347.000, 127]
+    level:    [28, 29]
+  17293584:
+    template: Clipper
+    at:       [-214.000, -19.000, 314.000, 32]
+    level:    [28, 29]
+  17293585:
+    template: Clipper
+    at:       [-147.944, -20.363, 349.353, 78]
+    level:    [28, 29]
+  17293586:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-123.719, -19.683, 376.637, 127]
+    level:    [28, 29]
+  17293587:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-105.680, -20.126, 353.412, 60]
+    level:    [28, 29]
+  17293588:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-107.525, -20.212, 379.564, 9]
+    level:    [28, 29]
+  17293589:
+    template: Greater_Pugil_QI
+    script:   Greater_Pugil
+    at:       [-108.059, -20.687, 343.693, 73]
+    level:    [28, 29]
+  17293590:
+    template: Acrophies
+    at:       [-141.837, -21.055, 341.594, 127]
+    level:    [33, 34]
+  17293591:
+    template: Acrophies
+    at:       [-111.537, -20.179, 395.880, 16]
+    level:    [33, 34]
+  17293592:
+    template: Acrophies
+    at:       [-75.208, -20.560, 355.569, 127]
+    level:    [33, 34]
+  17293593:
+    template: Acrophies
+    at:       [-117.502, -19.916, 383.993, 19]
+    level:    [33, 34]
+  17293594:
+    template: Banshee
+    at:       [-122.106, -19.918, 384.412, 127]
+    level:    [31, 32]
+  17293595:
+    template: Banshee
+    at:       [-103.964, -20.654, 380.802, 127]
+    level:    [31, 32]
+  17293596:
+    template: Thunder_Elemental
+    at:       [-120.363, -20.487, 403.354, 127]
+    level:    [35, 36]
+  17293597:
+    template: Qoofim
+    at:       [-108.200, -21.820, 388.200, 127]
+    level:    [47, 48]
+  17293598:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-294.000, -11.000, 483.000, 127]
+    level:    [26, 27]
+  17293599:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-335.014, -11.639, 442.083, 67]
+    level:    [26, 27]
+  17293600:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-305.772, -12.799, 457.087, 111]
+    level:    [26, 27]
+  17293601:
+    template: Ancient_Bat_Qufim
+    script:   Ancient_Bat
+    at:       [-368.598, -12.418, 436.948, 112]
+    level:    [28, 29]
+  17293602:
+    template: Ancient_Bat_Qufim
+    script:   Ancient_Bat
+    at:       [-321.689, -12.729, 445.407, 89]
+    level:    [28, 29]
+  17293603:
+    template: Wight_war
+    script:   Wight
+    at:       [-339.128, -12.994, 533.764, 90]
+    level:    [28, 29]
+  17293604:
+    template: Wight_war
+    script:   Wight
+    at:       [-335.886, -13.522, 532.259, 19]
+    level:    [28, 29]
+  17293605:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-419.640, -5.890, 433.476, 127]
+    level:    [26, 27]
+  17293606:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-471.459, -10.592, 407.959, 127]
+    level:    [26, 27]
+  17293607:
+    template: Ancient_Bat_Qufim
+    script:   Ancient_Bat
+    at:       [-467.647, -10.334, 407.221, 127]
+    level:    [28, 29]
+  17293608:
+    template: Ancient_Bat_Qufim
+    script:   Ancient_Bat
+    at:       [-475.560, -11.062, 372.179, 127]
+    level:    [28, 29]
+  17293609:
+    template: Wight_war
+    script:   Wight
+    at:       [-427.571, -12.507, 337.510, 80]
+    level:    [28, 29]
+  17293610:
+    template: Wight_war
+    script:   Wight
+    at:       [-419.158, -11.386, 339.963, 109]
+    level:    [28, 29]
+  17293611:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-497.248, -10.908, 355.857, 127]
+    level:    [26, 27]
+  17293612:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-479.353, -11.255, 370.408, 94]
+    level:    [26, 27]
+  17293613:
+    template: Ancient_Bat_Qufim
+    script:   Ancient_Bat
+    at:       [-496.902, -10.748, 361.449, 3]
+    level:    [28, 29]
+  17293614:
+    template: Ancient_Bat_Qufim
+    script:   Ancient_Bat
+    at:       [-488.081, -11.431, 366.026, 127]
+    level:    [28, 29]
+  17293615:
+    template: Dancing_Weapon
+    at:       [-486.000, -12.000, 347.000, 127]
+    level:    [28, 29]
+  17293616:
+    template: Dancing_Weapon
+    at:       [-494.484, -10.869, 359.086, 127]
+    level:    [28, 29]
+  17293617:
+    template: Hobgoblin_Warrior
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293618:
+    template: Hobgoblin_White_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293619:
+    template: Hobgoblin_Black_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293620:
+    template: Hobgoblin_Red_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293621:
+    template: Hobgoblin_Thief
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293622:
+    template: Hobgoblin_Dark_Knight
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293623:
+    template: Hobgoblin_Ranger
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293624:
+    template: Hobgoblin_Beastmaster
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293625:
+    template: Goblins_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17293626:
+    template: Giant_Warrior
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293627:
+    template: Giant_Monk
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293628:
+    template: Giant_Beastmaster
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293629:
+    template: Giant_High_Ranger
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17293630:
+    template: Gigass_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17293631:
+    template: Giant_Ranger_2
+    script:   Giant_Ranger
+    at:       [-232.893, -19.857, 307.388, 95]
+    level:    [30, 35]
+  17293632:
+    template: Giant_Ranger_2
+    script:   Giant_Ranger
+    at:       [-238.704, -19.150, 302.990, 80]
+    level:    [30, 35]
+  17293633:
+    template: Giant_Hunter_2
+    script:   Giant_Hunter
+    at:       [-254.556, -20.000, 282.447, 85]
+    level:    [30, 35]
+  17293634:
+    template: Giant_Hunter_2
+    script:   Giant_Hunter
+    at:       [-245.696, -20.005, 281.911, 95]
+    level:    [30, 35]
+  17293635:
+    template: Giant_Ranger_2
+    script:   Giant_Ranger
+    at:       [-234.981, -19.267, 311.927, 90]
+    level:    [30, 35]
+  17293636:
+    template: Giant_Ranger_2
+    script:   Giant_Ranger
+    at:       [-246.880, -19.955, 312.185, 80]
+    level:    [30, 35]
+  17293637:
+    template: Giant_Hunter_2
+    script:   Giant_Hunter
+    at:       [-244.831, -19.840, 311.927, 75]
+    level:    [30, 35]
+  17293638:
+    template: Giant_Hunter_2
+    script:   Giant_Hunter
+    at:       [-247.139, -19.865, 310.121, 85]
+    level:    [30, 35]
+  17293639:
+    template: Hunting_Chief
+    at:       [-204.310, -20.014, 324.066, 90]
+    level:    [35, 35]
+  17293640:
+    template: Dosetsu_Tree
+    at:       [-240.000, -20.795, 37.000, 31]
+    level:    [35, 35]
+  17293641:
+    template: Ingaevon
+    level:    [53, 55]
+  17293642:
+    template: Malefic_Fencer
+    at:       [-316.000, -12.500, 436.000, 127]
+    level:    [32, 32]
+  17293643:
+    template: Seed_Mandragora
+    at:       [-121.065, -20.308, 312.177, 80]
+    level:    [32, 32]
+  17293644:
+    template: Seed_Mandragora
+    at:       [-121.120, -20.249, 310.996, 127]
+    level:    [32, 32]
+  17293645:
+    template: Seed_Mandragora
+    at:       [-120.317, -20.075, 310.818, 127]
+    level:    [32, 32]
+  17293646:
+    template: Seed_Mandragora
+    at:       [-122.605, -20.264, 312.834, 65]
+    level:    [32, 32]
+  17293647:
+    template: Seed_Mandragora
+    at:       [-120.968, -20.171, 309.438, 127]
+    level:    [32, 32]
+  17293648:
+    template: Kaggen
+    at:       [150.000, -20.500, 150.000]
+    level:    [95, 96]
+  17293649:
+    template: Kaggen
+    at:       [-118.972, -19.816, 374.838, 116]
+    level:    [95, 96]
+  17293650:
+    template: Kaggen
+    level:    [95, 96]
+  17293651:
+    template: Goblin_Bounty_Hunter
+    at:       [91.148, -21.365, -66.309, 16]
+    level:    [32, 36]
+  17293652:
+    template: Goblin_Bounty_Hunter
+    at:       [43.732, -18.879, -105.300, 15]
+    level:    [32, 36]
+  17293653:
+    template: Goblin_Bounty_Hunter
+    at:       [-30.420, -18.696, -70.234, 76]
+    level:    [32, 36]
+  17293654:
+    template: Goblin_Bounty_Hunter
+    at:       [-56.626, -19.798, -62.189, 250]
+    level:    [32, 36]
+  17293655:
+    template: Goblin_Bounty_Hunter
+    at:       [-225.331, -18.870, -3.738, 117]
+    level:    [32, 36]
+  17293656:
+    template: Goblin_Bounty_Hunter
+    at:       [-288.229, -7.039, 14.614, 137]
+    level:    [32, 36]
+  17293657:
+    template: Goblin_Bounty_Hunter
+    at:       [-329.932, -18.535, 49.133, 39]
+    level:    [32, 36]
+  17293658:
+    template: Goblin_Bounty_Hunter
+    at:       [-107.449, -19.151, 394.440, 11]
+    level:    [32, 36]
+  17293659:
+    template: Goblin_Bounty_Hunter
+    at:       [-80.198, -20.483, 368.466, 1]
+    level:    [32, 36]
+  17293660:
+    template: Goblin_Bounty_Hunter
+    at:       [3.481, -20.111, 329.441, 36]
+    level:    [32, 36]
+  17293661:
+    template: Goblin_Bounty_Hunter
+    at:       [44.547, -20.690, 289.820, 106]
+    level:    [32, 36]
+  17293662:
+    template: Goblin_Bounty_Hunter
+    at:       [-17.459, -18.679, 87.008, 149]
+    level:    [11, 11]
+  17293663:
+    template: Jester_Malatrix
+    at:       [136.852, -21.084, 21.419, 220]
+  17293664:
+    template: Jester_Malatrix
+    at:       [-159.162, -20.500, 76.575, 154]
+  17293665:
+    template: Jester_Malatrix
+    at:       [-125.676, -20.286, 209.942, 223]
+  17293666:
+    template: Ophiotaurus
+    at:       [-198.531, -20.027, 75.318, 156]
+    level:    [43, 43]
+  17293667:
+    template: Echion
+    at:       [-226.750, -19.000, 319.640, 225]
+    level:    [139, 139]
+  17293668:
+    template: Gloom_Phantom_Qufim
+    script:   Gloom_Phantom
+    at:       [-222.970, -19.000, 319.990, 124]
+    level:    [139, 139]
+  17293669:
+    template: Magh_Bihu_Qufim
+    script:   Magh_Bihu
+    at:       [-223.930, -20.000, 322.240, 97]
+    level:    [139, 139]
+  17293670:
+    template: Dazbog_Qufim
+    script:   Dazbog
+    at:       [-223.020, -19.000, 321.510, 109]
+    level:    [139, 139]
+  17293671:
+    template: Awoken_Tanngrisnir
+    at:       [-189.000, -20.000, 45.000, 185]
+    level:    [119, 119]
+
+slots:
+  - members:
+      17293321: {} # Dancing_Weapon
+      17293324: {} # Dancing_Weapon
+  - members:
+      17293325: {} # Dancing_Weapon
+      17293328: {} # Dancing_Weapon
+  - members:
+      17293341: {} # Giant_Ranger
+      17293342: {} # Giant_Ascetic
+      17293343: {} # Giant_Trapper
+      17293345: {} # Giant_Hunter
+  - members:
+      17293346: {} # Giant_Ranger
+      17293347: {} # Giant_Ascetic
+      17293348: {} # Giant_Trapper
+      17293350: {} # Giant_Hunter
+  - members:
+      17293376: {} # Giant_Ranger
+      17293377: {} # Giant_Ascetic
+      17293378: {} # Giant_Trapper
+      17293380: {} # Giant_Hunter
+  - members:
+      17293381: {} # Giant_Ranger
+      17293382: {} # Giant_Ascetic
+      17293383: {} # Giant_Trapper
+      17293385: {} # Giant_Hunter
+  - members:
+      17293399: {} # Giant_Ranger
+      17293400: {} # Giant_Ascetic
+      17293401: {} # Giant_Trapper
+      17293403: {} # Giant_Hunter
+  - members:
+      17293417: {} # Giant_Ranger
+      17293418: {} # Giant_Ascetic
+      17293419: {} # Giant_Trapper
+      17293421: {} # Giant_Hunter
+  - members:
+      17293451: {} # Giant_Ranger
+      17293452: {} # Giant_Ascetic
+      17293453: {} # Giant_Trapper
+      17293455: {} # Giant_Hunter
+  - members:
+      17293496: {} # Giant_Ranger
+      17293497: {} # Giant_Ascetic
+      17293498: {} # Giant_Trapper
+      17293500: {} # Giant_Hunter
+  - members:
+      17293519: {} # Giant_Ranger
+      17293520: {} # Giant_Ascetic
+      17293521: {} # Giant_Trapper
+      17293523: {} # Giant_Hunter
+  - members:
+      17293524: {} # Giant_Ranger
+      17293525: {} # Giant_Ascetic
+      17293526: {} # Giant_Trapper
+      17293528: {} # Giant_Hunter
+  - members:
+      17293550: {} # Giant_Ranger
+      17293551: {} # Giant_Ascetic
+      17293552: {} # Giant_Trapper
+      17293554: {} # Giant_Hunter
+  - members:
+      17293555: {} # Giant_Ranger
+      17293556: {} # Giant_Ascetic
+      17293557: {} # Giant_Trapper
+      17293559: {} # Giant_Hunter
+  - members:
+      17293574: {} # Giant_Ranger
+      17293575: {} # Giant_Ascetic
+      17293576: {} # Giant_Trapper
+      17293578: {} # Giant_Hunter

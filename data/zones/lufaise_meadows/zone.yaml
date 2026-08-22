@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          230
+  night:        230
+  battle_solo:  101
+  battle_party: 219
+
+zonelines:
+
+  z0o0:
+    from:  [-482.593, -20.100, 283.523]
+    to:    misareaux_coast
+    at:    [567.624, -20.000, 280.775, 3.141593]
+    scale: [1.500, 7.000]
+
+  z0o2:
+    from:  [-600.989, -2.981, -100.086]
+    to:    tavnazian_safehold
+    at:    [7.425, -31.201, 155.009, 2.478368]
+    scale: [1.000, 5.000]
+
+  z0o4:
+    from:  [-401.488, -3.056, -219.958]
+    to:    tavnazian_safehold
+    at:    [13.659, -27.742, 118.255, 3.909538]
+    scale: [1.000, 5.000]

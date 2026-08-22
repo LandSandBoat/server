@@ -22,7 +22,7 @@
 // Inheritance rules for data/ecosystems.yaml.
 
 #include "map/data/datasets/ecosystems/dataset.h"
-#include "map/data/loader.h"
+#include "map/utils/dataset_loader.h"
 #include "map/utils/mobutils.h"
 
 #include <catch2/catch_test_macros.hpp>

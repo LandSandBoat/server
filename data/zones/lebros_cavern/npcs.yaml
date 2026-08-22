@@ -1,0 +1,1655 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17035292:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28714
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035293:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28716
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035294:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28716
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035295:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28717
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035296:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28714
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035297:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28716
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035298:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28717
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035299:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28714
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035300:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28716
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035301:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28717
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035302:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28714
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035303:
+    script:       Imperial_Stormer
+    display_name: Imperial Stormer
+    at:           [-476.615, -10.461, -355.162, 117]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4267
+        body:  8363
+        hands: 12462
+        legs:  16555
+        feet:  20651
+        main:  24831
+        sub:   28717
+      entity_flags: 1179
+      name_vis:        1
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035336:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035337:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035338:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035339:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035340:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035341:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035342:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035343:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035344:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035345:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035346:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035347:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035348:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035349:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035350:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035351:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035380:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035381:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035382:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035383:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035384:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035385:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035386:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035387:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035388:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035389:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035390:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035391:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035392:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035393:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035394:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035395:
+    script:       Lebros_Apkallu
+    display_name: Lebros Apkallu
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          status_7
+    animation_speed: 57
+    widescan:        true
+
+  17035477:
+    script: NPC[d5]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17035478:
+    script:       Ancient_Lockbox
+    display_name: Ancient Lockbox
+    at:           [50.000, -40.070, 99.999]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags: 1667
+      moving:          6
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         TOAU
+
+  17035479:
+    script:       Rune_of_Release
+    display_name: Rune of Release
+    at:           [49.999, -40.837, 96.999]
+    render:
+      look:
+        type:  standard
+        model: 1508
+      entity_flags:  27
+      name_vis:     112
+      name_prefix:   32
+      moving:         6
+    widescan: true
+    content:  TOAU
+
+  17035480:
+    script:       Yazuhma
+    display_name: Yazuhma
+    at:           [-330.000, -10.000, -260.000, 128]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  5
+        head:  4267
+        body:  8363
+        hands: 12459
+        legs:  16558
+        feet:  20654
+        main:  24832
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035481:
+    script:       Switch
+    display_name: Switch
+    render:
+      look:
+        type:  standard
+        model: 1509
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17035482:
+    script:       Switch
+    display_name: Switch
+    render:
+      look:
+        type:  standard
+        model: 1509
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17035483:
+    script:       Switch
+    display_name: Switch
+    render:
+      look:
+        type:  standard
+        model: 1509
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17035484:
+    script: NPC[dc]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status: cutscene_only
+
+  17035485:
+    script:       Rhap_Nelhah
+    display_name: Rhap Nelhah
+    at:           [91.270, -30.894, 254.352, 144]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  1
+        head:  4212
+        body:  8192
+        hands: 12319
+        legs:  16541
+        feet:  20637
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17035486:
+    script:       Rhap_Nelhah
+    display_name: Rhap Nelhah
+    at:           [-136.750, -10.670, 462.980, 128]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  1
+        head:  4212
+        body:  8192
+        hands: 12319
+        legs:  16541
+        feet:  20637
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17035487:
+    script:       Whyjham
+    display_name: Whyjham
+    at:           [160.420, -40.000, 322.294, 223]
+    render:
+      look:
+        type:  standard
+        model: 122
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  17035489:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17035490:
+    script: NPC[e2]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17035492:
+    script: NPC[e4]
+    at:     [0.000, -9.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17035493:
+    script: NPC[e5]
+    at:     [0.000, -9.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17035494:
+    script: NPC[e6]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17035495:
+    script: NPC[e7]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17035496:
+    script: NPC[e8]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17035497:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17035498:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17035499:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17035500:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17035501:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17035502:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17035503:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17035504:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17035505:
+    script:       DOOR_MASTER
+    display_name: DOOR_MASTER
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status:   normal
+    widescan: true
+
+  17035506:
+    script: _1r1
+    at:     [-320.018, -13.350, 459.752]
+    render:
+      look:
+        type: door
+      door_id:      829567327
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035507:
+    script: _1r2
+    at:     [-280.022, -12.927, 420.125]
+    render:
+      look:
+        type: door
+      door_id:      846344543
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035508:
+    script: _1r3
+    at:     [40.000, -32.866, 460.000]
+    render:
+      look:
+        type: door
+      door_id:      863121759
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035509:
+    script: _1r4
+    at:     [-300.000, -13.121, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      879898975
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035510:
+    script: _1r5
+    at:     [-160.000, -32.897, 300.000]
+    render:
+      look:
+        type: door
+      door_id:      896676191
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035511:
+    script: _1r6
+    at:     [0.000, -33.113, 300.000]
+    render:
+      look:
+        type: door
+      door_id:      913453407
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035512:
+    script: _1r7
+    at:     [120.000, -33.144, 380.000]
+    render:
+      look:
+        type: door
+      door_id:      930230623
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035513:
+    script: _1r8
+    at:     [380.000, -33.017, 320.000]
+    render:
+      look:
+        type: door
+      door_id:      947007839
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035514:
+    script: _1r9
+    at:     [-240.000, -33.158, 220.000]
+    render:
+      look:
+        type: door
+      door_id:      963785055
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035515:
+    script: _1ra
+    at:     [-180.000, -33.384, 200.000]
+    render:
+      look:
+        type: door
+      door_id:      1634873695
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035516:
+    script: _1rb
+    at:     [0.000, -33.067, 260.000]
+    render:
+      look:
+        type: door
+      door_id:      1651650911
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035517:
+    script: _1rc
+    at:     [100.000, -33.171, 240.000]
+    render:
+      look:
+        type: door
+      door_id:      1668428127
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035518:
+    script: _1rd
+    at:     [300.000, -33.136, 200.000]
+    render:
+      look:
+        type: door
+      door_id:      1685205343
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035519:
+    script: _1re
+    at:     [-240.000, -13.258, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1701982559
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035520:
+    script: _1rf
+    at:     [-20.000, -33.185, 200.000]
+    render:
+      look:
+        type: door
+      door_id:      1718759775
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035521:
+    script: _1rg
+    at:     [260.000, -33.182, 160.000]
+    render:
+      look:
+        type: door
+      door_id:      1735536991
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035522:
+    script: _1rh
+    at:     [-500.000, -13.071, -40.000]
+    render:
+      look:
+        type: door
+      door_id:      1752314207
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035523:
+    script: _1ri
+    at:     [-280.000, -13.129, -60.000]
+    render:
+      look:
+        type: door
+      door_id:      1769091423
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035524:
+    script: _1rj
+    at:     [-220.000, -33.020, 0.000]
+    render:
+      look:
+        type: door
+      door_id:      1785868639
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035525:
+    script: _1rk
+    at:     [-60.000, -43.106, 0.000]
+    render:
+      look:
+        type: door
+      door_id:      1802645855
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035526:
+    script: _1rl
+    at:     [-20.000, -43.202, 80.000]
+    render:
+      look:
+        type: door
+      door_id:      1819423071
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035527:
+    script: _1rm
+    at:     [60.000, -43.159, 80.000]
+    render:
+      look:
+        type: door
+      door_id:      1836200287
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035528:
+    script: _1rn
+    at:     [120.000, -43.186, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      1852977503
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035529:
+    script: _1ro
+    at:     [440.000, -53.171, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1869754719
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035530:
+    script: _1rp
+    at:     [-400.000, -13.022, -180.000]
+    render:
+      look:
+        type: door
+      door_id:      1886531935
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035531:
+    script: _1rq
+    at:     [-40.000, -63.257, -180.000]
+    render:
+      look:
+        type: door
+      door_id:      1903309151
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035532:
+    script: _1rr
+    at:     [-120.000, -53.164, -220.000]
+    render:
+      look:
+        type: door
+      door_id:      1920086367
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035533:
+    script: _1rs
+    at:     [80.000, -43.182, -60.000]
+    render:
+      look:
+        type: door
+      door_id:      1936863583
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035534:
+    script: _1rt
+    at:     [120.000, -43.036, -260.000]
+    render:
+      look:
+        type: door
+      door_id:      1953640799
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035535:
+    script: _1ru
+    at:     [240.000, -43.131, -180.000]
+    render:
+      look:
+        type: door
+      door_id:      1970418015
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035536:
+    script: _1rv
+    at:     [-60.000, -63.184, -440.000]
+    render:
+      look:
+        type: door
+      door_id:      1987195231
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035537:
+    script: _1rw
+    at:     [220.000, -42.905, -400.000]
+    render:
+      look:
+        type: door
+      door_id:      2003972447
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035538:
+    script: _1rx
+    at:     [179.000, -43.362, 380.000]
+    render:
+      look:
+        type: door
+      door_id:      2020749663
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035539:
+    script: _1ry
+    at:     [179.000, -32.992, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      2037526879
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035540:
+    script: _1rz
+    at:     [259.000, -32.862, 220.000]
+    render:
+      look:
+        type: door
+      door_id:      2054304095
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035541:
+    script: _jr0
+    at:     [300.000, -32.910, 341.000]
+    render:
+      look:
+        type: door
+      door_id:      812804703
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035542:
+    script: _jr1
+    at:     [339.000, -32.901, 300.000]
+    render:
+      look:
+        type: door
+      door_id:      829581919
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035543:
+    script: _jr2
+    at:     [300.000, -42.957, 461.000]
+    render:
+      look:
+        type: door
+      door_id:      846359135
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035544:
+    script: _jr3
+    at:     [419.000, -62.901, 500.000]
+    render:
+      look:
+        type: door
+      door_id:      863136351
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035545:
+    script: _jr4
+    at:     [539.000, -42.953, 500.000]
+    render:
+      look:
+        type: door
+      door_id:      879913567
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035546:
+    script: _jr5
+    at:     [419.000, -42.992, 340.000]
+    render:
+      look:
+        type: door
+      door_id:      896690783
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035547:
+    script: _jr6
+    at:     [460.000, -42.896, 301.000]
+    render:
+      look:
+        type: door
+      door_id:      913467999
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035548:
+    script: _jr7
+    at:     [500.000, -42.853, 341.000]
+    render:
+      look:
+        type: door
+      door_id:      930245215
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035549:
+    script: _jr8
+    at:     [539.000, -42.934, 380.000]
+    render:
+      look:
+        type: door
+      door_id:      947022431
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035550:
+    script: _jr9
+    at:     [379.000, -42.924, 180.000]
+    render:
+      look:
+        type: door
+      door_id:      963799647
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035551:
+    script: _jra
+    at:     [459.000, -42.965, 220.000]
+    render:
+      look:
+        type: door
+      door_id:      1634888287
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035552:
+    script: _jrb
+    at:     [260.000, -33.004, 101.000]
+    render:
+      look:
+        type: door
+      door_id:      1651665503
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035553:
+    script: _jrc
+    at:     [299.000, -32.879, 180.000]
+    render:
+      look:
+        type: door
+      door_id:      1668442719
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035554:
+    script: _jrd
+    at:     [300.000, -32.923, 61.000]
+    render:
+      look:
+        type: door
+      door_id:      1685219935
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035555:
+    script: _jre
+    at:     [140.000, -42.892, -19.000]
+    render:
+      look:
+        type: door
+      door_id:      1701997151
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17035556:
+    script: _jrf
+    at:     [218.800, -32.843, -19.994]
+    render:
+      look:
+        type: door
+      door_id:      1718774367
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035557:
+    script: _jrg
+    at:     [299.000, -32.907, -20.000]
+    render:
+      look:
+        type: door
+      door_id:      1735551583
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035558:
+    script: _jri
+    at:     [260.000, -32.874, -99.000]
+    render:
+      look:
+        type: door
+      door_id:      1769106015
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035559:
+    script: _jrh
+    at:     [420.000, -53.019, 21.000]
+    render:
+      look:
+        type: door
+      door_id:      1752328799
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035560:
+    script: _jrj
+    at:     [420.000, -32.892, -259.000]
+    render:
+      look:
+        type: door
+      door_id:      1785883231
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035561:
+    script: _jrk
+    at:     [460.000, -32.977, -59.000]
+    render:
+      look:
+        type: door
+      door_id:      1802660447
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17035562:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    status: normal

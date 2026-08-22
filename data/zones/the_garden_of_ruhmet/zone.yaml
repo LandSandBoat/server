@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          228
+  night:        228
+  battle_solo:  115
+  battle_party: 218
+
+zonelines:
+
+  z0z0:
+    from:  [-420.000, -3.669, 235.712]
+    to:    grand_palace_of_huxzoi
+    at:    [-20.000, -2.064, -285.460, 1.570796]
+    scale: [1.000, 5.000]
+
+  z0z2:
+    from:  [-484.739, -3.000, -340.000]
+    to:    the_garden_of_ruhmet
+    at:    [-351.136, -2.250, -380.000]
+    scale: [1.000, 4.000]
+
+  z0z4:
+    from:  [-355.149, -3.000, -380.141]
+    to:    the_garden_of_ruhmet
+    at:    [-488.908, -2.318, -340.000, 3.141593]
+    scale: [1.000, 4.000]
+
+  z0z6:
+    from:  [-478.374, -3.000, -339.977]
+    to:    the_garden_of_ruhmet
+    at:    [-365.291, -2.250, -380.000, 3.141593]
+    scale: [1.000, 4.000]
+
+  z0z8:
+    from:  [-361.598, -3.000, -380.000]
+    to:    the_garden_of_ruhmet
+    at:    [-474.853, -2.250, -340.000]
+    scale: [1.000, 4.000]
+
+  z0za:
+    from:  [-361.604, -3.000, -340.000]
+    to:    the_garden_of_ruhmet
+    at:    [-474.843, -2.250, -380.000]
+    scale: [1.000, 4.000]
+
+  z0zc:
+    from:  [-478.375, -3.000, -380.000]
+    to:    the_garden_of_ruhmet
+    at:    [-365.298, -2.250, -340.000, 3.141593]
+    scale: [1.000, 4.000]
+
+  z0ze:
+    from:  [-355.157, -3.000, -340.000]
+    to:    the_garden_of_ruhmet
+    at:    [-488.897, -2.250, -380.000, 3.141593]
+    scale: [1.000, 4.000]
+
+  z0zg:
+    from:  [-484.729, -3.000, -380.000]
+    to:    the_garden_of_ruhmet
+    at:    [-351.143, -2.250, -340.000]
+    scale: [1.000, 4.000]
+
+  z0zi:
+    from:  [-460.000, -2.500, -446.305]
+    to:    the_garden_of_ruhmet
+    at:    [-380.000, -2.250, -478.369, 1.570796]
+    scale: [1.000, 3.000]
+
+  z0zk:
+    from:  [-380.000, -3.500, -473.733]
+    to:    the_garden_of_ruhmet
+    at:    [-460.000, -2.250, -441.682, 4.712389]
+    scale: [1.000, 3.000]
+
+  z0zm:
+    from:  [-460.000, -3.500, -473.733]
+    to:    the_garden_of_ruhmet
+    at:    [-380.000, -2.250, -441.682, 4.712389]
+    scale: [1.000, 3.000]
+
+  z0zo:
+    from:  [-380.000, -3.500, -446.305]
+    to:    the_garden_of_ruhmet
+    at:    [-460.000, -2.250, -478.369, 1.570796]
+    scale: [1.000, 3.000]

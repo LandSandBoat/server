@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  193
+  battle_party: 193
+
+zonelines:
+
+  z4q0:
+    from:  [-260.059, 0.719, -329.073]
+    to:    toraimarai_canal
+    at:    [-259.980, 21.794, 81.887, 1.570796]
+    scale: [1.000, 4.000]
+
+  z4q2:
+    from:  [409.773, 0.701, 419.936]
+    to:    toraimarai_canal
+    at:    [-320.003, 9.742, 260.022]
+    scale: [1.000, 4.000]

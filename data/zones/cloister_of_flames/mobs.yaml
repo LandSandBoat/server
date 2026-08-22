@@ -1,0 +1,438 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Fire_Elemental_T:
+    id:            6137
+    display_name:  Fire_Elemental
+    species:       fire_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, silence, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 8
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+  Ifrit_Prime_ASA:
+    id:           7043
+    display_name: Ifrit_Prime
+    species:      ifrit
+    type:         [notorious, battlefield]
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   -3
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      -3
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Ifrit_Prime_TBF:
+    id:            4645
+    display_name:  Ifrit_Prime
+    species:       ifrit
+    type:          [notorious, battlefield]
+    skill_list_id: 322
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   -3
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      -3
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Ifrit_Prime_TBF_2:
+    id:            4645
+    display_name:  Ifrit_Prime
+    species:       ifrit
+    type:          [notorious, battlefield]
+    skill_list_id: 322
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   -3
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      -3
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ifrit_Prime_TSTBF:
+    id:            7052
+    display_name:  Ifrit_Prime
+    species:       ifrit
+    type:          [notorious, battlefield]
+    skill_list_id: 1180
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   -3
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      -3
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 700
+
+  Ifrit_Prime_WTB:
+    id:            2050
+    display_name:  Ifrit_Prime
+    species:       ifrit
+    type:          [notorious, battlefield]
+    skill_list_id: 2013
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     11
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:   -3
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:      4
+          slow:         4
+          poison:      -3
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+spawns:
+  17625089:
+    template: Ifrit_Prime_TBF
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [60, 60]
+  17625090:
+    template: Ifrit_Prime_TBF
+    at:       [22.924, -18.996, 32.955, 105]
+    level:    [60, 60]
+  17625091:
+    template: Ifrit_Prime_TBF
+    at:       [-376.950, -79.007, 513.097, 105]
+    level:    [60, 60]
+  17625092:
+    template: Ifrit_Prime_TSTBF
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [20, 20]
+  17625093:
+    template: Ifrit_Prime_TSTBF
+    at:       [22.924, -18.996, 32.955, 105]
+    level:    [20, 20]
+  17625094:
+    template: Ifrit_Prime_TSTBF
+    at:       [-376.950, -79.007, 513.097, 105]
+    level:    [20, 20]
+  17625095:
+    template: Ifrit_Prime_WTB
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [85, 85]
+  17625096:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [507.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17625097:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [499.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17625098:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [503.000, 41.000, -371.000, 105]
+    level:    [75, 75]
+  17625099:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [503.000, 41.000, -363.000, 105]
+    level:    [75, 75]
+  17625100:
+    template: Ifrit_Prime_WTB
+    at:       [23.048, -19.001, 33.005, 105]
+    level:    [85, 85]
+  17625101:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [19.048, -19.001, 33.005, 105]
+    level:    [75, 75]
+  17625102:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [26.048, -19.001, 33.005, 105]
+    level:    [75, 75]
+  17625103:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [23.048, -19.001, 37.005, 105]
+    level:    [75, 75]
+  17625104:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [23.048, -19.001, 29.005, 105]
+    level:    [75, 75]
+  17625105:
+    template: Ifrit_Prime_WTB
+    at:       [-376.950, -79.007, 513.097, 105]
+    level:    [85, 85]
+  17625106:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [-381.066, -79.002, 513.045, 105]
+    level:    [75, 75]
+  17625107:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [-373.066, -79.002, 513.045, 105]
+    level:    [75, 75]
+  17625108:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [-377.066, -79.002, 517.045, 105]
+    level:    [75, 75]
+  17625109:
+    template: Fire_Elemental_T
+    script:   Fire_Elemental
+    at:       [-377.066, -79.002, 509.045, 105]
+    level:    [75, 75]
+  17625110:
+    template: Ifrit_Prime_ASA
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [40, 40]
+  17625111:
+    template: Ifrit_Prime_ASA
+    at:       [22.924, -18.996, 32.955, 105]
+    level:    [40, 40]
+  17625112:
+    template: Ifrit_Prime_ASA
+    at:       [-376.950, -79.007, 513.097, 105]
+    level:    [40, 40]
+  17625113:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625114:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625115:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625116:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625117:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625118:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625119:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625120:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625121:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625122:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625123:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625124:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625125:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625126:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]
+  17625127:
+    template: Ifrit_Prime_TBF_2
+    script:   Ifrit_Prime_HTBF
+    level:    [99, 99]

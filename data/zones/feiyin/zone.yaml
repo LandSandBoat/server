@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z5o0:
+    from:  [-179.993, -28.770, -199.963]
+    to:    beaucedine_glacier
+    at:    [280.025, 17.881, 568.587, 1.570796]
+    scale: [1.000, 4.000]
+
+  z5o2:
+    from:  [244.965, -26.953, 59.998]
+    to:    qubia_arena
+    at:    [-241.046, -25.860, 19.991]
+    scale: [1.000, 3.000]
+
+  z5o4:
+    from:  [264.944, -31.225, -70.021]
+    to:    qubia_arena
+    at:    [-62.095, -30.074, -80.027]
+    scale: [1.000, 3.000]
+
+  z5o6:
+    from:  [100.007, -4.454, 280.023]
+    to:    cloister_of_frost
+    at:    [499.993, -1.696, 523.343, 4.712389]
+    scale: [1.000, 4.000]
+
+  z5o8:
+    from:  [245.790, -31.265, 159.982]
+    to:    cloister_of_frost
+    at:    [-449.500, -21.936, -399.976]
+    scale: [1.000, 4.000]

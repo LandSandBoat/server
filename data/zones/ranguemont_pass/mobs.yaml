@@ -1,0 +1,2246 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Bat_Eye:
+    id:            374
+    species:       ahriman
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: club
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   ahriman_lens
+        - chance: rare
+          item:   storm_axe
+        - chance: always
+          item:   bottle_of_ahriman_tears
+      despoil:
+        bottle_of_ahriman_tears: 0
+        ahriman_wing:            0
+
+  Bilesucker:
+    id:            6459
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+    content: ABYSSEA
+
+  Blade_Bat_Ranguemont_Pass:
+    id:            8169
+    display_name:  Blade_Bat
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Cave_Scorpion:
+    id:            666
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   scorpion_claw
+        - chance: common
+          item:   scorpion_shell
+        - chance: rare
+          item:   frostreaper
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Evil_Weapon:
+    id:            1267
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_glittersand
+
+  Giant_Scorpion:
+    id:            1537
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   scorpion_claw
+        - chance: common
+          item:   scorpion_shell
+        - chance: rare
+          item:   harvester
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Gloom_Eye:
+    id:            5849
+    species:       ahriman
+    type:          [notorious]
+    skill_list_id: 50
+    attributes:
+      combat:
+        skill: club
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8600
+    loot:
+      drops:
+        - chance: common
+          item:   wit_pendant
+    content: WOTG
+
+  Goblin_Artificer:
+    id:            6662
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 497
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   iron_mask
+        - chance: very_rare
+          item:   chain_hose
+        - chance: very_rare
+          item:   chain_mittens
+        - chance: very_rare
+          item:   greaves
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+    content: ABYSSEA
+
+  Goblin_Chaser:
+    id:            6668
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 487
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   brass_cuisses
+        - chance: very_rare
+          item:   brass_mask
+        - chance: very_rare
+          item:   brass_finger_gauntlets
+        - chance: very_rare
+          item:   brass_greaves
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+    content: ABYSSEA
+
+  Goblin_Gambler:
+    id:            1666
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 494
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   bag_of_poison_flour
+        - chance: very_rare
+          item:   poets_circlet
+        - chance: very_rare
+          item:   linen_cuffs
+        - chance: very_rare
+          item:   linen_slops
+        - chance: very_rare
+          item:   holly_clogs
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Hoodoo:
+    id:            6657
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: ultra_rare
+          item:   wool_hat
+        - chance: ultra_rare
+          item:   wool_cuffs
+        - chance: ultra_rare
+          item:   wool_slops
+        - chance: ultra_rare
+          item:   chestnut_sabots
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+    content: ABYSSEA
+
+  Goblin_Leecher:
+    id:            1683
+    species:       goblin
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 488
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   scroll_of_paralyze
+        - chance: rare
+          item:   scroll_of_barsleep
+        - chance: rare
+          item:   scroll_of_silence
+        - chance: very_rare
+          item:   scroll_of_barpoison
+        - chance: rare
+          item:   scroll_of_protectra
+        - chance: rare
+          item:   scroll_of_sneak
+        - chance: very_rare
+          item:   scroll_of_invisible
+        - chance: very_rare
+          item:   scroll_of_deodorize
+        - chance: very_rare
+          item:   poets_circlet
+        - chance: very_rare
+          item:   linen_cuffs
+        - chance: very_rare
+          item:   linen_slops
+        - chance: very_rare
+          item:   holly_clogs
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Mugger:
+    id:            1690
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 485
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   brass_cap
+        - chance: very_rare
+          item:   brass_mittens
+        - chance: very_rare
+          item:   brass_subligar
+        - chance: very_rare
+          item:   brass_leggings
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Tanner:
+    id:            6655
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 490
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   square_of_sheep_leather
+        - chance: very_rare
+          item:   square_of_dhalmel_leather
+        - chance: super_rare
+          item:   square_of_black_tiger_leather
+        - chance: ultra_rare
+          item:   square_of_coeurl_leather
+        - chance: super_rare
+          item:   studded_bandana
+        - chance: super_rare
+          item:   studded_gloves
+        - chance: super_rare
+          item:   studded_trousers
+        - chance: super_rare
+          item:   studded_boots
+      steal: crossbow_bolt
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+    content: ABYSSEA
+
+  Goblin_Thug:
+    id:            1737
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 484
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   wild_onion
+        - chance: very_rare
+          item:   bronze_cap
+        - chance: very_rare
+          item:   bronze_mittens
+        - chance: very_rare
+          item:   bronze_subligar
+        - chance: very_rare
+          item:   bronze_leggings
+      steal: beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Weaver:
+    id:            1744
+    species:       goblin
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 489
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   spool_of_grass_thread
+        - chance: very_rare
+          item:   square_of_grass_cloth
+        - chance: very_rare
+          item:   spool_of_cotton_thread
+        - chance: very_rare
+          item:   square_of_cotton_cloth
+        - chance: very_rare
+          item:   circlet
+        - chance: very_rare
+          item:   cuffs
+        - chance: very_rare
+          item:   slops
+        - chance: very_rare
+          item:   ash_clogs
+      steal: spool_of_grass_thread
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblins_Bats:
+    id:            1721
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+    content: ABYSSEA
+
+  Harnessed_Smilodon_Ranguemont:
+    id:            6042
+    display_name:  Harnessed_Smilodon
+    species:       smilodon
+    type:          [notorious]
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 2248
+        entity_flags: 133
+        name_vis:       4
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Hecteyes_RP:
+    id:            1912
+    species:       hecteye
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 1153
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: uncommon
+          item:   hecteyes_eye
+        - chance: uncommon
+          item:   hecteyes_eye
+      despoil:
+        hecteyes_eye: 0
+
+  Hovering_Oculus:
+    id:            6606
+    species:       ahriman
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: club
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bottle_of_ahriman_tears
+        - chance: uncommon
+          item:   ahriman_lens
+        - chance: rare
+          item:   ahriman_wing
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: uncommon
+          item:   fossilized_bone
+      despoil:
+        bottle_of_ahriman_tears: 0
+        ahriman_wing:            0
+    content: ABYSSEA
+
+  Hyakume:
+    id:            6883
+    species:       hecteye
+    type:          [notorious]
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 2900
+        mp: 2900
+    content: WOTG
+
+  Metallic_Slime:
+    id:            2633
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Mucoid_Mass:
+    id:            4574
+    species:       slime
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 228
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 6000
+    loot:
+      drops:
+        - chance: common
+          item:   spellcasters_ecu
+    content: WOTG
+
+  Oil_Slick_RP:
+    id:            6412
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 1153
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Ooze:
+    id:            2987
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Seeker_Bats_KT_RP_Qufim:
+    id:            3642
+    display_name:  Seeker_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+  Stirge:
+    id:            3776
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: common
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Taisai:
+    id:            3838
+    species:       hecteye
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_mercury
+        - chance: common
+          item:   hecteyes_eye
+      despoil:
+        hecteyes_eye: 0
+
+  Taisaijin:
+    id:            3839
+    species:       hecteye
+    type:          [notorious]
+    spell_list_id: 81
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9350
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_mercury
+        - chance: common
+          item:   hecteyes_eye
+        - chance: rare
+          item:   spelunkers_hat
+        - chance: always
+          one_of:
+            scroll_of_refresh:    95
+            scroll_of_refresh_ii:  5
+
+  Tros:
+    id:            4041
+    species:       sea_monk
+    type:          [notorious]
+    spell_list_id: 83
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 2000
+
+  Wind_Bats_RP:
+    id:            4349
+    display_name:  Wind_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  641
+        animation_sub:   8
+        name_prefix:    64
+        hitbox:         13
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+spawns:
+  17457153:
+    template: Wind_Bats_RP
+    script:   Wind_Bats
+    at:       [-193.830, 3.712, -261.749, 92]
+    level:    [3, 5]
+  17457154:
+    template: Wind_Bats_RP
+    script:   Wind_Bats
+    at:       [-217.222, 3.358, -241.211, 127]
+    level:    [3, 5]
+  17457155:
+    template: Blade_Bat_Ranguemont_Pass
+    script:   Blade_Bat
+    at:       [-180.128, 3.450, -265.574, 44]
+    level:    [4, 7]
+  17457156:
+    template: Blade_Bat_Ranguemont_Pass
+    script:   Blade_Bat
+    at:       [-151.331, 4.137, -256.681, 127]
+    level:    [4, 7]
+  17457157:
+    template: Oil_Slick_RP
+    script:   Oil_Slick
+    at:       [-171.489, 2.843, -261.196, 120]
+    level:    [7, 9]
+  17457158:
+    template: Oil_Slick_RP
+    script:   Oil_Slick
+    at:       [-220.195, 3.568, -232.002, 127]
+    level:    [7, 9]
+  17457159:
+    template: Goblin_Thug
+    at:       [-169.638, 3.938, -223.796, 127]
+    level:    [4, 6]
+  17457160:
+    template: Goblin_Weaver
+    at:       [-141.918, 4.101, -221.867, 127]
+    level:    [4, 6]
+  17457161:
+    template: Wind_Bats_RP
+    script:   Wind_Bats
+    at:       [-135.130, 2.597, -220.187, 127]
+    level:    [3, 5]
+  17457162:
+    template: Wind_Bats_RP
+    script:   Wind_Bats
+    at:       [-143.144, 3.863, -235.005, 58]
+    level:    [3, 5]
+  17457163:
+    template: Wind_Bats_RP
+    script:   Wind_Bats
+    at:       [-139.284, 3.868, -222.732, 18]
+    level:    [3, 5]
+  17457164:
+    template: Blade_Bat_Ranguemont_Pass
+    script:   Blade_Bat
+    at:       [-139.166, 4.577, -234.560, 127]
+    level:    [4, 7]
+  17457165:
+    template: Blade_Bat_Ranguemont_Pass
+    script:   Blade_Bat
+    at:       [-149.415, 2.318, -236.875, 65]
+    level:    [4, 7]
+  17457166:
+    template: Goblin_Thug
+    at:       [-188.000, 5.000, -191.000, 64]
+    level:    [6, 8]
+  17457167:
+    template: Goblin_Weaver
+    at:       [-171.000, 5.000, -165.000, 101]
+    level:    [6, 8]
+  17457168:
+    template: Goblin_Weaver
+    at:       [-179.000, 5.000, -182.000, 2]
+    level:    [6, 8]
+  17457169:
+    template: Blade_Bat_Ranguemont_Pass
+    script:   Blade_Bat
+    at:       [-172.000, 5.000, -191.000, 127]
+    level:    [4, 7]
+  17457170:
+    template: Blade_Bat_Ranguemont_Pass
+    script:   Blade_Bat
+    at:       [-186.000, 5.000, -166.000, 66]
+    level:    [4, 7]
+  17457171:
+    template: Goblin_Mugger
+    at:       [-209.311, 2.998, -149.195, 5]
+    level:    [26, 30]
+  17457172:
+    template: Goblin_Leecher
+    at:       [-209.388, 4.470, -144.834, 127]
+    level:    [26, 30]
+  17457173:
+    template: Goblin_Gambler
+    at:       [-207.632, 3.068, -134.052, 9]
+    level:    [26, 30]
+  17457174:
+    template: Goblin_Mugger
+    at:       [-197.619, 4.469, -143.783, 192]
+    level:    [26, 30]
+  17457175:
+    template: Goblin_Leecher
+    at:       [-190.599, 4.586, -143.857, 128]
+    level:    [26, 30]
+  17457176:
+    template: Goblin_Gambler
+    at:       [-187.556, 3.383, -148.428, 127]
+    level:    [26, 30]
+  17457177:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-219.000, 4.000, -120.000, 127]
+    level:    [25, 28]
+  17457178:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-189.958, 4.596, -144.100, 127]
+    level:    [25, 28]
+  17457179:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-277.461, 3.449, -138.721, 127]
+    level:    [25, 28]
+  17457180:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-254.480, 4.118, -140.249, 127]
+    level:    [25, 28]
+  17457181:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-275.537, 2.603, -143.879, 127]
+    level:    [25, 28]
+  17457182:
+    template: Ooze
+    at:       [-280.167, 3.502, -140.934, 127]
+    level:    [28, 30]
+  17457183:
+    template: Goblin_Mugger
+    at:       [-290.751, 2.285, -158.577, 18]
+    level:    [26, 30]
+  17457184:
+    template: Goblin_Leecher
+    at:       [-298.000, 4.000, -173.000, 127]
+    level:    [26, 30]
+  17457185:
+    template: Goblin_Gambler
+    at:       [-296.000, 4.000, -153.000, 127]
+    level:    [26, 30]
+  17457186:
+    template: Goblin_Mugger
+    at:       [-290.390, 3.454, -175.201, 154]
+    level:    [26, 30]
+  17457187:
+    template: Goblin_Leecher
+    at:       [-301.000, 5.000, -162.000, 127]
+    level:    [26, 30]
+  17457188:
+    template: Goblin_Gambler
+    at:       [-295.578, 3.369, -151.104, 133]
+    level:    [26, 30]
+  17457189:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-296.000, 4.000, -179.000, 67]
+    level:    [25, 28]
+  17457190:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-292.000, 3.000, -145.000, 127]
+    level:    [25, 28]
+  17457191:
+    template: Goblin_Mugger
+    at:       [-249.641, 5.000, -174.069, 67]
+    level:    [26, 30]
+  17457192:
+    template: Goblin_Mugger
+    at:       [-261.000, 5.000, -188.000, 36]
+    level:    [26, 30]
+  17457193:
+    template: Goblin_Leecher
+    at:       [-264.000, 5.000, -179.000, 69]
+    level:    [26, 30]
+  17457194:
+    template: Cave_Scorpion
+    at:       [-224.841, 4.010, -185.155, 57]
+    level:    [30, 33]
+  17457195:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-220.595, 4.448, -202.500, 48]
+    level:    [25, 28]
+  17457196:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-217.000, 4.000, -189.000, 97]
+    level:    [25, 28]
+  17457197:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-219.000, 2.000, -219.000, 127]
+    level:    [25, 28]
+  17457198:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-214.290, -0.633, -104.787, 127]
+    level:    [25, 28]
+  17457199:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-180.912, -6.664, -95.141, 127]
+    level:    [25, 28]
+  17457200:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-152.136, -5.216, -89.814, 112]
+    level:    [25, 28]
+  17457201:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-163.000, -6.000, -81.000, 127]
+    level:    [25, 28]
+  17457202:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-114.841, -5.545, -86.773, 2]
+    level:    [25, 28]
+  17457203:
+    template: Stirge
+    at:       [-138.837, -3.900, -75.286, 127]
+    level:    [30, 33]
+  17457204:
+    template: Gloom_Eye
+    at:       [-152.136, -5.216, -89.814, 112]
+    level:    [73, 74]
+  17457205:
+    template: Ooze
+    at:       [-142.919, -3.591, -75.975, 127]
+    level:    [28, 30]
+  17457206:
+    template: Ooze
+    at:       [-146.860, -3.566, -68.779, 127]
+    level:    [28, 30]
+  17457207:
+    template: Cave_Scorpion
+    at:       [-60.224, -6.502, -68.529, 127]
+    level:    [30, 33]
+  17457208:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-69.793, -6.759, -62.671, 127]
+    level:    [25, 28]
+  17457209:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-58.367, -6.498, -56.828, 127]
+    level:    [25, 28]
+  17457210:
+    template: Stirge
+    at:       [-52.518, -6.636, -93.312, 127]
+    level:    [31, 33]
+  17457211:
+    template: Stirge
+    at:       [-88.000, -6.000, -60.000, 66]
+    level:    [31, 33]
+  17457212:
+    template: Stirge
+    at:       [-16.311, 3.990, -124.339, 127]
+    level:    [30, 32]
+  17457213:
+    template: Taisai
+    at:       [-18.325, 1.830, -114.932, 127]
+    level:    [35, 38]
+  17457214:
+    template: Taisai
+    at:       [-5.188, 11.730, -141.503, 8]
+    level:    [35, 38]
+  17457215:
+    template: Taisai
+    at:       [59.000, 15.000, -120.000, 50]
+    level:    [35, 38]
+  17457216:
+    template: Taisaijin
+    at:       [-15.000, 7.000, -131.000, 127]
+    level:    [60, 60]
+  17457217:
+    template: Goblin_Mugger
+    at:       [61.364, 12.520, -108.375, 127]
+    level:    [26, 30]
+  17457218:
+    template: Goblin_Leecher
+    at:       [56.328, 12.498, -110.328, 222]
+    level:    [26, 30]
+  17457219:
+    template: Goblin_Gambler
+    at:       [60.619, 14.360, -129.575, 252]
+    level:    [26, 30]
+  17457220:
+    template: Goblin_Mugger
+    at:       [46.000, 15.000, -139.000, 127]
+    level:    [26, 30]
+  17457221:
+    template: Goblin_Leecher
+    at:       [59.122, 14.343, -131.304, 94]
+    level:    [26, 30]
+  17457222:
+    template: Goblin_Gambler
+    at:       [59.000, 13.000, -151.000, 127]
+    level:    [26, 30]
+  17457223:
+    template: Stirge
+    at:       [27.241, 11.781, -135.749, 127]
+    level:    [31, 33]
+  17457224:
+    template: Stirge
+    at:       [95.365, 9.704, -94.921, 127]
+    level:    [31, 33]
+  17457225:
+    template: Giant_Scorpion
+    at:       [100.539, 4.808, -84.262, 5]
+    level:    [38, 40]
+  17457226:
+    template: Bat_Eye
+    at:       [163.997, 3.603, -54.476, 127]
+    level:    [42, 44]
+  17457227:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [121.104, 4.308, -54.413, 127]
+    level:    [25, 28]
+  17457228:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [152.000, 4.000, -59.000, 124]
+    level:    [25, 28]
+  17457229:
+    template: Hecteyes_RP
+    script:   Hecteyes
+    at:       [125.987, 3.561, -57.222, 127]
+    level:    [31, 34]
+  17457230:
+    template: Hecteyes_RP
+    script:   Hecteyes
+    at:       [144.000, 3.000, -57.000, 127]
+    level:    [31, 34]
+  17457231:
+    template: Hecteyes_RP
+    script:   Hecteyes
+    at:       [167.030, 3.665, -57.378, 127]
+    level:    [31, 34]
+  17457232:
+    template: Hecteyes_RP
+    script:   Hecteyes
+    at:       [135.251, 2.518, -57.706, 127]
+    level:    [31, 34]
+  17457233:
+    template: Hecteyes_RP
+    script:   Hecteyes
+    at:       [166.758, 3.504, -56.162, 146]
+    level:    [31, 34]
+  17457234:
+    template: Stirge
+    at:       [98.000, 24.000, -184.000, 8]
+    level:    [32, 32]
+  17457235:
+    template: Stirge
+    at:       [78.999, 23.490, -182.105, 127]
+    level:    [31, 31]
+  17457236:
+    template: Hyakume
+    at:       [144.098, 2.525, -63.542, 3]
+    level:    [43, 43]
+  17457237:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [150.930, 24.106, -194.463, 69]
+    level:    [25, 28]
+  17457238:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [158.639, 23.630, -206.317, 127]
+    level:    [25, 28]
+  17457239:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [160.597, 23.678, -195.648, 121]
+    level:    [25, 28]
+  17457240:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [137.757, 26.140, -205.335, 83]
+    level:    [25, 28]
+  17457241:
+    template: Stirge
+    at:       [139.891, 26.256, -201.758, 127]
+    level:    [31, 31]
+  17457242:
+    template: Stirge
+    at:       [142.615, 26.049, -195.887, 199]
+    level:    [32, 32]
+  17457243:
+    template: Ooze
+    at:       [-80.052, -16.495, -18.756, 127]
+    level:    [28, 30]
+  17457244:
+    template: Ooze
+    at:       [-62.992, -10.174, -25.971, 37]
+    level:    [28, 30]
+  17457245:
+    template: Mucoid_Mass
+    at:       [140.000, 20.000, -193.000, 145]
+    level:    [45, 48]
+  17457246:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-84.887, -16.751, -21.532, 134]
+    level:    [25, 28]
+  17457247:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-92.705, -16.619, -12.399, 11]
+    level:    [25, 28]
+  17457248:
+    template: Hovering_Oculus
+    at:       [-80.839, -15.192, 18.071, 118]
+    level:    [90, 92]
+  17457249:
+    template: Bilesucker
+    at:       [-84.117, -15.644, 24.575, 127]
+    level:    [87, 89]
+  17457250:
+    template: Bilesucker
+    at:       [-18.000, -26.382, 65.000, 127]
+    level:    [87, 89]
+  17457251:
+    template: Bilesucker
+    at:       [-17.490, -26.342, 82.798, 64]
+    level:    [87, 89]
+  17457252:
+    template: Bilesucker
+    at:       [-26.224, -20.459, 22.437, 127]
+    level:    [87, 89]
+  17457253:
+    template: Bilesucker
+    at:       [49.000, -25.000, 100.000, 22]
+    level:    [87, 89]
+  17457254:
+    template: Goblin_Hoodoo
+    at:       [-4.000, -25.000, 97.000, 118]
+    level:    [88, 90]
+  17457255:
+    template: Goblin_Artificer
+    at:       [7.000, -26.000, 100.000, 127]
+    level:    [88, 90]
+  17457256:
+    template: Goblin_Tanner
+    at:       [19.855, -27.039, 104.258, 28]
+    level:    [88, 90]
+  17457257:
+    template: Goblin_Chaser
+    at:       [44.000, -24.000, 97.000, 127]
+    level:    [88, 90]
+  17457258:
+    template: Goblins_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [83, 84]
+  17457259:
+    template: Bilesucker
+    at:       [-164.884, -36.507, 61.805, 127]
+    level:    [87, 89]
+  17457260:
+    template: Bilesucker
+    at:       [-114.298, -16.622, 24.229, 127]
+    level:    [87, 89]
+  17457261:
+    template: Bilesucker
+    at:       [-136.449, -22.125, 30.259, 127]
+    level:    [87, 89]
+  17457262:
+    template: Goblin_Hoodoo
+    at:       [-193.000, -35.000, 123.000, 102]
+    level:    [88, 90]
+  17457263:
+    template: Goblin_Artificer
+    at:       [-203.000, -35.000, 92.000, 127]
+    level:    [88, 90]
+  17457264:
+    template: Goblin_Tanner
+    at:       [-194.000, -36.000, 80.000, 127]
+    level:    [88, 90]
+  17457265:
+    template: Goblin_Chaser
+    at:       [-206.000, -35.000, 123.000, 127]
+    level:    [88, 90]
+  17457266:
+    template: Goblins_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [83, 84]
+  17457267:
+    template: Bilesucker
+    at:       [-194.177, -36.222, 114.178, 220]
+    level:    [87, 89]
+  17457268:
+    template: Bilesucker
+    at:       [-191.959, -33.653, 101.296, 163]
+    level:    [87, 89]
+  17457269:
+    template: Bilesucker
+    at:       [-191.000, -34.000, 90.000, 127]
+    level:    [87, 89]
+  17457270:
+    template: Bilesucker
+    at:       [-197.903, -35.717, 80.000, 127]
+    level:    [87, 89]
+  17457271:
+    template: Bilesucker
+    at:       [-197.000, -35.000, 108.000, 127]
+    level:    [87, 89]
+  17457272:
+    template: Bilesucker
+    at:       [-199.782, -36.425, 113.459, 127]
+    level:    [87, 89]
+  17457273:
+    template: Evil_Weapon
+    at:       [-271.000, -46.000, 194.000, 131]
+    level:    [35, 37]
+  17457274:
+    template: Evil_Weapon
+    at:       [-275.000, -45.000, 207.000, 30]
+    level:    [35, 37]
+  17457275:
+    template: Evil_Weapon
+    at:       [-269.000, -46.000, 206.000, 100]
+    level:    [35, 37]
+  17457276:
+    template: Bilesucker
+    at:       [-284.000, -45.000, 203.000, 127]
+    level:    [87, 89]
+  17457277:
+    template: Bilesucker
+    at:       [-280.000, -46.289, 200.366, 48]
+    level:    [87, 89]
+  17457278:
+    template: Bilesucker
+    at:       [-277.000, -45.000, 190.000, 127]
+    level:    [87, 89]
+  17457279:
+    template: Hovering_Oculus
+    at:       [-139.000, -48.000, 171.000, 127]
+    level:    [90, 92]
+  17457280:
+    template: Hovering_Oculus
+    at:       [-140.325, -43.994, 152.523, 86]
+    level:    [90, 92]
+  17457281:
+    template: Bilesucker
+    at:       [-160.000, -36.000, 140.000, 101]
+    level:    [87, 89]
+  17457282:
+    template: Bilesucker
+    at:       [-119.514, -56.514, 219.418, 95]
+    level:    [87, 89]
+  17457283:
+    template: Bilesucker
+    at:       [-127.549, -56.630, 216.994, 124]
+    level:    [87, 89]
+  17457284:
+    template: Hovering_Oculus
+    at:       [-108.000, -56.000, 220.000, 127]
+    level:    [90, 92]
+  17457285:
+    template: Bilesucker
+    at:       [-59.324, -46.319, 198.840, 26]
+    level:    [87, 89]
+  17457286:
+    template: Bilesucker
+    at:       [-63.020, -50.237, 211.641, 121]
+    level:    [87, 89]
+  17457287:
+    template: Goblin_Hoodoo
+    at:       [6.000, -35.000, 160.000, 127]
+    level:    [88, 90]
+  17457288:
+    template: Goblin_Artificer
+    at:       [3.000, -36.000, 152.000, 127]
+    level:    [88, 90]
+  17457289:
+    template: Goblin_Tanner
+    at:       [-5.000, -36.000, 167.000, 12]
+    level:    [88, 90]
+  17457290:
+    template: Goblin_Chaser
+    at:       [-9.390, -36.264, 160.853, 127]
+    level:    [88, 90]
+  17457291:
+    template: Goblins_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [83, 84]
+  17457292:
+    template: Bilesucker
+    at:       [31.569, -36.485, 140.948, 138]
+    level:    [87, 89]
+  17457293:
+    template: Bilesucker
+    at:       [55.132, -30.253, 131.912, 24]
+    level:    [87, 89]
+  17457294:
+    template: Bilesucker
+    at:       [43.492, -36.080, 136.746, 30]
+    level:    [87, 89]
+  17457295:
+    template: Hovering_Oculus
+    at:       [101.505, -26.586, 119.185, 63]
+    level:    [90, 92]
+  17457296:
+    template: Hovering_Oculus
+    at:       [106.000, -30.000, 135.000, 70]
+    level:    [90, 92]
+  17457297:
+    template: Bilesucker
+    at:       [78.000, -26.708, 98.000, 127]
+    level:    [87, 89]
+  17457298:
+    template: Bilesucker
+    at:       [155.565, -46.135, 176.184, 127]
+    level:    [87, 89]
+  17457299:
+    template: Bilesucker
+    at:       [141.305, -37.082, 162.909, 127]
+    level:    [87, 89]
+  17457300:
+    template: Bilesucker
+    at:       [132.074, -36.569, 147.083, 96]
+    level:    [87, 89]
+  17457301:
+    template: Bilesucker
+    at:       [35.000, -24.000, 100.000, 91]
+    level:    [87, 89]
+  17457302:
+    template: Hovering_Oculus
+    at:       [214.702, -56.501, 188.312, 127]
+    level:    [90, 92]
+  17457303:
+    template: Hovering_Oculus
+    at:       [221.848, -57.475, 203.247, 62]
+    level:    [90, 92]
+  17457304:
+    template: Bilesucker
+    at:       [204.387, -57.225, 182.761, 127]
+    level:    [87, 89]
+  17457305:
+    template: Bilesucker
+    at:       [254.287, -66.525, 225.457, 127]
+    level:    [87, 89]
+  17457306:
+    template: Bilesucker
+    at:       [260.000, -66.000, 241.000, 62]
+    level:    [87, 89]
+  17457307:
+    template: Bilesucker
+    at:       [256.699, -66.583, 228.009, 174]
+    level:    [87, 89]
+  17457308:
+    template: Bilesucker
+    at:       [255.645, -66.515, 228.359, 223]
+    level:    [87, 89]
+  17457309:
+    template: Tros
+    at:       [-289.000, -45.000, 212.000, 23]
+    level:    [44, 44]
+  17457310:
+    template: Metallic_Slime
+    level:    [29, 33]
+  17457311:
+    script: Arcus_Blades
+  17457312:
+    template: Harnessed_Smilodon_Ranguemont
+    script:   Harnessed_Smilodon
+    at:       [144.906, 3.000, -56.221, 37]
+    level:    [139, 139]
+
+slots:
+  - members:
+      17457153: {} # Wind_Bats
+      17457156: {} # Blade_Bat
+  - members:
+      17457171: {} # Goblin_Mugger
+      17457172: {} # Goblin_Leecher
+  - members:
+      17457173: {} # Goblin_Gambler
+      17457174: {} # Goblin_Mugger
+  - members:
+      17457175: {} # Goblin_Leecher
+      17457176: {} # Goblin_Gambler
+  - members:
+      17457183: {} # Goblin_Mugger
+      17457184: {} # Goblin_Leecher
+  - members:
+      17457185: {} # Goblin_Gambler
+      17457186: {} # Goblin_Mugger
+  - members:
+      17457187: {} # Goblin_Leecher
+      17457188: {} # Goblin_Gambler
+  - members:
+      17457220: {} # Goblin_Mugger
+      17457221: {} # Goblin_Leecher
+      17457222: {} # Goblin_Gambler

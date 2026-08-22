@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, costume, auction_house, yell, los_player_block, assist]
+music:
+  day:          110
+  night:        110
+  battle_solo:  110
+  battle_party: 110
+
+zonelines:
+
+  z6s0:
+    from:  [-106.095, -4.637, 189.999]
+    to:    batallia_downs
+    at:    [486.298, 4.169, -159.953, 3.141593]
+    scale: [1.000, 10.000]
+
+  z6s2:
+    from:  [4.763, -1.796, -54.883]
+    to:    lower_jeuno
+    at:    [2.830, -4.799, 57.689, 0.633630]
+    scale: [1.000, 3.000]
+
+  z6s4:
+    from:  [46.000, -6.542, -30.915]
+    to:    rulude_gardens
+    at:    [-0.025, -1.585, -107.260, 4.712389]
+    scale: [1.000, 3.000]
+
+  zmro:
+    from:  [49.180, -9.642, -82.946]
+    to:    upper_jeuno
+    at:    [47.798, -6.556, -80.568, 4.188851]
+    scale: [1.000, 3.000]

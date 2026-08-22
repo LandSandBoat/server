@@ -31,8 +31,6 @@
 #include <common/types/maybe.h>
 
 #include "data/enums/behavior.h"
-#include "data/enums/claim_type.h"
-#include "data/enums/detects.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
@@ -62,6 +60,8 @@ enum SPECIALFLAG
 
 class CMobSkillState;
 
+struct DropList_t;
+
 class CMobEntity : public CBattleEntity
 {
 public:
@@ -77,6 +77,8 @@ public:
     auto GetRoamAnchor() const -> position_t;     // the point roaming is measured from
     void setRoamRegion(const RoamRegion* region); // assigning a region drops m_maxRoamDistance to 0: its edge is the limit
     auto roamRegion() const -> const RoamRegion*;
+    auto dropList() const -> const DropList_t*;
+    void setPatrolRoute(std::vector<position_t> route); // walked as a loop from every spawn
 
     bool shouldUseTPMove(uint16 tpThreshold); // return true to use a TP move, checked on on 400ms tick interval
 
@@ -159,7 +161,8 @@ public:
     timer::duration m_RespawnTime;  // respawn time
     timer::duration m_DropItemTime; // time until monster death animation
 
-    uint32 m_DropID; // dropid of items to be dropped. dropid in Database (mob_droplist)
+    uint32            m_DropID;     // global drop list from SQL. To be deprecated
+    const DropList_t* m_DropList{}; // shared by every spawn of one template, null when the template has no loot
 
     uint8  m_minLevel; // lowest possible level of the mob
     uint8  m_maxLevel; // highest possible level of the mob
@@ -248,6 +251,7 @@ private:
     SpawnSlot*                            spawnSlot = nullptr;
     Maybe<SpawnWindow>                    spawnWindow_;
     const RoamRegion*                     roamRegion_{ nullptr }; // area it spawns and roams in, owned by the zone
+    std::vector<position_t>               patrolRoute_;           // waypoints it loops while roaming, empty for a free roamer
 };
 
 #endif

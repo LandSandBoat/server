@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          118
+  night:        118
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z320:
+    from:  [-124.192, -7.558, -920.091]
+    to:    pashhow_marshlands
+    at:    [547.841, 23.192, 696.323, 3.141593]
+    scale: [1.000, 4.000]
+
+  z322:
+    from:  [-38.664, 14.566, 640.092]
+    to:    batallia_downs
+    at:    [479.744, 3.338, -359.840, 4.712389]
+    scale: [1.000, 15.000]
+
+  z324:
+    from:  [376.860, 16.399, 480.032]
+    to:    sauromugue_champaign
+    at:    [-475.679, -3.228, 201.675, 5.934119]
+    scale: [1.000, 10.000]
+
+  z326:
+    from:  [340.051, 17.423, 613.388]
+    to:    lower_jeuno
+    at:    [-121.659, -2.053, -198.247, 5.235987]
+    scale: [1.000, 4.000]
+
+  z328:
+    from:  [-381.995, -32.113, -791.740]
+    to:    crawlers_nest
+    at:    [380.617, -34.610, 4.581, 1.570796]
+    scale: [1.000, 4.000]
+
+  z32a:
+    from:  [-792.229, -40.476, -502.043]
+    to:    crawlers_nest
+    at:    [84.741, -2.471, 379.574, 3.141593]
+    scale: [1.000, 4.000]

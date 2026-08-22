@@ -1,0 +1,1210 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16888033:
+    script: NPC[e1]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16888034:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16888035:
+    script: NPC[e3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16888036:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16888038:
+    script: NPC[e6]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16888039:
+    script: NPC[e7]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16888040:
+    script: NPC[e8]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16888041:
+    script: NPC[e9]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16888042:
+    script:       _0r0
+    display_name: Iron Gate
+    at:           [-140.000, -25.500, 71.213]
+    render:
+      look:
+        type: door
+      door_id:      812789855
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888043:
+    script:       _0r1
+    display_name: Iron Gate
+    at:           [-140.000, -25.500, 49.000]
+    render:
+      look:
+        type: door
+      door_id:      829567071
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888044:
+    script:       _0r2
+    display_name: Wooden Gate
+    at:           [-78.650, -25.500, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      846344287
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888045:
+    script:       _0r3
+    display_name: Wooden Gate
+    at:           [-78.650, -25.500, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      863121503
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888046:
+    script:       _0r6
+    display_name: Wooden Gate
+    at:           [118.625, -25.500, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      913453151
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888047:
+    script:       _0r7
+    display_name: Wooden Gate
+    at:           [118.625, -25.500, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      930230367
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888048:
+    script:       _0ra
+    display_name: Iron Gate
+    at:           [180.000, -25.500, 71.400]
+    render:
+      look:
+        type: door
+      door_id:      1634873439
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888049:
+    script:       _0rb
+    display_name: Iron Gate
+    at:           [180.000, -25.500, 48.450]
+    render:
+      look:
+        type: door
+      door_id:      1651650655
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888050:
+    script: _0re
+    at:     [-41.251, -25.500, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      1701982303
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16888051:
+    script:       qm_east_door_f7
+    display_name: ???
+    at:           [-44.550, -24.601, 106.495]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16888052:
+    script: _0rf
+    at:     [-60.000, -25.500, 85.250]
+    render:
+      look:
+        type: door
+      door_id:      1718759519
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16888053:
+    script:       _0rm
+    display_name: Oil Lamp
+    at:           [-63.703, -26.227, 83.000]
+    render:
+      look:
+        type: door
+      door_id:      1836200031
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888054:
+    script:       qm_south_door_f7
+    display_name: ???
+    at:           [-75.329, -24.636, 92.512]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16888055:
+    script: _0rg
+    at:     [-60.000, -25.500, 34.750]
+    render:
+      look:
+        type: door
+      door_id:      1735536735
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16888056:
+    script:       _0rv
+    display_name: Oil Lamp
+    at:           [-63.703, -26.227, 37.000]
+    render:
+      look:
+        type: door
+      door_id:      1987194975
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888057:
+    script: _0rh
+    at:     [100.000, -25.500, 85.250]
+    render:
+      look:
+        type: door
+      door_id:      1752313951
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16888058:
+    script:       _0rw
+    display_name: Oil Lamp
+    at:           [103.703, -26.180, 83.000]
+    render:
+      look:
+        type: door
+      door_id:      2003972191
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888059:
+    script: _0ri
+    at:     [100.000, -25.500, 34.750]
+    render:
+      look:
+        type: door
+      door_id:      1769091167
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16888060:
+    script:       _ir5
+    display_name: Oil Lamp
+    at:           [103.703, -26.180, 37.000]
+    render:
+      look:
+        type: door
+      door_id:      896690527
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888061:
+    script:       qm_north_door_j9
+    display_name: ???
+    at:           [116.743, -24.636, 27.518]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16888062:
+    script: _0rj
+    at:     [81.251, -25.500, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      1785868383
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16888063:
+    script:       qm_west_door_j9
+    display_name: ???
+    at:           [92.542, -25.907, 26.548]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16888064:
+    script:       _0r4
+    display_name: Ornate Gate
+    at:           [-89.500, -25.500, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      879898719
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888065:
+    script:       _0r5
+    display_name: Ornate Gate
+    at:           [-99.000, -25.500, 60.000]
+    render:
+      look:
+        type: door
+      door_id:   896675935
+      animation: close_door
+      moving:    1
+    status:  normal
+    content: COP
+
+  16888066:
+    script:       _0rk
+    display_name: Door_0rk
+    at:           [-64.500, -26.500, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1802645599
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888067:
+    script:       qm_east_door_f8
+    display_name: ???
+    at:           [-65.512, -25.262, 62.918]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16888068:
+    script:       _0rn
+    display_name: Oil Lamp
+    at:           [-63.685, -26.227, 77.000]
+    render:
+      look:
+        type: door
+      door_id:      1852977247
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888069:
+    script:       _0ro
+    display_name: Oil Lamp
+    at:           [-63.715, -26.227, 73.018]
+    render:
+      look:
+        type: door
+      door_id:      1869754463
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888070:
+    script:       _0rp
+    display_name: Oil Lamp
+    at:           [-63.707, -26.268, 66.999]
+    render:
+      look:
+        type: door
+      door_id:      1886531679
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888071:
+    script:       _0rq
+    display_name: Oil Lamp
+    at:           [-63.695, -26.211, 63.000]
+    render:
+      look:
+        type: door
+      door_id:      1903308895
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888072:
+    script:       _0rr
+    display_name: Oil Lamp
+    at:           [-63.695, -26.211, 57.000]
+    render:
+      look:
+        type: door
+      door_id:      1920086111
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888073:
+    script:       _0rs
+    display_name: Oil Lamp
+    at:           [-63.695, -26.227, 53.000]
+    render:
+      look:
+        type: door
+      door_id:      1936863327
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888074:
+    script:       _0rt
+    display_name: Oil Lamp
+    at:           [-63.695, -26.232, 47.000]
+    render:
+      look:
+        type: door
+      door_id:      1953640543
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888075:
+    script:       _0ru
+    display_name: Oil Lamp
+    at:           [-63.699, -26.227, 43.009]
+    render:
+      look:
+        type: door
+      door_id:      1970417759
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888076:
+    script:       _ir6
+    display_name: ???
+    at:           [153.807, -25.178, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      913467743
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888077:
+    script:       _0r8
+    display_name: Ornate Gate
+    at:           [129.500, -25.500, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      947007583
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888078:
+    script:       _0r9
+    display_name: Ornate Gate
+    at:           [139.000, -25.500, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      963784799
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888079:
+    script:       _0rl
+    display_name: Door_0rl
+    at:           [104.500, -26.500, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1819422815
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888080:
+    script:       qm_west_door_j8
+    display_name: ???
+    at:           [105.502, -25.262, 57.138]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16888081:
+    script:       _0rx
+    display_name: Oil Lamp
+    at:           [103.699, -26.180, 76.990]
+    render:
+      look:
+        type: door
+      door_id:      2020749407
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888082:
+    script:       _0ry
+    display_name: Oil Lamp
+    at:           [103.695, -26.185, 73.000]
+    render:
+      look:
+        type: door
+      door_id:      2037526623
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888083:
+    script:       _0rz
+    display_name: Oil Lamp
+    at:           [103.695, -26.180, 67.000]
+    render:
+      look:
+        type: door
+      door_id:      2054303839
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888084:
+    script:       _ir0
+    display_name: Oil Lamp
+    at:           [103.695, -26.211, 63.000]
+    render:
+      look:
+        type: door
+      door_id:      812804447
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888085:
+    script:       _ir1
+    display_name: Oil Lamp
+    at:           [103.695, -26.211, 57.000]
+    render:
+      look:
+        type: door
+      door_id:      829581663
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888086:
+    script:       _ir2
+    display_name: Oil Lamp
+    at:           [103.707, -26.221, 53.000]
+    render:
+      look:
+        type: door
+      door_id:      846358879
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888087:
+    script:       _ir3
+    display_name: Oil Lamp
+    at:           [103.715, -26.180, 46.981]
+    render:
+      look:
+        type: door
+      door_id:      863136095
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888088:
+    script:       _ir4
+    display_name: Oil Lamp
+    at:           [103.685, -26.180, 43.000]
+    render:
+      look:
+        type: door
+      door_id:      879913311
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888089:
+    script:       _ir7
+    display_name: Iron Gate
+    at:           [-70.800, -1.500, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      930244959
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888090:
+    script:       _ir8
+    display_name: Iron Gate
+    at:           [20.000, -1.500, 50.000]
+    render:
+      look:
+        type: door
+      door_id:      947022175
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888091:
+    script:       _ir9
+    display_name: Iron Gate
+    at:           [70.000, -1.500, 140.000]
+    render:
+      look:
+        type: door
+      door_id:      963799391
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888092:
+    script:       _0rc
+    display_name: Door_0rc
+    at:           [140.000, -25.500, 110.000]
+    render:
+      look:
+        type: door
+      door_id:      1668427871
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888093:
+    script:       _0rd
+    display_name: Door_0rd
+    at:           [140.000, -25.500, 9.989]
+    render:
+      look:
+        type: door
+      door_id:      1685205087
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16888094:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [101.900, -1.500, -101.900]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888095:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [101.948, -1.500, -18.016]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888096:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [-61.888, -1.500, -18.079]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888097:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [-218.109, -1.499, 18.081]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888098:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [-61.903, -1.500, 138.099]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888099:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [21.901, -1.500, 138.096]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888100:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [101.902, -1.500, 181.902]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888101:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [-159.320, -2.500, 60.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888102:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [-159.380, -22.559, 60.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888103:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [199.317, -2.500, 60.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888104:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [199.380, -22.559, 60.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888105:
+    script:       Wooden_Ladder
+    display_name: Wooden Ladder
+    at:           [-200.679, -8.570, 60.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16888106:
+    script:       qm_torches_hint
+    display_name: ???
+    at:           [83.219, -25.047, 8.010]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16888107:
+    script:       qm_map_of_aqueducts
+    display_name: ???
+    at:           [83.899, -24.963, 32.047]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16888108:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  16888109:
+    script:       Nagmolada
+    display_name: Nag'molada
+    at:           [-108.000, -24.000, 60.000, 126]
+    render:
+      look:
+        type:  standard
+        model: 1452
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16888110:
+    script:       BOX
+    display_name: BOX
+    at:           [-113.800, -27.400, 60.050]
+    render:
+      look:
+        type:  standard
+        model: 1456
+      entity_flags: 31
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16888111:
+    script:       Shikaree_X
+    display_name: Shikaree X
+    at:           [-4.898, 3.521, 128.413, 52]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  5
+        head:  4147
+        body:  8246
+        hands: 12398
+        legs:  16468
+        feet:  20590
+        main:  24756
+        sub:   28852
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16888112:
+    script:       qm
+    display_name: ???
+    at:           [-109.229, -23.999, 58.242, 225]
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:  cutscene_only
+    content: COP
+
+  16888113:
+    script: NPC[131]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16888114:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16888115:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16888116:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16888117:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16888118:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16888119:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16888120:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16888121:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16888122:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [263.112, 0.000, -272.501, 143]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16888123:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [263.112, 0.000, -272.501, 143]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16888124:
+    script:       qm_tavnazian_cookbook
+    display_name: ???
+    at:           [113.474, -26.000, 91.610, 145]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32774
+    status:  normal
+    content: COP
+
+  16888125:
+    script:       Fardimant
+    display_name: Fardimant
+    at:           [-239.023, -5.999, 18.975, 251]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  13
+        head:  4096
+        body:  8299
+        hands: 12417
+        legs:  16513
+        feet:  20609
+        main:  24734
+        sub:   28672
+      entity_flags: 25
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16888126:
+    script:       Enaremand
+    display_name: Enaremand
+    at:           [-222.902, -5.999, 18.784, 130]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4221
+        body:  8215
+        hands: 12288
+        legs:  16407
+        feet:  20503
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16888127:
+    script:       Survival_Guide
+    display_name: Survival Guide
+    at:           [252.000, 0.000, -266.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:  1
+      name_vis:      32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  SURVIVAL_GUIDE

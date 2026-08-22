@@ -1,0 +1,1117 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ark_Angel_EV_CP:
+    id:            7585
+    display_name:  Ark_Angel_EV
+    species:       elvaan
+    type:          [battlefield]
+    spell_list_id: 37
+    skill_list_id: 352
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [pld, whm]
+      render:
+        look:
+          type:  standard
+          model: 785
+        entity_flags: 1051
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_GK_CP:
+    id:            7587
+    display_name:  Ark_Angel_GK
+    species:       galks
+    type:          [battlefield]
+    skill_list_id: 353
+    attributes:
+      combat:
+        skill:    great_katana
+        dmg_mult: 125
+      jobs: [sam, drg]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   2
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       2
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 788
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_HM_CP:
+    id:            7581
+    display_name:  Ark_Angel_HM
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 38
+    skill_list_id: 354
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [war, nin]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 784
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_MR_CP:
+    id:            7582
+    display_name:  Ark_Angel_MR
+    species:       mithra
+    type:          [battlefield]
+    skill_list_id: 355
+    attributes:
+      combat:
+        skill:    dagger
+        dmg_mult: 125
+      jobs: [bst, thf]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    2
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    2
+          slow:       1
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 786
+        entity_flags: 1051
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_TT_CP:
+    id:            7586
+    display_name:  Ark_Angel_TT
+    species:       tarutaru
+    type:          [battlefield]
+    spell_list_id: 39
+    skill_list_id: 356
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [blm, drk]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     2
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   2
+          dark:    2
+        rank_status:
+          paralyze:   2
+          bind:       2
+          silence:    1
+          slow:       1
+          poison:     2
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 787
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        flags:          [standback]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Adamant_CP:
+    id:            7584
+    display_name:  Ark_Angels_Adamantoise
+    species:       adamantoise
+    type:          [battlefield]
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: scythe
+        delay: 250
+      jobs: [pld, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 401
+        entity_flags:  1153
+        animation_sub:    8
+        hitbox:          27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Behemoth_CP:
+    id:            7583
+    display_name:  Ark_Angels_Behemoth
+    species:       behemoth
+    type:          [battlefield]
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 210
+      jobs: [war, thf]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags: 129
+        hitbox:        38
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Wyvern_CP:
+    id:            7588
+    display_name:  Ark_Angels_Wyvern
+    species:       shadow_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drg, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 780
+        entity_flags: 1157
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ealdnarche:
+    id:            1158
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 22
+    skill_list_id: 150
+    attributes:
+      combat:
+        skill:    katana
+        dmg_mult: 125
+      jobs: [blm, war]
+      render:
+        look:
+          type:  standard
+          model: 776
+        name_prefix: 32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 5000
+
+  Ealdnarche_2_1158:
+    id:            1158
+    display_name:  Ealdnarche
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 22
+    skill_list_id: 150
+    attributes:
+      combat:
+        skill:    katana
+        dmg_mult: 125
+      jobs: [blm, war]
+      render:
+        look:
+          type:  standard
+          model: 776
+        name_prefix: 32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ealdnarche_2_2:
+    id:            4676
+    display_name:  Ealdnarche_2
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 112
+    skill_list_id: 394
+    attributes:
+      combat:
+        skill:    katana
+        delay:    170
+        dmg_mult: 125
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 779
+        name_prefix: 32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ealdnarche_2_4676:
+    id:            4676
+    display_name:  Ealdnarche_2
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 112
+    skill_list_id: 394
+    attributes:
+      combat:
+        skill:    katana
+        delay:    170
+        dmg_mult: 125
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 779
+        name_prefix: 32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 5000
+
+  Ealdnarche_CP:
+    id:            7589
+    display_name:  Ealdnarche
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 112
+    skill_list_id: 394
+    attributes:
+      combat:
+        skill:    katana
+        delay:    170
+        dmg_mult: 125
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 779
+        name_prefix: 32
+        model_size:   1
+        hitbox:      10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Exoplates:
+    id:            1270
+    species:       belfrys
+    type:          [notorious, battlefield]
+    skill_list_id: 237
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 777
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        share_pos: -1
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+
+  Exoplates_2:
+    id:            1270
+    display_name:  Exoplates
+    species:       belfrys
+    type:          [notorious, battlefield]
+    skill_list_id: 237
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 777
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        share_pos: -1
+      spawn:
+        type: [scripted]
+
+  Kamlanaut_CP:
+    id:            7580
+    display_name:  Kamlanaut
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 351
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    3
+          ice:     3
+          wind:    3
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 799
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Orbital:
+    id:            2993
+    species:       spheroid
+    type:          [notorious, battlefield]
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 314
+        entity_flags: 1157
+        model_size:      2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 145
+
+  Orbital_2:
+    id:            2993
+    display_name:  Orbital
+    species:       spheroid
+    type:          [notorious, battlefield]
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 314
+        entity_flags: 1157
+        model_size:      2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Orbital_CP:
+    id:            7590
+    display_name:  Orbital
+    species:       spheroid
+    type:          [battlefield]
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 314
+        entity_flags: 1157
+        model_size:      1
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17518596:
+    template: Ealdnarche
+    at:       [-32.000, -18.000, -25.000, 128]
+    level:    [78, 78]
+  17518597:
+    template: Exoplates
+    at:       [-32.000, -18.000, -25.000, 128]
+    level:    [75, 75]
+  17518598:
+    template: Ealdnarche_2_4676
+    script:   Ealdnarche_2
+    at:       [-32.000, -18.000, -25.000, 128]
+    level:    [78, 78]
+  17518599:
+    template: Orbital
+    at:       [-30.000, -18.000, -23.000, 128]
+    level:    [68, 68]
+  17518600:
+    template: Orbital
+    at:       [-30.000, -18.000, -27.000, 128]
+    level:    [68, 68]
+  17518601:
+    template: Ealdnarche
+    at:       [456.286, -21.139, 669.512, 128]
+    level:    [78, 78]
+  17518602:
+    template: Exoplates
+    at:       [456.286, -21.139, 669.512, 128]
+    level:    [75, 75]
+  17518603:
+    template: Ealdnarche_2_4676
+    script:   Ealdnarche_2
+    at:       [456.286, -21.139, 669.512, 128]
+    level:    [78, 78]
+  17518604:
+    template: Orbital
+    at:       [458.000, -21.500, 671.400, 128]
+    level:    [68, 68]
+  17518605:
+    template: Orbital
+    at:       [458.000, -21.500, 667.400, 128]
+    level:    [68, 68]
+  17518606:
+    template: Ealdnarche
+    at:       [505.569, -4.093, -690.194, 128]
+    level:    [78, 78]
+  17518607:
+    template: Exoplates
+    at:       [505.569, -4.093, -690.194, 128]
+    level:    [75, 75]
+  17518608:
+    template: Ealdnarche_2_4676
+    script:   Ealdnarche_2
+    at:       [505.569, -4.093, -690.194, 128]
+    level:    [78, 78]
+  17518609:
+    template: Orbital
+    at:       [507.700, -4.500, -688.000, 128]
+    level:    [68, 68]
+  17518610:
+    template: Orbital
+    at:       [507.700, -4.500, -692.000, 128]
+    level:    [68, 68]
+  17518611:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518612:
+    template: Exoplates_2
+    script:   Exoplates
+  17518613:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518614:
+    template: Orbital_2
+    script:   Orbital
+  17518615:
+    template: Orbital_2
+    script:   Orbital
+  17518616:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518617:
+    template: Exoplates_2
+    script:   Exoplates
+  17518618:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518619:
+    template: Orbital_2
+    script:   Orbital
+  17518620:
+    template: Orbital_2
+    script:   Orbital
+  17518621:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518622:
+    template: Exoplates_2
+    script:   Exoplates
+  17518623:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518624:
+    template: Orbital_2
+    script:   Orbital
+  17518625:
+    template: Orbital_2
+    script:   Orbital
+  17518626:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518627:
+    template: Exoplates_2
+    script:   Exoplates
+  17518628:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518629:
+    template: Orbital_2
+    script:   Orbital
+  17518630:
+    template: Orbital_2
+    script:   Orbital
+  17518631:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518632:
+    template: Exoplates_2
+    script:   Exoplates
+  17518633:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518634:
+    template: Orbital_2
+    script:   Orbital
+  17518635:
+    template: Orbital_2
+    script:   Orbital
+  17518636:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518637:
+    template: Exoplates_2
+    script:   Exoplates
+  17518638:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518639:
+    template: Orbital_2
+    script:   Orbital
+  17518640:
+    template: Orbital_2
+    script:   Orbital
+  17518641:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518642:
+    template: Exoplates_2
+    script:   Exoplates
+  17518643:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518644:
+    template: Orbital_2
+    script:   Orbital
+  17518645:
+    template: Orbital_2
+    script:   Orbital
+  17518646:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518647:
+    template: Exoplates_2
+    script:   Exoplates
+  17518648:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518649:
+    template: Orbital_2
+    script:   Orbital
+  17518650:
+    template: Orbital_2
+    script:   Orbital
+  17518651:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518652:
+    template: Exoplates_2
+    script:   Exoplates
+  17518653:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518654:
+    template: Orbital_2
+    script:   Orbital
+  17518655:
+    template: Orbital_2
+    script:   Orbital
+  17518656:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518657:
+    template: Exoplates_2
+    script:   Exoplates
+  17518658:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518659:
+    template: Orbital_2
+    script:   Orbital
+  17518660:
+    template: Orbital_2
+    script:   Orbital
+  17518661:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518662:
+    template: Exoplates_2
+    script:   Exoplates
+  17518663:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518664:
+    template: Orbital_2
+    script:   Orbital
+  17518665:
+    template: Orbital_2
+    script:   Orbital
+  17518666:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518667:
+    template: Exoplates_2
+    script:   Exoplates
+  17518668:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518669:
+    template: Orbital_2
+    script:   Orbital
+  17518670:
+    template: Orbital_2
+    script:   Orbital
+  17518671:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518672:
+    template: Exoplates_2
+    script:   Exoplates
+  17518673:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518674:
+    template: Orbital_2
+    script:   Orbital
+  17518675:
+    template: Orbital_2
+    script:   Orbital
+  17518676:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518677:
+    template: Exoplates_2
+    script:   Exoplates
+  17518678:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518679:
+    template: Orbital_2
+    script:   Orbital
+  17518680:
+    template: Orbital_2
+    script:   Orbital
+  17518681:
+    template: Ealdnarche_2_1158
+    script:   Ealdnarche
+  17518682:
+    template: Exoplates_2
+    script:   Exoplates
+  17518683:
+    template: Ealdnarche_2_2
+    script:   Ealdnarche
+  17518684:
+    template: Orbital_2
+    script:   Orbital
+  17518685:
+    template: Orbital_2
+    script:   Orbital
+  17518686:
+    template: Ealdnarche_CP
+    at:       [-34.000, -18.000, -21.000, 128]
+    level:    [139, 139]
+  17518687:
+    template: Orbital_CP
+    at:       [-34.000, -18.000, -19.000, 31]
+    level:    [139, 139]
+  17518688:
+    template: Orbital_CP
+    at:       [-34.000, -18.000, -19.000, 32]
+    level:    [139, 139]
+  17518689:
+    template: Kamlanaut_CP
+    at:       [-34.000, -18.000, -30.000, 128]
+    level:    [139, 139]
+  17518690:
+    template: Ark_Angel_HM_CP
+    at:       [-35.000, -18.000, -25.000, 128]
+    level:    [139, 139]
+  17518691:
+    template: Ark_Angel_MR_CP
+    at:       [-35.000, -18.000, -23.000, 128]
+    level:    [139, 139]
+  17518692:
+    template: Ark_Angels_Behemoth_CP
+    at:       [-36.000, -19.000, -23.000, 2]
+    level:    [139, 139]
+  17518693:
+    template: Ark_Angels_Adamant_CP
+    at:       [-36.000, -19.000, -23.000, 1]
+    level:    [139, 139]
+  17518694:
+    template: Ark_Angel_EV_CP
+    at:       [-33.000, -18.000, -24.000, 128]
+    level:    [139, 139]
+  17518695:
+    template: Ark_Angel_TT_CP
+    at:       [-53.000, -19.000, -24.000, 140]
+    level:    [139, 139]
+  17518696:
+    template: Ark_Angel_GK_CP
+    at:       [-33.000, -18.000, -26.000, 128]
+    level:    [139, 139]
+  17518697:
+    template: Ark_Angels_Wyvern_CP
+    at:       [-35.000, -18.000, -23.000, 1]
+    level:    [139, 139]
+  17518698:
+    template: Ealdnarche_CP
+    at:       [454.286, -21.139, 673.512, 128]
+    level:    [139, 139]
+  17518699:
+    template: Orbital_CP
+    at:       [454.286, -21.139, 675.512, 31]
+    level:    [139, 139]
+  17518700:
+    template: Orbital_CP
+    at:       [454.286, -21.139, 675.512, 32]
+    level:    [139, 139]
+  17518701:
+    template: Kamlanaut_CP
+    at:       [454.286, -21.139, 664.512, 128]
+    level:    [139, 139]
+  17518702:
+    template: Ark_Angel_HM_CP
+    at:       [453.286, -21.139, 669.512, 128]
+    level:    [139, 139]
+  17518703:
+    template: Ark_Angel_MR_CP
+    at:       [453.286, -21.139, 671.512, 128]
+    level:    [139, 139]
+  17518704:
+    template: Ark_Angels_Behemoth_CP
+    at:       [452.286, -22.139, 671.512, 2]
+    level:    [139, 139]
+  17518705:
+    template: Ark_Angels_Adamant_CP
+    at:       [452.286, -22.139, 671.512, 1]
+    level:    [139, 139]
+  17518706:
+    template: Ark_Angel_EV_CP
+    at:       [455.286, -21.139, 670.512, 128]
+    level:    [139, 139]
+  17518707:
+    template: Ark_Angel_TT_CP
+    at:       [435.286, -22.139, 670.512, 140]
+    level:    [139, 139]
+  17518708:
+    template: Ark_Angel_GK_CP
+    at:       [455.286, -21.139, 668.512, 128]
+    level:    [139, 139]
+  17518709:
+    template: Ark_Angels_Wyvern_CP
+    at:       [453.286, -21.139, 671.512, 1]
+    level:    [139, 139]
+  17518710:
+    template: Ealdnarche_CP
+    at:       [503.569, -4.093, -686.194, 128]
+    level:    [139, 139]
+  17518711:
+    template: Orbital_CP
+    at:       [503.569, -4.093, -684.194, 31]
+    level:    [139, 139]
+  17518712:
+    template: Orbital_CP
+    at:       [503.569, -4.093, -684.194, 32]
+    level:    [139, 139]
+  17518713:
+    template: Kamlanaut_CP
+    at:       [503.569, -4.093, -695.194, 128]
+    level:    [139, 139]
+  17518714:
+    template: Ark_Angel_HM_CP
+    at:       [502.569, -4.093, -690.194, 128]
+    level:    [139, 139]
+  17518715:
+    template: Ark_Angel_MR_CP
+    at:       [502.569, -4.093, -688.194, 128]
+    level:    [139, 139]
+  17518716:
+    template: Ark_Angels_Behemoth_CP
+    at:       [501.569, -5.093, -688.194, 2]
+    level:    [139, 139]
+  17518717:
+    template: Ark_Angels_Adamant_CP
+    at:       [501.569, -5.093, -688.194, 1]
+    level:    [139, 139]
+  17518718:
+    template: Ark_Angel_EV_CP
+    at:       [504.569, -4.093, -689.194, 128]
+    level:    [139, 139]
+  17518719:
+    template: Ark_Angel_TT_CP
+    at:       [484.569, -5.093, -689.194, 140]
+    level:    [139, 139]
+  17518720:
+    template: Ark_Angel_GK_CP
+    at:       [504.569, -4.093, -691.194, 128]
+    level:    [139, 139]
+  17518721:
+    template: Ark_Angels_Wyvern_CP
+    at:       [502.569, -4.093, -688.194, 1]
+    level:    [139, 139]

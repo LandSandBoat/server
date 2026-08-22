@@ -1,0 +1,8271 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aa_Xalmo_the_Savage:
+    id:            17
+    species:       yagudo
+    type:          [notorious]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2084
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 14500
+    loot:
+      drops:
+        - chance: common
+          item:   deae_gratia
+
+  Abenzio:
+    id:            18
+    species:       goobbue
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags:  3
+        hitbox:       25
+      spawn:
+        type: [scripted]
+
+  Achtelle:
+    id:            37
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      render:
+        look:
+          type:   equipped
+          race:   4
+          face:   9
+          head:   4148
+          body:   8244
+          hands:  12340
+          legs:   16436
+          feet:   20532
+          main:   24783
+          sub:    28672
+          ranged: 32768
+        entity_flags: 1561
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Alfons:
+    id:            84
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  13
+          head:  4173
+          body:  8269
+          hands: 12365
+          legs:  16461
+          feet:  20557
+          main:  24896
+          sub:   28696
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Allied_Armored_Belfry:
+    id:      89
+    species: belfrys
+    type:    [notorious]
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 2329
+        model_size:  1
+        hitbox:     20
+      spawn:
+        type: [scripted]
+
+  Allied_Belfry:
+    id:      90
+    species: belfrys
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 2329
+        entity_flags:  1155
+        animation_sub:    8
+        model_size:       1
+        hitbox:          20
+      spawn:
+        type: [scripted]
+
+  Allied_Mantelet:
+    id:            91
+    species:       belfrys
+    skill_list_id: 239
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 2327
+        entity_flags: 1153
+        hitbox:         34
+      spawn:
+        type: [scripted]
+
+  Ancient_Royal_Knight:
+    id:            126
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1176
+        entity_flags: 1153
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Antlion_Fly:
+    id:            193
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   insect_wing
+      despoil:
+        insect_wing: 0
+
+  Aquarian_Caster:
+    id:            205
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   13
+          head:   4114
+          body:   8212
+          hands:  12308
+          legs:   16404
+          feet:   20500
+          main:   24803
+          sub:    28711
+          ranged: 32795
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Areuhat:
+    id:            227
+    species:       elvaan
+    spell_list_id: 4
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:   equipped
+          race:   4
+          face:   26
+          head:   4096
+          body:   8327
+          hands:  12423
+          legs:   16519
+          feet:   20615
+          main:   24951
+          sub:    28672
+          ranged: 32768
+        entity_flags: 1561
+        name_prefix:    32
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Asterion:
+    id:            274
+    species:       taurus
+    type:          [notorious]
+    skill_list_id: 155
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   bamboo_tea_basket
+        - chance: uncommon
+          item:   alastor
+        - chance: uncommon
+          item:   bediveres_hose
+
+  Auroral_Alicorn:
+    id:            291
+    species:       monoceros
+    skill_list_id: 39
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:   -2
+          thunder:  6
+          water:    2
+          dark:     4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:       -2
+          poison:      2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2227
+        entity_flags:  1665
+        animation_sub:   22
+        name_prefix:     32
+        hitbox:          22
+      spawn:
+        type: [scripted]
+
+  Azima:
+    id:            311
+    species:       humes
+    spell_list_id: 21
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   12
+          head:   4277
+          body:   8377
+          hands:  12473
+          legs:   16569
+          feet:   20551
+          main:   24867
+          sub:    28672
+          ranged: 32768
+        entity_flags: 1561
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Azo:
+    id:            312
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags: 1177
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Babban_Ny_Mheillea:
+    id:            320
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2247
+      spawn:
+        type: [scripted]
+
+  Bastion_Bats_Castle_Oztroja_S:
+    id:            7340
+    display_name:  Bastion_Bats
+    species:       flock_bat
+    skill_list_id: 2015
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Blooming_Rafflesia:
+    id:            474
+    species:       rafflesia
+    skill_list_id: 207
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -1
+          earth:    3
+          thunder:  1
+          light:    2
+        rank_status:
+          silence:     -1
+          slow:         3
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2024
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   rafflesia_vine
+        - chance: uncommon
+          item:   rafflesia_petal
+      despoil:
+        rafflesia_vine:  0
+        rafflesia_petal: 0
+
+  Boodlix:
+    id:            502
+    species:       goblin
+    type:          [event]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 702
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bravo_NV24:
+    id:            526
+    display_name:  Bravo
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 318
+        entity_flags: 2201
+        name_vis:       24
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Bryher:
+    id:            549
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Bulwark_Bat_Castle_Oztroja_S:
+    id:            7315
+    display_name:  Bulwark_Bat
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Camlin:
+    id:            616
+    species:       sabotender
+    skill_list_id: 212
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:    4
+          light:    4
+          dark:    -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:       4
+          light_sleep:  4
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 372
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Cardian_Prototype:
+    id:            637
+    species:       batons
+    spell_list_id: 21
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Chigoe_past:
+    id:            6312
+    species:       chigoe
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2231
+        entity_flags:  2689
+        animation_sub:    8
+        model_size:       1
+        hitbox:           6
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Choh_Moui:
+    id:            725
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   4
+          head:   4305
+          body:   8364
+          hands:  12460
+          legs:   16556
+          feet:   20652
+          main:   24661
+          sub:    28722
+          ranged: 32794
+        entity_flags: 537
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Combat_Salvemixer:
+    id:            772
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   6
+          face:   13
+          head:   4096
+          body:   8203
+          hands:  12307
+          legs:   16403
+          feet:   20499
+          main:   24873
+          sub:    28672
+          ranged: 32768
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  Confederate_Belfry:
+    id:      775
+    species: belfrys
+    attributes:
+      combat:
+        skill: axe
+        delay: 32000
+      render:
+        look:
+          type:  standard
+          model: 2320
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      spawn:
+        type: [scripted]
+
+  Confederate_Mantelet:
+    id:            776
+    species:       fortifications
+    skill_list_id: 239
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 2328
+        entity_flags: 129
+        hitbox:        34
+      spawn:
+        type: [scripted]
+
+  Dalzakk:
+    id:            896
+    species:       galks
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  equipped
+          race:  8
+          face:  7
+          head:  4113
+          body:  8213
+          hands: 12305
+          legs:  16401
+          feet:  20497
+          main:  24576
+          sub:   28672
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Darach:
+    id:            903
+    species:       treant
+    skill_list_id: 245
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 388
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Dee_Xalmo_the_Grim:
+    id:            953
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2084
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dee_Zelko_the_Esoteric:
+    id:            954
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 239
+    attributes:
+      combat:
+        skill: katana
+      jobs: [blm, blm]
+      resists:
+        immune_status: [gravity, bind, silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1085
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   bamboo_grass_basket
+        - chance: uncommon
+          item:   grenadier_belt
+        - chance: uncommon
+          item:   grandeur
+
+  Degenhard:
+    id:            960
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 2177
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Divine_Ascetic:
+    id:            1055
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2082
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divine_Assassin:
+    id:            1056
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2079
+        entity_flags:  3
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Divine_Disseminator:
+    id:            1057
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2076
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divine_Inciter:
+    id:            1058
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2076
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divine_Inspirer:
+    id:            1059
+    species:       yagudo
+    spell_list_id: 6
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1085
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divine_Liturgist:
+    id:            1060
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: katana
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1085
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divine_Martyr:
+    id:            1061
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 596
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divine_Pilgrim:
+    id:            1062
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2082
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divine_Sentinel:
+    id:            1063
+    species:       yagudo
+    spell_list_id: 20
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 583
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Divine_Templar:
+    id:            1064
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 607
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dusk_Raider:
+    id:            1143
+    species:       humes
+    spell_list_id: 5
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   10
+          head:   4154
+          body:   8250
+          hands:  12366
+          legs:   16462
+          feet:   20558
+          main:   24851
+          sub:    28697
+          ranged: 32768
+        entity_flags: 129
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Duskraven:
+    id:            1141
+    species:       humes
+    spell_list_id: 5
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, blm]
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  2
+          head:  4278
+          body:  8270
+          hands: 12397
+          legs:  16462
+          feet:  20558
+          main:  24646
+          sub:   28672
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Duu_Masa_the_Onecut:
+    id:            1145
+    species:       yagudo
+    type:          [notorious]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2078
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   naraenten_bead_necklace
+        - chance: uncommon
+          item:   yagudo_kote
+
+  Duu_Nazo_the_Spryfooted:
+    id:            1146
+    species:       yagudo
+    type:          [notorious]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2084
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Eurytos:
+    id:            1262
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 707
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Faerie:
+    id:            1279
+    species:       pixie
+    skill_list_id: 195
+    attributes:
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags:  513
+        animation_sub:   8
+      spawn:
+        type: [scripted]
+
+  Ferreous_Coffin:
+    id:            1324
+    species:       galks
+    spell_list_id: 20
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      render:
+        look:
+          type:   equipped
+          race:   8
+          face:   9
+          head:   4165
+          body:   8261
+          hands:  12357
+          legs:   16453
+          feet:   20549
+          main:   24883
+          sub:    28672
+          ranged: 32768
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        20
+      spawn:
+        type: [scripted]
+
+  Fiendish_Leechkeeper:
+    id:            1333
+    species:       imp
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [sch, rdm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2236
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Flame_Giant:
+    id:            1358
+    species:       ifrit
+    skill_list_id: 38
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   -3
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      -3
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 18
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      spawn:
+        type: [scripted]
+
+  Fleshgnasher:
+    id:            1368
+    species:       gnat
+    type:          [notorious]
+    skill_list_id: 131
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 149
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   bamboo_flower_basket
+        - chance: uncommon
+          item:   caloyer_cape
+        - chance: uncommon
+          item:   basilisk
+
+  Fortification_NV80:
+    id:           6880
+    display_name: Fortification
+    species:      unclassified
+    type:         [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 1580
+        entity_flags:  2689
+        animation_sub:    8
+        name_vis:        80
+        name_prefix:      2
+        hitbox:          12
+      spawn:
+        type: [scripted]
+
+  Gariri:
+    id:            1470
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      render:
+        look:
+          type:   equipped
+          race:   6
+          face:   5
+          head:   4167
+          body:   8237
+          hands:  12359
+          legs:   16455
+          feet:   20551
+          main:   24905
+          sub:    28672
+          ranged: 32794
+        entity_flags:  539
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Gigas_Mercenary:
+    id:            1574
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gnat:
+    id:            1628
+    species:       gnat
+    skill_list_id: 131
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   gnat_wing
+      despoil:
+        gnat_wing: 0
+
+  Goblin_Lansquenet:
+    id:            1681
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 492
+        entity_flags: 133
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haja_Zhwan:
+    id:            1875
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   26
+          head:   4096
+          body:   8227
+          hands:  12342
+          legs:   16603
+          feet:   20480
+          main:   24945
+          sub:    28672
+          ranged: 32821
+        entity_flags:  539
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Ice_Fiend:
+    id:            2044
+    species:       ice_elemental
+    spell_list_id: 21
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 9
+        entity_flags:  1155
+        animation_sub:   16
+        name_prefix:     32
+        model_size:       1
+        hitbox:           8
+      spawn:
+        type: [scripted]
+
+  Immolatory_Pugil:
+    id:            2062
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 1153
+        hitbox:         23
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+        - chance: rare
+          item:   shall_shell
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Iron_Bomb:
+    id:      2100
+    species: fortifications
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1791
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Jajaro:
+    id:            2137
+    species:       buffalo
+    skill_list_id: 57
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags:  153
+        animation_sub:   8
+        name_prefix:    32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Jii_Xai_the_Rimebladed:
+    id:            2150
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2101
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Kagetora:
+    id:            2179
+    species:       humes
+    spell_list_id: 7
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   14
+          head:   4155
+          body:   8196
+          hands:  12376
+          legs:   16472
+          feet:   20568
+          main:   24965
+          sub:    28986
+          ranged: 32798
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Kaiser_Behemoth_S:
+    id:            2180
+    display_name:  Kaiser_Behemoth
+    species:       behemoth
+    type:          [notorious, battlefield]
+    spell_list_id: 126
+    skill_list_id: 479
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 380
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        45
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+
+  Kayeel-Payeel:
+    id:            2197
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   9
+          head:   4316
+          body:   8412
+          hands:  12508
+          legs:   16604
+          feet:   20700
+          main:   24918
+          sub:    28672
+          ranged: 32768
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Kazan_the_Peerless:
+    id:            2198
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1083
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Kilhwch:
+    id:            2226
+    species:       humes
+    spell_list_id: 4
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   13
+          head:   4173
+          body:   8269
+          hands:  12365
+          legs:   16461
+          feet:   20557
+          main:   24896
+          sub:    28696
+          ranged: 32768
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Kyo:
+    id:            2306
+    species:       roc
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lerren:
+    id:            2391
+    species:       tiger
+    skill_list_id: 242
+    attributes:
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 2248
+        entity_flags: 2201
+        name_vis:       24
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Lewenhart:
+    id:            2403
+    species:       humes
+    spell_list_id: 6
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: club
+      jobs: [brd, brd]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   13
+          head:   4096
+          body:   8203
+          hands:  12294
+          legs:   16387
+          feet:   20488
+          main:   24740
+          sub:    28672
+          ranged: 32768
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Lhu_Mhakaracca:
+    id:            2405
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   13
+          head:   4177
+          body:   8273
+          hands:  12369
+          legs:   16465
+          feet:   20561
+          main:   24923
+          sub:    28725
+          ranged: 32793
+        entity_flags:  539
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Libran_Caster:
+    id:            2406
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   13
+          head:   4114
+          body:   8212
+          hands:  12308
+          legs:   16404
+          feet:   20500
+          main:   24803
+          sub:    28711
+          ranged: 32795
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Loo_Kutto_the_Pensive:
+    id:            2438
+    species:       yagudo
+    type:          [notorious]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2078
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   bamboo_bugcage
+        - chance: uncommon
+          item:   mukademaru
+        - chance: uncommon
+          item:   skirmishers_ring
+
+  Maa_Illmu_the_Bestower:
+    id:            2465
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1084
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+        mp: 99999
+    loot:
+      drops:
+        - chance: always
+          item:   bamboo_charcoal_basket
+        - chance: uncommon
+          item:   clearpath
+        - chance: uncommon
+          item:   cruadin
+
+  Maat_campaign:
+    id:            6823
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill:    hand_to_hand
+        delay:    480
+        dmg_mult: 110
+      jobs: [mnk, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Marquis_Forneus:
+    id:            2574
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 301
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze, light_sleep, dark_sleep]
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 752
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   bamboo_medicine_basket
+        - chance: uncommon
+          item:   faucheuse
+        - chance: uncommon
+          item:   shark_strap
+
+  Momowa:
+    id:            2730
+    species:       bird
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags:  665
+        animation_sub:   8
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Moo_Ouzi_the_SwiftbladeS:
+    id:            1247
+    display_name:  Moo_Ouzi_the_Swiftblade
+    species:       yagudo
+    type:          [notorious]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2115
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Muu_Buxu_the_Elusive:
+    id:            2776
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2081
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Nail_Bomb:
+    id:      2799
+    species: fortifications
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 1791
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Odontotyrannus:
+    id:            2944
+    species:       pugil
+    type:          [notorious, fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 1153
+        hitbox:         23
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2850
+
+  Odzmanouk:
+    id:            2946
+    species:       black_wyrm
+    skill_list_id: 260
+    attributes:
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+          light: -2
+        rank_status:
+          poison:      -2
+          light_sleep:  6
+          dark_sleep:   6
+      render:
+        look:
+          type:  standard
+          model: 783
+        entity_flags:  1177
+        animation_sub:    4
+        name_prefix:     32
+        hitbox:          42
+      spawn:
+        type: [scripted]
+
+  Oggbi:
+    id:            2949
+    species:       galks
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:   equipped
+          race:   8
+          face:   3
+          head:   4163
+          body:   8209
+          hands:  12355
+          legs:   16401
+          feet:   20547
+          main:   24707
+          sub:    28672
+          ranged: 32768
+        entity_flags: 1177
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Papako:
+    id:            3096
+    species:       manticore
+    skill_list_id: 179
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags:  2201
+        animation_sub:    8
+        name_vis:        24
+        name_prefix:     32
+      spawn:
+        type: [scripted]
+
+  Piscean_Caster:
+    id:            3139
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   6
+          head:   4125
+          body:   8293
+          hands:  12317
+          legs:   16485
+          feet:   20581
+          main:   24901
+          sub:    28672
+          ranged: 32850
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  Plenilune_Ronin:
+    id:            3158
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2079
+        entity_flags:  3
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Popochu:
+    id:            3176
+    species:       dhalmel
+    spell_list_id: 20
+    skill_list_id: 80
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -3
+          thunder: -3
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 332
+        entity_flags:  2201
+        animation_sub:    8
+        name_vis:        24
+        name_prefix:     32
+      spawn:
+        type: [scripted]
+
+  Poroggo_Prince:
+    id:            3184
+    species:       green_poroggo
+    skill_list_id: 196
+    attributes:
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 133
+      spawn:
+        type: [scripted]
+
+  Poroggo_Servant:
+    id:            3186
+    species:       green_poroggo
+    skill_list_id: 196
+    attributes:
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags: 129
+      spawn:
+        type: [scripted]
+
+  Pya:
+    id:            3239
+    species:       roc
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: club
+      resists:
+        immune_status: [silence, paralyze, blind, slow]
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags: 667
+        name_prefix:   32
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Python_Mercenary:
+    id:            3243
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   14
+          head:   4210
+          body:   8207
+          hands:  12402
+          legs:   16399
+          feet:   20495
+          main:   24676
+          sub:    28718
+          ranged: 32818
+        entity_flags:  515
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Raigegue_R_dOraguille:
+    id:            3310
+    species:       corse
+    spell_list_id: 21
+    skill_list_id: 74
+    attributes:
+      combat:
+        skill: club
+        delay: 290
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:    2
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     3
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         2
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1363
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Rainemard:
+    id:            3312
+    species:       elvaan
+    spell_list_id: 3
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      render:
+        look:
+          type:  equipped
+          race:  3
+          face:  9
+          head:  4168
+          body:  8264
+          hands: 12360
+          legs:  16456
+          feet:  20552
+          main:  24854
+          sub:   28672
+        entity_flags:  3
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  Rikoh_Wahcondalo:
+    id:            3366
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  misc
+          model: 2371
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Rongo-Nango:
+    id:            3391
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   1
+          head:   4147
+          body:   8375
+          hands:  12471
+          legs:   16567
+          feet:   20663
+          main:   24882
+          sub:    28672
+          ranged: 32793
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Roo_Beju_the_Eulogizer:
+    id:            3392
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 593
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Scorpion_Caster:
+    id:            3504
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   13
+          head:   4114
+          body:   8212
+          hands:  12308
+          legs:   16404
+          feet:   20500
+          main:   24803
+          sub:    28711
+          ranged: 32795
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Seneschal_Imp:
+    id:            3541
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2236
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   imp_wing
+        - chance: rare
+          item:   imp_horn
+      despoil:
+        imp_wing: 0
+
+  Shadoweye:
+    id:            6608
+    species:       ahriman
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 265
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadoweye_Gnat:
+    id:            3562
+    species:       gnat
+    skill_list_id: 131
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 129
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowfang:
+    id:            3563
+    species:       kindred
+    type:          [event]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [smn, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 741
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowfang_Void:
+    id:            3564
+    species:       dark_elemental
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowhand:
+    id:            3565
+    species:       fomor
+    type:          [event]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  equipped
+          race:  4
+          face:  29
+          head:  4277
+          body:  8263
+          hands: 12474
+          legs:  16570
+          feet:  20666
+          main:  24869
+          sub:   28672
+        entity_flags: 669
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowhand_Cuirassier:
+    id:            3566
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  equipped
+          race:  3
+          face:  29
+          head:  4317
+          body:  8413
+          hands: 12505
+          legs:  16396
+          feet:  20492
+          main:  24827
+          sub:   28699
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowhorn:
+    id:            3569
+    species:       taurus
+    type:          [event]
+    skill_list_id: 240
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, blm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowhorn_Stormer:
+    id:            3570
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 271
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Soo_Luma_the_Ascended:
+    id:            3703
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2113
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Suu_Xicu_the_Cantabile:
+    id:            3815
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        immune_status: [gravity, bind, silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1085
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 14500
+    loot:
+      drops:
+        - chance: always
+          item:   bamboo_snakecage
+        - chance: uncommon
+          item:   silktone
+        - chance: uncommon
+          item:   failnaught
+
+  Thunder_Fiend:
+    id:            3913
+    species:       thunder_elemental
+    spell_list_id: 21
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 13
+        entity_flags:  131
+        animation_sub:  16
+        name_prefix:    32
+        model_size:      1
+        hitbox:          8
+      spawn:
+        type: [scripted]
+
+  Titania:
+    id:            3926
+    species:       pixie
+    skill_list_id: 195
+    attributes:
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Tzee_Xicu_the_Manifest:
+    id:            4072
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 30
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill:    staff
+        delay:    265
+        dmg_mult: 125
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 781
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tzee_Xicus_Elemental:
+    id:            4071
+    species:       air_elemental
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        model_size: 1
+        hitbox:     8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ulla:
+    id:            4081
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   14
+          head:   4282
+          body:   8308
+          hands:  12404
+          legs:   16500
+          feet:   20608
+          main:   24758
+          sub:    28714
+          ranged: 32768
+        entity_flags:  1561
+        animation_sub:    8
+        name_prefix:     32
+        hitbox:          12
+      spawn:
+        type: [scripted]
+
+  Vaa_Oozu_the_Redolent:
+    id:            4115
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: katana
+      jobs: [war, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2082
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Vaa_Oozus_Scolopendrid:
+    id:            4114
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 2243
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Vahi:
+    id:            4118
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags:  665
+        animation_sub:   8
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Vee_Ladu_the_Titterer:
+    id:            4210
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        immune_status: [gravity, bind, silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2081
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   bamboo_birdcage
+        - chance: uncommon
+          item:   harpy_shield
+        - chance: uncommon
+          item:   yagentoshiro
+
+  Vee_Ladu_the_Titterer_2:
+    id:            4210
+    display_name:  Vee_Ladu_the_Titterer
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        immune_status: [gravity, bind, silence, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2081
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 200
+
+  Vee_Qiqa_the_Decreer:
+    id:            4212
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 781
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Vee_Qiqas_Elemental:
+    id:            4211
+    species:       air_elemental
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  155
+        animation_sub:  16
+        name_prefix:    32
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Vee_Seju_the_Consumed:
+    id:            4214
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 360
+      jobs: [mnk, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1084
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Vee_Sejus_Elemental:
+    id:            4213
+    species:       air_elemental
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  155
+        animation_sub:  16
+        name_prefix:    32
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Vuu_Puqu_the_Beguiler_S:
+    id:            6731
+    display_name:  Vuu_Puqu_the_Beguiler
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 593
+        entity_flags: 669
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  War_Lynx_COS:
+    id:            5347
+    species:       coeurl
+    skill_list_id: 162
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -2
+          wind:  -2
+          earth: -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2246
+        entity_flags:  131
+        animation_sub:   5
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   lynx_hide
+        - chance: uncommon
+          item:   slice_of_lynx_meat
+
+  Wildcat_Vanguard:
+    id:            4338
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   8
+          head:   4279
+          body:   8329
+          hands:  12425
+          legs:   16399
+          feet:   20495
+          main:   24986
+          sub:    28847
+          ranged: 32768
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Wildcat_Volunteer:
+    id:            4339
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   6
+          head:   4233
+          body:   8329
+          hands:  12425
+          legs:   16399
+          feet:   20495
+          main:   24687
+          sub:    28672
+          ranged: 32809
+        entity_flags:  515
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Yaa_Haqa_the_Pious:
+    id:            4401
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 589
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Abbot_indoor_S:
+    id:            5479
+    species:       yagudo
+    spell_list_id: 20
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1084
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   yagudo_feather
+        - chance: very_common
+          item:   yagudo_feather
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:          0
+        roast_pipira:        0
+        boiled_tuna_head:    0
+        plate_of_sole_sushi: 0
+
+  Yagudo_Chanter_past:
+    id:            5493
+    species:       yagudo
+    spell_list_id: 6
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 595
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   block_of_yagudo_glue
+        - chance: rare
+          item:   scroll_of_warding_round
+        - chance: very_rare
+          item:   scroll_of_goddesss_hymnus
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Conductor_past:
+    id:            5488
+    species:       yagudo
+    spell_list_id: 6
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1085
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   block_of_yagudo_glue
+        - chance: rare
+          item:   scroll_of_warding_round
+        - chance: very_rare
+          item:   scroll_of_goddesss_hymnus
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Eradicator_past:
+    id:            4417
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2080
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   dorter_key
+        - chance: uncommon
+          item:   yagudo_kote
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Flagellant_past:
+    id:            5487
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2084
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: very_rare
+          item:   yagudo_osode
+        - chance: uncommon
+          item:   yagudo_kote
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Genja:
+    id:            4420
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2114
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Hierogrammat:
+    id:            4424
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: katana
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1085
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          one_of:
+            scroll_of_aero_iii:   35
+            scroll_of_aeroga_ii:  20
+            scroll_of_aeroga_iii: 20
+            scroll_of_aero_iv:    15
+            scroll_of_tornado:    10
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_High_Priest_past:
+    id:            5478
+    species:       yagudo
+    spell_list_id: 20
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 606
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: always
+          item:   bottled_pixie
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Knight_Templar:
+    id:            4430
+    species:       yagudo
+    type:          [battlefield]
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2077
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 900
+    loot:
+      drops:
+        - chance: common
+          item:   dorter_key
+        - chance: uncommon
+          item:   yagudo_kote
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Nokizaru:
+    id:            4436
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2081
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   jar_of_gnat_pellets
+        - chance: very_rare
+          item:   yagudo_osode
+        - chance: uncommon
+          item:   yagudo_kote
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Parasite:
+    id:            4438
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 131
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Yagudo_Prelate_past:
+    id:            4442
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 605
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   dorter_key
+        - chance: rare
+          item:   scroll_of_aero_iii
+        - chance: very_rare
+          item:   scroll_of_aero_iv
+        - chance: rare
+          item:   scroll_of_aeroga_ii
+        - chance: very_rare
+          item:   scroll_of_aeroga_iii
+        - chance: very_rare
+          item:   scroll_of_tornado
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Prioress:
+    id:            4446
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 607
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   dorter_key
+        - chance: rare
+          item:   air_spirit_pact
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Sentinel_past:
+    id:            5481
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2083
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   yagudo_feather
+        - chance: rare
+          item:   bottled_pixie
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Superior:
+    id:            4452
+    species:       yagudo
+    spell_list_id: 30
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1084
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   jar_of_gnat_pellets
+        - chance: very_rare
+          item:   air_spirit_pact
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudo_Turret:
+    id:            4458
+    species:       yagudo
+    skill_list_id: 250
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    4
+          earth:   4
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2165
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         38
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Yojimbo:
+    id:            4460
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2078
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   jar_of_gnat_pellets
+        - chance: very_rare
+          item:   yagudo_osode
+        - chance: uncommon
+          item:   yagudo_kote
+      steal: platinum_beastcoin
+      despoil:
+        roast_carp:       0
+        roast_pipira:     0
+        boiled_tuna_head: 0
+
+  Yagudos_Elemental:
+    id:            4454
+    species:       air_elemental
+    spell_list_id: 21
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  129
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Yuu_Mjuu_the_Awakened:
+    id:            4486
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, smn]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1084
+        entity_flags: 669
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yuu_Mjuus_Elemental:
+    id:            4485
+    species:       light_elemental
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 14
+        entity_flags:  155
+        animation_sub:  16
+        name_prefix:    32
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Zhuu_Buxu_the_Silent_COS:
+    id:            6687
+    display_name:  Zhuu_Buxu_the_Silent
+    species:       yagudo
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2081
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 250
+    loot:
+      drops:
+        - chance: uncommon
+          item:   sangoma_lappas
+        - chance: rare
+          item:   yagudo_kote
+
+  Zjaa_Bao_the_Wrathherald:
+    id:            4512
+    species:       yagudo
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2081
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Zolku-Azolku:
+    id:            4515
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   13
+          head:   4301
+          body:   8378
+          hands:  12436
+          legs:   16532
+          feet:   20628
+          main:   24881
+          sub:    28672
+          ranged: 32768
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+spawns:
+  17182721:
+    template: Odontotyrannus
+    at:       [1.000, 1.000, 1.000]
+    level:    [52, 52]
+  17182722:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-178.082, -0.249, 47.347, 182]
+    level:    [76, 79]
+  17182723:
+    template: Yagudo_Knight_Templar
+    at:       [-179.645, -0.245, 12.605, 42]
+    level:    [76, 79]
+  17182724:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-175.943, -0.249, 25.443, 252]
+    level:    [70, 72]
+  17182725:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-182.277, -0.227, 14.719, 205]
+    level:    [70, 72]
+  17182726:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-174.293, -0.234, 59.904, 37]
+    level:    [76, 79]
+  17182727:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-170.079, -0.246, 60.841, 248]
+    level:    [76, 79]
+  17182728:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-182.944, -0.228, -45.138, 206]
+    level:    [76, 79]
+  17182729:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-183.208, -0.249, -84.419, 61]
+    level:    [76, 79]
+  17182730:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-180.861, -0.143, -36.754, 59]
+    level:    [70, 72]
+  17182731:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-181.269, -0.233, -45.989, 161]
+    level:    [70, 72]
+  17182732:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-156.957, -0.250, -100.536, 34]
+    level:    [76, 79]
+  17182733:
+    template: Yagudo_Prioress
+    at:       [-159.407, -0.249, -102.740, 244]
+    level:    [76, 79]
+  17182734:
+    template: Yagudos_Elemental
+    at:       [-158.512, -0.249, -102.610, 244]
+    level:    [70, 79]
+  17182735:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-110.030, -0.250, -52.464, 135]
+    level:    [76, 79]
+  17182736:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-128.557, -0.255, -56.445, 207]
+    level:    [76, 79]
+  17182737:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-120.918, -0.250, -46.790, 152]
+    level:    [76, 79]
+  17182738:
+    template: Yagudo_Knight_Templar
+    at:       [-140.283, -0.250, -1.053, 192]
+    level:    [76, 79]
+  17182739:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-133.256, -0.245, 9.616, 83]
+    level:    [76, 79]
+  17182740:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-134.574, -0.264, 7.924, 210]
+    level:    [76, 79]
+  17182741:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-60.663, -0.296, 6.939, 37]
+    level:    [76, 79]
+  17182742:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-72.618, -0.251, -13.640, 43]
+    level:    [76, 79]
+  17182743:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-68.365, -0.196, -20.440, 237]
+    level:    [76, 79]
+  17182744:
+    template: Yagudo_Knight_Templar
+    at:       [-84.167, -0.250, -8.829, 87]
+    level:    [76, 79]
+  17182745:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-73.501, -0.250, -1.495, 51]
+    level:    [76, 79]
+  17182746:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-105.904, -0.282, -25.376, 204]
+    level:    [76, 79]
+  17182747:
+    template: Yagudo_Prioress
+    at:       [-135.479, -0.224, -48.585, 71]
+    level:    [76, 79]
+  17182748:
+    template: Yagudos_Elemental
+    at:       [-134.547, -0.228, -49.918, 85]
+    level:    [70, 79]
+  17182749:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-139.558, -0.266, -2.275, 6]
+    level:    [70, 72]
+  17182750:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-66.635, -0.196, -19.781, 231]
+    level:    [70, 72]
+  17182751:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-116.476, -0.251, 0.249, 220]
+    level:    [70, 72]
+  17182752:
+    template: Yagudo_Knight_Templar
+    at:       [-55.617, -0.242, 89.300, 200]
+    level:    [76, 79]
+  17182753:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-77.697, -0.249, 95.858, 91]
+    level:    [76, 79]
+  17182754:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-62.333, -0.199, 85.522, 149]
+    level:    [76, 79]
+  17182755:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-55.323, -0.238, 93.598, 62]
+    level:    [70, 72]
+  17182756:
+    template: Yagudo_Knight_Templar
+    at:       [-108.644, -0.216, 96.300, 230]
+    level:    [76, 79]
+  17182757:
+    template: Yagudo_Knight_Templar
+    at:       [-88.666, -0.249, 100.983, 125]
+    level:    [76, 79]
+  17182758:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-132.905, -0.249, 97.702, 225]
+    level:    [76, 79]
+  17182759:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-133.646, -0.249, 97.152, 137]
+    level:    [76, 79]
+  17182760:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-90.184, -0.215, 96.290, 102]
+    level:    [70, 72]
+  17182761:
+    template: Yagudo_Knight_Templar
+    at:       [-182.586, -0.509, 123.834, 94]
+    level:    [76, 79]
+  17182762:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-191.817, -0.724, 104.285, 240]
+    level:    [76, 79]
+  17182763:
+    template: Blooming_Rafflesia
+    at:       [-179.354, -0.360, 114.984, 34]
+    level:    [71, 73]
+  17182764:
+    template: Blooming_Rafflesia
+    at:       [-179.304, -0.500, 123.354, 117]
+    level:    [71, 73]
+  17182765:
+    template: Yagudo_Knight_Templar
+    at:       [-242.925, -0.501, 101.658, 253]
+    level:    [76, 79]
+  17182766:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-265.984, -1.526, 95.073, 53]
+    level:    [76, 79]
+  17182767:
+    template: Blooming_Rafflesia
+    at:       [-241.578, -0.502, 102.368, 88]
+    level:    [71, 73]
+  17182768:
+    template: Blooming_Rafflesia
+    at:       [-244.892, -0.552, 94.381, 142]
+    level:    [71, 73]
+  17182769:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-186.091, -1.027, 178.075, 248]
+    level:    [76, 79]
+  17182770:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-191.411, -0.561, 157.478, 157]
+    level:    [76, 79]
+  17182771:
+    template: Blooming_Rafflesia
+    at:       [-212.505, -0.502, 178.932, 191]
+    level:    [71, 73]
+  17182772:
+    template: Blooming_Rafflesia
+    at:       [-207.646, -0.558, 179.220, 249]
+    level:    [71, 73]
+  17182773:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-262.026, -0.669, 152.104, 110]
+    level:    [76, 79]
+  17182774:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-253.562, -1.086, 166.787, 90]
+    level:    [76, 79]
+  17182775:
+    template: Blooming_Rafflesia
+    at:       [-256.006, -0.849, 146.139, 193]
+    level:    [71, 73]
+  17182776:
+    template: Blooming_Rafflesia
+    at:       [-230.093, -0.701, 172.913, 138]
+    level:    [71, 73]
+  17182777:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-208.926, -1.160, 142.801, 192]
+    level:    [76, 79]
+  17182778:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-214.923, -1.188, 149.607, 6]
+    level:    [76, 79]
+  17182779:
+    template: Antlion_Fly
+    at:       [-213.123, 0.492, 161.677, 149]
+    level:    [63, 64]
+  17182780:
+    template: Antlion_Fly
+    at:       [-197.517, 0.499, 156.730, 162]
+    level:    [63, 64]
+  17182781:
+    template: Antlion_Fly
+    at:       [-256.325, 0.499, 106.261, 219]
+    level:    [63, 64]
+  17182782:
+    template: Antlion_Fly
+    at:       [-249.408, 0.499, 100.174, 19]
+    level:    [63, 64]
+  17182783:
+    template: Yagudo_Knight_Templar
+    at:       [-251.309, -0.341, 97.279, 33]
+    level:    [76, 79]
+  17182784:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-242.006, 0.497, 155.286, 90]
+    level:    [76, 79]
+  17182785:
+    template: Antlion_Fly
+    at:       [-207.064, -0.344, 114.823, 143]
+    level:    [63, 64]
+  17182786:
+    template: Antlion_Fly
+    at:       [-229.163, 0.127, 110.867, 161]
+    level:    [63, 64]
+  17182787:
+    template: Antlion_Fly
+    at:       [-187.444, -0.514, 158.891, 17]
+    level:    [63, 64]
+  17182788:
+    template: Earth_Elemental
+    at:       [-188.500, -0.499, 181.383, 244]
+    level:    [80, 80]
+  17182789:
+    template: Fire_Elemental
+    at:       [-257.991, -0.500, 159.353, 148]
+    level:    [80, 80]
+  17182790:
+    template: Duu_Masa_the_Onecut
+    at:       [-182.571, -0.689, 137.769, 93]
+    level:    [80, 80]
+  17182791:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-19.289, -0.250, -5.075, 181]
+    level:    [76, 79]
+  17182792:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-21.567, -0.250, 1.352, 73]
+    level:    [76, 79]
+  17182793:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [19.382, -0.249, -21.146, 29]
+    level:    [76, 79]
+  17182794:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-14.900, -0.249, -21.720, 145]
+    level:    [76, 79]
+  17182795:
+    template: Yagudo_Prioress
+    at:       [9.782, -0.249, -15.021, 180]
+    level:    [76, 79]
+  17182796:
+    template: Yagudos_Elemental
+    at:       [8.870, -0.249, -15.047, 127]
+    level:    [70, 79]
+  17182797:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [22.912, -0.249, -19.958, 224]
+    level:    [70, 72]
+  17182798:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-22.389, -0.250, -39.637, 79]
+    level:    [76, 79]
+  17182799:
+    template: Yagudo_Prioress
+    at:       [-22.415, -0.250, -40.335, 188]
+    level:    [76, 79]
+  17182800:
+    template: Yagudos_Elemental
+    at:       [-22.322, -0.250, -42.731, 189]
+    level:    [70, 79]
+  17182801:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [-20.894, -0.250, -73.485, 76]
+    level:    [70, 72]
+  17182802:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-26.074, -0.250, -102.057, 24]
+    level:    [76, 79]
+  17182803:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-26.622, -0.250, -102.243, 1]
+    level:    [76, 79]
+  17182804:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-97.466, -0.249, -164.014, 89]
+    level:    [76, 79]
+  17182805:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-97.746, -0.250, -114.781, 80]
+    level:    [76, 79]
+  17182806:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-99.825, -0.244, -169.351, 43]
+    level:    [76, 79]
+  17182807:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-99.314, -0.249, -119.387, 88]
+    level:    [76, 79]
+  17182808:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-65.701, -0.246, -183.803, 244]
+    level:    [76, 79]
+  17182809:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-34.915, -0.188, -182.116, 132]
+    level:    [76, 79]
+  17182810:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-85.419, -0.249, -178.911, 240]
+    level:    [76, 79]
+  17182811:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-64.794, -0.233, -178.690, 224]
+    level:    [76, 79]
+  17182812:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-103.220, -0.246, -159.507, 86]
+    level:    [76, 79]
+  17182813:
+    template: Zhuu_Buxu_the_Silent_COS
+    script:   Zhuu_Buxu_the_Silent
+    at:       [-103.220, -0.246, -159.507, 86]
+    level:    [80, 84]
+  17182814:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [24.799, -0.739, -172.973, 109]
+    level:    [76, 79]
+  17182815:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [22.965, -0.461, -164.814, 214]
+    level:    [76, 79]
+  17182816:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [29.585, -1.077, -171.153, 202]
+    level:    [76, 79]
+  17182817:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    at:       [24.167, -1.460, -178.579, 49]
+    level:    [71, 73]
+  17182818:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    at:       [45.660, -0.594, -170.565, 86]
+    level:    [71, 73]
+  17182819:
+    template: Yagudo_Prioress
+    at:       [82.712, 0.479, -159.270, 194]
+    level:    [76, 79]
+  17182820:
+    template: Yagudos_Elemental
+    at:       [84.760, 0.209, -160.451, 166]
+    level:    [70, 79]
+  17182821:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    at:       [79.584, -0.455, -181.475, 18]
+    level:    [71, 73]
+  17182822:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    at:       [75.107, -0.045, -184.289, 111]
+    level:    [71, 73]
+  17182823:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [23.666, -0.594, -114.353, 38]
+    level:    [76, 79]
+  17182824:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [33.066, -0.749, -104.533, 48]
+    level:    [76, 79]
+  17182825:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    at:       [22.330, -0.572, -130.533, 64]
+    level:    [71, 73]
+  17182826:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    at:       [19.499, -0.450, -107.293, 215]
+    level:    [71, 73]
+  17182827:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [94.553, -1.052, -139.298, 106]
+    level:    [76, 79]
+  17182828:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [96.764, -1.253, -104.256, 233]
+    level:    [76, 79]
+  17182829:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    at:       [74.708, -0.498, -98.148, 225]
+    level:    [71, 73]
+  17182830:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    at:       [100.318, -0.907, -113.496, 233]
+    level:    [71, 73]
+  17182831:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [58.625, -1.187, -150.909, 9]
+    level:    [76, 79]
+  17182832:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [69.826, -1.187, -143.834, 208]
+    level:    [76, 79]
+  17182833:
+    template: Immolatory_Pugil
+    at:       [78.302, 0.499, -127.841, 107]
+    level:    [64, 64]
+  17182834:
+    template: Immolatory_Pugil
+    at:       [69.656, 0.500, -113.558, 201]
+    level:    [64, 64]
+  17182835:
+    template: Immolatory_Pugil
+    at:       [59.854, 0.492, -163.970, 129]
+    level:    [64, 64]
+  17182836:
+    template: Immolatory_Pugil
+    at:       [89.224, 0.499, -175.332, 92]
+    level:    [64, 64]
+  17182837:
+    template: Immolatory_Pugil
+    at:       [98.191, 0.438, -173.922]
+    level:    [64, 64]
+  17182838:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [35.178, -0.644, -102.795, 169]
+    level:    [76, 79]
+  17182839:
+    template: Yagudo_Prioress
+    at:       [55.848, -0.946, -185.791, 236]
+    level:    [76, 79]
+  17182840:
+    template: Yagudos_Elemental
+    at:       [52.570, -0.659, -186.493, 5]
+    level:    [70, 79]
+  17182841:
+    template: Earth_Elemental
+    at:       [22.937, -0.492, -123.912, 144]
+    level:    [80, 80]
+  17182842:
+    template: Fire_Elemental
+    at:       [103.107, -0.863, -149.768, 53]
+    level:    [80, 80]
+  17182843:
+    template: Aa_Xalmo_the_Savage
+    at:       [50.000, -0.700, -148.000, 46]
+    level:    [80, 84]
+  17182844:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [56.470, -3.223, 20.107, 245]
+    level:    [76, 79]
+  17182845:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [74.952, -7.551, 19.575, 11]
+    level:    [76, 79]
+  17182846:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [22.367, 19.199, -140.536, 201]
+    level:    [70, 72]
+  17182847:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [22.318, 16.761, -150.147]
+    level:    [70, 72]
+  17182848:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [21.677, 19.345, -139.868, 6]
+    level:    [70, 72]
+  17182849:
+    template: Seneschal_Imp
+    at:       [21.280, 15.841, -154.348, 43]
+    level:    [77, 79]
+  17182850:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [21.967, 13.669, -208.800, 47]
+    level:    [70, 72]
+  17182851:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [19.158, 15.751, -159.591, 130]
+    level:    [70, 72]
+  17182852:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [20.546, 16.193, -165.624, 203]
+    level:    [70, 72]
+  17182853:
+    template: Seneschal_Imp
+    at:       [18.737, 16.189, -169.096, 73]
+    level:    [77, 79]
+  17182854:
+    template: Bastion_Bats_Castle_Oztroja_S
+    script:   Bastion_Bats
+    at:       [49.419, 5.723, -217.929, 239]
+    level:    [70, 72]
+  17182855:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [100.624, -16.250, -19.068, 120]
+    level:    [76, 79]
+  17182856:
+    template: Yagudo_Knight_Templar
+    at:       [40.069, -16.250, -20.712, 74]
+    level:    [76, 79]
+  17182857:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [87.724, -15.992, -17.976, 120]
+    level:    [76, 79]
+  17182858:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [69.731, -16.250, -21.003, 71]
+    level:    [76, 79]
+  17182859:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [18.852, -16.250, -19.575, 138]
+    level:    [76, 79]
+  17182860:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [18.820, -16.250, -24.027, 57]
+    level:    [76, 79]
+  17182861:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [20.929, -16.250, 0.434]
+    level:    [76, 79]
+  17182862:
+    template: Yagudo_Prioress
+    at:       [40.296, -16.250, -18.298, 141]
+    level:    [76, 79]
+  17182863:
+    template: Yagudos_Elemental
+    at:       [39.374, -16.250, -18.051, 238]
+    level:    [70, 79]
+  17182864:
+    template: Yagudo_Knight_Templar
+    at:       [-19.439, -16.250, -40.952, 83]
+    level:    [76, 79]
+  17182865:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-21.873, -16.250, -87.038, 200]
+    level:    [76, 79]
+  17182866:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-21.222, -16.250, -43.306, 176]
+    level:    [76, 79]
+  17182867:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-17.960, -16.250, -19.767, 97]
+    level:    [76, 79]
+  17182868:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-44.458, -16.250, -100.443, 111]
+    level:    [76, 79]
+  17182869:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-56.880, -16.250, -105.393, 211]
+    level:    [76, 79]
+  17182870:
+    template: Yagudo_Prioress
+    at:       [-51.126, -16.250, -102.155, 221]
+    level:    [76, 79]
+  17182871:
+    template: Yagudos_Elemental
+    at:       [-49.955, -16.250, -102.111, 250]
+    level:    [70, 79]
+  17182872:
+    template: Yagudo_Yojimbo
+    at:       [11.293, -16.531, -107.856, 182]
+    level:    [81, 83]
+  17182873:
+    template: Yagudo_Nokizaru
+    at:       [21.953, -16.514, -101.660, 46]
+    level:    [79, 82]
+  17182874:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [16.004, -16.540, -175.674, 34]
+    level:    [81, 83]
+  17182875:
+    template: Yagudo_Yojimbo
+    at:       [31.877, -16.500, -186.935, 137]
+    level:    [81, 83]
+  17182876:
+    template: Yagudo_Nokizaru
+    at:       [110.747, -16.499, -128.351, 40]
+    level:    [79, 82]
+  17182877:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [110.849, -16.499, -138.450, 64]
+    level:    [81, 83]
+  17182878:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [8.218, -16.538, -85.519, 33]
+    level:    [81, 83]
+  17182879:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [12.795, -16.796, -79.480, 167]
+    level:    [81, 83]
+  17182880:
+    template: Yagudo_Yojimbo
+    at:       [7.314, -16.499, -191.353, 125]
+    level:    [81, 83]
+  17182881:
+    template: Yagudo_Yojimbo
+    at:       [12.401, -16.499, -185.853, 118]
+    level:    [81, 83]
+  17182882:
+    template: Yagudo_Nokizaru
+    at:       [114.125, -16.500, -95.230, 249]
+    level:    [79, 82]
+  17182883:
+    template: Yagudo_Nokizaru
+    at:       [115.899, -16.503, -89.748, 49]
+    level:    [79, 82]
+  17182884:
+    template: Yagudo_Yojimbo
+    at:       [59.921, -19.955, -152.076, 9]
+    level:    [81, 83]
+  17182885:
+    template: Yagudo_Nokizaru
+    at:       [72.394, -19.993, -132.978, 31]
+    level:    [79, 82]
+  17182886:
+    template: Seneschal_Imp
+    at:       [130.287, -16.250, -141.007, 64]
+    level:    [77, 79]
+  17182887:
+    template: Seneschal_Imp
+    at:       [133.720, -16.250, -138.201, 8]
+    level:    [77, 79]
+  17182888:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-18.589, -16.211, -139.101, 3]
+    level:    [76, 79]
+  17182889:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [-81.769, -16.249, -142.392, 119]
+    level:    [76, 79]
+  17182890:
+    template: Yagudo_Knight_Templar
+    at:       [-62.877, -16.244, -136.108, 125]
+    level:    [76, 79]
+  17182891:
+    template: Yagudo_Knight_Templar
+    at:       [-54.164, -16.239, -136.026, 119]
+    level:    [76, 79]
+  17182892:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-80.842, -16.249, -138.786, 112]
+    level:    [76, 79]
+  17182893:
+    template: Bulwark_Bat_Castle_Oztroja_S
+    script:   Bulwark_Bat
+    at:       [-65.873, -16.245, -137.707, 186]
+    level:    [70, 72]
+  17182894:
+    template: Yagudo_Knight_Templar
+    at:       [-101.524, -16.222, -101.896, 205]
+    level:    [76, 79]
+  17182895:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-103.032, -16.239, -135.337, 226]
+    level:    [76, 79]
+  17182896:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-100.603, -16.227, -133.497, 222]
+    level:    [76, 79]
+  17182897:
+    template: Bulwark_Bat_Castle_Oztroja_S
+    script:   Bulwark_Bat
+    at:       [-100.559, -16.215, -99.725, 78]
+    level:    [70, 72]
+  17182898:
+    template: Yagudo_Sentinel_past
+    script:   Yagudo_Sentinel
+    at:       [23.538, -16.249, 41.145, 52]
+    level:    [76, 79]
+  17182899:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [18.033, -16.249, 34.860, 83]
+    level:    [76, 79]
+  17182900:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [16.233, -16.249, 40.017, 150]
+    level:    [76, 79]
+  17182901:
+    template: Yagudo_Knight_Templar
+    at:       [-13.053, -16.233, 62.834, 109]
+    level:    [76, 79]
+  17182902:
+    template: Yagudo_Eradicator_past
+    script:   Yagudo_Eradicator
+    at:       [-4.398, -16.249, 60.980, 145]
+    level:    [76, 79]
+  17182903:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-6.040, -16.249, 61.044, 241]
+    level:    [76, 79]
+  17182904:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [6.259, -16.224, 55.512, 2]
+    level:    [76, 79]
+  17182905:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-44.271, -16.232, 61.154, 146]
+    level:    [76, 79]
+  17182906:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-50.003, -16.249, 63.950, 143]
+    level:    [76, 79]
+  17182907:
+    template: Yagudo_Prioress
+    at:       [-19.061, -16.579, 85.220, 74]
+    level:    [76, 79]
+  17182908:
+    template: Yagudos_Elemental
+    at:       [-19.930, -16.841, 86.453, 51]
+    level:    [70, 79]
+  17182909:
+    template: Yagudo_Prioress
+    at:       [-19.464, -16.192, 83.169, 205]
+    level:    [76, 79]
+  17182910:
+    template: Yagudos_Elemental
+    at:       [-18.877, -16.092, 81.849, 190]
+    level:    [70, 79]
+  17182911:
+    template: Earth_Elemental
+    at:       [-21.054, -23.804, 119.842, 248]
+    level:    [80, 80]
+  17182912:
+    template: Fire_Elemental
+    at:       [-18.683, -31.806, 155.865, 72]
+    level:    [80, 80]
+  17182913:
+    template: Yagudo_Prioress
+    at:       [-25.383, -36.670, 180.017, 240]
+    level:    [76, 79]
+  17182914:
+    template: Yagudos_Elemental
+    at:       [-25.225, -36.703, 180.305, 13]
+    level:    [70, 79]
+  17182915:
+    template: Yagudo_Prioress
+    at:       [-38.926, -39.704, 181.743, 9]
+    level:    [76, 79]
+  17182916:
+    template: Yagudos_Elemental
+    at:       [-40.061, -39.910, 182.195, 250]
+    level:    [70, 79]
+  17182917:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-88.817, -16.048, 28.649, 4]
+    level:    [81, 83]
+  17182918:
+    template: Yagudo_Hierogrammat
+    at:       [-132.918, -16.056, 28.633, 132]
+    level:    [81, 83]
+  17182919:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-103.363, -16.055, 28.759, 134]
+    level:    [81, 83]
+  17182920:
+    template: Gnat
+    at:       [-129.360, -16.055, 28.344, 4]
+    level:    [79, 83]
+  17182921:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-180.754, -16.216, 21.177, 224]
+    level:    [76, 79]
+  17182922:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-176.584, -16.243, 47.617, 84]
+    level:    [76, 79]
+  17182923:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-181.078, -16.215, 18.249, 32]
+    level:    [76, 79]
+  17182924:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-169.509, -16.249, 57.461, 75]
+    level:    [76, 79]
+  17182925:
+    template: Yagudo_High_Priest_past
+    script:   Yagudo_High_Priest
+    at:       [-170.225, -16.249, 64.684, 220]
+    level:    [76, 79]
+  17182926:
+    template: Bulwark_Bat_Castle_Oztroja_S
+    script:   Bulwark_Bat
+    at:       [-159.527, -16.246, 60.661, 126]
+    level:    [70, 72]
+  17182927:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-141.212, -16.249, 79.573, 250]
+    level:    [76, 79]
+  17182928:
+    template: Yagudo_Prelate_past
+    script:   Yagudo_Prelate
+    at:       [-138.949, -16.248, 73.463, 203]
+    level:    [76, 79]
+  17182929:
+    template: Yagudo_Chanter_past
+    script:   Yagudo_Chanter
+    at:       [-143.487, -16.250, 80.538, 18]
+    level:    [76, 79]
+  17182930:
+    template: Bulwark_Bat_Castle_Oztroja_S
+    script:   Bulwark_Bat
+    at:       [-143.519, -16.242, 99.240, 105]
+    level:    [70, 72]
+  17182931:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-173.490, -16.565, 111.392, 85]
+    level:    [81, 83]
+  17182932:
+    template: Yagudo_Superior
+    at:       [-170.752, -16.498, 137.515, 41]
+    level:    [81, 83]
+  17182933:
+    template: Yagudos_Elemental
+    at:       [-171.618, -16.499, 139.072, 41]
+    level:    [70, 79]
+  17182934:
+    template: Yagudo_Hierogrammat
+    at:       [-179.615, -16.549, 179.490, 18]
+    level:    [81, 83]
+  17182935:
+    template: Yagudo_Superior
+    at:       [-212.992, -16.500, 186.573, 231]
+    level:    [81, 83]
+  17182936:
+    template: Yagudos_Elemental
+    at:       [-215.014, -16.500, 184.699, 110]
+    level:    [70, 79]
+  17182937:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-266.134, -16.499, 133.965, 211]
+    level:    [81, 83]
+  17182938:
+    template: Yagudo_Superior
+    at:       [-268.579, -16.498, 143.593, 77]
+    level:    [81, 83]
+  17182939:
+    template: Yagudos_Elemental
+    at:       [-267.962, -16.498, 142.267, 101]
+    level:    [70, 79]
+  17182940:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-168.523, -16.706, 81.726, 73]
+    level:    [81, 83]
+  17182941:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-176.614, -16.500, 88.379, 90]
+    level:    [81, 83]
+  17182942:
+    template: Yagudo_Hierogrammat
+    at:       [-167.786, -16.500, 183.746, 53]
+    level:    [81, 83]
+  17182943:
+    template: Yagudo_Hierogrammat
+    at:       [-162.434, -16.773, 194.572, 78]
+    level:    [81, 83]
+  17182944:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-261.578, -16.498, 192.068, 128]
+    level:    [81, 83]
+  17182945:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-263.801, -16.500, 194.369, 169]
+    level:    [81, 83]
+  17182946:
+    template: Yagudo_Hierogrammat
+    at:       [-211.039, -19.999, 150.217, 31]
+    level:    [81, 83]
+  17182947:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-207.419, -19.982, 146.421, 186]
+    level:    [81, 83]
+  17182948:
+    template: Seneschal_Imp
+    at:       [-302.039, -16.250, 140.864]
+    level:    [77, 79]
+  17182949:
+    template: Seneschal_Imp
+    at:       [-301.884, -16.250, 141.024]
+    level:    [77, 79]
+  17182950:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-106.702, -16.054, -66.192, 3]
+    level:    [81, 83]
+  17182951:
+    template: Yagudo_Nokizaru
+    at:       [-146.077, -16.055, -60.770, 172]
+    level:    [79, 82]
+  17182952:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-139.088, -15.836, -70.071, 98]
+    level:    [81, 83]
+  17182953:
+    template: Gnat
+    at:       [-125.660, -16.042, -65.610, 122]
+    level:    [79, 83]
+  17182954:
+    template: Bulwark_Bat_Castle_Oztroja_S
+    script:   Bulwark_Bat
+    at:       [-56.693, -16.250, -59.938, 172]
+    level:    [70, 72]
+  17182955:
+    template: Bulwark_Bat_Castle_Oztroja_S
+    script:   Bulwark_Bat
+    at:       [-63.144, -16.250, -59.668, 32]
+    level:    [70, 72]
+  17182956:
+    template: Seneschal_Imp
+    at:       [-61.446, -16.250, -64.773, 126]
+    level:    [77, 79]
+  17182957:
+    template: Yagudo_Yojimbo
+    at:       [-82.272, -16.031, -27.759, 127]
+    level:    [81, 83]
+  17182958:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-96.668, -16.199, -20.657, 13]
+    level:    [81, 83]
+  17182959:
+    template: Yagudo_Hierogrammat
+    at:       [-102.022, -16.245, -19.398, 253]
+    level:    [81, 83]
+  17182960:
+    template: Gnat
+    at:       [-109.278, -15.978, -19.879, 255]
+    level:    [79, 83]
+  17182961:
+    template: Yagudo_Yojimbo
+    at:       [-53.661, -16.038, 6.285, 181]
+    level:    [81, 83]
+  17182962:
+    template: Yagudo_Superior
+    at:       [-53.463, -16.036, 16.191, 182]
+    level:    [81, 83]
+  17182963:
+    template: Yagudos_Elemental
+    at:       [-53.320, -16.035, 15.929, 182]
+    level:    [70, 79]
+  17182964:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-148.933, -16.425, -20.523, 8]
+    level:    [81, 83]
+  17182965:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-149.837, -16.350, -18.183, 127]
+    level:    [81, 83]
+  17182966:
+    template: Yagudo_Nokizaru
+    at:       [-169.047, -15.805, -24.627, 111]
+    level:    [79, 82]
+  17182967:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-175.218, -15.798, -22.806, 29]
+    level:    [81, 83]
+  17182968:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-222.953, -15.806, -20.775, 113]
+    level:    [81, 83]
+  17182969:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-210.000, -15.806, -19.727, 203]
+    level:    [81, 83]
+  17182970:
+    template: Yagudo_Hierogrammat
+    at:       [-238.320, -15.806, -19.298, 138]
+    level:    [81, 83]
+  17182971:
+    template: Yagudo_Yojimbo
+    at:       [-260.015, -16.250, -24.505, 228]
+    level:    [81, 83]
+  17182972:
+    template: Yagudo_Superior
+    at:       [-254.698, -16.250, -22.389, 24]
+    level:    [81, 83]
+  17182973:
+    template: Yagudos_Elemental
+    at:       [-256.640, -16.250, -22.583, 1]
+    level:    [70, 79]
+  17182974:
+    template: Yagudo_Nokizaru
+    at:       [-169.521, -38.767, -59.454, 201]
+    level:    [79, 82]
+  17182975:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-249.459, -21.503, -60.958, 56]
+    level:    [81, 83]
+  17182976:
+    template: Yagudo_Hierogrammat
+    at:       [-243.616, -22.918, -60.200, 13]
+    level:    [81, 83]
+  17182977:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-135.815, -40.243, -29.153, 88]
+    level:    [81, 83]
+  17182978:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-142.135, -40.248, -34.386, 182]
+    level:    [81, 83]
+  17182979:
+    template: Yagudo_Yojimbo
+    at:       [-141.728, -40.247, -55.315, 201]
+    level:    [81, 83]
+  17182980:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-113.252, -40.248, -21.554, 181]
+    level:    [81, 83]
+  17182981:
+    template: Yagudo_Hierogrammat
+    at:       [-98.667, -40.202, -21.536, 48]
+    level:    [81, 83]
+  17182982:
+    template: Yagudo_Nokizaru
+    at:       [-104.242, -40.249, -20.346, 74]
+    level:    [79, 82]
+  17182983:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-104.672, -40.250, -94.907, 65]
+    level:    [81, 83]
+  17182984:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-101.342, -40.207, -67.826, 162]
+    level:    [81, 83]
+  17182985:
+    template: Yagudo_Hierogrammat
+    at:       [-78.351, -40.274, -56.983, 168]
+    level:    [81, 83]
+  17182986:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-75.294, -40.282, -98.520, 229]
+    level:    [81, 83]
+  17182987:
+    template: Yagudo_Yojimbo
+    at:       [-66.519, -40.281, -73.002, 179]
+    level:    [81, 83]
+  17182988:
+    template: Yagudo_Nokizaru
+    at:       [-83.802, -40.281, -100.660, 236]
+    level:    [79, 82]
+  17182989:
+    template: Yagudo_Superior
+    at:       [-100.189, -40.265, -88.399, 228]
+    level:    [81, 83]
+  17182990:
+    template: Yagudos_Elemental
+    at:       [-102.036, -40.259, -85.131, 252]
+    level:    [70, 79]
+  17182991:
+    template: Yagudo_Parasite
+    at:       [-80.278, -40.402, -75.464, 110]
+    level:    [45, 47]
+  17182992:
+    template: Yagudo_Parasite
+    at:       [-80.512, -40.390, -83.621, 156]
+    level:    [45, 47]
+  17182993:
+    template: Yagudo_Parasite
+    at:       [-77.683, -40.343, -80.491, 164]
+    level:    [45, 47]
+  17182994:
+    template: Yagudo_Parasite
+    at:       [-80.281, -40.283, -77.598, 167]
+    level:    [45, 47]
+  17182995:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-49.755, -40.249, -136.494, 138]
+    level:    [81, 83]
+  17182996:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-39.759, -40.249, -137.109, 149]
+    level:    [81, 83]
+  17182997:
+    template: Gnat
+    at:       [-62.585, -40.209, -141.083, 143]
+    level:    [79, 83]
+  17182998:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-18.107, -40.240, -149.673, 200]
+    level:    [81, 83]
+  17182999:
+    template: Yagudo_Nokizaru
+    at:       [-18.227, -40.248, -161.858, 112]
+    level:    [79, 82]
+  17183000:
+    template: Yagudo_Hierogrammat
+    at:       [-17.440, -40.249, -165.372, 75]
+    level:    [81, 83]
+  17183001:
+    template: Yagudo_Yojimbo
+    at:       [-61.007, -50.856, -211.566, 50]
+    level:    [81, 83]
+  17183002:
+    template: Yagudo_Hierogrammat
+    at:       [-61.235, -50.739, -210.694, 127]
+    level:    [81, 83]
+  17183003:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-59.280, -47.965, -199.248, 65]
+    level:    [81, 83]
+  17183004:
+    template: Gnat
+    at:       [-58.698, -45.023, -185.525, 70]
+    level:    [79, 83]
+  17183005:
+    template: Yagudo_Nokizaru
+    at:       [-82.393, -57.109, -221.248, 139]
+    level:    [79, 82]
+  17183006:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-82.095, -57.056, -219.924, 111]
+    level:    [81, 83]
+  17183007:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-100.744, -62.210, -210.303, 156]
+    level:    [81, 83]
+  17183008:
+    template: Yagudo_Superior
+    at:       [-68.672, -54.122, -218.726, 154]
+    level:    [81, 83]
+  17183009:
+    template: Yagudos_Elemental
+    at:       [-67.581, -53.895, -218.807, 11]
+    level:    [70, 79]
+  17183010:
+    template: Gnat
+    at:       [-97.587, -66.025, -189.622, 54]
+    level:    [79, 83]
+  17183011:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-98.520, -72.249, -117.169, 63]
+    level:    [81, 83]
+  17183012:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-101.211, -72.226, -107.524, 154]
+    level:    [81, 83]
+  17183013:
+    template: Yagudo_Nokizaru
+    at:       [-95.882, -72.248, -74.223, 205]
+    level:    [79, 82]
+  17183014:
+    template: Yagudo_Hierogrammat
+    at:       [-95.406, -72.249, -68.835, 38]
+    level:    [81, 83]
+  17183015:
+    template: Yagudo_Conductor_past
+    script:   Yagudo_Conductor
+    at:       [-92.831, -72.244, -97.513, 194]
+    level:    [81, 83]
+  17183016:
+    template: Yagudo_Yojimbo
+    at:       [-78.202, -72.249, -99.298, 148]
+    level:    [81, 83]
+  17183017:
+    template: Yagudo_Nokizaru
+    at:       [-143.723, -72.244, -95.090, 170]
+    level:    [79, 82]
+  17183018:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-115.040, -72.249, -97.840, 182]
+    level:    [81, 83]
+  17183019:
+    template: Yagudo_Superior
+    at:       [-58.806, -72.250, -119.381, 255]
+    level:    [81, 83]
+  17183020:
+    template: Yagudos_Elemental
+    at:       [-61.343, -72.249, -116.873, 32]
+    level:    [70, 79]
+  17183021:
+    template: Yagudo_Superior
+    at:       [-141.501, -72.241, -94.126, 194]
+    level:    [81, 83]
+  17183022:
+    template: Yagudos_Elemental
+    at:       [-141.781, -72.243, -93.402, 196]
+    level:    [70, 79]
+  17183023:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-57.425, -72.368, -132.995, 42]
+    level:    [81, 83]
+  17183024:
+    template: Yagudo_Flagellant_past
+    script:   Yagudo_Flagellant
+    at:       [-60.493, -73.974, -136.192, 221]
+    level:    [81, 83]
+  17183025:
+    template: Yagudo_Yojimbo
+    at:       [-58.767, -72.264, -55.009, 131]
+    level:    [81, 83]
+  17183026:
+    template: Yagudo_Yojimbo
+    at:       [-66.214, -72.264, -58.485, 190]
+    level:    [81, 83]
+  17183027:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-146.300, -72.368, -138.949, 191]
+    level:    [81, 83]
+  17183028:
+    template: Yagudo_Abbot_indoor_S
+    script:   Yagudo_Abbot
+    at:       [-145.493, -72.324, -136.904, 86]
+    level:    [81, 83]
+  17183029:
+    template: Yagudo_Hierogrammat
+    at:       [-145.456, -72.250, -57.796, 100]
+    level:    [81, 83]
+  17183030:
+    template: Yagudo_Hierogrammat
+    at:       [-143.538, -72.252, -66.849, 38]
+    level:    [81, 83]
+  17183031:
+    template: Dee_Zelko_the_Esoteric
+    at:       [-91.983, -40.245, -62.989, 93]
+    level:    [83, 83]
+  17183032:
+    template: Marquis_Forneus
+    at:       [-343.345, -16.984, 141.193, 214]
+    level:    [80, 85]
+  17183033:
+    template: Loo_Kutto_the_Pensive
+    at:       [7.990, -16.500, -187.812, 238]
+    level:    [83, 83]
+  17183034:
+    template: Fleshgnasher
+    at:       [174.370, -16.539, -141.226, 181]
+    level:    [80, 85]
+  17183035:
+    template: Vee_Ladu_the_Titterer
+    at:       [-57.602, -0.823, -58.060, 95]
+    level:    [83, 83]
+  17183036:
+    template: Maa_Illmu_the_Bestower
+    at:       [-17.176, -16.250, -16.468, 188]
+    level:    [83, 83]
+  17183037:
+    template: Asterion
+    at:       [-18.050, -16.926, 18.064, 83]
+    level:    [80, 85]
+  17183038:
+    template: Suu_Xicu_the_Cantabile
+    at:       [-252.700, -0.382, 115.500, 183]
+    level:    [83, 83]
+  17183039:
+    template: Vee_Ladu_the_Titterer_2
+    script:   Vee_Ladu_the_Titterer
+    at:       [-62.488, -0.293, -52.560, 7]
+    level:    [83, 83]
+  17183040:
+    template: Vee_Ladu_the_Titterer_2
+    script:   Vee_Ladu_the_Titterer
+    at:       [-62.911, -0.238, -54.708, 243]
+    level:    [83, 83]
+  17183041:
+    template: Vee_Ladu_the_Titterer_2
+    script:   Vee_Ladu_the_Titterer
+    at:       [-59.716, -0.390, -51.730, 44]
+    level:    [83, 83]
+  17183042:
+    template: Vee_Ladu_the_Titterer_2
+    script:   Vee_Ladu_the_Titterer
+    at:       [-62.105, -0.561, -55.080, 234]
+    level:    [83, 83]
+  17183043:
+    template: Duu_Nazo_the_Spryfooted
+    at:       [-237.721, -0.240, -19.271, 117]
+    level:    [83, 83]
+  17183044:
+    template: Duu_Nazo_the_Spryfooted
+    at:       [-240.320, -0.031, -20.150, 124]
+    level:    [83, 83]
+  17183045:
+    template: Duu_Nazo_the_Spryfooted
+    at:       [-237.288, 0.080, -20.998, 116]
+    level:    [83, 83]
+  17183046:
+    template: Duu_Nazo_the_Spryfooted
+    at:       [-238.542, 0.025, -20.431, 104]
+    level:    [83, 83]
+  17183047:
+    template: Soo_Luma_the_Ascended
+    level:    [85, 90]
+  17183049:
+    template: Roo_Beju_the_Eulogizer
+  17183050:
+    template: Zjaa_Bao_the_Wrathherald
+  17183051:
+    template: Jii_Xai_the_Rimebladed
+  17183052:
+    template: Soo_Luma_the_Ascended
+    level:    [85, 90]
+  17183054:
+    template: Roo_Beju_the_Eulogizer
+  17183055:
+    template: Zjaa_Bao_the_Wrathherald
+  17183056:
+    template: Jii_Xai_the_Rimebladed
+  17183057:
+    template: Soo_Luma_the_Ascended
+    level:    [85, 90]
+  17183059:
+    template: Roo_Beju_the_Eulogizer
+  17183060:
+    template: Zjaa_Bao_the_Wrathherald
+  17183061:
+    template: Jii_Xai_the_Rimebladed
+  17183062:
+    template: Tzee_Xicu_the_Manifest
+    at:       [-288.397, -136.569, 447.669, 148]
+  17183063:
+    template: Tzee_Xicus_Elemental
+    at:       [-281.392, -136.583, 431.660, 179]
+  17183064:
+    template: Tzee_Xicus_Elemental
+    at:       [-288.376, -136.583, 446.479, 178]
+  17183065:
+    template: Tzee_Xicus_Elemental
+    at:       [-285.290, -136.522, 454.716, 200]
+  17183066:
+    template: Tzee_Xicus_Elemental
+    at:       [-235.575, -142.359, 459.035, 127]
+  17183068:
+    template: Tzee_Xicu_the_Manifest
+  17183069:
+    template: Tzee_Xicus_Elemental
+  17183070:
+    template: Tzee_Xicus_Elemental
+  17183071:
+    template: Tzee_Xicus_Elemental
+  17183072:
+    template: Tzee_Xicus_Elemental
+  17183074:
+    template: Tzee_Xicu_the_Manifest
+  17183075:
+    template: Tzee_Xicus_Elemental
+  17183076:
+    template: Tzee_Xicus_Elemental
+  17183077:
+    template: Tzee_Xicus_Elemental
+  17183078:
+    template: Tzee_Xicus_Elemental
+  17183080:
+    template: Kayeel-Payeel
+    level:    [1, 1]
+  17183081:
+    template: Ice_Fiend
+    at:       [70.830, -1.188, -144.475, 248]
+    level:    [1, 1]
+  17183082:
+    template: Thunder_Fiend
+    at:       [70.830, -1.188, -146.475, 228]
+    level:    [1, 1]
+  17183083:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183084:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183085:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183086:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183087:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183088:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183089:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183090:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183091:
+    template: Aquarian_Caster
+    level:    [1, 1]
+  17183092:
+    template: Gariri
+    at:       [44.417, 0.264, -136.942, 1]
+    level:    [1, 1]
+  17183093:
+    template: Flame_Giant
+    at:       [50.242, -1.188, -133.621, 121]
+    level:    [1, 1]
+  17183094:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183095:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183096:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183097:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183098:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183099:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183100:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183101:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183102:
+    template: Scorpion_Caster
+    level:    [1, 1]
+  17183103:
+    template: Zolku-Azolku
+    at:       [43.363, 0.500, -153.923, 108]
+    level:    [1, 1]
+  17183104:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183105:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183106:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183107:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183108:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183109:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183110:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183111:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183112:
+    template: Libran_Caster
+    level:    [1, 1]
+  17183113:
+    template: Lhu_Mhakaracca
+    at:       [52.066, -1.186, -131.647, 75]
+    level:    [1, 1]
+  17183114:
+    template: Pya
+    at:       [53.066, -1.175, -130.647, 139]
+    level:    [1, 1]
+  17183115:
+    template: Kyo
+    at:       [51.066, -1.188, -132.647, 60]
+    level:    [1, 1]
+  17183116:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183117:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183118:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183119:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183120:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183121:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183122:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183123:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183124:
+    template: Python_Mercenary
+    level:    [1, 1]
+  17183125:
+    template: Haja_Zhwan
+    at:       [52.120, 0.500, -158.107, 151]
+    level:    [1, 1]
+  17183126:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183127:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183128:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183129:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183130:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183131:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183132:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183133:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183134:
+    template: Wildcat_Volunteer
+    level:    [1, 1]
+  17183135:
+    template: Piscean_Caster
+    level:    [1, 1]
+  17183136:
+    template: Piscean_Caster
+    level:    [1, 1]
+  17183137:
+    template: Piscean_Caster
+    level:    [1, 1]
+  17183138:
+    template: Piscean_Caster
+    level:    [1, 1]
+  17183139:
+    template: Piscean_Caster
+    level:    [1, 1]
+  17183140:
+    template: Piscean_Caster
+    level:    [1, 1]
+  17183141:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17183142:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17183143:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17183144:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17183145:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17183146:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17183147:
+    template: Nail_Bomb
+    level:    [1, 1]
+  17183148:
+    template: Nail_Bomb
+    level:    [1, 1]
+  17183149:
+    template: Nail_Bomb
+    level:    [1, 1]
+  17183150:
+    template: Nail_Bomb
+    level:    [1, 1]
+  17183151:
+    template: Nail_Bomb
+    level:    [1, 1]
+  17183152:
+    template: Nail_Bomb
+    level:    [1, 1]
+  17183153:
+    template: Allied_Belfry
+    level:    [1, 1]
+  17183154:
+    template: Wildcat_Vanguard
+    level:    [1, 1]
+  17183155:
+    template: Wildcat_Vanguard
+    level:    [1, 1]
+  17183156:
+    template: Wildcat_Vanguard
+    level:    [1, 1]
+  17183157:
+    template: Wildcat_Vanguard
+    level:    [1, 1]
+  17183158:
+    template: Wildcat_Vanguard
+    level:    [1, 1]
+  17183159:
+    template: Wildcat_Vanguard
+    level:    [1, 1]
+  17183160:
+    template: Allied_Armored_Belfry
+  17183161:
+    template: Cardian_Prototype
+    level:    [1, 1]
+  17183162:
+    template: Cardian_Prototype
+    level:    [1, 1]
+  17183163:
+    template: Cardian_Prototype
+    level:    [1, 1]
+  17183164:
+    template: Cardian_Prototype
+    level:    [1, 1]
+  17183165:
+    template: Cardian_Prototype
+    level:    [1, 1]
+  17183166:
+    template: Cardian_Prototype
+    level:    [1, 1]
+  17183167:
+    template: Combat_Salvemixer
+    level:    [1, 1]
+  17183168:
+    template: Combat_Salvemixer
+    level:    [1, 1]
+  17183169:
+    template: Combat_Salvemixer
+    level:    [1, 1]
+  17183170:
+    template: Combat_Salvemixer
+    level:    [1, 1]
+  17183171:
+    template: Combat_Salvemixer
+    level:    [1, 1]
+  17183172:
+    template: Combat_Salvemixer
+    level:    [1, 1]
+  17183173:
+    template: Vee_Qiqa_the_Decreer
+  17183174:
+    template: Vee_Qiqas_Elemental
+  17183175:
+    template: Vee_Qiqas_Elemental
+  17183176:
+    template: Vee_Qiqas_Elemental
+  17183177:
+    template: Vee_Qiqas_Elemental
+  17183178:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183179:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183180:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183181:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183182:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183183:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183184:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183185:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183186:
+    template: Divine_Templar
+    level:    [60, 60]
+  17183187:
+    template: Moo_Ouzi_the_SwiftbladeS
+    script:   Moo_Ouzi_the_Swiftblade
+  17183188:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183189:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183190:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183191:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183192:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183193:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183194:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183195:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183196:
+    template: Divine_Disseminator
+    level:    [60, 60]
+  17183197:
+    template: Muu_Buxu_the_Elusive
+  17183198:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183199:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183200:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183201:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183202:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183203:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183204:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183205:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183206:
+    template: Divine_Assassin
+    level:    [60, 60]
+  17183207:
+    template: Dee_Xalmo_the_Grim
+  17183208:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183209:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183210:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183211:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183212:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183213:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183214:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183215:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183216:
+    template: Divine_Ascetic
+    level:    [60, 60]
+  17183217:
+    template: Kazan_the_Peerless
+  17183218:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183219:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183220:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183221:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183222:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183223:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183224:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183225:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183226:
+    template: Plenilune_Ronin
+    level:    [60, 60]
+  17183227:
+    template: Vuu_Puqu_the_Beguiler_S
+    script:   Vuu_Puqu_the_Beguiler
+  17183228:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183229:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183230:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183231:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183232:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183233:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183234:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183235:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183236:
+    template: Divine_Inspirer
+    level:    [60, 60]
+  17183237:
+    template: Yuu_Mjuu_the_Awakened
+  17183238:
+    template: Yuu_Mjuus_Elemental
+  17183239:
+    template: Yuu_Mjuus_Elemental
+  17183240:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183241:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183242:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183243:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183244:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183245:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183246:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183247:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183248:
+    template: Divine_Sentinel
+    level:    [60, 60]
+  17183249:
+    template: Vaa_Oozu_the_Redolent
+  17183250:
+    template: Vaa_Oozus_Scolopendrid
+  17183251:
+    template: Vaa_Oozus_Scolopendrid
+  17183252:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183253:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183254:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183255:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183256:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183257:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183258:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183259:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183260:
+    template: Divine_Inciter
+    level:    [60, 60]
+  17183261:
+    template: Yaa_Haqa_the_Pious
+  17183262:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183263:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183264:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183265:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183266:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183267:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183268:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183269:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183270:
+    template: Divine_Liturgist
+    level:    [60, 60]
+  17183271:
+    template: Vee_Seju_the_Consumed
+  17183272:
+    template: Vee_Sejus_Elemental
+  17183273:
+    template: Vee_Sejus_Elemental
+  17183274:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183275:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183276:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183277:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183278:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183279:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183280:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183281:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183282:
+    template: Divine_Martyr
+    level:    [60, 60]
+  17183283:
+    template: Divine_Pilgrim
+    level:    [60, 60]
+  17183284:
+    template: Divine_Pilgrim
+    level:    [60, 60]
+  17183285:
+    template: Divine_Pilgrim
+    level:    [60, 60]
+  17183286:
+    template: Divine_Pilgrim
+    level:    [60, 60]
+  17183287:
+    template: Divine_Pilgrim
+    level:    [60, 60]
+  17183288:
+    template: Divine_Pilgrim
+    level:    [60, 60]
+  17183289:
+    template: Confederate_Mantelet
+    at:       [60.130, 0.500, -120.222, 192]
+    level:    [75, 80]
+  17183290:
+    template: Confederate_Mantelet
+    at:       [42.494, 0.500, -124.894, 160]
+    level:    [75, 80]
+  17183291:
+    template: Confederate_Mantelet
+    at:       [45.495, 0.500, -155.781, 96]
+    level:    [75, 80]
+  17183292:
+    template: Confederate_Mantelet
+    at:       [59.993, 0.500, -159.352, 64]
+    level:    [75, 80]
+  17183293:
+    template: Confederate_Mantelet
+    at:       [75.379, 0.481, -154.438, 32]
+    level:    [75, 80]
+  17183294:
+    template: Confederate_Mantelet
+    at:       [74.804, 0.500, -123.905, 222]
+    level:    [75, 80]
+  17183295:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17183296:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17183297:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17183298:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17183299:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17183300:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17183301:
+    template: Confederate_Belfry
+    level:    [75, 80]
+  17183302:
+    template: Yagudo_Genja
+    level:    [60, 60]
+  17183303:
+    template: Yagudo_Genja
+    level:    [60, 60]
+  17183304:
+    template: Yagudo_Genja
+    level:    [60, 60]
+  17183305:
+    template: Yagudo_Genja
+    level:    [60, 60]
+  17183306:
+    template: Yagudo_Genja
+    level:    [60, 60]
+  17183307:
+    template: Yagudo_Genja
+    level:    [60, 60]
+  17183308:
+    template: Yagudo_Turret
+    level:    [75, 80]
+  17183309:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    level:    [71, 73]
+  17183310:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    level:    [71, 73]
+  17183311:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    level:    [71, 73]
+  17183312:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    level:    [71, 73]
+  17183313:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    level:    [71, 73]
+  17183314:
+    template: War_Lynx_COS
+    script:   War_Lynx
+    level:    [71, 73]
+  17183315:
+    template: Fiendish_Leechkeeper
+    level:    [75, 80]
+  17183316:
+    template: Fiendish_Leechkeeper
+    level:    [75, 80]
+  17183317:
+    template: Fiendish_Leechkeeper
+    level:    [75, 80]
+  17183318:
+    template: Fiendish_Leechkeeper
+    level:    [75, 80]
+  17183319:
+    template: Fiendish_Leechkeeper
+    level:    [75, 80]
+  17183320:
+    template: Fiendish_Leechkeeper
+    level:    [75, 80]
+  17183321:
+    template: Shadowhorn
+    level:    [75, 80]
+  17183322:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183323:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183324:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183325:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183326:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183327:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183328:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183329:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183330:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17183331:
+    template: Shadowhand
+    level:    [75, 80]
+  17183332:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183333:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183334:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183335:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183336:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183337:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183338:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183339:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183340:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17183341:
+    template: Shadowfang
+    level:    [75, 80]
+  17183342:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183343:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183344:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183345:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183346:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183347:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183348:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183349:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183350:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17183351:
+    template: Shadoweye
+    level:    [75, 80]
+  17183352:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183353:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183354:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183355:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183356:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183357:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183358:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183359:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183360:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17183361:
+    template: Fortification_NV80
+    script:   Fortification
+    at:       [52.436, -1.687, -135.617]
+    level:    [50, 50]
+  17183362:
+    template: Fortification_NV80
+    script:   Fortification
+    at:       [66.948, -1.687, -134.627]
+    level:    [50, 50]
+  17183363:
+    template: Fortification_NV80
+    script:   Fortification
+    at:       [66.741, -1.687, -145.739]
+    level:    [50, 50]
+  17183364:
+    template: Fortification_NV80
+    script:   Fortification
+    at:       [54.977, -1.687, -147.178]
+    level:    [50, 50]
+  17183365:
+    template: Rikoh_Wahcondalo
+    level:    [1, 1]
+  17183366:
+    template: Kagetora
+    at:       [44.829, 0.049, -136.488, 178]
+    level:    [1, 1]
+  17183367:
+    template: Kagetora
+    at:       [43.248, 0.500, -146.824, 170]
+    level:    [1, 1]
+  17183368:
+    template: Kagetora
+    at:       [43.060, 0.491, -144.279, 70]
+    level:    [1, 1]
+  17183369:
+    template: Kagetora
+    at:       [44.830, 0.049, -136.486, 191]
+    level:    [1, 1]
+  17183370:
+    template: Kagetora
+    at:       [42.854, 0.476, -146.661, 98]
+    level:    [1, 1]
+  17183371:
+    template: Kagetora
+    at:       [42.957, 0.500, -146.839, 180]
+    level:    [1, 1]
+  17183372:
+    template: Dalzakk
+    level:    [1, 1]
+  17183373:
+    template: Oggbi
+    level:    [1, 1]
+  17183374:
+    template: Rainemard
+    level:    [1, 1]
+  17183375:
+    template: Maat_campaign
+    script:   Maat
+    level:    [1, 1]
+  17183376:
+    template: Degenhard
+    level:    [1, 1]
+  17183377:
+    template: Azima
+    level:    [1, 1]
+  17183378:
+    template: Choh_Moui
+    at:       [38.644, 0.500, -153.978, 209]
+    level:    [1, 1]
+  17183379:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17183380:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17183381:
+    template: Chigoe_past
+    script:   Chigoe
+    at:       [42.744, 0.488, -147.342, 75]
+    level:    [1, 1]
+  17183382:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17183383:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17183384:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17183385:
+    template: Chigoe_past
+    script:   Chigoe
+    at:       [40.164, 0.500, -151.957, 3]
+    level:    [1, 1]
+  17183386:
+    template: Chigoe_past
+    script:   Chigoe
+    at:       [44.563, 0.485, -145.389, 95]
+    level:    [1, 1]
+  17183387:
+    template: Azo
+    at:       [31.366, -0.500, -160.241, 133]
+    level:    [1, 1]
+  17183388:
+    template: Vahi
+    at:       [36.677, 0.500, -156.060, 169]
+    level:    [1, 1]
+  17183389:
+    template: Rongo-Nango
+    level:    [1, 1]
+  17183390:
+    template: Lerren
+    level:    [1, 1]
+  17183391:
+    template: Jajaro
+    level:    [1, 1]
+  17183392:
+    template: Popochu
+    level:    [1, 1]
+  17183393:
+    template: Papako
+    level:    [1, 1]
+  17183394:
+    template: Momowa
+    level:    [1, 1]
+  17183395:
+    template: Ulla
+    at:       [30.672, -0.500, -160.248, 205]
+    level:    [1, 1]
+  17183396:
+    template: Kilhwch
+    level:    [1, 1]
+  17183397:
+    template: Alfons
+    level:    [1, 1]
+  17183398:
+    template: Achtelle
+    level:    [1, 1]
+  17183399:
+    template: Bravo_NV24
+    script:   Bravo
+    level:    [1, 1]
+  17183400:
+    template: Duskraven
+    level:    [1, 1]
+  17183401:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17183402:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17183403:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17183404:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17183405:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17183406:
+    template: Areuhat
+    level:    [1, 1]
+  17183407:
+    template: Odzmanouk
+    at:       [39.289, 0.500, -152.537, 230]
+    level:    [1, 1]
+  17183408:
+    template: Boodlix
+    level:    [75, 80]
+  17183409:
+    template: Goblin_Lansquenet
+    level:    [60, 60]
+  17183410:
+    template: Goblin_Lansquenet
+    level:    [60, 60]
+  17183411:
+    template: Goblin_Lansquenet
+    level:    [60, 60]
+  17183412:
+    template: Titania
+    level:    [1, 1]
+  17183413:
+    template: Faerie
+    level:    [1, 1]
+  17183414:
+    template: Faerie
+    level:    [1, 1]
+  17183415:
+    template: Faerie
+    level:    [1, 1]
+  17183416:
+    template: Faerie
+    level:    [1, 1]
+  17183417:
+    template: Faerie
+    level:    [1, 1]
+  17183418:
+    template: Faerie
+    level:    [1, 1]
+  17183419:
+    template: Faerie
+    level:    [1, 1]
+  17183420:
+    template: Faerie
+    level:    [1, 1]
+  17183421:
+    template: Faerie
+    level:    [1, 1]
+  17183422:
+    template: Babban_Ny_Mheillea
+  17183423:
+    template: Abenzio
+    level:    [1, 1]
+  17183424:
+    template: Bryher
+    level:    [1, 1]
+  17183425:
+    template: Camlin
+    level:    [1, 1]
+  17183426:
+    template: Darach
+    level:    [1, 1]
+  17183427:
+    template: Raigegue_R_dOraguille
+  17183428:
+    template: Ancient_Royal_Knight
+  17183429:
+    template: Ancient_Royal_Knight
+  17183430:
+    template: Ancient_Royal_Knight
+  17183431:
+    template: Ancient_Royal_Knight
+  17183432:
+    template: Eurytos
+    level:    [75, 75]
+  17183433:
+    template: Gigas_Mercenary
+    level:    [60, 60]
+  17183434:
+    template: Gigas_Mercenary
+    level:    [60, 60]
+  17183435:
+    template: Poroggo_Prince
+    level:    [1, 1]
+  17183436:
+    template: Poroggo_Servant
+    at:       [25.651, -18.159, -139.223, 126]
+    level:    [1, 1]
+  17183437:
+    template: Poroggo_Servant
+    at:       [30.004, -19.285, -139.650, 1]
+    level:    [1, 1]
+  17183438:
+    template: Poroggo_Servant
+    at:       [28.815, -19.120, -139.789, 255]
+    level:    [1, 1]
+  17183439:
+    template: Kaiser_Behemoth_S
+    script:   Kaiser_Behemoth
+    level:    [60, 60]
+  17183440:
+    template: Ferreous_Coffin
+    at:       [65.221, -0.511, -154.071, 16]
+    level:    [1, 1]
+  17183441:
+    template: Lewenhart
+    level:    [1, 1]
+  17183442:
+    template: Auroral_Alicorn
+    level:    [1, 1]
+  17183443:
+    template: Tzee_Xicu_the_Manifest
+  17183444:
+    template: Tzee_Xicus_Elemental
+  17183445:
+    template: Tzee_Xicus_Elemental
+  17183446:
+    template: Tzee_Xicu_the_Manifest
+  17183447:
+    template: Tzee_Xicus_Elemental
+  17183448:
+    template: Tzee_Xicus_Elemental
+  17183449:
+    template: Tzee_Xicu_the_Manifest
+  17183450:
+    template: Tzee_Xicus_Elemental
+  17183451:
+    template: Tzee_Xicus_Elemental
+  17183452:
+    script: Fenrir
+  17183453:
+    script: Karaha-Baruha
+  17183454:
+    script: Robel-Akbel
+  17183455:
+    script: Lehko_Habhoka
+  17183456:
+    script: Fenrir
+  17183457:
+    script: Karaha-Baruha
+  17183458:
+    script: Robel-Akbel
+  17183459:
+    script: Lehko_Habhoka
+  17183460:
+    script: Fenrir
+  17183461:
+    script: Karaha-Baruha
+  17183462:
+    script: Robel-Akbel
+  17183463:
+    script: Lehko_Habhoka

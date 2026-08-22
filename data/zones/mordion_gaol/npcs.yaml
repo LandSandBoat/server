@@ -1,0 +1,105 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17313795:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313796:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313797:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313798:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313799:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313800:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313801:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313802:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313803:
+    script:       Moogle-Ch
+    display_name: Moogle-Ch
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313804:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313806:
+    script:       Read_me
+    display_name: Read me
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313807:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17313809:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 50

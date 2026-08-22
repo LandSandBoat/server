@@ -1,0 +1,489 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17973449:
+    script:       Treasure_Portent_#1
+    display_name: 'Treasure Portent #1'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973450:
+    script:       Treasure_Portent_#2
+    display_name: 'Treasure Portent #2'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973451:
+    script:       Treasure_Portent_#3
+    display_name: 'Treasure Portent #3'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973452:
+    script:       Treasure_Portent_#4
+    display_name: 'Treasure Portent #4'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973453:
+    script:       Treasure_Portent_#5
+    display_name: 'Treasure Portent #5'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973454:
+    script:       Treasure_Portent_#6
+    display_name: 'Treasure Portent #6'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973455:
+    script:       Treasure_Portent_#7
+    display_name: 'Treasure Portent #7'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973456:
+    script:       Treasure_Portent_#8
+    display_name: 'Treasure Portent #8'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973457:
+    script:       Treasure_Portent_#9
+    display_name: 'Treasure Portent #9'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973458:
+    script:       Treasure_Portent_#10
+    display_name: 'Treasure Portent #10'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973459:
+    script:       Treasure_Portent_#11
+    display_name: 'Treasure Portent #11'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973460:
+    script:       Treasure_Portent_#12
+    display_name: 'Treasure Portent #12'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973461:
+    script:       Treasure_Portent_#13
+    display_name: 'Treasure Portent #13'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973462:
+    script:       Treasure_Portent_#14
+    display_name: 'Treasure Portent #14'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973463:
+    script:       Treasure_Portent_#15
+    display_name: 'Treasure Portent #15'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973464:
+    script:       Treasure_Portent_#16
+    display_name: 'Treasure Portent #16'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973465:
+    script:       Treasure_Portent_#1
+    display_name: 'Treasure Portent #1'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973466:
+    script:       Treasure_Portent_#2
+    display_name: 'Treasure Portent #2'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973467:
+    script:       Treasure_Portent_#3
+    display_name: 'Treasure Portent #3'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973468:
+    script:       Treasure_Portent_#4
+    display_name: 'Treasure Portent #4'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973469:
+    script:       Treasure_Portent_#5
+    display_name: 'Treasure Portent #5'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973470:
+    script:       Treasure_Portent_#6
+    display_name: 'Treasure Portent #6'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973471:
+    script:       Treasure_Portent_#7
+    display_name: 'Treasure Portent #7'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973472:
+    script:       Treasure_Portent_#8
+    display_name: 'Treasure Portent #8'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973473:
+    script:       Treasure_Portent_#9
+    display_name: 'Treasure Portent #9'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973474:
+    script:       Treasure_Portent_#10
+    display_name: 'Treasure Portent #10'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973475:
+    script:       Treasure_Portent_#11
+    display_name: 'Treasure Portent #11'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973476:
+    script:       Treasure_Portent_#12
+    display_name: 'Treasure Portent #12'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973477:
+    script:       Treasure_Portent_#13
+    display_name: 'Treasure Portent #13'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973478:
+    script:       Treasure_Portent_#14
+    display_name: 'Treasure Portent #14'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973479:
+    script:       Treasure_Portent_#15
+    display_name: 'Treasure Portent #15'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973480:
+    script:       Treasure_Portent_#16
+    display_name: 'Treasure Portent #16'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973481:
+    script:       Treasure_Portent_#1
+    display_name: 'Treasure Portent #1'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973482:
+    script:       Treasure_Portent_#2
+    display_name: 'Treasure Portent #2'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973483:
+    script:       Treasure_Portent_#3
+    display_name: 'Treasure Portent #3'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973484:
+    script:       Treasure_Portent_#4
+    display_name: 'Treasure Portent #4'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973485:
+    script:       Treasure_Portent_#5
+    display_name: 'Treasure Portent #5'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973486:
+    script:       Treasure_Portent_#6
+    display_name: 'Treasure Portent #6'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973487:
+    script:       Treasure_Portent_#7
+    display_name: 'Treasure Portent #7'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973488:
+    script:       Treasure_Portent_#8
+    display_name: 'Treasure Portent #8'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973489:
+    script:       Treasure_Portent_#9
+    display_name: 'Treasure Portent #9'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973490:
+    script:       Treasure_Portent_#10
+    display_name: 'Treasure Portent #10'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973491:
+    script:       Treasure_Portent_#11
+    display_name: 'Treasure Portent #11'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973492:
+    script:       Treasure_Portent_#12
+    display_name: 'Treasure Portent #12'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973493:
+    script:       Treasure_Portent_#13
+    display_name: 'Treasure Portent #13'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973494:
+    script:       Treasure_Portent_#14
+    display_name: 'Treasure Portent #14'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973495:
+    script:       Treasure_Portent_#15
+    display_name: 'Treasure Portent #15'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973496:
+    script:       Treasure_Portent_#16
+    display_name: 'Treasure Portent #16'
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973563:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973564:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973572:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973573:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973574:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973575:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973576:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973577:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973578:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973579:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973580:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973581:
+    script:       reisen_master
+    display_name: reisen_master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17973582:
+    script:       Ethereal_Ingress
+    display_name: Ethereal Ingress
+    render:
+      look:
+        type:  standard
+        model: 50

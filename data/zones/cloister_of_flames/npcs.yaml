@@ -1,0 +1,323 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17625128:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17625129:
+    script: NPC[29]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17625130:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17625132:
+    script: NPC[2c]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17625133:
+    script: NPC[2d]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17625134:
+    script: NPC[2e]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17625135:
+    script:       FP_Entrance
+    display_name: Fire Protocrystal
+    at:           [-722.131, -1.400, -597.955]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17625136:
+    script:       Fire_Protocrystal
+    display_name: Fire Protocrystal
+    at:           [501.117, 54.390, -436.990]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17625137:
+    script:       Fire_Protocrystal
+    display_name: Fire Protocrystal
+    at:           [21.195, -5.612, -37.031]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17625138:
+    script:       Fire_Protocrystal
+    display_name: Fire Protocrystal
+    at:           [-378.835, -65.619, 442.952]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17625139:
+    script: NPC[33]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17625140:
+    script: NPC[34]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17625141:
+    script: NPC[35]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17625142:
+    script: NPC[36]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17625143:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17625144:
+    script:       Ifrit
+    display_name: Ifrit
+    render:
+      look:
+        type:  standard
+        model: 793
+      entity_flags: 31
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17625145:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 793
+      entity_flags: 31
+      name_prefix:  32
+    status: cutscene_only
+
+  17625146:
+    script: NPC[3a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17625147:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17625148:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17625149:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17625150:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17625151:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17625152:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17625153:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17625154:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17625155:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-696.588, -0.987, -632.100, 110]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17625156:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-696.588, -0.987, -632.100, 110]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17625157:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17625158:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+
+  17625159:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17625160:
+    script:       qm2
+    display_name: ???
+    at:           [-718.081, 0.000, -596.067, 43]
+    render:
+      look:
+        type:  standard
+        model: 1336
+      entity_flags:  27
+      name_vis:     112
+      name_prefix:   34
+      moving:         1
+    status: normal

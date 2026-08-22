@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [mazurka, tractor, pet, trust]
+music:
+  day:          229
+  night:        229
+  battle_solo:  101
+  battle_party: 219

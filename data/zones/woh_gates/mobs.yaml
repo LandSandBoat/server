@@ -1,0 +1,2604 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Apex_Jagil:
+    id:            5393
+    species:       pugil
+    skill_list_id: 6
+    attributes:
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Apex_Toad:
+    id:      5399
+    species: toad
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Bergschrund_Gefyrst:
+    id:            6697
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 600
+
+  Bound_Twitherym:
+    id:            6339
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2536
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Calcined_Umbril:
+    id:            6703
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  131
+        animation_sub:   5
+        name_prefix:     2
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 600
+      stats:
+        mp: 9999
+
+  Chrysoberyl_Jagil:
+    id:            6942
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 129
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Cliffclinger_Toad:
+    id:      4989
+    species: toad
+    attributes:
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags: 129
+        hitbox:         6
+      spawn:
+        respawn: 600
+
+  Cowll_Hippogryph:
+    id:            5475
+    species:       hippogryph
+    type:          [notorious]
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 135
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Depthdiver_Bats:
+    id:            6442
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+
+  Draftrider_Bat:
+    id:            6477
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Drusy_Twitherym:
+    id:            6340
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2536
+        entity_flags: 131
+        name_prefix:   64
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+
+  Dullahan_generic:
+    id:            5250
+    species:       dullahan
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2605
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Grimfang_Bat:
+    id:            6476
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 600
+
+  Knotted_Root_DG_WG:
+    id:           6711
+    display_name: Knotted_Root
+    species:      unclassified
+    type:         [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2794
+        entity_flags:  647
+        animation_sub:   8
+        model_size:      3
+        hitbox:         50
+      spawn:
+        type: [scripted]
+
+  Malodorous_Tarichuk:
+    id:            5640
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1350
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Metalcruncher_Worm:
+    id:            6421
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+
+  Nesting_Hippogryph:
+    id:            6479
+    species:       hippogryph
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Pestiferous_Acuex:
+    id:            6381
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Powdery_Snoll:
+    id:            6603
+    species:       snoll
+    skill_list_id: 232
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      3
+          wind:     1
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 278
+        entity_flags: 131
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 600
+
+  Schorl_Umbril:
+    id:            6706
+    species:       umbril
+    type:          [notorious]
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  131
+        animation_sub:   5
+        name_prefix:     2
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Serac_Rabbit:
+    id:            5358
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 270
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 600
+
+  Slabspitter_Jagil:
+    id:            5756
+    species:       pugil
+    skill_list_id: 709
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Soundsplitter_Bat:
+    id:            6478
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        respawn: 300
+
+  Spinescent_Protuberance:
+    id:      6714
+    species: unclassified
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2804
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          4
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+
+  Stonesoftener_Acuex:
+    id:            6382
+    display_name:  Bloated_Acuex
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Talus_Tarichuk:
+    id:            6808
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1350
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 600
+
+  Touched_Gefyrst:
+    id:            6698
+    species:       ice_elemental
+    spell_list_id: 3
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+      stats:
+        mp: 9999
+
+  Velkk_Abyssal:
+    id:            5217
+    species:       blue_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+
+  Velkk_Junglemancer:
+    id:            5220
+    species:       blue_velkk
+    spell_list_id: 20
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+      stats:
+        mp: 5000
+
+  Velkk_Mindmelter:
+    id:            5218
+    species:       red_velkk
+    spell_list_id: 20
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+      stats:
+        mp: 5000
+
+  Velkk_Tearlicker:
+    id:            5219
+    species:       blue_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+
+  Wheezing_Acuex:
+    id:            4752
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 600
+      stats:
+        mp: 5000
+
+spawns:
+  17895425:
+    template: Chrysoberyl_Jagil
+    at:       [1.000, 1.000, 1.000]
+    level:    [111, 111]
+  17895426:
+    template: Chrysoberyl_Jagil
+    at:       [1.000, 1.000, 1.000]
+    level:    [111, 111]
+  17895427:
+    template: Chrysoberyl_Jagil
+    at:       [1.000, 1.000, 1.000]
+    level:    [111, 111]
+  17895428:
+    script: Deadwater_Toad
+    at:     [1.000, 1.000, 1.000]
+    level:  [110, 110]
+  17895429:
+    script: Deadwater_Toad
+    at:     [1.000, 1.000, 1.000]
+    level:  [110, 110]
+  17895430:
+    template: Knotted_Root_DG_WG
+    script:   Knotted_Root
+    at:       [280.000, 29.000, 98.000, 76]
+    level:    [110, 111]
+  17895431:
+    template: Knotted_Root_DG_WG
+    script:   Knotted_Root
+    at:       [280.000, 29.000, 101.500, 26]
+    level:    [110, 111]
+  17895432:
+    template: Stonesoftener_Acuex
+    at:       [290.770, 30.297, 100.806, 1]
+    level:    [110, 110]
+  17895433:
+    template: Stonesoftener_Acuex
+    at:       [286.920, 30.020, 100.927, 132]
+    level:    [110, 110]
+  17895434:
+    template: Stonesoftener_Acuex
+    at:       [272.560, 29.951, 101.339, 5]
+    level:    [110, 110]
+  17895435:
+    template: Stonesoftener_Acuex
+    at:       [265.320, 29.930, 102.227, 4]
+    level:    [110, 110]
+  17895436:
+    template: Knotted_Root_DG_WG
+    script:   Knotted_Root
+    at:       [280.000, 29.000, 258.500, 69]
+    level:    [110, 111]
+  17895437:
+    template: Knotted_Root_DG_WG
+    script:   Knotted_Root
+    at:       [280.000, 29.000, 262.000, 31]
+    level:    [110, 111]
+  17895438:
+    template: Draftrider_Bat
+    at:       [291.320, 30.104, 259.730, 114]
+    level:    [110, 110]
+  17895439:
+    template: Draftrider_Bat
+    at:       [291.200, 30.104, 259.536, 113]
+    level:    [110, 110]
+  17895440:
+    template: Draftrider_Bat
+    at:       [271.670, 29.975, 260.071, 5]
+    level:    [110, 110]
+  17895441:
+    template: Draftrider_Bat
+    at:       [265.010, 30.358, 260.720, 16]
+    level:    [110, 110]
+  17895442:
+    template: Cliffclinger_Toad
+    at:       [216.190, 39.638, 85.145, 201]
+    level:    [124, 126]
+  17895443:
+    template: Cliffclinger_Toad
+    at:       [218.760, 40.000, 81.912, 56]
+    level:    [124, 126]
+  17895444:
+    template: Cliffclinger_Toad
+    at:       [218.770, 39.001, 87.038, 116]
+    level:    [124, 126]
+  17895445:
+    template: Drusy_Twitherym
+    at:       [217.620, 40.333, 73.816, 135]
+    level:    [124, 127]
+  17895446:
+    template: Drusy_Twitherym
+    at:       [220.490, 39.361, 85.207, 242]
+    level:    [124, 127]
+  17895447:
+    template: Cliffclinger_Toad
+    at:       [257.750, 30.326, 114.595, 76]
+    level:    [124, 126]
+  17895448:
+    template: Cliffclinger_Toad
+    at:       [264.290, 29.940, 117.287, 218]
+    level:    [124, 126]
+  17895449:
+    template: Cliffclinger_Toad
+    at:       [256.340, 29.920, 119.644, 88]
+    level:    [124, 126]
+  17895450:
+    template: Drusy_Twitherym
+    at:       [296.130, 20.086, 139.606, 110]
+    level:    [124, 127]
+  17895451:
+    template: Drusy_Twitherym
+    at:       [289.330, 20.069, 138.393, 120]
+    level:    [124, 127]
+  17895452:
+    template: Spinescent_Protuberance
+    at:       [314.560, 30.374, -73.921, 97]
+    level:    [1, 1]
+  17895453:
+    template: Drusy_Twitherym
+    at:       [357.960, 20.124, 154.046, 150]
+    level:    [124, 127]
+  17895454:
+    template: Drusy_Twitherym
+    at:       [334.480, 20.389, 155.822, 97]
+    level:    [124, 127]
+  17895455:
+    template: Bergschrund_Gefyrst
+    at:       [370.290, 19.783, 150.100, 24]
+    level:    [124, 127]
+  17895456:
+    template: Wheezing_Acuex
+    at:       [356.450, 20.245, 151.496, 80]
+    level:    [124, 127]
+  17895457:
+    template: Wheezing_Acuex
+    at:       [361.770, 20.104, 151.880, 18]
+    level:    [124, 127]
+  17895458:
+    template: Wheezing_Acuex
+    at:       [342.380, 20.388, 156.173, 125]
+    level:    [124, 127]
+  17895459:
+    template: Wheezing_Acuex
+    at:       [332.710, 20.231, 166.054, 175]
+    level:    [124, 127]
+  17895460:
+    template: Wheezing_Acuex
+    at:       [336.880, 20.347, 164.386, 23]
+    level:    [124, 127]
+  17895461:
+    template: Drusy_Twitherym
+    at:       [341.630, 19.915, 171.246, 251]
+    level:    [124, 127]
+  17895462:
+    template: Drusy_Twitherym
+    at:       [365.210, 19.611, 164.218, 151]
+    level:    [124, 127]
+  17895463:
+    template: Wheezing_Acuex
+    at:       [340.680, 19.739, 237.822, 58]
+    level:    [124, 127]
+  17895464:
+    template: Wheezing_Acuex
+    at:       [340.760, 19.826, 232.529, 60]
+    level:    [124, 127]
+  17895465:
+    template: Drusy_Twitherym
+    at:       [339.330, 20.169, 226.837, 76]
+    level:    [124, 127]
+  17895466:
+    template: Drusy_Twitherym
+    at:       [339.900, 19.735, 237.794, 57]
+    level:    [124, 127]
+  17895467:
+    template: Talus_Tarichuk
+    at:       [408.400, 19.951, 284.139, 246]
+    level:    [124, 127]
+  17895468:
+    template: Drusy_Twitherym
+    at:       [400.250, 19.465, 285.619, 97]
+    level:    [124, 127]
+  17895469:
+    template: Talus_Tarichuk
+    at:       [350.670, 19.920, 289.393, 123]
+    level:    [124, 127]
+  17895470:
+    template: Talus_Tarichuk
+    at:       [352.230, 19.851, 276.583, 222]
+    level:    [124, 127]
+  17895471:
+    template: Drusy_Twitherym
+    at:       [349.150, 19.990, 276.757, 70]
+    level:    [124, 127]
+  17895472:
+    template: Drusy_Twitherym
+    at:       [351.530, 20.076, 283.283, 250]
+    level:    [124, 127]
+  17895473:
+    template: Talus_Tarichuk
+    at:       [403.430, 19.731, 280.808, 205]
+    level:    [124, 127]
+  17895474:
+    template: Talus_Tarichuk
+    at:       [399.630, 19.340, 277.998, 87]
+    level:    [124, 127]
+  17895475:
+    template: Drusy_Twitherym
+    at:       [402.780, 19.764, 282.898, 23]
+    level:    [124, 127]
+  17895476:
+    template: Drusy_Twitherym
+    at:       [395.220, 19.576, 276.403, 110]
+    level:    [124, 127]
+  17895477:
+    template: Talus_Tarichuk
+    at:       [445.080, 19.997, 354.799, 109]
+    level:    [124, 127]
+  17895478:
+    template: Drusy_Twitherym
+    at:       [424.370, 19.822, 319.433, 48]
+    level:    [124, 127]
+  17895479:
+    template: Talus_Tarichuk
+    at:       [424.320, 19.795, 316.569, 214]
+    level:    [124, 127]
+  17895480:
+    template: Talus_Tarichuk
+    at:       [423.810, 19.910, 318.029, 3]
+    level:    [124, 127]
+  17895481:
+    template: Drusy_Twitherym
+    at:       [421.990, 19.874, 335.348, 138]
+    level:    [124, 127]
+  17895482:
+    template: Drusy_Twitherym
+    at:       [420.910, 19.676, 313.492, 37]
+    level:    [124, 127]
+  17895483:
+    template: Talus_Tarichuk
+    at:       [442.350, 19.353, 358.059, 140]
+    level:    [124, 127]
+  17895484:
+    template: Talus_Tarichuk
+    at:       [446.510, 20.240, 362.553, 198]
+    level:    [124, 127]
+  17895485:
+    template: Drusy_Twitherym
+    at:       [442.760, 19.357, 359.355, 120]
+    level:    [124, 127]
+  17895486:
+    template: Drusy_Twitherym
+    at:       [434.200, 20.033, 357.700, 221]
+    level:    [124, 127]
+  17895487:
+    template: Talus_Tarichuk
+    at:       [337.190, 20.114, 299.078, 146]
+    level:    [124, 127]
+  17895488:
+    template: Wheezing_Acuex
+    at:       [480.540, 9.874, 204.166, 218]
+    level:    [124, 127]
+  17895489:
+    template: Wheezing_Acuex
+    at:       [488.630, 9.754, 204.652, 160]
+    level:    [124, 127]
+  17895490:
+    template: Wheezing_Acuex
+    at:       [477.210, 9.820, 191.442, 39]
+    level:    [124, 127]
+  17895491:
+    template: Wheezing_Acuex
+    at:       [438.130, 9.580, 220.203, 251]
+    level:    [124, 127]
+  17895492:
+    template: Wheezing_Acuex
+    at:       [430.290, 9.979, 220.164, 134]
+    level:    [124, 127]
+  17895493:
+    template: Drusy_Twitherym
+    at:       [437.700, 9.583, 220.623, 251]
+    level:    [124, 127]
+  17895494:
+    template: Drusy_Twitherym
+    at:       [421.040, 10.345, 222.473, 138]
+    level:    [124, 127]
+  17895495:
+    template: Wheezing_Acuex
+    at:       [379.580, 9.912, 244.388, 50]
+    level:    [124, 127]
+  17895496:
+    template: Wheezing_Acuex
+    at:       [377.560, 11.017, 249.304, 40]
+    level:    [124, 127]
+  17895497:
+    template: Drusy_Twitherym
+    at:       [373.620, 12.501, 257.989, 179]
+    level:    [124, 127]
+  17895498:
+    template: Drusy_Twitherym
+    at:       [378.760, 9.903, 244.274, 51]
+    level:    [124, 127]
+  17895499:
+    template: Wheezing_Acuex
+    at:       [382.530, 11.390, 311.640, 38]
+    level:    [124, 127]
+  17895500:
+    template: Wheezing_Acuex
+    at:       [379.570, 10.234, 316.626, 55]
+    level:    [124, 127]
+  17895501:
+    template: Metalcruncher_Worm
+    at:       [353.430, 10.000, 361.664, 229]
+    level:    [124, 127]
+  17895502:
+    template: Metalcruncher_Worm
+    at:       [349.070, 9.898, 362.839, 191]
+    level:    [124, 127]
+  17895503:
+    template: Metalcruncher_Worm
+    at:       [356.870, 9.824, 350.515, 170]
+    level:    [124, 127]
+  17895504:
+    template: Metalcruncher_Worm
+    at:       [349.110, 9.627, 357.305, 242]
+    level:    [124, 127]
+  17895505:
+    template: Serac_Rabbit
+    at:       [381.890, 9.736, 395.523, 91]
+    level:    [124, 127]
+  17895506:
+    template: Serac_Rabbit
+    at:       [375.810, 9.822, 395.157, 57]
+    level:    [124, 127]
+  17895507:
+    template: Metalcruncher_Worm
+    at:       [375.110, 9.957, 381.126, 82]
+    level:    [124, 127]
+  17895508:
+    template: Metalcruncher_Worm
+    at:       [377.120, 9.731, 391.122, 31]
+    level:    [124, 127]
+  17895509:
+    template: Serac_Rabbit
+    at:       [353.180, -0.045, 418.480, 3]
+    level:    [124, 127]
+  17895510:
+    template: Serac_Rabbit
+    at:       [363.440, -0.105, 418.369, 2]
+    level:    [124, 127]
+  17895511:
+    template: Serac_Rabbit
+    at:       [336.330, -4.374, 448.906, 171]
+    level:    [124, 127]
+  17895512:
+    template: Serac_Rabbit
+    at:       [332.830, -4.682, 453.563, 164]
+    level:    [124, 127]
+  17895513:
+    template: Metalcruncher_Worm
+    at:       [293.460, -10.290, 481.479, 232]
+    level:    [124, 127]
+  17895514:
+    template: Metalcruncher_Worm
+    at:       [305.920, -10.050, 474.933, 201]
+    level:    [124, 127]
+  17895515:
+    template: Metalcruncher_Worm
+    at:       [306.130, -10.270, 481.600, 161]
+    level:    [124, 127]
+  17895516:
+    template: Serac_Rabbit
+    at:       [340.630, 9.800, 394.247, 70]
+    level:    [124, 127]
+  17895517:
+    template: Serac_Rabbit
+    at:       [343.670, 9.955, 379.834, 172]
+    level:    [124, 127]
+  17895518:
+    template: Serac_Rabbit
+    at:       [327.690, 9.954, 419.282]
+    level:    [124, 127]
+  17895519:
+    template: Metalcruncher_Worm
+    at:       [302.880, 19.975, 396.898, 58]
+    level:    [124, 127]
+  17895520:
+    template: Metalcruncher_Worm
+    at:       [304.070, 19.673, 404.907, 250]
+    level:    [124, 127]
+  17895521:
+    template: Metalcruncher_Worm
+    at:       [301.690, 20.000, 398.816, 196]
+    level:    [124, 127]
+  17895522:
+    template: Serac_Rabbit
+    at:       [287.190, 19.990, 381.242, 109]
+    level:    [124, 127]
+  17895523:
+    template: Serac_Rabbit
+    at:       [260.450, 19.990, 424.484, 75]
+    level:    [124, 127]
+  17895524:
+    template: Metalcruncher_Worm
+    at:       [261.080, 19.597, 439.032, 188]
+    level:    [124, 127]
+  17895525:
+    template: Metalcruncher_Worm
+    at:       [259.400, 20.000, 419.466, 69]
+    level:    [124, 127]
+  17895526:
+    template: Metalcruncher_Worm
+    at:       [260.200, 19.256, 406.463, 192]
+    level:    [124, 127]
+  17895527:
+    template: Metalcruncher_Worm
+    at:       [230.010, 29.843, 333.403, 134]
+    level:    [124, 127]
+  17895528:
+    template: Metalcruncher_Worm
+    at:       [227.520, 29.700, 308.997, 248]
+    level:    [124, 127]
+  17895529:
+    template: Bergschrund_Gefyrst
+    at:       [219.580, 29.375, 300.908, 218]
+    level:    [124, 127]
+  17895530:
+    template: Bergschrund_Gefyrst
+    at:       [210.850, 29.764, 282.446, 198]
+    level:    [124, 127]
+  17895531:
+    template: Serac_Rabbit
+    at:       [247.240, 29.663, 317.100, 248]
+    level:    [124, 127]
+  17895532:
+    template: Powdery_Snoll
+    at:       [247.750, 29.997, 325.359, 29]
+    level:    [124, 127]
+  17895533:
+    template: Serac_Rabbit
+    at:       [213.830, 29.516, 301.141, 108]
+    level:    [124, 127]
+  17895534:
+    template: Serac_Rabbit
+    at:       [204.000, 29.631, 308.820, 92]
+    level:    [124, 127]
+  17895535:
+    template: Serac_Rabbit
+    at:       [211.610, 29.854, 325.347, 55]
+    level:    [124, 127]
+  17895536:
+    template: Powdery_Snoll
+    at:       [209.110, 29.719, 304.178, 216]
+    level:    [124, 127]
+  17895537:
+    template: Powdery_Snoll
+    at:       [218.410, 29.930, 313.165, 201]
+    level:    [124, 127]
+  17895538:
+    template: Powdery_Snoll
+    at:       [193.500, 29.958, 308.002, 121]
+    level:    [124, 127]
+  17895539:
+    template: Metalcruncher_Worm
+    at:       [216.700, 29.718, 307.656, 10]
+    level:    [124, 127]
+  17895540:
+    template: Serac_Rabbit
+    at:       [192.650, 29.695, 278.104, 25]
+    level:    [124, 127]
+  17895541:
+    template: Powdery_Snoll
+    at:       [198.290, 29.672, 275.218, 128]
+    level:    [124, 127]
+  17895542:
+    template: Serac_Rabbit
+    at:       [164.580, 29.648, 342.803, 19]
+    level:    [124, 127]
+  17895543:
+    template: Powdery_Snoll
+    at:       [152.870, 29.951, 343.136, 115]
+    level:    [124, 127]
+  17895544:
+    template: Powdery_Snoll
+    at:       [255.030, 29.840, 335.559, 83]
+    level:    [124, 127]
+  17895545:
+    template: Metalcruncher_Worm
+    at:       [220.190, 29.999, 402.432, 152]
+    level:    [124, 127]
+  17895546:
+    template: Metalcruncher_Worm
+    at:       [224.260, 29.993, 397.686, 196]
+    level:    [124, 127]
+  17895547:
+    template: Metalcruncher_Worm
+    at:       [220.300, 30.000, 402.407, 162]
+    level:    [124, 127]
+  17895548:
+    template: Powdery_Snoll
+    at:       [193.290, 29.996, 418.740]
+    level:    [124, 127]
+  17895549:
+    template: Metalcruncher_Worm
+    at:       [157.020, 29.586, 388.471, 121]
+    level:    [124, 127]
+  17895550:
+    template: Metalcruncher_Worm
+    at:       [159.670, 29.627, 395.445, 5]
+    level:    [124, 127]
+  17895551:
+    template: Metalcruncher_Worm
+    at:       [157.440, 29.867, 404.848, 141]
+    level:    [124, 127]
+  17895552:
+    template: Metalcruncher_Worm
+    at:       [158.610, 29.559, 399.756, 137]
+    level:    [124, 127]
+  17895553:
+    template: Metalcruncher_Worm
+    at:       [160.500, 29.190, 399.761, 238]
+    level:    [124, 127]
+  17895554:
+    template: Bergschrund_Gefyrst
+    at:       [154.700, 29.836, 395.498, 200]
+    level:    [124, 127]
+  17895555:
+    template: Powdery_Snoll
+    at:       [128.750, 29.982, 420.173, 130]
+    level:    [124, 127]
+  17895556:
+    template: Metalcruncher_Worm
+    at:       [99.574, 29.808, 418.944, 235]
+    level:    [124, 127]
+  17895557:
+    template: Metalcruncher_Worm
+    at:       [100.400, 29.704, 423.545, 186]
+    level:    [124, 127]
+  17895558:
+    template: Metalcruncher_Worm
+    at:       [99.237, 29.704, 423.933, 226]
+    level:    [124, 127]
+  17895559:
+    template: Powdery_Snoll
+    at:       [140.550, 29.999, 370.135, 64]
+    level:    [124, 127]
+  17895560:
+    template: Grimfang_Bat
+    at:       [139.710, 40.110, 200.210, 197]
+    level:    [124, 127]
+  17895561:
+    template: Grimfang_Bat
+    at:       [136.790, 44.435, 190.632, 83]
+    level:    [124, 127]
+  17895562:
+    template: Calcined_Umbril
+    at:       [138.360, 42.191, 194.091, 213]
+    level:    [125, 127]
+  17895563:
+    template: Depthdiver_Bats
+    at:       [94.805, 49.859, 179.408, 124]
+    level:    [124, 126]
+  17895564:
+    template: Depthdiver_Bats
+    at:       [59.027, 49.933, 195.481, 61]
+    level:    [124, 126]
+  17895565:
+    template: Grimfang_Bat
+    at:       [18.895, 40.284, 202.432, 74]
+    level:    [124, 127]
+  17895566:
+    template: Grimfang_Bat
+    at:       [20.271, 43.071, 208.026, 88]
+    level:    [124, 127]
+  17895567:
+    template: Calcined_Umbril
+    at:       [18.802, 40.941, 203.309, 71]
+    level:    [125, 127]
+  17895568:
+    template: Depthdiver_Bats
+    at:       [40.200, 39.601, 179.613, 128]
+    level:    [124, 126]
+  17895569:
+    template: Grimfang_Bat
+    at:       [60.245, 42.659, 152.774, 170]
+    level:    [124, 127]
+  17895570:
+    template: Grimfang_Bat
+    at:       [58.943, 40.134, 162.373, 193]
+    level:    [124, 127]
+  17895571:
+    template: Calcined_Umbril
+    at:       [65.834, 45.159, 145.057, 34]
+    level:    [125, 127]
+  17895572:
+    template: Metalcruncher_Worm
+    at:       [99.013, 50.000, 157.429, 181]
+    level:    [124, 127]
+  17895573:
+    template: Metalcruncher_Worm
+    at:       [95.761, 50.000, 151.947, 194]
+    level:    [124, 127]
+  17895574:
+    template: Metalcruncher_Worm
+    at:       [95.591, 50.000, 149.322, 93]
+    level:    [124, 127]
+  17895575:
+    template: Depthdiver_Bats
+    at:       [114.500, 39.931, 258.901, 130]
+    level:    [124, 126]
+  17895576:
+    template: Depthdiver_Bats
+    at:       [137.030, 39.972, 256.204, 156]
+    level:    [124, 126]
+  17895577:
+    template: Calcined_Umbril
+    at:       [131.770, 39.999, 257.933, 6]
+    level:    [125, 127]
+  17895578:
+    template: Calcined_Umbril
+    at:       [75.293, 39.939, 258.330, 127]
+    level:    [125, 127]
+  17895579:
+    template: Grimfang_Bat
+    at:       [60.441, 39.875, 228.899, 65]
+    level:    [124, 127]
+  17895580:
+    template: Grimfang_Bat
+    at:       [77.260, 39.875, 219.229, 129]
+    level:    [124, 127]
+  17895581:
+    template: Bergschrund_Gefyrst
+    at:       [106.810, 39.907, 222.485, 209]
+    level:    [124, 127]
+  17895582:
+    template: Metalcruncher_Worm
+    at:       [103.900, 39.997, 273.585, 227]
+    level:    [124, 127]
+  17895583:
+    template: Metalcruncher_Worm
+    at:       [102.900, 39.981, 283.341, 174]
+    level:    [124, 127]
+  17895584:
+    template: Metalcruncher_Worm
+    at:       [98.747, 40.000, 283.816, 153]
+    level:    [124, 127]
+  17895585:
+    template: Depthdiver_Bats
+    at:       [62.153, 33.290, 288.261, 90]
+    level:    [124, 126]
+  17895586:
+    template: Depthdiver_Bats
+    at:       [69.649, 35.242, 296.042, 227]
+    level:    [124, 126]
+  17895587:
+    template: Calcined_Umbril
+    at:       [69.432, 35.310, 296.227, 229]
+    level:    [125, 127]
+  17895588:
+    template: Grimfang_Bat
+    at:       [46.195, 29.843, 260.248, 134]
+    level:    [124, 127]
+  17895589:
+    template: Calcined_Umbril
+    at:       [20.364, 30.413, 239.063, 202]
+    level:    [125, 127]
+  17895590:
+    template: Calcined_Umbril
+    at:       [8.569, 36.316, 223.554, 235]
+    level:    [125, 127]
+  17895591:
+    template: Depthdiver_Bats
+    at:       [-3.079, 48.130, 181.942, 5]
+    level:    [124, 126]
+  17895592:
+    template: Calcined_Umbril
+    at:       [-10.950, 45.587, 185.175, 24]
+    level:    [125, 127]
+  17895593:
+    template: Calcined_Umbril
+    at:       [-16.840, 34.339, 250.878, 214]
+    level:    [125, 127]
+  17895594:
+    template: Calcined_Umbril
+    at:       [-17.010, 34.381, 250.895, 214]
+    level:    [125, 127]
+  17895595:
+    template: Metalcruncher_Worm
+    at:       [-13.190, 35.283, 255.225, 223]
+    level:    [124, 127]
+  17895596:
+    template: Metalcruncher_Worm
+    at:       [-17.510, 34.352, 250.643, 217]
+    level:    [124, 127]
+  17895597:
+    template: Metalcruncher_Worm
+    at:       [-48.080, 29.944, 217.082, 221]
+    level:    [124, 127]
+  17895598:
+    template: Metalcruncher_Worm
+    at:       [-43.750, 29.669, 219.348, 239]
+    level:    [124, 127]
+  17895599:
+    template: Grimfang_Bat
+    at:       [-80.070, 29.316, 239.779, 9]
+    level:    [124, 127]
+  17895600:
+    template: Grimfang_Bat
+    at:       [-82.190, 30.021, 221.598, 138]
+    level:    [124, 127]
+  17895601:
+    template: Depthdiver_Bats
+    at:       [-73.560, 29.888, 210.731, 25]
+    level:    [124, 126]
+  17895602:
+    template: Depthdiver_Bats
+    at:       [-77.800, 29.833, 247.757, 185]
+    level:    [124, 126]
+  17895603:
+    template: Calcined_Umbril
+    at:       [-76.230, 29.881, 213.052, 171]
+    level:    [125, 127]
+  17895604:
+    template: Calcined_Umbril
+    at:       [-82.290, 30.035, 208.432, 123]
+    level:    [125, 127]
+  17895605:
+    template: Calcined_Umbril
+    at:       [-76.580, 29.759, 209.712, 89]
+    level:    [125, 127]
+  17895606:
+    template: Calcined_Umbril
+    at:       [-75.620, 29.982, 227.647, 87]
+    level:    [125, 127]
+  17895607:
+    template: Calcined_Umbril
+    at:       [-81.680, 29.270, 239.389, 91]
+    level:    [125, 127]
+  17895608:
+    template: Calcined_Umbril
+    at:       [-80.380, 30.145, 226.746, 121]
+    level:    [125, 127]
+  17895609:
+    template: Malodorous_Tarichuk
+    at:       [-286.000, 30.174, -263.780, 30]
+    level:    [121, 123]
+  17895610:
+    template: Malodorous_Tarichuk
+    at:       [-280.600, 29.684, -267.070, 35]
+    level:    [121, 123]
+  17895611:
+    template: Malodorous_Tarichuk
+    at:       [-221.700, 39.730, -236.510, 186]
+    level:    [121, 123]
+  17895612:
+    template: Bound_Twitherym
+    at:       [-220.800, 39.987, -241.990, 147]
+    level:    [121, 123]
+  17895613:
+    template: Malodorous_Tarichuk
+    at:       [-220.900, 39.687, -232.560, 2]
+    level:    [121, 123]
+  17895614:
+    template: Malodorous_Tarichuk
+    at:       [-328.100, 30.051, -220.020, 254]
+    level:    [121, 123]
+  17895615:
+    template: Bound_Twitherym
+    at:       [-319.600, 29.622, -219.550, 128]
+    level:    [121, 123]
+  17895616:
+    template: Malodorous_Tarichuk
+    at:       [-181.716, 40.245, -297.415, 78]
+    level:    [121, 123]
+  17895617:
+    template: Bound_Twitherym
+    at:       [-183.756, 40.174, -298.709, 248]
+    level:    [121, 123]
+  17895618:
+    template: Bound_Twitherym
+    at:       [-210.200, 40.073, -299.550, 133]
+    level:    [121, 123]
+  17895619:
+    template: Malodorous_Tarichuk
+    at:       [-215.000, 40.029, -299.700, 246]
+    level:    [121, 123]
+  17895620:
+    template: Malodorous_Tarichuk
+    at:       [-155.441, 39.719, -205.457, 84]
+    level:    [121, 123]
+  17895621:
+    template: Touched_Gefyrst
+    at:       [-167.200, 40.256, -190.250, 70]
+    level:    [121, 122]
+  17895622:
+    template: Touched_Gefyrst
+    at:       [-173.500, 40.305, -192.650, 106]
+    level:    [121, 122]
+  17895623:
+    template: Touched_Gefyrst
+    at:       [-198.700, 39.939, -188.990, 53]
+    level:    [121, 122]
+  17895624:
+    template: Malodorous_Tarichuk
+    at:       [-182.500, 40.396, -193.860, 64]
+    level:    [121, 123]
+  17895625:
+    template: Slabspitter_Jagil
+    at:       [-191.800, 40.291, -194.160, 19]
+    level:    [121, 123]
+  17895626:
+    template: Slabspitter_Jagil
+    at:       [-188.500, 40.374, -195.020, 122]
+    level:    [121, 123]
+  17895627:
+    template: Slabspitter_Jagil
+    at:       [-153.600, 39.955, -214.120, 8]
+    level:    [121, 123]
+  17895628:
+    template: Slabspitter_Jagil
+    at:       [-159.100, 40.077, -212.850, 82]
+    level:    [121, 123]
+  17895629:
+    template: Malodorous_Tarichuk
+    at:       [-157.836, 39.745, -209.626, 164]
+    level:    [121, 123]
+  17895630:
+    template: Malodorous_Tarichuk
+    at:       [-176.735, 39.685, -210.103, 99]
+    level:    [121, 123]
+  17895631:
+    template: Malodorous_Tarichuk
+    at:       [-167.900, 40.214, -216.440, 197]
+    level:    [121, 123]
+  17895632:
+    template: Malodorous_Tarichuk
+    at:       [-161.200, 40.174, -215.110, 11]
+    level:    [121, 123]
+  17895633:
+    template: Slabspitter_Jagil
+    at:       [-368.800, 30.172, -278.570, 98]
+    level:    [121, 123]
+  17895634:
+    template: Slabspitter_Jagil
+    at:       [-370.100, 30.375, -260.090, 154]
+    level:    [121, 123]
+  17895635:
+    template: Slabspitter_Jagil
+    at:       [-354.000, 30.295, -269.130, 171]
+    level:    [121, 123]
+  17895636:
+    template: Slabspitter_Jagil
+    at:       [-351.100, 30.082, -288.640, 218]
+    level:    [121, 123]
+  17895637:
+    template: Slabspitter_Jagil
+    at:       [-353.100, 30.135, -290.450, 154]
+    level:    [121, 123]
+  17895638:
+    template: Malodorous_Tarichuk
+    at:       [-351.100, 29.809, -247.190, 40]
+    level:    [121, 123]
+  17895639:
+    template: Bound_Twitherym
+    at:       [-369.900, 30.142, -245.780, 145]
+    level:    [121, 123]
+  17895640:
+    template: Touched_Gefyrst
+    at:       [-359.200, 30.323, -265.600, 98]
+    level:    [121, 122]
+  17895641:
+    template: Touched_Gefyrst
+    at:       [-348.100, 29.870, -265.500, 3]
+    level:    [121, 122]
+  17895642:
+    template: Malodorous_Tarichuk
+    at:       [-366.200, 29.690, -286.050, 128]
+    level:    [121, 123]
+  17895643:
+    template: Bound_Twitherym
+    at:       [-357.400, 29.895, -274.080, 241]
+    level:    [121, 123]
+  17895644:
+    template: Bound_Twitherym
+    at:       [-299.700, 30.336, -300.130, 194]
+    level:    [121, 123]
+  17895645:
+    template: Malodorous_Tarichuk
+    at:       [-311.700, 30.200, -298.230, 183]
+    level:    [121, 123]
+  17895646:
+    template: Malodorous_Tarichuk
+    at:       [-331.600, 29.687, -300.620, 101]
+    level:    [121, 123]
+  17895647:
+    template: Slabspitter_Jagil
+    at:       [-325.200, 29.639, -300.950, 71]
+    level:    [121, 123]
+  17895648:
+    template: Nesting_Hippogryph
+    at:       [-238.500, 32.862, -338.980]
+    level:    [125, 125]
+  17895649:
+    template: Bound_Twitherym
+    at:       [-234.230, 40.131, -309.919, 137]
+    level:    [121, 123]
+  17895650:
+    template: Malodorous_Tarichuk
+    at:       [-237.860, 39.440, -321.868, 115]
+    level:    [121, 123]
+  17895651:
+    template: Bound_Twitherym
+    at:       [-246.540, 39.930, -316.640, 221]
+    level:    [121, 123]
+  17895652:
+    template: Malodorous_Tarichuk
+    at:       [-244.853, 39.615, -319.732, 70]
+    level:    [121, 123]
+  17895653:
+    template: Bound_Twitherym
+    at:       [-244.830, 39.882, -355.818, 221]
+    level:    [121, 123]
+  17895654:
+    template: Malodorous_Tarichuk
+    at:       [-241.827, 40.020, -366.782, 121]
+    level:    [121, 123]
+  17895655:
+    template: Malodorous_Tarichuk
+    at:       [-249.434, 40.095, -360.267, 69]
+    level:    [121, 123]
+  17895656:
+    template: Bound_Twitherym
+    at:       [-240.893, 40.375, -337.160, 193]
+    level:    [121, 123]
+  17895657:
+    template: Nesting_Hippogryph
+    at:       [-175.711, 39.882, -360.605, 220]
+    level:    [125, 125]
+  17895658:
+    template: Nesting_Hippogryph
+    at:       [-183.448, 40.192, -369.470, 71]
+    level:    [125, 125]
+  17895659:
+    template: Bound_Twitherym
+    at:       [-303.942, 40.385, -380.047, 254]
+    level:    [121, 123]
+  17895660:
+    template: Bound_Twitherym
+    at:       [-334.200, 39.770, -381.310, 22]
+    level:    [121, 123]
+  17895661:
+    template: Pestiferous_Acuex
+    at:       [-338.760, 39.840, -379.907, 54]
+    level:    [121, 124]
+  17895662:
+    template: Pestiferous_Acuex
+    at:       [-319.380, 39.952, -384.943, 98]
+    level:    [121, 124]
+  17895663:
+    template: Nesting_Hippogryph
+    at:       [-312.600, 40.287, -420.900, 72]
+    level:    [125, 125]
+  17895664:
+    template: Nesting_Hippogryph
+    at:       [-323.200, 39.804, -426.970, 41]
+    level:    [125, 125]
+  17895665:
+    template: Pestiferous_Acuex
+    at:       [-359.700, 39.361, -358.810, 205]
+    level:    [121, 124]
+  17895666:
+    template: Pestiferous_Acuex
+    at:       [-364.400, 39.285, -361.140, 98]
+    level:    [121, 124]
+  17895667:
+    template: Pestiferous_Acuex
+    at:       [-359.300, 39.361, -358.980, 205]
+    level:    [121, 124]
+  17895668:
+    template: Bound_Twitherym
+    at:       [-359.600, 40.136, -352.310, 127]
+    level:    [121, 123]
+  17895669:
+    template: Bound_Twitherym
+    at:       [-358.200, 39.908, -369.010, 68]
+    level:    [121, 123]
+  17895670:
+    template: Pestiferous_Acuex
+    at:       [-348.700, 39.922, -352.670, 208]
+    level:    [121, 124]
+  17895671:
+    template: Pestiferous_Acuex
+    at:       [-349.700, 39.911, -351.030, 248]
+    level:    [121, 124]
+  17895672:
+    template: Pestiferous_Acuex
+    at:       [-403.900, 39.756, -359.210, 92]
+    level:    [121, 124]
+  17895673:
+    template: Pestiferous_Acuex
+    at:       [-407.100, 39.973, -359.830, 147]
+    level:    [121, 124]
+  17895674:
+    template: Bound_Twitherym
+    at:       [-394.900, 39.584, -357.390, 138]
+    level:    [121, 123]
+  17895675:
+    template: Bound_Twitherym
+    at:       [-381.800, 40.398, -360.130, 129]
+    level:    [121, 123]
+  17895676:
+    template: Pestiferous_Acuex
+    at:       [-421.400, 39.762, -394.310, 93]
+    level:    [121, 124]
+  17895677:
+    template: Pestiferous_Acuex
+    at:       [-418.100, 40.220, -400.240, 107]
+    level:    [121, 124]
+  17895678:
+    template: Bound_Twitherym
+    at:       [-419.400, 39.738, -405.850, 121]
+    level:    [121, 123]
+  17895679:
+    template: Soundsplitter_Bat
+    at:       [-271.500, 49.643, -500.050, 51]
+    level:    [121, 124]
+  17895680:
+    template: Dullahan_generic
+    script:   Wayward_Dullahan
+    at:       [-263.300, 49.551, -500.730, 95]
+    level:    [121, 124]
+  17895681:
+    template: Schorl_Umbril
+    at:       [-266.600, 49.638, -500.020, 22]
+    level:    [122, 124]
+  17895682:
+    template: Schorl_Umbril
+    at:       [-269.700, 49.582, -500.960, 120]
+    level:    [122, 124]
+  17895683:
+    template: Schorl_Umbril
+    at:       [-354.000, 40.103, -455.250, 231]
+    level:    [122, 124]
+  17895684:
+    template: Soundsplitter_Bat
+    at:       [-357.900, 39.743, -452.970, 194]
+    level:    [121, 124]
+  17895685:
+    template: Schorl_Umbril
+    at:       [-366.300, 40.136, -456.550, 84]
+    level:    [122, 124]
+  17895686:
+    template: Soundsplitter_Bat
+    at:       [-359.400, 40.316, -456.930, 242]
+    level:    [121, 124]
+  17895687:
+    template: Schorl_Umbril
+    at:       [-320.100, 49.646, -498.010, 130]
+    level:    [122, 124]
+  17895688:
+    template: Schorl_Umbril
+    at:       [-317.200, 50.085, -498.400, 2]
+    level:    [122, 124]
+  17895689:
+    template: Schorl_Umbril
+    at:       [-341.500, 39.812, -479.050, 63]
+    level:    [122, 124]
+  17895690:
+    template: Soundsplitter_Bat
+    at:       [-342.000, 40.186, -468.590, 190]
+    level:    [121, 124]
+  17895691:
+    template: Soundsplitter_Bat
+    at:       [-451.800, 40.375, -511.180, 66]
+    level:    [121, 124]
+  17895692:
+    template: Soundsplitter_Bat
+    at:       [-446.700, 40.320, -487.680, 214]
+    level:    [121, 124]
+  17895693:
+    template: Soundsplitter_Bat
+    at:       [-427.700, 39.645, -499.620, 102]
+    level:    [121, 124]
+  17895694:
+    template: Soundsplitter_Bat
+    at:       [-419.000, 39.596, -502.530, 3]
+    level:    [121, 124]
+  17895695:
+    template: Soundsplitter_Bat
+    at:       [-436.300, 40.287, -498.260, 200]
+    level:    [121, 124]
+  17895696:
+    template: Soundsplitter_Bat
+    at:       [-437.100, 39.918, -509.200, 83]
+    level:    [121, 124]
+  17895697:
+    template: Soundsplitter_Bat
+    at:       [-438.700, 39.410, -481.180, 139]
+    level:    [121, 124]
+  17895698:
+    template: Soundsplitter_Bat
+    at:       [-444.900, 39.678, -481.110, 199]
+    level:    [121, 124]
+  17895699:
+    template: Soundsplitter_Bat
+    at:       [-449.700, 39.925, -480.540, 38]
+    level:    [121, 124]
+  17895700:
+    template: Soundsplitter_Bat
+    at:       [-443.000, 40.055, -486.380, 96]
+    level:    [121, 124]
+  17895701:
+    template: Cowll_Hippogryph
+    at:       [-395.900, 39.773, -521.310, 142]
+    level:    [131, 133]
+  17895702:
+    template: Soundsplitter_Bat
+    at:       [-398.900, 39.879, -461.430, 254]
+    level:    [121, 124]
+  17895703:
+    template: Soundsplitter_Bat
+    at:       [-413.500, 40.092, -461.720, 243]
+    level:    [121, 124]
+  17895704:
+    template: Nesting_Hippogryph
+    at:       [-190.536, 50.339, -470.913, 250]
+    level:    [125, 125]
+  17895705:
+    template: Nesting_Hippogryph
+    at:       [-219.144, 50.167, -481.782, 181]
+    level:    [125, 125]
+  17895706:
+    template: Nesting_Hippogryph
+    at:       [-206.147, 49.672, -472.797, 131]
+    level:    [125, 125]
+  17895707:
+    template: Nesting_Hippogryph
+    at:       [-189.862, 50.373, -470.261, 242]
+    level:    [125, 125]
+  17895708:
+    template: Schorl_Umbril
+    at:       [-234.983, 49.889, -473.759, 56]
+    level:    [122, 124]
+  17895709:
+    template: Dullahan_generic
+    script:   Wayward_Dullahan
+    at:       [-226.287, 49.767, -471.377, 94]
+    level:    [121, 124]
+  17895710:
+    template: Schorl_Umbril
+    at:       [-235.984, 50.014, -480.975, 36]
+    level:    [122, 124]
+  17895711:
+    template: Dullahan_generic
+    script:   Wayward_Dullahan
+    at:       [-233.076, 50.040, -481.662, 118]
+    level:    [121, 124]
+  17895712:
+    template: Schorl_Umbril
+    at:       [-203.850, 50.044, -435.998, 232]
+    level:    [122, 124]
+  17895713:
+    template: Schorl_Umbril
+    at:       [-191.010, 50.164, -441.630, 165]
+    level:    [122, 124]
+  17895714:
+    template: Schorl_Umbril
+    at:       [-200.936, 49.882, -444.572, 93]
+    level:    [122, 124]
+  17895715:
+    template: Spinescent_Protuberance
+    at:       [385.980, 39.880, -163.520, 82]
+    level:    [1, 1]
+  17895716:
+    template: Apex_Jagil
+    at:       [374.670, 39.944, -170.750, 119]
+    level:    [130, 133]
+  17895717:
+    template: Apex_Jagil
+    at:       [411.630, 39.793, -167.390, 57]
+    level:    [130, 133]
+  17895718:
+    template: Apex_Jagil
+    at:       [407.190, 39.785, -166.390, 226]
+    level:    [130, 133]
+  17895719:
+    template: Apex_Jagil
+    at:       [391.830, 39.853, -167.400, 121]
+    level:    [130, 133]
+  17895720:
+    template: Velkk_Tearlicker
+    at:       [409.420, 39.817, -157.530, 224]
+    level:    [130, 133]
+  17895721:
+    template: Velkk_Mindmelter
+    at:       [392.530, 39.816, -166.830, 22]
+    level:    [130, 133]
+  17895722:
+    template: Apex_Jagil
+    at:       [370.580, 40.313, -149.960, 163]
+    level:    [130, 133]
+  17895723:
+    template: Apex_Jagil
+    at:       [365.820, 40.168, -161.260, 220]
+    level:    [130, 133]
+  17895724:
+    template: Apex_Jagil
+    at:       [363.170, 40.134, -160.850, 66]
+    level:    [130, 133]
+  17895725:
+    template: Apex_Jagil
+    at:       [356.010, 40.250, -150.460, 145]
+    level:    [130, 133]
+  17895726:
+    template: Velkk_Tearlicker
+    at:       [369.010, 40.182, -160.940, 156]
+    level:    [130, 133]
+  17895727:
+    template: Velkk_Mindmelter
+    at:       [373.830, 40.376, -149.690, 253]
+    level:    [130, 133]
+  17895728:
+    template: Velkk_Junglemancer
+    at:       [395.610, 40.139, -155.650, 128]
+    level:    [130, 133]
+  17895729:
+    template: Velkk_Junglemancer
+    at:       [360.670, 40.014, -163.630, 7]
+    level:    [130, 133]
+  17895730:
+    template: Spinescent_Protuberance
+    at:       [279.040, 30.045, -89.529, 100]
+    level:    [1, 1]
+  17895731:
+    template: Velkk_Abyssal
+    at:       [288.220, 29.707, -87.529, 218]
+    level:    [130, 133]
+  17895732:
+    template: Velkk_Abyssal
+    at:       [314.460, 30.136, -86.678, 215]
+    level:    [130, 133]
+  17895733:
+    template: Apex_Jagil
+    at:       [292.280, 29.902, -92.083, 125]
+    level:    [130, 133]
+  17895734:
+    template: Apex_Jagil
+    at:       [301.250, 30.153, -85.791, 128]
+    level:    [130, 133]
+  17895735:
+    template: Apex_Jagil
+    at:       [291.790, 29.875, -96.324, 99]
+    level:    [130, 133]
+  17895736:
+    template: Apex_Jagil
+    at:       [300.350, 29.864, -91.855, 105]
+    level:    [130, 133]
+  17895737:
+    template: Velkk_Abyssal
+    at:       [286.050, 30.319, -73.049, 151]
+    level:    [130, 133]
+  17895738:
+    template: Velkk_Abyssal
+    at:       [277.320, 29.766, -74.718, 75]
+    level:    [130, 133]
+  17895739:
+    template: Apex_Jagil
+    at:       [292.540, 30.155, -76.578, 71]
+    level:    [130, 133]
+  17895740:
+    template: Apex_Jagil
+    at:       [294.170, 30.135, -78.018, 120]
+    level:    [130, 133]
+  17895741:
+    template: Apex_Jagil
+    at:       [309.220, 30.349, -70.811, 142]
+    level:    [130, 133]
+  17895742:
+    template: Apex_Jagil
+    at:       [309.500, 30.350, -70.606, 142]
+    level:    [130, 133]
+  17895743:
+    template: Velkk_Junglemancer
+    at:       [326.260, 29.780, -78.202, 195]
+    level:    [130, 133]
+  17895744:
+    template: Velkk_Junglemancer
+    at:       [279.400, 30.118, -83.917, 117]
+    level:    [130, 133]
+  17895745:
+    template: Spinescent_Protuberance
+    at:       [237.440, 30.106, -171.030, 101]
+    level:    [1, 1]
+  17895746:
+    template: Apex_Jagil
+    at:       [198.240, 30.163, -128.780, 71]
+    level:    [130, 133]
+  17895747:
+    template: Apex_Jagil
+    at:       [215.550, 29.615, -139.780, 141]
+    level:    [130, 133]
+  17895748:
+    template: Apex_Jagil
+    at:       [192.530, 30.193, -123.340, 128]
+    level:    [130, 133]
+  17895749:
+    template: Apex_Jagil
+    at:       [203.370, 30.309, -144.350, 27]
+    level:    [130, 133]
+  17895750:
+    template: Apex_Jagil
+    at:       [212.290, 30.236, -125.130, 182]
+    level:    [130, 133]
+  17895751:
+    template: Velkk_Tearlicker
+    at:       [193.530, 30.014, -143.110, 216]
+    level:    [130, 133]
+  17895752:
+    template: Velkk_Abyssal
+    at:       [194.110, 29.774, -145.240, 9]
+    level:    [130, 133]
+  17895753:
+    template: Velkk_Abyssal
+    at:       [241.630, 29.884, -167.060, 26]
+    level:    [130, 133]
+  17895754:
+    template: Velkk_Tearlicker
+    at:       [237.070, 30.033, -163.380, 158]
+    level:    [130, 133]
+  17895755:
+    template: Apex_Jagil
+    at:       [221.630, 30.329, -166.370, 101]
+    level:    [130, 133]
+  17895756:
+    template: Apex_Jagil
+    at:       [218.250, 30.247, -161.360, 236]
+    level:    [130, 133]
+  17895757:
+    template: Apex_Jagil
+    at:       [234.570, 30.312, -167.090, 57]
+    level:    [130, 133]
+  17895758:
+    template: Apex_Jagil
+    at:       [208.160, 30.311, -164.710, 104]
+    level:    [130, 133]
+  17895759:
+    template: Apex_Jagil
+    at:       [203.260, 29.739, -163.780, 17]
+    level:    [130, 133]
+  17895760:
+    template: Velkk_Junglemancer
+    at:       [201.460, 30.010, -116.700, 251]
+    level:    [130, 133]
+  17895761:
+    template: Velkk_Junglemancer
+    at:       [195.050, 29.770, -155.610, 183]
+    level:    [130, 133]
+  17895762:
+    template: Velkk_Junglemancer
+    at:       [241.200, 30.141, -163.660, 9]
+    level:    [130, 133]
+  17895763:
+    template: Apex_Toad
+    at:       [343.620, 30.281, -22.040, 246]
+    level:    [130, 133]
+  17895764:
+    template: Apex_Toad
+    at:       [343.790, 30.281, -22.277, 245]
+    level:    [130, 133]
+  17895765:
+    template: Apex_Toad
+    at:       [335.760, 30.222, -23.243, 9]
+    level:    [130, 133]
+  17895766:
+    template: Apex_Toad
+    at:       [324.400, 29.934, -21.638, 253]
+    level:    [130, 133]
+  17895767:
+    template: Apex_Toad
+    at:       [336.580, 30.170, -23.504, 10]
+    level:    [130, 133]
+  17895768:
+    template: Apex_Jagil
+    at:       [297.480, 29.787, 5.669, 84]
+    level:    [130, 133]
+  17895769:
+    template: Apex_Jagil
+    at:       [301.610, 30.337, -2.913, 159]
+    level:    [130, 133]
+  17895770:
+    template: Apex_Jagil
+    at:       [304.700, 29.972, -2.307, 243]
+    level:    [130, 133]
+  17895771:
+    template: Apex_Toad
+    at:       [301.520, 29.805, 12.270, 44]
+    level:    [130, 133]
+  17895772:
+    template: Apex_Toad
+    at:       [297.550, 29.840, 2.912, 195]
+    level:    [130, 133]
+  17895773:
+    template: Apex_Toad
+    at:       [303.680, 30.281, -6.447, 9]
+    level:    [130, 133]
+  17895774:
+    template: Apex_Jagil
+    at:       [277.780, 29.652, 48.525, 203]
+    level:    [130, 133]
+  17895775:
+    template: Apex_Jagil
+    at:       [278.000, 29.716, 48.666, 199]
+    level:    [130, 133]
+  17895776:
+    template: Apex_Jagil
+    at:       [282.130, 29.837, 49.785, 137]
+    level:    [130, 133]
+  17895777:
+    template: Apex_Jagil
+    at:       [279.790, 29.701, 50.612, 138]
+    level:    [130, 133]
+  17895778:
+    template: Apex_Toad
+    at:       [277.100, 29.847, 46.108, 139]
+    level:    [130, 133]
+  17895779:
+    template: Apex_Toad
+    at:       [280.620, 29.885, 48.653, 50]
+    level:    [130, 133]
+  17895780:
+    template: Apex_Toad
+    at:       [278.950, 29.833, 47.478, 182]
+    level:    [130, 133]
+  17895781:
+    template: Apex_Toad
+    at:       [288.570, 29.906, 41.795, 119]
+    level:    [130, 133]
+  17895782:
+    template: Apex_Toad
+    at:       [233.830, 40.292, -17.329, 201]
+    level:    [130, 133]
+  17895783:
+    template: Apex_Toad
+    at:       [238.320, 39.946, -23.246, 16]
+    level:    [130, 133]
+  17895784:
+    template: Apex_Toad
+    at:       [239.950, 39.960, -22.235, 77]
+    level:    [130, 133]
+  17895785:
+    template: Apex_Toad
+    at:       [237.850, 39.951, -14.385, 237]
+    level:    [130, 133]
+  17895786:
+    template: Apex_Toad
+    at:       [234.610, 40.299, -19.884, 30]
+    level:    [130, 133]
+  17895787:
+    template: Apex_Toad
+    at:       [238.350, 40.000, -15.218, 206]
+    level:    [130, 133]

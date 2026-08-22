@@ -1,0 +1,5143 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  2nd_Legion_Scout:
+    id:            9
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, sch]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   5
+          head:   4101
+          body:   8197
+          hands:  12293
+          legs:   16389
+          feet:   20485
+          main:   24778
+          sub:    28672
+          ranged: 32820
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  7th_Cohors_Engineer:
+    id:      7706
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Anapos:
+    id:      7707
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Antje:
+    id:      7708
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Aphotic_Crab:
+    id:      7709
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Aquarian_Caster:
+    id:            205
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   13
+          head:   4114
+          body:   8212
+          hands:  12308
+          legs:   16404
+          feet:   20500
+          main:   24803
+          sub:    28711
+          ranged: 32795
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Arch_Demon:
+    id:            226
+    species:       kindred
+    spell_list_id: 5
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 751
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Atlas_Beetle:
+    id:      7710
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Babalu_Aye:
+    id:      7711
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Befouled_Slime:
+    id:      7712
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Befuddled_Meeble:
+    id:      7713
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bellicose_Tarichuk:
+    id:      7714
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bloodwing_Deathrainer:
+    id:            5346
+    species:       orc
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 129
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bloodwing_Maimer:
+    id:            5815
+    species:       orc
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [sam, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 129
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  BoDhos_Shieldwarrior_GR:
+    id:            5827
+    display_name:  BoDhos_Shieldwarrior
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2117
+        entity_flags: 129
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Burrows_Depthmarker:
+    id:      7715
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Caointeach:
+    id:      7716
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Capricornian_Caster:
+    id:            631
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   6
+          face:   10
+          head:   4120
+          body:   8216
+          hands:  12457
+          legs:   16553
+          feet:   20649
+          main:   25083
+          sub:    29179
+          ranged: 32794
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  Centycore:
+    id:      7717
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chichevache:
+    id:      7718
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chuhaister:
+    id:      7719
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Clay_Krater:
+    id:      7720
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cluster_Fly:
+    id:      7721
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cluster_Scorpion:
+    id:      7722
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cluster_Spider:
+    id:      7723
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cobra_Mercenary:
+    id:            756
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  equipped
+          race:  7
+          face:  15
+          head:  4233
+          body:  8208
+          hands: 12304
+          legs:  16494
+          feet:  20496
+          main:  24676
+          sub:   28710
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Cobra_Mercenary_1:
+    id:            5817
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   2
+          head:   4233
+          body:   8208
+          hands:  12304
+          legs:   16494
+          feet:   20496
+          main:   24974
+          sub:    28672
+          ranged: 32818
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Cobra_Mercenary_2:
+    id:            5818
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   1
+          head:   4233
+          body:   8208
+          hands:  12304
+          legs:   16494
+          feet:   20496
+          main:   24974
+          sub:    28672
+          ranged: 32818
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Cobra_Mercenary_3:
+    id:            5819
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   3
+          head:   4233
+          body:   8208
+          hands:  12304
+          legs:   16494
+          feet:   20496
+          main:   24658
+          sub:    28708
+          ranged: 32818
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Cobra_Mercenary_4:
+    id:            5820
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   4
+          head:   4233
+          body:   8208
+          hands:  12304
+          legs:   16494
+          feet:   20496
+          main:   25083
+          sub:    29179
+          ranged: 32818
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Cobra_Mercenary_5:
+    id:            5821
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   5
+          head:   4233
+          body:   8208
+          hands:  12304
+          legs:   16494
+          feet:   20496
+          main:   24974
+          sub:    28672
+          ranged: 32818
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Cobra_Mercenary_6:
+    id:            5822
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   6
+          head:   4233
+          body:   8208
+          hands:  12304
+          legs:   16494
+          feet:   20496
+          main:   24658
+          sub:    28708
+          ranged: 32818
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Cobra_Mercenary_7:
+    id:            5823
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   0
+          head:   4233
+          body:   8208
+          hands:  12304
+          legs:   16494
+          feet:   20496
+          main:   25083
+          sub:    29179
+          ranged: 32818
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Cobra_Mercenary_8:
+    id:            5824
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   2
+          head:   4233
+          body:   8208
+          hands:  12304
+          legs:   16494
+          feet:   20496
+          main:   24658
+          sub:    28708
+          ranged: 32818
+        entity_flags: 515
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Colony_Bat:
+    id:      7724
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Confederate_Belfry:
+    id:      775
+    species: belfrys
+    attributes:
+      combat:
+        skill: axe
+        delay: 32000
+      render:
+        look:
+          type:  standard
+          model: 2320
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      spawn:
+        type: [scripted]
+
+  Count_Bifrons:
+    id:            812
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 169
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 741
+        entity_flags: 141
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Crab:
+    id:      7725
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Crawler:
+    id:      7726
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Crusted_Pincer:
+    id:      7727
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Curupira:
+    id:      7728
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dicey_Dorcus:
+    id:      7729
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dzoavits:
+    id:      7730
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Effluvial_Grenade:
+    id:            1180
+    species:       tubes
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1792
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Egungun:
+    id:      7731
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Emerald_Quadav:
+    id:            1207
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 667
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Entremet:
+    id:      7732
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Excenmille_S:
+    id:            5786
+    species:       elvaan
+    type:          [battlefield]
+    spell_list_id: 4
+    skill_list_id: 483
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      render:
+        look:
+          type:  standard
+          model: 2181
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Extirpating_Weapon:
+    id:      7733
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Falxfang_Tiger:
+    id:      7734
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Federation_Garrison:
+    id:            1315
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  1
+          body:  8195
+          hands: 12291
+          legs:  16387
+          feet:  20483
+          main:  24770
+      spawn:
+        type: [scripted]
+
+  Federation_Infantry:
+    id:            1316
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  13
+          head:  4114
+          body:  8212
+          hands: 12308
+          legs:  16404
+          feet:  20500
+          main:  24881
+      spawn:
+        type: [scripted]
+
+  Feeble_Eft:
+    id:      7735
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fetid_Slime:
+    id:      7736
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fiendish_Weapon:
+    id:      7737
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Flamma:
+    id:      7738
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Flytrap:
+    id:      7739
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fulmen:
+    id:      7740
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fungic_Koti:
+    id:      7741
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gherrmoga:
+    id:      5814
+    species: bugard
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: staff
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 157
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Gigas_Flanker:
+    id:            1560
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 275
+        entity_flags: 131
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gigas_Trebucket:
+    id:            1596
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 274
+        entity_flags: 131
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Glacies:
+    id:      7742
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gnat:
+    id:      7743
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gnole:
+    id:      7744
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gnyan:
+    id:      7745
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Goblin_Poisoner:
+    id:            1702
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 1383
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Goblin_Scrounger:
+    id:      7746
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Goldwing:
+    id:      7747
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gorib:
+    id:      7748
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gumdrop:
+    id:      7749
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Haferbocks:
+    id:      7750
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Hippalectryon:
+    id:      7751
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Incited_Meeble:
+    id:      7752
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Iyamoopo:
+    id:      7753
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kendi:
+    id:      7754
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kerwan:
+    id:      7755
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kimmerios:
+    id:      7756
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kingslayer_Doggvdegg:
+    id:            2252
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2075
+        entity_flags: 157
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kraken:
+    id:      7757
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kuperan:
+    id:      7758
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Laa_Yaku_the_Austere:
+    id:            2309
+    species:       yagudo
+    spell_list_id: 20
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1084
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ladybug:
+    id:      7759
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lair_Lizard:
+    id:      7760
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lambton_Worm:
+    id:            2322
+    species:       sandworm
+    skill_list_id: 214
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     1
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      1
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2027
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_common
+          item:   morganas_cotehardie
+        - chance: very_common
+          item:   ancient_torque
+        - chance: very_common
+          item:   oily_trousers
+        - chance: very_common
+          item:   fragarach
+        - chance: common
+          item:   guivres_skull
+        - chance: common
+          item:   venomous_claw
+        - chance: common
+          item:   square_of_damascene_cloth
+
+  Leech:
+    id:      7761
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Libran_Caster:
+    id:            2406
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   13
+          head:   4114
+          body:   8212
+          hands:  12308
+          legs:   16404
+          feet:   20500
+          main:   24803
+          sub:    28711
+          ranged: 32795
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Lizard:
+    id:      7762
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lubber_Lyle:
+    id:      7763
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Luminare:
+    id:      7764
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Maze_Demolisher:
+    id:      7765
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Maze_Lurker:
+    id:      7766
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Meeble_Augur:
+    id:      7767
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Meeble_Scribe:
+    id:      7768
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Metshaldjas:
+    id:      7769
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Metsik:
+    id:      7770
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Moblin_Arcanist:
+    id:      7771
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Moblin_Militant:
+    id:      7772
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Moblin_Miscreant:
+    id:      7773
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mucid_Slime:
+    id:      7774
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nhev_Befrathi:
+    id:      7775
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nickel_Quadav:
+    id:            2837
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 651
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Nimble_Nelson:
+    id:      7776
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Niveus_Tages:
+    id:      7777
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Noxious_Nellie:
+    id:      7778
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Obin-Murt:
+    id:      7779
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Odious_Obdella:
+    id:      7780
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Old_Quadav_past:
+    id:            6242
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2116
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Onyx_Mine:
+    id:      2985
+    species: fortifications
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 1791
+        hitbox: 10
+      spawn:
+        type: [scripted]
+
+  Opo-opo:
+    id:      7781
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Orcish_Brawler_past:
+    id:            6272
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2048
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Orcish_Footsoldier_past:
+    id:            6280
+    species:       orc
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2037
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Orcish_Hexspinner_past:
+    id:            5558
+    species:       orc
+    spell_list_id: 21
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 637
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Orcish_Impaler:
+    id:            3020
+    species:       orc
+    skill_list_id: 713
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 620
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Orcish_Mangler:
+    id:      7782
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Orcish_Muscle:
+    id:      7783
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Orcish_Trooper_past:
+    id:            6284
+    species:       orc
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2042
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Orcish_Turret:
+    id:            3040
+    species:       orcish_warmachine
+    skill_list_id: 248
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    4
+          ice:     4
+          wind:    2
+          earth:   2
+          thunder: 2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2162
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          38
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ore_Cruncher:
+    id:      7784
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ore_Devourer:
+    id:      7785
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Osteoguard:
+    id:      7786
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Peckish_Cockatrice:
+    id:      7787
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Peiste:
+    id:      7788
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Pesoso:
+    id:      7789
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Piceous_Mimic:
+    id:      7790
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Pugnacious_Eft:
+    id:      7791
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Purushamriga:
+    id:      7792
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Python_Mercenary:
+    id:            3243
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   14
+          head:   4210
+          body:   8207
+          hands:  12402
+          legs:   16399
+          feet:   20495
+          main:   24676
+          sub:    28718
+          ranged: 32818
+        entity_flags:  515
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Rafflesia:
+    id:      7793
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Rahu:
+    id:      7794
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Rambunctious_Meeble:
+    id:      7795
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Red_Pillywiggin:
+    id:      7796
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Romaa_Mihgo:
+    id:            3387
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  equipped
+          race:  7
+          face:  9
+          head:  4233
+          body:  8302
+          hands: 12304
+          legs:  16494
+          feet:  20493
+          main:  24957
+          sub:   28672
+        entity_flags:  537
+        animation_sub:   8
+        name_prefix:    32
+        hitbox:         12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Sapphirine_Quadav:
+    id:            3464
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 671
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Scorpion_Caster:
+    id:            3504
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   13
+          head:   4114
+          body:   8212
+          hands:  12308
+          legs:   16404
+          feet:   20500
+          main:   24803
+          sub:    28711
+          ranged: 32795
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Scultone:
+    id:      7797
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Serket:
+    id:            3549
+    species:       great_scorpion
+    type:          [notorious]
+    spell_list_id: 46
+    skill_list_id: 273
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    270
+        dmg_mult: 125
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        19
+      mods:
+        regen: 50
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   vile_elixir_+1
+        - chance: very_rare
+          item:   hi-reraiser
+        - chance: very_common
+          item:   antares_harness
+        - chance: very_common
+          item:   white_tathlum
+        - chance: very_rare
+          item:   serket_shield
+        - chance: very_rare
+          item:   serket_ring
+        - chance: very_rare
+          item:   triple_dagger
+        - chance: very_rare
+          item:   venomous_claw
+
+  Seua_Peek:
+    id:      7798
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadhavar:
+    id:      7799
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadhavars_Avatar:
+    id:      7800
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Silagilith:
+    id:      7801
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Siltim:
+    id:      7802
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Silver_Quadav_PMS:
+    id:            5826
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 659
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Skeleton:
+    id:      7803
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Skoll:
+    id:      7804
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Slug:
+    id:      7805
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Snarling_Meeble:
+    id:      7806
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sparky_Sam:
+    id:      7807
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Spider:
+    id:      7808
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Stoic_Marolith:
+    id:      7809
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Student_Salvemixer_I:
+    id:      7810
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Student_Salvemixer_II:
+    id:      7811
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Student_Salvemixer_III:
+    id:      7812
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Subterranean_Safepoint:
+    id:      7813
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sulphurous_Bomb:
+    id:      7814
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sulphurous_Djinn:
+    id:      7815
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Surtr:
+    id:      7816
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Svaha:
+    id:      7817
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Syu_Befrathi:
+    id:      7818
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tanihwa:
+    id:      7819
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tatzelwurm:
+    id:      7820
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tectochuk:
+    id:      7821
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tellus:
+    id:      7822
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tenebrous_Bat:
+    id:      7823
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Terror_Fly:
+    id:      7824
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Trained_Bat:
+    id:            3986
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+      spawn:
+        type: [scripted]
+
+  Trained_Crab:
+    id:            3987
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+      spawn:
+        type: [scripted]
+
+  Trained_Scorpion:
+    id:            3988
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Tumultuous_Worm:
+    id:      7825
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tupilaq:
+    id:      7826
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Umagrhk:
+    id:      7827
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Varaneft:
+    id:      7828
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ventus:
+    id:      7829
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Virulent_Flask:
+    id:            4237
+    species:       tubes
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1792
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Wicked_Weapon:
+    id:      7830
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Wildcat_Volunteer:
+    id:            4339
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   6
+          head:   4233
+          body:   8329
+          hands:  12425
+          legs:   16399
+          feet:   20495
+          main:   24687
+          sub:    28672
+          ranged: 32809
+        entity_flags:  515
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Winged_Menace:
+    id:      7831
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Worm:
+    id:      7832
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Carrier:
+    id:            4409
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2083
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Conversus:
+    id:            4414
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2083
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Drummer_past:
+    id:            5490
+    species:       yagudo
+    spell_list_id: 6
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 593
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Guard:
+    id:            4421
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2077
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Gyrovague:
+    id:            4422
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2083
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Herald_past:
+    id:            5486
+    species:       yagudo
+    spell_list_id: 7
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2079
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Interrogator_past:
+    id:            5483
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2076
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Kamari:
+    id:      7833
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Neophyte:
+    id:            4435
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2083
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Priest_past:
+    id:            5484
+    species:       yagudo
+    spell_list_id: 20
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 583
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Prior_past:
+    id:            5491
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 605
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Seminarian:
+    id:            4449
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2083
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Stormer:
+    id:            4451
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2089
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Theologist:
+    id:            4456
+    species:       yagudo
+    spell_list_id: 21
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 589
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yagudo_Votary_past:
+    id:            5489
+    species:       yagudo
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2082
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Yellow_Pillywiggin:
+    id:      7834
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Zircon_Quadav_past:
+    id:            5825
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 669
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17305601:
+    template: Federation_Infantry
+  17305602:
+    template: Federation_Infantry
+  17305603:
+    template: Federation_Infantry
+  17305604:
+    template: Trained_Crab
+  17305605:
+    template: Trained_Bat
+  17305606:
+    template: Trained_Scorpion
+  17305607:
+    template: Yagudo_Stormer
+  17305608:
+    template: Yagudo_Stormer
+  17305609:
+    template: Yagudo_Stormer
+  17305610:
+    template: Yagudo_Stormer
+  17305611:
+    template: Yagudo_Stormer
+  17305612:
+    template: Yagudo_Stormer
+  17305613:
+    template: Yagudo_Stormer
+  17305614:
+    template: Yagudo_Stormer
+  17305615:
+    template: Yagudo_Stormer
+  17305616:
+    template: Yagudo_Stormer
+  17305617:
+    template: Yagudo_Stormer
+  17305618:
+    template: Yagudo_Stormer
+  17305619:
+    template: Yagudo_Stormer
+  17305620:
+    template: Yagudo_Stormer
+  17305621:
+    template: Yagudo_Stormer
+  17305622:
+    template: Yagudo_Stormer
+  17305623:
+    template: Yagudo_Stormer
+  17305624:
+    template: Yagudo_Stormer
+  17305625:
+    template: Federation_Garrison
+  17305626:
+    template: Federation_Garrison
+  17305627:
+    template: Federation_Garrison
+  17305628:
+    template: Yagudo_Carrier
+  17305629:
+    template: Yagudo_Guard
+  17305630:
+    template: Yagudo_Guard
+  17305631:
+    template: Yagudo_Carrier
+  17305632:
+    template: Yagudo_Guard
+  17305633:
+    template: Yagudo_Guard
+  17305634:
+    template: Yagudo_Carrier
+  17305635:
+    template: Yagudo_Guard
+  17305636:
+    template: Yagudo_Guard
+  17305637:
+    template: Yagudo_Carrier
+  17305638:
+    template: Yagudo_Guard
+  17305639:
+    template: Yagudo_Guard
+  17305640:
+    template: Yagudo_Carrier
+  17305641:
+    template: Yagudo_Guard
+  17305642:
+    template: Yagudo_Guard
+  17305643:
+    template: Yagudo_Guard
+  17305644:
+    template: Yagudo_Guard
+  17305645:
+    template: Yagudo_Guard
+  17305646:
+    template: Yagudo_Guard
+  17305647:
+    template: Yagudo_Priest_past
+    script:   Yagudo_Priest
+  17305648:
+    template: Yagudo_Priest_past
+    script:   Yagudo_Priest
+  17305649:
+    template: Yagudo_Priest_past
+    script:   Yagudo_Priest
+  17305650:
+    template: Yagudo_Theologist
+  17305651:
+    template: Yagudo_Theologist
+  17305652:
+    template: Yagudo_Theologist
+  17305653:
+    template: Yagudo_Interrogator_past
+    script:   Yagudo_Interrogator
+  17305654:
+    template: Yagudo_Interrogator_past
+    script:   Yagudo_Interrogator
+  17305655:
+    template: Yagudo_Interrogator_past
+    script:   Yagudo_Interrogator
+  17305656:
+    template: Yagudo_Herald_past
+    script:   Yagudo_Herald
+  17305657:
+    template: Yagudo_Herald_past
+    script:   Yagudo_Herald
+  17305658:
+    template: Yagudo_Herald_past
+    script:   Yagudo_Herald
+  17305659:
+    template: Yagudo_Votary_past
+    script:   Yagudo_Votary
+  17305660:
+    template: Yagudo_Votary_past
+    script:   Yagudo_Votary
+  17305661:
+    template: Yagudo_Votary_past
+    script:   Yagudo_Votary
+  17305662:
+    template: Laa_Yaku_the_Austere
+  17305663:
+    template: Onyx_Mine
+  17305664:
+    template: Onyx_Mine
+  17305665:
+    template: Onyx_Mine
+  17305666:
+    template: Serket
+  17305667:
+    template: Lambton_Worm
+  17305668:
+    template: Yagudo_Conversus
+  17305669:
+    template: Yagudo_Neophyte
+  17305670:
+    template: Yagudo_Neophyte
+  17305671:
+    template: Yagudo_Neophyte
+  17305672:
+    template: Yagudo_Neophyte
+  17305673:
+    template: Yagudo_Neophyte
+  17305674:
+    template: Yagudo_Prior_past
+    script:   Yagudo_Prior
+  17305675:
+    template: Yagudo_Gyrovague
+  17305676:
+    template: Yagudo_Gyrovague
+  17305677:
+    template: Yagudo_Gyrovague
+  17305678:
+    template: Yagudo_Gyrovague
+  17305679:
+    template: Yagudo_Gyrovague
+  17305680:
+    template: Yagudo_Seminarian
+  17305681:
+    template: Yagudo_Seminarian
+  17305682:
+    template: Yagudo_Seminarian
+  17305683:
+    template: Romaa_Mihgo
+    at:       [-413.540, -0.618, -11.722, 111]
+    level:    [75, 75]
+  17305684:
+    template: Cobra_Mercenary
+    at:       [-392.565, -0.400, 11.841, 223]
+    level:    [75, 75]
+  17305685:
+    template: Cobra_Mercenary_1
+    script:   Cobra_Mercenary
+    at:       [-412.803, -0.313, 7.117, 223]
+    level:    [75, 75]
+  17305686:
+    template: Cobra_Mercenary_3
+    script:   Cobra_Mercenary
+    at:       [-399.117, 0.100, 11.553, 223]
+    level:    [75, 75]
+  17305687:
+    template: Cobra_Mercenary_4
+    script:   Cobra_Mercenary
+    at:       [-395.277, -0.858, -13.710, 223]
+    level:    [75, 75]
+  17305688:
+    template: Cobra_Mercenary_5
+    script:   Cobra_Mercenary
+    at:       [-413.893, -1.002, 10.441, 223]
+    level:    [75, 75]
+  17305689:
+    template: Cobra_Mercenary_6
+    script:   Cobra_Mercenary
+    at:       [-412.803, -0.313, 7.117, 223]
+    level:    [75, 75]
+  17305690:
+    template: Cobra_Mercenary_7
+    script:   Cobra_Mercenary
+    at:       [-404.004, -0.230, 1.867, 223]
+    level:    [75, 75]
+  17305691:
+    template: Cobra_Mercenary_2
+    script:   Cobra_Mercenary
+    at:       [-397.151, -0.088, -6.091, 223]
+    level:    [75, 75]
+  17305692:
+    template: Cobra_Mercenary_8
+    script:   Cobra_Mercenary
+    at:       [-399.909, 0.500, -8.410, 223]
+    level:    [75, 75]
+  17305693:
+    template: Zircon_Quadav_past
+    script:   Zircon_Quadav
+    at:       [-360.527, 0.056, -30.847, 200]
+    level:    [75, 75]
+  17305694:
+    template: Silver_Quadav_PMS
+    script:   Silver_Quadav
+    at:       [-360.600, 0.001, -30.826, 201]
+    level:    [75, 75]
+  17305695:
+    template: Nickel_Quadav
+    at:       [-360.400, 0.001, -30.778, 200]
+    level:    [75, 75]
+  17305696:
+    template: Zircon_Quadav_past
+    script:   Zircon_Quadav
+    at:       [-360.700, -0.050, -30.368, 179]
+    level:    [75, 75]
+  17305697:
+    template: Silver_Quadav_PMS
+    script:   Silver_Quadav
+    at:       [-360.689, -0.055, -30.577, 179]
+    level:    [75, 75]
+  17305698:
+    template: Nickel_Quadav
+    at:       [-360.796, -0.050, -30.114, 179]
+    level:    [75, 75]
+  17305699:
+    template: Zircon_Quadav_past
+    script:   Zircon_Quadav
+    at:       [-360.891, -0.054, -30.054, 179]
+    level:    [75, 75]
+  17305700:
+    template: Silver_Quadav_PMS
+    script:   Silver_Quadav
+    at:       [-360.983, -0.050, -29.975, 178]
+    level:    [75, 75]
+  17305701:
+    template: Nickel_Quadav
+    at:       [-360.527, 0.056, -30.847, 200]
+    level:    [75, 75]
+  17305702:
+    template: BoDhos_Shieldwarrior_GR
+    script:   BoDhos_Shieldwarrior
+    at:       [-341.604, -0.132, 38.596, 122]
+    level:    [75, 75]
+  17305703:
+    template: BoDhos_Shieldwarrior_GR
+    script:   BoDhos_Shieldwarrior
+    at:       [-341.700, -0.123, 38.672, 122]
+    level:    [75, 75]
+  17305704:
+    template: BoDhos_Shieldwarrior_GR
+    script:   BoDhos_Shieldwarrior
+    at:       [-341.791, -0.113, 38.705, 122]
+    level:    [75, 75]
+  17305705:
+    template: BoDhos_Shieldwarrior_GR
+    script:   BoDhos_Shieldwarrior
+    at:       [-325.134, -0.483, 41.945, 182]
+    level:    [75, 75]
+  17305706:
+    template: BoDhos_Shieldwarrior_GR
+    script:   BoDhos_Shieldwarrior
+    at:       [-325.889, -0.422, 43.252, 139]
+    level:    [75, 75]
+  17305707:
+    template: Gigas_Trebucket
+    at:       [-369.242, -3.778, 16.368, 236]
+    level:    [75, 75]
+  17305708:
+    template: Gigas_Flanker
+    at:       [-369.899, -3.759, 16.489, 236]
+    level:    [75, 75]
+  17305709:
+    template: Gigas_Trebucket
+    at:       [-368.411, -3.741, 16.667, 236]
+    level:    [75, 75]
+  17305710:
+    template: Gigas_Flanker
+    at:       [-368.923, -3.773, 16.364, 237]
+    level:    [75, 75]
+  17305711:
+    template: Gigas_Trebucket
+    level:    [75, 75]
+  17305712:
+    template: Confederate_Belfry
+    at:       [-323.533, -0.500, 41.088, 108]
+    level:    [77, 78]
+  17305713:
+    template: Goblin_Poisoner
+  17305714:
+    template: Effluvial_Grenade
+  17305715:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305716:
+    template: Goblin_Poisoner
+  17305717:
+    template: Effluvial_Grenade
+  17305718:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305719:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305720:
+    template: Goblin_Poisoner
+  17305721:
+    template: Effluvial_Grenade
+  17305722:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305723:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305724:
+    template: Goblin_Poisoner
+  17305725:
+    template: Effluvial_Grenade
+  17305726:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305727:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305728:
+    template: Goblin_Poisoner
+  17305729:
+    template: Effluvial_Grenade
+  17305730:
+    template: Goblin_Poisoner
+  17305731:
+    template: Effluvial_Grenade
+  17305732:
+    template: Goblin_Poisoner
+  17305733:
+    template: Effluvial_Grenade
+  17305734:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305735:
+    template: Goblin_Poisoner
+  17305736:
+    template: Effluvial_Grenade
+  17305737:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305738:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305739:
+    template: Goblin_Poisoner
+  17305740:
+    template: Effluvial_Grenade
+  17305741:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305742:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305743:
+    template: Virulent_Flask
+  17305744:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305745:
+    template: Virulent_Flask
+  17305746:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305747:
+    template: Virulent_Flask
+  17305748:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305749:
+    template: Virulent_Flask
+  17305750:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305751:
+    template: Virulent_Flask
+  17305752:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305753:
+    template: Virulent_Flask
+  17305754:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305755:
+    template: Virulent_Flask
+  17305756:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305757:
+    template: Virulent_Flask
+  17305758:
+    template: Orcish_Hexspinner_past
+    script:   Orcish_Hexspinner
+  17305759:
+    template: Virulent_Flask
+  17305760:
+    template: Orcish_Footsoldier_past
+    script:   Orcish_Footsoldier
+  17305761:
+    template: Virulent_Flask
+  17305762:
+    template: Orcish_Turret
+  17305763:
+    template: Effluvial_Grenade
+  17305764:
+    template: Student_Salvemixer_I
+  17305765:
+    template: Student_Salvemixer_II
+  17305766:
+    template: Student_Salvemixer_III
+  17305767:
+    template: Aquarian_Caster
+  17305768:
+    template: Scorpion_Caster
+  17305769:
+    template: Libran_Caster
+  17305770:
+    template: Python_Mercenary
+  17305771:
+    template: Wildcat_Volunteer
+  17305772:
+    template: Capricornian_Caster
+  17305773:
+    template: Aquarian_Caster
+  17305774:
+    template: Scorpion_Caster
+  17305775:
+    template: Libran_Caster
+  17305776:
+    template: Python_Mercenary
+  17305777:
+    template: Kingslayer_Doggvdegg
+    at:       [458.000, 0.499, 442.000, 64]
+    level:    [77, 79]
+  17305778:
+    template: Gherrmoga
+    at:       [456.000, 0.500, 440.000, 64]
+    level:    [76, 77]
+  17305779:
+    template: Bloodwing_Maimer
+    at:       [454.000, -0.060, 434.000, 64]
+    level:    [75, 75]
+  17305780:
+    template: Bloodwing_Maimer
+    at:       [462.000, -0.146, 464.000, 64]
+    level:    [75, 75]
+  17305781:
+    template: Bloodwing_Maimer
+    at:       [452.000, 0.210, 436.000, 64]
+    level:    [75, 75]
+  17305782:
+    template: Bloodwing_Maimer
+    at:       [464.000, 0.173, 436.000, 64]
+    level:    [75, 75]
+  17305783:
+    template: Bloodwing_Deathrainer
+    at:       [450.000, 0.001, 438.000, 64]
+    level:    [75, 75]
+  17305784:
+    template: Bloodwing_Deathrainer
+    at:       [466.000, 0.500, 438.000, 64]
+    level:    [75, 75]
+  17305785:
+    template: Excenmille_S
+    script:   Excenmille
+    at:       [458.000, -0.006, 416.000, 192]
+    level:    [75, 75]
+  17305786:
+    template: Goblin_Scrounger
+  17305787:
+    template: Goblin_Scrounger
+  17305788:
+    template: Goblin_Scrounger
+  17305789:
+    template: Goblin_Scrounger
+  17305790:
+    template: Goblin_Scrounger
+  17305791:
+    template: Yagudo_Kamari
+  17305792:
+    template: Yagudo_Kamari
+  17305793:
+    template: Yagudo_Kamari
+  17305794:
+    template: Yagudo_Kamari
+  17305795:
+    template: Yagudo_Kamari
+  17305796:
+    template: Yagudo_Kamari
+  17305797:
+    template: Yagudo_Kamari
+  17305798:
+    template: Aphotic_Crab
+  17305799:
+    template: Aphotic_Crab
+  17305800:
+    template: Aphotic_Crab
+  17305801:
+    template: Aphotic_Crab
+  17305802:
+    template: Aphotic_Crab
+  17305803:
+    template: Aphotic_Crab
+  17305804:
+    template: Aphotic_Crab
+  17305805:
+    template: Aphotic_Crab
+  17305806:
+    template: Orcish_Brawler_past
+    script:   Orcish_Brawler
+  17305807:
+    template: Orcish_Brawler_past
+    script:   Orcish_Brawler
+  17305808:
+    template: Orcish_Trooper_past
+    script:   Orcish_Trooper
+  17305809:
+    template: Orcish_Trooper_past
+    script:   Orcish_Trooper
+  17305810:
+    template: Orcish_Impaler
+  17305811:
+    template: Orcish_Impaler
+  17305812:
+    template: Old_Quadav_past
+    script:   Old_Quadav
+  17305813:
+    template: Old_Quadav_past
+    script:   Old_Quadav
+  17305814:
+    template: Sapphirine_Quadav
+  17305815:
+    template: Sapphirine_Quadav
+  17305816:
+    template: Emerald_Quadav
+  17305817:
+    template: Emerald_Quadav
+  17305818:
+    template: Yagudo_Theologist
+  17305819:
+    template: Yagudo_Theologist
+  17305820:
+    template: Yagudo_Drummer_past
+    script:   Yagudo_Drummer
+  17305821:
+    template: Yagudo_Drummer_past
+    script:   Yagudo_Drummer
+  17305822:
+    template: Yagudo_Herald_past
+    script:   Yagudo_Herald
+  17305823:
+    template: Yagudo_Herald_past
+    script:   Yagudo_Herald
+  17305824:
+    template: Arch_Demon
+  17305825:
+    template: Arch_Demon
+  17305826:
+    template: Arch_Demon
+  17305827:
+    template: Count_Bifrons
+  17305828:
+    template: Orcish_Mangler
+  17305829:
+    template: Orcish_Mangler
+  17305830:
+    template: Orcish_Muscle
+  17305831:
+    template: Orcish_Muscle
+  17305832:
+    template: Falxfang_Tiger
+  17305833:
+    template: Falxfang_Tiger
+  17305834:
+    template: Falxfang_Tiger
+  17305835:
+    template: Falxfang_Tiger
+  17305836:
+    template: Falxfang_Tiger
+  17305837:
+    template: Falxfang_Tiger
+  17305838:
+    template: Falxfang_Tiger
+  17305839:
+    template: Falxfang_Tiger
+  17305840:
+    template: Falxfang_Tiger
+  17305841:
+    template: Falxfang_Tiger
+  17305850:
+    template: Nhev_Befrathi
+  17305851:
+    template: Syu_Befrathi
+  17305855:
+    template: Pesoso
+  17305856:
+    template: Antje
+  17305863:
+    template: 2nd_Legion_Scout
+  17305864:
+    template: 7th_Cohors_Engineer
+  17305865:
+    template: 2nd_Legion_Scout
+  17305866:
+    template: 7th_Cohors_Engineer
+  17305867:
+    template: 7th_Cohors_Engineer
+  17305868:
+    template: 7th_Cohors_Engineer
+  17305869:
+    template: 7th_Cohors_Engineer
+  17305870:
+    template: 2nd_Legion_Scout
+  17305871:
+    template: 2nd_Legion_Scout
+  17305872:
+    template: 7th_Cohors_Engineer
+  17305873:
+    template: 2nd_Legion_Scout
+  17305874:
+    template: 7th_Cohors_Engineer
+  17305875:
+    template: 2nd_Legion_Scout
+  17305876:
+    template: 2nd_Legion_Scout
+  17305877:
+    template: 2nd_Legion_Scout
+  17305878:
+    template: 7th_Cohors_Engineer
+  17305879:
+    template: 2nd_Legion_Scout
+  17305880:
+    template: 7th_Cohors_Engineer
+  17305881:
+    template: 2nd_Legion_Scout
+  17305882:
+    template: 2nd_Legion_Scout
+  17305883:
+    template: 2nd_Legion_Scout
+  17305884:
+    template: 7th_Cohors_Engineer
+  17305885:
+    template: 2nd_Legion_Scout
+  17305886:
+    template: 2nd_Legion_Scout

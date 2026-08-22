@@ -1,0 +1,1342 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Awoken_Ariri_Samariri_Movalpolos:
+    id:            3865
+    display_name:  Awoken_Ariri_Samariri
+    species:       red_poroggo
+    type:          [notorious]
+    skill_list_id: 2053
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 3598
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Awoken_Hildesvini_Movalpolos:
+    id:            3864
+    display_name:  Awoken_Hildesvini
+    species:       marid
+    type:          [notorious]
+    skill_list_id: 180
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          ice:     -1
+          wind:    -1
+          earth:    2
+          thunder: -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:         2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 3596
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Awoken_Vampyr_Jarl_Movalpolos:
+    id:            3863
+    display_name:  Awoken_Vampyr_Jarl
+    species:       vampyr
+    type:          [notorious]
+    skill_list_id: 2054
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 3594
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bugbby:
+    id:      559
+    species: bugbear
+    type:    [notorious, battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        attp: -50
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+
+  Bugboy:
+    id:            569
+    species:       bugbear
+    type:          [battlefield]
+    skill_list_id: 59
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [war, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 19500
+
+  Chekochuk:
+    id:            707
+    species:       moblin
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 687
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+
+  Elvaan_Automaton:
+    id:            1206
+    species:       elvaan
+    spell_list_id: 1
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 280
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  misc
+          model: 1237
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 3000
+
+  Fantoccini:
+    id:            1296
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 149
+    attributes:
+      render:
+        look:
+          type:  misc
+          model: 1234
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+
+  Fantoccini_Automaton:
+    id:            1297
+    species:       automaton
+    type:          [notorious, battlefield]
+    spell_list_id: 3
+    skill_list_id: 363
+    attributes:
+      combat:
+        skill: axe
+        delay: 320
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+        entity_flags: 131
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  750
+        mp: 8000
+
+  Fantoccini_Avatar:
+    id:            1298
+    species:       carbuncle
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 750
+
+  Fantoccini_Monster:
+    id:            1299
+    species:       rabbit
+    type:          [battlefield]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 131
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 750
+
+  Fantoccini_Wyvern:
+    id:            1300
+    species:       blue_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 3
+        model_size:   1
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 750
+
+  Galkan_Automaton:
+    id:            1452
+    species:       galks
+    spell_list_id: 4
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 280
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  misc
+          model: 1253
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3600
+        mp: 3600
+
+  Gloom_Phantom:
+    id:            6160
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 1
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 3652
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Hume_Automaton:
+    id:            2006
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 280
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  misc
+          model: 1236
+        entity_flags: 1027
+        model_size:      1
+        hitbox:         17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+        mp: 3000
+
+  Jabbos:
+    id:            6161
+    species:       galks
+    type:          [notorious]
+    spell_list_id: 1
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  equipped
+          race:  8
+          face:  8
+          head:  4096
+          body:  8307
+          hands: 12290
+          legs:  16490
+          feet:  20480
+          main:  24670
+          sub:   28672
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Mithran_Automaton:
+    id:            2680
+    species:       mithra
+    type:          [battlefield]
+    spell_list_id: 4
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 280
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  misc
+          model: 1252
+        entity_flags: 515
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2900
+        mp: 2900
+
+  Moblin_Clergyman:
+    id:            2688
+    species:       moblin
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 688
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2100
+        mp: 2500
+
+  Moblin_Fantocciniman:
+    id:            2693
+    species:       moblin
+    type:          [battlefield]
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 691
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3800
+
+  Moblin_Wisewoman:
+    id:            2707
+    species:       moblin
+    type:          [battlefield]
+    spell_list_id: 3
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 682
+        entity_flags: 643
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2100
+        mp: 2500
+
+  Movamuq:
+    id:            2766
+    species:       moblin
+    type:          [notorious, battlefield]
+    spell_list_id: 20
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 688
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+
+  Swipostik:
+    id:            3828
+    species:       moblin
+    type:          [notorious, battlefield]
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 682
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+
+  Tarutaru_Automaton:
+    id:            3850
+    species:       tarutaru
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 280
+      jobs: [blm, rdm]
+      render:
+        look:
+          type:  misc
+          model: 1238
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  Trikotrak:
+    id:            4005
+    species:       moblin
+    type:          [notorious, battlefield]
+    spell_list_id: 3
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 681
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2300
+
+  Twilotak:
+    id:            4057
+    species:       moblin
+    type:          [battlefield]
+    spell_list_id: 5
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: axe
+        delay: 180
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 697
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 3500
+
+spawns:
+  16830465:
+    template: Movamuq
+    at:       [-464.321, 122.032, 23.421, 67]
+    level:    [62, 63]
+  16830466:
+    template: Chekochuk
+    at:       [-461.080, 122.032, 24.921, 67]
+    level:    [62, 63]
+  16830467:
+    template: Trikotrak
+    at:       [-458.992, 122.032, 24.973, 67]
+    level:    [62, 63]
+  16830468:
+    template: Swipostik
+    at:       [-455.936, 122.032, 23.416, 67]
+    level:    [62, 63]
+  16830469:
+    template: Bugbby
+    at:       [-460.149, 122.032, 20.257, 67]
+    level:    [63, 64]
+  16830470:
+    template: Movamuq
+    at:       [15.661, 2.032, 23.358, 67]
+    level:    [62, 63]
+  16830471:
+    template: Chekochuk
+    at:       [18.902, 2.032, 24.858, 67]
+    level:    [62, 63]
+  16830472:
+    template: Trikotrak
+    at:       [20.990, 2.032, 24.910, 67]
+    level:    [62, 63]
+  16830473:
+    template: Swipostik
+    at:       [24.046, 2.032, 23.353, 67]
+    level:    [62, 63]
+  16830474:
+    template: Bugbby
+    at:       [19.833, 2.032, 20.194, 67]
+    level:    [63, 64]
+  16830475:
+    template: Movamuq
+    at:       [495.630, -117.968, 23.362, 67]
+    level:    [62, 63]
+  16830476:
+    template: Chekochuk
+    at:       [498.871, -117.968, 24.862, 67]
+    level:    [62, 63]
+  16830477:
+    template: Trikotrak
+    at:       [500.959, -117.968, 24.914, 67]
+    level:    [62, 63]
+  16830478:
+    template: Swipostik
+    at:       [504.015, -117.968, 23.357, 67]
+    level:    [62, 63]
+  16830479:
+    template: Bugbby
+    at:       [499.802, -117.968, 20.198, 67]
+    level:    [63, 64]
+  16830480:
+    template: Twilotak
+    at:       [-460.000, 122.032, 20.000, 64]
+    level:    [45, 45]
+  16830481:
+    template: Moblin_Wisewoman
+    at:       [-465.500, 122.000, 28.000, 64]
+    level:    [39, 41]
+  16830482:
+    template: Moblin_Clergyman
+    at:       [-463.500, 122.000, 30.000, 64]
+    level:    [39, 41]
+  16830483:
+    template: Moblin_Wisewoman
+    at:       [-461.500, 121.986, 32.000, 64]
+    level:    [39, 41]
+  16830484:
+    template: Moblin_Clergyman
+    at:       [-458.500, 122.000, 32.000, 64]
+    level:    [39, 41]
+  16830485:
+    template: Moblin_Wisewoman
+    at:       [-456.500, 122.000, 30.000, 64]
+    level:    [39, 41]
+  16830486:
+    template: Moblin_Clergyman
+    at:       [-454.500, 122.000, 28.000, 64]
+    level:    [39, 41]
+  16830487:
+    template: Twilotak
+    at:       [9.000, 1.500, 20.000, 64]
+    level:    [45, 45]
+  16830488:
+    template: Moblin_Wisewoman
+    at:       [14.482, 1.500, 27.937, 64]
+    level:    [39, 41]
+  16830489:
+    template: Moblin_Clergyman
+    at:       [16.482, 1.500, 29.937, 64]
+    level:    [39, 41]
+  16830490:
+    template: Moblin_Wisewoman
+    at:       [18.482, 1.486, 31.937, 64]
+    level:    [39, 41]
+  16830491:
+    template: Moblin_Clergyman
+    at:       [21.482, 1.500, 31.937, 64]
+    level:    [39, 41]
+  16830492:
+    template: Moblin_Wisewoman
+    at:       [23.482, 1.500, 29.937, 64]
+    level:    [39, 41]
+  16830493:
+    template: Moblin_Clergyman
+    at:       [25.482, 1.500, 27.937, 64]
+    level:    [39, 41]
+  16830494:
+    template: Twilotak
+    at:       [499.951, -118.468, 19.941, 64]
+    level:    [45, 45]
+  16830495:
+    template: Moblin_Wisewoman
+    at:       [494.451, -118.500, 27.941, 64]
+    level:    [39, 41]
+  16830496:
+    template: Moblin_Clergyman
+    at:       [496.451, -118.500, 29.941, 64]
+    level:    [39, 41]
+  16830497:
+    template: Moblin_Wisewoman
+    at:       [498.451, -118.514, 31.941, 64]
+    level:    [39, 41]
+  16830498:
+    template: Moblin_Clergyman
+    at:       [501.451, -118.500, 31.941, 64]
+    level:    [39, 41]
+  16830499:
+    template: Moblin_Wisewoman
+    at:       [503.451, -118.500, 29.941, 64]
+    level:    [39, 41]
+  16830500:
+    template: Moblin_Clergyman
+    at:       [505.451, -118.500, 27.941, 64]
+    level:    [39, 41]
+  16830501:
+    template: Bugboy
+    at:       [-460.000, 121.532, 20.000, 64]
+    level:    [80, 80]
+  16830503:
+    template: Bugboy
+    at:       [20.138, 1.532, 16.883, 64]
+    level:    [80, 80]
+  16830505:
+    template: Bugboy
+    at:       [500.362, -118.468, 16.365, 64]
+    level:    [80, 80]
+  16830507:
+    template: Moblin_Fantocciniman
+    at:       [-464.000, 121.704, 26.000, 64]
+    level:    [62, 62]
+  16830509:
+    template: Fantoccini
+    at:       [-460.000, 121.532, 20.000, 64]
+    level:    [60, 60]
+  16830510:
+    template: Fantoccini_Monster
+    at:       [-460.000, 121.532, 20.000, 64]
+    level:    [57, 57]
+  16830511:
+    template: Fantoccini_Wyvern
+    at:       [-460.000, 121.532, 20.000, 64]
+    level:    [57, 57]
+  16830512:
+    template: Fantoccini_Avatar
+    at:       [-460.000, 121.532, 20.000, 64]
+    level:    [57, 57]
+  16830513:
+    template: Fantoccini_Automaton
+    at:       [-460.000, 121.532, 20.000, 64]
+    level:    [57, 57]
+  16830514:
+    template: Moblin_Fantocciniman
+    at:       [16.000, 2.204, 26.000, 64]
+    level:    [62, 62]
+  16830516:
+    template: Fantoccini
+    at:       [20.000, 2.032, 20.000, 64]
+    level:    [60, 60]
+  16830517:
+    template: Fantoccini_Monster
+    at:       [20.000, 2.032, 20.000, 64]
+    level:    [57, 57]
+  16830518:
+    template: Fantoccini_Wyvern
+    at:       [20.000, 2.032, 20.000, 64]
+    level:    [57, 57]
+  16830519:
+    template: Fantoccini_Avatar
+    at:       [20.000, 2.032, 20.000, 64]
+    level:    [57, 57]
+  16830520:
+    template: Fantoccini_Automaton
+    at:       [20.000, 2.032, 20.000, 64]
+    level:    [57, 57]
+  16830521:
+    template: Moblin_Fantocciniman
+    at:       [496.191, -117.796, 26.297, 64]
+    level:    [62, 62]
+  16830523:
+    template: Fantoccini
+    at:       [500.191, -117.968, 20.297, 64]
+    level:    [60, 60]
+  16830524:
+    template: Fantoccini_Monster
+    at:       [500.191, -117.968, 20.297, 64]
+    level:    [57, 57]
+  16830525:
+    template: Fantoccini_Wyvern
+    at:       [500.191, -117.968, 20.297, 64]
+    level:    [57, 57]
+  16830526:
+    template: Fantoccini_Avatar
+    at:       [500.191, -117.968, 20.297, 64]
+    level:    [57, 57]
+  16830527:
+    template: Fantoccini_Automaton
+    at:       [500.191, -117.968, 20.297, 64]
+    level:    [57, 57]
+  16830529:
+    template: Hume_Automaton
+    at:       [-466.000, 121.704, 26.000, 64]
+    level:    [62, 62]
+  16830530:
+    template: Elvaan_Automaton
+    at:       [-466.000, 121.704, 26.000, 64]
+    level:    [62, 62]
+  16830531:
+    template: Tarutaru_Automaton
+    at:       [-462.000, 121.637, 26.000, 64]
+    level:    [62, 62]
+  16830532:
+    template: Mithran_Automaton
+    at:       [-458.000, 121.637, 26.000, 64]
+    level:    [62, 62]
+  16830533:
+    template: Galkan_Automaton
+    at:       [-454.000, 121.704, 26.000, 64]
+    level:    [62, 62]
+  16830535:
+    template: Hume_Automaton
+    at:       [14.138, 1.704, 22.883, 64]
+    level:    [62, 62]
+  16830536:
+    template: Elvaan_Automaton
+    at:       [14.138, 1.704, 22.883, 64]
+    level:    [62, 62]
+  16830537:
+    template: Tarutaru_Automaton
+    at:       [18.138, 1.637, 22.883, 64]
+    level:    [62, 62]
+  16830538:
+    template: Mithran_Automaton
+    at:       [22.138, 1.637, 22.883, 64]
+    level:    [62, 62]
+  16830539:
+    template: Galkan_Automaton
+    at:       [26.138, 1.704, 22.883, 64]
+    level:    [62, 62]
+  16830541:
+    template: Hume_Automaton
+    at:       [494.362, -118.296, 22.365, 64]
+    level:    [62, 62]
+  16830542:
+    template: Elvaan_Automaton
+    at:       [494.362, -118.296, 22.365, 64]
+    level:    [62, 62]
+  16830543:
+    template: Tarutaru_Automaton
+    at:       [498.362, -118.363, 22.365, 64]
+    level:    [62, 62]
+  16830544:
+    template: Mithran_Automaton
+    at:       [502.362, -118.363, 22.365, 64]
+    level:    [62, 62]
+  16830545:
+    template: Galkan_Automaton
+    at:       [506.362, -118.296, 22.365, 64]
+    level:    [62, 62]
+  16830546:
+    script: Buggesy
+  16830547:
+    script: Bugafrod
+  16830548:
+    script: Viovek
+  16830549:
+    script: Lustilok
+  16830550:
+    script: Glutogroc
+  16830551:
+    script: Gredogreq
+  16830552:
+    script: Angoraq
+  16830553:
+    script: Limbolaq
+  16830554:
+    script: Trechitrac
+  16830556:
+    script: Trechitracs_Bat
+  16830557:
+    script: Buggesy
+  16830558:
+    script: Bugafrod
+  16830559:
+    script: Viovek
+  16830560:
+    script: Lustilok
+  16830561:
+    script: Glutogroc
+  16830562:
+    script: Gredogreq
+  16830563:
+    script: Angoraq
+  16830564:
+    script: Limbolaq
+  16830565:
+    script: Trechitrac
+  16830567:
+    script: Trechitracs_Bat
+  16830568:
+    script: Buggesy
+  16830569:
+    script: Bugafrod
+  16830570:
+    script: Viovek
+  16830571:
+    script: Lustilok
+  16830572:
+    script: Glutogroc
+  16830573:
+    script: Gredogreq
+  16830574:
+    script: Angoraq
+  16830575:
+    script: Limbolaq
+  16830576:
+    script: Trechitrac
+  16830578:
+    script: Trechitracs_Bat
+  16830579:
+    template: Gloom_Phantom
+    at:       [-461.768, 121.637, 17.623, 253]
+    level:    [139, 139]
+  16830580:
+    template: Awoken_Vampyr_Jarl_Movalpolos
+    script:   Awoken_Vampyr_Jarl
+    at:       [-462.233, 121.918, 21.589]
+    level:    [139, 139]
+  16830581:
+    template: Awoken_Ariri_Samariri_Movalpolos
+    script:   Awoken_Ariri_Samariri
+    at:       [-461.263, 121.532, 18.764]
+    level:    [139, 139]
+  16830582:
+    template: Awoken_Hildesvini_Movalpolos
+    script:   Awoken_Hildesvini
+    at:       [-464.152, 121.704, 24.048]
+    level:    [139, 139]
+  16830583:
+    template: Jabbos
+    at:       [-460.000, 121.532, 20.000, 64]
+    level:    [139, 139]
+  16830584:
+    template: Gloom_Phantom
+    at:       [18.232, 1.637, 17.623, 253]
+    level:    [139, 139]
+  16830585:
+    template: Awoken_Vampyr_Jarl_Movalpolos
+    script:   Awoken_Vampyr_Jarl
+    at:       [17.767, 1.918, 21.589]
+    level:    [139, 139]
+  16830586:
+    template: Awoken_Ariri_Samariri_Movalpolos
+    script:   Awoken_Ariri_Samariri
+    at:       [18.737, 1.532, 18.764]
+    level:    [139, 139]
+  16830587:
+    template: Awoken_Hildesvini_Movalpolos
+    script:   Awoken_Hildesvini
+    at:       [15.848, 1.704, 24.048]
+    level:    [139, 139]
+  16830588:
+    template: Jabbos
+    at:       [20.000, 1.532, 20.000, 64]
+    level:    [139, 139]
+  16830589:
+    template: Gloom_Phantom
+    at:       [498.232, -118.363, 17.623, 253]
+    level:    [139, 139]
+  16830590:
+    template: Awoken_Vampyr_Jarl_Movalpolos
+    script:   Awoken_Vampyr_Jarl
+    at:       [497.767, -118.082, 21.589]
+    level:    [139, 139]
+  16830591:
+    template: Awoken_Ariri_Samariri_Movalpolos
+    script:   Awoken_Ariri_Samariri
+    at:       [498.737, -118.468, 18.764]
+    level:    [139, 139]
+  16830592:
+    template: Awoken_Hildesvini_Movalpolos
+    script:   Awoken_Hildesvini
+    at:       [495.848, -118.296, 24.048]
+    level:    [139, 139]
+  16830593:
+    template: Jabbos
+    at:       [500.000, -118.468, 20.000, 64]
+    level:    [139, 139]

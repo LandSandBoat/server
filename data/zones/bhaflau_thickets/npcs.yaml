@@ -1,0 +1,807 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16990599:
+    script: NPC[187]
+    at:     [1.000, 0.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+      moving:        7
+    speed:           40
+    animation_speed: 40
+
+  16990600:
+    script: NPC[188]
+    at:     [331.456, -10.000, 182.845, 104]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    speed:           40
+    animation_speed: 40
+
+  16990601:
+    script:       Warhorse_Hoofprint
+    display_name: Warhorse Hoofprint
+    at:           [460.166, -14.926, 256.214]
+    render:
+      look:
+        type:  standard
+        model: 1525
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+    widescan: true
+
+  16990602:
+    script:       Warhorse_Hoofprint
+    display_name: Warhorse Hoofprint
+    render:
+      look:
+        type:  standard
+        model: 1525
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+    widescan: true
+
+  16990603:
+    script:       Warhorse_Hoofprint
+    display_name: Warhorse Hoofprint
+    render:
+      look:
+        type:  standard
+        model: 1525
+      entity_flags: 27
+      name_vis:     32
+      name_prefix:  32
+    widescan: true
+
+  16990604:
+    script:       qm1
+    display_name: ???
+    at:           [331.456, -10.000, 182.845, 104]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  16990605:
+    script:       qm2
+    display_name: ???
+    at:           [-32.405, -32.529, 484.546, 208]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  16990606:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16990607:
+    script: NPC[18f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16990608:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16990609:
+    script: NPC[191]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16990610:
+    script:       qm8
+    display_name: ???
+    at:           [30.711, -32.838, 580.932]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+
+  16990612:
+    script: NPC[194]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16990613:
+    script: NPC[195]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16990614:
+    script: NPC[196]
+    render:
+      look:
+        type:  standard
+        model: 82
+      name_vis: 4
+
+  16990615:
+    script: NPC[197]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  16990616:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+
+  16990617:
+    script: NPC[199]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  16990618:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16990619:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16990620:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16990621:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16990622:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  16990623:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    widescan: true
+
+  16990624:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-184.957, -5.816, -829.355, 206]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  16990625:
+    script:       _1g0
+    display_name: Moogle
+    at:           [573.625, -12.500, 140.000]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  16990626:
+    script: _1g1
+    at:     [-180.000, -12.372, -761.482]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    speed:           40
+    animation_speed: 40
+
+  16990627:
+    script: _1g2
+    at:     [-180.000, -6.800, -833.921]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  4099
+      animation:     close_door
+      animation_sub: 16
+      moving:        1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16990628:
+    script:       Mamuuja
+    display_name: Mamuuja
+    at:           [-184.957, -5.816, -829.355, 206]
+    render:
+      look:
+        type:  standard
+        model: 964
+      moving: 1
+    widescan: true
+    content:  TOAU
+
+  16990629:
+    script:       _1g0
+    display_name: Postern
+    at:           [573.625, -12.500, 140.000]
+    render:
+      look:
+        type: door
+      door_id:      812069215
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  16990630:
+    script:       _1g1
+    display_name: Heavy Iron Gate
+    at:           [-180.000, -12.372, -761.482]
+    render:
+      look:
+        type: door
+      door_id:      828846431
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  16990631:
+    script:       _1g2
+    display_name: Runic Seal
+    at:           [-180.000, -6.800, -833.921]
+    render:
+      look:
+        type: door
+      door_id:      845623647
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  16990632:
+    script:       Runic_Portal
+    display_name: Runic Portal
+    at:           [-211.834, -12.719, -818.050]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  16990633:
+    script:       _1g3
+    display_name: Door_1g3
+    at:           [20.015, -30.729, 597.981]
+    render:
+      look:
+        type: door
+      door_id:      862400863
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  16990634:
+    script:       _1g4
+    display_name: Door_1g4
+    at:           [-459.942, -19.048, -2.999]
+    render:
+      look:
+        type: door
+      door_id:      879178079
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  16990635:
+    script:       Kamih_Mapokhalam
+    display_name: Kamih Mapokhalam
+    at:           [20.015, -30.729, 597.981, 64]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  5
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  16990636:
+    script:       Hamta-Iramta
+    display_name: Hamta-Iramta
+    at:           [-459.942, -19.048, -2.999, 64]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  11
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       21
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  16990637:
+    script: NPC[1ad]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    status: normal
+
+  16990638:
+    script:       qm3
+    display_name: ???
+    at:           [460.166, -14.926, 256.214, 192]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  16990639:
+    script:       Alcander
+    display_name: Alcander
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  12
+        head:  4096
+        body:  8225
+        hands: 12319
+        legs:  16400
+        feet:  20482
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  16990640:
+    script:       Tinga-Matonga
+    display_name: Tinga-Matonga
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  2
+        head:  4096
+        body:  8235
+        hands: 12296
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  16990641:
+    script: blank
+    at:     [-208.720, -11.889, -779.713]
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16990642:
+    script:       Ramblix
+    display_name: ???
+    at:           [566.851, -7.823, 156.368, 120]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 27
+      name_prefix:  32
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  16990643:
+    script: blank
+    at:     [566.851, -7.823, 156.368, 120]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    speed:           40
+    animation_speed: 40
+
+  16990644:
+    script: blank
+    at:     [-15.453, -28.497, 140.072, 103]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    speed:           40
+    animation_speed: 40
+
+  16990645:
+    script:       Daswil
+    display_name: Daswil
+    at:           [-208.720, -11.889, -779.713, 38]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  13
+        head:  4261
+        body:  8357
+        hands: 12459
+        legs:  16549
+        feet:  20651
+        main:  24951
+        sub:   28672
+      entity_flags: 25
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  16990646:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [566.851, -7.823, 156.368, 120]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  16990647:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [566.851, -7.823, 156.368, 120]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: TOAU
+
+  16990648:
+    script:       Ahmibi_Watchtower
+    display_name: Ahmibi Watchtower
+    at:           [-15.453, -28.497, 140.072, 103]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  16990649:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [98.557, -20.249, 344.977]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:  normal
+    content: TOAU
+
+  16990650:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [98.557, -20.249, 344.977]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:  normal
+    content: TOAU
+
+  16990651:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [146.059, -16.499, 338.636]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:   normal
+    widescan: true
+
+  16990652:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [242.654, -31.830, 486.744]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:  normal
+    content: TOAU
+
+  16990653:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [292.814, -28.262, 508.026]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:   normal
+    widescan: true
+
+  16990654:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [177.026, -18.207, 313.230]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32775
+    status:   normal
+    widescan: true
+
+  16990655:
+    script: blank
+    at:     [-173.264, -7.086, -825.648, 64]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 27
+      name_prefix:  32
+    speed:           40
+    animation_speed: 40
+
+  16990656:
+    script: HomePoint#1
+    at:     [-98.000, -10.000, -493.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    content: SOA
+
+  16990657:
+    script:       Mythralline_Wellspring
+    display_name: Mythralline Wellspring
+    at:           [180.813, -15.188, 373.560, 223]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  16990658:
+    script:       qm9
+    display_name: ???
+    at:           [-173.264, -7.086, -825.648, 64]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  16990659:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-173.264, -7.086, -825.648, 64]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  TOAU
+
+  16990660:
+    script:       HomePoint#1
+    display_name: 'Home Point #1'
+    at:           [-98.000, -10.000, -493.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  16990661:
+    script:       Home_Point_#2
+    display_name: 'Home Point #2'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16990662:
+    script:       Home_Point_#3
+    display_name: 'Home Point #3'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16990663:
+    script:       Home_Point_#4
+    display_name: 'Home Point #4'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16990664:
+    script:       Home_Point_#5
+    display_name: 'Home Point #5'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true

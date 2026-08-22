@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          222
+  night:        222
+  battle_solo:  115
+  battle_party: 218
+
+zonelines:
+
+  z0i0:
+    from:  [20.000, -2.174, 59.998]
+    to:    spire_of_dem
+    at:    [-0.039, -4.083, 293.641, 1.570796]
+    scale: [1.000, 5.000]

@@ -1,0 +1,507 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ingester:
+    id:            2080
+    species:       gorger
+    type:          [battlefield]
+    skill_list_id: 138
+    attributes:
+      combat:
+        skill: sword
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 1133
+        model_size:  2
+        hitbox:     13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+
+  Neogorger:
+    id:            2824
+    species:       gorger
+    type:          [battlefield]
+    skill_list_id: 137
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 1140
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 800
+
+  Neoingester:
+    id:            2825
+    species:       gorger
+    type:          [battlefield]
+    skill_list_id: 137
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 1140
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 800
+
+  Neosatiator:
+    id:            2827
+    species:       gorger
+    type:          [battlefield]
+    skill_list_id: 137
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 1140
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   sleepshroom
+        - chance: common
+          item:   woozyshroom
+        - chance: rare
+          item:   nest_chest_key
+        - chance: rare
+          item:   danceshroom
+        - chance: common
+          item:   clump_of_exoray_mold
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Offspring:
+    id:            2947
+    species:       gorger
+    type:          [battlefield]
+    skill_list_id: 137
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 1140
+        entity_flags:  1153
+        animation_sub:    8
+        hitbox:          10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 450
+
+  Progenerator:
+    id:            3204
+    species:       gorger
+    type:          [battlefield]
+    skill_list_id: 138
+    attributes:
+      combat:
+        skill: sword
+        delay: 190
+      jobs: [war, rdm]
+      resists:
+        immune_status: [bind, light_sleep, dark_sleep]
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 1133
+        entity_flags:  6
+        model_size:    3
+        hitbox:       16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3700
+
+  Wanderer_enm:
+    id:            4283
+    display_name:  Wanderer
+    species:       wanderer
+    type:          [battlefield]
+    skill_list_id: 255
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 1110
+        entity_flags:  131
+        animation_sub:   5
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 800
+
+spawns:
+  16855041:
+    template: Progenerator
+    at:       [-240.000, 60.000, 0.000, 190]
+    level:    [37, 38]
+  16855042:
+    template: Offspring
+    at:       [-240.000, 60.000, 0.000, 190]
+    level:    [27, 28]
+  16855043:
+    template: Offspring
+    at:       [-240.000, 60.000, 0.000, 190]
+    level:    [27, 28]
+  16855044:
+    template: Offspring
+    at:       [-240.000, 60.000, 0.000, 190]
+    level:    [27, 28]
+  16855045:
+    template: Offspring
+    at:       [-240.000, 60.000, 0.000, 190]
+    level:    [27, 28]
+  16855046:
+    template: Progenerator
+    at:       [0.001, 0.001, 0.000, 190]
+    level:    [37, 38]
+  16855047:
+    template: Offspring
+    at:       [0.001, 0.001, 0.000, 190]
+    level:    [27, 28]
+  16855048:
+    template: Offspring
+    at:       [0.001, 0.001, 0.000, 190]
+    level:    [27, 28]
+  16855049:
+    template: Offspring
+    at:       [0.001, 0.001, 0.000, 190]
+    level:    [27, 28]
+  16855050:
+    template: Offspring
+    at:       [0.001, 0.001, 0.000, 190]
+    level:    [27, 28]
+  16855051:
+    template: Progenerator
+    at:       [240.000, -60.000, 0.000, 190]
+    level:    [37, 38]
+  16855052:
+    template: Offspring
+    at:       [240.000, -60.000, 0.000, 190]
+    level:    [27, 28]
+  16855053:
+    template: Offspring
+    at:       [240.000, -60.000, 0.000, 190]
+    level:    [27, 28]
+  16855054:
+    template: Offspring
+    at:       [240.000, -60.000, 0.000, 190]
+    level:    [27, 28]
+  16855055:
+    template: Offspring
+    at:       [240.000, -60.000, 0.000, 190]
+    level:    [27, 28]
+  16855056:
+    template: Ingester
+    at:       [-240.000, 60.000, 0.000, 191]
+    level:    [37, 37]
+  16855057:
+    template: Neoingester
+    at:       [-240.000, 60.000, 0.000, 191]
+    level:    [30, 30]
+  16855058:
+    template: Neogorger
+    at:       [-240.000, 60.000, 0.000, 191]
+    level:    [30, 30]
+  16855059:
+    template: Neosatiator
+    at:       [-240.000, 60.000, 0.000, 191]
+    level:    [30, 30]
+  16855060:
+    template: Wanderer_enm
+    at:       [-240.000, 60.000, 0.000, 191]
+    level:    [30, 30]
+  16855062:
+    template: Ingester
+    at:       [0.001, 0.001, 0.000, 191]
+    level:    [37, 37]
+  16855063:
+    template: Neoingester
+    at:       [0.100, 0.000, 0.000, 191]
+    level:    [30, 30]
+  16855064:
+    template: Neogorger
+    at:       [0.100, 0.000, 0.000, 191]
+    level:    [30, 30]
+  16855065:
+    template: Neosatiator
+    at:       [0.100, 0.000, 0.000, 191]
+    level:    [30, 30]
+  16855066:
+    template: Wanderer_enm
+    at:       [0.100, 0.000, 0.000, 191]
+    level:    [30, 30]
+  16855068:
+    template: Ingester
+    at:       [240.000, -60.000, 0.000, 191]
+    level:    [37, 37]
+  16855069:
+    template: Neoingester
+    at:       [240.000, -60.000, 0.000, 191]
+    level:    [30, 30]
+  16855070:
+    template: Neogorger
+    at:       [240.000, -60.000, 0.000, 191]
+    level:    [30, 30]
+  16855071:
+    template: Neosatiator
+    at:       [240.000, -60.000, 0.000, 191]
+    level:    [30, 30]
+  16855072:
+    template: Wanderer_enm
+    at:       [240.000, -60.000, 0.000, 191]
+    level:    [30, 30]
+  16855074:
+    script: Recollector
+  16855075:
+    script: Insatiable_Gorger
+  16855076:
+    script: Insatiable_Offspring
+  16855077:
+    script: Insatiable_Offspring
+  16855078:
+    script: Disconsolate_Weeper
+  16855079:
+    script: Disconsolate_Weeper
+  16855080:
+    script: Disconsolate_Weeper
+  16855081:
+    script: Disconsolate_Weeper
+  16855082:
+    script: Disconsolate_Weeper
+  16855083:
+    script: Disconsolate_Weeper
+  16855084:
+    script: Disconsolate_Weeper
+  16855085:
+    script: Disconsolate_Weeper
+  16855086:
+    script: Disconsolate_Weeper
+  16855087:
+    script: Disconsolate_Weeper
+  16855088:
+    script: Disconsolate_Weeper
+  16855089:
+    script: Disconsolate_Weeper
+  16855090:
+    script: Disconsolate_Weeper
+  16855091:
+    script: Disconsolate_Weeper
+  16855092:
+    script: Disconsolate_Weeper
+  16855093:
+    script: Disconsolate_Weeper
+  16855094:
+    script: Disconsolate_Weeper
+  16855095:
+    script: Disconsolate_Weeper
+  16855096:
+    script: Recollector
+  16855097:
+    script: Insatiable_Gorger
+  16855098:
+    script: Insatiable_Offspring
+  16855099:
+    script: Insatiable_Offspring
+  16855100:
+    script: Disconsolate_Weeper
+  16855101:
+    script: Disconsolate_Weeper
+  16855102:
+    script: Disconsolate_Weeper
+  16855103:
+    script: Disconsolate_Weeper
+  16855104:
+    script: Disconsolate_Weeper
+  16855105:
+    script: Disconsolate_Weeper
+  16855106:
+    script: Disconsolate_Weeper
+  16855107:
+    script: Disconsolate_Weeper
+  16855108:
+    script: Disconsolate_Weeper
+  16855109:
+    script: Disconsolate_Weeper
+  16855110:
+    script: Disconsolate_Weeper
+  16855111:
+    script: Disconsolate_Weeper
+  16855112:
+    script: Disconsolate_Weeper
+  16855113:
+    script: Disconsolate_Weeper
+  16855114:
+    script: Disconsolate_Weeper
+  16855115:
+    script: Disconsolate_Weeper
+  16855116:
+    script: Disconsolate_Weeper
+  16855117:
+    script: Disconsolate_Weeper
+  16855118:
+    script: Recollector
+  16855119:
+    script: Insatiable_Gorger
+  16855120:
+    script: Insatiable_Offspring
+  16855121:
+    script: Insatiable_Offspring
+  16855122:
+    script: Disconsolate_Weeper
+  16855123:
+    script: Disconsolate_Weeper
+  16855124:
+    script: Disconsolate_Weeper
+  16855125:
+    script: Disconsolate_Weeper
+  16855126:
+    script: Disconsolate_Weeper
+  16855127:
+    script: Disconsolate_Weeper
+  16855128:
+    script: Disconsolate_Weeper
+  16855129:
+    script: Disconsolate_Weeper
+  16855130:
+    script: Disconsolate_Weeper
+  16855131:
+    script: Disconsolate_Weeper
+  16855132:
+    script: Disconsolate_Weeper
+  16855133:
+    script: Disconsolate_Weeper
+  16855134:
+    script: Disconsolate_Weeper
+  16855135:
+    script: Disconsolate_Weeper
+  16855136:
+    script: Disconsolate_Weeper
+  16855137:
+    script: Disconsolate_Weeper
+  16855138:
+    script: Disconsolate_Weeper
+  16855139:
+    script: Disconsolate_Weeper

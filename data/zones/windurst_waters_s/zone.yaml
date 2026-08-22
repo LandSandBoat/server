@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, costume, los_player_block]
+music:
+  day:          182
+  night:        182
+  battle_solo:  182
+  battle_party: 182
+
+zonelines:
+
+  z2m0:
+    from:  [-40.194, -7.871, 248.809]
+    to:    west_sarutabaruta_s
+    at:    [320.018, -6.684, -45.166, 4.712389]
+    scale: [1.000, 5.000]
+
+  zms6:
+    from:  [159.934, -8.386, -64.086]
+    to:    windurst_waters_s
+    at:    [160.000, -2.350, -8.000, 4.712389]
+    scale: [1.000, 6.000]

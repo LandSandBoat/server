@@ -1,0 +1,1770 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Afrhaad:
+    id:            59
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 1179
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bashdeel:
+    id:            353
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1888
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Clavauert_B_Chanoix:
+    id:            739
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  equipped
+          race:  4
+          face:  14
+          head:  4221
+          body:  8307
+          hands: 12403
+          legs:  16499
+          feet:  20595
+        model_size:  1
+        hitbox:     12
+      spawn:
+        type: [scripted]
+
+  Coney:
+    id:            774
+    species:       rabbit
+    type:          [battlefield]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 270
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Count_Dracula:
+    id:            813
+    species:       vampyr
+    spell_list_id: 5
+    skill_list_id: 252
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1845
+        entity_flags: 139
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+        mp:  9999
+
+  Cursed_Doppelganger:
+    id:            866
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      render:
+        look:
+          type: equipped
+          race: 1
+          face: 0
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Danzo:
+    id:            901
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      render:
+        look:
+          type:  misc
+          model: 1967
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dhiadjhar:
+    id:            1024
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  misc
+          model: 1889
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Frozen_Bones:
+    id:            1433
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ganmuul:
+    id:            1458
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  misc
+          model: 1889
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Gasharyad:
+    id:            1474
+    species:       humes
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1881
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Gelid_Bhoot:
+    id:            1489
+    species:       bhoot
+    spell_list_id: 28
+    skill_list_id: 52
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      5
+          wind:    -1
+          thunder: -2
+          water:   -1
+          light:   -2
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 369
+        entity_flags: 3
+        model_size:   1
+        hitbox:       8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ghahnis:
+    id:            1510
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  misc
+          model: 1889
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Ghayaraan:
+    id:            1512
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1888
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Habraheem:
+    id:            1866
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Hkadouf:
+    id:            1963
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Imp:
+    id:            2065
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  1153
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Jalyaat:
+    id:            2140
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  misc
+          model: 1889
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Krinahal:
+    id:            2288
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1888
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kudagitsune:
+    id:            2290
+    species:       bhoot
+    type:          [battlefield]
+    spell_list_id: 28
+    skill_list_id: 52
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      5
+          wind:    -1
+          thunder: -2
+          water:   -1
+          light:   -2
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 369
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Kusa:
+    id:            2301
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      render:
+        look:
+          type:  misc
+          model: 1970
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lamia_Bowyer:
+    id:            2325
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1646
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lamia_Prosector:
+    id:            2355
+    species:       lamiae
+    spell_list_id: 28
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lamia_Sharper:
+    id:            2357
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1655
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Leujaoam_Worm:
+    id:            2401
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Mareyamad:
+    id:            2560
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mineral_Eater:
+    id:            2671
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Nareema:
+    id:            2810
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1885
+        entity_flags: 539
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Oko:
+    id:            2960
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      render:
+        look:
+          type:  misc
+          model: 1969
+        entity_flags: 1051
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Miner:
+    id:            3259
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Qudeen:
+    id:            3279
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Rahdjab:
+    id:            3306
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  misc
+          model: 1889
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Raubahn_redvsbl:
+    id:            5751
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1393
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Rhushouf:
+    id:            3361
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  misc
+          model: 1889
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Saizo:
+    id:            3443
+    species:       humes
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      render:
+        look:
+          type:  misc
+          model: 1968
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Salimuhl:
+    id:            3445
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      render:
+        look:
+          type:  misc
+          model: 1881
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      spawn:
+        type: [scripted]
+
+  Salyhaar:
+    id:            3447
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shailham:
+    id:            3581
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  misc
+          model: 1890
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Sharayaan:
+    id:            3586
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shayaam:
+    id:            3590
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tahbmar:
+    id:            3833
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  misc
+          model: 1889
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Ubdeen:
+    id:            4073
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1887
+        entity_flags: 1179
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Udhaaman:
+    id:            4075
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1887
+        entity_flags: 1179
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Varajahl:
+    id:            4202
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Wharadi:
+    id:            4326
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1888
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Yhalbin:
+    id:            4469
+    species:       humes
+    type:          [called]
+    spell_list_id: 8
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1886
+        entity_flags: 155
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Zhadjaraf:
+    id:            4500
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      render:
+        look:
+          type:  misc
+          model: 1889
+        entity_flags: 155
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+spawns:
+  17059841:
+    template: Leujaoam_Worm
+    at:       [283.973, -8.500, 117.171]
+    level:    [76, 78]
+  17059842:
+    template: Leujaoam_Worm
+    at:       [357.694, -4.042, 112.966, 230]
+    level:    [76, 78]
+  17059843:
+    template: Leujaoam_Worm
+    at:       [350.896, -35.359, 200.535, 39]
+    level:    [76, 78]
+  17059844:
+    template: Leujaoam_Worm
+    at:       [332.546, -36.177, 192.045, 154]
+    level:    [76, 78]
+  17059845:
+    template: Leujaoam_Worm
+    at:       [330.883, -35.903, 194.850, 59]
+    level:    [76, 78]
+  17059846:
+    template: Leujaoam_Worm
+    at:       [288.886, -35.916, 120.296, 43]
+    level:    [76, 78]
+  17059847:
+    template: Leujaoam_Worm
+    at:       [457.045, 4.135, 98.938, 174]
+    level:    [76, 78]
+  17059848:
+    template: Leujaoam_Worm
+    at:       [420.397, -2.813, 90.193, 83]
+    level:    [76, 78]
+  17059849:
+    template: Leujaoam_Worm
+    at:       [364.243, -0.006, -17.799, 120]
+    level:    [76, 78]
+  17059850:
+    template: Leujaoam_Worm
+    at:       [490.965, 8.296, -47.949, 105]
+    level:    [76, 78]
+  17059851:
+    template: Leujaoam_Worm
+    at:       [479.888, 7.716, -39.545, 57]
+    level:    [76, 78]
+  17059852:
+    template: Leujaoam_Worm
+    at:       [477.563, 7.846, -73.208, 170]
+    level:    [76, 78]
+  17059853:
+    template: Leujaoam_Worm
+    at:       [478.236, 7.749, -80.324, 76]
+    level:    [76, 78]
+  17059854:
+    template: Leujaoam_Worm
+    at:       [498.838, 7.653, -87.358, 111]
+    level:    [76, 78]
+  17059855:
+    template: Leujaoam_Worm
+    at:       [471.118, 7.849, -54.299, 239]
+    level:    [76, 78]
+  17059856:
+    template: Qiqirn_Miner
+    at:       [-519.519, -52.068, 196.745, 113]
+  17059857:
+    template: Qiqirn_Miner
+    at:       [-538.091, -48.863, 294.327, 108]
+  17059858:
+    template: Qiqirn_Miner
+    at:       [-414.927, -24.107, 247.502, 252]
+  17059859:
+    template: Qiqirn_Miner
+    at:       [-318.907, 3.821, 159.317, 193]
+  17059860:
+    template: Qiqirn_Miner
+    at:       [-312.961, -0.335, 217.331, 23]
+  17059861:
+    template: Qiqirn_Miner
+    at:       [-428.855, -17.967, 59.715, 241]
+  17059862:
+    template: Qiqirn_Miner
+    at:       [-378.242, -28.197, 178.675, 209]
+  17059863:
+    template: Qiqirn_Miner
+    at:       [-417.615, -32.208, 323.733, 184]
+  17059864:
+    template: Mineral_Eater
+    at:       [-424.166, -32.041, 335.851, 54]
+    level:    [77, 78]
+  17059865:
+    template: Mineral_Eater
+    at:       [-551.561, -51.654, 207.978, 94]
+    level:    [77, 78]
+  17059866:
+    template: Mineral_Eater
+    at:       [-540.609, -51.849, 286.021, 135]
+    level:    [77, 78]
+  17059867:
+    template: Mineral_Eater
+    at:       [-434.059, -24.539, 237.531, 19]
+    level:    [77, 78]
+  17059868:
+    template: Mineral_Eater
+    at:       [-336.109, 3.500, 180.414, 241]
+    level:    [77, 78]
+  17059869:
+    template: Mineral_Eater
+    at:       [309.551, -0.112, 199.472, 39]
+    level:    [77, 78]
+  17059870:
+    template: Mineral_Eater
+    at:       [-420.385, -13.043, 76.331, 217]
+    level:    [77, 78]
+  17059871:
+    template: Mineral_Eater
+    at:       [-372.017, -28.000, 219.106, 76]
+    level:    [77, 78]
+  17059872:
+    template: Mineral_Eater
+    at:       [-440.346, -56.278, 162.886, 174]
+    level:    [77, 78]
+  17059873:
+    template: Mineral_Eater
+    at:       [-327.724, -27.453, 235.233, 53]
+    level:    [77, 78]
+  17059874:
+    template: Clavauert_B_Chanoix
+    level:    [1, 1]
+  17059875:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059876:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059877:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059878:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059879:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059880:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059881:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059882:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059883:
+    template: Frozen_Bones
+    level:    [73, 75]
+  17059884:
+    template: Gelid_Bhoot
+    level:    [76, 77]
+  17059885:
+    template: Gelid_Bhoot
+    level:    [76, 77]
+  17059886:
+    template: Gelid_Bhoot
+    level:    [76, 77]
+  17059887:
+    template: Gelid_Bhoot
+    level:    [76, 77]
+  17059888:
+    template: Gelid_Bhoot
+    level:    [76, 77]
+  17059889:
+    template: Gelid_Bhoot
+    level:    [76, 77]
+  17059890:
+    template: Gelid_Bhoot
+    level:    [76, 77]
+  17059891:
+    template: Coney
+    level:    [50, 50]
+  17059892:
+    template: Coney
+    level:    [50, 50]
+  17059893:
+    template: Coney
+    level:    [50, 50]
+  17059894:
+    template: Coney
+    level:    [50, 50]
+  17059895:
+    template: Coney
+    level:    [50, 50]
+  17059896:
+    template: Coney
+    level:    [50, 50]
+  17059897:
+    template: Coney
+    level:    [50, 50]
+  17059898:
+    template: Coney
+    level:    [50, 50]
+  17059899:
+    template: Coney
+    level:    [50, 50]
+  17059900:
+    template: Coney
+    level:    [50, 50]
+  17059901:
+    template: Coney
+    level:    [50, 50]
+  17059902:
+    template: Coney
+    level:    [50, 50]
+  17059903:
+    template: Coney
+    level:    [50, 50]
+  17059904:
+    template: Coney
+    level:    [50, 50]
+  17059905:
+    template: Coney
+    level:    [50, 50]
+  17059906:
+    template: Coney
+    level:    [50, 50]
+  17059907:
+    template: Coney
+    level:    [50, 50]
+  17059908:
+    template: Coney
+    level:    [50, 50]
+  17059909:
+    template: Coney
+    level:    [50, 50]
+  17059910:
+    template: Coney
+    level:    [50, 50]
+  17059936:
+    template: Imp
+    at:       [-75.574, -4.001, 22.788, 46]
+    level:    [75, 79]
+  17059937:
+    template: Imp
+    at:       [-21.216, -8.171, 136.623, 33]
+    level:    [75, 79]
+  17059938:
+    template: Imp
+    at:       [35.499, -7.967, 84.319, 242]
+    level:    [75, 79]
+  17059939:
+    template: Imp
+    at:       [75.791, -4.118, 120.081, 158]
+    level:    [75, 79]
+  17059940:
+    template: Imp
+    at:       [92.779, -4.472, 48.038, 27]
+    level:    [75, 79]
+  17059941:
+    template: Imp
+    at:       [117.213, -3.852, 85.424, 154]
+    level:    [75, 79]
+  17059942:
+    template: Imp
+    at:       [173.608, -3.835, 141.288, 125]
+    level:    [75, 79]
+  17059943:
+    template: Imp
+    at:       [-5.133, -4.381, 9.526, 51]
+    level:    [75, 79]
+  17059944:
+    template: Imp
+    at:       [-77.821, -4.003, 17.203, 128]
+    level:    [75, 79]
+  17059945:
+    template: Imp
+    at:       [-1.809, -7.983, 145.171, 223]
+    level:    [75, 79]
+  17059946:
+    template: Gasharyad
+    at:       [178.158, -3.812, 142.000, 3]
+    level:    [75, 75]
+  17059947:
+    template: Salimuhl
+    at:       [177.095, -3.810, 142.505, 2]
+    level:    [75, 75]
+  17059948:
+    template: Lamia_Prosector
+    level:    [75, 75]
+  17059949:
+    template: Lamia_Bowyer
+    level:    [75, 75]
+  17059950:
+    template: Lamia_Sharper
+    level:    [75, 75]
+  17059951:
+    template: Lamia_Prosector
+    level:    [75, 75]
+  17059952:
+    template: Lamia_Bowyer
+    level:    [75, 75]
+  17059953:
+    template: Lamia_Sharper
+    level:    [75, 75]
+  17059954:
+    template: Lamia_Prosector
+    level:    [75, 75]
+  17059955:
+    template: Lamia_Bowyer
+    level:    [75, 75]
+  17059956:
+    template: Lamia_Sharper
+    level:    [75, 75]
+  17059957:
+    template: Lamia_Prosector
+    level:    [75, 75]
+  17059958:
+    template: Kusa
+    at:       [-382.142, -4.054, -402.734, 200]
+    level:    [76, 77]
+  17059959:
+    template: Kusa
+    at:       [-380.468, -4.103, -388.303, 52]
+    level:    [76, 77]
+  17059960:
+    template: Kusa
+    at:       [-237.805, -0.075, -364.759, 139]
+    level:    [76, 77]
+  17059961:
+    template: Kusa
+    at:       [-235.695, -0.234, -323.068, 106]
+    level:    [76, 77]
+  17059962:
+    template: Kusa
+    at:       [-244.124, 0.021, -333.764, 19]
+    level:    [76, 77]
+  17059963:
+    template: Kusa
+    at:       [-247.437, -0.227, -331.827, 66]
+    level:    [76, 77]
+  17059964:
+    template: Kusa
+    at:       [-236.248, 4.107, -275.544, 48]
+    level:    [76, 77]
+  17059965:
+    template: Kusa
+    at:       [-160.044, -8.189, -400.381, 119]
+    level:    [76, 77]
+  17059966:
+    template: Kusa
+    at:       [-139.466, -7.533, -399.719, 91]
+    level:    [76, 77]
+  17059967:
+    template: Kusa
+    at:       [-112.431, -8.171, -412.189, 162]
+    level:    [76, 77]
+  17059968:
+    template: Kusa
+    at:       [-337.069, 4.232, -278.156, 154]
+    level:    [76, 77]
+  17059969:
+    template: Kusa
+    at:       [-360.604, 3.512, -281.842, 253]
+    level:    [76, 77]
+  17059970:
+    template: Kusa
+    at:       [-398.556, 7.657, -280.230, 30]
+    level:    [76, 77]
+  17059971:
+    template: Kusa
+    at:       [-350.895, -24.207, -198.723, 151]
+    level:    [76, 77]
+  17059972:
+    template: Kusa
+    at:       [-356.779, -24.042, -205.013, 12]
+    level:    [76, 77]
+  17059973:
+    template: Kusa
+    at:       [-334.517, -23.896, -200.923, 171]
+    level:    [76, 77]
+  17059974:
+    template: Saizo
+    at:       [-240.106, 4.323, -274.000, 110]
+    level:    [79, 80]
+  17059975:
+    template: Oko
+    at:       [-406.448, 7.699, -271.846, 186]
+    level:    [79, 80]
+  17059976:
+    template: Danzo
+    at:       [-319.998, -23.947, -276.650, 139]
+    level:    [79, 80]
+  17059977:
+    template: Kudagitsune
+    at:       [-339.242, -4.003, -377.047, 141]
+    level:    [76, 77]
+  17059978:
+    template: Kudagitsune
+    at:       [-219.723, 0.042, -339.731, 8]
+    level:    [76, 77]
+  17059979:
+    template: Kudagitsune
+    at:       [-364.620, -23.732, -191.861, 25]
+    level:    [76, 77]
+  17059980:
+    template: Kudagitsune
+    at:       [-332.630, -24.175, -193.659, 54]
+    level:    [76, 77]
+  17059981:
+    template: Kudagitsune
+    at:       [-247.853, -0.109, -330.957, 116]
+    level:    [76, 77]
+  17059982:
+    template: Kudagitsune
+    at:       [-163.559, -8.003, -395.945, 210]
+    level:    [76, 77]
+  17059983:
+    template: Kudagitsune
+    at:       [-369.587, 3.564, -283.627, 32]
+    level:    [76, 77]
+  17059984:
+    template: Shailham
+    at:       [20.000, -8.025, -365.000, 192]
+    level:    [75, 75]
+  17059985:
+    template: Dhiadjhar
+    at:       [21.500, -8.055, -366.000, 192]
+    level:    [75, 75]
+  17059986:
+    template: Zhadjaraf
+    at:       [18.500, -8.041, -366.000, 192]
+    level:    [75, 75]
+  17059987:
+    template: Ganmuul
+    at:       [22.500, -8.000, -363.000, 64]
+    level:    [75, 75]
+  17059988:
+    template: Jalyaat
+    at:       [17.500, -8.000, -363.000, 64]
+    level:    [75, 75]
+  17059989:
+    template: Rahdjab
+    at:       [22.500, -8.000, -361.000, 64]
+    level:    [75, 75]
+  17059990:
+    template: Ghahnis
+    at:       [22.500, -8.000, -359.000, 64]
+    level:    [75, 75]
+  17059991:
+    template: Tahbmar
+    at:       [17.500, -8.000, -361.000, 64]
+    level:    [75, 75]
+  17059992:
+    template: Rhushouf
+    at:       [17.500, -8.000, -359.000, 64]
+    level:    [75, 75]
+  17059993:
+    template: Raubahn_redvsbl
+    script:   Raubahn
+    at:       [140.000, -8.357, -145.000, 64]
+    level:    [76, 78]
+  17059994:
+    template: Ghayaraan
+    at:       [139.000, -8.689, -147.000, 64]
+    level:    [75, 75]
+  17059995:
+    template: Krinahal
+    at:       [141.000, -8.569, -147.000, 64]
+    level:    [75, 75]
+  17059996:
+    template: Varajahl
+    at:       [138.000, -8.413, -149.000, 64]
+    level:    [75, 75]
+  17059997:
+    template: Mareyamad
+    at:       [142.000, -8.211, -149.000, 64]
+    level:    [75, 75]
+  17059998:
+    template: Shayaam
+    at:       [59.000, -4.408, -264.000, 64]
+    level:    [75, 75]
+  17059999:
+    template: Habraheem
+    at:       [63.000, -4.492, -264.000, 64]
+    level:    [75, 75]
+  17060000:
+    template: Qudeen
+    at:       [139.000, -8.455, -151.000, 64]
+    level:    [75, 75]
+  17060001:
+    template: Salyhaar
+    at:       [137.000, -8.238, -151.000, 64]
+    level:    [75, 75]
+  17060002:
+    template: Sharayaan
+    at:       [143.000, -7.962, -151.000, 64]
+    level:    [75, 75]
+  17060003:
+    template: Ubdeen
+    at:       [141.000, -8.297, -151.000, 64]
+    level:    [75, 75]
+  17060004:
+    template: Bashdeel
+    at:       [58.000, -4.724, -265.500, 64]
+    level:    [75, 75]
+  17060005:
+    template: Wharadi
+    at:       [60.000, -4.437, -265.500, 64]
+    level:    [75, 75]
+  17060006:
+    template: Hkadouf
+    at:       [64.000, -5.035, -265.500, 64]
+    level:    [75, 75]
+  17060007:
+    template: Afrhaad
+    at:       [62.000, -4.496, -265.500, 64]
+    level:    [75, 75]
+  17060008:
+    template: Nareema
+    at:       [20.071, -8.186, -372.310, 175]
+    level:    [75, 75]
+  17060009:
+    template: Udhaaman
+    at:       [19.589, -8.200, -370.930, 203]
+    level:    [75, 75]
+  17060010:
+    template: Yhalbin
+    at:       [20.680, -8.117, -373.536, 205]
+    level:    [75, 75]
+  17060011:
+    template: Count_Dracula
+    at:       [499.000, 4.563, -298.000, 96]
+    level:    [78, 80]
+  17060012:
+    template: Cursed_Doppelganger
+    level:    [70, 70]

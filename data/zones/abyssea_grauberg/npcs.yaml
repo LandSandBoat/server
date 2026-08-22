@@ -1,0 +1,3040 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17818078:
+    script: NPC[1de]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17818079:
+    script: NPC[1df]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17818080:
+    script: NPC[1e0]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17818081:
+    script:       qm_ironclad_sunderer
+    display_name: ???
+    at:           [502.000, 26.000, 503.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818082:
+    script:       qm_ningishzida
+    display_name: ???
+    at:           [379.878, -31.007, 239.694]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818083:
+    script:       qm_teugghia
+    display_name: ???
+    at:           [-68.305, -6.750, 657.159]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818084:
+    script:       qm_bomblix_flamefinger
+    display_name: ???
+    at:           [556.000, 24.000, -318.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818085:
+    script:       qm_teekesselchen
+    display_name: ???
+    at:           [320.000, 48.000, 644.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818086:
+    script:       qm_minaruja
+    display_name: ???
+    at:           [340.000, -15.000, -117.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818087:
+    script:       qm_xibalba
+    display_name: ???
+    at:           [-487.734, -168.265, 211.894]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818088:
+    script:       qm_ika_roa
+    display_name: ???
+    at:           [158.000, -29.633, -215.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818089:
+    script:       qm_lorelei
+    display_name: ???
+    at:           [-192.017, -31.814, 480.963]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818090:
+    script:       qm_burstrox_powderpate
+    display_name: ???
+    at:           [397.000, 40.000, -436.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818091:
+    script:       qm_raja_1
+    display_name: ???
+    at:           [481.000, 56.000, 680.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818092:
+    script:       qm_alfard_1
+    display_name: ???
+    at:           [310.000, -32.000, 173.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818093:
+    script:       qm_azdaja_1
+    display_name: ???
+    at:           [-568.052, -167.210, 138.244]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818094:
+    script:       qm_amphitrite_1
+    display_name: ???
+    at:           [-147.311, -31.516, -220.781]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818095:
+    script:       qm_raja_2
+    display_name: ???
+    at:           [496.000, 56.800, 680.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818096:
+    script:       qm_alfard_2
+    display_name: ???
+    at:           [310.000, -33.570, 158.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818097:
+    script:       qm_azdaja_2
+    display_name: ???
+    at:           [-552.052, -169.410, 138.144]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818098:
+    script:       qm_amphitrite_2
+    display_name: ???
+    at:           [-136.811, -31.716, -231.281]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818099:
+    script:       qm_raja_3
+    display_name: ???
+    at:           [466.000, 56.600, 680.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818100:
+    script:       qm_alfard_3
+    display_name: ???
+    at:           [310.000, -39.400, 190.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818101:
+    script:       qm_azdaja_3
+    display_name: ???
+    at:           [-583.052, -167.480, 138.244]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818102:
+    script:       qm_amphitrite_3
+    display_name: ???
+    at:           [-162.311, -32.000, -220.781]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818103:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17818104:
+    script: NPC[1f8]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17818105:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17818107:
+    script: NPC[1fb]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17818108:
+    script: NPC[1fc]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17818109:
+    script: NPC[1fd]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17818110:
+    script:       Conflux_Surveyor
+    display_name: Conflux Surveyor
+    at:           [-530.000, 26.224, -778.000, 238]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  1
+        head:  4348
+        body:  8450
+        hands: 12489
+        legs:  16569
+        feet:  20617
+        main:  24576
+        sub:   28672
+      moving: 6
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818111:
+    script:       Cruor_Prospector
+    display_name: Cruor Prospector
+    at:           [-528.000, 26.725, -782.000, 233]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  2
+        head:  4348
+        body:  8450
+        hands: 12489
+        legs:  16569
+        feet:  20617
+        main:  24576
+        sub:   28672
+      moving: 7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818112:
+    script:       Atma_Infusionist
+    display_name: Atma Infusionist
+    at:           [-534.000, 25.926, -776.000, 4]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  8
+        head:  4348
+        body:  8450
+        hands: 12489
+        legs:  16569
+        feet:  20617
+        main:  24576
+        sub:   28672
+      entity_flags: 1539
+      moving:          7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818113:
+    script:       Atma_Fabricant
+    display_name: Atma Fabricant
+    at:           [-508.000, 31.900, -798.000, 192]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  10
+        head:  4233
+        body:  8452
+        hands: 12548
+        legs:  16469
+        feet:  20617
+        main:  24809
+        sub:   28672
+      entity_flags: 1539
+      moving:         14
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818114:
+    script:       Time_Master_Debug
+    display_name: Time Master Debug
+    at:           [-522.000, 25.500, -772.000, 96]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        7
+    content: ABYSSEA
+
+  17818115:
+    script:       AP_Master_Debug
+    display_name: AP Master Debug
+    at:           [-520.000, 25.750, -774.000, 96]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    content: ABYSSEA
+
+  17818116:
+    script: NPC[204]
+    at:     [-488.000, 23.450, -756.000]
+    render:
+      look:
+        type:  standard
+        model: 2404
+      entity_flags:  2075
+      name_vis:        88
+      name_prefix:     32
+      moving:       32769
+    status: normal
+
+  17818117:
+    script: NPC[205]
+    at:     [-488.000, 23.250, -768.000]
+    render:
+      look:
+        type:  standard
+        model: 2404
+      entity_flags:  2075
+      name_vis:        88
+      name_prefix:     32
+      moving:       32769
+    status: normal
+
+  17818118:
+    script: NPC[206]
+    at:     [-488.000, 28.500, -780.000]
+    render:
+      look:
+        type:  standard
+        model: 2404
+      entity_flags:  2075
+      name_vis:        88
+      name_prefix:     32
+      moving:       32769
+    status: normal
+
+  17818119:
+    script: NPC[207]
+    at:     [-488.000, 31.700, -792.000]
+    render:
+      look:
+        type:  standard
+        model: 2404
+      entity_flags:  2075
+      name_vis:        88
+      name_prefix:     32
+      moving:       32769
+    status: normal
+
+  17818120:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 968
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818121:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           6
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818122:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 969
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           6
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818123:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           6
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818124:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 968
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818125:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 968
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818126:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           6
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818127:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818128:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 968
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818129:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 968
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           6
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818130:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818131:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818132:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 968
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+      moving:           7
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818133:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818134:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818135:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818136:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818137:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818138:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818139:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818140:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818141:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818142:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818143:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818144:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818145:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818146:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818147:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818148:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818149:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818150:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818151:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818152:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818153:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818154:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818155:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818156:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818157:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818158:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818159:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818160:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818161:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818162:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818163:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818164:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818165:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818166:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818167:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818168:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818169:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818170:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818171:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818172:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818173:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818174:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818175:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818176:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818177:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818178:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818179:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818180:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818181:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818182:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818183:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:       108
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17818184:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818185:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818186:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818187:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818188:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818189:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818190:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818191:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818192:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818193:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818194:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818195:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818196:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  1155
+      animation_sub:    4
+      name_vis:         4
+      moving:           7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818197:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818198:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  1155
+      animation_sub:    4
+      name_vis:         4
+      moving:           6
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818199:
+    script:       Sturdy_Pyxis
+    display_name: Sturdy Pyxis
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  3203
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818200:
+    script:       Veridical_Conflux_#01
+    display_name: 'Veridical Conflux #01'
+    at:           [-515.652, 21.254, -752.295, 64]
+    render:
+      look:
+        type:  standard
+        model: 2402
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818201:
+    script:       Veridical_Conflux_#02
+    display_name: 'Veridical Conflux #02'
+    at:           [325.590, 30.019, -555.127, 93]
+    render:
+      look:
+        type:  standard
+        model: 2402
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818202:
+    script:       Veridical_Conflux_#03
+    display_name: 'Veridical Conflux #03'
+    at:           [426.259, -0.782, -177.580, 160]
+    render:
+      look:
+        type:  standard
+        model: 2402
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818203:
+    script:       Veridical_Conflux_#04
+    display_name: 'Veridical Conflux #04'
+    at:           [-22.919, -1.098, -463.973, 128]
+    render:
+      look:
+        type:  standard
+        model: 2402
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818204:
+    script:       Veridical_Conflux_#05
+    display_name: 'Veridical Conflux #05'
+    at:           [-161.609, -32.000, 404.024, 192]
+    render:
+      look:
+        type:  standard
+        model: 2402
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818205:
+    script:       Veridical_Conflux_#06
+    display_name: 'Veridical Conflux #06'
+    at:           [99.184, 16.500, 496.614, 255]
+    render:
+      look:
+        type:  standard
+        model: 2402
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818206:
+    script:       Veridical_Conflux_#07
+    display_name: 'Veridical Conflux #07'
+    at:           [-323.000, -128.000, 116.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2402
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818207:
+    script:       Veridical_Conflux_#08
+    display_name: 'Veridical Conflux #08'
+    at:           [490.618, -5.962, 338.097, 192]
+    render:
+      look:
+        type:  standard
+        model: 2402
+      name_vis:    96
+      name_prefix:  2
+      moving:       1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818208:
+    script:       GR-01_Martello
+    display_name: GR-01 Martello
+    at:           [-442.000, 31.625, -762.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 2327
+      entity_flags: 131
+      name_vis:      64
+      moving:         1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         ABYSSEA
+
+  17818209:
+    script:       GR-02_Martello
+    display_name: GR-02 Martello
+    at:           [256.444, 27.165, -526.611, 93]
+    render:
+      look:
+        type:  standard
+        model: 2327
+      entity_flags: 131
+      name_vis:      64
+      moving:         1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         ABYSSEA
+
+  17818210:
+    script:       GR-03_Martello
+    display_name: GR-03 Martello
+    at:           [453.161, -0.924, -183.862, 128]
+    render:
+      look:
+        type:  standard
+        model: 2327
+      entity_flags: 131
+      name_vis:      64
+      moving:         1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         ABYSSEA
+
+  17818211:
+    script:       GR-04_Martello
+    display_name: GR-04 Martello
+    at:           [-75.959, 7.816, -474.618, 93]
+    render:
+      look:
+        type:  standard
+        model: 2327
+      entity_flags: 131
+      name_vis:      64
+      moving:         1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         ABYSSEA
+
+  17818212:
+    script:       GR-05_Martello
+    display_name: GR-05 Martello
+    at:           [-200.571, -32.064, 326.916, 192]
+    render:
+      look:
+        type:  standard
+        model: 2327
+      entity_flags: 131
+      name_vis:      64
+      moving:         1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         ABYSSEA
+
+  17818213:
+    script:       GR-06_Martello
+    display_name: GR-06 Martello
+    at:           [256.524, 33.472, 515.663, 193]
+    render:
+      look:
+        type:  standard
+        model: 2327
+      entity_flags: 131
+      name_vis:      64
+      moving:         1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         ABYSSEA
+
+  17818214:
+    script:       GR-07_Martello
+    display_name: GR-07 Martello
+    at:           [-244.395, -104.056, 77.001, 64]
+    render:
+      look:
+        type:  standard
+        model: 2327
+      entity_flags: 131
+      name_vis:      64
+      moving:         1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         ABYSSEA
+
+  17818215:
+    script:       GR-08_Martello
+    display_name: GR-08 Martello
+    at:           [153.579, -47.681, 151.060, 64]
+    render:
+      look:
+        type:  standard
+        model: 2327
+      entity_flags: 131
+      name_vis:      64
+      moving:         1
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         ABYSSEA
+
+  17818216:
+    script:       Dominion_Tactician
+    display_name: Dominion Tactician
+    at:           [-508.081, 25.163, -775.073, 177]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  7
+        head:  4246
+        body:  8407
+        hands: 12503
+        legs:  16599
+        feet:  20486
+        main:  24850
+        sub:   28672
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818217:
+    script:       Debug_Koryakudo_NPC
+    display_name: Debug Koryakudo NPC
+    at:           [-510.000, 24.812, -775.000, 192]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    content: ABYSSEA
+
+  17818218:
+    script: NPC[26a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17818219:
+    script:       Cavernous_Maw
+    display_name: Cavernous Maw
+    at:           [-564.000, 30.300, -760.000]
+    render:
+      look:
+        type:  standard
+        model: 2325
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818220:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17818221:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [181.086, 3.671, -402.003]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: ABYSSEA
+
+  17818222:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [375.354, 40.635, -436.544]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: ABYSSEA
+
+  17818223:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [127.940, -16.623, -348.855]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: ABYSSEA
+
+  17818224:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [100.824, -26.643, -299.275]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: ABYSSEA
+
+  17818225:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [324.996, 32.172, -437.634]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: ABYSSEA
+
+  17818226:
+    script:       Harvesting_Point
+    display_name: Harvesting Point
+    at:           [310.055, 14.670, -360.552]
+    render:
+      look:
+        type:  standard
+        model: 2422
+      moving: 32774
+    status:  normal
+    content: ABYSSEA
+
+  17818227:
+    script:       Eight_of_Hearts
+    display_name: Eight of Hearts
+    at:           [206.874, 22.871, -653.004, 111]
+    render:
+      look:
+        type:  standard
+        model: 252
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818228:
+    script:       Kororo
+    display_name: Kororo
+    at:           [207.154, 22.839, -654.502, 128]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  1
+        head:  4096
+        body:  8197
+        hands: 12311
+        legs:  16407
+        feet:  20503
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        21
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818229:
+    script:       Eight_of_Clubs
+    display_name: Eight of Clubs
+    at:           [124.063, -56.000, 120.406, 206]
+    render:
+      look:
+        type:  standard
+        model: 252
+      entity_flags: 27
+      name_prefix:  32
+      moving:       14
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818230:
+    script:       Faint_Glister
+    display_name: Faint Glister
+    at:           [430.399, -29.173, 228.497, 119]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818231:
+    script:       Ranpi-Monpi
+    display_name: Ranpi-Monpi
+    at:           [794.710, 31.832, 478.277, 95]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  8
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16395
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818232:
+    script:       Earthy_Mound
+    display_name: Earthy Mound
+    at:           [528.498, 26.375, 496.422, 134]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818233:
+    script:       Earthy_Mound
+    display_name: Earthy Mound
+    at:           [228.474, -49.066, 128.321, 70]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818234:
+    script:       Earthy_Mound
+    display_name: Earthy Mound
+    at:           [428.731, 0.389, -157.709, 113]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818235:
+    script:       Kuoh_Rhel
+    display_name: Kuoh Rhel
+    at:           [72.948, -47.737, 284.817, 130]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  1
+        head:  4117
+        body:  8213
+        hands: 12309
+        legs:  16405
+        feet:  20504
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818236:
+    script:       Chocobo
+    display_name: Chocobo
+    at:           [73.799, -47.587, 286.618, 115]
+    render:
+      look:
+        type:  standard
+        model: 86
+      moving: 21
+    status:  normal
+    content: ABYSSEA
+
+  17818237:
+    script:       Rukususu
+    display_name: Rukususu
+    at:           [-232.769, -47.840, -156.465, 119]
+    render:
+      look:
+        type:  standard
+        model: 165
+      entity_flags: 27
+      name_prefix:  32
+      moving:       14
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818238:
+    script:       qm
+    display_name: ???
+    at:           [-643.049, -168.064, 159.912, 129]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818239:
+    script:       Fay_Pond
+    display_name: Fay Pond
+    at:           [-124.162, -6.768, 583.599, 83]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ABYSSEA
+
+  17818240:
+    script:       Pixie
+    display_name: Pixie
+    at:           [-125.847, -6.750, 584.415, 15]
+    render:
+      look:
+        type:  standard
+        model: 2030
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  ABYSSEA
+
+  17818241:
+    script:       Brugaire
+    display_name: Brugaire
+    at:           [776.948, 22.749, 450.244, 211]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  10
+        head:  4096
+        body:  8231
+        hands: 12306
+        legs:  16415
+        feet:  20511
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        14
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818242:
+    script:       Kurou-Morou
+    display_name: Kurou-Morou
+    at:           [241.686, 23.999, -517.517, 231]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  7
+        head:  4096
+        body:  8211
+        hands: 12307
+        legs:  16402
+        feet:  20498
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818243:
+    script:       Scuff_Mark
+    display_name: Scuff Mark
+    at:           [-134.624, -33.150, -250.868, 135]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 515
+      moving:         1
+    status:  normal
+    content: ABYSSEA
+
+  17818244:
+    script:       Scuff_Mark
+    display_name: Scuff Mark
+    at:           [643.933, 25.296, -428.753, 238]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 515
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17818245:
+    script:       Scuff_Mark
+    display_name: Scuff Mark
+    at:           [-100.239, 39.308, -725.827, 235]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 515
+      moving:         1
+    status:  normal
+    content: ABYSSEA
+
+  17818246:
+    script:       Ramblix
+    display_name: Ramblix
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17818247:
+    script:       Cornelia
+    display_name: Cornelia
+    at:           [-12.023, 0.277, -479.485, 86]
+    render:
+      look:
+        type:  standard
+        model: 70
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818248:
+    script:       Lucius
+    display_name: Lucius
+    at:           [-10.229, 0.371, -480.658, 108]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  1
+        head:  4116
+        body:  8211
+        hands: 12288
+        legs:  16408
+        feet:  20504
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        21
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818249:
+    script:       Wolfgang
+    display_name: Wolfgang
+    at:           [796.445, 31.860, 475.192, 108]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  2
+        head:  4116
+        body:  8217
+        hands: 12313
+        legs:  16409
+        feet:  20505
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        14
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818250:
+    script:       Pherimociel
+    display_name: Pherimociel
+    at:           [785.749, 28.405, 487.889, 83]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  13
+        head:  4116
+        body:  8217
+        hands: 12300
+        legs:  16386
+        feet:  20482
+        main:  24581
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818251:
+    script:       Tosuka-Porika
+    display_name: Tosuka-Porika
+    at:           [-214.006, -47.478, -162.004, 207]
+    render:
+      look:
+        type:  standard
+        model: 162
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818252:
+    script:       Maabu-Sonbu
+    display_name: Maabu-Sonbu
+    at:           [-209.636, -49.632, -169.787, 8]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  2
+        head:  4096
+        body:  8202
+        hands: 12298
+        legs:  16394
+        feet:  20490
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        21
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818253:
+    script:       Zeid
+    display_name: Zeid
+    at:           [-511.304, 25.351, -775.868, 188]
+    render:
+      look:
+        type:  standard
+        model: 2307
+      entity_flags: 27
+      name_prefix:  32
+      moving:       14
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818254:
+    script:       Tancredi
+    display_name: Tancredi
+    at:           [-504.722, 25.540, -775.057, 158]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  3
+        head:  4096
+        body:  8205
+        hands: 12310
+        legs:  16389
+        feet:  20485
+        main:  24831
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818255:
+    script: 010fe28b
+    at:     [-531.992, 27.254, -780.551, 217]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags: 2075
+      name_vis:       64
+      name_prefix:    34
+      moving:          1
+    status: normal
+
+  17818256:
+    script: blank
+    at:     [-10.746, -0.228, -477.257, 89]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags: 2075
+      name_vis:       64
+      name_prefix:    34
+      moving:          1
+    status: normal
+
+  17818257:
+    script: 010fe28d
+    at:     [797.859, 31.995, 476.020, 104]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags: 2075
+      name_vis:       64
+      name_prefix:    34
+      moving:          1
+    status: normal
+
+  17818258:
+    script: 010fe28e
+    at:     [-214.643, -47.426, -163.663, 208]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags: 2075
+      name_vis:       64
+      name_prefix:    34
+      moving:          1
+    status: normal
+
+  17818259:
+    script:       Malduc
+    display_name: Malduc
+    at:           [-497.750, 23.236, -746.175, 63]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  11
+        head:  4096
+        body:  8205
+        hands: 12310
+        legs:  16389
+        feet:  20485
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818260:
+    script:       Dulsie
+    display_name: Dulsie
+    at:           [-519.626, 31.859, -794.931, 188]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  3
+        head:  4096
+        body:  8197
+        hands: 12310
+        legs:  16389
+        feet:  20487
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        21
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818261:
+    script:       Parnika
+    display_name: Parnika
+    at:           [-540.695, 27.836, -755.087, 76]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4096
+        body:  8197
+        hands: 12310
+        legs:  16389
+        feet:  20487
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        14
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818262:
+    script:       Deadly_Spider
+    display_name: Deadly Spider
+    at:           [-516.622, 25.947, -775.049, 182]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  3
+        head:  4098
+        body:  8194
+        hands: 12310
+        legs:  16386
+        feet:  20482
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818263:
+    script:       Crying_Wind
+    display_name: Crying Wind
+    at:           [-500.197, 29.043, -782.511, 10]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  1
+        head:  4098
+        body:  8194
+        hands: 12290
+        legs:  16386
+        feet:  20482
+        main:  24654
+        sub:   28702
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818264:
+    script: 010fe294
+    at:     [793.024, 31.621, 479.657, 79]
+    render:
+      look:
+        type:  standard
+        model: 2411
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:       100
+      name_prefix:     34
+      moving:           1
+    status: normal
+
+  17818265:
+    script: blank
+    at:     [-8.091, 0.149, -479.808, 106]
+    render:
+      look:
+        type:  standard
+        model: 2413
+      entity_flags:  2075
+      animation_sub:    5
+      name_vis:       100
+      name_prefix:     34
+      moving:           1
+    status: normal
+
+  17818266:
+    script: 010fe296
+    at:     [-8.174, -0.098, -478.063, 106]
+    render:
+      look:
+        type:  standard
+        model: 2413
+      entity_flags:  2075
+      animation_sub:    6
+      name_vis:       100
+      name_prefix:     34
+      moving:           1
+    status: normal
+
+  17818267:
+    script: 010fe297
+    at:     [74.251, -48.044, 284.068, 131]
+    render:
+      look:
+        type:  standard
+        model: 2413
+      entity_flags:  2075
+      animation_sub:    6
+      name_vis:       100
+      name_prefix:     34
+      moving:           1
+    status: normal
+
+  17818268:
+    script: 010fe298
+    at:     [240.601, 23.999, -517.737, 235]
+    render:
+      look:
+        type:  standard
+        model: 2412
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:       100
+      name_prefix:     34
+      moving:           1
+    status: normal
+
+  17818269:
+    script: 010fe299
+    at:     [-512.630, 25.861, -778.352, 190]
+    render:
+      look:
+        type:  standard
+        model: 2412
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:       100
+      name_prefix:     34
+      moving:           1
+    status: normal
+
+  17818270:
+    script: 010fe29a
+    at:     [-509.925, 25.669, -777.831, 179]
+    render:
+      look:
+        type:  standard
+        model: 2412
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:       100
+      name_prefix:     34
+      moving:           1
+    status: normal
+
+  17818271:
+    script:       DSgt_Wolfgang
+    display_name: Dominion Sergeant
+    at:           [797.128, 31.450, 472.778, 120]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  5
+        head:  4258
+        body:  8354
+        hands: 12450
+        legs:  16546
+        feet:  20642
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818272:
+    script:       DSgt_Cornelia
+    display_name: Dominion Sergeant
+    at:           [-15.255, 0.705, -480.320, 69]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  4
+        head:  4258
+        body:  8354
+        hands: 12450
+        legs:  16546
+        feet:  20642
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       21
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818273:
+    script:       DSgt_Tosuka
+    display_name: Dominion Sergeant
+    at:           [-217.521, -47.329, -161.383, 229]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  0
+        head:  4110
+        body:  8354
+        hands: 12450
+        legs:  16546
+        feet:  20642
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       14
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818274:
+    script:       Machine_Outfitter
+    display_name: Machine Outfitter
+    at:           [-499.662, 24.368, -756.559, 64]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  6
+        head:  4096
+        body:  8215
+        hands: 12311
+        legs:  16407
+        feet:  20503
+        main:  24576
+        sub:   28672
+      moving: 7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17818275:
+    script:       Event_Master
+    display_name: Event Master
+    at:           [-549.105, 29.944, -753.316, 69]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    content: ABYSSEA
+
+  17818276:
+    script: NPC[2a4]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17818277:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818278:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818279:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818280:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818281:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818282:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818283:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA
+
+  17818284:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         ABYSSEA

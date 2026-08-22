@@ -1,0 +1,487 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Asb:
+    id:            4664
+    species:       knight
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2061
+        entity_flags:  1439
+        animation_sub:    1
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 180000
+        mp:   9999
+
+  Crystal_Fetter:
+    id:      5314
+    species: unclassified
+    type:    [notorious, battlefield]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2141
+        entity_flags: 1153
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Pil_provenance:
+    id:            5315
+    display_name:  Pil
+    species:       bishop
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: staff
+        delay: 360
+      jobs: [blm, sch]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2102
+        entity_flags: 415
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 180000
+        mp:   9999
+
+  Provenance_Watcher:
+    id:            4654
+    species:       provenance_watcher
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 462
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    3
+          ice:     3
+          wind:    3
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   6
+          dark:    3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 6
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 2058
+        entity_flags:  391
+        animation_sub:   5
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 100000
+        mp:   9999
+
+  Rukh:
+    id:            4663
+    species:       rook
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2062
+        entity_flags:  415
+        animation_sub:   1
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 180000
+        mp:   9999
+
+  Sarbaz:
+    id:            4665
+    species:       pawn
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2063
+        entity_flags:  415
+        animation_sub:   4
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 180000
+        mp:   9999
+
+  Shah:
+    id:            4667
+    species:       king
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2094
+        entity_flags:  415
+        animation_sub:   4
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 180000
+        mp:   9999
+
+  Wazir:
+    id:            4666
+    species:       queen
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 450
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2093
+        entity_flags:  415
+        animation_sub:   8
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 180000
+        mp:   9999
+
+spawns:
+  17686529:
+    template: Provenance_Watcher
+    at:       [-580.000, -228.500, 540.000, 64]
+    level:    [99, 99]
+  17686530:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686531:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686532:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686533:
+    template: Provenance_Watcher
+    level:    [99, 99]
+  17686534:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686535:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686536:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686537:
+    template: Provenance_Watcher
+    level:    [99, 99]
+  17686538:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686539:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686540:
+    template: Crystal_Fetter
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17686541:
+    template: Sarbaz
+    at:       [-232.154, -19.603, -215.910, 96]
+    level:    [99, 99]
+  17686542:
+    template: Pil_provenance
+    script:   Pil
+    at:       [-223.964, -19.840, -223.837, 96]
+    level:    [99, 99]
+  17686543:
+    template: Asb
+    at:       [-232.154, -19.603, -215.910, 96]
+    level:    [99, 99]
+  17686544:
+    template: Rukh
+    at:       [-223.964, -19.840, -223.837, 96]
+    level:    [99, 99]
+  17686545:
+    template: Shah
+    at:       [-236.949, -19.953, -242.496, 35]
+    level:    [99, 99]
+  17686546:
+    template: Wazir
+    at:       [-250.705, -19.786, -237.403, 171]
+    level:    [99, 99]
+  17686547:
+    template: Sarbaz
+    level:    [99, 99]
+  17686548:
+    template: Pil_provenance
+    script:   Pil
+    level:    [99, 99]
+  17686549:
+    template: Asb
+    level:    [99, 99]
+  17686550:
+    template: Rukh
+    level:    [99, 99]
+  17686551:
+    template: Shah
+    at:       [-183.458, 0.279, -712.034, 225]
+    level:    [99, 99]
+  17686552:
+    template: Wazir
+    at:       [-191.727, 0.363, -704.239, 225]
+    level:    [99, 99]
+  17686553:
+    template: Sarbaz
+    level:    [99, 99]
+  17686554:
+    template: Pil_provenance
+    script:   Pil
+    level:    [99, 99]
+  17686555:
+    template: Asb
+    level:    [99, 99]
+  17686556:
+    template: Rukh
+    level:    [99, 99]
+  17686557:
+    template: Shah
+    level:    [99, 99]
+  17686558:
+    template: Wazir
+    level:    [99, 99]
+  17686559:
+    template: Sarbaz
+    level:    [99, 99]
+  17686560:
+    template: Pil_provenance
+    script:   Pil
+    level:    [99, 99]
+  17686561:
+    template: Asb
+    level:    [99, 99]
+  17686562:
+    template: Rukh
+    level:    [99, 99]
+  17686563:
+    template: Shah
+    level:    [99, 99]
+  17686564:
+    template: Wazir
+    level:    [99, 99]
+  17686565:
+    template: Sarbaz
+    level:    [99, 99]
+  17686566:
+    template: Pil_provenance
+    script:   Pil
+    level:    [99, 99]
+  17686567:
+    template: Asb
+    level:    [99, 99]
+  17686568:
+    template: Rukh
+    level:    [99, 99]
+  17686569:
+    template: Shah
+    level:    [99, 99]
+  17686570:
+    template: Wazir
+    level:    [99, 99]
+  17686571:
+    template: Sarbaz
+    level:    [99, 99]
+  17686572:
+    template: Pil_provenance
+    script:   Pil
+    level:    [99, 99]
+  17686573:
+    template: Asb
+    level:    [99, 99]
+  17686574:
+    template: Rukh
+    level:    [99, 99]
+  17686575:
+    template: Shah
+    level:    [99, 99]
+  17686576:
+    template: Wazir
+    level:    [99, 99]

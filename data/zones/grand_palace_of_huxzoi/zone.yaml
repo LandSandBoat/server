@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 218
+
+zonelines:
+
+  z0y0:
+    from:  [-20.000, -2.840, -364.277]
+    to:    altaieu
+    at:    [0.000, -12.500, -464.781, 1.570796]
+    scale: [1.500, 6.000]
+
+  z0y2:
+    from:  [10.000, -2.812, -320.000]
+    to:    grand_palace_of_huxzoi
+    at:    [-368.794, -2.216, 260.000]
+    scale: [1.000, 5.000]
+
+  z0y4:
+    from:  [-371.972, -3.669, 260.000]
+    to:    grand_palace_of_huxzoi
+    at:    [-1.608, -1.661, -320.000, 3.141593]
+    scale: [1.000, 5.000]
+
+  z0y6:
+    from:  [-20.000, -3.808, -271.805]
+    to:    the_garden_of_ruhmet
+    at:    [-420.000, -2.216, 243.491, 4.712389]
+    scale: [1.000, 5.000]

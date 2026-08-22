@@ -7,7 +7,7 @@ local entity = {}
 
 local ID = zones[xi.zone.VELUGANNON_PALACE]
 
--- Spawn points from nm_spawn_points.sql
+-- Spawn points, kept here since nm_spawn_points.sql was retired
 local spawnPoints =
 {
     blueShort   = { x = -196, y = 0,  z = 389 },

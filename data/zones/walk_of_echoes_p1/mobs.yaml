@@ -1,0 +1,5377 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aegypius:
+    id:      7835
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Adjudicator:
+    id:      7836
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Agent:
+    id:      7837
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Archer:
+    id:      7838
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Archon:
+    id:      7839
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Assassin:
+    id:      7840
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Black_Belt:
+    id:      7841
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Bruiser:
+    id:      7842
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Champion:
+    id:      7843
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Channeler:
+    id:      7844
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Chemister:
+    id:      7845
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Chirurgeon:
+    id:      7846
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Clearmind:
+    id:      7847
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Cleaver:
+    id:      7848
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Cleric:
+    id:      7849
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Crusader:
+    id:      7850
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Culler:
+    id:      7851
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Defender:
+    id:      7852
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Dignitary:
+    id:      7853
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Dragonmaster:
+    id:      7854
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Enchanter:
+    id:      7855
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Errant:
+    id:      7856
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Evoker:
+    id:      7857
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Fighter:
+    id:      7858
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Footsoldier:
+    id:      7859
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Halo:
+    id:      7860
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Healer:
+    id:      7861
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Heretic:
+    id:      7862
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Hexer:
+    id:      7863
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Infidel:
+    id:      7864
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Initiate:
+    id:      7865
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Instigator:
+    id:      7866
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Kunoichi:
+    id:      7867
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Lancer:
+    id:      7868
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Lyricist:
+    id:      7869
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Magister:
+    id:      7870
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Magus:
+    id:      7871
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Man-at-Arms:
+    id:      7872
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Marauder:
+    id:      7873
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Marksman:
+    id:      7874
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Marquess:
+    id:      7875
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Mendicant:
+    id:      7876
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Monarch:
+    id:      7877
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Muse:
+    id:      7878
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Phalanx:
+    id:      7879
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Pickpocket:
+    id:      7880
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Pilferer:
+    id:      7881
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Pillager:
+    id:      7882
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Praetor:
+    id:      7883
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Pugilist:
+    id:      7884
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Rabblerouser:
+    id:      7885
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Ravager:
+    id:      7886
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Renegade:
+    id:      7887
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Ritualist:
+    id:      7888
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Rogue:
+    id:      7889
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Samurai:
+    id:      7890
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Scallywag:
+    id:      7891
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Sharpshooter:
+    id:      7892
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Shieldsaint:
+    id:      7893
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Shinobi:
+    id:      7894
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Soldier:
+    id:      7895
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Spiritualist:
+    id:      7896
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Spy:
+    id:      7897
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Squire:
+    id:      7898
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Stoicist:
+    id:      7899
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Swiftcaster:
+    id:      7900
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Tamer:
+    id:      7901
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Thaumaturge:
+    id:      7902
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Villifier:
+    id:      7903
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Viscount:
+    id:      7904
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Vizier:
+    id:      7905
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Warden:
+    id:      7906
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Agon_Yojimbo:
+    id:      7907
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ailuros:
+    id:      7908
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Akidu:
+    id:      7909
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Akidus_Damselfly:
+    id:      7910
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Alexander_NP:
+    id:            82
+    display_name:  Alexander
+    species:       alexander
+    type:          [notorious, event]
+    spell_list_id: 214
+    skill_list_id: 784
+    attributes:
+      combat:
+        skill: club
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     5
+          ice:      5
+          wind:     5
+          earth:    5
+          thunder:  5
+          water:    5
+          light:   11
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:      5
+          slow:         5
+          poison:       5
+          light_sleep: 11
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 1834
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Allergorhai:
+    id:      7911
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Allergorhais_Worm:
+    id:      7912
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Apollinaris_VII-II:
+    id:      7913
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Apollinariss_Antican:
+    id:      7914
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Arebati:
+    id:      7915
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Arebatis_Razz:
+    id:      7916
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Aristaeus:
+    id:      7917
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Aristaeuss_Chapuli:
+    id:      7918
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Asena:
+    id:      7919
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Azdaha:
+    id:      7920
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Azdahas_Wyvern:
+    id:      7921
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bendigeidfran:
+    id:      7922
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bendigeidfrans_Golem:
+    id:      7923
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bes:
+    id:      7924
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bess_Hecteyes:
+    id:      7925
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Brachys:
+    id:      7926
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bumba:
+    id:      7927
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bumbas_Chapuli:
+    id:      7928
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bumbas_Craklaw:
+    id:      7929
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bumbas_Matamata:
+    id:      7930
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bumbas_Razz:
+    id:      7931
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bumbas_Snapweed:
+    id:      7932
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bumbas_Tulfaire:
+    id:      7933
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bygul:
+    id:      7934
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chaos_Steward:
+    id:      7935
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chelamma:
+    id:      7936
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chelammas_Scorpion:
+    id:      7937
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chnubis:
+    id:      7938
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chnubiss_Manticore:
+    id:      7939
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Count_Malefis:
+    id:      7940
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Cynara:
+    id:      7941
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dabbat_al-Ard:
+    id:      7942
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Damysus:
+    id:      7943
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dealan-dhe:
+    id:      7944
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dealan-dhes_Twitherym:
+    id:      7945
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Dione:
+    id:      7946
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Eurytus:
+    id:      7947
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fleet-footed_Lokberry:
+    id:      7948
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fornax:
+    id:      7949
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fornaxs_Cluster:
+    id:      7950
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gandji:
+    id:      7951
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gandjis_Roc:
+    id:      7952
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gigelorum:
+    id:      7953
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gigelorums_Matamata:
+    id:      7954
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gloios:
+    id:      7955
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gogmagog:
+    id:      7956
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gogmagogs_Dullahan:
+    id:      7957
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gravehaunter:
+    id:      7958
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gravehaunters_Corse:
+    id:      7959
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gumdrop:
+    id:      7749
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Harpe:
+    id:      7960
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Henwen:
+    id:      7961
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Henwens_Raaz:
+    id:      7962
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ishum:
+    id:      7963
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ishums_Bomb:
+    id:      7964
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kalunga:
+    id:      7965
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kalungas_Matamata:
+    id:      7966
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Khepers_Beetle:
+    id:      7967
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kuk:
+    id:      7968
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kuks_Shadow_Dragon:
+    id:      7969
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kurmajara:
+    id:      7970
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Kusarikku:
+    id:      7971
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Langmeidong:
+    id:      7972
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Langmeidongs_Roc:
+    id:      7973
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Leucippe:
+    id:      7974
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lokberrys_Avatar:
+    id:      7975
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lokberrys_Tonberry:
+    id:      7976
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Lotanu:
+    id:      7977
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Malefiss_Vampire:
+    id:      7978
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Man-kheper-re:
+    id:      7979
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Marmorkrebs:
+    id:      7980
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Marmorkrebss_Craklaw:
+    id:      7981
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Maudes_Ameretat:
+    id:      7982
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Maverick_Maude:
+    id:      7983
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mboze:
+    id:      7984
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mbozes_Snapweed:
+    id:      7985
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Megaera:
+    id:      7986
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Nerites:
+    id:      7987
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Neritess_Crab:
+    id:      7988
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ngai:
+    id:      7989
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ngais_Craklaw:
+    id:      7990
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Ahriman:
+    id:      7991
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Ameretat:
+    id:      7992
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Apkallu:
+    id:      7993
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Bat:
+    id:      7994
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Bats:
+    id:      7995
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Beetle:
+    id:      7996
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Bhoot:
+    id:      7997
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Bigbird:
+    id:      7998
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Black_Pudding:
+    id:      7999
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Bomb:
+    id:      8000
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Buffalo:
+    id:      8001
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Bugard:
+    id:      8002
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Chigoe:
+    id:      8003
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Clot:
+    id:      8004
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Cluster:
+    id:      8005
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Cockatrice:
+    id:      8006
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Coeurl:
+    id:      8007
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Colibri:
+    id:      8008
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Corse:
+    id:      8009
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Crab:
+    id:      8010
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Crawler:
+    id:      8011
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Dahak:
+    id:      8012
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Damselfly:
+    id:      8013
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Defoliator:
+    id:      8014
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Dhalmel:
+    id:      8015
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Diremite:
+    id:      8016
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Doom_Toad:
+    id:      8017
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Drake:
+    id:      8018
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Draugar:
+    id:      8019
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Eft:
+    id:      8020
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Eruca:
+    id:      8021
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Evil_Weapon:
+    id:      8022
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Fish:
+    id:      8023
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Flytrap:
+    id:      8024
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Funguar:
+    id:      8025
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Gaganbo:
+    id:      8026
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Ghost:
+    id:      8027
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Ghoul:
+    id:      8028
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Giant:
+    id:      8029
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Goobbue:
+    id:      8030
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Hecteyes:
+    id:      8031
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Hound:
+    id:      8032
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Imp:
+    id:      8033
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Jagil:
+    id:      8034
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Karakul:
+    id:      8035
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Korrigan:
+    id:      8036
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Kraken:
+    id:      8037
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Leech:
+    id:      8038
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Leopard:
+    id:      8039
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Lizard:
+    id:      8040
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Magic_Pot:
+    id:      8041
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Mandragora:
+    id:      8042
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Manticore:
+    id:      8043
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Marid:
+    id:      8044
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Morbol:
+    id:      8045
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Opo-opo:
+    id:      8046
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Puk:
+    id:      8047
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Qutrub:
+    id:      8048
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Ram:
+    id:      8049
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Raptor:
+    id:      8050
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Rarab:
+    id:      8051
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Roc:
+    id:      8052
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Sabotender:
+    id:      8053
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Sapling:
+    id:      8054
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Scorpion:
+    id:      8055
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Sheep:
+    id:      8056
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Skeleton:
+    id:      8057
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Slime:
+    id:      8058
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Soulflayer:
+    id:      8059
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Spider:
+    id:      8060
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Spinner:
+    id:      8061
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Taurus:
+    id:      8062
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Tiger:
+    id:      8063
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Treant:
+    id:      8064
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Uragnite:
+    id:      8065
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Vulture:
+    id:      8066
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Wamoura:
+    id:      8067
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Wamouracampa:
+    id:      8068
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Wasp:
+    id:      8069
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Worm:
+    id:      8070
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Wyvern:
+    id:      8071
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Nostos_Ziz:
+    id:      8072
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Odin_Prime:
+    id:            6961
+    species:       odin
+    type:          [notorious, battlefield]
+    spell_list_id: 5
+    skill_list_id: 41
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1829
+        entity_flags: 1179
+        name_prefix:    32
+        hitbox:         32
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ongo:
+    id:      8073
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ongos_Tulfaire:
+    id:      8074
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Physis:
+    id:      8075
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Procne:
+    id:      8076
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Procnes_Tulfaire:
+    id:      8077
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ptelea:
+    id:      8078
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ptesan_Wi:
+    id:      8079
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ptesan_Wis_Buffalo:
+    id:      8080
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Raskovniche:
+    id:      8081
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Raskovniches_Snapweed:
+    id:      8082
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Salmandra:
+    id:      8083
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sgili:
+    id:      8084
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sgilis_Umbril:
+    id:      8085
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shara:
+    id:      8086
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sharas_Evil_Weapon:
+    id:      8087
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Simir:
+    id:      8088
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Simirs_Colibri:
+    id:      8089
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Spyrysyon:
+    id:      8090
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Spyrysyons_Shadow:
+    id:      8091
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tabitjet:
+    id:      8092
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tabitjets_Scorpion:
+    id:      8093
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Taniwha:
+    id:      8094
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Taniwhas_Kraken:
+    id:      8095
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tipuli:
+    id:      8096
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tripix:
+    id:      8097
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Tripixs_Goblin:
+    id:      8098
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  U_Bnai:
+    id:      8099
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  U_Bnais_Acuex:
+    id:      8100
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Wayra_Tata:
+    id:      8101
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Xevioso:
+    id:      8102
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Xeviosos_Chapuli:
+    id:      8103
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Zacatzontli:
+    id:      8104
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Zacatzontlis_Roc:
+    id:      8105
+    species: unclassified
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17997825:
+    template: Odin_Prime
+    at:       [-700.000, -13.270, -140.000, 64]
+    level:    [124, 129]
+  17997826:
+    script: Cait_Sith
+  17997827:
+    template: Alexander_NP
+    script:   Alexander
+    at:       [-700.000, -13.270, -140.000, 64]
+    level:    [119, 119]
+  17997828:
+    script: Lady_Lilith
+  17997829:
+    script: Aquila
+  17997830:
+    script: Haudrale
+  17997831:
+    script: Larzos
+  17997832:
+    script: Dark_Gyves
+  17997833:
+    script: Dark_Gyves
+  17997834:
+    script: Dark_Gyves
+  17997835:
+    script: Lilith_Ascendant
+  17997836:
+    script: Light_Gyves
+  17997837:
+    script: Light_Gyves
+  17997838:
+    script: Light_Gyves
+  17997839:
+    script: Light_Gyves
+  17997840:
+    script: Light_Gyves
+  17997841:
+    script: Dark_Gyves
+  17997842:
+    script: Dark_Gyves
+  17997843:
+    script: Dark_Gyves
+  17997844:
+    script: Dark_Gyves
+  17997845:
+    script: Dark_Gyves
+  17997846:
+    script: Dark_Gyves
+  17997847:
+    script: Dark_Gyves
+  17997848:
+    script: Dark_Gyves
+  17997849:
+    script: Dark_Gyves
+  17997850:
+    script: Dark_Gyves
+  17997851:
+    script: Dark_Gyves
+  17997852:
+    script: Dark_Gyves
+  17997853:
+    script: Dark_Gyves
+  17997854:
+    script: Dark_Gyves
+  17997855:
+    script: Dark_Gyves
+  17997856:
+    script: Dark_Gyves
+  17997857:
+    script: Light_Gyves
+  17997858:
+    script: Light_Gyves
+  17997859:
+    script: Light_Gyves
+  17997860:
+    script: Light_Gyves
+  17997861:
+    script: Light_Gyves
+  17997862:
+    script: Light_Gyves
+  17997863:
+    script: Light_Gyves
+  17997864:
+    script: Light_Gyves
+  17997865:
+    script: Light_Gyves
+  17997866:
+    script: Light_Gyves
+  17997867:
+    script: Light_Gyves
+  17997868:
+    script: Light_Gyves
+  17997869:
+    script: Light_Gyves
+  17997870:
+    script: Light_Gyves
+  17997871:
+    script: Light_Gyves
+  17997872:
+    script: Light_Gyves

@@ -1,0 +1,7273 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  1st_Gold_Musketeer:
+    id:            1
+    species:       humes
+    spell_list_id: 3
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rng]
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   13
+          head:   4318
+          body:   8264
+          hands:  12360
+          legs:   16456
+          feet:   20552
+          main:   24759
+          sub:    28672
+          ranged: 32827
+        model_size:  1
+        hitbox:     12
+      spawn:
+        type: [scripted]
+
+  1st_Iron_Musketeer:
+    id:            2
+    species:       humes
+    spell_list_id: 3
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   5
+          head:   4245
+          body:   8354
+          hands:  12450
+          legs:   16546
+          feet:   20642
+          main:   24764
+          sub:    28855
+          ranged: 32826
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  1st_Legion_Aidman:
+    id:            4
+    species:       humes
+    spell_list_id: 20
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [whm, mnk]
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   14
+          head:   4234
+          body:   8305
+          hands:  12296
+          legs:   16415
+          feet:   20549
+          main:   24708
+          sub:    28804
+          ranged: 32768
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  1st_Legion_Mercenary:
+    id:            5
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 1383
+        model_size:  1
+        hitbox:     15
+      spawn:
+        type: [scripted]
+
+  1st_Legionnaire:
+    id:            3
+    species:       galks
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rng, rng]
+      render:
+        look:
+          type:   equipped
+          race:   8
+          face:   5
+          head:   4102
+          body:   8198
+          hands:  12294
+          legs:   16390
+          feet:   20486
+          main:   24842
+          sub:    28706
+          ranged: 32820
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  2nd_Legionnaire:
+    id:            7
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drk]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   5
+          head:   4101
+          body:   8197
+          hands:  12293
+          legs:   16389
+          feet:   20485
+          main:   24778
+          sub:    28672
+          ranged: 32820
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  4th_Legionnaire:
+    id:            11
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   6
+          head:   4125
+          body:   8221
+          hands:  12317
+          legs:   16413
+          feet:   20509
+          main:   24852
+          sub:    28716
+          ranged: 32822
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  8th_Iron_Musketeer:
+    id:            13
+    species:       humes
+    spell_list_id: 7
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [nin, nin]
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   13
+          head:   4245
+          body:   8354
+          hands:  12450
+          legs:   16546
+          feet:   20642
+          main:   24764
+          sub:    28855
+          ranged: 32826
+        model_size:  1
+        hitbox:     12
+      spawn:
+        type: [scripted]
+
+  Abenzio:
+    id:            18
+    species:       goobbue
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags:  3
+        hitbox:       25
+      spawn:
+        type: [scripted]
+
+  Achtelle:
+    id:            37
+    species:       elvaan
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      render:
+        look:
+          type:   equipped
+          race:   4
+          face:   9
+          head:   4148
+          body:   8244
+          hands:  12340
+          legs:   16436
+          feet:   20532
+          main:   24783
+          sub:    28672
+          ranged: 32768
+        entity_flags: 1561
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Adaman_Quadav_past:
+    id:            5553
+    display_name:  Adaman_Quadav
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2122
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   heavy_quadav_chestplate
+        - chance: rare
+          item:   heavy_quadav_backplate
+      steal: shard_of_obsidian
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Alfons:
+    id:            84
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  13
+          head:  4173
+          body:  8269
+          hands: 12365
+          legs:  16461
+          feet:  20557
+          main:  24896
+          sub:   28696
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Allied_Armored_Belfry:
+    id:      89
+    species: belfrys
+    type:    [notorious]
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 2329
+        model_size:  1
+        hitbox:     20
+      spawn:
+        type: [scripted]
+
+  Allied_Belfry:
+    id:      90
+    species: belfrys
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 2329
+        entity_flags:  1155
+        animation_sub:    8
+        model_size:       1
+        hitbox:          20
+      spawn:
+        type: [scripted]
+
+  Allied_Mantelet:
+    id:            91
+    species:       belfrys
+    skill_list_id: 239
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 2327
+        entity_flags: 1153
+        hitbox:         34
+      spawn:
+        type: [scripted]
+
+  Ancient_Quadav_past:
+    id:            6233
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2117
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   punch_bug
+        - chance: rare
+          item:   heavy_quadav_chestplate
+        - chance: rare
+          item:   heavy_quadav_backplate
+      steal: shard_of_obsidian
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Ancient_Royal_Knight:
+    id:            126
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1176
+        entity_flags: 1153
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Areuhat:
+    id:            227
+    species:       elvaan
+    spell_list_id: 4
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:   equipped
+          race:   4
+          face:   26
+          head:   4096
+          body:   8327
+          hands:  12423
+          legs:   16519
+          feet:   20615
+          main:   24951
+          sub:    28672
+          ranged: 32768
+        entity_flags: 1561
+        name_prefix:    32
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Auroral_Alicorn:
+    id:            291
+    species:       monoceros
+    skill_list_id: 39
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:   -2
+          thunder:  6
+          water:    2
+          dark:     4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:       -2
+          poison:      2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2227
+        entity_flags:  1665
+        animation_sub:   22
+        name_prefix:     32
+        hitbox:          22
+      spawn:
+        type: [scripted]
+
+  Azima:
+    id:            311
+    species:       humes
+    spell_list_id: 21
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   12
+          head:   4277
+          body:   8377
+          hands:  12473
+          legs:   16569
+          feet:   20551
+          main:   24867
+          sub:    28672
+          ranged: 32768
+        entity_flags: 1561
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Azo:
+    id:            312
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags: 1177
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  BaTho_Mercifulheart:
+    id:            377
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 245
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2124
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   molioness_sickle
+        - chance: rare
+          item:   heavy_quadav_chestplate
+        - chance: rare
+          item:   heavy_quadav_backplate
+
+  Babban_Ny_Mheillea:
+    id:            320
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2247
+      spawn:
+        type: [scripted]
+
+  Baetyl_Quadav_BS:
+    id:            324
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1055
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   bottled_pixie
+        - chance: very_rare
+          item:   scroll_of_waterga_iii
+        - chance: super_rare
+          item:   scroll_of_water_iv
+        - chance: very_rare
+          item:   scroll_of_waterga_ii
+        - chance: rare
+          item:   scroll_of_water_iii
+        - chance: super_rare
+          item:   scroll_of_flood
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Bartholomaus:
+    id:            352
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   0
+          head:   4169
+          body:   8354
+          hands:  12450
+          legs:   16546
+          feet:   20642
+          main:   24757
+          sub:    28716
+          ranged: 32826
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Beadeaux_Vanguard:
+    id:            381
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2126
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  BiGho_Headtaker_past:
+    id:            6680
+    display_name:  BiGho_Headtaker
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2124
+        entity_flags: 669
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Binding_Tube_BS:
+    id:            6717
+    display_name:  Binding_Tube
+    species:       tubes
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1792
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Blifnix_Oilycheeks:
+    id:            450
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 1383
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 18000
+    loot:
+      drops:
+        - chance: always
+          item:   iron_letterbox
+        - chance: uncommon
+          item:   amanokakoyumi
+        - chance: uncommon
+          item:   goblin_cracker
+
+  BoDho_Hundredfist:
+    id:            516
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2155
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  BoDhos_Shieldwarrior_C:
+    id:            517
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2116
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Boodlix:
+    id:            502
+    species:       goblin
+    type:          [event]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 702
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bravo_NV24:
+    id:            526
+    display_name:  Bravo
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 318
+        entity_flags: 2201
+        name_vis:       24
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Bres:
+    id:            528
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 2179
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 36000
+    loot:
+      drops:
+        - chance: always
+          item:   brass_letterbox
+        - chance: uncommon
+          item:   emissary_boots
+        - chance: uncommon
+          item:   useshi
+
+  Bryher:
+    id:            549
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Camlin:
+    id:            616
+    species:       sabotender
+    skill_list_id: 212
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:    4
+          light:    4
+          dark:    -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:       4
+          light_sleep:  4
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 372
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Chatoyant_Quadav_BS:
+    id:            703
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1054
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   shard_of_obsidian
+        - chance: rare
+          item:   jar_of_peiste_pellets
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Chigoe_past:
+    id:            6312
+    species:       chigoe
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2231
+        entity_flags:  2689
+        animation_sub:    8
+        model_size:       1
+        hitbox:           6
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Choh_Moui:
+    id:            725
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   4
+          head:   4305
+          body:   8364
+          hands:  12460
+          legs:   16556
+          feet:   20652
+          main:   24661
+          sub:    28722
+          ranged: 32794
+        entity_flags: 537
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Confederate_Belfry:
+    id:      775
+    species: belfrys
+    attributes:
+      combat:
+        skill: axe
+        delay: 32000
+      render:
+        look:
+          type:  standard
+          model: 2320
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      spawn:
+        type: [scripted]
+
+  Confederate_Mantelet:
+    id:            776
+    species:       fortifications
+    skill_list_id: 239
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 2328
+        entity_flags: 129
+        hitbox:        34
+      spawn:
+        type: [scripted]
+
+  DaDha_Hundredmask:
+    id:            928
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 652
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   patricians_cuffs
+
+  Dadough_Vanguard:
+    id:            889
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 666
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Dalzakk:
+    id:            896
+    species:       galks
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  equipped
+          race:  8
+          face:  7
+          head:  4113
+          body:  8213
+          hands: 12305
+          legs:  16401
+          feet:  20497
+          main:  24576
+          sub:   28672
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Darach:
+    id:            903
+    species:       treant
+    skill_list_id: 245
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 388
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  DeVyu_Headhunter_past:
+    id:            6681
+    display_name:  DeVyu_Headhunter
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2129
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Degenhard:
+    id:            960
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 2177
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  DiDha_Adamantfist:
+    id:            1066
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: club
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 782
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  DiDhas_Elite_Guard:
+    id:            1067
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 671
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  DiMho_Platekeeper:
+    id:            1068
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: scythe
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 671
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  DiZho_Spongeshell:
+    id:            1069
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2124
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 18000
+    loot:
+      drops:
+        - chance: always
+          item:   shakudo_letterbox
+        - chance: uncommon
+          item:   balisarde
+        - chance: uncommon
+          item:   patriots_ring
+
+  DoBho_Venomtail:
+    id:            1096
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 265
+      jobs: [rdm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1055
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Doyen_Quadav:
+    id:            1094
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2119
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   heavy_quadav_chestplate
+        - chance: rare
+          item:   heavy_quadav_backplate
+      steal: shard_of_obsidian
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Dusk_Raider:
+    id:            1143
+    species:       humes
+    spell_list_id: 5
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   10
+          head:   4154
+          body:   8250
+          hands:  12366
+          legs:   16462
+          feet:   20558
+          main:   24851
+          sub:    28697
+          ranged: 32768
+        entity_flags: 129
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Duskraven:
+    id:            1141
+    species:       humes
+    spell_list_id: 5
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, blm]
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  2
+          head:  4278
+          body:  8270
+          hands: 12397
+          legs:  16462
+          feet:  20558
+          main:  24646
+          sub:   28672
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  EaTho_Cruelheart_past:
+    id:            6068
+    display_name:  EaTho_Cruelheart
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2124
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   molioness_ring
+        - chance: rare
+          item:   heavy_quadav_chestplate
+        - chance: rare
+          item:   heavy_quadav_backplate
+
+  Edible_Slug:
+    id:            1175
+    species:       slug
+    skill_list_id: 231
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          thunder: -1
+          water:   11
+        rank_status:
+          paralyze: -1
+          bind:     -1
+          poison:   11
+      render:
+        look:
+          type:  standard
+          model: 2021
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          17
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_rare
+          item:   slug_eye
+      despoil:
+        slug_eye: 0
+
+  Electrumcap:
+    id:            1195
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_rare
+          item:   agaricus_mushroom
+      steal: woozyshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Elivira:
+    id:            1198
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rng, rng]
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   26
+          head:   4096
+          body:   8265
+          hands:  12361
+          legs:   16457
+          feet:   20553
+          main:   24761
+          sub:    28672
+          ranged: 32853
+        entity_flags:  1563
+        animation_sub:    8
+        name_prefix:     32
+        model_size:       1
+        hitbox:          12
+      spawn:
+        type: [scripted]
+
+  Eurytos_Beadeaux_S:
+    id:            7302
+    display_name:  Eurytos
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 707
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Faerie:
+    id:            1279
+    species:       pixie
+    skill_list_id: 195
+    attributes:
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags:  513
+        animation_sub:   8
+      spawn:
+        type: [scripted]
+
+  Ferreous_Coffin:
+    id:            1324
+    species:       galks
+    spell_list_id: 20
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      render:
+        look:
+          type:   equipped
+          race:   8
+          face:   9
+          head:   4165
+          body:   8261
+          hands:  12357
+          legs:   16453
+          feet:   20549
+          main:   24883
+          sub:    28672
+          ranged: 32768
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        20
+      spawn:
+        type: [scripted]
+
+  Ferroalloy_Quadav:
+    id:            1325
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2124
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   heavy_quadav_chestplate
+        - chance: rare
+          item:   heavy_quadav_backplate
+      steal: shard_of_obsidian
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Field_Woundpatcher:
+    id:            1332
+    species:       humes
+    spell_list_id: 20
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, rdm]
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   7
+          head:   4220
+          body:   8312
+          hands:  12356
+          legs:   16407
+          feet:   20503
+          main:   24809
+          sub:    28672
+          ranged: 32768
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  Fiendish_Leechkeeper:
+    id:            1333
+    species:       imp
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [sch, rdm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2236
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fortification_F641:
+    id:           6653
+    display_name: Fortification
+    species:      unclassified
+    type:         [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 1580
+        entity_flags:  641
+        animation_sub:   8
+        name_prefix:     2
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  GaDho_Softstep:
+    id:            1483
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 660
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  GaLhu_Nevermolt:
+    id:            1485
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2129
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 18000
+    loot:
+      drops:
+        - chance: always
+          item:   bronze_letterbox
+        - chance: uncommon
+          item:   sinfender
+        - chance: uncommon
+          item:   terror_shield
+
+  GiGhi_Rockchopper:
+    id:            1611
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2116
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  GiGhis_Elite_Guard:
+    id:            1612
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2116
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  GiGhis_Peiste:
+    id:            1613
+    species:       peiste
+    skill_list_id: 192
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          earth: 2
+          water: 3
+        rank_status:
+          slow:   2
+          poison: 3
+      render:
+        look:
+          type:  standard
+          model: 2015
+        entity_flags:  155
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gigas_Mercenary:
+    id:            1574
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  GoBhu_Herohunter:
+    id:            1779
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1053
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  GoBhus_Elite_Raider:
+    id:            1780
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [rdm, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 667
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  GoDha_Jademaiden:
+    id:            1781
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1053
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  GoDhas_Elite_Raider:
+    id:            1782
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: club
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 667
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Goblin_Lansquenet:
+    id:            1681
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 492
+        entity_flags: 133
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Goblin_Mine:
+    id:      1688
+    species: fortifications
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1791
+        entity_flags:  641
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gold_Quadav:
+    id:            1753
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 659
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   punch_bug
+        - chance: uncommon
+          item:   shard_of_obsidian
+      steal: platinum_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  GuDho_Staggershell:
+    id:            1856
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 660
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Iron_Bomb:
+    id:      2100
+    species: fortifications
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1791
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Iron_Quadav_BS:
+    id:            6247
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2127
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   heavy_quadav_chestplate
+        - chance: rare
+          item:   heavy_quadav_backplate
+      steal: shard_of_obsidian
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Jajaro:
+    id:            2137
+    species:       buffalo
+    skill_list_id: 57
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags:  153
+        animation_sub:   8
+        name_prefix:    32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Kagetora:
+    id:            2179
+    species:       humes
+    spell_list_id: 7
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   14
+          head:   4155
+          body:   8196
+          hands:  12376
+          legs:   16472
+          feet:   20568
+          main:   24965
+          sub:    28986
+          ranged: 32798
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Kaiser_Behemoth_S:
+    id:            2180
+    display_name:  Kaiser_Behemoth
+    species:       behemoth
+    type:          [notorious, battlefield]
+    spell_list_id: 126
+    skill_list_id: 479
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 380
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        45
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+
+  Khroma_Quadav:
+    id:            2224
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2154
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Kilhwch:
+    id:            2226
+    species:       humes
+    spell_list_id: 4
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   13
+          head:   4173
+          body:   8269
+          hands:  12365
+          legs:   16461
+          feet:   20557
+          main:   24896
+          sub:    28696
+          ranged: 32768
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Kurt:
+    id:            2300
+    species:       humes
+    spell_list_id: 7
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   15
+          head:   4184
+          body:   8354
+          hands:  12450
+          legs:   16546
+          feet:   20642
+          main:   24899
+          sub:    28672
+          ranged: 32857
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Lerren:
+    id:            2391
+    species:       tiger
+    skill_list_id: 242
+    attributes:
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 2248
+        entity_flags: 2201
+        name_vis:       24
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Lewenhart:
+    id:            2403
+    species:       humes
+    spell_list_id: 6
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: club
+      jobs: [brd, brd]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   13
+          head:   4096
+          body:   8203
+          hands:  12294
+          legs:   16387
+          feet:   20488
+          main:   24740
+          sub:    28672
+          ranged: 32768
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Ludwig:
+    id:            2445
+    species:       humes
+    spell_list_id: 5
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   3
+          head:   4314
+          body:   8410
+          hands:  12506
+          legs:   16602
+          feet:   20698
+          main:   24969
+          sub:    28672
+          ranged: 32796
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Maat_campaign:
+    id:            6823
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill:    hand_to_hand
+        delay:    480
+        dmg_mult: 110
+      jobs: [mnk, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Magnes_Quadav_BS:
+    id:            6254
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 669
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   scroll_of_blind
+        - chance: rare
+          item:   scroll_of_bind
+        - chance: rare
+          item:   bottled_pixie
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Maximilian:
+    id:            2590
+    species:       humes
+    skill_list_id: 233
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   26
+          head:   4096
+          body:   8410
+          hands:  12506
+          legs:   16397
+          feet:   20493
+          main:   24766
+          sub:    29056
+          ranged: 32768
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Meteor_Quadav:
+    id:            2644
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [rdm, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1053
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   shard_of_obsidian
+        - chance: very_rare
+          item:   jar_of_peiste_pellets
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Momowa:
+    id:            2730
+    species:       bird
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags:  665
+        animation_sub:   8
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  MuNhi_Thimbletail:
+    id:            2779
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 660
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 18000
+    loot:
+      drops:
+        - chance: always
+          item:   pig_iron_letterbox
+        - chance: uncommon
+          item:   farseer
+        - chance: uncommon
+          item:   demagogues_sash
+
+  Nail_Bomb:
+    id:      2799
+    species: fortifications
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 1791
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  NoMho_Crimsonarmor_past:
+    id:            6682
+    display_name:  NoMho_Crimsonarmor
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [war, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1054
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  NoMhos_Elite_Guard:
+    id:            2917
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 665
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Observant_Zekka:
+    id:            2932
+    species:       imp
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: katana
+      jobs: [blm, blm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2236
+        entity_flags:  1693
+        animation_sub:   12
+        name_prefix:     32
+        model_size:       2
+        hitbox:          13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 18000
+    loot:
+      drops:
+        - chance: always
+          item:   paktong_letterbox
+        - chance: uncommon
+          item:   kebbie
+        - chance: uncommon
+          item:   pipers_torque
+
+  Odzmanouk:
+    id:            2946
+    species:       black_wyrm
+    skill_list_id: 260
+    attributes:
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+          light: -2
+        rank_status:
+          poison:      -2
+          light_sleep:  6
+          dark_sleep:   6
+      render:
+        look:
+          type:  standard
+          model: 783
+        entity_flags:  1177
+        animation_sub:    4
+        name_prefix:     32
+        hitbox:          42
+      spawn:
+        type: [scripted]
+
+  Oggbi:
+    id:            2949
+    species:       galks
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:   equipped
+          race:   8
+          face:   3
+          head:   4163
+          body:   8209
+          hands:  12355
+          legs:   16401
+          feet:   20547
+          main:   24707
+          sub:    28672
+          ranged: 32768
+        entity_flags: 1177
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Papako:
+    id:            3096
+    species:       manticore
+    skill_list_id: 179
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags:  2201
+        animation_sub:    8
+        name_vis:        24
+        name_prefix:     32
+      spawn:
+        type: [scripted]
+
+  Paralyzing_Tube_BS:
+    id:            6715
+    display_name:  Paralyzing_Tube
+    species:       tubes
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1792
+        entity_flags:  2689
+        animation_sub:    8
+        hitbox:          10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Pitchy_Pudding:
+    id:            3140
+    species:       flan
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2234
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_flan_meat
+
+  Platinum_Quadav_BS:
+    id:            6234
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 660
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   shard_of_obsidian
+      steal: shard_of_obsidian
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Popochu:
+    id:            3176
+    species:       dhalmel
+    spell_list_id: 20
+    skill_list_id: 80
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -3
+          thunder: -3
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 332
+        entity_flags:  2201
+        animation_sub:    8
+        name_vis:        24
+        name_prefix:     32
+      spawn:
+        type: [scripted]
+
+  Poroggo_Prince:
+    id:            3184
+    species:       green_poroggo
+    skill_list_id: 196
+    attributes:
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2238
+        entity_flags: 133
+      spawn:
+        type: [scripted]
+
+  Poroggo_Servant:
+    id:            3186
+    species:       green_poroggo
+    skill_list_id: 196
+    attributes:
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags: 129
+      spawn:
+        type: [scripted]
+
+  Quadav_Turret:
+    id:            3277
+    species:       quadav_turret
+    skill_list_id: 249
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    4
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 1
+          water:   4
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      4
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2168
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         38
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Qulun_Heavyshell:
+    id:            3293
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2121
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  RaDha_Scarscute:
+    id:            3337
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2119
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 18000
+    loot:
+      drops:
+        - chance: always
+          item:   wrought_iron_letterbox
+        - chance: uncommon
+          item:   fleetwing
+        - chance: uncommon
+          item:   louhis_mask
+
+  Raigegue_R_dOraguille:
+    id:            3310
+    species:       corse
+    spell_list_id: 21
+    skill_list_id: 74
+    attributes:
+      combat:
+        skill: club
+        delay: 290
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:    2
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     3
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         2
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1363
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Rainemard:
+    id:            3312
+    species:       elvaan
+    spell_list_id: 3
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      render:
+        look:
+          type:  equipped
+          race:  3
+          face:  9
+          head:  4168
+          body:  8264
+          hands: 12360
+          legs:  16456
+          feet:  20552
+          main:  24854
+          sub:   28672
+        entity_flags:  3
+        hitbox:       12
+      spawn:
+        type: [scripted]
+
+  Rikoh_Wahcondalo:
+    id:            3366
+    species:       mithra
+    skill_list_id: 151
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  misc
+          model: 2371
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Rongo-Nango:
+    id:            3391
+    species:       tarutaru
+    skill_list_id: 153
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   1
+          head:   4147
+          body:   8375
+          hands:  12471
+          legs:   16567
+          feet:   20663
+          main:   24882
+          sub:    28672
+          ranged: 32793
+        entity_flags: 153
+        name_prefix:   32
+      spawn:
+        type: [scripted]
+
+  Seneschal_Imp_BS:
+    id:            6637
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2236
+        entity_flags:  133
+        animation_sub:   4
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   imp_wing
+        - chance: rare
+          item:   imp_horn
+      despoil:
+        imp_wing: 0
+
+  Shadoweye:
+    id:            6608
+    species:       ahriman
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 265
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadoweye_Gnat:
+    id:            3562
+    species:       gnat
+    skill_list_id: 131
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 129
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowfang:
+    id:            3563
+    species:       kindred
+    type:          [event]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [smn, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 741
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowfang_Void:
+    id:            3564
+    species:       dark_elemental
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowhand:
+    id:            3565
+    species:       fomor
+    type:          [event]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  equipped
+          race:  4
+          face:  29
+          head:  4277
+          body:  8263
+          hands: 12474
+          legs:  16570
+          feet:  20666
+          main:  24869
+          sub:   28672
+        entity_flags: 669
+        name_prefix:   32
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowhand_Cuirassier:
+    id:            3566
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  equipped
+          race:  3
+          face:  29
+          head:  4317
+          body:  8413
+          hands: 12505
+          legs:  16396
+          feet:  20492
+          main:  24827
+          sub:   28699
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowhorn:
+    id:            3569
+    species:       taurus
+    type:          [event]
+    skill_list_id: 240
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, blm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadowhorn_Stormer:
+    id:            3570
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 271
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Silencing_Tube_BS:
+    id:            6716
+    display_name:  Silencing_Tube
+    species:       tubes
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1792
+        entity_flags:  2689
+        animation_sub:    8
+        hitbox:          10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Star_Ruby_Quadav_BS:
+    id:            3757
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 670
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   shard_of_obsidian
+      steal: [platinum_beastcoin, shard_of_obsidian] # audit needed
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Steel_Quadav_BS:
+    id:            6248
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2129
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   heavy_quadav_chestplate
+        - chance: rare
+          item:   heavy_quadav_backplate
+      steal: shard_of_obsidian
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Titania:
+    id:            3926
+    species:       pixie
+    skill_list_id: 195
+    attributes:
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Ulla:
+    id:            4081
+    species:       humes
+    skill_list_id: 149
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   2
+          face:   14
+          head:   4282
+          body:   8308
+          hands:  12404
+          legs:   16500
+          feet:   20608
+          main:   24758
+          sub:    28714
+          ranged: 32768
+        entity_flags:  1561
+        animation_sub:    8
+        name_prefix:     32
+        hitbox:          12
+      spawn:
+        type: [scripted]
+
+  VaGho_Bloodbasked:
+    id:            4208
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 337
+    attributes:
+      combat:
+        skill: club
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1053
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        links: true
+      spawn:
+        respawn: 18000
+    loot:
+      drops:
+        - chance: always
+          item:   cast_iron_letterbox
+        - chance: uncommon
+          item:   osoraku
+        - chance: uncommon
+          item:   malagigis_trousers
+
+  Vahi:
+    id:            4118
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags:  665
+        animation_sub:   8
+        name_prefix:    32
+      spawn:
+        type: [scripted]
+
+  Vajra_Quadav:
+    id:            4120
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 671
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   punch_bug
+        - chance: uncommon
+          item:   shard_of_obsidian
+      steal: platinum_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Vhuud_Vanguard:
+    id:            4228
+    species:       quadav
+    skill_list_id: 337
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 658
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Virulent_Peiste:
+    id:            4238
+    species:       peiste
+    skill_list_id: 192
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          earth: 2
+          water: 3
+        rank_status:
+          slow:   2
+          poison: 3
+      render:
+        look:
+          type:  standard
+          model: 2015
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      mob_mods:
+        exp_bonus: 5
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   peiste_stinger
+        - chance: rare
+          item:   peiste_skin
+
+  War_Ajattara:
+    id:            4296
+    species:       ajattara
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 2245
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Waughroon_Heavyshell:
+    id:            4315
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 2116
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  ZaDha_Adamantking_BS:
+    id:            4494
+    display_name:  ZaDha_Adamantking
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    265
+        dmg_mult: 125
+      jobs: [whm, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 782
+        entity_flags: 671
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  ZaDhas_Biographer:
+    id:            4495
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1054
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  ZaDhas_Minister:
+    id:            4496
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 1055
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  ZiBhe_Gauntletkeeper:
+    id:            4510
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: scythe
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 669
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  ZoBha_Helmkeeper:
+    id:            4520
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: scythe
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 670
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17154049:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-187.290, 0.433, 88.485, 91]
+    level:    [76, 79]
+  17154050:
+    template: Vajra_Quadav
+    at:       [-204.849, 0.499, 88.458, 164]
+    level:    [76, 79]
+  17154051:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-194.877, 0.500, 76.062, 186]
+    level:    [76, 79]
+  17154052:
+    template: Edible_Slug
+    at:       [-183.905, 0.499, 66.675, 158]
+    level:    [72, 76]
+  17154053:
+    template: Edible_Slug
+    at:       [-205.365, 0.499, 71.337, 92]
+    level:    [72, 76]
+  17154054:
+    template: Pitchy_Pudding
+    at:       [-150.487, 0.462, 62.522, 254]
+    level:    [78, 80]
+  17154055:
+    template: Vajra_Quadav
+    at:       [-180.275, 0.500, 135.138, 68]
+    level:    [76, 79]
+  17154056:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-160.967, 0.486, 144.352, 1]
+    level:    [76, 79]
+  17154057:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-121.637, 0.499, 129.548, 50]
+    level:    [76, 79]
+  17154058:
+    template: Gold_Quadav
+    at:       [-129.738, 0.499, 113.349, 76]
+    level:    [76, 79]
+  17154059:
+    template: Edible_Slug
+    at:       [-122.031, 0.499, 129.215, 216]
+    level:    [72, 76]
+  17154060:
+    template: Edible_Slug
+    at:       [-133.997, 0.382, 133.785, 58]
+    level:    [72, 76]
+  17154061:
+    template: Seneschal_Imp_BS
+    script:   Seneschal_Imp
+    at:       [-110.059, 0.499, 128.712, 192]
+    level:    [77, 79]
+  17154062:
+    template: Pitchy_Pudding
+    at:       [-99.693, 0.396, 65.942, 60]
+    level:    [78, 80]
+  17154063:
+    template: Gold_Quadav
+    at:       [-61.321, 0.494, 135.277, 30]
+    level:    [76, 79]
+  17154064:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-58.809, 0.500, 126.271, 68]
+    level:    [76, 79]
+  17154065:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-59.346, 0.249, 102.302, 211]
+    level:    [76, 79]
+  17154066:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-160.119, 0.500, -82.366, 129]
+    level:    [76, 79]
+  17154067:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-133.394, 0.500, -80.628, 53]
+    level:    [76, 79]
+  17154068:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-134.889, 0.569, -93.957, 26]
+    level:    [77, 79]
+  17154069:
+    template: EaTho_Cruelheart_past
+    script:   EaTho_Cruelheart
+    at:       [-191.758, 0.500, -59.651, 108]
+    level:    [78, 78]
+  17154070:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-157.513, 0.500, -134.339, 193]
+    level:    [76, 79]
+  17154071:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-182.792, 0.546, -142.560, 99]
+    level:    [76, 79]
+  17154072:
+    template: Gold_Quadav
+    at:       [-211.174, 0.500, -124.412, 142]
+    level:    [76, 79]
+  17154073:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-206.845, 0.500, -114.222, 143]
+    level:    [76, 79]
+  17154074:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-229.082, 0.368, -141.702, 144]
+    level:    [77, 79]
+  17154075:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-244.759, 0.500, -212.765, 122]
+    level:    [76, 79]
+  17154076:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-236.616, 0.499, -195.163]
+    level:    [76, 79]
+  17154077:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-256.669, 0.500, -192.483, 85]
+    level:    [76, 79]
+  17154078:
+    template: Seneschal_Imp_BS
+    script:   Seneschal_Imp
+    at:       [-247.903, 0.486, -212.667, 129]
+    level:    [77, 79]
+  17154079:
+    template: Gold_Quadav
+    at:       [-258.327, 0.500, -163.275, 57]
+    level:    [76, 79]
+  17154080:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-259.829, 0.500, -145.934, 188]
+    level:    [76, 79]
+  17154081:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-189.596, 0.438, -180.031, 139]
+    level:    [76, 79]
+  17154082:
+    template: Vajra_Quadav
+    at:       [-158.291, 0.500, -172.426, 250]
+    level:    [76, 79]
+  17154083:
+    template: Edible_Slug
+    at:       [-159.378, 0.500, -160.287, 253]
+    level:    [72, 76]
+  17154084:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-146.274, 0.500, -104.280, 238]
+    level:    [76, 79]
+  17154085:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-154.655, 0.500, -97.667, 119]
+    level:    [77, 79]
+  17154086:
+    template: Seneschal_Imp_BS
+    script:   Seneschal_Imp
+    at:       [-182.660, 0.559, -96.983, 247]
+    level:    [77, 79]
+  17154087:
+    template: Electrumcap
+    at:       [-95.354, 0.113, -79.549, 40]
+    level:    [69, 71]
+  17154088:
+    template: Electrumcap
+    at:       [-81.157, -0.013, -85.443, 77]
+    level:    [69, 71]
+  17154089:
+    template: Electrumcap
+    at:       [-105.824, 0.117, -79.864, 75]
+    level:    [69, 71]
+  17154090:
+    template: Electrumcap
+    at:       [-74.762, -0.010, -65.891, 244]
+    level:    [69, 71]
+  17154091:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-91.582, -0.344, -62.011, 159]
+    level:    [76, 79]
+  17154092:
+    template: Electrumcap
+    at:       [-29.675, 0.094, -106.983, 194]
+    level:    [69, 71]
+  17154093:
+    template: Electrumcap
+    at:       [-30.504, 0.109, -107.325, 203]
+    level:    [69, 71]
+  17154094:
+    template: Electrumcap
+    at:       [-43.681, 0.066, -107.919, 230]
+    level:    [69, 71]
+  17154095:
+    template: Gold_Quadav
+    at:       [-37.741, 0.344, -127.037, 102]
+    level:    [76, 79]
+  17154096:
+    template: Electrumcap
+    at:       [-66.285, 0.151, -173.126, 39]
+    level:    [69, 71]
+  17154097:
+    template: Electrumcap
+    at:       [-74.341, 0.382, -163.788, 163]
+    level:    [69, 71]
+  17154098:
+    template: Electrumcap
+    at:       [-80.076, 0.374, -161.702, 252]
+    level:    [69, 71]
+  17154099:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-98.479, 0.414, -159.730, 94]
+    level:    [76, 79]
+  17154100:
+    template: Electrumcap
+    at:       [-139.534, 0.223, -164.312, 255]
+    level:    [69, 71]
+  17154101:
+    template: Electrumcap
+    at:       [-122.982, -0.124, -171.277, 72]
+    level:    [69, 71]
+  17154102:
+    template: Electrumcap
+    at:       [-113.385, 0.275, -163.931, 229]
+    level:    [69, 71]
+  17154103:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-120.439, 0.105, -153.209, 162]
+    level:    [77, 79]
+  17154104:
+    template: Doyen_Quadav
+    at:       [62.684, 0.459, -20.226, 39]
+    level:    [80, 83]
+  17154105:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [54.991, 0.500, 0.396, 165]
+    level:    [80, 83]
+  17154106:
+    template: Meteor_Quadav
+    at:       [108.939, 0.844, -17.640, 141]
+    level:    [80, 83]
+  17154107:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [106.812, 0.952, -17.446, 255]
+    level:    [80, 83]
+  17154108:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [143.731, 0.491, -19.114, 19]
+    level:    [80, 83]
+  17154109:
+    template: Ferroalloy_Quadav
+    at:       [130.610, 0.499, -19.302, 123]
+    level:    [80, 83]
+  17154110:
+    template: Doyen_Quadav
+    at:       [158.530, 0.513, -20.605, 134]
+    level:    [80, 83]
+  17154111:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [170.435, 0.673, -22.078, 134]
+    level:    [80, 83]
+  17154112:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [109.337, 0.931, 16.473, 121]
+    level:    [80, 83]
+  17154113:
+    template: Meteor_Quadav
+    at:       [91.372, 0.689, 18.354, 137]
+    level:    [80, 83]
+  17154114:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [60.363, 0.500, 40.500, 206]
+    level:    [80, 83]
+  17154115:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [64.784, 0.933, 67.702, 61]
+    level:    [80, 83]
+  17154116:
+    template: Ferroalloy_Quadav
+    at:       [91.646, 0.499, 106.445, 109]
+    level:    [80, 83]
+  17154117:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [77.282, 0.499, 104.170, 126]
+    level:    [80, 83]
+  17154118:
+    template: Doyen_Quadav
+    at:       [97.309, 0.500, 81.285, 140]
+    level:    [80, 83]
+  17154119:
+    template: Ferroalloy_Quadav
+    at:       [97.336, 0.500, 81.884, 203]
+    level:    [80, 83]
+  17154120:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [139.571, 0.418, 41.827, 211]
+    level:    [80, 83]
+  17154121:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [140.931, 0.496, 48.627, 65]
+    level:    [80, 83]
+  17154122:
+    template: Meteor_Quadav
+    at:       [170.053, 0.797, 19.326, 14]
+    level:    [80, 83]
+  17154123:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [169.759, 0.807, 19.024, 10]
+    level:    [80, 83]
+  17154124:
+    template: Ferroalloy_Quadav
+    at:       [223.130, 1.194, 59.638, 192]
+    level:    [80, 83]
+  17154125:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [221.300, 0.676, 48.278, 77]
+    level:    [80, 83]
+  17154126:
+    template: Doyen_Quadav
+    at:       [220.225, 0.500, 90.587, 44]
+    level:    [80, 83]
+  17154127:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [215.768, 0.500, 99.694, 173]
+    level:    [80, 83]
+  17154128:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [178.156, 0.499, 61.947, 75]
+    level:    [80, 83]
+  17154129:
+    template: Meteor_Quadav
+    at:       [159.074, 0.500, 57.879, 130]
+    level:    [80, 83]
+  17154130:
+    template: Doyen_Quadav
+    at:       [138.609, 0.500, 102.551, 159]
+    level:    [80, 83]
+  17154131:
+    template: Meteor_Quadav
+    at:       [134.976, 0.500, 105.987, 159]
+    level:    [80, 83]
+  17154132:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [172.129, 0.500, 105.935, 215]
+    level:    [80, 83]
+  17154133:
+    template: Doyen_Quadav
+    at:       [122.068, 0.500, 160.119, 45]
+    level:    [80, 83]
+  17154134:
+    template: Meteor_Quadav
+    at:       [127.647, 0.499, 150.247, 47]
+    level:    [80, 83]
+  17154135:
+    template: Ferroalloy_Quadav
+    at:       [124.639, 0.500, 166.371, 230]
+    level:    [80, 83]
+  17154136:
+    template: Seneschal_Imp_BS
+    script:   Seneschal_Imp
+    at:       [128.274, 0.500, 157.092, 224]
+    level:    [77, 79]
+  17154137:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [178.855, 0.491, 130.411, 189]
+    level:    [80, 83]
+  17154138:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-190.773, -3.938, 149.472, 204]
+    level:    [76, 79]
+  17154139:
+    template: Vajra_Quadav
+    at:       [-202.420, -3.634, 136.194, 211]
+    level:    [76, 79]
+  17154140:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-196.672, -3.656, 162.493, 121]
+    level:    [76, 79]
+  17154141:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-150.688, -3.664, 163.223, 233]
+    level:    [76, 79]
+  17154142:
+    template: Gold_Quadav
+    at:       [-178.567, -3.524, 164.019, 184]
+    level:    [76, 79]
+  17154143:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-97.559, -3.504, 171.240, 121]
+    level:    [76, 79]
+  17154144:
+    template: Vajra_Quadav
+    at:       [-54.276, -3.556, 166.659, 141]
+    level:    [76, 79]
+  17154145:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-49.639, -3.583, 166.365, 184]
+    level:    [76, 79]
+  17154146:
+    template: Gold_Quadav
+    at:       [-61.986, -3.582, 163.572, 186]
+    level:    [76, 79]
+  17154147:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-120.073, -3.610, 156.828, 163]
+    level:    [77, 79]
+  17154148:
+    template: BaTho_Mercifulheart
+    at:       [-93.112, -3.500, 179.625, 2]
+    level:    [80, 81]
+  17154149:
+    template: Vajra_Quadav
+    at:       [-31.273, -3.563, 124.019, 250]
+    level:    [76, 79]
+  17154150:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-33.152, -3.586, 101.486, 121]
+    level:    [76, 79]
+  17154151:
+    template: Gold_Quadav
+    at:       [-39.356, -3.708, 97.695, 212]
+    level:    [76, 79]
+  17154152:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-61.315, -3.579, 65.692, 39]
+    level:    [76, 79]
+  17154153:
+    template: Gold_Quadav
+    at:       [-73.709, -3.768, 72.095, 245]
+    level:    [76, 79]
+  17154154:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-56.189, -3.429, 69.822, 160]
+    level:    [76, 79]
+  17154155:
+    template: Vajra_Quadav
+    at:       [-93.316, -2.983, 120.295, 173]
+    level:    [76, 79]
+  17154156:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-73.513, -3.105, 127.536, 144]
+    level:    [76, 79]
+  17154157:
+    template: Vajra_Quadav
+    at:       [-125.401, -3.776, 40.297, 43]
+    level:    [76, 79]
+  17154158:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-126.800, -3.746, 34.586, 129]
+    level:    [76, 79]
+  17154159:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-106.731, -3.588, 36.921, 77]
+    level:    [76, 79]
+  17154160:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-117.839, -3.119, 88.145, 194]
+    level:    [76, 79]
+  17154161:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-119.069, -3.338, 82.939, 61]
+    level:    [76, 79]
+  17154162:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-161.179, -3.665, 95.544, 220]
+    level:    [76, 79]
+  17154163:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-154.254, -3.784, 81.523, 169]
+    level:    [77, 79]
+  17154164:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-161.153, -3.603, 99.850, 231]
+    level:    [76, 79]
+  17154165:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-192.214, -3.611, 30.719, 24]
+    level:    [76, 79]
+  17154166:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-196.702, -3.597, 13.424, 104]
+    level:    [76, 79]
+  17154167:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-182.781, -3.619, 38.506, 134]
+    level:    [76, 79]
+  17154168:
+    template: Vajra_Quadav
+    at:       [-246.305, -3.570, 25.920, 141]
+    level:    [76, 79]
+  17154169:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-233.483, -3.967, 43.771, 164]
+    level:    [76, 79]
+  17154170:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-235.306, -3.507, -15.926, 80]
+    level:    [77, 79]
+  17154171:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-237.585, -3.714, -20.459, 243]
+    level:    [76, 79]
+  17154172:
+    template: Vajra_Quadav
+    at:       [-238.994, -3.709, -81.778, 236]
+    level:    [76, 79]
+  17154173:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-212.226, -3.683, -82.327, 110]
+    level:    [76, 79]
+  17154174:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-200.995, -3.564, -82.858, 114]
+    level:    [76, 79]
+  17154175:
+    template: Gold_Quadav
+    at:       [-225.015, -3.146, -126.760, 4]
+    level:    [76, 79]
+  17154176:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-247.952, -3.646, -122.350, 44]
+    level:    [76, 79]
+  17154177:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-254.972, -3.520, -106.736, 179]
+    level:    [77, 79]
+  17154178:
+    template: Gold_Quadav
+    at:       [-269.699, -3.838, -122.672, 21]
+    level:    [76, 79]
+  17154179:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-278.593, -3.665, -154.249, 21]
+    level:    [76, 79]
+  17154180:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-281.914, -3.574, -146.038, 241]
+    level:    [76, 79]
+  17154181:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-293.746, -3.504, -210.463, 173]
+    level:    [77, 79]
+  17154182:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-291.424, -3.509, -217.118, 78]
+    level:    [76, 79]
+  17154183:
+    template: Vajra_Quadav
+    at:       [-265.509, -3.767, -238.135, 22]
+    level:    [76, 79]
+  17154184:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-270.655, -3.965, -234.630, 145]
+    level:    [76, 79]
+  17154185:
+    template: Gold_Quadav
+    at:       [-232.359, -3.766, -235.495, 57]
+    level:    [76, 79]
+  17154186:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-208.674, -3.876, -233.234, 86]
+    level:    [76, 79]
+  17154187:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-193.428, -3.499, -214.098, 121]
+    level:    [77, 79]
+  17154188:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-204.945, -3.716, -218.348, 112]
+    level:    [76, 79]
+  17154189:
+    template: Gold_Quadav
+    at:       [-165.280, -3.410, -214.612, 122]
+    level:    [76, 79]
+  17154190:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-150.733, -3.498, -213.601, 13]
+    level:    [76, 79]
+  17154191:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-157.222, -3.515, -209.190, 147]
+    level:    [76, 79]
+  17154192:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-115.926, -3.712, -204.424, 166]
+    level:    [76, 79]
+  17154193:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-83.475, -3.287, -204.870, 53]
+    level:    [76, 79]
+  17154194:
+    template: Vajra_Quadav
+    at:       [-119.079, -3.129, -190.962, 178]
+    level:    [76, 79]
+  17154195:
+    template: DaDha_Hundredmask
+    at:       [-89.901, 0.225, -159.964, 155]
+    level:    [80, 81]
+  17154196:
+    template: Gold_Quadav
+    at:       [-64.813, -3.699, -206.442, 22]
+    level:    [76, 79]
+  17154197:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-67.463, -3.475, -200.739, 189]
+    level:    [76, 79]
+  17154198:
+    template: Vajra_Quadav
+    at:       [-46.149, -3.724, -204.041, 9]
+    level:    [76, 79]
+  17154199:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-9.546, -3.941, -154.986, 231]
+    level:    [76, 79]
+  17154200:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-15.819, -3.676, -161.745, 88]
+    level:    [77, 79]
+  17154201:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-21.060, -3.626, -160.608, 145]
+    level:    [76, 79]
+  17154202:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-7.891, -3.345, -111.826, 207]
+    level:    [77, 79]
+  17154203:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-1.138, -3.710, -100.026, 215]
+    level:    [76, 79]
+  17154204:
+    template: Vajra_Quadav
+    at:       [6.649, -3.630, -79.401, 123]
+    level:    [76, 79]
+  17154205:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-42.192, -3.539, -65.851, 209]
+    level:    [76, 79]
+  17154206:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-25.486, -3.500, -42.123, 207]
+    level:    [76, 79]
+  17154207:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-30.421, -3.604, -64.232, 108]
+    level:    [76, 79]
+  17154208:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-74.849, -3.558, -37.995, 93]
+    level:    [77, 79]
+  17154209:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-80.523, -3.568, -37.001, 208]
+    level:    [77, 79]
+  17154210:
+    template: Gold_Quadav
+    at:       [-77.549, -3.519, -41.953, 225]
+    level:    [76, 79]
+  17154211:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-130.456, -3.541, -27.395, 169]
+    level:    [76, 79]
+  17154212:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-139.977, -3.021, -52.989, 11]
+    level:    [76, 79]
+  17154213:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-156.003, -3.535, -28.379, 247]
+    level:    [76, 79]
+  17154214:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-182.791, -3.357, -10.557, 195]
+    level:    [76, 79]
+  17154215:
+    template: Vajra_Quadav
+    at:       [-183.673, -3.284, -6.513, 7]
+    level:    [76, 79]
+  17154216:
+    template: Gold_Quadav
+    at:       [-182.426, -3.442, -12.928, 57]
+    level:    [76, 79]
+  17154217:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [22.977, -3.544, -120.345, 42]
+    level:    [76, 79]
+  17154218:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [12.594, -3.736, -126.303, 1]
+    level:    [76, 79]
+  17154219:
+    template: Vajra_Quadav
+    at:       [9.569, -3.764, -111.562, 90]
+    level:    [76, 79]
+  17154220:
+    template: Seneschal_Imp_BS
+    script:   Seneschal_Imp
+    at:       [11.781, -3.532, -108.703, 208]
+    level:    [77, 79]
+  17154221:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-82.113, -2.752, -102.711, 146]
+    level:    [76, 79]
+  17154222:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-67.548, -2.578, -108.032, 223]
+    level:    [76, 79]
+  17154223:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-111.030, -3.910, -108.973, 161]
+    level:    [77, 79]
+  17154224:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-131.057, -3.110, -113.993, 212]
+    level:    [76, 79]
+  17154225:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-209.546, -3.762, -155.655, 91]
+    level:    [76, 79]
+  17154226:
+    template: Gold_Quadav
+    at:       [-247.152, -3.388, -164.628, 193]
+    level:    [76, 79]
+  17154227:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-247.809, -3.292, -171.006, 76]
+    level:    [76, 79]
+  17154228:
+    template: Gold_Quadav
+    at:       [-120.158, -3.398, -78.627, 192]
+    level:    [76, 79]
+  17154229:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-161.670, -3.385, -145.097, 107]
+    level:    [76, 79]
+  17154230:
+    template: Doyen_Quadav
+    at:       [34.419, -3.510, -50.828, 26]
+    level:    [80, 83]
+  17154231:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [28.871, -3.540, -45.700, 94]
+    level:    [80, 83]
+  17154232:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [39.546, -3.624, -12.035, 162]
+    level:    [80, 83]
+  17154233:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [40.629, -3.612, -14.494, 45]
+    level:    [80, 83]
+  17154234:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [49.055, -3.028, 52.313, 218]
+    level:    [80, 83]
+  17154235:
+    template: Meteor_Quadav
+    at:       [29.570, -3.492, 62.241, 130]
+    level:    [80, 83]
+  17154236:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [53.574, -3.663, 114.283, 213]
+    level:    [80, 83]
+  17154237:
+    template: Ferroalloy_Quadav
+    at:       [52.319, -3.662, 113.692, 222]
+    level:    [80, 83]
+  17154238:
+    template: Doyen_Quadav
+    at:       [64.675, -3.761, 122.285, 243]
+    level:    [80, 83]
+  17154239:
+    template: Doyen_Quadav
+    at:       [84.101, -3.797, 190.332, 202]
+    level:    [80, 83]
+  17154240:
+    template: Meteor_Quadav
+    at:       [82.729, -3.733, 190.097, 53]
+    level:    [80, 83]
+  17154241:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [76.163, -3.589, 193.461, 138]
+    level:    [80, 83]
+  17154242:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [106.843, -3.342, 192.899, 90]
+    level:    [80, 83]
+  17154243:
+    template: Doyen_Quadav
+    at:       [123.510, -3.576, 205.756, 172]
+    level:    [80, 83]
+  17154244:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [127.963, -3.501, 213.769, 233]
+    level:    [80, 83]
+  17154245:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [159.241, -3.713, 206.758, 55]
+    level:    [80, 83]
+  17154246:
+    template: Ferroalloy_Quadav
+    at:       [159.420, -3.754, 203.543, 191]
+    level:    [80, 83]
+  17154247:
+    template: Meteor_Quadav
+    at:       [151.890, -3.303, 174.398, 88]
+    level:    [80, 83]
+  17154248:
+    template: Doyen_Quadav
+    at:       [207.889, -3.525, 142.968, 180]
+    level:    [80, 83]
+  17154249:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [203.279, -3.619, 153.370, 141]
+    level:    [80, 83]
+  17154250:
+    template: Meteor_Quadav
+    at:       [214.492, -3.331, 151.524, 53]
+    level:    [80, 83]
+  17154251:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [161.031, -3.495, 146.537, 130]
+    level:    [80, 83]
+  17154252:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [166.877, -3.843, 156.714, 205]
+    level:    [80, 83]
+  17154253:
+    template: Doyen_Quadav
+    at:       [237.763, -3.650, 104.162, 45]
+    level:    [80, 83]
+  17154254:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [234.535, -3.745, 120.351, 91]
+    level:    [80, 83]
+  17154255:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [244.429, -3.547, 96.612, 18]
+    level:    [80, 83]
+  17154256:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [269.350, -3.489, 57.806, 10]
+    level:    [80, 83]
+  17154257:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [241.394, -3.890, 48.301, 44]
+    level:    [80, 83]
+  17154258:
+    template: Meteor_Quadav
+    at:       [239.725, -3.388, 60.488, 158]
+    level:    [80, 83]
+  17154259:
+    template: Meteor_Quadav
+    at:       [288.579, -3.531, 2.396, 227]
+    level:    [80, 83]
+  17154260:
+    template: Doyen_Quadav
+    at:       [272.572, -3.871, 6.251, 11]
+    level:    [80, 83]
+  17154261:
+    template: Ferroalloy_Quadav
+    at:       [220.930, -3.412, -8.201, 1]
+    level:    [80, 83]
+  17154262:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [212.319, -3.548, 1.224, 23]
+    level:    [80, 83]
+  17154263:
+    template: Doyen_Quadav
+    at:       [165.498, -3.228, 5.707, 127]
+    level:    [80, 83]
+  17154264:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [162.555, -3.434, -4.554, 75]
+    level:    [80, 83]
+  17154265:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [212.896, -3.262, -39.062, 166]
+    level:    [80, 83]
+  17154266:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [222.116, -3.543, -45.170, 53]
+    level:    [80, 83]
+  17154267:
+    template: Doyen_Quadav
+    at:       [122.848, -3.578, -52.622, 55]
+    level:    [80, 83]
+  17154268:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [127.383, -3.475, -35.279, 229]
+    level:    [80, 83]
+  17154269:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [165.231, -3.464, -37.056, 201]
+    level:    [80, 83]
+  17154270:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [157.881, -3.453, -36.216, 155]
+    level:    [80, 83]
+  17154271:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [76.928, -3.875, -39.292, 163]
+    level:    [80, 83]
+  17154272:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [99.348, -3.507, -52.149, 246]
+    level:    [80, 83]
+  17154273:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [87.778, -3.520, -50.914, 100]
+    level:    [80, 83]
+  17154274:
+    template: Pitchy_Pudding
+    at:       [86.143, -3.351, -6.034, 115]
+    level:    [78, 80]
+  17154275:
+    template: Virulent_Peiste
+    at:       [105.332, -3.370, 4.571, 124]
+    level:    [79, 81]
+  17154276:
+    template: Virulent_Peiste
+    at:       [85.919, -3.895, -0.419, 65]
+    level:    [79, 81]
+  17154277:
+    template: Virulent_Peiste
+    at:       [101.668, -3.296, 5.419, 17]
+    level:    [79, 81]
+  17154278:
+    template: Pitchy_Pudding
+    at:       [85.581, -3.825, 47.654, 211]
+    level:    [78, 80]
+  17154279:
+    template: Virulent_Peiste
+    at:       [87.592, -3.107, 34.283, 47]
+    level:    [79, 81]
+  17154280:
+    template: Virulent_Peiste
+    at:       [87.405, -3.058, 33.621, 35]
+    level:    [79, 81]
+  17154281:
+    template: Pitchy_Pudding
+    at:       [81.405, -3.619, 70.195, 220]
+    level:    [78, 80]
+  17154282:
+    template: Virulent_Peiste
+    at:       [82.910, -3.613, 74.346, 71]
+    level:    [79, 81]
+  17154283:
+    template: Virulent_Peiste
+    at:       [83.784, -3.478, 78.262, 226]
+    level:    [79, 81]
+  17154284:
+    template: Pitchy_Pudding
+    at:       [148.552, -3.400, 73.649, 35]
+    level:    [78, 80]
+  17154285:
+    template: Doyen_Quadav
+    at:       [146.705, -3.431, 67.465, 109]
+    level:    [80, 83]
+  17154286:
+    template: Ferroalloy_Quadav
+    at:       [153.287, -3.477, 74.607, 128]
+    level:    [80, 83]
+  17154287:
+    template: Pitchy_Pudding
+    at:       [114.531, -3.448, 93.664, 106]
+    level:    [78, 80]
+  17154288:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [121.684, -3.857, 90.051, 70]
+    level:    [80, 83]
+  17154289:
+    template: Meteor_Quadav
+    at:       [115.004, -3.659, 99.877, 113]
+    level:    [80, 83]
+  17154290:
+    template: Pitchy_Pudding
+    at:       [112.619, -3.406, 122.436, 184]
+    level:    [78, 80]
+  17154291:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [114.428, -3.804, 108.548, 62]
+    level:    [80, 83]
+  17154292:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [127.998, -3.322, 125.382, 201]
+    level:    [80, 83]
+  17154293:
+    template: Pitchy_Pudding
+    at:       [205.911, -2.952, 51.559, 18]
+    level:    [78, 80]
+  17154294:
+    template: Meteor_Quadav
+    at:       [196.835, -3.198, 83.264, 121]
+    level:    [80, 83]
+  17154295:
+    template: Doyen_Quadav
+    at:       [198.716, -3.701, 70.979, 141]
+    level:    [80, 83]
+  17154296:
+    template: Pitchy_Pudding
+    at:       [183.463, -3.259, 32.043, 200]
+    level:    [78, 80]
+  17154297:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [185.475, -3.433, 33.296, 148]
+    level:    [80, 83]
+  17154298:
+    template: Ferroalloy_Quadav
+    at:       [184.791, -3.379, 40.954, 65]
+    level:    [80, 83]
+  17154299:
+    template: Vajra_Quadav
+    at:       [-44.637, 17.503, 98.314, 142]
+    level:    [76, 79]
+  17154300:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-45.178, 23.511, 59.298, 128]
+    level:    [76, 79]
+  17154301:
+    template: Vajra_Quadav
+    at:       [-97.883, 23.369, 70.396, 58]
+    level:    [76, 79]
+  17154302:
+    template: Magnes_Quadav_BS
+    script:   Magnes_Quadav
+    at:       [-97.681, 23.466, 38.770, 207]
+    level:    [76, 79]
+  17154303:
+    template: Gold_Quadav
+    at:       [-118.247, 23.718, 19.794, 254]
+    level:    [76, 79]
+  17154304:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-141.259, 23.509, 51.861, 172]
+    level:    [76, 79]
+  17154305:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-179.609, 23.578, 76.044, 213]
+    level:    [76, 79]
+  17154306:
+    template: Vajra_Quadav
+    at:       [-208.012, 23.571, 59.735, 124]
+    level:    [76, 79]
+  17154307:
+    template: Ancient_Quadav_past
+    script:   Ancient_Quadav
+    at:       [-193.002, 13.350, 33.374, 203]
+    level:    [76, 79]
+  17154308:
+    template: Virulent_Peiste
+    at:       [-64.519, 23.686, 24.190, 157]
+    level:    [79, 81]
+  17154309:
+    template: Virulent_Peiste
+    at:       [-61.901, 23.685, 17.631, 196]
+    level:    [79, 81]
+  17154310:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-96.997, 23.660, 111.180, 251]
+    level:    [76, 79]
+  17154311:
+    template: Adaman_Quadav_past
+    script:   Adaman_Quadav
+    at:       [-99.993, 23.576, 103.776, 201]
+    level:    [77, 79]
+  17154312:
+    template: Seneschal_Imp_BS
+    script:   Seneschal_Imp
+    at:       [-105.162, 23.702, 106.388, 181]
+    level:    [77, 79]
+  17154313:
+    template: Vajra_Quadav
+    at:       [-138.003, 24.154, 19.500, 219]
+    level:    [76, 79]
+  17154314:
+    template: Star_Ruby_Quadav_BS
+    script:   Star_Ruby_Quadav
+    at:       [-144.448, 24.104, 18.973, 160]
+    level:    [76, 79]
+  17154315:
+    template: Gold_Quadav
+    at:       [-179.033, 24.190, 104.724, 90]
+    level:    [76, 79]
+  17154316:
+    template: Iron_Quadav_BS
+    script:   Iron_Quadav
+    at:       [-177.098, 23.939, 105.760, 217]
+    level:    [76, 79]
+  17154317:
+    template: Seneschal_Imp_BS
+    script:   Seneschal_Imp
+    at:       [-179.358, 24.112, 96.824, 110]
+    level:    [77, 79]
+  17154318:
+    template: Virulent_Peiste
+    at:       [-137.071, 23.553, 97.719, 63]
+    level:    [79, 81]
+  17154319:
+    template: Virulent_Peiste
+    at:       [-143.603, 23.578, 105.578, 196]
+    level:    [79, 81]
+  17154320:
+    template: Virulent_Peiste
+    at:       [-141.560, 23.543, 104.712, 43]
+    level:    [79, 81]
+  17154321:
+    template: Virulent_Peiste
+    at:       [-229.525, 23.606, 98.330, 98]
+    level:    [79, 81]
+  17154322:
+    template: Virulent_Peiste
+    at:       [-218.131, 23.683, 101.380, 28]
+    level:    [79, 81]
+  17154323:
+    template: Virulent_Peiste
+    at:       [-218.901, 23.627, 92.969, 46]
+    level:    [79, 81]
+  17154324:
+    template: Doyen_Quadav
+    at:       [180.829, 26.894, 170.097, 93]
+    level:    [80, 83]
+  17154325:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [222.893, 39.369, 146.238, 46]
+    level:    [80, 83]
+  17154326:
+    template: Meteor_Quadav
+    at:       [219.548, 39.553, 111.421, 63]
+    level:    [80, 83]
+  17154327:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [313.869, 33.349, 139.266, 132]
+    level:    [80, 83]
+  17154328:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [419.810, 32.089, 37.167, 193]
+    level:    [80, 83]
+  17154329:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [353.835, 39.442, 18.972, 254]
+    level:    [80, 83]
+  17154330:
+    template: Doyen_Quadav
+    at:       [198.974, 40.420, 89.081, 15]
+    level:    [80, 83]
+  17154331:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [197.966, 39.985, 92.406, 239]
+    level:    [80, 83]
+  17154332:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [212.207, 39.803, 67.810, 76]
+    level:    [80, 83]
+  17154333:
+    template: Meteor_Quadav
+    at:       [208.770, 39.631, 94.572, 161]
+    level:    [80, 83]
+  17154334:
+    template: Seneschal_Imp_BS
+    script:   Seneschal_Imp
+    at:       [204.787, 40.623, 71.162, 208]
+    level:    [77, 79]
+  17154335:
+    template: Virulent_Peiste
+    at:       [177.056, 39.693, 11.155, 138]
+    level:    [79, 81]
+  17154336:
+    template: Virulent_Peiste
+    at:       [176.800, 39.699, 11.277, 2]
+    level:    [79, 81]
+  17154337:
+    template: Virulent_Peiste
+    at:       [182.516, 39.533, 17.651, 215]
+    level:    [79, 81]
+  17154338:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [300.898, 40.264, 21.003, 16]
+    level:    [80, 83]
+  17154339:
+    template: Meteor_Quadav
+    at:       [306.369, 40.102, 19.886, 51]
+    level:    [80, 83]
+  17154340:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [306.320, 40.100, 19.713, 50]
+    level:    [80, 83]
+  17154341:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [381.189, 24.088, 65.533, 158]
+    level:    [80, 83]
+  17154342:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [384.342, 24.121, 60.160, 228]
+    level:    [80, 83]
+  17154343:
+    template: Ferroalloy_Quadav
+    at:       [420.277, 23.566, 95.168, 99]
+    level:    [80, 83]
+  17154344:
+    template: Chatoyant_Quadav_BS
+    script:   Chatoyant_Quadav
+    at:       [416.854, 23.562, 101.537, 186]
+    level:    [80, 83]
+  17154345:
+    template: Steel_Quadav_BS
+    script:   Steel_Quadav
+    at:       [339.341, 24.065, 97.603, 150]
+    level:    [80, 83]
+  17154346:
+    template: Doyen_Quadav
+    at:       [335.244, 24.166, 101.174, 96]
+    level:    [80, 83]
+  17154347:
+    template: Meteor_Quadav
+    at:       [375.594, 23.641, 147.770, 182]
+    level:    [80, 83]
+  17154348:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [384.455, 23.749, 148.349, 231]
+    level:    [80, 83]
+  17154349:
+    template: Platinum_Quadav_BS
+    script:   Platinum_Quadav
+    at:       [258.593, 40.164, 144.511, 194]
+    level:    [80, 83]
+  17154350:
+    template: Baetyl_Quadav_BS
+    script:   Baetyl_Quadav
+    at:       [255.663, 40.175, 140.974]
+    level:    [80, 83]
+  17154351:
+    template: Thunder_Elemental
+    at:       [-83.193, 0.099, -81.338, 165]
+    level:    [75, 82]
+  17154352:
+    template: Thunder_Elemental
+    at:       [232.832, -3.344, 66.291, 169]
+    level:    [75, 82]
+  17154353:
+    template: Thunder_Elemental
+    at:       [30.599, -3.577, 0.914, 132]
+    level:    [75, 82]
+  17154354:
+    template: Water_Elemental
+    at:       [-135.933, 0.500, -71.613, 251]
+    level:    [75, 82]
+  17154355:
+    template: Water_Elemental
+    at:       [206.100, -3.122, 68.500, 199]
+    level:    [75, 82]
+  17154356:
+    template: GaLhu_Nevermolt
+    at:       [208.697, -3.353, -39.247, 186]
+    level:    [83, 83]
+  17154357:
+    template: Bres
+    at:       [179.322, 39.503, 13.407, 153]
+    level:    [83, 83]
+  17154358:
+    template: DiZho_Spongeshell
+    at:       [-288.203, -3.567, -162.998, 75]
+    level:    [83, 83]
+  17154359:
+    template: Observant_Zekka
+    at:       [128.442, 0.495, 161.025, 43]
+    level:    [83, 83]
+  17154360:
+    template: MuNhi_Thimbletail
+    at:       [240.284, -3.717, 119.684, 65]
+    level:    [83, 83]
+  17154361:
+    template: Paralyzing_Tube_BS
+    script:   Paralyzing_Tube
+    at:       [61.145, -3.500, -104.878]
+    level:    [75, 75]
+  17154362:
+    template: Silencing_Tube_BS
+    script:   Silencing_Tube
+    at:       [59.194, -3.499, -101.361]
+    level:    [75, 75]
+  17154363:
+    template: Binding_Tube_BS
+    script:   Binding_Tube
+    at:       [45.582, -3.500, -106.296]
+    level:    [75, 75]
+  17154364:
+    template: Blifnix_Oilycheeks
+    at:       [-132.780, 23.532, 97.215, 187]
+    level:    [83, 83]
+  17154365:
+    template: Goblin_Mine
+    at:       [-215.897, 0.622, -6.295, 186]
+    level:    [75, 75]
+  17154366:
+    template: Goblin_Mine
+    at:       [-215.897, 0.500, -2.295, 186]
+    level:    [75, 75]
+  17154367:
+    template: Goblin_Mine
+    at:       [-173.386, 24.037, 100.720, 16]
+    level:    [75, 75]
+  17154368:
+    template: Goblin_Mine
+    at:       [-172.386, 23.971, 101.220, 181]
+    level:    [75, 75]
+  17154369:
+    template: Goblin_Mine
+    at:       [-171.386, 23.589, 97.220, 75]
+    level:    [75, 75]
+  17154370:
+    template: VaGho_Bloodbasked
+    at:       [48.226, -3.267, 41.630, 127]
+    level:    [83, 83]
+  17154371:
+    template: RaDha_Scarscute
+    at:       [-22.510, -3.529, -57.955, 93]
+    level:    [83, 83]
+  17154372:
+    template: ZaDha_Adamantking_BS
+    script:   ZaDha_Adamantking
+  17154374:
+    template: DiMho_Platekeeper
+  17154375:
+    template: ZiBhe_Gauntletkeeper
+  17154376:
+    template: ZoBha_Helmkeeper
+  17154377:
+    template: ZaDha_Adamantking_BS
+    script:   ZaDha_Adamantking
+  17154379:
+    template: DiMho_Platekeeper
+  17154380:
+    template: ZiBhe_Gauntletkeeper
+  17154381:
+    template: ZoBha_Helmkeeper
+  17154382:
+    template: ZaDha_Adamantking_BS
+    script:   ZaDha_Adamantking
+  17154384:
+    template: DiMho_Platekeeper
+  17154385:
+    template: ZiBhe_Gauntletkeeper
+  17154386:
+    template: ZoBha_Helmkeeper
+  17154387:
+    template: ZaDha_Adamantking_BS
+    script:   ZaDha_Adamantking
+    at:       [522.266, -39.443, 351.541, 110]
+  17154388:
+    template: ZaDhas_Biographer
+    at:       [516.823, -39.401, 354.987, 18]
+    level:    [75, 75]
+  17154389:
+    template: ZaDhas_Biographer
+    at:       [533.430, -39.946, 362.470, 72]
+    level:    [75, 75]
+  17154390:
+    template: ZaDhas_Minister
+    at:       [529.048, -40.413, 344.213, 105]
+    level:    [75, 75]
+  17154391:
+    template: ZaDhas_Minister
+    at:       [527.728, -40.542, 343.132, 202]
+    level:    [75, 75]
+  17154393:
+    template: ZaDha_Adamantking_BS
+    script:   ZaDha_Adamantking
+  17154394:
+    template: ZaDhas_Biographer
+    level:    [75, 75]
+  17154395:
+    template: ZaDhas_Biographer
+    level:    [75, 75]
+  17154396:
+    template: ZaDhas_Minister
+    level:    [75, 75]
+  17154397:
+    template: ZaDhas_Minister
+    level:    [75, 75]
+  17154399:
+    template: ZaDha_Adamantking_BS
+    script:   ZaDha_Adamantking
+  17154400:
+    template: ZaDhas_Biographer
+    level:    [75, 75]
+  17154401:
+    template: ZaDhas_Biographer
+    level:    [75, 75]
+  17154402:
+    template: ZaDhas_Minister
+    level:    [75, 75]
+  17154403:
+    template: ZaDhas_Minister
+    level:    [75, 75]
+  17154405:
+    template: Bartholomaus
+    at:       [-164.236, 0.500, -115.312, 243]
+    level:    [70, 70]
+  17154406:
+    template: 1st_Iron_Musketeer
+    at:       [-156.916, -3.578, -40.042, 37]
+    level:    [70, 70]
+  17154407:
+    template: 1st_Iron_Musketeer
+    at:       [-154.553, -3.429, -43.602, 37]
+    level:    [70, 70]
+  17154408:
+    template: 1st_Iron_Musketeer
+    at:       [-158.089, -3.568, -39.827, 36]
+    level:    [70, 70]
+  17154409:
+    template: 1st_Iron_Musketeer
+    at:       [-191.274, -2.241, -71.656, 55]
+    level:    [70, 70]
+  17154410:
+    template: 1st_Iron_Musketeer
+    at:       [-158.977, -3.563, -40.196, 35]
+    level:    [70, 70]
+  17154411:
+    template: 1st_Iron_Musketeer
+    at:       [-160.273, -3.610, -39.381, 35]
+    level:    [70, 70]
+  17154412:
+    template: 1st_Iron_Musketeer
+    at:       [-159.798, -3.563, -40.826, 35]
+    level:    [70, 70]
+  17154413:
+    template: 1st_Iron_Musketeer
+    at:       [-190.595, -1.774, -74.140, 24]
+    level:    [70, 70]
+  17154414:
+    template: 1st_Iron_Musketeer
+    at:       [-161.039, -3.610, -40.842, 34]
+    level:    [70, 70]
+  17154415:
+    template: Maximilian
+    at:       [-144.293, 0.500, -78.774, 107]
+    level:    [1, 1]
+  17154416:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154417:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154418:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154419:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154420:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154421:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154422:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154423:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154424:
+    template: 1st_Legionnaire
+    level:    [1, 1]
+  17154425:
+    template: Ludwig
+    at:       [-152.482, 0.500, -66.778, 142]
+    level:    [1, 1]
+  17154426:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154427:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154428:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154429:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154430:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154431:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154432:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154433:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154434:
+    template: 2nd_Legionnaire
+    level:    [1, 1]
+  17154435:
+    template: Elivira
+    at:       [-149.121, 0.500, -67.123, 87]
+    level:    [1, 1]
+  17154436:
+    template: 1st_Gold_Musketeer
+  17154437:
+    template: 1st_Gold_Musketeer
+  17154438:
+    template: 1st_Gold_Musketeer
+  17154439:
+    template: 1st_Gold_Musketeer
+  17154440:
+    template: 1st_Gold_Musketeer
+  17154441:
+    template: 1st_Gold_Musketeer
+  17154442:
+    template: 1st_Gold_Musketeer
+  17154443:
+    template: 1st_Gold_Musketeer
+  17154444:
+    template: 1st_Gold_Musketeer
+  17154445:
+    template: Kurt
+    at:       [-193.557, 0.500, -120.307, 3]
+    level:    [1, 1]
+  17154446:
+    template: 8th_Iron_Musketeer
+  17154447:
+    template: 8th_Iron_Musketeer
+  17154448:
+    template: 8th_Iron_Musketeer
+  17154449:
+    template: 8th_Iron_Musketeer
+  17154450:
+    template: 8th_Iron_Musketeer
+  17154451:
+    template: 8th_Iron_Musketeer
+  17154452:
+    template: 8th_Iron_Musketeer
+  17154453:
+    template: 8th_Iron_Musketeer
+  17154454:
+    template: 8th_Iron_Musketeer
+  17154455:
+    template: 4th_Legionnaire
+    level:    [1, 1]
+  17154456:
+    template: 4th_Legionnaire
+    level:    [1, 1]
+  17154457:
+    template: 4th_Legionnaire
+    level:    [1, 1]
+  17154458:
+    template: 4th_Legionnaire
+    level:    [1, 1]
+  17154459:
+    template: 4th_Legionnaire
+    level:    [1, 1]
+  17154460:
+    template: 4th_Legionnaire
+    level:    [1, 1]
+  17154461:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17154462:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17154463:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17154464:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17154465:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17154466:
+    template: Allied_Mantelet
+    level:    [1, 1]
+  17154467:
+    template: Nail_Bomb
+    at:       [-161.764, 0.500, -109.375, 199]
+    level:    [1, 1]
+  17154468:
+    template: Nail_Bomb
+    at:       [-175.860, 0.500, -101.943, 23]
+    level:    [1, 1]
+  17154469:
+    template: Nail_Bomb
+    at:       [-161.776, 0.500, -109.487, 199]
+    level:    [1, 1]
+  17154470:
+    template: Nail_Bomb
+    at:       [-171.089, 0.500, -111.102, 196]
+    level:    [1, 1]
+  17154471:
+    template: Nail_Bomb
+    at:       [-165.904, 0.500, -94.669, 118]
+    level:    [1, 1]
+  17154472:
+    template: Nail_Bomb
+    at:       [-161.660, 0.500, -109.075, 196]
+    level:    [1, 1]
+  17154473:
+    template: Allied_Belfry
+    at:       [-143.686, 0.500, -87.697, 113]
+    level:    [1, 1]
+  17154474:
+    template: 1st_Legion_Aidman
+    at:       [-146.494, 0.453, -88.750, 234]
+  17154475:
+    template: 1st_Legion_Aidman
+    at:       [-146.494, 0.453, -88.750, 239]
+  17154476:
+    template: 1st_Legion_Aidman
+    at:       [-146.494, 0.453, -88.750, 137]
+  17154477:
+    template: 1st_Legion_Aidman
+    at:       [-146.494, 0.453, -88.750, 137]
+  17154478:
+    template: 1st_Legion_Aidman
+    at:       [-145.216, 0.467, -87.614, 94]
+  17154479:
+    template: 1st_Legion_Aidman
+    at:       [-146.494, 0.453, -88.750, 249]
+  17154480:
+    template: Allied_Armored_Belfry
+  17154481:
+    template: 1st_Legion_Mercenary
+  17154482:
+    template: 1st_Legion_Mercenary
+  17154483:
+    template: 1st_Legion_Mercenary
+  17154484:
+    template: 1st_Legion_Mercenary
+  17154485:
+    template: 1st_Legion_Mercenary
+  17154486:
+    template: 1st_Legion_Mercenary
+  17154487:
+    template: Field_Woundpatcher
+    level:    [1, 1]
+  17154488:
+    template: Field_Woundpatcher
+    level:    [1, 1]
+  17154489:
+    template: Field_Woundpatcher
+    level:    [1, 1]
+  17154490:
+    template: Field_Woundpatcher
+    level:    [1, 1]
+  17154491:
+    template: Field_Woundpatcher
+    level:    [1, 1]
+  17154492:
+    template: Field_Woundpatcher
+    level:    [1, 1]
+  17154493:
+    template: DiDha_Adamantfist
+    at:       [-184.380, 0.500, -105.680, 169]
+    level:    [70, 70]
+  17154494:
+    template: DiDhas_Elite_Guard
+    at:       [-155.445, 0.500, -132.003, 239]
+    level:    [70, 70]
+  17154495:
+    template: DiDhas_Elite_Guard
+    at:       [-164.034, 0.500, -115.189, 125]
+    level:    [70, 70]
+  17154496:
+    template: DiDhas_Elite_Guard
+    at:       [-145.970, 0.500, -118.088, 135]
+    level:    [70, 70]
+  17154497:
+    template: DiDhas_Elite_Guard
+    at:       [-155.525, 0.500, -98.376, 48]
+    level:    [70, 70]
+  17154498:
+    template: DiDhas_Elite_Guard
+    at:       [-189.658, 0.500, -99.441, 91]
+    level:    [70, 70]
+  17154499:
+    template: DiDhas_Elite_Guard
+    at:       [-167.964, 0.500, -127.895, 232]
+    level:    [70, 70]
+  17154500:
+    template: DiDhas_Elite_Guard
+    at:       [-167.031, 0.500, -83.044, 63]
+    level:    [70, 70]
+  17154501:
+    template: DiDhas_Elite_Guard
+    at:       [-170.522, 0.500, -115.700, 251]
+    level:    [70, 70]
+  17154502:
+    template: DiDhas_Elite_Guard
+    at:       [-152.281, 0.500, -74.802, 69]
+    level:    [70, 70]
+  17154503:
+    template: BoDho_Hundredfist
+    at:       [-191.710, 0.502, -100.628, 221]
+    level:    [70, 70]
+  17154504:
+    template: Waughroon_Heavyshell
+    at:       [-153.664, 0.500, -86.255, 190]
+    level:    [70, 70]
+  17154505:
+    template: Waughroon_Heavyshell
+    at:       [-173.380, 0.500, -130.576, 233]
+    level:    [70, 70]
+  17154506:
+    template: Waughroon_Heavyshell
+    at:       [-190.176, 0.502, -99.692, 197]
+    level:    [70, 70]
+  17154507:
+    template: Waughroon_Heavyshell
+    at:       [-180.716, 0.500, -109.263, 33]
+    level:    [70, 70]
+  17154508:
+    template: Waughroon_Heavyshell
+    at:       [-145.650, 0.500, -104.822, 167]
+    level:    [70, 70]
+  17154509:
+    template: Waughroon_Heavyshell
+    at:       [-162.013, 0.500, -117.301, 14]
+    level:    [70, 70]
+  17154510:
+    template: Waughroon_Heavyshell
+    at:       [-178.633, 0.544, -82.620, 72]
+    level:    [70, 70]
+  17154511:
+    template: Waughroon_Heavyshell
+    at:       [-170.659, 0.500, -128.806, 235]
+    level:    [70, 70]
+  17154512:
+    template: Waughroon_Heavyshell
+    at:       [-143.793, 0.500, -83.485, 55]
+    level:    [70, 70]
+  17154513:
+    template: DeVyu_Headhunter_past
+    script:   DeVyu_Headhunter
+    at:       [-175.487, 0.500, -76.117, 178]
+    level:    [70, 70]
+  17154514:
+    template: Beadeaux_Vanguard
+    at:       [-150.742, 0.500, -97.262, 46]
+    level:    [70, 70]
+  17154515:
+    template: Beadeaux_Vanguard
+    at:       [-189.399, 0.500, -108.420, 250]
+    level:    [70, 70]
+  17154516:
+    template: Beadeaux_Vanguard
+    at:       [-189.998, 0.500, -108.936, 249]
+    level:    [70, 70]
+  17154517:
+    template: Beadeaux_Vanguard
+    at:       [-144.426, 0.503, -103.300, 16]
+    level:    [70, 70]
+  17154518:
+    template: Beadeaux_Vanguard
+    at:       [-153.954, 0.500, -85.533, 143]
+    level:    [70, 70]
+  17154519:
+    template: Beadeaux_Vanguard
+    at:       [-156.876, 0.500, -98.968, 163]
+    level:    [70, 70]
+  17154520:
+    template: Beadeaux_Vanguard
+    at:       [-170.762, 0.500, -130.989, 228]
+    level:    [70, 70]
+  17154521:
+    template: Beadeaux_Vanguard
+    at:       [-154.935, 0.500, -86.646, 198]
+    level:    [70, 70]
+  17154522:
+    template: Beadeaux_Vanguard
+    at:       [-151.280, 0.500, -96.929, 105]
+    level:    [70, 70]
+  17154523:
+    template: BiGho_Headtaker_past
+    script:   BiGho_Headtaker
+    at:       [-145.605, 0.500, -118.230, 5]
+    level:    [69, 69]
+  17154524:
+    template: Qulun_Heavyshell
+    at:       [-190.198, 0.500, -108.392, 10]
+    level:    [69, 69]
+  17154525:
+    template: Qulun_Heavyshell
+    at:       [-144.697, 0.500, -119.093, 195]
+    level:    [69, 69]
+  17154526:
+    template: Qulun_Heavyshell
+    at:       [-141.494, 0.500, -78.449, 38]
+    level:    [69, 69]
+  17154527:
+    template: Qulun_Heavyshell
+    at:       [-149.483, 0.500, -75.917, 116]
+    level:    [69, 69]
+  17154528:
+    template: Qulun_Heavyshell
+    at:       [-180.855, 0.500, -108.230, 162]
+    level:    [69, 69]
+  17154529:
+    template: Qulun_Heavyshell
+    at:       [-142.056, 0.518, -113.649, 86]
+    level:    [69, 69]
+  17154530:
+    template: Qulun_Heavyshell
+    at:       [-166.699, 0.500, -81.801, 14]
+    level:    [69, 69]
+  17154531:
+    template: Qulun_Heavyshell
+    at:       [-130.597, 0.500, -77.939, 28]
+    level:    [69, 69]
+  17154532:
+    template: Qulun_Heavyshell
+    at:       [-150.380, 0.500, -127.647, 248]
+    level:    [69, 69]
+  17154533:
+    template: GoBhu_Herohunter
+    at:       [-151.975, 0.500, -69.287, 41]
+    level:    [75, 80]
+  17154534:
+    template: GoBhus_Elite_Raider
+  17154535:
+    template: GoBhus_Elite_Raider
+  17154536:
+    template: GoBhus_Elite_Raider
+  17154537:
+    template: GoBhus_Elite_Raider
+  17154538:
+    template: GoBhus_Elite_Raider
+  17154539:
+    template: GoBhus_Elite_Raider
+  17154540:
+    template: GoBhus_Elite_Raider
+  17154541:
+    template: GoBhus_Elite_Raider
+  17154542:
+    template: GoBhus_Elite_Raider
+  17154543:
+    template: DoBho_Venomtail
+    level:    [75, 80]
+  17154544:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154545:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154546:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154547:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154548:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154549:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154550:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154551:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154552:
+    template: Dadough_Vanguard
+    level:    [60, 60]
+  17154553:
+    template: NoMho_Crimsonarmor_past
+    script:   NoMho_Crimsonarmor
+    level:    [75, 80]
+  17154554:
+    template: NoMhos_Elite_Guard
+  17154555:
+    template: NoMhos_Elite_Guard
+  17154556:
+    template: NoMhos_Elite_Guard
+  17154557:
+    template: NoMhos_Elite_Guard
+  17154558:
+    template: NoMhos_Elite_Guard
+  17154559:
+    template: NoMhos_Elite_Guard
+  17154560:
+    template: NoMhos_Elite_Guard
+  17154561:
+    template: NoMhos_Elite_Guard
+  17154562:
+    template: NoMhos_Elite_Guard
+  17154563:
+    template: GiGhi_Rockchopper
+    level:    [75, 80]
+  17154564:
+    template: GiGhis_Peiste
+    level:    [60, 64]
+  17154565:
+    template: GiGhis_Peiste
+    level:    [60, 64]
+  17154566:
+    template: GiGhis_Elite_Guard
+  17154567:
+    template: GiGhis_Elite_Guard
+  17154568:
+    template: GiGhis_Elite_Guard
+  17154569:
+    template: GiGhis_Elite_Guard
+  17154570:
+    template: GiGhis_Elite_Guard
+  17154571:
+    template: GiGhis_Elite_Guard
+  17154572:
+    template: GiGhis_Elite_Guard
+  17154573:
+    template: GiGhis_Elite_Guard
+  17154574:
+    template: GiGhis_Elite_Guard
+  17154575:
+    template: GaDho_Softstep
+    level:    [75, 80]
+  17154576:
+    template: GuDho_Staggershell
+    level:    [67, 72]
+  17154577:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154578:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154579:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154580:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154581:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154582:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154583:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154584:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154585:
+    template: Vhuud_Vanguard
+    level:    [60, 60]
+  17154586:
+    template: GoDha_Jademaiden
+    level:    [75, 80]
+  17154587:
+    template: GoDhas_Elite_Raider
+  17154588:
+    template: GoDhas_Elite_Raider
+  17154589:
+    template: GoDhas_Elite_Raider
+  17154590:
+    template: GoDhas_Elite_Raider
+  17154591:
+    template: GoDhas_Elite_Raider
+  17154592:
+    template: GoDhas_Elite_Raider
+  17154593:
+    template: GoDhas_Elite_Raider
+  17154594:
+    template: GoDhas_Elite_Raider
+  17154595:
+    template: GoDhas_Elite_Raider
+  17154596:
+    template: BoDhos_Shieldwarrior_C
+    script:   BoDhos_Shieldwarrior
+    level:    [75, 80]
+  17154597:
+    template: BoDhos_Shieldwarrior_C
+    script:   BoDhos_Shieldwarrior
+    level:    [75, 80]
+  17154598:
+    template: BoDhos_Shieldwarrior_C
+    script:   BoDhos_Shieldwarrior
+    level:    [75, 80]
+  17154599:
+    template: BoDhos_Shieldwarrior_C
+    script:   BoDhos_Shieldwarrior
+    level:    [75, 80]
+  17154600:
+    template: BoDhos_Shieldwarrior_C
+    script:   BoDhos_Shieldwarrior
+    level:    [75, 80]
+  17154601:
+    template: BoDhos_Shieldwarrior_C
+    script:   BoDhos_Shieldwarrior
+    level:    [75, 80]
+  17154602:
+    template: Confederate_Mantelet
+    at:       [-157.861, 0.500, -97.029, 232]
+    level:    [75, 80]
+  17154603:
+    template: Confederate_Mantelet
+    at:       [-154.207, 0.500, -109.984, 19]
+    level:    [75, 80]
+  17154604:
+    template: Confederate_Mantelet
+    at:       [-166.820, 0.500, -117.992, 62]
+    level:    [75, 80]
+  17154605:
+    template: Confederate_Mantelet
+    at:       [-179.727, 0.500, -110.605, 103]
+    level:    [75, 80]
+  17154606:
+    template: Confederate_Mantelet
+    at:       [-182.164, 0.699, -94.829, 149]
+    level:    [75, 80]
+  17154607:
+    template: Confederate_Mantelet
+    at:       [-168.298, 0.500, -86.882, 188]
+    level:    [75, 80]
+  17154608:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17154609:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17154610:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17154611:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17154612:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17154613:
+    template: Iron_Bomb
+    level:    [75, 75]
+  17154614:
+    template: Confederate_Belfry
+    level:    [75, 80]
+  17154615:
+    template: Khroma_Quadav
+    level:    [60, 60]
+  17154616:
+    template: Khroma_Quadav
+    level:    [60, 60]
+  17154617:
+    template: Khroma_Quadav
+    level:    [60, 60]
+  17154618:
+    template: Khroma_Quadav
+    level:    [60, 60]
+  17154619:
+    template: Khroma_Quadav
+    level:    [60, 60]
+  17154620:
+    template: Khroma_Quadav
+    level:    [60, 60]
+  17154621:
+    template: Quadav_Turret
+    level:    [75, 80]
+  17154622:
+    template: War_Ajattara
+    level:    [60, 60]
+  17154623:
+    template: War_Ajattara
+    level:    [60, 60]
+  17154624:
+    template: War_Ajattara
+    level:    [60, 60]
+  17154625:
+    template: War_Ajattara
+    level:    [60, 60]
+  17154626:
+    template: War_Ajattara
+    level:    [60, 60]
+  17154627:
+    template: War_Ajattara
+    level:    [60, 60]
+  17154628:
+    template: Fiendish_Leechkeeper
+    at:       [-158.424, 0.500, -124.652, 245]
+    level:    [60, 60]
+  17154629:
+    template: Fiendish_Leechkeeper
+    at:       [-129.428, 0.500, -70.033, 159]
+    level:    [60, 60]
+  17154630:
+    template: Fiendish_Leechkeeper
+    at:       [-190.496, 0.500, -107.910, 103]
+    level:    [60, 60]
+  17154631:
+    template: Fiendish_Leechkeeper
+    at:       [-166.613, 0.500, -82.343]
+    level:    [60, 60]
+  17154632:
+    template: Fiendish_Leechkeeper
+    at:       [-134.602, 0.569, -93.333, 75]
+    level:    [60, 60]
+  17154633:
+    template: Fiendish_Leechkeeper
+    at:       [-216.776, -0.188, -99.725, 210]
+    level:    [60, 60]
+  17154634:
+    template: Shadowhorn
+    level:    [75, 80]
+  17154635:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154636:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154637:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154638:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154639:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154640:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154641:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154642:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154643:
+    template: Shadowhorn_Stormer
+    level:    [60, 60]
+  17154644:
+    template: Shadowhand
+    level:    [75, 80]
+  17154645:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154646:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154647:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154648:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154649:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154650:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154651:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154652:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154653:
+    template: Shadowhand_Cuirassier
+    level:    [60, 60]
+  17154654:
+    template: Shadowfang
+    level:    [75, 80]
+  17154655:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154656:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154657:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154658:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154659:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154660:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154661:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154662:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154663:
+    template: Shadowfang_Void
+    level:    [60, 60]
+  17154664:
+    template: Shadoweye
+    level:    [75, 80]
+  17154665:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154666:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154667:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154668:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154669:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154670:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154671:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154672:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154673:
+    template: Shadoweye_Gnat
+    level:    [60, 60]
+  17154674:
+    template: Fortification_F641
+    script:   Fortification
+    at:       [-161.576, 0.000, -108.372]
+    level:    [50, 50]
+  17154675:
+    template: Fortification_F641
+    script:   Fortification
+    at:       [-171.046, 0.000, -110.737]
+    level:    [50, 50]
+  17154676:
+    template: Fortification_F641
+    script:   Fortification
+    at:       [-175.861, 0.000, -101.943]
+    level:    [50, 50]
+  17154677:
+    template: Fortification_F641
+    script:   Fortification
+    at:       [-167.472, 0.000, -95.055]
+    level:    [50, 50]
+  17154678:
+    template: Rikoh_Wahcondalo
+    level:    [1, 1]
+  17154679:
+    template: Kagetora
+    level:    [1, 1]
+  17154680:
+    template: Kagetora
+    level:    [1, 1]
+  17154681:
+    template: Kagetora
+    level:    [1, 1]
+  17154682:
+    template: Kagetora
+    level:    [1, 1]
+  17154683:
+    template: Kagetora
+    level:    [1, 1]
+  17154684:
+    template: Kagetora
+    level:    [1, 1]
+  17154685:
+    template: Dalzakk
+    level:    [1, 1]
+  17154686:
+    template: Oggbi
+    level:    [1, 1]
+  17154687:
+    template: Rainemard
+    level:    [1, 1]
+  17154688:
+    template: Maat_campaign
+    script:   Maat
+    at:       [-138.940, 0.500, -69.858, 157]
+    level:    [139, 139]
+  17154689:
+    template: Degenhard
+    level:    [1, 1]
+  17154690:
+    template: Azima
+    level:    [1, 1]
+  17154691:
+    template: Choh_Moui
+    level:    [1, 1]
+  17154692:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17154693:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17154694:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17154695:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17154696:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17154697:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17154698:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17154699:
+    template: Chigoe_past
+    script:   Chigoe
+    level:    [1, 1]
+  17154700:
+    template: Azo
+    level:    [1, 1]
+  17154701:
+    template: Vahi
+    level:    [1, 1]
+  17154702:
+    template: Rongo-Nango
+    level:    [1, 1]
+  17154703:
+    template: Lerren
+    level:    [1, 1]
+  17154704:
+    template: Jajaro
+    level:    [1, 1]
+  17154705:
+    template: Popochu
+    level:    [1, 1]
+  17154706:
+    template: Papako
+    level:    [1, 1]
+  17154707:
+    template: Momowa
+    level:    [1, 1]
+  17154708:
+    template: Ulla
+    level:    [1, 1]
+  17154709:
+    template: Kilhwch
+    level:    [1, 1]
+  17154710:
+    template: Alfons
+    level:    [1, 1]
+  17154711:
+    template: Achtelle
+    level:    [1, 1]
+  17154712:
+    template: Bravo_NV24
+    script:   Bravo
+    level:    [1, 1]
+  17154713:
+    template: Duskraven
+    level:    [1, 1]
+  17154714:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17154715:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17154716:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17154717:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17154718:
+    template: Dusk_Raider
+    level:    [1, 1]
+  17154719:
+    template: Areuhat
+    level:    [1, 1]
+  17154720:
+    template: Odzmanouk
+    level:    [1, 1]
+  17154721:
+    template: Boodlix
+    level:    [75, 80]
+  17154722:
+    template: Goblin_Lansquenet
+    level:    [60, 60]
+  17154723:
+    template: Goblin_Lansquenet
+    level:    [60, 60]
+  17154724:
+    template: Goblin_Lansquenet
+    level:    [60, 60]
+  17154725:
+    template: Titania
+    level:    [1, 1]
+  17154726:
+    template: Faerie
+    level:    [1, 1]
+  17154727:
+    template: Faerie
+    level:    [1, 1]
+  17154728:
+    template: Faerie
+    level:    [1, 1]
+  17154729:
+    template: Faerie
+    level:    [1, 1]
+  17154730:
+    template: Faerie
+    level:    [1, 1]
+  17154731:
+    template: Faerie
+    level:    [1, 1]
+  17154732:
+    template: Faerie
+    level:    [1, 1]
+  17154733:
+    template: Faerie
+    level:    [1, 1]
+  17154734:
+    template: Faerie
+    level:    [1, 1]
+  17154735:
+    template: Babban_Ny_Mheillea
+  17154736:
+    template: Abenzio
+    level:    [1, 1]
+  17154737:
+    template: Bryher
+    level:    [1, 1]
+  17154738:
+    template: Camlin
+    level:    [1, 1]
+  17154739:
+    template: Darach
+    level:    [1, 1]
+  17154740:
+    template: Raigegue_R_dOraguille
+  17154741:
+    template: Ancient_Royal_Knight
+  17154742:
+    template: Ancient_Royal_Knight
+  17154743:
+    template: Ancient_Royal_Knight
+  17154744:
+    template: Ancient_Royal_Knight
+  17154745:
+    template: Eurytos_Beadeaux_S
+    script:   Eurytos
+    level:    [75, 75]
+  17154746:
+    template: Gigas_Mercenary
+    level:    [60, 60]
+  17154747:
+    template: Gigas_Mercenary
+    level:    [60, 60]
+  17154748:
+    template: Poroggo_Prince
+    level:    [1, 1]
+  17154749:
+    template: Poroggo_Servant
+    level:    [1, 1]
+  17154750:
+    template: Poroggo_Servant
+    level:    [1, 1]
+  17154751:
+    template: Poroggo_Servant
+    level:    [1, 1]
+  17154752:
+    template: Kaiser_Behemoth_S
+    script:   Kaiser_Behemoth
+    level:    [60, 60]
+  17154753:
+    template: Ferreous_Coffin
+    level:    [1, 1]
+  17154754:
+    template: Lewenhart
+    level:    [1, 1]
+  17154755:
+    template: Auroral_Alicorn
+    level:    [1, 1]

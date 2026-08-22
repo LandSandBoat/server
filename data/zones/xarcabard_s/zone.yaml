@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [mount, mazurka, tractor, pet, trust]
+music:
+  day:           42
+  night:         42
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z3t0:
+    from:  [683.275, -6.517, -300.196]
+    to:    beaucedine_glacier_s
+    at:    [-180.000, -81.850, 280.000, 1.570796]
+    scale: [1.000, 4.000]
+
+  z3t2:
+    from:  [-437.021, -52.941, 20.018]
+    to:    castle_zvahl_baileys_s
+    at:    [412.020, -13.611, -19.964, 3.141593]
+    scale: [1.000, 4.000]

@@ -1,0 +1,1756 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17506691:
+    script: NPC[183]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17506692:
+    script:       qm1
+    display_name: ???
+    at:           [849.743, 0.000, 90.460]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17506693:
+    script:       qm2
+    display_name: ???
+    at:           [-79.066, 32.574, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17506694:
+    script:       qm3
+    display_name: ???
+    at:           [740.000, -99.924, -580.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17506695:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506696:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506697:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506698:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506699:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506700:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506701:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506702:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506703:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506704:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506705:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506706:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506707:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506708:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506709:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506710:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17506711:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17506712:
+    script: NPC[198]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17506713:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17506715:
+    script: NPC[19b]
+    at:     [0.000, -15.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17506716:
+    script: NPC[19c]
+    at:     [0.000, -15.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17506717:
+    script: NPC[19d]
+    at:     [0.000, -15.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      name_vis: 4
+
+  17506718:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17506719:
+    script:       _4y0
+    display_name: Cermet Door
+    at:           [40.000, -2.974, -99.999]
+    render:
+      look:
+        type: door
+      door_id:      813249631
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506720:
+    script:       _4y1
+    display_name: Cermet Door
+    at:           [160.000, -2.974, -60.000]
+    render:
+      look:
+        type: door
+      door_id:      830026847
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506721:
+    script:       _4y2
+    display_name: Cermet Door
+    at:           [140.000, -2.974, 160.000]
+    render:
+      look:
+        type: door
+      door_id:      846804063
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506722:
+    script:       _4y3
+    display_name: Cermet Door
+    at:           [40.000, -2.974, 140.000]
+    render:
+      look:
+        type: door
+      door_id:      863581279
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506723:
+    script:       _4y4
+    display_name: Cermet Door
+    at:           [-40.000, -2.974, 140.000]
+    render:
+      look:
+        type: door
+      door_id:      880358495
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506724:
+    script:       _4y5
+    display_name: Cermet Door
+    at:           [-140.000, -2.974, 160.000]
+    render:
+      look:
+        type: door
+      door_id:      897135711
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506725:
+    script:       _4y6
+    display_name: Cermet Door
+    at:           [-160.000, -2.974, -60.000]
+    render:
+      look:
+        type: door
+      door_id:      913912927
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506726:
+    script:       _4y7
+    display_name: Cermet Door
+    at:           [-40.000, -2.974, -100.000]
+    render:
+      look:
+        type: door
+      door_id:      930690143
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506727:
+    script:       _4y8
+    display_name: Cermet Door
+    at:           [20.000, -18.975, -40.000]
+    render:
+      look:
+        type: door
+      door_id:      947467359
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506728:
+    script:       _4y9
+    display_name: Cermet Door
+    at:           [-20.000, -18.975, 40.000]
+    render:
+      look:
+        type: door
+      door_id:      964244575
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506729:
+    script:       _4ya
+    display_name: Cermet Door
+    at:           [700.000, 97.025, 520.000]
+    render:
+      look:
+        type: door
+      door_id:      1635333215
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506730:
+    script:       _4yb
+    display_name: Cermet Door
+    at:           [760.000, 97.025, 540.000]
+    render:
+      look:
+        type: door
+      door_id:      1652110431
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506731:
+    script:       _4yc
+    display_name: Cermet Door
+    at:           [840.000, 97.025, 580.000]
+    render:
+      look:
+        type: door
+      door_id:      1668887647
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506732:
+    script:       _4yd
+    display_name: Cermet Door
+    at:           [900.000, 97.025, 520.000]
+    render:
+      look:
+        type: door
+      door_id:      1685664863
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506733:
+    script:       _4ye
+    display_name: Cermet Door
+    at:           [700.000, 97.025, 680.000]
+    render:
+      look:
+        type: door
+      door_id:      1702442079
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506734:
+    script:       _4yf
+    display_name: Cermet Door
+    at:           [760.000, 97.025, 660.000]
+    render:
+      look:
+        type: door
+      door_id:      1719219295
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506735:
+    script:       _4yg
+    display_name: Cermet Door
+    at:           [840.000, 97.025, 620.000]
+    render:
+      look:
+        type: door
+      door_id:      1735996511
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506736:
+    script:       _4yh
+    display_name: Cermet Door
+    at:           [900.000, 97.025, 680.000]
+    render:
+      look:
+        type: door
+      door_id:      1752773727
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506737:
+    script:       _4yi
+    display_name: Cermet Door
+    at:           [800.000, -2.974, -60.000]
+    render:
+      look:
+        type: door
+      door_id:      1769550943
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506738:
+    script:       _4yj
+    display_name: Cermet Door
+    at:           [840.000, -2.974, -20.000]
+    render:
+      look:
+        type: door
+      door_id:      1786328159
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506739:
+    script:       _4yk
+    display_name: Cermet Door
+    at:           [760.000, -2.974, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      1803105375
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506740:
+    script:       _4yl
+    display_name: Cermet Door
+    at:           [800.000, -2.974, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1819882591
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506741:
+    script: _4ym
+    at:     [8.800, 0.000, -115.516]
+    render:
+      look:
+        type: door
+      door_id:      1836659807
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506742:
+    script:       Monolith
+    display_name: Monolith
+    at:           [7.904, -2.269, -115.967]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506743:
+    script: _4yn
+    at:     [126.984, 0.000, -33.015]
+    render:
+      look:
+        type: door
+      door_id:      1853437023
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506744:
+    script:       Monolith
+    display_name: Monolith
+    at:           [126.276, -2.269, -33.722]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506745:
+    script: _4yo
+    at:     [126.984, 0.000, 73.016]
+    render:
+      look:
+        type: door
+      door_id:      1870214239
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506746:
+    script:       Monolith
+    display_name: Monolith
+    at:           [126.276, -2.269, 73.723]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506747:
+    script: _4yp
+    at:     [8.800, 0.000, 124.484]
+    render:
+      look:
+        type: door
+      door_id:      1886991455
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506748:
+    script:       Monolith
+    display_name: Monolith
+    at:           [7.895, -2.269, 124.042]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506749:
+    script: _4yq
+    at:     [-8.800, 0.000, 124.484]
+    render:
+      look:
+        type: door
+      door_id:      1903768671
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506750:
+    script:       Monolith
+    display_name: Monolith
+    at:           [-7.899, -2.269, 124.044]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506751:
+    script: _4yr
+    at:     [-126.984, 0.000, 73.016]
+    render:
+      look:
+        type: door
+      door_id:      1920545887
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506752:
+    script:       Monolith
+    display_name: Monolith
+    at:           [-126.279, -2.269, 73.719]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506753:
+    script: _4ys
+    at:     [-126.984, 0.000, -33.016]
+    render:
+      look:
+        type: door
+      door_id:      1937323103
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506754:
+    script:       Monolith
+    display_name: Monolith
+    at:           [-126.282, -2.269, -33.718]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506755:
+    script: _4yt
+    at:     [-8.800, 0.400, -115.516]
+    render:
+      look:
+        type: door
+      door_id:      1954100319
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506756:
+    script:       Monolith
+    display_name: Monolith
+    at:           [-7.908, -2.269, -115.970]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506757:
+    script: _4yu
+    at:     [-6.984, -15.851, -6.984]
+    render:
+      look:
+        type: door
+      door_id:      1970877535
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506758:
+    script:       Monolith
+    display_name: Monolith
+    at:           [-6.252, -18.267, -6.254]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506759:
+    script: _4yv
+    at:     [6.984, -15.552, 6.984]
+    render:
+      look:
+        type: door
+      door_id:      1987654751
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506760:
+    script:       Monolith
+    display_name: Monolith
+    at:           [6.276, -18.267, 6.275]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506761:
+    script: _4yw
+    at:     [713.016, 100.448, 566.984]
+    render:
+      look:
+        type: door
+      door_id:      2004431967
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506762:
+    script:       Monolith
+    display_name: Monolith
+    at:           [713.719, 97.724, 566.279]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506763:
+    script: _4yx
+    at:     [793.016, 100.448, 566.984]
+    render:
+      look:
+        type: door
+      door_id:      2021209183
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506764:
+    script:       Monolith
+    display_name: Monolith
+    at:           [793.723, 97.724, 566.275]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506765:
+    script: _4yy
+    at:     [806.984, 100.448, 553.016]
+    render:
+      look:
+        type: door
+      door_id:      2037986399
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506766:
+    script:       Monolith
+    display_name: Monolith
+    at:           [806.274, 97.724, 553.720]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506767:
+    script: _4yz
+    at:     [886.984, 100.448, 566.984]
+    render:
+      look:
+        type: door
+      door_id:      2054763615
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506768:
+    script:       Monolith
+    display_name: Monolith
+    at:           [886.257, 97.724, 566.255]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506769:
+    script: _my0
+    at:     [886.984, 100.448, 633.016]
+    render:
+      look:
+        type: door
+      door_id:      813264223
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506770:
+    script:       Monolith
+    display_name: Monolith
+    at:           [886.276, 97.724, 633.725]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506771:
+    script: _my1
+    at:     [806.984, 100.448, 646.984]
+    render:
+      look:
+        type: door
+      door_id:      830041439
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506772:
+    script:       Monolith
+    display_name: Monolith
+    at:           [806.274, 97.724, 646.274]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506773:
+    script: _my2
+    at:     [793.016, 100.448, 633.016]
+    render:
+      look:
+        type: door
+      door_id:      846818655
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506774:
+    script:       Monolith
+    display_name: Monolith
+    at:           [793.723, 97.724, 633.724]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506775:
+    script: _my3
+    at:     [713.016, 100.448, 633.016]
+    render:
+      look:
+        type: door
+      door_id:      863595871
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506776:
+    script:       Monolith
+    display_name: Monolith
+    at:           [713.720, 97.724, 633.721]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506777:
+    script: _my4
+    at:     [734.178, 0.000, -105.822]
+    render:
+      look:
+        type: door
+      door_id:      880373087
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506778:
+    script:       Monolith
+    display_name: Monolith
+    at:           [734.888, -2.316, -105.110]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506779:
+    script: _my5
+    at:     [865.822, 0.000, 105.822]
+    render:
+      look:
+        type: door
+      door_id:      897150303
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506780:
+    script:       Monolith
+    display_name: Monolith
+    at:           [865.116, -2.316, 105.114]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17506781:
+    script:       _my6
+    display_name: Cermet Door
+    at:           [-55.500, -1.975, 30.000]
+    render:
+      look:
+        type: door
+      door_id:      913927519
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506782:
+    script:       _my7
+    display_name: Cermet Door
+    at:           [-55.500, -1.975, -9.999]
+    render:
+      look:
+        type: door
+      door_id:      930704735
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506783:
+    script:       _my8
+    display_name: Cermet Door
+    at:           [-55.500, -1.975, -30.000]
+    render:
+      look:
+        type: door
+      door_id:      947481951
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506784:
+    script:       _my9
+    display_name: Cermet Door
+    at:           [30.000, -1.975, -64.500]
+    render:
+      look:
+        type: door
+      door_id:      964259167
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506785:
+    script:       _mya
+    display_name: Cermet Door
+    at:           [55.500, -1.975, -9.999]
+    render:
+      look:
+        type: door
+      door_id:      1635347807
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506786:
+    script:       _myb
+    display_name: Cermet Door
+    at:           [55.500, -1.975, 9.999]
+    render:
+      look:
+        type: door
+      door_id:      1652125023
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506787:
+    script:       _myc
+    display_name: Cermet Door
+    at:           [735.500, -1.975, -49.999]
+    render:
+      look:
+        type: door
+      door_id:      1668902239
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506788:
+    script:       _myd
+    display_name: Cermet Door
+    at:           [770.000, -1.975, -104.500]
+    render:
+      look:
+        type: door
+      door_id:      1685679455
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506789:
+    script:       _mye
+    display_name: Cermet Door
+    at:           [790.000, -1.975, -104.500]
+    render:
+      look:
+        type: door
+      door_id:      1702456671
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506790:
+    script:       _myf
+    display_name: Cermet Door
+    at:           [830.000, -1.975, -104.500]
+    render:
+      look:
+        type: door
+      door_id:      1719233887
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506791:
+    script:       _myg
+    display_name: Cermet Door
+    at:           [830.000, -1.975, -64.500]
+    render:
+      look:
+        type: door
+      door_id:      1736011103
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506792:
+    script:       _myh
+    display_name: Cermet Door
+    at:           [770.000, -1.975, -15.500]
+    render:
+      look:
+        type: door
+      door_id:      1752788319
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506793:
+    script:       _myi
+    display_name: Cermet Door
+    at:           [790.000, -1.975, -15.500]
+    render:
+      look:
+        type: door
+      door_id:      1769565535
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506794:
+    script:       _myj
+    display_name: Cermet Door
+    at:           [830.000, -1.975, -15.500]
+    render:
+      look:
+        type: door
+      door_id:      1786342751
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506795:
+    script:       _myk
+    display_name: Cermet Door
+    at:           [770.000, -1.975, 15.500]
+    render:
+      look:
+        type: door
+      door_id:      1803119967
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506796:
+    script:       _myl
+    display_name: Cermet Door
+    at:           [810.000, -1.975, 15.500]
+    render:
+      look:
+        type: door
+      door_id:      1819897183
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506797:
+    script:       _mym
+    display_name: Cermet Door
+    at:           [830.000, -1.975, 15.500]
+    render:
+      look:
+        type: door
+      door_id:      1836674399
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506798:
+    script:       _myn
+    display_name: Cermet Door
+    at:           [864.500, -1.975, 49.999]
+    render:
+      look:
+        type: door
+      door_id:      1853451615
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506799:
+    script:       _myo
+    display_name: Cermet Door
+    at:           [770.000, -1.975, 64.500]
+    render:
+      look:
+        type: door
+      door_id:      1870228831
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506800:
+    script:       _myp
+    display_name: Cermet Door
+    at:           [770.000, -1.975, 104.500]
+    render:
+      look:
+        type: door
+      door_id:      1887006047
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506801:
+    script:       _myq
+    display_name: Cermet Door
+    at:           [810.000, -1.975, 104.500]
+    render:
+      look:
+        type: door
+      door_id:      1903783263
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506802:
+    script:       _myr
+    display_name: Cermet Door
+    at:           [830.000, -1.975, 104.500]
+    render:
+      look:
+        type: door
+      door_id:      1920560479
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17506803:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17506804:
+    script: NPC[1f4]
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+
+  17506805:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17506806:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17506807:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17506808:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17506809:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17506810:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17506811:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17506812:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17506813:
+    script:       Lion
+    display_name: Lion
+    render:
+      look:
+        type:  standard
+        model: 60
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17506814:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17506815:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-54.134, -1.749, -206.379, 221]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17506816:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-54.134, -1.749, -206.379, 221]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17506817:
+    script: blank_divine_might
+    at:     [-40.033, -1.648, -148.199, 197]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17506818:
+    script:       Yvenoile
+    display_name: Yve'noile
+    render:
+      look:
+        type:  standard
+        model: 1424
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17506819:
+    script:       qm4
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+
+  17506820:
+    script: _3e6
+    render:
+      look:
+        type: door
+      door_id:      912601951
+      entity_flags: 6147
+      animation:    close_door
+
+  17506821:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [-68.000, -15.424, 68.000]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17506822:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [68.000, -15.424, 68.000]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17506823:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [-68.000, -15.424, -68.000]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17506824:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [-67.900, -15.424, 68.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17506825:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [68.100, -15.424, 68.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17506826:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [-67.900, -15.424, -68.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17506827:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [23.269, -0.004, -136.349, 251]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17506828:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [23.345, 0.000, 104.212, 255]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   23
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17506829:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [-4.528, -16.004, 15.566, 184]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   17
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17506830:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [789.096, 99.999, 538.755, 22]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    7
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17506831:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [810.813, 99.999, 619.022, 100]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17506832:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [803.619, 0.000, -63.633, 62]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   23
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17506833:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [796.520, 0.000, 63.554, 202]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   17
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17506834:
+    script:       HomePoint#1
+    display_name: 'Home Point #1'
+    at:           [-13.000, 48.000, 61.000]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17506835:
+    script:       HomePoint#2
+    display_name: 'Home Point #2'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17506836:
+    script:       HomePoint#3
+    display_name: 'Home Point #3'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17506837:
+    script:       HomePoint#4
+    display_name: 'Home Point #4'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17506838:
+    script:       HomePoint#5
+    display_name: 'Home Point #5'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA

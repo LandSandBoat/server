@@ -86,6 +86,8 @@ enum FEATURE_DISPLAY : uint16
 
 bool isStringMalformed(const std::string& str, std::size_t max_length);
 
+void loadZoneLookups();
+
 auto validateCharacterName(const std::string& name) -> Maybe<std::string>;
 
 auto isZoneAtPlayerCap(xi::ZoneId zoneId, bool isGM) -> bool;

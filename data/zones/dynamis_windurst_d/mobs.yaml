@@ -1,0 +1,1645 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+spawns:
+  17989633:
+    script: Aurix
+  17989634:
+    script: Evincing_Idol
+  17989635:
+    script: Incarnation_Icon
+  17989636:
+    script: Squadron_Hoplite
+  17989637:
+    script: Squadron_Ascetic
+  17989638:
+    script: Squadron_Orisha
+  17989639:
+    script: Squadrons_Avatar
+  17989640:
+    script: Squadron_Magian
+  17989641:
+    script: Incarnation_Icon
+  17989642:
+    script: Squadron_Prognosticator
+  17989643:
+    script: Squadron_Ruffian
+  17989644:
+    script: Squadron_Champion
+  17989645:
+    script: Squadrons_Wyvern
+  17989646:
+    script: Incarnation_Icon
+  17989647:
+    script: Squadron_Empath
+  17989648:
+    script: Squadrons_Jagil
+  17989649:
+    script: Squadron_Minnesinger
+  17989650:
+    script: Squadron_Spy
+  17989651:
+    script: Incarnation_Icon
+  17989652:
+    script: Squadron_Privateer
+  17989653:
+    script: Squadron_Empath
+  17989654:
+    script: Squadrons_Jagil
+  17989655:
+    script: Squadron_Spy
+  17989656:
+    script: Squadron_Ruffian
+  17989657:
+    script: Incarnation_Icon
+  17989658:
+    script: Squadron_Ascetic
+  17989659:
+    script: Squadron_Orisha
+  17989660:
+    script: Squadrons_Avatar
+  17989661:
+    script: Squadron_Magian
+  17989662:
+    script: Squadron_Prognosticator
+  17989663:
+    script: Squadron_Minnesinger
+  17989664:
+    script: Incarnation_Icon
+  17989665:
+    script: Squadron_Hoplite
+  17989666:
+    script: Squadron_Ruffian
+  17989667:
+    script: Squadron_Champion
+  17989668:
+    script: Squadrons_Wyvern
+  17989669:
+    script: Squadron_Privateer
+  17989670:
+    script: Incarnation_Icon
+  17989671:
+    script: Squadron_Hoplite
+  17989672:
+    script: Squadron_Ascetic
+  17989673:
+    script: Squadron_Magian
+  17989674:
+    script: Squadron_Prognosticator
+  17989675:
+    script: Incarnation_Icon
+  17989676:
+    script: Squadron_Magian
+  17989677:
+    script: Squadron_Prognosticator
+  17989678:
+    script: Squadron_Ruffian
+  17989679:
+    script: Squadron_Champion
+  17989680:
+    script: Squadrons_Wyvern
+  17989681:
+    script: Incarnation_Icon
+  17989682:
+    script: Squadron_Empath
+  17989683:
+    script: Squadrons_Jagil
+  17989684:
+    script: Squadron_Minnesinger
+  17989685:
+    script: Squadron_Spy
+  17989686:
+    script: Squadron_Privateer
+  17989687:
+    script: Incarnation_Icon
+  17989688:
+    script: Squadron_Champion
+  17989689:
+    script: Squadrons_Wyvern
+  17989690:
+    script: Squadron_Empath
+  17989691:
+    script: Squadrons_Jagil
+  17989692:
+    script: Squadron_Hoplite
+  17989693:
+    script: Squadron_Ascetic
+  17989694:
+    script: Incarnation_Icon
+  17989695:
+    script: Squadron_Hoplite
+  17989696:
+    script: Squadron_Ascetic
+  17989697:
+    script: Squadron_Magian
+  17989698:
+    script: Squadron_Prognosticator
+  17989699:
+    script: Incarnation_Icon
+  17989700:
+    script: Squadron_Ruffian
+  17989701:
+    script: Squadron_Champion
+  17989702:
+    script: Squadrons_Wyvern
+  17989703:
+    script: Squadron_Minnesinger
+  17989704:
+    script: Squadron_Spy
+  17989705:
+    script: Incarnation_Icon
+  17989706:
+    script: Squadron_Orisha
+  17989707:
+    script: Squadrons_Avatar
+  17989708:
+    script: Squadron_Magian
+  17989709:
+    script: Squadron_Prognosticator
+  17989710:
+    script: Squadron_Privateer
+  17989711:
+    script: Incarnation_Icon
+  17989712:
+    script: Squadron_Hoplite
+  17989713:
+    script: Squadron_Hoplite
+  17989714:
+    script: Squadron_Ascetic
+  17989715:
+    script: Squadron_Ascetic
+  17989716:
+    script: Incarnation_Icon
+  17989717:
+    script: Squadron_Orisha
+  17989718:
+    script: Squadrons_Avatar
+  17989719:
+    script: Squadron_Orisha
+  17989720:
+    script: Squadrons_Avatar
+  17989721:
+    script: Squadron_Ruffian
+  17989722:
+    script: Squadron_Ruffian
+  17989723:
+    script: Incarnation_Icon
+  17989724:
+    script: Squadron_Magian
+  17989725:
+    script: Squadron_Magian
+  17989726:
+    script: Squadron_Empath
+  17989727:
+    script: Squadrons_Jagil
+  17989728:
+    script: Squadron_Empath
+  17989729:
+    script: Squadrons_Jagil
+  17989730:
+    script: Incarnation_Icon
+  17989731:
+    script: Squadron_Prognosticator
+  17989732:
+    script: Squadron_Prognosticator
+  17989733:
+    script: Squadron_Spy
+  17989734:
+    script: Squadron_Spy
+  17989735:
+    script: Incarnation_Icon
+  17989736:
+    script: Squadron_Champion
+  17989737:
+    script: Squadrons_Wyvern
+  17989738:
+    script: Squadron_Champion
+  17989739:
+    script: Squadrons_Wyvern
+  17989740:
+    script: Squadron_Privateer
+  17989741:
+    script: Squadron_Privateer
+  17989742:
+    script: Incarnation_Icon
+  17989743:
+    script: Squadron_Minnesinger
+  17989744:
+    script: Squadron_Hoplite
+  17989745:
+    script: Squadron_Spy
+  17989746:
+    script: Squadron_Minnesinger
+  17989747:
+    script: Squadron_Magian
+  17989748:
+    script: Squadron_Prognosticator
+  17989749:
+    script: Incarnation_Icon
+  17989750:
+    script: Squadron_Ruffian
+  17989751:
+    script: Squadron_Champion
+  17989752:
+    script: Squadrons_Wyvern
+  17989753:
+    script: Squadron_Ascetic
+  17989754:
+    script: Squadron_Prognosticator
+  17989755:
+    script: Incarnation_Icon
+  17989756:
+    script: Squadron_Hoplite
+  17989757:
+    script: Squadron_Ascetic
+  17989758:
+    script: Squadron_Orisha
+  17989759:
+    script: Squadrons_Avatar
+  17989760:
+    script: Squadron_Magian
+  17989761:
+    script: Incarnation_Icon
+  17989762:
+    script: Squadron_Ruffian
+  17989763:
+    script: Squadron_Champion
+  17989764:
+    script: Squadrons_Wyvern
+  17989765:
+    script: Squadron_Empath
+  17989766:
+    script: Squadrons_Jagil
+  17989767:
+    script: Squadron_Privateer
+  17989768:
+    script: Squadron_Ascetic
+  17989769:
+    script: Incarnation_Icon
+  17989770:
+    script: Squadron_Minnesinger
+  17989771:
+    script: Squadron_Spy
+  17989772:
+    script: Squadron_Privateer
+  17989773:
+    script: Incarnation_Icon
+  17989774:
+    script: Squadron_Ascetic
+  17989775:
+    script: Squadron_Ascetic
+  17989776:
+    script: Squadron_Spy
+  17989777:
+    script: Squadron_Spy
+  17989778:
+    script: Incarnation_Icon
+  17989779:
+    script: Squadron_Hoplite
+  17989780:
+    script: Squadron_Orisha
+  17989781:
+    script: Squadrons_Avatar
+  17989782:
+    script: Squadron_Ruffian
+  17989783:
+    script: Incarnation_Icon
+  17989784:
+    script: Squadron_Ascetic
+  17989785:
+    script: Squadron_Prognosticator
+  17989786:
+    script: Squadron_Minnesinger
+  17989787:
+    script: Squadron_Spy
+  17989788:
+    script: Incarnation_Icon
+  17989789:
+    script: Squadron_Orisha
+  17989790:
+    script: Squadrons_Avatar
+  17989791:
+    script: Squadron_Magian
+  17989792:
+    script: Squadron_Champion
+  17989793:
+    script: Squadrons_Wyvern
+  17989794:
+    script: Squadron_Empath
+  17989795:
+    script: Squadrons_Jagil
+  17989796:
+    script: Incarnation_Icon
+  17989797:
+    script: Squadron_Hoplite
+  17989798:
+    script: Squadron_Ascetic
+  17989799:
+    script: Squadron_Ruffian
+  17989800:
+    script: Squadron_Minnesinger
+  17989801:
+    script: Incarnation_Icon
+  17989802:
+    script: Squadron_Hoplite
+  17989803:
+    script: Squadron_Empath
+  17989804:
+    script: Squadrons_Jagil
+  17989805:
+    script: Squadron_Spy
+  17989806:
+    script: Squadron_Magian
+  17989807:
+    script: Incarnation_Icon
+  17989808:
+    script: Squadron_Hoplite
+  17989809:
+    script: Squadron_Ascetic
+  17989810:
+    script: Squadron_Magian
+  17989811:
+    script: Incarnation_Icon
+  17989812:
+    script: Squadron_Empath
+  17989813:
+    script: Squadrons_Jagil
+  17989814:
+    script: Squadron_Minnesinger
+  17989815:
+    script: Squadron_Spy
+  17989816:
+    script: Squadron_Privateer
+  17989817:
+    script: Squadron_Minnesinger
+  17989818:
+    script: Squadron_Spy
+  17989819:
+    script: Incarnation_Icon
+  17989820:
+    script: Squadron_Orisha
+  17989821:
+    script: Squadrons_Avatar
+  17989822:
+    script: Squadron_Magian
+  17989823:
+    script: Squadron_Prognosticator
+  17989824:
+    script: Squadron_Champion
+  17989825:
+    script: Squadrons_Wyvern
+  17989826:
+    script: Incarnation_Icon
+  17989827:
+    script: Squadron_Ascetic
+  17989828:
+    script: Squadron_Magian
+  17989829:
+    script: Squadron_Minnesinger
+  17989830:
+    script: Squadron_Spy
+  17989831:
+    script: Incarnation_Icon
+  17989832:
+    script: Squadron_Hoplite
+  17989833:
+    script: Squadron_Orisha
+  17989834:
+    script: Squadrons_Avatar
+  17989835:
+    script: Squadron_Prognosticator
+  17989836:
+    script: Squadron_Minnesinger
+  17989837:
+    script: Incarnation_Icon
+  17989838:
+    script: Squadron_Ascetic
+  17989839:
+    script: Squadron_Prognosticator
+  17989840:
+    script: Squadron_Ruffian
+  17989841:
+    script: Squadron_Spy
+  17989842:
+    script: Incarnation_Icon
+  17989843:
+    script: Squadron_Ascetic
+  17989844:
+    script: Squadron_Prognosticator
+  17989845:
+    script: Squadron_Ruffian
+  17989846:
+    script: Squadron_Spy
+  17989847:
+    script: Squadron_Privateer
+  17989848:
+    script: Incarnation_Icon
+  17989849:
+    script: Squadron_Magian
+  17989850:
+    script: Squadron_Prognosticator
+  17989851:
+    script: Squadron_Ruffian
+  17989852:
+    script: Squadron_Champion
+  17989853:
+    script: Squadrons_Wyvern
+  17989854:
+    script: Incarnation_Icon
+  17989855:
+    script: Squadron_Hoplite
+  17989856:
+    script: Squadron_Ascetic
+  17989857:
+    script: Squadron_Minnesinger
+  17989858:
+    script: Incarnation_Icon
+  17989859:
+    script: Squadron_Magian
+  17989860:
+    script: Squadron_Prognosticator
+  17989861:
+    script: Squadron_Ruffian
+  17989862:
+    script: Incarnation_Icon
+  17989863:
+    script: Squadron_Hoplite
+  17989864:
+    script: Squadron_Ascetic
+  17989865:
+    script: Squadron_Orisha
+  17989866:
+    script: Squadrons_Avatar
+  17989867:
+    script: Incarnation_Icon
+  17989868:
+    script: Squadron_Minnesinger
+  17989869:
+    script: Squadron_Spy
+  17989870:
+    script: Squadron_Privateer
+  17989871:
+    script: Incarnation_Icon
+  17989872:
+    script: Squadron_Magian
+  17989873:
+    script: Squadron_Prognosticator
+  17989874:
+    script: Squadron_Ruffian
+  17989875:
+    script: Squadron_Champion
+  17989876:
+    script: Squadrons_Wyvern
+  17989877:
+    script: Squadron_Empath
+  17989878:
+    script: Squadrons_Jagil
+  17989879:
+    script: Incarnation_Icon
+  17989880:
+    script: Squadron_Hoplite
+  17989881:
+    script: Squadron_Hoplite
+  17989882:
+    script: Squadron_Orisha
+  17989883:
+    script: Squadrons_Avatar
+  17989884:
+    script: Incarnation_Icon
+  17989885:
+    script: Squadron_Magian
+  17989886:
+    script: Squadron_Magian
+  17989887:
+    script: Squadron_Ruffian
+  17989888:
+    script: Squadron_Ruffian
+  17989889:
+    script: Incarnation_Icon
+  17989890:
+    script: Squadron_Hoplite
+  17989891:
+    script: Squadron_Ascetic
+  17989892:
+    script: Squadron_Empath
+  17989893:
+    script: Squadrons_Jagil
+  17989894:
+    script: Incarnation_Icon
+  17989895:
+    script: Squadron_Minnesinger
+  17989896:
+    script: Squadron_Prognosticator
+  17989897:
+    script: Squadron_Ruffian
+  17989898:
+    script: Incarnation_Icon
+  17989899:
+    script: Squadron_Magian
+  17989900:
+    script: Squadron_Privateer
+  17989901:
+    script: Squadron_Champion
+  17989902:
+    script: Squadrons_Wyvern
+  17989903:
+    script: Incarnation_Icon
+  17989904:
+    script: Squadron_Hoplite
+  17989905:
+    script: Squadron_Ascetic
+  17989906:
+    script: Squadron_Spy
+  17989907:
+    script: Incarnation_Icon
+  17989908:
+    script: Squadron_Prognosticator
+  17989909:
+    script: Squadron_Prognosticator
+  17989910:
+    script: Squadron_Privateer
+  17989911:
+    script: Incarnation_Icon
+  17989912:
+    script: Squadron_Minnesinger
+  17989913:
+    script: Squadron_Minnesinger
+  17989914:
+    script: Squadron_Spy
+  17989915:
+    script: Incarnation_Icon
+  17989916:
+    script: Squadron_Magian
+  17989917:
+    script: Squadron_Prognosticator
+  17989918:
+    script: Squadron_Ruffian
+  17989919:
+    script: Incarnation_Icon
+  17989920:
+    script: Squadron_Hoplite
+  17989921:
+    script: Squadron_Ascetic
+  17989922:
+    script: Squadron_Magian
+  17989923:
+    script: Squadron_Prognosticator
+  17989924:
+    script: Incarnation_Icon
+  17989925:
+    script: Squadron_Orisha
+  17989926:
+    script: Squadrons_Avatar
+  17989927:
+    script: Squadron_Privateer
+  17989928:
+    script: Squadron_Ruffian
+  17989929:
+    script: Squadron_Spy
+  17989930:
+    script: Squadron_Minnesinger
+  17989931:
+    script: Squadron_Hoplite
+  17989932:
+    script: Incarnation_Icon
+  17989933:
+    script: Squadron_Champion
+  17989934:
+    script: Squadrons_Wyvern
+  17989935:
+    script: Squadron_Magian
+  17989936:
+    script: Incarnation_Icon
+  17989937:
+    script: Squadron_Hoplite
+  17989938:
+    script: Squadron_Ruffian
+  17989939:
+    script: Incarnation_Icon
+  17989940:
+    script: Squadron_Hoplite
+  17989941:
+    script: Squadron_Orisha
+  17989942:
+    script: Squadrons_Avatar
+  17989943:
+    script: Squadron_Prognosticator
+  17989944:
+    script: Squadron_Champion
+  17989945:
+    script: Squadrons_Wyvern
+  17989946:
+    script: Incarnation_Icon
+  17989947:
+    script: Squadron_Hoplite
+  17989948:
+    script: Squadron_Ascetic
+  17989949:
+    script: Squadron_Magian
+  17989950:
+    script: Squadron_Prognosticator
+  17989951:
+    script: Incarnation_Icon
+  17989952:
+    script: Squadron_Ruffian
+  17989953:
+    script: Squadron_Minnesinger
+  17989954:
+    script: Squadron_Spy
+  17989955:
+    script: Squadron_Privateer
+  17989956:
+    script: Incarnation_Icon
+  17989957:
+    script: Squadron_Hoplite
+  17989958:
+    script: Squadron_Ascetic
+  17989959:
+    script: Squadron_Spy
+  17989960:
+    script: Squadron_Privateer
+  17989961:
+    script: Incarnation_Icon
+  17989962:
+    script: Empath_Leader
+  17989963:
+    script: Leaders_Kraken
+  17989964:
+    script: Incarnation_Icon
+  17989965:
+    script: Hoplite_Leader
+  17989966:
+    script: Minnesinger_Leader
+  17989967:
+    script: Incarnation_Icon
+  17989968:
+    script: Ascetic_Leader
+  17989969:
+    script: Prognosticator_Leader
+  17989970:
+    script: Incarnation_Icon
+  17989971:
+    script: Orisha_Leader
+  17989972:
+    script: Leaders_Avatar
+  17989973:
+    script: Magian_Leader
+  17989974:
+    script: Incarnation_Icon
+  17989975:
+    script: Privateer_Leader
+  17989976:
+    script: Champion_Leader
+  17989977:
+    script: Leaders_Wyvern
+  17989978:
+    script: Incarnation_Icon
+  17989979:
+    script: Ruffian_Leader
+  17989980:
+    script: Spy_Leader
+  17989981:
+    script: Fii_Pexu_the_Eternal
+  17989982:
+    script: Incarnation_Icon
+  17989983:
+    script: Regiment_Hoplite
+  17989984:
+    script: Regiment_Ascetic
+  17989985:
+    script: Regiment_Orisha
+  17989986:
+    script: Regiments_Avatar
+  17989987:
+    script: Incarnation_Icon
+  17989988:
+    script: Regiment_Magian
+  17989989:
+    script: Regiment_Prognosticator
+  17989990:
+    script: Regiment_Ruffian
+  17989991:
+    script: Incarnation_Icon
+  17989992:
+    script: Incarnation_Icon
+  17989993:
+    script: Regiment_Champion
+  17989994:
+    script: Regiments_Wyvern
+  17989995:
+    script: Regiment_Empath
+  17989996:
+    script: Regiments_Crab
+  17989997:
+    script: Regiment_Minnesinger
+  17989998:
+    script: Regiment_Spy
+  17989999:
+    script: Regiment_Privateer
+  17990000:
+    script: Incarnation_Icon
+  17990001:
+    script: Regiment_Hoplite
+  17990002:
+    script: Regiment_Ruffian
+  17990003:
+    script: Regiment_Minnesinger
+  17990004:
+    script: Regiment_Privateer
+  17990005:
+    script: Incarnation_Icon
+  17990006:
+    script: Regiment_Ascetic
+  17990007:
+    script: Regiment_Magian
+  17990008:
+    script: Regiment_Prognosticator
+  17990009:
+    script: Regiment_Spy
+  17990010:
+    script: Regiment_Hoplite
+  17990011:
+    script: Incarnation_Icon
+  17990012:
+    script: Regiment_Orisha
+  17990013:
+    script: Regiments_Avatar
+  17990014:
+    script: Regiment_Champion
+  17990015:
+    script: Regiments_Wyvern
+  17990016:
+    script: Incarnation_Icon
+  17990017:
+    script: Regiment_Magian
+  17990018:
+    script: Regiment_Prognosticator
+  17990019:
+    script: Regiment_Ruffian
+  17990020:
+    script: Incarnation_Icon
+  17990021:
+    script: Regiment_Hoplite
+  17990022:
+    script: Regiment_Ascetic
+  17990023:
+    script: Regiment_Empath
+  17990024:
+    script: Regiments_Crab
+  17990025:
+    script: Incarnation_Icon
+  17990026:
+    script: Incarnation_Icon
+  17990027:
+    script: Regiment_Orisha
+  17990028:
+    script: Regiments_Avatar
+  17990029:
+    script: Regiment_Magian
+  17990030:
+    script: Regiment_Prognosticator
+  17990031:
+    script: Regiment_Ruffian
+  17990032:
+    script: Regiment_Champion
+  17990033:
+    script: Regiments_Wyvern
+  17990034:
+    script: Incarnation_Icon
+  17990035:
+    script: Regiment_Minnesinger
+  17990036:
+    script: Regiment_Privateer
+  17990037:
+    script: Regiment_Hoplite
+  17990038:
+    script: Incarnation_Icon
+  17990039:
+    script: Regiment_Hoplite
+  17990040:
+    script: Regiment_Magian
+  17990041:
+    script: Regiment_Prognosticator
+  17990042:
+    script: Regiment_Ruffian
+  17990043:
+    script: Incarnation_Icon
+  17990044:
+    script: Regiment_Ascetic
+  17990045:
+    script: Regiment_Ruffian
+  17990046:
+    script: Regiment_Minnesinger
+  17990047:
+    script: Incarnation_Icon
+  17990048:
+    script: Regiment_Magian
+  17990049:
+    script: Regiment_Prognosticator
+  17990050:
+    script: Regiment_Privateer
+  17990051:
+    script: Regiment_Orisha
+  17990052:
+    script: Regiments_Avatar
+  17990053:
+    script: Incarnation_Icon
+  17990054:
+    script: Regiment_Hoplite
+  17990055:
+    script: Regiment_Ascetic
+  17990056:
+    script: Regiment_Champion
+  17990057:
+    script: Regiments_Wyvern
+  17990058:
+    script: Incarnation_Icon
+  17990059:
+    script: Regiment_Prognosticator
+  17990060:
+    script: Regiment_Empath
+  17990061:
+    script: Regiments_Crab
+  17990062:
+    script: Regiment_Spy
+  17990063:
+    script: Incarnation_Icon
+  17990064:
+    script: Regiment_Hoplite
+  17990065:
+    script: Regiment_Ascetic
+  17990066:
+    script: Regiment_Orisha
+  17990067:
+    script: Regiments_Avatar
+  17990068:
+    script: Regiment_Magian
+  17990069:
+    script: Incarnation_Icon
+  17990070:
+    script: Regiment_Prognosticator
+  17990071:
+    script: Regiment_Ruffian
+  17990072:
+    script: Regiment_Champion
+  17990073:
+    script: Regiments_Wyvern
+  17990074:
+    script: Regiment_Empath
+  17990075:
+    script: Regiments_Crab
+  17990076:
+    script: Incarnation_Icon
+  17990077:
+    script: Regiment_Minnesinger
+  17990078:
+    script: Regiment_Spy
+  17990079:
+    script: Regiment_Spy
+  17990080:
+    script: Regiment_Privateer
+  17990081:
+    script: Incarnation_Icon
+  17990082:
+    script: Incarnation_Icon
+  17990083:
+    script: Regiment_Orisha
+  17990084:
+    script: Regiments_Avatar
+  17990085:
+    script: Regiment_Magian
+  17990086:
+    script: Regiment_Prognosticator
+  17990087:
+    script: Incarnation_Icon
+  17990088:
+    script: Regiment_Magian
+  17990089:
+    script: Regiment_Empath
+  17990090:
+    script: Regiments_Crab
+  17990091:
+    script: Regiment_Minnesinger
+  17990092:
+    script: Incarnation_Icon
+  17990093:
+    script: Regiment_Prognosticator
+  17990094:
+    script: Regiment_Ruffian
+  17990095:
+    script: Regiment_Privateer
+  17990096:
+    script: Incarnation_Icon
+  17990097:
+    script: Regiment_Hoplite
+  17990098:
+    script: Regiment_Ascetic
+  17990099:
+    script: Regiment_Magian
+  17990100:
+    script: Regiment_Prognosticator
+  17990101:
+    script: Regiment_Ruffian
+  17990102:
+    script: Regiment_Spy
+  17990103:
+    script: Incarnation_Icon
+  17990104:
+    script: Regiment_Orisha
+  17990105:
+    script: Regiments_Avatar
+  17990106:
+    script: Regiment_Minnesinger
+  17990107:
+    script: Regiment_Spy
+  17990108:
+    script: Regiment_Privateer
+  17990109:
+    script: Incarnation_Icon
+  17990110:
+    script: Regiment_Prognosticator
+  17990111:
+    script: Regiment_Ruffian
+  17990112:
+    script: Regiment_Champion
+  17990113:
+    script: Regiments_Wyvern
+  17990114:
+    script: Incarnation_Icon
+  17990115:
+    script: Incarnation_Icon
+  17990116:
+    script: Regiment_Ascetic
+  17990117:
+    script: Regiment_Ascetic
+  17990118:
+    script: Regiment_Minnesinger
+  17990119:
+    script: Incarnation_Icon
+  17990120:
+    script: Regiment_Hoplite
+  17990121:
+    script: Regiment_Hoplite
+  17990122:
+    script: Regiment_Minnesinger
+  17990123:
+    script: Incarnation_Icon
+  17990124:
+    script: Regiment_Magian
+  17990125:
+    script: Regiment_Magian
+  17990126:
+    script: Regiment_Prognosticator
+  17990127:
+    script: Regiment_Prognosticator
+  17990128:
+    script: Incarnation_Icon
+  17990129:
+    script: Regiment_Ruffian
+  17990130:
+    script: Regiment_Ruffian
+  17990131:
+    script: Regiment_Minnesinger
+  17990132:
+    script: Regiment_Spy
+  17990133:
+    script: Incarnation_Icon
+  17990134:
+    script: Regiment_Hoplite
+  17990135:
+    script: Regiment_Ascetic
+  17990136:
+    script: Regiment_Ruffian
+  17990137:
+    script: Regiment_Spy
+  17990138:
+    script: Incarnation_Icon
+  17990139:
+    script: Incarnation_Icon
+  17990140:
+    script: Regiment_Empath
+  17990141:
+    script: Regiments_Crab
+  17990142:
+    script: Regiment_Empath
+  17990143:
+    script: Regiments_Crab
+  17990144:
+    script: Regiment_Privateer
+  17990145:
+    script: Incarnation_Icon
+  17990146:
+    script: Regiment_Orisha
+  17990147:
+    script: Regiments_Avatar
+  17990148:
+    script: Regiment_Champion
+  17990149:
+    script: Regiments_Wyvern
+  17990150:
+    script: Regiment_Orisha
+  17990151:
+    script: Regiments_Avatar
+  17990152:
+    script: Regiment_Champion
+  17990153:
+    script: Regiments_Wyvern
+  17990154:
+    script: Incarnation_Icon
+  17990155:
+    script: Regiment_Ascetic
+  17990156:
+    script: Regiment_Orisha
+  17990157:
+    script: Regiments_Avatar
+  17990158:
+    script: Regiment_Magian
+  17990159:
+    script: Incarnation_Icon
+  17990160:
+    script: Regiment_Magian
+  17990161:
+    script: Regiment_Prognosticator
+  17990162:
+    script: Regiment_Privateer
+  17990163:
+    script: Incarnation_Icon
+  17990164:
+    script: Regiment_Hoplite
+  17990165:
+    script: Regiment_Ascetic
+  17990166:
+    script: Regiment_Ruffian
+  17990167:
+    script: Incarnation_Icon
+  17990168:
+    script: Regiment_Ruffian
+  17990169:
+    script: Regiment_Spy
+  17990170:
+    script: Regiment_Ascetic
+  17990171:
+    script: Regiment_Orisha
+  17990172:
+    script: Regiments_Avatar
+  17990173:
+    script: Incarnation_Icon
+  17990174:
+    script: Regiment_Hoplite
+  17990175:
+    script: Regiment_Prognosticator
+  17990176:
+    script: Regiment_Minnesinger
+  17990177:
+    script: Regiment_Champion
+  17990178:
+    script: Regiments_Wyvern
+  17990179:
+    script: Incarnation_Icon
+  17990180:
+    script: Regiment_Ruffian
+  17990181:
+    script: Regiment_Spy
+  17990182:
+    script: Regiment_Ascetic
+  17990183:
+    script: Regiment_Orisha
+  17990184:
+    script: Regiments_Avatar
+  17990185:
+    script: Incarnation_Icon
+  17990186:
+    script: Regiment_Hoplite
+  17990187:
+    script: Regiment_Prognosticator
+  17990188:
+    script: Regiment_Minnesinger
+  17990189:
+    script: Regiment_Champion
+  17990190:
+    script: Regiments_Wyvern
+  17990191:
+    script: Incarnation_Icon
+  17990192:
+    script: Regiment_Minnesinger
+  17990193:
+    script: Regiment_Privateer
+  17990194:
+    script: Regiment_Privateer
+  17990195:
+    script: Incarnation_Icon
+  17990196:
+    script: Regiment_Hoplite
+  17990197:
+    script: Regiment_Ascetic
+  17990198:
+    script: Regiment_Orisha
+  17990199:
+    script: Regiments_Avatar
+  17990200:
+    script: Incarnation_Icon
+  17990201:
+    script: Regiment_Magian
+  17990202:
+    script: Regiment_Prognosticator
+  17990203:
+    script: Regiment_Ruffian
+  17990204:
+    script: Incarnation_Icon
+  17990205:
+    script: Regiment_Champion
+  17990206:
+    script: Regiments_Wyvern
+  17990207:
+    script: Regiment_Empath
+  17990208:
+    script: Regiments_Crab
+  17990209:
+    script: Regiment_Minnesinger
+  17990210:
+    script: Regiment_Spy
+  17990211:
+    script: Incarnation_Icon
+  17990212:
+    script: Regiment_Orisha
+  17990213:
+    script: Regiments_Avatar
+  17990214:
+    script: Regiment_Magian
+  17990215:
+    script: Regiment_Prognosticator
+  17990216:
+    script: Regiment_Minnesinger
+  17990217:
+    script: Incarnation_Icon
+  17990218:
+    script: Regiment_Hoplite
+  17990219:
+    script: Regiment_Ascetic
+  17990220:
+    script: Regiment_Champion
+  17990221:
+    script: Regiments_Wyvern
+  17990222:
+    script: Regiment_Empath
+  17990223:
+    script: Regiments_Crab
+  17990224:
+    script: Incarnation_Icon
+  17990225:
+    script: Regiment_Hoplite
+  17990226:
+    script: Regiment_Ascetic
+  17990227:
+    script: Regiment_Orisha
+  17990228:
+    script: Regiments_Avatar
+  17990229:
+    script: Regiment_Magian
+  17990230:
+    script: Regiment_Prognosticator
+  17990231:
+    script: Regiment_Ruffian
+  17990232:
+    script: Incarnation_Icon
+  17990233:
+    script: Regiment_Minnesinger
+  17990234:
+    script: Regiment_Spy
+  17990235:
+    script: Regiment_Privateer
+  17990236:
+    script: Incarnation_Icon
+  17990237:
+    script: Regiment_Hoplite
+  17990238:
+    script: Regiment_Ascetic
+  17990239:
+    script: Regiment_Magian
+  17990240:
+    script: Regiment_Minnesinger
+  17990241:
+    script: Incarnation_Icon
+  17990242:
+    script: Regiment_Prognosticator
+  17990243:
+    script: Regiment_Ruffian
+  17990244:
+    script: Regiment_Spy
+  17990245:
+    script: Incarnation_Icon
+  17990246:
+    script: Regiment_Empath
+  17990247:
+    script: Regiments_Crab
+  17990248:
+    script: Regiment_Minnesinger
+  17990249:
+    script: Regiment_Spy
+  17990250:
+    script: Incarnation_Icon
+  17990251:
+    script: Regiment_Hoplite
+  17990252:
+    script: Regiment_Hoplite
+  17990253:
+    script: Regiment_Hoplite
+  17990254:
+    script: Incarnation_Icon
+  17990255:
+    script: Regiment_Ascetic
+  17990256:
+    script: Regiment_Ascetic
+  17990257:
+    script: Regiment_Ascetic
+  17990258:
+    script: Incarnation_Icon
+  17990259:
+    script: Regiment_Magian
+  17990260:
+    script: Regiment_Magian
+  17990261:
+    script: Regiment_Magian
+  17990262:
+    script: Incarnation_Icon
+  17990263:
+    script: Regiment_Prognosticator
+  17990264:
+    script: Regiment_Prognosticator
+  17990265:
+    script: Regiment_Prognosticator
+  17990266:
+    script: Incarnation_Icon
+  17990267:
+    script: Regiment_Ruffian
+  17990268:
+    script: Regiment_Ruffian
+  17990269:
+    script: Regiment_Ruffian
+  17990270:
+    script: Incarnation_Icon
+  17990271:
+    script: Regiment_Minnesinger
+  17990272:
+    script: Regiment_Minnesinger
+  17990273:
+    script: Regiment_Minnesinger
+  17990274:
+    script: Incarnation_Icon
+  17990275:
+    script: Regiment_Spy
+  17990276:
+    script: Regiment_Spy
+  17990277:
+    script: Regiment_Spy
+  17990278:
+    script: Incarnation_Icon
+  17990279:
+    script: Regiment_Privateer
+  17990280:
+    script: Regiment_Privateer
+  17990281:
+    script: Regiment_Privateer
+  17990282:
+    script: Incarnation_Icon
+  17990283:
+    script: Regiment_Hoplite
+  17990284:
+    script: Regiment_Ascetic
+  17990285:
+    script: Regiment_Minnesinger
+  17990286:
+    script: Incarnation_Icon
+  17990287:
+    script: Regiment_Orisha
+  17990288:
+    script: Regiments_Avatar
+  17990289:
+    script: Regiment_Champion
+  17990290:
+    script: Regiments_Wyvern
+  17990291:
+    script: Regiment_Empath
+  17990292:
+    script: Regiments_Crab
+  17990293:
+    script: Regiment_Orisha
+  17990294:
+    script: Regiments_Avatar
+  17990295:
+    script: Regiment_Champion
+  17990296:
+    script: Regiments_Wyvern
+  17990297:
+    script: Regiment_Empath
+  17990298:
+    script: Regiments_Crab
+  17990299:
+    script: Incarnation_Icon
+  17990300:
+    script: Hoplite_Commander
+  17990301:
+    script: Incarnation_Icon
+  17990302:
+    script: Ascetic_Commander
+  17990303:
+    script: Incarnation_Icon
+  17990304:
+    script: Orisha_Commander
+  17990305:
+    script: Commanders_Avatar
+  17990306:
+    script: Incarnation_Icon
+  17990307:
+    script: Magian_Commander
+  17990308:
+    script: Incarnation_Icon
+  17990309:
+    script: Prognosticator_Commander
+  17990310:
+    script: Incarnation_Icon
+  17990311:
+    script: Ruffian_Commander
+  17990312:
+    script: Incarnation_Icon
+  17990313:
+    script: Champion_Commander
+  17990314:
+    script: Commanders_Wyvern
+  17990315:
+    script: Incarnation_Icon
+  17990316:
+    script: Empath_Commander
+  17990317:
+    script: Commanders_Kraken
+  17990318:
+    script: Incarnation_Icon
+  17990319:
+    script: Minnesinger_Commander
+  17990320:
+    script: Incarnation_Icon
+  17990321:
+    script: Spy_Commander
+  17990322:
+    script: Incarnation_Icon
+  17990323:
+    script: Privateer_Commander
+  17990324:
+    script: Fire_Circle
+  17990325:
+    script: Disjoined_Tarutaru_qm
+  17990326:
+    script: Volte_Communer
+  17990327:
+    script: Voltes_Luopan
+  17990328:
+    script: Volte_White_Mage
+  17990329:
+    script: Volte_Black_Mage
+  17990330:
+    script: Volte_Red_Mage
+  17990331:
+    script: Volte_Thief
+  17990332:
+    script: Volte_Beastmaster
+  17990333:
+    script: Voltes_Bomb
+  17990334:
+    script: Volte_Blue_Mage
+  17990335:
+    script: Ice_Circle
+  17990336:
+    script: Disjoined_Tarutaru_qm
+  17990337:
+    script: Volte_Incanter
+  17990338:
+    script: Volte_Paladin
+  17990339:
+    script: Volte_Dark_Knight
+  17990340:
+    script: Volte_Bard
+  17990341:
+    script: Volte_Ranger
+  17990342:
+    script: Volte_Ninja
+  17990343:
+    script: Volte_Dragoon
+  17990344:
+    script: Voltes_Wyvern
+  17990345:
+    script: Air_Circle
+  17990346:
+    script: Disjoined_Tarutaru_qm
+  17990347:
+    script: Volte_Joiner
+  17990348:
+    script: Volte_Warrior
+  17990349:
+    script: Volte_Thief
+  17990350:
+    script: Volte_Summoner
+  17990351:
+    script: Voltes_Avatar
+  17990352:
+    script: Volte_Samurai
+  17990353:
+    script: Volte_Corsair
+  17990354:
+    script: Volte_Rune_Fencer
+  17990355:
+    script: Earth_Circle
+  17990356:
+    script: Disjoined_Tarutaru_qm
+  17990357:
+    script: Volte_Monk
+  17990358:
+    script: Volte_Corsair
+  17990359:
+    script: Volte_Puppetmaster
+  17990360:
+    script: Voltes_Automaton
+  17990361:
+    script: Volte_Dancer
+  17990362:
+    script: Volte_Scholar
+  17990363:
+    script: Volte_Geomancer
+  17990364:
+    script: Voltes_Luopan
+  17990365:
+    script: Thunder_Circle
+  17990366:
+    script: Disjoined_Tarutaru_qm
+  17990367:
+    script: Volte_Warrior
+  17990368:
+    script: Volte_Monk
+  17990369:
+    script: Volte_Summoner
+  17990370:
+    script: Voltes_Avatar
+  17990371:
+    script: Volte_Blue_Mage
+  17990372:
+    script: Volte_Scholar
+  17990373:
+    script: Volte_Geomancer
+  17990374:
+    script: Voltes_Luopan
+  17990375:
+    script: Water_Circle
+  17990376:
+    script: Disjoined_Tarutaru_qm
+  17990377:
+    script: Volte_Controller
+  17990378:
+    script: Voltes_Avatar
+  17990379:
+    script: Volte_Monk
+  17990380:
+    script: Volte_Dark_Knight
+  17990381:
+    script: Volte_Bard
+  17990382:
+    script: Volte_White_Mage
+  17990383:
+    script: Volte_Black_Mage
+  17990384:
+    script: Volte_Red_Mage
+  17990385:
+    script: Light_Circle
+  17990386:
+    script: Disjoined_Tarutaru_qm
+  17990387:
+    script: Volte_Warrior
+  17990388:
+    script: Volte_Ninja
+  17990389:
+    script: Volte_Dragoon
+  17990390:
+    script: Voltes_Wyvern
+  17990391:
+    script: Volte_Ranger
+  17990392:
+    script: Volte_Corsair
+  17990393:
+    script: Volte_Puppetmaster
+  17990394:
+    script: Voltes_Automaton
+  17990395:
+    script: Dark_Circle
+  17990396:
+    script: Disjoined_Tarutaru_qm
+  17990397:
+    script: Volte_Sniper
+  17990398:
+    script: Volte_Ninja
+  17990399:
+    script: Volte_White_Mage
+  17990400:
+    script: Volte_Black_Mage
+  17990401:
+    script: Volte_Red_Mage
+  17990402:
+    script: Volte_Scholar
+  17990403:
+    script: Volte_Geomancer
+  17990404:
+    script: Voltes_Luopan
+  17990405:
+    script: Volte_Cleaver
+  17990406:
+    script: Volte_Fistfighter
+  17990407:
+    script: Volte_Priest
+  17990408:
+    script: Volte_Illusionist
+  17990409:
+    script: Volte_Vagabond
+  17990410:
+    script: Volte_Crusader
+  17990411:
+    script: Volte_Reaper
+  17990412:
+    script: Volte_Trainer
+  17990413:
+    script: Voltes_Cluster
+  17990414:
+    script: Volte_Conductor
+  17990415:
+    script: Volte_Mononofu
+  17990416:
+    script: Volte_Shinobi
+  17990417:
+    script: Volte_Highwind
+  17990418:
+    script: Voltes_Wyvern
+  17990419:
+    script: Volte_Sailor
+  17990420:
+    script: Volte_Manipulator
+  17990421:
+    script: Voltes_Automaton
+  17990422:
+    script: Volte_Twirler
+  17990423:
+    script: Volte_Erudite
+  17990424:
+    script: Volte_Duelist
+  17990425:
+    script: Disjoined_Tarutaru
+  17990426:
+    script: Disjoineds_Odin
+  17990427:
+    script: Volte_Warrior
+  17990428:
+    script: Volte_Monk
+  17990429:
+    script: Volte_White_Mage
+  17990430:
+    script: Volte_Black_Mage
+  17990431:
+    script: Volte_Red_Mage
+  17990432:
+    script: Volte_Thief
+  17990433:
+    script: Volte_Paladin
+  17990434:
+    script: Volte_Dark_Knight
+  17990435:
+    script: Volte_Beastmaster
+  17990436:
+    script: Voltes_Bomb
+  17990437:
+    script: Volte_Bard
+  17990438:
+    script: Volte_Ranger
+  17990439:
+    script: Volte_Samurai
+  17990440:
+    script: Volte_Ninja
+  17990441:
+    script: Volte_Dragoon
+  17990442:
+    script: Voltes_Wyvern
+  17990443:
+    script: Volte_Summoner
+  17990444:
+    script: Voltes_Avatar
+  17990445:
+    script: Volte_Blue_Mage
+  17990446:
+    script: Volte_Corsair
+  17990447:
+    script: Volte_Puppetmaster
+  17990448:
+    script: Voltes_Automaton
+  17990449:
+    script: Volte_Dancer
+  17990450:
+    script: Volte_Scholar
+  17990451:
+    script: Volte_Geomancer
+  17990452:
+    script: Voltes_Luopan
+  17990453:
+    script: Volte_Rune_Fencer

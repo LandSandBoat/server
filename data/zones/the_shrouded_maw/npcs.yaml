@@ -1,0 +1,822 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16818199:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-239.950, -16.500, 284.099, 64]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags: 1155
+      moving:          7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         COP
+
+  16818201:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [0.040, 23.502, 4.051, 64]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818203:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [280.217, 63.507, -275.965, 64]
+    render:
+      look:
+        type:  standard
+        model: 960
+      entity_flags:  1155
+      animation_sub:    8
+      moving:           7
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818240:
+    script: NPC[40]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16818241:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16818242:
+    script: NPC[42]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16818243:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16818245:
+    script: NPC[45]
+    at:     [0.000, 7.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16818246:
+    script: NPC[46]
+    at:     [0.000, 7.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16818247:
+    script: NPC[47]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16818248:
+    script:       MC_Entrance
+    display_name: Memento Circle
+    at:           [-300.057, -2.499, -261.886, 191]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16818249:
+    script:       Memento_Circle
+    display_name: Memento Circle
+    at:           [-240.035, -18.249, 209.766]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16818250:
+    script:       Memento_Circle
+    display_name: Memento Circle
+    at:           [-0.038, 21.749, -70.310, 189]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16818251:
+    script:       Memento_Circle
+    display_name: Memento Circle
+    at:           [279.959, 61.749, -350.198, 192]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16818252:
+    script: NPC[4c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16818253:
+    script: NPC[4d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16818254:
+    script: NPC[4e]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16818255:
+    script: NPC[4f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16818256:
+    script: NPC[50]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16818257:
+    script:       FLOOR_A_PANEL
+    display_name: FLOOR_A_PANEL
+    at:           [-240.029, -32.000, 288.064]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16818258:
+    script:       FLOOR_B_PANEL
+    display_name: FLOOR_B_PANEL
+    at:           [0.113, 8.000, 8.030]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16818259:
+    script:       FLOOR_C_PANEL
+    display_name: FLOOR_C_PANEL
+    at:           [279.920, 47.999, -276.083]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16818260:
+    script:       _0a0
+    display_name: FLOOR_A_1
+    at:           [-244.000, -31.832, 292.000]
+    render:
+      look:
+        type: door
+      door_id:      811675743
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818261:
+    script:       _0a1
+    display_name: FLOOR_A_2
+    at:           [-236.000, -31.832, 292.000]
+    render:
+      look:
+        type: door
+      door_id:      828452959
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818262:
+    script:       _0a2
+    display_name: FLOOR_A_3
+    at:           [-240.000, -31.832, 284.000]
+    render:
+      look:
+        type: door
+      door_id:      845230175
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818263:
+    script:       _0a3
+    display_name: FLOOR_A_4
+    at:           [-248.000, -31.832, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      862007391
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818264:
+    script:       _0a4
+    display_name: FLOOR_A_5
+    at:           [-240.000, -31.832, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      878784607
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818265:
+    script:       _0a5
+    display_name: FLOOR_A_6
+    at:           [-232.000, -31.832, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      895561823
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818266:
+    script:       _0a6
+    display_name: FLOOR_A_7
+    at:           [-248.000, -31.832, 276.000]
+    render:
+      look:
+        type: door
+      door_id:      912339039
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818267:
+    script:       _0a7
+    display_name: FLOOR_A_8
+    at:           [-232.000, -31.832, 276.000]
+    render:
+      look:
+        type: door
+      door_id:      929116255
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818268:
+    script:       _0a8
+    display_name: FLOOR_B_1
+    at:           [4.000, 8.167, 12.000]
+    render:
+      look:
+        type: door
+      door_id:      945893471
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818269:
+    script:       _0a9
+    display_name: FLOOR_B_2
+    at:           [8.000, 8.167, 12.000]
+    render:
+      look:
+        type: door
+      door_id:      962670687
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818270:
+    script:       _0aa
+    display_name: FLOOR_B_3
+    at:           [-4.000, 8.167, 8.000]
+    render:
+      look:
+        type: door
+      door_id:      1633759327
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818271:
+    script:       _0ab
+    display_name: FLOOR_B_4
+    at:           [4.000, 8.167, 4.000]
+    render:
+      look:
+        type: door
+      door_id:      1650536543
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818272:
+    script:       _0ac
+    display_name: FLOOR_B_5
+    at:           [-4.000, 8.167, 4.000]
+    render:
+      look:
+        type: door
+      door_id:      1667313759
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818273:
+    script:       _0ad
+    display_name: FLOOR_B_6
+    at:           [4.000, 8.167, 0.000]
+    render:
+      look:
+        type: door
+      door_id:      1684090975
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818274:
+    script:       _0ae
+    display_name: FLOOR_B_7
+    at:           [-4.000, 8.167, -4.000]
+    render:
+      look:
+        type: door
+      door_id:      1700868191
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818275:
+    script:       _0af
+    display_name: FLOOR_B_8
+    at:           [-8.000, 8.167, -4.000]
+    render:
+      look:
+        type: door
+      door_id:      1717645407
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818276:
+    script:       _0ag
+    display_name: FLOOR_C_1
+    at:           [272.000, 48.167, -268.000]
+    render:
+      look:
+        type: door
+      door_id:      1734422623
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818277:
+    script:       _0ah
+    display_name: FLOOR_C_2
+    at:           [288.000, 48.167, -268.000]
+    render:
+      look:
+        type: door
+      door_id:      1751199839
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818278:
+    script:       _0ai
+    display_name: FLOOR_C_3
+    at:           [280.000, 48.167, -272.000]
+    render:
+      look:
+        type: door
+      door_id:      1767977055
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818279:
+    script:       _0aj
+    display_name: FLOOR_C_4
+    at:           [272.000, 48.167, -276.000]
+    render:
+      look:
+        type: door
+      door_id:      1784754271
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818280:
+    script:       _0ak
+    display_name: FLOOR_C_5
+    at:           [288.000, 48.167, -276.000]
+    render:
+      look:
+        type: door
+      door_id:      1801531487
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818281:
+    script:       _0al
+    display_name: FLOOR_C_6
+    at:           [280.000, 48.167, -280.000]
+    render:
+      look:
+        type: door
+      door_id:      1818308703
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818282:
+    script:       _0am
+    display_name: FLOOR_C_7
+    at:           [272.000, 48.167, -284.000]
+    render:
+      look:
+        type: door
+      door_id:      1835085919
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818283:
+    script:       _0an
+    display_name: FLOOR_C_8
+    at:           [288.000, 48.167, -284.000]
+    render:
+      look:
+        type: door
+      door_id:      1851863135
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16818284:
+    script: blank
+    at:     [-298.384, 0.000, -248.680, 67]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  16818285:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16818286:
+    script:       Prishe
+    display_name: Prishe
+    render:
+      look:
+        type:  standard
+        model: 1446
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818287:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818288:
+    script:       Tenzen
+    display_name: Tenzen
+    render:
+      look:
+        type:  standard
+        model: 1442
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818289:
+    script:       Diabolos
+    display_name: Diabolos
+    at:           [279.984, 8.000, 332.168, 63]
+    render:
+      look:
+        type:  standard
+        model: 1145
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818290:
+    script:       Diabolos
+    display_name: Diabolos
+    render:
+      look:
+        type:  standard
+        model: 1145
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818291:
+    script:       Diabolos
+    display_name: Diabolos
+    render:
+      look:
+        type:  standard
+        model: 1145
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818292:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1446
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16818293:
+    script: NPC[75]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16818294:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16818295:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16818296:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16818297:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16818298:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16818299:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16818300:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16818301:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16818302:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-302.671, 0.000, -233.014, 226]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16818303:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-302.671, 0.000, -233.014, 226]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16818304:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  16818305:
+    script:       Volto_Oscuro
+    display_name: Volto Oscuro
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true

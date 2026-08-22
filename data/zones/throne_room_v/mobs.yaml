@@ -1,0 +1,137 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Oshasha:
+    id:      6147
+    species: tarutaru
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Romaa_Mihgo_TR:
+    id:           6148
+    display_name: Romaa_Mihgo
+    species:      mithra
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags:  3
+        name_prefix:  32
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Shadow_Lord_TR:
+    id:           6149
+    display_name: Shadow_Lord
+    species:      shadow_lord
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Valli:
+    id:      6150
+    species: elvaan
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags:  3
+        name_prefix:  32
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Volker_Throne_V:
+    id:            3866
+    display_name:  Volker
+    species:       humes
+    type:          [notorious]
+    skill_list_id: 482
+    attributes:
+      combat:
+        skill: sword
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags: 3
+      behaviors:
+        flags: [no_assist]
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Zeid_TR:
+    id:           6151
+    display_name: Zeid
+    species:      galks
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 0
+        entity_flags:  3
+        name_prefix:  32
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+spawns:
+  17715201:
+    template: Shadow_Lord_TR
+    script:   Shadow_Lord
+    level:    [139, 139]
+  17715202:
+    template: Oshasha
+    level:    [139, 139]
+  17715203:
+    template: Valli
+    level:    [139, 139]
+  17715204:
+    template: Zeid_TR
+    script:   Zeid
+    level:    [139, 139]
+  17715205:
+    template: Volker_Throne_V
+    script:   Volker
+    level:    [139, 139]
+  17715206:
+    template: Romaa_Mihgo_TR
+    script:   Romaa_Mihgo
+    level:    [139, 139]

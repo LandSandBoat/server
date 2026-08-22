@@ -1,0 +1,1035 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16900321:
+    script: NPC[e1]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900322:
+    script: NPC[e2]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900323:
+    script: NPC[e3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900324:
+    script: NPC[e4]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900325:
+    script:       qm
+    display_name: ???
+    at:           [506.000, 0.500, 366.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:  normal
+    content: COP
+
+  16900326:
+    script:       qm_shieldtrap
+    display_name: ???
+    at:           [162.000, 1.000, 466.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16900327:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16900328:
+    script: NPC[e8]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900329:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16900331:
+    script: NPC[eb]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16900332:
+    script: NPC[ec]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16900333:
+    script: NPC[ed]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16900334:
+    script: NPC[ee]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900335:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [654.910, -3.180, 583.140]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900336:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [572.500, 1.720, 307.470]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900337:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [371.670, 1.820, 267.860]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900338:
+    script: NPC[f2]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900339:
+    script: NPC[f3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900340:
+    script:       Unstable_Displacement
+    display_name: Unstable Displacement
+    at:           [183.390, -3.250, 341.550]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900341:
+    script:       _0u1
+    display_name: Unstable Displacement
+    at:           [-12.630, 0.620, 307.990]
+    render:
+      look:
+        type: door
+      door_id:      829763679
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16900342:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-132.260, 1.820, 429.380]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900343:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-213.310, 1.820, 548.310]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900344:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [660.670, -35.180, -463.030]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900345:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [736.210, -35.180, -501.400]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900346:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [737.080, -35.180, -575.650]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900347:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [736.970, -7.180, -660.090]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900348:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [706.580, 49.820, -827.430]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900349:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [612.450, 17.820, -813.470]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900350:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [546.830, 17.820, -812.380]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900351:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [547.780, 17.820, -747.410]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900352:
+    script:       _0u2
+    display_name: Unstable Displacement
+    at:           [496.910, 35.720, -860.210]
+    render:
+      look:
+        type: door
+      door_id:      846540895
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16900353:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [383.110, 36.710, -819.600]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900354:
+    script:       _0u3
+    display_name: Unstable Displacement
+    at:           [333.200, 28.620, -814.400]
+    render:
+      look:
+        type: door
+      door_id:      863318111
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16900355:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [381.200, 36.820, -895.720]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900356:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [297.180, 72.820, -899.780]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900357:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [259.510, 72.820, -902.880]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900358:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [306.880, 29.820, -786.860]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900359:
+    script:       Spatial_Displacement_BC
+    display_name: Spatial Displacement
+    at:           [55.110, 72.750, -702.920]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900360:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-218.620, 44.820, -824.020]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900361:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [219.590, 92.810, -896.660]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900362:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-386.760, -18.180, -507.350]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900363:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-423.640, -23.180, -578.390]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900364:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-266.620, 1.820, -586.890]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900365:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-220.960, 16.810, -703.290]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900366:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-261.140, 16.810, -776.500]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900367:
+    script:       _0u4
+    display_name: Unstable Displacement
+    at:           [-458.920, 15.620, -703.480]
+    render:
+      look:
+        type: door
+      door_id:      880095327
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16900368:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-376.890, 16.820, -619.500]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900369:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-587.230, 21.820, -507.640]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900370:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-503.950, -11.180, -381.930]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900371:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-533.570, -6.280, -412.450]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900372:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-706.820, -42.280, -373.160]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900373:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-652.780, 21.820, -506.230]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900374:
+    script:       Spatial_Displacement
+    display_name: Spatial Displacement
+    at:           [-547.630, 21.720, -613.400]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900375:
+    script:       Stone_Monument
+    display_name: Stone Monument
+    at:           [-733.091, -45.901, -300.686]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900376:
+    script:       Prishe
+    display_name: Prishe
+    render:
+      look:
+        type:  standard
+        model: 1446
+      entity_flags: 27
+      name_prefix:  32
+    status:          cutscene_only
+    animation_speed: 54
+    widescan:        true
+    content:         COP
+
+  16900377:
+    script:       Ulmia
+    display_name: Ulmia
+    render:
+      look:
+        type:  standard
+        model: 1472
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900378:
+    script:       Cherukiki
+    display_name: Cherukiki
+    render:
+      look:
+        type:  standard
+        model: 1443
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900379:
+    script:       Kukki-Chebukki
+    display_name: Kukki-Chebukki
+    render:
+      look:
+        type:  standard
+        model: 1444
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900380:
+    script:       Makki-Chebukki
+    display_name: Makki-Chebukki
+    render:
+      look:
+        type:  standard
+        model: 1445
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900381:
+    script:       Nagmolada
+    display_name: Nag'molada
+    render:
+      look:
+        type:  standard
+        model: 1452
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900382:
+    script: NPC[11e]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16900383:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16900384:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16900385:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16900386:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16900387:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16900388:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16900389:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16900390:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16900391:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [691.243, -31.498, -466.799, 83]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900392:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [691.243, -31.498, -466.799, 83]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16900393:
+    script:       qm_rivernewort
+    display_name: ???
+    at:           [-514.717, -6.684, -407.314, 9]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16900394:
+    script:       qm
+    display_name: ???
+    at:           [28.898, -11.999, -174.580, 30]
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:  cutscene_only
+    content: COP
+
+  16900395:
+    script:       Trunk
+    display_name: Trunk
+    at:           [162.989, 96.257, -876.048, 219]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16900396:
+    script:       Sanctia
+    display_name: Sanctia
+    at:           [163.299, 96.297, -875.892, 105]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  15
+        head:  4153
+        body:  8194
+        hands: 12373
+        legs:  16468
+        feet:  20582
+        main:  24576
+        sub:   28672
+      entity_flags:  25
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900397:
+    script:       Novice_Moogle
+    display_name: Novice Moogle
+    at:           [163.734, 96.448, -873.649, 79]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags:  25
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900398:
+    script:       qm
+    display_name: ???
+    at:           [-737.297, -44.000, -301.489, 66]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  6
+        head:  4115
+        body:  8211
+        hands: 12307
+        legs:  16403
+        feet:  20498
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:  cutscene_only
+    content: COP
+
+  16900399:
+    script:       Albanus
+    display_name: Albanus
+    at:           [-727.502, -43.601, -305.725, 149]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  7
+        head:  4096
+        body:  8211
+        hands: 12307
+        legs:  16403
+        feet:  20498
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16900400:
+    script:       HomePoint#1
+    display_name: 'Home Point #1'
+    at:           [187.000, 1.000, 361.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  16900401:
+    script:       Home_Point_#2
+    display_name: 'Home Point #2'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16900402:
+    script:       Home_Point_#3
+    display_name: 'Home Point #3'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16900403:
+    script:       Home_Point_#4
+    display_name: 'Home Point #4'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16900404:
+    script:       Home_Point_#5
+    display_name: 'Home Point #5'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+
+  16900405:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [19.780, 0.510, 367.790]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      name_vis:   112
+      moving:   32769
+    content: SOA
+
+  16900406:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [121.530, 0.930, 388.290]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      name_vis:   112
+      moving:   32769
+    content: SOA
+
+  16900407:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [265.060, 0.400, 528.220]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      name_vis:   112
+      moving:   32769
+    content: SOA

@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 139
+
+zonelines:
+
+  z200:
+    from:  [-20.000, -10.000, 840.000]
+    to:    caedarva_mire
+    at:    [339.996, 2.500, -721.286, 4.712389]
+    scale: [1.500, 4.000]
+
+  z202:
+    from:  [320.000, -10.000, 700.066]
+    to:    caedarva_mire
+    at:    [644.720, -5.627, 219.989]
+    scale: [1.500, 4.000]
+
+  z204:
+    from:  [-220.000, -10.000, 480.000]
+    to:    caedarva_mire
+    at:    [-460.005, 2.500, -760.756, 4.712389]
+    scale: [1.500, 4.000]
+
+  z206:
+    from:  [-520.000, -10.000, 740.000]
+    to:    caedarva_mire
+    at:    [-360.759, -1.500, -300.035, 3.141593]
+    scale: [1.500, 4.000]
+
+  z208:
+    from:  [-240.000, -10.000, 220.000]
+    to:    caedarva_mire
+    at:    [-600.739, 22.500, -260.003, 3.141593]
+    scale: [1.500, 4.000]
+
+  z20a:
+    from:  [320.000, -10.436, -620.000]
+    to:    bhaflau_thickets
+    at:    [79.994, -21.578, 619.974, 3.141593]
+    scale: [1.000, 4.000]
+
+  z20c:
+    from:  [-120.000, -10.000, -620.000]
+    to:    bhaflau_thickets
+    at:    [-401.065, -9.633, 19.995, 3.141593]
+    scale: [1.000, 4.000]
+
+  z20e:
+    from:  [100.014, -10.000, -680.020]
+    to:    mount_zhayolm
+    at:    [-19.867, 1.551, 316.915, 1.570796]
+    scale: [1.500, 4.000]

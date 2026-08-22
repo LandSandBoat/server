@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, costume, los_player_block]
+music:
+  day:          180
+  night:        180
+  battle_solo:  180
+  battle_party: 180
+
+zonelines:
+
+  z2f0:
+    from:  [-233.956, -4.231, 105.000]
+    to:    north_gustaberg_s
+    at:    [380.038, -2.250, 147.627, 4.712389]
+    scale: [1.000, 5.000]
+
+  zms2:
+    from:  [-150.750, -6.766, 29.920]
+    to:    bastok_markets_s
+    at:    [-177.000, -9.400, 30.026, 3.141593]
+    scale: [1.000, 6.000]
+
+  zms4:
+    from:  [-150.750, -6.781, -30.329]
+    to:    bastok_markets_s
+    at:    [-177.000, -9.400, -30.251, 3.141593]
+    scale: [1.000, 6.000]

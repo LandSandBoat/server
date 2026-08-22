@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, los_player_block]
+
+zonelines:
+
+  z260:
+    from:  [654.670, -274.266, -107.741]
+    to:    caedarva_mire
+    at:    [-539.996, 10.500, -559.207, 1.570796]
+    scale: [1.500, 4.000]

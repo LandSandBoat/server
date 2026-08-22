@@ -11,6 +11,7 @@ set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/blueutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/charutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/charutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/dataset_loader.h
     ${CMAKE_CURRENT_SOURCE_DIR}/dboxutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/dboxutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fellowutils.cpp

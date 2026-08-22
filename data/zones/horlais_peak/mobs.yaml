@@ -1,0 +1,3863 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Archer_Pugil:
+    id:            222
+    species:       pugil
+    type:          [battlefield]
+    skill_list_id: 2088
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 500
+
+  Aries:
+    id:            230
+    species:       ram
+    type:          [battlefield]
+    spell_list_id: 521
+    skill_list_id: 208
+    attributes:
+      combat:
+        skill: scythe
+        delay: 180
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 344
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         58
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12400
+        mp: 12600
+
+  Armsmaster_Dekbuk:
+    id:            249
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 614
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5800
+
+  Armsmaster_Dekbuk_2:
+    id:            249
+    display_name:  Armsmaster_Dekbuk
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 614
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Atori-Tutori_qm:
+    id:            6642
+    display_name:  Atori-Tutori_???
+    species:       tarutaru
+    type:          [notorious, battlefield]
+    skill_list_id: 1145
+    attributes:
+      combat:
+        skill:    hand_to_hand
+        delay:    480
+        dmg_mult: 110
+      jobs: [mnk, none]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  2
+          head:  4096
+          body:  8209
+          hands: 12288
+          legs:  16384
+          feet:  20480
+          main:  25074
+          sub:   29170
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 27000
+
+  Bisan:
+    id:            422
+    species:       beetle
+    type:          [notorious, battlefield]
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1350
+
+  Bonesetter_Medokvok:
+    id:            6866
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 20
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1050
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Bruteborn_Krushkosh:
+    id:            6863
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Chest_OPlenty:
+    id:            6868
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [blm, drk]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 967
+        entity_flags:  4227
+        animation_sub:    4
+        name_vis:       100
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chlevnik:
+    id:            723
+    species:       behemoth
+    type:          [notorious, battlefield]
+    spell_list_id: 126
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 210
+      jobs: [drk, thf]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags:  155
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      1
+        hitbox:         45
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 60000
+
+  Coffer_OPlenty:
+    id:            6869
+    species:       mimic
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [blm, drk]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 966
+        entity_flags:  4227
+        animation_sub:    4
+        name_vis:       100
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Compound_Eyes:
+    id:            773
+    species:       hecteye
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+        mp: 1400
+
+  Cottontail:
+    id:            804
+    species:       rabbit
+    type:          [battlefield]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+
+  Cottontail_2:
+    id:            804
+    display_name:  Cottontail
+    species:       rabbit
+    type:          [battlefield]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Crackshot_Zwogchog:
+    id:            6867
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: katana
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Darokbok_of_Clan_Reaper:
+    id:            919
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 629
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3950
+
+  Derakbak_of_Clan_Wolf:
+    id:            1002
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 713
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 612
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3990
+
+  Dragonian_Berzerker:
+    id:            1100
+    species:       dragon
+    type:          [notorious, battlefield]
+    skill_list_id: 2072
+    attributes:
+      combat:
+        skill: staff
+        delay: 210
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 129
+        hitbox:        28
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8250
+
+  Dragonian_Minstrel:
+    id:            1101
+    species:       dragon
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 2073
+    attributes:
+      combat:
+        skill: staff
+        delay: 210
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 129
+        hitbox:        28
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8250
+
+  Dragzaggs_Wyvern:
+    id:            6865
+    species:       blue_wyvern
+    type:          [called, battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 139
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Dread_Dragon:
+    id:            1116
+    species:       dragon
+    type:          [notorious, battlefield]
+    skill_list_id: 2069
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 131
+        model_size:     1
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Evil_Oscar:
+    id:            1265
+    species:       morbol
+    type:          [notorious, battlefield]
+    skill_list_id: 1157
+    attributes:
+      combat:
+        skill: scythe
+        delay: 260
+      resists:
+        immune_status: [stun, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13000
+
+  Fighting_Sheep:
+    id:            1337
+    species:       sheep
+    type:          [notorious, battlefield]
+    skill_list_id: 702
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 340
+        entity_flags:  133
+        animation_sub:  16
+        model_size:      2
+        hitbox:         27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5400
+
+  Gerjis:
+    id:            1500
+    species:       tiger
+    type:          [notorious, battlefield]
+    skill_list_id: 497
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        36
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5200
+
+  Helltail_Harry:
+    id:            1923
+    species:       rabbit
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 270
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3700
+        mp: 3700
+
+  Helltail_Harry_2:
+    id:            1923
+    display_name:  Helltail_Harry
+    species:       rabbit
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 270
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Houndfly:
+    id:            1993
+    species:       fly
+    type:          [battlefield]
+    skill_list_id: 374
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 1665
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 800
+
+  Huntfly:
+    id:            2011
+    species:       fly
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 997
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 1671
+        model_size:      3
+        hitbox:         20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1750
+        mp: 1500
+
+  Invulnerable_Mazzgozz:
+    id:            2086
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 612
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4750
+        mp: 4750
+
+  Invulnerable_Mazzgozz_2:
+    id:            2086
+    display_name:  Invulnerable_Mazzgozz
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 4
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 612
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Jagidbod_of_Clan_Reaper:
+    id:            2126
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 613
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3675
+
+  Keeneyed_Aufwuf:
+    id:            2202
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 628
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4700
+        mp: 4700
+
+  Keeneyed_Aufwuf_2:
+    id:            2202
+    display_name:  Keeneyed_Aufwuf
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 628
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Longarmed_Gottditt:
+    id:            2436
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 624
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6300
+
+  Longarmed_Gottditt_2:
+    id:            2436
+    display_name:  Longarmed_Gottditt
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 624
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Maat_blm:
+    id:            4836
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: staff
+        delay: 480
+      jobs: [blm, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1800
+        mp: 3000
+
+  Maat_rng:
+    id:            4837
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: archery
+        delay: 480
+      jobs: [rng, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+
+  Maat_war:
+    id:            4835
+    display_name:  Maat
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 335
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 480
+      jobs: [war, none]
+      render:
+        look:
+          type:  standard
+          model: 762
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3650
+
+  Malodorous_Mort:
+    id:            6861
+    species:       funguar
+    type:          [notorious, battlefield]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Minds-eyed_Klugwug:
+    id:            2670
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 613
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5200
+
+  Minds-eyed_Klugwug_2:
+    id:            2670
+    display_name:  Minds-eyed_Klugwug
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 613
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mortobello:
+    id:            6862
+    species:       funguar
+    type:          [battlefield]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Orcish_Onager:
+    id:            3026
+    species:       orcish_warmachine
+    type:          [notorious, battlefield]
+    spell_list_id: 71
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: scythe
+        delay: 210
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 428
+        entity_flags:  3
+        model_size:    1
+        hitbox:       25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Orcs_Wyvern_SW:
+    id:            8168
+    display_name:  Orcs_Wyvern
+    species:       blue_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 750
+
+  Pilwiz:
+    id:            3136
+    species:       beetle
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 409
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1450
+        mp: 3000
+
+  Reaper_Clan_Warmachine:
+    id:            3341
+    species:       orcish_warmachine
+    type:          [notorious, battlefield]
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 428
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2030
+
+  Sniper_Pugil:
+    id:            3681
+    species:       pugil
+    type:          [battlefield]
+    skill_list_id: 2088
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 135
+        model_size:     3
+        hitbox:        39
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 750
+
+  Sobbing_Eyes:
+    id:            3693
+    species:       hecteye
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 492
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+        mp: 2500
+
+  Spotter:
+    id:            3740
+    species:       ahriman
+    type:          [notorious, battlefield]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags: 131
+        model_size:     1
+        hitbox:        55
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Undefeatable_Sappdapp:
+    id:            4097
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 5
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 615
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4300
+        mp: 4300
+
+  Undefeatable_Sappdapp_2:
+    id:            4097
+    display_name:  Undefeatable_Sappdapp
+    species:       orc
+    type:          [notorious, battlefield]
+    spell_list_id: 5
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 615
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Wolf_Clan_Warmachine:
+    id:            4358
+    species:       orcish_warmachine
+    type:          [notorious, battlefield]
+    skill_list_id: 190
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 428
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2030
+
+  Wyvernkin_Dragzagg:
+    id:            6864
+    species:       orc
+    type:          [notorious, battlefield]
+    skill_list_id: 189
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1048
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17346561:
+    template: Dread_Dragon
+    at:       [-396.000, 94.000, -64.000, 45]
+    level:    [25, 25]
+  17346562:
+    template: Spotter
+    at:       [-400.000, 94.000, -64.000, 45]
+    level:    [23, 23]
+  17346563:
+    template: Dread_Dragon
+    at:       [-156.065, -26.009, 115.970, 45]
+    level:    [25, 25]
+  17346564:
+    template: Spotter
+    at:       [-160.065, -26.009, 115.970, 45]
+    level:    [23, 23]
+  17346565:
+    template: Dread_Dragon
+    at:       [83.928, -146.026, 295.804, 45]
+    level:    [25, 25]
+  17346566:
+    template: Spotter
+    at:       [79.928, -146.026, 295.804, 45]
+    level:    [23, 23]
+  17346567:
+    template: Darokbok_of_Clan_Reaper
+    at:       [-395.090, 94.751, -66.691, 45]
+    level:    [68, 68]
+  17346568:
+    template: Jagidbod_of_Clan_Reaper
+    at:       [-392.669, 94.910, -63.111, 45]
+    level:    [68, 68]
+  17346569:
+    template: Derakbak_of_Clan_Wolf
+    at:       [-399.629, 94.910, -66.259, 45]
+    level:    [68, 68]
+  17346570:
+    template: Reaper_Clan_Warmachine
+    at:       [-395.314, 94.813, -59.798, 45]
+    level:    [68, 68]
+  17346571:
+    template: Wolf_Clan_Warmachine
+    at:       [-400.811, 94.859, -64.510, 45]
+    level:    [68, 68]
+  17346572:
+    template: Orcs_Wyvern_SW
+    script:   Orcs_Wyvern
+    at:       [-398.337, 94.763, -65.268, 45]
+    level:    [63, 63]
+  17346573:
+    template: Darokbok_of_Clan_Reaper
+    at:       [-155.155, -25.258, 113.279, 45]
+    level:    [68, 68]
+  17346574:
+    template: Jagidbod_of_Clan_Reaper
+    at:       [-152.734, -25.099, 116.859, 45]
+    level:    [68, 68]
+  17346575:
+    template: Derakbak_of_Clan_Wolf
+    at:       [-159.694, -25.099, 113.711, 45]
+    level:    [68, 68]
+  17346576:
+    template: Reaper_Clan_Warmachine
+    at:       [-155.379, -25.196, 120.172, 45]
+    level:    [68, 68]
+  17346577:
+    template: Wolf_Clan_Warmachine
+    at:       [-160.876, -25.150, 115.460, 45]
+    level:    [68, 68]
+  17346578:
+    template: Orcs_Wyvern_SW
+    script:   Orcs_Wyvern
+    at:       [-158.402, -25.246, 114.702, 45]
+    level:    [63, 63]
+  17346579:
+    template: Darokbok_of_Clan_Reaper
+    at:       [84.838, -145.275, 293.113, 45]
+    level:    [68, 68]
+  17346580:
+    template: Jagidbod_of_Clan_Reaper
+    at:       [87.259, -145.116, 296.693, 45]
+    level:    [68, 68]
+  17346581:
+    template: Derakbak_of_Clan_Wolf
+    at:       [80.299, -145.116, 293.545, 45]
+    level:    [68, 68]
+  17346582:
+    template: Reaper_Clan_Warmachine
+    at:       [84.614, -145.213, 300.006, 45]
+    level:    [68, 68]
+  17346583:
+    template: Wolf_Clan_Warmachine
+    at:       [79.117, -145.167, 295.294, 45]
+    level:    [68, 68]
+  17346584:
+    template: Orcs_Wyvern_SW
+    script:   Orcs_Wyvern
+    at:       [81.591, -145.263, 294.536, 45]
+    level:    [63, 63]
+  17346585:
+    template: Maat_war
+    at:       [-396.160, 94.712, -64.398, 46]
+    level:    [70, 70]
+  17346586:
+    template: Maat_war
+    at:       [-156.151, -25.297, 115.648, 46]
+    level:    [70, 70]
+  17346587:
+    template: Maat_war
+    at:       [83.884, -145.294, 295.658, 46]
+    level:    [70, 70]
+  17346588:
+    template: Maat_blm
+    at:       [-396.160, 94.712, -64.398, 46]
+    level:    [70, 70]
+  17346589:
+    template: Maat_blm
+    at:       [-156.151, -25.297, 115.648, 46]
+    level:    [70, 70]
+  17346590:
+    template: Maat_blm
+    at:       [83.884, -145.294, 295.658, 46]
+    level:    [70, 70]
+  17346591:
+    template: Maat_rng
+    at:       [-396.160, 94.712, -64.398, 46]
+    level:    [70, 70]
+  17346592:
+    template: Maat_rng
+    at:       [-156.151, -25.297, 115.648, 46]
+    level:    [70, 70]
+  17346593:
+    template: Maat_rng
+    at:       [83.884, -145.294, 295.658, 46]
+    level:    [70, 70]
+  17346594:
+    template: Sniper_Pugil
+    at:       [-396.000, 94.000, -64.000, 50]
+    level:    [21, 21]
+  17346595:
+    template: Archer_Pugil
+    at:       [-401.000, 94.000, -66.000, 40]
+    level:    [19, 19]
+  17346596:
+    template: Archer_Pugil
+    at:       [-391.000, 94.000, -62.000, 40]
+    level:    [19, 19]
+  17346598:
+    template: Sniper_Pugil
+    at:       [-156.065, -26.009, 115.970, 50]
+    level:    [21, 21]
+  17346599:
+    template: Archer_Pugil
+    at:       [-161.065, -26.009, 113.970, 40]
+    level:    [19, 19]
+  17346600:
+    template: Archer_Pugil
+    at:       [-151.065, -26.009, 117.970, 40]
+    level:    [19, 19]
+  17346602:
+    template: Sniper_Pugil
+    at:       [83.928, -146.026, 295.804, 50]
+    level:    [21, 21]
+  17346603:
+    template: Archer_Pugil
+    at:       [78.928, -146.026, 293.804, 40]
+    level:    [19, 19]
+  17346604:
+    template: Archer_Pugil
+    at:       [88.928, -146.026, 297.804, 40]
+    level:    [19, 19]
+  17346606:
+    template: Pilwiz
+    at:       [-399.723, 94.409, -65.810, 46]
+    level:    [32, 32]
+  17346607:
+    template: Bisan
+    at:       [-392.683, 94.409, -62.733, 46]
+    level:    [31, 31]
+  17346609:
+    template: Pilwiz
+    at:       [-160.065, -26.009, 116.970, 46]
+    level:    [32, 32]
+  17346610:
+    template: Bisan
+    at:       [-153.025, -26.009, 120.047, 46]
+    level:    [31, 31]
+  17346612:
+    template: Pilwiz
+    at:       [79.928, -146.026, 296.804, 46]
+    level:    [32, 32]
+  17346613:
+    template: Bisan
+    at:       [86.968, -146.026, 299.881, 46]
+    level:    [31, 31]
+  17346615:
+    template: Huntfly
+    at:       [-398.269, 94.613, -59.508, 46]
+    level:    [34, 34]
+  17346616:
+    template: Houndfly
+    at:       [-396.148, 94.704, -64.359, 46]
+    level:    [25, 26]
+  17346617:
+    template: Houndfly
+    at:       [-401.457, 94.658, -64.489, 46]
+    level:    [25, 26]
+  17346618:
+    template: Houndfly
+    at:       [-391.870, 94.814, -61.719, 46]
+    level:    [25, 26]
+  17346619:
+    template: Houndfly
+    at:       [-392.469, 94.179, -57.448, 46]
+    level:    [25, 26]
+  17346620:
+    template: Houndfly
+    at:       [-403.571, 94.109, -62.314, 46]
+    level:    [25, 26]
+  17346621:
+    template: Houndfly
+    at:       [-403.095, 94.331, -57.774, 46]
+    level:    [25, 26]
+  17346622:
+    template: Houndfly
+    at:       [-396.065, 94.331, -55.089, 46]
+    level:    [25, 26]
+  17346623:
+    template: Houndfly
+    at:       [-400.299, 94.275, -54.814, 46]
+    level:    [25, 26]
+  17346625:
+    template: Huntfly
+    at:       [-158.334, -25.396, 120.462, 46]
+    level:    [34, 34]
+  17346626:
+    template: Houndfly
+    at:       [-156.213, -25.305, 115.611, 46]
+    level:    [25, 26]
+  17346627:
+    template: Houndfly
+    at:       [-161.522, -25.351, 115.481, 46]
+    level:    [25, 26]
+  17346628:
+    template: Houndfly
+    at:       [-151.935, -25.195, 118.251, 46]
+    level:    [25, 26]
+  17346629:
+    template: Houndfly
+    at:       [-152.534, -25.830, 122.522, 46]
+    level:    [25, 26]
+  17346630:
+    template: Houndfly
+    at:       [-163.636, -25.900, 117.656, 46]
+    level:    [25, 26]
+  17346631:
+    template: Houndfly
+    at:       [-163.160, -25.678, 122.196, 46]
+    level:    [25, 26]
+  17346632:
+    template: Houndfly
+    at:       [-156.130, -25.678, 124.881, 46]
+    level:    [25, 26]
+  17346633:
+    template: Houndfly
+    at:       [-160.364, -25.734, 125.156, 46]
+    level:    [25, 26]
+  17346635:
+    template: Huntfly
+    at:       [81.659, -145.413, 300.296, 46]
+    level:    [34, 34]
+  17346636:
+    template: Houndfly
+    at:       [83.780, -145.322, 295.445, 46]
+    level:    [25, 26]
+  17346637:
+    template: Houndfly
+    at:       [78.471, -145.368, 295.315, 46]
+    level:    [25, 26]
+  17346638:
+    template: Houndfly
+    at:       [88.058, -145.212, 298.085, 46]
+    level:    [25, 26]
+  17346639:
+    template: Houndfly
+    at:       [87.459, -145.847, 302.356, 46]
+    level:    [25, 26]
+  17346640:
+    template: Houndfly
+    at:       [76.357, -145.917, 297.490, 46]
+    level:    [25, 26]
+  17346641:
+    template: Houndfly
+    at:       [76.833, -145.695, 302.030, 46]
+    level:    [25, 26]
+  17346642:
+    template: Houndfly
+    at:       [83.863, -145.695, 304.715, 46]
+    level:    [25, 26]
+  17346643:
+    template: Houndfly
+    at:       [79.629, -145.751, 304.990, 46]
+    level:    [25, 26]
+  17346645:
+    template: Helltail_Harry
+    at:       [-396.160, 94.211, -64.398, 46]
+    level:    [45, 45]
+  17346646:
+    template: Cottontail
+    at:       [-396.648, 94.313, -69.333, 46]
+    level:    [38, 39]
+  17346647:
+    template: Cottontail
+    at:       [-400.053, 94.313, -67.914, 46]
+    level:    [38, 39]
+  17346648:
+    template: Cottontail
+    at:       [-401.294, 94.297, -63.655, 46]
+    level:    [38, 39]
+  17346649:
+    template: Cottontail
+    at:       [-398.279, 94.313, -59.757, 46]
+    level:    [38, 39]
+  17346650:
+    template: Cottontail
+    at:       [-393.598, 94.219, -59.757, 46]
+    level:    [38, 39]
+  17346651:
+    template: Cottontail
+    at:       [-391.329, 94.388, -63.943, 46]
+    level:    [38, 39]
+  17346652:
+    template: Cottontail
+    at:       [-392.747, 94.171, -68.553, 46]
+    level:    [38, 39]
+  17346654:
+    template: Helltail_Harry
+    at:       [-156.132, -25.788, 115.587, 46]
+    level:    [45, 45]
+  17346655:
+    template: Cottontail
+    at:       [-156.483, -25.850, 110.200, 46]
+    level:    [38, 39]
+  17346656:
+    template: Cottontail
+    at:       [-160.277, -25.814, 111.791, 46]
+    level:    [38, 39]
+  17346657:
+    template: Cottontail
+    at:       [-161.272, -25.686, 116.222, 46]
+    level:    [38, 39]
+  17346658:
+    template: Cottontail
+    at:       [-158.255, -25.686, 120.166, 46]
+    level:    [38, 39]
+  17346659:
+    template: Cottontail
+    at:       [-153.574, -25.748, 120.166, 46]
+    level:    [38, 39]
+  17346660:
+    template: Cottontail
+    at:       [-151.236, -25.594, 116.305, 46]
+    level:    [38, 39]
+  17346661:
+    template: Cottontail
+    at:       [-152.555, -25.773, 111.782, 46]
+    level:    [38, 39]
+  17346663:
+    template: Helltail_Harry
+    at:       [83.928, -146.026, 295.804, 46]
+    level:    [45, 45]
+  17346664:
+    template: Cottontail
+    at:       [83.528, -146.026, 290.804, 46]
+    level:    [38, 39]
+  17346665:
+    template: Cottontail
+    at:       [80.128, -146.026, 292.304, 46]
+    level:    [38, 39]
+  17346666:
+    template: Cottontail
+    at:       [79.028, -146.026, 296.804, 46]
+    level:    [38, 39]
+  17346667:
+    template: Cottontail
+    at:       [82.028, -146.026, 301.704, 46]
+    level:    [38, 39]
+  17346668:
+    template: Cottontail
+    at:       [87.028, -146.026, 301.704, 46]
+    level:    [38, 39]
+  17346669:
+    template: Cottontail
+    at:       [85.008, -146.026, 297.116, 46]
+    level:    [38, 39]
+  17346670:
+    template: Cottontail
+    at:       [83.728, -146.026, 293.616, 46]
+    level:    [38, 39]
+  17346672:
+    template: Sobbing_Eyes
+    at:       [-396.159, 94.773, -64.397, 46]
+    level:    [42, 42]
+  17346673:
+    template: Compound_Eyes
+    at:       [-391.159, 94.773, -62.397, 46]
+    level:    [39, 39]
+  17346674:
+    template: Compound_Eyes
+    at:       [-401.159, 94.773, -66.397, 46]
+    level:    [39, 39]
+  17346676:
+    template: Sobbing_Eyes
+    at:       [-156.132, -25.788, 115.587, 46]
+    level:    [42, 42]
+  17346677:
+    template: Compound_Eyes
+    at:       [-160.832, -25.590, 113.587, 46]
+    level:    [39, 39]
+  17346678:
+    template: Compound_Eyes
+    at:       [-151.432, -25.590, 117.587, 46]
+    level:    [39, 39]
+  17346680:
+    template: Sobbing_Eyes
+    at:       [83.769, -145.253, 295.407, 46]
+    level:    [42, 42]
+  17346681:
+    template: Compound_Eyes
+    at:       [88.769, -145.253, 297.407, 46]
+    level:    [39, 39]
+  17346682:
+    template: Compound_Eyes
+    at:       [78.769, -145.253, 293.407, 46]
+    level:    [39, 39]
+  17346684:
+    template: Fighting_Sheep
+    at:       [-396.159, 94.773, -64.397, 46]
+    level:    [53, 53]
+  17346685:
+    template: Fighting_Sheep
+    at:       [-391.159, 94.773, -62.397, 46]
+    level:    [53, 53]
+  17346686:
+    template: Fighting_Sheep
+    at:       [-401.159, 94.773, -66.397, 46]
+    level:    [53, 53]
+  17346688:
+    template: Fighting_Sheep
+    at:       [-156.224, -25.236, 115.573, 46]
+    level:    [53, 53]
+  17346689:
+    template: Fighting_Sheep
+    at:       [-151.224, -25.236, 117.573, 46]
+    level:    [53, 53]
+  17346690:
+    template: Fighting_Sheep
+    at:       [-161.224, -25.236, 113.573, 46]
+    level:    [53, 53]
+  17346692:
+    template: Fighting_Sheep
+    at:       [83.769, -145.253, 295.407, 46]
+    level:    [53, 53]
+  17346693:
+    template: Fighting_Sheep
+    at:       [88.769, -145.253, 297.407, 46]
+    level:    [53, 53]
+  17346694:
+    template: Fighting_Sheep
+    at:       [78.769, -145.253, 293.407, 46]
+    level:    [53, 53]
+  17346696:
+    template: Armsmaster_Dekbuk
+    at:       [-395.100, 94.251, -66.500, 46]
+    level:    [62, 64]
+  17346697:
+    template: Longarmed_Gottditt
+    at:       [-398.100, 94.313, -68.000, 46]
+    level:    [62, 64]
+  17346698:
+    template: Keeneyed_Aufwuf
+    at:       [-400.000, 94.313, -63.500, 46]
+    level:    [62, 64]
+  17346699:
+    template: Invulnerable_Mazzgozz
+    at:       [-392.200, 94.313, -65.349, 46]
+    level:    [62, 64]
+  17346700:
+    template: Undefeatable_Sappdapp
+    at:       [-397.100, 94.305, -62.000, 46]
+    level:    [62, 64]
+  17346701:
+    template: Minds-eyed_Klugwug
+    at:       [-394.100, 94.313, -60.849, 46]
+    level:    [62, 64]
+  17346703:
+    template: Armsmaster_Dekbuk
+    at:       [-155.165, -25.758, 113.470, 46]
+    level:    [62, 64]
+  17346704:
+    template: Longarmed_Gottditt
+    at:       [-158.165, -25.696, 111.970, 46]
+    level:    [62, 64]
+  17346705:
+    template: Keeneyed_Aufwuf
+    at:       [-160.065, -25.696, 116.470, 46]
+    level:    [62, 64]
+  17346706:
+    template: Invulnerable_Mazzgozz
+    at:       [-152.265, -25.696, 114.621, 46]
+    level:    [62, 64]
+  17346707:
+    template: Undefeatable_Sappdapp
+    at:       [-157.165, -25.704, 117.970, 46]
+    level:    [62, 64]
+  17346708:
+    template: Minds-eyed_Klugwug
+    at:       [-154.165, -25.696, 119.121, 46]
+    level:    [62, 64]
+  17346710:
+    template: Armsmaster_Dekbuk
+    at:       [84.828, -145.775, 293.304, 46]
+    level:    [62, 64]
+  17346711:
+    template: Longarmed_Gottditt
+    at:       [81.828, -145.713, 291.804, 46]
+    level:    [62, 64]
+  17346712:
+    template: Keeneyed_Aufwuf
+    at:       [79.928, -145.713, 296.304, 46]
+    level:    [62, 64]
+  17346713:
+    template: Invulnerable_Mazzgozz
+    at:       [87.728, -145.713, 294.455, 46]
+    level:    [62, 64]
+  17346714:
+    template: Undefeatable_Sappdapp
+    at:       [82.828, -145.721, 297.804, 46]
+    level:    [62, 64]
+  17346715:
+    template: Minds-eyed_Klugwug
+    at:       [85.828, -145.713, 298.955, 46]
+    level:    [62, 64]
+  17346717:
+    template: Chlevnik
+    at:       [-396.153, 94.703, -64.349, 46]
+    level:    [80, 80]
+  17346719:
+    template: Chlevnik
+    at:       [-156.218, -25.306, 115.621, 46]
+    level:    [80, 80]
+  17346721:
+    template: Chlevnik
+    at:       [83.775, -145.323, 295.455, 46]
+    level:    [80, 80]
+  17346723:
+    template: Gerjis
+    at:       [-396.153, 94.703, -64.349, 46]
+    level:    [54, 54]
+  17346725:
+    template: Gerjis
+    at:       [-156.218, -25.306, 115.621, 46]
+    level:    [54, 54]
+  17346727:
+    template: Gerjis
+    at:       [83.834, -145.788, 295.622, 46]
+    level:    [54, 54]
+  17346729:
+    template: Orcish_Onager
+    at:       [-396.153, 94.703, -64.349, 46]
+    level:    [66, 66]
+  17346731:
+    template: Orcish_Onager
+    at:       [-156.218, -25.306, 115.621, 46]
+    level:    [66, 66]
+  17346733:
+    template: Orcish_Onager
+    at:       [83.834, -145.788, 295.622, 46]
+    level:    [66, 66]
+  17346735:
+    template: Dragonian_Berzerker
+    at:       [-402.000, 94.000, -63.000, 52]
+    level:    [75, 75]
+  17346736:
+    template: Dragonian_Minstrel
+    at:       [-393.000, 94.000, -60.000, 52]
+    level:    [75, 75]
+  17346738:
+    template: Dragonian_Berzerker
+    at:       [-162.065, -26.009, 116.970, 52]
+    level:    [75, 75]
+  17346739:
+    template: Dragonian_Minstrel
+    at:       [-153.065, -26.009, 119.970, 52]
+    level:    [75, 75]
+  17346741:
+    template: Dragonian_Berzerker
+    at:       [77.928, -146.026, 296.804, 52]
+    level:    [75, 75]
+  17346742:
+    template: Dragonian_Minstrel
+    at:       [86.928, -146.026, 299.804, 52]
+    level:    [75, 75]
+  17346744:
+    template: Aries
+    at:       [-396.153, 94.703, -64.349, 46]
+    level:    [79, 79]
+  17346746:
+    template: Aries
+    at:       [-156.218, -25.306, 115.621, 46]
+    level:    [79, 79]
+  17346748:
+    template: Aries
+    at:       [83.834, -145.788, 295.622, 46]
+    level:    [79, 79]
+  17346750:
+    template: Evil_Oscar
+    at:       [-396.153, 94.703, -64.349, 46]
+    level:    [80, 80]
+  17346752:
+    template: Evil_Oscar
+    at:       [-156.065, -26.009, 116.970, 46]
+    level:    [80, 80]
+  17346754:
+    template: Evil_Oscar
+    at:       [83.928, -146.026, 296.804, 46]
+    level:    [80, 80]
+  17346756:
+    template: Malodorous_Mort
+    at:       [-392.919, 93.530, -74.950, 116]
+  17346757:
+    template: Mortobello
+    at:       [-391.600, 93.438, -75.312, 128]
+  17346758:
+    template: Mortobello
+    at:       [-393.135, 93.586, -72.176, 75]
+  17346759:
+    template: Mortobello
+    at:       [-390.242, 93.455, -75.077, 125]
+  17346761:
+    template: Malodorous_Mort
+    at:       [-152.984, -26.479, 105.020, 116]
+  17346762:
+    template: Mortobello
+    at:       [-151.665, -26.571, 104.658, 128]
+  17346763:
+    template: Mortobello
+    at:       [-153.200, -26.423, 107.794, 75]
+  17346764:
+    template: Mortobello
+    at:       [-150.307, -26.554, 104.893, 125]
+  17346766:
+    template: Malodorous_Mort
+    at:       [87.009, -146.496, 284.854, 116]
+  17346767:
+    template: Mortobello
+    at:       [88.328, -146.588, 284.492, 128]
+  17346768:
+    template: Mortobello
+    at:       [86.793, -146.440, 287.628, 75]
+  17346769:
+    template: Mortobello
+    at:       [89.686, -146.571, 284.727, 125]
+  17346771:
+    template: Bruteborn_Krushkosh
+    at:       [-396.377, 93.831, -73.362, 197]
+  17346772:
+    template: Wyvernkin_Dragzagg
+    at:       [-391.896, 94.152, -65.539, 248]
+  17346773:
+    template: Dragzaggs_Wyvern
+    at:       [-392.920, 93.880, -72.265, 144]
+  17346774:
+    template: Bonesetter_Medokvok
+    at:       [-398.674, 94.009, -73.110, 91]
+  17346775:
+    template: Crackshot_Zwogchog
+    at:       [-392.160, 94.386, -64.091, 202]
+  17346777:
+    template: Bruteborn_Krushkosh
+    at:       [-156.442, -26.178, 106.608, 197]
+  17346778:
+    template: Wyvernkin_Dragzagg
+    at:       [-151.961, -25.857, 114.431, 248]
+  17346779:
+    template: Dragzaggs_Wyvern
+    at:       [-152.985, -26.129, 107.705, 144]
+  17346780:
+    template: Bonesetter_Medokvok
+    at:       [-158.739, -26.000, 106.860, 91]
+  17346781:
+    template: Crackshot_Zwogchog
+    at:       [-152.225, -25.623, 115.879, 202]
+  17346783:
+    template: Bruteborn_Krushkosh
+    at:       [83.551, -146.195, 286.442, 197]
+  17346784:
+    template: Wyvernkin_Dragzagg
+    at:       [88.032, -145.874, 294.265, 248]
+  17346785:
+    template: Dragzaggs_Wyvern
+    at:       [87.008, -146.146, 287.539, 144]
+  17346786:
+    template: Bonesetter_Medokvok
+    at:       [81.254, -146.017, 286.694, 91]
+  17346787:
+    template: Crackshot_Zwogchog
+    at:       [87.768, -145.640, 295.713, 202]
+  17346789:
+    template: Atori-Tutori_qm
+    at:       [-396.000, 94.000, -64.000, 45]
+    level:    [102, 102]
+  17346790:
+    template: Atori-Tutori_qm
+    at:       [-156.065, -26.009, 115.970, 45]
+    level:    [102, 102]
+  17346791:
+    template: Atori-Tutori_qm
+    at:       [83.928, -146.026, 295.804, 45]
+    level:    [102, 102]
+  17346792:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [-386.761, 92.430, -82.835, 6]
+  17346793:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-388.058, 92.854, -81.748, 157]
+  17346794:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-388.409, 93.010, -81.281, 45]
+  17346795:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-386.956, 92.236, -84.141, 44]
+  17346796:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-387.242, 92.506, -82.779, 175]
+  17346797:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-387.779, 92.288, -83.981, 101]
+  17346798:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-386.749, 92.351, -83.174, 189]
+  17346799:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-387.043, 93.509, -77.385, 120]
+  17346801:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [-389.008, 93.268, -80.265, 150]
+  17346802:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-388.019, 92.924, -81.430, 67]
+  17346803:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-388.871, 92.771, -82.441, 190]
+  17346804:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-387.681, 92.993, -80.931, 157]
+  17346805:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-386.123, 92.222, -83.411, 144]
+  17346806:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-389.327, 93.503, -78.898, 33]
+  17346807:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-388.661, 92.910, -81.831, 127]
+  17346808:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-388.741, 92.798, -82.293, 179]
+  17346810:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [-383.907, 93.045, -86.079, 52]
+  17346811:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-388.207, 93.748, -90.840, 186]
+  17346812:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-386.577, 93.663, -92.114, 246]
+  17346813:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-385.112, 93.698, -91.862, 239]
+  17346814:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-386.852, 93.633, -90.068, 167]
+  17346815:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-386.341, 93.818, -91.646, 244]
+  17346816:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-388.701, 93.654, -90.826, 192]
+  17346817:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-386.133, 93.586, -90.431, 160]
+  17346819:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+  17346820:
+    template: Cottontail_2
+    script:   Cottontail
+  17346821:
+    template: Cottontail_2
+    script:   Cottontail
+  17346822:
+    template: Cottontail_2
+    script:   Cottontail
+  17346823:
+    template: Cottontail_2
+    script:   Cottontail
+  17346824:
+    template: Cottontail_2
+    script:   Cottontail
+  17346825:
+    template: Cottontail_2
+    script:   Cottontail
+  17346826:
+    template: Cottontail_2
+    script:   Cottontail
+  17346828:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+  17346829:
+    template: Cottontail_2
+    script:   Cottontail
+  17346830:
+    template: Cottontail_2
+    script:   Cottontail
+  17346831:
+    template: Cottontail_2
+    script:   Cottontail
+  17346832:
+    template: Cottontail_2
+    script:   Cottontail
+  17346833:
+    template: Cottontail_2
+    script:   Cottontail
+  17346834:
+    template: Cottontail_2
+    script:   Cottontail
+  17346835:
+    template: Cottontail_2
+    script:   Cottontail
+  17346837:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [-147.040, -25.964, 90.242, 6]
+  17346838:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-144.758, -25.680, 92.520, 157]
+  17346839:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-146.112, -25.951, 89.632, 45]
+  17346840:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-144.716, -25.975, 89.013, 44]
+  17346841:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-146.430, -25.848, 91.569, 175]
+  17346842:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-144.917, -25.654, 92.830, 101]
+  17346843:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-145.280, -25.778, 92.584, 189]
+  17346844:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-146.618, -25.838, 91.909, 120]
+  17346846:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [-149.073, -26.741, 99.705, 150]
+  17346847:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-148.084, -27.085, 98.540, 67]
+  17346848:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-148.936, -27.238, 97.529, 190]
+  17346849:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-147.746, -27.016, 99.039, 157]
+  17346850:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-146.188, -27.787, 96.559, 144]
+  17346851:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-149.392, -26.506, 101.072, 33]
+  17346852:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-148.726, -27.099, 98.139, 127]
+  17346853:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-148.806, -27.211, 97.677, 179]
+  17346855:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [-143.972, -26.964, 93.891, 52]
+  17346856:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-148.272, -26.261, 89.130, 186]
+  17346857:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-146.642, -26.346, 87.856, 246]
+  17346858:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-145.177, -26.311, 88.108, 239]
+  17346859:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-146.917, -26.376, 89.902, 167]
+  17346860:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-146.406, -26.191, 88.324, 244]
+  17346861:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-148.766, -26.355, 89.144, 192]
+  17346862:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [-146.198, -26.423, 89.539, 160]
+  17346864:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+  17346865:
+    template: Cottontail_2
+    script:   Cottontail
+  17346866:
+    template: Cottontail_2
+    script:   Cottontail
+  17346867:
+    template: Cottontail_2
+    script:   Cottontail
+  17346868:
+    template: Cottontail_2
+    script:   Cottontail
+  17346869:
+    template: Cottontail_2
+    script:   Cottontail
+  17346870:
+    template: Cottontail_2
+    script:   Cottontail
+  17346871:
+    template: Cottontail_2
+    script:   Cottontail
+  17346873:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+  17346874:
+    template: Cottontail_2
+    script:   Cottontail
+  17346875:
+    template: Cottontail_2
+    script:   Cottontail
+  17346876:
+    template: Cottontail_2
+    script:   Cottontail
+  17346877:
+    template: Cottontail_2
+    script:   Cottontail
+  17346878:
+    template: Cottontail_2
+    script:   Cottontail
+  17346879:
+    template: Cottontail_2
+    script:   Cottontail
+  17346880:
+    template: Cottontail_2
+    script:   Cottontail
+  17346882:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [93.167, -147.596, 276.969, 6]
+  17346883:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [91.870, -147.172, 278.056, 157]
+  17346884:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [91.519, -147.016, 278.523, 45]
+  17346885:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [92.972, -147.790, 275.663, 44]
+  17346886:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [92.686, -147.520, 277.025, 175]
+  17346887:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [92.149, -147.738, 275.823, 101]
+  17346888:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [93.179, -147.675, 276.630, 189]
+  17346889:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [92.885, -146.517, 282.419, 120]
+  17346891:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [90.920, -146.758, 279.539, 150]
+  17346892:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [91.909, -147.102, 278.374, 67]
+  17346893:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [91.057, -147.255, 277.363, 190]
+  17346894:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [92.247, -147.033, 278.873, 157]
+  17346895:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [93.805, -147.804, 276.393, 144]
+  17346896:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [90.601, -146.523, 280.906, 33]
+  17346897:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [91.267, -147.116, 277.973, 127]
+  17346898:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [91.187, -147.228, 277.511, 179]
+  17346900:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+    at:       [96.021, -146.981, 273.725, 52]
+  17346901:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [91.721, -146.278, 268.964, 186]
+  17346902:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [93.351, -146.363, 267.690, 246]
+  17346903:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [94.816, -146.328, 267.942, 239]
+  17346904:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [93.076, -146.393, 269.736, 167]
+  17346905:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [93.587, -146.208, 268.158, 244]
+  17346906:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [91.227, -146.372, 268.978, 192]
+  17346907:
+    template: Cottontail_2
+    script:   Cottontail
+    at:       [93.795, -146.440, 269.373, 160]
+  17346909:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+  17346910:
+    template: Cottontail_2
+    script:   Cottontail
+  17346911:
+    template: Cottontail_2
+    script:   Cottontail
+  17346912:
+    template: Cottontail_2
+    script:   Cottontail
+  17346913:
+    template: Cottontail_2
+    script:   Cottontail
+  17346914:
+    template: Cottontail_2
+    script:   Cottontail
+  17346915:
+    template: Cottontail_2
+    script:   Cottontail
+  17346916:
+    template: Cottontail_2
+    script:   Cottontail
+  17346918:
+    template: Helltail_Harry_2
+    script:   Helltail_Harry
+  17346919:
+    template: Cottontail_2
+    script:   Cottontail
+  17346920:
+    template: Cottontail_2
+    script:   Cottontail
+  17346921:
+    template: Cottontail_2
+    script:   Cottontail
+  17346922:
+    template: Cottontail_2
+    script:   Cottontail
+  17346923:
+    template: Cottontail_2
+    script:   Cottontail
+  17346924:
+    template: Cottontail_2
+    script:   Cottontail
+  17346925:
+    template: Cottontail_2
+    script:   Cottontail
+  17346927:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-400.255, 93.766, -54.213, 248]
+  17346928:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-400.132, 94.164, -60.734, 238]
+  17346929:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-403.917, 93.926, -69.208, 135]
+  17346930:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-399.955, 93.811, -57.928, 23]
+  17346931:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-405.592, 93.817, -71.357, 174]
+  17346932:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-399.811, 93.973, -59.247, 8]
+  17346934:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-394.154, 94.247, -63.212, 7]
+  17346935:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-392.890, 94.248, -60.898, 35]
+  17346936:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-400.129, 94.385, -64.792, 152]
+  17346937:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-394.159, 94.029, -60.257, 252]
+  17346938:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-393.704, 94.452, -62.032, 20]
+  17346939:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-391.034, 94.319, -64.803, 184]
+  17346941:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-394.381, 94.211, -64.687, 44]
+  17346942:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-396.019, 94.211, -64.405, 12]
+  17346943:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-400.000, 94.313, -63.500, 42]
+  17346944:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-395.995, 94.211, -63.886, 218]
+  17346945:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-397.100, 94.305, -62.000, 148]
+  17346946:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-394.100, 94.313, -60.849, 80]
+  17346948:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-397.447, 94.138, -68.536, 107]
+  17346949:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-402.652, 94.652, -65.953, 142]
+  17346950:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-400.079, 94.386, -64.795, 41]
+  17346951:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-397.094, 94.313, -67.299, 1]
+  17346952:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-396.445, 94.271, -64.414, 19]
+  17346953:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-391.930, 94.324, -64.778, 68]
+  17346955:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-393.718, 93.917, -68.982, 174]
+  17346956:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-394.631, 94.551, -69.683, 188]
+  17346957:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-398.431, 94.257, -64.420, 20]
+  17346958:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-391.893, 94.042, -68.432, 152]
+  17346959:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-396.907, 94.211, -63.386, 39]
+  17346960:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-392.031, 94.409, -63.419, 96]
+  17346962:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-155.100, -25.748, 113.500, 248]
+  17346963:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-158.100, -25.686, 112.000, 238]
+  17346964:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-156.448, -26.095, 109.064, 135]
+  17346965:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-152.567, -25.686, 112.685, 23]
+  17346966:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-150.419, -26.429, 101.045, 174]
+  17346967:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-152.442, -25.945, 111.073, 8]
+  17346969:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-156.350, -25.487, 115.509, 7]
+  17346970:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-154.016, -25.747, 119.939, 35]
+  17346971:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-160.021, -25.597, 115.101, 152]
+  17346972:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-156.314, -25.788, 113.947, 252]
+  17346973:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-150.969, -25.701, 115.452, 20]
+  17346974:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-152.659, -25.575, 117.846, 184]
+  17346976:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-153.534, -25.910, 110.602, 44]
+  17346977:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-155.228, -25.686, 110.613, 12]
+  17346978:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-159.936, -25.609, 115.202, 42]
+  17346979:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-152.125, -25.686, 113.955, 218]
+  17346980:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-154.899, -25.744, 115.792, 148]
+  17346981:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-154.100, -25.686, 119.151, 80]
+  17346983:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-157.512, -25.871, 111.434, 107]
+  17346984:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-162.717, -25.357, 114.017, 142]
+  17346985:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-160.144, -25.623, 115.175, 41]
+  17346986:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-157.159, -25.696, 112.671, 1]
+  17346987:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-156.510, -25.738, 115.556, 19]
+  17346988:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-151.995, -25.685, 115.192, 68]
+  17346990:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [-153.783, -26.092, 110.988, 174]
+  17346991:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [-154.696, -25.458, 110.287, 188]
+  17346992:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [-158.496, -25.752, 115.550, 20]
+  17346993:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [-151.958, -25.967, 111.538, 152]
+  17346994:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [-156.972, -25.798, 116.584, 39]
+  17346995:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [-152.096, -25.600, 116.551, 96]
+  17346997:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [79.673, -146.260, 305.591, 248]
+  17346998:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [79.796, -145.862, 299.070, 238]
+  17346999:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [76.011, -146.100, 290.596, 135]
+  17347000:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [79.973, -146.215, 301.876, 23]
+  17347001:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [74.336, -146.209, 288.447, 174]
+  17347002:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [80.117, -146.053, 300.557, 8]
+  17347004:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [85.774, -145.779, 296.592, 7]
+  17347005:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [87.038, -145.778, 298.906, 35]
+  17347006:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [79.799, -145.641, 295.012, 152]
+  17347007:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [85.769, -145.997, 299.547, 252]
+  17347008:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [86.224, -145.574, 297.772, 20]
+  17347009:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [88.894, -145.707, 295.001, 184]
+  17347011:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [85.547, -145.815, 295.117, 44]
+  17347012:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [83.909, -145.815, 295.399, 12]
+  17347013:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [79.928, -145.713, 296.304, 42]
+  17347014:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [83.933, -145.815, 295.918, 218]
+  17347015:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [82.828, -145.721, 297.804, 148]
+  17347016:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [85.828, -145.713, 298.955, 80]
+  17347018:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [82.481, -145.888, 291.268, 107]
+  17347019:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [77.276, -145.374, 293.851, 142]
+  17347020:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [79.849, -145.640, 295.009, 41]
+  17347021:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [82.834, -145.713, 292.505, 1]
+  17347022:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [83.483, -145.755, 295.390, 19]
+  17347023:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [87.998, -145.702, 295.026, 68]
+  17347025:
+    template: Armsmaster_Dekbuk_2
+    script:   Armsmaster_Dekbuk
+    at:       [86.210, -146.109, 290.822, 174]
+  17347026:
+    template: Longarmed_Gottditt_2
+    script:   Longarmed_Gottditt
+    at:       [85.297, -145.475, 290.121, 188]
+  17347027:
+    template: Keeneyed_Aufwuf_2
+    script:   Keeneyed_Aufwuf
+    at:       [81.497, -145.769, 295.384, 20]
+  17347028:
+    template: Invulnerable_Mazzgozz_2
+    script:   Invulnerable_Mazzgozz
+    at:       [88.035, -145.984, 291.372, 152]
+  17347029:
+    template: Undefeatable_Sappdapp_2
+    script:   Undefeatable_Sappdapp
+    at:       [83.021, -145.815, 296.418, 39]
+  17347030:
+    template: Minds-eyed_Klugwug_2
+    script:   Minds-eyed_Klugwug
+    at:       [87.897, -145.617, 296.385, 96]
+  17347032:
+    script: Bahamute
+  17347033:
+    script: Bahamute
+  17347034:
+    script: Bahamute
+  17347035:
+    template: Chest_OPlenty
+    at:       [-400.500, 93.744, -71.000, 46]
+    level:    [99, 99]
+  17347036:
+    template: Chest_OPlenty
+    at:       [-397.500, 94.210, -69.500, 46]
+    level:    [99, 99]
+  17347037:
+    template: Chest_OPlenty
+    at:       [-394.500, 94.313, -68.000, 46]
+    level:    [99, 99]
+  17347038:
+    template: Chest_OPlenty
+    at:       [-391.500, 94.313, -66.500, 46]
+    level:    [99, 99]
+  17347039:
+    template: Chest_OPlenty
+    at:       [-388.500, 93.750, -65.000, 46]
+    level:    [99, 99]
+  17347040:
+    template: Chest_OPlenty
+    at:       [-403.799, 93.696, -63.799, 46]
+    level:    [99, 99]
+  17347041:
+    template: Chest_OPlenty
+    at:       [-400.799, 94.313, -62.299, 46]
+    level:    [99, 99]
+  17347042:
+    template: Chest_OPlenty
+    at:       [-397.799, 94.313, -60.799, 46]
+    level:    [99, 99]
+  17347043:
+    template: Chest_OPlenty
+    at:       [-394.799, 94.236, -59.299, 46]
+    level:    [99, 99]
+  17347044:
+    template: Chest_OPlenty
+    at:       [-391.799, 93.679, -57.799, 46]
+    level:    [99, 99]
+  17347046:
+    template: Chest_OPlenty
+    at:       [-160.500, -26.255, 109.000, 46]
+    level:    [99, 99]
+  17347047:
+    template: Chest_OPlenty
+    at:       [-157.500, -25.789, 110.500, 46]
+    level:    [99, 99]
+  17347048:
+    template: Chest_OPlenty
+    at:       [-154.500, -25.686, 112.000, 46]
+    level:    [99, 99]
+  17347049:
+    template: Chest_OPlenty
+    at:       [-151.500, -25.686, 113.500, 46]
+    level:    [99, 99]
+  17347050:
+    template: Chest_OPlenty
+    at:       [-148.500, -26.249, 115.000, 46]
+    level:    [99, 99]
+  17347051:
+    template: Chest_OPlenty
+    at:       [-163.800, -26.316, 116.500, 46]
+    level:    [99, 99]
+  17347052:
+    template: Chest_OPlenty
+    at:       [-160.800, -25.733, 118.000, 46]
+    level:    [99, 99]
+  17347053:
+    template: Chest_OPlenty
+    at:       [-157.800, -25.686, 119.500, 46]
+    level:    [99, 99]
+  17347054:
+    template: Chest_OPlenty
+    at:       [-154.800, -25.880, 121.000, 46]
+    level:    [99, 99]
+  17347055:
+    template: Chest_OPlenty
+    at:       [-151.800, -26.329, 122.500, 46]
+    level:    [99, 99]
+  17347057:
+    template: Chest_OPlenty
+    at:       [79.428, -146.282, 288.804, 46]
+    level:    [99, 99]
+  17347058:
+    template: Chest_OPlenty
+    at:       [82.428, -145.816, 290.304, 46]
+    level:    [99, 99]
+  17347059:
+    template: Chest_OPlenty
+    at:       [85.428, -145.713, 291.804, 46]
+    level:    [99, 99]
+  17347060:
+    template: Chest_OPlenty
+    at:       [88.428, -145.713, 293.304, 46]
+    level:    [99, 99]
+  17347061:
+    template: Chest_OPlenty
+    at:       [91.428, -146.276, 294.804, 46]
+    level:    [99, 99]
+  17347062:
+    template: Chest_OPlenty
+    at:       [76.129, -146.330, 296.005, 46]
+    level:    [99, 99]
+  17347063:
+    template: Chest_OPlenty
+    at:       [79.129, -145.713, 297.505, 46]
+    level:    [99, 99]
+  17347064:
+    template: Chest_OPlenty
+    at:       [82.129, -145.713, 299.005, 46]
+    level:    [99, 99]
+  17347065:
+    template: Chest_OPlenty
+    at:       [85.129, -145.790, 300.505, 46]
+    level:    [99, 99]
+  17347066:
+    template: Chest_OPlenty
+    at:       [88.129, -146.347, 302.005, 46]
+    level:    [99, 99]
+  17347068:
+    template: Coffer_OPlenty
+    at:       [-400.500, 93.744, -71.000, 46]
+  17347069:
+    template: Coffer_OPlenty
+    at:       [-397.500, 94.210, -69.500, 46]
+  17347070:
+    template: Coffer_OPlenty
+    at:       [-394.500, 94.313, -68.000, 46]
+  17347071:
+    template: Coffer_OPlenty
+    at:       [-391.500, 94.313, -66.500, 46]
+  17347072:
+    template: Coffer_OPlenty
+    at:       [-388.500, 93.750, -65.000, 46]
+  17347073:
+    template: Coffer_OPlenty
+    at:       [-403.799, 93.696, -63.799, 46]
+  17347074:
+    template: Coffer_OPlenty
+    at:       [-400.799, 94.313, -62.299, 46]
+  17347075:
+    template: Coffer_OPlenty
+    at:       [-397.799, 94.313, -60.799, 46]
+  17347076:
+    template: Coffer_OPlenty
+    at:       [-394.799, 94.236, -59.299, 46]
+  17347077:
+    template: Coffer_OPlenty
+    at:       [-391.799, 93.679, -57.799, 46]
+  17347079:
+    template: Coffer_OPlenty
+    at:       [-160.500, -26.255, 109.000, 46]
+  17347080:
+    template: Coffer_OPlenty
+    at:       [-157.500, -25.789, 110.500, 46]
+  17347081:
+    template: Coffer_OPlenty
+    at:       [-154.500, -25.686, 112.000, 46]
+  17347082:
+    template: Coffer_OPlenty
+    at:       [-151.500, -25.686, 113.500, 46]
+  17347083:
+    template: Coffer_OPlenty
+    at:       [-148.500, -26.249, 115.000, 46]
+  17347084:
+    template: Coffer_OPlenty
+    at:       [-163.800, -26.316, 116.500, 46]
+  17347085:
+    template: Coffer_OPlenty
+    at:       [-160.800, -25.733, 118.000, 46]
+  17347086:
+    template: Coffer_OPlenty
+    at:       [-157.800, -25.686, 119.500, 46]
+  17347087:
+    template: Coffer_OPlenty
+    at:       [-154.800, -25.880, 121.000, 46]
+  17347088:
+    template: Coffer_OPlenty
+    at:       [-151.800, -26.329, 122.500, 46]
+  17347090:
+    template: Coffer_OPlenty
+    at:       [79.428, -146.282, 288.804, 46]
+  17347091:
+    template: Coffer_OPlenty
+    at:       [82.428, -145.816, 290.304, 46]
+  17347092:
+    template: Coffer_OPlenty
+    at:       [85.428, -145.713, 291.804, 46]
+  17347093:
+    template: Coffer_OPlenty
+    at:       [88.428, -145.713, 293.304, 46]
+  17347094:
+    template: Coffer_OPlenty
+    at:       [91.428, -146.276, 294.804, 46]
+  17347095:
+    template: Coffer_OPlenty
+    at:       [76.129, -146.330, 296.005, 46]
+  17347096:
+    template: Coffer_OPlenty
+    at:       [79.129, -145.713, 297.505, 46]
+  17347097:
+    template: Coffer_OPlenty
+    at:       [82.129, -145.713, 299.005, 46]
+  17347098:
+    template: Coffer_OPlenty
+    at:       [85.129, -145.790, 300.505, 46]
+  17347099:
+    template: Coffer_OPlenty
+    at:       [88.129, -146.347, 302.005, 46]
+  17347101:
+    script: Excenmille
+  17347102:
+    script: Excenmille
+  17347103:
+    script: Excenmille
+  17347104:
+    script: Excenmille
+  17347105:
+    script: Kupipi
+  17347106:
+    script: Naji
+  17347107:
+    script: Excenmille
+  17347108:
+    script: Kupipi
+  17347109:
+    script: Naji
+  17347110:
+    script: Excenmille
+  17347111:
+    script: Kupipi
+  17347112:
+    script: Naji

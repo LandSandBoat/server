@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  57
+  battle_party: 57
+
+zonelines:
+
+  z7i0:
+    from:  [-219.784, 6.327, 524.000]
+    to:    woh_gates
+    at:    [400.500, 27.856, 100.000, 3.141593]
+    scale: [1.000, 4.000]
+
+  z7i2:
+    from:  [527.531, 16.455, 418.559]
+    to:    moh_gates
+    at:    [-120.923, 37.348, -380.194, 6.021386]
+    scale: [1.000, 3.500]
+
+  z7i4:
+    from:  [-180.217, 26.996, -321.000]
+    to:    dho_gates
+    at:    [60.000, -32.100, 520.000, 1.570796]
+    scale: [1.000, 4.000]
+
+  z7i6:
+    from:  [419.000, 36.782, -286.000]
+    to:    sih_gates
+    at:    [-500.388, -41.805, -0.261, 1.308997]
+    scale: [1.000, 4.000]
+
+  z7i8:
+    from:  [207.632, 4.893, 217.938]
+    to:    yorcia_weald
+    at:    [240.000, 6.150, 59.500]
+    scale: [1.000, 4.000]

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z4t0:
+    from:  [459.979, -42.936, 156.973]
+    to:    zeruhn_mines
+    at:    [-270.707, 14.159, -20.268]
+    scale: [1.000, 3.000]
+
+  z4t2:
+    from:  [-500.000, -23.838, 4.001]
+    to:    eastern_altepa_desert
+    at:    [499.839, 5.391, -76.809, 4.712389]
+    scale: [1.000, 4.000]
+
+  z4t4:
+    from:  [-523.020, -33.357, 340.048]
+    to:    western_altepa_desert
+    at:    [676.280, 12.742, -99.425, 3.384405]
+    scale: [1.000, 4.000]

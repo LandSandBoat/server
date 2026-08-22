@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          141
+  night:        141
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z2n0:
+    from:  [320.010, -8.222, -48.071]
+    to:    windurst_waters_s
+    at:    [-39.996, -7.640, 235.000, 1.570796]
+    scale: [1.000, 6.000]
+
+  z2n2:
+    from:  [118.936, -27.623, 648.841]
+    to:    fort_karugo_narugo_s
+    at:    [-572.103, -7.774, -731.530, 5.759587]
+    scale: [1.000, 4.000]

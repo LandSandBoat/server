@@ -1,0 +1,4644 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+
+  Anautogenous_Slug:
+    id:            119
+    species:       leech
+    type:          [fished]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags:  3
+        model_size:    1
+        hitbox:       11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Awoken_Hrungnir:
+    id:            6103
+    species:       golem
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 2047
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 3600
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Aydeewa_Crab:
+    id:            306
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  3
+        model_size:    1
+        hitbox:       13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   chunk_of_rock_salt
+        - chance: uncommon
+          item:   slice_of_land_crab_meat
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Aydeewa_Diremite:
+    id:            307
+    species:       diremite
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   tuft_of_colorful_hair
+        - chance: uncommon
+          item:   spool_of_bloodthread
+        - chance: rare
+          item:   bottle_of_avatar_blood
+      steal: vial_of_fiend_blood
+      despoil:
+        bottle_of_avatar_blood: 0
+        spool_of_bloodthread:   0
+
+  Bluestreak_Gyugyuroon:
+    id:            477
+    species:       qiqirn
+    type:          [notorious]
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: axe
+        delay: 480
+      jobs: [rng, rng]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        flags: [standback]
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 12000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   qiqirn_collar
+        - chance: uncommon
+          item:   peacemaker
+      steal: qiqirn_sandbag
+
+  Cave_Mold:
+    id:            664
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Cave_Pugil:
+    id:            665
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags:  3
+        model_size:    1
+        hitbox:       27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   sack_of_silica
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Cave_Tiger:
+    id:            667
+    species:       tiger
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   black_tiger_fang
+        - chance: uncommon
+          item:   black_tiger_hide
+      despoil:
+        black_tiger_fang: 0
+        black_tiger_hide: 0
+
+  Chigre:
+    id:            717
+    species:       chigoe
+    type:          [notorious]
+    skill_list_id: 293
+    attributes:
+      combat:
+        skill: dagger
+        delay: 50
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1748
+        entity_flags:  645
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:          6
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   chigre
+        - chance: common
+          item:   insect_ring
+        - chance: common
+          item:   blood_ring
+
+  Crystal_Eater:
+    id:            858
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags:  3
+        model_size:    2
+        hitbox:       17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rapture_earring
+        - chance: uncommon
+          item:   brigands_mask
+      steal: sleepshroom
+
+  Defoliator:
+    id:            959
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 397
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   crawler_egg
+        - chance: uncommon
+          item:   piece_of_crawler_cocoon
+        - chance: rare
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Deforester:
+    id:            5333
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 397
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   crawler_egg
+        - chance: uncommon
+          item:   piece_of_crawler_cocoon
+        - chance: rare
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+    content: ABYSSEA
+
+  Fossorial_Flea:
+    id:            1411
+    species:       chigoe
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1747
+        entity_flags:  2691
+        animation_sub:    8
+        model_size:       1
+        hitbox:           6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_chimera_blood
+        - chance: very_rare
+          item:   vial_of_demon_blood
+
+  Great_Ameretat:
+    id:            1809
+    species:       morbol
+    skill_list_id: 2044
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 382
+        entity_flags:  645
+        animation_sub:  12
+        model_size:      2
+        hitbox:         36
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_jodys_acid
+        - chance: uncommon
+          item:   ameretat_vine
+        - chance: uncommon
+          item:   ameretat_vine
+        - chance: very_rare
+          item:   lacquer_tree_log
+
+  Lizardtrap:
+    id:            5188
+    species:       flytrap
+    type:          [notorious]
+    spell_list_id: 303
+    skill_list_id: 114
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [blm, blm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze, light_sleep, dark_sleep]
+        rank_element:
+          fire:  -3
+          ice:   -1
+          wind:   3
+          water:  3
+          light:  3
+          dark:  -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1345
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: rare
+          item:   fenrirs_crown
+    content: WOTG
+
+  Missabikong:
+    id:            6131
+    species:       marolith
+    type:          [notorious]
+    skill_list_id: 347
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    3
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        3
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 3609
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mold_Eater:
+    id:            2720
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   flint_stone
+        - chance: uncommon
+          item:   chunk_of_copper_ore
+        - chance: rare
+          item:   chunk_of_zinc_ore
+        - chance: very_rare
+          item:   chunk_of_silver_ore
+      steal: pebble
+      despoil:
+        chunk_of_copper_ore: 0
+        chunk_of_iron_ore:   0
+        chunk_of_silver_ore: 0
+        chunk_of_zinc_ore:   0
+
+  Morta:
+    id:            4668
+    species:       belladonna
+    type:          [notorious]
+    skill_list_id: 453
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -1
+          earth:    3
+          thunder:  1
+          light:    2
+        rank_status:
+          silence:     -1
+          slow:         3
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2091
+        entity_flags:  669
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         28
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Mycohopper:
+    id:            2782
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   woozyshroom
+        - chance: uncommon
+          item:   danceshroom
+        - chance: rare
+          item:   king_truffle
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Mycoskulker:
+    id:            5334
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   woozyshroom
+        - chance: uncommon
+          item:   danceshroom
+        - chance: very_rare
+          item:   king_truffle
+      steal: woozyshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+    content: ABYSSEA
+
+  Nosferatu:
+    id:            2910
+    species:       vampyr
+    type:          [notorious]
+    spell_list_id: 293
+    skill_list_id: 309
+    attributes:
+      combat:
+        skill: scythe
+        delay: 290
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1845
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 33000
+    loot:
+      drops:
+        - chance: always
+          item:   nosferatus_claw
+        - chance: very_common
+          item:   earth_grip
+        - chance: very_common
+          item:   wind_grip
+        - chance: always
+          one_of: [labrys, aurum_gauntlets, enkidus_leggings]
+        - chance: uncommon
+          one_of: [labrys, aurum_gauntlets, enkidus_leggings]
+
+  Nosferatu_Bats:
+    id:            2911
+    species:       flock_bat
+    type:          [notorious]
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  645
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      2
+        hitbox:         18
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Nosferatu_Murk:
+    id:            2912
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1871
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Nosferatu_Wolf:
+    id:            2913
+    species:       hound
+    type:          [notorious]
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 133
+        model_size:     2
+        hitbox:        28
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Pandemonium_Lamp:
+    id:            3089
+    species:       corpselight
+    type:          [notorious, called]
+    spell_list_id: 560
+    skill_list_id: 91
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, war]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1841
+        entity_flags: 649
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+
+  Pandemonium_Warden:
+    id:            3090
+    species:       dvergr
+    type:          [notorious]
+    spell_list_id: 560
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1840
+        entity_flags: 141
+        model_size:     2
+        hitbox:        35
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 147000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_mulcibars_scoria
+        - chance: rare
+          item:   chunk_of_mulcibars_scoria
+        - chance: always
+          item:   khimaira_mane
+        - chance: always
+          item:   cerberus_hide
+        - chance: always
+          item:   hydra_scale
+        - chance: very_common
+          item:   hydra_fang
+        - chance: very_common
+          item:   cerberus_claw
+        - chance: very_common
+          item:   khimaira_horn
+        - chance: very_common
+          item:   hachiryu_haramaki
+        - chance: very_common
+          item:   nanatsusayanotachi
+        - chance: very_common
+          item:   shenlongs_baghnakhs
+        - chance: very_common
+          item:   dorje
+
+  Pandemonium_Warden_2:
+    id:            7172
+    display_name:  Pandemonium_Warden
+    species:       warden
+    type:          [notorious]
+    spell_list_id: 560
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1840
+        entity_flags: 141
+        model_size:     2
+        hitbox:         7
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 147000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_mulcibars_scoria
+        - chance: rare
+          item:   chunk_of_mulcibars_scoria
+        - chance: always
+          item:   khimaira_mane
+        - chance: always
+          item:   cerberus_hide
+        - chance: always
+          item:   hydra_scale
+        - chance: very_common
+          item:   hydra_fang
+        - chance: very_common
+          item:   cerberus_claw
+        - chance: very_common
+          item:   khimaira_horn
+        - chance: very_common
+          item:   hachiryu_haramaki
+        - chance: very_common
+          item:   nanatsusayanotachi
+        - chance: very_common
+          item:   shenlongs_baghnakhs
+        - chance: very_common
+          item:   dorje
+
+  Pandemonium_Warden_3:
+    id:            7173
+    display_name:  Pandemonium_Warden
+    species:       warden
+    type:          [notorious]
+    spell_list_id: 560
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1840
+        entity_flags: 141
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 147000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_mulcibars_scoria
+        - chance: rare
+          item:   chunk_of_mulcibars_scoria
+        - chance: always
+          item:   khimaira_mane
+        - chance: always
+          item:   cerberus_hide
+        - chance: always
+          item:   hydra_scale
+        - chance: very_common
+          item:   hydra_fang
+        - chance: very_common
+          item:   cerberus_claw
+        - chance: very_common
+          item:   khimaira_horn
+        - chance: very_common
+          item:   hachiryu_haramaki
+        - chance: very_common
+          item:   nanatsusayanotachi
+        - chance: very_common
+          item:   shenlongs_baghnakhs
+        - chance: very_common
+          item:   dorje
+
+  Pandemonium_Warden_4:
+    id:            7174
+    display_name:  Pandemonium_Warden
+    species:       warden
+    type:          [notorious]
+    spell_list_id: 560
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1840
+        entity_flags: 141
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 147000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_mulcibars_scoria
+        - chance: rare
+          item:   chunk_of_mulcibars_scoria
+        - chance: always
+          item:   khimaira_mane
+        - chance: always
+          item:   cerberus_hide
+        - chance: always
+          item:   hydra_scale
+        - chance: very_common
+          item:   hydra_fang
+        - chance: very_common
+          item:   cerberus_claw
+        - chance: very_common
+          item:   khimaira_horn
+        - chance: very_common
+          item:   hachiryu_haramaki
+        - chance: very_common
+          item:   nanatsusayanotachi
+        - chance: very_common
+          item:   shenlongs_baghnakhs
+        - chance: very_common
+          item:   dorje
+
+  Pandemonium_Warden_5:
+    id:            7175
+    display_name:  Pandemonium_Warden
+    species:       warden
+    type:          [notorious]
+    spell_list_id: 560
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1840
+        entity_flags: 141
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 147000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_mulcibars_scoria
+        - chance: rare
+          item:   chunk_of_mulcibars_scoria
+        - chance: always
+          item:   khimaira_mane
+        - chance: always
+          item:   cerberus_hide
+        - chance: always
+          item:   hydra_scale
+        - chance: very_common
+          item:   hydra_fang
+        - chance: very_common
+          item:   cerberus_claw
+        - chance: very_common
+          item:   khimaira_horn
+        - chance: very_common
+          item:   hachiryu_haramaki
+        - chance: very_common
+          item:   nanatsusayanotachi
+        - chance: very_common
+          item:   shenlongs_baghnakhs
+        - chance: very_common
+          item:   dorje
+
+  Pandemonium_Warden_6:
+    id:            7176
+    display_name:  Pandemonium_Warden
+    species:       warden
+    type:          [notorious]
+    spell_list_id: 560
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1840
+        entity_flags: 141
+        model_size:     2
+        hitbox:        24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 147000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_mulcibars_scoria
+        - chance: rare
+          item:   chunk_of_mulcibars_scoria
+        - chance: always
+          item:   khimaira_mane
+        - chance: always
+          item:   cerberus_hide
+        - chance: always
+          item:   hydra_scale
+        - chance: very_common
+          item:   hydra_fang
+        - chance: very_common
+          item:   cerberus_claw
+        - chance: very_common
+          item:   khimaira_horn
+        - chance: very_common
+          item:   hachiryu_haramaki
+        - chance: very_common
+          item:   nanatsusayanotachi
+        - chance: very_common
+          item:   shenlongs_baghnakhs
+        - chance: very_common
+          item:   dorje
+
+  Pandemonium_Warden_7:
+    id:            7177
+    display_name:  Pandemonium_Warden
+    species:       warden
+    type:          [notorious]
+    spell_list_id: 560
+    skill_list_id: 316
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1840
+        entity_flags: 141
+        model_size:     2
+        hitbox:        45
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 147000
+    loot:
+      drops:
+        - chance: always
+          item:   chunk_of_mulcibars_scoria
+        - chance: rare
+          item:   chunk_of_mulcibars_scoria
+        - chance: always
+          item:   khimaira_mane
+        - chance: always
+          item:   cerberus_hide
+        - chance: always
+          item:   hydra_scale
+        - chance: very_common
+          item:   hydra_fang
+        - chance: very_common
+          item:   cerberus_claw
+        - chance: very_common
+          item:   khimaira_horn
+        - chance: very_common
+          item:   hachiryu_haramaki
+        - chance: very_common
+          item:   nanatsusayanotachi
+        - chance: very_common
+          item:   shenlongs_baghnakhs
+        - chance: very_common
+          item:   dorje
+
+  Phlebotomic_Slug:
+    id:            3131
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: rare
+          item:   vial_of_beastman_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Puktrap:
+    id:            3224
+    species:       flytrap
+    skill_list_id: 114
+    attributes:
+      combat:
+        skill: polearm
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -3
+          ice:   -1
+          wind:   3
+          water:  3
+          light:  3
+          dark:  -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1345
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   flytrap_leaf
+      despoil:
+        flytrap_leaf: 0
+
+  Qiqirn_Archaeologist:
+    id:            3245
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: axe
+        delay: 200
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      mob_mods:
+        hp_standback: 1
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   handful_of_almonds
+        - chance: very_rare
+          item:   pebble
+        - chance: very_rare
+          item:   qiqirn_sandbag
+        - chance: very_rare
+          item:   qiqirn_cape
+        - chance: super_rare
+          item:   jar_of_firesand
+        - chance: super_rare
+          item:   handful_of_iron_sand
+        - chance: ultra_rare
+          item:   bowl_of_nashmau_stew
+        - chance: ultra_rare
+          item:   sack_of_silica
+      steal: qiqirn_sandbag
+      despoil:
+        qiqirn_cape:    0
+        qiqirn_sandbag: 0
+
+  Qiqirn_Enterpriser:
+    id:            3252
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: axe
+        delay: 200
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      mob_mods:
+        hp_standback: 1
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   handful_of_almonds
+        - chance: very_rare
+          item:   pebble
+        - chance: very_rare
+          item:   qiqirn_sandbag
+        - chance: very_rare
+          item:   qiqirn_cape
+        - chance: super_rare
+          item:   jar_of_firesand
+        - chance: super_rare
+          item:   handful_of_iron_sand
+        - chance: ultra_rare
+          item:   bowl_of_nashmau_stew
+        - chance: ultra_rare
+          item:   sack_of_silica
+      steal: qiqirn_sandbag
+      despoil:
+        qiqirn_cape:    0
+        qiqirn_sandbag: 0
+
+  Qiqirn_Lieuter:
+    id:            3256
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   handful_of_almonds
+        - chance: very_rare
+          item:   pebble
+        - chance: very_rare
+          item:   qiqirn_sandbag
+        - chance: very_rare
+          item:   qiqirn_cape
+        - chance: super_rare
+          item:   jar_of_firesand
+        - chance: super_rare
+          item:   handful_of_iron_sand
+        - chance: ultra_rare
+          item:   bowl_of_nashmau_stew
+        - chance: ultra_rare
+          item:   sack_of_silica
+      steal: qiqirn_sandbag
+      despoil:
+        qiqirn_cape:    0
+        qiqirn_sandbag: 0
+
+  Qiqirn_Mine:
+    id:      3258
+    species: fortifications
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1790
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Mosstrooper:
+    id:            3261
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: very_common
+          item:   handful_of_almonds
+        - chance: very_rare
+          item:   pebble
+        - chance: very_rare
+          item:   qiqirn_sandbag
+        - chance: very_rare
+          item:   qiqirn_cape
+        - chance: super_rare
+          item:   jar_of_firesand
+        - chance: super_rare
+          item:   handful_of_iron_sand
+        - chance: ultra_rare
+          item:   bowl_of_nashmau_stew
+        - chance: ultra_rare
+          item:   sack_of_silica
+      steal: qiqirn_sandbag
+      despoil:
+        qiqirn_cape:    0
+        qiqirn_sandbag: 0
+
+  Ravishing_Rafflesia:
+    id:            5187
+    species:       rafflesia
+    type:          [notorious]
+    skill_list_id: 207
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -1
+          earth:    3
+          thunder:  1
+          light:    2
+        rank_status:
+          silence:     -1
+          slow:         3
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2024
+        entity_flags:  1157
+        animation_sub:    8
+        model_size:       2
+        hitbox:          20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Slime_Eater:
+    id:            5335
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   flint_stone
+        - chance: uncommon
+          item:   chunk_of_copper_ore
+        - chance: rare
+          item:   chunk_of_zinc_ore
+        - chance: very_rare
+          item:   chunk_of_silver_ore
+      steal: pebble
+      despoil:
+        chunk_of_copper_ore: 0
+        chunk_of_iron_ore:   0
+        chunk_of_silver_ore: 0
+        chunk_of_zinc_ore:   0
+    content: ABYSSEA
+
+  Slime_Mold:
+    id:            3670
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Treant_Sapling_AS_CM:
+    id:            6354
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   treant_bulb
+        - chance: rare
+          item:   bag_of_fruit_seeds
+        - chance: very_rare
+          item:   bag_of_grain_seeds
+      despoil:
+        bag_of_vegetable_seeds: 0
+        treant_bulb:            0
+        bag_of_wildgrass_seeds: 0
+
+spawns:
+  17055745:
+    template: Cave_Mold
+    at:       [1.000, 1.000, 1.000]
+    level:    [66, 69]
+  17055746:
+    template: Cave_Mold
+    at:       [1.000, 1.000, 1.000]
+    level:    [66, 69]
+  17055747:
+    template: Anautogenous_Slug
+    at:       [1.000, 1.000, 1.000]
+    level:    [66, 66]
+  17055748:
+    template: Cave_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [69, 69]
+  17055749:
+    template: Aydeewa_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [68, 70]
+  17055750:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [68.181, 15.864, 145.091, 32]
+    level:    [66, 68]
+  17055751:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [53.926, 32.985, 134.893, 41]
+    level:    [66, 68]
+  17055752:
+    template: Puktrap
+    at:       [62.047, 38.869, 107.405, 183]
+    level:    [67, 69]
+  17055753:
+    template: Puktrap
+    at:       [62.160, 38.872, 105.791, 65]
+    level:    [67, 69]
+  17055754:
+    template: Puktrap
+    at:       [110.160, 38.929, 60.792, 121]
+    level:    [67, 69]
+  17055755:
+    template: Puktrap
+    at:       [132.650, 38.875, 62.101, 94]
+    level:    [67, 69]
+  17055756:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [102.540, 39.141, 104.416, 114]
+    level:    [66, 68]
+  17055757:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [99.586, 39.244, 90.537, 57]
+    level:    [66, 68]
+  17055758:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [150.020, 39.062, 141.151, 129]
+    level:    [66, 68]
+  17055759:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [142.770, 39.111, 92.319, 204]
+    level:    [66, 68]
+  17055760:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [138.750, 35.187, 52.785, 148]
+    level:    [66, 68]
+  17055761:
+    template: Slime_Mold
+    at:       [181.650, 35.823, 51.443, 110]
+    level:    [67, 69]
+  17055762:
+    template: Slime_Mold
+    at:       [176.810, 35.866, 53.598, 32]
+    level:    [67, 69]
+  17055763:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [180.750, 38.585, 19.546, 45]
+    level:    [66, 68]
+  17055764:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [221.310, 39.140, 16.832, 128]
+    level:    [66, 68]
+  17055765:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [217.910, 38.922, 47.321, 186]
+    level:    [66, 68]
+  17055766:
+    template: Qiqirn_Enterpriser
+    at:       [19.208, 37.737, 25.702, 66]
+    level:    [68, 70]
+  17055767:
+    template: Qiqirn_Enterpriser
+    at:       [21.656, 38.541, 18.756, 51]
+    level:    [68, 70]
+  17055768:
+    template: Slime_Mold
+    at:       [53.564, 38.838, 16.317, 154]
+    level:    [67, 69]
+  17055769:
+    template: Slime_Mold
+    at:       [54.195, 39.338, 20.488, 152]
+    level:    [67, 69]
+  17055770:
+    template: Qiqirn_Enterpriser
+    at:       [59.887, 38.699, -18.794, 48]
+    level:    [68, 70]
+  17055771:
+    template: Qiqirn_Enterpriser
+    at:       [23.822, 36.014, 98.400, 120]
+    level:    [68, 70]
+  17055772:
+    template: Qiqirn_Lieuter
+    at:       [64.424, 36.001, 57.858, 46]
+    level:    [68, 70]
+  17055773:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055774:
+    template: Qiqirn_Enterpriser
+    at:       [67.132, 36.014, 57.394, 111]
+    level:    [68, 70]
+  17055775:
+    template: Qiqirn_Enterpriser
+    at:       [100.770, 35.525, 50.037, 94]
+    level:    [68, 70]
+  17055776:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [-13.930, 36.125, 60.972, 11]
+    level:    [66, 68]
+  17055777:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [-60.670, 36.185, 62.006, 124]
+    level:    [66, 68]
+  17055778:
+    template: Slime_Mold
+    at:       [-66.090, 35.923, 26.815, 146]
+    level:    [67, 69]
+  17055779:
+    template: Slime_Mold
+    at:       [-68.450, 36.180, 23.628, 85]
+    level:    [67, 69]
+  17055780:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [-16.800, 38.713, 15.485, 43]
+    level:    [66, 68]
+  17055781:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [-117.500, 36.330, 100.502, 135]
+    level:    [66, 68]
+  17055782:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [-103.300, 36.094, 69.271, 186]
+    level:    [66, 68]
+  17055783:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [-94.330, 18.579, 8.603, 120]
+    level:    [67, 68]
+  17055784:
+    template: Puktrap
+    at:       [-18.070, 38.869, -8.578, 198]
+    level:    [67, 69]
+  17055785:
+    template: Puktrap
+    at:       [-17.940, 38.869, -15.284, 159]
+    level:    [67, 69]
+  17055786:
+    template: Slime_Mold
+    at:       [13.392, 39.233, -17.853, 182]
+    level:    [67, 69]
+  17055787:
+    template: Slime_Mold
+    at:       [17.974, 38.925, -23.836, 146]
+    level:    [67, 69]
+  17055788:
+    template: Qiqirn_Enterpriser
+    at:       [20.642, 38.464, -58.175, 35]
+    level:    [68, 70]
+  17055789:
+    template: Qiqirn_Enterpriser
+    at:       [55.817, 36.019, -59.469, 5]
+    level:    [68, 70]
+  17055790:
+    template: Qiqirn_Enterpriser
+    at:       [25.240, 29.135, -92.989, 24]
+    level:    [68, 70]
+  17055791:
+    template: Qiqirn_Lieuter
+    at:       [98.102, 35.757, -70.143, 73]
+    level:    [68, 70]
+  17055792:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055793:
+    template: Qiqirn_Enterpriser
+    at:       [-181.400, 8.020, -0.277, 183]
+    level:    [69, 70]
+  17055794:
+    template: Qiqirn_Enterpriser
+    at:       [-181.200, 8.416, 83.588, 67]
+    level:    [68, 70]
+  17055795:
+    template: Qiqirn_Enterpriser
+    at:       [-180.100, 8.155, 108.055, 62]
+    level:    [68, 70]
+  17055796:
+    template: Qiqirn_Enterpriser
+    at:       [-226.500, 8.196, 141.757, 248]
+    level:    [68, 70]
+  17055797:
+    template: Qiqirn_Lieuter
+    at:       [-226.200, 8.124, 98.215, 128]
+    level:    [68, 70]
+  17055798:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055799:
+    template: Qiqirn_Enterpriser
+    at:       [-224.600, 13.859, 65.234, 228]
+    level:    [68, 70]
+  17055800:
+    template: Fossorial_Flea
+    at:       [-219.300, 34.891, 41.385, 198]
+    level:    [66, 68]
+  17055801:
+    template: Fossorial_Flea
+    at:       [-219.600, 35.757, 37.694, 74]
+    level:    [66, 68]
+  17055802:
+    template: Phlebotomic_Slug
+    at:       [-301.400, 19.561, 41.665, 63]
+    level:    [68, 70]
+  17055803:
+    template: Phlebotomic_Slug
+    at:       [-249.800, 28.694, -60.705, 134]
+    level:    [68, 70]
+  17055804:
+    template: Phlebotomic_Slug
+    at:       [-159.300, 20.375, -59.290, 238]
+    level:    [68, 70]
+  17055805:
+    template: Puktrap
+    at:       [201.040, 39.401, 133.093, 13]
+    level:    [67, 69]
+  17055806:
+    template: Defoliator
+    at:       [198.210, 39.376, 113.902, 18]
+    level:    [68, 70]
+  17055807:
+    template: Defoliator
+    at:       [211.770, 39.359, 124.747, 229]
+    level:    [68, 70]
+  17055808:
+    template: Puktrap
+    at:       [218.550, 38.842, 137.537, 39]
+    level:    [67, 69]
+  17055809:
+    template: Defoliator
+    at:       [227.500, 39.340, 129.304, 136]
+    level:    [68, 70]
+  17055810:
+    template: Puktrap
+    at:       [243.220, 39.347, 133.716, 114]
+    level:    [67, 69]
+  17055811:
+    template: Defoliator
+    at:       [231.110, 39.401, 113.486, 132]
+    level:    [68, 70]
+  17055812:
+    template: Defoliator
+    at:       [257.660, 39.127, 110.309, 135]
+    level:    [68, 70]
+  17055813:
+    template: Defoliator
+    at:       [235.140, 39.337, 91.606, 72]
+    level:    [68, 70]
+  17055814:
+    template: Puktrap
+    at:       [251.620, 39.382, 93.164, 230]
+    level:    [67, 69]
+  17055815:
+    template: Puktrap
+    at:       [234.070, 39.268, 78.097, 71]
+    level:    [67, 69]
+  17055816:
+    template: Defoliator
+    at:       [243.610, 39.159, 77.023, 23]
+    level:    [68, 70]
+  17055817:
+    template: Defoliator
+    at:       [243.980, 39.535, 67.534, 142]
+    level:    [68, 70]
+  17055818:
+    template: Air_Elemental
+    at:       [241.000, 39.356, 71.236, 121]
+    level:    [70, 70]
+  17055819:
+    template: Defoliator
+    at:       [283.460, 39.236, 50.717, 143]
+    level:    [68, 70]
+  17055820:
+    template: Defoliator
+    at:       [272.720, 39.152, 48.016, 215]
+    level:    [68, 70]
+  17055821:
+    template: Defoliator
+    at:       [265.630, 39.118, 32.517, 12]
+    level:    [68, 70]
+  17055822:
+    template: Defoliator
+    at:       [284.580, 39.347, 26.526, 49]
+    level:    [68, 70]
+  17055823:
+    template: Defoliator
+    at:       [138.000, 36.039, 3.224, 212]
+    level:    [70, 72]
+  17055824:
+    template: Defoliator
+    at:       [101.670, 36.189, -3.186, 93]
+    level:    [70, 72]
+  17055825:
+    template: Aydeewa_Diremite
+    at:       [113.700, 36.576, -25.395, 218]
+    level:    [70, 72]
+  17055826:
+    template: Defoliator
+    at:       [108.940, 36.595, -21.603, 76]
+    level:    [70, 72]
+  17055827:
+    template: Aydeewa_Diremite
+    at:       [119.490, 36.419, -10.442, 172]
+    level:    [70, 72]
+  17055828:
+    template: Defoliator
+    at:       [103.090, 36.269, -35.862, 89]
+    level:    [70, 72]
+  17055829:
+    template: Air_Elemental
+    at:       [115.000, 36.258, -39.025, 15]
+    level:    [70, 70]
+  17055830:
+    template: Defoliator
+    at:       [129.050, 36.675, -44.833, 206]
+    level:    [70, 72]
+  17055831:
+    template: Defoliator
+    at:       [136.670, 36.233, -49.991, 125]
+    level:    [70, 72]
+  17055832:
+    template: Aydeewa_Diremite
+    at:       [141.020, 36.706, -37.792, 218]
+    level:    [70, 72]
+  17055833:
+    template: Defoliator
+    at:       [160.840, 36.347, -51.243, 79]
+    level:    [70, 72]
+  17055834:
+    template: Aydeewa_Diremite
+    at:       [155.710, 36.286, -35.692, 35]
+    level:    [70, 72]
+  17055835:
+    template: Fossorial_Flea
+    at:       [150.430, 35.263, -24.593, 126]
+    level:    [66, 68]
+  17055836:
+    template: Fossorial_Flea
+    at:       [134.400, 34.501, -15.685, 50]
+    level:    [66, 68]
+  17055837:
+    template: Mycohopper
+    at:       [-148.700, 7.894, 51.200, 133]
+    level:    [68, 70]
+  17055838:
+    template: Mycohopper
+    at:       [-172.400, 8.239, 45.652, 113]
+    level:    [68, 70]
+  17055839:
+    template: Mycohopper
+    at:       [-151.300, 8.141, 32.699, 122]
+    level:    [68, 70]
+  17055840:
+    template: Mycohopper
+    at:       [-156.000, 8.123, 39.131, 167]
+    level:    [68, 70]
+  17055841:
+    template: Great_Ameretat
+    at:       [-186.900, 8.344, -31.576, 39]
+    level:    [73, 75]
+  17055842:
+    template: Fossorial_Flea
+    at:       [-203.200, 8.440, -30.218, 138]
+    level:    [66, 68]
+  17055843:
+    template: Fossorial_Flea
+    at:       [-195.600, 8.255, -23.392, 151]
+    level:    [66, 68]
+  17055844:
+    template: Fossorial_Flea
+    at:       [-187.200, 8.374, -37.125, 219]
+    level:    [66, 68]
+  17055845:
+    template: Fossorial_Flea
+    at:       [-187.600, 8.404, -36.257, 3]
+    level:    [66, 68]
+  17055846:
+    template: Fossorial_Flea
+    at:       [-188.900, 7.995, -48.921, 156]
+    level:    [66, 68]
+  17055847:
+    template: Fossorial_Flea
+    at:       [-206.100, 8.201, -45.587, 140]
+    level:    [66, 68]
+  17055848:
+    template: Fossorial_Flea
+    at:       [-200.000, 8.280, -52.028, 129]
+    level:    [66, 68]
+  17055849:
+    template: Fossorial_Flea
+    at:       [-195.800, 7.846, -83.607, 161]
+    level:    [66, 68]
+  17055850:
+    template: Fossorial_Flea
+    at:       [-198.600, 7.653, -75.067, 112]
+    level:    [66, 68]
+  17055851:
+    template: Fossorial_Flea
+    at:       [-211.100, 7.939, -87.998, 135]
+    level:    [66, 68]
+  17055852:
+    template: Fossorial_Flea
+    at:       [-211.700, 7.958, -87.654, 126]
+    level:    [66, 68]
+  17055853:
+    template: Great_Ameretat
+    at:       [-202.700, 8.086, -69.964, 72]
+    level:    [73, 75]
+  17055854:
+    template: Great_Ameretat
+    at:       [-128.500, 8.229, -148.030, 219]
+    level:    [73, 75]
+  17055855:
+    template: Defoliator
+    at:       [-118.100, 8.323, -153.970, 22]
+    level:    [71, 73]
+  17055856:
+    template: Defoliator
+    at:       [-72.810, 8.091, -149.360, 147]
+    level:    [71, 73]
+  17055857:
+    template: Defoliator
+    at:       [-85.480, 8.242, -158.360, 5]
+    level:    [71, 73]
+  17055858:
+    template: Air_Elemental
+    at:       [-89.580, 8.190, -148.690, 181]
+    level:    [70, 70]
+  17055859:
+    template: Great_Ameretat
+    at:       [-64.490, 7.977, -167.880, 242]
+    level:    [73, 75]
+  17055860:
+    template: Defoliator
+    at:       [-85.240, 8.414, -168.680, 104]
+    level:    [71, 73]
+  17055861:
+    template: Defoliator
+    at:       [-121.300, 8.140, -163.770, 167]
+    level:    [71, 73]
+  17055862:
+    template: Defoliator
+    at:       [-134.400, 8.292, -184.640, 123]
+    level:    [71, 73]
+  17055863:
+    template: Great_Ameretat
+    at:       [-117.600, 8.191, -196.150, 247]
+    level:    [73, 75]
+  17055864:
+    template: Defoliator
+    at:       [-115.700, 8.391, -211.760, 220]
+    level:    [71, 73]
+  17055865:
+    template: Defoliator
+    at:       [-107.200, 8.396, -194.090, 174]
+    level:    [71, 73]
+  17055866:
+    template: Fossorial_Flea
+    at:       [-95.300, 6.560, -173.220, 86]
+    level:    [66, 68]
+  17055867:
+    template: Fossorial_Flea
+    at:       [-105.200, 6.507, -177.280, 142]
+    level:    [66, 68]
+  17055868:
+    template: Deforester
+    at:       [-329.100, 8.214, 82.495, 114]
+    level:    [87, 89]
+  17055869:
+    template: Deforester
+    at:       [-324.600, 7.929, 85.526, 184]
+    level:    [87, 89]
+  17055870:
+    template: Deforester
+    at:       [-328.700, 8.212, 83.457, 113]
+    level:    [87, 89]
+  17055871:
+    template: Deforester
+    at:       [-324.900, 7.912, 89.552, 183]
+    level:    [87, 89]
+  17055872:
+    template: Deforester
+    at:       [-307.000, 8.727, 85.101, 111]
+    level:    [87, 89]
+  17055873:
+    template: Deforester
+    at:       [-304.600, 8.388, 90.559, 184]
+    level:    [87, 89]
+  17055874:
+    template: Deforester
+    at:       [-304.000, 8.390, 80.824, 255]
+    level:    [87, 89]
+  17055875:
+    template: Deforester
+    at:       [-290.300, 7.924, 96.012, 176]
+    level:    [87, 89]
+  17055876:
+    template: Deforester
+    at:       [-293.700, 8.628, 85.890, 38]
+    level:    [87, 89]
+  17055877:
+    template: Deforester
+    at:       [-285.300, 8.308, 88.176, 123]
+    level:    [87, 89]
+  17055878:
+    template: Deforester
+    at:       [-290.900, 8.242, 78.099, 71]
+    level:    [87, 89]
+  17055879:
+    template: Deforester
+    at:       [-274.400, 8.297, 67.212, 247]
+    level:    [87, 89]
+  17055880:
+    template: Deforester
+    at:       [-303.100, 8.316, 79.469, 184]
+    level:    [87, 89]
+  17055881:
+    template: Deforester
+    at:       [-282.700, 8.189, 81.379, 211]
+    level:    [87, 89]
+  17055882:
+    template: Qiqirn_Archaeologist
+    at:       [-500.700, 11.553, -194.340, 66]
+    level:    [73, 75]
+  17055883:
+    template: Qiqirn_Archaeologist
+    at:       [-500.600, 12.145, -189.670, 194]
+    level:    [73, 75]
+  17055884:
+    template: Fossorial_Flea
+    at:       [-502.600, 11.097, -222.000, 255]
+    level:    [66, 68]
+  17055885:
+    template: Fossorial_Flea
+    at:       [-518.300, 11.211, -220.470, 5]
+    level:    [66, 68]
+  17055886:
+    template: Fossorial_Flea
+    at:       [-503.900, 11.175, -220.380, 104]
+    level:    [66, 68]
+  17055887:
+    template: Fossorial_Flea
+    at:       [-478.400, 11.135, -222.500, 19]
+    level:    [66, 68]
+  17055888:
+    template: Fossorial_Flea
+    at:       [-480.900, 11.413, -220.410, 17]
+    level:    [66, 68]
+  17055889:
+    template: Qiqirn_Mosstrooper
+    at:       [-482.600, 11.163, -222.650, 81]
+    level:    [73, 75]
+  17055890:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055891:
+    template: Fossorial_Flea
+    at:       [-454.900, 11.133, -221.530, 255]
+    level:    [66, 68]
+  17055892:
+    template: Fossorial_Flea
+    at:       [-450.900, 10.968, -214.220, 151]
+    level:    [66, 68]
+  17055893:
+    template: Qiqirn_Archaeologist
+    at:       [-422.400, 10.626, -221.490, 231]
+    level:    [73, 75]
+  17055894:
+    template: Qiqirn_Archaeologist
+    at:       [-420.100, 8.429, -175.890, 129]
+    level:    [73, 75]
+  17055895:
+    template: Qiqirn_Mosstrooper
+    at:       [-420.200, 7.877, -193.190, 63]
+    level:    [73, 75]
+  17055896:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055897:
+    template: Qiqirn_Mosstrooper
+    at:       [-387.000, 7.883, -181.160, 9]
+    level:    [73, 75]
+  17055898:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055899:
+    template: Qiqirn_Archaeologist
+    at:       [-310.400, 10.928, -183.260, 18]
+    level:    [73, 75]
+  17055900:
+    template: Qiqirn_Archaeologist
+    at:       [-288.100, 25.163, -180.910, 40]
+    level:    [73, 75]
+  17055901:
+    template: Qiqirn_Mosstrooper
+    at:       [-378.800, 38.667, -99.126, 34]
+    level:    [73, 75]
+  17055902:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055903:
+    template: Fossorial_Flea
+    at:       [-351.900, 35.887, -99.128, 5]
+    level:    [66, 68]
+  17055904:
+    template: Fossorial_Flea
+    at:       [-379.500, 39.205, -75.607, 52]
+    level:    [66, 68]
+  17055905:
+    template: Fossorial_Flea
+    at:       [-396.400, 39.243, -59.695, 133]
+    level:    [66, 68]
+  17055906:
+    template: Fossorial_Flea
+    at:       [-380.600, 38.869, -63.277, 10]
+    level:    [66, 68]
+  17055907:
+    template: Qiqirn_Archaeologist
+    at:       [-457.700, 11.000, -224.260, 66]
+    level:    [73, 75]
+  17055908:
+    template: Mold_Eater
+    at:       [-454.500, 12.175, -260.690, 154]
+    level:    [69, 71]
+  17055909:
+    template: Mold_Eater
+    at:       [-456.300, 12.694, -263.440, 34]
+    level:    [69, 71]
+  17055910:
+    template: Mold_Eater
+    at:       [-456.400, 11.130, -254.770, 163]
+    level:    [69, 71]
+  17055911:
+    template: Slime_Mold
+    at:       [-427.700, 14.303, -257.310, 229]
+    level:    [68, 70]
+  17055912:
+    template: Slime_Mold
+    at:       [-419.900, 14.142, -262.540, 199]
+    level:    [68, 70]
+  17055913:
+    template: Fossorial_Flea
+    at:       [-422.700, 14.282, -259.980, 154]
+    level:    [66, 68]
+  17055914:
+    template: Qiqirn_Archaeologist
+    at:       [-421.700, 13.786, -288.710, 175]
+    level:    [73, 75]
+  17055915:
+    template: Mold_Eater
+    at:       [-357.300, 14.276, -338.670, 250]
+    level:    [69, 71]
+  17055916:
+    template: Qiqirn_Mosstrooper
+    at:       [-352.100, 14.251, -337.300, 243]
+    level:    [73, 75]
+  17055917:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055918:
+    template: Mold_Eater
+    at:       [-331.900, 14.123, -336.080]
+    level:    [69, 71]
+  17055919:
+    template: Mold_Eater
+    at:       [-340.500, 13.885, -365.240, 56]
+    level:    [69, 71]
+  17055920:
+    template: Mold_Eater
+    at:       [-313.000, 13.940, -338.430, 239]
+    level:    [69, 71]
+  17055921:
+    template: Mold_Eater
+    at:       [-308.600, 13.869, -340.190, 11]
+    level:    [69, 71]
+  17055922:
+    template: Qiqirn_Archaeologist
+    at:       [-307.100, 13.869, -348.790, 157]
+    level:    [73, 75]
+  17055923:
+    template: Mold_Eater
+    at:       [-294.700, 14.083, -380.610, 120]
+    level:    [69, 71]
+  17055924:
+    template: Mold_Eater
+    at:       [-297.500, 14.020, -381.390, 247]
+    level:    [69, 71]
+  17055925:
+    template: Qiqirn_Archaeologist
+    at:       [-301.000, 13.961, -408.940, 65]
+    level:    [73, 75]
+  17055926:
+    template: Mold_Eater
+    at:       [-300.700, 14.081, -405.090, 192]
+    level:    [69, 71]
+  17055927:
+    template: Mold_Eater
+    at:       [-300.500, 13.953, -408.680, 65]
+    level:    [69, 71]
+  17055928:
+    template: Qiqirn_Archaeologist
+    at:       [-262.100, 10.984, -341.290, 175]
+    level:    [73, 75]
+  17055929:
+    template: Mold_Eater
+    at:       [-270.900, 13.845, -384.050, 149]
+    level:    [69, 71]
+  17055930:
+    template: Mold_Eater
+    at:       [-263.300, 13.109, -388.440, 130]
+    level:    [69, 71]
+  17055931:
+    template: Qiqirn_Mosstrooper
+    at:       [-301.600, 16.195, -464.000, 183]
+    level:    [73, 75]
+  17055932:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055933:
+    template: Fossorial_Flea
+    at:       [-298.200, 16.431, -468.360, 11]
+    level:    [66, 68]
+  17055934:
+    template: Fossorial_Flea
+    at:       [-300.800, 15.993, -458.620, 78]
+    level:    [66, 68]
+  17055935:
+    template: Qiqirn_Archaeologist
+    at:       [-300.500, 15.935, -456.720, 201]
+    level:    [73, 75]
+  17055936:
+    template: Qiqirn_Archaeologist
+    at:       [-295.000, 10.829, -339.560, 41]
+    level:    [73, 75]
+  17055937:
+    template: Slime_Mold
+    at:       [-299.100, 10.824, -306.440, 21]
+    level:    [68, 70]
+  17055938:
+    template: Slime_Mold
+    at:       [-298.300, 10.946, -305.540, 47]
+    level:    [68, 70]
+  17055939:
+    template: Qiqirn_Archaeologist
+    at:       [-327.000, -6.276, -253.090, 201]
+    level:    [73, 75]
+  17055940:
+    template: Qiqirn_Archaeologist
+    at:       [-332.900, 10.703, -300.970, 17]
+    level:    [73, 75]
+  17055941:
+    template: Qiqirn_Archaeologist
+    at:       [-221.700, 13.762, -346.830, 175]
+    level:    [73, 75]
+  17055942:
+    template: Qiqirn_Archaeologist
+    at:       [-219.000, 14.003, -364.830, 176]
+    level:    [73, 75]
+  17055943:
+    template: Slime_Mold
+    at:       [-184.900, 11.100, -336.060, 92]
+    level:    [68, 70]
+  17055944:
+    template: Slime_Mold
+    at:       [-183.100, 11.208, -340.320, 117]
+    level:    [68, 70]
+  17055945:
+    template: Qiqirn_Mosstrooper
+    at:       [-140.200, 8.265, -319.870, 67]
+    level:    [73, 75]
+  17055946:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055947:
+    template: Qiqirn_Archaeologist
+    at:       [-140.400, 7.798, -314.940, 194]
+    level:    [73, 75]
+  17055948:
+    template: Puktrap
+    at:       [-173.200, 11.149, -299.130, 18]
+    level:    [69, 70]
+  17055949:
+    template: Puktrap
+    at:       [-196.700, 11.069, -297.070, 209]
+    level:    [69, 70]
+  17055950:
+    template: Qiqirn_Archaeologist
+    at:       [-197.300, 11.078, -297.220, 222]
+    level:    [73, 75]
+  17055951:
+    template: Puktrap
+    at:       [-220.200, 10.977, -302.490, 13]
+    level:    [69, 70]
+  17055952:
+    template: Qiqirn_Archaeologist
+    at:       [-222.300, 9.670, -277.440, 182]
+    level:    [73, 75]
+  17055953:
+    template: Fossorial_Flea
+    at:       [-153.500, 10.873, -302.350, 169]
+    level:    [66, 68]
+  17055954:
+    template: Fossorial_Flea
+    at:       [-147.600, 10.668, -295.790, 210]
+    level:    [66, 68]
+  17055955:
+    template: Qiqirn_Archaeologist
+    at:       [-140.400, 7.802, -317.070, 194]
+    level:    [73, 75]
+  17055956:
+    template: Qiqirn_Mosstrooper
+    at:       [-101.300, 8.242, -285.830, 200]
+    level:    [73, 75]
+  17055957:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055958:
+    template: Fossorial_Flea
+    at:       [-101.100, 7.871, -290.290, 158]
+    level:    [66, 68]
+  17055959:
+    template: Fossorial_Flea
+    at:       [-101.400, 8.603, -266.700, 91]
+    level:    [66, 68]
+  17055960:
+    template: Fossorial_Flea
+    at:       [-95.770, 8.376, -255.890, 199]
+    level:    [66, 68]
+  17055961:
+    template: Fossorial_Flea
+    at:       [-97.900, 8.608, -262.030, 87]
+    level:    [66, 68]
+  17055962:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [-190.100, 8.037, -141.360, 251]
+    level:    [67, 69]
+  17055963:
+    template: Slime_Mold
+    at:       [-172.600, 8.032, -179.720, 180]
+    level:    [68, 70]
+  17055964:
+    template: Slime_Mold
+    at:       [-186.000, 8.210, -176.940, 248]
+    level:    [68, 70]
+  17055965:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [-61.510, 11.465, -209.940, 80]
+    level:    [67, 68]
+  17055966:
+    template: Phlebotomic_Slug
+    at:       [-97.410, 18.308, -124.380, 215]
+    level:    [68, 70]
+  17055967:
+    template: Qiqirn_Archaeologist
+    at:       [-14.900, 36.131, -107.680, 199]
+    level:    [73, 75]
+  17055968:
+    template: Qiqirn_Mosstrooper
+    at:       [-19.610, 36.237, -59.925, 179]
+    level:    [73, 75]
+  17055969:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17055970:
+    template: Qiqirn_Archaeologist
+    at:       [-19.890, 36.221, -56.506, 75]
+    level:    [73, 75]
+  17055971:
+    template: Qiqirn_Archaeologist
+    at:       [-16.940, 36.118, -100.440, 181]
+    level:    [73, 75]
+  17055972:
+    template: Fossorial_Flea
+    at:       [-355.400, 36.187, -59.470]
+    level:    [66, 68]
+  17055973:
+    template: Fossorial_Flea
+    at:       [-356.900, 36.188, -59.430, 4]
+    level:    [66, 68]
+  17055974:
+    template: Slime_Mold
+    at:       [-380.300, 36.123, -30.382, 62]
+    level:    [68, 70]
+  17055975:
+    template: Slime_Mold
+    at:       [-381.000, 36.243, -19.972, 188]
+    level:    [68, 70]
+  17055976:
+    template: Mycohopper
+    at:       [-406.800, 14.138, -327.510, 204]
+    level:    [70, 71]
+  17055977:
+    template: Mycohopper
+    at:       [-412.900, 13.538, -333.390, 22]
+    level:    [70, 71]
+  17055978:
+    template: Mycohopper
+    at:       [-387.800, 14.085, -326.140, 210]
+    level:    [70, 71]
+  17055979:
+    template: Mycohopper
+    at:       [-384.800, 14.260, -314.780, 144]
+    level:    [70, 71]
+  17055980:
+    template: Mycohopper
+    at:       [-363.400, 8.116, -204.530, 241]
+    level:    [70, 71]
+  17055981:
+    template: Mycohopper
+    at:       [-373.800, 8.074, -206.830, 135]
+    level:    [70, 71]
+  17055982:
+    template: Mycohopper
+    at:       [-372.800, 8.059, -193.440, 20]
+    level:    [70, 71]
+  17055983:
+    template: Mycohopper
+    at:       [-351.800, 8.209, -191.890, 34]
+    level:    [70, 71]
+  17055984:
+    template: Aydeewa_Diremite
+    at:       [-323.200, 36.282, -136.460, 123]
+    level:    [72, 74]
+  17055985:
+    template: Aydeewa_Diremite
+    at:       [-313.700, 36.532, -114.480, 25]
+    level:    [72, 74]
+  17055986:
+    template: Aydeewa_Diremite
+    at:       [-322.500, 36.268, -111.050, 229]
+    level:    [72, 74]
+  17055987:
+    template: Cave_Tiger
+    at:       [-346.100, 14.131, -394.050, 3]
+    level:    [73, 75]
+  17055988:
+    template: Phlebotomic_Slug
+    at:       [-370.600, 14.704, -408.160, 131]
+    level:    [68, 70]
+  17055989:
+    template: Cave_Tiger
+    at:       [-347.500, 14.451, -421.820, 218]
+    level:    [73, 75]
+  17055990:
+    template: Phlebotomic_Slug
+    at:       [-372.200, 14.708, -428.530, 111]
+    level:    [68, 70]
+  17055991:
+    template: Fossorial_Flea
+    at:       [-364.900, 14.364, -434.900, 74]
+    level:    [66, 68]
+  17055992:
+    template: Fossorial_Flea
+    at:       [-407.600, 14.013, -426.340, 159]
+    level:    [66, 68]
+  17055993:
+    template: Fossorial_Flea
+    at:       [-400.400, 13.927, -434.720, 120]
+    level:    [66, 68]
+  17055994:
+    template: Cave_Tiger
+    at:       [-342.400, 14.359, -443.620, 65]
+    level:    [73, 75]
+  17055995:
+    template: Phlebotomic_Slug
+    at:       [-348.200, 14.347, -443.110, 85]
+    level:    [68, 70]
+  17055996:
+    template: Fossorial_Flea
+    at:       [-353.300, 14.430, -430.880, 151]
+    level:    [66, 68]
+  17055997:
+    template: Cave_Tiger
+    at:       [-370.700, 13.057, -456.220, 84]
+    level:    [73, 75]
+  17055998:
+    template: Phlebotomic_Slug
+    at:       [-368.800, 14.685, -453.410, 136]
+    level:    [68, 70]
+  17055999:
+    template: Fossorial_Flea
+    at:       [-405.200, 14.027, -456.550, 22]
+    level:    [66, 68]
+  17056000:
+    template: Fossorial_Flea
+    at:       [-389.800, 14.694, -449.640, 42]
+    level:    [66, 68]
+  17056001:
+    template: Cave_Tiger
+    at:       [-371.400, 12.543, -462.580, 82]
+    level:    [73, 75]
+  17056002:
+    template: Fossorial_Flea
+    at:       [-374.300, 12.623, -464.940, 165]
+    level:    [66, 68]
+  17056003:
+    template: Cave_Tiger
+    at:       [-356.300, 14.456, -456.690, 172]
+    level:    [73, 75]
+  17056004:
+    template: Cave_Tiger
+    at:       [-370.900, 14.395, -482.620, 140]
+    level:    [73, 75]
+  17056005:
+    template: Fossorial_Flea
+    at:       [-364.100, 14.402, -482.620, 108]
+    level:    [66, 68]
+  17056006:
+    template: Fossorial_Flea
+    at:       [-363.200, 14.345, -492.420, 147]
+    level:    [66, 68]
+  17056007:
+    template: Cave_Tiger
+    at:       [-326.600, 36.367, 4.303, 27]
+    level:    [75, 76]
+  17056008:
+    template: Great_Ameretat
+    at:       [-290.500, 36.186, 11.903, 77]
+    level:    [75, 76]
+  17056009:
+    template: Cave_Tiger
+    at:       [-290.400, 36.388, -12.168, 216]
+    level:    [75, 76]
+  17056010:
+    template: Cave_Tiger
+    at:       [-269.200, 36.249, -23.742, 109]
+    level:    [75, 76]
+  17056011:
+    template: Great_Ameretat
+    at:       [-296.100, 36.401, -29.059, 46]
+    level:    [75, 76]
+  17056012:
+    template: Cave_Tiger
+    at:       [-267.000, 36.444, -29.909, 206]
+    level:    [75, 76]
+  17056013:
+    template: Cave_Tiger
+    at:       [-272.700, 36.471, -40.416, 9]
+    level:    [75, 76]
+  17056014:
+    template: Great_Ameretat
+    at:       [-272.900, 36.272, -77.182, 49]
+    level:    [75, 76]
+  17056015:
+    template: Cave_Tiger
+    at:       [-295.000, 36.104, -86.487, 75]
+    level:    [75, 76]
+  17056016:
+    template: Cave_Tiger
+    at:       [-281.200, 36.215, -97.242, 134]
+    level:    [75, 76]
+  17056017:
+    template: Cave_Tiger
+    at:       [-331.800, 35.990, -41.171, 56]
+    level:    [75, 76]
+  17056018:
+    template: Great_Ameretat
+    at:       [-337.000, 34.856, -36.501, 166]
+    level:    [75, 76]
+  17056019:
+    template: Mycoskulker
+    at:       [-124.400, 36.272, -24.899, 234]
+    level:    [89, 90]
+  17056020:
+    template: Mycoskulker
+    at:       [-120.900, 36.349, -48.650, 67]
+    level:    [89, 90]
+  17056021:
+    template: Mycoskulker
+    at:       [-128.600, 35.990, -70.295, 70]
+    level:    [89, 90]
+  17056022:
+    template: Mycoskulker
+    at:       [-115.900, 36.243, -90.244, 45]
+    level:    [89, 90]
+  17056023:
+    template: Mycoskulker
+    at:       [-65.180, 36.140, -88.402, 81]
+    level:    [89, 90]
+  17056024:
+    template: Mycoskulker
+    at:       [-71.900, 36.390, -74.135, 129]
+    level:    [89, 90]
+  17056025:
+    template: Mycoskulker
+    at:       [-75.490, 36.676, -53.777, 87]
+    level:    [89, 90]
+  17056026:
+    template: Mycoskulker
+    at:       [-85.310, 36.445, -30.052, 108]
+    level:    [89, 90]
+  17056027:
+    template: Mycoskulker
+    at:       [-105.200, 36.237, -27.482, 55]
+    level:    [89, 90]
+  17056028:
+    template: Mycoskulker
+    at:       [-102.400, 36.381, -37.108, 138]
+    level:    [89, 90]
+  17056029:
+    template: Mycoskulker
+    at:       [-101.400, 36.354, -44.812, 57]
+    level:    [89, 90]
+  17056030:
+    template: Mycoskulker
+    at:       [-95.480, 36.395, -48.750, 97]
+    level:    [89, 90]
+  17056031:
+    template: Mycoskulker
+    at:       [-97.460, 36.710, -52.460, 24]
+    level:    [89, 90]
+  17056032:
+    template: Mycoskulker
+    at:       [-94.420, 36.698, -53.798, 47]
+    level:    [89, 90]
+  17056033:
+    template: Mycoskulker
+    at:       [-99.600, 36.761, -49.709, 199]
+    level:    [89, 90]
+  17056034:
+    template: Mycoskulker
+    at:       [-97.400, 36.359, -68.712, 170]
+    level:    [89, 90]
+  17056035:
+    template: Mycoskulker
+    at:       [-87.630, 36.332, -67.317, 27]
+    level:    [89, 90]
+  17056036:
+    template: Mycoskulker
+    at:       [-88.130, 36.340, -64.783, 235]
+    level:    [89, 90]
+  17056037:
+    template: Phlebotomic_Slug
+    at:       [-231.800, -5.431, -466.200, 169]
+    level:    [68, 70]
+  17056038:
+    template: Phlebotomic_Slug
+    at:       [-215.600, 2.913, -466.790, 233]
+    level:    [68, 70]
+  17056039:
+    template: Phlebotomic_Slug
+    at:       [-168.000, 10.994, -458.520, 125]
+    level:    [68, 70]
+  17056040:
+    template: Phlebotomic_Slug
+    at:       [-149.200, 10.939, -458.110, 253]
+    level:    [68, 70]
+  17056041:
+    template: Phlebotomic_Slug
+    at:       [-139.300, 11.078, -446.500, 198]
+    level:    [68, 70]
+  17056042:
+    template: Phlebotomic_Slug
+    at:       [-69.320, 11.001, -420.230, 112]
+    level:    [68, 70]
+  17056043:
+    template: Phlebotomic_Slug
+    at:       [-56.690, 11.145, -384.240, 51]
+    level:    [68, 70]
+  17056044:
+    template: Phlebotomic_Slug
+    at:       [-63.470, 10.664, -343.610, 94]
+    level:    [68, 70]
+  17056045:
+    template: Phlebotomic_Slug
+    at:       [-28.160, 5.129, -299.910, 251]
+    level:    [69, 69]
+  17056046:
+    template: Phlebotomic_Slug
+    at:       [-81.190, 5.316, -300.350, 130]
+    level:    [68, 70]
+  17056047:
+    template: Phlebotomic_Slug
+    at:       [-33.900, 15.286, -255.740, 171]
+    level:    [68, 70]
+  17056048:
+    template: Slime_Mold
+    at:       [16.454, 33.203, -258.700, 245]
+    level:    [68, 70]
+  17056049:
+    template: Slime_Mold
+    at:       [14.614, 33.199, -265.080, 206]
+    level:    [68, 70]
+  17056050:
+    template: Phlebotomic_Slug
+    at:       [26.927, 32.991, -218.610, 130]
+    level:    [68, 70]
+  17056051:
+    template: Phlebotomic_Slug
+    at:       [8.132, 33.125, -219.850, 136]
+    level:    [68, 70]
+  17056052:
+    template: Phlebotomic_Slug
+    at:       [54.874, 33.000, -224.840, 8]
+    level:    [68, 70]
+  17056053:
+    template: Phlebotomic_Slug
+    at:       [38.702, 33.241, -221.130, 9]
+    level:    [68, 70]
+  17056054:
+    template: Phlebotomic_Slug
+    at:       [60.013, 32.936, -177.880, 175]
+    level:    [68, 70]
+  17056055:
+    template: Phlebotomic_Slug
+    at:       [81.944, 30.045, -142.140, 3]
+    level:    [68, 70]
+  17056056:
+    template: Phlebotomic_Slug
+    at:       [107.800, 32.799, -184.530, 111]
+    level:    [68, 70]
+  17056057:
+    template: Phlebotomic_Slug
+    at:       [100.740, 33.203, -117.910, 61]
+    level:    [68, 70]
+  17056058:
+    template: Phlebotomic_Slug
+    at:       [260.860, 33.388, -163.250, 193]
+    level:    [68, 70]
+  17056059:
+    template: Phlebotomic_Slug
+    at:       [262.600, 32.966, -174.510, 44]
+    level:    [68, 70]
+  17056060:
+    template: Phlebotomic_Slug
+    at:       [339.660, 32.627, -73.911, 49]
+    level:    [68, 70]
+  17056061:
+    template: Slime_Mold
+    at:       [-114.100, 10.831, -403.770, 176]
+    level:    [68, 70]
+  17056062:
+    template: Slime_Mold
+    at:       [-129.100, 11.052, -407.040, 18]
+    level:    [68, 70]
+  17056063:
+    template: Slime_Mold
+    at:       [-130.900, 11.206, -405.150, 106]
+    level:    [68, 70]
+  17056064:
+    template: Slime_Mold
+    at:       [-120.900, 11.267, -385.870, 73]
+    level:    [68, 70]
+  17056065:
+    template: Slime_Mold
+    at:       [-105.500, 11.187, -394.810, 170]
+    level:    [68, 70]
+  17056066:
+    template: Slime_Mold
+    at:       [-110.200, 10.826, -385.540, 6]
+    level:    [68, 70]
+  17056067:
+    template: Phlebotomic_Slug
+    at:       [163.360, 33.310, -146.920, 88]
+    level:    [68, 70]
+  17056068:
+    template: Phlebotomic_Slug
+    at:       [158.010, 33.376, -165.710, 41]
+    level:    [68, 70]
+  17056069:
+    template: Slime_Mold
+    at:       [151.690, 33.159, -169.400, 29]
+    level:    [68, 70]
+  17056070:
+    template: Phlebotomic_Slug
+    at:       [184.840, 31.736, -182.610, 102]
+    level:    [68, 70]
+  17056071:
+    template: Slime_Mold
+    at:       [185.550, 33.425, -158.680, 165]
+    level:    [68, 70]
+  17056072:
+    template: Slime_Mold
+    at:       [194.960, 33.793, -142.460, 86]
+    level:    [68, 70]
+  17056073:
+    template: Air_Elemental
+    at:       [196.520, 33.768, -140.790, 160]
+    level:    [70, 70]
+  17056074:
+    template: Phlebotomic_Slug
+    at:       [199.950, 33.213, -162.160, 145]
+    level:    [68, 70]
+  17056075:
+    template: Phlebotomic_Slug
+    at:       [205.550, 33.014, -177.960, 254]
+    level:    [68, 70]
+  17056076:
+    template: Phlebotomic_Slug
+    at:       [191.750, 33.390, -126.330, 76]
+    level:    [68, 70]
+  17056077:
+    template: Phlebotomic_Slug
+    at:       [228.350, 33.363, -122.960, 78]
+    level:    [68, 70]
+  17056078:
+    template: Slime_Mold
+    at:       [227.600, 33.709, -128.840, 105]
+    level:    [68, 70]
+  17056079:
+    template: Phlebotomic_Slug
+    at:       [219.080, 32.787, -101.070, 17]
+    level:    [68, 70]
+  17056080:
+    template: Phlebotomic_Slug
+    at:       [224.670, 31.947, -97.439, 237]
+    level:    [68, 70]
+  17056081:
+    template: Phlebotomic_Slug
+    at:       [245.440, 33.648, -125.180, 130]
+    level:    [68, 70]
+  17056082:
+    template: Phlebotomic_Slug
+    at:       [238.110, 33.701, -113.980, 115]
+    level:    [68, 70]
+  17056083:
+    template: Phlebotomic_Slug
+    at:       [182.170, 31.325, -144.760, 115]
+    level:    [68, 70]
+  17056084:
+    template: Phlebotomic_Slug
+    at:       [212.170, 31.559, -141.920, 223]
+    level:    [68, 70]
+  17056085:
+    template: Phlebotomic_Slug
+    at:       [273.410, 33.548, -88.498, 143]
+    level:    [68, 70]
+  17056086:
+    template: Slime_Mold
+    at:       [268.070, 34.243, -92.877, 99]
+    level:    [68, 70]
+  17056087:
+    template: Air_Elemental
+    at:       [276.910, 33.511, -95.780, 153]
+    level:    [70, 70]
+  17056088:
+    template: Phlebotomic_Slug
+    at:       [294.910, 33.014, -88.361, 223]
+    level:    [68, 70]
+  17056089:
+    template: Phlebotomic_Slug
+    at:       [282.230, 33.409, -65.736, 30]
+    level:    [68, 70]
+  17056090:
+    template: Slime_Mold
+    at:       [281.670, 33.327, -67.779, 82]
+    level:    [68, 70]
+  17056091:
+    template: Qiqirn_Enterpriser
+    at:       [488.590, -27.030, 418.352, 141]
+    level:    [68, 70]
+  17056092:
+    template: Qiqirn_Lieuter
+    at:       [481.010, -26.820, 419.285, 130]
+    level:    [68, 70]
+  17056093:
+    template: Qiqirn_Mine
+    at:       [472.850, -27.200, 420.272, 112]
+    level:    [75, 75]
+  17056094:
+    template: Qiqirn_Lieuter
+    at:       [543.360, -26.750, 375.936, 14]
+    level:    [68, 70]
+  17056095:
+    template: Qiqirn_Mine
+    level:    [75, 75]
+  17056096:
+    template: Slime_Eater
+    at:       [340.180, -27.040, 475.819, 71]
+    level:    [87, 89]
+  17056097:
+    template: Slime_Eater
+    at:       [341.290, -26.720, 483.914, 64]
+    level:    [87, 89]
+  17056098:
+    template: Slime_Eater
+    at:       [382.630, -26.840, 502.751, 115]
+    level:    [87, 89]
+  17056099:
+    template: Slime_Eater
+    at:       [388.870, -26.870, 504.542, 137]
+    level:    [87, 89]
+  17056100:
+    template: Mold_Eater
+    at:       [408.750, -12.680, 255.472, 74]
+    level:    [69, 71]
+  17056101:
+    template: Mold_Eater
+    at:       [408.530, -12.750, 255.496, 76]
+    level:    [69, 71]
+  17056102:
+    template: Mold_Eater
+    at:       [410.400, -14.180, 250.283, 47]
+    level:    [69, 71]
+  17056103:
+    template: Mold_Eater
+    at:       [459.630, -26.820, 276.803, 62]
+    level:    [69, 71]
+  17056104:
+    template: Qiqirn_Enterpriser
+    at:       [458.730, -27.060, 268.941, 67]
+    level:    [68, 70]
+  17056105:
+    template: Mold_Eater
+    at:       [459.900, -26.950, 259.928, 138]
+    level:    [69, 71]
+  17056106:
+    template: Mold_Eater
+    at:       [455.340, -26.650, 257.122, 55]
+    level:    [69, 71]
+  17056107:
+    template: Mold_Eater
+    at:       [458.100, -26.870, 261.720, 241]
+    level:    [69, 71]
+  17056108:
+    template: Slime_Mold
+    at:       [266.560, 1.087, 341.184, 129]
+    level:    [68, 70]
+  17056109:
+    template: Slime_Mold
+    at:       [260.170, 1.213, 340.282, 248]
+    level:    [68, 70]
+  17056110:
+    template: Mold_Eater
+    at:       [258.870, 0.984, 357.726, 58]
+    level:    [69, 71]
+  17056111:
+    template: Mold_Eater
+    at:       [283.900, 0.881, 338.950, 122]
+    level:    [69, 71]
+  17056112:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [218.290, 1.268, 356.052, 199]
+    level:    [67, 69]
+  17056113:
+    template: Qiqirn_Enterpriser
+    at:       [218.220, 1.130, 352.089, 196]
+    level:    [68, 70]
+  17056114:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [221.510, 1.052, 379.772, 66]
+    level:    [67, 69]
+  17056115:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [216.380, 1.089, 417.045, 189]
+    level:    [67, 69]
+  17056116:
+    template: Qiqirn_Enterpriser
+    at:       [224.570, 0.139, 459.221, 129]
+    level:    [68, 70]
+  17056117:
+    template: Qiqirn_Lieuter
+    at:       [228.180, -0.546, 458.617, 254]
+    level:    [68, 70]
+  17056118:
+    template: Qiqirn_Mine
+    at:       [220.988, 0.576, 457.981, 87]
+    level:    [75, 75]
+  17056119:
+    template: Treant_Sapling_AS_CM
+    script:   Treant_Sapling
+    at:       [271.990, -17.880, 449.963, 221]
+    level:    [67, 69]
+  17056120:
+    template: Qiqirn_Enterpriser
+    at:       [184.610, 0.214, 374.875, 101]
+    level:    [68, 70]
+  17056121:
+    template: Puktrap
+    at:       [454.290, -26.940, 406.019, 39]
+    level:    [69, 70]
+  17056122:
+    template: Puktrap
+    at:       [455.220, -26.920, 405.058, 39]
+    level:    [69, 70]
+  17056123:
+    template: Puktrap
+    at:       [424.890, -26.760, 394.808, 102]
+    level:    [69, 70]
+  17056124:
+    template: Aydeewa_Diremite
+    at:       [481.880, -26.760, 355.207, 57]
+    level:    [72, 74]
+  17056125:
+    template: Aydeewa_Diremite
+    at:       [484.500, -26.650, 368.619, 116]
+    level:    [72, 74]
+  17056126:
+    template: Aydeewa_Diremite
+    at:       [475.280, -26.790, 343.462, 81]
+    level:    [72, 74]
+  17056127:
+    template: Aydeewa_Diremite
+    at:       [470.640, -26.910, 339.886, 244]
+    level:    [72, 74]
+  17056128:
+    template: Aydeewa_Diremite
+    at:       [467.190, -26.820, 313.432, 62]
+    level:    [72, 74]
+  17056129:
+    template: Aydeewa_Diremite
+    at:       [480.010, -26.590, 307.877, 106]
+    level:    [72, 74]
+  17056130:
+    template: Slime_Eater
+    at:       [348.530, -26.760, 447.513, 86]
+    level:    [87, 89]
+  17056131:
+    template: Slime_Eater
+    at:       [357.490, -26.920, 436.312, 10]
+    level:    [87, 89]
+  17056132:
+    template: Slime_Eater
+    at:       [380.180, -26.410, 450.510, 210]
+    level:    [87, 88]
+  17056133:
+    template: Slime_Eater
+    at:       [385.930, -26.680, 457.190, 227]
+    level:    [87, 89]
+  17056134:
+    template: Slime_Eater
+    at:       [398.160, -26.660, 454.093, 111]
+    level:    [87, 89]
+  17056135:
+    template: Slime_Eater
+    at:       [393.850, -26.700, 449.971, 204]
+    level:    [87, 89]
+  17056136:
+    template: Slime_Eater
+    at:       [415.340, -26.630, 438.959, 254]
+    level:    [88, 89]
+  17056137:
+    template: Slime_Eater
+    at:       [399.600, -26.850, 437.890, 168]
+    level:    [87, 89]
+  17056138:
+    template: Puktrap
+    at:       [263.930, 1.089, 407.615, 87]
+    level:    [69, 70]
+  17056139:
+    template: Puktrap
+    at:       [294.600, 1.235, 405.984, 243]
+    level:    [69, 70]
+  17056140:
+    template: Lizardtrap
+    at:       [276.060, 1.419, 409.441, 142]
+    level:    [71, 72]
+  17056141:
+    template: Puktrap
+    at:       [262.730, 1.202, 394.851, 167]
+    level:    [69, 70]
+  17056142:
+    template: Qiqirn_Enterpriser
+    at:       [327.340, 1.444, 370.257, 69]
+    level:    [69, 70]
+  17056143:
+    template: Qiqirn_Enterpriser
+    at:       [304.540, 0.871, 372.872, 198]
+    level:    [69, 70]
+  17056144:
+    template: Phlebotomic_Slug
+    at:       [332.920, 0.642, 379.346, 100]
+    level:    [67, 69]
+  17056145:
+    template: Qiqirn_Enterpriser
+    at:       [352.100, 1.670, 351.582, 225]
+    level:    [69, 70]
+  17056146:
+    template: Qiqirn_Lieuter
+    at:       [403.120, 1.156, 349.290, 117]
+    level:    [69, 70]
+  17056147:
+    template: Qiqirn_Mine
+    at:       [361.850, 1.289, 371.134, 103]
+    level:    [75, 75]
+  17056148:
+    template: Phlebotomic_Slug
+    at:       [400.560, 1.109, 354.430, 192]
+    level:    [67, 69]
+  17056149:
+    template: Phlebotomic_Slug
+    at:       [407.530, 1.127, 351.059, 51]
+    level:    [67, 69]
+  17056150:
+    template: Phlebotomic_Slug
+    at:       [410.680, 1.382, 319.477, 229]
+    level:    [67, 69]
+  17056151:
+    template: Phlebotomic_Slug
+    at:       [409.540, 1.201, 328.480, 199]
+    level:    [67, 69]
+  17056152:
+    template: Qiqirn_Enterpriser
+    at:       [411.690, 1.374, 317.041, 12]
+    level:    [69, 70]
+  17056153:
+    template: Qiqirn_Enterpriser
+    at:       [374.720, 1.633, 313.917, 237]
+    level:    [69, 70]
+  17056154:
+    template: Phlebotomic_Slug
+    at:       [350.740, 1.657, 334.941, 122]
+    level:    [67, 69]
+  17056155:
+    template: Crystal_Eater
+    at:       [-302.285, 36.716, -32.391, 203]
+    level:    [75, 75]
+  17056156:
+    template: Bluestreak_Gyugyuroon
+    at:       [-219.199, 13.483, -340.343, 241]
+    level:    [80, 80]
+  17056157:
+    template: Nosferatu
+    at:       [-198.600, 8.387, -60.832, 207]
+    level:    [87, 88]
+  17056158:
+    template: Nosferatu_Bats
+    at:       [-194.500, 7.908, -61.998, 157]
+    level:    [73, 75]
+  17056159:
+    template: Nosferatu_Bats
+    at:       [-202.200, 8.457, -59.923, 247]
+    level:    [73, 75]
+  17056160:
+    template: Nosferatu_Bats
+    at:       [-201.700, 8.236, -58.043, 9]
+    level:    [73, 75]
+  17056161:
+    template: Nosferatu_Wolf
+    at:       [-201.700, 8.236, -58.043, 9]
+    level:    [73, 75]
+  17056162:
+    template: Nosferatu_Wolf
+    at:       [-193.900, 8.164, -59.986, 138]
+    level:    [73, 75]
+  17056163:
+    template: Nosferatu_Wolf
+    at:       [-199.400, 8.408, -55.998, 43]
+    level:    [73, 75]
+  17056164:
+    template: Nosferatu_Murk
+    at:       [-196.800, 8.188, -62.895, 182]
+    level:    [73, 75]
+  17056165:
+    template: Nosferatu_Murk
+    at:       [-198.800, 8.447, -55.136, 54]
+    level:    [73, 75]
+  17056166:
+    template: Nosferatu_Murk
+    at:       [-196.100, 8.046, -62.217, 180]
+    level:    [73, 75]
+  17056167:
+    template: Pandemonium_Warden_5
+    script:   Pandemonium_Warden
+    at:       [208.160, 33.750, -138.610, 90]
+    level:    [86, 88]
+  17056168:
+    template: Pandemonium_Warden_7
+    script:   Pandemonium_Warden_HNM
+    at:       [208.160, 33.750, -138.610, 90]
+    level:    [86, 88]
+  17056169:
+    template: Pandemonium_Lamp
+    at:       [208.150, 33.751, -138.610, 90]
+    level:    [77, 79]
+  17056170:
+    template: Pandemonium_Lamp
+    at:       [208.150, 33.751, -138.610, 90]
+    level:    [77, 79]
+  17056171:
+    template: Pandemonium_Lamp
+    at:       [208.150, 33.751, -138.610, 90]
+    level:    [77, 79]
+  17056172:
+    template: Pandemonium_Lamp
+    at:       [208.160, 33.750, -138.610, 90]
+    level:    [77, 79]
+  17056173:
+    template: Pandemonium_Lamp
+    at:       [208.160, 33.750, -138.610, 90]
+    level:    [77, 79]
+  17056174:
+    template: Pandemonium_Lamp
+    at:       [208.160, 33.750, -138.610, 90]
+    level:    [77, 79]
+  17056175:
+    template: Pandemonium_Lamp
+    at:       [208.160, 33.750, -138.610, 90]
+    level:    [77, 79]
+  17056176:
+    template: Pandemonium_Lamp
+    at:       [206.510, 33.861, -140.040, 53]
+    level:    [77, 79]
+  17056177:
+    template: Pandemonium_Warden_2
+    script:   Pandemonium_Lamp_Avatar
+    at:       [206.510, 33.861, -140.040, 53]
+    level:    [86, 88]
+  17056178:
+    template: Pandemonium_Warden_3
+    script:   Pandemonium_Lamp_Avatar
+    at:       [207.740, 33.382, -140.300, 116]
+    level:    [86, 88]
+  17056179:
+    template: Pandemonium_Warden_4
+    script:   Pandemonium_Lamp_Avatar
+    at:       [206.640, 33.812, -141.140, 193]
+    level:    [86, 88]
+  17056180:
+    template: Pandemonium_Warden
+    script:   Pandemonium_Lamp_Avatar
+    at:       [206.110, 33.936, -140.470, 10]
+    level:    [86, 88]
+  17056181:
+    template: Pandemonium_Warden
+    script:   Pandemonium_Lamp_Avatar
+    at:       [206.610, 33.840, -140.080, 60]
+    level:    [86, 88]
+  17056182:
+    template: Pandemonium_Warden
+    script:   Pandemonium_Lamp_Avatar
+    at:       [206.500, 33.842, -141.130, 203]
+    level:    [86, 88]
+  17056183:
+    template: Pandemonium_Warden_6
+    script:   Pandemonium_Lamp_Avatar
+    at:       [206.110, 33.936, -140.640, 254]
+    level:    [86, 88]
+  17056184:
+    template: Pandemonium_Warden_6
+    script:   Pandemonium_Lamp_Avatar
+    at:       [206.930, 33.776, -140.150, 85]
+    level:    [86, 88]
+  17056185:
+    template: Pandemonium_Warden_6
+    script:   Pandemonium_Lamp_Avatar
+    at:       [207.170, 33.707, -140.460, 115]
+    level:    [86, 88]
+  17056186:
+    template: Chigre
+    at:       [-217.500, 34.866, 13.689, 122]
+    level:    [82, 82]
+  17056187:
+    template: Morta
+    at:       [276.400, 1.529, 407.785, 64]
+    level:    [94, 95]
+  17056188:
+    template: Ravishing_Rafflesia
+    at:       [259.040, 0.760, 375.058, 205]
+    level:    [92, 93]
+  17056189:
+    template: Ravishing_Rafflesia
+    at:       [260.180, 0.731, 374.841, 195]
+    level:    [92, 93]
+  17056190:
+    template: Ravishing_Rafflesia
+    at:       [259.920, 0.762, 375.910, 199]
+    level:    [92, 93]
+  17056191:
+    template: Ravishing_Rafflesia
+    at:       [259.620, 0.751, 374.894, 200]
+    level:    [92, 93]
+  17056192:
+    template: Ravishing_Rafflesia
+    at:       [262.310, 0.568, 375.515, 175]
+    level:    [92, 93]
+  17056193:
+    template: Ravishing_Rafflesia
+    at:       [259.500, 0.761, 375.509, 202]
+    level:    [92, 93]
+  17056194:
+    template: Morta
+    at:       [-153.000, 8.212, 44.000]
+    level:    [94, 95]
+  17056195:
+    template: Ravishing_Rafflesia
+    at:       [-155.544, 8.255, 51.026, 61]
+    level:    [92, 93]
+  17056196:
+    template: Ravishing_Rafflesia
+    at:       [-151.466, 8.212, 45.522, 9]
+    level:    [92, 93]
+  17056197:
+    template: Ravishing_Rafflesia
+    at:       [-151.796, 8.212, 45.792, 255]
+    level:    [92, 93]
+  17056198:
+    template: Ravishing_Rafflesia
+    at:       [-152.434, 8.210, 46.588, 175]
+    level:    [92, 93]
+  17056199:
+    template: Ravishing_Rafflesia
+    at:       [-153.514, 8.196, 46.185, 131]
+    level:    [92, 93]
+  17056200:
+    template: Ravishing_Rafflesia
+    at:       [-153.534, 8.223, 46.820, 164]
+    level:    [92, 93]
+  17056201:
+    template: Morta
+    at:       [441.070, -26.850, 396.726, 83]
+    level:    [94, 95]
+  17056202:
+    template: Ravishing_Rafflesia
+    at:       [460.070, -27.320, 418.575, 234]
+    level:    [92, 93]
+  17056203:
+    template: Ravishing_Rafflesia
+    at:       [460.070, -27.320, 418.575, 234]
+    level:    [92, 93]
+  17056204:
+    template: Ravishing_Rafflesia
+    at:       [460.070, -27.320, 418.575, 234]
+    level:    [92, 93]
+  17056205:
+    template: Ravishing_Rafflesia
+    at:       [460.070, -27.320, 418.575, 234]
+    level:    [92, 93]
+  17056206:
+    template: Ravishing_Rafflesia
+    at:       [460.070, -27.320, 418.575, 234]
+    level:    [92, 93]
+  17056207:
+    template: Ravishing_Rafflesia
+    at:       [460.070, -27.320, 418.575, 234]
+    level:    [92, 93]
+  17056208:
+    script: Tumult_Curator
+    at:     [146.433, 35.618, -59.061, 87]
+    level:  [99, 99]
+  17056209:
+    script: Tumult_Curator
+    at:     [163.499, 36.317, -43.723]
+    level:  [99, 99]
+  17056210:
+    script: Tumult_Curator
+    at:     [167.055, 36.414, -41.977, 255]
+    level:  [99, 99]
+  17056211:
+    script: Tumult_Curator
+    at:     [150.982, 36.464, -54.689, 166]
+    level:  [99, 99]
+  17056212:
+    script: Tumult_Curator
+    at:     [146.115, 35.557, -60.270, 138]
+    level:  [99, 99]
+  17056213:
+    script: Tumult_Curator
+    at:     [147.580, 35.966, -56.706, 154]
+    level:  [99, 99]
+  17056214:
+    script: Tumult_Curator
+    at:     [146.524, 35.416, -61.414, 107]
+    level:  [99, 99]
+  17056215:
+    script: Tumult_Curator
+    at:     [146.909, 35.294, -60.974]
+    level:  [99, 99]
+  17056216:
+    script: Tumult_Curator
+    at:     [146.257, 35.594, -59.878]
+    level:  [99, 99]
+  17056217:
+    script: Tumult_Curator
+    at:     [138.940, 36.147, -53.587]
+    level:  [99, 99]
+  17056218:
+    script: Tumult_Curator
+    at:     [148.044, 35.533, -60.180]
+    level:  [99, 99]
+  17056219:
+    script: Tumult_Curator
+    at:     [148.489, 35.810, -58.921]
+    level:  [99, 99]
+  17056220:
+    script: Tumult_Curator
+    at:     [146.402, 35.995, -56.881]
+    level:  [99, 99]
+  17056221:
+    script: Tumult_Lamp
+    at:     [163.275, 36.345, -44.341, 169]
+    level:  [99, 99]
+  17056222:
+    script: Tumult_Lamp
+    at:     [163.281, 36.268, -43.444, 86]
+    level:  [99, 99]
+  17056223:
+    script: Tumult_Lamp
+    at:     [162.734, 36.222, -43.439, 42]
+    level:  [99, 99]
+  17056224:
+    script: Tumult_Lamp
+    at:     [162.765, 36.304, -44.360, 210]
+    level:  [99, 99]
+  17056225:
+    script: Tumult_Lamp
+    at:     [163.055, 36.331, -44.419, 187]
+    level:  [99, 99]
+  17056226:
+    script: Tumult_Lamp
+    at:     [162.472, 36.250, -43.884]
+    level:  [99, 99]
+  17056227:
+    script: Tumult_Lamp
+    at:     [154.403, 36.465, -51.232, 80]
+    level:  [99, 99]
+  17056228:
+    script: Tumult_Lamp
+    at:     [150.458, 36.315, -46.704, 11]
+    level:  [99, 99]
+  17056229:
+    script: Tumult_Lamp
+    at:     [149.166, 35.834, -56.516, 86]
+    level:  [99, 99]
+  17056230:
+    script: Tumult_Lamp
+    at:     [143.399, 35.277, -60.247, 159]
+    level:  [99, 99]
+  17056231:
+    script: Tumult_Lamp
+    at:     [143.756, 35.581, -59.757, 209]
+    level:  [99, 99]
+  17056232:
+    script: Tumult_Lamp
+    at:     [148.253, 35.754, -56.880, 87]
+    level:  [99, 99]
+  17056233:
+    script: Tumult_Lamp
+    at:     [155.704, 36.374, -47.001, 45]
+    level:  [99, 99]
+  17056234:
+    script: Tumult_Lamp
+    at:     [155.724, 36.316, -45.021, 58]
+    level:  [99, 99]
+  17056235:
+    script: Tumult_Lamp
+    at:     [151.355, 36.379, -47.047, 219]
+    level:  [99, 99]
+  17056236:
+    script: Tumult_Lamp
+    at:     [152.879, 36.463, -48.528, 194]
+    level:  [99, 99]
+  17056237:
+    script: Tumult_Lamp
+    at:     [151.913, 36.417, -47.500, 184]
+    level:  [99, 99]
+  17056238:
+    script: Tumult_Lamp
+    at:     [153.226, 36.431, -49.238, 140]
+    level:  [99, 99]
+  17056239:
+    script: Tumult_Lamp
+    at:     [153.473, 36.540, -47.921, 98]
+    level:  [99, 99]
+  17056240:
+    script: Tumult_Lamp
+    at:     [155.081, 36.804, -46.727, 88]
+    level:  [99, 99]
+  17056241:
+    script: Tumult_Lamp
+    at:     [156.280, 36.346, -46.361, 77]
+    level:  [99, 99]
+  17056242:
+    script: Tumult_Lamp
+    at:     [156.355, 36.291, -44.289, 69]
+    level:  [99, 99]
+  17056243:
+    script: Tumult_Lamp
+    at:     [153.739, 36.405, -44.252, 236]
+    level:  [99, 99]
+  17056244:
+    script: Tumult_Lamp
+    at:     [156.056, 36.311, -44.868, 169]
+    level:  [99, 99]
+  17056245:
+    script: Tumult_Lamp
+    at:     [153.728, 36.348, -45.818, 206]
+    level:  [99, 99]
+  17056246:
+    script: Tumult_Lamp
+    at:     [155.901, 36.382, -47.113, 177]
+    level:  [99, 99]
+  17056247:
+    script: Tumult_Lamp
+    at:     [155.881, 36.307, -44.446, 153]
+    level:  [99, 99]
+  17056248:
+    script: Tumult_Lamp
+    at:     [157.301, 36.335, -46.244, 160]
+    level:  [99, 99]
+  17056249:
+    script: Tumult_Lamp
+    at:     [154.409, 36.366, -47.002, 194]
+    level:  [99, 99]
+  17056250:
+    script: Tumult_Lamp
+    at:     [152.266, 36.421, -45.205, 230]
+    level:  [99, 99]
+  17056251:
+    script: Tumult_Lamp
+    at:     [165.958, 36.318, -41.228, 66]
+    level:  [99, 99]
+  17056252:
+    script: Tumult_Lamp
+    at:     [165.958, 36.318, -41.228, 44]
+    level:  [99, 99]
+  17056253:
+    script: Tumult_Lamp
+    at:     [166.521, 36.387, -42.354, 45]
+    level:  [99, 99]
+  17056254:
+    script: Tumult_Lamp
+    at:     [145.193, 36.721, -33.865, 131]
+    level:  [99, 99]
+  17056255:
+    script: Tumult_Lamp
+    at:     [165.958, 36.318, -41.228, 69]
+    level:  [99, 99]
+  17056256:
+    script: Tumult_Lamp
+    at:     [165.958, 36.318, -41.228, 69]
+    level:  [99, 99]
+  17056257:
+    script: Tumult_Lamp
+    at:     [165.958, 36.318, -41.228, 44]
+    level:  [99, 99]
+  17056258:
+    script: Tumult_Lamp
+    at:     [145.143, 36.713, -33.446, 131]
+    level:  [99, 99]
+  17056259:
+    script: Tumult_Lamp
+    at:     [165.958, 36.318, -41.228, 66]
+    level:  [99, 99]
+  17056260:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056261:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056262:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056263:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056264:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056265:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056266:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056267:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056268:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056269:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056270:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056271:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056272:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056273:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056274:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056275:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056276:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056277:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056278:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056279:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056280:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056281:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056282:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056283:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056284:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056285:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056286:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056287:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056288:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056289:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056290:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056291:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056292:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056293:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056294:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056295:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056296:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056297:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056298:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056299:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056300:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056301:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056302:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056303:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056304:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056305:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056306:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056307:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056308:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056309:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056310:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056311:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056312:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056313:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056314:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056315:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056316:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056317:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056318:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056319:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056320:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056321:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056322:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056323:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056324:
+    script: Tumult_Curator
+    level:  [99, 99]
+  17056325:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056326:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056327:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056328:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056329:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056330:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056331:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056332:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056333:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056334:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056335:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056336:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056337:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056338:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056339:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056340:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056341:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056342:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056343:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056344:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056345:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056346:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056347:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056348:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056349:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056350:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056351:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056352:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056353:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056354:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056355:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056356:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056357:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056358:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056359:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056360:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056361:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056362:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056363:
+    script: Tumult_Lamp
+    level:  [99, 99]
+  17056364:
+    template: Missabikong
+    at:       [-391.690, 11.690, -439.590, 131]
+    level:    [139, 139]
+  17056365:
+    template: Awoken_Hrungnir
+    at:       [-219.610, 8.000, 100.340, 105]
+    level:    [119, 119]

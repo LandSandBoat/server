@@ -47,6 +47,7 @@
 
 #include "battleutils.h"
 #include "charutils.h"
+#include "data/enums/detects.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/weather.h"
 #include "enums/chat_message_type.h"

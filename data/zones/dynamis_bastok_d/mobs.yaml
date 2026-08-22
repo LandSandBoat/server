@@ -1,0 +1,1639 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+spawns:
+  17985537:
+    script: Aurix
+  17985538:
+    script: MuSha_Effigy
+  17985539:
+    script: Lithicthrower_Image
+  17985540:
+    script: Squadron_Weaponmaster
+  17985541:
+    script: Squadron_Combatant
+  17985542:
+    script: Squadron_Mender
+  17985543:
+    script: Squadrons_Avatar
+  17985544:
+    script: Lithicthrower_Image
+  17985545:
+    script: Squadron_Magister
+  17985546:
+    script: Squadron_Magician
+  17985547:
+    script: Squadron_Trickster
+  17985548:
+    script: Lithicthrower_Image
+  17985549:
+    script: Squadron_Cavalier
+  17985550:
+    script: Squadrons_Wyvern
+  17985551:
+    script: Squadron_Harnesser
+  17985552:
+    script: Squadrons_Wasp
+  17985553:
+    script: Squadron_Balladeer
+  17985554:
+    script: Lithicthrower_Image
+  17985555:
+    script: Squadron_Shadowstalker
+  17985556:
+    script: Squadron_Scallywag
+  17985557:
+    script: Squadron_Weaponmaster
+  17985558:
+    script: Lithicthrower_Image
+  17985559:
+    script: Squadron_Combatant
+  17985560:
+    script: Squadron_Magister
+  17985561:
+    script: Squadron_Magician
+  17985562:
+    script: Lithicthrower_Image
+  17985563:
+    script: Squadron_Mender
+  17985564:
+    script: Squadrons_Avatar
+  17985565:
+    script: Squadron_Trickster
+  17985566:
+    script: Squadron_Cavalier
+  17985567:
+    script: Squadrons_Wyvern
+  17985568:
+    script: Lithicthrower_Image
+  17985569:
+    script: Squadron_Balladeer
+  17985570:
+    script: Squadron_Shadowstalker
+  17985571:
+    script: Squadron_Scallywag
+  17985572:
+    script: Lithicthrower_Image
+  17985573:
+    script: Squadron_Mender
+  17985574:
+    script: Squadrons_Avatar
+  17985575:
+    script: Squadron_Cavalier
+  17985576:
+    script: Squadrons_Wyvern
+  17985577:
+    script: Squadron_Harnesser
+  17985578:
+    script: Squadrons_Wasp
+  17985579:
+    script: Squadron_Balladeer
+  17985580:
+    script: Squadron_Shadowstalker
+  17985581:
+    script: Squadron_Scallywag
+  17985582:
+    script: Lithicthrower_Image
+  17985583:
+    script: Squadron_Weaponmaster
+  17985584:
+    script: Squadron_Combatant
+  17985585:
+    script: Squadron_Magister
+  17985586:
+    script: Squadron_Magician
+  17985587:
+    script: Lithicthrower_Image
+  17985588:
+    script: Squadron_Trickster
+  17985589:
+    script: Squadron_Cavalier
+  17985590:
+    script: Squadrons_Wyvern
+  17985591:
+    script: Squadron_Shadowstalker
+  17985592:
+    script: Lithicthrower_Image
+  17985593:
+    script: Squadron_Balladeer
+  17985594:
+    script: Squadron_Shadowstalker
+  17985595:
+    script: Squadron_Mender
+  17985596:
+    script: Squadrons_Avatar
+  17985597:
+    script: Lithicthrower_Image
+  17985598:
+    script: Squadron_Magister
+  17985599:
+    script: Squadron_Harnesser
+  17985600:
+    script: Squadrons_Wasp
+  17985601:
+    script: Squadron_Scallywag
+  17985602:
+    script: Lithicthrower_Image
+  17985603:
+    script: Squadron_Mender
+  17985604:
+    script: Squadrons_Avatar
+  17985605:
+    script: Squadron_Magister
+  17985606:
+    script: Squadron_Magician
+  17985607:
+    script: Squadron_Balladeer
+  17985608:
+    script: Squadron_Scallywag
+  17985609:
+    script: Squadron_Shadowstalker
+  17985610:
+    script: Lithicthrower_Image
+  17985611:
+    script: Squadron_Weaponmaster
+  17985612:
+    script: Squadron_Combatant
+  17985613:
+    script: Squadron_Trickster
+  17985614:
+    script: Squadron_Cavalier
+  17985615:
+    script: Squadrons_Wyvern
+  17985616:
+    script: Squadron_Harnesser
+  17985617:
+    script: Squadrons_Wasp
+  17985618:
+    script: Squadron_Balladeer
+  17985619:
+    script: Lithicthrower_Image
+  17985620:
+    script: Squadron_Weaponmaster
+  17985621:
+    script: Squadron_Weaponmaster
+  17985622:
+    script: Squadron_Magister
+  17985623:
+    script: Squadron_Harnesser
+  17985624:
+    script: Squadrons_Wasp
+  17985625:
+    script: Lithicthrower_Image
+  17985626:
+    script: Squadron_Mender
+  17985627:
+    script: Squadrons_Avatar
+  17985628:
+    script: Squadron_Magister
+  17985629:
+    script: Squadron_Magician
+  17985630:
+    script: Squadron_Cavalier
+  17985631:
+    script: Squadrons_Wyvern
+  17985632:
+    script: Squadron_Scallywag
+  17985633:
+    script: Lithicthrower_Image
+  17985634:
+    script: Squadron_Weaponmaster
+  17985635:
+    script: Squadron_Combatant
+  17985636:
+    script: Squadron_Trickster
+  17985637:
+    script: Squadron_Shadowstalker
+  17985638:
+    script: Lithicthrower_Image
+  17985639:
+    script: Squadron_Mender
+  17985640:
+    script: Squadrons_Avatar
+  17985641:
+    script: Squadron_Magister
+  17985642:
+    script: Squadron_Magician
+  17985643:
+    script: Squadron_Scallywag
+  17985644:
+    script: Lithicthrower_Image
+  17985645:
+    script: Squadron_Weaponmaster
+  17985646:
+    script: Squadron_Combatant
+  17985647:
+    script: Squadron_Trickster
+  17985648:
+    script: Squadron_Shadowstalker
+  17985649:
+    script: Lithicthrower_Image
+  17985650:
+    script: Squadron_Mender
+  17985651:
+    script: Squadrons_Avatar
+  17985652:
+    script: Squadron_Magister
+  17985653:
+    script: Squadron_Magician
+  17985654:
+    script: Squadron_Scallywag
+  17985655:
+    script: Lithicthrower_Image
+  17985656:
+    script: Squadron_Weaponmaster
+  17985657:
+    script: Squadron_Cavalier
+  17985658:
+    script: Squadrons_Wyvern
+  17985659:
+    script: Squadron_Harnesser
+  17985660:
+    script: Squadrons_Wasp
+  17985661:
+    script: Squadron_Shadowstalker
+  17985662:
+    script: Lithicthrower_Image
+  17985663:
+    script: Squadron_Weaponmaster
+  17985664:
+    script: Squadron_Combatant
+  17985665:
+    script: Squadron_Magister
+  17985666:
+    script: Squadron_Magician
+  17985667:
+    script: Lithicthrower_Image
+  17985668:
+    script: Squadron_Mender
+  17985669:
+    script: Squadrons_Avatar
+  17985670:
+    script: Squadron_Magister
+  17985671:
+    script: Squadron_Magician
+  17985672:
+    script: Squadron_Scallywag
+  17985673:
+    script: Lithicthrower_Image
+  17985674:
+    script: Squadron_Weaponmaster
+  17985675:
+    script: Squadron_Combatant
+  17985676:
+    script: Squadron_Mender
+  17985677:
+    script: Squadrons_Avatar
+  17985678:
+    script: Squadron_Magister
+  17985679:
+    script: Squadron_Magician
+  17985680:
+    script: Squadron_Trickster
+  17985681:
+    script: Lithicthrower_Image
+  17985682:
+    script: Squadron_Weaponmaster
+  17985683:
+    script: Squadron_Combatant
+  17985684:
+    script: Squadron_Cavalier
+  17985685:
+    script: Squadrons_Wyvern
+  17985686:
+    script: Squadron_Shadowstalker
+  17985687:
+    script: Squadron_Harnesser
+  17985688:
+    script: Squadrons_Wasp
+  17985689:
+    script: Lithicthrower_Image
+  17985690:
+    script: Squadron_Mender
+  17985691:
+    script: Squadrons_Avatar
+  17985692:
+    script: Squadron_Magister
+  17985693:
+    script: Squadron_Magician
+  17985694:
+    script: Squadron_Balladeer
+  17985695:
+    script: Squadron_Scallywag
+  17985696:
+    script: Lithicthrower_Image
+  17985697:
+    script: Squadron_Weaponmaster
+  17985698:
+    script: Squadron_Weaponmaster
+  17985699:
+    script: Squadron_Weaponmaster
+  17985700:
+    script: Lithicthrower_Image
+  17985701:
+    script: Squadron_Magister
+  17985702:
+    script: Squadron_Magister
+  17985703:
+    script: Squadron_Magister
+  17985704:
+    script: Lithicthrower_Image
+  17985705:
+    script: Squadron_Trickster
+  17985706:
+    script: Squadron_Trickster
+  17985707:
+    script: Squadron_Trickster
+  17985708:
+    script: Squadron_Trickster
+  17985709:
+    script: Lithicthrower_Image
+  17985710:
+    script: Squadron_Combatant
+  17985711:
+    script: Squadron_Combatant
+  17985712:
+    script: Squadron_Combatant
+  17985713:
+    script: Lithicthrower_Image
+  17985714:
+    script: Squadron_Magician
+  17985715:
+    script: Squadron_Magician
+  17985716:
+    script: Squadron_Magician
+  17985717:
+    script: Lithicthrower_Image
+  17985718:
+    script: Squadron_Shadowstalker
+  17985719:
+    script: Squadron_Shadowstalker
+  17985720:
+    script: Squadron_Shadowstalker
+  17985721:
+    script: Lithicthrower_Image
+  17985722:
+    script: Squadron_Mender
+  17985723:
+    script: Squadrons_Avatar
+  17985724:
+    script: Squadron_Mender
+  17985725:
+    script: Squadrons_Avatar
+  17985726:
+    script: Lithicthrower_Image
+  17985727:
+    script: Squadron_Cavalier
+  17985728:
+    script: Squadrons_Wyvern
+  17985729:
+    script: Squadron_Cavalier
+  17985730:
+    script: Squadrons_Wyvern
+  17985731:
+    script: Lithicthrower_Image
+  17985732:
+    script: Squadron_Harnesser
+  17985733:
+    script: Squadrons_Wasp
+  17985734:
+    script: Squadron_Harnesser
+  17985735:
+    script: Squadrons_Wasp
+  17985736:
+    script: Lithicthrower_Image
+  17985737:
+    script: Squadron_Scallywag
+  17985738:
+    script: Squadron_Scallywag
+  17985739:
+    script: Lithicthrower_Image
+  17985740:
+    script: Squadron_Balladeer
+  17985741:
+    script: Squadron_Balladeer
+  17985742:
+    script: Lithicthrower_Image
+  17985743:
+    script: Squadron_Weaponmaster
+  17985744:
+    script: Squadron_Magister
+  17985745:
+    script: Lithicthrower_Image
+  17985746:
+    script: Squadron_Combatant
+  17985747:
+    script: Squadron_Mender
+  17985748:
+    script: Squadrons_Avatar
+  17985749:
+    script: Lithicthrower_Image
+  17985750:
+    script: Squadron_Cavalier
+  17985751:
+    script: Squadrons_Wyvern
+  17985752:
+    script: Squadron_Scallywag
+  17985753:
+    script: Lithicthrower_Image
+  17985754:
+    script: Squadron_Balladeer
+  17985755:
+    script: Squadron_Shadowstalker
+  17985756:
+    script: Lithicthrower_Image
+  17985757:
+    script: Squadron_Trickster
+  17985758:
+    script: Squadron_Harnesser
+  17985759:
+    script: Squadrons_Wasp
+  17985760:
+    script: Lithicthrower_Image
+  17985761:
+    script: Squadron_Weaponmaster
+  17985762:
+    script: Squadron_Cavalier
+  17985763:
+    script: Squadrons_Wyvern
+  17985764:
+    script: Squadron_Balladeer
+  17985765:
+    script: Lithicthrower_Image
+  17985766:
+    script: Squadron_Combatant
+  17985767:
+    script: Squadron_Mender
+  17985768:
+    script: Squadrons_Avatar
+  17985769:
+    script: Squadron_Magister
+  17985770:
+    script: Lithicthrower_Image
+  17985771:
+    script: Squadron_Weaponmaster
+  17985772:
+    script: Squadron_Combatant
+  17985773:
+    script: Squadron_Magister
+  17985774:
+    script: Squadron_Magician
+  17985775:
+    script: Squadron_Trickster
+  17985776:
+    script: Lithicthrower_Image
+  17985777:
+    script: Squadron_Weaponmaster
+  17985778:
+    script: Squadron_Combatant
+  17985779:
+    script: Squadron_Shadowstalker
+  17985780:
+    script: Lithicthrower_Image
+  17985781:
+    script: Squadron_Magister
+  17985782:
+    script: Squadron_Magister
+  17985783:
+    script: Squadron_Magician
+  17985784:
+    script: Squadron_Cavalier
+  17985785:
+    script: Squadrons_Wyvern
+  17985786:
+    script: Lithicthrower_Image
+  17985787:
+    script: Squadron_Trickster
+  17985788:
+    script: Squadron_Trickster
+  17985789:
+    script: Squadron_Shadowstalker
+  17985790:
+    script: Squadron_Scallywag
+  17985791:
+    script: Lithicthrower_Image
+  17985792:
+    script: Squadron_Mender
+  17985793:
+    script: Squadrons_Avatar
+  17985794:
+    script: Squadron_Magister
+  17985795:
+    script: Squadron_Magician
+  17985796:
+    script: Squadron_Magician
+  17985797:
+    script: Lithicthrower_Image
+  17985798:
+    script: Squadron_Weaponmaster
+  17985799:
+    script: Squadron_Combatant
+  17985800:
+    script: Squadron_Cavalier
+  17985801:
+    script: Squadrons_Wyvern
+  17985802:
+    script: Squadron_Harnesser
+  17985803:
+    script: Squadrons_Wasp
+  17985804:
+    script: Squadron_Trickster
+  17985805:
+    script: Lithicthrower_Image
+  17985806:
+    script: Squadron_Magister
+  17985807:
+    script: Squadron_Magician
+  17985808:
+    script: Squadron_Balladeer
+  17985809:
+    script: Squadron_Shadowstalker
+  17985810:
+    script: Lithicthrower_Image
+  17985811:
+    script: Squadron_Weaponmaster
+  17985812:
+    script: Squadron_Weaponmaster
+  17985813:
+    script: Squadron_Combatant
+  17985814:
+    script: Squadron_Combatant
+  17985815:
+    script: Squadron_Magician
+  17985816:
+    script: Squadron_Magician
+  17985817:
+    script: Lithicthrower_Image
+  17985818:
+    script: Squadron_Magister
+  17985819:
+    script: Squadron_Magister
+  17985820:
+    script: Squadron_Trickster
+  17985821:
+    script: Squadron_Trickster
+  17985822:
+    script: Squadron_Scallywag
+  17985823:
+    script: Squadron_Scallywag
+  17985824:
+    script: Lithicthrower_Image
+  17985825:
+    script: Squadron_Mender
+  17985826:
+    script: Squadrons_Avatar
+  17985827:
+    script: Squadron_Balladeer
+  17985828:
+    script: Squadron_Balladeer
+  17985829:
+    script: Squadron_Shadowstalker
+  17985830:
+    script: Squadron_Shadowstalker
+  17985831:
+    script: Lithicthrower_Image
+  17985832:
+    script: Squadron_Cavalier
+  17985833:
+    script: Squadrons_Wyvern
+  17985834:
+    script: Squadron_Magister
+  17985835:
+    script: Squadron_Magician
+  17985836:
+    script: Squadron_Balladeer
+  17985837:
+    script: Squadron_Scallywag
+  17985838:
+    script: Lithicthrower_Image
+  17985839:
+    script: Squadron_Cavalier
+  17985840:
+    script: Squadrons_Wyvern
+  17985841:
+    script: Squadron_Magister
+  17985842:
+    script: Squadron_Magician
+  17985843:
+    script: Squadron_Balladeer
+  17985844:
+    script: Squadron_Scallywag
+  17985845:
+    script: Lithicthrower_Image
+  17985846:
+    script: Squadron_Weaponmaster
+  17985847:
+    script: Squadron_Magister
+  17985848:
+    script: Squadron_Magician
+  17985849:
+    script: Squadron_Trickster
+  17985850:
+    script: Squadron_Balladeer
+  17985851:
+    script: Squadron_Harnesser
+  17985852:
+    script: Squadrons_Wasp
+  17985853:
+    script: Lithicthrower_Image
+  17985854:
+    script: Squadron_Weaponmaster
+  17985855:
+    script: Squadron_Magister
+  17985856:
+    script: Squadron_Magician
+  17985857:
+    script: Squadron_Trickster
+  17985858:
+    script: Squadron_Balladeer
+  17985859:
+    script: Squadron_Mender
+  17985860:
+    script: Squadrons_Avatar
+  17985861:
+    script: Lithicthrower_Image
+  17985862:
+    script: Squadron_Weaponmaster
+  17985863:
+    script: Squadron_Combatant
+  17985864:
+    script: Squadron_Mender
+  17985865:
+    script: Squadrons_Avatar
+  17985866:
+    script: Squadron_Magister
+  17985867:
+    script: Squadron_Magician
+  17985868:
+    script: Squadron_Trickster
+  17985869:
+    script: Lithicthrower_Image
+  17985870:
+    script: Squadron_Harnesser
+  17985871:
+    script: Squadrons_Wasp
+  17985872:
+    script: Squadron_Balladeer
+  17985873:
+    script: Squadron_Shadowstalker
+  17985874:
+    script: Squadron_Scallywag
+  17985875:
+    script: Lithicthrower_Image
+  17985876:
+    script: Fighter_Leader
+  17985877:
+    script: Lithicthrower_Image
+  17985878:
+    script: Healer_Leader
+  17985879:
+    script: Leaders_Avatar
+  17985880:
+    script: Chevalier_Leader
+  17985881:
+    script: Leaders_Wyvern
+  17985882:
+    script: Lithicthrower_Image
+  17985883:
+    script: Brother_Leader
+  17985884:
+    script: Domesticator_Leader
+  17985885:
+    script: Leaders_Gnat
+  17985886:
+    script: Lithicthrower_Image
+  17985887:
+    script: Magus_Leader
+  17985888:
+    script: Assassin_Leader
+  17985889:
+    script: Lithicthrower_Image
+  17985890:
+    script: Pickpocket_Leader
+  17985891:
+    script: Joculator_Leader
+  17985892:
+    script: Lithicthrower_Image
+  17985893:
+    script: Shaman_Leader
+  17985894:
+    script: Freebooter_Leader
+  17985895:
+    script: KaRho_Fearsinger
+  17985896:
+    script: Lithicthrower_Image
+  17985897:
+    script: Regiment_Weaponmaster
+  17985898:
+    script: Regiment_Combatant
+  17985899:
+    script: Regiment_Mender
+  17985900:
+    script: Regiments_Avatar
+  17985901:
+    script: Regiment_Magister
+  17985902:
+    script: Regiment_Magician
+  17985903:
+    script: Lithicthrower_Image
+  17985904:
+    script: Regiment_Trickster
+  17985905:
+    script: Regiment_Cavalier
+  17985906:
+    script: Regiments_Wyvern
+  17985907:
+    script: Regiment_Balladeer
+  17985908:
+    script: Regiment_Shadowstalker
+  17985909:
+    script: Lithicthrower_Image
+  17985910:
+    script: Regiment_Trickster
+  17985911:
+    script: Regiment_Cavalier
+  17985912:
+    script: Regiments_Wyvern
+  17985913:
+    script: Regiment_Balladeer
+  17985914:
+    script: Regiment_Shadowstalker
+  17985915:
+    script: Lithicthrower_Image
+  17985916:
+    script: Regiment_Weaponmaster
+  17985917:
+    script: Regiment_Combatant
+  17985918:
+    script: Regiment_Trickster
+  17985919:
+    script: Regiment_Shadowstalker
+  17985920:
+    script: Lithicthrower_Image
+  17985921:
+    script: Regiment_Magister
+  17985922:
+    script: Regiment_Magician
+  17985923:
+    script: Regiment_Balladeer
+  17985924:
+    script: Regiment_Scallywag
+  17985925:
+    script: Lithicthrower_Image
+  17985926:
+    script: Regiment_Weaponmaster
+  17985927:
+    script: Regiment_Mender
+  17985928:
+    script: Regiments_Avatar
+  17985929:
+    script: Regiment_Cavalier
+  17985930:
+    script: Regiments_Wyvern
+  17985931:
+    script: Regiment_Magister
+  17985932:
+    script: Lithicthrower_Image
+  17985933:
+    script: Regiment_Weaponmaster
+  17985934:
+    script: Regiment_Balladeer
+  17985935:
+    script: Regiment_Shadowstalker
+  17985936:
+    script: Regiment_Scallywag
+  17985937:
+    script: Lithicthrower_Image
+  17985938:
+    script: Regiment_Weaponmaster
+  17985939:
+    script: Regiment_Weaponmaster
+  17985940:
+    script: Regiment_Magister
+  17985941:
+    script: Lithicthrower_Image
+  17985942:
+    script: Regiment_Combatant
+  17985943:
+    script: Regiment_Combatant
+  17985944:
+    script: Regiment_Magician
+  17985945:
+    script: Lithicthrower_Image
+  17985946:
+    script: Regiment_Trickster
+  17985947:
+    script: Regiment_Trickster
+  17985948:
+    script: Regiment_Mender
+  17985949:
+    script: Regiments_Avatar
+  17985950:
+    script: Lithicthrower_Image
+  17985951:
+    script: Regiment_Shadowstalker
+  17985952:
+    script: Regiment_Shadowstalker
+  17985953:
+    script: Regiment_Balladeer
+  17985954:
+    script: Lithicthrower_Image
+  17985955:
+    script: Regiment_Magister
+  17985956:
+    script: Regiment_Magister
+  17985957:
+    script: Regiment_Scallywag
+  17985958:
+    script: Lithicthrower_Image
+  17985959:
+    script: Regiment_Magician
+  17985960:
+    script: Regiment_Magician
+  17985961:
+    script: Regiment_Cavalier
+  17985962:
+    script: Regiments_Wyvern
+  17985963:
+    script: Lithicthrower_Image
+  17985964:
+    script: Regiment_Weaponmaster
+  17985965:
+    script: Regiment_Magister
+  17985966:
+    script: Regiment_Magician
+  17985967:
+    script: Lithicthrower_Image
+  17985968:
+    script: Regiment_Cavalier
+  17985969:
+    script: Regiments_Wyvern
+  17985970:
+    script: Regiment_Mender
+  17985971:
+    script: Regiments_Avatar
+  17985972:
+    script: Regiment_Harnesser
+  17985973:
+    script: Regiments_Fly
+  17985974:
+    script: Regiment_Magister
+  17985975:
+    script: Lithicthrower_Image
+  17985976:
+    script: Regiment_Weaponmaster
+  17985977:
+    script: Regiment_Combatant
+  17985978:
+    script: Regiment_Trickster
+  17985979:
+    script: Regiment_Shadowstalker
+  17985980:
+    script: Lithicthrower_Image
+  17985981:
+    script: Regiment_Weaponmaster
+  17985982:
+    script: Regiment_Mender
+  17985983:
+    script: Regiments_Avatar
+  17985984:
+    script: Regiment_Balladeer
+  17985985:
+    script: Regiment_Scallywag
+  17985986:
+    script: Lithicthrower_Image
+  17985987:
+    script: Regiment_Combatant
+  17985988:
+    script: Regiment_Mender
+  17985989:
+    script: Regiments_Avatar
+  17985990:
+    script: Regiment_Magister
+  17985991:
+    script: Regiment_Magician
+  17985992:
+    script: Lithicthrower_Image
+  17985993:
+    script: Regiment_Weaponmaster
+  17985994:
+    script: Regiment_Combatant
+  17985995:
+    script: Regiment_Magister
+  17985996:
+    script: Regiment_Magician
+  17985997:
+    script: Regiment_Trickster
+  17985998:
+    script: Regiment_Balladeer
+  17985999:
+    script: Lithicthrower_Image
+  17986000:
+    script: Regiment_Magister
+  17986001:
+    script: Regiment_Magician
+  17986002:
+    script: Regiment_Harnesser
+  17986003:
+    script: Regiments_Fly
+  17986004:
+    script: Regiment_Scallywag
+  17986005:
+    script: Lithicthrower_Image
+  17986006:
+    script: Regiment_Weaponmaster
+  17986007:
+    script: Regiment_Combatant
+  17986008:
+    script: Regiment_Mender
+  17986009:
+    script: Regiments_Avatar
+  17986010:
+    script: Regiment_Trickster
+  17986011:
+    script: Lithicthrower_Image
+  17986012:
+    script: Regiment_Mender
+  17986013:
+    script: Regiments_Avatar
+  17986014:
+    script: Regiment_Magister
+  17986015:
+    script: Regiment_Magician
+  17986016:
+    script: Regiment_Scallywag
+  17986017:
+    script: Lithicthrower_Image
+  17986018:
+    script: Regiment_Magister
+  17986019:
+    script: Regiment_Magician
+  17986020:
+    script: Regiment_Harnesser
+  17986021:
+    script: Regiments_Fly
+  17986022:
+    script: Regiment_Balladeer
+  17986023:
+    script: Regiment_Shadowstalker
+  17986024:
+    script: Regiment_Scallywag
+  17986025:
+    script: Lithicthrower_Image
+  17986026:
+    script: Regiment_Weaponmaster
+  17986027:
+    script: Regiment_Weaponmaster
+  17986028:
+    script: Regiment_Magister
+  17986029:
+    script: Regiment_Magister
+  17986030:
+    script: Lithicthrower_Image
+  17986031:
+    script: Regiment_Combatant
+  17986032:
+    script: Regiment_Combatant
+  17986033:
+    script: Regiment_Trickster
+  17986034:
+    script: Regiment_Trickster
+  17986035:
+    script: Lithicthrower_Image
+  17986036:
+    script: Regiment_Magician
+  17986037:
+    script: Regiment_Magician
+  17986038:
+    script: Regiment_Shadowstalker
+  17986039:
+    script: Regiment_Shadowstalker
+  17986040:
+    script: Lithicthrower_Image
+  17986041:
+    script: Regiment_Balladeer
+  17986042:
+    script: Regiment_Balladeer
+  17986043:
+    script: Regiment_Scallywag
+  17986044:
+    script: Regiment_Scallywag
+  17986045:
+    script: Lithicthrower_Image
+  17986046:
+    script: Regiment_Mender
+  17986047:
+    script: Regiments_Avatar
+  17986048:
+    script: Regiment_Shadowstalker
+  17986049:
+    script: Regiment_Scallywag
+  17986050:
+    script: Lithicthrower_Image
+  17986051:
+    script: Regiment_Cavalier
+  17986052:
+    script: Regiments_Wyvern
+  17986053:
+    script: Regiment_Magister
+  17986054:
+    script: Regiment_Magician
+  17986055:
+    script: Lithicthrower_Image
+  17986056:
+    script: Regiment_Harnesser
+  17986057:
+    script: Regiments_Fly
+  17986058:
+    script: Regiment_Balladeer
+  17986059:
+    script: Regiment_Scallywag
+  17986060:
+    script: Lithicthrower_Image
+  17986061:
+    script: Regiment_Weaponmaster
+  17986062:
+    script: Regiment_Combatant
+  17986063:
+    script: Regiment_Shadowstalker
+  17986064:
+    script: Lithicthrower_Image
+  17986065:
+    script: Regiment_Weaponmaster
+  17986066:
+    script: Regiment_Combatant
+  17986067:
+    script: Regiment_Mender
+  17986068:
+    script: Regiments_Avatar
+  17986069:
+    script: Regiment_Trickster
+  17986070:
+    script: Regiment_Balladeer
+  17986071:
+    script: Regiment_Scallywag
+  17986072:
+    script: Lithicthrower_Image
+  17986073:
+    script: Regiment_Combatant
+  17986074:
+    script: Regiment_Magister
+  17986075:
+    script: Regiment_Magician
+  17986076:
+    script: Regiment_Trickster
+  17986077:
+    script: Lithicthrower_Image
+  17986078:
+    script: Regiment_Weaponmaster
+  17986079:
+    script: Regiment_Combatant
+  17986080:
+    script: Regiment_Trickster
+  17986081:
+    script: Regiment_Balladeer
+  17986082:
+    script: Lithicthrower_Image
+  17986083:
+    script: Regiment_Mender
+  17986084:
+    script: Regiments_Avatar
+  17986085:
+    script: Regiment_Cavalier
+  17986086:
+    script: Regiments_Wyvern
+  17986087:
+    script: Regiment_Harnesser
+  17986088:
+    script: Regiments_Fly
+  17986089:
+    script: Regiment_Weaponmaster
+  17986090:
+    script: Lithicthrower_Image
+  17986091:
+    script: Regiment_Magister
+  17986092:
+    script: Regiment_Magician
+  17986093:
+    script: Regiment_Shadowstalker
+  17986094:
+    script: Regiment_Scallywag
+  17986095:
+    script: Lithicthrower_Image
+  17986096:
+    script: Regiment_Weaponmaster
+  17986097:
+    script: Regiment_Combatant
+  17986098:
+    script: Regiment_Magister
+  17986099:
+    script: Regiment_Magister
+  17986100:
+    script: Regiment_Magician
+  17986101:
+    script: Regiment_Magician
+  17986102:
+    script: Lithicthrower_Image
+  17986103:
+    script: Regiment_Trickster
+  17986104:
+    script: Regiment_Shadowstalker
+  17986105:
+    script: Regiment_Magister
+  17986106:
+    script: Regiment_Magister
+  17986107:
+    script: Regiment_Magician
+  17986108:
+    script: Regiment_Magician
+  17986109:
+    script: Lithicthrower_Image
+  17986110:
+    script: Regiment_Cavalier
+  17986111:
+    script: Regiments_Wyvern
+  17986112:
+    script: Regiment_Harnesser
+  17986113:
+    script: Regiments_Fly
+  17986114:
+    script: Regiment_Balladeer
+  17986115:
+    script: Regiment_Balladeer
+  17986116:
+    script: Regiment_Scallywag
+  17986117:
+    script: Regiment_Scallywag
+  17986118:
+    script: Lithicthrower_Image
+  17986119:
+    script: Regiment_Mender
+  17986120:
+    script: Regiments_Avatar
+  17986121:
+    script: Regiment_Trickster
+  17986122:
+    script: Regiment_Trickster
+  17986123:
+    script: Regiment_Balladeer
+  17986124:
+    script: Lithicthrower_Image
+  17986125:
+    script: Regiment_Magister
+  17986126:
+    script: Regiment_Magician
+  17986127:
+    script: Regiment_Scallywag
+  17986128:
+    script: Lithicthrower_Image
+  17986129:
+    script: Regiment_Weaponmaster
+  17986130:
+    script: Regiment_Combatant
+  17986131:
+    script: Regiment_Mender
+  17986132:
+    script: Regiments_Avatar
+  17986133:
+    script: Regiment_Magister
+  17986134:
+    script: Lithicthrower_Image
+  17986135:
+    script: Regiment_Magician
+  17986136:
+    script: Regiment_Trickster
+  17986137:
+    script: Regiment_Cavalier
+  17986138:
+    script: Regiments_Wyvern
+  17986139:
+    script: Regiment_Balladeer
+  17986140:
+    script: Regiment_Shadowstalker
+  17986141:
+    script: Lithicthrower_Image
+  17986142:
+    script: Regiment_Harnesser
+  17986143:
+    script: Regiments_Fly
+  17986144:
+    script: Regiment_Balladeer
+  17986145:
+    script: Regiment_Shadowstalker
+  17986146:
+    script: Regiment_Scallywag
+  17986147:
+    script: Lithicthrower_Image
+  17986148:
+    script: Regiment_Weaponmaster
+  17986149:
+    script: Regiment_Combatant
+  17986150:
+    script: Regiment_Trickster
+  17986151:
+    script: Regiment_Balladeer
+  17986152:
+    script: Lithicthrower_Image
+  17986153:
+    script: Regiment_Magister
+  17986154:
+    script: Regiment_Magician
+  17986155:
+    script: Regiment_Trickster
+  17986156:
+    script: Regiment_Shadowstalker
+  17986157:
+    script: Lithicthrower_Image
+  17986158:
+    script: Regiment_Trickster
+  17986159:
+    script: Regiment_Cavalier
+  17986160:
+    script: Regiments_Wyvern
+  17986161:
+    script: Regiment_Harnesser
+  17986162:
+    script: Regiments_Fly
+  17986163:
+    script: Regiment_Balladeer
+  17986164:
+    script: Regiment_Shadowstalker
+  17986165:
+    script: Lithicthrower_Image
+  17986166:
+    script: Regiment_Weaponmaster
+  17986167:
+    script: Regiment_Combatant
+  17986168:
+    script: Regiment_Magister
+  17986169:
+    script: Regiment_Magician
+  17986170:
+    script: Regiment_Trickster
+  17986171:
+    script: Regiment_Balladeer
+  17986172:
+    script: Lithicthrower_Image
+  17986173:
+    script: Regiment_Weaponmaster
+  17986174:
+    script: Regiment_Combatant
+  17986175:
+    script: Regiment_Mender
+  17986176:
+    script: Regiments_Avatar
+  17986177:
+    script: Regiment_Trickster
+  17986178:
+    script: Lithicthrower_Image
+  17986179:
+    script: Regiment_Harnesser
+  17986180:
+    script: Regiments_Fly
+  17986181:
+    script: Regiment_Balladeer
+  17986182:
+    script: Regiment_Shadowstalker
+  17986183:
+    script: Lithicthrower_Image
+  17986184:
+    script: Regiment_Weaponmaster
+  17986185:
+    script: Regiment_Combatant
+  17986186:
+    script: Regiment_Harnesser
+  17986187:
+    script: Regiments_Fly
+  17986188:
+    script: Regiment_Scallywag
+  17986189:
+    script: Lithicthrower_Image
+  17986190:
+    script: Regiment_Weaponmaster
+  17986191:
+    script: Regiment_Combatant
+  17986192:
+    script: Regiment_Trickster
+  17986193:
+    script: Regiment_Shadowstalker
+  17986194:
+    script: Lithicthrower_Image
+  17986195:
+    script: Regiment_Magister
+  17986196:
+    script: Regiment_Magician
+  17986197:
+    script: Regiment_Scallywag
+  17986198:
+    script: Lithicthrower_Image
+  17986199:
+    script: Fighter_Commander
+  17986200:
+    script: Lithicthrower_Image
+  17986201:
+    script: Brother_Commander
+  17986202:
+    script: Lithicthrower_Image
+  17986203:
+    script: Healer_Commander
+  17986204:
+    script: Commanders_Avatar
+  17986205:
+    script: Lithicthrower_Image
+  17986206:
+    script: Magus_Commander
+  17986207:
+    script: Lithicthrower_Image
+  17986208:
+    script: Shaman_Commander
+  17986209:
+    script: Lithicthrower_Image
+  17986210:
+    script: Pickpocket_Commander
+  17986211:
+    script: Lithicthrower_Image
+  17986212:
+    script: Chevalier_Commander
+  17986213:
+    script: Commanders_Wyvern
+  17986214:
+    script: Lithicthrower_Image
+  17986215:
+    script: Domesticator_Commander
+  17986216:
+    script: Commanders_Gnat
+  17986217:
+    script: Lithicthrower_Image
+  17986218:
+    script: Joculator_Commander
+  17986219:
+    script: Lithicthrower_Image
+  17986220:
+    script: Assassin_Commander
+  17986221:
+    script: Lithicthrower_Image
+  17986222:
+    script: Freebooter_Commander
+  17986223:
+    script: Fire_Circle
+  17986224:
+    script: Disjoined_Galka_qm
+  17986225:
+    script: Volte_Shinobi
+  17986226:
+    script: Volte_Warrior
+  17986227:
+    script: Volte_Monk
+  17986228:
+    script: Volte_Dark_Knight
+  17986229:
+    script: Volte_Beastmaster
+  17986230:
+    script: Voltes_Bomb
+  17986231:
+    script: Volte_Dragoon
+  17986232:
+    script: Voltes_Wyvern
+  17986233:
+    script: Volte_Summoner
+  17986234:
+    script: Voltes_Avatar
+  17986235:
+    script: Ice_Circle
+  17986236:
+    script: Disjoined_Galka_qm
+  17986237:
+    script: Volte_Cleaver
+  17986238:
+    script: Volte_Black_Mage
+  17986239:
+    script: Volte_Scholar
+  17986240:
+    script: Volte_Geomancer
+  17986241:
+    script: Voltes_Luopan
+  17986242:
+    script: Volte_Puppetmaster
+  17986243:
+    script: Voltes_Automaton
+  17986244:
+    script: Volte_Dancer
+  17986245:
+    script: Volte_Rune_Fencer
+  17986246:
+    script: Air_Circle
+  17986247:
+    script: Disjoined_Galka_qm
+  17986248:
+    script: Volte_Reaper
+  17986249:
+    script: Volte_White_Mage
+  17986250:
+    script: Volte_Bard
+  17986251:
+    script: Volte_Ranger
+  17986252:
+    script: Volte_Red_Mage
+  17986253:
+    script: Volte_Blue_Mage
+  17986254:
+    script: Volte_Corsair
+  17986255:
+    script: Earth_Circle
+  17986256:
+    script: Disjoined_Galka_qm
+  17986257:
+    script: Volte_Thief
+  17986258:
+    script: Volte_Paladin
+  17986259:
+    script: Volte_Ninja
+  17986260:
+    script: Volte_Dragoon
+  17986261:
+    script: Voltes_Wyvern
+  17986262:
+    script: Volte_Scholar
+  17986263:
+    script: Volte_Rune_Fencer
+  17986264:
+    script: Thunder_Circle
+  17986265:
+    script: Disjoined_Galka_qm
+  17986266:
+    script: Volte_Vagabond
+  17986267:
+    script: Volte_Warrior
+  17986268:
+    script: Volte_Dark_Knight
+  17986269:
+    script: Volte_Bard
+  17986270:
+    script: Volte_Samurai
+  17986271:
+    script: Volte_Summoner
+  17986272:
+    script: Voltes_Avatar
+  17986273:
+    script: Volte_Blue_Mage
+  17986274:
+    script: Water_Circle
+  17986275:
+    script: Disjoined_Galka_qm
+  17986276:
+    script: Volte_Monk
+  17986277:
+    script: Volte_Black_Mage
+  17986278:
+    script: Volte_Summoner
+  17986279:
+    script: Voltes_Avatar
+  17986280:
+    script: Volte_Red_Mage
+  17986281:
+    script: Volte_Paladin
+  17986282:
+    script: Volte_Puppetmaster
+  17986283:
+    script: Voltes_Automaton
+  17986284:
+    script: Light_Circle
+  17986285:
+    script: Disjoined_Galka_qm
+  17986286:
+    script: Volte_Fistfighter
+  17986287:
+    script: Volte_Thief
+  17986288:
+    script: Volte_Dark_Knight
+  17986289:
+    script: Volte_Beastmaster
+  17986290:
+    script: Voltes_Bomb
+  17986291:
+    script: Volte_Ranger
+  17986292:
+    script: Volte_Samurai
+  17986293:
+    script: Volte_Corsair
+  17986294:
+    script: Dark_Circle
+  17986295:
+    script: Disjoined_Galka_qm
+  17986296:
+    script: Volte_Mononofu
+  17986297:
+    script: Volte_Blue_Mage
+  17986298:
+    script: Volte_Corsair
+  17986299:
+    script: Volte_Puppetmaster
+  17986300:
+    script: Voltes_Automaton
+  17986301:
+    script: Volte_Dancer
+  17986302:
+    script: Volte_Scholar
+  17986303:
+    script: Volte_Geomancer
+  17986304:
+    script: Voltes_Luopan
+  17986305:
+    script: Volte_Priest
+  17986306:
+    script: Volte_Incanter
+  17986307:
+    script: Volte_Illusionist
+  17986308:
+    script: Volte_Crusader
+  17986309:
+    script: Volte_Trainer
+  17986310:
+    script: Voltes_Cluster
+  17986311:
+    script: Volte_Conductor
+  17986312:
+    script: Volte_Sniper
+  17986313:
+    script: Volte_Highwind
+  17986314:
+    script: Voltes_Wyvern
+  17986315:
+    script: Volte_Controller
+  17986316:
+    script: Voltes_Avatar
+  17986317:
+    script: Volte_Joiner
+  17986318:
+    script: Volte_Sailor
+  17986319:
+    script: Volte_Manipulator
+  17986320:
+    script: Voltes_Automaton
+  17986321:
+    script: Volte_Twirler
+  17986322:
+    script: Volte_Erudite
+  17986323:
+    script: Volte_Communer
+  17986324:
+    script: Voltes_Luopan
+  17986325:
+    script: Volte_Duelist
+  17986326:
+    script: Disjoined_Galka
+  17986327:
+    script: Disjoineds_Odin
+  17986328:
+    script: Volte_Warrior
+  17986329:
+    script: Volte_Monk
+  17986330:
+    script: Volte_White_Mage
+  17986331:
+    script: Volte_Black_Mage
+  17986332:
+    script: Volte_Red_Mage
+  17986333:
+    script: Volte_Thief
+  17986334:
+    script: Volte_Paladin
+  17986335:
+    script: Volte_Dark_Knight
+  17986336:
+    script: Volte_Beastmaster
+  17986337:
+    script: Voltes_Bomb
+  17986338:
+    script: Volte_Bard
+  17986339:
+    script: Volte_Ranger
+  17986340:
+    script: Volte_Samurai
+  17986341:
+    script: Volte_Ninja
+  17986342:
+    script: Volte_Dragoon
+  17986343:
+    script: Voltes_Wyvern
+  17986344:
+    script: Volte_Summoner
+  17986345:
+    script: Voltes_Avatar
+  17986346:
+    script: Volte_Blue_Mage
+  17986347:
+    script: Volte_Corsair
+  17986348:
+    script: Volte_Puppetmaster
+  17986349:
+    script: Voltes_Automaton
+  17986350:
+    script: Volte_Dancer
+  17986351:
+    script: Volte_Scholar
+  17986352:
+    script: Volte_Geomancer
+  17986353:
+    script: Voltes_Luopan
+  17986354:
+    script: Volte_Rune_Fencer

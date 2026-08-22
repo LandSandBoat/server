@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z2u0:
+    from:  [-558.569, -7.049, 688.049]
+    to:    west_ronfaure
+    at:    [-559.963, -7.062, -602.479, 4.712389]
+    scale: [3.000, 15.000]
+
+  z2u2:
+    from:  [801.831, 24.326, -37.618]
+    to:    jugner_forest
+    at:    [-583.857, -9.344, -441.110]
+    scale: [1.000, 10.000]
+
+  z2u4:
+    from:  [160.169, 24.326, -764.007]
+    to:    valkurm_dunes
+    at:    [760.069, -9.949, 409.269, 1.570796]
+    scale: [1.000, 6.000]
+
+  z2u6:
+    from:  [-276.649, 20.594, 99.618]
+    to:    ordelles_caves
+    at:    [-76.839, -1.696, 659.969, 3.141593]
+    scale: [1.000, 4.000]
+
+  z2u8:
+    from:  [-60.125, 27.231, 148.001]
+    to:    ordelles_caves
+    at:    [179.906, 30.349, 596.605, 1.570796]
+    scale: [1.000, 4.000]
+
+  z2ua:
+    from:  [59.001, 36.459, -312.493]
+    to:    ordelles_caves
+    at:    [-200.326, -29.608, -219.847]
+    scale: [1.000, 4.000]

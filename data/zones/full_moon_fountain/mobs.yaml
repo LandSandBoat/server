@@ -1,0 +1,1233 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ace_of_Batons:
+    id:            30
+    species:       batons
+    type:          [notorious, battlefield]
+    spell_list_id: 556
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ace_of_batons_card
+
+  Ace_of_Batons_Large:
+    id:            7263
+    display_name:  Ace_of_Batons
+    species:       batons
+    type:          [notorious, battlefield]
+    spell_list_id: 556
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 1155
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ace_of_batons_card
+
+  Ace_of_Coins:
+    id:            31
+    species:       coins
+    type:          [notorious, battlefield]
+    spell_list_id: 557
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ace_of_coins_card
+
+  Ace_of_Coins_Large:
+    id:            7265
+    display_name:  Ace_of_Coins
+    species:       coins
+    type:          [notorious, battlefield]
+    spell_list_id: 557
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 1155
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ace_of_coins_card
+
+  Ace_of_Cups:
+    id:            32
+    species:       cups
+    type:          [notorious, battlefield]
+    spell_list_id: 558
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ace_of_cups_card
+
+  Ace_of_Cups_Large:
+    id:            7262
+    display_name:  Ace_of_Cups
+    species:       cups
+    type:          [notorious, battlefield]
+    spell_list_id: 558
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 1155
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ace_of_cups_card
+
+  Ace_of_Swords:
+    id:            33
+    species:       swords
+    type:          [notorious, battlefield]
+    spell_list_id: 559
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ace_of_swords_card
+
+  Ace_of_Swords_Large:
+    id:            7264
+    display_name:  Ace_of_Swords
+    species:       swords
+    type:          [notorious, battlefield]
+    spell_list_id: 559
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 431
+        entity_flags: 1155
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_rare
+          item:   ace_of_swords_card
+
+  Ajido-Marujido:
+    id:            75
+    species:       tarutaru
+    type:          [battlefield]
+    spell_list_id: 134
+    skill_list_id: 481
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      render:
+        look:
+          type:  standard
+          model: 775
+        entity_flags:  3
+        name_vis:      2
+        name_prefix:  40
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:   600
+        mp: 10000
+    allegiance: player
+
+  Carbuncle_Prime:
+    id:            636
+    species:       carbuncle
+    type:          [notorious, battlefield]
+    skill_list_id: 2031
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 3
+        model_size:   1
+        hitbox:       7
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+
+  Fenrir_Prime:
+    id:            1322
+    species:       fenrir
+    type:          [notorious, battlefield]
+    skill_list_id: 36
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 200
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:     3
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  3
+          water:    3
+          light:   -2
+          dark:    11
+        rank_status:
+          paralyze:     3
+          bind:         3
+          silence:      3
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 792
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+        mp: 12500
+
+  Garuda_Prime_WTB:
+    id:            1473
+    display_name:  Garuda_Prime
+    species:       garuda
+    type:          [notorious, battlefield]
+    skill_list_id: 2026
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -3
+          wind:    -3
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Ifrit_Prime_WTB:
+    id:            2050
+    display_name:  Ifrit_Prime
+    species:       ifrit
+    type:          [notorious, battlefield]
+    skill_list_id: 2013
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     11
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:   -3
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:      4
+          slow:         4
+          poison:      -3
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Leviathan_Prime_WTB:
+    id:            2402
+    display_name:  Leviathan_Prime
+    species:       leviathan
+    type:          [notorious, battlefield]
+    skill_list_id: 2028
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    11
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder: -3
+          water:   -3
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:      -3
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Ramuh_Prime_WTB:
+    id:            3317
+    display_name:  Ramuh_Prime
+    species:       ramuh
+    type:          [notorious, battlefield]
+    skill_list_id: 2027
+    attributes:
+      combat:
+        skill: staff
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     4
+          earth:   -3
+          thunder: -3
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:        -3
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Shiva_Prime_WTB:
+    id:            3607
+    display_name:  Shiva_Prime
+    species:       shiva
+    type:          [notorious, battlefield]
+    skill_list_id: 2025
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    11
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     11
+          slow:         4
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Tatzlwurm:
+    id:            3851
+    species:       wyvern
+    type:          [battlefield]
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 133
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Titan_Prime_WTB:
+    id:            3931
+    display_name:  Titan_Prime
+    species:       titan
+    type:          [notorious, battlefield]
+    skill_list_id: 2029
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:    -3
+          earth:   -3
+          thunder: 11
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -3
+          slow:        -3
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+  Yali:
+    id:            4462
+    species:       manticore
+    type:          [battlefield]
+    spell_list_id: 135
+    skill_list_id: 179
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags: 133
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+spawns:
+  17473537:
+    template: Fenrir_Prime
+    at:       [340.000, 47.000, -337.000, 65]
+    level:    [80, 80]
+  17473538:
+    template: Fenrir_Prime
+    at:       [-60.097, 9.000, 62.967, 65]
+    level:    [80, 80]
+  17473539:
+    template: Fenrir_Prime
+    at:       [-379.943, -53.000, 422.974, 65]
+    level:    [80, 80]
+  17473540:
+    template: Ace_of_Cups_Large
+    script:   Ace_of_Cups
+    at:       [344.000, 48.000, -341.000, 61]
+    level:    [73, 75]
+  17473541:
+    template: Ace_of_Batons_Large
+    script:   Ace_of_Batons
+    at:       [335.000, 48.000, -341.000, 60]
+    level:    [73, 75]
+  17473542:
+    template: Ace_of_Swords_Large
+    script:   Ace_of_Swords
+    at:       [338.000, 48.000, -341.000, 60]
+    level:    [73, 75]
+  17473543:
+    template: Ace_of_Coins_Large
+    script:   Ace_of_Coins
+    at:       [341.000, 48.000, -341.000, 60]
+    level:    [73, 75]
+  17473544:
+    template: Tatzlwurm
+    at:       [360.000, 48.000, -350.000, 85]
+    level:    [75, 75]
+  17473545:
+    template: Yali
+    at:       [318.000, 48.000, -350.000, 36]
+    level:    [75, 75]
+  17473546:
+    template: Ace_of_Cups
+    at:       [-56.097, 10.000, 58.967, 61]
+    level:    [73, 75]
+  17473547:
+    template: Ace_of_Batons
+    at:       [-65.097, 10.000, 58.967, 60]
+    level:    [73, 75]
+  17473548:
+    template: Ace_of_Swords
+    at:       [-62.097, 10.000, 58.967, 60]
+    level:    [73, 75]
+  17473549:
+    template: Ace_of_Coins
+    at:       [-59.097, 10.000, 58.967, 60]
+    level:    [73, 75]
+  17473550:
+    template: Tatzlwurm
+    at:       [-40.097, 10.000, 49.967, 85]
+    level:    [75, 75]
+  17473551:
+    template: Yali
+    at:       [-82.097, 10.000, 49.967, 36]
+    level:    [75, 75]
+  17473552:
+    template: Ace_of_Cups
+    at:       [-375.943, -52.000, 418.974, 61]
+    level:    [73, 75]
+  17473553:
+    template: Ace_of_Batons
+    at:       [-384.943, -52.000, 418.974, 60]
+    level:    [73, 75]
+  17473554:
+    template: Ace_of_Swords
+    at:       [-381.943, -52.000, 418.974, 60]
+    level:    [73, 75]
+  17473555:
+    template: Ace_of_Coins
+    at:       [-378.943, -52.000, 418.974, 60]
+    level:    [73, 75]
+  17473556:
+    template: Tatzlwurm
+    at:       [-359.943, -52.000, 409.974, 85]
+    level:    [75, 75]
+  17473557:
+    template: Yali
+    at:       [-401.943, -52.000, 409.974, 36]
+    level:    [75, 75]
+  17473558:
+    template: Carbuncle_Prime
+    at:       [340.000, 46.907, -340.000, 64]
+    level:    [80, 85]
+  17473559:
+    template: Carbuncle_Prime
+    at:       [338.606, 47.236, -344.516, 46]
+    level:    [80, 85]
+  17473560:
+    template: Carbuncle_Prime
+    at:       [341.109, 47.301, -345.059, 110]
+    level:    [80, 85]
+  17473561:
+    template: Carbuncle_Prime
+    at:       [337.198, 47.342, -345.470, 22]
+    level:    [80, 85]
+  17473562:
+    template: Carbuncle_Prime
+    at:       [342.070, 47.405, -346.664, 136]
+    level:    [80, 85]
+  17473563:
+    template: Ifrit_Prime_WTB
+    script:   Ifrit_Prime
+    at:       [339.127, 47.288, -350.148, 17]
+    level:    [80, 85]
+  17473564:
+    template: Shiva_Prime_WTB
+    script:   Shiva_Prime
+    at:       [339.063, 47.257, -348.851, 12]
+    level:    [80, 85]
+  17473565:
+    template: Garuda_Prime_WTB
+    script:   Garuda_Prime
+    at:       [338.257, 47.227, -344.050, 45]
+    level:    [80, 85]
+  17473566:
+    template: Titan_Prime_WTB
+    script:   Titan_Prime
+    at:       [336.691, 47.352, -344.315, 30]
+    level:    [80, 85]
+  17473567:
+    template: Ramuh_Prime_WTB
+    script:   Ramuh_Prime
+    at:       [337.710, 47.638, -345.801, 25]
+    level:    [80, 85]
+  17473568:
+    template: Leviathan_Prime_WTB
+    script:   Leviathan_Prime
+    at:       [340.472, 47.271, -349.137, 15]
+    level:    [80, 85]
+  17473569:
+    template: Carbuncle_Prime
+    at:       [-60.000, 9.000, 63.000, 65]
+    level:    [80, 85]
+  17473570:
+    template: Carbuncle_Prime
+    at:       [-63.000, 9.000, 60.000, 46]
+    level:    [80, 85]
+  17473571:
+    template: Carbuncle_Prime
+    at:       [-66.000, 9.000, 57.000, 110]
+    level:    [80, 85]
+  17473572:
+    template: Carbuncle_Prime
+    at:       [-57.000, 9.000, 60.000, 22]
+    level:    [80, 85]
+  17473573:
+    template: Carbuncle_Prime
+    at:       [-54.000, 9.000, 57.000, 136]
+    level:    [80, 85]
+  17473574:
+    template: Ifrit_Prime_WTB
+    script:   Ifrit_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473575:
+    template: Shiva_Prime_WTB
+    script:   Shiva_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473576:
+    template: Garuda_Prime_WTB
+    script:   Garuda_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473577:
+    template: Titan_Prime_WTB
+    script:   Titan_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473578:
+    template: Ramuh_Prime_WTB
+    script:   Ramuh_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473579:
+    template: Leviathan_Prime_WTB
+    script:   Leviathan_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473580:
+    template: Carbuncle_Prime
+    at:       [-380.000, -53.000, 423.000, 65]
+    level:    [80, 85]
+  17473581:
+    template: Carbuncle_Prime
+    at:       [-383.000, -53.000, 420.000, 46]
+    level:    [80, 85]
+  17473582:
+    template: Carbuncle_Prime
+    at:       [-386.000, -53.000, 417.000, 110]
+    level:    [80, 85]
+  17473583:
+    template: Carbuncle_Prime
+    at:       [-377.000, -53.000, 420.000, 22]
+    level:    [80, 85]
+  17473584:
+    template: Carbuncle_Prime
+    at:       [-374.000, -53.000, 417.000, 136]
+    level:    [80, 85]
+  17473585:
+    template: Ifrit_Prime_WTB
+    script:   Ifrit_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473586:
+    template: Shiva_Prime_WTB
+    script:   Shiva_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473587:
+    template: Garuda_Prime_WTB
+    script:   Garuda_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473588:
+    template: Titan_Prime_WTB
+    script:   Titan_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473589:
+    template: Ramuh_Prime_WTB
+    script:   Ramuh_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473590:
+    template: Leviathan_Prime_WTB
+    script:   Leviathan_Prime
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 85]
+  17473591:
+    script: Clone_of_Flames
+  17473592:
+    script: Pet_Prime
+  17473593:
+    script: Clone_of_Torrents
+  17473594:
+    script: Pet_Prime
+  17473595:
+    script: Clone_of_Boulders
+  17473596:
+    script: Pet_Prime
+  17473597:
+    script: Clone_of_Gusts
+  17473598:
+    script: Pet_Prime
+  17473599:
+    script: Clone_of_Sparks
+  17473600:
+    script: Pet_Prime
+  17473601:
+    script: Clone_of_Glaciers
+  17473602:
+    script: Pet_Prime
+  17473603:
+    script: Clone_of_Lights
+  17473604:
+    script: Pet_Prime
+  17473605:
+    script: Clone_of_Shadows
+  17473606:
+    script: Pet_Prime
+  17473607:
+    script: Clone_of_Flames
+  17473608:
+    script: Pet_Prime
+  17473609:
+    script: Clone_of_Torrents
+  17473610:
+    script: Pet_Prime
+  17473611:
+    script: Clone_of_Boulders
+  17473612:
+    script: Pet_Prime
+  17473613:
+    script: Clone_of_Gusts
+  17473614:
+    script: Pet_Prime
+  17473615:
+    script: Clone_of_Sparks
+  17473616:
+    script: Pet_Prime
+  17473617:
+    script: Clone_of_Glaciers
+  17473618:
+    script: Pet_Prime
+  17473619:
+    script: Clone_of_Lights
+  17473620:
+    script: Pet_Prime
+  17473621:
+    script: Clone_of_Shadows
+  17473622:
+    script: Pet_Prime
+  17473623:
+    script: Clone_of_Flames
+  17473624:
+    script: Pet_Prime
+  17473625:
+    script: Clone_of_Torrents
+  17473626:
+    script: Pet_Prime
+  17473627:
+    script: Clone_of_Boulders
+  17473628:
+    script: Pet_Prime
+  17473629:
+    script: Clone_of_Gusts
+  17473630:
+    script: Pet_Prime
+  17473631:
+    script: Clone_of_Sparks
+  17473632:
+    script: Pet_Prime
+  17473633:
+    script: Clone_of_Glaciers
+  17473634:
+    script: Pet_Prime
+  17473635:
+    script: Clone_of_Lights
+  17473636:
+    script: Pet_Prime
+  17473637:
+    script: Clone_of_Shadows
+  17473638:
+    script: Pet_Prime
+  17473639:
+    script: Fenrir_Prime
+  17473640:
+    script: Fenrir_Prime
+  17473641:
+    script: Fenrir_Prime
+  17473642:
+    script: Fenrir_Prime
+  17473643:
+    script: Fenrir_Prime
+  17473644:
+    script: Fenrir_Prime
+  17473645:
+    script: Fenrir_Prime
+  17473646:
+    script: Fenrir_Prime
+  17473647:
+    script: Fenrir_Prime
+  17473648:
+    script: Fenrir_Prime
+  17473649:
+    script: Fenrir_Prime
+  17473650:
+    script: Fenrir_Prime
+  17473651:
+    script: Fenrir_Prime
+  17473652:
+    script: Fenrir_Prime
+  17473653:
+    script: Fenrir_Prime
+  17473654:
+    script: Carbuncle_Prime
+  17473655:
+    script: Carbuncle_Prime
+  17473656:
+    script: Carbuncle_Prime
+  17473657:
+    script: Carbuncle_Prime
+  17473658:
+    script: Carbuncle_Prime
+  17473659:
+    script: Carbuncle_Prime
+  17473660:
+    script: Carbuncle_Prime
+  17473661:
+    script: Carbuncle_Prime
+  17473662:
+    script: Carbuncle_Prime
+  17473663:
+    script: Carbuncle_Prime
+  17473664:
+    script: Carbuncle_Prime
+  17473665:
+    script: Carbuncle_Prime
+  17473666:
+    script: Carbuncle_Prime
+  17473667:
+    script: Carbuncle_Prime
+  17473668:
+    script: Carbuncle_Prime

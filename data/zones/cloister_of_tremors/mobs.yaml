@@ -1,0 +1,505 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Earth_Elemental_T:
+    id:            6140
+    display_name:  Earth_Elemental
+    species:       earth_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 11
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+  Galgalim:
+    id:            1451
+    species:       hecteye
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+        mp: 6000
+
+  Titan_Prime_ASA:
+    id:           7042
+    display_name: Titan_Prime
+    species:      titan
+    type:         [notorious, battlefield]
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    -3
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     -3
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Titan_Prime_HTBF:
+    id:            6954
+    display_name:  Titan_Prime
+    species:       titan
+    type:          [notorious, battlefield]
+    skill_list_id: 321
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    -3
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     -3
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 131
+        name_prefix:   32
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Titan_Prime_TBE:
+    id:            4644
+    display_name:  Titan_Prime
+    species:       titan
+    type:          [notorious, battlefield]
+    skill_list_id: 321
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    -3
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     -3
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Titan_Prime_TSTBE:
+    id:            7053
+    display_name:  Titan_Prime
+    species:       titan
+    type:          [notorious, battlefield]
+    skill_list_id: 1181
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   -3
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      -3
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 700
+
+  Titan_Prime_WTB:
+    id:            3931
+    display_name:  Titan_Prime
+    species:       titan
+    type:          [notorious, battlefield]
+    skill_list_id: 2029
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:    -3
+          earth:   -3
+          thunder: 11
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -3
+          slow:        -3
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+spawns:
+  17633281:
+    template: Titan_Prime_TBE
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [60, 60]
+  17633282:
+    template: Titan_Prime_TBE
+    at:       [22.907, -19.005, 33.085, 105]
+    level:    [60, 60]
+  17633283:
+    template: Titan_Prime_TBE
+    at:       [-376.962, -79.004, 513.055, 105]
+    level:    [60, 60]
+  17633284:
+    template: Galgalim
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [45, 45]
+  17633285:
+    template: Galgalim
+    at:       [22.907, -19.005, 33.085, 105]
+    level:    [45, 45]
+  17633286:
+    template: Galgalim
+    at:       [-376.962, -79.004, 513.055, 105]
+    level:    [45, 45]
+  17633287:
+    template: Titan_Prime_TSTBE
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [20, 20]
+  17633288:
+    template: Titan_Prime_TSTBE
+    at:       [22.907, -19.005, 33.085, 105]
+    level:    [20, 20]
+  17633289:
+    template: Titan_Prime_TSTBE
+    at:       [-376.962, -79.004, 513.055, 105]
+    level:    [20, 20]
+  17633290:
+    template: Titan_Prime_WTB
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [85, 85]
+  17633291:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [507.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17633292:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [499.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17633293:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [503.000, 41.000, -371.000, 105]
+    level:    [75, 75]
+  17633294:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [503.000, 41.000, -363.000, 105]
+    level:    [75, 75]
+  17633295:
+    template: Titan_Prime_WTB
+    at:       [22.907, -19.005, 33.085, 105]
+    level:    [85, 85]
+  17633296:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [26.907, -19.005, 33.085, 105]
+    level:    [75, 75]
+  17633297:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [18.907, -19.005, 33.085, 105]
+    level:    [75, 75]
+  17633298:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [22.907, -19.005, 37.085, 105]
+    level:    [75, 75]
+  17633299:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [22.907, -19.005, 29.085, 105]
+    level:    [75, 75]
+  17633300:
+    template: Titan_Prime_WTB
+    at:       [-376.962, -79.004, 513.055, 105]
+    level:    [85, 85]
+  17633301:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [-380.962, -79.004, 513.055, 105]
+    level:    [75, 75]
+  17633302:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [-372.962, -79.004, 513.055, 105]
+    level:    [75, 75]
+  17633303:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [-376.962, -79.004, 517.055, 105]
+    level:    [75, 75]
+  17633304:
+    template: Earth_Elemental_T
+    script:   Earth_Elemental
+    at:       [-376.962, -79.004, 509.055, 105]
+    level:    [75, 75]
+  17633305:
+    template: Titan_Prime_ASA
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [40, 40]
+  17633306:
+    template: Titan_Prime_ASA
+    at:       [22.907, -19.005, 33.085, 105]
+    level:    [40, 40]
+  17633307:
+    template: Titan_Prime_ASA
+    at:       [-376.962, -79.004, 513.055, 105]
+    level:    [40, 40]
+  17633308:
+    template: Titan_Prime_HTBF
+    at:       [502.093, 41.368, -370.085, 96]
+    level:    [99, 99]
+  17633309:
+    template: Titan_Prime_HTBF
+    at:       [498.177, 40.423, -374.814, 214]
+    level:    [99, 99]
+  17633310:
+    template: Titan_Prime_HTBF
+    at:       [499.640, 41.199, -371.075, 212]
+    level:    [99, 99]
+  17633311:
+    template: Titan_Prime_HTBF
+    at:       [498.747, 41.103, -367.936, 232]
+    level:    [99, 99]
+  17633312:
+    template: Titan_Prime_HTBF
+    at:       [516.034, 39.702, -370.181, 11]
+    level:    [99, 99]
+  17633313:
+    template: Titan_Prime_HTBF
+    at:       [22.000, -18.637, 30.000, 96]
+    level:    [99, 99]
+  17633314:
+    template: Titan_Prime_HTBF
+    at:       [18.084, -19.582, 25.271, 214]
+    level:    [99, 99]
+  17633315:
+    template: Titan_Prime_HTBF
+    at:       [19.547, -18.806, 29.010, 212]
+    level:    [99, 99]
+  17633316:
+    template: Titan_Prime_HTBF
+    at:       [18.654, -18.902, 32.149, 232]
+    level:    [99, 99]
+  17633317:
+    template: Titan_Prime_HTBF
+    at:       [35.941, -20.303, 29.904, 11]
+    level:    [99, 99]
+  17633318:
+    template: Titan_Prime_HTBF
+    at:       [-377.869, -78.636, 509.970, 96]
+    level:    [99, 99]
+  17633319:
+    template: Titan_Prime_HTBF
+    at:       [-381.785, -79.581, 505.241, 214]
+    level:    [99, 99]
+  17633320:
+    template: Titan_Prime_HTBF
+    at:       [-380.322, -78.805, 508.980, 212]
+    level:    [99, 99]
+  17633321:
+    template: Titan_Prime_HTBF
+    at:       [-381.215, -78.901, 512.119, 232]
+    level:    [99, 99]
+  17633322:
+    template: Titan_Prime_HTBF
+    at:       [-363.928, -80.302, 509.874, 11]
+    level:    [99, 99]

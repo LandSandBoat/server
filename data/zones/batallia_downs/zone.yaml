@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          114
+  night:        114
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z2x0:
+    from:  [-444.042, -16.166, -240.077]
+    to:    jugner_forest
+    at:    [584.034, -8.476, 558.296, 3.141593]
+    scale: [1.000, 10.000]
+
+  z2x2:
+    from:  [479.955, -0.786, -363.913]
+    to:    rolanberry_fields
+    at:    [-39.230, 21.178, 635.328, 1.570796]
+    scale: [1.000, 10.000]
+
+  z2x4:
+    from:  [491.918, 1.171, -159.982]
+    to:    upper_jeuno
+    at:    [-104.576, -2.286, 187.365, 1.047198]
+    scale: [1.000, 4.000]
+
+  z2x6:
+    from:  [-501.560, -40.541, 508.768]
+    to:    beaucedine_glacier
+    at:    [17.331, -2.813, -654.230, 4.712389]
+    scale: [1.000, 4.000]
+
+  z2x8:
+    from:  [-467.273, -23.040, 332.724]
+    to:    the_eldieme_necropolis
+    at:    [-438.878, -26.091, 540.004, 3.141593]
+    scale: [1.000, 4.000]
+
+  z2xa:
+    from:  [-212.725, -7.424, 132.695]
+    to:    the_eldieme_necropolis
+    at:    [-160.776, -34.077, 259.998]
+    scale: [1.000, 4.000]
+
+  z2xc:
+    from:  [52.695, 0.348, 132.701]
+    to:    the_eldieme_necropolis
+    at:    [339.992, -50.075, 321.016, 1.570796]
+    scale: [1.000, 4.000]
+
+  z2xe:
+    from:  [-135.321, -7.435, -15.526]
+    to:    the_eldieme_necropolis
+    at:    [59.989, -34.062, 160.973, 1.570796]
+    scale: [1.000, 4.000]
+
+  z2xg:
+    from:  [-224.545, -23.550, -64.537]
+    to:    the_eldieme_necropolis
+    at:    [-300.010, -26.100, 119.191, 4.712389]
+    scale: [1.000, 4.000]
+
+  z2xi:
+    from:  [132.648, 8.566, -372.663]
+    to:    the_eldieme_necropolis
+    at:    [420.035, -58.114, -119.510, 4.712389]
+    scale: [1.000, 4.000]
+
+  z2xk:
+    from:  [162.950, 21.998, -605.297]
+    to:    the_eldieme_necropolis
+    at:    [439.955, -49.607, -300.015, 3.141593]
+    scale: [1.000, 3.000]
+
+  z2xm:
+    from:  [-695.363, -15.756, 175.332]
+    to:    the_eldieme_necropolis
+    at:    [-558.931, -18.096, 99.999, 3.141593]
+    scale: [1.000, 4.000]

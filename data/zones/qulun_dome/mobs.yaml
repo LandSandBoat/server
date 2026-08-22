@@ -1,0 +1,685 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Adaman_Quadav:
+    id:            46
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 657
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 1200
+      stats:
+        hp: 4100
+    loot:
+      drops:
+        - chance: very_common
+          item:   dark_knights_testimony
+        - chance: rare
+          item:   gold_beastcoin
+      steal: gold_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Ancient_Quadav:
+    id:            125
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 649
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   warriors_testimony
+        - chance: ultra_rare
+          item:   mythril_sallet
+        - chance: ultra_rare
+          item:   mythril_gauntlets
+        - chance: ultra_rare
+          item:   mythril_cuisses
+        - chance: ultra_rare
+          item:   mythril_leggings
+      steal: gold_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Darksteel_Quadav:
+    id:            907
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 656
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   paladins_testimony
+        - chance: very_rare
+          item:   gold_beastcoin
+      steal: gold_beastcoin
+      despoil:
+        serving_of_herb_crawler_eggs: 0
+        hard-boiled_egg:              0
+
+  DePha_Unscarred:
+    id:            1022
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 649
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Diamond_Quadav:
+    id:            1034
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: club
+        delay: 265
+      jobs: [whm, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 671
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: always
+          item:   diamond
+        - chance: always
+          item:   white_mages_testimony
+        - chance: uncommon
+          item:   scroll_of_shellra_iv
+        - chance: rare
+          item:   scroll_of_raise_ii
+        - chance: uncommon
+          item:   scroll_of_regen_iii
+        - chance: uncommon
+          item:   dodge_cape
+        - chance: rare
+          item:   scroll_of_cure_v
+        - chance: very_rare
+          item:   scroll_of_curaga_iv
+      steal: gold_beastcoin
+
+  HuRhe_Marrowgorger:
+    id:            2017
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 657
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  KaGhi_Trovetaker:
+    id:            2199
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 664
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  MuZha_Infernoblade:
+    id:            2780
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: club
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 670
+        model_size:  2
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  NoBhu_Unyielding:
+    id:            2915
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 656
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Platinum_Quadav:
+    id:            3156
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 660
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: common
+          item:   beastcoin
+        - chance: rare
+          item:   gold_beastcoin
+      steal: thiefs_testimony
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Ruby_Quadav:
+    id:            3410
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [rdm, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 670
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 1200
+      stats:
+        hp: 3600
+    loot:
+      drops:
+        - chance: very_common
+          item:   red_mages_testimony
+        - chance: common
+          item:   scroll_of_shell_iv
+        - chance: very_common
+          item:   ruby
+      steal: beastcoin
+
+  Sapphire_Quadav:
+    id:            3463
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 671
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   black_mages_testimony
+        - chance: rare
+          item:   scroll_of_water_iii
+        - chance: very_rare
+          item:   scroll_of_waterga_ii
+        - chance: very_rare
+          item:   scroll_of_waterga_iii
+        - chance: very_rare
+          item:   scroll_of_water_iv
+        - chance: very_rare
+          item:   scroll_of_flood
+        - chance: ultra_rare
+          item:   black_mitts
+        - chance: ultra_rare
+          item:   white_slacks
+        - chance: ultra_rare
+          item:   moccasins
+      steal: gold_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  SoHyu_Quakemaker:
+    id:            3716
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 669
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  ZaDha_Adamantking_QD:
+    id:            6683
+    display_name:  ZaDha_Adamantking
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [whm, war]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 782
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 30000
+        mp: 42000
+    loot:
+      drops:
+        - chance: always
+          item:   platinum_beastcoin
+        - chance: always
+          item:   white_mages_testimony
+        - chance: always
+          item:   scroll_of_raise_iii
+        - chance: rare
+          item:   mistilteinn
+        - chance: very_rare
+          item:   reraiser
+        - chance: very_rare
+          item:   vile_elixir
+        - chance: very_rare
+          item:   vile_elixir_+1
+        - chance: always
+          one_of:
+            philosophers_stone:          30
+            phoenix_feather:             30
+            square_of_raxa:              10
+            damascus_ingot:             7.5
+            spool_of_malboro_fiber:     7.5
+            square_of_damascene_cloth:  7.5
+            vial_of_black_beetle_blood: 7.5
+        - chance: always
+          one_of:
+            square_of_raxa:           15.5
+            chunk_of_darksteel_ore:    6.5
+            chunk_of_gold_ore:         6.5
+            chunk_of_mythril_ore:      6.5
+            chunk_of_platinum_ore:     6.5
+            coral_fragment:            6.5
+            demon_horn:                6.5
+            ebony_log:                 6.5
+            handful_of_wyvern_scales:  6.5
+            mahogany_log:              6.5
+            petrified_log:             6.5
+            ram_horn:                  6.5
+            spool_of_gold_thread:      6.5
+            square_of_rainbow_cloth:   6.5
+      steal: platinum_beastcoin
+
+spawns:
+  17383425:
+    template: Ancient_Quadav
+    at:       [262.000, 40.000, 85.000, 124]
+    level:    [69, 72]
+  17383426:
+    template: Darksteel_Quadav
+    at:       [291.882, 39.528, 22.795, 127]
+    level:    [69, 72]
+  17383427:
+    template: Platinum_Quadav
+    at:       [306.111, 39.603, 16.437, 30]
+    level:    [69, 72]
+  17383428:
+    template: Sapphire_Quadav
+    at:       [297.294, 39.675, 15.086, 223]
+    level:    [69, 72]
+  17383429:
+    template: Ancient_Quadav
+    at:       [296.000, 40.000, 89.000, 44]
+    level:    [69, 72]
+  17383430:
+    template: Darksteel_Quadav
+    at:       [298.000, 40.000, 19.000, 25]
+    level:    [69, 72]
+  17383431:
+    template: Platinum_Quadav
+    at:       [289.000, 43.000, 79.000, 25]
+    level:    [69, 72]
+  17383432:
+    template: Sapphire_Quadav
+    at:       [306.567, 39.765, 21.833, 255]
+    level:    [69, 72]
+  17383433:
+    template: Ruby_Quadav
+    at:       [295.000, 40.000, 13.000, 127]
+    level:    [72, 74]
+  17383434:
+    template: Darksteel_Quadav
+    at:       [288.751, 41.128, 70.520, 127]
+    level:    [69, 72]
+  17383435:
+    template: Sapphire_Quadav
+    at:       [289.558, 40.808, 69.111, 69]
+    level:    [69, 72]
+  17383436:
+    template: Darksteel_Quadav
+    at:       [271.269, 41.748, 65.587, 127]
+    level:    [69, 72]
+  17383437:
+    template: Sapphire_Quadav
+    at:       [268.090, 40.768, 63.624, 57]
+    level:    [69, 72]
+  17383438:
+    template: Ancient_Quadav
+    at:       [274.419, 42.624, 69.813, 127]
+    level:    [69, 72]
+  17383439:
+    template: Platinum_Quadav
+    at:       [278.450, 42.624, 75.634, 104]
+    level:    [69, 72]
+  17383440:
+    template: Adaman_Quadav
+    at:       [283.000, 43.000, 95.000, 9]
+    level:    [72, 74]
+  17383441:
+    template: Ruby_Quadav
+    at:       [276.362, 42.624, 93.686, 127]
+    level:    [72, 74]
+  17383442:
+    template: Diamond_Quadav
+    at:       [277.930, 42.625, 96.177, 127]
+    level:    [75, 75]
+  17383443:
+    template: ZaDha_Adamantking_QD
+    script:   ZaDha_Adamantking
+    at:       [281.000, 43.000, 96.000, 127]
+    level:    [85, 85]
+  17383444:
+    template: Diamond_Quadav
+    level:    [75, 75]
+  17383445:
+    template: MuZha_Infernoblade
+    level:    [72, 75]
+  17383446:
+    template: HuRhe_Marrowgorger
+    at:       [166.130, -0.500, -20.914, 127]
+    level:    [72, 75]
+  17383447:
+    template: DePha_Unscarred
+    level:    [72, 75]
+  17383448:
+    template: SoHyu_Quakemaker
+    level:    [72, 75]
+  17383449:
+    template: KaGhi_Trovetaker
+    level:    [72, 75]
+  17383450:
+    template: NoBhu_Unyielding
+    level:    [72, 75]
+
+slots:
+  - members:
+      17383425: {} # Ancient_Quadav
+      17383426: {} # Darksteel_Quadav
+      17383427: {} # Platinum_Quadav
+  - members:
+      17383428: {} # Sapphire_Quadav
+      17383429: {} # Ancient_Quadav
+      17383430: {} # Darksteel_Quadav
+  - members:
+      17383431: {} # Platinum_Quadav
+      17383432: {} # Sapphire_Quadav
+      17383433: {} # Ruby_Quadav

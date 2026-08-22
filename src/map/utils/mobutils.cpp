@@ -27,7 +27,6 @@
 #include "ai/ai_container.h"
 #include "battleutils.h"
 #include "data/enums/mob_mod.h"
-#include "data/loader.h"
 #include "grades.h"
 #include "instance.h"
 #include "items/item_weapon.h"
@@ -37,6 +36,7 @@
 #include "packets/s2c/0x028_battle2.h"
 #include "status_effect_container.h"
 #include "trait.h"
+#include "utils/dataset_loader.h"
 #include "zone_entities.h"
 #include "zoneutils.h"
 
@@ -86,15 +86,21 @@ void LoadSpeciesData()
 
 void ApplySpecies(CMobEntity* PMob)
 {
-    const auto& species    = GetSpeciesData(PMob->m_Species);
-    const auto& attributes = species.MobAttributes;
+    ApplySpecies(PMob, GetSpeciesData(PMob->m_Species).MobAttributes);
+}
+
+// The attributes arrive already merged, so a caller with more layers than the species applies the whole chain.
+// This writes every field it covers, so a caller reading the same fields from SQL has to assign after it, not before.
+void ApplySpecies(CMobEntity* PMob, const xi::data::MobAttributesData& attributes)
+{
+    const auto& species = GetSpeciesData(PMob->m_Species);
 
     PMob->m_EcoSystem = species.Ecosystem;
     PMob->m_Family    = static_cast<uint16>(species.Family);
     PMob->m_Element   = static_cast<uint8>(attributes.Element);
 
     PMob->baseSpeed      = attributes.Speed;
-    PMob->animationSpeed = attributes.Speed;
+    PMob->animationSpeed = attributes.AnimationSpeed.value_or(attributes.Speed);
     PMob->UpdateSpeed();
 
     ApplyStatRanks(*PMob, attributes.Stats);
@@ -108,6 +114,35 @@ void ApplySpecies(CMobEntity* PMob)
                          (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
 
     PMob->setMobMod(xi::MobMod::Charmable, attributes.Charmable && !special ? 1 : 0);
+
+    for (const auto& [id, value] : attributes.Resists)
+    {
+        PMob->setModifier(id, value);
+    }
+
+    if (attributes.Behavior)
+    {
+        PMob->m_Behavior = *attributes.Behavior;
+    }
+
+    if (attributes.Immune)
+    {
+        PMob->m_Immunity = *attributes.Immune;
+    }
+
+    if (attributes.MainJob)
+    {
+        PMob->SetMJob(static_cast<uint8>(*attributes.MainJob));
+    }
+
+    if (attributes.SubJob)
+    {
+        PMob->SetSJob(static_cast<uint8>(*attributes.SubJob));
+    }
+
+    PMob->m_Aggro         = attributes.Aggressive;
+    PMob->m_Link          = static_cast<uint8>(attributes.Links);
+    PMob->m_TrueDetection = attributes.TrueDetection;
 }
 
 auto GetSpeciesData(const uint16 speciesId) -> const SpeciesInfo&
@@ -1740,7 +1775,6 @@ auto InstantiateAlly(const uint32 groupid, const xi::ZoneId zoneID, CInstance* i
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
         PMob->m_Behavior = rset->get<xi::Behavior>("behavior");
-        PMob->m_Link     = rset->get<uint8>("links");
         PMob->m_Type     = rset->get<xi::MobType>("mobType");
         PMob->m_Immunity = rset->get<xi::Immunity>("immunity");
 
@@ -1801,6 +1835,7 @@ auto InstantiateAlly(const uint32 groupid, const xi::ZoneId zoneID, CInstance* i
         PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
         PMob->m_Aggro         = rset->get<bool>("aggro");
         PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");
+        PMob->m_Link          = rset->get<uint8>("links");
         PMob->m_TrueDetection = rset->get<bool>("true_detection");
 
         if (instance)
@@ -1892,7 +1927,6 @@ auto InstantiateDynamicMob(const uint32 groupid, const xi::ZoneId groupZoneId, c
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
         PMob->m_Behavior = rset->get<xi::Behavior>("behavior");
-        PMob->m_Link     = rset->get<uint8>("links");
         PMob->m_Type     = rset->get<xi::MobType>("mobType");
         PMob->m_Immunity = rset->get<xi::Immunity>("immunity");
 
@@ -1938,6 +1972,7 @@ auto InstantiateDynamicMob(const uint32 groupid, const xi::ZoneId groupZoneId, c
         PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
         PMob->m_Aggro         = rset->get<bool>("aggro");
         PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");
+        PMob->m_Link          = rset->get<uint8>("links");
         PMob->m_TrueDetection = rset->get<bool>("true_detection");
 
         mobutils::InitializeMob(PMob);

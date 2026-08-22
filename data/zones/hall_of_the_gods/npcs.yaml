@@ -1,0 +1,508 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17805313:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17805314:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17805315:
+    script:       Yvenoile
+    display_name: Yve'noile
+    render:
+      look:
+        type:  standard
+        model: 1424
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17805316:
+    script:       Zeid
+    display_name: Zeid
+    render:
+      look:
+        type:  standard
+        model: 830
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17805317:
+    script:       Aldo
+    display_name: Aldo
+    render:
+      look:
+        type:  standard
+        model: 78
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17805318:
+    script:       _6z0
+    display_name: Cermet Grate
+    at:           [0.000, -14.302, 50.201]
+    render:
+      look:
+        type: door
+      door_id:      813315679
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17805319:
+    script:       Shimmering_Circle
+    display_name: Shimmering Circle
+    at:           [0.066, -20.693, 149.316, 63]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17805320:
+    script:       Shimmering_Circle
+    display_name: Shimmering Circle
+    at:           [0.026, 0.109, 250.731, 192]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17805321:
+    script: NPC[9]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17805322:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17805323:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17805324:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17805325:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17805326:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17805327:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17805328:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17805329:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17805330:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17805331:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [7.413, -4.083, -145.339, 152]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17805332:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [7.413, -4.083, -145.339, 152]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17805333:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805334:
+    script:       Mathilde
+    display_name: Mathilde
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  2
+        head:  4096
+        body:  8213
+        hands: 12288
+        legs:  16387
+        feet:  20488
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17805335:
+    script:       Aldo
+    display_name: Aldo
+    render:
+      look:
+        type:  standard
+        model: 78
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17805336:
+    script:       Young_Aldo
+    display_name: Young Aldo
+    render:
+      look:
+        type:  standard
+        model: 2350
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17805337:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+
+  17805338:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805339:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805340:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805341:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805342:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+
+  17805343:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805344:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805345:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805346:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805347:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805348:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         SOA
+
+  17805349:
+    script: NPC[25]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17805350:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17805351:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17805352:
+    script:       Eshantarl
+    display_name: Esha'ntarl
+    render:
+      look:
+        type:  standard
+        model: 1441
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17805353:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 2450
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17805354:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 326
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17805355:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1471
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17805356:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1468
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17805357:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1469
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17805358:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1470
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17805359:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1467
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17805360:
+    script:       Disjoined_One
+    display_name: Disjoined One
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4484
+        body:  8422
+        hands: 12518
+        legs:  16614
+        feet:  20710
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true

@@ -107,20 +107,6 @@ void getMSB(uint32* result, uint32 value)
 #endif
 }
 
-/*
-Rotations of entities are saved in uint8s, which can only hold up to a value of 255. In order to properly calculate rotations you'll need these methods to
-convert back and forth.
-*/
-float rotationToRadian(uint8 rotation)
-{
-    return (float)((rotation / 256.0f) * 2 * M_PI);
-}
-
-uint8 radianToRotation(float radian)
-{
-    return (uint8)((radian / (2 * M_PI)) * 256);
-}
-
 /****************************************************************************
  * Functions for entity-to-entity world angles, and facing differences.      *
  * Highly recommended to read our wiki page to understand these.             *

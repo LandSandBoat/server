@@ -22,7 +22,7 @@
 // Invariants merit.cpp and charutils rely on when reading data/merits.yaml.
 
 #include "map/data/datasets/merits/dataset.h"
-#include "map/data/loader.h"
+#include "map/utils/dataset_loader.h"
 
 #include <catch2/catch_test_macros.hpp>
 

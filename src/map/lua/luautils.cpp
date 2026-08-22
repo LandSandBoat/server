@@ -62,7 +62,6 @@
 
 #include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x05a_motionmes.h"
-#include "packets/s2c/0x0f9_res.h"
 
 #include "persist_batch.h"
 #include "utils/battleutils.h"
@@ -82,7 +81,10 @@
 #include "battlefield.h"
 #include "conquest_system.h"
 #include "daily_system.h"
+#include "data/datasets/zones/mobs/dataset.h"
+#include "data/datasets/zones/npcs/dataset.h"
 #include "data/enums/mob_mod.h"
+#include "data/loader.h"
 #include "fishingcontest.h"
 #include "instance.h"
 #include "ipc_client.h"
@@ -97,7 +99,6 @@
 #include "roe.h"
 #include "spell.h"
 #include "status_effect_container.h"
-#include "timetriggers.h"
 #include "trade_container.h"
 #include "transport.h"
 #include "weapon_skill.h"
@@ -107,11 +108,8 @@
 #include <common/types/hash_map.h>
 
 #include <array>
-#include <cctype>
-#include <cmath>
 #include <filesystem>
 #include <limits>
-#include <numeric>
 #include <ranges>
 #include <string>
 
@@ -1275,7 +1273,7 @@ auto CalculateExperiencePoints(CCharEntity* PMember, CMobEntity* PMob, const Cal
     return calcResult;
 }
 
-void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName)
+void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName, const ZoneEntityRecords& preloaded)
 {
     TracyZoneScoped;
 
@@ -1301,45 +1299,67 @@ void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName)
         effectiveZones.push_back(overlayRset->get<uint16>("overlay_id"));
     }
 
-    const auto idRange = [](uint16 effectiveZone) -> std::pair<uint32, uint32>
-    {
-        const uint32 idMin = (static_cast<uint32>(effectiveZone) << 12) | 0x01000000;
-        return { idMin, idMin + 0xFFF };
-    };
-
-    // Mobs
     for (auto effectiveZone : effectiveZones)
     {
-        const auto [idMin, idMax] = idRange(effectiveZone);
-        const auto rset           = db::preparedStmt("SELECT mobname, mobid FROM mob_spawn_points "
-                                                     "WHERE mobid BETWEEN ? AND ? "
-                                                     "ORDER BY mobid ASC",
-                                                     idMin,
-                                                     idMax);
-        FOR_DB_MULTIPLE_RESULTS(rset)
-        {
-            const auto name = rset->get<std::string>("mobname");
-            const auto id   = rset->get<uint32>("mobid");
+        const auto zone = static_cast<xi::ZoneId>(effectiveZone);
 
-            lookup[name].emplace_back(id);
+        // startup and reloads pass no records, so they read the files
+        const auto handedIn = zone == zoneId;
+
+        const auto fallbackMobs = [&]() -> std::optional<xi::data::Mobs>
+        {
+            if (handedIn && preloaded.Mobs)
+            {
+                return std::nullopt;
+            }
+
+            return xi::data::loadZoneFile<xi::data::datasets::zones::mobs::Dataset>(zone);
+        }();
+
+        const auto fallbackNpcs = [&]() -> std::optional<xi::data::Npcs>
+        {
+            if (handedIn && preloaded.Npcs)
+            {
+                return std::nullopt;
+            }
+
+            return xi::data::loadZoneFile<xi::data::datasets::zones::npcs::Dataset>(zone);
+        }();
+
+        const auto* mobs = [&]() -> const xi::data::Mobs*
+        {
+            if (fallbackMobs)
+            {
+                return &*fallbackMobs;
+            }
+
+            return handedIn ? preloaded.Mobs : nullptr;
+        }();
+
+        const auto* npcs = [&]() -> const xi::data::Npcs*
+        {
+            if (fallbackNpcs)
+            {
+                return &*fallbackNpcs;
+            }
+
+            return handedIn ? preloaded.Npcs : nullptr;
+        }();
+
+        if (mobs)
+        {
+            for (const auto& spawn : mobs->Spawns)
+            {
+                lookup[spawn.Script].emplace_back(spawn.Id);
+            }
         }
-    }
 
-    // NPCs
-    for (auto effectiveZone : effectiveZones)
-    {
-        const auto [idMin, idMax] = idRange(effectiveZone);
-        const auto rset           = db::preparedStmt("SELECT name, npcid FROM npc_list "
-                                                     "WHERE npcid BETWEEN ? AND ? "
-                                                     "ORDER BY npcid ASC",
-                                                     idMin,
-                                                     idMax);
-        FOR_DB_MULTIPLE_RESULTS(rset)
+        if (npcs)
         {
-            const auto name = rset->get<std::string>("name");
-            const auto id   = rset->get<uint32>("npcid");
-
-            lookup[name].emplace_back(id);
+            for (const auto& npc : *npcs)
+            {
+                lookup[npc.Script].emplace_back(npc.Id);
+            }
         }
     }
 
@@ -1458,7 +1478,7 @@ void PopulateIDLookupsByFilename(Maybe<std::string> maybeFilename)
             return xi::ZoneId::Unknown;
         }();
 
-        PopulateIDLookups(zoneId, zoneName);
+        PopulateIDLookups(zoneId, zoneName, {});
     };
 
     if (!maybeFilename)
@@ -1485,15 +1505,13 @@ void PopulateIDLookupsByFilename(Maybe<std::string> maybeFilename)
     }
 }
 
-void PopulateIDLookupsByZone(Maybe<xi::ZoneId> maybeZoneId)
+void PopulateIDLookupsByZone(Maybe<xi::ZoneId> maybeZoneId, const ZoneEntityRecords& preloaded)
 {
     TracyZoneScoped;
 
-    const auto handleZone = [&](CZone* PZone)
+    const auto handleZone = [&](CZone* PZone, const ZoneEntityRecords& records)
     {
-        const auto zoneId   = PZone->GetID();
-        const auto zoneName = PZone->getName();
-        PopulateIDLookups(zoneId, zoneName);
+        PopulateIDLookups(PZone->GetID(), PZone->getName(), records);
     };
 
     if (!maybeZoneId.has_value())
@@ -1503,13 +1521,13 @@ void PopulateIDLookupsByZone(Maybe<xi::ZoneId> maybeZoneId)
             {
                 if (PZone->GetIP() != 0)
                 {
-                    handleZone(PZone);
+                    handleZone(PZone, {});
                 }
             });
     }
     else
     {
-        handleZone(zoneutils::GetZone(maybeZoneId.value()));
+        handleZone(zoneutils::GetZone(maybeZoneId.value()), preloaded);
     }
 }
 

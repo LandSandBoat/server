@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, yell, los_player_block]
+music:
+  day:          156
+  night:        156
+  battle_solo:  156
+  battle_party: 156
+
+zonelines:
+
+  z6h2:
+    from:  [12.495, 6.974, 24.047]
+    to:    bostaunieux_oubliette
+    at:    [99.978, -25.647, 72.867, 1.570796]
+    scale: [1.000, 4.000]

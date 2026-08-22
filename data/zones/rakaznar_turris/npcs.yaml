@@ -1,0 +1,560 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17911939:
+    script:       JGL_BUILD_MASTER_0
+    display_name: JGL_BUILD_MASTER_0
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911940:
+    script:       JGL_BUILD_MASTER_1
+    display_name: JGL_BUILD_MASTER_1
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911941:
+    script:       JGL_BUILD_MASTER_2
+    display_name: JGL_BUILD_MASTER_2
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911942:
+    script:       JGL_BUILD_MASTER_3
+    display_name: JGL_BUILD_MASTER_3
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911943:
+    script:       JGL_BUILD_MASTER_4
+    display_name: JGL_BUILD_MASTER_4
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911944:
+    script:       JGL_BUILD_MASTER_5
+    display_name: JGL_BUILD_MASTER_5
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911973:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911974:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911975:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911976:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911977:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911978:
+    script:       Soul_Pyre
+    display_name: Soul Pyre
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911980:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911982:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17911989:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17911990:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17911991:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17911992:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17911993:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17911994:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17911995:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17911996:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17911997:
+    script: _7p0
+    at:     [58.000, -29.000, 20.000, 64]
+    render:
+      look:
+        type: door
+      door_id:      812660575
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: SOA
+
+  17911998:
+    script:       _7p1
+    display_name: Vertical Transit Device
+    at:           [74.000, -33.000, 20.000, 64]
+    render:
+      look:
+        type: door
+      door_id:      829437791
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: SOA
+
+  17911999:
+    script: _7p2
+    at:     [-514.299, -4.000, -480.000]
+    render:
+      look:
+        type: door
+      door_id:      846215007
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: SOA
+
+  17912000:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17912001:
+    script:       blank???
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+    content:  SOA
+
+  17912002:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+    content:  SOA
+
+  17912003:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+    content:  SOA
+
+  17912004:
+    script: csnpc
+    render:
+      look:
+        type:  standard
+        model: 524
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912005:
+    script: csnpc
+    render:
+      look:
+        type:  standard
+        model: 524
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912006:
+    script:       Arciela
+    display_name: Arciela
+    render:
+      look:
+        type:  standard
+        model: 2700
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912007:
+    script:       Arciela
+    display_name: Arciela
+    render:
+      look:
+        type:  standard
+        model: 2700
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912008:
+    script:       Hades
+    display_name: Hades
+    render:
+      look:
+        type:  standard
+        model: 2745
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912009:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912010:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912011:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912012:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912013:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912014:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912015:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912016:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912017:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912018:
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17912019:
+    script:       Resume_Point
+    display_name: Resume Point
+    at:           [96.959, -25.000, 23.140]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags:    27
+      name_vis:        96
+      name_prefix:     34
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17912020:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [102.884, -25.000, 20.005]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912021:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [102.884, -25.000, 20.005]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 27
+      name_prefix:  34
+      moving:        1
+    status:  normal
+    content: SOA
+
+  17912022:
+    script:       Ominous_Postern
+    display_name: Ominous Postern
+    at:           [118.000, 37.500, 20.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17912023:
+    script:       exit
+    display_name: exit
+    at:           [755.000, -406.000, 480.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    widescan: true
+    content:  SOA
+
+  17912024:
+    script:       exit
+    display_name: exit
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17912025:
+    script:       exit
+    display_name: exit
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17912026:
+    script:       exit
+    display_name: exit
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17912027:
+    script:       exit
+    display_name: exit
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17912034:
+    script:       Vertical_Transit_Device
+    display_name: Vertical Transit Device
+    at:           [73.000, -31.100, 20.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis:    32
+      moving:   32768
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17912035:
+    render:
+      look:
+        type:  standard
+        model: 50

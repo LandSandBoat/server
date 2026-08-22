@@ -1,0 +1,219 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Cloud_of_Darkness:
+    id:      4819
+    species: cloud_of_darkness
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     3
+          ice:      9
+          wind:     3
+          earth:    9
+          thunder:  3
+          water:    9
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     9
+          bind:         9
+          silence:      3
+          slow:         9
+          poison:       9
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2942
+        entity_flags:  131
+        animation_sub:   4
+        name_vis:      122
+        name_prefix:    32
+        model_size:      1
+        hitbox:         25
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 20000
+
+  Darkness:
+    id:      4821
+    species: cloud_of_darkness
+    type:    [notorious]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2941
+        entity_flags:  129
+        animation_sub:   3
+        name_vis:        8
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+spawns:
+  17977400:
+    template: Cloud_of_Darkness
+    at:       [500.000, -530.840, 500.000, 64]
+    level:    [130, 130]
+  17977401:
+    template: Darkness
+    level:    [130, 130]
+  17977402:
+    template: Darkness
+    level:    [130, 130]
+  17977403:
+    template: Darkness
+    level:    [130, 130]
+  17977404:
+    template: Darkness
+    level:    [130, 130]
+  17977405:
+    template: Darkness
+    level:    [130, 130]
+  17977406:
+    template: Darkness
+    level:    [130, 130]
+  17977407:
+    template: Darkness
+    level:    [130, 130]
+  17977408:
+    template: Darkness
+    level:    [130, 130]
+  17977409:
+    template: Darkness
+    level:    [130, 130]
+  17977410:
+    template: Darkness
+    level:    [130, 130]
+  17977411:
+    script: Iroha
+  17977412:
+    template: Cloud_of_Darkness
+    level:    [130, 130]
+  17977413:
+    template: Darkness
+    level:    [130, 130]
+  17977414:
+    template: Darkness
+    level:    [130, 130]
+  17977415:
+    template: Darkness
+    level:    [130, 130]
+  17977416:
+    template: Darkness
+    level:    [130, 130]
+  17977417:
+    template: Darkness
+    level:    [130, 130]
+  17977418:
+    template: Darkness
+    level:    [130, 130]
+  17977419:
+    template: Darkness
+    level:    [130, 130]
+  17977420:
+    template: Darkness
+    level:    [130, 130]
+  17977421:
+    template: Darkness
+    level:    [130, 130]
+  17977422:
+    template: Darkness
+    level:    [130, 130]
+  17977423:
+    script: Iroha
+  17977424:
+    template: Cloud_of_Darkness
+    level:    [130, 130]
+  17977425:
+    template: Darkness
+    level:    [130, 130]
+  17977426:
+    template: Darkness
+    level:    [130, 130]
+  17977427:
+    template: Darkness
+    level:    [130, 130]
+  17977428:
+    template: Darkness
+    level:    [130, 130]
+  17977429:
+    template: Darkness
+    level:    [130, 130]
+  17977430:
+    template: Darkness
+    level:    [130, 130]
+  17977431:
+    template: Darkness
+    level:    [130, 130]
+  17977432:
+    template: Darkness
+    level:    [130, 130]
+  17977433:
+    template: Darkness
+    level:    [130, 130]
+  17977434:
+    template: Darkness
+    level:    [130, 130]
+  17977435:
+    script: Iroha
+  17977436:
+    script: Iroha
+  17977437:
+    script: Iroha
+  17977438:
+    script: Iroha
+  17977439:
+    script: Iroha
+  17977440:
+    script: Iroha
+  17977441:
+    script: Lion
+  17977442:
+    script: Prishe
+  17977443:
+    script: Nashmeira
+  17977444:
+    script: Lilisette
+  17977445:
+    script: Arciela
+  17977446:
+    script: Iroha
+  17977447:
+    script: Iroha
+  17977448:
+    script: Lion
+  17977449:
+    script: Prishe
+  17977450:
+    script: Nashmeira
+  17977451:
+    script: Lilisette
+  17977452:
+    script: Arciela
+  17977453:
+    script: Iroha
+  17977454:
+    script: Iroha
+  17977455:
+    script: Lion
+  17977456:
+    script: Prishe
+  17977457:
+    script: Nashmeira
+  17977458:
+    script: Lilisette
+  17977459:
+    script: Arciela

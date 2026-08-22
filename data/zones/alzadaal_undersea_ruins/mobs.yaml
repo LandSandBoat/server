@@ -1,0 +1,1397 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Alexander_Strange_Happenings:
+    id:            7361
+    display_name:  Alexander
+    species:       alexander
+    type:          [notorious]
+    spell_list_id: 214
+    skill_list_id: 784
+    attributes:
+      combat:
+        skill: club
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     5
+          ice:      5
+          wind:     5
+          earth:    5
+          thunder:  5
+          water:    5
+          light:   11
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:      5
+          slow:         5
+          poison:       5
+          light_sleep: 11
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 1834
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        true_detection: true
+      spawn:
+        respawn: 2700
+      stats:
+        hp: 3240000
+    content: TVR
+
+  Apex_Archaic_Cog:
+    id:            7577
+    display_name:  Apex Archaic Cog
+    species:       cog
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 3629
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+      stats:
+        hp: 305000
+    content: ROV
+
+  Apex_Archaic_Cogs:
+    id:            7578
+    display_name:  Apex Archaic Cogs
+    species:       triple_cog
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 3630
+        entity_flags:  131
+        animation_sub:   4
+        name_prefix:    64
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 960
+      stats:
+        hp: 305000
+    content: ROV
+
+  Armed_Gears:
+    id:            243
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 150
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1677
+        animation_sub:    4
+        name_prefix:     64
+        model_size:       2
+        hitbox:          15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 32000
+    loot:
+      drops:
+        - chance: always
+          item:   armed_gears_fragment
+        - chance: very_common
+          item:   earth_grip
+        - chance: very_common
+          item:   thunder_grip
+        - chance: always
+          one_of: [tomoe, oracles_gloves, aurum_sabatons]
+        - chance: uncommon
+          one_of: [tomoe, oracles_gloves, aurum_sabatons]
+
+  Boompadu:
+    id:            504
+    species:       acrolith
+    type:          [notorious]
+    skill_list_id: 302
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  2
+          light:    6
+          dark:    11
+        rank_status:
+          paralyze:     3
+          bind:         3
+          silence:      3
+          slow:         3
+          light_sleep:  6
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1778
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 7200
+    loot:
+      drops:
+        - chance: uncommon
+          item:   surge_subligar
+    content: WOTG
+
+  Cheese_Hoarder_Gigiroon:
+    id:            705
+    species:       qiqirn
+    type:          [notorious]
+    skill_list_id: 288
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        immune_status: [gravity, bind, poison, light_sleep, dark_sleep]
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   gigiroons_cape
+        - chance: common
+          item:   armadillo_cuisses
+        - chance: common
+          item:   beast_slayer
+
+  Cookieduster_Lipiroon:
+    id:            783
+    species:       qiqirn
+    type:          [notorious]
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        immune_status: [gravity, bind, poison, light_sleep, dark_sleep]
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        name_prefix: 32
+        model_size:   1
+        hitbox:      12
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lyft_crossbow
+    content: WOTG
+
+  Nepionic_Soulflayer:
+    id:            2834
+    species:       soulflayer
+    type:          [notorious]
+    spell_list_id: 460
+    skill_list_id: 234
+    attributes:
+      combat:
+        skill: axe
+        delay: 220
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:    2
+          water:  9
+          light: -1
+          dark:  11
+        rank_status:
+          paralyze:     2
+          bind:         2
+          poison:       9
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1775
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9600
+        mp: 9600
+
+  Ob:
+    id:            2931
+    species:       automaton
+    type:          [notorious]
+    skill_list_id: 291
+    attributes:
+      combat:
+        skill: axe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item:   obs_arm
+        - chance: common
+          item:   guignol_earring
+        - chance: uncommon
+          item:   coiler
+        - chance: uncommon
+          item:   steam_jacket
+        - chance: rare
+          item:   barrier_module_ii
+        - chance: rare
+          item:   percolator
+        - chance: rare
+          item:   vivi-valve
+        - chance: rare
+          item:   disruptor
+        - chance: very_rare
+          item:   equalizer
+        - chance: rare
+          item:   drum_magazine
+        - chance: very_rare
+          item:   mana_channeler
+        - chance: very_rare
+          item:   eraser
+        - chance: very_rare
+          item:   attuner
+        - chance: very_rare
+          item:   target_marker
+        - chance: very_rare
+          item:   smoke_screen
+        - chance: very_rare
+          item:   tactical_processor
+
+  Oupire:
+    id:            3069
+    species:       vampyr
+    type:          [notorious]
+    spell_list_id: 150
+    skill_list_id: 284
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1845
+        entity_flags:  1157
+        animation_sub:    8
+        model_size:       2
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 14400
+    loot:
+      drops:
+        - chance: always
+          item:   vial_of_ebur_pigment
+        - chance: very_common
+          item:   square_of_cambric
+        - chance: common
+          item:   square_of_cambric
+        - chance: uncommon
+          item:   square_of_cambric
+        - chance: very_common
+          item:   chunk_of_adaman_ore
+        - chance: common
+          item:   chunk_of_orichalcum_ore
+        - chance: uncommon
+          item:   chunk_of_orichalcum_ore
+        - chance: uncommon
+          item:   chunk_of_orichalcum_ore
+        - chance: rare
+          item:   vial_of_ebur_pigment
+        - chance: uncommon
+          item:   narigitsune
+    content: WOTG
+
+  Panaiveriyamman:
+    id:            7579
+    species:       acrolith
+    type:          [notorious]
+    skill_list_id: 302
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  2
+          light:    6
+          dark:    11
+        rank_status:
+          paralyze:     3
+          bind:         3
+          silence:      3
+          slow:         3
+          light_sleep:  6
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1778
+        entity_flags:  133
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Goldsmith:
+    id:            3254
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   handful_of_almonds
+        - chance: very_rare
+          item:   pebble
+        - chance: very_rare
+          item:   qiqirn_sandbag
+        - chance: very_rare
+          item:   qiqirn_cape
+        - chance: super_rare
+          item:   jar_of_firesand
+        - chance: super_rare
+          item:   handful_of_iron_sand
+        - chance: ultra_rare
+          item:   bowl_of_nashmau_stew
+        - chance: ultra_rare
+          item:   sack_of_silica
+      steal: qiqirn_sandbag
+      despoil:
+        qiqirn_cape:    0
+        qiqirn_sandbag: 0
+
+  Qiqirn_Mine_AUR:
+    id:           6713
+    display_name: Qiqirn_Mine
+    species:      unclassified
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1791
+        entity_flags: 643
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Poulterer:
+    id:            3263
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: axe
+        delay: 200
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   handful_of_almonds
+        - chance: very_rare
+          item:   pebble
+        - chance: very_rare
+          item:   qiqirn_sandbag
+        - chance: very_rare
+          item:   qiqirn_cape
+        - chance: super_rare
+          item:   jar_of_firesand
+        - chance: super_rare
+          item:   handful_of_iron_sand
+        - chance: ultra_rare
+          item:   bowl_of_nashmau_stew
+        - chance: ultra_rare
+          item:   sack_of_silica
+      steal: qiqirn_sandbag
+      despoil:
+        qiqirn_cape:    0
+        qiqirn_sandbag: 0
+
+  Vidmapire:
+    id:            6757
+    species:       vampyr
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 284
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [blm, blm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1845
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Wulgaru:
+    id:            4594
+    species:       acrolith
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 302
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, blm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze, blind, slow, light_sleep, dark_sleep]
+        rank_element:
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  2
+          light:    6
+          dark:    11
+        rank_status:
+          paralyze:     3
+          bind:         3
+          silence:      3
+          slow:         3
+          light_sleep:  6
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1778
+        entity_flags:  157
+        animation_sub:   5
+        name_prefix:    32
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 32000
+    loot:
+      drops:
+        - chance: always
+          item:   wulgarus_head
+        - chance: common
+          item:   riot_shield
+        - chance: common
+          item:   hissho_hachimaki
+
+spawns:
+  17072129:
+    template: Nepionic_Soulflayer
+    at:       [-527.222, -0.050, 648.291, 183]
+    level:    [66, 66]
+  17072130:
+    template: Qiqirn_Poulterer
+    at:       [103.860, -0.486, 145.245, 1]
+    level:    [76, 78]
+  17072131:
+    template: Qiqirn_Goldsmith
+    at:       [94.937, -0.441, 135.866, 245]
+    level:    [76, 78]
+  17072132:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072133:
+    template: Boompadu
+    at:       [111.669, -0.352, 144.457, 84]
+    level:    [82, 82]
+  17072134:
+    template: Qiqirn_Poulterer
+    at:       [60.181, -4.000, 114.084, 248]
+    level:    [76, 78]
+  17072135:
+    template: Qiqirn_Poulterer
+    at:       [51.574, -4.004, 108.471, 192]
+    level:    [76, 78]
+  17072136:
+    template: Qiqirn_Goldsmith
+    at:       [70.022, -4.018, 110.663, 67]
+    level:    [76, 78]
+  17072137:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072138:
+    template: Qiqirn_Goldsmith
+    at:       [-31.616, -4.441, 128.273, 126]
+    level:    [76, 78]
+  17072139:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072140:
+    template: Qiqirn_Goldsmith
+    at:       [-14.382, -4.488, 144.050, 31]
+    level:    [76, 78]
+  17072141:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072142:
+    template: Qiqirn_Goldsmith
+    at:       [-112.599, -8.000, 104.053, 239]
+    level:    [76, 78]
+  17072143:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072144:
+    template: Qiqirn_Goldsmith
+    at:       [-92.370, -7.999, 93.103, 66]
+    level:    [76, 78]
+  17072145:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072146:
+    template: Qiqirn_Poulterer
+    at:       [-113.187, -7.999, 103.088, 147]
+    level:    [76, 78]
+  17072147:
+    template: Qiqirn_Poulterer
+    at:       [-188.666, -8.484, 59.816, 44]
+    level:    [76, 78]
+  17072148:
+    template: Qiqirn_Goldsmith
+    at:       [-171.052, -8.343, 59.996, 222]
+    level:    [76, 78]
+  17072149:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072150:
+    template: Cookieduster_Lipiroon
+    at:       [-105.000, -8.000, 94.000, 60]
+    level:    [80, 82]
+  17072151:
+    template: Qiqirn_Poulterer
+    at:       [-185.782, -8.249, -33.147, 56]
+    level:    [76, 78]
+  17072152:
+    template: Qiqirn_Goldsmith
+    at:       [-174.194, -8.441, -17.681, 138]
+    level:    [76, 78]
+  17072153:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072154:
+    template: Qiqirn_Goldsmith
+    at:       [-112.401, -8.058, -58.387, 187]
+    level:    [76, 78]
+  17072155:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072156:
+    template: Qiqirn_Goldsmith
+    at:       [-87.459, -8.058, -73.269, 116]
+    level:    [76, 78]
+  17072157:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072158:
+    template: Qiqirn_Poulterer
+    at:       [-93.193, -8.058, -59.126, 191]
+    level:    [76, 78]
+  17072159:
+    template: Qiqirn_Goldsmith
+    at:       [-16.070, -4.487, -105.433, 1]
+    level:    [76, 78]
+  17072160:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072161:
+    template: Qiqirn_Goldsmith
+    at:       [-10.483, -4.457, -102.846, 217]
+    level:    [76, 78]
+  17072162:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072163:
+    template: Qiqirn_Goldsmith
+    at:       [53.516, -4.002, -49.170, 88]
+    level:    [76, 78]
+  17072164:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072165:
+    template: Qiqirn_Poulterer
+    at:       [50.524, -4.002, -45.605, 129]
+    level:    [76, 78]
+  17072166:
+    template: Qiqirn_Poulterer
+    at:       [71.085, -4.002, -55.531, 184]
+    level:    [76, 78]
+  17072167:
+    template: Qiqirn_Poulterer
+    at:       [95.994, -0.445, -91.888, 54]
+    level:    [76, 78]
+  17072168:
+    template: Qiqirn_Goldsmith
+    at:       [98.206, -0.210, -111.793, 126]
+    level:    [76, 78]
+  17072169:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    level:    [75, 75]
+  17072170:
+    template: Oupire
+    at:       [90.000, 0.100, -100.000]
+    level:    [85, 85]
+  17072171:
+    template: Ob
+    at:       [552.914, -0.112, -135.001, 50]
+    level:    [78, 80]
+  17072172:
+    template: Cheese_Hoarder_Gigiroon
+    at:       [-184.112, -8.105, 24.555, 26]
+    level:    [80, 82]
+  17072173:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    at:       [-99.441, -8.499, 30.888, 217]
+    level:    [75, 75]
+  17072174:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    at:       [-100.259, -9.000, 25.517, 191]
+    level:    [75, 75]
+  17072175:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    at:       [-144.175, -8.450, 63.390, 224]
+    level:    [75, 75]
+  17072176:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    at:       [-174.429, -8.500, 67.694, 13]
+    level:    [75, 75]
+  17072177:
+    template: Qiqirn_Mine_AUR
+    script:   Qiqirn_Mine
+    at:       [-176.807, -8.449, 73.492, 65]
+    level:    [75, 75]
+  17072178:
+    template: Armed_Gears
+    at:       [-19.957, -4.000, -182.656, 188]
+    level:    [86, 88]
+  17072179:
+    template: Wulgaru
+    at:       [-22.265, -4.449, 204.588, 114]
+    level:    [80, 82]
+  17072180:
+    template: Vidmapire
+    at:       [-96.282, -8.449, 110.278, 122]
+    level:    [99, 99]
+  17072181:
+    template: Vidmapire
+    at:       [-113.000, -8.500, -73.000, 176]
+    level:    [99, 99]
+  17072182:
+    template: Vidmapire
+    at:       [73.000, -4.500, -73.000, 121]
+    level:    [99, 99]
+  17072183:
+    template: Panaiveriyamman
+    at:       [-1.000, 0.000, 0.000]
+    level:    [139, 139]
+  17072184:
+    template: Panaiveriyamman
+    at:       [-1.000, 0.000, 0.000]
+    level:    [139, 139]
+  17072185:
+    template: Panaiveriyamman
+    at:       [-1.000, 0.000, 0.000]
+    level:    [139, 139]
+  17072186:
+    template: Panaiveriyamman
+    at:       [-1.000, 0.000, 0.000]
+    level:    [139, 139]
+  17072187:
+    template: Apex_Archaic_Cog
+    at:       [506.690, -0.055, 465.343, 77]
+    level:    [143, 145]
+  17072188:
+    template: Apex_Archaic_Cog
+    at:       [496.621, -0.052, 448.011, 58]
+    level:    [143, 145]
+  17072189:
+    template: Apex_Archaic_Cog
+    at:       [489.498, -0.105, 451.294, 177]
+    level:    [143, 145]
+  17072190:
+    template: Apex_Archaic_Cog
+    at:       [492.775, -0.051, 461.313, 38]
+    level:    [143, 145]
+  17072191:
+    template: Apex_Archaic_Cogs
+    at:       [497.053, -0.055, 470.019, 201]
+    level:    [145, 147]
+  17072192:
+    template: Apex_Archaic_Cogs
+    at:       [503.849, -0.090, 456.021, 5]
+    level:    [145, 147]
+  17072193:
+    template: Apex_Archaic_Cog
+    at:       [671.509, -0.064, 457.478, 12]
+    level:    [143, 145]
+  17072194:
+    template: Apex_Archaic_Cog
+    at:       [668.049, -0.070, 453.377, 178]
+    level:    [143, 145]
+  17072195:
+    template: Apex_Archaic_Cog
+    at:       [673.340, -0.038, 458.591, 25]
+    level:    [143, 145]
+  17072196:
+    template: Apex_Archaic_Cog
+    at:       [652.240, -0.096, 458.436, 216]
+    level:    [143, 145]
+  17072197:
+    template: Apex_Archaic_Cogs
+    at:       [658.200, -0.039, 454.497, 177]
+    level:    [145, 147]
+  17072198:
+    template: Apex_Archaic_Cogs
+    at:       [662.467, -0.040, 466.417, 252]
+    level:    [145, 147]
+  17072199:
+    template: Apex_Archaic_Cog
+    at:       [707.744, -0.058, 435.882, 128]
+    level:    [143, 145]
+  17072200:
+    template: Apex_Archaic_Cog
+    at:       [701.700, -0.045, 426.309, 247]
+    level:    [143, 145]
+  17072201:
+    template: Apex_Archaic_Cog
+    at:       [710.932, -0.050, 425.400, 230]
+    level:    [143, 145]
+  17072202:
+    template: Apex_Archaic_Cog
+    at:       [711.574, -0.042, 432.904, 203]
+    level:    [143, 145]
+  17072203:
+    template: Apex_Archaic_Cogs
+    at:       [685.133, -0.116, 431.592, 191]
+    level:    [145, 147]
+  17072204:
+    template: Apex_Archaic_Cogs
+    at:       [711.400, -0.041, 428.659, 59]
+    level:    [145, 147]
+  17072205:
+    template: Apex_Archaic_Cog
+    at:       [-314.605, -0.499, 431.665, 95]
+    level:    [143, 145]
+  17072206:
+    template: Apex_Archaic_Cog
+    at:       [-312.236, -0.500, 430.446, 10]
+    level:    [143, 145]
+  17072207:
+    template: Apex_Archaic_Cog
+    at:       [-326.004, -0.498, 447.047, 164]
+    level:    [143, 145]
+  17072208:
+    template: Apex_Archaic_Cog
+    at:       [-317.756, -0.499, 447.952, 254]
+    level:    [143, 145]
+  17072209:
+    template: Apex_Archaic_Cogs
+    at:       [-326.465, -0.498, 440.917, 168]
+    level:    [145, 147]
+  17072210:
+    template: Apex_Archaic_Cogs
+    at:       [-314.631, -0.463, 433.902, 161]
+    level:    [145, 147]
+  17072211:
+    template: Apex_Archaic_Cog
+    at:       [-331.641, -0.500, 205.144, 180]
+    level:    [143, 145]
+  17072212:
+    template: Apex_Archaic_Cog
+    at:       [-322.911, -0.499, 194.130, 248]
+    level:    [143, 145]
+  17072213:
+    template: Apex_Archaic_Cog
+    at:       [-313.393, -0.499, 193.689, 140]
+    level:    [143, 145]
+  17072214:
+    template: Apex_Archaic_Cog
+    at:       [-321.926, -0.500, 193.051, 229]
+    level:    [143, 145]
+  17072215:
+    template: Apex_Archaic_Cogs
+    at:       [-313.735, -0.500, 199.578, 215]
+    level:    [145, 147]
+  17072216:
+    template: Apex_Archaic_Cogs
+    at:       [-322.283, -0.500, 188.495, 14]
+    level:    [145, 147]
+  17072217:
+    template: Apex_Archaic_Cog
+    at:       [-665.276, -0.024, -131.882, 142]
+    level:    [143, 145]
+  17072218:
+    template: Apex_Archaic_Cog
+    at:       [-670.207, -0.011, -155.827, 127]
+    level:    [143, 145]
+  17072219:
+    template: Apex_Archaic_Cog
+    at:       [-670.318, -0.080, -144.418, 91]
+    level:    [143, 145]
+  17072220:
+    template: Apex_Archaic_Cog
+    at:       [-651.541, -0.011, -155.312, 126]
+    level:    [143, 145]
+  17072221:
+    template: Apex_Archaic_Cogs
+    at:       [-655.565, -0.050, -146.757, 241]
+    level:    [145, 147]
+  17072222:
+    template: Apex_Archaic_Cogs
+    at:       [-655.540, -0.031, -128.219, 244]
+    level:    [145, 147]
+  17072223:
+    template: Apex_Archaic_Cog
+    at:       [-708.251, -0.090, -167.912, 140]
+    level:    [143, 145]
+  17072224:
+    template: Apex_Archaic_Cog
+    at:       [-684.565, -0.020, -182.176, 53]
+    level:    [143, 145]
+  17072225:
+    template: Apex_Archaic_Cog
+    at:       [-686.471, -0.027, -176.967, 229]
+    level:    [143, 145]
+  17072226:
+    template: Apex_Archaic_Cog
+    at:       [-703.913, -0.030, -175.973, 228]
+    level:    [143, 145]
+  17072227:
+    template: Apex_Archaic_Cogs
+    at:       [-705.119, -0.018, -174.794, 246]
+    level:    [145, 147]
+  17072228:
+    template: Apex_Archaic_Cogs
+    at:       [-704.063, -0.026, -187.786, 50]
+    level:    [145, 147]
+  17072229:
+    template: Apex_Archaic_Cog
+    at:       [-653.650, -0.074, -206.764, 184]
+    level:    [143, 145]
+  17072230:
+    template: Apex_Archaic_Cog
+    at:       [-656.735, -0.054, -212.437, 14]
+    level:    [143, 145]
+  17072231:
+    template: Apex_Archaic_Cog
+    at:       [-658.094, -0.093, -221.606, 6]
+    level:    [143, 145]
+  17072232:
+    template: Apex_Archaic_Cog
+    at:       [-654.446, -0.089, -224.975, 179]
+    level:    [143, 145]
+  17072233:
+    template: Apex_Archaic_Cogs
+    at:       [-671.261, -0.054, -213.235, 129]
+    level:    [145, 147]
+  17072234:
+    template: Apex_Archaic_Cogs
+    at:       [-658.849, -0.054, -230.450, 12]
+    level:    [145, 147]
+  17072235:
+    template: Apex_Archaic_Cog
+    at:       [-513.361, -0.007, -420.101, 87]
+    level:    [143, 145]
+  17072236:
+    template: Apex_Archaic_Cog
+    at:       [-497.517, 0.000, -419.846, 60]
+    level:    [143, 145]
+  17072237:
+    template: Apex_Archaic_Cog
+    at:       [-511.080, -0.006, -406.737, 141]
+    level:    [143, 145]
+  17072238:
+    template: Apex_Archaic_Cog
+    at:       [-492.899, 0.000, -405.621, 129]
+    level:    [143, 145]
+  17072239:
+    template: Apex_Archaic_Cogs
+    at:       [-513.626, -0.002, -406.557, 137]
+    level:    [145, 147]
+  17072240:
+    template: Apex_Archaic_Cogs
+    at:       [-515.296, 0.000, -430.293, 73]
+    level:    [145, 147]
+  17072241:
+    template: Apex_Archaic_Cog
+    at:       [-675.669, -0.034, -431.682, 66]
+    level:    [143, 145]
+  17072242:
+    template: Apex_Archaic_Cog
+    at:       [-672.803, -0.076, -424.917, 119]
+    level:    [143, 145]
+  17072243:
+    template: Apex_Archaic_Cog
+    at:       [-663.098, -0.039, -426.844, 138]
+    level:    [143, 145]
+  17072244:
+    template: Apex_Archaic_Cog
+    at:       [-654.683, -0.025, -435.078, 124]
+    level:    [143, 145]
+  17072245:
+    template: Apex_Archaic_Cogs
+    at:       [-649.148, -0.031, -419.516, 218]
+    level:    [145, 147]
+  17072246:
+    template: Apex_Archaic_Cogs
+    at:       [-647.371, -0.024, -411.096, 192]
+    level:    [145, 147]
+  17072247:
+    template: Apex_Archaic_Cog
+    at:       [-693.516, -0.013, -379.732, 153]
+    level:    [143, 145]
+  17072248:
+    template: Apex_Archaic_Cog
+    at:       [-686.564, -0.012, -393.617, 63]
+    level:    [143, 145]
+  17072249:
+    template: Apex_Archaic_Cog
+    at:       [-704.747, -0.014, -380.251, 203]
+    level:    [143, 145]
+  17072250:
+    template: Apex_Archaic_Cog
+    at:       [-693.663, -0.013, -380.253, 27]
+    level:    [143, 145]
+  17072251:
+    template: Apex_Archaic_Cogs
+    at:       [-685.350, -0.012, -371.514, 193]
+    level:    [145, 147]
+  17072252:
+    template: Apex_Archaic_Cogs
+    at:       [-694.480, -0.048, -383.521, 54]
+    level:    [145, 147]
+  17072253:
+    template: Apex_Archaic_Cog
+    at:       [-197.591, -0.492, -603.293, 89]
+    level:    [143, 145]
+  17072254:
+    template: Apex_Archaic_Cog
+    at:       [-202.397, -0.495, -598.595, 134]
+    level:    [143, 145]
+  17072255:
+    template: Apex_Archaic_Cog
+    at:       [-200.350, -0.482, -604.649, 249]
+    level:    [143, 145]
+  17072256:
+    template: Apex_Archaic_Cog
+    at:       [-188.669, -0.500, -602.439, 45]
+    level:    [143, 145]
+  17072257:
+    template: Apex_Archaic_Cogs
+    at:       [-191.177, -0.499, -592.292, 141]
+    level:    [145, 147]
+  17072258:
+    template: Apex_Archaic_Cogs
+    at:       [-208.435, -0.490, -604.011, 139]
+    level:    [145, 147]
+  17072259:
+    template: Apex_Archaic_Cog
+    at:       [171.770, -0.499, -560.478, 198]
+    level:    [144, 144]
+  17072260:
+    template: Apex_Archaic_Cog
+    at:       [160.076, -0.499, -556.274, 217]
+    level:    [143, 143]
+  17072261:
+    template: Apex_Archaic_Cog
+    at:       [171.329, -0.499, -567.148, 234]
+    level:    [145, 145]
+  17072262:
+    template: Apex_Archaic_Cog
+    at:       [162.644, -0.500, -548.256, 131]
+    level:    [143, 143]
+  17072263:
+    template: Apex_Archaic_Cogs
+    at:       [164.895, -0.461, -555.243, 234]
+    level:    [147, 147]
+  17072264:
+    template: Apex_Archaic_Cogs
+    at:       [165.510, -0.483, -561.770, 204]
+    level:    [147, 147]
+  17072265:
+    template: Apex_Archaic_Cog
+    at:       [447.313, -0.499, -590.178, 137]
+    level:    [143, 145]
+  17072266:
+    template: Apex_Archaic_Cog
+    at:       [449.800, -0.497, -598.477, 198]
+    level:    [143, 145]
+  17072267:
+    template: Apex_Archaic_Cog
+    at:       [429.488, -0.491, -606.614, 88]
+    level:    [143, 145]
+  17072268:
+    template: Apex_Archaic_Cog
+    at:       [432.792, -0.457, -607.170, 44]
+    level:    [143, 145]
+  17072269:
+    template: Apex_Archaic_Cogs
+    at:       [445.369, -0.466, -599.921, 225]
+    level:    [145, 147]
+  17072270:
+    template: Apex_Archaic_Cogs
+    at:       [448.738, -0.499, -601.692, 34]
+    level:    [145, 147]
+  17072271:
+    template: Apex_Archaic_Cog
+    at:       [486.400, -0.229, -166.625, 138]
+    level:    [143, 145]
+  17072272:
+    template: Apex_Archaic_Cog
+    at:       [486.979, -0.153, -192.603, 116]
+    level:    [143, 145]
+  17072273:
+    template: Apex_Archaic_Cog
+    at:       [509.344, -0.152, -182.469, 37]
+    level:    [143, 145]
+  17072274:
+    template: Apex_Archaic_Cog
+    at:       [487.557, -0.216, -168.425, 140]
+    level:    [143, 145]
+  17072275:
+    template: Apex_Archaic_Cogs
+    at:       [502.520, -0.162, -191.722, 63]
+    level:    [145, 147]
+  17072276:
+    template: Apex_Archaic_Cogs
+    at:       [492.102, -0.166, -184.230, 116]
+    level:    [145, 147]
+  17072277:
+    template: Alexander_Strange_Happenings
+    script:   Alexander
+    at:       [-1.000, 0.000, 0.000]
+    level:    [119, 119]
+
+slots:
+  - members:
+      17072142: {} # Qiqirn_Goldsmith
+      17072148: {} # Qiqirn_Goldsmith

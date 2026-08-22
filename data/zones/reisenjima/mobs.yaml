@@ -1,0 +1,6316 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Agitated_Chapuli:
+    id:            5368
+    species:       chapuli
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Albumen:
+    id:            5605
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2378
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Albumens_Korrigan:
+    id:            5608
+    species:       mandragora
+    type:          [notorious]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Albumens_Lycopodium:
+    id:            5607
+    species:       mandragora
+    type:          [notorious]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2247
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      spawn:
+        type: [scripted]
+
+  Albumens_Mandragora:
+    id:            5606
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Albumens_Pachypodium:
+    id:            5615
+    species:       mandragora
+    type:          [notorious]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 2377
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Arboreal_Chigoe:
+    id:            5385
+    species:       chigoe
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: club
+        delay: 12
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1747
+        entity_flags: 2177
+        name_vis:       24
+        hitbox:          5
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 180
+
+  Ascended_Beetle:
+    id:            5564
+    species:       beetle
+    type:          [notorious]
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 410
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ascended_Chapuli:
+    id:            5560
+    species:       chapuli
+    type:          [notorious]
+    skill_list_id: 339
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -2
+          water:   -2
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:        2
+          poison:     -2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2545
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Chigoe:
+    id:            5573
+    species:       chigoe
+    type:          [notorious]
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: club
+        delay: 12
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1747
+        entity_flags: 133
+        model_size:     2
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Cyhiraeth:
+    id:            5568
+    species:       corpselight
+    type:          [notorious]
+    spell_list_id: 21
+    attributes:
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          ice:    2
+          earth:  2
+          water:  2
+          light: -1
+          dark:   6
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1841
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Faaz:
+    id:            5575
+    species:       raaz
+    type:          [notorious]
+    skill_list_id: 458
+    attributes:
+      resists:
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2601
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      spawn:
+        type: [scripted]
+
+  Ascended_Gefyrst:
+    id:            5576
+    species:       ice_elemental
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 2151
+        entity_flags: 133
+      spawn:
+        type: [scripted]
+
+  Ascended_Hippogryph:
+    id:            5574
+    species:       hippogryph
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 141
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [brd, brd]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Lucani:
+    id:            5566
+    species:       ladybug
+    type:          [notorious]
+    skill_list_id: 170
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:  4
+          dark: 4
+        rank_status:
+          paralyze:   4
+          bind:       4
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2943
+        entity_flags:  133
+        animation_sub:   5
+        name_vis:        4
+        model_size:      2
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Luckybug:
+    id:            5565
+    species:       ladybug
+    type:          [notorious]
+    skill_list_id: 170
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:  4
+          dark: 4
+        rank_status:
+          paralyze:   4
+          bind:       4
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2019
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Mantis:
+    id:            5563
+    species:       green_mantid
+    type:          [notorious]
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2945
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Mosquito:
+    id:            5562
+    species:       yellow_bee
+    type:          [notorious]
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2919
+        entity_flags: 133
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ascended_Naraka:
+    id:            5570
+    species:       naraka
+    type:          [notorious]
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          ice:     5
+          wind:    2
+          earth:   3
+          thunder: 2
+          water:   2
+          dark:    9
+        rank_status:
+          paralyze:   5
+          bind:       5
+          silence:    2
+          slow:       3
+          poison:     2
+          dark_sleep: 9
+          blind:      9
+      render:
+        look:
+          type:  standard
+          model: 2946
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Panopt:
+    id:            5571
+    species:       panopt
+    type:          [notorious]
+    spell_list_id: 9
+    skill_list_id: 376
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          ice:     2
+          wind:    4
+          earth:   2
+          thunder: 1
+          water:   2
+          light:   3
+          dark:    5
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     4
+          slow:        2
+          poison:      2
+          light_sleep: 3
+          dark_sleep:  5
+          blind:       5
+      render:
+        look:
+          type:  standard
+          model: 517
+        entity_flags:  133
+        animation_sub:   4
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Poroggo:
+    id:            5572
+    species:       green_poroggo
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1811
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Porxie:
+    id:            5567
+    species:       pixie
+    type:          [notorious]
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2928
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Ascended_Tiger:
+    id:            5569
+    species:       tiger
+    type:          [notorious]
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 133
+        model_size:     2
+        hitbox:        29
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ascended_Ungeweder:
+    id:            5577
+    species:       thunder_elemental
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 2150
+        entity_flags:  7
+        model_size:    2
+        hitbox:       20
+      spawn:
+        type: [scripted]
+
+  Asphyxiating_Cyhiraeth:
+    id:            5380
+    species:       corpselight
+    spell_list_id: 21
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          ice:    2
+          earth:  2
+          water:  2
+          light: -1
+          dark:   6
+        rank_status:
+          paralyze:     2
+          bind:         2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1841
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+      stats:
+        mp: 9999
+
+  Awoken_Stoorworm:
+    id:            6104
+    species:       hydra
+    type:          [notorious]
+    spell_list_id: 1
+    skill_list_id: 164
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -1250
+        rank_element:
+          fire:    6
+          ice:     6
+          wind:    6
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 3601
+        entity_flags:  3
+        model_size:    2
+        hitbox:       45
+      behaviors:
+        flags:          [no_turn]
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Bashmu:
+    id:            5595
+    species:       hydra
+    type:          [notorious]
+    skill_list_id: 164
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      resists:
+        dmg_physical:
+          blunt: -1250
+        rank_element:
+          fire:    6
+          ice:     6
+          wind:    6
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 1796
+        entity_flags:  135
+        animation_sub:   5
+        name_prefix:    32
+        model_size:      3
+        hitbox:         55
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Belphegor:
+    id:            5584
+    species:       corse
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 74
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:    2
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     3
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         2
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 2389
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        21
+      spawn:
+        type: [scripted]
+
+  Boobrie:
+    id:            5612
+    species:       amphiptere
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 6
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    8
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    4
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     8
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2222
+        entity_flags:  129
+        animation_sub:   4
+        name_vis:        4
+        name_prefix:    32
+        hitbox:         34
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Crom_Dubh:
+    id:            5579
+    species:       dullahan
+    type:          [notorious]
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2606
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        29
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Dazzling_Dolores:
+    id:            5582
+    species:       morbol
+    type:          [notorious]
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 383
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        57
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Devouring_Mosquito:
+    id:            5369
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 2919
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 180
+
+  Erinys:
+    id:            5611
+    species:       amphiptere
+    type:          [notorious]
+    skill_list_id: 6
+    attributes:
+      combat:
+        skill: club
+      jobs: [sch, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    8
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    4
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     8
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2391
+        entity_flags:  133
+        animation_sub:   4
+        name_vis:        4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         45
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Gajasimha:
+    id:            5591
+    species:       khimaira
+    type:          [notorious]
+    skill_list_id: 168
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    8
+          ice:     5
+          wind:    8
+          earth:   7
+          thunder: 9
+          water:   5
+          light:   7
+          dark:    5
+        rank_status:
+          paralyze:    7
+          bind:        7
+          silence:     7
+          slow:        7
+          poison:      7
+          light_sleep: 7
+          dark_sleep:  7
+          blind:       7
+      render:
+        look:
+          type:  standard
+          model: 1807
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        41
+      spawn:
+        type: [scripted]
+
+  Glowering_Ladybug:
+    id:            5387
+    species:       ladybug
+    skill_list_id: 170
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:  4
+          dark: 4
+        rank_status:
+          paralyze:   4
+          bind:       4
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2018
+        entity_flags: 129
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+
+  Golden_Kist:
+    id:            5580
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 267
+        entity_flags:  135
+        animation_sub:   5
+        name_prefix:    32
+        model_size:      3
+        hitbox:         32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Heavenly_Veela:
+    id:            5578
+    species:       pixie
+    type:          [notorious]
+    skill_list_id: 195
+    attributes:
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2031
+        entity_flags:  517
+        animation_sub:   8
+        model_size:      2
+        hitbox:          9
+      spawn:
+        type: [scripted]
+
+  Ignoble_Skeleton:
+    id:            5384
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2103
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+      stats:
+        mp: 9999
+
+  Indomitable_Faaz:
+    id:            5370
+    species:       raaz
+    skill_list_id: 458
+    attributes:
+      resists:
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2601
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        respawn: 180
+
+  Ironside:
+    id:            5592
+    species:       iron_giant
+    type:          [notorious]
+    skill_list_id: 350
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:  4
+          ice:   6
+          wind:  4
+          earth: 4
+          water: 2
+          light: 4
+          dark:  4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     4
+          slow:        4
+          poison:      2
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2136
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        41
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Jeering_Pixie:
+    id:            5383
+    species:       pixie
+    spell_list_id: 20
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags:  515
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      spawn:
+        respawn: 180
+      stats:
+        mp: 9999
+
+  Kabandha:
+    id:            5585
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2109
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        33
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lentic_Toad:
+    id:            5373
+    species:       green_poroggo
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+
+  Lentic_Toad_fished:
+    id:            6943
+    display_name:  Lentic_Toad
+    species:       green_poroggo
+    type:          [fished]
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags: 131
+        hitbox:         6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lucani:
+    id:            5386
+    species:       ladybug
+    skill_list_id: 170
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:  4
+          dark: 4
+        rank_status:
+          paralyze:   4
+          bind:       4
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2943
+        entity_flags:  131
+        animation_sub:   4
+        name_vis:        4
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+      stats:
+        mp: 9999
+
+  Macabre_Skeleton:
+    id:            5377
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2100
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+      stats:
+        mp: 9999
+
+  Maju:
+    id:            6793
+    species:       peiste
+    type:          [notorious]
+    skill_list_id: 192
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          earth: 2
+          water: 3
+        rank_status:
+          slow:   2
+          poison: 3
+      render:
+        look:
+          type:  standard
+          model: 2017
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        25
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Mauve-Wristed_Gomberry:
+    id:            5581
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 2379
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Neak:
+    id:            6794
+    species:       dragon
+    type:          [notorious]
+    skill_list_id: 87
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2940
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        47
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Obstreperous_Panopt:
+    id:            5367
+    species:       panopt
+    spell_list_id: 9
+    skill_list_id: 376
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          ice:     2
+          wind:    4
+          earth:   2
+          thunder: 1
+          water:   2
+          light:   3
+          dark:    5
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     4
+          slow:        2
+          poison:      2
+          light_sleep: 3
+          dark_sleep:  5
+          blind:       5
+      render:
+        look:
+          type:  standard
+          model: 517
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 180
+      stats:
+        mp: 9999
+
+  Officious_Unseelie:
+    id:            5376
+    species:       pixie
+    spell_list_id: 20
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2032
+        entity_flags:  515
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 180
+      stats:
+        mp: 9999
+
+  Old_Shuck:
+    id:            5594
+    species:       cerberus
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 62
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:  11
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 1794
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        55
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Onychophora:
+    id:            5609
+    species:       sandworm
+    skill_list_id: 214
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     1
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      1
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2027
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        45
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Onycophoras_Sandworm:
+    id:            5610
+    species:       sandworm
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 215
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     1
+          earth:   11
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      1
+          slow:        11
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2028
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Oryx:
+    id:            6792
+    species:       monoceros
+    type:          [notorious]
+    skill_list_id: 39
+    attributes:
+      combat:
+        skill:    great_axe
+        dmg_mult: 125
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:   -2
+          thunder:  6
+          water:    2
+          dark:     4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:       -2
+          poison:      2
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2226
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         36
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Perfervid_Naraka:
+    id:            5378
+    species:       naraka
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          ice:     5
+          wind:    2
+          earth:   3
+          thunder: 2
+          water:   2
+          dark:    9
+        rank_status:
+          paralyze:   5
+          bind:       5
+          silence:    2
+          slow:       3
+          poison:     2
+          dark_sleep: 9
+          blind:      9
+      render:
+        look:
+          type:  standard
+          model: 2946
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+      stats:
+        mp: 9999
+
+  Porxie:
+    id:            5379
+    species:       pixie
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2928
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 180
+      stats:
+        mp: 9999
+
+  Quarrelsome_Hippogryph:
+    id:            5382
+    species:       hippogryph
+    skill_list_id: 140
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     3
+          earth:   -2
+          thunder:  3
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          slow:        -2
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1365
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 180
+
+  Quetzalcoatl:
+    id:            5613
+    species:       black_wyrm
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 263
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+          light: -2
+        rank_status:
+          poison:      -2
+          light_sleep:  6
+          dark_sleep:   6
+      render:
+        look:
+          type:  standard
+          model: 611
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         70
+      spawn:
+        type: [scripted]
+
+  Quetzalcoatls_Sibilus:
+    id:            5614
+    species:       peiste
+    skill_list_id: 192
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          earth: 2
+          water: 3
+        rank_status:
+          slow:   2
+          poison: 3
+      render:
+        look:
+          type:  standard
+          model: 2947
+        entity_flags:  129
+        animation_sub:   4
+        name_prefix:    32
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Rampaging_Beetle:
+    id:            5372
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 410
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+
+  Sabotender_Royal:
+    id:            5588
+    species:       sabotender
+    type:          [notorious]
+    skill_list_id: 212
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:    4
+          light:    4
+          dark:    -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:       4
+          light_sleep:  4
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 374
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Sang_Buaya:
+    id:            5587
+    species:       bugard
+    type:          [notorious]
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1352
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        21
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sarsaok:
+    id:            5593
+    species:       behemoth
+    type:          [notorious]
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 405
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        63
+      spawn:
+        type: [scripted]
+
+  Schah:
+    id:      6795
+    species: king
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2399
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Schahs_Ashva:
+    id:      6799
+    species: king
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2210
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Schahs_Bhata:
+    id:      6800
+    species: king
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2212
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Schahs_Gaja:
+    id:      6798
+    species: king
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2213
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Schahs_Mantri:
+    id:      6796
+    species: king
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2398
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Schahs_Ratha:
+    id:      6797
+    species: king
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     4
+          wind:    2
+          earth:   4
+          thunder: 2
+          water:   4
+          dark:    8
+        rank_status:
+          paralyze:   4
+          bind:       4
+          silence:    2
+          slow:       4
+          poison:     4
+          dark_sleep: 8
+          blind:      8
+      render:
+        look:
+          type:  standard
+          model: 2211
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Selkit:
+    id:            5586
+    species:       scorpion
+    type:          [notorious]
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 2107
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        39
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Snaggletoothed_Tiger:
+    id:            5366
+    species:       tiger
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 180
+
+  Strophadia:
+    id:            5590
+    species:       harpeia
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 471
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    1
+          wind:    9
+          earth:   5
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          silence:     9
+          slow:        5
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 2106
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Taelmoth_the_Diremaw:
+    id:            5583
+    species:       soulflayer
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 234
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [silence, slow, elegy]
+        rank_element:
+          fire:     2
+          ice:      4
+          wind:     2
+          earth:    2
+          thunder:  2
+          water:   10
+          light:    1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      2
+          slow:         2
+          poison:      10
+          light_sleep:  1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1776
+        entity_flags:  135
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Teles:
+    id:            5597
+    species:       harpeia
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 471
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    1
+          wind:    9
+          earth:   5
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          silence:     9
+          slow:        5
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 2610
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Territorial_Mantis:
+    id:            5371
+    species:       green_mantid
+    skill_list_id: 340
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:   -1
+          wind:   4
+          earth:  4
+          water: -2
+          light:  2
+          dark:   2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 2945
+        entity_flags: 129
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+
+  Thunder_Elemental_R:
+    id:            5381
+    display_name:  Thunder_Elemental
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags: 131
+        model_size:     1
+        hitbox:         3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [weather]
+      stats:
+        mp: 9999
+
+  Vinipata:
+    id:            5602
+    species:       naraka
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 472
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          ice:     5
+          wind:    2
+          earth:   3
+          thunder: 2
+          water:   2
+          dark:    9
+        rank_status:
+          paralyze:   5
+          bind:       5
+          silence:    2
+          slow:       3
+          poison:     2
+          dark_sleep: 9
+          blind:      9
+      render:
+        look:
+          type:  standard
+          model: 2111
+        entity_flags: 135
+        name_prefix:   32
+        model_size:     3
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vinipatas_Naraka_1:
+    id:            5603
+    species:       naraka
+    type:          [notorious]
+    skill_list_id: 472
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          ice:     5
+          wind:    2
+          earth:   3
+          thunder: 2
+          water:   2
+          dark:    9
+        rank_status:
+          paralyze:   5
+          bind:       5
+          silence:    2
+          slow:       3
+          poison:     2
+          dark_sleep: 9
+          blind:      9
+      render:
+        look:
+          type:  standard
+          model: 2105
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        28
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Vinipatas_Naraka_2:
+    id:            5604
+    species:       naraka
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 472
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          ice:     5
+          wind:    2
+          earth:   3
+          thunder: 2
+          water:   2
+          dark:    9
+        rank_status:
+          paralyze:   5
+          bind:       5
+          silence:    2
+          slow:       3
+          poison:     2
+          dark_sleep: 9
+          blind:      9
+      render:
+        look:
+          type:  standard
+          model: 2065
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        28
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Wanton_Danaid:
+    id:            5388
+    species:       pixie
+    spell_list_id: 20
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2064
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      spawn:
+        respawn: 180
+      stats:
+        mp: 9999
+
+  Water_Elemental_R:
+    id:            5374
+    display_name:  Water_Elemental
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags: 131
+        model_size:     1
+        hitbox:         3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [weather]
+      stats:
+        mp: 9999
+
+  Wretched_Poroggo:
+    id:            5375
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1811
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 180
+      stats:
+        mp: 9999
+
+  Wretched_Poroggo_fished:
+    id:            6944
+    display_name:  Wretched_Poroggo
+    species:       green_poroggo
+    type:          [fished]
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1811
+        entity_flags: 131
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Yakshi:
+    id:            5596
+    species:       yggdreant
+    skill_list_id: 465
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          ice:      6
+          wind:     2
+          earth:   11
+          thunder: 11
+          water:   10
+          light:    4
+          dark:     6
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:        11
+          poison:      10
+          light_sleep:  4
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2511
+        entity_flags:  135
+        animation_sub:   4
+        name_vis:        4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         55
+      spawn:
+        type: [scripted]
+
+  Zduhac:
+    id:            5589
+    species:       roc
+    type:          [notorious]
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 339
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        59
+      spawn:
+        type: [scripted]
+
+  Zerde:
+    id:            5598
+    species:       botulus
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    1
+          ice:     6
+          wind:    6
+          earth:   6
+          thunder: 1
+          water:   9
+          light:   3
+          dark:    4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        6
+          poison:      9
+          light_sleep: 3
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 2060
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        45
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Zerdes_Drisheen:
+    id:            5601
+    species:       botulus
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    1
+          ice:     6
+          wind:    6
+          earth:   6
+          thunder: 1
+          water:   9
+          light:   3
+          dark:    4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        6
+          poison:      9
+          light_sleep: 3
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 1799
+        entity_flags:  131
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Zerdes_Haupia:
+    id:            5599
+    species:       botulus
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    1
+          ice:     6
+          wind:    6
+          earth:   6
+          thunder: 1
+          water:   9
+          light:   3
+          dark:    4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        6
+          poison:      9
+          light_sleep: 3
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 1801
+        entity_flags:  131
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Zerdes_Kacamak:
+    id:            5600
+    species:       botulus
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    1
+          ice:     6
+          wind:    6
+          earth:   6
+          thunder: 1
+          water:   9
+          light:   3
+          dark:    4
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        6
+          poison:      9
+          light_sleep: 3
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 1800
+        entity_flags:  131
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17969153:
+    template: Lentic_Toad_fished
+    script:   Lentic_Toad
+    at:       [1.000, 1.000, 1.000]
+    level:    [121, 126]
+  17969154:
+    template: Lentic_Toad_fished
+    script:   Lentic_Toad
+    at:       [1.000, 1.000, 1.000]
+    level:    [121, 126]
+  17969155:
+    template: Lentic_Toad_fished
+    script:   Lentic_Toad
+    at:       [1.000, 1.000, 1.000]
+    level:    [121, 126]
+  17969156:
+    template: Lentic_Toad_fished
+    script:   Lentic_Toad
+    at:       [1.000, 1.000, 1.000]
+    level:    [121, 126]
+  17969157:
+    template: Wretched_Poroggo_fished
+    script:   Wretched_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [121, 126]
+  17969158:
+    script: Ogdoad
+    at:     [1.000, 1.000, 1.000]
+  17969159:
+    template: Snaggletoothed_Tiger
+    at:       [-481.600, -31.990, -391.610, 241]
+    level:    [121, 126]
+  17969160:
+    template: Snaggletoothed_Tiger
+    at:       [-494.000, -28.900, -397.670, 3]
+    level:    [121, 126]
+  17969161:
+    template: Snaggletoothed_Tiger
+    at:       [-480.800, -28.330, -420.280, 64]
+    level:    [121, 126]
+  17969162:
+    template: Obstreperous_Panopt
+    at:       [-486.500, -30.040, -408.270, 182]
+    level:    [121, 126]
+  17969163:
+    template: Obstreperous_Panopt
+    at:       [-497.800, -27.040, -405.610, 96]
+    level:    [121, 126]
+  17969164:
+    template: Obstreperous_Panopt
+    at:       [-481.200, -32.200, -401.380, 191]
+    level:    [121, 126]
+  17969165:
+    template: Obstreperous_Panopt
+    at:       [-482.100, -30.930, -409.110, 61]
+    level:    [121, 126]
+  17969166:
+    template: Snaggletoothed_Tiger
+    at:       [-481.500, -31.780, -381.950, 62]
+    level:    [121, 126]
+  17969167:
+    template: Snaggletoothed_Tiger
+    at:       [-484.100, -32.200, -367.780, 247]
+    level:    [121, 126]
+  17969168:
+    template: Obstreperous_Panopt
+    at:       [-484.200, -31.760, -373.540]
+    level:    [121, 126]
+  17969169:
+    template: Obstreperous_Panopt
+    at:       [-488.300, -31.190, -378.030, 34]
+    level:    [121, 126]
+  17969170:
+    template: Agitated_Chapuli
+    at:       [-492.600, -25.300, -422.060, 225]
+    level:    [121, 126]
+  17969171:
+    template: Agitated_Chapuli
+    at:       [-493.500, -23.620, -427.010, 87]
+    level:    [121, 126]
+  17969172:
+    template: Agitated_Chapuli
+    at:       [-493.400, -21.670, -434.010, 107]
+    level:    [121, 126]
+  17969173:
+    template: Devouring_Mosquito
+    at:       [-482.300, -24.490, -436.640, 33]
+    level:    [121, 126]
+  17969174:
+    template: Agitated_Chapuli
+    at:       [-505.300, -27.900, -389.360, 163]
+    level:    [121, 126]
+  17969175:
+    template: Agitated_Chapuli
+    at:       [-500.600, -27.900, -390.100, 39]
+    level:    [121, 126]
+  17969176:
+    template: Agitated_Chapuli
+    at:       [-502.600, -29.630, -375.930, 96]
+    level:    [121, 126]
+  17969177:
+    template: Agitated_Chapuli
+    at:       [-494.700, -28.870, -387.650, 163]
+    level:    [121, 126]
+  17969178:
+    template: Devouring_Mosquito
+    at:       [-494.000, -30.460, -375.850, 171]
+    level:    [121, 126]
+  17969179:
+    template: Snaggletoothed_Tiger
+    at:       [-534.800, -30.680, -390.470, 71]
+    level:    [121, 126]
+  17969180:
+    template: Snaggletoothed_Tiger
+    at:       [-535.200, -27.950, -375.550, 48]
+    level:    [121, 126]
+  17969181:
+    template: Snaggletoothed_Tiger
+    at:       [-534.800, -28.260, -378.680, 200]
+    level:    [121, 126]
+  17969182:
+    template: Snaggletoothed_Tiger
+    at:       [-556.800, -32.410, -397.280, 63]
+    level:    [121, 126]
+  17969183:
+    template: Obstreperous_Panopt
+    at:       [-544.000, -29.250, -376.480, 26]
+    level:    [121, 126]
+  17969184:
+    template: Obstreperous_Panopt
+    at:       [-541.600, -28.170, -368.960, 85]
+    level:    [121, 126]
+  17969185:
+    template: Obstreperous_Panopt
+    at:       [-544.000, -29.260, -375.870, 26]
+    level:    [121, 126]
+  17969186:
+    template: Obstreperous_Panopt
+    at:       [-556.500, -32.250, -392.040, 154]
+    level:    [121, 126]
+  17969187:
+    template: Snaggletoothed_Tiger
+    at:       [-559.100, -28.420, -343.160, 202]
+    level:    [121, 126]
+  17969188:
+    template: Snaggletoothed_Tiger
+    at:       [-575.600, -30.900, -351.640, 23]
+    level:    [121, 126]
+  17969189:
+    template: Snaggletoothed_Tiger
+    at:       [-596.600, -32.280, -352.260, 105]
+    level:    [121, 126]
+  17969190:
+    template: Obstreperous_Panopt
+    at:       [-570.400, -27.970, -337.240, 6]
+    level:    [121, 126]
+  17969191:
+    template: Obstreperous_Panopt
+    at:       [-596.700, -31.470, -340.640, 32]
+    level:    [121, 126]
+  17969192:
+    template: Obstreperous_Panopt
+    at:       [-565.800, -31.060, -352.070, 82]
+    level:    [121, 126]
+  17969193:
+    template: Obstreperous_Panopt
+    at:       [-578.100, -28.870, -339.100, 34]
+    level:    [121, 126]
+  17969194:
+    template: Snaggletoothed_Tiger
+    at:       [-605.800, -35.280, -303.610, 190]
+    level:    [121, 126]
+  17969195:
+    template: Snaggletoothed_Tiger
+    at:       [-585.500, -30.780, -305.420, 171]
+    level:    [121, 126]
+  17969196:
+    template: Snaggletoothed_Tiger
+    at:       [-611.800, -35.190, -303.510, 179]
+    level:    [121, 126]
+  17969197:
+    template: Obstreperous_Panopt
+    at:       [-631.900, -34.620, -306.980, 82]
+    level:    [121, 126]
+  17969198:
+    template: Obstreperous_Panopt
+    at:       [-586.400, -30.810, -306.350, 179]
+    level:    [121, 126]
+  17969199:
+    template: Obstreperous_Panopt
+    at:       [-608.400, -33.830, -309.420, 250]
+    level:    [121, 126]
+  17969200:
+    template: Obstreperous_Panopt
+    at:       [-600.700, -34.800, -306.780, 179]
+    level:    [121, 126]
+  17969201:
+    template: Obstreperous_Panopt
+    at:       [-581.500, -34.740, -286.530, 61]
+    level:    [121, 126]
+  17969202:
+    template: Obstreperous_Panopt
+    at:       [-588.700, -36.080, -268.520, 153]
+    level:    [121, 126]
+  17969203:
+    template: Obstreperous_Panopt
+    at:       [-581.100, -33.930, -290.640, 190]
+    level:    [121, 126]
+  17969204:
+    template: Obstreperous_Panopt
+    at:       [-639.500, -39.790, -264.100, 69]
+    level:    [121, 126]
+  17969205:
+    template: Obstreperous_Panopt
+    at:       [-633.400, -39.400, -266.230, 8]
+    level:    [121, 126]
+  17969206:
+    template: Agitated_Chapuli
+    at:       [-582.700, -28.310, -330.010, 92]
+    level:    [121, 126]
+  17969207:
+    template: Agitated_Chapuli
+    at:       [-582.800, -28.300, -329.800, 68]
+    level:    [121, 126]
+  17969208:
+    template: Agitated_Chapuli
+    at:       [-588.200, -29.410, -321.010, 62]
+    level:    [121, 126]
+  17969209:
+    template: Devouring_Mosquito
+    at:       [-583.900, -28.490, -318.600, 29]
+    level:    [121, 126]
+  17969210:
+    template: Agitated_Chapuli
+    at:       [-629.100, -39.020, -290.440, 184]
+    level:    [121, 126]
+  17969211:
+    template: Agitated_Chapuli
+    at:       [-627.400, -38.010, -298.490, 213]
+    level:    [121, 126]
+  17969212:
+    template: Agitated_Chapuli
+    at:       [-633.400, -38.420, -296.360, 240]
+    level:    [121, 126]
+  17969213:
+    template: Devouring_Mosquito
+    at:       [-631.100, -40.000, -273.470, 239]
+    level:    [121, 126]
+  17969214:
+    template: Devouring_Mosquito
+    at:       [-618.400, -52.180, -178.470, 192]
+    level:    [121, 126]
+  17969215:
+    template: Devouring_Mosquito
+    at:       [-618.400, -51.990, -165.920, 192]
+    level:    [121, 126]
+  17969216:
+    template: Agitated_Chapuli
+    at:       [-617.700, -51.520, -202.160, 191]
+    level:    [121, 126]
+  17969217:
+    template: Agitated_Chapuli
+    at:       [-618.200, -52.150, -185.580, 189]
+    level:    [121, 126]
+  17969218:
+    template: Agitated_Chapuli
+    at:       [-618.800, -46.960, -138.360, 62]
+    level:    [121, 126]
+  17969219:
+    template: Agitated_Chapuli
+    at:       [-618.900, -46.730, -137.200, 191]
+    level:    [121, 126]
+  17969220:
+    template: Obstreperous_Panopt
+    at:       [-605.200, -43.900, -61.652, 106]
+    level:    [121, 126]
+  17969221:
+    template: Obstreperous_Panopt
+    at:       [-616.400, -44.380, -62.305, 25]
+    level:    [121, 126]
+  17969222:
+    template: Obstreperous_Panopt
+    at:       [-616.000, -43.980, -65.528, 220]
+    level:    [121, 126]
+  17969223:
+    template: Obstreperous_Panopt
+    at:       [-585.300, -44.560, -35.432, 145]
+    level:    [121, 126]
+  17969224:
+    template: Obstreperous_Panopt
+    at:       [-581.300, -43.990, -33.894, 197]
+    level:    [121, 126]
+  17969225:
+    template: Obstreperous_Panopt
+    at:       [-597.500, -48.030, -10.085, 127]
+    level:    [121, 126]
+  17969226:
+    template: Obstreperous_Panopt
+    at:       [-586.500, -45.360, -20.261, 113]
+    level:    [121, 126]
+  17969227:
+    template: Indomitable_Faaz
+    at:       [-598.200, -48.100, -11.451, 161]
+    level:    [121, 126]
+  17969228:
+    template: Indomitable_Faaz
+    at:       [-598.500, -47.450, -20.423, 109]
+    level:    [121, 126]
+  17969229:
+    template: Obstreperous_Panopt
+    at:       [-587.300, -45.020, 14.757, 87]
+    level:    [121, 126]
+  17969230:
+    template: Obstreperous_Panopt
+    at:       [-582.800, -44.250, 16.308, 199]
+    level:    [121, 126]
+  17969231:
+    template: Indomitable_Faaz
+    at:       [-592.900, -46.630, 12.333, 134]
+    level:    [121, 126]
+  17969232:
+    template: Indomitable_Faaz
+    at:       [-590.900, -46.290, 18.427, 118]
+    level:    [121, 126]
+  17969233:
+    template: Territorial_Mantis
+    at:       [-584.400, -44.270, -30.003, 26]
+    level:    [121, 126]
+  17969234:
+    template: Territorial_Mantis
+    at:       [-587.400, -45.010, -28.055, 242]
+    level:    [121, 126]
+  17969235:
+    template: Rampaging_Beetle
+    at:       [-587.600, -45.400, -23.121, 187]
+    level:    [121, 126]
+  17969236:
+    template: Territorial_Mantis
+    at:       [-593.700, -46.960, 4.508, 174]
+    level:    [121, 126]
+  17969237:
+    template: Rampaging_Beetle
+    at:       [-588.500, -45.480, -5.437, 105]
+    level:    [121, 126]
+  17969238:
+    template: Rampaging_Beetle
+    at:       [-580.500, -43.960, 2.236, 8]
+    level:    [121, 126]
+  17969239:
+    template: Indomitable_Faaz
+    at:       [-580.800, -45.900, 53.005, 189]
+    level:    [121, 126]
+  17969240:
+    template: Territorial_Mantis
+    at:       [-548.100, -52.160, 100.249, 186]
+    level:    [121, 126]
+  17969241:
+    template: Territorial_Mantis
+    at:       [-553.000, -52.180, 97.087, 50]
+    level:    [121, 126]
+  17969242:
+    template: Rampaging_Beetle
+    at:       [-552.800, -52.170, 97.256, 51]
+    level:    [121, 126]
+  17969243:
+    template: Rampaging_Beetle
+    at:       [-554.100, -53.190, 107.061, 187]
+    level:    [121, 126]
+  17969244:
+    template: Territorial_Mantis
+    at:       [-518.500, -51.920, 99.359, 9]
+    level:    [121, 126]
+  17969245:
+    template: Territorial_Mantis
+    at:       [-512.100, -52.000, 99.418, 255]
+    level:    [121, 126]
+  17969246:
+    template: Rampaging_Beetle
+    at:       [-524.700, -51.940, 99.612]
+    level:    [121, 126]
+  17969247:
+    template: Rampaging_Beetle
+    at:       [-525.500, -54.760, 112.180, 182]
+    level:    [121, 126]
+  17969248:
+    template: Indomitable_Faaz
+    at:       [-455.500, -52.260, 98.973, 240]
+    level:    [121, 126]
+  17969249:
+    template: Indomitable_Faaz
+    at:       [-455.500, -52.250, 99.164, 237]
+    level:    [121, 126]
+  17969250:
+    template: Indomitable_Faaz
+    at:       [-453.800, -50.340, 74.176, 26]
+    level:    [121, 126]
+  17969251:
+    template: Indomitable_Faaz
+    at:       [-460.500, -53.000, 75.022, 201]
+    level:    [121, 126]
+  17969252:
+    template: Devouring_Mosquito
+    at:       [-458.600, -52.190, 72.030, 56]
+    level:    [121, 126]
+  17969253:
+    template: Devouring_Mosquito
+    at:       [-462.900, -50.080, 66.093, 62]
+    level:    [121, 126]
+  17969254:
+    template: Devouring_Mosquito
+    at:       [-451.500, -50.360, 79.429, 174]
+    level:    [121, 126]
+  17969255:
+    template: Devouring_Mosquito
+    at:       [-451.200, -49.850, 77.184, 13]
+    level:    [121, 126]
+  17969256:
+    template: Devouring_Mosquito
+    at:       [-430.100, -44.150, 72.125, 17]
+    level:    [121, 126]
+  17969257:
+    template: Water_Elemental_R
+    script:   Water_Elemental
+    at:       [-419.800, -41.900, 80.078, 195]
+    level:    [121, 126]
+  17969258:
+    template: Water_Elemental_R
+    script:   Water_Elemental
+    at:       [-420.400, -41.900, 105.024, 192]
+    level:    [121, 126]
+  17969259:
+    template: Lentic_Toad
+    at:       [-454.100, -41.900, 26.303, 130]
+    level:    [121, 126]
+  17969260:
+    template: Lentic_Toad
+    at:       [-433.800, -41.900, 31.256, 205]
+    level:    [121, 126]
+  17969261:
+    template: Lentic_Toad
+    at:       [-426.600, -41.900, 56.938, 2]
+    level:    [121, 126]
+  17969262:
+    template: Lentic_Toad
+    at:       [-428.800, -41.900, 60.748, 216]
+    level:    [121, 126]
+  17969263:
+    template: Lentic_Toad
+    at:       [-448.100, -41.900, 52.362, 200]
+    level:    [121, 126]
+  17969264:
+    template: Lentic_Toad
+    at:       [-439.600, -41.900, 47.548, 127]
+    level:    [121, 126]
+  17969265:
+    template: Wretched_Poroggo
+    at:       [-456.300, -41.900, 37.948, 171]
+    level:    [121, 126]
+  17969266:
+    template: Wretched_Poroggo
+    at:       [-448.800, -41.900, 52.155, 226]
+    level:    [121, 126]
+  17969267:
+    template: Devouring_Mosquito
+    at:       [-440.800, -41.900, 48.357, 71]
+    level:    [121, 126]
+  17969268:
+    template: Devouring_Mosquito
+    at:       [-454.400, -41.900, 23.992, 121]
+    level:    [121, 126]
+  17969269:
+    template: Lentic_Toad
+    at:       [-447.100, -41.900, -19.850, 6]
+    level:    [121, 126]
+  17969270:
+    template: Lentic_Toad
+    at:       [-456.300, -41.900, -14.560, 166]
+    level:    [121, 126]
+  17969271:
+    template: Lentic_Toad
+    at:       [-460.300, -41.900, -6.705, 166]
+    level:    [121, 126]
+  17969272:
+    template: Wretched_Poroggo
+    at:       [-456.700, -41.890, -13.222, 51]
+    level:    [121, 126]
+  17969273:
+    template: Lentic_Toad
+    at:       [-419.800, -41.900, 112.491, 64]
+    level:    [121, 126]
+  17969274:
+    template: Lentic_Toad
+    at:       [-419.600, -41.900, 116.531, 192]
+    level:    [121, 126]
+  17969275:
+    template: Lentic_Toad
+    at:       [-419.500, -41.900, 110.170, 192]
+    level:    [121, 126]
+  17969276:
+    template: Lentic_Toad
+    at:       [-419.400, -41.900, 93.698, 193]
+    level:    [121, 126]
+  17969277:
+    template: Wretched_Poroggo
+    at:       [-419.200, -41.900, 111.156, 192]
+    level:    [121, 126]
+  17969278:
+    template: Devouring_Mosquito
+    at:       [-419.500, -41.900, 72.726, 65]
+    level:    [121, 126]
+  17969279:
+    template: Lentic_Toad
+    at:       [-420.600, -57.890, 209.149, 53]
+    level:    [121, 126]
+  17969280:
+    template: Lentic_Toad
+    at:       [-419.300, -57.890, 202.391, 182]
+    level:    [121, 126]
+  17969281:
+    template: Lentic_Toad
+    at:       [-420.400, -57.890, 208.384, 185]
+    level:    [121, 126]
+  17969282:
+    template: Lentic_Toad
+    at:       [-420.200, -54.260, 188.145, 182]
+    level:    [121, 126]
+  17969283:
+    template: Lentic_Toad
+    at:       [-418.700, -56.500, 193.253, 206]
+    level:    [121, 126]
+  17969284:
+    template: Wretched_Poroggo
+    at:       [-418.600, -57.840, 198.761, 193]
+    level:    [121, 126]
+  17969285:
+    template: Devouring_Mosquito
+    at:       [-419.500, -52.990, 184.218, 57]
+    level:    [121, 126]
+  17969286:
+    template: Indomitable_Faaz
+    at:       [-375.600, -51.920, 131.636, 222]
+    level:    [121, 126]
+  17969287:
+    template: Indomitable_Faaz
+    at:       [-367.800, -52.630, 132.449, 207]
+    level:    [121, 126]
+  17969288:
+    template: Indomitable_Faaz
+    at:       [-369.100, -52.360, 133.649, 9]
+    level:    [121, 126]
+  17969289:
+    template: Indomitable_Faaz
+    at:       [-377.700, -51.920, 116.273, 227]
+    level:    [121, 126]
+  17969290:
+    template: Indomitable_Faaz
+    at:       [-330.500, -52.060, 141.688, 248]
+    level:    [121, 126]
+  17969291:
+    template: Indomitable_Faaz
+    at:       [-326.800, -52.000, 141.882, 128]
+    level:    [121, 126]
+  17969292:
+    template: Indomitable_Faaz
+    at:       [-351.400, -52.040, 141.557, 129]
+    level:    [121, 126]
+  17969293:
+    template: Territorial_Mantis
+    at:       [-395.400, -55.530, 119.824, 235]
+    level:    [121, 126]
+  17969294:
+    template: Territorial_Mantis
+    at:       [-398.700, -55.970, 117.845, 174]
+    level:    [121, 126]
+  17969295:
+    template: Territorial_Mantis
+    at:       [-409.200, -53.420, 124.878, 92]
+    level:    [121, 126]
+  17969296:
+    template: Territorial_Mantis
+    at:       [-402.500, -56.250, 121.751, 202]
+    level:    [121, 126]
+  17969297:
+    template: Rampaging_Beetle
+    at:       [-397.400, -56.630, 125.829, 11]
+    level:    [121, 126]
+  17969298:
+    template: Rampaging_Beetle
+    at:       [-406.900, -53.500, 109.450, 179]
+    level:    [121, 126]
+  17969299:
+    template: Rampaging_Beetle
+    at:       [-398.900, -53.330, 108.137, 98]
+    level:    [121, 126]
+  17969300:
+    template: Rampaging_Beetle
+    at:       [-396.200, -56.460, 125.539, 117]
+    level:    [121, 126]
+  17969301:
+    template: Territorial_Mantis
+    at:       [-370.000, -53.990, 116.834, 118]
+    level:    [121, 126]
+  17969302:
+    template: Territorial_Mantis
+    at:       [-355.100, -53.290, 132.570, 184]
+    level:    [121, 126]
+  17969303:
+    template: Territorial_Mantis
+    at:       [-361.700, -54.320, 128.065, 17]
+    level:    [121, 126]
+  17969304:
+    template: Rampaging_Beetle
+    at:       [-353.900, -54.430, 129.302, 54]
+    level:    [121, 126]
+  17969305:
+    template: Rampaging_Beetle
+    at:       [-353.700, -54.560, 128.953, 57]
+    level:    [121, 126]
+  17969306:
+    template: Rampaging_Beetle
+    at:       [-367.200, -54.630, 122.856, 100]
+    level:    [121, 126]
+  17969307:
+    template: Territorial_Mantis
+    at:       [-305.700, -52.630, 153.983, 178]
+    level:    [121, 126]
+  17969308:
+    template: Territorial_Mantis
+    at:       [-301.300, -51.980, 155.936, 228]
+    level:    [121, 126]
+  17969309:
+    template: Territorial_Mantis
+    at:       [-317.600, -51.900, 139.897, 118]
+    level:    [121, 126]
+  17969310:
+    template: Rampaging_Beetle
+    at:       [-307.400, -51.900, 145.240, 232]
+    level:    [121, 126]
+  17969311:
+    template: Rampaging_Beetle
+    at:       [-310.600, -52.520, 148.330, 7]
+    level:    [121, 126]
+  17969312:
+    template: Rampaging_Beetle
+    at:       [-307.100, -51.900, 145.757, 229]
+    level:    [121, 126]
+  17969313:
+    template: Indomitable_Faaz
+    at:       [-304.800, -55.680, 167.490, 228]
+    level:    [121, 126]
+  17969314:
+    template: Indomitable_Faaz
+    at:       [-299.100, -62.790, 183.623, 223]
+    level:    [121, 126]
+  17969315:
+    template: Indomitable_Faaz
+    at:       [-316.900, -72.080, 200.470, 123]
+    level:    [121, 126]
+  17969316:
+    template: Territorial_Mantis
+    at:       [-301.600, -67.910, 203.932, 160]
+    level:    [121, 126]
+  17969317:
+    template: Territorial_Mantis
+    at:       [-309.800, -66.340, 185.348, 173]
+    level:    [121, 126]
+  17969318:
+    template: Rampaging_Beetle
+    at:       [-297.000, -66.840, 195.117, 87]
+    level:    [121, 126]
+  17969319:
+    template: Rampaging_Beetle
+    at:       [-300.900, -62.670, 184.333, 63]
+    level:    [121, 126]
+  17969320:
+    template: Snaggletoothed_Tiger
+    at:       [-299.000, -69.640, 268.886, 70]
+    level:    [121, 126]
+  17969321:
+    template: Snaggletoothed_Tiger
+    at:       [-289.900, -76.860, 251.259, 149]
+    level:    [121, 126]
+  17969322:
+    template: Snaggletoothed_Tiger
+    at:       [-297.500, -74.330, 251.977, 121]
+    level:    [121, 126]
+  17969323:
+    template: Officious_Unseelie
+    at:       [-285.700, -79.360, 244.097, 229]
+    level:    [121, 126]
+  17969324:
+    template: Officious_Unseelie
+    at:       [-294.000, -73.970, 258.617, 250]
+    level:    [121, 126]
+  17969325:
+    template: Officious_Unseelie
+    at:       [-296.100, -73.200, 296.227, 49]
+    level:    [121, 126]
+  17969326:
+    template: Officious_Unseelie
+    at:       [-284.500, -71.990, 284.359, 235]
+    level:    [121, 126]
+  17969327:
+    template: Officious_Unseelie
+    at:       [-284.600, -74.860, 293.923, 222]
+    level:    [121, 126]
+  17969328:
+    template: Macabre_Skeleton
+    at:       [-303.700, -79.280, 314.692, 5]
+    level:    [121, 126]
+  17969329:
+    template: Macabre_Skeleton
+    at:       [-284.400, -76.480, 299.720, 244]
+    level:    [121, 126]
+  17969330:
+    template: Macabre_Skeleton
+    at:       [-295.600, -68.130, 278.971, 12]
+    level:    [121, 126]
+  17969331:
+    template: Perfervid_Naraka
+    at:       [-284.600, -76.430, 299.450, 241]
+    level:    [121, 126]
+  17969332:
+    template: Officious_Unseelie
+    at:       [-275.700, -81.280, 319.128, 130]
+    level:    [121, 126]
+  17969333:
+    template: Officious_Unseelie
+    at:       [-312.500, -80.290, 320.638, 21]
+    level:    [121, 126]
+  17969334:
+    template: Officious_Unseelie
+    at:       [-314.300, -80.470, 333.410, 252]
+    level:    [121, 126]
+  17969335:
+    template: Macabre_Skeleton
+    at:       [-293.900, -80.830, 324.527, 123]
+    level:    [121, 126]
+  17969336:
+    template: Macabre_Skeleton
+    at:       [-303.200, -80.390, 325.605, 85]
+    level:    [121, 126]
+  17969337:
+    template: Perfervid_Naraka
+    at:       [-314.700, -80.390, 327.787, 115]
+    level:    [121, 126]
+  17969338:
+    template: Officious_Unseelie
+    at:       [-320.300, -80.160, 354.239, 231]
+    level:    [121, 126]
+  17969339:
+    template: Macabre_Skeleton
+    at:       [-318.900, -80.470, 354.628, 162]
+    level:    [121, 126]
+  17969340:
+    template: Macabre_Skeleton
+    at:       [-319.500, -80.400, 354.194, 209]
+    level:    [121, 126]
+  17969341:
+    template: Indomitable_Faaz
+    at:       [-327.500, -67.900, 299.748, 28]
+    level:    [121, 126]
+  17969342:
+    template: Indomitable_Faaz
+    at:       [-310.000, -67.900, 295.967, 154]
+    level:    [121, 126]
+  17969343:
+    template: Indomitable_Faaz
+    at:       [-338.100, -66.710, 365.957, 194]
+    level:    [121, 126]
+  17969344:
+    template: Indomitable_Faaz
+    at:       [-338.100, -63.900, 377.359, 191]
+    level:    [121, 126]
+  17969345:
+    template: Porxie
+    at:       [-356.400, -72.390, 284.009, 236]
+    level:    [121, 126]
+  17969346:
+    template: Porxie
+    at:       [-348.700, -71.290, 292.023, 191]
+    level:    [121, 126]
+  17969347:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-350.800, -70.400, 318.972, 149]
+    level:    [121, 126]
+  17969348:
+    template: Arboreal_Chigoe
+    at:       [-359.000, -72.390, 316.634, 77]
+    level:    [121, 126]
+  17969349:
+    template: Arboreal_Chigoe
+    at:       [-356.600, -71.970, 323.781, 68]
+    level:    [121, 126]
+  17969350:
+    template: Porxie
+    at:       [-368.400, -72.860, 290.092, 17]
+    level:    [121, 126]
+  17969351:
+    template: Porxie
+    at:       [-381.900, -71.680, 282.317, 133]
+    level:    [121, 126]
+  17969352:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-373.200, -72.110, 285.729, 99]
+    level:    [121, 126]
+  17969353:
+    template: Officious_Unseelie
+    at:       [-398.000, -68.340, 302.722, 194]
+    level:    [121, 126]
+  17969354:
+    template: Officious_Unseelie
+    at:       [-389.400, -68.060, 304.371, 133]
+    level:    [121, 126]
+  17969355:
+    template: Macabre_Skeleton
+    at:       [-377.300, -62.830, 354.868, 62]
+    level:    [121, 126]
+  17969356:
+    template: Macabre_Skeleton
+    at:       [-370.500, -63.590, 359.119, 228]
+    level:    [121, 126]
+  17969357:
+    template: Porxie
+    at:       [-366.400, -69.650, 335.240, 237]
+    level:    [121, 126]
+  17969358:
+    template: Porxie
+    at:       [-369.100, -71.060, 327.230, 235]
+    level:    [121, 126]
+  17969359:
+    template: Porxie
+    at:       [-370.800, -68.000, 339.845, 113]
+    level:    [121, 126]
+  17969360:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-369.700, -71.040, 326.549, 234]
+    level:    [121, 126]
+  17969361:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-370.300, -67.850, 340.566, 230]
+    level:    [121, 126]
+  17969362:
+    template: Arboreal_Chigoe
+    at:       [-391.900, -63.280, 332.433, 238]
+    level:    [121, 126]
+  17969363:
+    template: Arboreal_Chigoe
+    at:       [-364.600, -71.210, 328.347, 129]
+    level:    [121, 126]
+  17969364:
+    template: Porxie
+    at:       [-365.000, -64.510, 357.161, 87]
+    level:    [121, 126]
+  17969365:
+    template: Porxie
+    at:       [-377.800, -62.920, 351.292, 39]
+    level:    [121, 126]
+  17969366:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-377.900, -61.670, 357.742, 4]
+    level:    [121, 126]
+  17969367:
+    template: Porxie
+    at:       [-355.900, -65.070, 360.529, 104]
+    level:    [121, 126]
+  17969368:
+    template: Indomitable_Faaz
+    at:       [-367.400, -58.680, 384.257, 217]
+    level:    [121, 126]
+  17969369:
+    template: Indomitable_Faaz
+    at:       [-376.900, -59.340, 376.552, 74]
+    level:    [121, 126]
+  17969370:
+    template: Porxie
+    at:       [-361.700, -60.480, 381.981, 164]
+    level:    [121, 126]
+  17969371:
+    template: Porxie
+    at:       [-376.700, -59.360, 376.606, 77]
+    level:    [121, 126]
+  17969372:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-385.700, -53.200, 389.375, 168]
+    level:    [121, 126]
+  17969373:
+    template: Arboreal_Chigoe
+    at:       [-367.200, -58.540, 384.630, 244]
+    level:    [121, 126]
+  17969374:
+    template: Arboreal_Chigoe
+    at:       [-381.000, -56.180, 381.212, 88]
+    level:    [121, 126]
+  17969375:
+    template: Porxie
+    at:       [-374.500, -53.980, 400.351, 130]
+    level:    [121, 126]
+  17969376:
+    template: Porxie
+    at:       [-370.900, -55.360, 405.424, 1]
+    level:    [121, 126]
+  17969377:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-363.000, -56.140, 397.851, 10]
+    level:    [121, 126]
+  17969378:
+    template: Porxie
+    at:       [-410.900, -50.790, 397.675, 50]
+    level:    [121, 126]
+  17969379:
+    template: Porxie
+    at:       [-408.500, -49.960, 402.842, 41]
+    level:    [121, 126]
+  17969380:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-400.000, -48.110, 412.761, 167]
+    level:    [121, 126]
+  17969381:
+    template: Indomitable_Faaz
+    at:       [-397.200, -48.670, 438.795, 154]
+    level:    [121, 126]
+  17969382:
+    template: Indomitable_Faaz
+    at:       [-392.100, -49.400, 417.092, 7]
+    level:    [121, 126]
+  17969383:
+    template: Porxie
+    at:       [-393.600, -48.970, 424.727, 247]
+    level:    [121, 126]
+  17969384:
+    template: Porxie
+    at:       [-384.500, -51.320, 417.541]
+    level:    [121, 126]
+  17969385:
+    template: Indomitable_Faaz
+    at:       [-348.900, -59.190, 394.993, 115]
+    level:    [121, 126]
+  17969386:
+    template: Indomitable_Faaz
+    at:       [-349.000, -57.950, 423.002, 219]
+    level:    [121, 126]
+  17969387:
+    template: Indomitable_Faaz
+    at:       [-340.000, -60.450, 427.811, 196]
+    level:    [121, 126]
+  17969388:
+    template: Porxie
+    at:       [-355.900, -57.050, 406.973, 184]
+    level:    [121, 126]
+  17969389:
+    template: Porxie
+    at:       [-347.900, -58.640, 429.348, 192]
+    level:    [121, 126]
+  17969390:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-346.600, -59.550, 400.075, 245]
+    level:    [121, 126]
+  17969391:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [-491.000, -52.700, 424.240, 5]
+    level:    [121, 126]
+  17969392:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [-488.500, -48.380, 402.069, 104]
+    level:    [121, 126]
+  17969393:
+    template: Agitated_Chapuli
+    at:       [-470.200, -52.750, 410.619, 164]
+    level:    [121, 126]
+  17969394:
+    template: Agitated_Chapuli
+    at:       [-496.700, -48.190, 401.575, 60]
+    level:    [121, 126]
+  17969395:
+    template: Territorial_Mantis
+    at:       [-505.700, -49.190, 415.463, 1]
+    level:    [121, 126]
+  17969396:
+    template: Territorial_Mantis
+    at:       [-501.800, -48.430, 404.726, 24]
+    level:    [121, 126]
+  17969397:
+    template: Glowering_Ladybug
+    at:       [-466.000, -52.100, 401.446, 20]
+    level:    [121, 126]
+  17969398:
+    template: Glowering_Ladybug
+    at:       [-504.600, -49.120, 413.238, 191]
+    level:    [121, 126]
+  17969399:
+    template: Lucani
+    at:       [-481.800, -51.550, 414.492, 251]
+    level:    [121, 126]
+  17969400:
+    template: Lucani
+    at:       [-495.800, -48.570, 405.458, 195]
+    level:    [121, 126]
+  17969401:
+    template: Agitated_Chapuli
+    at:       [-476.800, -56.270, 455.721, 68]
+    level:    [121, 126]
+  17969402:
+    template: Agitated_Chapuli
+    at:       [-481.900, -56.170, 449.791, 170]
+    level:    [121, 126]
+  17969403:
+    template: Glowering_Ladybug
+    at:       [-488.300, -54.420, 429.481, 222]
+    level:    [121, 126]
+  17969404:
+    template: Lucani
+    at:       [-510.500, -49.620, 439.569, 89]
+    level:    [121, 126]
+  17969405:
+    template: Lucani
+    at:       [-473.200, -56.130, 430.776, 247]
+    level:    [121, 126]
+  17969406:
+    template: Agitated_Chapuli
+    at:       [-480.400, -55.820, 456.259, 76]
+    level:    [121, 126]
+  17969407:
+    template: Agitated_Chapuli
+    at:       [-487.000, -55.980, 451.648, 145]
+    level:    [121, 126]
+  17969408:
+    template: Territorial_Mantis
+    at:       [-494.400, -55.740, 474.286, 75]
+    level:    [121, 126]
+  17969409:
+    template: Territorial_Mantis
+    at:       [-506.300, -55.990, 476.372, 36]
+    level:    [121, 126]
+  17969410:
+    template: Glowering_Ladybug
+    at:       [-515.300, -55.150, 470.903, 160]
+    level:    [121, 126]
+  17969411:
+    template: Glowering_Ladybug
+    at:       [-511.200, -54.070, 465.941, 42]
+    level:    [121, 126]
+  17969412:
+    template: Lucani
+    at:       [-503.700, -54.580, 466.542, 94]
+    level:    [121, 126]
+  17969413:
+    template: Lucani
+    at:       [-494.700, -56.130, 480.501, 255]
+    level:    [121, 126]
+  17969414:
+    template: Porxie
+    at:       [-401.400, -56.720, 486.558, 211]
+    level:    [121, 126]
+  17969415:
+    template: Porxie
+    at:       [-403.800, -57.270, 481.308, 139]
+    level:    [121, 126]
+  17969416:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-405.000, -57.490, 483.092, 81]
+    level:    [121, 126]
+  17969417:
+    template: Porxie
+    at:       [-397.300, -56.980, 511.523, 186]
+    level:    [121, 126]
+  17969418:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-400.500, -56.340, 497.395, 111]
+    level:    [121, 126]
+  17969419:
+    template: Porxie
+    at:       [-407.700, -62.640, 546.591, 191]
+    level:    [121, 126]
+  17969420:
+    template: Jeering_Pixie
+    at:       [-457.300, -60.250, 570.067, 17]
+    level:    [121, 126]
+  17969421:
+    template: Jeering_Pixie
+    at:       [-435.400, -63.310, 568.929, 27]
+    level:    [121, 126]
+  17969422:
+    template: Jeering_Pixie
+    at:       [-456.800, -55.920, 581.010, 184]
+    level:    [121, 126]
+  17969423:
+    template: Jeering_Pixie
+    at:       [-483.600, -56.080, 563.611, 199]
+    level:    [121, 126]
+  17969424:
+    template: Jeering_Pixie
+    at:       [-474.100, -53.260, 571.107, 50]
+    level:    [121, 126]
+  17969425:
+    template: Indomitable_Faaz
+    at:       [-503.400, -58.620, 607.197, 136]
+    level:    [121, 126]
+  17969426:
+    template: Indomitable_Faaz
+    at:       [-503.500, -57.050, 602.672, 126]
+    level:    [121, 126]
+  17969427:
+    template: Jeering_Pixie
+    at:       [-478.800, -53.100, 590.096, 55]
+    level:    [121, 126]
+  17969428:
+    template: Jeering_Pixie
+    at:       [-506.100, -57.290, 602.937, 20]
+    level:    [121, 126]
+  17969429:
+    template: Jeering_Pixie
+    at:       [-479.700, -55.580, 594.411, 23]
+    level:    [121, 126]
+  17969430:
+    template: Jeering_Pixie
+    at:       [-482.600, -55.200, 593.976, 157]
+    level:    [121, 126]
+  17969431:
+    template: Indomitable_Faaz
+    at:       [-531.500, -54.640, 597.588, 103]
+    level:    [121, 126]
+  17969432:
+    template: Indomitable_Faaz
+    at:       [-516.700, -56.190, 596.982, 188]
+    level:    [121, 126]
+  17969433:
+    template: Indomitable_Faaz
+    at:       [-487.800, -55.370, 594.234, 132]
+    level:    [121, 126]
+  17969434:
+    template: Jeering_Pixie
+    at:       [-505.400, -52.660, 590.473, 126]
+    level:    [121, 126]
+  17969435:
+    template: Jeering_Pixie
+    at:       [-493.700, -52.480, 590.796, 60]
+    level:    [121, 126]
+  17969436:
+    template: Lentic_Toad
+    at:       [-460.000, -49.890, 593.286, 78]
+    level:    [121, 126]
+  17969437:
+    template: Lentic_Toad
+    at:       [-459.600, -49.780, 605.382, 206]
+    level:    [121, 126]
+  17969438:
+    template: Water_Elemental_R
+    script:   Water_Elemental
+    at:       [-458.800, -49.890, 596.445, 206]
+    level:    [121, 126]
+  17969439:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [-286.900, -54.860, 497.441, 68]
+    level:    [121, 126]
+  17969440:
+    template: Quarrelsome_Hippogryph
+    at:       [-283.700, -55.560, 504.572, 241]
+    level:    [121, 126]
+  17969441:
+    template: Quarrelsome_Hippogryph
+    at:       [-315.500, -56.120, 523.224, 104]
+    level:    [121, 126]
+  17969442:
+    template: Quarrelsome_Hippogryph
+    at:       [-221.200, -67.980, 546.064, 89]
+    level:    [121, 126]
+  17969443:
+    template: Quarrelsome_Hippogryph
+    at:       [-218.100, -67.900, 566.591, 75]
+    level:    [121, 126]
+  17969444:
+    template: Porxie
+    at:       [-215.300, -68.380, 555.590, 34]
+    level:    [121, 126]
+  17969445:
+    template: Porxie
+    at:       [-205.900, -69.640, 567.838, 191]
+    level:    [121, 126]
+  17969446:
+    template: Porxie
+    at:       [-198.800, -80.310, 526.197, 39]
+    level:    [121, 126]
+  17969447:
+    template: Porxie
+    at:       [-198.800, -76.400, 542.840, 201]
+    level:    [121, 126]
+  17969448:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-206.000, -72.250, 553.349, 150]
+    level:    [121, 126]
+  17969449:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [-155.200, -78.180, 617.236, 43]
+    level:    [121, 126]
+  17969450:
+    template: Quarrelsome_Hippogryph
+    at:       [-154.400, -78.040, 591.682, 230]
+    level:    [121, 126]
+  17969451:
+    template: Quarrelsome_Hippogryph
+    at:       [-121.700, -76.360, 575.913, 220]
+    level:    [121, 126]
+  17969452:
+    template: Quarrelsome_Hippogryph
+    at:       [-143.400, -80.600, 559.312, 150]
+    level:    [121, 126]
+  17969453:
+    template: Porxie
+    at:       [-127.600, -76.130, 583.799, 113]
+    level:    [121, 126]
+  17969454:
+    template: Porxie
+    at:       [-134.800, -79.700, 596.091, 108]
+    level:    [121, 126]
+  17969455:
+    template: Porxie
+    at:       [-153.400, -76.880, 586.706, 70]
+    level:    [121, 126]
+  17969456:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-147.300, -79.840, 596.538, 252]
+    level:    [121, 126]
+  17969457:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-129.500, -76.460, 583.734, 64]
+    level:    [121, 126]
+  17969458:
+    template: Porxie
+    at:       [98.114, -74.280, 602.216]
+    level:    [121, 126]
+  17969459:
+    template: Porxie
+    at:       [-75.640, -84.580, 575.911, 245]
+    level:    [121, 126]
+  17969460:
+    template: Porxie
+    at:       [98.207, -74.260, 601.289, 253]
+    level:    [121, 126]
+  17969461:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-74.790, -87.250, 587.801, 220]
+    level:    [121, 126]
+  17969462:
+    template: Asphyxiating_Cyhiraeth
+    at:       [-84.000, -84.250, 574.843, 133]
+    level:    [121, 126]
+  17969463:
+    template: Officious_Unseelie
+    at:       [71.805, -81.540, 596.062, 226]
+    level:    [121, 126]
+  17969464:
+    template: Officious_Unseelie
+    at:       [65.129, -82.920, 596.070, 227]
+    level:    [121, 126]
+  17969465:
+    template: Officious_Unseelie
+    at:       [47.930, -87.410, 597.500, 93]
+    level:    [121, 126]
+  17969466:
+    template: Officious_Unseelie
+    at:       [51.938, -84.580, 567.471, 196]
+    level:    [121, 126]
+  17969467:
+    template: Officious_Unseelie
+    at:       [51.873, -85.380, 555.840, 128]
+    level:    [121, 126]
+  17969468:
+    template: Ignoble_Skeleton
+    at:       [40.819, -88.300, 558.486, 46]
+    level:    [121, 126]
+  17969469:
+    template: Quarrelsome_Hippogryph
+    at:       [61.376, -83.910, 548.018, 85]
+    level:    [121, 126]
+  17969470:
+    template: Quarrelsome_Hippogryph
+    at:       [55.721, -86.160, 546.385, 189]
+    level:    [121, 126]
+  17969471:
+    template: Quarrelsome_Hippogryph
+    at:       [61.097, -85.480, 542.718, 34]
+    level:    [121, 126]
+  17969472:
+    template: Officious_Unseelie
+    at:       [55.909, -87.960, 541.427, 87]
+    level:    [121, 126]
+  17969473:
+    template: Officious_Unseelie
+    at:       [68.553, -83.070, 558.247, 204]
+    level:    [121, 126]
+  17969474:
+    template: Ignoble_Skeleton
+    at:       [56.560, -85.860, 547.192, 163]
+    level:    [121, 126]
+  17969475:
+    template: Ignoble_Skeleton
+    at:       [50.661, -92.520, 534.129, 179]
+    level:    [121, 126]
+  17969476:
+    template: Officious_Unseelie
+    at:       [93.769, -76.110, 586.809, 232]
+    level:    [121, 126]
+  17969477:
+    template: Officious_Unseelie
+    at:       [105.610, -75.680, 601.434, 28]
+    level:    [121, 126]
+  17969478:
+    template: Ignoble_Skeleton
+    at:       [73.462, -81.160, 593.395, 108]
+    level:    [121, 126]
+  17969479:
+    template: Officious_Unseelie
+    at:       [88.026, -80.490, 552.075, 133]
+    level:    [121, 126]
+  17969480:
+    template: Officious_Unseelie
+    at:       [86.404, -78.970, 557.328, 5]
+    level:    [121, 126]
+  17969481:
+    template: Ignoble_Skeleton
+    at:       [91.888, -77.150, 556.223, 41]
+    level:    [121, 126]
+  17969482:
+    template: Officious_Unseelie
+    at:       [73.027, -86.110, 531.614, 204]
+    level:    [121, 126]
+  17969483:
+    template: Officious_Unseelie
+    at:       [78.746, -88.490, 520.447, 62]
+    level:    [121, 126]
+  17969484:
+    template: Ignoble_Skeleton
+    at:       [76.223, -85.770, 531.101, 4]
+    level:    [121, 126]
+  17969485:
+    template: Rampaging_Beetle
+    at:       [116.340, -85.790, 549.861, 66]
+    level:    [121, 126]
+  17969486:
+    template: Rampaging_Beetle
+    at:       [120.170, -85.280, 548.479, 47]
+    level:    [121, 126]
+  17969487:
+    template: Devouring_Mosquito
+    at:       [113.630, -84.350, 577.723, 64]
+    level:    [121, 126]
+  17969488:
+    template: Devouring_Mosquito
+    at:       [118.190, -87.120, 553.573, 20]
+    level:    [121, 126]
+  17969489:
+    template: Devouring_Mosquito
+    at:       [119.260, -87.190, 554.294, 61]
+    level:    [121, 126]
+  17969490:
+    template: Devouring_Mosquito
+    at:       [114.550, -85.970, 570.635, 155]
+    level:    [121, 126]
+  17969491:
+    template: Rampaging_Beetle
+    at:       [128.210, -87.650, 538.064, 160]
+    level:    [121, 126]
+  17969492:
+    template: Rampaging_Beetle
+    at:       [128.390, -87.680, 537.823, 161]
+    level:    [121, 126]
+  17969493:
+    template: Devouring_Mosquito
+    at:       [134.600, -93.510, 528.278, 25]
+    level:    [121, 126]
+  17969494:
+    template: Devouring_Mosquito
+    at:       [136.760, -93.820, 531.489, 160]
+    level:    [121, 126]
+  17969495:
+    template: Devouring_Mosquito
+    at:       [135.060, -91.040, 536.552, 196]
+    level:    [121, 126]
+  17969496:
+    template: Devouring_Mosquito
+    at:       [119.520, -87.240, 525.773, 70]
+    level:    [121, 126]
+  17969497:
+    template: Devouring_Mosquito
+    at:       [118.650, -88.040, 522.622, 113]
+    level:    [121, 126]
+  17969498:
+    template: Devouring_Mosquito
+    at:       [159.910, -103.500, 524.794, 101]
+    level:    [121, 126]
+  17969499:
+    template: Devouring_Mosquito
+    at:       [160.120, -103.900, 513.096, 128]
+    level:    [121, 126]
+  17969500:
+    template: Devouring_Mosquito
+    at:       [147.590, -101.500, 523.234, 189]
+    level:    [121, 126]
+  17969501:
+    template: Rampaging_Beetle
+    at:       [177.370, -99.920, 528.533, 180]
+    level:    [121, 126]
+  17969502:
+    template: Rampaging_Beetle
+    at:       [181.220, -99.900, 517.007, 57]
+    level:    [121, 126]
+  17969503:
+    template: Rampaging_Beetle
+    at:       [184.060, -92.930, 447.244, 238]
+    level:    [121, 126]
+  17969504:
+    template: Devouring_Mosquito
+    at:       [185.550, -100.600, 488.420, 144]
+    level:    [121, 126]
+  17969505:
+    template: Devouring_Mosquito
+    at:       [185.920, -98.310, 469.446, 180]
+    level:    [121, 126]
+  17969506:
+    template: Devouring_Mosquito
+    at:       [190.370, -94.140, 442.971, 114]
+    level:    [121, 126]
+  17969507:
+    template: Devouring_Mosquito
+    at:       [186.370, -93.870, 448.170, 221]
+    level:    [121, 126]
+  17969508:
+    template: Rampaging_Beetle
+    at:       [182.060, -91.910, 402.222, 63]
+    level:    [121, 126]
+  17969509:
+    template: Devouring_Mosquito
+    at:       [182.030, -92.170, 418.427, 65]
+    level:    [121, 126]
+  17969510:
+    template: Devouring_Mosquito
+    at:       [181.640, -92.100, 414.464, 65]
+    level:    [121, 126]
+  17969511:
+    template: Arboreal_Chigoe
+    at:       [145.680, -82.640, 299.877, 27]
+    level:    [121, 126]
+  17969512:
+    template: Arboreal_Chigoe
+    at:       [123.210, -73.130, 321.177, 145]
+    level:    [121, 126]
+  17969513:
+    template: Arboreal_Chigoe
+    at:       [152.910, -87.820, 338.114, 95]
+    level:    [121, 126]
+  17969514:
+    template: Arboreal_Chigoe
+    at:       [131.380, -81.150, 366.696, 247]
+    level:    [121, 126]
+  17969515:
+    template: Arboreal_Chigoe
+    at:       [122.240, -74.550, 330.957, 155]
+    level:    [121, 126]
+  17969516:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [171.990, -83.730, 298.791, 56]
+    level:    [121, 126]
+  17969517:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [116.020, -77.230, 369.247, 194]
+    level:    [121, 126]
+  17969518:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [128.260, -74.870, 299.397, 250]
+    level:    [121, 126]
+  17969519:
+    template: Lucani
+    at:       [152.070, -87.540, 349.907, 165]
+    level:    [121, 126]
+  17969520:
+    template: Lucani
+    at:       [158.160, -87.850, 338.117, 65]
+    level:    [121, 126]
+  17969521:
+    template: Lucani
+    at:       [166.610, -89.900, 357.958, 183]
+    level:    [121, 126]
+  17969522:
+    template: Territorial_Mantis
+    at:       [139.700, -82.010, 313.359, 166]
+    level:    [121, 126]
+  17969523:
+    template: Territorial_Mantis
+    at:       [141.810, -85.410, 347.636, 215]
+    level:    [121, 126]
+  17969524:
+    template: Territorial_Mantis
+    at:       [141.700, -82.980, 309.561, 215]
+    level:    [121, 126]
+  17969525:
+    template: Glowering_Ladybug
+    at:       [141.930, -82.930, 312.808, 38]
+    level:    [121, 126]
+  17969526:
+    template: Glowering_Ladybug
+    at:       [145.760, -82.930, 298.376, 53]
+    level:    [121, 126]
+  17969527:
+    template: Lucani
+    at:       [138.930, -82.310, 332.308, 153]
+    level:    [121, 126]
+  17969528:
+    template: Lucani
+    at:       [143.480, -83.230, 308.570, 204]
+    level:    [121, 126]
+  17969529:
+    template: Glowering_Ladybug
+    at:       [145.200, -75.280, 423.134, 141]
+    level:    [121, 126]
+  17969530:
+    template: Glowering_Ladybug
+    at:       [155.960, -79.530, 423.165, 28]
+    level:    [121, 126]
+  17969531:
+    template: Glowering_Ladybug
+    at:       [154.840, -79.150, 411.063, 213]
+    level:    [121, 126]
+  17969532:
+    template: Territorial_Mantis
+    at:       [148.430, -76.080, 413.437, 59]
+    level:    [121, 126]
+  17969533:
+    template: Glowering_Ladybug
+    at:       [159.010, -81.910, 388.934, 47]
+    level:    [121, 126]
+  17969534:
+    template: Glowering_Ladybug
+    at:       [143.000, -77.040, 385.725, 87]
+    level:    [121, 126]
+  17969535:
+    template: Glowering_Ladybug
+    at:       [142.890, -76.940, 385.904, 66]
+    level:    [121, 126]
+  17969536:
+    template: Territorial_Mantis
+    at:       [151.530, -77.490, 406.251, 1]
+    level:    [121, 126]
+  17969537:
+    template: Glowering_Ladybug
+    at:       [126.940, -77.100, 372.035, 112]
+    level:    [121, 126]
+  17969538:
+    template: Glowering_Ladybug
+    at:       [126.260, -77.070, 371.799, 235]
+    level:    [121, 126]
+  17969539:
+    template: Glowering_Ladybug
+    at:       [125.450, -80.430, 362.976, 34]
+    level:    [121, 126]
+  17969540:
+    template: Territorial_Mantis
+    at:       [110.830, -77.240, 361.598, 5]
+    level:    [121, 126]
+  17969541:
+    template: Glowering_Ladybug
+    at:       [121.150, -73.510, 327.826, 135]
+    level:    [121, 126]
+  17969542:
+    template: Glowering_Ladybug
+    at:       [115.170, -73.800, 332.470, 150]
+    level:    [121, 126]
+  17969543:
+    template: Glowering_Ladybug
+    at:       [116.340, -75.740, 336.770, 74]
+    level:    [121, 126]
+  17969544:
+    template: Territorial_Mantis
+    at:       [113.010, -76.830, 347.647, 17]
+    level:    [121, 126]
+  17969545:
+    template: Territorial_Mantis
+    at:       [114.480, -75.030, 337.234, 146]
+    level:    [121, 126]
+  17969546:
+    template: Lucani
+    at:       [110.080, -69.230, 303.579, 66]
+    level:    [121, 126]
+  17969547:
+    template: Lucani
+    at:       [112.390, -70.370, 308.519, 9]
+    level:    [121, 126]
+  17969548:
+    template: Lucani
+    at:       [121.640, -72.330, 297.018, 229]
+    level:    [121, 126]
+  17969549:
+    template: Lucani
+    at:       [110.570, -69.420, 310.084, 240]
+    level:    [121, 126]
+  17969550:
+    template: Lucani
+    at:       [143.300, -78.340, 285.535, 48]
+    level:    [121, 126]
+  17969551:
+    template: Lucani
+    at:       [143.640, -78.300, 284.690, 170]
+    level:    [121, 126]
+  17969552:
+    template: Lucani
+    at:       [142.100, -77.310, 277.996, 188]
+    level:    [121, 126]
+  17969553:
+    template: Lucani
+    at:       [165.210, -86.140, 306.653, 149]
+    level:    [121, 126]
+  17969554:
+    template: Lucani
+    at:       [167.500, -82.450, 292.106, 65]
+    level:    [121, 126]
+  17969555:
+    template: Lucani
+    at:       [177.470, -87.520, 306.627, 57]
+    level:    [121, 126]
+  17969556:
+    template: Lucani
+    at:       [181.430, -85.260, 293.149, 174]
+    level:    [121, 126]
+  17969557:
+    template: Lucani
+    at:       [177.000, -84.980, 297.295, 185]
+    level:    [121, 126]
+  17969558:
+    template: Lucani
+    at:       [180.780, -84.940, 276.579, 168]
+    level:    [121, 126]
+  17969559:
+    template: Lucani
+    at:       [182.190, -86.620, 298.977, 169]
+    level:    [121, 126]
+  17969560:
+    template: Wanton_Danaid
+    at:       [269.200, -93.040, 272.519, 62]
+    level:    [121, 126]
+  17969561:
+    template: Wanton_Danaid
+    at:       [265.690, -94.860, 292.809, 39]
+    level:    [121, 126]
+  17969562:
+    template: Wanton_Danaid
+    at:       [257.440, -92.380, 287.606, 105]
+    level:    [121, 126]
+  17969563:
+    template: Wanton_Danaid
+    at:       [263.240, -91.680, 276.575, 182]
+    level:    [121, 126]
+  17969564:
+    template: Wanton_Danaid
+    at:       [258.410, -88.340, 262.747, 136]
+    level:    [121, 126]
+  17969565:
+    template: Wanton_Danaid
+    at:       [267.480, -83.840, 224.009, 26]
+    level:    [121, 126]
+  17969566:
+    template: Wanton_Danaid
+    at:       [253.270, -82.380, 235.235, 57]
+    level:    [121, 126]
+  17969567:
+    template: Wanton_Danaid
+    at:       [252.380, -82.510, 237.360, 174]
+    level:    [121, 126]
+  17969568:
+    template: Wanton_Danaid
+    at:       [268.210, -81.160, 214.184, 207]
+    level:    [121, 126]
+  17969569:
+    template: Wanton_Danaid
+    at:       [270.520, -85.550, 238.914, 222]
+    level:    [121, 126]
+  17969570:
+    template: Wanton_Danaid
+    at:       [264.840, -84.160, 128.054, 58]
+    level:    [121, 126]
+  17969571:
+    template: Wanton_Danaid
+    at:       [262.870, -84.050, 129.716, 95]
+    level:    [121, 126]
+  17969572:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [259.550, -76.430, 192.567, 1]
+    level:    [121, 126]
+  17969573:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [253.400, -79.180, 179.166, 63]
+    level:    [121, 126]
+  17969574:
+    template: Perfervid_Naraka
+    at:       [250.750, -74.620, 199.860, 181]
+    level:    [121, 126]
+  17969575:
+    template: Perfervid_Naraka
+    at:       [260.220, -76.720, 191.998, 187]
+    level:    [121, 126]
+  17969576:
+    template: Perfervid_Naraka
+    at:       [253.100, -75.130, 199.718, 68]
+    level:    [121, 126]
+  17969577:
+    template: Perfervid_Naraka
+    at:       [271.210, -85.310, 170.048, 57]
+    level:    [121, 126]
+  17969578:
+    template: Perfervid_Naraka
+    at:       [267.670, -84.840, 166.046, 89]
+    level:    [121, 126]
+  17969579:
+    template: Perfervid_Naraka
+    at:       [253.560, -81.200, 171.610, 128]
+    level:    [121, 126]
+  17969580:
+    template: Perfervid_Naraka
+    at:       [259.560, -80.070, 177.397, 187]
+    level:    [121, 126]
+  17969581:
+    template: Perfervid_Naraka
+    at:       [258.060, -84.410, 119.161, 244]
+    level:    [121, 126]
+  17969582:
+    template: Perfervid_Naraka
+    at:       [245.070, -87.380, 126.245, 84]
+    level:    [121, 126]
+  17969583:
+    template: Perfervid_Naraka
+    at:       [258.380, -85.330, 116.230, 26]
+    level:    [121, 126]
+  17969584:
+    template: Water_Elemental_R
+    script:   Water_Elemental
+    at:       [139.800, -73.890, 432.352, 175]
+    level:    [121, 126]
+  17969585:
+    template: Water_Elemental_R
+    script:   Water_Elemental
+    at:       [121.550, -65.900, 260.074, 4]
+    level:    [121, 126]
+  17969586:
+    template: Water_Elemental_R
+    script:   Water_Elemental
+    at:       [141.990, -84.620, 341.207, 212]
+    level:    [121, 126]
+  17969587:
+    template: Lentic_Toad
+    at:       [100.960, -73.900, 557.523, 193]
+    level:    [121, 126]
+  17969588:
+    template: Lentic_Toad
+    at:       [100.680, -73.900, 570.616, 204]
+    level:    [121, 126]
+  17969589:
+    template: Lentic_Toad
+    at:       [91.485, -76.480, 580.508, 83]
+    level:    [121, 126]
+  17969590:
+    template: Lentic_Toad
+    at:       [94.486, -75.410, 585.940, 115]
+    level:    [121, 126]
+  17969591:
+    template: Lentic_Toad
+    at:       [100.350, -73.900, 513.075, 180]
+    level:    [121, 126]
+  17969592:
+    template: Lentic_Toad
+    at:       [106.790, -73.900, 501.596, 31]
+    level:    [121, 126]
+  17969593:
+    template: Lentic_Toad
+    at:       [104.340, -73.900, 504.143, 159]
+    level:    [121, 126]
+  17969594:
+    template: Lentic_Toad
+    at:       [124.570, -73.900, 499.069, 4]
+    level:    [121, 126]
+  17969595:
+    template: Wretched_Poroggo
+    at:       [100.280, -73.900, 519.000, 188]
+    level:    [121, 126]
+  17969596:
+    template: Lentic_Toad
+    at:       [140.470, -73.900, 461.852, 64]
+    level:    [121, 126]
+  17969597:
+    template: Lentic_Toad
+    at:       [140.270, -73.900, 442.240, 209]
+    level:    [121, 126]
+  17969598:
+    template: Lentic_Toad
+    at:       [140.670, -73.900, 432.778, 42]
+    level:    [121, 126]
+  17969599:
+    template: Lentic_Toad
+    at:       [138.970, -73.900, 439.678, 82]
+    level:    [121, 126]
+  17969600:
+    template: Lentic_Toad
+    at:       [120.130, -73.890, 378.838, 10]
+    level:    [121, 126]
+  17969601:
+    template: Lentic_Toad
+    at:       [118.110, -73.890, 379.523, 139]
+    level:    [121, 126]
+  17969602:
+    template: Lentic_Toad
+    at:       [120.160, -73.900, 379.013, 12]
+    level:    [121, 126]
+  17969603:
+    template: Lentic_Toad
+    at:       [120.210, -73.900, 379.036, 8]
+    level:    [121, 126]
+  17969604:
+    template: Lentic_Toad
+    at:       [99.986, -65.900, 311.696, 176]
+    level:    [121, 126]
+  17969605:
+    template: Lentic_Toad
+    at:       [100.640, -66.040, 326.194, 57]
+    level:    [121, 126]
+  17969606:
+    template: Lentic_Toad
+    at:       [100.740, -65.890, 309.403, 48]
+    level:    [121, 126]
+  17969607:
+    template: Lentic_Toad
+    at:       [99.638, -65.900, 312.040, 177]
+    level:    [121, 126]
+  17969608:
+    template: Wretched_Poroggo
+    at:       [100.720, -65.900, 320.447, 63]
+    level:    [121, 126]
+  17969609:
+    template: Lentic_Toad
+    at:       [126.270, -65.900, 260.352, 4]
+    level:    [121, 126]
+  17969610:
+    template: Lentic_Toad
+    at:       [137.610, -65.900, 260.582, 128]
+    level:    [121, 126]
+  17969611:
+    template: Lentic_Toad
+    at:       [132.120, -65.900, 259.845, 121]
+    level:    [121, 126]
+  17969612:
+    template: Lentic_Toad
+    at:       [124.980, -65.900, 260.286, 4]
+    level:    [121, 126]
+  17969613:
+    template: Lentic_Toad
+    at:       [188.890, -65.900, 223.397, 151]
+    level:    [121, 126]
+  17969614:
+    template: Lentic_Toad
+    at:       [211.940, -65.900, 215.384, 26]
+    level:    [121, 126]
+  17969615:
+    template: Lentic_Toad
+    at:       [219.030, -65.900, 203.430, 53]
+    level:    [121, 126]
+  17969616:
+    template: Lentic_Toad
+    at:       [216.130, -65.900, 210.296, 168]
+    level:    [121, 126]
+  17969617:
+    template: Wretched_Poroggo
+    at:       [192.300, -65.900, 220.542, 139]
+    level:    [121, 126]
+  17969618:
+    template: Thunder_Elemental_R
+    script:   Thunder_Elemental
+    at:       [196.950, -65.900, 219.220, 128]
+    level:    [121, 126]
+  17969619:
+    template: Ascended_Chapuli
+    at:       [-486.100, -55.720, 448.497, 178]
+    level:    [125, 127]
+  17969620:
+    template: Ascended_Mosquito
+    at:       [114.540, -83.760, 539.138, 146]
+    level:    [125, 127]
+  17969621:
+    template: Ascended_Mantis
+    at:       [-397.000, -54.430, 88.603, 245]
+    level:    [125, 127]
+  17969622:
+    template: Ascended_Beetle
+    at:       [-425.200, -52.340, 99.038, 181]
+    level:    [125, 127]
+  17969623:
+    template: Ascended_Luckybug
+    at:       [-513.900, -48.430, 406.747, 190]
+    level:    [125, 127]
+  17969624:
+    template: Ascended_Lucani
+    at:       [-479.200, -55.550, 431.498, 165]
+    level:    [125, 127]
+  17969625:
+    template: Ascended_Porxie
+    at:       [-386.200, -51.310, 419.825, 133]
+    level:    [125, 127]
+  17969626:
+    template: Ascended_Cyhiraeth
+    at:       [-311.300, -59.900, 420.800, 209]
+    level:    [125, 127]
+  17969627:
+    template: Ascended_Tiger
+    at:       [-523.100, -27.890, -378.560, 149]
+    level:    [125, 127]
+  17969628:
+    template: Ascended_Naraka
+    at:       [248.410, -74.200, 196.466, 170]
+    level:    [125, 127]
+  17969629:
+    template: Ascended_Panopt
+    at:       [-512.100, -29.330, -373.350, 102]
+    level:    [125, 127]
+  17969630:
+    template: Ascended_Poroggo
+    at:       [100.480, -73.900, 524.981, 69]
+    level:    [125, 127]
+  17969631:
+    template: Ascended_Chigoe
+    at:       [-368.700, -67.780, 340.665, 238]
+    level:    [125, 127]
+  17969632:
+    template: Ascended_Hippogryph
+    at:       [71.838, -81.550, 567.870, 98]
+    level:    [125, 127]
+  17969633:
+    template: Ascended_Faaz
+    at:       [-431.100, -51.660, 100.436]
+    level:    [125, 127]
+  17969634:
+    template: Ascended_Gefyrst
+    at:       [-460.000, -49.860, 604.241, 80]
+    level:    [125, 127]
+  17969635:
+    template: Ascended_Ungeweder
+    at:       [198.900, -65.900, 220.356, 114]
+    level:    [125, 127]
+  17969636:
+    template: Heavenly_Veela
+    at:       [266.760, -83.780, 223.276, 9]
+    level:    [125, 127]
+  17969637:
+    template: Crom_Dubh
+    at:       [-612.000, -417.899, -1050.000]
+    level:    [125, 127]
+  17969638:
+    template: Crom_Dubh
+    at:       [61.993, -83.830, 569.414, 93]
+    level:    [125, 127]
+  17969639:
+    template: Crom_Dubh
+    at:       [-391.100, -67.950, 301.765, 33]
+    level:    [125, 127]
+  17969640:
+    template: Golden_Kist
+    at:       [-589.000, -417.800, -1028.000]
+    level:    [125, 127]
+  17969641:
+    template: Golden_Kist
+    at:       [-640.000, -39.870, -255.000, 189]
+    level:    [125, 127]
+  17969642:
+    template: Golden_Kist
+    at:       [-390.000, -67.750, 302.000]
+    level:    [125, 127]
+  17969643:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-641.000, -40.520, -248.610, 165]
+    level:    [125, 127]
+  17969644:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-635.000, -39.440, -258.890, 173]
+    level:    [125, 127]
+  17969645:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-635.000, -39.580, -256.870, 168]
+    level:    [125, 127]
+  17969646:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-634.900, -39.520, -259.920, 172]
+    level:    [125, 127]
+  17969647:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-598.200, -63.890, 114.392, 95]
+    level:    [125, 127]
+  17969648:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-597.500, -63.810, 114.417, 79]
+    level:    [125, 127]
+  17969649:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-598.500, -64.110, 115.171, 69]
+    level:    [125, 127]
+  17969650:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-597.000, -63.600, 113.802, 90]
+    level:    [125, 127]
+  17969651:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-609.700, -417.800, -1053.400, 60]
+    level:    [125, 127]
+  17969652:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-609.400, -417.800, -1051.000, 35]
+    level:    [125, 127]
+  17969653:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-609.600, -417.800, -1052.000, 22]
+    level:    [125, 127]
+  17969654:
+    template: Mauve-Wristed_Gomberry
+    script:   Mauve-wristed_Gomberry
+    at:       [-609.700, -417.800, -1051.900, 29]
+    level:    [125, 127]
+  17969655:
+    template: Dazzling_Dolores
+    at:       [-589.000, -417.800, -1028.000, 203]
+    level:    [125, 127]
+  17969656:
+    template: Dazzling_Dolores
+    at:       [163.390, -87.970, 333.700, 125]
+    level:    [125, 127]
+  17969657:
+    template: Dazzling_Dolores
+    level:    [125, 127]
+  17969658:
+    template: Taelmoth_the_Diremaw
+    at:       [-283.000, -56.120, 519.000, 147]
+    level:    [125, 127]
+  17969659:
+    template: Taelmoth_the_Diremaw
+    at:       [-614.200, -417.800, -1030.000, 40]
+    level:    [125, 127]
+  17969660:
+    template: Taelmoth_the_Diremaw
+    at:       [-637.500, -40.060, -248.750, 153]
+    level:    [125, 127]
+  17969661:
+    template: Belphegor
+    at:       [60.895, -83.870, 583.875, 213]
+    level:    [125, 127]
+  17969662:
+    template: Belphegor
+    at:       [60.500, -83.860, 583.299, 217]
+    level:    [125, 127]
+  17969663:
+    template: Belphegor
+    at:       [-489.000, -55.240, 436.204, 99]
+    level:    [125, 127]
+  17969664:
+    template: Kabandha
+    at:       [-588.800, -417.800, -1024.100, 187]
+    level:    [125, 127]
+  17969665:
+    template: Kabandha
+    at:       [-402.900, -63.630, 581.765, 231]
+    level:    [125, 127]
+  17969666:
+    template: Kabandha
+    at:       [60.500, -83.860, 583.299, 68]
+    level:    [125, 127]
+  17969667:
+    template: Selkit
+    at:       [-589.000, -417.899, -1028.000, 81]
+    level:    [129, 129]
+  17969668:
+    template: Selkit
+    at:       [-409.300, -64.290, 574.268, 247]
+    level:    [129, 129]
+  17969669:
+    template: Selkit
+    at:       [58.798, -84.660, 587.624, 165]
+    level:    [129, 129]
+  17969670:
+    template: Sang_Buaya
+    at:       [-390.000, -67.750, 302.000, 138]
+    level:    [125, 127]
+  17969671:
+    template: Sang_Buaya
+    at:       [-490.000, -54.990, 437.200, 96]
+    level:    [125, 127]
+  17969672:
+    template: Sang_Buaya
+    at:       [-610.200, -417.800, -1031.700, 67]
+    level:    [125, 127]
+  17969673:
+    template: Sabotender_Royal
+    at:       [-631.800, -39.190, -261.400, 87]
+    level:    [125, 127]
+  17969674:
+    template: Sabotender_Royal
+    at:       [-611.400, -417.800, -1050.600, 72]
+    level:    [125, 127]
+  17969675:
+    template: Sabotender_Royal
+    level:    [125, 127]
+  17969676:
+    template: Zduhac
+    at:       [-408.600, -63.520, 582.538, 231]
+    level:    [125, 127]
+  17969677:
+    template: Zduhac
+    at:       [-410.000, -63.450, 582.000, 239]
+    level:    [125, 127]
+  17969678:
+    template: Zduhac
+    level:    [125, 127]
+  17969679:
+    template: Oryx
+    at:       [-617.161, -417.899, -1051.411]
+  17969680:
+    template: Oryx
+    at:       [-589.000, -417.899, -1028.000]
+  17969681:
+    template: Oryx
+  17969682:
+    template: Strophadia
+    at:       [-612.400, -417.800, -1050.900, 80]
+    level:    [125, 127]
+  17969683:
+    template: Strophadia
+    at:       [-488.800, -55.270, 437.924, 227]
+    level:    [125, 127]
+  17969684:
+    template: Strophadia
+    level:    [125, 127]
+  17969685:
+    template: Gajasimha
+    at:       [-612.000, -417.800, -1050.000]
+    level:    [125, 127]
+  17969686:
+    template: Gajasimha
+    at:       [-490.000, -54.990, 437.200]
+    level:    [125, 127]
+  17969687:
+    template: Gajasimha
+    level:    [125, 127]
+  17969688:
+    template: Ironside
+    at:       [-612.500, -417.800, -1050.300, 119]
+    level:    [125, 127]
+  17969689:
+    template: Ironside
+    at:       [-614.200, -417.899, -1030.000, 76]
+    level:    [125, 127]
+  17969690:
+    template: Ironside
+    at:       [60.500, -83.860, 583.299, 194]
+    level:    [125, 127]
+  17969691:
+    template: Sarsaok
+    at:       [-590.300, -417.800, -1030.300, 230]
+    level:    [125, 127]
+  17969692:
+    template: Sarsaok
+    at:       [-485.400, -55.850, 433.960, 229]
+    level:    [125, 127]
+  17969693:
+    template: Sarsaok
+    level:    [125, 127]
+  17969694:
+    template: Old_Shuck
+    at:       [-586.600, -417.800, -1028.300, 224]
+    level:    [125, 127]
+  17969695:
+    template: Old_Shuck
+    at:       [-608.200, -417.800, -1025.000, 158]
+    level:    [125, 127]
+  17969696:
+    template: Old_Shuck
+    level:    [125, 127]
+  17969697:
+    template: Bashmu
+    at:       [-612.000, -417.899, -1050.000, 212]
+    level:    [125, 127]
+  17969698:
+    template: Bashmu
+    at:       [-614.200, -417.800, -1030.000]
+    level:    [125, 127]
+  17969699:
+    template: Bashmu
+    at:       [-442.900, -62.550, 571.760, 29]
+    level:    [125, 127]
+  17969700:
+    template: Maju
+    at:       [-612.000, -417.899, -1050.000, 5]
+  17969701:
+    template: Maju
+  17969702:
+    template: Maju
+  17969703:
+    template: Yakshi
+    at:       [-612.000, -417.800, -1050.000, 55]
+    level:    [125, 127]
+  17969704:
+    template: Yakshi
+    at:       [-272.900, -58.090, 520.138, 15]
+    level:    [125, 127]
+  17969705:
+    template: Yakshi
+    level:    [125, 127]
+  17969706:
+    template: Neak
+    at:       [-589.000, -417.899, -1028.000, 254]
+  17969707:
+    template: Neak
+  17969708:
+    template: Neak
+  17969709:
+    template: Teles
+    at:       [129.690, -75.590, 314.463, 163]
+    level:    [125, 127]
+  17969710:
+    template: Teles
+    level:    [125, 127]
+  17969711:
+    template: Teles
+    level:    [125, 127]
+  17969712:
+    template: Zerde
+    at:       [-589.500, -60.510, 108.064, 212]
+    level:    [125, 127]
+  17969713:
+    template: Zerde
+    level:    [125, 127]
+  17969714:
+    template: Zerde
+    level:    [125, 127]
+  17969715:
+    template: Zerdes_Haupia
+    at:       [-577.900, -60.360, 120.003, 62]
+    level:    [123, 124]
+  17969716:
+    template: Zerdes_Kacamak
+    at:       [-576.000, -59.780, 118.577, 104]
+    level:    [123, 124]
+  17969717:
+    template: Zerdes_Drisheen
+    at:       [-576.900, -60.050, 119.392, 81]
+    level:    [123, 124]
+  17969718:
+    template: Zerdes_Haupia
+    at:       [-576.200, -59.830, 118.163, 110]
+    level:    [123, 124]
+  17969719:
+    template: Zerdes_Kacamak
+    at:       [-577.800, -60.320, 120.059, 64]
+    level:    [123, 124]
+  17969720:
+    template: Zerdes_Drisheen
+    at:       [-580.700, -60.950, 117.598, 2]
+    level:    [123, 124]
+  17969721:
+    template: Zerdes_Haupia
+    at:       [-576.100, -59.740, 117.370, 129]
+    level:    [123, 124]
+  17969722:
+    template: Zerdes_Kacamak
+    at:       [-576.300, -59.850, 119.183, 93]
+    level:    [123, 124]
+  17969723:
+    template: Zerdes_Drisheen
+    at:       [-576.100, -59.760, 117.725, 121]
+    level:    [123, 124]
+  17969724:
+    template: Zerdes_Haupia
+    level:    [123, 124]
+  17969725:
+    template: Zerdes_Kacamak
+    level:    [123, 124]
+  17969726:
+    template: Zerdes_Drisheen
+    level:    [123, 124]
+  17969727:
+    template: Zerdes_Haupia
+    level:    [123, 124]
+  17969728:
+    template: Zerdes_Kacamak
+    level:    [123, 124]
+  17969729:
+    template: Zerdes_Drisheen
+    level:    [123, 124]
+  17969730:
+    template: Zerdes_Haupia
+    level:    [123, 124]
+  17969731:
+    template: Zerdes_Kacamak
+    level:    [123, 124]
+  17969732:
+    template: Zerdes_Drisheen
+    level:    [123, 124]
+  17969733:
+    template: Zerdes_Haupia
+    level:    [123, 124]
+  17969734:
+    template: Zerdes_Kacamak
+    level:    [123, 124]
+  17969735:
+    template: Zerdes_Drisheen
+    level:    [123, 124]
+  17969736:
+    template: Zerdes_Haupia
+    level:    [123, 124]
+  17969737:
+    template: Zerdes_Kacamak
+    level:    [123, 124]
+  17969738:
+    template: Zerdes_Drisheen
+    level:    [123, 124]
+  17969739:
+    template: Zerdes_Haupia
+    level:    [123, 124]
+  17969740:
+    template: Zerdes_Kacamak
+    level:    [123, 124]
+  17969741:
+    template: Zerdes_Drisheen
+    level:    [123, 124]
+  17969742:
+    template: Vinipata
+    at:       [128.110, -75.840, 327.760, 32]
+    level:    [125, 127]
+  17969743:
+    template: Vinipata
+    level:    [125, 127]
+  17969744:
+    template: Vinipata
+    level:    [125, 127]
+  17969745:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    at:       [143.550, -83.400, 311.834]
+    level:    [123, 124]
+  17969746:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    at:       [134.710, -78.900, 310.339, 179]
+    level:    [123, 124]
+  17969747:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    at:       [141.250, -83.300, 331.144, 212]
+    level:    [123, 124]
+  17969748:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    at:       [126.180, -75.550, 330.195, 236]
+    level:    [123, 124]
+  17969749:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    at:       [141.470, -83.460, 331.013, 210]
+    level:    [123, 124]
+  17969750:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    at:       [126.350, -75.940, 331.458, 247]
+    level:    [123, 124]
+  17969751:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969752:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969753:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969754:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969755:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969756:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969757:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969758:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969759:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969760:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969761:
+    template: Vinipatas_Naraka_1
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969762:
+    template: Vinipatas_Naraka_2
+    script:   Vinipatas_Naraka
+    level:    [123, 124]
+  17969763:
+    template: Schah
+    at:       [-582.285, -52.388, 90.850, 144]
+  17969764:
+    template: Schah
+  17969765:
+    template: Schah
+  17969766:
+    template: Schahs_Mantri
+    at:       [-593.837, -65.315, 124.731, 241]
+  17969767:
+    template: Schahs_Mantri
+  17969768:
+    template: Schahs_Mantri
+  17969769:
+    template: Schahs_Ratha
+    at:       [-585.641, -55.521, 95.989, 70]
+  17969770:
+    template: Schahs_Ratha
+  17969771:
+    template: Schahs_Ratha
+  17969772:
+    template: Schahs_Gaja
+    at:       [-586.553, -55.429, 94.771, 90]
+  17969773:
+    template: Schahs_Gaja
+  17969774:
+    template: Schahs_Gaja
+  17969775:
+    template: Schahs_Ashva
+    at:       [-588.350, -56.431, 95.854, 89]
+  17969776:
+    template: Schahs_Ashva
+  17969777:
+    template: Schahs_Ashva
+  17969778:
+    template: Schahs_Bhata
+    at:       [-586.883, -54.964, 93.098, 181]
+  17969779:
+    template: Schahs_Bhata
+  17969780:
+    template: Schahs_Bhata
+  17969781:
+    template: Schahs_Mantri
+    at:       [-491.171, -54.688, 436.153, 223]
+  17969782:
+    template: Schahs_Mantri
+  17969783:
+    template: Schahs_Mantri
+  17969784:
+    template: Albumen
+    at:       [-584.500, -54.370, 94.175, 198]
+    level:    [125, 127]
+  17969785:
+    template: Albumen
+    level:    [125, 127]
+  17969786:
+    template: Albumen
+    level:    [125, 127]
+  17969787:
+    template: Albumens_Mandragora
+    at:       [-592.700, -61.910, 108.598, 225]
+    level:    [123, 124]
+  17969788:
+    template: Albumens_Mandragora
+    level:    [123, 124]
+  17969789:
+    template: Albumens_Mandragora
+    level:    [123, 124]
+  17969790:
+    template: Albumens_Lycopodium
+    at:       [-592.500, -61.920, 108.878, 225]
+    level:    [123, 124]
+  17969791:
+    template: Albumens_Lycopodium
+    level:    [123, 124]
+  17969792:
+    template: Albumens_Lycopodium
+    level:    [123, 124]
+  17969793:
+    template: Albumens_Korrigan
+    at:       [-592.500, -61.900, 109.527, 224]
+    level:    [123, 124]
+  17969794:
+    template: Albumens_Korrigan
+    level:    [123, 124]
+  17969795:
+    template: Albumens_Korrigan
+    level:    [123, 124]
+  17969796:
+    template: Albumens_Pachypodium
+    at:       [-589.300, -61.320, 111.472, 52]
+    level:    [123, 124]
+  17969797:
+    template: Albumens_Pachypodium
+    level:    [123, 124]
+  17969798:
+    template: Albumens_Pachypodium
+    level:    [123, 124]
+  17969799:
+    template: Albumens_Mandragora
+    at:       [-590.000, -61.180, 111.429, 52]
+    level:    [123, 124]
+  17969800:
+    template: Albumens_Mandragora
+    level:    [123, 124]
+  17969801:
+    template: Albumens_Mandragora
+    level:    [123, 124]
+  17969802:
+    template: Albumens_Lycopodium
+    at:       [-590.800, -61.180, 111.355, 55]
+    level:    [123, 124]
+  17969803:
+    template: Albumens_Lycopodium
+    level:    [123, 124]
+  17969804:
+    template: Albumens_Lycopodium
+    level:    [123, 124]
+  17969805:
+    template: Albumens_Korrigan
+    at:       [-591.600, -61.300, 111.135, 54]
+    level:    [123, 124]
+  17969806:
+    template: Albumens_Korrigan
+    level:    [123, 124]
+  17969807:
+    template: Albumens_Korrigan
+    level:    [123, 124]
+  17969808:
+    template: Albumens_Pachypodium
+    at:       [-591.900, -61.430, 110.763, 56]
+    level:    [123, 124]
+  17969809:
+    template: Albumens_Pachypodium
+    level:    [123, 124]
+  17969810:
+    template: Albumens_Pachypodium
+    level:    [123, 124]
+  17969811:
+    template: Albumens_Mandragora
+    at:       [-591.800, -61.670, 110.728, 55]
+    level:    [123, 124]
+  17969812:
+    template: Albumens_Mandragora
+    level:    [123, 124]
+  17969813:
+    template: Albumens_Mandragora
+    level:    [123, 124]
+  17969814:
+    template: Albumens_Lycopodium
+    at:       [-592.300, -61.880, 109.927, 224]
+    level:    [123, 124]
+  17969815:
+    template: Albumens_Lycopodium
+    level:    [123, 124]
+  17969816:
+    template: Albumens_Lycopodium
+    level:    [123, 124]
+  17969817:
+    template: Albumens_Korrigan
+    at:       [-592.600, -61.890, 108.815, 224]
+    level:    [123, 124]
+  17969818:
+    template: Albumens_Korrigan
+    level:    [123, 124]
+  17969819:
+    template: Albumens_Korrigan
+    level:    [123, 124]
+  17969820:
+    template: Albumens_Pachypodium
+    at:       [-592.500, -61.910, 108.727, 225]
+    level:    [123, 124]
+  17969821:
+    template: Albumens_Pachypodium
+    level:    [123, 124]
+  17969822:
+    template: Albumens_Pachypodium
+    level:    [123, 124]
+  17969823:
+    template: Onychophora
+    at:       [-597.100, -64.080, 115.677, 177]
+    level:    [125, 127]
+  17969824:
+    template: Onychophora
+    level:    [125, 127]
+  17969825:
+    template: Onychophora
+    level:    [125, 127]
+  17969826:
+    template: Onycophoras_Sandworm
+    at:       [-572.900, -58.800, 118.085, 227]
+    level:    [125, 127]
+  17969827:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969828:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969829:
+    template: Onycophoras_Sandworm
+    at:       [-573.200, -58.660, 119.454, 250]
+    level:    [125, 127]
+  17969830:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969831:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969832:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969833:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969834:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969835:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969836:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969837:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969838:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969839:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969840:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969841:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969842:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969843:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969844:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969845:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969846:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969847:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969848:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969849:
+    template: Onycophoras_Sandworm
+    level:    [125, 127]
+  17969850:
+    template: Erinys
+    at:       [-578.400, -60.310, 117.100, 2]
+    level:    [125, 127]
+  17969851:
+    template: Erinys
+    level:    [125, 127]
+  17969852:
+    template: Erinys
+    level:    [125, 127]
+  17969853:
+    template: Boobrie
+    at:       [-589.500, -60.490, 108.462]
+    level:    [125, 127]
+  17969854:
+    template: Boobrie
+    at:       [-587.400, -60.450, 108.190]
+    level:    [125, 127]
+  17969855:
+    template: Boobrie
+    at:       [-587.300, -60.030, 109.208]
+    level:    [125, 127]
+  17969856:
+    template: Boobrie
+    at:       [-589.000, -60.260, 110.177]
+    level:    [125, 127]
+  17969857:
+    template: Boobrie
+    at:       [-587.800, -60.580, 109.212]
+    level:    [125, 127]
+  17969858:
+    template: Boobrie
+    level:    [125, 127]
+  17969859:
+    template: Boobrie
+    level:    [125, 127]
+  17969860:
+    template: Boobrie
+    level:    [125, 127]
+  17969861:
+    template: Boobrie
+    level:    [125, 127]
+  17969862:
+    template: Boobrie
+    level:    [125, 127]
+  17969863:
+    template: Boobrie
+    level:    [125, 127]
+  17969864:
+    template: Boobrie
+    level:    [125, 127]
+  17969865:
+    template: Boobrie
+    level:    [125, 127]
+  17969866:
+    template: Boobrie
+    level:    [125, 127]
+  17969867:
+    template: Boobrie
+    level:    [125, 127]
+  17969868:
+    template: Quetzalcoatl
+    at:       [615.200, -372.000, -947.790, 225]
+    level:    [119, 119]
+  17969869:
+    template: Quetzalcoatls_Sibilus
+    at:       [615.200, -371.900, -945.790, 225]
+    level:    [117, 117]
+  17969870:
+    template: Quetzalcoatls_Sibilus
+    at:       [617.200, -371.900, -945.790, 225]
+    level:    [117, 117]
+  17969871:
+    template: Quetzalcoatls_Sibilus
+    at:       [619.200, -372.000, -945.790, 225]
+    level:    [117, 117]
+  17969872:
+    template: Quetzalcoatls_Sibilus
+    at:       [616.940, -371.300, -942.620, 120]
+    level:    [117, 117]
+  17969873:
+    template: Quetzalcoatls_Sibilus
+    at:       [623.200, -371.900, -945.790, 225]
+    level:    [117, 117]
+  17969874:
+    template: Quetzalcoatls_Sibilus
+    at:       [616.920, -371.400, -941.230, 102]
+    level:    [117, 117]
+  17969875:
+    template: Quetzalcoatls_Sibilus
+    at:       [613.200, -371.900, -945.790, 225]
+    level:    [117, 117]
+  17969876:
+    template: Quetzalcoatls_Sibilus
+    at:       [611.200, -371.900, -945.790, 225]
+    level:    [117, 117]
+  17969877:
+    template: Quetzalcoatls_Sibilus
+    at:       [609.200, -371.900, -945.790, 225]
+    level:    [117, 117]
+  17969878:
+    template: Quetzalcoatls_Sibilus
+    at:       [612.080, -371.700, -944.010, 238]
+    level:    [117, 117]
+  17969879:
+    template: Quetzalcoatls_Sibilus
+    at:       [614.970, -371.800, -946.560, 199]
+    level:    [117, 117]
+  17969880:
+    script: Mireu
+  17969881:
+    template: Awoken_Stoorworm
+    at:       [-584.500, -417.900, -1051.550, 152]
+    level:    [119, 119]

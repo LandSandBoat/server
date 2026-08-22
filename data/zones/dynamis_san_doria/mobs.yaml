@@ -1,0 +1,3774 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Arch_Overlord_Tombstone:
+    id:            6087
+    species:       orc_statue
+    type:          [notorious]
+    spell_list_id: 49
+    skill_list_id: 93
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1057
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   oneiros_cest
+        - chance: uncommon
+          item:   oneiros_lance
+        - chance: uncommon
+          item:   oneiros_helm
+        - chance: common
+          item:   forgotten_touch
+        - chance: uncommon
+          item:   infinity_core
+        - chance: rare
+          item:   sparkling_stone
+        - chance: rare
+          item:   mythril_beastcoin
+        - chance: rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   montiont_silverpiece
+        - chance: very_rare
+          item:   ordelle_bronzepiece
+
+  Battlechoir_Gitchfotch:
+    id:            363
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 2104
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [brd, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Bladeburner_Rokgevok:
+    id:            6081
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 2104
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_2
+        - chance: common
+          item:   oneiros_sash
+        - chance: very_rare
+          item:   montiont_silverpiece
+        - chance: common
+          item:   forgotten_touch
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+
+  Bloodfist_Voshgrosh:
+    id:            6084
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 2104
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_4
+        - chance: common
+          item:   oneiros_belt
+        - chance: very_rare
+          item:   montiont_silverpiece
+        - chance: common
+          item:   forgotten_touch
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+
+  Djokvukks_Wyvern:
+    id:            6086
+    species:       blue_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Kratzvatzs_Hecteyes:
+    id:            6083
+    species:       hecteye
+    type:          [called]
+    spell_list_id: 10
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Overlords_Tombstone:
+    id:            3076
+    species:       orc_statue
+    type:          [notorious]
+    spell_list_id: 49
+    skill_list_id: 93
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1057
+        entity_flags:  1153
+        animation_sub:    5
+        hitbox:          30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+        mp: 12500
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_1
+        - chance: uncommon
+          item:   infinity_core
+        - chance: rare
+          item:   mythril_beastcoin
+        - chance: rare
+          item:   forgotten_touch
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   ordelle_bronzepiece
+        - chance: very_rare
+          item:   montiont_silverpiece
+
+  Reapertongue_Gadgquok:
+    id:            3340
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 141
+    skill_list_id: 2104
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 900
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item:   barbaric_bijou
+        - chance: very_rare
+          item:   montiont_silverpiece
+        - chance: rare
+          item:   forgotten_touch
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Serjeant_Tombstone:
+    id:            3548
+    species:       orc_statue
+    spell_list_id: 21
+    skill_list_id: 93
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1056
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   infinity_core
+        - chance: very_rare
+          item:   mythril_beastcoin
+        - chance: very_rare
+          item:   sparkling_stone
+        - chance: very_rare
+          item:   gold_beastcoin
+        - chance: very_rare
+          item:   ordelle_bronzepiece
+
+  Soulsender_Fugbrag:
+    id:            3705
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 6
+    skill_list_id: 2104
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [brd, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Spellspear_Djokvukk:
+    id:            6085
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 2105
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, rdm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1048
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_5
+        - chance: common
+          item:   oneiros_cape
+        - chance: very_rare
+          item:   montiont_silverpiece
+        - chance: common
+          item:   forgotten_touch
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+
+  Steelshank_Kratzvatz:
+    id:            6082
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 2104
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, bst]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1048
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fiendish_tome_chapter_3
+        - chance: common
+          item:   oneiros_cappa
+        - chance: very_rare
+          item:   montiont_silverpiece
+        - chance: common
+          item:   forgotten_touch
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+
+  Vanguard_Amputator:
+    id:            4135
+    species:       orc
+    spell_list_id: 20
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1050
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Amputator_2:
+    id:            4135
+    display_name:  Vanguard_Amputator
+    species:       orc
+    spell_list_id: 20
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1050
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Backstabber:
+    id:            4138
+    species:       orc
+    spell_list_id: 7
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Backstabber_2:
+    id:            4138
+    display_name:  Vanguard_Backstabber
+    species:       orc
+    spell_list_id: 7
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cryptex
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Bugler:
+    id:            4140
+    species:       orc
+    spell_list_id: 6
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: club
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Bugler_2:
+    id:            4140
+    display_name:  Vanguard_Bugler
+    species:       orc
+    spell_list_id: 6
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: club
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   square_of_odious_leather
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Dollmaster:
+    id:            4144
+    species:       orc
+    spell_list_id: 141
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Dollmaster_2:
+    id:            4144
+    display_name:  Vanguard_Dollmaster
+    species:       orc
+    spell_list_id: 141
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: club
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cryptex
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Footsoldier:
+    id:            4150
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Footsoldier_2:
+    id:            4150
+    display_name:  Vanguard_Footsoldier
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: rare
+          one_of: [assassins_bonnet, monster_helm, scouts_bracers, koga_hakama, wyrm_brais, summoners_spats, warriors_calligae, melee_gaiters, clerics_duckbills, sorcerers_sabots, duelists_boots, valor_leggings, abyss_sollerets, bards_slippers, saotome_sune-ate]
+        - chance: very_rare
+          one_of: [mirage_charuqs, etoile_bangles, argute_bracers, commodore_trews, pantin_churidars]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Grappler:
+    id:            4151
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Grappler_2:
+    id:            4151
+    display_name:  Vanguard_Grappler
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   square_of_odious_leather
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Gutslasher:
+    id:            4152
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Gutslasher_2:
+    id:            4152
+    display_name:  Vanguard_Gutslasher
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   square_of_odious_leather
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Hawker:
+    id:            4154
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Hawker_2:
+    id:            4154
+    display_name:  Vanguard_Hawker
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_strongbox
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Impaler:
+    id:            4156
+    species:       orc
+    skill_list_id: 2103
+    attributes:
+      combat:
+        skill: polearm
+        delay: 290
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1048
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Impaler_2:
+    id:            4156
+    display_name:  Vanguard_Impaler
+    species:       orc
+    skill_list_id: 2103
+    attributes:
+      combat:
+        skill: polearm
+        delay: 290
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1048
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_strongbox
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Mesmerizer:
+    id:            4162
+    species:       orc
+    spell_list_id: 21
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Mesmerizer_2:
+    id:            4162
+    display_name:  Vanguard_Mesmerizer
+    species:       orc
+    spell_list_id: 21
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1049
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_strongbox
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Neckchopper:
+    id:            4165
+    species:       orc
+    spell_list_id: 5
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Neckchopper_2:
+    id:            4165
+    display_name:  Vanguard_Neckchopper
+    species:       orc
+    spell_list_id: 5
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1047
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   odious_cryptex
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Pillager:
+    id:            4172
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Pillager_2:
+    id:            4172
+    display_name:  Vanguard_Pillager
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: rare
+          one_of: [assassins_bonnet, monster_helm, scouts_bracers, koga_hakama, wyrm_brais, summoners_spats, warriors_calligae, melee_gaiters, clerics_duckbills, sorcerers_sabots, duelists_boots, valor_leggings, abyss_sollerets, bards_slippers, saotome_sune-ate]
+        - chance: very_rare
+          one_of: [mirage_charuqs, etoile_bangles, argute_bracers, commodore_trews, pantin_churidars]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Predator:
+    id:            4174
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Predator_2:
+    id:            4174
+    display_name:  Vanguard_Predator
+    species:       orc
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: rare
+          one_of: [assassins_bonnet, monster_helm, scouts_bracers, koga_hakama, wyrm_brais, summoners_spats, warriors_calligae, melee_gaiters, clerics_duckbills, sorcerers_sabots, duelists_boots, valor_leggings, abyss_sollerets, bards_slippers, saotome_sune-ate]
+        - chance: very_rare
+          one_of: [mirage_charuqs, etoile_bangles, argute_bracers, commodore_trews, pantin_churidars]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Trooper:
+    id:            4193
+    species:       orc
+    spell_list_id: 4
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1048
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Trooper_2:
+    id:            4193
+    display_name:  Vanguard_Trooper
+    species:       orc
+    spell_list_id: 4
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1048
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: rare
+          item:   square_of_odious_leather
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Vexer:
+    id:            4195
+    species:       orc
+    spell_list_id: 3
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1050
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          item:   forgotten_touch
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Vanguard_Vexer_2:
+    id:            4195
+    display_name:  Vanguard_Vexer
+    species:       orc
+    spell_list_id: 3
+    skill_list_id: 2102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1050
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        can_parry: 3
+      spawn:
+        respawn: 300
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   forgotten_touch
+        - chance: rare
+          one_of: [assassins_bonnet, monster_helm, scouts_bracers, koga_hakama, wyrm_brais, summoners_spats, warriors_calligae, melee_gaiters, clerics_duckbills, sorcerers_sabots, duelists_boots, valor_leggings, abyss_sollerets, bards_slippers, saotome_sune-ate]
+        - chance: very_rare
+          one_of: [mirage_charuqs, etoile_bangles, argute_bracers, commodore_trews, pantin_churidars]
+      steal: ordelle_bronzepiece
+
+  Vanguards_Avatar:
+    id:            4185
+    species:       carbuncle
+    type:          [called]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags: 131
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+
+  Vanguards_Hecteyes:
+    id:            4187
+    species:       hecteye
+    type:          [called]
+    spell_list_id: 51
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        silenceres: 15
+      mob_mods:
+        magic_cool:     20
+        standback_cool:  0
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+
+  Vanguards_Wyvern:
+    id:            4190
+    species:       shadow_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: sword
+        delay: 200
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2400
+
+  Voidstreaker_Butchnotch:
+    id:            4243
+    species:       orc
+    type:          [notorious]
+    spell_list_id: 7
+    skill_list_id: 2104
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, war]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1046
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 900
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item:   barbaric_bijou
+        - chance: very_rare
+          item:   montiont_silverpiece
+        - chance: rare
+          item:   forgotten_touch
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+  Warchief_Tombstone:
+    id:            4289
+    species:       orc_statue
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 93
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1056
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+        mp: 1000
+
+  Wyrmgnasher_Bjakdek:
+    id:            4387
+    species:       orc
+    type:          [notorious]
+    skill_list_id: 2105
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1048
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 900
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item:   barbaric_bijou
+        - chance: very_rare
+          item:   montiont_silverpiece
+        - chance: rare
+          item:   forgotten_touch
+        - chance: very_rare
+          item:   griffon_hide
+        - chance: very_rare
+          item:   giant_frozen_head
+        - chance: very_rare
+          item:   fresh_orc_liver
+        - chance: very_rare
+          one_of: [relic_bhuj, relic_lance, ihintanto, relic_gun]
+        - chance: rare
+          one_of: [clerics_cap, bards_roundlet, valor_gauntlets, melee_hose, monster_trousers, scouts_braccae, koga_hakama, warriors_calligae, duelists_boots, wyrm_greaves, summoners_pigaches]
+        - chance: very_rare
+          one_of: [argute_bracers, pantin_babouches, mirage_bazubands, commodore_trews]
+      steal: ordelle_bronzepiece
+
+spawns:
+  17534977:
+    template: Overlords_Tombstone
+    at:       [-2.618, -1.838, 36.580, 254]
+    level:    [85, 85]
+  17534978:
+    template: Battlechoir_Gitchfotch
+    at:       [-2.858, -2.398, 39.388, 27]
+    level:    [83, 84]
+  17534979:
+    template: Soulsender_Fugbrag
+    at:       [3.551, -2.434, 39.609, 96]
+    level:    [83, 84]
+  17534980:
+    template: Vanguard_Footsoldier
+    at:       [141.604, -2.420, 108.763, 231]
+    level:    [75, 77]
+  17534981:
+    template: Vanguard_Trooper
+    at:       [132.572, -2.509, 108.942, 157]
+    level:    [75, 77]
+  17534982:
+    template: Vanguard_Amputator
+    at:       [144.495, -2.500, 106.451, 251]
+    level:    [75, 77]
+  17534983:
+    template: Vanguard_Vexer
+    at:       [140.371, -2.500, 111.077, 69]
+    level:    [75, 77]
+  17534984:
+    template: Vanguard_Pillager
+    at:       [132.780, -2.280, 109.656, 107]
+    level:    [75, 77]
+  17534985:
+    template: Vanguard_Mesmerizer
+    at:       [123.614, -0.500, 97.504, 149]
+    level:    [75, 77]
+  17534986:
+    template: Vanguard_Grappler
+    at:       [132.805, -1.204, 100.939, 245]
+    level:    [75, 77]
+  17534987:
+    template: Vanguard_Neckchopper
+    at:       [122.448, -0.500, 103.011, 31]
+    level:    [75, 77]
+  17534988:
+    template: Vanguard_Mesmerizer
+    at:       [104.586, 0.099, 102.310, 255]
+    level:    [75, 77]
+  17534989:
+    template: Vanguard_Bugler
+    at:       [101.608, 0.442, 102.394, 162]
+    level:    [75, 77]
+  17534990:
+    template: Vanguard_Gutslasher
+    at:       [103.505, 0.481, 105.077, 160]
+    level:    [75, 77]
+  17534991:
+    template: Vanguard_Impaler
+    at:       [107.985, -0.497, 95.026, 250]
+    level:    [75, 77]
+  17534992:
+    template: Vanguards_Wyvern
+    at:       [114.751, -0.500, 99.306, 77]
+    level:    [75, 77]
+  17534993:
+    template: Vanguard_Backstabber
+    at:       [104.706, 0.500, 115.032, 23]
+    level:    [75, 77]
+  17534994:
+    template: Vanguard_Hawker
+    at:       [108.205, 0.800, 112.718, 151]
+    level:    [75, 77]
+  17534995:
+    template: Vanguards_Hecteyes
+    at:       [108.263, 0.800, 112.824, 142]
+    level:    [75, 77]
+  17534996:
+    template: Vanguard_Dollmaster
+    at:       [134.962, -0.499, 84.884, 128]
+    level:    [75, 77]
+  17534997:
+    template: Vanguards_Avatar
+    at:       [131.470, -0.499, 84.582, 248]
+    level:    [75, 77]
+  17534998:
+    template: Vanguard_Vexer
+    at:       [134.013, -0.500, 79.005, 112]
+    level:    [75, 77]
+  17534999:
+    template: Vanguard_Predator
+    at:       [126.054, -0.499, 76.350, 235]
+    level:    [75, 77]
+  17535000:
+    template: Vanguard_Footsoldier
+    at:       [100.815, 2.430, 71.055, 158]
+    level:    [75, 77]
+  17535001:
+    template: Vanguard_Grappler
+    at:       [99.013, 1.956, 75.483, 103]
+    level:    [75, 77]
+  17535002:
+    template: Vanguard_Predator
+    at:       [100.931, 1.080, 76.829, 174]
+    level:    [75, 77]
+  17535003:
+    template: Serjeant_Tombstone
+    at:       [109.249, -0.500, 80.079, 24]
+    level:    [65, 65]
+  17535004:
+    template: Serjeant_Tombstone
+    at:       [104.748, 2.457, 67.969, 31]
+    level:    [65, 65]
+  17535005:
+    template: Serjeant_Tombstone
+    at:       [107.299, -0.500, 78.311, 63]
+    level:    [65, 65]
+  17535006:
+    template: Reapertongue_Gadgquok
+    at:       [109.854, -0.634, 76.595, 215]
+    level:    [83, 84]
+  17535007:
+    template: Vanguards_Avatar
+    at:       [110.302, 0.018, 72.994, 192]
+    level:    [75, 77]
+  17535008:
+    template: Vanguard_Trooper
+    at:       [105.527, 3.000, 64.529, 196]
+    level:    [75, 77]
+  17535009:
+    template: Vanguard_Amputator
+    at:       [98.203, 3.500, 44.071, 17]
+    level:    [75, 77]
+  17535010:
+    template: Vanguard_Dollmaster
+    at:       [97.811, 3.500, 46.083, 200]
+    level:    [75, 77]
+  17535011:
+    template: Vanguards_Avatar
+    at:       [98.270, 3.499, 46.082, 53]
+    level:    [75, 77]
+  17535012:
+    template: Vanguard_Footsoldier
+    at:       [100.056, 3.500, 35.177, 114]
+    level:    [75, 77]
+  17535013:
+    template: Vanguard_Backstabber
+    at:       [100.800, 3.500, 35.756, 220]
+    level:    [75, 77]
+  17535014:
+    template: Vanguard_Impaler
+    at:       [100.812, 3.500, 35.753, 212]
+    level:    [75, 77]
+  17535015:
+    template: Vanguards_Wyvern
+    at:       [95.153, 3.500, 44.888, 240]
+    level:    [75, 77]
+  17535016:
+    template: Vanguard_Footsoldier
+    at:       [139.281, -0.500, 61.133, 224]
+    level:    [75, 77]
+  17535017:
+    template: Vanguard_Grappler
+    at:       [128.530, -0.499, 79.175, 216]
+    level:    [75, 77]
+  17535018:
+    template: Vanguard_Amputator
+    at:       [153.023, -0.500, 37.662, 253]
+    level:    [75, 77]
+  17535019:
+    template: Vanguard_Trooper
+    at:       [148.839, -0.500, 44.374]
+    level:    [75, 77]
+  17535020:
+    template: Vanguard_Neckchopper
+    at:       [146.926, -0.500, 51.545, 162]
+    level:    [75, 77]
+  17535021:
+    template: Vanguard_Pillager
+    at:       [143.339, -0.499, 28.716, 193]
+    level:    [75, 77]
+  17535022:
+    template: Vanguard_Bugler
+    at:       [144.062, -0.500, 23.454, 27]
+    level:    [75, 77]
+  17535023:
+    template: Vanguard_Predator
+    at:       [139.960, -0.500, 24.655, 140]
+    level:    [75, 77]
+  17535024:
+    template: Vanguard_Vexer
+    at:       [156.643, -7.300, 43.381, 64]
+    level:    [75, 77]
+  17535025:
+    template: Vanguard_Trooper
+    at:       [156.344, -7.102, 52.107, 32]
+    level:    [75, 77]
+  17535026:
+    template: Warchief_Tombstone
+    at:       [156.591, -7.197, 41.199, 64]
+    level:    [65, 65]
+  17535027:
+    template: Vanguard_Bugler
+    at:       [80.739, 1.500, -0.574, 137]
+    level:    [75, 77]
+  17535028:
+    template: Vanguard_Hawker
+    at:       [85.604, 1.500, -5.807, 86]
+    level:    [75, 77]
+  17535029:
+    template: Vanguards_Hecteyes
+    at:       [86.604, 1.500, -4.901, 91]
+    level:    [75, 77]
+  17535030:
+    template: Vanguard_Gutslasher
+    at:       [89.141, 1.500, 0.472, 149]
+    level:    [75, 77]
+  17535031:
+    template: Vanguard_Backstabber
+    at:       [84.750, 1.500, -1.177, 52]
+    level:    [75, 77]
+  17535032:
+    template: Wyrmgnasher_Bjakdek
+    at:       [91.085, -6.714, -10.785, 221]
+    level:    [83, 84]
+  17535033:
+    template: Vanguards_Wyvern
+    at:       [80.891, -7.900, -20.895, 208]
+    level:    [75, 77]
+  17535034:
+    template: Vanguard_Footsoldier
+    at:       [33.202, 1.500, -20.752, 178]
+    level:    [75, 77]
+  17535035:
+    template: Vanguard_Grappler
+    at:       [25.037, 1.500, -22.387, 223]
+    level:    [75, 77]
+  17535036:
+    template: Vanguard_Pillager
+    at:       [35.638, 1.500, -27.701, 144]
+    level:    [75, 77]
+  17535037:
+    template: Vanguard_Trooper
+    at:       [24.610, 1.500, -20.542, 186]
+    level:    [75, 77]
+  17535038:
+    template: Vanguard_Neckchopper
+    at:       [42.599, 1.500, -20.800, 23]
+    level:    [75, 77]
+  17535039:
+    template: Vanguard_Predator
+    at:       [-8.353, 1.500, -23.227, 40]
+    level:    [75, 77]
+  17535040:
+    template: Vanguard_Gutslasher
+    at:       [7.254, 1.499, -17.358, 64]
+    level:    [75, 77]
+  17535041:
+    template: Vanguard_Backstabber
+    at:       [0.077, 1.500, -13.598, 227]
+    level:    [75, 77]
+  17535042:
+    template: Vanguard_Impaler
+    at:       [5.268, 1.676, -8.401, 174]
+    level:    [75, 77]
+  17535043:
+    template: Vanguards_Wyvern
+    at:       [-24.480, 1.500, -19.308, 152]
+    level:    [75, 77]
+  17535044:
+    template: Voidstreaker_Butchnotch
+    at:       [6.884, 1.499, -16.198, 154]
+    level:    [84, 84]
+  17535045:
+    template: Vanguard_Amputator
+    at:       [-21.012, 1.500, -26.420, 19]
+    level:    [75, 77]
+  17535046:
+    template: Vanguard_Mesmerizer
+    at:       [-22.062, 1.500, -17.224, 12]
+    level:    [75, 77]
+  17535047:
+    template: Vanguard_Vexer
+    at:       [-38.727, 1.500, -12.372, 157]
+    level:    [75, 77]
+  17535048:
+    template: Vanguard_Bugler
+    at:       [-17.965, 1.500, -19.617, 212]
+    level:    [75, 77]
+  17535049:
+    template: Vanguard_Dollmaster
+    at:       [-16.663, 1.245, -28.637, 58]
+    level:    [75, 77]
+  17535050:
+    template: Vanguards_Avatar
+    at:       [-17.562, 1.475, -24.666, 57]
+    level:    [75, 77]
+  17535051:
+    template: Vanguard_Mesmerizer
+    at:       [19.551, 1.583, 0.539, 104]
+    level:    [75, 77]
+  17535052:
+    template: Vanguard_Bugler
+    at:       [10.946, 1.318, 12.804, 184]
+    level:    [75, 77]
+  17535053:
+    template: Vanguard_Neckchopper
+    at:       [-15.743, 1.599, 2.314, 22]
+    level:    [75, 77]
+  17535054:
+    template: Vanguard_Pillager
+    at:       [-16.831, 1.594, 5.726, 246]
+    level:    [75, 77]
+  17535055:
+    template: Vanguard_Vexer
+    at:       [7.760, -3.500, -32.980, 20]
+    level:    [75, 77]
+  17535056:
+    template: Vanguard_Trooper
+    at:       [-9.360, -3.500, -33.706, 124]
+    level:    [75, 77]
+  17535057:
+    template: Warchief_Tombstone
+    at:       [0.511, -3.500, -33.541, 192]
+    level:    [65, 65]
+  17535058:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [-263.975, -4.100, 112.274, 122]
+    level:    [90, 92]
+  17535059:
+    template: Vanguard_Grappler_2
+    script:   Vanguard_Grappler
+    at:       [-254.724, -3.608, 110.266, 145]
+    level:    [90, 92]
+  17535060:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-253.318, -4.099, 113.539, 12]
+    level:    [90, 92]
+  17535061:
+    template: Vanguard_Mesmerizer_2
+    script:   Vanguard_Mesmerizer
+    at:       [-262.705, -4.100, 115.849, 252]
+    level:    [90, 92]
+  17535062:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-262.952, -4.099, 115.092, 185]
+    level:    [90, 92]
+  17535063:
+    template: Vanguard_Pillager_2
+    script:   Vanguard_Pillager
+    at:       [-263.330, -4.100, 111.329, 133]
+    level:    [90, 92]
+  17535064:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [-258.121, -4.099, 106.776, 63]
+    level:    [90, 92]
+  17535065:
+    template: Vanguard_Neckchopper_2
+    script:   Vanguard_Neckchopper
+    at:       [-263.999, -4.100, 112.443, 29]
+    level:    [90, 92]
+  17535066:
+    template: Vanguard_Hawker_2
+    script:   Vanguard_Hawker
+    at:       [-259.547, -4.100, 108.725, 229]
+    level:    [90, 92]
+  17535067:
+    template: Vanguards_Hecteyes
+    at:       [-259.674, -4.100, 107.179, 226]
+    level:    [90, 92]
+  17535068:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-258.256, -4.100, 87.633, 254]
+    level:    [90, 92]
+  17535069:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [-268.044, -4.100, 78.118, 206]
+    level:    [90, 92]
+  17535070:
+    template: Vanguard_Gutslasher_2
+    script:   Vanguard_Gutslasher
+    at:       [-264.936, -4.100, 83.955, 202]
+    level:    [90, 92]
+  17535071:
+    template: Vanguard_Backstabber_2
+    script:   Vanguard_Backstabber
+    at:       [-264.336, -4.500, 100.030, 169]
+    level:    [90, 92]
+  17535072:
+    template: Vanguard_Impaler_2
+    script:   Vanguard_Impaler
+    at:       [-264.476, -4.100, 81.717, 136]
+    level:    [90, 92]
+  17535073:
+    template: Vanguards_Wyvern
+    at:       [-264.596, -3.678, 92.363, 229]
+    level:    [90, 92]
+  17535074:
+    template: Vanguard_Dollmaster_2
+    script:   Vanguard_Dollmaster
+    at:       [-258.912, -3.771, 111.954, 39]
+    level:    [90, 92]
+  17535075:
+    template: Vanguards_Avatar
+    at:       [-260.745, -3.900, 112.876, 31]
+    level:    [90, 92]
+  17535076:
+    template: Vanguard_Hawker_2
+    script:   Vanguard_Hawker
+    at:       [-201.510, -2.500, 91.127, 25]
+    level:    [90, 92]
+  17535077:
+    template: Vanguards_Hecteyes
+    at:       [-202.406, -2.500, 90.195, 244]
+    level:    [90, 92]
+  17535078:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-198.355, -2.500, 91.037, 11]
+    level:    [90, 92]
+  17535079:
+    template: Vanguard_Grappler_2
+    script:   Vanguard_Grappler
+    at:       [-191.836, -2.500, 83.236, 90]
+    level:    [90, 92]
+  17535080:
+    template: Vanguard_Mesmerizer_2
+    script:   Vanguard_Mesmerizer
+    at:       [-199.392, -2.500, 83.510, 157]
+    level:    [90, 92]
+  17535081:
+    template: Vanguard_Pillager_2
+    script:   Vanguard_Pillager
+    at:       [-199.176, -2.500, 76.942, 141]
+    level:    [90, 92]
+  17535082:
+    template: Vanguard_Gutslasher_2
+    script:   Vanguard_Gutslasher
+    at:       [-195.048, -1.645, 54.427, 159]
+    level:    [90, 92]
+  17535083:
+    template: Vanguard_Backstabber_2
+    script:   Vanguard_Backstabber
+    at:       [-191.090, -2.500, 68.603, 36]
+    level:    [90, 92]
+  17535084:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [-194.942, -2.498, 70.551, 221]
+    level:    [90, 92]
+  17535085:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [-192.206, -1.500, 41.030, 30]
+    level:    [90, 92]
+  17535086:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-180.315, -1.500, 32.838, 6]
+    level:    [90, 92]
+  17535087:
+    template: Vanguard_Neckchopper_2
+    script:   Vanguard_Neckchopper
+    at:       [-175.571, -1.500, 26.289, 174]
+    level:    [90, 92]
+  17535088:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-195.864, -1.500, 46.667, 143]
+    level:    [90, 92]
+  17535089:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [-177.006, -1.500, 25.832, 153]
+    level:    [90, 92]
+  17535090:
+    template: Vanguard_Backstabber_2
+    script:   Vanguard_Backstabber
+    at:       [-194.269, -1.500, 42.240, 40]
+    level:    [90, 92]
+  17535091:
+    template: Vanguard_Grappler_2
+    script:   Vanguard_Grappler
+    at:       [-159.139, -1.800, 20.308, 202]
+    level:    [90, 92]
+  17535092:
+    template: Vanguard_Gutslasher_2
+    script:   Vanguard_Gutslasher
+    at:       [-146.880, -2.499, 17.266, 211]
+    level:    [90, 92]
+  17535093:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [-149.371, -2.500, 20.654, 116]
+    level:    [90, 92]
+  17535094:
+    template: Vanguard_Hawker_2
+    script:   Vanguard_Hawker
+    at:       [-143.725, -2.500, 15.140, 102]
+    level:    [90, 92]
+  17535095:
+    template: Vanguards_Hecteyes
+    at:       [-141.479, -2.500, 15.419, 107]
+    level:    [90, 92]
+  17535096:
+    template: Vanguard_Impaler_2
+    script:   Vanguard_Impaler
+    at:       [-147.749, -2.499, 14.696, 241]
+    level:    [90, 92]
+  17535097:
+    template: Vanguards_Wyvern
+    at:       [-159.068, -1.500, 16.968, 11]
+    level:    [90, 92]
+  17535098:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [-110.991, -2.337, 17.502, 227]
+    level:    [90, 92]
+  17535099:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-117.959, -2.500, 25.073, 253]
+    level:    [90, 92]
+  17535100:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-108.034, -2.500, 20.609, 227]
+    level:    [90, 92]
+  17535101:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [-105.722, -2.500, 21.657, 126]
+    level:    [90, 92]
+  17535102:
+    template: Vanguard_Backstabber_2
+    script:   Vanguard_Backstabber
+    at:       [-100.615, -2.500, 16.714, 10]
+    level:    [90, 92]
+  17535103:
+    template: Vanguard_Grappler_2
+    script:   Vanguard_Grappler
+    at:       [-106.455, -2.500, 22.810, 74]
+    level:    [90, 92]
+  17535104:
+    template: Vanguard_Gutslasher_2
+    script:   Vanguard_Gutslasher
+    at:       [-99.688, -2.500, 23.889, 110]
+    level:    [90, 92]
+  17535105:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [-107.596, -2.500, 26.199, 132]
+    level:    [90, 92]
+  17535106:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [-161.328, -2.500, 66.968, 242]
+    level:    [90, 92]
+  17535107:
+    template: Vanguard_Mesmerizer_2
+    script:   Vanguard_Mesmerizer
+    at:       [-158.708, -2.500, 58.594, 43]
+    level:    [90, 92]
+  17535108:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-167.804, -2.500, 64.119, 155]
+    level:    [90, 92]
+  17535109:
+    template: Vanguard_Neckchopper_2
+    script:   Vanguard_Neckchopper
+    at:       [-156.529, -2.500, 62.659, 99]
+    level:    [90, 92]
+  17535110:
+    template: Vanguard_Dollmaster_2
+    script:   Vanguard_Dollmaster
+    at:       [-149.342, -2.500, 62.827, 33]
+    level:    [90, 92]
+  17535111:
+    template: Vanguards_Avatar
+    at:       [-151.009, -2.500, 65.952, 40]
+    level:    [90, 92]
+  17535112:
+    template: Vanguard_Backstabber_2
+    script:   Vanguard_Backstabber
+    at:       [-161.299, -2.500, 60.247, 118]
+    level:    [90, 92]
+  17535113:
+    template: Serjeant_Tombstone
+    at:       [-159.564, -2.500, 62.312, 23]
+    level:    [80, 80]
+  17535114:
+    template: Serjeant_Tombstone
+    at:       [-158.985, -2.500, 61.605, 5]
+    level:    [80, 80]
+  17535115:
+    template: Serjeant_Tombstone
+    at:       [-154.256, -2.500, 66.927, 174]
+    level:    [80, 80]
+  17535116:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [-139.516, -6.500, 91.338, 70]
+    level:    [90, 92]
+  17535117:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-128.093, -6.500, 92.565, 131]
+    level:    [90, 92]
+  17535118:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-139.688, -6.500, 89.648, 185]
+    level:    [90, 92]
+  17535119:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [-128.843, -6.499, 91.490, 184]
+    level:    [90, 92]
+  17535120:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [-90.010, -6.499, 56.446, 118]
+    level:    [90, 92]
+  17535121:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-88.518, -6.494, 61.069, 166]
+    level:    [90, 92]
+  17535122:
+    template: Vanguard_Neckchopper_2
+    script:   Vanguard_Neckchopper
+    at:       [-91.414, -6.499, 59.515, 72]
+    level:    [90, 92]
+  17535123:
+    template: Vanguard_Backstabber_2
+    script:   Vanguard_Backstabber
+    at:       [-88.929, 1.023, 8.975, 31]
+    level:    [90, 92]
+  17535124:
+    template: Vanguard_Grappler_2
+    script:   Vanguard_Grappler
+    at:       [-91.068, -6.500, 72.464, 185]
+    level:    [90, 92]
+  17535125:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [-92.891, -6.500, 74.632, 161]
+    level:    [90, 92]
+  17535126:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-148.474, -9.765, 77.390, 128]
+    level:    [90, 92]
+  17535127:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [-152.135, -9.299, 74.206, 64]
+    level:    [90, 92]
+  17535128:
+    template: Warchief_Tombstone
+    at:       [-157.228, -9.275, 69.602, 125]
+    level:    [80, 80]
+  17535129:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-185.930, -9.300, 29.037, 181]
+    level:    [90, 92]
+  17535130:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [-186.659, -9.300, 24.944, 220]
+    level:    [90, 92]
+  17535131:
+    template: Warchief_Tombstone
+    at:       [-191.374, -9.290, 25.688, 26]
+    level:    [80, 80]
+  17535132:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-81.055, 1.500, -10.434, 253]
+    level:    [90, 92]
+  17535133:
+    template: Vanguard_Mesmerizer_2
+    script:   Vanguard_Mesmerizer
+    at:       [-77.463, 1.500, -1.404, 182]
+    level:    [90, 92]
+  17535134:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [-82.735, 1.500, -1.439, 5]
+    level:    [90, 92]
+  17535135:
+    template: Vanguard_Pillager_2
+    script:   Vanguard_Pillager
+    at:       [-81.414, 1.500, -2.439, 181]
+    level:    [90, 92]
+  17535136:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [-72.585, 1.500, -6.376, 238]
+    level:    [90, 92]
+  17535137:
+    template: Vanguard_Vexer
+    at:       [-82.023, -7.900, -17.974, 30]
+    level:    [75, 77]
+  17535138:
+    template: Vanguard_Trooper
+    at:       [-82.031, -7.857, -17.794, 31]
+    level:    [75, 77]
+  17535139:
+    template: Warchief_Tombstone
+    at:       [-87.273, -6.904, -12.756, 158]
+    level:    [65, 65]
+  17535140:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [-250.700, -4.499, 95.956, 73]
+    level:    [90, 92]
+  17535141:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-254.606, -4.500, 92.329, 74]
+    level:    [90, 92]
+  17535142:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [-254.436, -4.500, 92.420, 91]
+    level:    [90, 92]
+  17535143:
+    template: Vanguard_Gutslasher_2
+    script:   Vanguard_Gutslasher
+    at:       [-268.385, -4.099, 107.758, 190]
+    level:    [90, 92]
+  17535144:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [102.098, 1.495, -15.832, 131]
+    level:    [90, 92]
+  17535145:
+    template: Vanguard_Grappler_2
+    script:   Vanguard_Grappler
+    at:       [115.546, 0.483, -28.087, 6]
+    level:    [90, 92]
+  17535146:
+    template: Vanguard_Pillager_2
+    script:   Vanguard_Pillager
+    at:       [95.483, 1.490, -25.393, 200]
+    level:    [90, 92]
+  17535147:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [103.101, 0.500, -44.316, 232]
+    level:    [90, 92]
+  17535148:
+    template: Vanguard_Neckchopper_2
+    script:   Vanguard_Neckchopper
+    at:       [109.284, 0.491, -26.162, 192]
+    level:    [90, 92]
+  17535149:
+    template: Vanguard_Hawker_2
+    script:   Vanguard_Hawker
+    at:       [99.849, 1.456, -23.580, 159]
+    level:    [90, 92]
+  17535150:
+    template: Vanguards_Hecteyes
+    at:       [100.921, 1.101, -25.135, 163]
+    level:    [90, 92]
+  17535151:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [106.713, 0.710, -24.594, 132]
+    level:    [90, 92]
+  17535152:
+    template: Vanguard_Impaler_2
+    script:   Vanguard_Impaler
+    at:       [95.250, 0.634, -34.081, 132]
+    level:    [90, 92]
+  17535153:
+    template: Vanguards_Wyvern
+    at:       [102.289, 0.500, -42.227, 251]
+    level:    [90, 92]
+  17535154:
+    template: Serjeant_Tombstone
+    at:       [96.918, 0.950, -29.808, 33]
+    level:    [80, 80]
+  17535155:
+    template: Serjeant_Tombstone
+    at:       [109.912, 0.500, -27.347, 187]
+    level:    [80, 80]
+  17535156:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [82.350, 1.499, -40.100, 87]
+    level:    [90, 92]
+  17535157:
+    template: Vanguard_Grappler_2
+    script:   Vanguard_Grappler
+    at:       [63.727, 2.000, -24.076, 90]
+    level:    [90, 92]
+  17535158:
+    template: Vanguard_Pillager_2
+    script:   Vanguard_Pillager
+    at:       [78.595, 1.427, -51.526, 93]
+    level:    [90, 92]
+  17535159:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [82.401, 1.500, -40.154, 79]
+    level:    [90, 92]
+  17535160:
+    template: Vanguard_Neckchopper_2
+    script:   Vanguard_Neckchopper
+    at:       [70.814, 1.499, -51.196, 162]
+    level:    [90, 92]
+  17535161:
+    template: Vanguard_Hawker_2
+    script:   Vanguard_Hawker
+    at:       [79.391, 1.499, -38.816, 208]
+    level:    [90, 92]
+  17535162:
+    template: Vanguards_Hecteyes
+    at:       [80.791, 1.486, -41.763, 128]
+    level:    [90, 92]
+  17535163:
+    template: Vanguard_Predator_2
+    script:   Vanguard_Predator
+    at:       [89.213, 0.815, -40.036, 250]
+    level:    [90, 92]
+  17535164:
+    template: Vanguard_Impaler_2
+    script:   Vanguard_Impaler
+    at:       [78.825, 1.954, -42.778, 176]
+    level:    [90, 92]
+  17535165:
+    template: Vanguards_Wyvern
+    at:       [77.498, 1.500, -42.291, 197]
+    level:    [90, 92]
+  17535166:
+    template: Serjeant_Tombstone
+    at:       [83.664, 0.877, -51.533, 126]
+    level:    [80, 80]
+  17535167:
+    template: Serjeant_Tombstone
+    at:       [86.179, 0.521, -58.298, 168]
+    level:    [80, 80]
+  17535168:
+    template: Vanguard_Gutslasher_2
+    script:   Vanguard_Gutslasher
+    at:       [8.832, 1.500, -80.769, 125]
+    level:    [90, 92]
+  17535169:
+    template: Vanguard_Gutslasher_2
+    script:   Vanguard_Gutslasher
+    at:       [17.642, 1.500, -73.235, 167]
+    level:    [90, 92]
+  17535170:
+    template: Vanguard_Footsoldier_2
+    script:   Vanguard_Footsoldier
+    at:       [4.155, 1.500, -73.329, 197]
+    level:    [90, 92]
+  17535171:
+    template: Vanguard_Pillager_2
+    script:   Vanguard_Pillager
+    at:       [5.121, 1.500, -71.234, 167]
+    level:    [90, 92]
+  17535172:
+    template: Vanguard_Neckchopper_2
+    script:   Vanguard_Neckchopper
+    at:       [17.595, 1.500, -76.344, 226]
+    level:    [90, 92]
+  17535173:
+    template: Vanguard_Hawker_2
+    script:   Vanguard_Hawker
+    at:       [11.383, 1.500, -79.874, 3]
+    level:    [90, 92]
+  17535174:
+    template: Vanguards_Hecteyes
+    at:       [9.552, 1.500, -77.217, 25]
+    level:    [90, 92]
+  17535175:
+    template: Vanguard_Backstabber_2
+    script:   Vanguard_Backstabber
+    at:       [-29.038, 1.500, -85.065, 72]
+    level:    [90, 92]
+  17535176:
+    template: Vanguard_Backstabber_2
+    script:   Vanguard_Backstabber
+    at:       [-15.151, 1.500, -70.122, 132]
+    level:    [90, 92]
+  17535177:
+    template: Vanguard_Grappler_2
+    script:   Vanguard_Grappler
+    at:       [-16.860, 1.500, -70.267, 244]
+    level:    [90, 92]
+  17535178:
+    template: Vanguard_Trooper_2
+    script:   Vanguard_Trooper
+    at:       [-9.296, 1.500, -72.505, 244]
+    level:    [90, 92]
+  17535179:
+    template: Vanguard_Impaler_2
+    script:   Vanguard_Impaler
+    at:       [-17.314, 1.500, -85.458, 90]
+    level:    [90, 92]
+  17535180:
+    template: Vanguards_Wyvern
+    at:       [-18.843, 1.784, -80.856, 221]
+    level:    [90, 92]
+  17535181:
+    template: Vanguard_Dollmaster_2
+    script:   Vanguard_Dollmaster
+    at:       [-8.899, 1.500, -73.463, 195]
+    level:    [90, 92]
+  17535182:
+    template: Vanguards_Avatar
+    at:       [-9.963, 1.500, -76.020, 204]
+    level:    [90, 92]
+  17535183:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-78.057, 1.244, -52.746, 148]
+    level:    [90, 92]
+  17535184:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-83.250, 0.779, -49.537, 28]
+    level:    [90, 92]
+  17535185:
+    template: Vanguard_Mesmerizer_2
+    script:   Vanguard_Mesmerizer
+    at:       [-87.523, 1.173, -39.068, 207]
+    level:    [90, 92]
+  17535186:
+    template: Vanguard_Mesmerizer_2
+    script:   Vanguard_Mesmerizer
+    at:       [-87.654, 0.688, -45.107, 196]
+    level:    [90, 92]
+  17535187:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-76.019, 1.500, -44.856, 248]
+    level:    [90, 92]
+  17535188:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-83.004, 1.500, -43.614, 184]
+    level:    [90, 92]
+  17535189:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-111.594, 0.500, -35.298, 146]
+    level:    [90, 92]
+  17535190:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-78.370, 1.439, -49.927, 219]
+    level:    [90, 92]
+  17535191:
+    template: Vanguard_Dollmaster_2
+    script:   Vanguard_Dollmaster
+    at:       [-86.627, 0.683, -45.833, 193]
+    level:    [90, 92]
+  17535192:
+    template: Vanguards_Avatar
+    at:       [-95.350, 0.499, -49.595, 156]
+    level:    [90, 92]
+  17535193:
+    template: Serjeant_Tombstone
+    at:       [-93.373, 0.500, -50.092, 63]
+    level:    [80, 80]
+  17535194:
+    template: Serjeant_Tombstone
+    at:       [-84.391, 1.500, -37.608, 169]
+    level:    [80, 80]
+  17535195:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-113.225, 0.500, -27.609, 167]
+    level:    [90, 92]
+  17535196:
+    template: Vanguard_Amputator_2
+    script:   Vanguard_Amputator
+    at:       [-110.732, 0.500, -31.437, 82]
+    level:    [90, 92]
+  17535197:
+    template: Vanguard_Mesmerizer_2
+    script:   Vanguard_Mesmerizer
+    at:       [-115.615, 0.500, -30.507, 149]
+    level:    [90, 92]
+  17535198:
+    template: Vanguard_Mesmerizer_2
+    script:   Vanguard_Mesmerizer
+    at:       [-97.582, 0.916, -30.053, 94]
+    level:    [90, 92]
+  17535199:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-109.608, 0.500, -33.501, 17]
+    level:    [90, 92]
+  17535200:
+    template: Vanguard_Vexer_2
+    script:   Vanguard_Vexer
+    at:       [-114.697, 0.500, -30.015, 107]
+    level:    [90, 92]
+  17535201:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-91.813, 1.499, -28.361, 66]
+    level:    [90, 92]
+  17535202:
+    template: Vanguard_Bugler_2
+    script:   Vanguard_Bugler
+    at:       [-97.009, 0.500, -35.325, 105]
+    level:    [90, 92]
+  17535203:
+    template: Vanguard_Dollmaster_2
+    script:   Vanguard_Dollmaster
+    at:       [-102.198, 1.491, -22.293, 151]
+    level:    [90, 92]
+  17535204:
+    template: Vanguards_Avatar
+    at:       [-99.430, 1.349, -23.604, 161]
+    level:    [90, 92]
+  17535205:
+    template: Serjeant_Tombstone
+    at:       [-107.412, 0.562, -26.158, 171]
+    level:    [80, 80]
+  17535206:
+    template: Serjeant_Tombstone
+    at:       [-106.786, 0.500, -32.995, 61]
+    level:    [80, 80]
+  17535207:
+    template: Bladeburner_Rokgevok
+    at:       [103.000, 0.500, -47.000, 98]
+    level:    [95, 95]
+  17535208:
+    template: Steelshank_Kratzvatz
+    at:       [18.315, 1.700, -94.055, 137]
+    level:    [95, 95]
+  17535209:
+    template: Kratzvatzs_Hecteyes
+    at:       [17.474, 1.700, -95.054, 185]
+    level:    [92, 92]
+  17535210:
+    template: Bloodfist_Voshgrosh
+    at:       [-103.000, 0.500, -47.000, 224]
+    level:    [95, 95]
+  17535211:
+    template: Spellspear_Djokvukk
+    at:       [-274.000, -6.698, 98.000, 24]
+    level:    [95, 95]
+  17535212:
+    template: Djokvukks_Wyvern
+    at:       [-274.000, -6.698, 98.000, 24]
+    level:    [92, 92]
+  17535213:
+    template: Arch_Overlord_Tombstone
+    at:       [0.000, -2.500, 43.000, 88]
+    level:    [99, 99]

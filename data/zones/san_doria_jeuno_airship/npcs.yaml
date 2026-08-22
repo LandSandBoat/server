@@ -1,0 +1,340 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17690625:
+    script:       Nigel
+    display_name: Nigel
+    at:           [0.000, 4.529, 21.950, 192]
+    render:
+      look:
+        type:  standard
+        model: 827
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17690626:
+    script:       Ricaldo
+    display_name: Ricaldo
+    at:           [0.000, -7.460, -12.977, 192]
+    render:
+      look:
+        type:  standard
+        model: 836
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17690627:
+    script:       SAILOR
+    display_name: SAILOR
+    at:           [0.000, -7.460, -12.977, 192]
+    render:
+      look:
+        type:  standard
+        model: 836
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    widescan: true
+
+  17690628:
+    script:       qm1
+    display_name: ???
+    at:           [-9.491, -4.967, -13.372, 77]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+
+  17690629:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-3.203, -4.045, 15.299, 130]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4110
+        body:  8210
+        hands: 12305
+        legs:  16407
+        feet:  20485
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17690630:
+    script:       Passenger
+    display_name: Passenger
+    at:           [2.935, -4.089, 15.432, 251]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4111
+        body:  8210
+        hands: 12390
+        legs:  16399
+        feet:  20490
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17690631:
+    script:       Passenger
+    display_name: Passenger
+    at:           [3.377, -6.480, -16.915, 226]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4113
+        body:  8210
+        hands: 12308
+        legs:  16389
+        feet:  20497
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17690632:
+    script:       Passenger
+    display_name: Passenger
+    at:           [3.923, 4.261, 10.974, 190]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4116
+        body:  8210
+        hands: 12393
+        legs:  16385
+        feet:  20503
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17690633:
+    script:       Passenger
+    display_name: Passenger
+    at:           [11.555, 1.062, 1.132, 93]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4119
+        body:  8210
+        hands: 12312
+        legs:  16488
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17690634:
+    script:       Passenger
+    display_name: Passenger
+    at:           [3.424, -3.281, -14.713, 231]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4120
+        body:  8210
+        hands: 12299
+        legs:  16441
+        feet:  20576
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17690635:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-5.151, 1.062, -10.968, 154]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4128
+        body:  8210
+        hands: 12389
+        legs:  16401
+        feet:  20585
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17690636:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-11.366, -3.082, 0.084, 126]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4129
+        body:  8210
+        hands: 12307
+        legs:  16396
+        feet:  20587
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17690637:
+    script: NPC[d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17690638:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17690639:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17690640:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17690641:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17690642:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17690643:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17690644:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17690645:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17690646:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_prefix: 32
+    widescan: true
+    content:  SOA
+
+  17690647:
+    script: NPC[17]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17690648:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17690649:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50

@@ -1,0 +1,1103 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16822467:
+    script: NPC[c3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16822468:
+    script: NPC[c4]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16822469:
+    script:       Scrawled_Writing
+    display_name: Scrawled Writing
+    at:           [-17.522, 11.791, -118.417, 128]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16822470:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16822471:
+    script: NPC[c7]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16822472:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16822474:
+    script: NPC[ca]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16822475:
+    script: NPC[cb]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16822476:
+    script: NPC[cc]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16822477:
+    script: NPC[cd]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16822478:
+    script:       _0b0
+    display_name: Rusty Lever
+    at:           [173.021, 5.666, -46.629]
+    render:
+      look:
+        type: door
+      door_id:      811741279
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: COP
+
+  16822479:
+    script:       _0b1
+    display_name: Rusty Lever
+    at:           [196.979, 5.666, -71.369]
+    render:
+      look:
+        type: door
+      door_id:      828518495
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16822480:
+    script:       _0b2
+    display_name: Rusty Lever
+    at:           [186.589, 13.668, -80.186]
+    render:
+      look:
+        type: door
+      door_id:      845295711
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16822481:
+    script:       _0b3
+    display_name: DROPFLOOR_A
+    at:           [175.003, 12.000, -60.009]
+    render:
+      look:
+        type: door
+      door_id:      862072927
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16822482:
+    script: _0b6
+    at:     [175.000, 16.299, -66.980]
+    render:
+      look:
+        type: door
+      door_id:      912404575
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16822483:
+    script:       _0b4
+    display_name: DROPFLOOR_B
+    at:           [181.003, 12.000, -60.009]
+    render:
+      look:
+        type: door
+      door_id:      878850143
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16822484:
+    script: _0b7
+    at:     [181.003, 16.299, -66.980]
+    render:
+      look:
+        type: door
+      door_id:      929181791
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16822485:
+    script:       _0b5
+    display_name: DROPFLOOR_C
+    at:           [187.003, 12.000, -60.009]
+    render:
+      look:
+        type: door
+      door_id:      895627359
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16822486:
+    script: _0b8
+    at:     [187.003, 16.299, -66.980]
+    render:
+      look:
+        type: door
+      door_id:      945959007
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16822487:
+    script: _0b9
+    at:     [178.500, 17.000, -52.250]
+    render:
+      look:
+        type: door
+      door_id:      962736223
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  16822488:
+    script: _0ba
+    at:     [180.985, 11.125, -59.618]
+    render:
+      look:
+        type: door
+      door_id:      1633824863
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  16822489:
+    script:       Tarnotik
+    display_name: Tarnotik
+    at:           [160.896, 11.999, -55.659, 192]
+    render:
+      look:
+        type:  standard
+        model: 982
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16822490:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  16822491:
+    script: blank
+    at:     [-340.428, -7.920, 427.447, 209]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  16822492:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  16822493:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+    content: COP
+
+  16822494:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822495:
+    script:       Louverance
+    display_name: Louverance
+    at:           [-261.714, 7.999, -46.439, 219]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  2
+        head:  4158
+        body:  8236
+        hands: 12288
+        legs:  16484
+        feet:  20580
+        main:  24640
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822496:
+    script:       qm
+    display_name: ???
+    at:           [187.271, 15.999, -75.139, 34]
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:  cutscene_only
+    content: COP
+
+  16822497:
+    script:       Brakobrik
+    display_name: Brakobrik
+    at:           [164.605, 11.992, -91.253, 203]
+    render:
+      look:
+        type:  standard
+        model: 984
+      entity_flags: 27
+      name_prefix:  32
+      moving:        7
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16822498:
+    script:       qm
+    display_name: ???
+    at:           [163.175, 11.999, -92.728, 225]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16822499:
+    script:       qm
+    display_name: ???
+    at:           [164.678, 11.999, -92.722, 243]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16822500:
+    script:       qm
+    display_name: ???
+    at:           [163.491, 11.992, -91.337, 39]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16822501:
+    script:       Rakorok
+    display_name: Rakorok
+    at:           [157.331, 13.999, -40.840, 143]
+    render:
+      look:
+        type:  standard
+        model: 984
+      entity_flags: 27
+      name_prefix:  32
+      moving:        7
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16822502:
+    script:       Jabbos
+    display_name: Jabbos
+    at:           [611.449, 132.662, 776.931, 193]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  8
+        head:  4096
+        body:  8307
+        hands: 12290
+        legs:  16490
+        feet:  20480
+        main:  24670
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822503:
+    script:       qm
+    display_name: ???
+    at:           [154.742, 13.999, -39.602, 13]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16822504:
+    script:       qm
+    display_name: ???
+    at:           [155.194, 13.999, -41.844, 236]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16822505:
+    script:       qm
+    display_name: ???
+    at:           [156.612, 13.999, -39.194, 27]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16822506:
+    script:       qm
+    display_name: ???
+    at:           [155.645, 13.999, -40.546, 40]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16822507:
+    script:       qm
+    display_name: ???
+    at:           [158.502, 13.999, -38.931, 62]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags: 2051
+      moving:          1
+    status:  normal
+    content: COP
+
+  16822508:
+    script:       Koblakiq
+    display_name: Koblakiq
+    at:           [-64.851, 22.834, -117.521, 123]
+    render:
+      look:
+        type:  standard
+        model: 982
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16822509:
+    script:       Zeelozok
+    display_name: Zeelozok
+    at:           [-58.092, 0.788, -182.088, 165]
+    render:
+      look:
+        type:  standard
+        model: 983
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822510:
+    script: Conquest_Banner
+    at:     [-256.617, 7.999, -50.306, 129]
+    render:
+      look:
+        type:  standard
+        model: 814
+      entity_flags: 2051
+      moving:          1
+
+  16822511:
+    script: Conquest_Banner
+    at:     [-256.617, 7.999, -50.306, 129]
+    render:
+      look:
+        type:  standard
+        model: 815
+      entity_flags: 2051
+      moving:          1
+
+  16822512:
+    script: Conquest_Banner
+    at:     [-256.617, 7.999, -50.306, 129]
+    render:
+      look:
+        type:  standard
+        model: 816
+      entity_flags: 2051
+      moving:          1
+
+  16822513:
+    script: Conquest_Banner
+    at:     [-257.001, 8.000, -48.805, 130]
+    render:
+      look:
+        type:  standard
+        model: 817
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  16822514:
+    script:       Bartabaq
+    display_name: Bartabaq
+    at:           [-261.930, 7.999, -49.145, 244]
+    render:
+      look:
+        type:  standard
+        model: 983
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    widescan: true
+    content:  COP
+
+  16822515:
+    script: NPC[f3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16822516:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16822517:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16822518:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16822519:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16822520:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16822521:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16822522:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16822523:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16822524:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-281.026, 0.023, -101.725, 180]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822525:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-281.026, 0.023, -101.725, 180]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16822526:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-29.411, 13.201, -15.271]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32774
+    status:  normal
+    content: COP
+
+  16822527:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-29.411, 13.201, -15.271]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32774
+    status:  normal
+    content: COP
+
+  16822528:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-261.965, 0.170, 105.879]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32774
+    status:  normal
+    content: COP
+
+  16822529:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-98.912, 7.446, 98.006]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32774
+    status:  normal
+    content: COP
+
+  16822530:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-136.898, 6.974, 56.038]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32774
+    status:   normal
+    widescan: true
+
+  16822531:
+    script:       Mining_Point
+    display_name: Mining Point
+    at:           [-98.912, 7.446, 98.006]
+    render:
+      look:
+        type:  standard
+        model: 2424
+      moving: 32774
+    status:  normal
+    content: COP
+
+  16822532:
+    script:       Treasure_Chest
+    display_name: Treasure Chest
+    render:
+      look:
+        type:  standard
+        model: 960
+      moving: 6
+    status:  normal
+    content: COP
+
+  16822533:
+    script:       Pawnpix
+    display_name: Pawnpix
+    at:           [-341.000, -8.000, 395.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822534:
+    script:       Stufstix
+    display_name: Stufstix
+    at:           [-339.000, -8.023, 395.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822535:
+    script:       Twinkbrix
+    display_name: Twinkbrix
+    at:           [-292.779, 7.999, -263.153, 189]
+    render:
+      look:
+        type:  standard
+        model: 994
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16822536:
+    script:       Jabbos
+    display_name: Jabbos
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  8
+        head:  4096
+        body:  8307
+        hands: 12290
+        legs:  16490
+        feet:  20480
+        main:  24670
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822537:
+    script:       Chekochuk
+    display_name: Chekochuk
+    render:
+      look:
+        type:  standard
+        model: 983
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822538:
+    script:       Movamuq
+    display_name: Movamuq
+    render:
+      look:
+        type:  standard
+        model: 982
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822539:
+    script:       Trikotrak
+    display_name: Trikotrak
+    render:
+      look:
+        type:  standard
+        model: 983
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822540:
+    script:       Swipostik
+    display_name: Swipostik
+    render:
+      look:
+        type:  standard
+        model: 982
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822541:
+    script:       '5'
+    display_name: '5'
+    render:
+      look:
+        type:  standard
+        model: 685
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822542:
+    script:       '6'
+    display_name: '6'
+    render:
+      look:
+        type:  standard
+        model: 687
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822543:
+    script:       '7'
+    display_name: '7'
+    render:
+      look:
+        type:  standard
+        model: 695
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822544:
+    script:       '8'
+    display_name: '8'
+    render:
+      look:
+        type:  standard
+        model: 682
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16822545:
+    script:       Iron_Box
+    display_name: Iron Box
+    at:           [-140.954, 7.518, 157.204, 143]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16822546:
+    script:       GuZho_Thunderblade
+    display_name: Gu'Zho Thunderblade
+    at:           [-316.427, 8.124, -260.868, 130]
+    render:
+      look:
+        type:  standard
+        model: 660
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+    content:  COP
+
+  16822547:
+    script:       qm
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: COP
+
+  16822548:
+    script:       Goblin_Preceptor
+    display_name: Goblin Preceptor
+    render:
+      look:
+        type:  standard
+        model: 700
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+    content:  COP
+
+  16822549:
+    script:       Mighty_Minded_Generajiq
+    display_name: Mighty Minded Generajiq
+    render:
+      look:
+        type:  standard
+        model: 694
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+    content:  COP
+
+  16822550:
+    script:       Choplix_Limblopper
+    display_name: Choplix Limblopper
+    render:
+      look:
+        type:  standard
+        model: 1089
+      entity_flags: 27
+      name_prefix:  32
+    widescan: true
+    content:  COP
+
+  16822551:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 1355
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  16822552:
+    script:       Geomagnetic_Fount
+    display_name: Geomagnetic Fount
+    at:           [177.549, 7.378, -97.327]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: SOA
+
+  16822553:
+    script:       Survival_Guide
+    display_name: Survival Guide
+    at:           [-262.000, 8.000, -54.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:  1
+      name_vis:      32
+      moving:        15
+    status:   normal
+    widescan: true
+    content:  SURVIVAL_GUIDE
+
+  16822554:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112
+
+  16822555:
+    script:       Gloom_Phantom
+    display_name: Gloom Phantom
+    render:
+      look:
+        type:  standard
+        model: 3652
+      entity_flags: 2077
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  16822556:
+    script:       Magh_Bihu
+    display_name: Magh Bihu
+    render:
+      look:
+        type:  standard
+        model: 3158
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  16822557:
+    script:       Dazbog
+    display_name: Dazbog
+    render:
+      look:
+        type:  standard
+        model: 3159
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  16822558:
+    script:       Boudox
+    display_name: Boudox
+    render:
+      look:
+        type:  standard
+        model: 3190
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true

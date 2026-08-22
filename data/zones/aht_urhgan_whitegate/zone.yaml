@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, auction_house, yell, los_player_block, assist]
+music:
+  day:          178
+  night:        178
+  battle_solo:  178
+  battle_party: 178
+
+zonelines:
+
+  z1e0:
+    from:  [-158.102, 0.000, 0.005]
+    to:    al_zahbi
+    at:    [120.359, -3.816, 40.004, 3.141593]
+    scale: [1.000, 4.000]
+
+  zmry:
+    from:  [-114.000, -3.333, -80.000]
+    to:    aht_urhgan_whitegate
+    at:    [-102.500, -1.500, -80.000]
+    scale: [1.000, 4.000]

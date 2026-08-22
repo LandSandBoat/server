@@ -1,0 +1,1748 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17629666:
+    script: NPC[1e2]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17629667:
+    script: NPC[1e3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17629668:
+    script:       qm_amk
+    display_name: ???
+    at:           [813.777, -11.013, -732.788]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status: normal
+
+  17629669:
+    script:       qm2
+    display_name: ???
+    at:           [-49.944, -0.891, -139.485]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17629670:
+    script:       qm3
+    display_name: ???
+    at:           [-144.856, 1.935, 446.109]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17629671:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        6
+
+  17629672:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+
+  17629673:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        6
+
+  17629674:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 966
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17629675:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 966
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+
+  17629676:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 966
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+
+  17629677:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17629678:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+
+  17629679:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+
+  17629680:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+
+  17629681:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 966
+      animation_sub: 4
+      name_vis:      4
+      moving:        6
+
+  17629682:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+
+  17629683:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+
+  17629684:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17629685:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17629686:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17629687:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         SOA
+
+  17629688:
+    script: NPC[1f8]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17629689:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17629691:
+    script: NPC[1fb]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17629692:
+    script: NPC[1fc]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17629693:
+    script: NPC[1fd]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17629694:
+    script:       _5s0
+    display_name: Ornate Door
+    at:           [-26.000, -2.525, -60.000]
+    render:
+      look:
+        type: door
+      door_id:      812856671
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629695:
+    script: blank
+    at:     [-16.000, 0.000, -60.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629696:
+    script:       _5s1
+    display_name: Ornate Door
+    at:           [25.999, -2.525, -179.990]
+    render:
+      look:
+        type: door
+      door_id:      829633887
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629697:
+    script: blank
+    at:     [16.000, 0.000, -180.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629698:
+    script:       _5s2
+    display_name: Ornate Door
+    at:           [-569.999, -2.525, -420.000]
+    render:
+      look:
+        type: door
+      door_id:      846411103
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629699:
+    script: blank
+    at:     [-580.000, 0.000, -420.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629700:
+    script:       _5s3
+    display_name: Ornate Door
+    at:           [-689.999, -2.525, -420.000]
+    render:
+      look:
+        type: door
+      door_id:      863188319
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629701:
+    script: blank
+    at:     [-700.000, 0.000, -420.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629702:
+    script:       _5s4
+    display_name: Ornate Door
+    at:           [-709.999, -2.525, -380.000]
+    render:
+      look:
+        type: door
+      door_id:      879965535
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629703:
+    script: blank
+    at:     [-700.000, 0.000, -380.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629704:
+    script:       _5s5
+    display_name: Ornate Door
+    at:           [-780.000, -2.525, -450.000]
+    render:
+      look:
+        type: door
+      door_id:      896742751
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629705:
+    script: blank
+    at:     [-780.000, 0.000, -460.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629706:
+    script:       _5s6
+    display_name: Ornate Door
+    at:           [-830.000, -2.525, -380.000]
+    render:
+      look:
+        type: door
+      door_id:      913519967
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629707:
+    script: blank
+    at:     [-820.000, 0.000, -380.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629708:
+    script:       _5s7
+    display_name: Ornate Door
+    at:           [-260.000, -2.525, 750.000]
+    render:
+      look:
+        type: door
+      door_id:      930297183
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629709:
+    script: blank
+    at:     [-260.000, 0.000, 740.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629710:
+    script:       _5s8
+    display_name: Ornate Door
+    at:           [-330.000, -2.525, 659.999]
+    render:
+      look:
+        type: door
+      door_id:      947074399
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629711:
+    script: blank
+    at:     [-340.000, 0.000, 660.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629712:
+    script:       _5s9
+    display_name: Ornate Door
+    at:           [-350.000, -2.525, 820.000]
+    render:
+      look:
+        type: door
+      door_id:      963851615
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629713:
+    script: blank
+    at:     [-340.000, 0.000, 820.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629714:
+    script:       _5sa
+    display_name: Ornate Door
+    at:           [-422.000, -2.525, 789.999]
+    render:
+      look:
+        type: door
+      door_id:      1634940255
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629715:
+    script: blank
+    at:     [-408.000, 0.000, 800.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629716:
+    script:       _5sb
+    display_name: Ornate Door
+    at:           [-420.000, -2.525, 730.000]
+    render:
+      look:
+        type: door
+      door_id:      1651717471
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629717:
+    script: blank
+    at:     [-420.000, 0.000, 740.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629718:
+    script:       _5sc
+    display_name: Ornate Door
+    at:           [-410.000, -2.525, 658.000]
+    render:
+      look:
+        type: door
+      door_id:      1668494687
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629719:
+    script: blank
+    at:     [-400.000, 0.000, 672.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status: normal
+
+  17629720:
+    script:       _5sd
+    display_name: Sandstone Door
+    at:           [-550.000, -2.324, -420.000]
+    render:
+      look:
+        type: door
+      door_id:      1685271903
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629721:
+    script:       _5se
+    display_name: Sandstone Door
+    at:           [-850.000, -2.324, -380.000]
+    render:
+      look:
+        type: door
+      door_id:      1702049119
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629722:
+    script:       _5sf
+    display_name: Sandstone Door
+    at:           [-302.000, -2.324, 670.000]
+    render:
+      look:
+        type: door
+      door_id:      1718826335
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629723:
+    script:       _5sg
+    display_name: Sandstone Door
+    at:           [-270.000, -2.724, 778.000]
+    render:
+      look:
+        type: door
+      door_id:      1735603551
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629724:
+    script:       _5sh
+    display_name: Sandstone Door
+    at:           [-378.000, -2.324, 810.000]
+    render:
+      look:
+        type: door
+      door_id:      1752380767
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629725:
+    script:       _5si
+    display_name: Sandstone Door
+    at:           [-492.000, -2.724, 780.000]
+    render:
+      look:
+        type: door
+      door_id:      1769157983
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629726:
+    script:       _5sj
+    display_name: Sandstone Door
+    at:           [-410.000, -2.274, 702.000]
+    render:
+      look:
+        type: door
+      door_id:      1785935199
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629727:
+    script:       _5sk
+    display_name: Sandstone Door
+    at:           [-452.000, -2.724, 620.000]
+    render:
+      look:
+        type: door
+      door_id:      1802712415
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17629728:
+    script: _5sl
+    at:     [-296.750, 7.711, 416.750]
+    render:
+      look:
+        type: door
+      door_id:      1819489631
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+
+  17629729:
+    script: _5sm
+    at:     [-136.750, 7.710, -176.750]
+    render:
+      look:
+        type: door
+      door_id:      1836266847
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+
+  17629730:
+    script: _5sn
+    at:     [216.750, 7.708, -16.750]
+    render:
+      look:
+        type: door
+      door_id:      1853044063
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+
+  17629731:
+    script: _5so
+    at:     [496.750, -8.307, -816.750]
+    render:
+      look:
+        type: door
+      door_id:      1869821279
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+
+  17629732:
+    script: _5sp
+    at:     [816.750, -8.312, -743.250]
+    render:
+      look:
+        type: door
+      door_id:      1886598495
+      entity_flags: 4099
+      animation:    open_door
+      moving:       1
+
+  17629733:
+    script:       qm4
+    display_name: ???
+    at:           [-533.066, -0.851, -414.969, 64]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17629734:
+    script:       Zeid
+    display_name: Zeid
+    render:
+      look:
+        type:  standard
+        model: 830
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17629735:
+    script:       Fountain_of_Kings
+    display_name: Fountain of Kings
+    at:           [571.283, 20.000, -938.480, 249]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17629736:
+    script:       qm5
+    display_name: ???
+    at:           [781.727, -16.000, -825.022, 83]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      entity_flags:    27
+      name_vis:       112
+      name_prefix:     34
+      moving:       32769
+    status: normal
+
+  17629737:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17629738:
+    script: NPC[22a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17629739:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17629740:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17629741:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17629742:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17629743:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17629744:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17629745:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17629746:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17629747:
+    script:       qm6
+    display_name: ???
+    at:           [-469.393, -1.000, 619.933]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17629748:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 961
+      moving: 7
+    status: normal
+
+  17629749:
+    script:       qm7
+    display_name: ???
+    at:           [-506.764, 17.375, -420.372, 115]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status: normal
+
+  17629750:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [943.154, -11.356, -337.309, 83]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17629751:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [943.154, -11.356, -337.309, 83]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17629752:
+    script:       Goblin_Geologist
+    display_name: Goblin Geologist
+    at:           [-737.000, -10.125, -550.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 85
+      moving: 22
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17629753:
+    script:       qm_amk
+    display_name: ???
+    at:           [-345.000, 0.500, 826.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629754:
+    script:       qm_amk
+    display_name: ???
+    at:           [76.000, 0.020, -27.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629755:
+    script:       qm_amk
+    display_name: ???
+    at:           [-60.000, 1.278, -169.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629756:
+    script:       qm_amk
+    display_name: ???
+    at:           [-181.000, 7.625, -107.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629757:
+    script:       qm_amk
+    display_name: ???
+    at:           [816.000, 1.502, -568.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629758:
+    script:       qm_amk
+    display_name: ???
+    at:           [548.000, 17.314, -946.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629759:
+    script:       qm_amk
+    display_name: ???
+    at:           [272.000, 1.962, 24.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629760:
+    script:       qm_amk
+    display_name: ???
+    at:           [101.000, 0.000, -100.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629761:
+    script:       qm_amk
+    display_name: ???
+    at:           [-21.000, 0.000, -18.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629762:
+    script:       qm_amk
+    display_name: ???
+    at:           [-211.000, 10.341, -129.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629763:
+    script:       qm_amk
+    display_name: ???
+    at:           [-108.000, 1.053, -170.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629764:
+    script:       qm_amk
+    display_name: ???
+    at:           [-142.000, 1.252, -271.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629765:
+    script:       qm_amk
+    display_name: ???
+    at:           [-65.000, 1.413, -270.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629766:
+    script:       qm_amk
+    display_name: ???
+    at:           [631.000, 0.187, -419.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629767:
+    script:       qm_amk
+    display_name: ???
+    at:           [862.000, -8.500, -415.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629768:
+    script:       qm_amk
+    display_name: ???
+    at:           [613.000, 8.981, -537.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629769:
+    script:       qm_amk
+    display_name: ???
+    at:           [770.000, 0.460, -668.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629770:
+    script:       qm25
+    display_name: ???
+    at:           [590.000, -6.602, -663.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629771:
+    script:       qm_amk
+    display_name: ???
+    at:           [495.000, 1.729, -834.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629772:
+    script:       qm_amk
+    display_name: ???
+    at:           [780.000, -15.326, -750.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status: normal
+
+  17629773:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [-85.000, 0.000, -40.000]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17629774:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [75.000, 0.000, -200.000]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17629775:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [40.000, 0.000, -130.000]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17629776:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [-84.900, 0.000, -40.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17629777:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [75.100, 0.000, -200.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17629778:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [40.100, 0.000, -130.000]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17629779:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [939.298, -8.000, -296.668, 191]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17629780:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [696.739, -24.000, -699.603, 125]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   22
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17629781:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [-354.967, 0.000, 863.316, 191]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   15
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17629782:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [176.547, -8.000, -159.999, 120]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    8
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17629783:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [-743.408, -8.000, -558.954, 128]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17629784:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [-904.736, 16.432, -277.684, 123]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   22
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17629785:
+    script:       Geomagnetic_Fount
+    display_name: Geomagnetic Fount
+    at:           [-896.722, -1.698, -375.598]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17629786:
+    script:       HomePoint#1
+    display_name: 'Home Point #1'
+    at:           [-984.000, 17.000, -289.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17629787:
+    script:       HomePoint#2
+    display_name: 'Home Point #2'
+    at:           [573.000, 8.950, -499.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 51
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17629788:
+    script:       HomePoint#3
+    display_name: 'Home Point #3'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17629789:
+    script:       HomePoint#4
+    display_name: 'Home Point #4'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17629790:
+    script:       HomePoint#5
+    display_name: 'Home Point #5'
+    render:
+      look:
+        type:  standard
+        model: 51
+    widescan: true
+    content:  SOA
+
+  17629791:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [813.660, 1.940, -560.660]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17629792:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [778.500, 2.020, -657.380]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17629793:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [822.080, -8.000, -382.990]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17629794:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112
+
+  17629795:
+    script:       Raebrimm
+    display_name: Raebrimm
+    render:
+      look:
+        type:  standard
+        model: 957
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629796:
+    script:       Gloom_Phantom
+    display_name: Gloom Phantom
+    render:
+      look:
+        type:  standard
+        model: 3185
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629797:
+    script:       Magh_Bihu
+    display_name: Magh Bihu
+    render:
+      look:
+        type:  standard
+        model: 3186
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629798:
+    script:       Dazbog
+    display_name: Dazbog
+    render:
+      look:
+        type:  standard
+        model: 3187
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629799:
+    script:       Uran-Mafran
+    display_name: Uran-Mafran
+    render:
+      look:
+        type:   equipped
+        race:   5
+        face:   4
+        head:   4096
+        body:   8238
+        hands:  12334
+        legs:   16430
+        feet:   20526
+        main:   24576
+        sub:    28672
+        ranged: 32785
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629800:
+    script:       Gumbah
+    display_name: Gumbah
+    render:
+      look:
+        type:  standard
+        model: 72
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629801:
+    script:       Oggbi
+    display_name: Oggbi
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  3
+        head:  4113
+        body:  8209
+        hands: 12305
+        legs:  16401
+        feet:  20497
+        main:  24576
+        sub:   28672
+      entity_flags:  2075
+      animation_sub:    1
+      name_prefix:     32
+    status:   cutscene_only
+    widescan: true
+
+  17629802:
+    script:       Duke_Alloces
+    display_name: Duke Alloces
+    render:
+      look:
+        type:  standard
+        model: 3634
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629803:
+    script:       Spelunking_Sabotender
+    display_name: Spelunking Sabotender
+    render:
+      look:
+        type:  standard
+        model: 372
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629804:
+    script:       Sand_Tarantula
+    display_name: Sand Tarantula
+    render:
+      look:
+        type:  standard
+        model: 310
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629805:
+    script:       Sand_Lizard
+    display_name: Sand Lizard
+    render:
+      look:
+        type:  standard
+        model: 328
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629806:
+    script:       Carbuncle
+    display_name: Carbuncle
+    render:
+      look:
+        type:  standard
+        model: 978
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629807:
+    script:       Odin
+    display_name: Odin
+    render:
+      look:
+        type:  standard
+        model: 1830
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+
+  17629808:
+    at: [-451.535, 8.394, -613.203, 19]
+    render:
+      look:
+        type: ship
+      door_id:      10
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+      moving:       32768
+    status: cutscene_only
+
+  17629809:
+    script:       Talking_Doll
+    display_name: Talking Doll
+    at:           [-61.095, -16.000, 301.447, 201]
+    render:
+      look:
+        type:  standard
+        model: 970
+      entity_flags:  2075
+      animation_sub:    1
+      name_prefix:     32
+    status:   cutscene_only
+    widescan: true
+
+  17629810:
+    script:       ???
+    display_name: ???
+    at:           [-533.065, -0.851, -414.969]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112
+      name_prefix:     2
+      moving:          1
+    status: normal
+
+  17629811:
+    script:       Journeys_End
+    display_name: Journey's End
+    at:           [-64.000, -16.000, 302.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags:    27
+      name_vis:       112
+      name_prefix:     34
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  TVR

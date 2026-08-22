@@ -1,0 +1,2173 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Apocalyptic_Weapon:
+    id:            199
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  1669
+        animation_sub:    8
+        model_size:       2
+        hitbox:          22
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Cannonball:
+    id:            623
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [fog]
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      steal: [pinch_of_bomb_ash, bomb_arm] # audit needed
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Cursed_Puppet:
+    id:            867
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  643
+        animation_sub:  12
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bottle_of_illuminink
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          item:   doll_shard
+      despoil:
+        doll_shard: 0
+
+  Darksteel_Golem:
+    id:            906
+    species:       golem
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 4
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   golem_shard
+        - chance: rare
+          item:   chunk_of_mythril_ore
+      despoil:
+        chunk_of_mythril_ore: 0
+        golem_shard:          0
+
+  Douma_Weapon:
+    id:            6843
+    species:       evil_weapon
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 478
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Eldhrimnir:
+    id:            1194
+    species:       magic_pot
+    type:          [notorious]
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+
+  Fired_Urn:
+    id:            4723
+    species:       magic_pot
+    type:          [notorious]
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  667
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    content: ASA
+
+  Infernal_Weapon:
+    id:            2077
+    species:       evil_weapon
+    spell_list_id: 42
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  1669
+        animation_sub:    8
+        model_size:       2
+        hitbox:          22
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        hp: 9600
+
+  Jackpot:
+    id:            2117
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 133
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Katashiro_Weapon:
+    id:            6844
+    species:       evil_weapon
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Killing_Weapon:
+    id:            2231
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Lode_Golem:
+    id:            4722
+    species:       doll
+    type:          [notorious]
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    content: ASA
+
+  Magic_Flagon:
+    id:            2476
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         37
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bottle_of_illuminink
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: uncommon
+          item:   red_mages_testimony
+        - chance: rare
+          item:   scroll_of_enstone_ii
+        - chance: rare
+          one_of:
+            scroll_of_thunder_iii:  35
+            scroll_of_shell_iv:     20
+            scroll_of_thundaga_iii: 20
+            scroll_of_thunder_iv:   15
+            scroll_of_burst:        10
+      despoil:
+        magic_pot_shard: 0
+
+  Martinet:
+    id:            5426
+    species:       doll
+    type:          [notorious]
+    skill_list_id: 401
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 7200
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aptant_of_pera
+        - chance: uncommon
+          item:   aptant_of_aecus
+    content: WOTG
+
+  Mimic_Jester:
+    id:            4726
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 258
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Mimic_King:
+    id:            4727
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 267
+        entity_flags:  135
+        animation_sub:   5
+        model_size:      3
+        hitbox:         32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Mimic_Mage:
+    id:            4725
+    species:       mimic
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  129
+        animation_sub:   5
+        hitbox:         11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Mokkurkalfi:
+    id:            2717
+    species:       golem
+    type:          [notorious]
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Mythril_Golem:
+    id:            2793
+    species:       golem
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 4
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   golem_shard
+        - chance: rare
+          item:   chunk_of_mythril_ore
+      despoil:
+        chunk_of_mythril_ore: 0
+        golem_shard:          0
+
+  Nargun:
+    id:            5842
+    species:       golem
+    type:          [notorious]
+    skill_list_id: 1005
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 11000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aptant_of_pera
+        - chance: uncommon
+          item:   aptant_of_arkhe
+    content: WOTG
+
+  Nightmare_Vase:
+    id:            2873
+    species:       magic_pot
+    type:          [notorious]
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         43
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 8400
+    loot:
+      drops:
+        - chance: always
+          item:   magic_pot_shard
+        - chance: always
+          item:   magic_pot_shard
+        - chance: always
+          item:   vial_of_mercury
+        - chance: common
+          item:   philosophers_stone
+        - chance: always
+          item:   magic_pot_shard
+        - chance: always
+          item:   magic_pot_shard
+        - chance: always
+          item:   vial_of_mercury
+        - chance: rare
+          item:   shinogi
+      steal: magic_pot_shard
+
+  Ominous_Weapon:
+    id:            2974
+    species:       evil_weapon
+    spell_list_id: 42
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Rogue_Receptacle:
+    id:            3420
+    species:       magic_pot
+    type:          [notorious]
+    skill_list_id: 421
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [thf, thf]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  3
+        model_size:    1
+        hitbox:       37
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lyricists_gonnelle
+    content: WOTG
+
+  Shikigami_Weapon:
+    id:            3603
+    species:       evil_weapon
+    type:          [notorious]
+    spell_list_id: 42
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, war]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 478
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 76500
+      stats:
+        hp: 14000
+    loot:
+      drops:
+        - chance: very_common
+          item:   yinyang_robe
+
+  Steely_Weapon:
+    id:            4724
+    species:       evil_weapon
+    type:          [notorious]
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: club
+        delay: 220
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  667
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    content: ASA
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+spawns:
+  17276929:
+    template: Mokkurkalfi
+    at:       [104.729, -4.143, -115.265, 215]
+    level:    [68, 70]
+  17276930:
+    template: Mokkurkalfi
+    at:       [101.918, -4.000, -115.265, 215]
+    level:    [68, 70]
+  17276931:
+    template: Killing_Weapon
+    at:       [22.224, -8.500, -117.272, 127]
+    level:    [60, 64]
+  17276932:
+    template: Killing_Weapon
+    at:       [-29.698, -5.800, -108.852, 52]
+    level:    [60, 64]
+  17276933:
+    template: Ominous_Weapon
+    at:       [-1.000, -8.000, -122.000, 98]
+    level:    [61, 65]
+  17276934:
+    template: Killing_Weapon
+    at:       [-47.650, -2.500, -118.694, 41]
+    level:    [60, 64]
+  17276935:
+    template: Ominous_Weapon
+    at:       [-37.288, -2.500, -122.916, 68]
+    level:    [61, 65]
+  17276936:
+    template: Cursed_Puppet
+    at:       [-20.104, -3.147, -98.991, 69]
+    level:    [65, 69]
+  17276937:
+    template: Killing_Weapon
+    at:       [43.662, -2.500, -95.293, 5]
+    level:    [60, 64]
+  17276938:
+    template: Ominous_Weapon
+    at:       [51.532, -2.500, -98.439, 127]
+    level:    [61, 65]
+  17276939:
+    template: Cursed_Puppet
+    at:       [42.832, -2.500, -123.701, 71]
+    level:    [65, 69]
+  17276940:
+    template: Killing_Weapon
+    at:       [-46.733, -4.383, -51.025, 38]
+    level:    [60, 64]
+  17276941:
+    template: Killing_Weapon
+    at:       [44.211, -4.583, -52.037, 127]
+    level:    [60, 64]
+  17276942:
+    template: Ominous_Weapon
+    at:       [-84.808, -3.672, -95.509, 16]
+    level:    [61, 65]
+  17276943:
+    template: Ominous_Weapon
+    at:       [74.438, -2.500, -99.089, 38]
+    level:    [61, 65]
+  17276944:
+    template: Ominous_Weapon
+    at:       [-99.712, -4.500, -89.720, 127]
+    level:    [61, 65]
+  17276945:
+    template: Cursed_Puppet
+    at:       [-94.203, -3.990, -84.529, 25]
+    level:    [65, 69]
+  17276946:
+    template: Ominous_Weapon
+    at:       [98.452, -4.447, -96.594, 43]
+    level:    [61, 65]
+  17276947:
+    template: Cursed_Puppet
+    at:       [94.413, -4.351, -89.685, 45]
+    level:    [65, 69]
+  17276948:
+    template: Ominous_Weapon
+    at:       [58.522, -4.500, -43.964, 16]
+    level:    [61, 65]
+  17276949:
+    template: Ominous_Weapon
+    at:       [0.488, -4.701, -36.572, 127]
+    level:    [61, 65]
+  17276950:
+    template: Cursed_Puppet
+    at:       [50.027, -4.500, -41.190, 24]
+    level:    [65, 69]
+  17276951:
+    template: Cursed_Puppet
+    at:       [61.468, -4.500, -49.230, 46]
+    level:    [65, 69]
+  17276952:
+    template: Cannonball
+    at:       [18.210, -4.499, -37.852, 127]
+    level:    [66, 70]
+  17276953:
+    template: Killing_Weapon
+    at:       [-99.140, -3.253, -64.165, 127]
+    level:    [60, 64]
+  17276954:
+    template: Killing_Weapon
+    at:       [99.339, -3.112, -63.870, 127]
+    level:    [60, 64]
+  17276955:
+    template: Killing_Weapon
+    at:       [-113.636, -3.500, -42.399, 59]
+    level:    [60, 64]
+  17276956:
+    template: Ominous_Weapon
+    at:       [-120.094, -3.500, -67.120, 127]
+    level:    [61, 65]
+  17276957:
+    template: Cursed_Puppet
+    at:       [-120.037, -3.500, -66.603, 127]
+    level:    [65, 69]
+  17276958:
+    template: Killing_Weapon
+    at:       [-145.358, -6.431, -55.607, 127]
+    level:    [60, 64]
+  17276959:
+    template: Cursed_Puppet
+    at:       [-149.772, -6.500, -64.417, 127]
+    level:    [65, 69]
+  17276960:
+    template: Killing_Weapon
+    at:       [-140.049, 0.500, -94.266, 127]
+    level:    [60, 64]
+  17276961:
+    template: Water_Elemental
+    at:       [-145.083, 0.500, -84.150, 127]
+    level:    [67, 69]
+  17276962:
+    template: Killing_Weapon
+    at:       [-159.796, 0.784, -78.421, 10]
+    level:    [60, 64]
+  17276963:
+    template: Magic_Flagon
+    at:       [-144.695, 0.500, -95.692, 127]
+    level:    [64, 69]
+  17276964:
+    template: Killing_Weapon
+    at:       [127.549, -3.500, -50.211, 49]
+    level:    [60, 64]
+  17276965:
+    template: Ominous_Weapon
+    at:       [122.169, -3.500, -65.057, 127]
+    level:    [61, 65]
+  17276966:
+    template: Cursed_Puppet
+    at:       [120.778, -3.500, -50.248, 127]
+    level:    [65, 69]
+  17276967:
+    template: Killing_Weapon
+    at:       [158.168, -6.499, -110.900, 59]
+    level:    [60, 64]
+  17276968:
+    template: Cursed_Puppet
+    at:       [155.542, -6.500, -72.370, 44]
+    level:    [65, 69]
+  17276969:
+    template: Killing_Weapon
+    at:       [140.765, 0.500, -84.195, 127]
+    level:    [60, 64]
+  17276970:
+    template: Thunder_Elemental
+    at:       [143.352, 0.497, -89.352, 109]
+    level:    [67, 69]
+  17276971:
+    template: Killing_Weapon
+    at:       [159.892, 1.042, -97.842, 90]
+    level:    [60, 64]
+  17276972:
+    template: Magic_Flagon
+    at:       [158.766, 0.500, -87.935, 127]
+    level:    [64, 69]
+  17276973:
+    template: Killing_Weapon
+    at:       [-97.557, -6.868, -13.301, 96]
+    level:    [60, 64]
+  17276974:
+    template: Ominous_Weapon
+    at:       [-85.668, -6.500, -5.901, 101]
+    level:    [61, 65]
+  17276975:
+    template: Cursed_Puppet
+    at:       [-79.661, -6.500, -6.026, 53]
+    level:    [65, 69]
+  17276976:
+    template: Killing_Weapon
+    at:       [-71.858, -6.062, 18.557, 56]
+    level:    [60, 64]
+  17276977:
+    template: Magic_Flagon
+    at:       [-71.937, -5.699, 18.558, 127]
+    level:    [64, 69]
+  17276978:
+    template: Ominous_Weapon
+    at:       [-41.170, -6.500, 0.923, 127]
+    level:    [61, 65]
+  17276979:
+    template: Magic_Flagon
+    at:       [-37.783, -5.972, -10.393, 127]
+    level:    [64, 69]
+  17276980:
+    template: Ominous_Weapon
+    at:       [-96.583, -6.500, 0.846, 78]
+    level:    [61, 65]
+  17276981:
+    template: Magic_Flagon
+    at:       [-101.575, -6.099, -1.520, 127]
+    level:    [64, 69]
+  17276982:
+    template: Nightmare_Vase
+    at:       [-108.575, -5.699, -5.432, 57]
+    level:    [70, 73]
+  17276983:
+    template: Killing_Weapon
+    at:       [79.841, -6.506, -7.928, 10]
+    level:    [60, 64]
+  17276984:
+    template: Ominous_Weapon
+    at:       [89.626, -6.499, -11.888, 23]
+    level:    [61, 65]
+  17276985:
+    template: Cursed_Puppet
+    at:       [57.000, -6.000, 4.000, 127]
+    level:    [65, 69]
+  17276986:
+    template: Killing_Weapon
+    at:       [58.744, -6.072, 19.022, 127]
+    level:    [60, 64]
+  17276987:
+    template: Magic_Flagon
+    at:       [59.825, -5.760, 25.123, 127]
+    level:    [64, 69]
+  17276988:
+    template: Ominous_Weapon
+    at:       [37.127, -6.368, -2.967, 105]
+    level:    [61, 65]
+  17276989:
+    template: Magic_Flagon
+    at:       [31.094, -5.700, -9.066, 127]
+    level:    [64, 69]
+  17276990:
+    template: Ominous_Weapon
+    at:       [96.341, -6.337, 2.324, 118]
+    level:    [61, 65]
+  17276991:
+    template: Magic_Flagon
+    at:       [102.459, -6.364, 1.121, 127]
+    level:    [64, 69]
+  17276992:
+    template: Nightmare_Vase
+    at:       [69.000, -5.000, 21.000, 127]
+    level:    [70, 73]
+  17276993:
+    template: Killing_Weapon
+    at:       [11.985, -6.500, 12.348, 113]
+    level:    [60, 64]
+  17276994:
+    template: Ominous_Weapon
+    at:       [-51.000, -6.000, 5.000, 127]
+    level:    [61, 65]
+  17276995:
+    template: Ominous_Weapon
+    at:       [-17.982, -6.500, 12.396, 127]
+    level:    [61, 65]
+  17276996:
+    template: Cursed_Puppet
+    at:       [32.000, -6.000, 13.000, 127]
+    level:    [65, 69]
+  17276997:
+    template: Cannonball
+    at:       [-9.338, -6.541, 12.582, 127]
+    level:    [66, 70]
+  17276998:
+    template: Apocalyptic_Weapon
+    at:       [-120.799, -8.500, 59.911, 127]
+    level:    [78, 80]
+  17276999:
+    template: Infernal_Weapon
+    at:       [-128.688, -8.500, 43.258, 47]
+    level:    [79, 81]
+  17277000:
+    template: Cursed_Puppet
+    at:       [-127.487, -8.500, 49.186, 127]
+    level:    [65, 69]
+  17277001:
+    template: Apocalyptic_Weapon
+    at:       [-148.804, -8.528, 26.506, 14]
+    level:    [78, 80]
+  17277002:
+    template: Cursed_Puppet
+    at:       [-141.586, -8.500, 38.176, 127]
+    level:    [65, 69]
+  17277003:
+    template: Apocalyptic_Weapon
+    at:       [-146.041, -8.500, 6.534, 33]
+    level:    [78, 80]
+  17277004:
+    template: Infernal_Weapon
+    at:       [-160.655, -8.500, 20.212, 127]
+    level:    [79, 81]
+  17277005:
+    template: Apocalyptic_Weapon
+    at:       [-167.720, -4.766, 6.352, 26]
+    level:    [78, 80]
+  17277006:
+    template: Cursed_Puppet
+    at:       [-164.479, -4.575, 8.788, 127]
+    level:    [65, 69]
+  17277007:
+    template: Water_Elemental
+    at:       [-178.955, -5.122, -8.975, 64]
+    level:    [67, 69]
+  17277008:
+    template: Apocalyptic_Weapon
+    at:       [-202.351, -8.500, -46.018, 127]
+    level:    [78, 80]
+  17277009:
+    template: Infernal_Weapon
+    at:       [-200.057, -8.500, -38.039, 58]
+    level:    [79, 81]
+  17277010:
+    template: Cursed_Puppet
+    at:       [-190.027, -8.499, -34.157, 127]
+    level:    [65, 69]
+  17277011:
+    template: Martinet
+    at:       [-189.696, -8.500, -33.497, 32]
+    level:    [72, 74]
+  17277012:
+    template: Apocalyptic_Weapon
+    at:       [-163.567, -8.499, -21.382, 127]
+    level:    [78, 80]
+  17277013:
+    template: Infernal_Weapon
+    at:       [-185.180, -8.500, -12.199, 16]
+    level:    [79, 81]
+  17277014:
+    template: Cursed_Puppet
+    at:       [-79.223, -11.480, 60.435, 115]
+    level:    [65, 69]
+  17277015:
+    template: Apocalyptic_Weapon
+    at:       [129.344, -8.500, 44.415, 127]
+    level:    [78, 80]
+  17277016:
+    template: Infernal_Weapon
+    at:       [108.226, -8.500, 29.395, 127]
+    level:    [79, 81]
+  17277017:
+    template: Cursed_Puppet
+    at:       [125.960, -8.500, 50.986, 127]
+    level:    [65, 69]
+  17277018:
+    template: Apocalyptic_Weapon
+    at:       [147.052, -8.498, 25.089, 59]
+    level:    [78, 80]
+  17277019:
+    template: Cursed_Puppet
+    at:       [138.289, -8.500, 24.439, 127]
+    level:    [65, 69]
+  17277020:
+    template: Apocalyptic_Weapon
+    at:       [146.977, -8.585, 5.940, 127]
+    level:    [78, 80]
+  17277021:
+    template: Infernal_Weapon
+    at:       [165.148, -8.500, 16.747, 127]
+    level:    [79, 81]
+  17277022:
+    template: Apocalyptic_Weapon
+    at:       [179.090, -6.372, -20.452, 93]
+    level:    [78, 80]
+  17277023:
+    template: Infernal_Weapon
+    at:       [172.307, -4.500, -3.299, 127]
+    level:    [79, 81]
+  17277024:
+    template: Thunder_Elemental
+    at:       [169.399, -4.534, -2.321, 15]
+    level:    [67, 69]
+  17277025:
+    template: Apocalyptic_Weapon
+    at:       [180.538, -8.314, -27.693, 127]
+    level:    [78, 80]
+  17277026:
+    template: Infernal_Weapon
+    at:       [198.685, -8.500, -55.122, 29]
+    level:    [79, 81]
+  17277027:
+    template: Cursed_Puppet
+    at:       [189.385, -8.499, -37.059, 127]
+    level:    [65, 69]
+  17277028:
+    template: Apocalyptic_Weapon
+    at:       [168.818, -8.500, -21.140, 127]
+    level:    [78, 80]
+  17277029:
+    template: Infernal_Weapon
+    at:       [185.081, -8.500, -6.635, 127]
+    level:    [79, 81]
+  17277030:
+    template: Cursed_Puppet
+    at:       [83.017, -10.443, 62.191, 127]
+    level:    [65, 69]
+  17277031:
+    template: Mythril_Golem
+    at:       [-1.452, -13.424, -68.042, 78]
+    level:    [68, 70]
+  17277032:
+    template: Mythril_Golem
+    at:       [-2.828, -20.858, -28.241, 107]
+    level:    [68, 70]
+  17277033:
+    template: Mythril_Golem
+    at:       [3.730, -29.132, 18.302, 127]
+    level:    [68, 70]
+  17277034:
+    template: Cursed_Puppet
+    at:       [-24.000, -28.000, 117.000, 127]
+    level:    [65, 69]
+  17277035:
+    template: Cursed_Puppet
+    at:       [25.000, -28.000, 120.000, 75]
+    level:    [65, 69]
+  17277036:
+    template: Cursed_Puppet
+    at:       [-23.000, -28.000, 120.000, 127]
+    level:    [65, 69]
+  17277037:
+    template: Cursed_Puppet
+    at:       [-10.916, -28.500, 95.657, 78]
+    level:    [65, 69]
+  17277038:
+    template: Cursed_Puppet
+    at:       [23.755, -28.859, 107.822, 172]
+    level:    [65, 69]
+  17277039:
+    template: Cursed_Puppet
+    at:       [-27.765, -30.312, 113.584, 97]
+    level:    [65, 69]
+  17277040:
+    template: Cannonball
+    at:       [25.955, -28.743, 103.086, 127]
+    level:    [66, 70]
+  17277041:
+    template: Cannonball
+    at:       [10.183, -28.516, 99.165, 127]
+    level:    [66, 70]
+  17277042:
+    template: Apocalyptic_Weapon
+    at:       [-217.187, -4.551, 41.112, 117]
+    level:    [78, 80]
+  17277043:
+    template: Apocalyptic_Weapon
+    at:       [-232.541, -4.499, 24.162, 127]
+    level:    [78, 80]
+  17277044:
+    template: Infernal_Weapon
+    at:       [-227.370, -4.979, -17.017, 78]
+    level:    [79, 81]
+  17277045:
+    template: Apocalyptic_Weapon
+    at:       [-263.214, -4.656, -44.560, 126]
+    level:    [78, 80]
+  17277046:
+    template: Infernal_Weapon
+    at:       [-250.500, -4.488, -73.603, 108]
+    level:    [79, 81]
+  17277047:
+    template: Apocalyptic_Weapon
+    at:       [-280.804, -4.499, -83.402, 19]
+    level:    [78, 80]
+  17277048:
+    template: Infernal_Weapon
+    at:       [-270.127, -4.500, -17.328, 127]
+    level:    [79, 81]
+  17277049:
+    template: Infernal_Weapon
+    at:       [-257.022, -4.500, 8.557, 127]
+    level:    [79, 81]
+  17277050:
+    template: Magic_Flagon
+    at:       [-275.211, -3.700, 12.496, 97]
+    level:    [64, 69]
+  17277051:
+    template: Magic_Flagon
+    at:       [-287.656, -3.960, -12.858, 104]
+    level:    [64, 69]
+  17277052:
+    template: Magic_Flagon
+    at:       [-302.655, -3.752, -51.130, 127]
+    level:    [64, 69]
+  17277053:
+    template: Magic_Flagon
+    at:       [-229.519, -3.700, -78.519, 28]
+    level:    [64, 69]
+  17277054:
+    template: Magic_Flagon
+    at:       [-218.444, -3.976, -48.355, 15]
+    level:    [64, 69]
+  17277055:
+    template: Magic_Flagon
+    at:       [-272.983, 3.950, -5.435, 228]
+    level:    [64, 69]
+  17277056:
+    template: Magic_Flagon
+    at:       [-281.928, 3.691, -29.100, 127]
+    level:    [64, 69]
+  17277057:
+    template: Magic_Flagon
+    at:       [-227.987, 3.663, -41.924, 75]
+    level:    [64, 69]
+  17277058:
+    template: Apocalyptic_Weapon
+    at:       [-212.306, -7.906, -18.156, 127]
+    level:    [78, 80]
+  17277059:
+    template: Infernal_Weapon
+    at:       [-248.324, 2.646, -23.230, 27]
+    level:    [79, 81]
+  17277060:
+    template: Darksteel_Golem
+    at:       [-251.378, 2.855, -10.119, 127]
+    level:    [80, 82]
+  17277061:
+    template: Apocalyptic_Weapon
+    at:       [-254.829, 3.495, -48.504, 127]
+    level:    [78, 80]
+  17277062:
+    template: Darksteel_Golem
+    at:       [-255.050, 3.499, -47.281, 2]
+    level:    [80, 82]
+  17277063:
+    template: Infernal_Weapon
+    at:       [216.498, -4.542, 35.999, 36]
+    level:    [79, 81]
+  17277064:
+    template: Apocalyptic_Weapon
+    at:       [234.278, -4.499, 26.819, 101]
+    level:    [78, 80]
+  17277065:
+    template: Infernal_Weapon
+    at:       [225.136, -5.155, -10.129, 31]
+    level:    [79, 81]
+  17277066:
+    template: Apocalyptic_Weapon
+    at:       [250.260, -4.857, -13.354, 127]
+    level:    [78, 80]
+  17277067:
+    template: Infernal_Weapon
+    at:       [248.645, -4.522, -43.350, 127]
+    level:    [79, 81]
+  17277068:
+    template: Apocalyptic_Weapon
+    at:       [249.006, -5.303, -73.500, 127]
+    level:    [78, 80]
+  17277069:
+    template: Infernal_Weapon
+    at:       [282.261, -5.255, -83.158, 127]
+    level:    [79, 81]
+  17277070:
+    template: Infernal_Weapon
+    at:       [249.894, -2.759, 6.249, 45]
+    level:    [79, 81]
+  17277071:
+    template: Magic_Flagon
+    at:       [264.671, -4.335, 20.213, 127]
+    level:    [64, 69]
+  17277072:
+    template: Magic_Flagon
+    at:       [279.955, -4.196, -6.232, 127]
+    level:    [64, 69]
+  17277073:
+    template: Magic_Flagon
+    at:       [305.356, -3.700, -68.187, 20]
+    level:    [64, 69]
+  17277074:
+    template: Magic_Flagon
+    at:       [236.758, -4.688, -68.890, 127]
+    level:    [64, 69]
+  17277075:
+    template: Magic_Flagon
+    at:       [223.836, -4.268, -47.426, 127]
+    level:    [64, 69]
+  17277076:
+    template: Magic_Flagon
+    at:       [271.039, 3.500, -13.155, 107]
+    level:    [64, 69]
+  17277077:
+    template: Magic_Flagon
+    at:       [286.128, 3.806, -38.642, 68]
+    level:    [64, 69]
+  17277078:
+    template: Magic_Flagon
+    at:       [221.619, 4.299, -39.444, 127]
+    level:    [64, 69]
+  17277079:
+    template: Rogue_Receptacle
+    at:       [219.800, -3.200, -41.220, 60]
+    level:    [67, 68]
+  17277080:
+    template: Apocalyptic_Weapon
+    at:       [219.170, -5.376, -16.069, 127]
+    level:    [78, 80]
+  17277081:
+    template: Infernal_Weapon
+    at:       [253.213, 3.500, -12.074, 127]
+    level:    [79, 81]
+  17277082:
+    template: Darksteel_Golem
+    at:       [237.535, 3.499, -18.181, 88]
+    level:    [80, 82]
+  17277083:
+    template: Apocalyptic_Weapon
+    at:       [254.634, 3.499, -49.910, 28]
+    level:    [78, 80]
+  17277084:
+    template: Darksteel_Golem
+    at:       [259.239, 3.533, -46.193, 127]
+    level:    [80, 82]
+  17277085:
+    template: Apocalyptic_Weapon
+    at:       [-194.516, -4.550, 50.777, 70]
+    level:    [78, 80]
+  17277086:
+    template: Infernal_Weapon
+    at:       [-156.481, -4.500, 65.418, 127]
+    level:    [79, 81]
+  17277087:
+    template: Apocalyptic_Weapon
+    at:       [-144.704, -4.553, 115.978, 12]
+    level:    [78, 80]
+  17277088:
+    template: Infernal_Weapon
+    at:       [-111.131, -5.082, 95.006, 127]
+    level:    [79, 81]
+  17277089:
+    template: Apocalyptic_Weapon
+    at:       [-111.713, -4.500, 131.309, 127]
+    level:    [78, 80]
+  17277090:
+    template: Infernal_Weapon
+    at:       [-175.239, -4.500, 100.246, 100]
+    level:    [79, 81]
+  17277091:
+    template: Infernal_Weapon
+    at:       [-202.331, -4.500, 78.987, 99]
+    level:    [79, 81]
+  17277092:
+    template: Magic_Flagon
+    at:       [-133.356, -4.675, 136.486, 48]
+    level:    [64, 69]
+  17277093:
+    template: Magic_Flagon
+    at:       [-184.515, -4.026, 116.434, 127]
+    level:    [64, 69]
+  17277094:
+    template: Magic_Flagon
+    at:       [-205.051, -3.700, 101.649, 127]
+    level:    [64, 69]
+  17277095:
+    template: Magic_Flagon
+    at:       [-132.145, -4.022, 63.617, 22]
+    level:    [64, 69]
+  17277096:
+    template: Magic_Flagon
+    at:       [-109.374, -4.018, 78.090]
+    level:    [64, 69]
+  17277097:
+    template: Magic_Flagon
+    at:       [-155.988, 3.500, 117.915, 214]
+    level:    [64, 69]
+  17277098:
+    template: Magic_Flagon
+    at:       [-180.262, 3.925, 113.115, 127]
+    level:    [64, 69]
+  17277099:
+    template: Magic_Flagon
+    at:       [-138.021, 3.695, 70.711, 226]
+    level:    [64, 69]
+  17277100:
+    template: Apocalyptic_Weapon
+    at:       [-158.640, -7.837, 50.393, 127]
+    level:    [78, 80]
+  17277101:
+    template: Infernal_Weapon
+    at:       [-150.077, 3.500, 108.614, 127]
+    level:    [79, 81]
+  17277102:
+    template: Darksteel_Golem
+    at:       [-143.373, 3.499, 101.769, 127]
+    level:    [80, 82]
+  17277103:
+    template: Nargun
+    at:       [-127.626, 4.000, 106.828, 127]
+    level:    [77, 79]
+  17277104:
+    template: Apocalyptic_Weapon
+    at:       [-162.479, 2.352, 85.123, 127]
+    level:    [78, 80]
+  17277105:
+    template: Darksteel_Golem
+    at:       [-172.296, 3.167, 71.227, 83]
+    level:    [80, 82]
+  17277106:
+    template: Apocalyptic_Weapon
+    at:       [209.381, -4.499, 65.228, 61]
+    level:    [78, 80]
+  17277107:
+    template: Infernal_Weapon
+    at:       [161.104, -4.500, 62.375, 20]
+    level:    [79, 81]
+  17277108:
+    template: Apocalyptic_Weapon
+    at:       [151.803, -4.521, 69.034, 62]
+    level:    [78, 80]
+  17277109:
+    template: Infernal_Weapon
+    at:       [142.028, -4.829, 102.761, 70]
+    level:    [79, 81]
+  17277110:
+    template: Apocalyptic_Weapon
+    at:       [120.161, -2.551, 96.049, 13]
+    level:    [78, 80]
+  17277111:
+    template: Infernal_Weapon
+    at:       [115.887, -4.636, 131.719, 31]
+    level:    [79, 81]
+  17277112:
+    template: Infernal_Weapon
+    at:       [198.661, -4.500, 81.605, 127]
+    level:    [79, 81]
+  17277113:
+    template: Magic_Flagon
+    at:       [133.596, -4.664, 135.501, 80]
+    level:    [64, 69]
+  17277114:
+    template: Magic_Flagon
+    at:       [182.353, -4.677, 107.017, 115]
+    level:    [64, 69]
+  17277115:
+    template: Magic_Flagon
+    at:       [201.457, -3.969, 100.906, 127]
+    level:    [64, 69]
+  17277116:
+    template: Magic_Flagon
+    at:       [137.876, -4.430, 64.682, 53]
+    level:    [64, 69]
+  17277117:
+    template: Magic_Flagon
+    at:       [104.432, -3.700, 78.851, 110]
+    level:    [64, 69]
+  17277118:
+    template: Magic_Flagon
+    at:       [154.586, 3.900, 124.320, 163]
+    level:    [64, 69]
+  17277119:
+    template: Magic_Flagon
+    at:       [174.787, 3.328, 105.063, 65]
+    level:    [64, 69]
+  17277120:
+    template: Magic_Flagon
+    at:       [143.608, 3.300, 72.359, 184]
+    level:    [64, 69]
+  17277121:
+    template: Apocalyptic_Weapon
+    at:       [161.093, -6.782, 51.033, 89]
+    level:    [78, 80]
+  17277122:
+    template: Infernal_Weapon
+    at:       [150.948, 3.421, 108.471, 127]
+    level:    [79, 81]
+  17277123:
+    template: Darksteel_Golem
+    at:       [148.304, 3.499, 91.240, 127]
+    level:    [80, 82]
+  17277124:
+    template: Apocalyptic_Weapon
+    at:       [177.221, 3.234, 75.166, 127]
+    level:    [78, 80]
+  17277125:
+    template: Darksteel_Golem
+    at:       [164.194, 3.500, 74.653, 66]
+    level:    [80, 82]
+  17277126:
+    template: Eldhrimnir
+    at:       [200.300, -11.000, -24.800, 105]
+    level:    [80, 80]
+  17277127:
+    template: Shikigami_Weapon
+    at:       [-40.000, -4.000, -36.000, 127]
+    level:    [77, 80]
+  17277128:
+    template: Jackpot
+    at:       [222.500, -7.039, -99.500, 195]
+    level:    [1, 1]
+  17277129:
+    template: Steely_Weapon
+    at:       [5.469, -8.500, 131.296, 183]
+    level:    [68, 68]
+  17277130:
+    template: Steely_Weapon
+    at:       [-43.936, -2.500, -121.743, 26]
+    level:    [68, 68]
+  17277131:
+    template: Steely_Weapon
+    at:       [55.263, -3.352, -110.989, 91]
+    level:    [68, 68]
+  17277132:
+    template: Lode_Golem
+    at:       [-108.426, -3.500, -35.913, 94]
+    level:    [70, 70]
+  17277133:
+    template: Lode_Golem
+    at:       [-163.184, -6.500, -98.494, 68]
+    level:    [70, 70]
+  17277134:
+    template: Lode_Golem
+    at:       [-146.482, 0.499, -83.917, 183]
+    level:    [70, 70]
+  17277135:
+    template: Fired_Urn
+    at:       [119.401, -3.500, -63.009, 91]
+    level:    [69, 69]
+  17277136:
+    template: Fired_Urn
+    at:       [151.893, -6.500, -68.431, 46]
+    level:    [69, 69]
+  17277137:
+    template: Fired_Urn
+    at:       [139.830, 0.499, -84.994, 125]
+    level:    [69, 69]
+  17277138:
+    template: Mimic_King
+    at:       [114.000, -8.500, 47.000, 243]
+    level:    [93, 95]
+  17277139:
+    template: Mimic_Jester
+    at:       [119.000, -8.500, 52.000, 96]
+    level:    [90, 91]
+  17277140:
+    template: Mimic_Mage
+    at:       [119.000, -8.500, 42.000, 131]
+    level:    [90, 91]
+  17277141:
+    template: Mimic_King
+    at:       [-114.000, -8.500, 44.000, 196]
+    level:    [93, 95]
+  17277142:
+    template: Mimic_Jester
+    at:       [-109.000, -8.500, 49.000, 22]
+    level:    [90, 91]
+  17277143:
+    template: Mimic_Mage
+    at:       [-109.000, -8.500, 39.000, 185]
+    level:    [90, 91]
+  17277144:
+    template: Mimic_King
+    at:       [46.000, -4.500, -36.000, 204]
+    level:    [93, 95]
+  17277145:
+    template: Mimic_Jester
+    at:       [51.000, -4.500, -31.000, 50]
+    level:    [90, 91]
+  17277146:
+    template: Mimic_Mage
+    at:       [51.000, -4.500, 431.000, 111]
+    level:    [90, 91]
+  17277147:
+    template: Douma_Weapon
+    at:       [43.361, -2.500, -96.558, 180]
+  17277148:
+    template: Katashiro_Weapon
+    at:       [44.405, -2.500, -97.494, 170]
+  17277149:
+    template: Katashiro_Weapon
+    at:       [43.887, -2.500, -92.531, 79]
+  17277150:
+    template: Katashiro_Weapon
+    at:       [43.913, -2.500, -93.256, 105]
+  17277151:
+    template: Katashiro_Weapon
+    at:       [43.569, -2.500, -94.147, 113]
+  17277152:
+    template: Katashiro_Weapon
+    at:       [45.088, -2.500, -95.232]
+  17277153:
+    template: Katashiro_Weapon
+    at:       [44.498, -2.500, -97.526, 169]
+  17277154:
+    template: Douma_Weapon
+    at:       [-59.879, -2.500, -120.716]
+  17277155:
+    template: Katashiro_Weapon
+    at:       [-50.667, -2.500, -121.558, 119]
+  17277156:
+    template: Katashiro_Weapon
+    at:       [-43.052, -2.500, -123.418, 197]
+  17277157:
+    template: Katashiro_Weapon
+    at:       [-58.547, -2.500, -121.403, 255]
+  17277158:
+    template: Katashiro_Weapon
+    at:       [-42.714, -2.500, -122.756]
+  17277159:
+    template: Katashiro_Weapon
+    at:       [-43.034, -2.467, -122.771]
+  17277160:
+    template: Katashiro_Weapon
+    at:       [-42.612, -2.500, -123.652, 190]
+  17277161:
+    template: Douma_Weapon
+    at:       [-184.584, -8.500, -55.671, 118]
+  17277162:
+    template: Katashiro_Weapon
+    at:       [-193.015, -8.500, -52.545, 126]
+  17277163:
+    template: Katashiro_Weapon
+    at:       [-187.482, -8.500, -53.343, 64]
+  17277164:
+    template: Katashiro_Weapon
+    at:       [-186.524, -8.500, -53.723, 79]
+  17277165:
+    template: Katashiro_Weapon
+    at:       [-186.310, -8.500, -53.837, 82]
+  17277166:
+    template: Katashiro_Weapon
+    at:       [-185.953, -8.500, -54.172, 89]
+  17277167:
+    template: Katashiro_Weapon
+    at:       [-185.700, -8.500, -54.853, 100]
+
+slots:
+  - members:
+      17276963: {} # Magic_Flagon
+      17276981: {} # Magic_Flagon
+      17276982: {} # Nightmare_Vase
+  - members:
+      17276972: {} # Magic_Flagon
+      17276991: {} # Magic_Flagon
+      17276992: {} # Nightmare_Vase
+  - members:
+      17276977: {} # Magic_Flagon
+      17276979: {} # Magic_Flagon
+  - members:
+      17276987: {} # Magic_Flagon
+      17276989: {} # Magic_Flagon
+  - members:
+      17277050: {} # Magic_Flagon
+      17277051: {} # Magic_Flagon
+  - members:
+      17277052: {} # Magic_Flagon
+      17277053: {} # Magic_Flagon
+  - members:
+      17277055: {} # Magic_Flagon
+      17277056: {} # Magic_Flagon
+  - members:
+      17277054: {} # Magic_Flagon
+      17277057: {} # Magic_Flagon
+  - members:
+      17277071: {} # Magic_Flagon
+      17277072: {} # Magic_Flagon
+      17277075: {} # Magic_Flagon
+  - members:
+      17277073: {} # Magic_Flagon
+      17277074: {} # Magic_Flagon
+  - members:
+      17277076: {} # Magic_Flagon
+      17277079: {} # Rogue_Receptacle
+  - members:
+      17277077: {} # Magic_Flagon
+      17277078: {} # Magic_Flagon
+  - members:
+      17277092: {} # Magic_Flagon
+      17277095: {} # Magic_Flagon
+  - members:
+      17277093: {} # Magic_Flagon
+      17277094: {} # Magic_Flagon
+  - members:
+      17277096: {} # Magic_Flagon
+      17277099: {} # Magic_Flagon
+  - members:
+      17277097: {} # Magic_Flagon
+      17277098: {} # Magic_Flagon
+  - members:
+      17277113: {} # Magic_Flagon
+      17277117: {} # Magic_Flagon
+  - members:
+      17277114: {} # Magic_Flagon
+      17277115: {} # Magic_Flagon
+  - members:
+      17277116: {} # Magic_Flagon
+      17277120: {} # Magic_Flagon
+  - members:
+      17277118: {} # Magic_Flagon
+      17277119: {} # Magic_Flagon

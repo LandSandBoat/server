@@ -1,0 +1,1363 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17461484:
+    script: NPC[ec]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17461485:
+    script: NPC[ed]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17461486:
+    script: NPC[ee]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17461487:
+    script:       qm1
+    display_name: ???
+    at:           [20.000, 17.000, -140.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17461488:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461489:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461490:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461491:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461492:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461493:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461494:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461495:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461496:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461497:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461498:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461499:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461500:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461501:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461502:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461503:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17461504:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17461505:
+    script: NPC[101]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17461506:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17461508:
+    script: NPC[104]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17461509:
+    script: NPC[105]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17461510:
+    script: NPC[106]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17461511:
+    script:       Novalmauge
+    display_name: Novalmauge
+    at:           [30.431, -24.019, 19.843, 255]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  0
+        head:  4099
+        body:  8195
+        hands: 12291
+        legs:  16407
+        feet:  20503
+        main:  24576
+        sub:   28672
+      entity_flags: 4194331
+      name_prefix:       32
+      moving:          1432
+    status:   normal
+    speed:    13
+    widescan: true
+
+  17461512:
+    script:       Chumia
+    display_name: Chumia
+    at:           [102.420, -24.001, 70.457, 131]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  4
+        head:  4118
+        body:  8214
+        hands: 12310
+        legs:  16406
+        feet:  20502
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        21
+    status:   normal
+    widescan: true
+
+  17461513:
+    script:       _4n0
+    display_name: Wooden Door
+    at:           [16.049, -25.500, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      812528735
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461514:
+    script:       _4n1
+    display_name: Cell Door
+    at:           [19.999, -25.500, 10.050]
+    render:
+      look:
+        type: door
+      door_id:      829305951
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461515:
+    script:       Couchatorage
+    display_name: Couchatorage
+    at:           [-20.502, -18.000, 17.765, 216]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  8
+        head:  4124
+        body:  8220
+        hands: 12316
+        legs:  16412
+        feet:  20508
+        main:  24581
+        sub:   28700
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+
+  17461516:
+    script:       _4n2
+    display_name: Sewer Lid
+    at:           [-19.000, -17.899, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      846083167
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461517:
+    script:       _4n3
+    display_name: Cell Door
+    at:           [128.000, -25.500, 64.037]
+    render:
+      look:
+        type: door
+      door_id:      862860383
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461518:
+    script:       _4n4
+    display_name: Cell Door
+    at:           [139.000, -25.500, 64.037]
+    render:
+      look:
+        type: door
+      door_id:      879637599
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461519:
+    script:       _4n5
+    display_name: Cell Door
+    at:           [150.000, -25.500, 64.037]
+    render:
+      look:
+        type: door
+      door_id:      896414815
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461520:
+    script:       _4n6
+    display_name: Cell Door
+    at:           [130.000, -25.500, 55.962]
+    render:
+      look:
+        type: door
+      door_id:      913192031
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461521:
+    script:       _4n7
+    display_name: Cell Door
+    at:           [141.000, -25.500, 55.962]
+    render:
+      look:
+        type: door
+      door_id:      929969247
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461522:
+    script:       _4n8
+    display_name: Cell Door
+    at:           [152.000, -25.500, 55.962]
+    render:
+      look:
+        type: door
+      door_id:      946746463
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461523:
+    script:       _4n9
+    display_name: Cell Door
+    at:           [48.000, -25.500, 24.037]
+    render:
+      look:
+        type: door
+      door_id:      963523679
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461524:
+    script:       _4na
+    display_name: Cell Door
+    at:           [59.000, -25.500, 24.037]
+    render:
+      look:
+        type: door
+      door_id:      1634612319
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461525:
+    script:       _4nb
+    display_name: Cell Door
+    at:           [70.000, -25.500, 24.037]
+    render:
+      look:
+        type: door
+      door_id:      1651389535
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461526:
+    script:       _4nc
+    display_name: Cell Door
+    at:           [50.000, -25.500, 15.962]
+    render:
+      look:
+        type: door
+      door_id:      1668166751
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461527:
+    script:       _4nd
+    display_name: Cell Door
+    at:           [61.000, -25.500, 15.962]
+    render:
+      look:
+        type: door
+      door_id:      1684943967
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461528:
+    script:       _4ne
+    display_name: Cell Door
+    at:           [72.000, -25.500, 15.962]
+    render:
+      look:
+        type: door
+      door_id:      1701721183
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461529:
+    script:       _4nf
+    display_name: Cell Door
+    at:           [104.037, -25.500, -7.999]
+    render:
+      look:
+        type: door
+      door_id:      1718498399
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461530:
+    script:       _4ng
+    display_name: Cell Door
+    at:           [104.037, -25.500, -19.000]
+    render:
+      look:
+        type: door
+      door_id:      1735275615
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461531:
+    script:       _4nh
+    display_name: Cell Door
+    at:           [104.037, -25.500, -30.000]
+    render:
+      look:
+        type: door
+      door_id:      1752052831
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461532:
+    script:       _4ni
+    display_name: Cell Door
+    at:           [95.962, -25.500, -9.999]
+    render:
+      look:
+        type: door
+      door_id:      1768830047
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461533:
+    script:       _4nj
+    display_name: Cell Door
+    at:           [95.962, -25.500, -20.999]
+    render:
+      look:
+        type: door
+      door_id:      1785607263
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461534:
+    script:       _4nk
+    display_name: Cell Door
+    at:           [95.962, -25.500, -32.000]
+    render:
+      look:
+        type: door
+      door_id:      1802384479
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461535:
+    script: _mn0
+    at:     [-65.000, 0.100, -135.000]
+    render:
+      look:
+        type: door
+      door_id:      812543327
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461536:
+    script: _mn1
+    at:     [-67.000, 0.100, -145.000]
+    render:
+      look:
+        type: door
+      door_id:      829320543
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461537:
+    script: _mn2
+    at:     [-55.000, 0.100, -141.000]
+    render:
+      look:
+        type: door
+      door_id:      846097759
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461538:
+    script: _mn3
+    at:     [-19.000, 1.100, -139.000]
+    render:
+      look:
+        type: door
+      door_id:      862874975
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461539:
+    script: _mn4
+    at:     [15.000, 0.100, -139.000]
+    render:
+      look:
+        type: door
+      door_id:      879652191
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461540:
+    script: _mn5
+    at:     [23.000, 0.100, -143.000]
+    render:
+      look:
+        type: door
+      door_id:      896429407
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461541:
+    script: _mn6
+    at:     [-21.000, 1.100, -149.000]
+    render:
+      look:
+        type: door
+      door_id:      913206623
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461542:
+    script: _mn7
+    at:     [-21.000, 1.100, -171.000]
+    render:
+      look:
+        type: door
+      door_id:      929983839
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461543:
+    script: _mn8
+    at:     [-19.000, 1.100, -181.000]
+    render:
+      look:
+        type: door
+      door_id:      946761055
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461544:
+    script: _mn9
+    at:     [-101.000, 1.100, -179.000]
+    render:
+      look:
+        type: door
+      door_id:      963538271
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461545:
+    script: _mna
+    at:     [-91.000, 1.100, -181.000]
+    render:
+      look:
+        type: door
+      door_id:      1634626911
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461546:
+    script: _mnb
+    at:     [-141.000, 1.100, -219.000]
+    render:
+      look:
+        type: door
+      door_id:      1651404127
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461547:
+    script: _mnc
+    at:     [-139.000, 1.100, -229.000]
+    render:
+      look:
+        type: door
+      door_id:      1668181343
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461548:
+    script: _mnh
+    at:     [-21.000, 1.100, -219.000]
+    render:
+      look:
+        type: door
+      door_id:      1752067423
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461549:
+    script: _mni
+    at:     [-19.000, 1.100, -229.000]
+    render:
+      look:
+        type: door
+      door_id:      1768844639
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461550:
+    script: _mnj
+    at:     [19.000, 1.100, -221.000]
+    render:
+      look:
+        type: door
+      door_id:      1785621855
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461551:
+    script: _mnk
+    at:     [29.000, 1.100, -219.000]
+    render:
+      look:
+        type: door
+      door_id:      1802399071
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461552:
+    script: _mnl
+    at:     [51.000, 1.100, -219.000]
+    render:
+      look:
+        type: door
+      door_id:      1819176287
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461553:
+    script: _mnm
+    at:     [61.000, 1.100, -221.000]
+    render:
+      look:
+        type: door
+      door_id:      1835953503
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461554:
+    script: _mnn
+    at:     [-19.000, 1.100, -251.000]
+    render:
+      look:
+        type: door
+      door_id:      1852730719
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461555:
+    script: _mno
+    at:     [-21.000, 1.100, -261.000]
+    render:
+      look:
+        type: door
+      door_id:      1869507935
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461556:
+    script: _mnp
+    at:     [-181.000, 1.100, -259.000]
+    render:
+      look:
+        type: door
+      door_id:      1886285151
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461557:
+    script: _mnq
+    at:     [-171.000, 1.100, -261.000]
+    render:
+      look:
+        type: door
+      door_id:      1903062367
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461558:
+    script: _mnr
+    at:     [-149.000, 1.100, -259.000]
+    render:
+      look:
+        type: door
+      door_id:      1919839583
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461559:
+    script: _mns
+    at:     [-139.000, 1.100, -261.000]
+    render:
+      look:
+        type: door
+      door_id:      1936616799
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17461560:
+    script:       Brugaire
+    display_name: Brugaire
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  10
+        head:  4096
+        body:  8231
+        hands: 12306
+        legs:  16415
+        feet:  20511
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17461561:
+    script:       Jurgenclaus
+    display_name: Jurgenclaus
+    at:           [69.735, -23.989, 7.741, 255]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  11
+        head:  4096
+        body:  8207
+        hands: 12291
+        legs:  16385
+        feet:  20482
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17461562:
+    script: NPC[13a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17461563:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17461564:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17461565:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17461566:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17461567:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17461568:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17461569:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17461570:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17461571:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17461572:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [111.806, -24.007, 57.266, 155]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17461573:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [111.806, -24.007, 57.266, 155]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17461574:
+    script:       GoalPoint
+    display_name: GoalPoint
+    at:           [62.955, 16.999, -219.381, 107]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+
+  17461575:
+    script:       GoalPoint
+    display_name: GoalPoint
+    at:           [63.778, -0.102, -296.859, 210]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+
+  17461576:
+    script:       GoalPoint
+    display_name: GoalPoint
+    at:           [100.050, 0.000, -40.417, 62]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+
+  17461577:
+    script:       GoalPoint
+    display_name: GoalPoint
+    at:           [-380.208, -4.000, -217.710, 95]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+
+  17461578:
+    script:       GoalPoint
+    display_name: GoalPoint
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+
+  17461579:
+    script:       GoalPoint
+    display_name: GoalPoint
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+
+  17461580:
+    script:       Moogle
+    display_name: Moogle
+    at:           [62.955, 16.999, -219.381, 107]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17461581:
+    script:       Moogle
+    display_name: Moogle
+    at:           [63.778, -0.102, -296.859, 210]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17461582:
+    script:       Moogle
+    display_name: Moogle
+    at:           [100.050, 0.000, -40.417, 62]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17461583:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-380.208, -4.000, -217.710, 95]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17461584:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+
+  17461585:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+
+  17461586:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [-27.954, 0.020, 25.377, 128]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    8
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17461587:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [-59.703, -0.033, -256.162, 227]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17461588:
+    script:       Grounds_Tome
+    display_name: Grounds Tome
+    at:           [-156.500, 15.999, -216.500, 192]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   21
+    status:   normal
+    widescan: true
+    content:  GROUNDS_TOMES
+
+  17461589:
+    script:       Geomantic_Reservoir
+    display_name: Geomantic Reservoir
+    at:           [-13.337, 0.009, -333.022]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 112
+      moving:     1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17461590:
+    script: NPC[156]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17461591:
+    script: NPC[157]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17461592:
+    script:       Survival_Guide
+    display_name: Survival Guide
+    at:           [-11.700, 0.020, 25.377]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:  1
+      name_vis:      32
+      moving:        21
+    status:   normal
+    widescan: true
+    content:  SURVIVAL_GUIDE
+
+  17461593:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [65.700, 0.000, -25.640]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17461594:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [68.450, 0.570, -290.610]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17461595:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [-223.050, -0.040, -98.280]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17461596:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112
+
+  17461597:
+    script:       Trion
+    display_name: Trion
+    render:
+      look:
+        type:  standard
+        model: 3169
+      entity_flags: 2075
+      name_prefix:    32
+    status:   cutscene_only
+    widescan: true
+    content:  TVR
+
+  17461598:
+    script:       Frigid_Confluence
+    display_name: Frigid Confluence
+    at:           [100.000, -24.000, -57.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:      112
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+    content:  TVR

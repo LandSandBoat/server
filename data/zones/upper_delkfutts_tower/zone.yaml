@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z4e0:
+    from:  [-300.039, -107.256, 31.308]
+    to:    upper_delkfutts_tower
+    at:    [12.098, -105.408, 27.683, 2.356194]
+    scale: [2.075, 7.000]
+
+  z4e2:
+    from:  [19.967, -105.775, 31.392]
+    to:    upper_delkfutts_tower
+    at:    [-291.555, -109.008, 27.636, 0.785398]
+    scale: [1.150, 7.000]
+
+  z4e4:
+    from:  [19.976, -42.212, 31.373]
+    to:    upper_delkfutts_tower
+    at:    [251.863, -40.981, 27.592, 2.356194]
+    scale: [2.000, 7.000]
+
+  z4e6:
+    from:  [260.008, -42.091, 31.337]
+    to:    upper_delkfutts_tower
+    at:    [27.719, -45.196, 28.094, 0.785398]
+    scale: [2.075, 7.000]

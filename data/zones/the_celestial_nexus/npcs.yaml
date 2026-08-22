@@ -1,0 +1,469 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17518593:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  SOA
+
+  17518594:
+    script: NPC[2]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17518595:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17518723:
+    script: NPC[83]
+    at:     [0.000, -12.837, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17518724:
+    script: NPC[84]
+    at:     [0.000, -12.837, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17518725:
+    script: NPC[85]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17518726:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17518727:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17518728:
+    script:       _513
+    display_name: Celestial Gate
+    at:           [-582.070, -8.068, -32.348]
+    render:
+      look:
+        type: door
+      door_id:      858862943
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17518729:
+    script:       _515
+    display_name: Celestial Gate
+    at:           [-112.513, -27.768, -25.072]
+    render:
+      look:
+        type: door
+      door_id:      892417375
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17518730:
+    script:       _514
+    display_name: Celestial Gate
+    at:           [375.696, -30.907, 669.449]
+    render:
+      look:
+        type: door
+      door_id:      875640159
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17518731:
+    script:       _516
+    display_name: Celestial Gate
+    at:           [425.181, -13.859, -690.208]
+    render:
+      look:
+        type: door
+      door_id:      909194591
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17518732:
+    script: NPC[8c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17518733:
+    script: NPC[8d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17518734:
+    script: NPC[8e]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17518735:
+    script: NPC[8f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17518736:
+    script:       Ealdnarche
+    display_name: Eald'narche
+    at:           [-48.753, -19.099, -25.065, 127]
+    render:
+      look:
+        type:  standard
+        model: 61
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518737:
+    script:       Zeid
+    display_name: Zeid
+    at:           [-57.810, -19.099, -23.465, 9]
+    render:
+      look:
+        type:  standard
+        model: 830
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518738:
+    script:       Aldo
+    display_name: Aldo
+    at:           [-56.426, -19.099, -27.083, 239]
+    render:
+      look:
+        type:  standard
+        model: 78
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518739:
+    script:       Lion
+    display_name: Lion
+    at:           [-59.502, -19.099, -25.759, 234]
+    render:
+      look:
+        type:  standard
+        model: 60
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518740:
+    script:       Yvenoile
+    display_name: Yve'noile
+    at:           [-19.239, -35.099, -26.319, 232]
+    render:
+      look:
+        type:  standard
+        model: 1424
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17518741:
+    script: blank
+    at:     [-48.753, -19.099, -25.065, 127]
+    render:
+      look:
+        type:  standard
+        model: 975
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17518742:
+    script:       Ealdnarche
+    display_name: Eald'narche
+    at:           [-48.753, -19.099, -25.065, 127]
+    render:
+      look:
+        type:  standard
+        model: 776
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518743:
+    script:       Ealdnarche
+    display_name: Eald'narche
+    at:           [-48.753, -19.099, -25.065, 127]
+    render:
+      look:
+        type:  standard
+        model: 779
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518744:
+    script:       Ealdnarche
+    display_name: Eald'narche
+    at:           [-48.753, -19.099, -25.065, 127]
+    render:
+      look:
+        type:  standard
+        model: 976
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518745:
+    script: blank
+    at:     [-48.753, -19.099, -25.065, 127]
+    render:
+      look:
+        type:  standard
+        model: 976
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17518746:
+    script: blank
+    at:     [-48.753, -19.099, -25.065, 127]
+    render:
+      look:
+        type:  standard
+        model: 777
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17518747:
+    script:       Graviton
+    display_name: Grav'iton
+    render:
+      look:
+        type:  standard
+        model: 1426
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518748:
+    script:       _510
+    display_name: Celestial Gate
+    at:           [-661.490, -8.070, -32.352]
+    render:
+      look:
+        type: door
+      door_id:      808531295
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17518749:
+    script:       _511
+    display_name: Celestial Gate
+    at:           [-640.002, -8.068, -32.356]
+    render:
+      look:
+        type: door
+      door_id:      825308511
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17518750:
+    script:       _512
+    display_name: Celestial Gate
+    at:           [-618.066, -8.068, -32.364]
+    render:
+      look:
+        type: door
+      door_id:      842085727
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17518751:
+    script: NPC[9f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17518752:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17518753:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17518754:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17518755:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17518756:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17518757:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17518758:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17518759:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17518760:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-680.007, -4.956, -39.719, 216]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17518761:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-680.007, -4.956, -39.719, 216]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17518762:
+    script: NPC[aa]
+    at:     [-68.000, -19.300, -27.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2477
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only

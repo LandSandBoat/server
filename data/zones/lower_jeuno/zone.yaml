@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, costume, auction_house, yell, los_player_block, assist]
+music:
+  day:          110
+  night:        110
+  battle_solo:  110
+  battle_party: 110
+
+zonelines:
+
+  z6t0:
+    from:  [-123.065, -4.435, -200.691]
+    to:    rolanberry_fields
+    at:    [339.741, 21.798, 608.166, 1.570796]
+    scale: [1.000, 20.000]
+
+  z6t2:
+    from:  [0.177, -6.280, 59.589]
+    to:    upper_jeuno
+    at:    [7.042, -0.642, -53.100, 5.652728]
+    scale: [1.000, 3.000]
+
+  z6t4:
+    from:  [29.694, -3.019, 41.444]
+    to:    port_jeuno
+    at:    [-150.730, -3.899, -19.900, 4.823146]
+    scale: [1.000, 3.000]
+
+  zmru:
+    from:  [43.944, -9.359, 88.580]
+    to:    lower_jeuno
+    at:    [42.500, -6.733, 86.074, 2.094455]
+    scale: [1.000, 3.000]

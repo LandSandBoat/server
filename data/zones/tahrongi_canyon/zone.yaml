@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z390:
+    from:  [-64.818, 42.560, -740.870]
+    to:    east_sarutabaruta
+    at:    [305.377, -36.092, 660.435, 1.570796]
+    scale: [1.000, 3.000]
+
+  z392:
+    from:  [-238.244, 48.730, 703.991]
+    to:    meriphataud_mountains
+    at:    [-121.850, -30.722, -616.268, 4.712389]
+    scale: [1.000, 6.000]
+
+  z394:
+    from:  [485.901, 43.001, 514.729]
+    to:    maze_of_shakhrami
+    at:    [-362.446, -12.747, -179.992]
+    scale: [1.000, 4.000]
+
+  z396:
+    from:  [446.613, -6.385, -40.255]
+    to:    buburimu_peninsula
+    at:    [-620.614, -46.470, 159.343]
+    scale: [1.000, 4.000]

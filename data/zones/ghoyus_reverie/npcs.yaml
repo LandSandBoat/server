@@ -1,0 +1,1379 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17305843:
+    script:       Dawn_Aureola
+    display_name: Dawn Aureola
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305844:
+    script:       Twilight_Aureola
+    display_name: Twilight Aureola
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305845:
+    script:       Lacuna_Whorl
+    display_name: Lacuna Whorl
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305847:
+    script:       ctrl_mission
+    display_name: ctrl_mission
+    render:
+      look:
+        type:  standard
+        model: 52
+    widescan: true
+
+  17305849:
+    script:       Zogbog
+    display_name: Zogbog
+    at:           [-37.993, -0.500, -361.987, 192]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17305852:
+    script: NPC[fc]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      name_vis:       88
+    status:   cutscene_only
+    widescan: true
+
+  17305853:
+    script: blank
+    at:     [-200.000, -2.000, -100.000]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags: 2075
+      name_vis:       80
+      name_prefix:    32
+      moving:          1
+    widescan: true
+
+  17305854:
+    script: blank
+    at:     [-220.000, -2.000, -160.000]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags: 2075
+      name_vis:       80
+      name_prefix:    32
+      moving:          1
+    widescan: true
+
+  17305857:
+    script:       Republic_Ensign_I
+    display_name: Republic Ensign I
+    at:           [-227.477, -0.157, -121.138, 125]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags:  515
+      animation_sub:   8
+      name_vis:       96
+      name_prefix:     2
+      moving:          1
+    widescan: true
+
+  17305858:
+    script:       Republic_Ensign_II
+    display_name: Republic Ensign II
+    at:           [-0.105, 0.075, -291.578, 192]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags:  515
+      animation_sub:   8
+      name_vis:       96
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+
+  17305859:
+    script:       Republic_Ensign_III
+    display_name: Republic Ensign III
+    at:           [61.213, -0.402, -45.078, 64]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags:  515
+      animation_sub:   8
+      name_vis:       96
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+
+  17305860:
+    script:       Republic_Ensign_IV
+    display_name: Republic Ensign IV
+    at:           [-62.519, -6.463, -64.306, 168]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags:  515
+      animation_sub:   8
+      name_vis:       96
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+
+  17305861:
+    script:       Republic_Ensign_V
+    display_name: Republic Ensign V
+    at:           [-18.997, 0.345, 141.049, 90]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags:  515
+      animation_sub:   8
+      name_vis:       96
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+
+  17305862:
+    script:       Republic_Ensign_VI
+    display_name: Republic Ensign VI
+    at:           [-234.988, -0.326, 60.810, 16]
+    render:
+      look:
+        type:  standard
+        model: 2311
+      entity_flags:  515
+      animation_sub:   8
+      name_vis:       96
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+
+  17305887:
+    script: blank
+    at:     [-227.096, -0.032, -137.695]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305888:
+    script: blank
+    at:     [-152.654, 0.300, -231.316]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305889:
+    script: blank
+    at:     [-107.980, -0.127, -255.425]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305890:
+    script: blank
+    at:     [-48.400, -1.597, -294.634]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305891:
+    script: blank
+    at:     [-7.870, 0.000, -254.312]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305892:
+    script: blank
+    at:     [-30.370, -0.273, -208.347]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305893:
+    script: blank
+    at:     [-60.797, -0.324, -165.210]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305894:
+    script: blank
+    at:     [32.337, 0.000, -163.033]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305895:
+    script: blank
+    at:     [40.486, 0.999, -106.561]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305896:
+    script: blank
+    at:     [23.918, -0.037, -97.141]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305897:
+    script: blank
+    at:     [-19.617, -1.752, -71.574]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305898:
+    script: blank
+    at:     [18.576, -10.115, 23.559]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305899:
+    script: blank
+    at:     [-17.758, -0.324, 104.804]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305900:
+    script: blank
+    at:     [-103.190, 0.749, 129.706]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305901:
+    script: blank
+    at:     [-159.889, 0.500, 129.204]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305902:
+    script: blank
+    at:     [-156.286, 0.307, 112.074]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305903:
+    script: blank
+    at:     [-108.118, -0.150, 65.339]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305904:
+    script: blank
+    at:     [-67.199, -0.191, 12.380]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305905:
+    script: blank
+    at:     [-99.864, 0.662, 2.923]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305906:
+    script: blank
+    at:     [-163.339, 0.357, -7.489]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305907:
+    script: blank
+    at:     [-168.420, -1.191, 6.394]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305908:
+    script: blank
+    at:     [-214.149, -0.048, -25.925]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305909:
+    script: blank
+    at:     [-201.598, 0.457, -49.052]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305910:
+    script: blank
+    at:     [-40.859, -0.057, -86.489]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305911:
+    script: blank
+    at:     [-173.821, -0.540, -107.018]
+    render:
+      look:
+        type:  standard
+        model: 2300
+      entity_flags:  2075
+      animation_sub:    4
+      name_vis:        80
+      name_prefix:     32
+      moving:           1
+    widescan: true
+
+  17305912:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17305915:
+    script: NPC[13a]
+    at:     [0.000, -10.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+    widescan: true
+
+  17305916:
+    script: NPC[13b]
+    at:     [0.000, -10.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  129
+      animation_sub:  16
+      name_vis:       32
+    widescan: true
+
+  17305917:
+    script: NPC[13c]
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17305919:
+    script:       DOOR_MASTER
+    display_name: DOOR_MASTER
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+    status:   normal
+    widescan: true
+
+  17305920:
+    script:       _3l0
+    display_name: _3l0
+    at:           [-358.000, -3.500, -399.088]
+    render:
+      look:
+        type: door
+      door_id:      812397407
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17305921:
+    script:       _3l1
+    display_name: _3l1
+    at:           [-220.000, 27.000, 280.000]
+    render:
+      look:
+        type: door
+      door_id:      829174623
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305922:
+    script:       _3l2
+    display_name: _3l2
+    at:           [-140.000, -3.000, 240.000]
+    render:
+      look:
+        type: door
+      door_id:      845951839
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305923:
+    script:       _3l3
+    display_name: _3l3
+    at:           [-80.000, -3.000, 260.000]
+    render:
+      look:
+        type: door
+      door_id:      862729055
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305924:
+    script:       _3l4
+    display_name: _3l4
+    at:           [100.000, -3.000, 400.000]
+    render:
+      look:
+        type: door
+      door_id:      879506271
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305925:
+    script:       _3l5
+    display_name: _3l5
+    at:           [80.000, -3.000, 260.000]
+    render:
+      look:
+        type: door
+      door_id:      896283487
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305926:
+    script:       _3l6
+    display_name: _3l6
+    at:           [220.000, 17.500, 320.000]
+    render:
+      look:
+        type: door
+      door_id:      913060703
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305927:
+    script:       _3l7
+    display_name: _3l7
+    at:           [260.000, -17.500, 320.000]
+    render:
+      look:
+        type: door
+      door_id:      929837919
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305928:
+    script:       _3l8
+    display_name: _3l8
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305929:
+    script:       _3l9
+    display_name: _3l9
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305930:
+    script:       _3la
+    display_name: _3la
+    at:           [-220.000, -2.000, 200.000]
+    render:
+      look:
+        type: door
+      door_id:      1634480991
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305931:
+    script:       _3lb
+    display_name: _3lb
+    at:           [-220.000, -2.000, 160.000]
+    render:
+      look:
+        type: door
+      door_id:      1651258207
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305932:
+    script:       _3lc
+    display_name: _3lc
+    at:           [-200.000, -2.000, 140.000]
+    render:
+      look:
+        type: door
+      door_id:      1668035423
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305933:
+    script:       _3ld
+    display_name: _3ld
+    at:           [-140.000, -2.000, 160.000]
+    render:
+      look:
+        type: door
+      door_id:      1684812639
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305934:
+    script:       _3le
+    display_name: _3le
+    at:           [-60.000, -12.000, 200.000]
+    render:
+      look:
+        type: door
+      door_id:      1701589855
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305935:
+    script:       _3lf
+    display_name: _3lf
+    at:           [-20.000, -2.000, 120.000]
+    render:
+      look:
+        type: door
+      door_id:      1718367071
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305936:
+    script:       _3lg
+    display_name: _3lg
+    at:           [40.000, -2.000, 100.000]
+    render:
+      look:
+        type: door
+      door_id:      1735144287
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305937:
+    script:       _3lh
+    display_name: _3lh
+    at:           [60.000, -2.000, 200.000]
+    render:
+      look:
+        type: door
+      door_id:      1751921503
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305938:
+    script:       _3li
+    display_name: _3li
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305939:
+    script:       _3lj
+    display_name: _3lj
+    at:           [180.000, -2.000, 240.000]
+    render:
+      look:
+        type: door
+      door_id:      1785475935
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305940:
+    script:       _3lk
+    display_name: _3lk
+    at:           [240.000, 18.000, 260.000]
+    render:
+      look:
+        type: door
+      door_id:      1802253151
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305941:
+    script:       _3ll
+    display_name: _3ll
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305942:
+    script:       _3lm
+    display_name: _3lm
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305943:
+    script:       _3ln
+    display_name: _3ln
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305944:
+    script:       _3lo
+    display_name: _3lo
+    at:           [-280.000, -2.000, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1869362015
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305945:
+    script:       _3lp
+    display_name: _3lp
+    at:           [-240.000, -2.000, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1886139231
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305946:
+    script:       _3lq
+    display_name: _3lq
+    at:           [-160.000, -2.000, 60.000]
+    render:
+      look:
+        type: door
+      door_id:      1902916447
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305947:
+    script:       _3lr
+    display_name: _3lr
+    at:           [-100.000, -2.000, 40.000]
+    render:
+      look:
+        type: door
+      door_id:      1919693663
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305948:
+    script:       _3ls
+    display_name: _3ls
+    at:           [-60.000, -2.000, 40.000]
+    render:
+      look:
+        type: door
+      door_id:      1936470879
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305949:
+    script:       _3lt
+    display_name: _3lt
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305950:
+    script:       _3lu
+    display_name: _3lu
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305951:
+    script:       _3lv
+    display_name: _3lv
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305952:
+    script:       _3lw
+    display_name: _3lw
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305953:
+    script:       _3lx
+    display_name: _3lx
+    at:           [-460.000, -2.000, -40.000]
+    render:
+      look:
+        type: door
+      door_id:      2020356959
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305954:
+    script:       _3ly
+    display_name: _3ly
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305955:
+    script:       _3lz
+    display_name: _3lz
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305956:
+    script:       _ll0
+    display_name: _ll0
+    at:           [-280.000, -2.000, -60.000]
+    render:
+      look:
+        type: door
+      door_id:      812411999
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305957:
+    script:       _ll1
+    display_name: _ll1
+    at:           [-280.000, -2.000, -140.000]
+    render:
+      look:
+        type: door
+      door_id:      829189215
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305958:
+    script:       _ll2
+    display_name: _ll2
+    at:           [-220.000, -2.000, -160.000]
+    render:
+      look:
+        type: door
+      door_id:      845966431
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305959:
+    script:       _ll3
+    display_name: _ll3
+    at:           [-200.000, -2.000, -100.000]
+    render:
+      look:
+        type: door
+      door_id:      862743647
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305960:
+    script:       _ll4
+    display_name: _ll4
+    at:           [-160.000, -2.000, -60.000]
+    render:
+      look:
+        type: door
+      door_id:      879520863
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305961:
+    script:       _ll5
+    display_name: _ll5
+    at:           [-120.000, -2.000, -180.000]
+    render:
+      look:
+        type: door
+      door_id:      896298079
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17305962:
+    script:       _ll6
+    display_name: _ll6
+    at:           [-80.000, -2.000, -140.000]
+    render:
+      look:
+        type: door
+      door_id:      913075295
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305963:
+    script:       _ll7
+    display_name: _ll7
+    at:           [-20.000, -2.000, -80.000]
+    render:
+      look:
+        type: door
+      door_id:      929852511
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305964:
+    script:       _ll8
+    display_name: _ll8
+    at:           [0.000, -2.000, -100.000]
+    render:
+      look:
+        type: door
+      door_id:      946629727
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305965:
+    script:       _ll9
+    display_name: _ll9
+    at:           [60.000, -2.000, 40.000]
+    render:
+      look:
+        type: door
+      door_id:      963406943
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305966:
+    script:       _lla
+    display_name: _lla
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305967:
+    script:       _llb
+    display_name: _llb
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305968:
+    script:       _llc
+    display_name: _llc
+    at:           [120.000, -2.000, -140.000]
+    render:
+      look:
+        type: door
+      door_id:      1668050015
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17305969:
+    script:       _lld
+    display_name: _lld
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305970:
+    script:       _lle
+    display_name: _lle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305971:
+    script:       _llf
+    display_name: _llf
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305972:
+    script:       _llg
+    display_name: _llg
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305973:
+    script:       _llh
+    display_name: _llh
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305974:
+    script:       _lli
+    display_name: _lli
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305975:
+    script:       _llj
+    display_name: _llj
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305976:
+    script:       _llk
+    display_name: _llk
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305977:
+    script:       _lll
+    display_name: _lll
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305978:
+    script:       _llm
+    display_name: _llm
+    at:           [-100.000, -2.000, -280.000]
+    render:
+      look:
+        type: door
+      door_id:      1835822175
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17305979:
+    script:       _lln
+    display_name: _lln
+    at:           [0.000, -2.000, -340.000]
+    render:
+      look:
+        type: door
+      door_id:      1852599391
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17305980:
+    script:       _llo
+    display_name: _llo
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305981:
+    script:       _llp
+    display_name: _llp
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305982:
+    script:       _llq
+    display_name: _llq
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305983:
+    script:       _llr
+    display_name: _llr
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305984:
+    script:       _lls
+    display_name: _lls
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17305985:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    widescan: true
+
+  17305986:
+    script: NPC[180]
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17305987:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+
+  17305988:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+
+  17305989:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+
+  17305990:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+
+  17305991:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+
+  17305992:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+
+  17305993:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+
+  17305994:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+
+  17305995:
+    script:       medic_pop_ctrl
+    display_name: medic_pop_ctrl
+    render:
+      look:
+        type:  standard
+        model: 52
+    widescan: true

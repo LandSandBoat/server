@@ -67,6 +67,10 @@ add_executable(xi_test
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/data_binding_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/ecosystems_tree_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/merits_dataset_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/zones/mobs_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/zones/npcs_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/zones/regions_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/zones/settings_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/roam_region_tests.cpp

@@ -1,0 +1,1406 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Count_Andromalius:
+    id:            811
+    species:       kindred
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 751
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 5000
+
+  Count_Andromalius_2:
+    id:            811
+    display_name:  Count_Andromalius
+    species:       kindred
+    type:          [battlefield]
+    spell_list_id: 2
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 751
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Crimson_Grimoire:
+    id:            838
+    species:       grimoire
+    type:          [notorious, battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: club
+      jobs: [sch, sch]
+      render:
+        look:
+          type:  standard
+          model: 2228
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Dazbog:
+    id:      6118
+    species: meeble
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 3159
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Demons_Avatar:
+    id:            993
+    species:       carbuncle
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      spawn:
+        type: [scripted]
+
+  Demons_Elemental:
+    id:            994
+    species:       dark_elemental
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, war]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 13
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Duke_Amduscias:
+    id:            1130
+    species:       kindred
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 753
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4800
+        mp: 4800
+
+  Duke_Amduscias_2:
+    id:            1130
+    display_name:  Duke_Amduscias
+    species:       kindred
+    type:          [battlefield]
+    spell_list_id: 1
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 753
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Duke_Dantalian:
+    id:            1132
+    species:       kindred
+    type:          [battlefield]
+    spell_list_id: 31
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 754
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4800
+        mp: 4800
+
+  Duke_Dantalian_2:
+    id:            1132
+    display_name:  Duke_Dantalian
+    species:       kindred
+    type:          [battlefield]
+    spell_list_id: 31
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 754
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Grand_Marquis_Chomiel:
+    id:            1788
+    species:       kindred
+    type:          [battlefield]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 746
+        model_size:  1
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5200
+        mp: 5200
+
+  Grand_Marquis_Chomiel_2:
+    id:            1788
+    display_name:  Grand_Marquis_Chomiel
+    species:       kindred
+    type:          [battlefield]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 746
+        model_size:  1
+        hitbox:     17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gunther:
+    id:            1850
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: club
+      jobs: [sch, sch]
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  1
+          head:  4211
+          body:  8406
+          hands: 12489
+          legs:  16569
+          feet:  20694
+          main:  24817
+          sub:   28672
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Henchman_Moogle:
+    id:            1931
+    species:       moogle
+    type:          [battlefield]
+    skill_list_id: 185
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   -3
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        -3
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2365
+        model_size:  1
+        hitbox:     10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Magh_Bihu:
+    id:      6117
+    species: citrullus
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 3158
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Orcish_Warchief:
+    id:      6114
+    species: orc
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 3654
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Riko_Kupenreich:
+    id:            3367
+    species:       moogle
+    type:          [battlefield]
+    skill_list_id: 185
+    attributes:
+      combat:
+        delay: 0
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          earth:   -3
+          thunder: -3
+          water:   -3
+          light:   -3
+          dark:    -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          slow:        -3
+          poison:      -3
+          light_sleep: -3
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 2366
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shadow_Lord_1:
+    id:            3579
+    display_name:  Shadow_Lord
+    species:       shadow_lord
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 2101
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 200
+      jobs: [drk, blm]
+      render:
+        look:
+          type:  standard
+          model: 789
+        entity_flags: 131
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+
+  Shadow_Lord_1_2:
+    id:            3579
+    display_name:  Shadow_Lord
+    species:       shadow_lord
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 2101
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 200
+      jobs: [drk, blm]
+      render:
+        look:
+          type:  standard
+          model: 789
+        entity_flags: 131
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Shadow_Lord_2:
+    id:            4593
+    display_name:  Shadow_Lord
+    species:       shadow_lord
+    type:          [notorious, battlefield]
+    skill_list_id: 2101
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 200
+      jobs: [drk, blm]
+      render:
+        look:
+          type:  standard
+          model: 790
+        entity_flags: 131
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Shadow_Lord_2_2:
+    id:            4593
+    display_name:  Shadow_Lord
+    species:       shadow_lord
+    type:          [notorious, battlefield]
+    skill_list_id: 2101
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 200
+      jobs: [drk, blm]
+      render:
+        look:
+          type:  standard
+          model: 790
+        entity_flags: 131
+        model_size:     1
+        hitbox:        35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Shadow_of_Rage:
+    id:            3580
+    species:       galks
+    type:          [notorious, battlefield]
+    skill_list_id: 480
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 772
+        entity_flags: 135
+        model_size:     3
+        hitbox:        41
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 500
+
+  Topaz_Quadav:
+    id:      6115
+    species: quadav
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      render:
+        look:
+          type:  standard
+          model: 3655
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Volker:
+    id:            4249
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 482
+    attributes:
+      combat:
+        skill: sword
+      render:
+        look:
+          type:  standard
+          model: 773
+        entity_flags:  3
+        name_prefix:  32
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        flags: [no_assist]
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1300
+    allegiance: player
+
+  Yagudo_Inquisitor:
+    id:      6116
+    species: yagudo
+    type:    [battlefield]
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      render:
+        look:
+          type:  standard
+          model: 3191
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Zeid:
+    id:            4498
+    species:       galks
+    type:          [notorious, battlefield]
+    spell_list_id: 396
+    skill_list_id: 480
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 771
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        33
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8500
+        mp: 8500
+
+spawns:
+  17453057:
+    template: Shadow_Lord_1
+    script:   Shadow_Lord_Phase_1
+    at:       [-464.527, -167.200, -240.076]
+    level:    [60, 60]
+  17453058:
+    template: Shadow_Lord_1
+    script:   Shadow_Lord_Phase_1
+    at:       [-784.761, -407.200, -479.932]
+    level:    [60, 60]
+  17453059:
+    template: Shadow_Lord_1
+    script:   Shadow_Lord_Phase_1
+    at:       [-1104.599, -647.200, -719.917]
+    level:    [60, 60]
+  17453060:
+    template: Shadow_Lord_2
+    script:   Shadow_Lord_Phase_2
+    at:       [-464.812, -167.200, -239.941]
+    level:    [60, 60]
+  17453061:
+    template: Shadow_Lord_2
+    script:   Shadow_Lord_Phase_2
+    at:       [-784.761, -407.200, -479.932]
+    level:    [60, 60]
+  17453062:
+    template: Shadow_Lord_2
+    script:   Shadow_Lord_Phase_2
+    at:       [-1104.599, -647.200, -719.917]
+    level:    [60, 60]
+  17453063:
+    template: Zeid
+    at:       [-465.000, -167.000, -240.000]
+    level:    [75, 76]
+  17453064:
+    template: Zeid
+    script:   Zeid_2
+    at:       [-465.000, -167.000, -240.000]
+    level:    [75, 78]
+  17453065:
+    template: Shadow_of_Rage
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17453066:
+    template: Shadow_of_Rage
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17453067:
+    template: Zeid
+    at:       [-784.949, -407.000, -479.991]
+    level:    [75, 76]
+  17453068:
+    template: Zeid
+    script:   Zeid_2
+    at:       [-784.949, -407.000, -479.991]
+    level:    [75, 78]
+  17453069:
+    template: Shadow_of_Rage
+    at:       [-318.949, -239.000, -238.991]
+    level:    [75, 75]
+  17453070:
+    template: Shadow_of_Rage
+    at:       [-318.949, -239.000, -238.991]
+    level:    [75, 75]
+  17453071:
+    template: Zeid
+    at:       [-1104.787, -647.000, -719.976]
+    level:    [75, 76]
+  17453072:
+    template: Zeid
+    script:   Zeid_2
+    at:       [-1104.787, -647.000, -719.976]
+    level:    [75, 78]
+  17453073:
+    template: Shadow_of_Rage
+    at:       [-638.787, -479.000, -478.976]
+    level:    [75, 75]
+  17453074:
+    template: Shadow_of_Rage
+    at:       [-638.787, -479.000, -478.976]
+    level:    [75, 75]
+  17453075:
+    template: Grand_Marquis_Chomiel
+    at:       [-464.527, -167.580, -241.576]
+    level:    [62, 64]
+  17453076:
+    template: Duke_Amduscias
+    at:       [-464.527, -167.500, -244.576]
+    level:    [62, 64]
+  17453077:
+    template: Count_Andromalius
+    at:       [-464.527, -167.584, -238.576]
+    level:    [62, 64]
+  17453078:
+    template: Duke_Dantalian
+    at:       [-463.309, -167.290, -235.124]
+    level:    [62, 64]
+  17453080:
+    template: Demons_Elemental
+    at:       [-464.526, -167.500, -235.574]
+    level:    [60, 60]
+  17453081:
+    template: Demons_Avatar
+    at:       [-462.068, -167.697, -235.429]
+    level:    [60, 60]
+  17453082:
+    template: Grand_Marquis_Chomiel
+    at:       [-784.527, -407.580, -481.576]
+    level:    [62, 64]
+  17453083:
+    template: Duke_Amduscias
+    at:       [-784.527, -407.500, -484.576]
+    level:    [62, 64]
+  17453084:
+    template: Count_Andromalius
+    at:       [-784.527, -407.584, -478.576]
+    level:    [62, 64]
+  17453085:
+    template: Duke_Dantalian
+    at:       [-783.309, -407.290, -475.124]
+    level:    [62, 64]
+  17453087:
+    template: Demons_Elemental
+    at:       [-784.526, -407.500, -475.574]
+    level:    [60, 60]
+  17453088:
+    template: Demons_Avatar
+    at:       [-782.068, -407.697, -475.429]
+    level:    [60, 60]
+  17453089:
+    template: Grand_Marquis_Chomiel
+    at:       [-1104.527, -647.580, -721.576]
+    level:    [62, 64]
+  17453090:
+    template: Duke_Amduscias
+    at:       [-1104.527, -647.500, -724.576]
+    level:    [62, 64]
+  17453091:
+    template: Count_Andromalius
+    at:       [-1104.527, -647.584, -718.576]
+    level:    [62, 64]
+  17453092:
+    template: Duke_Dantalian
+    at:       [-1103.309, -647.290, -715.124]
+    level:    [62, 64]
+  17453094:
+    template: Demons_Elemental
+    at:       [-1104.526, -647.500, -715.574]
+    level:    [60, 60]
+  17453095:
+    template: Demons_Avatar
+    at:       [-1102.068, -647.697, -715.429]
+    level:    [60, 60]
+  17453096:
+    template: Gunther
+    at:       [-138.535, -0.500, 233.810, 34]
+    level:    [70, 70]
+  17453097:
+    template: Crimson_Grimoire
+    level:    [70, 70]
+  17453098:
+    template: Gunther
+    level:    [70, 70]
+  17453099:
+    template: Crimson_Grimoire
+    level:    [70, 70]
+  17453100:
+    template: Gunther
+    level:    [70, 70]
+  17453101:
+    template: Crimson_Grimoire
+    level:    [70, 70]
+  17453102:
+    template: Riko_Kupenreich
+    at:       [-485.000, -172.500, -240.000, 13]
+    level:    [75, 75]
+  17453103:
+    template: Henchman_Moogle
+    at:       [-454.131, -167.620, -239.973, 113]
+    level:    [75, 75]
+  17453104:
+    template: Henchman_Moogle
+    at:       [-454.414, -167.628, -239.014, 59]
+    level:    [75, 75]
+  17453105:
+    template: Henchman_Moogle
+    at:       [-452.534, -167.700, -240.626, 149]
+    level:    [75, 75]
+  17453106:
+    template: Henchman_Moogle
+    at:       [-454.397, -167.676, -240.032, 194]
+    level:    [75, 75]
+  17453107:
+    template: Henchman_Moogle
+    at:       [-454.573, -167.199, -239.070, 46]
+    level:    [75, 75]
+  17453108:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453109:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453110:
+    template: Henchman_Moogle
+    at:       [-485.000, -172.500, -238.000]
+    level:    [75, 75]
+  17453111:
+    template: Henchman_Moogle
+    at:       [-485.000, -172.500, -242.000]
+    level:    [75, 75]
+  17453112:
+    template: Riko_Kupenreich
+    level:    [75, 75]
+  17453113:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453114:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453115:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453116:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453117:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453118:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453119:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453120:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453121:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453122:
+    template: Riko_Kupenreich
+    level:    [75, 75]
+  17453123:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453124:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453125:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453126:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453127:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453128:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453129:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453130:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453131:
+    template: Henchman_Moogle
+    level:    [75, 75]
+  17453132:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453133:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453134:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453135:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453137:
+    template: Demons_Elemental
+  17453138:
+    template: Demons_Avatar
+  17453139:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453140:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453141:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453142:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453144:
+    template: Demons_Elemental
+  17453145:
+    template: Demons_Avatar
+  17453146:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453147:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453148:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453149:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453151:
+    template: Demons_Elemental
+  17453152:
+    template: Demons_Avatar
+  17453153:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453154:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453155:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453156:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453158:
+    template: Demons_Elemental
+  17453159:
+    template: Demons_Avatar
+  17453160:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453161:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453162:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453163:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453165:
+    template: Demons_Elemental
+  17453166:
+    template: Demons_Avatar
+  17453167:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453168:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453169:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453170:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453172:
+    template: Demons_Elemental
+  17453173:
+    template: Demons_Avatar
+  17453174:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453175:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453176:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453177:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453179:
+    template: Demons_Elemental
+  17453180:
+    template: Demons_Avatar
+  17453181:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453182:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453183:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453184:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453186:
+    template: Demons_Elemental
+  17453187:
+    template: Demons_Avatar
+  17453188:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453189:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453190:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453191:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453193:
+    template: Demons_Elemental
+  17453194:
+    template: Demons_Avatar
+  17453195:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453196:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453197:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453198:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453200:
+    template: Demons_Elemental
+  17453201:
+    template: Demons_Avatar
+  17453202:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453203:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453204:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453205:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453207:
+    template: Demons_Elemental
+  17453208:
+    template: Demons_Avatar
+  17453209:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453210:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453211:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453212:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453214:
+    template: Demons_Elemental
+  17453215:
+    template: Demons_Avatar
+  17453216:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453217:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453218:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453219:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453221:
+    template: Demons_Elemental
+  17453222:
+    template: Demons_Avatar
+  17453223:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453224:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453225:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453226:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453228:
+    template: Demons_Elemental
+  17453229:
+    template: Demons_Avatar
+  17453230:
+    template: Grand_Marquis_Chomiel_2
+    script:   Grand_Marquis_Chomiel
+  17453231:
+    template: Duke_Amduscias_2
+    script:   Duke_Amduscias
+  17453232:
+    template: Count_Andromalius_2
+    script:   Count_Andromalius
+  17453233:
+    template: Duke_Dantalian_2
+    script:   Duke_Dantalian
+  17453235:
+    template: Demons_Elemental
+  17453236:
+    template: Demons_Avatar
+  17453237:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453238:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453239:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453240:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453241:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453242:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453243:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453244:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453245:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453246:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453247:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453248:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453249:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453250:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453251:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453252:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453253:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453254:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453255:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453256:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453257:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453258:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453259:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453260:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453261:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453262:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453263:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453264:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453265:
+    template: Shadow_Lord_1_2
+    script:   Shadow_Lord
+  17453266:
+    template: Shadow_Lord_2_2
+    script:   Shadow_Lord
+  17453267:
+    script: Lion
+  17453268:
+    script: Lion
+  17453269:
+    script: Lion
+  17453270:
+    script: Lion
+  17453271:
+    script: Zeid
+  17453272:
+    script: Aldo
+  17453273:
+    script: Lion
+  17453274:
+    script: Zeid
+  17453275:
+    script: Aldo
+  17453276:
+    script: Lion
+  17453277:
+    script: Zeid
+  17453278:
+    script: Aldo
+  17453279:
+    template: Orcish_Warchief
+    at:       [-468.145, -167.269, -240.363, 139]
+    level:    [139, 139]
+  17453280:
+    template: Topaz_Quadav
+    at:       [-481.826, -172.000, -241.615, 136]
+    level:    [139, 139]
+  17453281:
+    template: Yagudo_Inquisitor
+    at:       [-491.172, -172.000, -243.416, 127]
+    level:    [139, 139]
+  17453282:
+    template: Magh_Bihu
+    at:       [-450.892, -167.200, -241.121, 131]
+    level:    [139, 139]
+  17453283:
+    template: Dazbog
+    at:       [-450.784, -167.199, -237.660, 124]
+    level:    [139, 139]
+  17453284:
+    template: Orcish_Warchief
+    at:       [-788.145, -407.269, -480.363, 139]
+    level:    [139, 139]
+  17453285:
+    template: Topaz_Quadav
+    at:       [-801.826, -412.000, -481.615, 136]
+    level:    [139, 139]
+  17453286:
+    template: Yagudo_Inquisitor
+    at:       [-811.172, -412.000, -483.416, 127]
+    level:    [139, 139]
+  17453287:
+    template: Magh_Bihu
+    at:       [-770.892, -407.200, -481.121, 131]
+    level:    [139, 139]
+  17453288:
+    template: Dazbog
+    at:       [-770.784, -407.199, -477.660, 124]
+    level:    [139, 139]
+  17453289:
+    template: Orcish_Warchief
+    at:       [-1108.145, -647.269, -720.363, 139]
+    level:    [139, 139]
+  17453290:
+    template: Topaz_Quadav
+    at:       [-1121.826, -652.000, -721.615, 136]
+    level:    [139, 139]
+  17453291:
+    template: Yagudo_Inquisitor
+    at:       [-1131.172, -652.000, -723.416, 127]
+    level:    [139, 139]
+  17453292:
+    template: Magh_Bihu
+    at:       [-1090.892, -647.200, -721.121, 131]
+    level:    [139, 139]
+  17453293:
+    template: Dazbog
+    at:       [-1090.784, -647.199, -717.660, 124]
+    level:    [139, 139]

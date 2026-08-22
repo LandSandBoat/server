@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          116
+  night:        116
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z2z0:
+    from:  [580.030, -3.225, -301.760]
+    to:    bastok_mines
+    at:    [-16.039, -4.217, -132.804, 4.712389]
+    scale: [1.000, 6.000]
+
+  z2z2:
+    from:  [260.000, -3.225, -180.000]
+    to:    bastok_markets
+    at:    [-363.536, -12.108, -183.525, 5.497787]
+    scale: [1.000, 4.000]
+
+  z2z4:
+    from:  [0.877, -6.763, 80.156]
+    to:    north_gustaberg
+    at:    [0.020, -4.409, -75.405, 4.712389]
+    scale: [1.000, 8.000]
+
+  z2z6:
+    from:  [-440.465, 33.268, -118.436]
+    to:    north_gustaberg
+    at:    [-440.792, 35.531, -272.901, 4.712389]
+    scale: [1.000, 8.000]
+
+  z2z8:
+    from:  [-605.340, 33.826, -520.223]
+    to:    dangruf_wadi
+    at:    [-4.025, -4.449, 0.016, 3.141593]
+    scale: [1.000, 10.000]

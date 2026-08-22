@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  125
+  battle_party: 125
+
+zonelines:
+
+  z3v0:
+    from:  [-540.003, 156.710, -209.995]
+    to:    yughott_grotto
+    at:    [439.814, -42.481, 169.755, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3v2:
+    from:  [439.943, -43.222, 69.988]
+    to:    yughott_grotto
+    at:    [437.235, -42.063, 68.564, 2.587814]
+    scale: [1.000, 3.000]

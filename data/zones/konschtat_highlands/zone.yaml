@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z300:
+    from:  [101.199, -77.595, -611.982]
+    to:    north_gustaberg
+    at:    [-518.867, 35.538, 588.640, 1.570796]
+    scale: [1.000, 8.000]
+
+  z302:
+    from:  [520.100, 26.451, 752.858]
+    to:    pashhow_marshlands
+    at:    [-543.423, 22.197, -647.550, 4.712389]
+    scale: [1.000, 6.000]
+
+  z304:
+    from:  [-160.469, 64.883, 887.731]
+    to:    valkurm_dunes
+    at:    [919.989, -2.101, -436.816, 4.712389]
+    scale: [1.000, 6.000]
+
+  z306:
+    from:  [707.646, 16.174, 217.545]
+    to:    gusgen_mines
+    at:    [45.982, -69.651, -340.094]
+    scale: [1.000, 4.000]

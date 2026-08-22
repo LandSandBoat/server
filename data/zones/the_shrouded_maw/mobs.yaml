@@ -1,0 +1,548 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Diabolos_DN:
+    id:            1027
+    display_name:  Diabolos
+    species:       diabolos
+    type:          [notorious, battlefield]
+    spell_list_id: 115
+    skill_list_id: 378
+    attributes:
+      combat:
+        skill: staff
+        delay: 190
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5900
+        mp: 5900
+
+  Diabolos_WD:
+    id:            5186
+    display_name:  Diabolos
+    species:       diabolos
+    type:          [notorious, battlefield]
+    spell_list_id: 149
+    skill_list_id: 378
+    attributes:
+      combat:
+        skill: staff
+        delay: 190
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+
+  Diabolos_WD_2:
+    id:            5186
+    display_name:  Diabolos
+    species:       diabolos
+    type:          [notorious, battlefield]
+    spell_list_id: 149
+    skill_list_id: 378
+    attributes:
+      combat:
+        skill: staff
+        delay: 190
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    4
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 1145
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Diremite_Dominator:
+    id:            5157
+    species:       diremite
+    type:          [notorious, battlefield]
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Diremite_TSM:
+    id:            5156
+    display_name:  Diremite
+    species:       diremite
+    type:          [notorious, battlefield]
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 950
+
+  Pasuk:
+    id:            3104
+    species:       diremite
+    type:          [battlefield]
+    spell_list_id: 110
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags:  155
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+
+spawns:
+  16818177:
+    template: Diabolos_DN
+    at:       [-239.679, -32.500, 289.431, 68]
+    level:    [45, 45]
+  16818178:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [-243.367, -17.244, 290.055, 139]
+    level:    [38, 40]
+  16818179:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [-233.889, -17.245, 279.957, 36]
+    level:    [38, 40]
+  16818180:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [-239.323, -17.227, 280.312, 63]
+    level:    [38, 40]
+  16818181:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [-244.794, -17.244, 286.114, 72]
+    level:    [38, 40]
+  16818182:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [-239.666, -17.244, 289.353, 197]
+    level:    [38, 40]
+  16818183:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [-234.289, -17.248, 286.192, 56]
+    level:    [38, 40]
+  16818184:
+    template: Diabolos_DN
+    at:       [0.311, 7.502, 9.383, 68]
+    level:    [45, 45]
+  16818185:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [-3.377, 22.758, 10.007, 139]
+    level:    [38, 40]
+  16818186:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [6.101, 22.757, -0.091, 36]
+    level:    [38, 40]
+  16818187:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [0.667, 22.775, 0.264, 63]
+    level:    [38, 40]
+  16818188:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [-4.804, 22.758, 6.066, 72]
+    level:    [38, 40]
+  16818189:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [0.324, 22.758, 9.305, 197]
+    level:    [38, 40]
+  16818190:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [5.701, 22.754, 6.144, 56]
+    level:    [38, 40]
+  16818191:
+    template: Diabolos_DN
+    at:       [280.488, 47.507, -270.633, 68]
+    level:    [45, 45]
+  16818192:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [276.800, 62.763, -270.009, 139]
+    level:    [38, 40]
+  16818193:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [286.278, 62.762, -280.107, 36]
+    level:    [38, 40]
+  16818194:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [280.844, 62.780, -279.752, 63]
+    level:    [38, 40]
+  16818195:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [275.373, 62.763, -273.950, 72]
+    level:    [38, 40]
+  16818196:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [280.501, 62.763, -270.711, 197]
+    level:    [38, 40]
+  16818197:
+    template: Diremite_TSM
+    script:   Diremite
+    at:       [285.878, 62.759, -273.872, 56]
+    level:    [38, 40]
+  16818198:
+    template: Pasuk
+    at:       [-240.000, -16.000, 283.000, 64]
+    level:    [45, 45]
+  16818200:
+    template: Pasuk
+    at:       [0.000, 24.000, 0.000, 64]
+    level:    [45, 45]
+  16818202:
+    template: Pasuk
+    at:       [280.000, 64.000, -275.000, 64]
+    level:    [45, 45]
+  16818204:
+    template: Diabolos_WD
+    at:       [-239.679, -32.500, 289.431, 68]
+    level:    [83, 83]
+  16818205:
+    template: Diremite_Dominator
+    at:       [-243.367, -17.244, 290.055, 139]
+    level:    [73, 75]
+  16818206:
+    template: Diremite_Dominator
+    at:       [-233.889, -17.245, 279.957, 36]
+    level:    [73, 75]
+  16818207:
+    template: Diremite_Dominator
+    at:       [-239.323, -17.227, 280.312, 63]
+    level:    [73, 75]
+  16818208:
+    template: Diremite_Dominator
+    at:       [-244.794, -17.244, 286.114, 72]
+    level:    [73, 75]
+  16818209:
+    template: Diremite_Dominator
+    at:       [-239.666, -17.244, 289.353, 197]
+    level:    [73, 75]
+  16818210:
+    template: Diremite_Dominator
+    at:       [-234.289, -17.248, 286.192, 56]
+    level:    [73, 75]
+  16818211:
+    template: Diabolos_WD
+    at:       [0.311, 7.502, 9.383, 68]
+    level:    [83, 83]
+  16818212:
+    template: Diremite_Dominator
+    at:       [-3.377, 22.758, 10.007, 139]
+    level:    [73, 75]
+  16818213:
+    template: Diremite_Dominator
+    at:       [6.101, 22.757, -0.091, 36]
+    level:    [73, 75]
+  16818214:
+    template: Diremite_Dominator
+    at:       [0.667, 22.775, 0.264, 63]
+    level:    [73, 75]
+  16818215:
+    template: Diremite_Dominator
+    at:       [-4.804, 22.758, 6.066, 72]
+    level:    [73, 75]
+  16818216:
+    template: Diremite_Dominator
+    at:       [0.324, 22.758, 9.305, 197]
+    level:    [73, 75]
+  16818217:
+    template: Diremite_Dominator
+    at:       [5.701, 22.754, 6.144, 56]
+    level:    [73, 75]
+  16818218:
+    template: Diabolos_WD
+    at:       [280.488, 47.507, -270.633, 68]
+    level:    [83, 83]
+  16818219:
+    template: Diremite_Dominator
+    at:       [276.800, 62.763, -270.009, 139]
+    level:    [73, 75]
+  16818220:
+    template: Diremite_Dominator
+    at:       [286.278, 62.762, -280.107, 36]
+    level:    [73, 75]
+  16818221:
+    template: Diremite_Dominator
+    at:       [280.844, 62.780, -279.752, 63]
+    level:    [73, 75]
+  16818222:
+    template: Diremite_Dominator
+    at:       [275.373, 62.763, -273.950, 72]
+    level:    [73, 75]
+  16818223:
+    template: Diremite_Dominator
+    at:       [280.501, 62.763, -270.711, 197]
+    level:    [73, 75]
+  16818224:
+    template: Diremite_Dominator
+    at:       [285.878, 62.759, -273.872, 56]
+    level:    [73, 75]
+  16818225:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [-236.512, -32.500, 280.998, 63]
+    level:    [99, 99]
+  16818226:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [-245.564, -32.500, 287.749, 151]
+    level:    [99, 99]
+  16818227:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [-238.037, -32.685, 287.805, 127]
+    level:    [99, 99]
+  16818228:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [-232.451, -32.500, 290.586, 214]
+    level:    [99, 99]
+  16818229:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [-239.793, -32.500, 275.560, 128]
+    level:    [99, 99]
+  16818230:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [3.478, 7.502, 0.950, 63]
+    level:    [99, 99]
+  16818231:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [-5.574, 7.502, 7.701, 151]
+    level:    [99, 99]
+  16818232:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [1.953, 7.317, 7.757, 127]
+    level:    [99, 99]
+  16818233:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [7.539, 7.502, 10.538, 214]
+    level:    [99, 99]
+  16818234:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [0.197, 7.502, -4.488, 128]
+    level:    [99, 99]
+  16818235:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [283.655, 47.507, -279.066, 63]
+    level:    [99, 99]
+  16818236:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [274.603, 47.507, -272.315, 151]
+    level:    [99, 99]
+  16818237:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [282.130, 47.322, -272.259, 127]
+    level:    [99, 99]
+  16818238:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [287.716, 47.507, -269.478, 214]
+    level:    [99, 99]
+  16818239:
+    template: Diabolos_WD_2
+    script:   Diabolos
+    at:       [280.374, 47.507, -284.504, 128]
+    level:    [99, 99]

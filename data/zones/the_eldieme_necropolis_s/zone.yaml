@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 216
+
+zonelines:
+
+  z4v0:
+    from:  [420.008, -60.092, -122.008]
+    to:    batallia_downs_s
+    at:    [176.010, 5.979, -415.987, 0.785398]
+    scale: [1.000, 4.000]
+
+  z4v2:
+    from:  [438.647, -51.914, -299.991]
+    to:    batallia_downs_s
+    at:    [165.521, 22.218, -603.006, 5.174027]
+    scale: [1.000, 3.000]
+
+  z4v4:
+    from:  [340.011, -52.117, 324.996]
+    to:    batallia_downs_s
+    at:    [96.010, -2.021, 175.998, 5.497787]
+    scale: [1.000, 4.000]
+
+  z4v6:
+    from:  [60.012, -36.354, 164.979]
+    to:    batallia_downs_s
+    at:    [-91.992, -10.000, 28.006, 5.497787]
+    scale: [1.000, 4.000]
+
+  z4v8:
+    from:  [-165.031, -36.024, 260.003]
+    to:    batallia_downs_s
+    at:    [-256.002, -10.021, 176.001, 3.926991]
+    scale: [1.000, 4.000]
+
+  z4va:
+    from:  [-300.006, -28.084, 115.014]
+    to:    batallia_downs_s
+    at:    [-267.996, -26.000, -107.999, 2.356194]
+    scale: [1.000, 4.000]
+
+  z4vc:
+    from:  [-434.959, -28.154, 540.002]
+    to:    batallia_downs_s
+    at:    [-424.004, -26.021, 376.000, 5.497787]
+    scale: [1.000, 4.000]
+
+  z4ve:
+    from:  [-555.012, -20.914, 99.998]
+    to:    batallia_downs_s
+    at:    [-652.004, -18.000, 131.999, 0.785398]
+    scale: [1.000, 4.000]

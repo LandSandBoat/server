@@ -1,0 +1,3759 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Archaic_Chariot:
+    id:            216
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1821
+        entity_flags: 1153
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   cumulus_cell
+        - chance: always
+          item:   stratus_cell
+        - chance: always
+          item:   virga_cell
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: 50
+          item:   cumulus_cell
+        - chance: 50
+          item:   stratus_cell
+        - chance: 50
+          item:   virga_cell
+        - chance: 12
+          item:   enlils_kolluks
+        - chance: 12
+          item:   hikazu_hakama
+        - chance: uncommon
+          item:   freyas_ledelsens
+
+  Archaic_Gear:
+    id:            218
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: 80
+          item:   duplicatus_cell
+        - chance: 68
+          item:   stratus_cell
+        - chance: uncommon
+          item:   piece_of_alexandrite
+        - chance: 8
+          item:   nemains_slops
+        - chance: 6
+          item:   arrapago_card
+        - chance: 6
+          item:   njords_gloves
+        - chance: 6
+          item:   anus_gaiters
+        - chance: 2
+          item:   enyos_cuisses
+        - chance: 2
+          item:   hoshikazu_hachimaki
+
+  Archaic_Gears:
+    id:            219
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   arrapago_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+        - chance: uncommon
+          item:   cumulus_cell
+        - chance: uncommon
+          item:   undulatus_cell
+        - chance: uncommon
+          item:   njords_gloves
+        - chance: uncommon
+          item:   enyos_cuisses
+        - chance: uncommon
+          item:   nemains_slops
+        - chance: uncommon
+          item:   anus_gaiters
+        - chance: uncommon
+          item:   hoshikazu_hachimaki
+
+  Archaic_Rampart:
+    id:            221
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   arrapago_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+        - chance: uncommon
+          item:   radiatus_cell
+        - chance: uncommon
+          item:   humilus_cell
+        - chance: uncommon
+          item:   spissatus_cell
+
+  Armored_Chariot:
+    id:            246
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 1002
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1822
+        entity_flags: 135
+        model_size:     3
+        hitbox:        41
+      behaviors:
+        flags:      [no_turn]
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   linen_coin_purse
+        - chance: always
+          one_of: [eas_doublet, bodbs_pigaches, eas_tiara, tsukikazu_gote, freyrs_trousers, phoboss_sabatons]
+        - chance: always
+          one_of: [eas_doublet, bodbs_pigaches, eas_tiara, tsukikazu_gote, freyrs_trousers, phoboss_sabatons]
+
+  Demonic_Pugil:
+    id:            976
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Demonic_Rose:
+    id:            978
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         36
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        exp_bonus: 23
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cumulus_cell
+        - chance: uncommon
+          item:   stratus_cell
+
+  Deviate_Bhoot:
+    id:            1015
+    species:       bhoot
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 52
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      5
+          wind:    -1
+          thunder: -2
+          water:   -1
+          light:   -2
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 369
+        hitbox: 6
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 14000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   congestus_cell
+        - chance: uncommon
+          item:   congestus_cell
+        - chance: uncommon
+          item:   cotton_coin_purse
+
+  Devil_Manta:
+    id:            1018
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   stratus_cell
+        - chance: uncommon
+          item:   cirrocumulus_cell
+
+  Draugars_Wyvern:
+    id:            1112
+    species:       shadow_wyvern
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 761
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      spawn:
+        type: [scripted]
+
+  Gespenst:
+    id:            1505
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags:  133
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   virga_cell
+        - chance: uncommon
+          item:   congestus_cell
+        - chance: uncommon
+          item:   velum_cell
+        - chance: rare
+          item:   virga_cell
+
+  Goobbue_Wanderer:
+    id:            1761
+    species:       goobbue
+    type:          [notorious]
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 320
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   pannus_cell
+        - chance: uncommon
+          item:   fractus_cell
+
+  Korrigan:
+    id:            2282
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   congestus_cell
+        - chance: uncommon
+          item:   nimbus_cell
+
+  Lamia_Dancer:
+    id:            2328
+    species:       lamiae
+    spell_list_id: 33
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1653
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   spissatus_cell
+
+  Lamia_Dartist:
+    id:            2329
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1647
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   incus_cell
+        - chance: uncommon
+          item:   undulatus_cell
+        - chance: uncommon
+          item:   opacus_cell
+
+  Lamia_Fatedealer:
+    id:            2332
+    species:       lamiae
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1655
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   undulatus_cell
+        - chance: uncommon
+          item:   opacus_cell
+
+  Lamia_Graverobber:
+    id:            2334
+    species:       lamiae
+    spell_list_id: 28
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   spissatus_cell
+
+  Lamias_Elemental:
+    id:            2359
+    species:       dark_elemental
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags:  129
+        animation_sub:  16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Merrow_Chantress:
+    id:            2619
+    species:       merrow
+    spell_list_id: 6
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1669
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   undulatus_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+
+  Merrow_Icedancer:
+    id:            2620
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1669
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   undulatus_cell
+        - chance: uncommon
+          item:   opacus_cell
+
+  Merrow_Kabukidancer:
+    id:            2621
+    species:       merrow
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: axe
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1672
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   spissatus_cell
+
+  Merrow_Shadowdancer:
+    id:            2627
+    species:       merrow
+    spell_list_id: 3
+    skill_list_id: 182
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1669
+        entity_flags:  515
+        animation_sub:  12
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   spissatus_cell
+
+  Migrant_Russula:
+    id:            2653
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   castellanus_cell
+        - chance: uncommon
+          item:   pileus_cell
+        - chance: uncommon
+          item:   spissatus_cell
+
+  Mourioche:
+    id:            2762
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mediocris_cell
+
+  Nipper:
+    id:            2890
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   fractus_cell
+        - chance: uncommon
+          item:   congestus_cell
+
+  Orobon_AR:
+    id:            6722
+    display_name:  Orobon
+    species:       orobon
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags:  3
+        hitbox:       17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cumulus_cell
+        - chance: uncommon
+          item:   radiatus_cell
+
+  Princess_Pudding:
+    id:            3197
+    species:       flan
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   hoshikazu_gi
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   spissatus_cell
+
+  Psycheflayer:
+    id:            3215
+    species:       soulflayer
+    spell_list_id: 28
+    skill_list_id: 233
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:    2
+          water:  9
+          light: -1
+          dark:  11
+        rank_status:
+          paralyze:     2
+          bind:         2
+          poison:       9
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1775
+        entity_flags:  129
+        animation_sub:  12
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 14000
+    loot:
+      drops:
+        - chance: 14
+          item:   machas_crown
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   cotton_coin_purse
+
+  Qiqirn_Astrologer:
+    id:            3246
+    species:       qiqirn
+    spell_list_id: 21
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: katana
+        delay: 200
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   velum_cell
+        - chance: always
+          item:   stratus_cell
+        - chance: 97
+          item:   praecipitatio_cell
+        - chance: 70
+          item:   velum_cell
+        - chance: 58
+          item:   stratus_cell
+        - chance: 51
+          item:   cotton_coin_purse
+        - chance: 48
+          item:   praecipitatio_cell
+        - chance: 46
+          item:   velum_cell
+        - chance: 38
+          item:   stratus_cell
+        - chance: 7
+          item:   deimoss_cuirass
+      steal: duplicatus_cell
+
+  Qiqirn_Mine:
+    id:      3258
+    species: fortifications
+    attributes:
+      combat:
+        skill: scythe
+      render:
+        look:
+          type:  standard
+          model: 1790
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Treasure_Hunter:
+    id:            3267
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   fractus_cell
+        - chance: always
+          item:   nimbus_cell
+        - chance: 69
+          item:   fractus_cell
+        - chance: 57
+          item:   incus_cell
+        - chance: 51
+          item:   nimbus_cell
+        - chance: 46
+          item:   fractus_cell
+        - chance: 28
+          item:   incus_cell
+        - chance: 28
+          item:   cotton_coin_purse
+        - chance: 4
+          item:   machas_coat
+      steal: cumulus_cell
+
+  Qutrub_drk:
+    id:            3294
+    display_name:  Qutrub
+    species:       qutrub
+    spell_list_id: 5
+    skill_list_id: 203
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: 10000
+          piercing: 10000
+          blunt:    10000
+          h2h:      10000
+        rank_element:
+          fire:    -2
+          ice:      4
+          wind:    -1
+          earth:    1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -1
+          slow:         1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  automaton
+          model: 1733
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:         11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: 20
+          item:   incus_cell
+        - chance: 19
+          item:   castellanus_cell
+
+  Reserve_Draugar_AR_blm:
+    id:            3355
+    display_name:  Reserve_Draugar
+    species:       draugar
+    spell_list_id: 21
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1766
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cirrocumulus_cell
+        - chance: uncommon
+          item:   pannus_cell
+        - chance: uncommon
+          item:   congestus_cell
+        - chance: uncommon
+          item:   nimbus_cell
+        - chance: uncommon
+          item:   velum_cell
+        - chance: uncommon
+          item:   humilus_cell
+
+  Reserve_Draugar_AR_drg:
+    id:            5194
+    display_name:  Reserve_Draugar
+    species:       draugar
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1763
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cirrocumulus_cell
+        - chance: uncommon
+          item:   pannus_cell
+        - chance: uncommon
+          item:   congestus_cell
+        - chance: uncommon
+          item:   nimbus_cell
+        - chance: uncommon
+          item:   velum_cell
+        - chance: uncommon
+          item:   humilus_cell
+
+  Reserve_Draugar_AR_drk:
+    id:            5193
+    display_name:  Reserve_Draugar
+    species:       draugar
+    spell_list_id: 5
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cirrocumulus_cell
+        - chance: uncommon
+          item:   pannus_cell
+        - chance: uncommon
+          item:   congestus_cell
+        - chance: uncommon
+          item:   nimbus_cell
+        - chance: uncommon
+          item:   velum_cell
+        - chance: uncommon
+          item:   humilus_cell
+
+  Reserve_Draugar_AR_thf:
+    id:            5192
+    display_name:  Reserve_Draugar
+    species:       draugar
+    skill_list_id: 89
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1751
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   cirrocumulus_cell
+        - chance: uncommon
+          item:   pannus_cell
+        - chance: uncommon
+          item:   congestus_cell
+        - chance: uncommon
+          item:   nimbus_cell
+        - chance: uncommon
+          item:   velum_cell
+        - chance: uncommon
+          item:   humilus_cell
+
+  Sabotender_Maestro:
+    id:            3431
+    species:       sabotender
+    skill_list_id: 212
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:    4
+          light:    4
+          dark:    -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:       4
+          light_sleep:  4
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 372
+        model_size: 1
+        hitbox:     8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   nimbus_cell
+        - chance: uncommon
+          item:   mediocris_cell
+
+  Seasonal_Treant:
+    id:            3517
+    species:       treant
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 394
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   pannus_cell
+        - chance: uncommon
+          item:   fractus_cell
+
+  Staggering_Sapling:
+    id:            3751
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   fractus_cell
+        - chance: uncommon
+          item:   pileus_cell
+
+  Vile_Wahzil:
+    id:            4233
+    species:       soulflayer
+    spell_list_id: 21
+    skill_list_id: 233
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:    2
+          water:  9
+          light: -1
+          dark:  11
+        rank_status:
+          paralyze:     2
+          bind:         2
+          poison:       9
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1726
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17080321:
+    template: Archaic_Rampart
+    at:       [340.000, -4.500, -326.500, 64]
+    level:    [73, 74]
+  17080322:
+    template: Sabotender_Maestro
+    at:       [339.910, -4.500, -329.490, 235]
+    level:    [75, 76]
+  17080323:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [309.460, -8.496, -379.050, 54]
+    level:    [73, 75]
+  17080324:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [296.070, -8.494, -375.300, 81]
+    level:    [73, 75]
+  17080325:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [306.320, -8.484, -369.460, 31]
+    level:    [73, 75]
+  17080326:
+    template: Lamia_Graverobber
+    at:       [261.560, -10.900, -377.630, 132]
+    level:    [75, 76]
+  17080327:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [223.410, -12.010, -372.060, 38]
+    level:    [73, 75]
+  17080328:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [230.910, -12.010, -374.360, 247]
+    level:    [73, 75]
+  17080329:
+    template: Lamia_Graverobber
+    at:       [225.320, -12.030, -377.220, 26]
+    level:    [75, 76]
+  17080330:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [213.310, -12.010, -381.110, 38]
+    level:    [73, 75]
+  17080331:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [218.300, -14.470, -339.590, 63]
+    level:    [73, 75]
+  17080332:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [214.430, -16.440, -293.790, 66]
+    level:    [73, 75]
+  17080333:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [213.110, -16.480, -301.470, 53]
+    level:    [73, 75]
+  17080334:
+    template: Lamia_Dartist
+    at:       [206.860, -16.450, -303.380, 116]
+    level:    [75, 76]
+  17080335:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [229.160, -16.480, -313.390]
+    level:    [73, 75]
+  17080336:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [310.730, -20.000, -304.770, 244]
+    level:    [73, 75]
+  17080337:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [300.310, -20.030, -292.280, 147]
+    level:    [73, 75]
+  17080338:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [294.520, -20.030, -294.740, 117]
+    level:    [73, 75]
+  17080339:
+    template: Lamia_Dartist
+    at:       [293.430, -20.020, -293.760, 78]
+    level:    [75, 76]
+  17080340:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [297.330, -8.019, -469.480, 14]
+    level:    [73, 75]
+  17080341:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [297.660, -8.029, -469.530, 17]
+    level:    [73, 75]
+  17080342:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [310.780, -8.055, -471.440, 59]
+    level:    [73, 75]
+  17080343:
+    template: Lamia_Dancer
+    at:       [300.010, -12.040, -510.480, 194]
+    level:    [75, 76]
+  17080344:
+    template: Lamias_Elemental
+    at:       [300.190, -12.050, -510.850, 64]
+    level:    [75, 76]
+  17080345:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [296.980, -12.010, -544.680, 186]
+    level:    [73, 75]
+  17080346:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [293.910, -12.010, -542.180, 154]
+    level:    [73, 75]
+  17080347:
+    template: Lamia_Fatedealer
+    at:       [298.510, -12.010, -529.700, 156]
+    level:    [75, 76]
+  17080348:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [310.590, -8.055, -467.070, 96]
+    level:    [73, 75]
+  17080349:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [255.570, -15.960, -541.140, 7]
+    level:    [73, 75]
+  17080350:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [210.950, -16.450, -535.870, 118]
+    level:    [73, 75]
+  17080351:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [214.250, -16.340, -544.790, 125]
+    level:    [73, 75]
+  17080352:
+    template: Lamia_Dancer
+    at:       [233.410, -16.460, -536.280, 245]
+    level:    [75, 76]
+  17080353:
+    template: Lamias_Elemental
+    at:       [232.240, -16.460, -537.670, 230]
+    level:    [75, 76]
+  17080354:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [222.220, -16.380, -552.910]
+    level:    [73, 75]
+  17080355:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [223.520, -20.050, -451.260, 153]
+    level:    [73, 75]
+  17080356:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [209.520, -20.040, -446.050, 135]
+    level:    [73, 75]
+  17080357:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [232.570, -20.050, -472.230, 4]
+    level:    [73, 75]
+  17080358:
+    template: Lamia_Fatedealer
+    at:       [231.570, -20.010, -458.010, 93]
+    level:    [75, 76]
+  17080359:
+    template: Merrow_Shadowdancer
+    at:       [378.700, -8.093, -469.330, 103]
+    level:    [75, 76]
+  17080360:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [388.810, -8.072, -453.630, 170]
+    level:    [75, 76]
+  17080361:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [374.530, -8.071, -468.120, 53]
+    level:    [75, 75]
+  17080362:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [429.470, -12.080, -458.690, 95]
+    level:    [75, 76]
+  17080363:
+    template: Merrow_Kabukidancer
+    at:       [470.270, -12.000, -471.620, 2]
+    level:    [75, 76]
+  17080364:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [446.760, -12.000, -461.180, 91]
+    level:    [75, 75]
+  17080365:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [469.790, -12.000, -453.910, 5]
+    level:    [75, 76]
+  17080366:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [463.540, -12.140, -471.140, 155]
+    level:    [75, 76]
+  17080367:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [453.580, -16.490, -542.620, 194]
+    level:    [75, 75]
+  17080368:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [456.100, -16.450, -526.810, 137]
+    level:    [75, 76]
+  17080369:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [445.180, -16.470, -531.720, 189]
+    level:    [75, 75]
+  17080370:
+    template: Merrow_Icedancer
+    at:       [417.950, -18.810, -540.930, 126]
+    level:    [75, 76]
+  17080371:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [419.580, -18.180, -541.180, 2]
+    level:    [75, 75]
+  17080372:
+    template: Merrow_Shadowdancer
+    at:       [372.160, -20.000, -537.280, 231]
+    level:    [75, 76]
+  17080373:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [392.890, -19.950, -543.730, 62]
+    level:    [75, 76]
+  17080374:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [374.670, -19.960, -529.560, 203]
+    level:    [75, 75]
+  17080375:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [373.710, -19.960, -554.430, 8]
+    level:    [75, 76]
+  17080376:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [383.600, -8.324, -422.780, 214]
+    level:    [75, 75]
+  17080377:
+    template: Draugars_Wyvern
+    at:       [382.510, -8.215, -426.000, 212]
+    level:    [75, 76]
+  17080378:
+    template: Merrow_Chantress
+    at:       [382.660, -8.079, -372.170, 117]
+    level:    [75, 76]
+  17080379:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [370.190, -8.048, -377.200, 120]
+    level:    [75, 75]
+  17080380:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [370.200, -8.043, -385.120, 106]
+    level:    [75, 75]
+  17080381:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [381.000, -12.170, -330.670, 93]
+    level:    [75, 75]
+  17080382:
+    template: Draugars_Wyvern
+    at:       [381.000, -12.500, -330.670, 93]
+    level:    [75, 76]
+  17080383:
+    template: Merrow_Chantress
+    at:       [387.290, -12.020, -303.310, 90]
+    level:    [75, 76]
+  17080384:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [388.510, -12.120, -303.800, 117]
+    level:    [75, 75]
+  17080385:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [370.170, -12.010, -304.250, 132]
+    level:    [75, 75]
+  17080386:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [369.780, -12.120, -285.770, 131]
+    level:    [75, 75]
+  17080387:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [450.260, -16.460, -302.650, 117]
+    level:    [75, 75]
+  17080388:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [473.920, -16.260, -296.200, 202]
+    level:    [75, 75]
+  17080389:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [462.910, -16.250, -284.750, 255]
+    level:    [75, 75]
+  17080390:
+    template: Draugars_Wyvern
+    at:       [460.630, -16.300, -284.350, 1]
+    level:    [75, 76]
+  17080391:
+    template: Gespenst
+    at:       [460.360, -18.230, -335.660, 192]
+    level:    [75, 76]
+  17080392:
+    template: Merrow_Chantress
+    at:       [446.550, -20.450, -384.690, 116]
+    level:    [75, 76]
+  17080393:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [470.650, -19.970, -376.910, 103]
+    level:    [75, 75]
+  17080394:
+    template: Gespenst
+    at:       [447.700, -19.960, -373.940, 129]
+    level:    [75, 76]
+  17080395:
+    template: Gespenst
+    at:       [447.560, -19.960, -382.720, 119]
+    level:    [75, 76]
+  17080396:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [289.160, -0.492, 195.294, 160]
+    level:    [73, 75]
+  17080397:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [259.050, -0.435, 205.391, 242]
+    level:    [73, 75]
+  17080398:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [256.310, -0.481, 211.115, 251]
+    level:    [73, 75]
+  17080399:
+    template: Lamia_Graverobber
+    at:       [282.690, -0.483, 192.977, 163]
+    level:    [75, 76]
+  17080400:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [234.640, -0.437, 152.348, 175]
+    level:    [73, 75]
+  17080401:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [235.180, -0.432, 155.356, 217]
+    level:    [73, 75]
+  17080402:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [241.940, -0.486, 172.326, 119]
+    level:    [73, 75]
+  17080403:
+    template: Lamia_Dartist
+    at:       [231.580, -0.488, 173.016, 65]
+    level:    [75, 76]
+  17080404:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [227.970, -0.199, 21.637, 187]
+    level:    [73, 75]
+  17080405:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [230.360, -0.238, 12.022, 183]
+    level:    [73, 75]
+  17080406:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [249.180, -0.358, 45.478, 98]
+    level:    [73, 75]
+  17080407:
+    template: Lamia_Dancer
+    at:       [238.530, -0.231, 23.366, 212]
+    level:    [75, 76]
+  17080408:
+    template: Lamias_Elemental
+    at:       [238.430, -0.061, 39.074, 188]
+    level:    [75, 76]
+  17080409:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [280.130, -0.230, -8.393, 126]
+    level:    [73, 75]
+  17080410:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [284.040, -0.236, -2.623, 44]
+    level:    [73, 75]
+  17080411:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [283.080, -0.305, 6.329, 39]
+    level:    [73, 75]
+  17080412:
+    template: Lamia_Fatedealer
+    at:       [275.530, -0.287, -4.174, 225]
+    level:    [75, 76]
+  17080413:
+    template: Merrow_Shadowdancer
+    at:       [436.950, -0.479, -6.596, 118]
+    level:    [75, 76]
+  17080414:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [419.960, -0.495, -14.010, 124]
+    level:    [75, 76]
+  17080415:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [395.010, -0.481, 0.333, 57]
+    level:    [75, 75]
+  17080416:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [418.550, -0.495, -15.343, 135]
+    level:    [75, 76]
+  17080417:
+    template: Merrow_Kabukidancer
+    at:       [445.070, -0.488, 27.913, 207]
+    level:    [75, 76]
+  17080418:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [430.600, -0.483, 44.896, 140]
+    level:    [75, 75]
+  17080419:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [418.130, -0.442, 48.428, 23]
+    level:    [75, 76]
+  17080420:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [422.910, -0.483, 50.270, 139]
+    level:    [75, 75]
+  17080421:
+    template: Merrow_Chantress
+    at:       [451.820, -0.500, 184.869]
+    level:    [75, 76]
+  17080422:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [451.460, -0.500, 175.363]
+    level:    [75, 75]
+  17080423:
+    template: Reserve_Draugar_AR_thf
+    script:   Reserve_Draugar
+    at:       [448.250, -0.500, 163.815]
+    level:    [75, 75]
+  17080424:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [445.580, -0.500, 188.565]
+    level:    [75, 75]
+  17080425:
+    template: Draugars_Wyvern
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 76]
+  17080426:
+    template: Merrow_Chantress
+    at:       [408.950, -0.500, 208.188]
+    level:    [75, 76]
+  17080427:
+    template: Reserve_Draugar_AR_drg
+    script:   Reserve_Draugar
+    at:       [401.060, -0.500, 190.078]
+    level:    [75, 75]
+  17080428:
+    template: Draugars_Wyvern
+    at:       [389.170, -0.500, 185.167, 132]
+    level:    [75, 76]
+  17080429:
+    template: Gespenst
+    at:       [395.770, -0.500, 200.423]
+    level:    [75, 76]
+  17080430:
+    template: Gespenst
+    at:       [394.240, -0.500, 171.401]
+    level:    [75, 76]
+  17080431:
+    template: Qiqirn_Astrologer
+    at:       [291.850, -0.153, 99.387, 182]
+    level:    [77, 78]
+  17080432:
+    template: Lamia_Dartist
+    at:       [271.580, -4.012, 511.032, 192]
+    level:    [75, 76]
+  17080433:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [261.680, -3.999, 511.087, 210]
+    level:    [73, 75]
+  17080434:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [260.400, -3.970, 488.958, 149]
+    level:    [73, 75]
+  17080435:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [254.230, -4.008, 510.136, 185]
+    level:    [73, 75]
+  17080436:
+    template: Lamia_Fatedealer
+    at:       [225.370, -4.013, 472.114, 128]
+    level:    [75, 76]
+  17080437:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [220.780, -4.013, 447.145, 28]
+    level:    [73, 75]
+  17080438:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [212.290, -4.013, 462.135, 245]
+    level:    [73, 75]
+  17080439:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [223.660, -4.037, 469.250, 199]
+    level:    [73, 75]
+  17080440:
+    template: Psycheflayer
+    at:       [247.350, -4.052, 416.264, 74]
+    level:    [78, 78]
+  17080441:
+    template: Psycheflayer
+    at:       [268.700, -4.032, 413.144, 78]
+    level:    [78, 78]
+  17080442:
+    template: Lamia_Dancer
+    at:       [302.300, -4.002, 346.649, 117]
+    level:    [75, 76]
+  17080443:
+    template: Lamias_Elemental
+    at:       [305.270, -4.002, 346.351, 127]
+    level:    [75, 76]
+  17080444:
+    template: Lamia_Graverobber
+    at:       [290.320, -4.018, 346.809, 109]
+    level:    [75, 76]
+  17080445:
+    template: Qutrub_drk
+    script:   Qutrub
+    at:       [302.720, -4.000, 353.312, 73]
+    level:    [73, 75]
+  17080446:
+    template: Psycheflayer
+    at:       [331.560, -4.030, 347.037, 111]
+    level:    [78, 78]
+  17080447:
+    template: Psycheflayer
+    at:       [339.370, -4.008, 371.829, 251]
+    level:    [78, 78]
+  17080448:
+    template: Psycheflayer
+    at:       [337.350, -4.044, 362.864, 149]
+    level:    [78, 78]
+  17080449:
+    template: Psycheflayer
+    at:       [384.840, -4.004, 350.524, 36]
+    level:    [78, 78]
+  17080450:
+    template: Psycheflayer
+    at:       [390.320, -4.000, 352.687, 218]
+    level:    [78, 78]
+  17080451:
+    template: Psycheflayer
+    at:       [369.950, -4.050, 373.454, 141]
+    level:    [78, 78]
+  17080452:
+    template: Qiqirn_Treasure_Hunter
+    at:       [330.770, -4.079, 416.506, 42]
+    level:    [73, 75]
+  17080453:
+    template: Qiqirn_Mine
+    at:       [330.770, -4.079, 416.506, 42]
+    level:    [75, 75]
+  17080454:
+    template: Merrow_Shadowdancer
+    at:       [423.020, -4.044, 408.705, 9]
+    level:    [75, 76]
+  17080455:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [431.640, -4.057, 408.179, 254]
+    level:    [75, 76]
+  17080456:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [408.640, -4.039, 408.937, 118]
+    level:    [75, 75]
+  17080457:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [421.050, -4.225, 415.292, 87]
+    level:    [75, 75]
+  17080458:
+    template: Merrow_Kabukidancer
+    at:       [446.480, -4.152, 455.020, 178]
+    level:    [75, 76]
+  17080459:
+    template: Reserve_Draugar_AR_drk
+    script:   Reserve_Draugar
+    at:       [456.490, -4.052, 456.511, 138]
+    level:    [75, 75]
+  17080460:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [456.440, -4.035, 448.406, 117]
+    level:    [75, 76]
+  17080461:
+    template: Reserve_Draugar_AR_blm
+    script:   Reserve_Draugar
+    at:       [445.260, -4.051, 449.932, 71]
+    level:    [75, 76]
+  17080462:
+    template: Merrow_Chantress
+    at:       [414.190, -4.071, 490.902, 246]
+    level:    [75, 76]
+  17080463:
+    template: Gespenst
+    at:       [415.990, -4.155, 492.299, 245]
+    level:    [75, 76]
+  17080464:
+    template: Gespenst
+    at:       [410.290, -4.111, 501.713, 81]
+    level:    [75, 76]
+  17080465:
+    template: Merrow_Icedancer
+    at:       [374.050, -4.032, 551.450, 223]
+    level:    [75, 76]
+  17080466:
+    template: Merrow_Icedancer
+    at:       [388.110, -4.032, 568.280, 79]
+    level:    [75, 76]
+  17080467:
+    template: Gespenst
+    at:       [367.800, -4.039, 567.085, 68]
+    level:    [75, 76]
+  17080468:
+    template: Gespenst
+    at:       [367.230, -4.039, 546.591, 109]
+    level:    [75, 76]
+  17080469:
+    template: Deviate_Bhoot
+    at:       [328.200, -4.080, 547.421, 89]
+    level:    [78, 78]
+  17080470:
+    template: Gespenst
+    at:       [344.710, -4.071, 550.132, 234]
+    level:    [75, 76]
+  17080471:
+    template: Gespenst
+    at:       [341.330, -4.046, 547.195, 105]
+    level:    [75, 76]
+  17080472:
+    template: Deviate_Bhoot
+    at:       [310.490, -4.081, 569.307, 212]
+    level:    [78, 78]
+  17080473:
+    template: Deviate_Bhoot
+    at:       [300.750, -4.032, 569.244, 182]
+    level:    [78, 78]
+  17080474:
+    template: Gespenst
+    at:       [303.970, -4.034, 565.651, 91]
+    level:    [75, 76]
+  17080475:
+    template: Qiqirn_Treasure_Hunter
+    at:       [325.680, -4.499, 512.601]
+    level:    [73, 75]
+  17080476:
+    template: Qiqirn_Mine
+    at:       [326.810, -4.448, 504.832, 63]
+    level:    [75, 75]
+  17080477:
+    template: Psycheflayer
+    at:       [-343.800, -4.125, -690.090, 49]
+    level:    [78, 78]
+  17080478:
+    template: Psycheflayer
+    at:       [-332.700, -4.451, -675.590, 122]
+    level:    [78, 78]
+  17080479:
+    template: Psycheflayer
+    at:       [-340.700, -4.185, -674.420, 10]
+    level:    [78, 78]
+  17080480:
+    template: Psycheflayer
+    at:       [-367.000, -4.232, -687.110, 248]
+    level:    [78, 78]
+  17080481:
+    template: Psycheflayer
+    at:       [-313.600, -4.123, -667.410, 235]
+    level:    [78, 78]
+  17080482:
+    template: Psycheflayer
+    at:       [-368.100, -4.080, -680.170, 140]
+    level:    [78, 78]
+  17080483:
+    template: Archaic_Gear
+    at:       [-293.000, -0.171, -533.360, 39]
+    level:    [73, 74]
+  17080484:
+    template: Archaic_Gear
+    at:       [-305.300, 0.014, -525.630, 253]
+    level:    [73, 74]
+  17080485:
+    template: Archaic_Gear
+    at:       [-292.000, -0.026, -541.420, 99]
+    level:    [73, 74]
+  17080486:
+    template: Archaic_Gear
+    at:       [-248.800, -0.006, -544.810, 140]
+    level:    [73, 74]
+  17080487:
+    template: Archaic_Gear
+    at:       [-249.000, -0.021, -537.010, 175]
+    level:    [73, 74]
+  17080488:
+    template: Archaic_Gear
+    at:       [-250.000, -0.500, -540.000, 128]
+    level:    [73, 74]
+  17080489:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_1
+    at:       [-240.000, -0.500, -525.000, 64]
+    level:    [73, 74]
+  17080490:
+    template: Nipper
+    at:       [-228.800, -0.018, -537.260, 45]
+    level:    [75, 76]
+  17080491:
+    template: Nipper
+    at:       [-229.800, -0.018, -538.260, 45]
+    level:    [75, 76]
+  17080492:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_2
+    at:       [-240.000, -0.500, -555.000, 192]
+    level:    [73, 74]
+  17080493:
+    template: Nipper
+    at:       [-236.000, -0.101, -541.750, 198]
+    level:    [75, 76]
+  17080494:
+    template: Nipper
+    at:       [-240.100, -0.492, -551.800, 167]
+    level:    [75, 76]
+  17080495:
+    template: Qiqirn_Treasure_Hunter
+    at:       [-393.100, -0.449, -615.880]
+    level:    [73, 75]
+  17080496:
+    template: Qiqirn_Mine
+    at:       [-384.700, -1.500, -619.190, 206]
+    level:    [75, 75]
+  17080497:
+    template: Deviate_Bhoot
+    at:       [-334.700, 3.848, -394.830, 235]
+    level:    [78, 78]
+  17080498:
+    template: Deviate_Bhoot
+    at:       [-339.300, 3.869, -400.490, 123]
+    level:    [78, 78]
+  17080499:
+    template: Deviate_Bhoot
+    at:       [-329.300, 3.776, -410.190, 152]
+    level:    [78, 78]
+  17080500:
+    template: Deviate_Bhoot
+    at:       [-309.000, 3.831, -399.200, 75]
+    level:    [78, 78]
+  17080501:
+    template: Deviate_Bhoot
+    at:       [-370.500, 3.774, -389.120, 116]
+    level:    [78, 78]
+  17080502:
+    template: Deviate_Bhoot
+    at:       [-309.200, 3.833, -396.410, 226]
+    level:    [78, 78]
+  17080503:
+    template: Archaic_Gear
+    at:       [-368.700, -0.449, -536.280, 14]
+    level:    [73, 74]
+  17080504:
+    template: Archaic_Gear
+    at:       [-391.700, -0.004, -554.430, 183]
+    level:    [73, 74]
+  17080505:
+    template: Archaic_Gear
+    at:       [-382.500, -0.007, -548.800, 190]
+    level:    [73, 74]
+  17080506:
+    template: Archaic_Gear
+    at:       [-440.000, -0.002, -537.160, 206]
+    level:    [73, 74]
+  17080507:
+    template: Archaic_Gear
+    at:       [-439.700, -0.001, -539.180, 48]
+    level:    [73, 74]
+  17080508:
+    template: Archaic_Gear
+    at:       [-426.000, -0.500, -540.000]
+    level:    [73, 74]
+  17080509:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_2
+    at:       [-440.000, -0.500, -525.000, 64]
+    level:    [73, 74]
+  17080510:
+    template: Migrant_Russula
+    at:       [-439.200, -0.030, -546.610, 44]
+    level:    [68, 69]
+  17080511:
+    template: Migrant_Russula
+    at:       [-428.900, -0.061, -533.590, 19]
+    level:    [68, 69]
+  17080512:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_1
+    at:       [-440.000, -0.500, -555.000, 192]
+    level:    [73, 74]
+  17080513:
+    template: Demonic_Rose
+    at:       [-439.000, -0.500, -554.000, 192]
+    level:    [73, 75]
+  17080514:
+    template: Qiqirn_Treasure_Hunter
+    at:       [-297.700, -0.449, -471.440]
+    level:    [73, 75]
+  17080515:
+    template: Qiqirn_Mine
+    at:       [-299.900, -0.500, -472.390, 66]
+    level:    [75, 75]
+  17080516:
+    template: Archaic_Gear
+    at:       [-339.800, -0.486, -210.720, 223]
+    level:    [73, 74]
+  17080517:
+    template: Archaic_Gear
+    at:       [-343.700, -0.020, -226.640, 144]
+    level:    [73, 74]
+  17080518:
+    template: Archaic_Gear
+    at:       [-326.000, -0.013, -215.980, 201]
+    level:    [73, 74]
+  17080519:
+    template: Archaic_Gear
+    at:       [-340.000, 3.423, -166.510, 64]
+    level:    [73, 74]
+  17080520:
+    template: Qiqirn_Astrologer
+    at:       [-346.600, 4.013, -134.190, 245]
+    level:    [77, 78]
+  17080521:
+    template: Archaic_Gear
+    at:       [-298.300, 0.002, -182.490, 2]
+    level:    [73, 74]
+  17080522:
+    template: Archaic_Gear
+    at:       [-292.300, 0.021, -181.770, 118]
+    level:    [73, 74]
+  17080523:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_2
+    at:       [-290.000, -0.500, -180.000, 128]
+    level:    [73, 74]
+  17080524:
+    template: Devil_Manta
+    at:       [-289.000, 0.001, -179.000, 128]
+    level:    [70, 73]
+  17080525:
+    template: Devil_Manta
+    at:       [-289.000, 0.001, -179.000, 128]
+    level:    [70, 73]
+  17080526:
+    template: Archaic_Gear
+    at:       [-263.000, 0.001, -122.390, 12]
+    level:    [73, 74]
+  17080527:
+    template: Archaic_Gears
+    at:       [-257.100, 0.001, -118.890, 138]
+    level:    [74, 75]
+  17080528:
+    template: Archaic_Gear
+    at:       [-245.400, 0.001, -79.817, 17]
+    level:    [73, 74]
+  17080529:
+    template: Archaic_Gears
+    at:       [-287.100, 0.001, -79.470, 90]
+    level:    [74, 75]
+  17080530:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_2
+    at:       [-233.000, -0.449, -100.000, 128]
+    level:    [73, 74]
+  17080531:
+    template: Devil_Manta
+    at:       [-232.000, -0.500, -99.000, 128]
+    level:    [70, 73]
+  17080532:
+    template: Devil_Manta
+    at:       [-232.000, -0.500, -99.000, 128]
+    level:    [70, 73]
+  17080533:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_3
+    at:       [-293.000, -0.500, -100.000]
+    level:    [73, 74]
+  17080534:
+    template: Demonic_Pugil
+    at:       [-292.000, -0.500, -99.000]
+    level:    [73, 75]
+  17080535:
+    template: Demonic_Pugil
+    at:       [-292.000, -0.500, -99.000]
+    level:    [73, 75]
+  17080536:
+    template: Orobon_AR
+    script:   Orobon
+    at:       [-292.000, -0.500, -99.000]
+    level:    [68, 69]
+  17080537:
+    template: Archaic_Chariot
+    at:       [-263.100, 0.018, -102.700, 67]
+    level:    [77, 78]
+  17080538:
+    template: Archaic_Gear
+    at:       [-331.500, -0.340, 18.630, 29]
+    level:    [73, 74]
+  17080539:
+    template: Archaic_Gear
+    at:       [-335.700, -0.037, 28.803, 26]
+    level:    [73, 74]
+  17080540:
+    template: Archaic_Gear
+    at:       [-333.200, -0.061, 31.150, 252]
+    level:    [73, 74]
+  17080541:
+    template: Archaic_Gear
+    at:       [-340.000, -4.388, -32.248, 192]
+    level:    [73, 74]
+  17080542:
+    template: Qiqirn_Astrologer
+    at:       [-342.600, -4.500, -57.333]
+    level:    [77, 78]
+  17080543:
+    template: Archaic_Gear
+    at:       [-375.300, 0.005, -14.420, 27]
+    level:    [73, 74]
+  17080544:
+    template: Archaic_Gear
+    at:       [-365.600, 0.021, -12.710, 199]
+    level:    [73, 74]
+  17080545:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_3
+    at:       [-393.000, -0.500, -20.000, 128]
+    level:    [73, 74]
+  17080546:
+    template: Mourioche
+    at:       [-392.000, -0.500, -19.000, 128]
+    level:    [68, 69]
+  17080547:
+    template: Mourioche
+    at:       [-392.000, -0.500, -19.000, 128]
+    level:    [68, 69]
+  17080548:
+    template: Mourioche
+    at:       [-392.000, -0.500, -19.000, 128]
+    level:    [68, 69]
+  17080549:
+    template: Archaic_Gear
+    at:       [-410.700, 0.001, -71.164, 251]
+    level:    [73, 74]
+  17080550:
+    template: Archaic_Gears
+    at:       [-415.200, 0.001, -73.176, 156]
+    level:    [74, 75]
+  17080551:
+    template: Archaic_Gear
+    at:       [-409.700, 0.001, -119.670, 33]
+    level:    [73, 74]
+  17080552:
+    template: Archaic_Gears
+    at:       [-400.100, 0.001, -119.610, 19]
+    level:    [74, 75]
+  17080553:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_1
+    at:       [-445.000, -0.449, -100.000]
+    level:    [73, 74]
+  17080554:
+    template: Goobbue_Wanderer
+    at:       [-444.000, -0.449, -99.000]
+    level:    [70, 73]
+  17080555:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_2
+    at:       [-387.000, -0.500, -100.000, 128]
+    level:    [73, 74]
+  17080556:
+    template: Goobbue_Wanderer
+    at:       [-386.000, -0.449, -99.000]
+    level:    [70, 73]
+  17080557:
+    template: Goobbue_Wanderer
+    at:       [-386.000, -0.449, -99.000]
+    level:    [70, 73]
+  17080558:
+    template: Archaic_Chariot
+    at:       [-419.000, -0.006, -84.586, 199]
+    level:    [77, 78]
+  17080559:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_2
+    at:       [-340.000, -0.500, 253.000, 64]
+    level:    [73, 74]
+  17080560:
+    template: Seasonal_Treant
+    at:       [-419.000, 0.500, 235.000, 64]
+    level:    [68, 69]
+  17080561:
+    template: Seasonal_Treant
+    at:       [-419.000, 0.500, 235.000, 64]
+    level:    [68, 69]
+  17080562:
+    template: Archaic_Gears
+    at:       [-316.000, -0.472, 235.759, 192]
+    level:    [74, 75]
+  17080563:
+    template: Archaic_Gears
+    at:       [-317.200, -0.037, 155.333, 45]
+    level:    [74, 75]
+  17080564:
+    template: Archaic_Gear
+    at:       [-359.800, -0.474, 211.024, 155]
+    level:    [73, 74]
+  17080565:
+    template: Archaic_Gear
+    at:       [-365.200, -0.476, 211.470, 73]
+    level:    [73, 74]
+  17080566:
+    template: Archaic_Gears
+    at:       [-359.500, -0.474, 178.126, 67]
+    level:    [74, 75]
+  17080567:
+    template: Archaic_Gear
+    at:       [-322.500, -0.469, 218.257, 3]
+    level:    [73, 74]
+  17080568:
+    template: Archaic_Gear
+    at:       [-311.200, -0.432, 182.477, 109]
+    level:    [73, 74]
+  17080569:
+    template: Archaic_Gears
+    at:       [-316.800, -0.075, 166.942, 243]
+    level:    [74, 75]
+  17080570:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_2
+    at:       [-340.000, -0.449, 180.000, 192]
+    level:    [73, 74]
+  17080571:
+    template: Seasonal_Treant
+    at:       [-258.000, 0.500, 194.000, 64]
+    level:    [68, 69]
+  17080572:
+    template: Seasonal_Treant
+    at:       [-258.000, 0.500, 194.000, 64]
+    level:    [68, 69]
+  17080573:
+    template: Qiqirn_Treasure_Hunter
+    at:       [-337.600, -0.508, 226.486, 102]
+    level:    [73, 75]
+  17080574:
+    template: Qiqirn_Mine
+    at:       [-371.100, -0.500, 219.212, 4]
+    level:    [75, 75]
+  17080575:
+    template: Qiqirn_Treasure_Hunter
+    at:       [-333.900, -0.685, 219.697, 216]
+    level:    [73, 75]
+  17080576:
+    template: Qiqirn_Mine
+    at:       [-333.900, -0.773, 219.697, 216]
+    level:    [75, 75]
+  17080577:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_3
+    at:       [-429.000, -0.500, 220.000, 4]
+    level:    [73, 74]
+  17080578:
+    template: Staggering_Sapling
+    at:       [-420.300, -0.094, 211.843, 27]
+    level:    [68, 69]
+  17080579:
+    template: Staggering_Sapling
+    at:       [-420.300, -0.094, 211.843, 27]
+    level:    [68, 69]
+  17080580:
+    template: Staggering_Sapling
+    at:       [-426.000, -0.500, 220.000, 75]
+    level:    [68, 69]
+  17080581:
+    template: Archaic_Rampart
+    script:   Archaic_Rampart_3
+    at:       [-251.000, -0.500, 180.000, 128]
+    level:    [73, 74]
+  17080582:
+    template: Korrigan
+    at:       [-246.400, -0.093, 171.893, 51]
+    level:    [68, 69]
+  17080583:
+    template: Korrigan
+    at:       [-246.400, -0.093, 171.893, 51]
+    level:    [68, 69]
+  17080584:
+    template: Korrigan
+    at:       [-246.400, -0.093, 171.893, 51]
+    level:    [68, 69]
+  17080585:
+    template: Armored_Chariot
+    at:       [-339.000, -5.000, 500.000, 188]
+    level:    [80, 85]
+  17080596:
+    template: Vile_Wahzil
+    at:       [260.000, 0.000, -27.000, 189]
+    level:    [70, 71]
+  17080597:
+    template: Princess_Pudding
+    at:       [420.000, 0.000, -25.000, 188]
+    level:    [70, 72]
+  17080599:
+    script: Vulture
+  17080600:
+    script: Vulture
+  17080601:
+    script: Vulture
+  17080602:
+    script: Vulture
+  17080603:
+    script: Vulture
+  17080604:
+    script: Vulture
+  17080605:
+    script: Vulture
+  17080606:
+    script: Vulture
+  17080607:
+    script: Vulture
+  17080608:
+    script: Vulture
+  17080609:
+    script: Vulture
+  17080610:
+    script: Vulture
+  17080611:
+    script: Vulture
+  17080612:
+    script: Vulture
+  17080613:
+    script: Vulture
+  17080614:
+    script: Vulture
+  17080615:
+    script: Merrow_Kabukidancer
+  17080616:
+    script: Merrow_Kabukidancer
+  17080617:
+    script: Chigoe_Stinger
+  17080618:
+    script: Leech
+  17080619:
+    script: Leech
+  17080620:
+    script: Leech
+  17080621:
+    script: Leech
+  17080622:
+    script: Leech
+  17080623:
+    script: Leech
+  17080624:
+    script: Leech
+  17080625:
+    script: Leech
+  17080626:
+    script: Leech
+  17080627:
+    script: Leech
+  17080628:
+    script: Leech
+  17080629:
+    script: Leech
+  17080630:
+    script: Leech
+  17080631:
+    script: Leech
+  17080632:
+    script: Leech
+  17080633:
+    script: Leech
+  17080634:
+    script: Merrow_Shadowdancer
+  17080635:
+    script: Merrow_Shadowdancer
+  17080636:
+    script: Chigoe_Stinger
+  17080637:
+    script: Leech
+  17080638:
+    script: Leech
+  17080639:
+    script: Leech
+  17080640:
+    script: Leech
+  17080641:
+    script: Leech
+  17080642:
+    script: Leech
+  17080643:
+    script: Leech
+  17080644:
+    script: Leech
+  17080645:
+    script: Leech
+  17080646:
+    script: Leech
+  17080647:
+    script: Leech
+  17080648:
+    script: Leech
+  17080649:
+    script: Leech
+  17080650:
+    script: Leech
+  17080651:
+    script: Leech
+  17080652:
+    script: Leech
+  17080653:
+    script: Lamia_Dartist
+  17080654:
+    script: Lamia_Dartist
+  17080655:
+    script: Chigoe_Stinger
+  17080656:
+    script: Vulture
+  17080657:
+    script: Vulture
+  17080658:
+    script: Vulture
+  17080659:
+    script: Vulture
+  17080660:
+    script: Vulture
+  17080661:
+    script: Vulture
+  17080662:
+    script: Vulture
+  17080663:
+    script: Vulture
+  17080664:
+    script: Vulture
+  17080665:
+    script: Vulture
+  17080666:
+    script: Vulture
+  17080667:
+    script: Vulture
+  17080668:
+    script: Vulture
+  17080669:
+    script: Vulture
+  17080670:
+    script: Vulture
+  17080671:
+    script: Vulture
+  17080672:
+    script: Lamia_Dancer
+  17080673:
+    script: Lamias_Elemental
+  17080674:
+    script: Lamia_Dancer
+  17080675:
+    script: Lamias_Elemental
+  17080676:
+    script: Chigoe_Stinger
+  17080677:
+    script: Leech
+  17080678:
+    script: Leech
+  17080679:
+    script: Leech
+  17080680:
+    script: Leech
+  17080681:
+    script: Leech
+  17080682:
+    script: Leech
+  17080683:
+    script: Leech
+  17080684:
+    script: Leech
+  17080685:
+    script: Leech
+  17080686:
+    script: Leech
+  17080687:
+    script: Merrow_Chantress
+  17080688:
+    script: Lamia_Dartist
+  17080689:
+    script: Vulture
+  17080690:
+    script: Vulture
+  17080691:
+    script: Vulture
+  17080692:
+    script: Vulture
+  17080693:
+    script: Vulture
+  17080694:
+    script: Vulture
+  17080695:
+    script: Vulture
+  17080696:
+    script: Vulture
+  17080697:
+    script: Vulture
+  17080698:
+    script: Vulture
+  17080699:
+    script: Merrow_Icedancer
+  17080700:
+    script: Lamia_Dancer
+  17080701:
+    script: Lamias_Elemental
+  17080702:
+    script: Vulture
+  17080703:
+    script: Vulture
+  17080704:
+    script: Vulture
+  17080705:
+    script: Vulture
+  17080706:
+    script: Vulture
+  17080707:
+    script: Vulture
+  17080708:
+    script: Vulture
+  17080709:
+    script: Vulture
+  17080710:
+    script: Vulture
+  17080711:
+    script: Vulture
+  17080712:
+    script: Merrow_Icedancer
+  17080713:
+    script: Lamia_Dancer
+  17080714:
+    script: Lamias_Elemental
+  17080715:
+    script: Leech
+  17080716:
+    script: Leech
+  17080717:
+    script: Leech
+  17080718:
+    script: Leech
+  17080719:
+    script: Leech
+  17080720:
+    script: Leech
+  17080721:
+    script: Leech
+  17080722:
+    script: Leech
+  17080723:
+    script: Leech
+  17080724:
+    script: Leech
+  17080725:
+    script: Merrow_Chantress
+  17080726:
+    script: Lamia_Dartist
+  17080727:
+    script: Archaic_Gear
+  17080728:
+    script: Archaic_Gear
+  17080729:
+    script: Archaic_Gear
+  17080730:
+    script: Archaic_Gear
+  17080731:
+    script: Archaic_Gear
+  17080732:
+    script: Flytrap
+  17080733:
+    script: Flytrap
+  17080734:
+    script: Flytrap
+  17080735:
+    script: Flytrap
+  17080736:
+    script: Flytrap
+  17080737:
+    script: Flytrap
+  17080738:
+    script: Flytrap
+  17080739:
+    script: Flytrap
+  17080740:
+    script: Flytrap
+  17080741:
+    script: Flytrap
+  17080742:
+    script: Flytrap
+  17080743:
+    script: Flytrap
+  17080744:
+    script: Merrow_Shadowdancer
+  17080745:
+    script: Merrow_Chantress
+  17080746:
+    script: Merrow_Kabukidancer
+  17080747:
+    script: Merrow_Icedancer
+  17080748:
+    script: Merrow_Shadowdancer
+  17080749:
+    script: Merrow_Chantress
+  17080750:
+    script: Merrow_Kabukidancer
+  17080751:
+    script: Merrow_Icedancer
+  17080752:
+    script: Merrow_Shadowdancer
+  17080753:
+    script: Merrow_Chantress
+  17080754:
+    script: Merrow_Kabukidancer
+  17080755:
+    script: Merrow_Icedancer
+  17080756:
+    script: Archaic_Gear
+  17080757:
+    script: Chigoe_Stinger
+  17080758:
+    script: Qutrub
+  17080759:
+    script: Qutrub
+  17080760:
+    script: Qutrub
+  17080761:
+    script: Qutrub
+  17080762:
+    script: Qutrub
+  17080763:
+    script: Qutrub
+  17080764:
+    script: Qutrub
+  17080765:
+    script: Qutrub
+  17080766:
+    script: Qutrub
+  17080767:
+    script: Qutrub
+  17080768:
+    script: Qutrub
+  17080769:
+    script: Qutrub
+  17080770:
+    script: Lamia_Graverobber
+  17080771:
+    script: Lamia_Dartist
+  17080772:
+    script: Lamia_Fatedealer
+  17080773:
+    script: Lamia_Dancer
+  17080774:
+    script: Lamias_Elemental
+  17080775:
+    script: Lamia_Graverobber
+  17080776:
+    script: Lamia_Dartist
+  17080777:
+    script: Lamia_Fatedealer
+  17080778:
+    script: Lamia_Dancer
+  17080779:
+    script: Lamias_Elemental
+  17080780:
+    script: Lamia_Graverobber
+  17080781:
+    script: Lamia_Dartist
+  17080782:
+    script: Lamia_Fatedealer
+  17080783:
+    script: Lamia_Dancer
+  17080784:
+    script: Lamias_Elemental
+  17080785:
+    script: Archaic_Gear
+  17080786:
+    script: Archaic_Gear
+  17080787:
+    script: Acrolith
+  17080788:
+    script: Acrolith
+  17080789:
+    script: Qutrub
+  17080790:
+    script: Qutrub
+  17080791:
+    script: Qutrub
+  17080792:
+    script: Qutrub
+  17080793:
+    script: Qutrub
+  17080794:
+    script: Qutrub
+  17080795:
+    script: Qutrub
+  17080796:
+    script: Qutrub
+  17080797:
+    script: Qutrub_Devourer
+  17080798:
+    script: Merrow_Shadowdancer
+  17080799:
+    script: Merrow_Chantress
+  17080800:
+    script: Merrow_Kabukidancer
+  17080801:
+    script: Merrow_Icedancer
+  17080802:
+    script: Merrow_Shadowdancer
+  17080803:
+    script: Merrow_Chantress
+  17080804:
+    script: Merrow_Kabukidancer
+  17080805:
+    script: Merrow_Icedancer
+  17080806:
+    script: Acrolith
+  17080807:
+    script: Acrolith
+  17080808:
+    script: Acrolith
+  17080809:
+    script: Flytrap
+  17080810:
+    script: Flytrap
+  17080811:
+    script: Flytrap
+  17080812:
+    script: Flytrap
+  17080813:
+    script: Flytrap
+  17080814:
+    script: Flytrap
+  17080815:
+    script: Flytrap
+  17080816:
+    script: Flytrap
+  17080817:
+    script: Lamia_Graverobber
+  17080818:
+    script: Lamia_Dartist
+  17080819:
+    script: Lamia_Fatedealer
+  17080820:
+    script: Lamia_Dancer
+  17080821:
+    script: Lamias_Elemental
+  17080822:
+    script: Lamia_Graverobber
+  17080823:
+    script: Lamia_Dartist
+  17080824:
+    script: Lamia_Fatedealer
+  17080825:
+    script: Lamia_Dancer
+  17080826:
+    script: Lamias_Elemental
+  17080827:
+    script: Lamia_Spoliator
+  17080828:
+    script: Acrolith
+  17080829:
+    script: Acrolith
+  17080830:
+    script: Acrolith
+  17080831:
+    script: Archaic_Gear
+  17080832:
+    script: Archaic_Gear
+  17080833:
+    script: Archaic_Gear
+  17080834:
+    script: Archaic_Gear
+  17080835:
+    script: Archaic_Gear
+  17080836:
+    script: Archaic_Gear
+  17080837:
+    script: Archaic_Gear
+  17080838:
+    script: Archaic_Gear
+  17080839:
+    script: Archaic_Gear
+  17080840:
+    script: Archaic_Gear
+  17080841:
+    script: Archaic_Gear
+  17080842:
+    script: Archaic_Gear
+  17080843:
+    script: Archaic_Gear
+  17080844:
+    script: Archaic_Gear
+  17080845:
+    script: Archaic_Gear
+  17080846:
+    script: Archaic_Gear
+  17080847:
+    script: Archaic_Rampart
+  17080848:
+    script: Archaic_Gears
+  17080849:
+    script: Archaic_Gears
+  17080850:
+    script: Archaic_Gears
+  17080851:
+    script: Archaic_Gears
+  17080852:
+    script: Archaic_Gears
+  17080853:
+    script: Archaic_Gears
+  17080854:
+    script: Archaic_Gears
+  17080855:
+    script: Archaic_Rampart
+  17080856:
+    script: Archaic_Gears
+  17080857:
+    script: Archaic_Gears
+  17080858:
+    script: Archaic_Gears
+  17080859:
+    script: Archaic_Gears
+  17080860:
+    script: Archaic_Gears
+  17080861:
+    script: Archaic_Gears
+  17080862:
+    script: Archaic_Gears
+  17080863:
+    script: Archaic_Rampart
+  17080864:
+    script: Archaic_Gears
+  17080865:
+    script: Archaic_Gears
+  17080866:
+    script: Archaic_Gears
+  17080867:
+    script: Archaic_Gears
+  17080868:
+    script: Archaic_Gears
+  17080869:
+    script: Archaic_Gears
+  17080870:
+    script: Archaic_Gears
+  17080871:
+    script: Archaic_Rampart
+  17080872:
+    script: Archaic_Gears
+  17080873:
+    script: Archaic_Gears
+  17080874:
+    script: Archaic_Gears
+  17080875:
+    script: Archaic_Gears
+  17080876:
+    script: Archaic_Gears
+  17080877:
+    script: Archaic_Gears
+  17080878:
+    script: Archaic_Gears
+  17080879:
+    script: Archaic_Gear
+  17080880:
+    script: Archaic_Gear
+  17080881:
+    script: Archaic_Gear
+  17080882:
+    script: Archaic_Gear
+  17080883:
+    script: Archaic_Gear
+  17080884:
+    script: Archaic_Gear
+  17080885:
+    script: Archaic_Gear
+  17080886:
+    script: Archaic_Gear
+  17080887:
+    script: Archaic_Gear
+  17080888:
+    script: Archaic_Gear
+  17080889:
+    script: Archaic_Gear
+  17080890:
+    script: Archaic_Gear
+  17080891:
+    script: Archaic_Gear
+  17080892:
+    script: Archaic_Gear
+  17080893:
+    script: Archaic_Gear
+  17080894:
+    script: Archaic_Gear
+  17080895:
+    script: Archaic_Rampart
+  17080896:
+    script: Archaic_Gears
+  17080897:
+    script: Archaic_Gears
+  17080898:
+    script: Archaic_Gears
+  17080899:
+    script: Archaic_Gears
+  17080900:
+    script: Archaic_Gears
+  17080901:
+    script: Archaic_Gears
+  17080902:
+    script: Archaic_Gears
+  17080903:
+    script: Archaic_Rampart
+  17080904:
+    script: Archaic_Gears
+  17080905:
+    script: Archaic_Gears
+  17080906:
+    script: Archaic_Gears
+  17080907:
+    script: Archaic_Gears
+  17080908:
+    script: Archaic_Gears
+  17080909:
+    script: Archaic_Gears
+  17080910:
+    script: Archaic_Gears
+  17080911:
+    script: Archaic_Rampart
+  17080912:
+    script: Archaic_Gears
+  17080913:
+    script: Archaic_Gears
+  17080914:
+    script: Archaic_Gears
+  17080915:
+    script: Archaic_Gears
+  17080916:
+    script: Archaic_Gears
+  17080917:
+    script: Archaic_Gears
+  17080918:
+    script: Archaic_Gears
+  17080919:
+    script: Archaic_Rampart
+  17080920:
+    script: Archaic_Gears
+  17080921:
+    script: Archaic_Gears
+  17080922:
+    script: Archaic_Gears
+  17080923:
+    script: Archaic_Gears
+  17080924:
+    script: Archaic_Gears
+  17080925:
+    script: Archaic_Gears
+  17080926:
+    script: Archaic_Gears
+  17080927:
+    script: Archaic_Rampart
+  17080928:
+    script: Armored_Chariot
+  17080929:
+    script: Archaic_Chariot
+  17080930:
+    script: Archaic_Chariot
+  17080931:
+    script: Archaic_Chariot
+  17080932:
+    script: Archaic_Chariot
+  17080933:
+    script: Archaic_Chariot
+  17080934:
+    script: Archaic_Chariot
+  17080935:
+    script: Archaic_Chariot
+  17080936:
+    script: Archaic_Chariot
+  17080937:
+    script: Archaic_Rampart
+  17080938:
+    script: Khimaira
+  17080939:
+    script: Khrysokhimaira_Elder

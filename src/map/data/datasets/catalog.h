@@ -29,6 +29,14 @@
 #include "data/datasets/merits/yaml.h"
 #include "data/datasets/status_effects/dataset.h"
 #include "data/datasets/status_effects/yaml.h"
+#include "data/datasets/zones/mobs/dataset.h"
+#include "data/datasets/zones/mobs/yaml.h"
+#include "data/datasets/zones/npcs/dataset.h"
+#include "data/datasets/zones/npcs/yaml.h"
+#include "data/datasets/zones/regions/dataset.h"
+#include "data/datasets/zones/regions/yaml.h"
+#include "data/datasets/zones/settings/dataset.h"
+#include "data/datasets/zones/settings/yaml.h"
 
 #include <concepts>
 #include <string_view>
@@ -57,6 +65,7 @@ struct DatasetCatalog
     }
 };
 
-using Catalog = DatasetCatalog<animation_locks::Dataset, status_effects::Dataset, ecosystems::Dataset, merits::Dataset>;
+using Catalog     = DatasetCatalog<animation_locks::Dataset, status_effects::Dataset, ecosystems::Dataset, merits::Dataset>;
+using ZoneCatalog = DatasetCatalog<zones::settings::Dataset, zones::npcs::Dataset, zones::mobs::Dataset, zones::regions::Dataset>;
 
 } // namespace xi::data::datasets

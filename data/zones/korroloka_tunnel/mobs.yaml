@@ -1,0 +1,3332 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Bogy:
+    id:            485
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   square_of_cotton_cloth
+        - chance: uncommon
+          item:   revival_tree_root
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Cargo_Crab_Colin:
+    id:            639
+    species:       crab
+    type:          [notorious]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        model_size:  2
+        hitbox:     16
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 2100
+    loot:
+      drops:
+        - chance: always
+          item:   slice_of_land_crab_meat
+        - chance: always
+          item:   slice_of_land_crab_meat
+        - chance: very_common
+          item:   crab_shell
+        - chance: very_common
+          item:   crab_shell
+        - chance: uncommon
+          item:   nadrs
+
+  Clipper:
+    id:            743
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Combat_KT:
+    id:            771
+    display_name:  Combat
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Dame_Blanche:
+    id:            898
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 669
+        name_prefix:   32
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 1950
+    loot:
+      drops:
+        - chance: always
+          item:   square_of_sarcenet_cloth
+        - chance: very_common
+          item:   square_of_sarcenet_cloth
+        - chance: common
+          item:   square_of_sarcenet_cloth
+        - chance: common
+          item:   square_of_sarcenet_cloth
+
+  Dazbog_Korroloka:
+    id:           6165
+    display_name: Dazbog
+    species:      meeble
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 3586
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Falcatus_Aranei:
+    id:            1282
+    species:       spider
+    type:          [notorious]
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags:  3
+        model_size:    2
+        hitbox:       16
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3300
+    loot:
+      drops:
+        - chance: very_common
+          item:   spider_web
+        - chance: very_common
+          item:   spider_web
+        - chance: very_common
+          item:   spider_web
+        - chance: common
+          item:   webcutter
+
+  Gigas_Foreman:
+    id:            1563
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 710
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   helmet_mole
+        - chance: uncommon
+          item:   gigas_socks
+        - chance: rare
+          item:   maple_shield
+        - chance: very_rare
+          item:   gigas_necklace
+        - chance: super_rare
+          item:   marble_slab
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Stonecarrier:
+    id:            1586
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   helmet_mole
+        - chance: uncommon
+          item:   gigas_socks
+        - chance: rare
+          item:   maple_shield
+        - chance: very_rare
+          item:   gigas_necklace
+        - chance: super_rare
+          item:   marble_slab
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Stonegrinder:
+    id:            1587
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 250
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   helmet_mole
+        - chance: uncommon
+          item:   gigas_socks
+        - chance: rare
+          item:   maple_shield
+        - chance: very_rare
+          item:   gigas_necklace
+        - chance: super_rare
+          item:   marble_slab
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Stonemason:
+    id:            1588
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   helmet_mole
+        - chance: uncommon
+          item:   gigas_socks
+        - chance: rare
+          item:   maple_shield
+        - chance: very_rare
+          item:   gigas_necklace
+        - chance: super_rare
+          item:   marble_slab
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigass_Spider:
+    id:            1593
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Gloom_Phantom_Korroloka:
+    id:           6163
+    display_name: Gloom_Phantom
+    species:      goblin
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, drk]
+      render:
+        look:
+          type:  standard
+          model: 3584
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Goblin_Bounty_Hunter:
+    id:            1642
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 497
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Greater_Pugil_KT_GM:
+    id:            1797
+    display_name:  Greater_Pugil
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Greater_Pugil_fished:
+    id:            5868
+    display_name:  Greater_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Huge_Spider:
+    id:            2002
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags: 643
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   spider_web
+      steal: spider_web
+      despoil:
+        spool_of_rainbow_thread: 0
+        spider_web:              0
+
+  Jammer_Leech:
+    id:            2141
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 647
+        model_size:     3
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 1800
+
+  Jelly_KT_GM:
+    id:            2146
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 643
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+        - chance: uncommon
+          item:   vial_of_slime_oil
+        - chance: uncommon
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Korroloka_Leech:
+    id:            2283
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 645
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 400
+
+  Kraken_fished:
+    id:            6029
+    display_name:  Kraken
+    species:       sea_monk
+    type:          [fished]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: rare
+          item:   shall_shell
+        - chance: very_rare
+          item:   blue_rock
+      despoil:
+        seashell: 0
+
+  Lacerator:
+    id:            4816
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 357
+        entity_flags: 133
+        model_size:     2
+        hitbox:        16
+      spawn:
+        respawn: 300
+    content: ABYSSEA
+
+  Land_Worm_Korroloka:
+    id:            2412
+    display_name:  Land_Worm
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   flint_stone
+        - chance: uncommon
+          item:   chunk_of_copper_ore
+        - chance: rare
+          item:   chunk_of_zinc_ore
+        - chance: very_rare
+          item:   chunk_of_iron_ore
+      steal: pebble
+      despoil:
+        chunk_of_copper_ore: 0
+        chunk_of_iron_ore:   0
+        chunk_of_silver_ore: 0
+        chunk_of_zinc_ore:   0
+
+  Magh_Bihu_Korroloka:
+    id:           6164
+    display_name: Magh_Bihu
+    species:      citrullus
+    type:         [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 3585
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Metallic_Slime:
+    id:            2633
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Morion_Worm:
+    id:            2748
+    species:       worm
+    type:          [notorious]
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        aggressive: true
+        links:      true
+      mods:
+        regen: 5
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2100
+        mp: 2100
+    loot:
+      drops:
+        - chance: uncommon
+          item:   morion_tathlum
+        - chance: always
+          one_of:
+            chunk_of_copper_ore: 70
+            chunk_of_iron_ore:   30
+        - chance: always
+          one_of:
+            chunk_of_copper_ore:    63
+            chunk_of_tin_ore:       30
+            chunk_of_darksteel_ore:  7
+        - chance: always
+          one_of:
+            chunk_of_copper_ore:    63
+            chunk_of_tin_ore:       30
+            chunk_of_darksteel_ore:  7
+
+  Sea_Monk:
+    id:            3523
+    species:       sea_monk
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 352
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   seashell
+        - chance: very_rare
+          item:   shall_shell
+      despoil:
+        seashell: 0
+
+  Seeker_Bats_KT_RP_Qufim:
+    id:            3642
+    display_name:  Seeker_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Snipper_fished:
+    id:            3682
+    display_name:  Snipper
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Spool_Leech:
+    id:            6404
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 645
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+    content: ABYSSEA
+
+  Thoon:
+    id:            4831
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      jobs: [rng, rng]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 3000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   impetus_earring
+    content: WOTG
+
+  Thread_Leech:
+    id:            3901
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   carbuncles_ruby
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 780
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 780
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+spawns:
+  17485825:
+    template: Snipper_fished
+    script:   Snipper
+    at:       [1.000, 1.000, 1.000]
+    level:    [22, 24]
+  17485826:
+    template: Snipper_fished
+    script:   Snipper
+    at:       [1.000, 1.000, 1.000]
+    level:    [22, 24]
+  17485827:
+    template: Greater_Pugil_fished
+    script:   Greater_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17485828:
+    template: Greater_Pugil_fished
+    script:   Greater_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17485829:
+    template: Kraken_fished
+    script:   Kraken
+    at:       [1.000, 1.000, 1.000]
+    level:    [35, 37]
+  17485830:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [386.274, -24.993, 173.122, 127]
+    level:    [20, 25]
+  17485831:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [344.000, -10.000, 139.000, 127]
+    level:    [20, 25]
+  17485832:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [413.424, -31.010, 181.159, 104]
+    level:    [22, 26]
+  17485833:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [337.420, -10.448, 119.198, 77]
+    level:    [20, 25]
+  17485834:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [341.772, -10.730, 130.722, 127]
+    level:    [20, 25]
+  17485835:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [325.230, -9.872, 100.053, 127]
+    level:    [20, 25]
+  17485836:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [344.749, -11.711, 129.316, 39]
+    level:    [22, 26]
+  17485837:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [315.215, -9.538, 99.506, 127]
+    level:    [20, 25]
+  17485838:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [289.851, -10.836, 95.264, 127]
+    level:    [20, 25]
+  17485839:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [324.110, -9.694, 103.247, 30]
+    level:    [22, 26]
+  17485840:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [294.659, -10.092, 97.870, 127]
+    level:    [20, 24]
+  17485841:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [278.180, -10.501, 58.160, 31]
+    level:    [20, 25]
+  17485842:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [279.278, -9.948, 93.983, 120]
+    level:    [22, 26]
+  17485843:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [297.274, -10.618, 58.407, 27]
+    level:    [20, 25]
+  17485844:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [262.828, -3.784, 98.679, 127]
+    level:    [20, 25]
+  17485845:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [288.413, -10.423, 60.180, 115]
+    level:    [22, 26]
+  17485846:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [258.686, -1.887, 92.601, 22]
+    level:    [20, 25]
+  17485847:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-346.096, -4.487, -11.640, 117]
+    level:    [20, 25]
+  17485848:
+    template: Thread_Leech
+    at:       [238.017, -0.147, 69.453]
+    level:    [28, 31]
+  17485849:
+    template: Huge_Spider
+    at:       [211.591, -0.426, 92.067, 127]
+    level:    [28, 31]
+  17485850:
+    template: Huge_Spider
+    at:       [247.230, -0.268, 72.269, 71]
+    level:    [28, 31]
+  17485851:
+    template: Huge_Spider
+    at:       [234.567, -0.372, 83.237, 127]
+    level:    [28, 31]
+  17485852:
+    template: Combat_KT
+    script:   Combat
+    at:       [251.419, -0.356, 82.783, 2]
+    level:    [27, 30]
+  17485853:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [247.847, 0.047, 74.358, 196]
+    level:    [23, 27]
+  17485854:
+    template: Thread_Leech
+    at:       [171.752, 0.175, 75.321, 127]
+    level:    [28, 31]
+  17485855:
+    template: Huge_Spider
+    at:       [185.577, 0.590, 78.022, 88]
+    level:    [28, 31]
+  17485856:
+    template: Huge_Spider
+    at:       [195.387, -0.440, 78.987, 26]
+    level:    [28, 31]
+  17485857:
+    template: Huge_Spider
+    at:       [156.627, -0.340, 89.265, 127]
+    level:    [28, 31]
+  17485858:
+    template: Combat_KT
+    script:   Combat
+    at:       [164.151, -0.333, 77.180, 127]
+    level:    [27, 30]
+  17485859:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [155.202, -0.279, 89.820, 230]
+    level:    [23, 27]
+  17485860:
+    template: Thread_Leech
+    at:       [139.680, 0.912, 79.033, 127]
+    level:    [28, 31]
+  17485861:
+    template: Huge_Spider
+    at:       [108.457, 0.127, 78.556, 127]
+    level:    [28, 31]
+  17485862:
+    template: Huge_Spider
+    at:       [93.052, 0.094, 79.206, 127]
+    level:    [28, 31]
+  17485863:
+    template: Combat_KT
+    script:   Combat
+    at:       [131.636, 0.300, 84.184, 127]
+    level:    [27, 30]
+  17485864:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [138.749, 0.902, 84.264, 12]
+    level:    [23, 27]
+  17485865:
+    template: Thread_Leech
+    at:       [73.397, -0.181, 85.807, 113]
+    level:    [28, 31]
+  17485866:
+    template: Huge_Spider
+    at:       [59.437, 0.488, 73.231, 127]
+    level:    [28, 31]
+  17485867:
+    template: Huge_Spider
+    at:       [60.136, 0.556, 77.603, 127]
+    level:    [28, 31]
+  17485868:
+    template: Combat_KT
+    script:   Combat
+    at:       [57.588, 0.518, 79.398, 35]
+    level:    [27, 30]
+  17485869:
+    template: Thunder_Elemental
+    at:       [63.012, -0.132, 70.353, 19]
+    level:    [32, 34]
+  17485870:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [54.816, -0.047, 67.149, 21]
+    level:    [23, 27]
+  17485871:
+    template: Thread_Leech
+    at:       [43.776, 0.096, 45.512, 127]
+    level:    [28, 31]
+  17485872:
+    template: Huge_Spider
+    at:       [39.990, -0.040, 48.476, 127]
+    level:    [28, 31]
+  17485873:
+    template: Huge_Spider
+    at:       [11.429, 0.125, 40.576, 119]
+    level:    [28, 31]
+  17485874:
+    template: Combat_KT
+    script:   Combat
+    at:       [25.459, 0.113, 37.500, 127]
+    level:    [27, 30]
+  17485875:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [46.708, -0.070, 33.799, 127]
+    level:    [23, 27]
+  17485876:
+    template: Thread_Leech
+    at:       [-17.757, 0.791, 40.200, 23]
+    level:    [28, 31]
+  17485877:
+    template: Huge_Spider
+    at:       [-34.651, 0.162, 38.002, 127]
+    level:    [28, 31]
+  17485878:
+    template: Huge_Spider
+    at:       [-37.671, -0.107, 34.840, 103]
+    level:    [28, 31]
+  17485879:
+    template: Combat_KT
+    script:   Combat
+    at:       [-37.202, -0.052, 44.025, 127]
+    level:    [27, 30]
+  17485880:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-40.367, -0.098, 41.306, 127]
+    level:    [23, 27]
+  17485881:
+    template: Sea_Monk
+    at:       [-63.555, 0.656, 39.812, 127]
+    level:    [32, 35]
+  17485882:
+    template: Thread_Leech
+    at:       [-88.840, 0.013, 44.892, 7]
+    level:    [28, 31]
+  17485883:
+    template: Thread_Leech
+    at:       [-76.951, -0.482, 28.292, 127]
+    level:    [28, 31]
+  17485884:
+    template: Thread_Leech
+    at:       [-71.289, -0.182, 35.505, 14]
+    level:    [28, 31]
+  17485885:
+    template: Huge_Spider
+    at:       [-94.603, -0.060, 31.576, 127]
+    level:    [28, 31]
+  17485886:
+    template: Combat_KT
+    script:   Combat
+    at:       [-73.223, -0.374, 36.828, 127]
+    level:    [27, 30]
+  17485887:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-76.797, -0.040, 43.104, 127]
+    level:    [23, 27]
+  17485888:
+    template: Thread_Leech
+    at:       [-130.216, 0.081, 33.725, 67]
+    level:    [28, 31]
+  17485889:
+    template: Thread_Leech
+    at:       [-151.944, -0.077, 37.708, 127]
+    level:    [28, 31]
+  17485890:
+    template: Huge_Spider
+    at:       [-158.738, -0.448, 41.053, 127]
+    level:    [28, 31]
+  17485891:
+    template: Huge_Spider
+    at:       [-160.843, 0.326, 25.456, 127]
+    level:    [28, 31]
+  17485892:
+    template: Combat_KT
+    script:   Combat
+    at:       [-151.395, -0.096, 2.194, 81]
+    level:    [27, 30]
+  17485893:
+    template: Combat_KT
+    script:   Combat
+    at:       [-130.953, 0.038, 43.951, 127]
+    level:    [27, 30]
+  17485894:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-153.705, -0.108, 38.572, 127]
+    level:    [23, 27]
+  17485895:
+    template: Thread_Leech
+    at:       [-160.077, -0.024, -4.975, 95]
+    level:    [28, 31]
+  17485896:
+    template: Thread_Leech
+    at:       [-177.099, 0.443, 10.131, 111]
+    level:    [28, 31]
+  17485897:
+    template: Huge_Spider
+    at:       [-183.242, 0.469, -0.662, 72]
+    level:    [28, 31]
+  17485898:
+    template: Huge_Spider
+    at:       [-175.007, 0.356, -0.886, 127]
+    level:    [28, 31]
+  17485899:
+    template: Combat_KT
+    script:   Combat
+    at:       [-213.591, 0.208, -3.429, 127]
+    level:    [27, 30]
+  17485900:
+    template: Combat_KT
+    script:   Combat
+    at:       [-172.989, 0.409, 9.861, 127]
+    level:    [27, 30]
+  17485901:
+    template: Thunder_Elemental
+    at:       [-160.678, -0.500, -1.089, 127]
+    level:    [32, 34]
+  17485902:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-177.029, -0.030, -7.629, 127]
+    level:    [23, 27]
+  17485903:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-188.680, 0.944, -8.608, 23]
+    level:    [30, 33]
+  17485904:
+    template: Clipper
+    at:       [-190.456, 0.843, -7.564, 24]
+    level:    [29, 32]
+  17485905:
+    template: Thread_Leech
+    at:       [-245.812, -0.327, 3.514, 107]
+    level:    [28, 31]
+  17485906:
+    template: Thread_Leech
+    at:       [-218.668, 0.625, 6.391, 127]
+    level:    [28, 31]
+  17485907:
+    template: Huge_Spider
+    at:       [-223.750, 0.467, 0.921, 20]
+    level:    [28, 31]
+  17485908:
+    template: Huge_Spider
+    at:       [-252.665, 0.333, -4.209, 127]
+    level:    [28, 31]
+  17485909:
+    template: Combat_KT
+    script:   Combat
+    at:       [-304.123, 0.778, 3.144, 127]
+    level:    [27, 30]
+  17485910:
+    template: Combat_KT
+    script:   Combat
+    at:       [-297.707, 0.547, 0.166, 23]
+    level:    [27, 30]
+  17485911:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-254.348, 0.191, -8.101, 127]
+    level:    [23, 27]
+  17485912:
+    template: Thread_Leech
+    at:       [-315.197, -0.331, -4.954, 127]
+    level:    [28, 31]
+  17485913:
+    template: Huge_Spider
+    at:       [-311.920, -0.052, -1.525, 29]
+    level:    [28, 31]
+  17485914:
+    template: Huge_Spider
+    at:       [-323.000, -0.066, -1.000, 127]
+    level:    [28, 31]
+  17485915:
+    template: Combat_KT
+    script:   Combat
+    at:       [-314.600, -0.247, 7.328, 88]
+    level:    [27, 30]
+  17485916:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-315.935, -0.058, 7.251, 36]
+    level:    [23, 27]
+  17485917:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-340.783, -3.762, -22.386, 127]
+    level:    [20, 25]
+  17485918:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-336.260, -1.977, -19.213, 127]
+    level:    [20, 25]
+  17485919:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-359.000, -9.000, -19.000, 99]
+    level:    [20, 25]
+  17485920:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-372.255, -9.973, -20.195, 36]
+    level:    [20, 25]
+  17485921:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-391.050, -9.505, -17.957, 127]
+    level:    [20, 25]
+  17485922:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-392.000, -10.114, -24.000, 47]
+    level:    [22, 26]
+  17485923:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-399.017, -9.252, -17.805, 127]
+    level:    [20, 25]
+  17485924:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-379.000, -9.000, -53.000, 58]
+    level:    [20, 25]
+  17485925:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-399.765, -9.924, -13.688, 127]
+    level:    [22, 26]
+  17485926:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-379.330, -10.624, -34.685, 1]
+    level:    [20, 24]
+  17485927:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-421.933, -10.204, 15.861, 127]
+    level:    [20, 25]
+  17485928:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-378.173, -10.720, -33.437, 66]
+    level:    [22, 26]
+  17485929:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-421.785, -10.432, -1.907, 68]
+    level:    [20, 25]
+  17485930:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-462.364, -10.646, -19.954, 46]
+    level:    [20, 25]
+  17485931:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-439.000, -10.521, 20.000, 127]
+    level:    [22, 26]
+  17485932:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-459.000, -10.794, 38.000, 127]
+    level:    [20, 25]
+  17485933:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [259.327, -6.084, 28.839, 127]
+    level:    [20, 25]
+  17485934:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-459.000, -10.474, 19.000, 127]
+    level:    [22, 26]
+  17485935:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-463.219, -10.488, -13.501, 64]
+    level:    [22, 26]
+  17485936:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [256.315, -6.146, 22.184]
+    level:    [20, 25]
+  17485937:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-13.648, -5.976, 100.926, 127]
+    level:    [20, 25]
+  17485938:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [230.000, -6.000, 21.000, 127]
+    level:    [22, 26]
+  17485939:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [221.000, -6.147, 27.000, 113]
+    level:    [22, 26]
+  17485940:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [183.927, -5.414, 60.821, 105]
+    level:    [22, 26]
+  17485941:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [198.827, -6.063, 65.307, 111]
+    level:    [22, 26]
+  17485942:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [144.167, -5.261, 62.834, 127]
+    level:    [22, 26]
+  17485943:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [120.407, -5.997, 64.892, 79]
+    level:    [22, 26]
+  17485944:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [102.988, -5.532, 60.047, 108]
+    level:    [22, 26]
+  17485945:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [101.436, -5.543, 32.137, 127]
+    level:    [23, 27]
+  17485946:
+    template: Sea_Monk
+    level:    [32, 35]
+  17485947:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    level:    [30, 33]
+  17485948:
+    template: Clipper
+    at:       [107.000, -4.000, 17.000, 217]
+    level:    [29, 32]
+  17485949:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [97.567, -5.000, 11.602, 165]
+    level:    [30, 33]
+  17485950:
+    template: Clipper
+    at:       [97.773, -5.000, 11.814, 127]
+    level:    [29, 32]
+  17485951:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    level:    [30, 33]
+  17485952:
+    template: Clipper
+    at:       [92.000, -4.000, 23.000, 240]
+    level:    [29, 32]
+  17485953:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [96.374, -5.446, 98.851, 127]
+    level:    [22, 26]
+  17485954:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [103.251, -5.392, 97.456, 127]
+    level:    [22, 26]
+  17485955:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [42.021, -5.986, 95.177, 127]
+    level:    [22, 26]
+  17485956:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [54.462, -5.248, 97.827, 127]
+    level:    [22, 26]
+  17485957:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [24.134, -5.749, 69.555, 81]
+    level:    [22, 26]
+  17485958:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [25.376, -6.051, 75.621, 127]
+    level:    [22, 26]
+  17485959:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [4.000, -5.000, 54.000, 127]
+    level:    [22, 26]
+  17485960:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-18.000, -5.657, 57.000, 127]
+    level:    [22, 26]
+  17485961:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-20.267, -3.765, -12.857, 73]
+    level:    [22, 26]
+  17485962:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-6.980, -0.717, -17.710, 127]
+    level:    [22, 26]
+  17485963:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [23.304, 0.195, -24.630, 127]
+    level:    [22, 26]
+  17485964:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [17.629, 0.926, -27.325, 127]
+    level:    [22, 26]
+  17485965:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [57.407, -0.074, -35.222, 84]
+    level:    [23, 27]
+  17485966:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [44.000, -0.227, -21.000, 26]
+    level:    [23, 27]
+  17485967:
+    template: Water_Elemental
+    at:       [54.057, 0.561, -28.774, 49]
+    level:    [32, 34]
+  17485968:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [58.000, 0.409, -47.000, 127]
+    level:    [23, 27]
+  17485969:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [54.907, 0.412, -53.414, 126]
+    level:    [23, 27]
+  17485970:
+    template: Water_Elemental
+    at:       [51.780, 1.144, -51.858, 127]
+    level:    [32, 34]
+  17485971:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-6.000, 0.962, -60.000, 4]
+    level:    [22, 26]
+  17485972:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [32.821, 0.845, -60.258, 127]
+    level:    [22, 26]
+  17485973:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-4.589, -0.500, -61.150, 121]
+    level:    [22, 26]
+  17485974:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-8.151, -0.500, -60.665, 127]
+    level:    [22, 26]
+  17485975:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-43.000, -0.500, -45.000, 127]
+    level:    [22, 26]
+  17485976:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-27.879, -0.731, -40.855, 35]
+    level:    [22, 26]
+  17485977:
+    template: Combat_KT
+    script:   Combat
+    at:       [-40.830, -0.094, -35.647, 127]
+    level:    [27, 30]
+  17485978:
+    template: Combat_KT
+    script:   Combat
+    at:       [-30.357, 0.058, -48.158, 58]
+    level:    [27, 30]
+  17485979:
+    template: Sea_Monk
+    at:       [-65.354, 0.514, -39.786, 127]
+    level:    [32, 35]
+  17485980:
+    template: Cargo_Crab_Colin
+    at:       [-52.000, -0.500, -33.000, 127]
+    level:    [34, 37]
+  17485981:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-94.980, 0.437, -40.852, 201]
+    level:    [22, 26]
+  17485982:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-80.000, -0.343, -44.000, 110]
+    level:    [22, 26]
+  17485983:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-96.272, -0.020, -49.503, 127]
+    level:    [22, 26]
+  17485984:
+    template: Combat_KT
+    script:   Combat
+    at:       [-102.647, 0.477, -40.374, 39]
+    level:    [27, 30]
+  17485985:
+    template: Combat_KT
+    script:   Combat
+    at:       [-73.013, -0.014, -30.047, 22]
+    level:    [27, 30]
+  17485986:
+    template: Combat_KT
+    script:   Combat
+    at:       [-73.930, -0.360, -38.025, 78]
+    level:    [27, 30]
+  17485987:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-98.000, 0.263, -71.000, 127]
+    level:    [22, 26]
+  17485988:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-127.000, 0.319, -42.000, 121]
+    level:    [22, 26]
+  17485989:
+    template: Combat_KT
+    script:   Combat
+    at:       [-129.553, 0.030, -44.061, 86]
+    level:    [27, 30]
+  17485990:
+    template: Combat_KT
+    script:   Combat
+    at:       [-132.362, 0.455, -47.890, 17]
+    level:    [27, 30]
+  17485991:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-154.000, -0.565, -71.000, 127]
+    level:    [22, 26]
+  17485992:
+    template: Combat_KT
+    script:   Combat
+    at:       [-159.902, -0.314, -80.809, 243]
+    level:    [27, 30]
+  17485993:
+    template: Combat_KT
+    script:   Combat
+    at:       [-151.000, 0.246, -74.000, 104]
+    level:    [27, 30]
+  17485994:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-152.723, 0.127, -81.996, 12]
+    level:    [23, 27]
+  17485995:
+    template: Water_Elemental
+    at:       [-158.480, -0.121, -68.601, 84]
+    level:    [32, 34]
+  17485996:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-180.782, -0.500, -36.938, 127]
+    level:    [22, 26]
+  17485997:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-180.983, -0.500, -41.983, 127]
+    level:    [22, 26]
+  17485998:
+    template: Jammer_Leech
+    at:       [-111.960, 1.000, -101.099, 127]
+    level:    [60, 60]
+  17485999:
+    template: Jammer_Leech
+    at:       [-102.275, 1.007, -108.629, 22]
+    level:    [60, 60]
+  17486000:
+    template: Jammer_Leech
+    at:       [-89.715, 0.988, -105.495, 78]
+    level:    [60, 60]
+  17486001:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-33.428, 1.000, -32.295, 148]
+    level:    [30, 33]
+  17486002:
+    template: Clipper
+    at:       [-30.384, 1.000, -33.277, 111]
+    level:    [29, 32]
+  17486003:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    level:    [30, 33]
+  17486004:
+    template: Clipper
+    at:       [-95.359, 1.000, -34.375, 127]
+    level:    [29, 32]
+  17486005:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-11.011, -6.008, 97.416, 83]
+    level:    [22, 26]
+  17486006:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-6.467, -5.889, 99.189, 25]
+    level:    [22, 26]
+  17486007:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-39.516, -5.992, 98.014, 44]
+    level:    [20, 25]
+  17486008:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-45.084, -5.607, 102.444, 104]
+    level:    [20, 25]
+  17486009:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-22.947, -5.871, 98.022, 127]
+    level:    [20, 25]
+  17486010:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-48.375, -5.798, 98.059, 5]
+    level:    [20, 24]
+  17486011:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-84.737, -6.015, 100.013, 12]
+    level:    [20, 25]
+  17486012:
+    template: Combat_KT
+    script:   Combat
+    at:       [-120.494, 0.031, -47.046, 127]
+    level:    [27, 30]
+  17486013:
+    template: Combat_KT
+    script:   Combat
+    at:       [-133.763, 0.341, -48.974, 122]
+    level:    [27, 30]
+  17486014:
+    template: Combat_KT
+    script:   Combat
+    at:       [-119.156, -0.041, -31.074, 127]
+    level:    [27, 30]
+  17486015:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-96.132, -6.023, 90.667, 127]
+    level:    [20, 25]
+  17486016:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-94.685, -6.135, 95.930, 70]
+    level:    [20, 25]
+  17486017:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-92.235, -6.100, 98.107, 41]
+    level:    [20, 25]
+  17486018:
+    template: Land_Worm_Korroloka
+    script:   Land_Worm
+    at:       [-99.727, -6.095, 90.560, 174]
+    level:    [20, 25]
+  17486019:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-119.035, -4.823, 51.323, 74]
+    level:    [22, 26]
+  17486020:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-131.541, -5.091, 66.041, 127]
+    level:    [22, 26]
+  17486021:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-140.000, -6.141, 80.000, 127]
+    level:    [22, 26]
+  17486022:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-142.494, -5.935, 101.301, 127]
+    level:    [22, 26]
+  17486023:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-31.368, -5.024, 184.510, 80]
+    level:    [30, 33]
+  17486024:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-22.787, -5.000, 190.698, 116]
+    level:    [30, 33]
+  17486025:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-8.591, -5.000, 184.086, 194]
+    level:    [30, 33]
+  17486026:
+    template: Sea_Monk
+    at:       [-26.364, -5.648, 177.508, 38]
+    level:    [32, 35]
+  17486027:
+    template: Huge_Spider
+    at:       [-25.445, -6.073, 142.192, 37]
+    level:    [28, 31]
+  17486028:
+    template: Huge_Spider
+    at:       [-33.446, -6.038, 141.987, 127]
+    level:    [28, 31]
+  17486029:
+    template: Huge_Spider
+    at:       [-54.112, -6.313, 137.079, 47]
+    level:    [28, 31]
+  17486030:
+    template: Huge_Spider
+    at:       [-63.688, -4.529, 139.858, 253]
+    level:    [28, 31]
+  17486031:
+    template: Falcatus_Aranei
+    at:       [-53.000, -4.418, 139.000, 127]
+    level:    [32, 32]
+  17486032:
+    template: Huge_Spider
+    at:       [-94.545, -6.095, 136.480, 127]
+    level:    [28, 31]
+  17486033:
+    template: Huge_Spider
+    at:       [-68.852, -5.029, 141.069, 127]
+    level:    [28, 31]
+  17486034:
+    template: Huge_Spider
+    at:       [-79.827, -6.046, 133.982, 112]
+    level:    [28, 31]
+  17486035:
+    template: Huge_Spider
+    level:    [28, 31]
+  17486036:
+    template: Huge_Spider
+    at:       [-120.738, -6.001, 140.605, 127]
+    level:    [28, 31]
+  17486037:
+    template: Huge_Spider
+    at:       [-132.819, -6.004, 138.089, 108]
+    level:    [28, 31]
+  17486038:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-19.000, -5.000, 174.000, 127]
+    level:    [23, 27]
+  17486039:
+    template: Clipper
+    at:       [-201.821, -6.071, 75.180, 19]
+    level:    [29, 32]
+  17486040:
+    template: Clipper
+    at:       [-212.000, -4.000, 83.000, 61]
+    level:    [29, 32]
+  17486041:
+    template: Clipper
+    at:       [-191.000, -5.000, 80.000, 127]
+    level:    [29, 32]
+  17486042:
+    template: Clipper
+    at:       [-195.032, -5.991, 89.752, 127]
+    level:    [29, 32]
+  17486043:
+    template: Clipper
+    at:       [-216.851, -5.544, 75.378, 127]
+    level:    [29, 32]
+  17486044:
+    template: Clipper
+    at:       [-245.000, -5.000, 75.000, 11]
+    level:    [29, 32]
+  17486045:
+    template: Clipper
+    at:       [-166.000, -4.000, 124.000, 23]
+    level:    [29, 32]
+  17486046:
+    template: Clipper
+    at:       [-240.811, -6.191, 85.496, 127]
+    level:    [29, 32]
+  17486047:
+    template: Clipper
+    at:       [-229.000, -6.279, 82.000, 127]
+    level:    [29, 32]
+  17486048:
+    template: Clipper
+    at:       [-175.000, -5.000, 109.000, 64]
+    level:    [29, 32]
+  17486049:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-164.686, -5.602, 124.045, 105]
+    level:    [30, 33]
+  17486050:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-191.791, -5.482, 89.284, 120]
+    level:    [30, 33]
+  17486051:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-158.901, -6.187, 116.927, 136]
+    level:    [30, 33]
+  17486052:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-187.681, -5.193, 95.037, 125]
+    level:    [30, 33]
+  17486053:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-191.369, -5.858, 77.290, 188]
+    level:    [30, 33]
+  17486054:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-218.675, -5.487, 83.573, 134]
+    level:    [30, 33]
+  17486055:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-218.671, -5.795, 72.519, 125]
+    level:    [30, 33]
+  17486056:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-229.988, -5.000, 90.353, 167]
+    level:    [30, 33]
+  17486057:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-237.814, -5.995, 90.202, 30]
+    level:    [30, 33]
+  17486058:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-249.589, -5.000, 71.915, 74]
+    level:    [30, 33]
+  17486059:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-219.000, -5.999, 47.000, 127]
+    level:    [22, 26]
+  17486060:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-227.716, -5.435, 18.382, 10]
+    level:    [22, 26]
+  17486061:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-244.762, -6.285, 15.112, 127]
+    level:    [22, 26]
+  17486062:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-261.000, -4.000, 14.000, 49]
+    level:    [22, 26]
+  17486063:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-262.000, -4.000, -17.000, 127]
+    level:    [22, 26]
+  17486064:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-290.050, -5.448, -16.795, 102]
+    level:    [22, 26]
+  17486065:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-299.797, -5.582, -48.083, 127]
+    level:    [22, 26]
+  17486066:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-295.297, -5.639, -59.549, 127]
+    level:    [22, 26]
+  17486067:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-262.000, -4.000, -62.000, 35]
+    level:    [23, 27]
+  17486068:
+    template: Jelly_KT_GM
+    script:   Jelly
+    at:       [-265.929, -5.581, -56.454, 72]
+    level:    [23, 27]
+  17486069:
+    template: Sea_Monk
+    at:       [-260.829, -5.699, -64.481, 150]
+    level:    [32, 35]
+  17486070:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    level:    [30, 33]
+  17486071:
+    template: Clipper
+    at:       [-164.000, -0.500, -84.000, 127]
+    level:    [29, 32]
+  17486072:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-249.287, -5.000, -60.627, 82]
+    level:    [30, 33]
+  17486073:
+    template: Clipper
+    at:       [-153.000, -0.500, -83.000, 127]
+    level:    [29, 32]
+  17486074:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-256.268, -5.000, -72.287, 1]
+    level:    [30, 33]
+  17486075:
+    template: Clipper
+    at:       [-144.000, -0.500, -60.000, 127]
+    level:    [29, 32]
+  17486076:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-356.678, -6.000, -60.966, 127]
+    level:    [22, 26]
+  17486077:
+    template: Seeker_Bats_KT_RP_Qufim
+    script:   Seeker_Bats
+    at:       [-336.819, -5.960, -58.619, 5]
+    level:    [22, 26]
+  17486078:
+    template: Clipper
+    at:       [-332.000, -5.000, 62.000, 127]
+    level:    [29, 32]
+  17486079:
+    template: Clipper
+    at:       [-304.000, -5.697, 50.000, 127]
+    level:    [29, 32]
+  17486080:
+    template: Thread_Leech
+    at:       [-307.970, -5.520, 55.974, 127]
+    level:    [28, 31]
+  17486081:
+    template: Clipper
+    at:       [-301.676, -5.224, 53.618, 68]
+    level:    [29, 32]
+  17486082:
+    template: Clipper
+    at:       [-304.107, -5.314, 55.446, 127]
+    level:    [29, 32]
+  17486083:
+    template: Thread_Leech
+    at:       [-324.330, -5.841, 60.051, 127]
+    level:    [28, 31]
+  17486084:
+    template: Thread_Leech
+    at:       [-345.827, -5.344, 63.384, 127]
+    level:    [28, 31]
+  17486085:
+    template: Clipper
+    at:       [-354.485, -5.452, 60.017, 127]
+    level:    [29, 32]
+  17486086:
+    template: Clipper
+    at:       [-341.265, -5.654, 67.398, 28]
+    level:    [29, 32]
+  17486087:
+    template: Thread_Leech
+    at:       [-374.023, -5.531, 62.376, 127]
+    level:    [28, 31]
+  17486088:
+    template: Thread_Leech
+    at:       [-381.765, -5.300, 65.441, 31]
+    level:    [28, 31]
+  17486089:
+    template: Sea_Monk
+    at:       [-366.005, -5.598, 61.927, 15]
+    level:    [32, 35]
+  17486090:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-383.629, -5.000, 72.130, 129]
+    level:    [30, 33]
+  17486091:
+    template: Clipper
+    at:       [-106.000, -0.500, -49.000, 127]
+    level:    [29, 32]
+  17486092:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-378.905, -5.245, 61.487, 20]
+    level:    [30, 33]
+  17486093:
+    template: Clipper
+    at:       [-388.000, -5.000, 62.000, 55]
+    level:    [29, 32]
+  17486094:
+    template: Greater_Pugil_KT_GM
+    script:   Greater_Pugil
+    at:       [-372.740, -5.421, 56.098, 189]
+    level:    [30, 33]
+  17486095:
+    template: Clipper
+    at:       [-85.000, -0.500, -37.000, 127]
+    level:    [29, 32]
+  17486096:
+    template: Thread_Leech
+    at:       [-378.000, -5.000, 56.000, 127]
+    level:    [28, 31]
+  17486097:
+    template: Lacerator
+    at:       [-321.000, -5.958, 179.000, 127]
+    level:    [87, 88]
+  17486098:
+    template: Lacerator
+    at:       [-341.000, -5.000, 170.000, 77]
+    level:    [87, 89]
+  17486099:
+    template: Lacerator
+    at:       [-344.037, -5.600, 178.330, 127]
+    level:    [87, 89]
+  17486100:
+    template: Lacerator
+    at:       [-331.000, -5.000, 178.000, 2]
+    level:    [87, 89]
+  17486101:
+    template: Lacerator
+    at:       [-338.000, -6.000, 176.000, 127]
+    level:    [87, 89]
+  17486102:
+    template: Lacerator
+    at:       [-370.000, -9.000, 274.000, 49]
+    level:    [87, 88]
+  17486103:
+    template: Spool_Leech
+    at:       [-359.000, -10.000, 284.000, 56]
+    level:    [89, 91]
+  17486104:
+    template: Spool_Leech
+    at:       [-301.141, -10.386, 189.531, 127]
+    level:    [89, 91]
+  17486105:
+    template: Spool_Leech
+    at:       [-296.852, -10.957, 210.174, 127]
+    level:    [89, 91]
+  17486106:
+    template: Spool_Leech
+    at:       [-361.000, -10.000, 276.000, 127]
+    level:    [89, 91]
+  17486107:
+    template: Spool_Leech
+    at:       [-326.000, -10.000, 220.000, 83]
+    level:    [89, 91]
+  17486108:
+    template: Spool_Leech
+    at:       [-338.032, -10.500, 239.306, 127]
+    level:    [89, 91]
+  17486109:
+    template: Spool_Leech
+    at:       [-352.950, -10.693, 275.932, 127]
+    level:    [89, 91]
+  17486110:
+    template: Lacerator
+    at:       [-365.000, -10.436, 270.000, 84]
+    level:    [87, 89]
+  17486111:
+    template: Thread_Leech
+    at:       [-300.000, -5.000, 40.000, 127]
+    level:    [28, 31]
+  17486112:
+    template: Thread_Leech
+    at:       [-339.000, -5.000, 79.000, 127]
+    level:    [28, 31]
+  17486113:
+    template: Thread_Leech
+    at:       [-277.713, -10.557, 221.479, 127]
+    level:    [28, 31]
+  17486114:
+    template: Thread_Leech
+    at:       [-262.248, -10.184, 217.201, 19]
+    level:    [28, 31]
+  17486115:
+    template: Bogy
+    at:       [-259.769, -11.088, 172.304, 127]
+    level:    [30, 33]
+  17486116:
+    template: Thread_Leech
+    at:       [-263.588, -11.129, 150.893, 107]
+    level:    [28, 31]
+  17486117:
+    template: Thread_Leech
+    at:       [-260.794, -10.615, 178.089, 127]
+    level:    [28, 31]
+  17486118:
+    template: Bogy
+    at:       [-276.713, -9.954, 135.353, 84]
+    level:    [30, 33]
+  17486119:
+    template: Bogy
+    at:       [-277.338, -9.352, 139.763, 110]
+    level:    [30, 33]
+  17486120:
+    template: Thread_Leech
+    at:       [-259.065, -10.188, 144.954, 127]
+    level:    [28, 31]
+  17486121:
+    template: Thread_Leech
+    at:       [-240.847, -9.323, 138.617, 127]
+    level:    [28, 31]
+  17486122:
+    template: Thread_Leech
+    at:       [-209.978, -10.217, 172.600, 55]
+    level:    [28, 31]
+  17486123:
+    template: Bogy
+    at:       [-211.963, -10.482, 173.593, 127]
+    level:    [30, 33]
+  17486124:
+    template: Bogy
+    at:       [-296.821, -3.207, 131.239, 25]
+    level:    [30, 33]
+  17486125:
+    template: Bogy
+    at:       [-292.487, -5.993, 141.408, 127]
+    level:    [30, 33]
+  17486126:
+    template: Bogy
+    at:       [-319.225, -0.146, 109.776, 127]
+    level:    [30, 33]
+  17486127:
+    template: Bogy
+    at:       [-319.266, -0.244, 130.650, 127]
+    level:    [30, 33]
+  17486128:
+    template: Bogy
+    at:       [-345.369, 0.716, 119.486, 127]
+    level:    [30, 33]
+  17486129:
+    template: Dame_Blanche
+    at:       [-361.894, -0.500, 121.675, 5]
+    level:    [34, 35]
+  17486130:
+    template: Water_Elemental
+    at:       [-363.697, -0.346, 129.631, 79]
+    level:    [32, 34]
+  17486131:
+    template: Lacerator
+    at:       [-421.000, -11.000, 224.000, 127]
+    level:    [87, 89]
+  17486132:
+    template: Lacerator
+    at:       [-459.000, -10.000, 269.000, 43]
+    level:    [87, 89]
+  17486133:
+    template: Lacerator
+    at:       [-380.000, -10.000, 214.000, 127]
+    level:    [87, 89]
+  17486134:
+    template: Lacerator
+    at:       [-395.000, -9.000, 219.000, 127]
+    level:    [87, 88]
+  17486135:
+    template: Lacerator
+    at:       [-366.000, -7.000, 179.000, 127]
+    level:    [87, 89]
+  17486136:
+    template: Lacerator
+    at:       [-434.705, -10.298, 236.019, 97]
+    level:    [87, 88]
+  17486137:
+    template: Lacerator
+    at:       [-443.527, -10.522, 242.289, 90]
+    level:    [87, 88]
+  17486138:
+    template: Lacerator
+    at:       [-427.000, -9.000, 248.000, 61]
+    level:    [87, 89]
+  17486139:
+    template: Lacerator
+    at:       [-436.000, -9.971, 247.000, 127]
+    level:    [87, 89]
+  17486140:
+    template: Spool_Leech
+    at:       [-423.000, -9.000, 309.000, 127]
+    level:    [89, 91]
+  17486141:
+    template: Spool_Leech
+    at:       [-428.000, -9.000, 311.000, 127]
+    level:    [89, 91]
+  17486142:
+    template: Lacerator
+    at:       [-441.762, -10.787, 300.837, 127]
+    level:    [87, 89]
+  17486143:
+    template: Lacerator
+    at:       [-460.000, -11.000, 275.000, 26]
+    level:    [87, 89]
+  17486144:
+    template: Combat_KT
+    script:   Combat
+    at:       [215.412, -0.742, 71.909, 127]
+    level:    [27, 30]
+  17486145:
+    template: Combat_KT
+    script:   Combat
+    at:       [200.117, -1.543, 93.961, 127]
+    level:    [27, 30]
+  17486146:
+    template: Combat_KT
+    script:   Combat
+    at:       [197.106, -1.744, 73.748, 127]
+    level:    [27, 30]
+  17486147:
+    template: Combat_KT
+    script:   Combat
+    at:       [162.204, -2.689, 94.980, 127]
+    level:    [27, 30]
+  17486148:
+    template: Combat_KT
+    script:   Combat
+    at:       [141.005, 0.241, 73.153, 127]
+    level:    [27, 30]
+  17486149:
+    template: Combat_KT
+    script:   Combat
+    at:       [120.228, -1.719, 74.787, 127]
+    level:    [27, 30]
+  17486150:
+    template: Combat_KT
+    script:   Combat
+    at:       [107.125, -0.821, 89.632, 127]
+    level:    [27, 30]
+  17486151:
+    template: Combat_KT
+    script:   Combat
+    at:       [98.966, -0.934, 70.145, 43]
+    level:    [27, 30]
+  17486152:
+    template: Combat_KT
+    script:   Combat
+    at:       [78.567, -0.323, 87.251, 127]
+    level:    [27, 30]
+  17486153:
+    template: Combat_KT
+    script:   Combat
+    at:       [68.747, -3.523, 92.515, 127]
+    level:    [27, 30]
+  17486154:
+    template: Combat_KT
+    script:   Combat
+    at:       [56.328, -0.143, 86.890, 70]
+    level:    [27, 30]
+  17486155:
+    template: Combat_KT
+    script:   Combat
+    at:       [34.242, -1.574, 76.714, 127]
+    level:    [27, 30]
+  17486156:
+    template: Combat_KT
+    script:   Combat
+    at:       [35.968, -1.166, 42.082, 127]
+    level:    [27, 30]
+  17486157:
+    template: Combat_KT
+    script:   Combat
+    at:       [51.663, -1.361, 41.122, 81]
+    level:    [27, 30]
+  17486158:
+    template: Combat_KT
+    script:   Combat
+    at:       [30.348, -1.470, 27.121, 127]
+    level:    [27, 30]
+  17486159:
+    template: Combat_KT
+    script:   Combat
+    at:       [3.086, -1.469, 46.108, 76]
+    level:    [27, 30]
+  17486160:
+    template: Combat_KT
+    script:   Combat
+    at:       [-3.427, -1.645, 27.233, 127]
+    level:    [27, 30]
+  17486161:
+    template: Combat_KT
+    script:   Combat
+    at:       [-39.139, -1.560, 51.861, 18]
+    level:    [27, 30]
+  17486162:
+    template: Combat_KT
+    script:   Combat
+    at:       [-40.824, -1.664, 26.969, 124]
+    level:    [27, 30]
+  17486163:
+    template: Combat_KT
+    script:   Combat
+    at:       [-80.994, -2.317, 51.934, 117]
+    level:    [27, 30]
+  17486164:
+    template: Combat_KT
+    script:   Combat
+    at:       [-101.860, -2.349, 51.989, 127]
+    level:    [27, 30]
+  17486165:
+    template: Combat_KT
+    script:   Combat
+    at:       [-126.000, -1.000, 26.000, 36]
+    level:    [27, 30]
+  17486166:
+    template: Gigas_Stonemason
+    at:       [127.000, -0.500, 79.000, 127]
+    level:    [35, 37]
+  17486167:
+    template: Gigas_Stonecarrier
+    at:       [178.000, 1.000, 81.000, 127]
+    level:    [35, 37]
+  17486168:
+    template: Gigas_Stonegrinder
+    at:       [154.000, -0.500, 81.000, 127]
+    level:    [35, 37]
+  17486169:
+    template: Gigas_Foreman
+    at:       [211.000, -1.000, 82.000, 127]
+    level:    [35, 37]
+  17486170:
+    template: Gigass_Spider
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17486171:
+    template: Thoon
+    at:       [132.000, 0.000, 74.000, 195]
+    level:    [42, 43]
+  17486172:
+    template: Gigas_Stonemason
+    at:       [-6.000, -0.500, 38.000, 127]
+    level:    [35, 37]
+  17486173:
+    template: Gigas_Stonecarrier
+    at:       [100.000, 0.500, 79.000, 127]
+    level:    [35, 37]
+  17486174:
+    template: Gigas_Stonegrinder
+    at:       [66.000, -0.500, 76.000, 127]
+    level:    [35, 37]
+  17486175:
+    template: Gigas_Foreman
+    at:       [38.000, -0.500, 59.000, 127]
+    level:    [35, 37]
+  17486176:
+    template: Gigass_Spider
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17486177:
+    template: Gigas_Stonemason
+    at:       [-108.000, -0.500, 37.000, 127]
+    level:    [35, 37]
+  17486178:
+    template: Gigas_Stonecarrier
+    at:       [-165.000, -0.500, 36.000, 127]
+    level:    [35, 37]
+  17486179:
+    template: Gigas_Stonegrinder
+    at:       [-157.000, -0.500, 15.000, 127]
+    level:    [35, 37]
+  17486180:
+    template: Gigas_Foreman
+    at:       [-92.000, -0.500, 38.000, 127]
+    level:    [35, 37]
+  17486181:
+    template: Gigass_Spider
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17486182:
+    template: Gigas_Stonemason
+    at:       [-150.000, 0.500, 25.000, 127]
+    level:    [35, 37]
+  17486183:
+    template: Gigas_Stonecarrier
+    at:       [-239.000, -0.500, -2.000, 127]
+    level:    [35, 37]
+  17486184:
+    template: Gigas_Stonegrinder
+    at:       [-272.000, -0.500, 0.500, 127]
+    level:    [35, 37]
+  17486185:
+    template: Gigas_Foreman
+    at:       [-198.000, -0.500, 0.500, 127]
+    level:    [35, 37]
+  17486186:
+    template: Gigass_Spider
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17486187:
+    template: Korroloka_Leech
+    at:       [-212.000, -9.000, 179.000, 247]
+    level:    [15, 15]
+  17486188:
+    template: Korroloka_Leech
+    at:       [-209.000, -9.000, 172.000, 246]
+    level:    [15, 15]
+  17486189:
+    template: Korroloka_Leech
+    at:       [-215.000, -10.000, 167.000, 114]
+    level:    [15, 15]
+  17486190:
+    template: Morion_Worm
+    at:       [255.652, -6.039, 20.878]
+    level:    [28, 28]
+  17486191:
+    template: Metallic_Slime
+    level:    [24, 30]
+  17486192:
+    template: Goblin_Bounty_Hunter
+    at:       [-48.364, -4.866, 106.168, 64]
+    level:    [10, 10]
+  17486193:
+    template: Goblin_Bounty_Hunter
+    at:       [-245.600, -5.339, 72.159, 250]
+    level:    [10, 10]
+  17486194:
+    template: Goblin_Bounty_Hunter
+    at:       [-179.803, -4.500, 109.150, 43]
+    level:    [10, 10]
+  17486195:
+    template: Goblin_Bounty_Hunter
+    at:       [-56.379, -4.919, 135.583, 94]
+    level:    [10, 10]
+  17486196:
+    template: Goblin_Bounty_Hunter
+    at:       [-388.335, -4.500, 59.106, 89]
+    level:    [10, 10]
+  17486197:
+    template: Goblin_Bounty_Hunter
+    at:       [-308.945, -5.503, 55.868, 9]
+    level:    [10, 10]
+  17486198:
+    template: Goblin_Bounty_Hunter
+    at:       [17.953, 1.499, -27.530, 118]
+    level:    [10, 10]
+  17486199:
+    template: Goblin_Bounty_Hunter
+    at:       [-133.530, 1.499, -51.592, 125]
+    level:    [10, 10]
+  17486200:
+    template: Goblin_Bounty_Hunter
+    at:       [-108.570, 1.499, -47.898, 22]
+    level:    [10, 10]
+  17486201:
+    template: Goblin_Bounty_Hunter
+    at:       [-350.413, -4.500, 178.439, 15]
+    level:    [10, 10]
+  17486202:
+    template: Goblin_Bounty_Hunter
+    at:       [-369.542, 0.987, 109.419, 34]
+    level:    [10, 10]
+  17486203:
+    template: Goblin_Bounty_Hunter
+    at:       [-427.719, -8.898, 246.602, 87]
+    level:    [10, 10]
+  17486204:
+    template: Goblin_Bounty_Hunter
+    at:       [-371.672, -8.898, 273.188, 77]
+    level:    [10, 10]
+  17486205:
+    template: Goblin_Bounty_Hunter
+    at:       [-185.880, 0.639, -11.274, 191]
+    level:    [10, 10]
+  17486206:
+    template: Goblin_Bounty_Hunter
+    at:       [-65.617, 0.572, -42.177, 62]
+    level:    [10, 10]
+  17486207:
+    template: Goblin_Bounty_Hunter
+    at:       [-297.696, -4.500, -51.776, 178]
+    level:    [10, 10]
+  17486208:
+    template: Goblin_Bounty_Hunter
+    at:       [110.253, -4.500, 15.697, 180]
+    level:    [10, 10]
+  17486209:
+    template: Goblin_Bounty_Hunter
+    at:       [-9.463, -4.500, 181.739, 156]
+    level:    [10, 10]
+  17486210:
+    template: Goblin_Bounty_Hunter
+    at:       [-63.075, 0.687, 41.855, 147]
+    level:    [10, 10]
+  17486211:
+    template: Gloom_Phantom_Korroloka
+    script:   Gloom_Phantom
+    at:       [53.535, 0.295, 77.591, 233]
+    level:    [139, 139]
+  17486212:
+    template: Magh_Bihu_Korroloka
+    script:   Magh_Bihu
+    at:       [52.553, 0.030, 77.083, 58]
+    level:    [139, 139]
+  17486213:
+    template: Dazbog_Korroloka
+    script:   Dazbog
+    at:       [51.036, 0.016, 77.497, 132]
+    level:    [139, 139]
+
+slots:
+  - members:
+      17485881: {} # Sea_Monk
+      17485903: {} # Greater_Pugil
+      17485904: {} # Clipper
+  - members:
+      17485946: {} # Sea_Monk
+      17485948: {} # Clipper
+      17485950: {} # Clipper
+      17485952: {} # Clipper
+  - members:
+      17485947: {} # Greater_Pugil
+      17485949: {} # Greater_Pugil
+      17485951: {} # Greater_Pugil
+  - members:
+      17486002: {} # Clipper
+      17486004: {} # Clipper
+  - members:
+      17486001: {} # Greater_Pugil
+      17486003: {} # Greater_Pugil
+  - members:
+      17486024: {} # Greater_Pugil
+      17486026: {} # Sea_Monk
+  - members:
+      17486028: {} # Huge_Spider
+      17486029: {} # Huge_Spider
+  - members:
+      17486030: {} # Huge_Spider
+      17486035: {} # Huge_Spider
+  - members:
+      17486038: {} # Jelly
+      17486049: {} # Greater_Pugil
+      17486050: {} # Greater_Pugil
+      17486051: {} # Greater_Pugil
+  - members:
+      17486039: {} # Clipper
+      17486052: {} # Greater_Pugil
+  - members:
+      17486040: {} # Clipper
+      17486053: {} # Greater_Pugil
+  - members:
+      17486041: {} # Clipper
+      17486054: {} # Greater_Pugil
+  - members:
+      17486042: {} # Clipper
+      17486055: {} # Greater_Pugil
+  - members:
+      17486044: {} # Clipper
+      17486056: {} # Greater_Pugil
+  - members:
+      17486045: {} # Clipper
+      17486057: {} # Greater_Pugil
+  - members:
+      17486046: {} # Clipper
+      17486058: {} # Greater_Pugil
+  - members:
+      17486069: {} # Sea_Monk
+      17486071: {} # Clipper
+      17486073: {} # Clipper
+      17486075: {} # Clipper
+  - members:
+      17486070: {} # Greater_Pugil
+      17486072: {} # Greater_Pugil
+      17486074: {} # Greater_Pugil
+  - members:
+      17486089: {} # Sea_Monk
+      17486091: {} # Clipper
+      17486093: {} # Clipper
+      17486095: {} # Clipper
+  - members:
+      17486090: {} # Greater_Pugil
+      17486092: {} # Greater_Pugil
+      17486094: {} # Greater_Pugil
+  - members:
+      17486166: {} # Gigas_Stonemason
+      17486167: {} # Gigas_Stonecarrier
+      17486168: {} # Gigas_Stonegrinder
+      17486169: {} # Gigas_Foreman
+  - members:
+      17486172: {} # Gigas_Stonemason
+      17486173: {} # Gigas_Stonecarrier
+      17486174: {} # Gigas_Stonegrinder
+      17486175: {} # Gigas_Foreman
+  - members:
+      17486177: {} # Gigas_Stonemason
+      17486178: {} # Gigas_Stonecarrier
+      17486179: {} # Gigas_Stonegrinder
+      17486180: {} # Gigas_Foreman
+  - members:
+      17486182: {} # Gigas_Stonemason
+      17486183: {} # Gigas_Stonecarrier
+      17486184: {} # Gigas_Stonegrinder
+      17486185: {} # Gigas_Foreman

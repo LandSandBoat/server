@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          174
+  night:        174
+  battle_solo:  115
+  battle_party: 139
+
+zonelines:
+
+  z1w0:
+    from:  [359.961, -1.770, -179.998]
+    to:    wajaom_woodlands
+    at:    [444.495, -22.120, -99.976]
+    scale: [1.000, 3.500]
+
+  z1w2:
+    from:  [20.016, 4.566, -120.017]
+    to:    wajaom_woodlands
+    at:    [99.049, -12.592, -150.954, 1.570796]
+    scale: [1.000, 3.500]
+
+  z1w4:
+    from:  [-48.857, 27.092, -223.656]
+    to:    wajaom_woodlands
+    at:    [-168.529, -12.902, -260.803]
+    scale: [1.000, 3.500]
+
+  z1w6:
+    from:  [-194.081, -20.834, -420.932]
+    to:    wajaom_woodlands
+    at:    [-328.495, -12.893, -379.397]
+    scale: [1.000, 3.500]
+
+  z1w8:
+    from:  [101.075, 6.390, 154.991]
+    to:    wajaom_woodlands
+    at:    [59.976, -13.674, 404.470, 4.712389]
+    scale: [1.000, 3.500]
+
+  z1wa:
+    from:  [-140.001, 3.002, 122.003]
+    to:    wajaom_woodlands
+    at:    [-258.999, -20.903, 311.538, 4.712389]
+    scale: [1.000, 3.500]
+
+  z1wc:
+    from:  [-405.060, 0.345, -140.039]
+    to:    wajaom_woodlands
+    at:    [-675.497, -5.780, -19.657]
+    scale: [1.000, 3.500]
+
+  z1we:
+    from:  [-219.928, 0.398, -153.012]
+    to:    wajaom_woodlands
+    at:    [-419.293, -5.753, -84.475, 1.570796]
+    scale: [1.000, 3.500]
+
+  z1wg:
+    from:  [-200.820, -22.142, -260.050]
+    to:    wajaom_woodlands
+    at:    [-328.534, -20.852, -180.819]
+    scale: [1.000, 3.500]
+
+  z1wi:
+    from:  [-359.001, -25.301, -259.970]
+    to:    wajaom_woodlands
+    at:    [-555.517, -13.730, -220.201, 3.141593]
+    scale: [1.000, 3.500]
+
+  z1wk:
+    from:  [519.935, -38.040, 459.902]
+    to:    bhaflau_thickets
+    at:    [442.765, -13.531, 419.999]
+    scale: [1.000, 4.000]
+
+  z1wm:
+    from:  [242.450, -37.642, 500.050]
+    to:    bhaflau_thickets
+    at:    [118.659, -13.567, 419.999, 3.141593]
+    scale: [1.000, 4.000]
+
+  z1wo:
+    from:  [-539.999, 11.703, -160.091]
+    to:    halvung
+    at:    [-20.007, 18.000, -439.514, 4.712389]
+    scale: [1.000, 4.000]

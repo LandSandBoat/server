@@ -21,40 +21,55 @@
 
 #pragma once
 
+#include "common/enum_traits.h"
 #include "common/logging.h"
-#include "data/yaml/merge.h"
-#include "utils/moduleutils.h"
+#include "data/enums/zone.h"
 
-#include <chrono>
+#include <cstdlib>
 #include <exception>
+#include <filesystem>
 #include <fmt/format.h>
+#include <fstream>
+#include <iterator>
+#include <optional>
 #include <string>
 
 namespace xi::data
 {
 
-template <class Dataset>
-auto loadDataset() -> typename Dataset::Records
+inline auto zoneFilePath(const xi::ZoneId zoneId, const std::string_view name) -> std::string
 {
-    const auto dataPath = Dataset::kDataPath;
-    const auto start    = std::chrono::steady_clock::now();
-    const auto corePath = fmt::format("data/{}.yaml", dataPath);
-    const auto modules  = moduleutils::GetDataModules(dataPath, ".yaml");
+    return fmt::format("data/zones/{}/{}.yaml", EnumTraits<xi::ZoneId>::toName(zoneId), name);
+}
+
+// Per-zone data file. No file means the zone declares none of this kind.
+template <class Dataset>
+auto loadZoneFile(const xi::ZoneId zoneId) -> std::optional<typename Dataset::Records>
+{
+    const auto path = zoneFilePath(zoneId, Dataset::kDataPath);
+    if (!std::filesystem::exists(path))
+    {
+        return std::nullopt;
+    }
 
     try
     {
-        auto       result       = Dataset::decode(loadMergedYaml(corePath, modules));
-        const auto ms           = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count();
-        const auto moduleSuffix = modules.empty()
-                                      ? std::string{}
-                                      : fmt::format("  +{} module{}", modules.size(), modules.size() == 1 ? "" : "s");
-        ShowInfoFmt("[data] {} {} entries loaded in {}ms{}", dataPath, result.size(), ms, moduleSuffix);
-        return result;
+        std::ifstream     input(path, std::ios::binary);
+        const std::string text{ std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>() };
+
+        auto records = Dataset::decode(text);
+        if constexpr (requires { Dataset::verifyZone(records, zoneId); })
+        {
+            Dataset::verifyZone(records, zoneId);
+        }
+
+        return records;
     }
     catch (const std::exception& error)
     {
-        ShowErrorFmt("loadDataset({}) failed: {}", corePath, error.what());
-        throw;
+        // Catch exceptions from workers, report the file and stop deliberately.
+        ShowCriticalFmt("{} is not valid: {}", path, error.what());
+        std::exit(-1);
     }
 }
 

@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          171
+  night:        171
+  battle_solo:  101
+  battle_party: 191
+
+zonelines:
+
+  z360:
+    from:  [499.979, 4.509, -79.972]
+    to:    korroloka_tunnel
+    at:    [-500.004, -21.824, 0.358, 1.570796]
+    scale: [1.000, 4.000]
+
+  z362:
+    from:  [260.282, 5.016, 323.975]
+    to:    western_altepa_desert
+    at:    [379.256, 6.954, -7.993, 4.712389]
+    scale: [1.000, 4.000]
+
+  z364:
+    from:  [-325.066, 25.163, -99.662]
+    to:    western_altepa_desert
+    at:    [-118.837, -2.646, -500.499, 3.141593]
+    scale: [1.000, 4.000]
+
+  z366:
+    from:  [420.063, 6.398, 194.874]
+    to:    quicksand_caves
+    at:    [940.000, -17.591, -357.759, 4.712389]
+    scale: [1.000, 4.000]
+
+  z368:
+    from:  [20.049, 14.297, -325.004]
+    to:    quicksand_caves
+    at:    [700.001, -25.793, -688.183, 1.570796]
+    scale: [1.000, 4.000]
+
+  z36a:
+    from:  [129.980, 6.192, -20.014]
+    to:    quicksand_caves
+    at:    [618.389, -9.800, -380.008]
+    scale: [1.000, 4.000]
+
+  z36c:
+    from:  [85.052, 6.504, -99.867]
+    to:    cloister_of_tremors
+    at:    [-636.001, -16.563, -500.023]
+    scale: [1.000, 4.000]

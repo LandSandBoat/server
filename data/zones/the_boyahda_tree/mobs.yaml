@@ -1,0 +1,3852 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Agas:
+    id:            60
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         27
+      behaviors:
+        aggressive: true
+      mods:
+        regen: 20
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+
+  Ancient_Goobbue:
+    id:            123
+    species:       goobbue
+    type:          [notorious]
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 300
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags: 1159
+        model_size:      3
+        hitbox:         41
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 15700
+    loot:
+      drops:
+        - chance: always
+          item:   clump_of_boyahda_moss
+        - chance: always
+          item:   bag_of_tree_cuttings
+        - chance: always
+          item:   clump_of_great_boyahda_moss
+        - chance: rare
+          item:   daihannya
+
+  Aquarius:
+    id:            206
+    species:       crab
+    type:          [notorious]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 125
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 1165
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 6100
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item:   crab_shell
+        - chance: always
+          item:   slice_of_land_crab_meat
+        - chance: always
+          one_of:
+            fransisca: 90
+            nothing:   10
+
+  Ayapec:
+    id:            6876
+    species:       crab
+    type:          [notorious]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Bark_Spider:
+    id:            343
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spider_web
+        - chance: rare
+          item:   boyahda_coffer_key
+      steal: spider_web
+      despoil:
+        spool_of_rainbow_thread: 0
+        spider_web:              0
+
+  Bark_Tarantula:
+    id:            344
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spider_web
+      steal: spider_web
+      despoil:
+        spool_of_rainbow_thread: 0
+        spider_web:              0
+
+  Beet_Leafhopper:
+    id:            386
+    species:       fly
+    type:          [notorious]
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 643
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+
+  Blood_Ball:
+    id:            469
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Bouncing_Ball_fished:
+    id:            6782
+    display_name:  Bouncing_Ball
+    species:       leech
+    type:          [fished]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 645
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   boyahda_coffer_key
+        - chance: very_rare
+          item:   carbuncles_ruby
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Boyahda_Sapling:
+    id:            515
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 133
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   treant_bulb
+        - chance: rare
+          item:   bag_of_fruit_seeds
+      steal: bag_of_fruit_seeds
+      despoil:
+        bag_of_vegetable_seeds: 0
+        treant_bulb:            0
+        bag_of_wildgrass_seeds: 0
+
+  Darter:
+    id:            920
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   insect_wing
+      despoil:
+        insect_wing: 0
+
+  Death_Cap:
+    id:            937
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   boyahda_coffer_key
+        - chance: common
+          item:   sleepshroom
+        - chance: uncommon
+          item:   woozyshroom
+        - chance: rare
+          item:   danceshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Demonic_Pugil_fished:
+    id:            6783
+    display_name:  Demonic_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Demonic_Rose:
+    id:            978
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         36
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        exp_bonus: 23
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   malboro_vine
+        - chance: very_common
+          item:   malboro_vine
+        - chance: rare
+          item:   lacquer_tree_log
+      steal: malboro_vine
+
+  Elder_Goobbue:
+    id:            1191
+    species:       goobbue
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 320
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   clump_of_boyahda_moss
+        - chance: very_common
+          item:   bag_of_tree_cuttings
+        - chance: uncommon
+          item:   piece_of_wisteria_lumber
+        - chance: rare
+          item:   clump_of_great_boyahda_moss
+      despoil:
+        clump_of_boyahda_moss: 0
+        bag_of_tree_cuttings:  0
+
+  Ellyllon:
+    id:            1201
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3600
+    loot:
+      drops:
+        - chance: always
+          item:   sleepshroom
+        - chance: common
+          item:   mushroom_helm
+        - chance: rare
+          item:   king_truffle
+        - chance: uncommon
+          item:   reishi_mushroom
+
+  Fafnir_Strange_Happenings:
+    id:            7358
+    display_name:  Fafnir
+    species:       black_wyrm
+    type:          [notorious]
+    skill_list_id: 260
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+          light: -2
+        rank_status:
+          poison:      -2
+          light_sleep:  6
+          dark_sleep:   6
+      render:
+        look:
+          type:  standard
+          model: 783
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        42
+      behaviors:
+        flags:          [no_turn]
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 2700
+      stats:
+        hp: 3240000
+    content: TVR
+
+  Hidhaegg:
+    id:            6877
+    species:       black_wyrm
+    type:          [notorious]
+    skill_list_id: 263
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -2
+          light: -2
+        rank_status:
+          poison:      -2
+          light_sleep:  6
+          dark_sleep:   6
+      render:
+        look:
+          type:  standard
+          model: 783
+        entity_flags:  131
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      1
+        hitbox:         50
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Knight_Crawler_BT:
+    id:            2272
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_crawler_cocoon
+        - chance: very_rare
+          item:   crawler_egg
+        - chance: rare
+          item:   lucky_egg
+        - chance: rare
+          item:   boyahda_coffer_key
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Korrigan:
+    id:            2282
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   two-leaf_mandragora_bud
+        - chance: rare
+          item:   jug_of_humus
+        - chance: very_rare
+          item:   four-leaf_korrigan_bud
+      despoil:
+        two-leaf_mandragora_bud: 0
+        ball_of_saruta_cotton:   0
+
+  Leshonki:
+    id:            2393
+    species:       sapling
+    type:          [notorious]
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        18
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: always
+          item:   bag_of_fruit_seeds
+        - chance: always
+          item:   bag_of_fruit_seeds
+        - chance: always
+          item:   leshonki_bulb
+        - chance: common
+          item:   bag_of_cactus_stems
+        - chance: uncommon
+          item:   treant_bulb
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   boyahda_coffer_key
+
+  Modron:
+    id:            5159
+    species:       treant
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 391
+        entity_flags:  671
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      3
+        hitbox:         53
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Modrons_Druid:
+    id:            5160
+    species:       treant
+    type:          [notorious]
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 395
+        entity_flags: 129
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Morbol_Menace:
+    id:            2745
+    species:       morbol_menace
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      mob_mods:
+        exp_bonus: 23
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   malboro_vine
+        - chance: very_common
+          item:   malboro_vine
+        - chance: rare
+          item:   lacquer_tree_log
+      steal: malboro_vine
+
+  Moss_Eater:
+    id:            2754
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 269
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   boyahda_coffer_key
+        - chance: common
+          item:   slice_of_hare_meat
+        - chance: uncommon
+          item:   rabbit_hide
+      despoil:
+        rabbit_hide:        0
+        slice_of_hare_meat: 0
+
+  Mourioche:
+    id:            2762
+    species:       mandragora
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   two-leaf_mandragora_bud
+        - chance: rare
+          item:   jug_of_humus
+        - chance: rare
+          item:   boyahda_coffer_key
+        - chance: very_rare
+          item:   snobby_letter
+      despoil:
+        two-leaf_mandragora_bud: 0
+        ball_of_saruta_cotton:   0
+
+  Mourning_Crawler:
+    id:            4578
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 397
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   piece_of_crawler_cocoon
+        - chance: uncommon
+          item:   spool_of_silk_thread
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: rare
+          item:   fossilized_bone
+        - chance: rare
+          item:   spool_of_wyrdstrand
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+    content: ABYSSEA
+
+  Old_Goobbue:
+    id:            2962
+    species:       goobbue
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 320
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   boyahda_coffer_key
+        - chance: common
+          item:   clump_of_boyahda_moss
+        - chance: uncommon
+          item:   bag_of_tree_cuttings
+        - chance: rare
+          item:   clump_of_goobbue_humus
+      despoil:
+        clump_of_boyahda_moss: 0
+        bag_of_tree_cuttings:  0
+
+  Processionaire:
+    id:            3200
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_crawler_cocoon
+        - chance: rare
+          item:   spool_of_silk_thread
+        - chance: very_rare
+          item:   crawler_egg
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Robber_Crab:
+    id:            3375
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: rare
+          item:   boyahda_coffer_key
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Scavenger_Crab_fished:
+    id:            6781
+    display_name:  Scavenger_Crab
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: uncommon
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   slice_of_land_crab_meat
+        - chance: rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+
+  Skimmer:
+    id:            3649
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   insect_wing
+      despoil:
+        insect_wing: 0
+
+  Snaggletooth_Peapuk:
+    id:            4577
+    species:       puk
+    skill_list_id: 2006
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1745
+        entity_flags: 133
+        model_size:     2
+        hitbox:        21
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: rare
+          item:   fossilized_bone
+        - chance: common
+          item:   peapuk_wing
+        - chance: uncommon
+          item:   puk_egg
+        - chance: rare
+          item:   vial_of_chimera_blood
+      despoil:
+        puk_wing:              0
+        puk_egg:               0
+        vial_of_chimera_blood: 0
+    content: ABYSSEA
+
+  Steelshell:
+    id:            3768
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Steelshell_2:
+    id:            3768
+    display_name:  Steelshell
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 1200
+    loot:
+      drops:
+        - chance: very_common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Stygian_Pugil_fished:
+    id:            6768
+    display_name:  Stygian_Pugil
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   boyahda_coffer_key
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Templar_Crawler:
+    id:            7026
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 133
+        model_size:     2
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Unut:
+    id:            4103
+    species:       rabbit
+    type:          [notorious]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [thf, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 7400
+    loot:
+      drops:
+        - chance: always
+          item:   rabbit_hide
+        - chance: always
+          item:   rabbit_hide
+        - chance: always
+          item:   rabbit_hide
+        - chance: uncommon
+          item:   luna_subligar
+
+  Viseclaw:
+    id:            6369
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: rare
+          item:   fossilized_bone
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+    content: ABYSSEA
+
+  Voluptuous_Vivian:
+    id:            4253
+    species:       morbol
+    type:          [notorious]
+    skill_list_id: 411
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [sam, war]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 381
+        entity_flags:  671
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      3
+        hitbox:         44
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 13000
+    loot:
+      drops:
+        - chance: always
+          item:   malboro_vine
+        - chance: uncommon
+          item:   black_ribbon
+        - chance: rare
+          item:   spool_of_malboro_fiber
+        - chance: rare
+          item:   vivian_ring
+      steal: malboro_vine
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+spawns:
+  17403905:
+    template: Scavenger_Crab_fished
+    script:   Scavenger_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [60, 62]
+  17403906:
+    template: Stygian_Pugil_fished
+    script:   Stygian_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [60, 62]
+  17403907:
+    template: Bouncing_Ball_fished
+    script:   Bouncing_Ball
+    at:       [1.000, 1.000, 1.000]
+    level:    [65, 67]
+  17403908:
+    template: Demonic_Pugil_fished
+    script:   Demonic_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 72]
+  17403909:
+    template: Demonic_Pugil_fished
+    script:   Demonic_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 72]
+  17403910:
+    template: Bark_Spider
+    at:       [405.430, 11.399, -98.606, 135]
+    level:    [60, 63]
+  17403911:
+    template: Bark_Spider
+    at:       [417.910, 11.119, -99.093, 205]
+    level:    [60, 63]
+  17403912:
+    template: Bark_Spider
+    at:       [364.360, 11.605, -99.154, 141]
+    level:    [60, 63]
+  17403913:
+    template: Bark_Spider
+    at:       [345.310, 11.482, -100.750, 27]
+    level:    [60, 63]
+  17403914:
+    template: Death_Cap
+    at:       [319.510, 8.730, -33.245, 38]
+    level:    [60, 63]
+  17403915:
+    template: Death_Cap
+    at:       [309.420, 8.245, -28.330, 174]
+    level:    [60, 63]
+  17403916:
+    template: Death_Cap
+    at:       [320.970, 8.746, -27.215, 174]
+    level:    [60, 63]
+  17403917:
+    template: Death_Cap
+    at:       [320.680, 8.463, -23.569, 199]
+    level:    [60, 63]
+  17403918:
+    template: Death_Cap
+    at:       [320.740, 8.673, -34.479, 119]
+    level:    [60, 63]
+  17403919:
+    template: Bark_Spider
+    at:       [299.610, 8.395, -83.037, 62]
+    level:    [60, 63]
+  17403920:
+    template: Bark_Spider
+    at:       [297.220, 8.540, -73.097, 185]
+    level:    [60, 63]
+  17403921:
+    template: Death_Cap
+    at:       [287.370, 7.759, -102.740, 29]
+    level:    [60, 63]
+  17403922:
+    template: Death_Cap
+    at:       [286.350, 7.090, -99.003, 222]
+    level:    [60, 63]
+  17403923:
+    template: Death_Cap
+    at:       [290.120, 7.994, -105.880, 241]
+    level:    [60, 63]
+  17403924:
+    template: Death_Cap
+    at:       [303.380, 8.358, -102.750, 164]
+    level:    [60, 63]
+  17403925:
+    template: Bark_Spider
+    at:       [277.850, 8.579, -140.900, 122]
+    level:    [60, 63]
+  17403926:
+    template: Bark_Spider
+    at:       [295.150, 7.944, -145.440, 37]
+    level:    [60, 63]
+  17403927:
+    template: Bark_Spider
+    at:       [259.730, 8.201, -167.950, 57]
+    level:    [60, 63]
+  17403928:
+    template: Bark_Spider
+    at:       [264.390, 8.026, -176.690, 24]
+    level:    [60, 63]
+  17403929:
+    template: Bark_Spider
+    at:       [260.160, 8.186, -167.920, 58]
+    level:    [60, 63]
+  17403930:
+    template: Bark_Spider
+    at:       [265.290, 8.547, -100.020, 158]
+    level:    [60, 63]
+  17403931:
+    template: Bark_Spider
+    at:       [264.020, 8.528, -98.125, 42]
+    level:    [60, 63]
+  17403932:
+    template: Death_Cap
+    at:       [246.920, 8.627, -98.999, 238]
+    level:    [60, 63]
+  17403933:
+    template: Death_Cap
+    at:       [260.990, 8.507, -102.200, 253]
+    level:    [60, 63]
+  17403934:
+    template: Death_Cap
+    at:       [211.480, 8.152, -171.300, 213]
+    level:    [60, 63]
+  17403935:
+    template: Death_Cap
+    at:       [216.920, 8.009, -162.590, 54]
+    level:    [60, 63]
+  17403936:
+    template: Death_Cap
+    at:       [201.300, 8.742, -158.080, 237]
+    level:    [60, 63]
+  17403937:
+    template: Death_Cap
+    at:       [206.470, 8.563, -154.450, 49]
+    level:    [60, 63]
+  17403938:
+    template: Death_Cap
+    at:       [192.540, 8.532, -163.410, 217]
+    level:    [60, 63]
+  17403939:
+    template: Ellyllon
+    at:       [216.010, 8.129, -157.100, 45]
+    level:    [65, 66]
+  17403940:
+    template: Bark_Spider
+    at:       [180.840, 8.332, -120.770, 118]
+    level:    [60, 63]
+  17403941:
+    template: Bark_Spider
+    at:       [179.340, 8.555, -122.010, 199]
+    level:    [60, 63]
+  17403942:
+    template: Bark_Spider
+    at:       [298.560, 8.567, -4.452, 78]
+    level:    [60, 63]
+  17403943:
+    template: Bark_Spider
+    at:       [299.420, 8.636, 5.120, 183]
+    level:    [60, 63]
+  17403944:
+    template: Bark_Spider
+    at:       [303.130, 8.506, 20.774, 100]
+    level:    [60, 63]
+  17403945:
+    template: Bark_Spider
+    at:       [295.040, 8.473, 28.767, 235]
+    level:    [60, 63]
+  17403946:
+    template: Death_Cap
+    at:       [319.540, 8.647, 23.494, 73]
+    level:    [60, 63]
+  17403947:
+    template: Death_Cap
+    at:       [335.780, 8.481, 16.539, 36]
+    level:    [60, 63]
+  17403948:
+    template: Death_Cap
+    at:       [319.000, 8.633, 23.444, 65]
+    level:    [60, 63]
+  17403949:
+    template: Death_Cap
+    at:       [331.260, 8.601, 18.107, 43]
+    level:    [60, 63]
+  17403950:
+    template: Death_Cap
+    at:       [263.200, 8.787, 17.770, 250]
+    level:    [60, 63]
+  17403951:
+    template: Death_Cap
+    at:       [268.030, 8.743, 13.036, 246]
+    level:    [60, 63]
+  17403952:
+    template: Death_Cap
+    at:       [271.550, 8.571, 16.965, 239]
+    level:    [60, 63]
+  17403953:
+    template: Death_Cap
+    at:       [253.610, 6.520, -16.163, 124]
+    level:    [60, 63]
+  17403954:
+    template: Death_Cap
+    at:       [253.630, 6.527, -16.099, 116]
+    level:    [60, 63]
+  17403955:
+    template: Death_Cap
+    at:       [251.900, 5.985, -19.857, 76]
+    level:    [60, 63]
+  17403956:
+    template: Death_Cap
+    at:       [251.980, 5.980, -20.007, 76]
+    level:    [60, 63]
+  17403957:
+    template: Bark_Spider
+    at:       [336.200, -3.536, 101.186, 55]
+    level:    [60, 63]
+  17403958:
+    template: Bark_Spider
+    at:       [314.460, -3.026, 100.535, 14]
+    level:    [60, 63]
+  17403959:
+    template: Bark_Spider
+    at:       [299.330, -0.750, 79.557, 120]
+    level:    [60, 63]
+  17403960:
+    template: Bark_Spider
+    at:       [301.790, 0.513, 70.169, 202]
+    level:    [60, 63]
+  17403961:
+    template: Bark_Spider
+    at:       [258.300, 5.516, 53.095, 87]
+    level:    [60, 63]
+  17403962:
+    template: Bark_Spider
+    at:       [258.730, 5.567, 54.658, 220]
+    level:    [60, 63]
+  17403963:
+    template: Bark_Spider
+    at:       [260.440, 4.895, 22.701, 227]
+    level:    [60, 63]
+  17403964:
+    template: Bark_Spider
+    at:       [240.820, 5.335, 19.086, 49]
+    level:    [60, 63]
+  17403965:
+    template: Bark_Spider
+    at:       [253.860, 4.963, 21.763, 187]
+    level:    [60, 63]
+  17403966:
+    template: Bark_Spider
+    at:       [222.120, 8.521, -8.940, 210]
+    level:    [60, 63]
+  17403967:
+    template: Bark_Spider
+    at:       [219.620, 8.220, 0.265, 90]
+    level:    [60, 63]
+  17403968:
+    template: Mourioche
+    at:       [206.250, 8.455, -90.176, 167]
+    level:    [62, 65]
+  17403969:
+    template: Mourioche
+    at:       [158.570, 8.794, -72.736, 244]
+    level:    [62, 65]
+  17403970:
+    template: Mourioche
+    at:       [147.110, 8.518, -83.415, 199]
+    level:    [62, 65]
+  17403971:
+    template: Moss_Eater
+    at:       [159.680, 8.230, -96.027, 107]
+    level:    [62, 66]
+  17403972:
+    template: Moss_Eater
+    at:       [161.320, 8.687, -92.767, 11]
+    level:    [62, 66]
+  17403973:
+    template: Mourioche
+    at:       [200.870, 8.784, -63.436, 244]
+    level:    [62, 65]
+  17403974:
+    template: Mourioche
+    at:       [193.160, 8.786, -42.608, 149]
+    level:    [62, 65]
+  17403975:
+    template: Mourioche
+    at:       [214.320, 8.367, -36.633, 174]
+    level:    [62, 65]
+  17403976:
+    template: Mourioche
+    at:       [214.100, 8.104, -32.189, 117]
+    level:    [62, 65]
+  17403977:
+    template: Moss_Eater
+    at:       [203.970, 8.652, -64.116, 255]
+    level:    [62, 66]
+  17403978:
+    template: Moss_Eater
+    at:       [214.590, 8.053, -31.202, 119]
+    level:    [62, 66]
+  17403979:
+    template: Mourioche
+    at:       [214.400, 5.993, -60.035, 37]
+    level:    [62, 65]
+  17403980:
+    template: Mourioche
+    at:       [217.610, 6.427, -69.658, 66]
+    level:    [62, 65]
+  17403981:
+    template: Knight_Crawler_BT
+    script:   Knight_Crawler
+    at:       [186.130, 5.681, -66.446, 115]
+    level:    [62, 67]
+  17403982:
+    template: Knight_Crawler_BT
+    script:   Knight_Crawler
+    at:       [188.170, 5.842, -60.810, 79]
+    level:    [62, 67]
+  17403983:
+    template: Mourioche
+    at:       [143.980, 8.739, 0.126, 107]
+    level:    [62, 65]
+  17403984:
+    template: Mourioche
+    at:       [146.080, 8.673, -3.004, 88]
+    level:    [62, 65]
+  17403985:
+    template: Mourioche
+    at:       [158.580, 8.717, -35.527, 124]
+    level:    [62, 65]
+  17403986:
+    template: Mourioche
+    at:       [154.740, 8.936, -10.786, 119]
+    level:    [62, 65]
+  17403987:
+    template: Moss_Eater
+    at:       [153.700, 8.690, 2.113, 83]
+    level:    [62, 66]
+  17403988:
+    template: Moss_Eater
+    at:       [150.850, 8.427, 9.696, 20]
+    level:    [62, 66]
+  17403989:
+    template: Moss_Eater
+    at:       [175.310, 9.277, -6.983, 69]
+    level:    [62, 66]
+  17403990:
+    template: Old_Goobbue
+    at:       [152.720, 8.839, -10.498, 2]
+    level:    [65, 68]
+  17403991:
+    template: Mourioche
+    at:       [145.050, 5.987, -25.795, 50]
+    level:    [62, 64]
+  17403992:
+    template: Mourioche
+    at:       [145.480, 6.067, -27.628, 192]
+    level:    [63, 66]
+  17403993:
+    template: Robber_Crab
+    at:       [170.970, 9.414, -12.579, 100]
+    level:    [62, 66]
+  17403994:
+    template: Robber_Crab
+    at:       [174.990, 9.589, -16.718, 13]
+    level:    [62, 66]
+  17403995:
+    template: Robber_Crab
+    at:       [182.400, 8.707, -33.993, 73]
+    level:    [62, 66]
+  17403996:
+    template: Water_Elemental
+    at:       [172.170, 9.358, -11.154, 67]
+    level:    [69, 72]
+  17403997:
+    template: Robber_Crab
+    at:       [163.310, 9.590, -58.550, 86]
+    level:    [62, 66]
+  17403998:
+    template: Robber_Crab
+    at:       [162.880, 9.591, -58.082, 66]
+    level:    [62, 66]
+  17403999:
+    template: Robber_Crab
+    at:       [195.370, 8.972, -73.536, 250]
+    level:    [62, 66]
+  17404000:
+    template: Aquarius
+    at:       [165.930, 9.344, -56.348, 51]
+    level:    [69, 71]
+  17404001:
+    template: Water_Elemental
+    at:       [185.940, 6.115, -70.771, 225]
+    level:    [69, 72]
+  17404002:
+    template: Robber_Crab
+    at:       [149.300, 9.742, -64.239, 4]
+    level:    [62, 66]
+  17404003:
+    template: Robber_Crab
+    at:       [146.140, 9.712, -51.616, 141]
+    level:    [62, 66]
+  17404004:
+    template: Robber_Crab
+    at:       [149.590, 9.765, -61.490, 143]
+    level:    [62, 66]
+  17404005:
+    template: Water_Elemental
+    at:       [144.480, 9.977, -59.077, 164]
+    level:    [69, 72]
+  17404006:
+    template: Knight_Crawler_BT
+    script:   Knight_Crawler
+    at:       [180.790, 8.582, 43.675, 189]
+    level:    [62, 67]
+  17404007:
+    template: Knight_Crawler_BT
+    script:   Knight_Crawler
+    at:       [182.150, 8.428, 47.235, 208]
+    level:    [62, 67]
+  17404008:
+    template: Knight_Crawler_BT
+    script:   Knight_Crawler
+    at:       [181.050, 8.501, 38.691, 60]
+    level:    [62, 67]
+  17404009:
+    template: Thunder_Elemental
+    at:       [174.940, 8.198, 64.972, 221]
+    level:    [69, 72]
+  17404010:
+    template: Mourioche
+    at:       [109.220, 8.474, 37.334, 96]
+    level:    [63, 66]
+  17404011:
+    template: Mourioche
+    at:       [124.180, 8.757, 77.574, 231]
+    level:    [63, 66]
+  17404012:
+    template: Mourioche
+    at:       [121.890, 8.655, 90.493, 174]
+    level:    [63, 66]
+  17404013:
+    template: Mourioche
+    at:       [121.980, 8.510, 51.846, 62]
+    level:    [63, 66]
+  17404014:
+    template: Moss_Eater
+    at:       [112.080, 8.368, 34.423, 215]
+    level:    [62, 66]
+  17404015:
+    template: Moss_Eater
+    at:       [134.440, 7.846, 45.197, 179]
+    level:    [62, 66]
+  17404016:
+    template: Moss_Eater
+    at:       [127.320, 7.768, 93.138, 237]
+    level:    [62, 66]
+  17404017:
+    template: Old_Goobbue
+    at:       [129.280, 10.423, 20.968, 33]
+    level:    [65, 68]
+  17404018:
+    template: Moss_Eater
+    at:       [95.055, 8.132, 71.958, 126]
+    level:    [62, 66]
+  17404019:
+    template: Moss_Eater
+    at:       [108.660, 8.193, 49.643, 190]
+    level:    [62, 66]
+  17404020:
+    template: Moss_Eater
+    at:       [97.774, 7.837, 67.815, 222]
+    level:    [62, 66]
+  17404021:
+    template: Mourioche
+    at:       [76.420, 8.743, 77.058, 180]
+    level:    [64, 67]
+  17404022:
+    template: Mourioche
+    at:       [102.000, 8.409, 91.051, 67]
+    level:    [64, 67]
+  17404023:
+    template: Mourioche
+    at:       [107.920, 8.375, 87.555, 75]
+    level:    [64, 67]
+  17404024:
+    template: Mourioche
+    at:       [55.150, 8.734, 84.262, 161]
+    level:    [64, 67]
+  17404025:
+    template: Moss_Eater
+    at:       [109.550, 8.561, 83.275, 82]
+    level:    [62, 66]
+  17404026:
+    template: Moss_Eater
+    at:       [59.283, 8.700, 78.246, 167]
+    level:    [62, 66]
+  17404027:
+    template: Moss_Eater
+    at:       [60.408, 8.711, 82.500, 188]
+    level:    [62, 66]
+  17404028:
+    template: Old_Goobbue
+    at:       [33.708, 8.771, 76.831, 174]
+    level:    [65, 68]
+  17404029:
+    template: Unut
+    at:       [104.340, 8.423, 81.217, 81]
+    level:    [69, 71]
+  17404030:
+    template: Moss_Eater
+    at:       [70.822, 6.211, 61.711, 64]
+    level:    [62, 66]
+  17404031:
+    template: Moss_Eater
+    at:       [57.942, 8.544, 88.215, 46]
+    level:    [62, 66]
+  17404032:
+    template: Moss_Eater
+    at:       [66.392, 5.884, 66.909, 64]
+    level:    [62, 66]
+  17404033:
+    template: Knight_Crawler_BT
+    script:   Knight_Crawler
+    at:       [22.297, 6.253, 90.465, 255]
+    level:    [62, 67]
+  17404034:
+    template: Knight_Crawler_BT
+    script:   Knight_Crawler
+    at:       [14.206, 5.548, 109.486, 122]
+    level:    [62, 67]
+  17404035:
+    template: Mourioche
+    at:       [27.326, 5.839, 131.949, 90]
+    level:    [64, 67]
+  17404036:
+    template: Mourioche
+    at:       [30.194, 6.017, 139.783, 218]
+    level:    [64, 67]
+  17404037:
+    template: Mourioche
+    at:       [44.993, 8.335, 132.574, 254]
+    level:    [64, 67]
+  17404038:
+    template: Mourioche
+    at:       [35.255, 8.201, 135.511, 73]
+    level:    [64, 67]
+  17404039:
+    template: Mourioche
+    at:       [56.720, 8.355, 118.922, 237]
+    level:    [64, 67]
+  17404040:
+    template: Mourioche
+    at:       [43.021, 8.539, 129.240, 63]
+    level:    [64, 67]
+  17404041:
+    template: Moss_Eater
+    at:       [51.960, 8.043, 108.568, 108]
+    level:    [62, 66]
+  17404042:
+    template: Moss_Eater
+    at:       [15.310, 8.752, 119.221, 57]
+    level:    [62, 66]
+  17404043:
+    template: Moss_Eater
+    at:       [51.304, 8.562, 137.005, 124]
+    level:    [62, 66]
+  17404044:
+    template: Old_Goobbue
+    at:       [39.273, 8.700, 116.971, 139]
+    level:    [65, 68]
+  17404045:
+    template: Mourioche
+    at:       [-14.520, 6.120, 106.547, 76]
+    level:    [64, 67]
+  17404046:
+    template: Mourioche
+    at:       [-12.580, 6.283, 108.619, 6]
+    level:    [64, 67]
+  17404047:
+    template: Mourioche
+    at:       [3.650, 9.253, 132.746, 214]
+    level:    [64, 67]
+  17404048:
+    template: Mourioche
+    at:       [-9.996, 9.277, 115.156, 184]
+    level:    [64, 67]
+  17404049:
+    template: Mourioche
+    at:       [-7.040, 9.155, 128.449, 176]
+    level:    [64, 67]
+  17404050:
+    template: Mourioche
+    at:       [5.504, 9.448, 123.509, 218]
+    level:    [64, 67]
+  17404051:
+    template: Moss_Eater
+    at:       [-16.880, 8.742, 113.518, 130]
+    level:    [62, 66]
+  17404052:
+    template: Moss_Eater
+    at:       [-6.014, 9.065, 105.453, 156]
+    level:    [62, 66]
+  17404053:
+    template: Moss_Eater
+    at:       [-11.240, 8.889, 126.622, 202]
+    level:    [62, 66]
+  17404054:
+    template: Old_Goobbue
+    at:       [5.044, 9.226, 127.643, 221]
+    level:    [65, 68]
+  17404055:
+    template: Mourioche
+    at:       [2.358, 8.829, 80.650, 142]
+    level:    [64, 67]
+  17404056:
+    template: Mourioche
+    at:       [-4.178, 8.737, 79.499, 177]
+    level:    [64, 67]
+  17404057:
+    template: Mourioche
+    at:       [-13.780, 8.673, 82.066, 218]
+    level:    [64, 67]
+  17404058:
+    template: Moss_Eater
+    at:       [-4.065, 8.796, 85.528, 113]
+    level:    [62, 66]
+  17404059:
+    template: Moss_Eater
+    at:       [6.832, 8.747, 78.160, 127]
+    level:    [62, 66]
+  17404060:
+    template: Moss_Eater
+    at:       [1.725, 8.846, 80.469, 127]
+    level:    [62, 66]
+  17404061:
+    template: Old_Goobbue
+    at:       [-6.919, 8.696, 83.337, 110]
+    level:    [65, 68]
+  17404062:
+    template: Robber_Crab
+    at:       [59.479, 9.457, 97.650, 45]
+    level:    [62, 66]
+  17404063:
+    template: Robber_Crab
+    at:       [63.271, 9.416, 93.876, 26]
+    level:    [62, 66]
+  17404064:
+    template: Water_Elemental
+    at:       [72.518, 9.459, 94.857, 225]
+    level:    [69, 72]
+  17404065:
+    template: Robber_Crab
+    at:       [8.449, 7.821, 101.748, 40]
+    level:    [62, 66]
+  17404066:
+    template: Robber_Crab
+    at:       [8.507, 7.765, 99.953, 20]
+    level:    [62, 66]
+  17404067:
+    template: Robber_Crab
+    at:       [10.760, 6.718, 95.046, 254]
+    level:    [62, 66]
+  17404068:
+    template: Water_Elemental
+    at:       [9.559, 6.728, 103.942, 32]
+    level:    [69, 72]
+  17404069:
+    template: Robber_Crab
+    at:       [25.096, 9.778, 66.566, 19]
+    level:    [62, 66]
+  17404070:
+    template: Robber_Crab
+    at:       [20.808, 9.913, 64.330, 13]
+    level:    [62, 66]
+  17404071:
+    template: Water_Elemental
+    at:       [32.202, 9.329, 63.080, 242]
+    level:    [69, 72]
+  17404072:
+    template: Mourioche
+    at:       [-37.610, 8.684, 141.979]
+    level:    [65, 68]
+  17404073:
+    template: Thunder_Elemental
+    at:       [-37.120, 8.671, 141.833, 249]
+    level:    [69, 72]
+  17404074:
+    template: Mourioche
+    at:       [-66.110, 6.019, 104.736, 160]
+    level:    [65, 68]
+  17404075:
+    template: Mourioche
+    at:       [-68.530, 6.077, 97.528, 82]
+    level:    [65, 68]
+  17404076:
+    template: Mourioche
+    at:       [-96.610, 6.103, 103.277, 27]
+    level:    [65, 68]
+  17404077:
+    template: Mourioche
+    at:       [-99.880, 6.243, 105.411, 245]
+    level:    [65, 68]
+  17404078:
+    template: Mourioche
+    at:       [-103.400, 6.517, 104.733, 9]
+    level:    [65, 68]
+  17404079:
+    template: Mourioche
+    at:       [-77.140, 8.697, 117.141, 227]
+    level:    [65, 68]
+  17404080:
+    template: Mourioche
+    at:       [-72.260, 8.125, 135.498, 133]
+    level:    [65, 68]
+  17404081:
+    template: Mourioche
+    at:       [-79.630, 8.749, 75.482, 147]
+    level:    [65, 68]
+  17404082:
+    template: Moss_Eater
+    at:       [-67.150, 8.197, 114.166, 81]
+    level:    [62, 66]
+  17404083:
+    template: Moss_Eater
+    at:       [-77.440, 8.814, 113.877, 67]
+    level:    [62, 66]
+  17404084:
+    template: Old_Goobbue
+    at:       [-74.830, 7.641, 136.835, 174]
+    level:    [65, 68]
+  17404085:
+    template: Mourioche
+    at:       [-76.860, 8.888, 94.399, 47]
+    level:    [65, 68]
+  17404086:
+    template: Mourioche
+    at:       [-79.660, 8.836, 106.248, 226]
+    level:    [65, 68]
+  17404087:
+    template: Mourioche
+    at:       [-80.860, 8.826, 100.182, 181]
+    level:    [65, 68]
+  17404088:
+    template: Mourioche
+    at:       [-80.160, 8.798, 112.887, 95]
+    level:    [65, 68]
+  17404089:
+    template: Morbol_Menace
+    at:       [-75.910, 8.792, 101.047, 94]
+    level:    [67, 70]
+  17404090:
+    template: Morbol_Menace
+    at:       [-46.700, -19.630, -2.261, 75]
+    level:    [67, 70]
+  17404091:
+    template: Mourioche
+    at:       [-86.050, 8.720, 82.690, 217]
+    level:    [65, 68]
+  17404092:
+    template: Mourioche
+    at:       [-87.020, 8.432, 70.198, 134]
+    level:    [65, 68]
+  17404093:
+    template: Mourioche
+    at:       [-66.750, 7.563, 72.659, 85]
+    level:    [65, 68]
+  17404094:
+    template: Moss_Eater
+    at:       [-85.320, 8.734, 80.220, 57]
+    level:    [62, 66]
+  17404095:
+    template: Moss_Eater
+    at:       [-84.830, 8.715, 78.283, 181]
+    level:    [62, 66]
+  17404096:
+    template: Old_Goobbue
+    at:       [-85.590, 8.719, 83.549, 217]
+    level:    [65, 68]
+  17404097:
+    template: Mourioche
+    at:       [-111.400, -6.381, 8.333, 94]
+    level:    [65, 68]
+  17404098:
+    template: Mourioche
+    at:       [-111.300, -6.346, 8.719, 93]
+    level:    [65, 68]
+  17404099:
+    template: Mourioche
+    at:       [-108.600, -1.082, 22.121, 88]
+    level:    [65, 68]
+  17404100:
+    template: Thunder_Elemental
+    at:       [177.060, 8.447, 62.542, 52]
+    level:    [69, 72]
+  17404101:
+    template: Moss_Eater
+    at:       [-8.107, -20.530, -10.078, 163]
+    level:    [62, 66]
+  17404102:
+    template: Moss_Eater
+    at:       [-23.180, -19.740, 5.836, 81]
+    level:    [62, 66]
+  17404103:
+    template: Elder_Goobbue
+    at:       [-26.070, -20.000, 10.769, 232]
+    level:    [74, 77]
+  17404104:
+    template: Elder_Goobbue
+    at:       [-7.479, -20.190, 15.305, 19]
+    level:    [74, 77]
+  17404105:
+    template: Moss_Eater
+    at:       [45.443, -20.229, 15.686, 127]
+    level:    [62, 66]
+  17404106:
+    template: Moss_Eater
+    at:       [38.362, -19.736, 3.798, 127]
+    level:    [62, 66]
+  17404107:
+    template: Elder_Goobbue
+    at:       [3.000, -19.000, 9.000, 82]
+    level:    [74, 77]
+  17404108:
+    template: Elder_Goobbue
+    at:       [-15.616, -19.574, -1.819, 98]
+    level:    [74, 77]
+  17404109:
+    template: Moss_Eater
+    at:       [91.942, -19.800, -42.921, 79]
+    level:    [62, 66]
+  17404110:
+    template: Moss_Eater
+    at:       [88.531, -19.637, -38.579, 114]
+    level:    [62, 66]
+  17404111:
+    template: Elder_Goobbue
+    at:       [82.438, -19.734, -29.627, 127]
+    level:    [74, 77]
+  17404112:
+    template: Elder_Goobbue
+    at:       [71.069, -19.774, -49.705, 101]
+    level:    [74, 77]
+  17404113:
+    template: Moss_Eater
+    at:       [84.731, -19.928, -95.847]
+    level:    [62, 66]
+  17404114:
+    template: Moss_Eater
+    at:       [62.780, -19.207, -79.147, 127]
+    level:    [62, 66]
+  17404115:
+    template: Elder_Goobbue
+    at:       [75.000, -19.000, -91.000, 127]
+    level:    [74, 77]
+  17404116:
+    template: Elder_Goobbue
+    at:       [77.967, -19.315, -71.111, 127]
+    level:    [74, 77]
+  17404117:
+    template: Moss_Eater
+    at:       [-48.430, -20.000, -13.972, 250]
+    level:    [62, 66]
+  17404118:
+    template: Moss_Eater
+    at:       [-36.290, -19.660, -39.340, 116]
+    level:    [62, 66]
+  17404119:
+    template: Elder_Goobbue
+    at:       [-27.600, -19.760, -37.349, 83]
+    level:    [74, 77]
+  17404120:
+    template: Elder_Goobbue
+    at:       [-34.150, -20.070, -23.575, 162]
+    level:    [74, 77]
+  17404121:
+    template: Korrigan
+    at:       [-40.370, -19.640, -93.477, 209]
+    level:    [72, 75]
+  17404122:
+    template: Korrigan
+    at:       [-27.860, -20.100, -97.931, 51]
+    level:    [72, 75]
+  17404123:
+    template: Elder_Goobbue
+    at:       [-35.420, -19.397, -106.691, 134]
+    level:    [74, 77]
+  17404124:
+    template: Elder_Goobbue
+    at:       [-38.628, -19.257, -84.437, 51]
+    level:    [74, 77]
+  17404125:
+    template: Elder_Goobbue
+    at:       [-54.550, -19.810, -97.231, 214]
+    level:    [74, 77]
+  17404126:
+    template: Korrigan
+    at:       [7.277, -19.770, -113.930, 55]
+    level:    [72, 75]
+  17404127:
+    template: Korrigan
+    at:       [-6.804, -19.860, -116.110, 45]
+    level:    [72, 75]
+  17404128:
+    template: Elder_Goobbue
+    at:       [-12.160, -20.350, -110.950, 70]
+    level:    [74, 77]
+  17404129:
+    template: Elder_Goobbue
+    at:       [-1.213, -19.820, -130.610, 253]
+    level:    [74, 77]
+  17404130:
+    template: Elder_Goobbue
+    at:       [-11.170, -21.150, -137.620, 247]
+    level:    [74, 77]
+  17404131:
+    template: Moss_Eater
+    at:       [44.828, -19.750, -109.760, 169]
+    level:    [62, 66]
+  17404132:
+    template: Moss_Eater
+    at:       [35.279, -19.640, -133.060, 178]
+    level:    [62, 66]
+  17404133:
+    template: Elder_Goobbue
+    at:       [46.883, -19.940, -141.600, 208]
+    level:    [74, 77]
+  17404134:
+    template: Elder_Goobbue
+    at:       [35.554, -19.740, -103.700, 218]
+    level:    [74, 77]
+  17404135:
+    template: Skimmer
+    at:       [5.586, -20.739, -64.777, 65]
+    level:    [72, 74]
+  17404136:
+    template: Skimmer
+    at:       [-31.340, -18.670, -57.290, 60]
+    level:    [72, 74]
+  17404137:
+    template: Skimmer
+    at:       [5.588, -20.710, -57.208, 16]
+    level:    [72, 74]
+  17404138:
+    template: Skimmer
+    at:       [-41.950, -18.440, -63.250, 182]
+    level:    [72, 74]
+  17404139:
+    template: Skimmer
+    at:       [16.642, -18.670, -9.464, 191]
+    level:    [72, 74]
+  17404140:
+    template: Skimmer
+    at:       [36.412, -18.646, -47.014, 58]
+    level:    [72, 74]
+  17404141:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [15.545, -18.570, -17.527, 99]
+    level:    [73, 76]
+  17404142:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [26.763, -18.580, -32.549, 46]
+    level:    [73, 76]
+  17404143:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [16.000, -18.000, -88.000, 38]
+    level:    [73, 76]
+  17404144:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [7.103, -20.950, -49.950, 27]
+    level:    [73, 76]
+  17404145:
+    template: Water_Elemental
+    at:       [29.784, -18.520, -24.531, 253]
+    level:    [69, 72]
+  17404146:
+    template: Skimmer
+    at:       [50.000, -18.000, -59.000, 1]
+    level:    [72, 74]
+  17404147:
+    template: Skimmer
+    at:       [43.947, -18.571, -85.895, 127]
+    level:    [72, 74]
+  17404148:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [40.000, -18.000, -34.000, 127]
+    level:    [73, 76]
+  17404149:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [21.000, -18.000, -19.000, 127]
+    level:    [73, 76]
+  17404150:
+    template: Water_Elemental
+    at:       [0.351, -18.517, -54.159, 27]
+    level:    [69, 72]
+  17404151:
+    template: Skimmer
+    at:       [-30.740, -18.670, -58.660, 26]
+    level:    [72, 74]
+  17404152:
+    template: Skimmer
+    at:       [-33.990, -18.670, -62.875, 239]
+    level:    [72, 74]
+  17404153:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [-16.760, -18.040, -66.820, 222]
+    level:    [73, 76]
+  17404154:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [-43.500, -18.610, -60.930, 208]
+    level:    [73, 76]
+  17404155:
+    template: Water_Elemental
+    at:       [-4.769, -18.620, -41.430, 169]
+    level:    [69, 72]
+  17404156:
+    template: Skimmer
+    at:       [19.787, -18.670, -109.080, 95]
+    level:    [72, 74]
+  17404157:
+    template: Skimmer
+    at:       [22.735, -18.520, -88.225, 198]
+    level:    [72, 74]
+  17404158:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [21.000, -18.000, -122.000, 127]
+    level:    [73, 76]
+  17404159:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [16.853, -18.350, -99.209, 138]
+    level:    [73, 76]
+  17404160:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [-10.000, -18.000, -82.000, 127]
+    level:    [73, 76]
+  17404161:
+    template: Steelshell_2
+    script:   Steelshell
+    at:       [24.826, -18.760, -106.770, 196]
+    level:    [73, 76]
+  17404162:
+    template: Water_Elemental
+    at:       [19.773, -18.520, -77.761, 136]
+    level:    [69, 72]
+  17404163:
+    template: Skimmer
+    at:       [55.773, -18.620, -164.800, 48]
+    level:    [72, 74]
+  17404164:
+    template: Skimmer
+    at:       [42.269, -18.720, -157.350, 101]
+    level:    [72, 74]
+  17404165:
+    template: Water_Elemental
+    at:       [36.740, -18.720, -163.560, 61]
+    level:    [69, 72]
+  17404166:
+    template: Robber_Crab
+    at:       [20.138, -8.412, 36.608, 65]
+    level:    [62, 66]
+  17404167:
+    template: Water_Elemental
+    at:       [20.970, -2.285, 47.504, 70]
+    level:    [69, 72]
+  17404168:
+    template: Robber_Crab
+    at:       [117.610, -7.271, -59.709, 252]
+    level:    [62, 66]
+  17404169:
+    template: Water_Elemental
+    at:       [126.486, -1.464, -58.665, 118]
+    level:    [69, 72]
+  17404170:
+    template: Steelshell
+    at:       [-85.800, -2.989, -58.632, 2]
+    level:    [73, 76]
+  17404171:
+    template: Water_Elemental
+    at:       [-76.350, -6.800, -59.633, 132]
+    level:    [69, 72]
+  17404172:
+    template: Skimmer
+    at:       [63.914, -16.760, -223.700, 101]
+    level:    [72, 74]
+  17404173:
+    template: Skimmer
+    at:       [60.161, -19.430, -203.080, 211]
+    level:    [72, 74]
+  17404174:
+    template: Processionaire
+    at:       [-20.220, -19.380, -179.800, 252]
+    level:    [72, 75]
+  17404175:
+    template: Processionaire
+    at:       [-23.560, -19.540, -177.150, 94]
+    level:    [72, 75]
+  17404176:
+    template: Processionaire
+    at:       [-22.260, -19.790, -209.490, 126]
+    level:    [72, 75]
+  17404177:
+    template: Processionaire
+    at:       [-16.080, -19.620, -205.930, 196]
+    level:    [72, 75]
+  17404178:
+    template: Elder_Goobbue
+    at:       [-22.510, -19.770, -209.210, 98]
+    level:    [74, 77]
+  17404179:
+    template: Processionaire
+    at:       [-55.170, -13.970, -174.880, 24]
+    level:    [72, 75]
+  17404180:
+    template: Processionaire
+    at:       [-69.700, -0.658, -182.930, 47]
+    level:    [72, 75]
+  17404181:
+    template: Processionaire
+    at:       [-69.370, 8.472, -221.950, 100]
+    level:    [72, 75]
+  17404182:
+    template: Processionaire
+    at:       [-57.830, 8.377, -220.970, 68]
+    level:    [72, 75]
+  17404183:
+    template: Thunder_Elemental
+    at:       [-63.340, 8.463, -219.690, 250]
+    level:    [70, 72]
+  17404184:
+    template: Processionaire
+    at:       [-72.030, 8.365, -263.570, 80]
+    level:    [72, 75]
+  17404185:
+    template: Processionaire
+    at:       [-81.180, 8.456, -261.940, 250]
+    level:    [72, 75]
+  17404186:
+    template: Processionaire
+    at:       [-22.120, 8.145, -262.510, 141]
+    level:    [72, 75]
+  17404187:
+    template: Thunder_Elemental
+    at:       [-60.110, 4.671, -265.850, 120]
+    level:    [69, 72]
+  17404188:
+    template: Processionaire
+    at:       [-55.870, 8.555, -301.860, 138]
+    level:    [72, 75]
+  17404189:
+    template: Thunder_Elemental
+    at:       [-52.620, 8.443, -302.940, 236]
+    level:    [69, 72]
+  17404190:
+    template: Processionaire
+    at:       [-20.630, 8.422, -302.160, 35]
+    level:    [72, 75]
+  17404191:
+    template: Thunder_Elemental
+    at:       [-16.610, 8.460, -293.570, 226]
+    level:    [69, 72]
+  17404192:
+    template: Korrigan
+    at:       [-104.800, 8.775, -38.509, 69]
+    level:    [72, 75]
+  17404193:
+    template: Korrigan
+    at:       [-143.300, 8.755, -38.283, 127]
+    level:    [72, 75]
+  17404194:
+    template: Elder_Goobbue
+    at:       [-144.400, 8.820, -35.922, 108]
+    level:    [74, 77]
+  17404195:
+    template: Korrigan
+    at:       [-132.200, 6.114, -24.263, 107]
+    level:    [72, 75]
+  17404196:
+    template: Korrigan
+    at:       [-145.800, 6.820, -25.606, 125]
+    level:    [72, 75]
+  17404197:
+    template: Korrigan
+    at:       [-157.300, 8.786, -49.092, 60]
+    level:    [72, 75]
+  17404198:
+    template: Korrigan
+    at:       [-159.500, 8.795, -65.202, 45]
+    level:    [72, 75]
+  17404199:
+    template: Elder_Goobbue
+    at:       [-166.000, 8.566, -32.490, 233]
+    level:    [74, 77]
+  17404200:
+    template: Korrigan
+    at:       [-171.300, 5.931, -51.977, 28]
+    level:    [72, 75]
+  17404201:
+    template: Korrigan
+    at:       [-169.200, 5.284, -59.523, 56]
+    level:    [72, 75]
+  17404202:
+    template: Steelshell
+    at:       [-166.000, 8.601, -109.240, 68]
+    level:    [73, 76]
+  17404203:
+    template: Steelshell
+    at:       [-145.600, 8.492, -122.430, 171]
+    level:    [73, 76]
+  17404204:
+    template: Steelshell
+    at:       [-167.200, 8.514, -92.635, 161]
+    level:    [73, 76]
+  17404205:
+    template: Steelshell
+    at:       [-166.400, 8.473, -106.410, 20]
+    level:    [73, 76]
+  17404206:
+    template: Steelshell
+    at:       [-165.000, 8.745, -76.179]
+    level:    [73, 76]
+  17404207:
+    template: Darter
+    at:       [-169.800, 8.740, -120.670, 32]
+    level:    [75, 78]
+  17404208:
+    template: Darter
+    at:       [-151.300, 8.561, -127.040, 53]
+    level:    [75, 78]
+  17404209:
+    template: Korrigan
+    at:       [-148.800, 5.597, -67.347, 53]
+    level:    [72, 75]
+  17404210:
+    template: Korrigan
+    at:       [-145.500, 5.386, -65.681, 245]
+    level:    [72, 75]
+  17404211:
+    template: Elder_Goobbue
+    at:       [-136.800, 5.515, -57.268, 16]
+    level:    [74, 77]
+  17404212:
+    template: Darter
+    at:       [-129.500, 8.362, -85.393, 34]
+    level:    [75, 78]
+  17404213:
+    template: Darter
+    at:       [-128.500, 8.335, -86.602, 165]
+    level:    [75, 78]
+  17404214:
+    template: Korrigan
+    at:       [-158.700, 8.670, -157.390, 244]
+    level:    [72, 75]
+  17404215:
+    template: Korrigan
+    at:       [-174.600, 8.482, -156.770, 16]
+    level:    [72, 75]
+  17404216:
+    template: Korrigan
+    at:       [-142.300, 8.163, -172.000, 186]
+    level:    [72, 75]
+  17404217:
+    template: Elder_Goobbue
+    at:       [-156.000, 8.672, -156.720, 112]
+    level:    [74, 77]
+  17404218:
+    template: Korrigan
+    at:       [-144.900, 6.476, -129.250, 232]
+    level:    [72, 75]
+  17404219:
+    template: Korrigan
+    at:       [-150.200, 5.656, -134.670, 90]
+    level:    [72, 75]
+  17404220:
+    template: Korrigan
+    at:       [-171.800, 6.487, -149.220, 175]
+    level:    [72, 75]
+  17404221:
+    template: Korrigan
+    at:       [-170.600, 6.546, -135.900, 190]
+    level:    [72, 75]
+  17404222:
+    template: Blood_Ball
+    at:       [-122.100, 9.325, -66.713, 117]
+    level:    [75, 78]
+  17404223:
+    template: Blood_Ball
+    at:       [-106.400, 9.779, -60.973, 154]
+    level:    [75, 78]
+  17404224:
+    template: Darter
+    at:       [-123.100, 9.457, -58.381, 113]
+    level:    [75, 78]
+  17404225:
+    template: Darter
+    at:       [-102.500, 9.505, -46.830, 195]
+    level:    [75, 78]
+  17404226:
+    template: Water_Elemental
+    at:       [-102.900, 9.979, -57.541, 63]
+    level:    [69, 72]
+  17404227:
+    template: Blood_Ball
+    at:       [-151.900, 8.587, -50.266, 110]
+    level:    [75, 78]
+  17404228:
+    template: Darter
+    at:       [-141.400, 8.802, -45.506, 224]
+    level:    [75, 78]
+  17404229:
+    template: Water_Elemental
+    at:       [-146.000, 9.049, -44.967, 242]
+    level:    [69, 72]
+  17404230:
+    template: Blood_Ball
+    at:       [-140.600, 9.540, -85.204, 62]
+    level:    [75, 78]
+  17404231:
+    template: Darter
+    at:       [-139.900, 9.453, -99.531, 20]
+    level:    [75, 78]
+  17404232:
+    template: Water_Elemental
+    at:       [-140.200, 9.506, -100.740, 231]
+    level:    [69, 72]
+  17404233:
+    template: Processionaire
+    at:       [-180.700, 8.558, -189.490, 82]
+    level:    [72, 75]
+  17404234:
+    template: Processionaire
+    at:       [-180.100, 8.481, -188.120, 211]
+    level:    [72, 75]
+  17404235:
+    template: Thunder_Elemental
+    at:       [-179.500, 8.442, -182.860, 83]
+    level:    [71, 72]
+  17404236:
+    template: Mourning_Crawler
+    at:       [-207.000, 8.634, -236.480, 173]
+    level:    [104, 105]
+  17404237:
+    template: Mourning_Crawler
+    at:       [-204.200, 8.601, -251.140, 193]
+    level:    [104, 105]
+  17404238:
+    template: Mourning_Crawler
+    at:       [-208.100, 8.673, -240.880, 147]
+    level:    [104, 105]
+  17404239:
+    template: Snaggletooth_Peapuk
+    at:       [-206.900, 8.632, -236.160, 139]
+    level:    [102, 104]
+  17404240:
+    template: Snaggletooth_Peapuk
+    at:       [-205.600, 8.733, -239.140, 47]
+    level:    [102, 104]
+  17404241:
+    template: Mourning_Crawler
+    at:       [-202.100, 8.778, -275.320, 39]
+    level:    [104, 105]
+  17404242:
+    template: Mourning_Crawler
+    at:       [-196.300, 8.742, -276.480, 173]
+    level:    [104, 105]
+  17404243:
+    template: Mourning_Crawler
+    at:       [-204.100, 8.774, -272.650, 126]
+    level:    [104, 105]
+  17404244:
+    template: Snaggletooth_Peapuk
+    at:       [-213.900, 8.829, -276.320, 78]
+    level:    [102, 104]
+  17404245:
+    template: Mourning_Crawler
+    at:       [-205.000, 8.487, -328.460, 171]
+    level:    [104, 105]
+  17404246:
+    template: Mourning_Crawler
+    at:       [-200.200, 8.648, -330.490, 168]
+    level:    [104, 105]
+  17404247:
+    template: Mourning_Crawler
+    at:       [-197.400, 8.611, -327.320, 24]
+    level:    [104, 105]
+  17404248:
+    template: Snaggletooth_Peapuk
+    at:       [-194.900, 8.678, -320.440, 201]
+    level:    [102, 104]
+  17404249:
+    template: Snaggletooth_Peapuk
+    at:       [-195.100, 7.463, -338.650, 20]
+    level:    [102, 104]
+  17404250:
+    template: Viseclaw
+    at:       [-184.300, 9.931, -269.100, 145]
+    level:    [102, 103]
+  17404251:
+    template: Viseclaw
+    at:       [-185.900, 9.841, -283.240, 156]
+    level:    [102, 103]
+  17404252:
+    template: Snaggletooth_Peapuk
+    at:       [-180.000, 9.920, -277.320, 151]
+    level:    [102, 104]
+  17404253:
+    template: Snaggletooth_Peapuk
+    at:       [-179.100, 9.895, -275.700, 47]
+    level:    [102, 104]
+  17404254:
+    template: Viseclaw
+    at:       [-205.200, 9.706, -258.150, 124]
+    level:    [102, 103]
+  17404255:
+    template: Viseclaw
+    at:       [-193.500, 9.782, -262.720, 30]
+    level:    [102, 103]
+  17404256:
+    template: Snaggletooth_Peapuk
+    at:       [-216.600, 9.874, -264.180, 6]
+    level:    [102, 104]
+  17404257:
+    template: Water_Elemental
+    at:       [-197.700, 9.752, -258.220, 187]
+    level:    [69, 72]
+  17404258:
+    template: Viseclaw
+    at:       [-195.700, 8.884, -292.240, 107]
+    level:    [102, 103]
+  17404259:
+    template: Viseclaw
+    at:       [-206.800, 9.724, -300.860, 52]
+    level:    [102, 103]
+  17404260:
+    template: Snaggletooth_Peapuk
+    at:       [-200.700, 8.908, -292.930, 154]
+    level:    [102, 104]
+  17404261:
+    template: Water_Elemental
+    at:       [-196.800, 9.580, -295.900, 105]
+    level:    [69, 72]
+  17404262:
+    template: Viseclaw
+    at:       [-230.600, 9.745, -283.310, 35]
+    level:    [102, 103]
+  17404263:
+    template: Viseclaw
+    at:       [-239.700, 9.752, -285.190, 200]
+    level:    [102, 103]
+  17404264:
+    template: Snaggletooth_Peapuk
+    at:       [-251.700, 9.821, -289.960, 127]
+    level:    [102, 104]
+  17404265:
+    template: Snaggletooth_Peapuk
+    at:       [-232.100, 9.756, -264.350, 251]
+    level:    [102, 104]
+  17404266:
+    template: Water_Elemental
+    at:       [-252.200, 9.835, -277.190, 54]
+    level:    [69, 72]
+  17404267:
+    template: Processionaire
+    at:       [-141.900, 8.130, -336.280, 77]
+    level:    [72, 75]
+  17404268:
+    template: Processionaire
+    at:       [-138.500, 6.088, -326.620, 202]
+    level:    [72, 75]
+  17404269:
+    template: Thunder_Elemental
+    at:       [-142.300, 5.391, -318.150, 72]
+    level:    [69, 72]
+  17404270:
+    template: Korrigan
+    at:       [-128.000, 8.519, -301.060, 33]
+    level:    [72, 75]
+  17404271:
+    template: Korrigan
+    at:       [-135.100, 8.664, -298.290, 198]
+    level:    [72, 75]
+  17404272:
+    template: Korrigan
+    at:       [-119.600, 8.025, -301.190, 16]
+    level:    [72, 75]
+  17404273:
+    template: Korrigan
+    at:       [-134.200, 8.771, -293.110, 207]
+    level:    [72, 75]
+  17404274:
+    template: Korrigan
+    at:       [-103.400, 8.651, -299.130, 21]
+    level:    [72, 75]
+  17404275:
+    template: Korrigan
+    at:       [-99.790, 8.188, -308.820, 45]
+    level:    [72, 75]
+  17404276:
+    template: Korrigan
+    at:       [-96.220, 7.808, -337.530, 25]
+    level:    [72, 75]
+  17404277:
+    template: Korrigan
+    at:       [-94.030, 7.895, -347.350, 75]
+    level:    [72, 75]
+  17404278:
+    template: Elder_Goobbue
+    at:       [-104.000, 7.660, -345.810, 162]
+    level:    [74, 77]
+  17404279:
+    template: Elder_Goobbue
+    at:       [-95.470, 7.910, -340.720, 56]
+    level:    [74, 77]
+  17404280:
+    template: Thunder_Elemental
+    at:       [-98.620, 8.175, -334.790, 164]
+    level:    [71, 72]
+  17404281:
+    template: Processionaire
+    at:       [-121.000, 8.817, -197.750, 76]
+    level:    [72, 75]
+  17404282:
+    template: Processionaire
+    at:       [-122.400, 8.806, -188.560, 242]
+    level:    [72, 75]
+  17404283:
+    template: Elder_Goobbue
+    at:       [-118.900, 8.722, -190.010, 111]
+    level:    [74, 77]
+  17404284:
+    template: Elder_Goobbue
+    at:       [-128.400, 8.785, -200.310, 102]
+    level:    [74, 77]
+  17404285:
+    template: Processionaire
+    at:       [-133.300, 6.578, -231.560, 214]
+    level:    [72, 75]
+  17404286:
+    template: Processionaire
+    at:       [-133.900, 8.606, -238.070, 206]
+    level:    [72, 75]
+  17404287:
+    template: Elder_Goobbue
+    at:       [-128.400, 8.638, -235.800, 48]
+    level:    [74, 77]
+  17404288:
+    template: Elder_Goobbue
+    at:       [-107.800, 8.249, -247.840, 246]
+    level:    [74, 77]
+  17404289:
+    template: Elder_Goobbue
+    at:       [-107.200, 8.429, -229.110, 49]
+    level:    [74, 77]
+  17404290:
+    template: Ancient_Goobbue
+    at:       [-133.700, 6.347, -230.290]
+    level:    [80, 80]
+  17404291:
+    template: Boyahda_Sapling
+    at:       [-196.400, 11.498, 19.512, 247]
+    level:    [74, 77]
+  17404292:
+    template: Boyahda_Sapling
+    at:       [-195.000, 11.553, 20.129, 124]
+    level:    [74, 77]
+  17404293:
+    template: Boyahda_Sapling
+    at:       [-222.000, 14.380, 25.724, 223]
+    level:    [74, 77]
+  17404294:
+    template: Boyahda_Sapling
+    at:       [-223.500, 14.430, 23.877, 195]
+    level:    [74, 77]
+  17404295:
+    template: Boyahda_Sapling
+    at:       [-215.200, 13.585, 68.666, 42]
+    level:    [74, 77]
+  17404296:
+    template: Boyahda_Sapling
+    at:       [-216.400, 14.317, 56.532, 110]
+    level:    [74, 77]
+  17404297:
+    template: Bark_Tarantula
+    at:       [-226.500, 14.038, 59.414, 62]
+    level:    [75, 78]
+  17404298:
+    template: Bark_Tarantula
+    at:       [-209.400, 13.800, 64.683, 222]
+    level:    [75, 78]
+  17404299:
+    template: Demonic_Rose
+    at:       [-220.000, 13.958, 71.823, 91]
+    level:    [75, 78]
+  17404300:
+    template: Leshonki
+    at:       [-220.500, 13.621, 73.357, 155]
+    level:    [79, 81]
+  17404301:
+    template: Boyahda_Sapling
+    at:       [-197.800, 11.135, 100.781, 178]
+    level:    [74, 77]
+  17404302:
+    template: Boyahda_Sapling
+    at:       [-223.800, 14.267, 96.920, 120]
+    level:    [74, 77]
+  17404303:
+    template: Bark_Tarantula
+    at:       [-221.400, 14.572, 97.168, 248]
+    level:    [75, 78]
+  17404304:
+    template: Boyahda_Sapling
+    at:       [-181.700, 11.329, 82.953, 180]
+    level:    [74, 77]
+  17404305:
+    template: Bark_Tarantula
+    at:       [-187.300, 11.720, 89.707, 154]
+    level:    [75, 78]
+  17404306:
+    template: Bark_Tarantula
+    at:       [-187.000, 11.590, 87.406, 222]
+    level:    [75, 78]
+  17404307:
+    template: Demonic_Rose
+    at:       [-192.800, 11.612, 97.210, 96]
+    level:    [75, 78]
+  17404308:
+    template: Boyahda_Sapling
+    at:       [-137.800, 8.540, 55.204, 232]
+    level:    [74, 77]
+  17404309:
+    template: Boyahda_Sapling
+    at:       [-137.900, 8.565, 54.097, 62]
+    level:    [74, 77]
+  17404310:
+    template: Bark_Tarantula
+    at:       [-141.700, 8.245, 38.986, 89]
+    level:    [75, 78]
+  17404311:
+    template: Boyahda_Sapling
+    at:       [-139.100, 8.324, 80.872, 29]
+    level:    [74, 77]
+  17404312:
+    template: Boyahda_Sapling
+    at:       [-137.300, 8.630, 92.532, 82]
+    level:    [74, 77]
+  17404313:
+    template: Bark_Tarantula
+    at:       [-141.300, 8.298, 80.642, 85]
+    level:    [75, 78]
+  17404314:
+    template: Bark_Tarantula
+    at:       [-135.200, 8.192, 95.120, 224]
+    level:    [75, 78]
+  17404315:
+    template: Boyahda_Sapling
+    at:       [-179.200, 8.772, 128.783, 41]
+    level:    [74, 77]
+  17404316:
+    template: Bark_Tarantula
+    at:       [-181.400, 8.890, 134.447, 42]
+    level:    [75, 78]
+  17404317:
+    template: Bark_Tarantula
+    at:       [-186.600, 8.290, 131.882, 112]
+    level:    [75, 78]
+  17404318:
+    template: Demonic_Rose
+    at:       [-192.600, 8.437, 134.358, 167]
+    level:    [75, 78]
+  17404319:
+    template: Boyahda_Sapling
+    at:       [-220.400, 5.593, 162.427, 185]
+    level:    [74, 77]
+  17404320:
+    template: Bark_Tarantula
+    at:       [-220.000, 5.834, 155.761, 213]
+    level:    [75, 78]
+  17404321:
+    template: Bark_Tarantula
+    at:       [-220.700, 5.517, 161.376, 65]
+    level:    [75, 78]
+  17404322:
+    template: Bark_Tarantula
+    at:       [-189.000, 5.390, 204.923, 151]
+    level:    [75, 78]
+  17404323:
+    template: Bark_Tarantula
+    at:       [-185.200, 5.099, 196.555, 139]
+    level:    [75, 78]
+  17404324:
+    template: Bark_Tarantula
+    at:       [-204.100, 5.179, 187.998, 61]
+    level:    [75, 78]
+  17404325:
+    template: Bark_Tarantula
+    at:       [-197.700, 5.804, 195.552, 76]
+    level:    [75, 78]
+  17404326:
+    template: Bark_Tarantula
+    at:       [-185.100, 5.063, 194.016, 91]
+    level:    [75, 78]
+  17404327:
+    template: Boyahda_Sapling
+    at:       [-194.200, 5.053, 207.617, 199]
+    level:    [74, 77]
+  17404328:
+    template: Boyahda_Sapling
+    at:       [-193.100, 4.590, 217.447, 9]
+    level:    [74, 77]
+  17404329:
+    template: Boyahda_Sapling
+    at:       [-201.100, 5.447, 200.813, 48]
+    level:    [74, 77]
+  17404330:
+    template: Demonic_Rose
+    at:       [-195.700, 5.649, 199.960, 213]
+    level:    [75, 78]
+  17404331:
+    template: Voluptuous_Vivian
+    at:       [-208.700, 5.276, 203.289, 56]
+    level:    [80, 81]
+  17404332:
+    template: Bark_Tarantula
+    at:       [-180.200, 4.608, 144.572, 129]
+    level:    [75, 78]
+  17404333:
+    template: Bark_Tarantula
+    at:       [-179.800, 4.814, 145.587, 253]
+    level:    [75, 78]
+  17404334:
+    template: Bark_Tarantula
+    at:       [-142.200, 5.272, 142.462, 245]
+    level:    [75, 78]
+  17404335:
+    template: Bark_Tarantula
+    at:       [-139.100, 5.509, 147.276, 56]
+    level:    [75, 78]
+  17404336:
+    template: Mimic
+    at:       [1.000, 1.000, 1.000]
+    level:    [60, 60]
+  17404337:
+    template: Agas
+    at:       [31.176, -21.331, -61.995]
+    level:    [65, 66]
+  17404338:
+    template: Beet_Leafhopper
+    at:       [-18.000, -19.200, -176.400]
+    level:    [75, 75]
+  17404339:
+    template: Modron
+    at:       [317.441, 8.305, -27.403, 179]
+    level:    [94, 95]
+  17404340:
+    template: Modrons_Druid
+    at:       [315.873, 8.632, -26.491, 48]
+    level:    [92, 93]
+  17404341:
+    template: Modrons_Druid
+    at:       [317.527, 8.834, -25.264, 156]
+    level:    [92, 93]
+  17404342:
+    template: Modron
+    at:       [120.600, 8.382, 67.299]
+    level:    [94, 95]
+  17404343:
+    template: Modrons_Druid
+    at:       [119.970, 8.782, 64.158, 199]
+    level:    [92, 93]
+  17404344:
+    template: Modrons_Druid
+    at:       [120.380, 8.769, 64.308, 196]
+    level:    [92, 93]
+  17404345:
+    template: Modron
+    at:       [-52.767, -19.999, -17.185, 8]
+    level:    [94, 95]
+  17404346:
+    template: Modrons_Druid
+    at:       [-50.685, -19.714, -19.654, 222]
+    level:    [92, 93]
+  17404347:
+    template: Modrons_Druid
+    at:       [-50.797, -19.650, -18.145, 241]
+    level:    [92, 93]
+  17404348:
+    template: Ayapec
+    at:       [36.718, 9.040, 64.048, 252]
+    level:    [125, 125]
+  17404349:
+    template: Ayapec
+    at:       [50.860, -18.708, -154.580, 99]
+    level:    [125, 125]
+  17404350:
+    template: Ayapec
+    at:       [-169.212, 7.887, -98.005, 177]
+    level:    [125, 125]
+  17404351:
+    template: Hidhaegg
+    at:       [35.724, 9.466, 67.278, 37]
+    level:    [135, 135]
+  17404352:
+    template: Hidhaegg
+    at:       [51.167, -18.547, -154.090, 214]
+    level:    [135, 135]
+  17404353:
+    template: Hidhaegg
+    level:    [135, 135]
+  17404354:
+    template: Templar_Crawler
+    at:       [172.415, 8.354, 62.609, 112]
+    level:    [139, 139]
+  17404355:
+    template: Fafnir_Strange_Happenings
+    script:   Fafnir
+    at:       [32.483, -18.000, -167.690, 12]
+    level:    [119, 119]
+
+slots:
+  - members:
+      17403986: {} # Mourioche
+      17403990: {} # Old_Goobbue
+  - members:
+      17403995: {} # Robber_Crab
+      17403999: {} # Robber_Crab
+      17404004: {} # Robber_Crab
+  - members:
+      17404013: {} # Mourioche
+      17404017: {} # Old_Goobbue
+  - members:
+      17404024: {} # Mourioche
+      17404028: {} # Old_Goobbue
+  - members:
+      17404027: {} # Moss_Eater
+      17404043: {} # Moss_Eater
+      17404053: {} # Moss_Eater
+      17404060: {} # Moss_Eater
+  - members:
+      17404040: {} # Mourioche
+      17404044: {} # Old_Goobbue
+  - members:
+      17404050: {} # Mourioche
+      17404054: {} # Old_Goobbue
+  - members:
+      17404057: {} # Mourioche
+      17404061: {} # Old_Goobbue
+  - members:
+      17404081: {} # Mourioche
+      17404084: {} # Old_Goobbue
+  - members:
+      17404093: {} # Mourioche
+      17404096: {} # Old_Goobbue
+  - members:
+      17404292: {} # Boyahda_Sapling
+      17404294: {} # Boyahda_Sapling
+      17404296: {} # Boyahda_Sapling
+      17404301: {} # Boyahda_Sapling
+      17404304: {} # Boyahda_Sapling
+  - members:
+      17404298: {} # Bark_Tarantula
+      17404302: {} # Boyahda_Sapling
+  - members:
+      17404309: {} # Boyahda_Sapling
+      17404310: {} # Bark_Tarantula
+  - members:
+      17404316: {} # Bark_Tarantula
+      17404317: {} # Bark_Tarantula
+  - members:
+      17404319: {} # Boyahda_Sapling
+      17404328: {} # Boyahda_Sapling
+  - members:
+      17404321: {} # Bark_Tarantula
+      17404324: {} # Bark_Tarantula
+      17404333: {} # Bark_Tarantula
+  - members:
+      17404325: {} # Bark_Tarantula
+      17404334: {} # Bark_Tarantula
+  - members:
+      17404326: {} # Bark_Tarantula
+      17404329: {} # Boyahda_Sapling

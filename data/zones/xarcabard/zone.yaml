@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          164
+  night:        164
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z340:
+    from:  [600.017, -6.517, -260.094]
+    to:    beaucedine_glacier
+    at:    [-247.911, -82.165, 260.207]
+    scale: [1.000, 4.000]
+
+  z342:
+    from:  [-437.021, -52.941, 20.018]
+    to:    castle_zvahl_baileys
+    at:    [412.020, -13.611, -19.964, 3.141593]
+    scale: [1.000, 4.000]
+
+  z344:
+    from:  [-131.779, -24.316, 139.017]
+    to:    uleguerand_range
+    at:    [-300.004, -44.225, -603.122, 4.712389]
+    scale: [1.000, 4.000]

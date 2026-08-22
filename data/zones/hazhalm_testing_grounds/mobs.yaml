@@ -1,0 +1,6745 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Andhrimnir:
+    id:            133
+    species:       corse
+    type:          [notorious, battlefield]
+    spell_list_id: 537
+    skill_list_id: 2046
+    attributes:
+      combat:
+        skill: staff
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:    2
+          thunder: -1
+          water:   -1
+          light:   -3
+          dark:     3
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:         2
+          poison:      -1
+          light_sleep: -3
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1364
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 85000
+
+  Angantyr:
+    id:            137
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Ariri_Samariri:
+    id:            234
+    species:       red_poroggo
+    type:          [notorious, battlefield]
+    spell_list_id: 540
+    skill_list_id: 2053
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        entity_flags: 3
+        model_size:   2
+        hitbox:       9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 95000
+
+  Audhumbla:
+    id:            283
+    species:       buffalo
+    type:          [notorious]
+    skill_list_id: 57
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags:  3
+        hitbox:       10
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Balrahn:
+    id:            334
+    species:       soulflayer
+    type:          [notorious, battlefield]
+    spell_list_id: 538
+    skill_list_id: 234
+    attributes:
+      combat:
+        skill: axe
+        delay: 180
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:    2
+          water:  9
+          light: -1
+          dark:  11
+        rank_status:
+          paralyze:     2
+          bind:         2
+          poison:       9
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1776
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 77000
+
+  Barri:
+    id:            351
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Battlemite:
+    id:            367
+    species:       diremite
+    type:          [notorious]
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Berserkr_blm:
+    id:            7081
+    display_name:  Berserkr
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 533
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: staff
+        delay: 290
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 748
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Berserkr_drk:
+    id:            7082
+    display_name:  Berserkr
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 534
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 745
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Berserkr_war:
+    id:            397
+    display_name:  Berserkr
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Brami:
+    id:            521
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 752
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Brunhilde:
+    id:            547
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1897
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Bugard-X:
+    id:            558
+    species:       bugard
+    type:          [notorious]
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: axe
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Bui:
+    id:            571
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 750
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Chigoe_einherjar:
+    id:            7074
+    display_name:  Chigoe
+    species:       chigoe
+    type:          [notorious]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1747
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          5
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7200
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Corrupt_Einherjar:
+    id:            800
+    species:       taurus
+    type:          [notorious]
+    skill_list_id: 240
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [mnk, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8800
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Craven_Einherjar:
+    id:            829
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 522
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 3
+        model_size:   1
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Craven_Einherjar_bhoot:
+    id:            7075
+    display_name:  Craven_Einherjar
+    species:       bhoot
+    type:          [notorious]
+    spell_list_id: 522
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 369
+        entity_flags: 3
+        model_size:   1
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Dark_Elemental_einherjar:
+    id:            7079
+    display_name:  Dark_Elemental
+    species:       dark_elemental
+    type:          [notorious]
+    spell_list_id: 523
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 443
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Dendainsonne:
+    id:            998
+    species:       behemoth
+    type:          [notorious, battlefield]
+    skill_list_id: 51
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 180
+      jobs: [war, thf]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 404
+        entity_flags:  3
+        model_size:    2
+        hitbox:       51
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 70000
+
+  Djigga:
+    id:            1071
+    species:       djigga
+    type:          [notorious]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1748
+        entity_flags: 3
+        hitbox:       5
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Djigga_2:
+    id:            1071
+    display_name:  Djigga
+    species:       djigga
+    type:          [notorious]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1748
+        entity_flags: 3
+        hitbox:       5
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 900
+
+  Einherjar_Brei:
+    id:            1187
+    species:       slime
+    type:          [notorious]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Einherjar_Eater:
+    id:            1188
+    species:       worm
+    type:          [notorious]
+    roam:          [worm]
+    spell_list_id: 524
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Experimental_Poroggo:
+    id:            1273
+    species:       green_poroggo
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1811
+        entity_flags: 3
+        hitbox:       6
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Flames_of_Muspelheim:
+    id:            1356
+    species:       cluster
+    type:          [notorious]
+    skill_list_id: 68
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  3
+          water:    3
+          light:    3
+          dark:     3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 291
+        model_size:  1
+        hitbox:     37
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 18000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Freke:
+    id:            1422
+    species:       cerberus
+    type:          [notorious, battlefield]
+    skill_list_id: 2051
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  11
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 1793
+        entity_flags:  3
+        model_size:    2
+        hitbox:       45
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 80000
+
+  Gardsvor:
+    id:            1459
+    species:       spider
+    type:          [notorious]
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 312
+        entity_flags:  3
+        model_size:    1
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7400
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Gerhilde:
+    id:            1499
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1894
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Gorgimera:
+    id:            1769
+    species:       khimaira
+    type:          [notorious, battlefield]
+    skill_list_id: 2050
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    8
+          ice:     5
+          wind:    8
+          earth:   7
+          thunder: 9
+          water:   5
+          light:   7
+          dark:    5
+        rank_status:
+          paralyze:    7
+          bind:        7
+          silence:     7
+          slow:        7
+          poison:      7
+          light_sleep: 7
+          dark_sleep:  7
+          blind:       7
+      render:
+        look:
+          type:  standard
+          model: 1805
+        entity_flags:  3
+        model_size:    2
+        hitbox:       34
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 98000
+
+  Grimgerde:
+    id:            1815
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, brd]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1882
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Hadding_the_Elder:
+    id:            1870
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 750
+        model_size:  2
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Hadding_the_Younger:
+    id:            1871
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 752
+        model_size:  2
+        hitbox:     20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Hafgygr:
+    id:            1873
+    species:       scorpion
+    type:          [notorious]
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags:  3
+        model_size:    1
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Hakenmann:
+    id:            1876
+    species:       orobon
+    type:          [notorious, battlefield]
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 105000
+
+  Hazhalm_Bat:
+    id:            1905
+    species:       bat
+    type:          [notorious]
+    skill_list_id: 2032
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Hazhalm_Bats:
+    id:            1906
+    species:       bat
+    type:          [notorious]
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  3
+        model_size:    1
+        hitbox:       16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Hazhalm_Leech:
+    id:            1907
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags:  3
+        model_size:    1
+        hitbox:       11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Heithrun:
+    id:      1916
+    species: karakul
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:    1
+          thunder: -2
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:         1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 341
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5250
+
+  Helmwige:
+    id:            1927
+    species:       fomor
+    type:          [called, battlefield]
+    spell_list_id: 4
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1898
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Hervarth:
+    id:            1936
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 752
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Hildesvini:
+    id:            1944
+    species:       marid
+    type:          [notorious, battlefield]
+    skill_list_id: 180
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          ice:     -1
+          wind:    -1
+          earth:    2
+          thunder: -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:         2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1738
+        entity_flags:  3
+        model_size:    2
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 95000
+
+  Himinrjot:
+    id:            1957
+    species:       buffalo
+    type:          [notorious, battlefield]
+    skill_list_id: 2042
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 360
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1357
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 85000
+
+  Hjorvarth:
+    id:            1962
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 750
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Hraesvelg:
+    id:            1996
+    species:       manticore
+    type:          [notorious, battlefield]
+    skill_list_id: 179
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags:  3
+        model_size:    2
+        hitbox:       36
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 110000
+
+  Hrani:
+    id:            1997
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 752
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Hrungnir:
+    id:            1999
+    species:       golem
+    type:          [notorious, battlefield]
+    skill_list_id: 2047
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 53000
+
+  Hrungnir_clone:
+    id:            7086
+    display_name:  Hrungnir
+    species:       golem
+    type:          [notorious, battlefield]
+    skill_list_id: 2048
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags:  3
+        model_size:    2
+        hitbox:       22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 53000
+
+  Huginn:
+    id:      2004
+    species: bird
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags:  3
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5250
+
+  Hyndla:
+    id:      2037
+    species: hound
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags:  3
+        model_size:    1
+        hitbox:       25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Idun:
+    id:            2049
+    species:       bhoot
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 52
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      5
+          wind:    -1
+          thunder: -2
+          water:   -1
+          light:   -2
+          dark:     5
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   5
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 369
+        entity_flags: 3
+        model_size:   2
+        hitbox:       9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Infected_Wamoura:
+    id:            2076
+    species:       wamoura
+    type:          [notorious]
+    skill_list_id: 253
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, pld]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1808
+        entity_flags:  3
+        hitbox:       17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Liquified_Einherjar:
+    id:            2422
+    species:       flan
+    type:          [notorious]
+    spell_list_id: 530
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6800
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Logi:
+    id:            7083
+    species:       bomb
+    type:          [notorious]
+    spell_list_id: 529
+    skill_list_id: 2039
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 282
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Logi_grow:
+    id:            2430
+    display_name:  Logi
+    species:       bomb
+    type:          [notorious]
+    spell_list_id: 529
+    skill_list_id: 2039
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Manticore-X:
+    id:            2555
+    species:       manticore
+    type:          [notorious]
+    skill_list_id: 2038
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   -2
+          thunder: -2
+          water:   -3
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:   4
+          slow:     -2
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 402
+        entity_flags:  3
+        model_size:    1
+        hitbox:       32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Margygr:
+    id:            2561
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 531
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Marid-X:
+    id:            2563
+    species:       marid
+    type:          [notorious]
+    skill_list_id: 180
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          ice:     -1
+          wind:    -1
+          earth:    2
+          thunder: -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:         2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1738
+        entity_flags:  3
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 42000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Mokkuralfi:
+    id:            2716
+    species:       flan
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 2052
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1800
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 95000
+
+  Morbol_Emperor:
+    id:            2744
+    species:       morbol
+    type:          [notorious, battlefield]
+    skill_list_id: 2044
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 382
+        entity_flags:  3
+        model_size:    2
+        hitbox:       36
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 90000
+
+  Motsognir:
+    id:            2756
+    species:       dvergr
+    type:          [notorious, battlefield]
+    spell_list_id: 541
+    skill_list_id: 90
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      6
+          wind:     4
+          earth:    6
+          thunder:  4
+          water:    6
+          light:    2
+          dark:    11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      4
+          slow:         6
+          poison:       6
+          light_sleep:  2
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1839
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 100000
+
+  Muninn:
+    id:      2771
+    species: bird
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 445
+        entity_flags:  3
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5250
+
+  Nickur:
+    id:      2838
+    species: doomed
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: axe
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  3
+        model_size:    1
+        hitbox:       30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Nihhus:
+    id:            2879
+    species:       wivre
+    type:          [notorious, battlefield]
+    skill_list_id: 2045
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:    3
+          thunder:  1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:         3
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 2233
+        entity_flags:  3
+        model_size:    2
+        hitbox:       32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 105000
+
+  Odin:
+    id:            2941
+    species:       odin
+    type:          [battlefield]
+    spell_list_id: 5
+    skill_list_id: 41
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1829
+        entity_flags:  3
+        model_size:    2
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 110000
+    loot:
+      drops:
+        - chance: always
+          one_of: [aquarian_abjuration_body, earthen_abjuration_body, martial_abjuration_body, wyrmal_abjuration_body]
+        - chance: always
+          one_of: [aquarian_abjuration_hands, aquarian_abjuration_feet, dryadic_abjuration_feet, earthen_abjuration_hands, earthen_abjuration_legs, martial_abjuration_legs, martial_abjuration_feet, neptunal_abjuration_head, neptunal_abjuration_legs, wyrmal_abjuration_head]
+        - chance: always
+          one_of: [hadean_abjuration_head, hadean_abjuration_body, hadean_abjuration_hands, hadean_abjuration_legs, hadean_abjuration_feet, phantasmal_abjuration_head, phantasmal_abjuration_body, phantasmal_abjuration_hands, phantasmal_abjuration_legs, phantasmal_abjuration_feet]
+        - chance: very_common
+          one_of: [aquarian_abjuration_body, earthen_abjuration_body, martial_abjuration_body, wyrmal_abjuration_body, hadean_abjuration_body, phantasmal_abjuration_body]
+        - chance: very_common
+          one_of: [hofud, valkyries_fork, valhalla_helm, valhalla_breastplate]
+
+  Odins_Fool:
+    id:            2942
+    species:       imp
+    type:          [notorious]
+    spell_list_id: 527
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        animation_sub:  4
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 14500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Odins_Jester:
+    id:            2943
+    species:       imp
+    type:          [notorious]
+    spell_list_id: 527
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1727
+        animation_sub:  4
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7700
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Ormr:
+    id:            3054
+    species:       dragon
+    type:          [notorious]
+    skill_list_id: 2034
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags:  3
+        hitbox:       28
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 32000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Ortlinde:
+    id:            3062
+    species:       fomor
+    type:          [called, battlefield]
+    spell_list_id: 4
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1900
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Reifnir:
+    id:            3349
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 750
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Rossweisse:
+    id:            3394
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1902
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Rossweisse_Large:
+    id:            7270
+    display_name:  Rossweisse
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1902
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Rotting_Huskarl_blm:
+    id:            7076
+    display_name:  Rotting_Huskarl
+    species:       skeleton
+    type:          [notorious]
+    spell_list_id: 525
+    skill_list_id: 2033
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Rotting_Huskarl_drk:
+    id:            7077
+    display_name:  Rotting_Huskarl
+    species:       skeleton
+    type:          [notorious]
+    spell_list_id: 526
+    skill_list_id: 2033
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Rotting_Huskarl_thf:
+    id:            7078
+    display_name:  Rotting_Huskarl
+    species:       skeleton
+    type:          [notorious]
+    skill_list_id: 2033
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1751
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Rotting_Huskarl_war:
+    id:            3397
+    display_name:  Rotting_Huskarl
+    species:       skeleton
+    type:          [notorious]
+    skill_list_id: 2033
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Saehrimnir:
+    id:      3436
+    species: tiger
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags:  3
+        model_size:    1
+        hitbox:       25
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5250
+
+  Schwertleite:
+    id:            3499
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1871
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Schwertleite_Large:
+    id:            7271
+    display_name:  Schwertleite
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1871
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Siegrune:
+    id:            3622
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1892
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Siegrune_Large:
+    id:            7269
+    display_name:  Siegrune
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [sam, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1892
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Sjokrakjen:
+    id:            3641
+    species:       sea_monk
+    type:          [notorious]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+        delay: 360
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22300
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Soulflayer_einherjar:
+    id:            7080
+    display_name:  Soulflayer
+    species:       soulflayer
+    type:          [notorious]
+    spell_list_id: 532
+    skill_list_id: 2040
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:    2
+          water:  9
+          light: -1
+          dark:  11
+        rank_status:
+          paralyze:     2
+          bind:         2
+          poison:       9
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1775
+        entity_flags:  129
+        animation_sub:   4
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Stoorworm:
+    id:            3782
+    species:       hydra
+    type:          [notorious, battlefield]
+    skill_list_id: 164
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -1250
+        rank_element:
+          fire:    6
+          ice:     6
+          wind:    6
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 1796
+        entity_flags:  3
+        model_size:    2
+        hitbox:       45
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 82000
+
+  Tanngrisnir:
+    id:            3842
+    species:       dragon
+    type:          [notorious, battlefield]
+    skill_list_id: 2049
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 421
+        entity_flags:  3
+        model_size:    2
+        hitbox:       39
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 88000
+
+  Tind:
+    id:            3921
+    species:       kindred
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 752
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Tyrfing:
+    id:            4069
+    species:       kindred
+    type:          [notorious]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        rank_element:
+          light: -2
+        rank_status:
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 747
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Utgarth_Bat:
+    id:            4109
+    species:       bat
+    type:          [notorious]
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 257
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Utgarth_Bats:
+    id:            4110
+    species:       flock_bat
+    type:          [notorious]
+    skill_list_id: 2036
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 263
+        entity_flags:  3
+        model_size:    1
+        hitbox:       16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Utgarth_Leech:
+    id:            4111
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags:  3
+        model_size:    1
+        hitbox:       11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Vampyr_Bats:
+    id:            4128
+    species:       flock_bat
+    type:          [notorious]
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  3
+        model_size:    1
+        hitbox:       16
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  Vampyr_Dog:
+    id:            4129
+    species:       hound
+    type:          [notorious]
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags:  3
+        model_size:    2
+        hitbox:       28
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7350
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Vampyr_Jarl:
+    id:            4130
+    species:       vampyr
+    type:          [notorious, battlefield]
+    spell_list_id: 542
+    skill_list_id: 2054
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, war]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      4
+          wind:     3
+          earth:    3
+          thunder:  1
+          water:    1
+          light:   -1
+          dark:    11
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      3
+          slow:         3
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1845
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+
+  Vampyr_Wolf:
+    id:            4131
+    species:       hound
+    type:          [notorious]
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags:  3
+        model_size:    1
+        hitbox:       25
+      behaviors:
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+
+  Vanquished_Einherjar_blm:
+    id:            4201
+    display_name:  Vanquished_Einherjar
+    species:       draugar
+    type:          [notorious]
+    spell_list_id: 536
+    skill_list_id: 88
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1766
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Vanquished_Einherjar_drk:
+    id:            7085
+    display_name:  Vanquished_Einherjar
+    species:       draugar
+    type:          [notorious]
+    spell_list_id: 535
+    skill_list_id: 88
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1758
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Vanquished_Einherjar_thf:
+    id:            7084
+    display_name:  Vanquished_Einherjar
+    species:       draugar
+    type:          [notorious]
+    skill_list_id: 88
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -2
+          ice:      2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:     2
+          bind:         2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 1751
+        entity_flags:  3
+        model_size:    2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Waldgeist:
+    id:            4276
+    species:       hecteye
+    type:          [notorious]
+    spell_list_id: 528
+    skill_list_id: 2037
+    attributes:
+      combat:
+        skill: staff
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 14000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Waltraute:
+    id:            4279
+    species:       fomor
+    type:          [called, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, brd]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1873
+        entity_flags:  3
+        model_size:    2
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12500
+
+  Winebibber:
+    id:            4352
+    species:       clot
+    type:          [notorious]
+    skill_list_id: 66
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6300
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+  Wivre-X:
+    id:            4356
+    species:       wivre
+    type:          [notorious]
+    skill_list_id: 2035
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -2
+          earth:    3
+          thunder:  1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:         3
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 2233
+        entity_flags:  3
+        hitbox:       25
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 50000
+    loot:
+      drops:
+        - chance: rare
+          item:   page_from_balrahns_reflections
+
+spawns:
+  17096711:
+    template: Hildesvini
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096712:
+    template: Himinrjot
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096713:
+    template: Nihhus
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096714:
+    template: Hraesvelg
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096715:
+    template: Hakenmann
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096716:
+    template: Morbol_Emperor
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096717:
+    template: Mokkuralfi
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096718:
+    template: Ariri_Samariri
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096719:
+    template: Balrahn
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096720:
+    template: Tanngrisnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096721:
+    template: Hrungnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096722:
+    template: Hrungnir_clone
+    script:   Hrungnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096723:
+    template: Andhrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096724:
+    template: Dendainsonne
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096725:
+    template: Gorgimera
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096726:
+    template: Stoorworm
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096727:
+    template: Freke
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096728:
+    template: Vampyr_Jarl
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096729:
+    template: Motsognir
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17096730:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096731:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096732:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096733:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096734:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096735:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096736:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096737:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096738:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096739:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096740:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096741:
+    template: Dark_Elemental_einherjar
+    script:   Dark_Elemental
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096742:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096743:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096744:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096745:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096746:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096747:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096748:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096749:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096750:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096751:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096752:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096753:
+    template: Rotting_Huskarl_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096754:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096755:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096756:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096757:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096758:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096759:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096760:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096761:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096762:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096763:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096764:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096765:
+    template: Rotting_Huskarl_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096766:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096767:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096768:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096769:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096770:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096771:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096772:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096773:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096774:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096775:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096776:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096777:
+    template: Craven_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096778:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096779:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096780:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096781:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096782:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096783:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096784:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096785:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096786:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096787:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096788:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096789:
+    template: Hyndla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096790:
+    template: Nickur
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096791:
+    template: Nickur
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096792:
+    template: Nickur
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096793:
+    template: Nickur
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096794:
+    template: Nickur
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096795:
+    template: Nickur
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096796:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096797:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096798:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096799:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096800:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096801:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096802:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096803:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096804:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096805:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096806:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096807:
+    template: Hazhalm_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096808:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096809:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096810:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096811:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096812:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096813:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096814:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096815:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096816:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096817:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096818:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096819:
+    template: Hazhalm_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096820:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096821:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096822:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096823:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096824:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096825:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096826:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096827:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096828:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096829:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096830:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096831:
+    template: Gardsvor
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096832:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096833:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096834:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096835:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096836:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096837:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096838:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096839:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096840:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096841:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096842:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096843:
+    template: Einherjar_Brei
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096844:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096845:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096846:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096847:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096848:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096849:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096850:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096851:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096852:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096853:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096854:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096855:
+    template: Hazhalm_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096856:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096857:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096858:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096859:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096860:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096861:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096862:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096863:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096864:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096865:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096866:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096867:
+    template: Winebibber
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096868:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096869:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096870:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096871:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096872:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096873:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096874:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096875:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096876:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096877:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096878:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096879:
+    template: Waldgeist
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096880:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096881:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096882:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096883:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096884:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096885:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096886:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096887:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096888:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096889:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096890:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096891:
+    template: Craven_Einherjar_bhoot
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096892:
+    template: Rotting_Huskarl_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096893:
+    template: Rotting_Huskarl_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096894:
+    template: Rotting_Huskarl_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096895:
+    template: Rotting_Huskarl_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096896:
+    template: Rotting_Huskarl_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096897:
+    template: Rotting_Huskarl_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096898:
+    template: Rotting_Huskarl_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096899:
+    template: Rotting_Huskarl_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096900:
+    template: Rotting_Huskarl_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096901:
+    template: Rotting_Huskarl_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096902:
+    template: Rotting_Huskarl_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096903:
+    template: Rotting_Huskarl_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096904:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096905:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096906:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096907:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096908:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096909:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096910:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096911:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096912:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096913:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096914:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096915:
+    template: Odins_Fool
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096916:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096917:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096918:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096919:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096920:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096921:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096922:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096923:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096924:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096925:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096926:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096927:
+    template: Battlemite
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096928:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096929:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096930:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096931:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096932:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096933:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096934:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096935:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096936:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096937:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096938:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096939:
+    template: Utgarth_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096940:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096941:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096942:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096943:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096944:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096945:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096946:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096947:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096948:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096949:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096950:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096951:
+    template: Utgarth_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096952:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096953:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096954:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096955:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096956:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096957:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096958:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096959:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096960:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096961:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096962:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096963:
+    template: Utgarth_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096964:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096965:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096966:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096967:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096968:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096969:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096970:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096971:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096972:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096973:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096974:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096975:
+    template: Experimental_Poroggo
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096976:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096977:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096978:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096979:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096980:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096981:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096982:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096983:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096984:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096985:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096986:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096987:
+    template: Liquified_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096988:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096989:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096990:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096991:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096992:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096993:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096994:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096995:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096996:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096997:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096998:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17096999:
+    template: Soulflayer_einherjar
+    script:   Soulflayer
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097000:
+    template: Audhumbla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097001:
+    template: Audhumbla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097002:
+    template: Audhumbla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097003:
+    template: Audhumbla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097004:
+    template: Audhumbla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097005:
+    template: Audhumbla
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097006:
+    template: Marid-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097007:
+    template: Marid-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097008:
+    template: Marid-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097009:
+    template: Marid-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097010:
+    template: Marid-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097011:
+    template: Marid-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097012:
+    template: Wivre-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097013:
+    template: Wivre-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097014:
+    template: Wivre-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097015:
+    template: Wivre-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097016:
+    template: Wivre-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097017:
+    template: Wivre-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097018:
+    template: Berserkr_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097019:
+    template: Berserkr_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097020:
+    template: Berserkr_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097021:
+    template: Berserkr_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097022:
+    template: Berserkr_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097023:
+    template: Berserkr_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097024:
+    template: Berserkr_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097025:
+    template: Berserkr_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097026:
+    template: Berserkr_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097027:
+    template: Berserkr_war
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097028:
+    template: Berserkr_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097029:
+    template: Berserkr_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097030:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097031:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097032:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097033:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097034:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097035:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097036:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097037:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097038:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097039:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097040:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097041:
+    template: Margygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097042:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097043:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097044:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097045:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097046:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097047:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097048:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097049:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097050:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097051:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097052:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097053:
+    template: Odins_Jester
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097054:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097055:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097056:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097057:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097058:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097059:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097060:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097061:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097062:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097063:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097064:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097065:
+    template: Corrupt_Einherjar
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097066:
+    template: Manticore-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097067:
+    template: Manticore-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097068:
+    template: Manticore-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097069:
+    template: Manticore-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097070:
+    template: Manticore-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097071:
+    template: Manticore-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097072:
+    template: Ormr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097073:
+    template: Ormr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097074:
+    template: Ormr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097075:
+    template: Ormr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097076:
+    template: Ormr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097077:
+    template: Ormr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097078:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097079:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097080:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097081:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097082:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097083:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097084:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097085:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097086:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097087:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097088:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097089:
+    template: Chigoe_einherjar
+    script:   Chigoe
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097090:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097091:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097092:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097093:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097094:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097095:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097096:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097097:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097098:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097099:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097100:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097101:
+    template: Djigga
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097102:
+    template: Logi_grow
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097103:
+    template: Logi_grow
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097104:
+    template: Logi_grow
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097105:
+    template: Logi_grow
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097106:
+    template: Logi_grow
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097107:
+    template: Logi_grow
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097108:
+    template: Logi
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097109:
+    template: Logi
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097110:
+    template: Logi
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097111:
+    template: Logi
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097112:
+    template: Logi
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097113:
+    template: Logi
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097114:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097115:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097116:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097117:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097118:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097119:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097120:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097121:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097122:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097123:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097124:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097125:
+    template: Flames_of_Muspelheim
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097126:
+    template: Infected_Wamoura
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097127:
+    template: Infected_Wamoura
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097128:
+    template: Infected_Wamoura
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097129:
+    template: Infected_Wamoura
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097130:
+    template: Infected_Wamoura
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097131:
+    template: Infected_Wamoura
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097132:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097133:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097134:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097135:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097136:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097137:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097138:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097139:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097140:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097141:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097142:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097143:
+    template: Sjokrakjen
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097144:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097145:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097146:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097147:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097148:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097149:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097150:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097151:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097152:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097153:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097154:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097155:
+    template: Einherjar_Eater
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097156:
+    template: Hafgygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097157:
+    template: Hafgygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097158:
+    template: Hafgygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097159:
+    template: Hafgygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097160:
+    template: Hafgygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097161:
+    template: Hafgygr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097162:
+    template: Hervarth
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097163:
+    template: Hjorvarth
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097164:
+    template: Hrani
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097165:
+    template: Angantyr
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097166:
+    template: Bui
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097167:
+    template: Brami
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097168:
+    template: Barri
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097169:
+    template: Reifnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097170:
+    template: Tind
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097171:
+    template: Tyrfing
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097172:
+    template: Hadding_the_Elder
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097173:
+    template: Hadding_the_Younger
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097174:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097175:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097176:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097177:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097178:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097179:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097180:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097181:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097182:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097183:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097184:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097185:
+    template: Vampyr_Dog
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097186:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097187:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097188:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097189:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097190:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097191:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097192:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097193:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097194:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097195:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097196:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097197:
+    template: Idun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097198:
+    template: Vanquished_Einherjar_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097199:
+    template: Vanquished_Einherjar_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097200:
+    template: Vanquished_Einherjar_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097201:
+    template: Vanquished_Einherjar_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097202:
+    template: Vanquished_Einherjar_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097203:
+    template: Vanquished_Einherjar_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097204:
+    template: Vanquished_Einherjar_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097205:
+    template: Vanquished_Einherjar_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097206:
+    template: Vanquished_Einherjar_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097207:
+    template: Vanquished_Einherjar_blm
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097208:
+    template: Vanquished_Einherjar_thf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097209:
+    template: Vanquished_Einherjar_drk
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097210:
+    template: Bugard-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097211:
+    template: Bugard-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097212:
+    template: Bugard-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097213:
+    template: Bugard-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097214:
+    template: Bugard-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097215:
+    template: Bugard-X
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097216:
+    template: Djigga_2
+    script:   Djigga_Hildesvini
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097217:
+    template: Djigga_2
+    script:   Djigga_Hildesvini
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097218:
+    template: Djigga_2
+    script:   Djigga_Hildesvini
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097219:
+    template: Djigga_2
+    script:   Djigga_Hildesvini
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097220:
+    template: Djigga_2
+    script:   Djigga_Hildesvini
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097221:
+    template: Djigga_2
+    script:   Djigga_Hildesvini
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097222:
+    template: Vampyr_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097223:
+    template: Vampyr_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097224:
+    template: Vampyr_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097225:
+    template: Vampyr_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097226:
+    template: Vampyr_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097227:
+    template: Vampyr_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097228:
+    template: Vampyr_Wolf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097229:
+    template: Vampyr_Wolf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097230:
+    template: Vampyr_Wolf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097231:
+    template: Vampyr_Wolf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097232:
+    template: Vampyr_Wolf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097233:
+    template: Vampyr_Wolf
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097234:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097235:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097236:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097237:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097238:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097239:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097240:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097241:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097242:
+    template: Huginn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097243:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097244:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097245:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097246:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097247:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097248:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097249:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097250:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097251:
+    template: Muninn
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097252:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097253:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097254:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097255:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097256:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097257:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097258:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097259:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097260:
+    template: Heithrun
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097261:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097262:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097263:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097264:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097265:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097266:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097267:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097268:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097269:
+    template: Saehrimnir
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17097271:
+    template: Brunhilde
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097272:
+    template: Siegrune
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097273:
+    template: Rossweisse
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097274:
+    template: Gerhilde
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097275:
+    template: Schwertleite
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097276:
+    template: Helmwige
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097277:
+    template: Ortlinde
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097278:
+    template: Grimgerde
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097279:
+    template: Waltraute
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097298:
+    script: Odin_Prime
+  17097299:
+    script: Odin_Image
+  17097300:
+    script: Odin_Image
+  17097301:
+    script: Odin_Image
+  17097302:
+    template: Odin
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097303:
+    template: Brunhilde
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097304:
+    template: Siegrune_Large
+    script:   Siegrune
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097305:
+    template: Rossweisse_Large
+    script:   Rossweisse
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097306:
+    template: Gerhilde
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097307:
+    template: Schwertleite_Large
+    script:   Schwertleite
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097308:
+    template: Helmwige
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097309:
+    template: Ortlinde
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097310:
+    template: Grimgerde
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17097311:
+    template: Waltraute
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]

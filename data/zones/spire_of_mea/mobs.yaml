@@ -1,0 +1,259 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Delver:
+    id:            966
+    species:       craver
+    type:          [battlefield]
+    skill_list_id: 707
+    attributes:
+      combat:
+        skill: polearm
+        delay: 190
+      jobs: [war, rdm]
+      resists:
+        immune_status: [bind, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 1139
+        entity_flags:  6
+        model_size:    3
+        hitbox:       16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3800
+
+  Envier:
+    id:            1237
+    species:       craver
+    type:          [battlefield]
+    skill_list_id: 707
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [war, rdm]
+      render:
+        look:
+          type:  standard
+          model: 1139
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2200
+
+  Seether:
+    id:            3539
+    species:       seether
+    type:          [battlefield]
+    skill_list_id: 220
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 1121
+        entity_flags:  131
+        animation_sub:   5
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 200
+
+spawns:
+  16863233:
+    template: Delver
+    at:       [-240.000, 60.000, 0.100, 190]
+    level:    [37, 38]
+  16863234:
+    template: Delver
+    at:       [0.007, 0.000, 0.116, 190]
+    level:    [37, 38]
+  16863235:
+    template: Delver
+    at:       [240.006, -60.000, 0.131, 190]
+    level:    [37, 38]
+  16863236:
+    template: Envier
+    at:       [-240.000, 60.750, 0.000, 200]
+    level:    [36, 36]
+  16863237:
+    template: Seether
+    at:       [-242.555, 60.726, 0.361, 243]
+    level:    [28, 28]
+  16863238:
+    template: Seether
+    at:       [-236.362, 60.258, 4.628]
+    level:    [28, 28]
+  16863239:
+    template: Seether
+    at:       [-240.037, 59.650, 18.111, 193]
+    level:    [28, 28]
+  16863241:
+    template: Envier
+    at:       [0.100, 0.000, 0.000, 200]
+    level:    [36, 36]
+  16863242:
+    template: Seether
+    at:       [-4.754, -0.345, 17.500, 243]
+    level:    [28, 28]
+  16863243:
+    template: Seether
+    at:       [1.792, 0.562, 7.711]
+    level:    [28, 28]
+  16863244:
+    template: Seether
+    at:       [-8.912, 0.266, 2.025, 193]
+    level:    [28, 28]
+  16863246:
+    template: Envier
+    at:       [240.000, -59.250, 0.000, 200]
+    level:    [36, 36]
+  16863247:
+    template: Seether
+    at:       [238.268, -59.418, 2.370, 243]
+    level:    [28, 28]
+  16863248:
+    template: Seether
+    at:       [238.623, -59.520, 3.705]
+    level:    [28, 28]
+  16863249:
+    template: Seether
+    at:       [236.561, -59.470, 3.377, 193]
+    level:    [28, 28]
+  16863251:
+    script: Recollector
+  16863252:
+    script: Quenchless_Craver
+  16863253:
+    script: Forsaken_Baelfyr
+  16863254:
+    script: Forsaken_Gefyrst
+  16863255:
+    script: Forsaken_Ungeweder
+  16863256:
+    script: Forsaken_Byrgen
+  16863257:
+    script: Quenchless_Seether
+  16863258:
+    script: Quenchless_Seether
+  16863259:
+    script: Quenchless_Seether
+  16863260:
+    script: Quenchless_Seether
+  16863261:
+    script: Quenchless_Seether
+  16863262:
+    script: Quenchless_Seether
+  16863263:
+    script: Quenchless_Seether
+  16863264:
+    script: Quenchless_Seether
+  16863265:
+    script: Quenchless_Seether
+  16863266:
+    script: Quenchless_Seether
+  16863267:
+    script: Quenchless_Seether
+  16863268:
+    script: Quenchless_Seether
+  16863269:
+    script: Recollector
+  16863270:
+    script: Quenchless_Craver
+  16863271:
+    script: Forsaken_Baelfyr
+  16863272:
+    script: Forsaken_Gefyrst
+  16863273:
+    script: Forsaken_Ungeweder
+  16863274:
+    script: Forsaken_Byrgen
+  16863275:
+    script: Quenchless_Seether
+  16863276:
+    script: Quenchless_Seether
+  16863277:
+    script: Quenchless_Seether
+  16863278:
+    script: Quenchless_Seether
+  16863279:
+    script: Quenchless_Seether
+  16863280:
+    script: Quenchless_Seether
+  16863281:
+    script: Quenchless_Seether
+  16863282:
+    script: Quenchless_Seether
+  16863283:
+    script: Quenchless_Seether
+  16863284:
+    script: Quenchless_Seether
+  16863285:
+    script: Quenchless_Seether
+  16863286:
+    script: Quenchless_Seether
+  16863287:
+    script: Recollector
+  16863288:
+    script: Quenchless_Craver
+  16863289:
+    script: Forsaken_Baelfyr
+  16863290:
+    script: Forsaken_Gefyrst
+  16863291:
+    script: Forsaken_Ungeweder
+  16863292:
+    script: Forsaken_Byrgen
+  16863293:
+    script: Quenchless_Seether
+  16863294:
+    script: Quenchless_Seether
+  16863295:
+    script: Quenchless_Seether
+  16863296:
+    script: Quenchless_Seether
+  16863297:
+    script: Quenchless_Seether
+  16863298:
+    script: Quenchless_Seether
+  16863299:
+    script: Quenchless_Seether
+  16863300:
+    script: Quenchless_Seether
+  16863301:
+    script: Quenchless_Seether
+  16863302:
+    script: Quenchless_Seether
+  16863303:
+    script: Quenchless_Seether
+  16863304:
+    script: Quenchless_Seether

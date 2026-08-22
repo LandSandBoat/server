@@ -1,0 +1,297 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Cogitator:
+    id:            760
+    species:       thinker
+    type:          [battlefield]
+    skill_list_id: 706
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 1128
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+
+  Weeper:
+    id:            4317
+    species:       weeper
+    type:          [battlefield]
+    skill_list_id: 256
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1112
+        entity_flags:  131
+        animation_sub:   5
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 300
+
+  Wreaker:
+    id:            4382
+    species:       thinker
+    type:          [battlefield]
+    skill_list_id: 706
+    attributes:
+      combat:
+        skill: scythe
+        delay: 190
+      jobs: [war, rdm]
+      resists:
+        immune_status: [bind, light_sleep, dark_sleep]
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 1128
+        entity_flags:  6
+        model_size:    3
+        hitbox:       16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4400
+
+spawns:
+  16846849:
+    template: Wreaker
+    at:       [-240.000, -59.000, 0.100, 60]
+    level:    [37, 38]
+  16846850:
+    template: Wreaker
+    at:       [0.058, 1.000, -0.035, 60]
+    level:    [37, 38]
+  16846851:
+    template: Wreaker
+    at:       [240.061, 61.000, -0.003, 60]
+    level:    [37, 38]
+  16846852:
+    template: Cogitator
+    at:       [-240.000, -60.000, 0.000, 67]
+    level:    [34, 34]
+  16846853:
+    template: Weeper
+    at:       [-236.834, -59.917, -12.388, 88]
+    level:    [28, 28]
+  16846854:
+    template: Weeper
+    at:       [-239.856, -60.062, -15.734, 73]
+    level:    [28, 28]
+  16846855:
+    template: Weeper
+    at:       [-234.087, -59.759, -11.478, 29]
+    level:    [28, 28]
+  16846857:
+    template: Cogitator
+    at:       [0.000, 0.750, 0.000, 67]
+    level:    [34, 34]
+  16846858:
+    template: Weeper
+    at:       [-3.446, 0.695, -5.120, 88]
+    level:    [28, 28]
+  16846859:
+    template: Weeper
+    at:       [-0.483, 0.289, -9.623, 73]
+    level:    [28, 28]
+  16846860:
+    template: Weeper
+    at:       [-1.129, 0.728, -5.545, 29]
+    level:    [28, 28]
+  16846862:
+    template: Cogitator
+    at:       [240.000, 60.750, 0.000, 67]
+    level:    [34, 34]
+  16846863:
+    template: Weeper
+    at:       [243.227, 60.083, -12.491, 88]
+    level:    [28, 28]
+  16846864:
+    template: Weeper
+    at:       [240.205, 59.938, -15.837, 73]
+    level:    [28, 28]
+  16846865:
+    template: Weeper
+    at:       [245.974, 60.241, -11.581, 29]
+    level:    [28, 28]
+  16846867:
+    script: Recollector
+  16846868:
+    script: Futile_Thinker
+  16846869:
+    script: Hollow_Air
+  16846870:
+    script: Hollow_Darkness
+  16846871:
+    script: Hollow_Earth
+  16846872:
+    script: Hollow_Fire
+  16846873:
+    script: Hollow_Ice
+  16846874:
+    script: Hollow_Light
+  16846875:
+    script: Hollow_Thunder
+  16846876:
+    script: Hollow_Water
+  16846877:
+    script: Constant_Wanderer
+  16846878:
+    script: Constant_Wanderer
+  16846879:
+    script: Constant_Wanderer
+  16846880:
+    script: Constant_Wanderer
+  16846881:
+    script: Constant_Wanderer
+  16846882:
+    script: Constant_Wanderer
+  16846883:
+    script: Constant_Wanderer
+  16846884:
+    script: Constant_Wanderer
+  16846885:
+    script: Constant_Wanderer
+  16846886:
+    script: Constant_Wanderer
+  16846887:
+    script: Constant_Wanderer
+  16846888:
+    script: Constant_Wanderer
+  16846889:
+    script: Recollector
+  16846890:
+    script: Futile_Thinker
+  16846891:
+    script: Hollow_Air
+  16846892:
+    script: Hollow_Darkness
+  16846893:
+    script: Hollow_Earth
+  16846894:
+    script: Hollow_Fire
+  16846895:
+    script: Hollow_Ice
+  16846896:
+    script: Hollow_Light
+  16846897:
+    script: Hollow_Thunder
+  16846898:
+    script: Hollow_Water
+  16846899:
+    script: Constant_Wanderer
+  16846900:
+    script: Constant_Wanderer
+  16846901:
+    script: Constant_Wanderer
+  16846902:
+    script: Constant_Wanderer
+  16846903:
+    script: Constant_Wanderer
+  16846904:
+    script: Constant_Wanderer
+  16846905:
+    script: Constant_Wanderer
+  16846906:
+    script: Constant_Wanderer
+  16846907:
+    script: Constant_Wanderer
+  16846908:
+    script: Constant_Wanderer
+  16846909:
+    script: Constant_Wanderer
+  16846910:
+    script: Constant_Wanderer
+  16846911:
+    script: Recollector
+  16846912:
+    script: Futile_Thinker
+  16846913:
+    script: Hollow_Air
+  16846914:
+    script: Hollow_Darkness
+  16846915:
+    script: Hollow_Earth
+  16846916:
+    script: Hollow_Fire
+  16846917:
+    script: Hollow_Ice
+  16846918:
+    script: Hollow_Light
+  16846919:
+    script: Hollow_Thunder
+  16846920:
+    script: Hollow_Water
+  16846921:
+    script: Constant_Wanderer
+  16846922:
+    script: Constant_Wanderer
+  16846923:
+    script: Constant_Wanderer
+  16846924:
+    script: Constant_Wanderer
+  16846925:
+    script: Constant_Wanderer
+  16846926:
+    script: Constant_Wanderer
+  16846927:
+    script: Constant_Wanderer
+  16846928:
+    script: Constant_Wanderer
+  16846929:
+    script: Constant_Wanderer
+  16846930:
+    script: Constant_Wanderer
+  16846931:
+    script: Constant_Wanderer
+  16846932:
+    script: Constant_Wanderer

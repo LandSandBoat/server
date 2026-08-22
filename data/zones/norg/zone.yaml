@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [city]
+misc: [mazurka, mogmenu, costume, auction_house, yell, los_player_block, assist]
+music:
+  day:          209
+  night:        209
+  battle_solo:  209
+  battle_party: 209
+
+zonelines:
+
+  z700:
+    from:  [-19.216, -3.609, -67.525]
+    to:    sea_serpent_grotto
+    at:    [-60.566, -2.127, 411.976, 1.570796]
+    scale: [1.000, 4.000]

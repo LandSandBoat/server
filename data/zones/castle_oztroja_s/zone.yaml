@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:           44
+  night:         44
+  battle_solo:  115
+  battle_party: 216
+
+zonelines:
+
+  z2r0:
+    from:  [-242.002, -3.955, -20.019]
+    to:    meriphataud_mountains_s
+    at:    [730.000, -33.663, -40.000, 3.141593]
+    scale: [1.000, 4.000]

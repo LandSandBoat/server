@@ -1,0 +1,1759 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Alkyoneus:
+    id:            87
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: great_axe
+      render:
+        look:
+          type:  standard
+          model: 643
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         41
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11670
+    loot:
+      drops:
+        - chance: very_common
+          item:   mahogany_shield
+        - chance: always
+          item:   gigas_socks
+        - chance: uncommon
+          item:   gigas_necklace
+        - chance: rare
+          item:   alkyoneuss_bracelets
+
+  Autarch:
+    id:            5428
+    species:       doll
+    type:          [notorious]
+    skill_list_id: 403
+    attributes:
+      combat:
+        skill: staff
+      jobs: [thf, war]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  1157
+        animation_sub:    4
+        model_size:       2
+        hitbox:          34
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 1800
+    loot:
+      drops:
+        - chance: common
+          item:   kinship_axe
+    content: WOTG
+
+  Demonic_Doll:
+    id:            974
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  133
+        animation_sub:  12
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   doll_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+
+  Dire_Bat_UDT_TC_SSG:
+    id:            6456
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Enkelados:
+    id:            1233
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 640
+        entity_flags: 1181
+        name_prefix:    32
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 3050
+    loot:
+      drops:
+        - chance: always
+          item:   gigas_socks
+        - chance: very_common
+          item:   mahogany_shield
+        - chance: common
+          item:   gigas_necklace
+        - chance: uncommon
+          item:   enkeladoss_bracelets
+
+  Gigas_Bonecutter:
+    id:            1552
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 710
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   delkfutt_chest_key
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Spirekeeper:
+    id:            1585
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   delkfutt_chest_key
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Stonemason:
+    id:            1588
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   delkfutt_chest_key
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigas_Torturer:
+    id:            1595
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 320
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   delkfutt_chest_key
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Gigass_Bat:
+    id:            1589
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1100
+
+  Gigass_Bat_2:
+    id:            1589
+    display_name:  Gigass_Bat
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Gigass_Bats:
+    id:            1590
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Incubus_Bats_UDT:
+    id:            6427
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  1669
+        animation_sub:    8
+        name_prefix:     64
+        model_size:       2
+        hitbox:          18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Ixtab:
+    id:            2111
+    species:       ghost
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1159
+        model_size:      3
+        hitbox:         11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 4000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   square_of_cheviot_cloth
+
+  Jotunn_Gatekeeper:
+    id:            2158
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 703
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   warriors_testimony
+        - chance: uncommon
+          item:   gigas_socks
+        - chance: very_rare
+          item:   gigas_necklace
+        - chance: rare
+          one_of:
+            hoary_battle_horn: 75
+            moldy_buckler:     25
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Jotunn_Hallkeeper:
+    id:            2159
+    species:       gigas
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 250
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 642
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   monks_testimony
+        - chance: uncommon
+          item:   gigas_socks
+        - chance: very_rare
+          item:   gigas_necklace
+        - chance: rare
+          one_of:
+            hoary_battle_horn: 75
+            moldy_buckler:     25
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Jotunn_Wallkeeper:
+    id:            2161
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: club
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 707
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rangers_testimony
+        - chance: very_rare
+          item:   scroll_of_archers_prelude
+        - chance: common
+          item:   gigas_socks
+        - chance: very_rare
+          item:   gigas_necklace
+        - chance: rare
+          one_of:
+            hoary_battle_horn: 75
+            moldy_buckler:     25
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Jotunn_Wildkeeper:
+    id:            2162
+    species:       gigas
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 703
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   beastmasters_testimony
+        - chance: common
+          item:   gigas_socks
+        - chance: very_rare
+          item:   gigas_necklace
+        - chance: rare
+          one_of:
+            hoary_battle_horn: 75
+            moldy_buckler:     25
+      despoil:
+        spool_of_wool_thread: 0
+        square_of_wool_cloth: 0
+
+  Light_Elemental:
+    id:            2413
+    species:       light_elemental
+    spell_list_id: 19
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 442
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+
+  Magic_Pot_UDT:
+    id:            6600
+    species:       magic_pot
+    spell_list_id: 3
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 133
+        model_size:     2
+        hitbox:        43
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: uncommon
+          item:   red_mages_testimony
+        - chance: rare
+          one_of:
+            scroll_of_thunder_iii:  35
+            scroll_of_shell_iv:     20
+            scroll_of_thundaga_iii: 20
+            scroll_of_thunder_iv:   15
+            scroll_of_burst:        10
+      despoil:
+        magic_pot_shard: 0
+
+  Magic_Urn:
+    id:            2483
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         43
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          item:   delkfutt_chest_key
+      despoil:
+        magic_pot_shard: 0
+
+  Mimas:
+    id:            2663
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [mnk, war]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 720
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        41
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 900
+      stats:
+        hp: 1150
+    loot:
+      drops:
+        - chance: rare
+          item:   huge_moth_axe
+
+  Pallas:
+    id:            3085
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 643
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10420
+    loot:
+      drops:
+        - chance: always
+          item:   gigas_socks
+        - chance: common
+          item:   mahogany_shield
+        - chance: uncommon
+          item:   gigas_necklace
+        - chance: rare
+          item:   pallass_bracelets
+
+  Phasma_UDT:
+    id:            6510
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 645
+        model_size:     2
+        hitbox:         9
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   square_of_wool_cloth
+        - chance: common
+          item:   revival_tree_root
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Porphyrion:
+    id:            3188
+    species:       gigas
+    type:          [notorious]
+    skill_list_id: 127
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          earth:   -2
+          thunder:  4
+        rank_status:
+          slow: -2
+      render:
+        look:
+          type:  standard
+          model: 643
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        41
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 600
+      stats:
+        hp: 1130
+    loot:
+      drops:
+        - chance: always
+          item:   delkfutt_key
+        - chance: always
+          item:   delkfutt_key
+        - chance: always
+          item:   delkfutt_key
+        - chance: always
+          item:   delkfutt_key
+        - chance: always
+          item:   delkfutt_key
+        - chance: always
+          item:   delkfutt_key
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+spawns:
+  17424385:
+    template: Enkelados
+    at:       [-391.000, -145.000, 25.000, 127]
+    level:    [40, 40]
+  17424386:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424387:
+    template: Gigas_Torturer
+    at:       [-387.740, -144.100, 16.162, 127]
+    level:    [34, 35]
+  17424388:
+    template: Gigas_Bonecutter
+    at:       [-371.586, -144.367, 28.244, 45]
+    level:    [34, 35]
+  17424389:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424390:
+    template: Gigas_Stonemason
+    at:       [-380.843, -144.099, 11.526, 21]
+    level:    [34, 35]
+  17424391:
+    template: Gigas_Spirekeeper
+    at:       [-312.000, -144.000, 59.000, 127]
+    level:    [34, 35]
+  17424392:
+    template: Gigas_Torturer
+    at:       [-301.000, -144.000, 69.000, 127]
+    level:    [34, 35]
+  17424393:
+    template: Gigas_Bonecutter
+    at:       [-333.951, -144.500, 61.751, 127]
+    level:    [34, 35]
+  17424394:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424395:
+    template: Gigas_Stonemason
+    at:       [-342.136, -144.500, 61.413, 15]
+    level:    [34, 35]
+  17424396:
+    template: Thunder_Elemental
+    at:       [-326.772, -144.500, 61.295, 97]
+    level:    [35, 36]
+  17424397:
+    template: Light_Elemental
+    at:       [-346.861, -144.490, 62.137, 24]
+    level:    [35, 36]
+  17424398:
+    template: Gigas_Spirekeeper
+    at:       [-287.426, -144.500, 100.646, 127]
+    level:    [34, 35]
+  17424399:
+    template: Gigas_Torturer
+    at:       [-268.000, -144.000, 100.000, 79]
+    level:    [34, 35]
+  17424400:
+    template: Gigas_Bonecutter
+    at:       [-255.000, -144.000, 99.000, 127]
+    level:    [34, 35]
+  17424401:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424402:
+    template: Gigas_Stonemason
+    at:       [-300.847, -144.500, 89.485, 127]
+    level:    [34, 35]
+  17424403:
+    template: Thunder_Elemental
+    at:       [-300.776, -144.500, 89.095, 32]
+    level:    [35, 36]
+  17424404:
+    template: Light_Elemental
+    at:       [-298.147, -144.500, 94.070, 101]
+    level:    [35, 36]
+  17424405:
+    template: Gigas_Spirekeeper
+    at:       [-381.034, -144.499, 43.599, 127]
+    level:    [34, 35]
+  17424406:
+    template: Gigas_Torturer
+    at:       [-377.000, -143.000, 71.000, 68]
+    level:    [34, 35]
+  17424407:
+    template: Gigas_Bonecutter
+    at:       [-379.000, -144.499, 61.000, 127]
+    level:    [34, 35]
+  17424408:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424409:
+    template: Gigas_Stonemason
+    at:       [-379.573, -144.499, 51.809, 127]
+    level:    [34, 35]
+  17424410:
+    template: Thunder_Elemental
+    at:       [-379.430, -144.499, 36.394, 66]
+    level:    [35, 36]
+  17424411:
+    template: Light_Elemental
+    at:       [-378.961, -144.499, 44.564, 127]
+    level:    [35, 36]
+  17424412:
+    template: Gigas_Spirekeeper
+    at:       [-218.606, -144.499, 49.528, 64]
+    level:    [34, 35]
+  17424413:
+    template: Gigas_Torturer
+    at:       [-210.000, -143.000, 27.000, 44]
+    level:    [34, 35]
+  17424414:
+    template: Gigas_Bonecutter
+    at:       [-225.982, -144.490, 70.129, 17]
+    level:    [34, 35]
+  17424415:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424416:
+    template: Gigas_Stonemason
+    at:       [-219.382, -144.498, 65.117, 69]
+    level:    [34, 35]
+  17424417:
+    template: Thunder_Elemental
+    at:       [-218.055, -144.500, 58.839, 64]
+    level:    [35, 36]
+  17424418:
+    template: Light_Elemental
+    at:       [-218.187, -144.500, 54.253, 127]
+    level:    [35, 36]
+  17424419:
+    template: Mimas
+    at:       [-293.419, -144.070, 53.648, 127]
+    level:    [36, 36]
+  17424420:
+    template: Magic_Urn
+    at:       [-238.899, -144.002, 77.680, 61]
+    level:    [34, 35]
+  17424421:
+    template: Magic_Urn
+    at:       [-236.313, -144.298, 72.947, 50]
+    level:    [34, 35]
+  17424422:
+    template: Magic_Urn
+    at:       [-241.098, -144.076, 86.067, 127]
+    level:    [34, 35]
+  17424423:
+    template: Enkelados
+    at:       [-226.158, -144.099, 28.522, 127]
+    level:    [40, 40]
+  17424424:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424425:
+    template: Gigas_Spirekeeper
+    at:       [-225.374, -144.100, 19.749, 127]
+    level:    [34, 35]
+  17424426:
+    template: Gigas_Bonecutter
+    at:       [-215.194, -144.099, 19.528, 127]
+    level:    [34, 35]
+  17424427:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424428:
+    template: Gigas_Stonemason
+    at:       [-225.728, -144.103, 30.087, 125]
+    level:    [34, 35]
+  17424429:
+    template: Porphyrion
+    at:       [-298.160, -144.165, 12.439, 58]
+    level:    [36, 36]
+  17424430:
+    template: Thunder_Elemental
+    at:       [-293.561, -144.623, 24.306, 127]
+    level:    [35, 36]
+  17424431:
+    template: Light_Elemental
+    at:       [-284.995, -143.924, 21.827, 114]
+    level:    [35, 36]
+  17424432:
+    template: Gigas_Spirekeeper
+    at:       [-280.026, -144.225, 35.292, 97]
+    level:    [34, 35]
+  17424433:
+    template: Gigas_Torturer
+    at:       [-276.798, -144.266, 15.071, 30]
+    level:    [34, 35]
+  17424434:
+    template: Gigas_Bonecutter
+    at:       [-283.047, -144.250, 33.735, 127]
+    level:    [34, 35]
+  17424435:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424436:
+    template: Gigas_Stonemason
+    at:       [-274.250, -144.283, 27.049, 84]
+    level:    [34, 35]
+  17424437:
+    template: Gigas_Spirekeeper
+    at:       [-313.391, -144.524, -12.468, 116]
+    level:    [34, 35]
+  17424438:
+    template: Gigas_Torturer
+    at:       [-295.429, -144.398, -9.097, 127]
+    level:    [34, 35]
+  17424439:
+    template: Gigas_Bonecutter
+    at:       [-312.331, -144.759, -13.591, 127]
+    level:    [34, 35]
+  17424440:
+    template: Gigass_Bats
+    at:       [1.000, 1.000, 1.000]
+    level:    [27, 29]
+  17424441:
+    template: Gigas_Stonemason
+    at:       [-293.688, -144.120, 1.548, 126]
+    level:    [34, 35]
+  17424442:
+    template: Demonic_Doll
+    at:       [-358.825, -144.159, -38.803, 127]
+    level:    [68, 70]
+  17424443:
+    template: Demonic_Doll
+    at:       [-226.754, -144.728, -32.811, 106]
+    level:    [68, 70]
+  17424444:
+    template: Pallas
+    at:       [-300.000, -159.000, 21.000, 127]
+    level:    [72, 72]
+  17424445:
+    template: Gigass_Bat_2
+    script:   Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [65, 65]
+  17424446:
+    template: Magic_Pot_UDT
+    script:   Magic_Pot
+    at:       [-303.825, -159.924, 13.823, 58]
+    level:    [68, 70]
+  17424447:
+    template: Magic_Pot_UDT
+    script:   Magic_Pot
+    at:       [-314.460, -159.924, 9.405, 49]
+    level:    [68, 70]
+  17424448:
+    template: Magic_Pot_UDT
+    script:   Magic_Pot
+    at:       [-312.528, -159.924, 19.562, 127]
+    level:    [68, 70]
+  17424449:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-309.140, -159.924, 13.836, 127]
+    level:    [64, 66]
+  17424450:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-307.942, -159.924, 19.354, 127]
+    level:    [64, 66]
+  17424451:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-297.221, -159.924, 5.041, 127]
+    level:    [64, 66]
+  17424452:
+    template: Jotunn_Wallkeeper
+    at:       [-315.000, -160.517, 52.000, 127]
+    level:    [65, 69]
+  17424453:
+    template: Jotunn_Gatekeeper
+    at:       [-305.000, -160.397, 51.000, 127]
+    level:    [65, 69]
+  17424454:
+    template: Jotunn_Hallkeeper
+    at:       [-274.364, -160.207, 46.033, 127]
+    level:    [65, 69]
+  17424455:
+    template: Jotunn_Wildkeeper
+    at:       [-280.230, -160.519, 52.984, 127]
+    level:    [65, 69]
+  17424456:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17424457:
+    template: Jotunn_Wallkeeper
+    at:       [-280.327, -159.993, -5.097, 34]
+    level:    [65, 69]
+  17424458:
+    template: Jotunn_Gatekeeper
+    at:       [-320.534, -159.924, -3.678, 57]
+    level:    [65, 69]
+  17424459:
+    template: Jotunn_Hallkeeper
+    at:       [-299.257, -160.347, -9.953, 63]
+    level:    [65, 69]
+  17424460:
+    template: Jotunn_Wildkeeper
+    at:       [-287.423, -160.466, -11.309, 89]
+    level:    [65, 69]
+  17424461:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17424462:
+    template: Jotunn_Wallkeeper
+    at:       [-340.411, -160.499, 20.166, 112]
+    level:    [65, 69]
+  17424463:
+    template: Jotunn_Gatekeeper
+    at:       [-325.646, -160.027, 1.424, 76]
+    level:    [65, 69]
+  17424464:
+    template: Jotunn_Hallkeeper
+    at:       [-332.906, -160.519, 39.799, 88]
+    level:    [65, 69]
+  17424465:
+    template: Jotunn_Wildkeeper
+    at:       [-333.395, -160.515, 1.424, 50]
+    level:    [65, 69]
+  17424466:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17424467:
+    template: Jotunn_Wallkeeper
+    at:       [-272.267, -160.159, 27.723, 14]
+    level:    [65, 69]
+  17424468:
+    template: Jotunn_Gatekeeper
+    at:       [-292.995, -160.512, 54.141, 127]
+    level:    [65, 69]
+  17424469:
+    template: Jotunn_Hallkeeper
+    at:       [-274.787, -160.000, 3.201, 127]
+    level:    [65, 69]
+  17424470:
+    template: Jotunn_Wildkeeper
+    at:       [-261.968, -160.501, 25.806, 29]
+    level:    [65, 69]
+  17424471:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17424472:
+    template: Phasma_UDT
+    script:   Phasma
+    at:       [-366.908, -160.336, 84.753, 127]
+    level:    [67, 69]
+  17424473:
+    template: Phasma_UDT
+    script:   Phasma
+    at:       [-359.458, -160.002, 76.582, 127]
+    level:    [67, 69]
+  17424474:
+    template: Phasma_UDT
+    script:   Phasma
+    at:       [-358.249, -159.924, 79.765, 68]
+    level:    [67, 69]
+  17424475:
+    template: Ixtab
+    at:       [-360.000, -159.500, 80.000, 60]
+    level:    [71, 71]
+  17424476:
+    template: Incubus_Bats_UDT
+    script:   Incubus_Bats
+    at:       [-341.847, -160.482, -29.294, 92]
+    level:    [62, 64]
+  17424477:
+    template: Incubus_Bats_UDT
+    script:   Incubus_Bats
+    at:       [-338.958, -160.497, -20.548, 127]
+    level:    [62, 64]
+  17424478:
+    template: Incubus_Bats_UDT
+    script:   Incubus_Bats
+    at:       [-242.986, -160.190, 73.348, 127]
+    level:    [62, 64]
+  17424479:
+    template: Incubus_Bats_UDT
+    script:   Incubus_Bats
+    at:       [-241.573, -160.163, 72.702, 127]
+    level:    [62, 64]
+  17424480:
+    template: Alkyoneus
+    at:       [-300.000, -175.000, 22.000, 64]
+    level:    [75, 75]
+  17424481:
+    template: Demonic_Doll
+    at:       [-296.738, -175.924, 17.698, 70]
+    level:    [68, 70]
+  17424482:
+    template: Demonic_Doll
+    at:       [-285.348, -175.924, 20.145, 127]
+    level:    [68, 70]
+  17424483:
+    template: Demonic_Doll
+    at:       [-299.740, -175.924, 15.733, 127]
+    level:    [68, 70]
+  17424484:
+    template: Magic_Pot_UDT
+    script:   Magic_Pot
+    at:       [-262.727, -176.415, 59.132, 127]
+    level:    [68, 70]
+  17424485:
+    template: Magic_Pot_UDT
+    script:   Magic_Pot
+    at:       [-264.870, -175.924, 77.028, 4]
+    level:    [68, 70]
+  17424486:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-279.608, -175.952, 72.133, 127]
+    level:    [64, 66]
+  17424487:
+    template: Dire_Bat_UDT_TC_SSG
+    script:   Dire_Bat
+    at:       [-282.696, -176.017, 82.517, 127]
+    level:    [64, 66]
+  17424488:
+    template: Autarch
+    at:       [-287.000, -175.600, 85.000, 126]
+    level:    [83, 85]
+  17424489:
+    template: Jotunn_Wallkeeper
+    at:       [-296.098, -175.924, 38.476, 52]
+    level:    [65, 69]
+  17424490:
+    template: Jotunn_Gatekeeper
+    at:       [-316.738, -175.924, 35.214, 108]
+    level:    [65, 69]
+  17424491:
+    template: Jotunn_Hallkeeper
+    at:       [-333.000, -176.000, 30.000, 65]
+    level:    [65, 69]
+  17424492:
+    template: Jotunn_Wildkeeper
+    at:       [-300.000, -175.000, 56.000, 58]
+    level:    [65, 69]
+  17424493:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17424494:
+    template: Jotunn_Wallkeeper
+    at:       [-293.086, -175.925, -4.024, 127]
+    level:    [65, 69]
+  17424495:
+    template: Jotunn_Gatekeeper
+    at:       [-292.705, -176.507, -14.928, 55]
+    level:    [65, 69]
+  17424496:
+    template: Jotunn_Hallkeeper
+    at:       [-317.000, -175.000, 50.000, 7]
+    level:    [65, 69]
+  17424497:
+    template: Jotunn_Wildkeeper
+    at:       [-308.514, -175.924, -3.720, 127]
+    level:    [65, 69]
+  17424498:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17424499:
+    template: Jotunn_Wallkeeper
+    at:       [-327.804, -176.163, 17.037, 127]
+    level:    [65, 69]
+  17424500:
+    template: Jotunn_Gatekeeper
+    at:       [-335.000, -176.000, 28.000, 105]
+    level:    [65, 69]
+  17424501:
+    template: Jotunn_Hallkeeper
+    at:       [-320.705, -175.924, 0.905, 127]
+    level:    [65, 69]
+  17424502:
+    template: Jotunn_Wildkeeper
+    at:       [-321.807, -175.924, 15.624, 127]
+    level:    [65, 69]
+  17424503:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17424504:
+    template: Jotunn_Wallkeeper
+    at:       [-265.683, -176.511, 23.816, 37]
+    level:    [65, 69]
+  17424505:
+    template: Jotunn_Gatekeeper
+    at:       [-268.000, -176.000, 40.000, 127]
+    level:    [65, 69]
+  17424506:
+    template: Jotunn_Hallkeeper
+    at:       [-267.000, -176.000, 3.000, 8]
+    level:    [65, 69]
+  17424507:
+    template: Jotunn_Wildkeeper
+    at:       [-270.097, -176.343, 17.070, 127]
+    level:    [65, 69]
+  17424508:
+    template: Gigass_Bat
+    at:       [1.000, 1.000, 1.000]
+    level:    [53, 55]
+  17424509:
+    template: Phasma_UDT
+    script:   Phasma
+    at:       [-348.777, -176.461, 76.460, 127]
+    level:    [67, 69]
+  17424510:
+    template: Phasma_UDT
+    script:   Phasma
+    at:       [-359.671, -176.144, 86.200, 127]
+    level:    [67, 69]
+  17424511:
+    template: Phasma_UDT
+    script:   Phasma
+    at:       [-362.595, -176.133, 85.139, 68]
+    level:    [67, 69]
+  17424512:
+    template: Ixtab
+    at:       [-360.000, -175.500, 78.000, 60]
+    level:    [71, 71]
+  17424513:
+    template: Incubus_Bats_UDT
+    script:   Incubus_Bats
+    at:       [-337.960, -176.495, 58.230, 127]
+    level:    [62, 64]
+  17424514:
+    template: Incubus_Bats_UDT
+    script:   Incubus_Bats
+    at:       [-346.093, -176.494, 71.868, 127]
+    level:    [62, 64]
+  17424515:
+    template: Incubus_Bats_UDT
+    script:   Incubus_Bats
+    at:       [-346.228, -176.491, -31.345, 104]
+    level:    [62, 64]
+  17424516:
+    template: Incubus_Bats_UDT
+    script:   Incubus_Bats
+    at:       [-341.833, -176.469, -27.273, 86]
+    level:    [62, 64]
+
+slots:
+  - members:
+      17424388: {} # Gigas_Bonecutter
+      17424423: {} # Enkelados
+      17424426: {} # Gigas_Bonecutter
+  - members:
+      17424392: {} # Gigas_Torturer
+      17424395: {} # Gigas_Stonemason
+  - members:
+      17424398: {} # Gigas_Spirekeeper
+      17424400: {} # Gigas_Bonecutter
+      17424402: {} # Gigas_Stonemason
+  - members:
+      17424405: {} # Gigas_Spirekeeper
+      17424406: {} # Gigas_Torturer
+      17424407: {} # Gigas_Bonecutter
+      17424409: {} # Gigas_Stonemason
+  - members:
+      17424412: {} # Gigas_Spirekeeper
+      17424413: {} # Gigas_Torturer
+      17424414: {} # Gigas_Bonecutter
+      17424416: {} # Gigas_Stonemason
+  - members:
+      17424433: {} # Gigas_Torturer
+      17424434: {} # Gigas_Bonecutter
+  - members:
+      17424437: {} # Gigas_Spirekeeper
+      17424441: {} # Gigas_Stonemason
+  - members:
+      17424453: {} # Jotunn_Gatekeeper
+      17424454: {} # Jotunn_Hallkeeper
+      17424455: {} # Jotunn_Wildkeeper
+  - members:
+      17424457: {} # Jotunn_Wallkeeper
+      17424463: {} # Jotunn_Gatekeeper
+      17424465: {} # Jotunn_Wildkeeper
+  - members:
+      17424459: {} # Jotunn_Hallkeeper
+      17424460: {} # Jotunn_Wildkeeper
+      17424462: {} # Jotunn_Wallkeeper
+  - members:
+      17424467: {} # Jotunn_Wallkeeper
+      17424468: {} # Jotunn_Gatekeeper
+      17424469: {} # Jotunn_Hallkeeper
+  - members:
+      17424474: {} # Phasma
+      17424511: {} # Phasma
+  - members:
+      17424490: {} # Jotunn_Gatekeeper
+      17424491: {} # Jotunn_Hallkeeper
+      17424492: {} # Jotunn_Wildkeeper
+  - members:
+      17424494: {} # Jotunn_Wallkeeper
+      17424496: {} # Jotunn_Hallkeeper
+      17424497: {} # Jotunn_Wildkeeper
+  - members:
+      17424499: {} # Jotunn_Wallkeeper
+      17424500: {} # Jotunn_Gatekeeper
+      17424502: {} # Jotunn_Wildkeeper
+  - members:
+      17424504: {} # Jotunn_Wallkeeper
+      17424505: {} # Jotunn_Gatekeeper
+      17424506: {} # Jotunn_Hallkeeper

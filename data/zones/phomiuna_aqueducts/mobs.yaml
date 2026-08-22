@@ -1,0 +1,2965 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Addled_Tumor:
+    id:            49
+    species:       doomed
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags: 1667
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   undead_skin
+      despoil:
+        undead_skin: 0
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+
+  Aqueduct_Spider:
+    id:            4531
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags:  1665
+        animation_sub:    8
+        hitbox:          11
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   water_spiders_web
+      despoil:
+        spool_of_rainbow_thread: 0
+        spider_web:              0
+    content: ABYSSEA
+
+  Bavarois:
+    id:            376
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Big_Jaw_noaggro:
+    id:            6026
+    display_name:  Big_Jaw
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 129
+        hitbox:        23
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: common
+          item:   sack_of_silica
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Canal_Bats_PA:
+    id:            5129
+    species:       flock_bat
+    skill_list_id: 2015
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Dark_Elemental:
+    id:            913
+    species:       dark_elemental
+    spell_list_id: 18
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        immune_status: [blind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 443
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+
+  Diremite:
+    id:            1040
+    species:       diremite
+    skill_list_id: 81
+    attributes:
+      combat:
+        skill: axe
+        delay: 210
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -3
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_bloodthread
+        - chance: very_rare
+          item:   bottle_of_avatar_blood
+      steal: vial_of_fiend_blood
+      despoil:
+        bottle_of_avatar_blood: 0
+        spool_of_bloodthread:   0
+
+  Duendes_Amoroso:
+    id:            1128
+    species:       fomor
+    spell_list_id: 21
+    skill_list_id: 359
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1030
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1800
+
+  Eba:
+    id:            1169
+    species:       fomor
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1035
+        entity_flags:  1565
+        animation_sub:    8
+        name_prefix:     32
+        model_size:       2
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_common
+          item:   fomor_tunic
+
+  Fomor_Bard:
+    id:            1380
+    species:       fomor
+    spell_list_id: 6
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1038
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   libra_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Beastmaster:
+    id:            1381
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1042
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   ophiuchus_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Black_Mage:
+    id:            1382
+    species:       fomor
+    spell_list_id: 21
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1030
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   aries_subligar
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Dark_Knight:
+    id:            1383
+    species:       fomor
+    spell_list_id: 5
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1034
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   sagittarius_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Dragoon:
+    id:            1384
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1014
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   leo_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Monk:
+    id:            1385
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1028
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   aquarius_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Ninja:
+    id:            1386
+    species:       fomor
+    spell_list_id: 7
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1036
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   taurus_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: uncommon
+          item:   shakudo_ingot
+        - chance: uncommon
+          item:   shakudo_ingot
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Paladin:
+    id:            1387
+    species:       fomor
+    spell_list_id: 4
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1040
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   pisces_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Ranger:
+    id:            1388
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1017
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   virgo_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: uncommon
+          item:   square_of_balloon_cloth
+        - chance: uncommon
+          item:   square_of_balloon_cloth
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Ranger_Large:
+    id:            7284
+    display_name:  Fomor_Ranger
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1017
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   virgo_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: uncommon
+          item:   square_of_balloon_cloth
+        - chance: uncommon
+          item:   square_of_balloon_cloth
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Red_Mage:
+    id:            1389
+    species:       fomor
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1032
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   scorpius_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Samurai:
+    id:            1390
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1012
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   cancer_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: uncommon
+          item:   shakudo_ingot
+        - chance: uncommon
+          item:   shakudo_ingot
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Summoner:
+    id:            1391
+    species:       fomor
+    spell_list_id: 34
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1026
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   capricornus_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Thief:
+    id:            1397
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1022
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   gemini_subligar
+        - chance: rare
+          item:   bronze_key
+        - chance: uncommon
+          item:   square_of_balloon_cloth
+        - chance: uncommon
+          item:   square_of_balloon_cloth
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomor_Warrior:
+    id:            1398
+    species:       fomor
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1020
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: rare
+          item:   bronze_key
+        - chance: very_rare
+          item:   revival_tree_root
+
+  Fomors_Bat:
+    id:            1393
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Fomors_Elemental:
+    id:            1395
+    species:       earth_elemental
+    spell_list_id: 21
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 11
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Fomors_Wyvern:
+    id:            1396
+    species:       blue_wyvern
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Foul_Meat:
+    id:            1412
+    species:       doomed
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: uncommon
+          item:   undead_skin
+      despoil:
+        undead_skin: 0
+
+  Freshwater_Trepang:
+    id:            1423
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Gloop:
+    id:            1624
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Hell_Bat_Phomiuna_Aqueducts:
+    id:            7326
+    display_name:  Hell_Bat
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Mahisha:
+    id:            2488
+    species:       taurus
+    type:          [notorious]
+    skill_list_id: 240
+    attributes:
+      combat:
+        skill: scythe
+        delay: 260
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: common
+          item:   sinister_mask
+
+  Makara_PA:
+    id:            5131
+    display_name:  Makara
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 129
+        hitbox:        23
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   sack_of_silica
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Minotaur:
+    id:            2675
+    species:       taurus
+    type:          [notorious, event]
+    skill_list_id: 240
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      mob_mods:
+        sight_range: 25
+      spawn:
+        respawn: 600
+      stats:
+        hp: 5000
+
+  Ogreish_Risotto:
+    id:            2954
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Oil_Spill:
+    id:            2958
+    species:       slime
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         24
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Sponge:
+    id:            3737
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 643
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+  Stegotaur_PA:
+    id:            3770
+    species:       taurus
+    skill_list_id: 240
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_spruce_lumber
+        - chance: rare
+          item:   fomor_codex
+        - chance: rare
+          item:   taurus_horn
+      steal: taurus_horn
+      despoil:
+        demon_skull: 0
+        demon_horn:  0
+
+  Taurus:
+    id:            3852
+    species:       taurus
+    skill_list_id: 240
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_spruce_lumber
+        - chance: rare
+          item:   fomor_codex
+        - chance: rare
+          item:   taurus_horn
+      steal: taurus_horn
+      despoil:
+        demon_skull: 0
+        demon_horn:  0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 960
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Tres_Duendes:
+    id:            3997
+    species:       flock_bat
+    type:          [notorious]
+    skill_list_id: 2015
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 263
+        entity_flags:  647
+        animation_sub:  12
+        name_prefix:    64
+        model_size:      3
+        hitbox:         22
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_common
+          item:   vampiric_claws
+        - chance: very_common
+          item:   chiroptera_dagger
+        - chance: very_common
+          item:   niokiyotsuna
+
+  Vampire_Bat_Phomiuna_Aqueducts:
+    id:            7334
+    display_name:  Vampire_Bat
+    species:       bat
+    skill_list_id: 224
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 720
+    loot:
+      drops:
+        - chance: very_common
+          item:   bat_wing
+        - chance: uncommon
+          item:   bat_fang
+        - chance: rare
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        bat_wing: 0
+
+  Water_Pumpkin:
+    id:            4313
+    species:       slime
+    type:          [fished]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_slime_oil
+      despoil:
+        vial_of_slime_oil: 0
+
+spawns:
+  16887809:
+    template: Sponge
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 29]
+  16887810:
+    template: Water_Pumpkin
+    at:       [1.000, 1.000, 1.000]
+    level:    [25, 29]
+  16887811:
+    template: Freshwater_Trepang
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 34]
+  16887812:
+    template: Ogreish_Risotto
+    at:       [1.000, 1.000, 1.000]
+    level:    [35, 37]
+  16887813:
+    template: Bavarois
+    at:       [1.000, 1.000, 1.000]
+    level:    [39, 41]
+  16887814:
+    template: Big_Jaw_noaggro
+    script:   Big_Jaw
+    at:       [220.244, 0.423, -236.106, 64]
+    level:    [37, 39]
+  16887815:
+    template: Gloop
+    at:       [220.125, 0.540, -247.271, 192]
+    level:    [36, 38]
+  16887816:
+    template: Big_Jaw_noaggro
+    script:   Big_Jaw
+    at:       [204.006, 0.568, -219.170, 255]
+    level:    [37, 39]
+  16887817:
+    template: Big_Jaw_noaggro
+    script:   Big_Jaw
+    at:       [175.735, 0.431, -219.079, 127]
+    level:    [37, 39]
+  16887818:
+    template: Gloop
+    at:       [190.744, 0.410, -219.187, 128]
+    level:    [36, 38]
+  16887819:
+    template: Gloop
+    at:       [178.087, 0.582, -219.160, 255]
+    level:    [36, 38]
+  16887820:
+    template: Addled_Tumor
+    at:       [125.640, 0.468, -219.381, 127]
+    level:    [36, 38]
+  16887821:
+    template: Gloop
+    at:       [179.264, 0.397, -198.526, 64]
+    level:    [36, 38]
+  16887822:
+    template: Big_Jaw_noaggro
+    script:   Big_Jaw
+    at:       [139.183, 0.533, -175.706, 192]
+    level:    [37, 39]
+  16887823:
+    template: Big_Jaw_noaggro
+    script:   Big_Jaw
+    at:       [156.692, 0.471, -179.874, 255]
+    level:    [37, 39]
+  16887824:
+    template: Big_Jaw_noaggro
+    script:   Big_Jaw
+    at:       [139.117, 0.447, -165.908, 192]
+    level:    [37, 39]
+  16887825:
+    template: Taurus
+    at:       [119.986, -0.350, -127.534, 157]
+    level:    [37, 38]
+  16887826:
+    template: Taurus
+    at:       [136.785, -0.565, -115.574, 206]
+    level:    [37, 38]
+  16887827:
+    template: Taurus
+    at:       [120.133, -0.349, -115.933, 169]
+    level:    [37, 38]
+  16887828:
+    template: Vampire_Bat_Phomiuna_Aqueducts
+    script:   Vampire_Bat
+    at:       [123.882, -0.557, -103.384, 221]
+    level:    [37, 38]
+  16887829:
+    template: Vampire_Bat_Phomiuna_Aqueducts
+    script:   Vampire_Bat
+    at:       [125.222, -0.539, -103.855, 195]
+    level:    [36, 38]
+  16887830:
+    template: Vampire_Bat_Phomiuna_Aqueducts
+    script:   Vampire_Bat
+    at:       [115.027, -0.349, -115.968, 151]
+    level:    [38, 38]
+  16887831:
+    template: Diremite
+    at:       [99.788, -6.462, -69.671, 64]
+    level:    [42, 44]
+  16887832:
+    template: Diremite
+    at:       [98.623, -6.594, -61.227]
+    level:    [42, 44]
+  16887833:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [60.224, -6.538, -47.509, 191]
+    level:    [41, 43]
+  16887834:
+    template: Diremite
+    at:       [60.453, -6.441, -54.500, 65]
+    level:    [42, 44]
+  16887835:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [62.077, -6.545, -20.958, 127]
+    level:    [41, 43]
+  16887836:
+    template: Diremite
+    at:       [79.642, -6.599, -20.735]
+    level:    [42, 44]
+  16887837:
+    template: Gloop
+    at:       [27.270, -6.589, -17.422, 54]
+    level:    [36, 38]
+  16887838:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [14.801, -6.438, -60.439]
+    level:    [41, 43]
+  16887839:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [20.659, -6.516, -56.629, 203]
+    level:    [41, 43]
+  16887840:
+    template: Diremite
+    at:       [-18.937, -6.569, -36.191, 191]
+    level:    [42, 44]
+  16887841:
+    template: Diremite
+    at:       [-18.942, -6.598, -41.247, 192]
+    level:    [42, 44]
+  16887842:
+    template: Hell_Bat_Phomiuna_Aqueducts
+    script:   Hell_Bat
+    at:       [-45.653, -6.606, -19.576, 255]
+    level:    [44, 46]
+  16887843:
+    template: Diremite
+    at:       [-33.018, -6.432, -19.406, 128]
+    level:    [42, 44]
+  16887844:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [134.689, -0.354, -3.852, 90]
+    level:    [44, 46]
+  16887845:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [132.849, -0.340, 9.226, 52]
+    level:    [44, 46]
+  16887846:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [137.645, -0.524, -4.635, 12]
+    level:    [44, 46]
+  16887847:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [104.563, -0.483, 0.387, 139]
+    level:    [44, 46]
+  16887848:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [115.875, -0.344, -4.295, 120]
+    level:    [44, 46]
+  16887849:
+    template: Diremite
+    at:       [99.835, -0.435, 54.923, 192]
+    level:    [42, 44]
+  16887850:
+    template: Fomor_Beastmaster
+    level:    [41, 44]
+  16887851:
+    template: Fomors_Bat
+    level:    [36, 43]
+  16887852:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [58.602, -0.583, 107.759, 51]
+    level:    [44, 46]
+  16887853:
+    template: Makara_PA
+    script:   Makara
+    at:       [56.858, -0.449, 109.184, 38]
+    level:    [44, 45]
+  16887854:
+    template: Makara_PA
+    script:   Makara
+    at:       [54.317, -0.329, 92.721, 185]
+    level:    [44, 45]
+  16887855:
+    template: Fomor_Dragoon
+    at:       [22.227, -0.345, 86.873, 243]
+    level:    [41, 44]
+  16887856:
+    template: Fomors_Wyvern
+    at:       [1.000, 1.000, 1.000, 177]
+    level:    [36, 43]
+  16887857:
+    template: Fomor_Ninja
+    at:       [20.997, -0.412, 85.400, 188]
+    level:    [41, 44]
+  16887858:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [19.504, -0.597, 120.505, 80]
+    level:    [44, 46]
+  16887859:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [19.559, -0.552, 84.980, 183]
+    level:    [44, 46]
+  16887860:
+    template: Oil_Spill
+    at:       [30.363, -0.557, 99.091, 127]
+    level:    [44, 47]
+  16887861:
+    template: Makara_PA
+    script:   Makara
+    at:       [115.418, 0.566, 99.257, 127]
+    level:    [45, 47]
+  16887862:
+    template: Makara_PA
+    script:   Makara
+    at:       [99.819, 0.542, 103.023, 181]
+    level:    [45, 47]
+  16887863:
+    template: Oil_Spill
+    at:       [108.694, 0.468, 99.125]
+    level:    [44, 47]
+  16887864:
+    template: Fomor_Warrior
+    at:       [139.967, 0.436, 67.924, 192]
+    level:    [44, 47]
+  16887865:
+    template: Fomor_Thief
+    at:       [140.185, 0.406, 66.916, 64]
+    level:    [44, 47]
+  16887866:
+    template: Fomor_Summoner
+    at:       [140.387, 0.403, 67.391, 65]
+    level:    [44, 47]
+  16887867:
+    template: Fomors_Elemental
+    at:       [1.000, 1.000, 1.000, 56]
+    level:    [36, 43]
+  16887868:
+    template: Foul_Meat
+    at:       [146.351, 0.396, 59.473, 128]
+    level:    [45, 47]
+  16887869:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [177.662, -0.596, 60.390, 95]
+    level:    [45, 47]
+  16887870:
+    template: Diremite
+    at:       [-7.761, -6.494, 139.611, 128]
+    level:    [44, 46]
+  16887871:
+    template: Hell_Bat_Phomiuna_Aqueducts
+    script:   Hell_Bat
+    at:       [-18.990, -6.436, 146.108, 63]
+    level:    [44, 46]
+  16887872:
+    template: Diremite
+    at:       [-58.922, -6.487, 173.702, 192]
+    level:    [44, 46]
+  16887873:
+    template: Diremite
+    at:       [-58.956, -6.502, 169.160, 192]
+    level:    [44, 46]
+  16887874:
+    template: Diremite
+    at:       [-15.201, -6.505, 180.380, 255]
+    level:    [44, 46]
+  16887875:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [-15.256, -6.507, 180.269, 246]
+    level:    [44, 46]
+  16887876:
+    template: Hell_Bat_Phomiuna_Aqueducts
+    script:   Hell_Bat
+    at:       [-27.973, -6.612, 180.651, 130]
+    level:    [44, 46]
+  16887877:
+    template: Diremite
+    at:       [44.165, -6.434, 220.873, 255]
+    level:    [44, 46]
+  16887878:
+    template: Diremite
+    at:       [28.931, -6.476, 220.966]
+    level:    [44, 46]
+  16887879:
+    template: Diremite
+    at:       [67.881, -6.509, 180.983, 127]
+    level:    [44, 46]
+  16887880:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [70.996, -6.510, 181.010, 128]
+    level:    [44, 46]
+  16887881:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [106.617, -0.598, 186.141, 139]
+    level:    [44, 46]
+  16887882:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [134.349, -0.325, 208.296, 57]
+    level:    [44, 46]
+  16887883:
+    template: Fomor_Paladin
+    at:       [100.110, -0.548, 202.070, 92]
+    level:    [44, 47]
+  16887884:
+    template: Fomor_Bard
+    at:       [107.274, -0.282, 191.044, 37]
+    level:    [44, 47]
+  16887885:
+    template: Mahisha
+    at:       [103.731, -0.592, 187.587, 53]
+    level:    [50, 50]
+  16887886:
+    template: Makara_PA
+    script:   Makara
+    at:       [100.288, 0.601, 260.316, 127]
+    level:    [45, 47]
+  16887887:
+    template: Makara_PA
+    script:   Makara
+    at:       [55.319, 0.457, 260.074, 126]
+    level:    [45, 47]
+  16887888:
+    template: Makara_PA
+    script:   Makara
+    at:       [60.216, 0.622, 260.032, 128]
+    level:    [45, 47]
+  16887889:
+    template: Minotaur
+    at:       [60.000, 0.500, 304.000, 64]
+    level:    [46, 48]
+  16887890:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-95.381, -0.420, 102.982, 204]
+    level:    [44, 46]
+  16887891:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [-93.346, -0.579, 99.607, 124]
+    level:    [44, 46]
+  16887892:
+    template: Makara_PA
+    script:   Makara
+    at:       [-86.545, -0.273, 103.703, 131]
+    level:    [45, 47]
+  16887893:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-88.928, -0.322, 134.827, 21]
+    level:    [44, 46]
+  16887894:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [-67.466, -0.590, 134.035, 11]
+    level:    [44, 46]
+  16887895:
+    template: Hell_Bat_Phomiuna_Aqueducts
+    script:   Hell_Bat
+    at:       [-99.117, -0.579, 138.072, 149]
+    level:    [44, 46]
+  16887896:
+    template: Makara_PA
+    script:   Makara
+    at:       [-107.119, -0.391, 134.783, 27]
+    level:    [45, 47]
+  16887897:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-99.753, -0.589, 112.235, 191]
+    level:    [44, 46]
+  16887898:
+    template: Air_Elemental
+    at:       [-69.868, -0.258, 106.553, 231]
+    level:    [45, 45]
+  16887899:
+    template: Thunder_Elemental
+    at:       [-93.928, -0.575, 99.463, 15]
+    level:    [45, 45]
+  16887900:
+    template: Dark_Elemental
+    at:       [-93.535, -0.585, 138.780, 239]
+    level:    [45, 45]
+  16887901:
+    template: Diremite
+    at:       [-138.965, -0.573, 155.731, 63]
+    level:    [44, 46]
+  16887902:
+    template: Fomor_Monk
+    at:       [-139.094, -0.588, 168.309, 77]
+    level:    [44, 45]
+  16887903:
+    template: Fomor_Samurai
+    at:       [-160.000, -0.250, 200.000, 64]
+    level:    [44, 45]
+  16887904:
+    template: Fomor_Ranger
+    at:       [-166.000, -0.183, 196.000, 64]
+    level:    [44, 46]
+  16887905:
+    template: Fomor_Dark_Knight
+    at:       [-164.000, -0.250, 200.000, 64]
+    level:    [44, 45]
+  16887906:
+    template: Fomor_Ninja
+    at:       [-156.000, -0.250, 200.000, 64]
+    level:    [44, 46]
+  16887907:
+    template: Fomor_Black_Mage
+    at:       [-160.778, -0.337, 213.239, 252]
+    level:    [45, 46]
+  16887908:
+    template: Tres_Duendes
+    at:       [-153.577, -0.245, 215.862, 121]
+    level:    [47, 49]
+  16887909:
+    template: Duendes_Amoroso
+    at:       [1.000, 1.000, 1.000, 28]
+    level:    [45, 45]
+  16887910:
+    template: Fomor_Monk
+    at:       [-167.358, -0.363, 188.373, 244]
+    level:    [44, 46]
+  16887911:
+    template: Diremite
+    at:       [-179.777, -0.588, 159.627, 192]
+    level:    [44, 46]
+  16887912:
+    template: Fomor_Monk
+    at:       [-180.004, -0.590, 169.597, 192]
+    level:    [44, 46]
+  16887913:
+    template: Foul_Meat
+    at:       [-198.556, -0.412, 104.186, 239]
+    level:    [45, 47]
+  16887914:
+    template: Foul_Meat
+    at:       [-209.190, -0.569, 103.079, 48]
+    level:    [45, 47]
+  16887915:
+    template: Foul_Meat
+    at:       [-213.897, -0.593, 105.838, 148]
+    level:    [45, 47]
+  16887916:
+    template: Canal_Bats_PA
+    script:   Canal_Bats
+    at:       [-215.581, -0.328, 113.452, 184]
+    level:    [44, 46]
+  16887917:
+    template: Diremite
+    at:       [-164.775, -0.574, 100.603, 128]
+    level:    [44, 46]
+  16887918:
+    template: Makara_PA
+    script:   Makara
+    at:       [-61.013, -0.593, 89.025, 192]
+    level:    [45, 47]
+  16887919:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-112.032, -0.686, 60.269, 255]
+    level:    [44, 46]
+  16887920:
+    template: Fomor_Paladin
+    at:       [-142.000, -0.500, 60.000]
+    level:    [44, 46]
+  16887921:
+    template: Fomor_Samurai
+    at:       [-142.000, -0.500, 55.000]
+    level:    [44, 46]
+  16887922:
+    template: Fomor_Red_Mage
+    at:       [-142.000, -0.468, 65.000]
+    level:    [44, 46]
+  16887923:
+    template: Makara_PA
+    script:   Makara
+    at:       [-60.698, 0.459, 30.565, 63]
+    level:    [44, 45]
+  16887924:
+    template: Oil_Spill
+    at:       [-60.621, 0.500, 27.567, 55]
+    level:    [44, 47]
+  16887925:
+    template: Oil_Spill
+    at:       [-36.037, 0.399, 59.308, 127]
+    level:    [44, 47]
+  16887926:
+    template: Makara_PA
+    script:   Makara
+    at:       [-46.227, 0.399, 59.261]
+    level:    [44, 45]
+  16887927:
+    template: Makara_PA
+    script:   Makara
+    at:       [-20.218, 0.477, 64.932, 64]
+    level:    [44, 45]
+  16887928:
+    template: Oil_Spill
+    at:       [-20.039, 0.533, 62.845, 191]
+    level:    [44, 47]
+  16887929:
+    template: Foul_Meat
+    at:       [-16.993, 0.480, 101.536, 222]
+    level:    [45, 47]
+  16887930:
+    template: Makara_PA
+    script:   Makara
+    at:       [-19.577, 0.618, 18.075, 192]
+    level:    [44, 45]
+  16887931:
+    template: Oil_Spill
+    at:       [-5.718, 0.399, 19.279]
+    level:    [44, 47]
+  16887932:
+    template: Makara_PA
+    script:   Makara
+    at:       [24.576, 0.524, 19.405, 254]
+    level:    [44, 45]
+  16887933:
+    template: Oil_Spill
+    at:       [39.771, 0.407, 19.594, 255]
+    level:    [44, 47]
+  16887934:
+    template: Foul_Meat
+    at:       [57.105, 0.431, 24.170, 146]
+    level:    [45, 47]
+  16887935:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-110.510, -0.554, 19.260, 136]
+    level:    [44, 46]
+  16887936:
+    template: Diremite
+    at:       [-115.192, -0.479, 17.573, 9]
+    level:    [44, 46]
+  16887937:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-69.967, -0.603, -18.316, 97]
+    level:    [44, 46]
+  16887938:
+    template: Diremite
+    at:       [-97.666, -0.582, -18.846, 114]
+    level:    [44, 46]
+  16887939:
+    template: Diremite
+    at:       [-106.286, -0.552, -18.441, 20]
+    level:    [44, 46]
+  16887940:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-99.214, -0.589, 7.282, 64]
+    level:    [44, 46]
+  16887941:
+    template: Dark_Elemental
+    at:       [-106.805, -0.572, -18.299, 13]
+    level:    [45, 45]
+  16887942:
+    template: Diremite
+    at:       [-159.894, -0.587, 21.144, 127]
+    level:    [44, 46]
+  16887943:
+    template: Diremite
+    at:       [-139.757, -0.591, -40.306, 192]
+    level:    [44, 46]
+  16887944:
+    template: Fomor_Dragoon
+    at:       [-167.969, -0.353, -72.906, 231]
+    level:    [44, 46]
+  16887945:
+    template: Fomors_Wyvern
+    at:       [1.000, 1.000, 1.000, 133]
+    level:    [36, 43]
+  16887946:
+    template: Fomor_Beastmaster
+    at:       [-171.008, -0.416, -68.976, 232]
+    level:    [44, 46]
+  16887947:
+    template: Fomors_Bat
+    at:       [1.000, 1.000, 1.000, 254]
+    level:    [36, 43]
+  16887948:
+    template: Fomor_Thief
+    at:       [-171.532, -0.350, -78.658, 124]
+    level:    [44, 46]
+  16887949:
+    template: Fomor_Ranger_Large
+    script:   Fomor_Ranger
+    at:       [-166.764, -0.301, -70.545, 111]
+    level:    [44, 46]
+  16887950:
+    template: Fomor_Ninja
+    at:       [-156.308, -0.564, -97.321, 26]
+    level:    [44, 46]
+  16887951:
+    template: Hell_Bat_Phomiuna_Aqueducts
+    script:   Hell_Bat
+    at:       [-153.541, -0.342, -72.744, 119]
+    level:    [44, 46]
+  16887952:
+    template: Hell_Bat_Phomiuna_Aqueducts
+    script:   Hell_Bat
+    at:       [-169.085, -0.343, -70.378, 149]
+    level:    [44, 46]
+  16887953:
+    template: Eba
+    at:       [-163.538, -0.344, -76.545, 151]
+    level:    [48, 50]
+  16887954:
+    template: Diremite
+    at:       [-181.130, -0.590, -39.013, 63]
+    level:    [44, 46]
+  16887955:
+    template: Makara_PA
+    script:   Makara
+    at:       [-216.637, -0.344, 4.123, 212]
+    level:    [45, 47]
+  16887956:
+    template: Makara_PA
+    script:   Makara
+    at:       [-208.751, -0.494, -18.337, 219]
+    level:    [45, 47]
+  16887957:
+    template: Hell_Bat_Phomiuna_Aqueducts
+    script:   Hell_Bat
+    at:       [-216.223, -0.381, 0.512, 46]
+    level:    [44, 46]
+  16887958:
+    template: Hell_Bat_Phomiuna_Aqueducts
+    script:   Hell_Bat
+    at:       [-216.768, -0.384, 5.085, 3]
+    level:    [44, 46]
+  16887959:
+    template: Fomor_Summoner
+    at:       [-215.296, -0.351, 6.195, 61]
+    level:    [44, 46]
+  16887960:
+    template: Fomors_Elemental
+    at:       [1.000, 1.000, 1.000, 126]
+    level:    [36, 43]
+  16887961:
+    template: Fomor_Dark_Knight
+    at:       [-204.335, -0.239, 13.934, 136]
+    level:    [44, 46]
+  16887962:
+    template: Fomor_Ninja
+    at:       [-214.606, -0.314, 3.645, 194]
+    level:    [44, 46]
+  16887963:
+    template: Air_Elemental
+    at:       [-250.992, -6.498, 19.139]
+    level:    [50, 50]
+  16887964:
+    template: Thunder_Elemental
+    at:       [-259.235, -6.437, 25.504, 63]
+    level:    [50, 50]
+  16887965:
+    template: Dark_Elemental
+    at:       [-245.170, -6.411, 19.377]
+    level:    [50, 50]
+  16887966:
+    template: Fomor_Black_Mage
+    at:       [-211.500, -7.500, 60.000, 128]
+    level:    [44, 47]
+  16887967:
+    template: Fomor_Warrior
+    at:       [-216.000, -6.500, 62.000, 128]
+    level:    [44, 47]
+  16887968:
+    template: Fomor_Dark_Knight
+    at:       [-216.000, -6.500, 58.000, 128]
+    level:    [44, 47]
+  16887969:
+    template: Diremite
+    at:       [177.842, -24.600, 56.376, 103]
+    level:    [47, 48]
+  16887970:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [159.556, -24.607, 100.474]
+    level:    [46, 48]
+  16887971:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [152.591, -24.610, 100.709, 128]
+    level:    [46, 48]
+  16887972:
+    template: Fomor_Ranger
+    at:       [101.884, -24.600, 98.193, 114]
+    level:    [47, 48]
+  16887973:
+    template: Fomor_Bard
+    at:       [103.164, -24.591, 99.499, 103]
+    level:    [47, 48]
+  16887974:
+    template: Fomor_Bard
+    at:       [101.035, -24.580, 98.971, 70]
+    level:    [47, 48]
+  16887975:
+    template: Fomor_Ranger
+    at:       [109.334, -24.598, 102.523, 139]
+    level:    [47, 48]
+  16887976:
+    template: Fomor_Ranger
+    at:       [94.267, -24.600, 23.151, 128]
+    level:    [47, 48]
+  16887977:
+    template: Fomor_Paladin
+    at:       [95.966, -24.599, 23.468, 122]
+    level:    [47, 48]
+  16887978:
+    template: Fomor_Paladin
+    at:       [107.889, -24.600, 9.444, 124]
+    level:    [47, 48]
+  16887979:
+    template: Fomor_Ranger
+    at:       [109.713, -24.600, 9.692, 122]
+    level:    [47, 48]
+  16887980:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [177.558, -24.591, 20.933, 255]
+    level:    [46, 48]
+  16887981:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [178.922, -24.529, 29.262, 194]
+    level:    [46, 48]
+  16887982:
+    template: Fomor_Red_Mage
+    at:       [104.094, -24.592, 22.523, 244]
+    level:    [47, 48]
+  16887983:
+    template: Fomor_Black_Mage
+    at:       [103.103, -24.585, 22.335, 249]
+    level:    [47, 48]
+  16887984:
+    template: Fomor_Black_Mage
+    at:       [84.981, -24.598, 19.772, 138]
+    level:    [47, 48]
+  16887985:
+    template: Fomor_Red_Mage
+    at:       [86.803, -24.590, 19.029, 140]
+    level:    [47, 48]
+  16887986:
+    template: Fomor_Red_Mage
+    at:       [90.237, -24.600, 100.512, 34]
+    level:    [47, 48]
+  16887987:
+    template: Fomor_Monk
+    at:       [90.165, -24.599, 101.626, 142]
+    level:    [47, 48]
+  16887988:
+    template: Fomor_Monk
+    at:       [88.033, -24.000, 100.683, 64]
+    level:    [47, 48]
+  16887989:
+    template: Fomor_Red_Mage
+    at:       [88.968, -24.500, 98.589, 67]
+    level:    [47, 48]
+  16887990:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-94.589, -24.599, 98.991, 128]
+    level:    [46, 48]
+  16887991:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-128.511, -24.498, 98.921, 128]
+    level:    [46, 48]
+  16887992:
+    template: Diremite
+    at:       [-144.395, -24.600, 55.840, 75]
+    level:    [47, 48]
+  16887993:
+    template: Fomor_Warrior
+    at:       [-68.735, -24.600, 109.813, 234]
+    level:    [47, 48]
+  16887994:
+    template: Fomor_Samurai
+    at:       [-70.247, -24.600, 108.819, 233]
+    level:    [47, 48]
+  16887995:
+    template: Fomor_Samurai
+    at:       [-48.428, -24.600, 101.264, 176]
+    level:    [47, 48]
+  16887996:
+    template: Fomor_Warrior
+    at:       [-46.847, -24.600, 100.121, 162]
+    level:    [47, 48]
+  16887997:
+    template: Fomor_Warrior
+    at:       [-65.603, -24.600, 17.367, 158]
+    level:    [47, 48]
+  16887998:
+    template: Fomor_Ranger
+    at:       [-67.174, -24.500, 18.369, 167]
+    level:    [47, 48]
+  16887999:
+    template: Fomor_Ranger
+    at:       [-47.641, -24.600, 17.389, 255]
+    level:    [47, 48]
+  16888000:
+    template: Fomor_Warrior
+    at:       [-49.475, -24.600, 17.489, 255]
+    level:    [47, 48]
+  16888001:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-105.249, -24.599, 20.250, 255]
+    level:    [46, 48]
+  16888002:
+    template: Stegotaur_PA
+    script:   Stegotaur
+    at:       [-132.635, -24.491, 20.411, 127]
+    level:    [46, 48]
+  16888003:
+    template: Fomor_Bard
+    at:       [-70.330, -24.582, 9.762, 134]
+    level:    [47, 48]
+  16888004:
+    template: Fomor_Thief
+    at:       [-69.152, -24.599, 9.946, 10]
+    level:    [47, 48]
+  16888005:
+    template: Fomor_Thief
+    at:       [-59.232, -24.600, 18.659, 59]
+    level:    [47, 48]
+  16888006:
+    template: Fomor_Bard
+    at:       [-59.568, -24.585, 20.569, 59]
+    level:    [47, 48]
+  16888007:
+    template: Fomor_Bard
+    at:       [-66.040, -24.500, 102.720, 34]
+    level:    [47, 48]
+  16888008:
+    template: Fomor_Thief
+    at:       [-65.063, -24.594, 100.985, 66]
+    level:    [47, 48]
+  16888009:
+    template: Fomor_Thief
+    at:       [-56.913, -24.600, 101.273, 119]
+    level:    [47, 48]
+  16888010:
+    template: Fomor_Bard
+    at:       [-49.206, -24.507, 102.005, 115]
+    level:    [47, 48]
+  16888011:
+    template: Aqueduct_Spider
+    at:       [139.553, 0.371, -245.222, 192]
+    level:    [84, 85]
+  16888012:
+    template: Aqueduct_Spider
+    at:       [139.388, 0.382, -235.864, 191]
+    level:    [84, 85]
+  16888013:
+    template: Aqueduct_Spider
+    at:       [139.316, 0.370, -243.483, 63]
+    level:    [84, 85]
+  16888014:
+    template: Aqueduct_Spider
+    at:       [179.160, 0.411, -168.540, 63]
+    level:    [84, 85]
+  16888015:
+    template: Aqueduct_Spider
+    at:       [179.109, 0.431, -170.382, 64]
+    level:    [84, 85]
+  16888016:
+    template: Aqueduct_Spider
+    at:       [-20.997, -6.613, -71.376, 191]
+    level:    [84, 85]
+  16888017:
+    template: Aqueduct_Spider
+    at:       [-20.976, -6.630, -76.481, 192]
+    level:    [84, 85]
+  16888018:
+    template: Aqueduct_Spider
+    at:       [99.172, 0.467, 155.412, 63]
+    level:    [84, 85]
+  16888019:
+    template: Aqueduct_Spider
+    at:       [99.245, 0.418, 158.270, 191]
+    level:    [84, 85]
+  16888020:
+    template: Aqueduct_Spider
+    at:       [139.369, 0.410, 48.244, 192]
+    level:    [84, 85]
+  16888021:
+    template: Aqueduct_Spider
+    at:       [139.505, 0.407, 48.243, 192]
+    level:    [84, 85]
+  16888022:
+    template: Aqueduct_Spider
+    at:       [139.595, 0.000, 130.281, 64]
+    level:    [84, 85]
+  16888023:
+    template: Aqueduct_Spider
+    at:       [139.876, 0.447, 143.237, 192]
+    level:    [84, 85]
+  16888024:
+    template: Aqueduct_Spider
+    at:       [139.942, 0.003, 130.300, 64]
+    level:    [84, 85]
+  16888025:
+    template: Aqueduct_Spider
+    at:       [140.223, 0.445, 143.265, 191]
+    level:    [84, 85]
+  16888026:
+    template: Aqueduct_Spider
+    at:       [154.408, 0.406, 139.207]
+    level:    [84, 85]
+  16888027:
+    template: Aqueduct_Spider
+    at:       [161.389, 0.408, 139.290, 127]
+    level:    [84, 85]
+  16888028:
+    template: Aqueduct_Spider
+    at:       [165.586, 0.446, 139.394, 128]
+    level:    [84, 85]
+  16888029:
+    template: Aqueduct_Spider
+    at:       [180.758, 0.511, 145.677, 63]
+    level:    [84, 85]
+  16888030:
+    template: Aqueduct_Spider
+    at:       [180.825, 0.585, 153.502, 192]
+    level:    [84, 85]
+  16888031:
+    template: Aqueduct_Spider
+    at:       [187.573, 0.419, 174.619, 2]
+    level:    [84, 85]
+  16888032:
+    template: Aqueduct_Spider
+    at:       [176.950, 0.473, 180.522, 121]
+    level:    [84, 85]
+
+slots:
+  - members:
+      16887875: {} # Canal_Bats
+      16887876: {} # Hell_Bat
+  - members:
+      16887902: {} # Fomor_Monk
+      16887912: {} # Fomor_Monk
+  - members:
+      16887924: {} # Oil_Spill
+      16887925: {} # Oil_Spill
+  - members:
+      16887948: {} # Fomor_Thief
+      16887949: {} # Fomor_Ranger
+  - members:
+      16887961: {} # Fomor_Dark_Knight
+      16887962: {} # Fomor_Ninja

@@ -1,0 +1,527 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17436971:
+    script: NPC[12b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17436972:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17436973:
+    script: NPC[12d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17436974:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17436976:
+    script: NPC[130]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17436977:
+    script: NPC[131]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17436978:
+    script: NPC[132]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17436979:
+    script: _4h4
+    at:     [-31.978, 17.886, 47.653]
+    render:
+      look:
+        type: door
+      door_id:      879244383
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17436980:
+    script: _4h2
+    at:     [-87.945, 17.886, 47.720]
+    render:
+      look:
+        type: door
+      door_id:      845689951
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17436981:
+    script: _4h1
+    at:     [-87.945, 17.886, -7.957]
+    render:
+      look:
+        type: door
+      door_id:      828912735
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17436982:
+    script: _4h3
+    at:     [-32.069, 17.886, -8.042]
+    render:
+      look:
+        type: door
+      door_id:      862467167
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17436983:
+    script:       _4h0
+    display_name: Iron Bar Gate
+    at:           [140.000, -27.380, -55.500]
+    render:
+      look:
+        type: door
+      door_id:      812135519
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17436984:
+    script:       _4h5
+    display_name: Iron Bar Gate
+    at:           [140.000, -27.380, 95.500]
+    render:
+      look:
+        type: door
+      door_id:      896021599
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17436985:
+    script:       Torch
+    display_name: Torch
+    at:           [61.440, -26.199, 13.946]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17436986:
+    script:       Torch
+    display_name: Torch
+    at:           [61.435, -26.199, 15.984]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17436987:
+    script:       Torch
+    display_name: Torch
+    at:           [61.467, -26.199, 24.040]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17436988:
+    script:       Torch
+    display_name: Torch
+    at:           [61.610, -26.199, 25.905]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17436989:
+    script: NPC[13d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17436990:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17436991:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17436992:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17436993:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17436994:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17436995:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17436996:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17436997:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17436998:
+    script:       Treasure_Chest
+    display_name: Treasure Chest
+    render:
+      look:
+        type:  standard
+        model: 960
+      moving: 6
+    status: normal
+
+  17436999:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 961
+      moving: 7
+    status: normal
+
+  17437000:
+    script:       Switchstix
+    display_name: Switchstix
+    at:           [386.091, -12.000, -17.399, 36]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+      moving:       21
+    status:   normal
+    widescan: true
+
+  17437001:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+
+  17437002:
+    script:       qm2
+    display_name: ???
+    at:           [19.400, -24.141, 19.185, 213]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17437003:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [377.847, -12.166, -25.548, 158]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17437004:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [377.847, -12.166, -25.548, 158]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17437005:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17437006:
+    script:       qm3
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+
+  17437007:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17437008:
+    script:       Stooge_Moogle
+    display_name: Stooge Moogle
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17437009:
+    script:       '1'
+    display_name: '1'
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17437010:
+    script:       '2'
+    display_name: '2'
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17437011:
+    script:       '3'
+    display_name: '3'
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17437012:
+    script:       '4'
+    display_name: '4'
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17437013:
+    script:       '5'
+    display_name: '5'
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17437014:
+    script:       '6'
+    display_name: '6'
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17437015:
+    script:       Stooge_Moogle
+    display_name: Stooge Moogle
+    render:
+      look:
+        type:  standard
+        model: 2364
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17437016:
+    script:       Shadowy_Pillar
+    display_name: Shadowy Pillar
+    at:           [374.128, -12.098, -15.010, 220]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  AMK
+
+  17437017:
+    script:       Flame_of_Fate
+    display_name: Flame of Fate
+    at:           [-154.893, -23.999, 16.908, 55]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  AMK
+
+  17437018:
+    script:       Survival_Guide
+    display_name: Survival Guide
+    at:           [372.000, -12.000, -25.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:  1
+      name_vis:      32
+      moving:         8
+    status:   normal
+    widescan: true
+    content:  SURVIVAL_GUIDE

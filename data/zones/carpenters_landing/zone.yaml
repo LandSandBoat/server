@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 219
+
+zonelines:
+
+  z020:
+    from:  [0.786, -10.312, -819.851]
+    to:    jugner_forest
+    at:    [341.844, -5.005, 15.117, 4.188790]
+    scale: [1.000, 4.000]
+
+  z022:
+    from:  [-420.264, -10.153, -560.076]
+    to:    jugner_forest
+    at:    [-536.152, 1.163, 336.587, 0.872665]
+    scale: [1.000, 4.000]
+
+  z024:
+    from:  [-479.706, -14.351, 672.851]
+    to:    northern_san_doria
+    at:    [-127.472, 10.500, 195.478, 3.926991]
+    scale: [1.000, 3.000]

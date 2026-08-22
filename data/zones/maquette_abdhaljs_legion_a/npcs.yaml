@@ -1,0 +1,255 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17526904:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 52
+    widescan: true
+
+  17526910:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17526911:
+    script:       Legion_Portal
+    display_name: Legion Portal
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 32
+      moving:    7
+    status:   normal
+    widescan: true
+
+  17526912:
+    script:       Legion_Portal
+    display_name: Legion Portal
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 32
+      moving:    7
+    status:   normal
+    widescan: true
+
+  17526913:
+    script:       Legion_Tome
+    display_name: Legion Tome
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17526914:
+    script:       Legion_Libretto
+    display_name: Legion Libretto
+    at:           [0.000, -1.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  129
+      animation_sub:  16
+      name_vis:       32
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17526915:
+    script:       monthly_master
+    display_name: monthly_master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    status:   cutscene_only
+    widescan: true
+
+  17526916:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 0
+    status: normal
+
+  17526917:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-20.000, 12.000, 68.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 32
+      moving:    7
+    status:   normal
+    widescan: true
+
+  17526918:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-220.000, 12.000, 333.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 32
+      moving:    7
+    status:   normal
+    widescan: true
+
+  17526919:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-220.000, 12.000, 355.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    7
+    status:   normal
+    widescan: true
+    content:  ABYSSEA
+
+  17526920:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-211.000, 12.000, 340.000]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   20
+    status:   normal
+    widescan: true
+
+  17526921:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    status:   cutscene_only
+    widescan: true
+
+  17526922:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17526923:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17526924:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17526925:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17526926:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17526927:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17526928:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17526929:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17526930:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40

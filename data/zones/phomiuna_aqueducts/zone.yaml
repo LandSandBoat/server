@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 218
+
+zonelines:
+
+  z0r0:
+    from:  [259.967, -3.881, -293.412]
+    to:    tavnazian_safehold
+    at:    [27.971, -14.068, 43.735, 1.570796]
+    scale: [1.000, 5.000]

@@ -1,0 +1,2181 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Bluethunder_Kaqool_Ja:
+    id:            478
+    species:       knight_ja
+    spell_list_id: 8
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags:  3
+        model_size:    3
+        hitbox:       16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Bugard:
+    id:            557
+    species:       bugard
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: sword
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Chigoe:
+    id:            714
+    species:       chigoe
+    type:          [battlefield]
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1747
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          5
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 500
+
+  Dilapidated_Gate:
+    id:      1037
+    species: fortifications
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  standard
+          model: 1580
+        entity_flags: 2179
+        name_vis:        1
+        name_prefix:     2
+        model_size:      1
+        hitbox:         12
+      spawn:
+        type: [scripted]
+    allegiance: player
+
+  Festive_Firedrake:
+    id:            1327
+    species:       wyvern
+    skill_list_id: 266
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:     4
+          ice:      1
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Huge_Spider:
+    id:            2002
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags: 643
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Leech:
+    id:            2385
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Breeder:
+    id:            2509
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Executioner_bu:
+    id:            5467
+    species:       knight_ja
+    spell_list_id: 8
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1603
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Executioner_ni:
+    id:            6501
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Executioner_wh:
+    id:            2515
+    species:       knight_ja
+    spell_list_id: 20
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1634
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Mamool_Ja_Farrier:
+    id:            2516
+    species:       knight_ja
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Mahout:
+    id:            2524
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Recruit:
+    id:            2531
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Trainee_blu:
+    id:            6676
+    species:       knight_ja
+    spell_list_id: 8
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Trainee_bst:
+    id:            6675
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Trainee_nin:
+    id:            2542
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Trainer:
+    id:            4815
+    species:       knight_ja
+    spell_list_id: 21
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1630
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Warder_bst:
+    id:            5465
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags: 131
+        name_vis:       1
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Warder_nin:
+    id:            2544
+    species:       knight_ja
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Warder_whm:
+    id:            5466
+    species:       knight_ja
+    spell_list_id: 20
+    skill_list_id: 177
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1634
+        entity_flags: 131
+        name_vis:       1
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Mamool_Jas_Lizard:
+    id:            2539
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 129
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Marid_MJTG:
+    id:            5742
+    display_name:  Marid
+    species:       marid
+    skill_list_id: 180
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          ice:     -1
+          wind:    -1
+          earth:    2
+          thunder: -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:         2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1738
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         24
+      spawn:
+        type: [scripted]
+
+  Molted_Bugard:
+    id:            2723
+    species:       bugard
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: sword
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags:  3
+        hitbox:       10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Molted_Lindwurm:
+    id:            2724
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 317
+        entity_flags:  3
+        hitbox:       16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Molted_Mamool_Ja:
+    id:            2725
+    species:       knight_ja
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        hitbox: 10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Molted_Puk:
+    id:            2726
+    species:       puk
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags:  3
+        hitbox:       10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Molted_Ziz:
+    id:            2727
+    species:       cockatrice
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 289
+        entity_flags:  3
+        hitbox:       32
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Orochi:
+    id:            3060
+    species:       hydra
+    type:          [battlefield]
+    skill_list_id: 164
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -1250
+        rank_element:
+          fire:    6
+          ice:     6
+          wind:    6
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    6
+          bind:        6
+          silence:     6
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 1796
+        entity_flags: 153
+        hitbox:        34
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+  Pit_Bugard:
+    id:            3142
+    species:       bugard
+    skill_list_id: 58
+    attributes:
+      combat:
+        skill: sword
+        delay: 300
+      resists:
+        rank_element:
+          fire:     2
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    2
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  2
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Pit_Lindwurm:
+    id:            3144
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 317
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Pit_Puk:
+    id:            3146
+    species:       puk
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Pit_Spider:
+    id:            3147
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Poroggo:
+    id:            3177
+    species:       green_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1811
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Puk_Executioner:
+    id:            3225
+    species:       puk
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Puk_WW:
+    id:            3223
+    species:       puk
+    skill_list_id: 198
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Qiqirn_Huckster:
+    id:            3255
+    species:       qiqirn
+    skill_list_id: 199
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          ice:   -1
+          wind:  -2
+          earth:  2
+          water: -1
+          light: -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:         2
+          poison:      -1
+          light_sleep: -1
+      render:
+        look:
+          type:  standard
+          model: 1735
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Sagelord_Molaal_Ja_WW:
+    id:            3437
+    display_name:  Sagelord_Molaal_Ja
+    species:       knight_ja
+    spell_list_id: 21
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags:  157
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Slavering_Lizard:
+    id:            3666
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17047553:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    at:       [-52.529, 11.454, -481.784, 173]
+    level:    [77, 78]
+  17047554:
+    template: Mamool_Ja_Warder_bst
+    script:   Mamool_Ja_Warder
+    at:       [-56.889, 11.425, -478.689, 120]
+    level:    [77, 78]
+  17047555:
+    template: Mamool_Jas_Lizard
+    at:       [-56.888, 11.328, -478.687, 120]
+    level:    [70, 70]
+  17047556:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    at:       [-73.562, 11.445, -476.531, 197]
+    level:    [77, 78]
+  17047557:
+    template: Mamool_Ja_Warder_bst
+    script:   Mamool_Ja_Warder
+    at:       [-83.271, 11.411, -451.202, 110]
+    level:    [77, 78]
+  17047558:
+    template: Mamool_Jas_Lizard
+    at:       [-83.271, 11.411, -451.202, 120]
+    level:    [70, 70]
+  17047559:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    at:       [166.512, 1.886, -418.296, 127]
+    level:    [77, 78]
+  17047560:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    at:       [261.726, 1.318, -421.633, 90]
+    level:    [77, 78]
+  17047561:
+    template: Mamool_Ja_Warder_bst
+    script:   Mamool_Ja_Warder
+    at:       [214.891, 1.294, -578.562, 204]
+    level:    [77, 78]
+  17047562:
+    template: Mamool_Jas_Lizard
+    at:       [215.239, 1.254, -580.130, 191]
+    level:    [70, 70]
+  17047563:
+    template: Mamool_Ja_Warder_nin
+    script:   Mamool_Ja_Warder
+    at:       [197.111, 2.415, -458.513, 140]
+    level:    [77, 78]
+  17047564:
+    template: Mamool_Ja_Warder_nin
+    script:   Mamool_Ja_Warder
+    at:       [215.755, 2.173, -461.893, 103]
+    level:    [77, 78]
+  17047565:
+    template: Mamool_Ja_Warder_nin
+    script:   Mamool_Ja_Warder
+    at:       [258.477, 5.566, -471.841, 188]
+    level:    [77, 78]
+  17047566:
+    template: Mamool_Ja_Warder_nin
+    script:   Mamool_Ja_Warder
+    at:       [178.120, 5.206, -522.340, 196]
+    level:    [77, 78]
+  17047567:
+    template: Dilapidated_Gate
+    at:       [220.004, 0.690, -439.999]
+    level:    [75, 75]
+  17047568:
+    template: Dilapidated_Gate
+    at:       [179.999, 0.671, -559.996]
+    level:    [75, 75]
+  17047569:
+    template: Dilapidated_Gate
+    at:       [259.999, 0.666, -559.996]
+    level:    [75, 75]
+  17047570:
+    template: Puk_Executioner
+    at:       [-157.942, 2.320, -114.860, 40]
+    level:    [74, 75]
+  17047571:
+    template: Mamool_Ja_Executioner_wh
+    script:   Mamool_Ja_Executioner
+    at:       [-157.849, 2.542, -129.114, 98]
+    level:    [76, 78]
+  17047572:
+    template: Puk_Executioner
+    at:       [-103.257, 1.823, -103.601, 222]
+    level:    [74, 75]
+  17047573:
+    template: Puk_Executioner
+    at:       [-120.098, 2.422, -61.026, 39]
+    level:    [74, 75]
+  17047574:
+    template: Mamool_Ja_Executioner_wh
+    script:   Mamool_Ja_Executioner
+    at:       [-104.147, 2.025, -103.794, 135]
+    level:    [76, 78]
+  17047575:
+    template: Mamool_Ja_Executioner_bu
+    script:   Mamool_Ja_Executioner
+    at:       [-112.376, 2.299, -43.035, 134]
+    level:    [76, 78]
+  17047576:
+    template: Puk_Executioner
+    at:       [-157.840, 2.351, -32.518, 177]
+    level:    [74, 75]
+  17047577:
+    template: Mamool_Ja_Executioner_ni
+    script:   Mamool_Ja_Executioner
+    at:       [-162.207, 2.274, -39.739, 237]
+    level:    [76, 78]
+  17047578:
+    template: Puk_Executioner
+    at:       [-205.366, 2.479, -86.069, 16]
+    level:    [74, 75]
+  17047579:
+    template: Puk_Executioner
+    at:       [-207.081, 2.507, -76.343, 115]
+    level:    [74, 75]
+  17047580:
+    template: Mamool_Ja_Executioner_wh
+    script:   Mamool_Ja_Executioner
+    at:       [-203.121, 2.363, -98.561, 54]
+    level:    [76, 78]
+  17047581:
+    template: Mamool_Ja_Executioner_bu
+    script:   Mamool_Ja_Executioner
+    at:       [-197.070, 2.314, -100.523, 28]
+    level:    [76, 78]
+  17047582:
+    template: Puk_Executioner
+    at:       [-270.049, 2.495, -89.884, 213]
+    level:    [74, 75]
+  17047583:
+    template: Mamool_Ja_Executioner_ni
+    script:   Mamool_Ja_Executioner
+    at:       [-236.468, 2.155, -79.495, 157]
+    level:    [76, 78]
+  17047584:
+    template: Mamool_Ja_Executioner_ni
+    script:   Mamool_Ja_Executioner
+    at:       [-260.912, -5.261, -60.171, 78]
+    level:    [76, 78]
+  17047585:
+    template: Mamool_Ja_Executioner_wh
+    script:   Mamool_Ja_Executioner
+    at:       [-251.788, -5.083, -57.829, 32]
+    level:    [76, 78]
+  17047586:
+    template: Mamool_Ja_Executioner_bu
+    script:   Mamool_Ja_Executioner
+    at:       [-221.142, -6.149, -135.125, 169]
+    level:    [76, 78]
+  17047587:
+    template: Mamool_Ja_Executioner_bu
+    script:   Mamool_Ja_Executioner
+    at:       [-95.577, -6.317, -139.842, 10]
+    level:    [76, 78]
+  17047588:
+    template: Mamool_Ja_Executioner_bu
+    script:   Mamool_Ja_Executioner
+    at:       [-220.009, -6.254, -19.412, 62]
+    level:    [76, 78]
+  17047589:
+    template: Mamool_Ja_Executioner_bu
+    script:   Mamool_Ja_Executioner
+    at:       [-99.835, -6.195, -19.313, 119]
+    level:    [76, 78]
+  17047590:
+    template: Sagelord_Molaal_Ja_WW
+    script:   Sagelord_Molaal_Ja
+    at:       [-427.700, -3.561, 319.423, 12]
+    level:    [82, 84]
+  17047591:
+    template: Mamool_Ja_Trainee_nin
+    script:   Mamool_Ja_Trainee
+    at:       [-370.000, -4.532, 104.272, 33]
+    level:    [77, 78]
+  17047592:
+    template: Mamool_Ja_Trainee_bst
+    script:   Mamool_Ja_Trainee
+    at:       [-349.500, -5.278, 105.569, 198]
+    level:    [77, 78]
+  17047593:
+    template: Mamool_Jas_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 70]
+  17047594:
+    template: Mamool_Ja_Trainee_bst
+    script:   Mamool_Ja_Trainee
+    at:       [-442.100, -3.469, 209.067, 136]
+    level:    [77, 78]
+  17047595:
+    template: Mamool_Ja_Trainee_blu
+    script:   Mamool_Ja_Trainee
+    at:       [-456.800, -3.694, 200.261, 110]
+    level:    [77, 78]
+  17047596:
+    template: Mamool_Jas_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 70]
+  17047597:
+    template: Mamool_Ja_Trainee_nin
+    script:   Mamool_Ja_Trainee
+    at:       [-442.800, -3.795, 359.123, 247]
+    level:    [77, 78]
+  17047598:
+    template: Mamool_Ja_Trainee_blu
+    script:   Mamool_Ja_Trainee
+    at:       [-410.600, -3.573, 318.649, 92]
+    level:    [77, 78]
+  17047599:
+    template: Mamool_Ja_Trainee_blu
+    script:   Mamool_Ja_Trainee
+    at:       [-403.700, -3.694, 313.347, 180]
+    level:    [77, 78]
+  17047600:
+    template: Mamool_Ja_Trainee_nin
+    script:   Mamool_Ja_Trainee
+    at:       [-476.900, -3.698, 294.115, 41]
+    level:    [77, 78]
+  17047601:
+    template: Mamool_Ja_Trainee_blu
+    script:   Mamool_Ja_Trainee
+    at:       [-483.900, -3.548, 313.670, 136]
+    level:    [77, 78]
+  17047602:
+    template: Mamool_Ja_Trainee_bst
+    script:   Mamool_Ja_Trainee
+    at:       [-361.900, -3.378, 240.764, 65]
+    level:    [77, 78]
+  17047603:
+    template: Mamool_Ja_Trainee_blu
+    script:   Mamool_Ja_Trainee
+    at:       [-362.100, -3.579, 297.851, 184]
+    level:    [77, 78]
+  17047604:
+    template: Mamool_Jas_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 70]
+  17047605:
+    template: Mamool_Ja_Trainee_nin
+    script:   Mamool_Ja_Trainee
+    at:       [-384.500, -8.100, 89.814, 111]
+    level:    [77, 78]
+  17047606:
+    template: Mamool_Ja_Trainee_bst
+    script:   Mamool_Ja_Trainee
+    at:       [-469.400, -11.420, 220.632, 147]
+    level:    [77, 78]
+  17047607:
+    template: Mamool_Jas_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 70]
+  17047608:
+    template: Mamool_Ja_Trainee_bst
+    script:   Mamool_Ja_Trainee
+    at:       [-462.400, -10.810, 174.072, 211]
+    level:    [77, 78]
+  17047609:
+    template: Mamool_Jas_Lizard
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 70]
+  17047610:
+    template: Mamool_Ja_Recruit
+    level:    [77, 78]
+  17047611:
+    template: Mamool_Ja_Recruit
+    level:    [77, 78]
+  17047612:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047613:
+    template: Mamool_Ja_Recruit
+    level:    [77, 78]
+  17047614:
+    template: Mamool_Ja_Recruit
+    level:    [77, 78]
+  17047615:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047616:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047617:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047618:
+    template: Mamool_Ja_Recruit
+    level:    [77, 78]
+  17047619:
+    template: Mamool_Ja_Recruit
+    level:    [77, 78]
+  17047620:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047621:
+    template: Mamool_Ja_Recruit
+    level:    [77, 78]
+  17047622:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047623:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047624:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047625:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047626:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047627:
+    template: Mamool_Ja_Trainer
+    level:    [77, 78]
+  17047654:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047655:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047656:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047657:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047658:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047659:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047660:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047661:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047662:
+    template: Puk_WW
+    script:   Puk
+    level:    [62, 67]
+  17047663:
+    template: Pit_Bugard
+    level:    [75, 75]
+  17047664:
+    template: Pit_Bugard
+    level:    [75, 75]
+  17047665:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047666:
+    template: Pit_Bugard
+    level:    [75, 75]
+  17047667:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047668:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047669:
+    template: Pit_Puk
+    level:    [75, 75]
+  17047670:
+    template: Pit_Puk
+    level:    [75, 75]
+  17047671:
+    template: Pit_Spider
+    level:    [75, 75]
+  17047672:
+    template: Pit_Spider
+    level:    [75, 75]
+  17047673:
+    template: Pit_Puk
+    level:    [75, 75]
+  17047674:
+    template: Pit_Puk
+    level:    [75, 75]
+  17047675:
+    template: Pit_Spider
+    level:    [75, 75]
+  17047676:
+    template: Pit_Spider
+    level:    [75, 75]
+  17047677:
+    template: Pit_Puk
+    level:    [75, 75]
+  17047678:
+    template: Pit_Puk
+    level:    [75, 75]
+  17047679:
+    template: Pit_Spider
+    level:    [75, 75]
+  17047680:
+    template: Pit_Spider
+    level:    [75, 75]
+  17047681:
+    template: Chigoe
+    level:    [74, 74]
+  17047682:
+    template: Chigoe
+    level:    [74, 74]
+  17047690:
+    template: Molted_Puk
+    level:    [75, 75]
+  17047691:
+    template: Molted_Puk
+    level:    [75, 75]
+  17047692:
+    template: Molted_Puk
+    level:    [75, 75]
+  17047693:
+    template: Molted_Puk
+    level:    [75, 75]
+  17047694:
+    template: Molted_Puk
+    level:    [75, 75]
+  17047695:
+    template: Molted_Lindwurm
+    level:    [75, 75]
+  17047696:
+    template: Molted_Lindwurm
+    level:    [75, 75]
+  17047697:
+    template: Molted_Lindwurm
+    level:    [75, 75]
+  17047698:
+    template: Molted_Lindwurm
+    level:    [75, 75]
+  17047699:
+    template: Molted_Lindwurm
+    level:    [75, 75]
+  17047700:
+    template: Molted_Bugard
+    level:    [75, 75]
+  17047701:
+    template: Molted_Bugard
+    level:    [75, 75]
+  17047702:
+    template: Molted_Bugard
+    level:    [75, 75]
+  17047703:
+    template: Molted_Bugard
+    level:    [75, 75]
+  17047704:
+    template: Molted_Bugard
+    level:    [75, 75]
+  17047705:
+    template: Molted_Ziz
+    level:    [75, 75]
+  17047706:
+    template: Molted_Ziz
+    level:    [75, 75]
+  17047707:
+    template: Molted_Ziz
+    level:    [75, 75]
+  17047708:
+    template: Molted_Ziz
+    level:    [75, 75]
+  17047709:
+    template: Molted_Ziz
+    level:    [75, 75]
+  17047710:
+    template: Molted_Mamool_Ja
+    level:    [75, 75]
+  17047711:
+    template: Molted_Mamool_Ja
+    level:    [75, 75]
+  17047712:
+    template: Molted_Mamool_Ja
+    level:    [75, 75]
+  17047713:
+    template: Molted_Mamool_Ja
+    level:    [75, 75]
+  17047714:
+    template: Molted_Mamool_Ja
+    level:    [75, 75]
+  17047715:
+    template: Bluethunder_Kaqool_Ja
+    level:    [75, 75]
+  17047716:
+    template: Festive_Firedrake
+    level:    [75, 75]
+  17047718:
+    template: Marid_MJTG
+    script:   Marid
+    at:       [324.846, 14.341, 192.452, 120]
+    level:    [80, 80]
+  17047719:
+    template: Marid_MJTG
+    script:   Marid
+    at:       [319.154, 14.341, 230.226, 201]
+    level:    [80, 80]
+  17047720:
+    template: Marid_MJTG
+    script:   Marid
+    at:       [288.598, 8.530, 325.039, 127]
+    level:    [80, 80]
+  17047721:
+    template: Marid_MJTG
+    script:   Marid
+    at:       [275.553, 8.411, 334.909, 80]
+    level:    [80, 80]
+  17047722:
+    template: Marid_MJTG
+    script:   Marid
+    at:       [195.476, 2.240, 368.211, 85]
+    level:    [80, 80]
+  17047723:
+    template: Marid_MJTG
+    script:   Marid
+    at:       [203.449, 2.373, 354.648, 233]
+    level:    [80, 80]
+  17047724:
+    template: Marid_MJTG
+    script:   Marid
+    at:       [160.559, 2.250, 238.300, 88]
+    level:    [80, 80]
+  17047725:
+    template: Marid_MJTG
+    script:   Marid
+    at:       [189.017, 2.440, 245.285, 135]
+    level:    [80, 80]
+  17047726:
+    template: Chigoe
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [74, 74]
+  17047727:
+    template: Chigoe
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [74, 74]
+  17047728:
+    template: Chigoe
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [74, 74]
+  17047729:
+    template: Mamool_Ja_Breeder
+    at:       [379.572, 5.614, 175.449, 43]
+    level:    [76, 78]
+  17047730:
+    template: Mamool_Ja_Mahout
+    at:       [343.465, 6.501, 227.289, 78]
+    level:    [76, 78]
+  17047731:
+    template: Mamool_Ja_Farrier
+    at:       [313.260, 14.333, 201.042, 134]
+    level:    [76, 78]
+  17047732:
+    template: Mamool_Ja_Mahout
+    at:       [323.359, 14.367, 226.097, 55]
+    level:    [76, 78]
+  17047733:
+    template: Mamool_Ja_Breeder
+    at:       [320.782, 14.244, 235.830, 106]
+    level:    [76, 78]
+  17047734:
+    template: Mamool_Ja_Farrier
+    at:       [340.898, -0.231, 302.435, 236]
+    level:    [76, 78]
+  17047735:
+    template: Mamool_Ja_Mahout
+    at:       [344.101, -0.191, 333.935, 61]
+    level:    [76, 78]
+  17047736:
+    template: Mamool_Ja_Breeder
+    at:       [299.937, -0.383, 383.783, 236]
+    level:    [76, 78]
+  17047737:
+    template: Mamool_Ja_Farrier
+    at:       [255.964, -0.382, 379.487, 150]
+    level:    [76, 78]
+  17047738:
+    template: Mamool_Ja_Breeder
+    at:       [223.873, -6.265, 376.182, 109]
+    level:    [76, 78]
+  17047739:
+    template: Mamool_Ja_Mahout
+    at:       [183.646, -6.226, 296.848, 229]
+    level:    [76, 78]
+  17047740:
+    template: Mamool_Ja_Farrier
+    at:       [198.076, 2.274, 336.269, 43]
+    level:    [76, 78]
+  17047741:
+    template: Mamool_Ja_Breeder
+    at:       [140.518, -6.312, 216.229, 78]
+    level:    [76, 78]
+  17047742:
+    template: Mamool_Ja_Mahout
+    at:       [185.265, -5.414, 217.188, 57]
+    level:    [76, 78]
+  17047743:
+    template: Mamool_Ja_Farrier
+    at:       [188.791, 2.395, 242.423, 212]
+    level:    [76, 78]
+  17047744:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    level:    [77, 78]
+  17047745:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    level:    [77, 78]
+  17047746:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    level:    [77, 78]
+  17047747:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    level:    [77, 78]
+  17047748:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    level:    [77, 78]
+  17047749:
+    template: Mamool_Ja_Warder_whm
+    script:   Mamool_Ja_Warder
+    level:    [77, 78]
+  17047750:
+    template: Bugard
+    level:    [75, 75]
+  17047751:
+    template: Bugard
+    level:    [75, 75]
+  17047752:
+    template: Bugard
+    level:    [75, 75]
+  17047753:
+    template: Bugard
+    level:    [75, 75]
+  17047754:
+    template: Bugard
+    level:    [75, 75]
+  17047755:
+    template: Bugard
+    level:    [75, 75]
+  17047756:
+    template: Bugard
+    level:    [75, 75]
+  17047757:
+    template: Bugard
+    level:    [75, 75]
+  17047758:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047759:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047760:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047761:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047762:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047763:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047764:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047765:
+    template: Pit_Lindwurm
+    level:    [75, 75]
+  17047766:
+    template: Poroggo
+    level:    [75, 75]
+  17047767:
+    template: Poroggo
+    level:    [75, 75]
+  17047768:
+    template: Poroggo
+    level:    [75, 75]
+  17047769:
+    template: Poroggo
+    level:    [75, 75]
+  17047770:
+    template: Poroggo
+    level:    [75, 75]
+  17047771:
+    template: Poroggo
+    level:    [75, 75]
+  17047772:
+    template: Poroggo
+    level:    [75, 75]
+  17047773:
+    template: Poroggo
+    level:    [75, 75]
+  17047774:
+    template: Huge_Spider
+    level:    [75, 75]
+  17047775:
+    template: Huge_Spider
+    level:    [75, 75]
+  17047776:
+    template: Huge_Spider
+    level:    [75, 75]
+  17047777:
+    template: Huge_Spider
+    level:    [75, 75]
+  17047778:
+    template: Huge_Spider
+    level:    [75, 75]
+  17047779:
+    template: Huge_Spider
+    level:    [75, 75]
+  17047780:
+    template: Huge_Spider
+    level:    [75, 75]
+  17047781:
+    template: Huge_Spider
+    level:    [75, 75]
+  17047782:
+    template: Leech
+    level:    [75, 75]
+  17047783:
+    template: Leech
+    level:    [75, 75]
+  17047784:
+    template: Leech
+    level:    [75, 75]
+  17047785:
+    template: Leech
+    level:    [75, 75]
+  17047786:
+    template: Leech
+    level:    [75, 75]
+  17047787:
+    template: Leech
+    level:    [75, 75]
+  17047788:
+    template: Leech
+    level:    [75, 75]
+  17047789:
+    template: Leech
+    level:    [75, 75]
+  17047790:
+    template: Slavering_Lizard
+    level:    [75, 75]
+  17047791:
+    template: Slavering_Lizard
+    level:    [75, 75]
+  17047792:
+    template: Slavering_Lizard
+    level:    [75, 75]
+  17047793:
+    template: Slavering_Lizard
+    level:    [75, 75]
+  17047794:
+    template: Slavering_Lizard
+    level:    [75, 75]
+  17047795:
+    template: Slavering_Lizard
+    level:    [75, 75]
+  17047796:
+    template: Slavering_Lizard
+    level:    [75, 75]
+  17047797:
+    template: Slavering_Lizard
+    level:    [75, 75]
+  17047798:
+    template: Qiqirn_Huckster
+    level:    [75, 75]
+  17047799:
+    template: Qiqirn_Huckster
+    level:    [75, 75]
+  17047800:
+    template: Qiqirn_Huckster
+    level:    [75, 75]
+  17047801:
+    template: Qiqirn_Huckster
+    level:    [75, 75]
+  17047802:
+    template: Qiqirn_Huckster
+    level:    [75, 75]
+  17047803:
+    template: Qiqirn_Huckster
+    level:    [75, 75]
+  17047804:
+    template: Qiqirn_Huckster
+    level:    [75, 75]
+  17047805:
+    template: Qiqirn_Huckster
+    level:    [75, 75]
+  17047806:
+    template: Orochi
+    at:       [-440.000, 2.499, -48.000, 64]
+    level:    [80, 82]

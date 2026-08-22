@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 139
+
+zonelines:
+
+  z1t0:
+    from:  [400.003, -35.018, -220.004]
+    to:    wajaom_woodlands
+    at:    [-475.452, -5.925, -539.960]
+    scale: [1.000, 3.500]
+
+  z1t2:
+    from:  [220.003, -34.280, -78.990]
+    to:    wajaom_woodlands
+    at:    [-739.549, -5.502, -565.146, 4.712389]
+    scale: [1.000, 3.500]
+
+  z1t4:
+    from:  [319.974, -10.746, -340.015]
+    to:    wajaom_woodlands
+    at:    [-565.517, -21.503, -780.596]
+    scale: [1.000, 3.500]
+
+  z1t6:
+    from:  [-119.988, -22.929, -299.970]
+    to:    bhaflau_thickets
+    at:    [-33.517, -12.770, -619.263, 3.141593]
+    scale: [1.000, 4.000]
+
+  z1t8:
+    from:  [-460.025, -16.686, 200.007]
+    to:    bhaflau_thickets
+    at:    [-340.017, -9.553, -119.995, 4.712389]
+    scale: [1.000, 4.000]

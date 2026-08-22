@@ -1,0 +1,467 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17838317:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838324:
+    script:       Exit_Coliseum
+    display_name: Exit:Coliseum
+    at:           [302.000, -7.000, -400.000]
+    render:
+      look:
+        type: door
+      door_id:      1953069125
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: SOA
+
+  17838364:
+    script:       _p7b
+    display_name: NPC
+    at:           [-200.001, -8.000, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      1647800415
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17838365:
+    script:       _p7c
+    display_name: NPC
+    at:           [-80.001, -8.000, 20.000]
+    render:
+      look:
+        type: door
+      door_id:      1664577631
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17838384:
+    script:       _77t
+    display_name: NPC
+    at:           [-220.001, -8.000, 40.000, 64]
+    render:
+      look:
+        type: door
+      door_id:      1949775711
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17838387:
+    script:       _77w
+    display_name: NPC
+    at:           [360.000, -5.000, -400.000]
+    render:
+      look:
+        type: door
+      door_id:      2000107359
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:   normal
+    widescan: true
+
+  17838388:
+    script:       _77x
+    display_name: NPC
+    at:           [360.000, -15.000, -380.500]
+    render:
+      look:
+        type: door
+      door_id:      2016884575
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    widescan: true
+
+  17838389:
+    script:       _77y
+    display_name: NPC
+    at:           [360.000, -15.000, -419.500]
+    render:
+      look:
+        type: door
+      door_id:      2033661791
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    widescan: true
+
+  17838391:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838392:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838393:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838394:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838395:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838396:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838397:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838398:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838399:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838400:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838408:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838409:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838410:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838411:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838412:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838413:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838414:
+    script:       Living_Cairn
+    display_name: Living Cairn
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838415:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838417:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838418:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838419:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838420:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838421:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838422:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838423:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838424:
+    script:       Lorissa
+    display_name: Lorissa
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838425:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17838427:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       20
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17838428:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       20
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17838429:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       20
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17838430:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       20
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17838431:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       20
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17838432:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       20
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17838433:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       20
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17838434:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:       20
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    content:         SOA

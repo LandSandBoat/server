@@ -1,0 +1,550 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Dryad:
+    id:            1126
+    species:       sapling
+    type:          [battlefield]
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1960
+
+  Ice_Elemental_T:
+    id:            6138
+    display_name:  Ice_Elemental
+    species:       ice_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 9
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+  Shiva_Prime_ASA:
+    id:           7046
+    display_name: Shiva_Prime
+    species:      shiva
+    type:         [notorious, battlefield]
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Shiva_Prime_TBI:
+    id:            4642
+    display_name:  Shiva_Prime
+    species:       shiva
+    type:          [notorious, battlefield]
+    skill_list_id: 319
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Shiva_Prime_TBI_2:
+    id:            4642
+    display_name:  Shiva_Prime
+    species:       shiva
+    type:          [notorious, battlefield]
+    skill_list_id: 319
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -3
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shiva_Prime_TSTBI:
+    id:            7051
+    display_name:  Shiva_Prime
+    species:       shiva
+    type:          [notorious, battlefield]
+    skill_list_id: 1179
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 700
+
+  Shiva_Prime_WTB:
+    id:            3607
+    display_name:  Shiva_Prime
+    species:       shiva
+    type:          [notorious, battlefield]
+    skill_list_id: 2025
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    11
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     11
+          slow:         4
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+spawns:
+  17608705:
+    template: Shiva_Prime_TBI
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [60, 60]
+  17608706:
+    template: Shiva_Prime_TBI
+    at:       [23.070, -18.991, 32.860, 105]
+    level:    [60, 60]
+  17608707:
+    template: Shiva_Prime_TBI
+    at:       [-377.091, -78.999, 512.996, 105]
+    level:    [60, 60]
+  17608708:
+    template: Dryad
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [48, 48]
+  17608709:
+    template: Dryad
+    at:       [504.000, 41.000, -367.000, 105]
+    level:    [48, 48]
+  17608710:
+    template: Dryad
+    at:       [503.000, 41.000, -366.000, 105]
+    level:    [48, 48]
+  17608711:
+    template: Dryad
+    at:       [504.000, 41.000, -366.000, 105]
+    level:    [48, 48]
+  17608712:
+    template: Dryad
+    at:       [502.000, 41.000, -368.000, 105]
+    level:    [48, 48]
+  17608713:
+    template: Dryad
+    at:       [503.000, 41.000, -368.000, 105]
+    level:    [48, 48]
+  17608714:
+    template: Dryad
+    at:       [23.070, -18.991, 32.860, 105]
+    level:    [48, 48]
+  17608715:
+    template: Dryad
+    at:       [24.070, -18.991, 32.860, 105]
+    level:    [48, 48]
+  17608716:
+    template: Dryad
+    at:       [23.070, -18.991, 33.860, 105]
+    level:    [48, 48]
+  17608717:
+    template: Dryad
+    at:       [24.070, -18.991, 33.860, 105]
+    level:    [48, 48]
+  17608718:
+    template: Dryad
+    at:       [22.070, -18.991, 31.860, 105]
+    level:    [48, 48]
+  17608719:
+    template: Dryad
+    at:       [23.070, -18.991, 31.860, 105]
+    level:    [48, 48]
+  17608720:
+    template: Dryad
+    at:       [-377.091, -78.999, 512.996, 105]
+    level:    [48, 48]
+  17608721:
+    template: Dryad
+    at:       [-376.091, -78.999, 512.996, 105]
+    level:    [48, 48]
+  17608722:
+    template: Dryad
+    at:       [-377.091, -78.999, 513.996, 105]
+    level:    [48, 48]
+  17608723:
+    template: Dryad
+    at:       [-376.091, -78.999, 513.996, 105]
+    level:    [48, 48]
+  17608724:
+    template: Dryad
+    at:       [-378.091, -78.999, 511.996, 105]
+    level:    [48, 48]
+  17608725:
+    template: Dryad
+    at:       [-377.091, -78.999, 511.996, 105]
+    level:    [48, 48]
+  17608726:
+    template: Shiva_Prime_TSTBI
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [20, 20]
+  17608727:
+    template: Shiva_Prime_TSTBI
+    at:       [23.070, -18.991, 32.860, 105]
+    level:    [20, 20]
+  17608728:
+    template: Shiva_Prime_TSTBI
+    at:       [-377.091, -78.999, 512.996, 105]
+    level:    [20, 20]
+  17608729:
+    template: Shiva_Prime_WTB
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [85, 85]
+  17608730:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [507.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17608731:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [499.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17608732:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [503.000, 41.000, -371.000, 105]
+    level:    [75, 75]
+  17608733:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [503.000, 41.000, -363.000, 105]
+    level:    [75, 75]
+  17608734:
+    template: Shiva_Prime_WTB
+    at:       [23.048, -19.001, 33.005, 105]
+    level:    [85, 85]
+  17608735:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [19.048, -19.001, 33.005, 105]
+    level:    [75, 75]
+  17608736:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [26.048, -19.001, 33.005, 105]
+    level:    [75, 75]
+  17608737:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [23.048, -19.001, 37.005, 105]
+    level:    [75, 75]
+  17608738:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [23.048, -19.001, 29.005, 105]
+    level:    [75, 75]
+  17608739:
+    template: Shiva_Prime_WTB
+    at:       [-377.066, -79.002, 513.045, 105]
+    level:    [85, 85]
+  17608740:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [-381.066, -79.002, 513.045, 105]
+    level:    [75, 75]
+  17608741:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [-373.066, -79.002, 513.045, 105]
+    level:    [75, 75]
+  17608742:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [-377.066, -79.002, 517.045, 105]
+    level:    [75, 75]
+  17608743:
+    template: Ice_Elemental_T
+    script:   Ice_Elemental
+    at:       [-377.066, -79.002, 509.045, 105]
+    level:    [75, 75]
+  17608744:
+    template: Shiva_Prime_ASA
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [40, 40]
+  17608745:
+    template: Shiva_Prime_ASA
+    at:       [23.070, -18.991, 32.860, 105]
+    level:    [40, 40]
+  17608746:
+    template: Shiva_Prime_ASA
+    at:       [-377.091, -78.999, 512.996, 105]
+    level:    [40, 40]
+  17608747:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608748:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608749:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608750:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608751:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608752:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608753:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608754:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608755:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608756:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608757:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608758:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608759:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608760:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]
+  17608761:
+    template: Shiva_Prime_TBI_2
+    script:   Shiva_Prime_HTBF
+    level:    [99, 99]

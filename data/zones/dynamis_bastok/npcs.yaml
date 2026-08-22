@@ -1,0 +1,229 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17539313:
+    script: NPC[f1]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17539314:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17539315:
+    script: NPC[f3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17539316:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17539318:
+    script: NPC[f6]
+    at:     [0.000, 6.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17539319:
+    script: NPC[f7]
+    at:     [0.000, 6.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17539320:
+    script: NPC[f8]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17539321:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17539322:
+    script:       Somnial_Threshold
+    display_name: Somnial Threshold
+    at:           [118.000, 0.996, -56.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17539323:
+    script:       qm0
+    display_name: ???
+    at:           [-16.150, -1.500, -130.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17539324:
+    script:       qm1
+    display_name: ???
+    at:           [-131.000, 0.000, -68.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17539325:
+    script:       qm2
+    display_name: ???
+    at:           [-187.748, -8.578, -22.176]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17539326:
+    script:       qm3
+    display_name: ???
+    at:           [-104.000, 12.000, 75.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17539327:
+    script:       qm4
+    display_name: ???
+    at:           [74.000, 7.000, -35.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17539328:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17539329:
+    script: NPC[101]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17539330:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17539331:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17539332:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17539333:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17539334:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17539335:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17539336:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17539337:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307

@@ -1,0 +1,3729 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Academics:
+    id:      7484
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Anchorites:
+    id:      7465
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Apollyon_Adamantoise:
+    id:      7460
+    species: adamantoise
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 400
+        entity_flags: 1153
+        hitbox:         27
+      spawn:
+        type: [scripted]
+
+  Apollyon_Ahriman:
+    id:      7441
+    species: ahriman
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags: 129
+        hitbox:        20
+      spawn:
+        type: [scripted]
+
+  Apollyon_Antlion:
+    id:      7448
+    species: antlion
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1347
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Beetle:
+    id:      7447
+    species: beetle
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 129
+        hitbox:        11
+      spawn:
+        type: [scripted]
+
+  Apollyon_Bugard:
+    id:      7461
+    species: bugard
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1351
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Corse:
+    id:      7432
+    species: corse
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1363
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Crawler:
+    id:      7450
+    species: crawler
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 129
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Apollyon_Cyhiraeth:
+    id:      7442
+    species: corpselight
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1841
+        entity_flags: 649
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Damselfly:
+    id:      7451
+    species: fly
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 641
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Apollyon_Demon:
+    id:      7439
+    species: demon
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 129
+        hitbox:        15
+      spawn:
+        type: [scripted]
+
+  Apollyon_Diremite:
+    id:      7452
+    species: diremite
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1353
+        entity_flags: 641
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Doomed:
+    id:      7431
+    species: doomed
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags: 129
+        hitbox:        25
+      spawn:
+        type: [scripted]
+
+  Apollyon_Eft:
+    id:      7456
+    species: eft
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags: 1153
+        hitbox:         10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Elvaan_Shade:
+    id:      1223
+    species: unclassified
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:   equipped
+          race:   4
+          face:   30
+          head:   4587
+          body:   8683
+          hands:  12779
+          legs:   16875
+          feet:   20971
+          main:   25161
+          sub:    29346
+          ranged: 32768
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Apollyon_Galka_Shade:
+    id:      1227
+    species: unclassified
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:   equipped
+          race:   8
+          face:   30
+          head:   4184
+          body:   8686
+          hands:  12782
+          legs:   16878
+          feet:   20974
+          main:   25164
+          sub:    28672
+          ranged: 32768
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Apollyon_Gargouille:
+    id:      7445
+    species: gargouille
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 2225
+        entity_flags:  641
+        animation_sub:   4
+        name_vis:        4
+        hitbox:         10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Ghost:
+    id:      7430
+    species: ghost
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 129
+        hitbox:         6
+      spawn:
+        type: [scripted]
+
+  Apollyon_Gnat:
+    id:      7455
+    species: gnat
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 2012
+        entity_flags: 129
+        hitbox:         8
+      spawn:
+        type: [scripted]
+
+  Apollyon_Hecteyes:
+    id:      7435
+    species: hecteye
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 384
+        entity_flags: 1153
+        hitbox:         10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Hound:
+    id:      7434
+    species: hound
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 129
+        hitbox:        21
+      spawn:
+        type: [scripted]
+
+  Apollyon_Hume_Shade:
+    id:      1222
+    species: unclassified
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:   equipped
+          race:   1
+          face:   30
+          head:   4586
+          body:   8682
+          hands:  12778
+          legs:   16874
+          feet:   20970
+          main:   25160
+          sub:    29256
+          ranged: 32768
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Apollyon_Imp:
+    id:      7443
+    species: imp
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1727
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Ladybug:
+    id:      7454
+    species: ladybug
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 2018
+        entity_flags: 641
+        hitbox:         8
+      spawn:
+        type: [scripted]
+
+  Apollyon_Leech:
+    id:      7437
+    species: leech
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 641
+        hitbox:         9
+      spawn:
+        type: [scripted]
+
+  Apollyon_Lizard:
+    id:      7457
+    species: hill_lizard
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 129
+        hitbox:        13
+      spawn:
+        type: [scripted]
+
+  Apollyon_Mithra_Shade:
+    id:      1225
+    species: unclassified
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   30
+          head:   4589
+          body:   8685
+          hands:  12781
+          legs:   16877
+          feet:   20973
+          main:   25163
+          sub:    28672
+          ranged: 32768
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Apollyon_Peiste:
+    id:      7462
+    species: peiste
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 2015
+        entity_flags: 129
+        hitbox:        15
+      spawn:
+        type: [scripted]
+
+  Apollyon_Raptor:
+    id:      7458
+    species: raptor
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 316
+        entity_flags: 129
+        hitbox:        16
+      spawn:
+        type: [scripted]
+
+  Apollyon_Scorpion:
+    id:      7449
+    species: scorpion
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 129
+        hitbox:        23
+      spawn:
+        type: [scripted]
+
+  Apollyon_Shadow_Dragon:
+    id:      7459
+    species: dragon
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 129
+        hitbox:        28
+      spawn:
+        type: [scripted]
+
+  Apollyon_Skeleton:
+    id:      7433
+    species: skeleton
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Slime:
+    id:      7436
+    species: slime
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 641
+        hitbox:        20
+      spawn:
+        type: [scripted]
+
+  Apollyon_Slug:
+    id:      7438
+    species: slug
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 2021
+        entity_flags: 641
+        hitbox:        15
+      spawn:
+        type: [scripted]
+
+  Apollyon_Spider:
+    id:      7453
+    species: spider
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 310
+        entity_flags: 641
+        hitbox:        11
+      spawn:
+        type: [scripted]
+
+  Apollyon_Tarutaru_Shade:
+    id:      1224
+    species: unclassified
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:   equipped
+          race:   5
+          face:   30
+          head:   4588
+          body:   8684
+          hands:  12780
+          legs:   16876
+          feet:   20972
+          main:   25162
+          sub:    28672
+          ranged: 32768
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Apollyon_Taurus:
+    id:      7444
+    species: taurus
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 1359
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Wasp:
+    id:      7446
+    species: yellow_bee
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags: 641
+        hitbox:         8
+      spawn:
+        type: [scripted]
+
+  Apollyon_Wight:
+    id:      7429
+    species: skeleton
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 129
+        hitbox:        10
+      spawn:
+        type: [scripted]
+
+  Apollyon_Wyvern:
+    id:      7463
+    species: wyvern
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 398
+        entity_flags: 129
+        hitbox:        27
+      spawn:
+        type: [scripted]
+
+  Assimilators:
+    id:      7480
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Atrophy:
+    id:      7468
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Brioso:
+    id:      7473
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Convokers:
+    id:      7478
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        entity_flags: 3
+      spawn:
+        type: [scripted]
+
+  Convokers_Avatar:
+    id:      7479
+    species: carbuncle
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Demons_Elemental:
+    id:      7440
+    species: fire_elemental
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 8
+        entity_flags: 129
+        hitbox:         8
+      spawn:
+        type: [scripted]
+
+  Foire:
+    id:      7482
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Galkas_Wyvern:
+    id:      1228
+    species: shadow_wyvern
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 780
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      spawn:
+        type: [scripted]
+
+  Geomancy:
+    id:      7485
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Geomancys_Luopan:
+    id:      7486
+    species: unclassified
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        entity_flags: 131
+        name_vis:      16
+        name_prefix:    8
+      spawn:
+        type: [scripted]
+
+  Hachiya:
+    id:      7476
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Ignominy:
+    id:      7471
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Ischyros_Adamantoise:
+    id:      7489
+    species: adamantoise
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis:    1
+        model_size:  1
+        hitbox:     32
+      spawn:
+        type: [scripted]
+
+  Ischyros_Mantis:
+    id:      7488
+    species: green_mantid
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis:    1
+        model_size:  1
+        hitbox:     20
+      spawn:
+        type: [scripted]
+
+  Ischyros_Sandworm:
+    id:      7490
+    species: sandworm
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis:    1
+        model_size:  1
+        hitbox:     40
+      spawn:
+        type: [scripted]
+
+  Laksamanas:
+    id:      7481
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Maxixi:
+    id:      7483
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Mithras_Korrigan:
+    id:      1226
+    species: korrigan
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags: 133
+        model_size:     2
+        hitbox:         9
+      spawn:
+        type: [scripted]
+
+  Omega_Forerunner:
+    id:      7494
+    species: omega
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis:    1
+        model_size:  3
+        hitbox:     20
+      spawn:
+        type: [scripted]
+
+  Omegas_Bit:
+    id:      7495
+    species: spheroid
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis:    1
+        model_size:  1
+        hitbox:     15
+      spawn:
+        type: [scripted]
+
+  Orion:
+    id:      7474
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Pillagers:
+    id:      7469
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Pummelers:
+    id:      7464
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Reverence:
+    id:      7470
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Runeist:
+    id:      7487
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Spaekonas:
+    id:      7467
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Theophany:
+    id:      7466
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Tolimi_Dvergr:
+    id:      7491
+    species: dvergr
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis:    1
+        model_size:  2
+        hitbox:     20
+      spawn:
+        type: [scripted]
+
+  Tolimi_Vampyr:
+    id:      7492
+    species: vampyr
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis:    1
+        model_size:  2
+        hitbox:     20
+      spawn:
+        type: [scripted]
+
+  Tolimi_Wyrm:
+    id:      7493
+    species: blue_wyrm
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis:    1
+        model_size:  2
+        hitbox:     57
+      spawn:
+        type: [scripted]
+
+  Totemic:
+    id:      7472
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Vishap:
+    id:      7477
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+  Wakido:
+    id:      7475
+    species: fomor
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: hand_to_hand
+      render:
+        look:
+          type:  standard
+          model: 50
+        name_vis: 1
+      spawn:
+        type: [scripted]
+
+spawns:
+  16932865:
+    template: Apollyon_Wight
+    at:       [-436.786, -0.470, 32.436, 11]
+    level:    [150, 150]
+  16932866:
+    template: Apollyon_Wight
+    at:       [-445.158, -0.499, 53.412, 153]
+    level:    [150, 150]
+  16932867:
+    template: Apollyon_Wight
+    at:       [-447.562, -0.483, -33.382, 232]
+    level:    [150, 150]
+  16932868:
+    template: Apollyon_Wight
+    at:       [-457.548, -0.494, 46.571, 159]
+    level:    [150, 150]
+  16932869:
+    template: Apollyon_Wight
+    at:       [-442.364, -0.414, 39.208, 4]
+    level:    [150, 150]
+  16932870:
+    template: Apollyon_Wight
+    at:       [-459.843, -0.499, 8.682, 189]
+    level:    [150, 150]
+  16932871:
+    template: Apollyon_Wight
+    at:       [-405.804, -0.500, 43.008, 104]
+    level:    [150, 150]
+  16932872:
+    template: Apollyon_Wight
+    at:       [-447.575, -0.409, 50.728, 105]
+    level:    [150, 150]
+  16932873:
+    template: Apollyon_Ghost
+    at:       [-430.574, -0.486, 10.437, 10]
+    level:    [150, 150]
+  16932874:
+    template: Apollyon_Ghost
+    at:       [-482.477, -0.498, 44.488, 248]
+    level:    [150, 150]
+  16932875:
+    template: Apollyon_Ghost
+    at:       [-454.909, -0.401, 50.783, 69]
+    level:    [150, 150]
+  16932876:
+    template: Apollyon_Ghost
+    at:       [-405.566, -0.500, 38.352, 81]
+    level:    [150, 150]
+  16932877:
+    template: Apollyon_Ghost
+    at:       [-473.144, -0.467, -33.978, 196]
+    level:    [150, 150]
+  16932878:
+    template: Apollyon_Ghost
+    at:       [-457.510, -0.500, -5.806, 224]
+    level:    [150, 150]
+  16932879:
+    template: Apollyon_Ghost
+    at:       [-467.990, -0.499, -8.234, 72]
+    level:    [150, 150]
+  16932880:
+    template: Apollyon_Ghost
+    at:       [-472.795, -0.499, -15.062, 130]
+    level:    [150, 150]
+  16932881:
+    template: Apollyon_Doomed
+    at:       [-444.616, -0.383, 36.352, 228]
+    level:    [150, 150]
+  16932882:
+    template: Apollyon_Doomed
+    at:       [-437.038, -0.499, -30.828, 213]
+    level:    [150, 150]
+  16932883:
+    template: Apollyon_Doomed
+    at:       [-469.022, -0.560, 37.493]
+    level:    [150, 150]
+  16932884:
+    template: Apollyon_Doomed
+    at:       [-457.409, -0.418, -43.237, 121]
+    level:    [150, 150]
+  16932885:
+    template: Apollyon_Doomed
+    at:       [-463.360, -0.500, 49.670, 174]
+    level:    [150, 150]
+  16932886:
+    template: Apollyon_Doomed
+    at:       [-473.092, -0.429, 33.152, 89]
+    level:    [150, 150]
+  16932887:
+    template: Apollyon_Doomed
+    at:       [-467.523, -0.478, 6.621, 201]
+    level:    [150, 150]
+  16932888:
+    template: Apollyon_Doomed
+    at:       [-459.995, -0.499, 28.477, 183]
+    level:    [150, 150]
+  16932889:
+    template: Apollyon_Corse
+    at:       [-455.982, -0.499, 3.087, 189]
+    level:    [150, 150]
+  16932890:
+    template: Apollyon_Corse
+    at:       [-459.649, -0.499, 0.995, 162]
+    level:    [150, 150]
+  16932891:
+    template: Apollyon_Corse
+    at:       [-458.784, -0.500, 36.299, 171]
+    level:    [150, 150]
+  16932892:
+    template: Apollyon_Corse
+    at:       [-460.906, -0.500, 8.398, 6]
+    level:    [150, 150]
+  16932893:
+    template: Apollyon_Corse
+    at:       [-479.232, -0.500, 44.530, 52]
+    level:    [150, 150]
+  16932894:
+    template: Apollyon_Corse
+    at:       [-430.842, -0.482, 49.541, 147]
+    level:    [150, 150]
+  16932895:
+    template: Apollyon_Corse
+    at:       [-426.607, -0.500, 9.253, 78]
+    level:    [150, 150]
+  16932896:
+    template: Apollyon_Corse
+    at:       [-473.032, -0.481, 9.543, 16]
+    level:    [150, 150]
+  16932897:
+    template: Apollyon_Doomed
+    at:       [-586.587, -0.411, 281.073, 61]
+    level:    [150, 150]
+  16932898:
+    template: Apollyon_Doomed
+    at:       [-532.496, -0.497, 265.463, 136]
+    level:    [150, 150]
+  16932899:
+    template: Apollyon_Doomed
+    at:       [-557.123, -0.499, 348.201, 217]
+    level:    [150, 150]
+  16932900:
+    template: Apollyon_Doomed
+    at:       [-554.396, -0.468, 352.133, 238]
+    level:    [150, 150]
+  16932901:
+    template: Apollyon_Corse
+    at:       [-546.424, -0.500, 253.167, 145]
+    level:    [150, 150]
+  16932902:
+    template: Apollyon_Corse
+    at:       [-535.044, -0.474, 250.559, 102]
+    level:    [150, 150]
+  16932903:
+    template: Apollyon_Corse
+    at:       [-596.588, -0.380, 235.345]
+    level:    [150, 150]
+  16932904:
+    template: Apollyon_Corse
+    at:       [-607.394, -0.496, 243.091, 130]
+    level:    [150, 150]
+  16932905:
+    template: Apollyon_Skeleton
+    at:       [-602.417, -0.465, 229.685, 34]
+    level:    [150, 150]
+  16932906:
+    template: Apollyon_Skeleton
+    at:       [-564.845, -0.499, 330.793, 216]
+    level:    [150, 150]
+  16932907:
+    template: Apollyon_Skeleton
+    at:       [-591.550, -0.445, 245.669, 158]
+    level:    [150, 150]
+  16932908:
+    template: Apollyon_Skeleton
+    at:       [-602.698, -0.495, 255.051, 95]
+    level:    [150, 150]
+  16932909:
+    template: Apollyon_Hound
+    at:       [-554.375, -0.491, 352.404, 233]
+    level:    [150, 150]
+  16932910:
+    template: Apollyon_Hound
+    at:       [-558.002, -0.499, 349.591, 222]
+    level:    [150, 150]
+  16932911:
+    template: Apollyon_Hound
+    at:       [-553.162, -0.499, 214.441, 20]
+    level:    [150, 150]
+  16932912:
+    template: Apollyon_Hound
+    at:       [-516.927, -0.385, 244.170, 91]
+    level:    [150, 150]
+  16932913:
+    template: Apollyon_Doomed
+    at:       [-585.771, -0.499, 307.980, 25]
+    level:    [150, 150]
+  16932914:
+    template: Apollyon_Doomed
+    at:       [-555.639, -0.384, 352.441, 244]
+    level:    [150, 150]
+  16932915:
+    template: Apollyon_Doomed
+    at:       [-550.296, -0.499, 307.606, 86]
+    level:    [150, 150]
+  16932916:
+    template: Apollyon_Doomed
+    at:       [-526.219, -0.400, 306.733, 28]
+    level:    [150, 150]
+  16932917:
+    template: Apollyon_Corse
+    at:       [-614.124, -0.499, 301.485, 218]
+    level:    [150, 150]
+  16932918:
+    template: Apollyon_Corse
+    at:       [-536.481, -0.493, 298.083, 89]
+    level:    [150, 150]
+  16932919:
+    template: Apollyon_Corse
+    at:       [-594.990, -0.499, 315.225, 231]
+    level:    [150, 150]
+  16932920:
+    template: Apollyon_Corse
+    at:       [-580.593, -0.396, 311.229, 159]
+    level:    [150, 150]
+  16932921:
+    template: Apollyon_Skeleton
+    at:       [-532.831, -0.499, 321.504, 190]
+    level:    [150, 150]
+  16932922:
+    template: Apollyon_Skeleton
+    at:       [-528.802, -0.383, 307.188, 78]
+    level:    [150, 150]
+  16932923:
+    template: Apollyon_Skeleton
+    at:       [-563.337, -0.470, 345.578, 181]
+    level:    [150, 150]
+  16932924:
+    template: Apollyon_Skeleton
+    at:       [-611.593, -0.479, 311.902, 76]
+    level:    [150, 150]
+  16932925:
+    template: Apollyon_Hound
+    at:       [-588.798, -0.495, 322.253, 228]
+    level:    [150, 150]
+  16932926:
+    template: Apollyon_Hound
+    at:       [-605.082, -0.383, 319.853, 119]
+    level:    [150, 150]
+  16932927:
+    template: Apollyon_Hound
+    at:       [-551.355, -0.499, 352.022, 239]
+    level:    [150, 150]
+  16932928:
+    template: Apollyon_Hound
+    at:       [-542.132, -0.383, 324.708, 168]
+    level:    [150, 150]
+  16932929:
+    template: Apollyon_Skeleton
+    at:       [-334.747, -0.655, 267.659, 50]
+    level:    [150, 150]
+  16932930:
+    template: Apollyon_Skeleton
+    at:       [-335.816, -0.624, 279.409, 114]
+    level:    [150, 150]
+  16932931:
+    template: Apollyon_Skeleton
+    at:       [-335.003, -0.495, 305.722, 170]
+    level:    [150, 150]
+  16932932:
+    template: Apollyon_Skeleton
+    at:       [-306.463, -0.484, 218.719, 156]
+    level:    [150, 150]
+  16932933:
+    template: Apollyon_Skeleton
+    at:       [-318.360, -0.479, 306.315, 157]
+    level:    [150, 150]
+  16932934:
+    template: Apollyon_Skeleton
+    at:       [-333.520, -0.470, 281.178, 182]
+    level:    [150, 150]
+  16932935:
+    template: Apollyon_Hound
+    at:       [-344.122, -0.553, 282.772, 152]
+    level:    [150, 150]
+  16932936:
+    template: Apollyon_Hound
+    at:       [-330.234, -0.499, 236.858, 209]
+    level:    [150, 150]
+  16932937:
+    template: Apollyon_Hound
+    at:       [-349.690, -0.380, 269.877, 11]
+    level:    [150, 150]
+  16932938:
+    template: Apollyon_Hound
+    at:       [-287.550, -0.386, 352.731, 13]
+    level:    [150, 150]
+  16932939:
+    template: Apollyon_Hound
+    at:       [-283.453, -0.018, 354.475, 64]
+    level:    [150, 150]
+  16932940:
+    template: Apollyon_Hound
+    at:       [-284.918, -0.022, 354.521, 46]
+    level:    [150, 150]
+  16932941:
+    template: Apollyon_Hecteyes
+    at:       [-322.390, -0.500, 226.647, 50]
+    level:    [150, 150]
+  16932942:
+    template: Apollyon_Hecteyes
+    at:       [-320.878, -0.500, 231.921, 47]
+    level:    [150, 150]
+  16932943:
+    template: Apollyon_Hecteyes
+    at:       [-321.390, -0.500, 231.220, 30]
+    level:    [150, 150]
+  16932944:
+    template: Apollyon_Hecteyes
+    at:       [-332.951, -0.642, 260.864, 88]
+    level:    [150, 150]
+  16932945:
+    template: Apollyon_Hecteyes
+    at:       [-333.423, -0.415, 276.438, 23]
+    level:    [150, 150]
+  16932946:
+    template: Apollyon_Hecteyes
+    at:       [-316.303, -0.381, 271.693, 161]
+    level:    [150, 150]
+  16932947:
+    template: Apollyon_Slime
+    at:       [-286.402, -0.131, 354.444, 33]
+    level:    [150, 150]
+  16932948:
+    template: Apollyon_Slime
+    at:       [-342.649, -0.871, 278.110, 39]
+    level:    [150, 150]
+  16932949:
+    template: Apollyon_Slime
+    at:       [-349.514, -0.383, 269.315, 147]
+    level:    [150, 150]
+  16932950:
+    template: Apollyon_Slime
+    at:       [-284.334, -0.530, 352.619, 39]
+    level:    [150, 150]
+  16932951:
+    template: Apollyon_Slime
+    at:       [-322.389, -0.383, 272.393, 201]
+    level:    [150, 150]
+  16932952:
+    template: Apollyon_Slime
+    at:       [-342.206, -0.980, 265.474, 36]
+    level:    [150, 150]
+  16932953:
+    template: Apollyon_Skeleton
+    at:       [-410.520, -0.401, 272.533, 55]
+    level:    [150, 150]
+  16932954:
+    template: Apollyon_Skeleton
+    at:       [-386.701, -0.498, 275.041, 225]
+    level:    [150, 150]
+  16932955:
+    template: Apollyon_Hound
+    at:       [-406.841, -0.420, 296.371, 49]
+    level:    [150, 150]
+  16932956:
+    template: Apollyon_Hound
+    at:       [-385.647, -1.105, 311.430, 13]
+    level:    [150, 150]
+  16932957:
+    template: Apollyon_Hecteyes
+    at:       [-394.372, -0.507, 323.005, 170]
+    level:    [150, 150]
+  16932958:
+    template: Apollyon_Hecteyes
+    at:       [-399.611, -0.477, 276.083, 251]
+    level:    [150, 150]
+  16932959:
+    template: Apollyon_Slime
+    at:       [-397.505, -0.476, 270.908, 95]
+    level:    [150, 150]
+  16932960:
+    template: Apollyon_Slime
+    at:       [-402.731, -0.444, 296.024, 124]
+    level:    [150, 150]
+  16932961:
+    template: Apollyon_Hecteyes
+    at:       [-547.174, -0.500, 559.605, 206]
+    level:    [150, 150]
+  16932962:
+    template: Apollyon_Hecteyes
+    at:       [-573.640, -0.377, 530.487, 249]
+    level:    [150, 150]
+  16932963:
+    template: Apollyon_Hecteyes
+    at:       [-593.216, -0.390, 526.649, 253]
+    level:    [150, 150]
+  16932964:
+    template: Apollyon_Hecteyes
+    at:       [-578.055, -0.405, 586.007, 125]
+    level:    [150, 150]
+  16932965:
+    template: Apollyon_Hecteyes
+    at:       [-580.937, -0.792, 554.459, 245]
+    level:    [150, 150]
+  16932966:
+    template: Apollyon_Hecteyes
+    at:       [-593.867, -0.388, 527.267, 4]
+    level:    [150, 150]
+  16932967:
+    template: Apollyon_Hecteyes
+    at:       [-561.362, -0.872, 542.062, 188]
+    level:    [150, 150]
+  16932968:
+    template: Apollyon_Hecteyes
+    at:       [-547.926, -0.403, 568.870, 235]
+    level:    [150, 150]
+  16932969:
+    template: Apollyon_Slime
+    at:       [-552.741, -0.398, 571.150, 177]
+    level:    [150, 150]
+  16932970:
+    template: Apollyon_Slime
+    at:       [-611.390, -0.503, 562.243, 187]
+    level:    [150, 150]
+  16932971:
+    template: Apollyon_Slime
+    at:       [-570.363, -0.478, 585.839, 228]
+    level:    [150, 150]
+  16932972:
+    template: Apollyon_Slime
+    at:       [-579.331, -0.380, 523.523, 55]
+    level:    [150, 150]
+  16932973:
+    template: Apollyon_Slime
+    at:       [-591.570, -0.381, 557.669, 29]
+    level:    [150, 150]
+  16932974:
+    template: Apollyon_Slime
+    at:       [-585.144, -1.862, 539.075, 172]
+    level:    [150, 150]
+  16932975:
+    template: Apollyon_Slime
+    at:       [-555.503, -0.498, 559.939, 71]
+    level:    [150, 150]
+  16932976:
+    template: Apollyon_Slime
+    at:       [-576.205, -0.483, 514.297, 120]
+    level:    [150, 150]
+  16932977:
+    template: Apollyon_Leech
+    at:       [-572.147, -0.378, 599.539, 239]
+    level:    [150, 150]
+  16932978:
+    template: Apollyon_Leech
+    at:       [-590.034, -0.530, 554.649, 161]
+    level:    [150, 150]
+  16932979:
+    template: Apollyon_Leech
+    at:       [-548.885, -0.494, 545.056, 16]
+    level:    [150, 150]
+  16932980:
+    template: Apollyon_Leech
+    at:       [-573.917, -0.412, 577.767, 150]
+    level:    [150, 150]
+  16932981:
+    template: Apollyon_Leech
+    at:       [-588.256, -0.478, 562.045, 146]
+    level:    [150, 150]
+  16932982:
+    template: Apollyon_Leech
+    at:       [-574.831, -0.380, 526.213, 94]
+    level:    [150, 150]
+  16932983:
+    template: Apollyon_Leech
+    at:       [-555.781, -0.496, 520.215, 59]
+    level:    [150, 150]
+  16932984:
+    template: Apollyon_Leech
+    at:       [-596.534, -0.499, 515.087, 96]
+    level:    [150, 150]
+  16932985:
+    template: Apollyon_Slug
+    at:       [-599.722, -0.453, 519.965, 96]
+    level:    [150, 150]
+  16932986:
+    template: Apollyon_Slug
+    at:       [-545.154, -0.382, 577.288, 62]
+    level:    [150, 150]
+  16932987:
+    template: Apollyon_Slug
+    at:       [-554.836, -0.482, 516.658, 39]
+    level:    [150, 150]
+  16932988:
+    template: Apollyon_Slug
+    at:       [-583.427, -0.499, 511.629, 4]
+    level:    [150, 150]
+  16932989:
+    template: Apollyon_Slug
+    at:       [-559.759, -0.380, 551.636, 190]
+    level:    [150, 150]
+  16932990:
+    template: Apollyon_Slug
+    at:       [-602.086, -0.498, 534.698, 189]
+    level:    [150, 150]
+  16932991:
+    template: Apollyon_Slug
+    at:       [-587.559, -0.477, 564.628, 69]
+    level:    [150, 150]
+  16932992:
+    template: Apollyon_Slug
+    at:       [-584.093, -1.750, 538.761, 203]
+    level:    [150, 150]
+  16932993:
+    template: Apollyon_Leech
+    at:       [-337.045, -0.496, 537.656, 79]
+    level:    [150, 150]
+  16932994:
+    template: Apollyon_Leech
+    at:       [-299.610, -0.995, 527.893, 216]
+    level:    [150, 150]
+  16932995:
+    template: Apollyon_Leech
+    at:       [-275.690, -0.460, 563.452, 63]
+    level:    [150, 150]
+  16932996:
+    template: Apollyon_Leech
+    at:       [-334.004, -0.499, 552.286, 239]
+    level:    [150, 150]
+  16932997:
+    template: Apollyon_Leech
+    at:       [-360.436, -0.499, 541.955, 205]
+    level:    [150, 150]
+  16932998:
+    template: Apollyon_Leech
+    at:       [-311.144, -0.384, 527.570, 169]
+    level:    [150, 150]
+  16932999:
+    template: Apollyon_Leech
+    at:       [-353.692, -0.411, 549.027, 80]
+    level:    [150, 150]
+  16933000:
+    template: Apollyon_Leech
+    at:       [-283.804, -0.385, 551.991, 80]
+    level:    [150, 150]
+  16933001:
+    template: Apollyon_Slug
+    at:       [-361.526, -0.489, 538.655, 144]
+    level:    [150, 150]
+  16933002:
+    template: Apollyon_Slug
+    at:       [-373.033, -0.499, 533.076, 217]
+    level:    [150, 150]
+  16933003:
+    template: Apollyon_Slug
+    at:       [-326.450, -0.558, 540.411, 182]
+    level:    [150, 150]
+  16933004:
+    template: Apollyon_Slug
+    at:       [-372.779, -0.499, 561.211, 95]
+    level:    [150, 150]
+  16933005:
+    template: Apollyon_Slug
+    at:       [-345.796, -0.499, 544.735, 242]
+    level:    [150, 150]
+  16933006:
+    template: Apollyon_Slug
+    at:       [-309.900, -0.468, 570.627, 119]
+    level:    [150, 150]
+  16933007:
+    template: Apollyon_Slug
+    at:       [-366.790, -0.474, 558.316, 163]
+    level:    [150, 150]
+  16933008:
+    template: Apollyon_Slug
+    at:       [-353.651, -0.488, 538.341, 237]
+    level:    [150, 150]
+  16933009:
+    template: Apollyon_Wight
+    at:       [-358.100, -0.500, 564.688, 253]
+    level:    [150, 150]
+  16933010:
+    template: Apollyon_Wight
+    at:       [-300.570, -0.404, 502.958, 94]
+    level:    [150, 150]
+  16933011:
+    template: Apollyon_Wight
+    at:       [-278.519, -0.496, 561.598, 27]
+    level:    [150, 150]
+  16933012:
+    template: Apollyon_Wight
+    at:       [-314.704, -0.380, 532.590, 175]
+    level:    [150, 150]
+  16933013:
+    template: Apollyon_Wight
+    at:       [-318.910, -0.393, 532.890, 182]
+    level:    [150, 150]
+  16933014:
+    template: Apollyon_Wight
+    at:       [-296.998, -0.486, 517.004, 117]
+    level:    [150, 150]
+  16933015:
+    template: Apollyon_Wight
+    at:       [-272.962, -0.511, 546.109, 195]
+    level:    [150, 150]
+  16933016:
+    template: Apollyon_Wight
+    at:       [-315.529, -0.498, 497.132, 244]
+    level:    [150, 150]
+  16933017:
+    template: Apollyon_Ghost
+    at:       [-272.987, -0.400, 559.177, 6]
+    level:    [150, 150]
+  16933018:
+    template: Apollyon_Ghost
+    at:       [-336.633, -0.499, 556.337, 67]
+    level:    [150, 150]
+  16933019:
+    template: Apollyon_Ghost
+    at:       [-275.677, -0.423, 563.370, 211]
+    level:    [150, 150]
+  16933020:
+    template: Apollyon_Ghost
+    at:       [-314.597, -0.385, 528.561, 105]
+    level:    [150, 150]
+  16933021:
+    template: Apollyon_Ghost
+    at:       [-305.287, -0.701, 545.182]
+    level:    [150, 150]
+  16933022:
+    template: Apollyon_Ghost
+    at:       [-304.522, -0.498, 518.592]
+    level:    [150, 150]
+  16933023:
+    template: Apollyon_Ghost
+    at:       [-351.859, -0.400, 528.009, 250]
+    level:    [150, 150]
+  16933024:
+    template: Apollyon_Ghost
+    at:       [-272.770, -0.496, 552.826, 183]
+    level:    [150, 150]
+  16933025:
+    template: Apollyon_Demon
+    at:       [-462.314, -0.494, -519.880, 167]
+    level:    [150, 150]
+  16933026:
+    template: Apollyon_Demon
+    at:       [-424.990, -0.494, -524.436, 222]
+    level:    [150, 150]
+  16933027:
+    template: Apollyon_Demon
+    at:       [-388.615, -0.555, -560.673, 52]
+    level:    [150, 150]
+  16933028:
+    template: Demons_Elemental
+    at:       [-389.329, -0.464, -558.070, 54]
+    level:    [150, 150]
+  16933029:
+    template: Apollyon_Demon
+    at:       [-435.915, -0.483, -562.094, 110]
+    level:    [150, 150]
+  16933030:
+    template: Apollyon_Demon
+    at:       [-434.298, -0.499, -540.737, 204]
+    level:    [150, 150]
+  16933031:
+    template: Apollyon_Demon
+    at:       [-433.460, -0.488, -526.285, 2]
+    level:    [150, 150]
+  16933032:
+    template: Apollyon_Demon
+    at:       [-445.972, -0.446, -525.056, 39]
+    level:    [150, 150]
+  16933033:
+    template: Demons_Elemental
+    at:       [-448.104, -0.457, -521.586, 42]
+    level:    [150, 150]
+  16933034:
+    template: Apollyon_Demon
+    at:       [-401.991, -0.493, -553.451, 225]
+    level:    [150, 150]
+  16933035:
+    template: Apollyon_Demon
+    at:       [-441.148, -0.382, -551.098, 167]
+    level:    [150, 150]
+  16933036:
+    template: Apollyon_Demon
+    at:       [-397.332, -0.497, -571.018, 120]
+    level:    [150, 150]
+  16933037:
+    template: Apollyon_Demon
+    at:       [-445.095, -0.417, -575.161, 72]
+    level:    [150, 150]
+  16933038:
+    template: Apollyon_Demon
+    at:       [-406.969, -0.498, -567.819, 57]
+    level:    [150, 150]
+  16933039:
+    template: Demons_Elemental
+    at:       [-407.827, -0.494, -564.729, 67]
+    level:    [150, 150]
+  16933040:
+    template: Apollyon_Demon
+    at:       [-431.505, -0.499, -518.896, 50]
+    level:    [150, 150]
+  16933041:
+    template: Apollyon_Demon
+    at:       [-445.291, -0.470, -541.950, 178]
+    level:    [150, 150]
+  16933042:
+    template: Apollyon_Demon
+    at:       [-395.553, -0.499, -560.412, 212]
+    level:    [150, 150]
+  16933043:
+    template: Apollyon_Demon
+    at:       [-424.906, -0.486, -555.372, 229]
+    level:    [150, 150]
+  16933044:
+    template: Demons_Elemental
+    at:       [-428.141, -0.439, -557.704, 231]
+    level:    [150, 150]
+  16933045:
+    template: Apollyon_Ahriman
+    at:       [-357.479, -0.400, -596.265, 5]
+    level:    [150, 150]
+  16933046:
+    template: Apollyon_Ahriman
+    at:       [-424.585, -0.420, -563.870, 6]
+    level:    [150, 150]
+  16933047:
+    template: Apollyon_Ahriman
+    at:       [-405.834, -0.500, -557.003, 77]
+    level:    [150, 150]
+  16933048:
+    template: Apollyon_Ahriman
+    at:       [-368.674, -0.468, -589.555, 241]
+    level:    [150, 150]
+  16933049:
+    template: Apollyon_Ahriman
+    at:       [-408.822, -0.484, -567.285, 214]
+    level:    [150, 150]
+  16933050:
+    template: Apollyon_Ahriman
+    at:       [-359.819, -0.491, -592.469, 212]
+    level:    [150, 150]
+  16933051:
+    template: Apollyon_Ahriman
+    at:       [-446.706, -0.486, -561.223, 51]
+    level:    [150, 150]
+  16933052:
+    template: Apollyon_Ahriman
+    at:       [-373.405, -0.397, -562.816, 50]
+    level:    [150, 150]
+  16933053:
+    template: Apollyon_Ahriman
+    at:       [-429.697, -0.384, -562.772, 64]
+    level:    [150, 150]
+  16933054:
+    template: Apollyon_Cyhiraeth
+    at:       [-372.253, -0.402, -561.840, 74]
+    level:    [150, 150]
+  16933055:
+    template: Apollyon_Cyhiraeth
+    at:       [-425.857, -0.497, -563.394, 27]
+    level:    [150, 150]
+  16933056:
+    template: Apollyon_Cyhiraeth
+    at:       [-354.868, -0.384, -596.831, 198]
+    level:    [150, 150]
+  16933057:
+    template: Apollyon_Cyhiraeth
+    at:       [-437.151, -0.499, -567.982, 168]
+    level:    [150, 150]
+  16933058:
+    template: Apollyon_Cyhiraeth
+    at:       [-412.544, -0.400, -543.630, 236]
+    level:    [150, 150]
+  16933059:
+    template: Apollyon_Cyhiraeth
+    at:       [-442.644, -0.394, -547.590, 8]
+    level:    [150, 150]
+  16933060:
+    template: Apollyon_Cyhiraeth
+    at:       [-448.683, -0.497, -517.436, 122]
+    level:    [150, 150]
+  16933061:
+    template: Apollyon_Cyhiraeth
+    at:       [-416.863, -0.488, -575.861, 102]
+    level:    [150, 150]
+  16933062:
+    template: Apollyon_Cyhiraeth
+    at:       [-352.435, -0.470, -582.953, 48]
+    level:    [150, 150]
+  16933063:
+    template: Apollyon_Demon
+    at:       [-549.480, -0.392, -344.264, 186]
+    level:    [150, 150]
+  16933064:
+    template: Apollyon_Demon
+    at:       [-558.743, -0.403, -354.599, 165]
+    level:    [150, 150]
+  16933065:
+    template: Apollyon_Demon
+    at:       [-530.962, -0.387, -356.231, 70]
+    level:    [150, 150]
+  16933066:
+    template: Demons_Elemental
+    at:       [-530.052, -0.434, -352.711, 183]
+    level:    [150, 150]
+  16933067:
+    template: Apollyon_Demon
+    at:       [-552.366, -0.499, -339.741, 125]
+    level:    [150, 150]
+  16933068:
+    template: Apollyon_Demon
+    at:       [-531.181, -0.499, -364.986, 5]
+    level:    [150, 150]
+  16933069:
+    template: Apollyon_Demon
+    at:       [-605.387, -0.499, -359.613, 179]
+    level:    [150, 150]
+  16933070:
+    template: Apollyon_Demon
+    at:       [-602.163, -0.499, -376.640, 212]
+    level:    [150, 150]
+  16933071:
+    template: Demons_Elemental
+    at:       [-601.710, -0.498, -381.915, 240]
+    level:    [150, 150]
+  16933072:
+    template: Apollyon_Demon
+    at:       [-570.518, -0.500, -358.442, 98]
+    level:    [150, 150]
+  16933073:
+    template: Apollyon_Demon
+    at:       [-607.546, -0.499, -362.600, 217]
+    level:    [150, 150]
+  16933074:
+    template: Apollyon_Demon
+    at:       [-597.673, -0.500, -361.187, 83]
+    level:    [150, 150]
+  16933075:
+    template: Apollyon_Demon
+    at:       [-509.091, -0.500, -352.371, 244]
+    level:    [150, 150]
+  16933076:
+    template: Apollyon_Demon
+    at:       [-551.095, -0.499, -351.278, 99]
+    level:    [150, 150]
+  16933077:
+    template: Demons_Elemental
+    at:       [-548.887, -0.499, -352.082, 132]
+    level:    [150, 150]
+  16933078:
+    template: Apollyon_Demon
+    at:       [-554.988, -0.410, -372.643, 24]
+    level:    [150, 150]
+  16933079:
+    template: Apollyon_Demon
+    at:       [-545.075, -0.400, -365.079, 227]
+    level:    [150, 150]
+  16933080:
+    template: Apollyon_Demon
+    at:       [-613.655, -0.499, -371.825, 181]
+    level:    [150, 150]
+  16933081:
+    template: Apollyon_Demon
+    at:       [-563.161, -0.499, -364.052, 10]
+    level:    [150, 150]
+  16933082:
+    template: Demons_Elemental
+    at:       [-563.817, -0.444, -366.869, 169]
+    level:    [150, 150]
+  16933083:
+    template: Apollyon_Imp
+    at:       [-548.469, -0.499, -349.247, 212]
+    level:    [150, 150]
+  16933084:
+    template: Apollyon_Imp
+    at:       [-519.148, -0.495, -366.752, 240]
+    level:    [150, 150]
+  16933085:
+    template: Apollyon_Imp
+    at:       [-584.245, -0.490, -388.495, 78]
+    level:    [150, 150]
+  16933086:
+    template: Apollyon_Imp
+    at:       [-605.487, -0.491, -363.027, 170]
+    level:    [150, 150]
+  16933087:
+    template: Apollyon_Imp
+    at:       [-518.398, -0.500, -364.777, 42]
+    level:    [150, 150]
+  16933088:
+    template: Apollyon_Imp
+    at:       [-522.796, -0.495, -361.627, 119]
+    level:    [150, 150]
+  16933089:
+    template: Apollyon_Imp
+    at:       [-562.728, -0.494, -311.643, 95]
+    level:    [150, 150]
+  16933090:
+    template: Apollyon_Imp
+    at:       [-584.388, -0.499, -350.394, 197]
+    level:    [150, 150]
+  16933091:
+    template: Apollyon_Cyhiraeth
+    at:       [-590.284, -0.498, -386.546, 123]
+    level:    [150, 150]
+  16933092:
+    template: Apollyon_Cyhiraeth
+    at:       [-563.268, -0.479, -321.270, 219]
+    level:    [150, 150]
+  16933093:
+    template: Apollyon_Cyhiraeth
+    at:       [-607.106, -0.387, -369.751, 133]
+    level:    [150, 150]
+  16933094:
+    template: Apollyon_Cyhiraeth
+    at:       [-540.973, -0.413, -359.684, 103]
+    level:    [150, 150]
+  16933095:
+    template: Apollyon_Cyhiraeth
+    at:       [-585.423, -0.420, -383.468, 216]
+    level:    [150, 150]
+  16933096:
+    template: Apollyon_Cyhiraeth
+    at:       [-571.250, -0.495, -344.597, 58]
+    level:    [150, 150]
+  16933097:
+    template: Apollyon_Cyhiraeth
+    at:       [-593.726, -0.497, -374.633, 128]
+    level:    [150, 150]
+  16933098:
+    template: Apollyon_Cyhiraeth
+    at:       [-570.618, -0.399, -369.634, 131]
+    level:    [150, 150]
+  16933099:
+    template: Apollyon_Demon
+    at:       [-338.602, -0.468, -328.090, 155]
+    level:    [150, 150]
+  16933100:
+    template: Apollyon_Demon
+    at:       [-367.929, -0.377, -331.490, 38]
+    level:    [150, 150]
+  16933101:
+    template: Apollyon_Demon
+    at:       [-350.942, -0.499, -331.768, 9]
+    level:    [150, 150]
+  16933102:
+    template: Demons_Elemental
+    at:       [-358.539, -0.499, -326.070, 62]
+    level:    [150, 150]
+  16933103:
+    template: Apollyon_Demon
+    at:       [-360.429, -0.500, -300.398, 95]
+    level:    [150, 150]
+  16933104:
+    template: Apollyon_Demon
+    at:       [-362.621, -0.363, -307.150, 254]
+    level:    [150, 150]
+  16933105:
+    template: Apollyon_Demon
+    at:       [-323.566, -0.381, -310.711, 248]
+    level:    [150, 150]
+  16933106:
+    template: Apollyon_Demon
+    at:       [-349.291, -0.399, -325.862, 201]
+    level:    [150, 150]
+  16933107:
+    template: Demons_Elemental
+    at:       [-350.091, -0.440, -329.504, 202]
+    level:    [150, 150]
+  16933108:
+    template: Apollyon_Demon
+    at:       [-323.248, -0.497, -304.390, 151]
+    level:    [150, 150]
+  16933109:
+    template: Apollyon_Demon
+    at:       [-357.245, -0.499, -323.457, 46]
+    level:    [150, 150]
+  16933110:
+    template: Apollyon_Demon
+    at:       [-340.491, -0.496, -319.611, 64]
+    level:    [150, 150]
+  16933111:
+    template: Apollyon_Demon
+    at:       [-316.321, -0.502, -317.525, 123]
+    level:    [150, 150]
+  16933112:
+    template: Apollyon_Demon
+    at:       [-369.906, -0.375, -290.888, 254]
+    level:    [150, 150]
+  16933113:
+    template: Demons_Elemental
+    at:       [-368.005, -0.399, -290.834, 127]
+    level:    [150, 150]
+  16933114:
+    template: Apollyon_Demon
+    at:       [-347.705, -0.495, -306.272, 196]
+    level:    [150, 150]
+  16933115:
+    template: Apollyon_Demon
+    at:       [-344.582, -0.411, -323.895, 104]
+    level:    [150, 150]
+  16933116:
+    template: Apollyon_Demon
+    at:       [-361.255, -0.500, -290.007, 67]
+    level:    [150, 150]
+  16933117:
+    template: Apollyon_Demon
+    at:       [-371.051, -0.499, -325.088, 70]
+    level:    [150, 150]
+  16933118:
+    template: Demons_Elemental
+    at:       [-371.058, -0.464, -329.998, 192]
+    level:    [150, 150]
+  16933119:
+    template: Apollyon_Taurus
+    at:       [-351.877, -0.388, -318.449, 207]
+    level:    [150, 150]
+  16933120:
+    template: Apollyon_Taurus
+    at:       [-332.449, -0.499, -301.951, 217]
+    level:    [150, 150]
+  16933121:
+    template: Apollyon_Taurus
+    at:       [-370.510, -0.499, -324.265, 124]
+    level:    [150, 150]
+  16933122:
+    template: Apollyon_Taurus
+    at:       [-334.115, -0.499, -286.396, 165]
+    level:    [150, 150]
+  16933123:
+    template: Apollyon_Taurus
+    at:       [-321.108, -0.499, -276.812, 204]
+    level:    [150, 150]
+  16933124:
+    template: Apollyon_Taurus
+    at:       [-353.962, -0.499, -289.457, 157]
+    level:    [150, 150]
+  16933125:
+    template: Apollyon_Taurus
+    at:       [-334.720, -0.499, -281.735, 105]
+    level:    [150, 150]
+  16933126:
+    template: Apollyon_Taurus
+    at:       [-312.715, -0.499, -272.726, 12]
+    level:    [150, 150]
+  16933127:
+    template: Apollyon_Cyhiraeth
+    at:       [-330.055, -0.499, -292.682, 247]
+    level:    [150, 150]
+  16933128:
+    template: Apollyon_Cyhiraeth
+    at:       [-331.144, -0.490, -271.025, 249]
+    level:    [150, 150]
+  16933129:
+    template: Apollyon_Cyhiraeth
+    at:       [-339.304, -0.498, -311.514, 183]
+    level:    [150, 150]
+  16933130:
+    template: Apollyon_Cyhiraeth
+    at:       [-319.215, -0.383, -300.130, 213]
+    level:    [150, 150]
+  16933131:
+    template: Apollyon_Cyhiraeth
+    at:       [-332.633, -0.499, -309.465, 228]
+    level:    [150, 150]
+  16933132:
+    template: Apollyon_Cyhiraeth
+    at:       [-349.332, -0.499, -312.137, 55]
+    level:    [150, 150]
+  16933133:
+    template: Apollyon_Cyhiraeth
+    at:       [-359.035, -0.499, -277.206, 189]
+    level:    [150, 150]
+  16933134:
+    template: Apollyon_Cyhiraeth
+    at:       [-359.584, -0.474, -309.030, 28]
+    level:    [150, 150]
+  16933135:
+    template: Apollyon_Demon
+    at:       [-119.846, -0.499, -532.225, 125]
+    level:    [150, 150]
+  16933136:
+    template: Apollyon_Demon
+    at:       [-180.969, -0.512, -558.706, 82]
+    level:    [150, 150]
+  16933137:
+    template: Apollyon_Demon
+    at:       [-190.827, -0.389, -548.103, 178]
+    level:    [150, 150]
+  16933138:
+    template: Demons_Elemental
+    at:       [-190.183, -0.416, -549.726, 176]
+    level:    [150, 150]
+  16933139:
+    template: Apollyon_Demon
+    at:       [-200.173, -0.500, -483.719, 17]
+    level:    [150, 150]
+  16933140:
+    template: Apollyon_Demon
+    at:       [-169.099, -0.377, -545.244, 55]
+    level:    [150, 150]
+  16933141:
+    template: Apollyon_Demon
+    at:       [-151.478, -0.499, -526.388, 155]
+    level:    [150, 150]
+  16933142:
+    template: Apollyon_Demon
+    at:       [-114.513, -0.500, -525.590, 202]
+    level:    [150, 150]
+  16933143:
+    template: Demons_Elemental
+    at:       [-115.833, -0.499, -528.100, 214]
+    level:    [150, 150]
+  16933144:
+    template: Apollyon_Demon
+    at:       [-128.577, -0.404, -549.251, 124]
+    level:    [150, 150]
+  16933145:
+    template: Apollyon_Demon
+    at:       [-151.221, -0.499, -514.366, 104]
+    level:    [150, 150]
+  16933146:
+    template: Apollyon_Demon
+    at:       [-150.642, -0.406, -533.542, 138]
+    level:    [150, 150]
+  16933147:
+    template: Apollyon_Demon
+    at:       [-198.742, -0.500, -591.049, 15]
+    level:    [150, 150]
+  16933148:
+    template: Apollyon_Demon
+    at:       [-197.890, -0.420, -595.089, 60]
+    level:    [150, 150]
+  16933149:
+    template: Demons_Elemental
+    at:       [-196.080, -0.418, -593.937, 82]
+    level:    [150, 150]
+  16933150:
+    template: Apollyon_Demon
+    at:       [-172.536, -0.500, -436.787, 36]
+    level:    [150, 150]
+  16933151:
+    template: Apollyon_Demon
+    at:       [-120.012, -0.499, -516.123, 12]
+    level:    [150, 150]
+  16933152:
+    template: Apollyon_Demon
+    at:       [-140.744, -0.383, -482.478, 115]
+    level:    [150, 150]
+  16933153:
+    template: Apollyon_Demon
+    at:       [-201.244, -0.430, -477.504, 158]
+    level:    [150, 150]
+  16933154:
+    template: Demons_Elemental
+    at:       [-199.771, -0.498, -480.477, 180]
+    level:    [150, 150]
+  16933155:
+    template: Apollyon_Gargouille
+    at:       [-199.541, -0.499, -584.244, 147]
+    level:    [150, 150]
+  16933156:
+    template: Apollyon_Gargouille
+    at:       [-136.716, -0.500, -573.038, 189]
+    level:    [150, 150]
+  16933157:
+    template: Apollyon_Gargouille
+    at:       [-143.582, -0.514, -476.763, 203]
+    level:    [150, 150]
+  16933158:
+    template: Apollyon_Gargouille
+    at:       [-168.899, -0.482, -553.463, 140]
+    level:    [150, 150]
+  16933159:
+    template: Apollyon_Gargouille
+    at:       [-153.638, -0.496, -517.429, 61]
+    level:    [150, 150]
+  16933160:
+    template: Apollyon_Gargouille
+    at:       [-139.231, -0.500, -555.964, 68]
+    level:    [150, 150]
+  16933161:
+    template: Apollyon_Gargouille
+    at:       [-214.845, -0.483, -583.322, 102]
+    level:    [150, 150]
+  16933162:
+    template: Apollyon_Gargouille
+    at:       [-183.295, -0.500, -570.965, 206]
+    level:    [150, 150]
+  16933163:
+    template: Apollyon_Cyhiraeth
+    at:       [-147.831, -0.491, -559.270, 54]
+    level:    [150, 150]
+  16933164:
+    template: Apollyon_Cyhiraeth
+    at:       [-181.052, -0.500, -558.752, 218]
+    level:    [150, 150]
+  16933165:
+    template: Apollyon_Cyhiraeth
+    at:       [-152.058, -0.499, -499.921, 223]
+    level:    [150, 150]
+  16933166:
+    template: Apollyon_Cyhiraeth
+    at:       [-178.557, -0.499, -437.416, 77]
+    level:    [150, 150]
+  16933167:
+    template: Apollyon_Cyhiraeth
+    at:       [-175.257, -0.500, -548.627, 174]
+    level:    [150, 150]
+  16933168:
+    template: Apollyon_Cyhiraeth
+    at:       [-135.826, -0.465, -493.794, 95]
+    level:    [150, 150]
+  16933169:
+    template: Apollyon_Cyhiraeth
+    at:       [-121.331, -0.482, -478.615, 210]
+    level:    [150, 150]
+  16933170:
+    template: Apollyon_Cyhiraeth
+    at:       [-135.736, -0.499, -530.431, 69]
+    level:    [150, 150]
+  16933171:
+    template: Apollyon_Wasp
+    at:       [458.290, -0.500, 46.841, 137]
+    level:    [150, 150]
+  16933172:
+    template: Apollyon_Wasp
+    at:       [453.293, -0.499, -33.426, 34]
+    level:    [150, 150]
+  16933173:
+    template: Apollyon_Wasp
+    at:       [469.677, -0.500, -17.933, 133]
+    level:    [150, 150]
+  16933174:
+    template: Apollyon_Wasp
+    at:       [428.338, -0.500, 28.118, 90]
+    level:    [150, 150]
+  16933175:
+    template: Apollyon_Wasp
+    at:       [488.973, -0.500, 22.558, 208]
+    level:    [150, 150]
+  16933176:
+    template: Apollyon_Wasp
+    at:       [467.038, -0.500, -46.624, 183]
+    level:    [150, 150]
+  16933177:
+    template: Apollyon_Wasp
+    at:       [457.911, -0.500, -33.962, 82]
+    level:    [150, 150]
+  16933178:
+    template: Apollyon_Wasp
+    at:       [450.340, -0.500, -3.862, 61]
+    level:    [150, 150]
+  16933179:
+    template: Apollyon_Beetle
+    at:       [427.042, -0.500, 17.957, 111]
+    level:    [150, 150]
+  16933180:
+    template: Apollyon_Beetle
+    at:       [448.426, -0.500, -13.230]
+    level:    [150, 150]
+  16933181:
+    template: Apollyon_Beetle
+    at:       [488.614, -0.500, -14.884, 52]
+    level:    [150, 150]
+  16933182:
+    template: Apollyon_Beetle
+    at:       [463.498, -0.500, 36.763, 196]
+    level:    [150, 150]
+  16933183:
+    template: Apollyon_Beetle
+    at:       [428.258, -0.500, 17.117, 145]
+    level:    [150, 150]
+  16933184:
+    template: Apollyon_Beetle
+    at:       [460.282, -0.500, 8.558, 63]
+    level:    [150, 150]
+  16933185:
+    template: Apollyon_Beetle
+    at:       [483.935, -0.500, 20.234, 176]
+    level:    [150, 150]
+  16933186:
+    template: Apollyon_Beetle
+    at:       [491.510, -0.500, 9.978, 205]
+    level:    [150, 150]
+  16933187:
+    template: Apollyon_Antlion
+    at:       [482.972, -0.499, 13.288, 123]
+    level:    [150, 150]
+  16933188:
+    template: Apollyon_Antlion
+    at:       [437.919, -0.500, -6.567, 35]
+    level:    [150, 150]
+  16933189:
+    template: Apollyon_Antlion
+    at:       [474.625, -0.500, -7.382, 49]
+    level:    [150, 150]
+  16933190:
+    template: Apollyon_Antlion
+    at:       [467.973, -0.499, -44.755, 122]
+    level:    [150, 150]
+  16933191:
+    template: Apollyon_Antlion
+    at:       [491.089, -0.500, 36.236, 13]
+    level:    [150, 150]
+  16933192:
+    template: Apollyon_Antlion
+    at:       [442.223, -0.491, -40.097, 19]
+    level:    [150, 150]
+  16933193:
+    template: Apollyon_Antlion
+    at:       [465.303, -0.500, 8.986, 204]
+    level:    [150, 150]
+  16933194:
+    template: Apollyon_Antlion
+    at:       [465.563, -0.500, 6.112, 66]
+    level:    [150, 150]
+  16933195:
+    template: Apollyon_Scorpion
+    at:       [463.289, -0.500, -2.036, 1]
+    level:    [150, 150]
+  16933196:
+    template: Apollyon_Scorpion
+    at:       [428.462, -0.500, 1.642, 185]
+    level:    [150, 150]
+  16933197:
+    template: Apollyon_Scorpion
+    at:       [483.691, -0.500, 40.797, 234]
+    level:    [150, 150]
+  16933198:
+    template: Apollyon_Scorpion
+    at:       [426.756, -0.500, -7.766, 180]
+    level:    [150, 150]
+  16933199:
+    template: Apollyon_Scorpion
+    at:       [479.264, -0.500, -47.604, 11]
+    level:    [150, 150]
+  16933200:
+    template: Apollyon_Scorpion
+    at:       [425.656, -0.499, -9.641, 194]
+    level:    [150, 150]
+  16933201:
+    template: Apollyon_Scorpion
+    at:       [474.840, -0.500, -33.303, 175]
+    level:    [150, 150]
+  16933202:
+    template: Apollyon_Scorpion
+    at:       [440.888, -0.500, 8.936, 69]
+    level:    [150, 150]
+  16933203:
+    template: Apollyon_Antlion
+    at:       [555.366, -0.500, 225.511, 41]
+    level:    [150, 150]
+  16933204:
+    template: Apollyon_Antlion
+    at:       [548.207, -0.500, 251.053, 139]
+    level:    [150, 150]
+  16933205:
+    template: Apollyon_Antlion
+    at:       [560.112, -0.500, 206.850, 24]
+    level:    [150, 150]
+  16933206:
+    template: Apollyon_Antlion
+    at:       [522.808, -0.500, 227.229, 133]
+    level:    [150, 150]
+  16933207:
+    template: Apollyon_Scorpion
+    at:       [558.159, -0.499, 222.338, 164]
+    level:    [150, 150]
+  16933208:
+    template: Apollyon_Scorpion
+    at:       [588.804, -0.500, 257.130, 233]
+    level:    [150, 150]
+  16933209:
+    template: Apollyon_Scorpion
+    at:       [532.139, -0.500, 246.635, 249]
+    level:    [150, 150]
+  16933210:
+    template: Apollyon_Scorpion
+    at:       [537.895, -0.500, 249.566, 223]
+    level:    [150, 150]
+  16933211:
+    template: Apollyon_Crawler
+    at:       [579.907, -0.499, 229.829, 121]
+    level:    [150, 150]
+  16933212:
+    template: Apollyon_Crawler
+    at:       [575.184, -0.500, 215.233, 62]
+    level:    [150, 150]
+  16933213:
+    template: Apollyon_Crawler
+    at:       [583.360, -0.500, 250.720, 134]
+    level:    [150, 150]
+  16933214:
+    template: Apollyon_Crawler
+    at:       [535.949, -0.500, 247.869, 245]
+    level:    [150, 150]
+  16933215:
+    template: Apollyon_Damselfly
+    at:       [515.654, -0.500, 250.845, 61]
+    level:    [150, 150]
+  16933216:
+    template: Apollyon_Damselfly
+    at:       [556.789, -0.500, 245.266, 118]
+    level:    [150, 150]
+  16933217:
+    template: Apollyon_Damselfly
+    at:       [522.488, -0.500, 253.360, 104]
+    level:    [150, 150]
+  16933218:
+    template: Apollyon_Damselfly
+    at:       [514.051, -0.500, 241.154, 132]
+    level:    [150, 150]
+  16933219:
+    template: Apollyon_Antlion
+    at:       [521.110, -0.500, 318.375, 125]
+    level:    [150, 150]
+  16933220:
+    template: Apollyon_Antlion
+    at:       [520.668, -0.499, 332.411, 136]
+    level:    [150, 150]
+  16933221:
+    template: Apollyon_Antlion
+    at:       [613.690, -0.500, 313.425, 179]
+    level:    [150, 150]
+  16933222:
+    template: Apollyon_Antlion
+    at:       [517.770, -0.495, 312.230, 45]
+    level:    [150, 150]
+  16933223:
+    template: Apollyon_Scorpion
+    at:       [550.755, -0.500, 317.015, 38]
+    level:    [150, 150]
+  16933224:
+    template: Apollyon_Scorpion
+    at:       [611.358, -0.500, 315.523, 4]
+    level:    [150, 150]
+  16933225:
+    template: Apollyon_Scorpion
+    at:       [559.874, -0.500, 317.457, 249]
+    level:    [150, 150]
+  16933226:
+    template: Apollyon_Scorpion
+    at:       [514.972, -0.499, 321.117, 60]
+    level:    [150, 150]
+  16933227:
+    template: Apollyon_Crawler
+    at:       [511.929, -0.499, 300.958, 120]
+    level:    [150, 150]
+  16933228:
+    template: Apollyon_Crawler
+    at:       [602.318, -0.500, 296.869, 87]
+    level:    [150, 150]
+  16933229:
+    template: Apollyon_Crawler
+    at:       [581.006, -0.500, 300.962, 26]
+    level:    [150, 150]
+  16933230:
+    template: Apollyon_Crawler
+    at:       [535.900, -0.498, 317.735, 250]
+    level:    [150, 150]
+  16933231:
+    template: Apollyon_Damselfly
+    at:       [611.385, -0.500, 313.052, 179]
+    level:    [150, 150]
+  16933232:
+    template: Apollyon_Damselfly
+    at:       [570.344, -0.500, 314.412, 137]
+    level:    [150, 150]
+  16933233:
+    template: Apollyon_Damselfly
+    at:       [595.460, -0.500, 301.995, 246]
+    level:    [150, 150]
+  16933234:
+    template: Apollyon_Damselfly
+    at:       [600.944, -0.499, 323.371, 193]
+    level:    [150, 150]
+  16933235:
+    template: Apollyon_Crawler
+    at:       [344.478, -0.499, 236.067, 55]
+    level:    [150, 150]
+  16933236:
+    template: Apollyon_Crawler
+    at:       [330.899, -0.499, 263.379, 5]
+    level:    [150, 150]
+  16933237:
+    template: Apollyon_Crawler
+    at:       [341.394, -0.401, 310.722, 20]
+    level:    [150, 150]
+  16933238:
+    template: Apollyon_Crawler
+    at:       [334.541, -0.394, 295.322, 244]
+    level:    [150, 150]
+  16933239:
+    template: Apollyon_Crawler
+    at:       [360.253, -0.499, 230.850, 48]
+    level:    [150, 150]
+  16933240:
+    template: Apollyon_Crawler
+    at:       [319.952, -0.499, 286.498, 57]
+    level:    [150, 150]
+  16933241:
+    template: Apollyon_Crawler
+    at:       [326.702, -0.483, 197.159, 155]
+    level:    [150, 150]
+  16933242:
+    template: Apollyon_Crawler
+    at:       [360.392, -0.503, 242.640, 219]
+    level:    [150, 150]
+  16933243:
+    template: Apollyon_Damselfly
+    at:       [368.858, -0.383, 242.475, 168]
+    level:    [150, 150]
+  16933244:
+    template: Apollyon_Damselfly
+    at:       [312.845, -0.495, 244.228, 203]
+    level:    [150, 150]
+  16933245:
+    template: Apollyon_Damselfly
+    at:       [334.338, -0.475, 281.924, 195]
+    level:    [150, 150]
+  16933246:
+    template: Apollyon_Damselfly
+    at:       [373.591, -0.486, 240.322, 54]
+    level:    [150, 150]
+  16933247:
+    template: Apollyon_Damselfly
+    at:       [355.229, -0.386, 248.046, 231]
+    level:    [150, 150]
+  16933248:
+    template: Apollyon_Damselfly
+    at:       [351.509, -0.500, 271.126, 185]
+    level:    [150, 150]
+  16933249:
+    template: Apollyon_Damselfly
+    at:       [315.715, -0.487, 250.705, 102]
+    level:    [150, 150]
+  16933250:
+    template: Apollyon_Damselfly
+    at:       [321.769, -0.380, 239.992, 99]
+    level:    [150, 150]
+  16933251:
+    template: Apollyon_Diremite
+    at:       [315.076, -0.497, 261.835, 66]
+    level:    [150, 150]
+  16933252:
+    template: Apollyon_Diremite
+    at:       [315.496, -0.486, 251.753, 103]
+    level:    [150, 150]
+  16933253:
+    template: Apollyon_Diremite
+    at:       [353.600, -0.500, 250.362, 83]
+    level:    [150, 150]
+  16933254:
+    template: Apollyon_Diremite
+    at:       [352.074, -0.501, 264.173, 219]
+    level:    [150, 150]
+  16933255:
+    template: Apollyon_Diremite
+    at:       [365.306, -0.376, 240.875, 52]
+    level:    [150, 150]
+  16933256:
+    template: Apollyon_Diremite
+    at:       [355.278, -0.500, 271.363, 242]
+    level:    [150, 150]
+  16933257:
+    template: Apollyon_Diremite
+    at:       [332.255, -0.497, 228.567, 224]
+    level:    [150, 150]
+  16933258:
+    template: Apollyon_Diremite
+    at:       [327.171, -0.411, 321.017, 71]
+    level:    [150, 150]
+  16933259:
+    template: Apollyon_Spider
+    at:       [325.370, -0.384, 314.282, 18]
+    level:    [150, 150]
+  16933260:
+    template: Apollyon_Spider
+    at:       [345.717, -0.490, 261.363, 201]
+    level:    [150, 150]
+  16933261:
+    template: Apollyon_Spider
+    at:       [326.924, -0.398, 314.581, 96]
+    level:    [150, 150]
+  16933262:
+    template: Apollyon_Spider
+    at:       [366.832, -0.497, 235.505, 86]
+    level:    [150, 150]
+  16933263:
+    template: Apollyon_Spider
+    at:       [347.049, -0.498, 277.630, 22]
+    level:    [150, 150]
+  16933264:
+    template: Apollyon_Spider
+    at:       [337.603, -0.499, 285.695, 8]
+    level:    [150, 150]
+  16933265:
+    template: Apollyon_Spider
+    at:       [363.183, -0.492, 276.717, 55]
+    level:    [150, 150]
+  16933266:
+    template: Apollyon_Spider
+    at:       [342.884, -0.381, 266.154, 25]
+    level:    [150, 150]
+  16933267:
+    template: Apollyon_Diremite
+    at:       [527.061, -0.405, 529.243, 22]
+    level:    [150, 150]
+  16933268:
+    template: Apollyon_Diremite
+    at:       [530.450, -0.384, 507.351, 163]
+    level:    [150, 150]
+  16933269:
+    template: Apollyon_Diremite
+    at:       [544.509, -0.402, 589.365, 134]
+    level:    [150, 150]
+  16933270:
+    template: Apollyon_Diremite
+    at:       [581.260, -0.500, 525.249, 179]
+    level:    [150, 150]
+  16933271:
+    template: Apollyon_Diremite
+    at:       [557.778, -0.383, 547.172, 78]
+    level:    [150, 150]
+  16933272:
+    template: Apollyon_Diremite
+    at:       [550.529, -0.500, 569.813, 206]
+    level:    [150, 150]
+  16933273:
+    template: Apollyon_Diremite
+    at:       [550.143, -0.409, 573.442, 4]
+    level:    [150, 150]
+  16933274:
+    template: Apollyon_Diremite
+    at:       [554.129, -0.500, 569.904, 158]
+    level:    [150, 150]
+  16933275:
+    template: Apollyon_Spider
+    at:       [554.128, -0.500, 573.904, 100]
+    level:    [150, 150]
+  16933276:
+    template: Apollyon_Spider
+    at:       [530.549, -0.490, 512.531, 217]
+    level:    [150, 150]
+  16933277:
+    template: Apollyon_Spider
+    at:       [599.596, -0.500, 513.903, 86]
+    level:    [150, 150]
+  16933278:
+    template: Apollyon_Spider
+    at:       [553.578, -0.500, 571.983, 123]
+    level:    [150, 150]
+  16933279:
+    template: Apollyon_Spider
+    at:       [578.734, -0.466, 539.432, 199]
+    level:    [150, 150]
+  16933280:
+    template: Apollyon_Spider
+    at:       [561.932, -0.470, 532.057, 208]
+    level:    [150, 150]
+  16933281:
+    template: Apollyon_Spider
+    at:       [575.442, -0.500, 539.156, 94]
+    level:    [150, 150]
+  16933282:
+    template: Apollyon_Spider
+    at:       [540.514, -0.386, 623.416, 20]
+    level:    [150, 150]
+  16933283:
+    template: Apollyon_Ladybug
+    at:       [557.335, -0.400, 509.344, 1]
+    level:    [150, 150]
+  16933284:
+    template: Apollyon_Ladybug
+    at:       [601.740, -0.382, 542.275, 125]
+    level:    [150, 150]
+  16933285:
+    template: Apollyon_Ladybug
+    at:       [529.499, -0.381, 530.111, 85]
+    level:    [150, 150]
+  16933286:
+    template: Apollyon_Ladybug
+    at:       [543.885, -0.480, 505.682, 53]
+    level:    [150, 150]
+  16933287:
+    template: Apollyon_Ladybug
+    at:       [587.948, -0.476, 512.729, 3]
+    level:    [150, 150]
+  16933288:
+    template: Apollyon_Ladybug
+    at:       [590.081, -0.491, 557.784, 99]
+    level:    [150, 150]
+  16933289:
+    template: Apollyon_Ladybug
+    at:       [551.007, -0.312, 575.333, 47]
+    level:    [150, 150]
+  16933290:
+    template: Apollyon_Ladybug
+    at:       [550.021, -0.496, 583.930, 56]
+    level:    [150, 150]
+  16933291:
+    template: Apollyon_Gnat
+    at:       [566.673, -0.499, 594.248, 169]
+    level:    [150, 150]
+  16933292:
+    template: Apollyon_Gnat
+    at:       [539.604, -0.496, 539.537, 236]
+    level:    [150, 150]
+  16933293:
+    template: Apollyon_Gnat
+    at:       [566.407, -0.499, 525.076, 198]
+    level:    [150, 150]
+  16933294:
+    template: Apollyon_Gnat
+    at:       [525.202, -0.421, 510.535, 99]
+    level:    [150, 150]
+  16933295:
+    template: Apollyon_Gnat
+    at:       [535.012, -0.496, 519.698, 159]
+    level:    [150, 150]
+  16933296:
+    template: Apollyon_Gnat
+    at:       [597.273, -0.531, 531.430, 1]
+    level:    [150, 150]
+  16933297:
+    template: Apollyon_Gnat
+    at:       [603.865, -0.493, 530.248, 248]
+    level:    [150, 150]
+  16933298:
+    template: Apollyon_Gnat
+    at:       [600.740, -0.499, 523.038, 139]
+    level:    [150, 150]
+  16933299:
+    template: Apollyon_Ladybug
+    at:       [282.682, -0.402, 555.216, 154]
+    level:    [150, 150]
+  16933300:
+    template: Apollyon_Ladybug
+    at:       [278.620, -0.500, 553.029, 128]
+    level:    [150, 150]
+  16933301:
+    template: Apollyon_Ladybug
+    at:       [325.612, -0.481, 560.203, 142]
+    level:    [150, 150]
+  16933302:
+    template: Apollyon_Ladybug
+    at:       [332.514, -0.396, 557.901, 224]
+    level:    [150, 150]
+  16933303:
+    template: Apollyon_Ladybug
+    at:       [315.130, -0.486, 478.537, 86]
+    level:    [150, 150]
+  16933304:
+    template: Apollyon_Ladybug
+    at:       [316.281, -0.467, 560.074, 39]
+    level:    [150, 150]
+  16933305:
+    template: Apollyon_Ladybug
+    at:       [323.636, -0.401, 516.760, 230]
+    level:    [150, 150]
+  16933306:
+    template: Apollyon_Ladybug
+    at:       [322.041, -0.387, 486.147, 144]
+    level:    [150, 150]
+  16933307:
+    template: Apollyon_Gnat
+    at:       [286.128, -0.478, 531.881, 109]
+    level:    [150, 150]
+  16933308:
+    template: Apollyon_Gnat
+    at:       [321.480, -0.424, 473.670, 142]
+    level:    [150, 150]
+  16933309:
+    template: Apollyon_Gnat
+    at:       [319.800, -0.500, 509.275, 251]
+    level:    [150, 150]
+  16933310:
+    template: Apollyon_Gnat
+    at:       [298.590, -0.498, 542.956, 49]
+    level:    [150, 150]
+  16933311:
+    template: Apollyon_Gnat
+    at:       [324.576, -0.490, 565.969, 136]
+    level:    [150, 150]
+  16933312:
+    template: Apollyon_Gnat
+    at:       [352.130, -0.386, 510.269, 30]
+    level:    [150, 150]
+  16933313:
+    template: Apollyon_Gnat
+    at:       [278.664, -0.499, 564.643, 119]
+    level:    [150, 150]
+  16933314:
+    template: Apollyon_Gnat
+    at:       [320.147, -0.483, 470.657, 76]
+    level:    [150, 150]
+  16933315:
+    template: Apollyon_Wasp
+    at:       [298.137, -0.407, 512.078, 230]
+    level:    [150, 150]
+  16933316:
+    template: Apollyon_Wasp
+    at:       [279.856, -0.498, 561.398, 227]
+    level:    [150, 150]
+  16933317:
+    template: Apollyon_Wasp
+    at:       [319.909, -0.404, 477.989, 67]
+    level:    [150, 150]
+  16933318:
+    template: Apollyon_Wasp
+    at:       [323.523, -0.399, 518.473, 245]
+    level:    [150, 150]
+  16933319:
+    template: Apollyon_Wasp
+    at:       [320.142, -0.404, 477.607, 90]
+    level:    [150, 150]
+  16933320:
+    template: Apollyon_Wasp
+    at:       [310.365, -0.499, 546.225, 136]
+    level:    [150, 150]
+  16933321:
+    template: Apollyon_Wasp
+    at:       [290.789, -0.499, 520.585, 6]
+    level:    [150, 150]
+  16933322:
+    template: Apollyon_Wasp
+    at:       [354.146, -0.499, 522.436, 67]
+    level:    [150, 150]
+  16933323:
+    template: Apollyon_Beetle
+    at:       [317.221, -0.408, 475.211, 224]
+    level:    [150, 150]
+  16933324:
+    template: Apollyon_Beetle
+    at:       [285.680, -0.499, 565.012, 12]
+    level:    [150, 150]
+  16933325:
+    template: Apollyon_Beetle
+    at:       [323.974, -0.485, 563.446, 79]
+    level:    [150, 150]
+  16933326:
+    template: Apollyon_Beetle
+    at:       [281.538, -0.500, 565.686, 190]
+    level:    [150, 150]
+  16933327:
+    template: Apollyon_Beetle
+    at:       [322.185, -0.499, 533.888, 242]
+    level:    [150, 150]
+  16933328:
+    template: Apollyon_Beetle
+    at:       [318.229, -0.402, 491.074, 82]
+    level:    [150, 150]
+  16933329:
+    template: Apollyon_Beetle
+    at:       [325.014, -0.482, 561.463, 133]
+    level:    [150, 150]
+  16933330:
+    template: Apollyon_Beetle
+    at:       [331.635, -0.496, 484.999, 56]
+    level:    [150, 150]
+  16933331:
+    template: Apollyon_Eft
+    at:       [424.720, -0.500, -582.247, 66]
+    level:    [150, 150]
+  16933332:
+    template: Apollyon_Eft
+    at:       [453.101, -0.499, -571.859, 39]
+    level:    [150, 150]
+  16933333:
+    template: Apollyon_Eft
+    at:       [427.337, -0.500, -553.920, 213]
+    level:    [150, 150]
+  16933334:
+    template: Apollyon_Eft
+    at:       [397.182, -0.500, -571.378, 120]
+    level:    [150, 150]
+  16933335:
+    template: Apollyon_Eft
+    at:       [447.800, -0.499, -568.863, 53]
+    level:    [150, 150]
+  16933336:
+    template: Apollyon_Eft
+    at:       [419.644, -0.500, -568.968, 234]
+    level:    [150, 150]
+  16933337:
+    template: Apollyon_Eft
+    at:       [413.181, -0.396, -553.701, 189]
+    level:    [150, 150]
+  16933338:
+    template: Apollyon_Eft
+    at:       [403.467, -0.500, -566.084, 203]
+    level:    [150, 150]
+  16933339:
+    template: Apollyon_Lizard
+    at:       [353.997, -0.500, -567.036, 169]
+    level:    [150, 150]
+  16933340:
+    template: Apollyon_Lizard
+    at:       [432.056, -0.907, -568.888, 230]
+    level:    [150, 150]
+  16933341:
+    template: Apollyon_Lizard
+    at:       [448.247, -0.499, -555.270, 138]
+    level:    [150, 150]
+  16933342:
+    template: Apollyon_Lizard
+    at:       [450.597, -0.500, -556.711, 14]
+    level:    [150, 150]
+  16933343:
+    template: Apollyon_Lizard
+    at:       [353.477, -0.494, -584.887, 82]
+    level:    [150, 150]
+  16933344:
+    template: Apollyon_Lizard
+    at:       [365.821, -0.500, -566.613, 84]
+    level:    [150, 150]
+  16933345:
+    template: Apollyon_Lizard
+    at:       [431.753, -0.500, -550.281, 108]
+    level:    [150, 150]
+  16933346:
+    template: Apollyon_Lizard
+    at:       [418.840, -0.499, -574.775, 20]
+    level:    [150, 150]
+  16933347:
+    template: Apollyon_Raptor
+    at:       [402.619, -0.499, -567.066, 32]
+    level:    [150, 150]
+  16933348:
+    template: Apollyon_Raptor
+    at:       [411.925, -0.499, -564.490, 203]
+    level:    [150, 150]
+  16933349:
+    template: Apollyon_Raptor
+    at:       [404.148, -0.500, -566.846, 55]
+    level:    [150, 150]
+  16933350:
+    template: Apollyon_Raptor
+    at:       [431.707, -0.499, -557.889, 88]
+    level:    [150, 150]
+  16933351:
+    template: Apollyon_Raptor
+    at:       [427.935, -0.500, -559.454, 2]
+    level:    [150, 150]
+  16933352:
+    template: Apollyon_Raptor
+    at:       [417.484, -0.500, -551.739, 214]
+    level:    [150, 150]
+  16933353:
+    template: Apollyon_Raptor
+    at:       [420.910, -0.499, -573.123, 100]
+    level:    [150, 150]
+  16933354:
+    template: Apollyon_Raptor
+    at:       [360.988, -0.499, -558.457, 189]
+    level:    [150, 150]
+  16933355:
+    template: Apollyon_Shadow_Dragon
+    at:       [445.314, -0.500, -552.529, 138]
+    level:    [150, 150]
+  16933356:
+    template: Apollyon_Shadow_Dragon
+    at:       [411.592, -0.499, -561.124, 95]
+    level:    [150, 150]
+  16933357:
+    template: Apollyon_Shadow_Dragon
+    at:       [353.941, -0.498, -573.402, 206]
+    level:    [150, 150]
+  16933358:
+    template: Apollyon_Shadow_Dragon
+    at:       [430.353, -0.500, -596.708, 14]
+    level:    [150, 150]
+  16933359:
+    template: Apollyon_Shadow_Dragon
+    at:       [397.056, -0.494, -560.685, 127]
+    level:    [150, 150]
+  16933360:
+    template: Apollyon_Shadow_Dragon
+    at:       [458.216, -0.500, -614.473, 108]
+    level:    [150, 150]
+  16933361:
+    template: Apollyon_Shadow_Dragon
+    at:       [417.664, -0.508, -571.645, 175]
+    level:    [150, 150]
+  16933362:
+    template: Apollyon_Shadow_Dragon
+    at:       [393.784, -0.499, -563.588, 215]
+    level:    [150, 150]
+  16933363:
+    template: Apollyon_Raptor
+    at:       [528.502, -0.500, -366.704, 255]
+    level:    [150, 150]
+  16933364:
+    template: Apollyon_Raptor
+    at:       [532.199, -0.500, -345.153, 118]
+    level:    [150, 150]
+  16933365:
+    template: Apollyon_Raptor
+    at:       [602.455, -0.500, -383.819, 168]
+    level:    [150, 150]
+  16933366:
+    template: Apollyon_Raptor
+    at:       [610.651, -0.500, -359.797, 255]
+    level:    [150, 150]
+  16933367:
+    template: Apollyon_Raptor
+    at:       [557.380, -0.907, -354.479, 50]
+    level:    [150, 150]
+  16933368:
+    template: Apollyon_Raptor
+    at:       [538.105, -0.500, -367.121, 120]
+    level:    [150, 150]
+  16933369:
+    template: Apollyon_Raptor
+    at:       [535.496, -0.499, -365.966, 39]
+    level:    [150, 150]
+  16933370:
+    template: Apollyon_Raptor
+    at:       [559.257, -0.500, -372.975, 248]
+    level:    [150, 150]
+  16933371:
+    template: Apollyon_Shadow_Dragon
+    at:       [571.034, -0.499, -359.858, 31]
+    level:    [150, 150]
+  16933372:
+    template: Apollyon_Shadow_Dragon
+    at:       [540.528, -0.500, -372.759, 48]
+    level:    [150, 150]
+  16933373:
+    template: Apollyon_Shadow_Dragon
+    at:       [570.768, -0.499, -324.508, 190]
+    level:    [150, 150]
+  16933374:
+    template: Apollyon_Shadow_Dragon
+    at:       [529.326, -0.500, -358.374, 4]
+    level:    [150, 150]
+  16933375:
+    template: Apollyon_Shadow_Dragon
+    at:       [609.506, -0.500, -371.333, 168]
+    level:    [150, 150]
+  16933376:
+    template: Apollyon_Shadow_Dragon
+    at:       [571.760, -0.494, -322.218, 184]
+    level:    [150, 150]
+  16933377:
+    template: Apollyon_Shadow_Dragon
+    at:       [560.392, -0.499, -318.056, 73]
+    level:    [150, 150]
+  16933378:
+    template: Apollyon_Shadow_Dragon
+    at:       [544.171, -0.500, -356.644, 42]
+    level:    [150, 150]
+  16933379:
+    template: Apollyon_Adamantoise
+    at:       [562.971, -0.499, -331.183, 51]
+    level:    [150, 150]
+  16933380:
+    template: Apollyon_Adamantoise
+    at:       [563.042, -0.499, -367.812, 94]
+    level:    [150, 150]
+  16933381:
+    template: Apollyon_Adamantoise
+    at:       [612.209, -0.496, -372.880, 28]
+    level:    [150, 150]
+  16933382:
+    template: Apollyon_Adamantoise
+    at:       [543.462, -0.500, -357.118, 255]
+    level:    [150, 150]
+  16933383:
+    template: Apollyon_Adamantoise
+    at:       [594.013, -0.470, -363.263, 39]
+    level:    [150, 150]
+  16933384:
+    template: Apollyon_Adamantoise
+    at:       [532.297, -0.499, -347.679, 74]
+    level:    [150, 150]
+  16933385:
+    template: Apollyon_Adamantoise
+    at:       [572.702, -0.499, -354.148, 228]
+    level:    [150, 150]
+  16933386:
+    template: Apollyon_Adamantoise
+    at:       [544.184, -0.499, -357.132, 128]
+    level:    [150, 150]
+  16933387:
+    template: Apollyon_Raptor
+    at:       [535.060, -0.500, -365.197, 188]
+    level:    [150, 150]
+  16933388:
+    template: Apollyon_Raptor
+    at:       [520.703, -0.500, -366.577, 118]
+    level:    [150, 150]
+  16933389:
+    template: Apollyon_Raptor
+    at:       [525.015, -0.500, -357.797, 127]
+    level:    [150, 150]
+  16933390:
+    template: Apollyon_Raptor
+    at:       [555.010, -0.500, -330.815, 254]
+    level:    [150, 150]
+  16933391:
+    template: Apollyon_Raptor
+    at:       [567.372, -0.496, -348.008]
+    level:    [150, 150]
+  16933392:
+    template: Apollyon_Raptor
+    at:       [568.667, -0.414, -341.337, 254]
+    level:    [150, 150]
+  16933393:
+    template: Apollyon_Raptor
+    at:       [562.009, -0.499, -363.944, 19]
+    level:    [150, 150]
+  16933394:
+    template: Apollyon_Raptor
+    at:       [548.820, -0.635, -358.326, 74]
+    level:    [150, 150]
+  16933395:
+    template: Apollyon_Adamantoise
+    at:       [353.445, -0.499, -275.140, 115]
+    level:    [150, 150]
+  16933396:
+    template: Apollyon_Adamantoise
+    at:       [365.756, -0.500, -290.245, 70]
+    level:    [150, 150]
+  16933397:
+    template: Apollyon_Adamantoise
+    at:       [351.457, -1.423, -310.977, 48]
+    level:    [150, 150]
+  16933398:
+    template: Apollyon_Adamantoise
+    at:       [351.986, -0.527, -280.298, 187]
+    level:    [150, 150]
+  16933399:
+    template: Apollyon_Adamantoise
+    at:       [322.005, -0.386, -307.287, 39]
+    level:    [150, 150]
+  16933400:
+    template: Apollyon_Adamantoise
+    at:       [322.798, -0.431, -321.168, 255]
+    level:    [150, 150]
+  16933401:
+    template: Apollyon_Adamantoise
+    at:       [360.531, -0.522, -322.138, 68]
+    level:    [150, 150]
+  16933402:
+    template: Apollyon_Adamantoise
+    at:       [346.099, -1.188, -317.558, 164]
+    level:    [150, 150]
+  16933403:
+    template: Apollyon_Raptor
+    at:       [319.029, -0.462, -312.542, 115]
+    level:    [150, 150]
+  16933404:
+    template: Apollyon_Raptor
+    at:       [339.072, -0.555, -321.902, 29]
+    level:    [150, 150]
+  16933405:
+    template: Apollyon_Raptor
+    at:       [348.052, -1.306, -314.806, 128]
+    level:    [150, 150]
+  16933406:
+    template: Apollyon_Raptor
+    at:       [344.013, -1.352, -313.494, 19]
+    level:    [150, 150]
+  16933407:
+    template: Apollyon_Raptor
+    at:       [352.411, -0.596, -321.541, 76]
+    level:    [150, 150]
+  16933408:
+    template: Apollyon_Raptor
+    at:       [320.632, -0.487, -312.282, 147]
+    level:    [150, 150]
+  16933409:
+    template: Apollyon_Raptor
+    at:       [339.834, -1.298, -311.488, 148]
+    level:    [150, 150]
+  16933410:
+    template: Apollyon_Raptor
+    at:       [336.946, -1.390, -308.527, 94]
+    level:    [150, 150]
+  16933411:
+    template: Apollyon_Bugard
+    at:       [361.361, -0.545, -268.840, 232]
+    level:    [150, 150]
+  16933412:
+    template: Apollyon_Bugard
+    at:       [347.864, -0.875, -316.533, 36]
+    level:    [150, 150]
+  16933413:
+    template: Apollyon_Bugard
+    at:       [339.502, -0.538, -271.971, 241]
+    level:    [150, 150]
+  16933414:
+    template: Apollyon_Bugard
+    at:       [357.870, -0.501, -329.124, 7]
+    level:    [150, 150]
+  16933415:
+    template: Apollyon_Bugard
+    at:       [327.374, -0.385, -286.166, 216]
+    level:    [150, 150]
+  16933416:
+    template: Apollyon_Bugard
+    at:       [359.945, -0.522, -275.660, 4]
+    level:    [150, 150]
+  16933417:
+    template: Apollyon_Bugard
+    at:       [346.742, -1.727, -296.628, 233]
+    level:    [150, 150]
+  16933418:
+    template: Apollyon_Bugard
+    at:       [341.524, -1.479, -309.077, 43]
+    level:    [150, 150]
+  16933419:
+    template: Apollyon_Peiste
+    at:       [338.240, -0.686, -273.870, 193]
+    level:    [150, 150]
+  16933420:
+    template: Apollyon_Peiste
+    at:       [368.291, -0.469, -332.367, 155]
+    level:    [150, 150]
+  16933421:
+    template: Apollyon_Peiste
+    at:       [321.507, -0.390, -307.468, 207]
+    level:    [150, 150]
+  16933422:
+    template: Apollyon_Peiste
+    at:       [361.874, -0.504, -277.481, 137]
+    level:    [150, 150]
+  16933423:
+    template: Apollyon_Peiste
+    at:       [363.588, -0.499, -331.836, 5]
+    level:    [150, 150]
+  16933424:
+    template: Apollyon_Peiste
+    at:       [341.137, -1.896, -298.343, 2]
+    level:    [150, 150]
+  16933425:
+    template: Apollyon_Peiste
+    at:       [319.999, -0.434, -318.814, 247]
+    level:    [150, 150]
+  16933426:
+    template: Apollyon_Peiste
+    at:       [354.942, -0.500, -330.577, 26]
+    level:    [150, 150]
+  16933427:
+    template: Apollyon_Bugard
+    at:       [160.749, -0.500, -571.562, 135]
+    level:    [150, 150]
+  16933428:
+    template: Apollyon_Bugard
+    at:       [194.812, -0.500, -546.534, 178]
+    level:    [150, 150]
+  16933429:
+    template: Apollyon_Bugard
+    at:       [156.369, -0.538, -516.569, 248]
+    level:    [150, 150]
+  16933430:
+    template: Apollyon_Bugard
+    at:       [150.981, -0.629, -524.458, 161]
+    level:    [150, 150]
+  16933431:
+    template: Apollyon_Bugard
+    at:       [139.686, -2.365, -504.537, 135]
+    level:    [150, 150]
+  16933432:
+    template: Apollyon_Bugard
+    at:       [141.930, -0.500, -526.965, 229]
+    level:    [150, 150]
+  16933433:
+    template: Apollyon_Bugard
+    at:       [213.062, -0.500, -577.738, 31]
+    level:    [150, 150]
+  16933434:
+    template: Apollyon_Bugard
+    at:       [161.683, -0.945, -497.059, 157]
+    level:    [150, 150]
+  16933435:
+    template: Apollyon_Peiste
+    at:       [186.936, -0.500, -520.250, 119]
+    level:    [150, 150]
+  16933436:
+    template: Apollyon_Peiste
+    at:       [131.169, -1.987, -501.517, 104]
+    level:    [150, 150]
+  16933437:
+    template: Apollyon_Peiste
+    at:       [113.136, -0.630, -490.528, 159]
+    level:    [150, 150]
+  16933438:
+    template: Apollyon_Peiste
+    at:       [208.728, -0.500, -516.499, 37]
+    level:    [150, 150]
+  16933439:
+    template: Apollyon_Peiste
+    at:       [199.502, -0.500, -518.863, 30]
+    level:    [150, 150]
+  16933440:
+    template: Apollyon_Peiste
+    at:       [167.548, -0.500, -524.655, 109]
+    level:    [150, 150]
+  16933441:
+    template: Apollyon_Peiste
+    at:       [171.862, -0.495, -566.492, 118]
+    level:    [150, 150]
+  16933442:
+    template: Apollyon_Peiste
+    at:       [203.402, -0.547, -548.889, 22]
+    level:    [150, 150]
+  16933443:
+    template: Apollyon_Raptor
+    at:       [207.850, -0.500, -530.997, 203]
+    level:    [150, 150]
+  16933444:
+    template: Apollyon_Raptor
+    at:       [148.381, -2.004, -503.132, 17]
+    level:    [150, 150]
+  16933445:
+    template: Apollyon_Raptor
+    at:       [191.270, -0.500, -519.181, 193]
+    level:    [150, 150]
+  16933446:
+    template: Apollyon_Raptor
+    at:       [192.633, -0.500, -509.703, 233]
+    level:    [150, 150]
+  16933447:
+    template: Apollyon_Raptor
+    at:       [169.084, -0.581, -481.817, 201]
+    level:    [150, 150]
+  16933448:
+    template: Apollyon_Raptor
+    at:       [206.734, -0.500, -563.522, 239]
+    level:    [150, 150]
+  16933449:
+    template: Apollyon_Raptor
+    at:       [184.595, -0.526, -573.485, 118]
+    level:    [150, 150]
+  16933450:
+    template: Apollyon_Raptor
+    at:       [147.820, -0.505, -528.291, 3]
+    level:    [150, 150]
+  16933451:
+    template: Apollyon_Wyvern
+    at:       [125.098, -0.500, -525.323, 112]
+    level:    [150, 150]
+  16933452:
+    template: Apollyon_Wyvern
+    at:       [176.611, -0.500, -530.179, 58]
+    level:    [150, 150]
+  16933453:
+    template: Apollyon_Wyvern
+    at:       [116.980, -0.584, -489.516, 194]
+    level:    [150, 150]
+  16933454:
+    template: Apollyon_Wyvern
+    at:       [147.202, -0.980, -481.628, 117]
+    level:    [150, 150]
+  16933455:
+    template: Apollyon_Wyvern
+    at:       [195.702, -0.500, -582.839, 87]
+    level:    [150, 150]
+  16933456:
+    template: Apollyon_Wyvern
+    at:       [203.705, -0.500, -531.139, 202]
+    level:    [150, 150]
+  16933457:
+    template: Apollyon_Wyvern
+    at:       [135.209, -0.507, -529.971, 94]
+    level:    [150, 150]
+  16933458:
+    template: Apollyon_Wyvern
+    at:       [191.088, -0.840, -544.895, 238]
+    level:    [150, 150]
+  16933459:
+    template: Pummelers
+    level:    [150, 150]
+  16933460:
+    template: Anchorites
+    level:    [150, 150]
+  16933461:
+    template: Theophany
+    level:    [150, 150]
+  16933462:
+    template: Spaekonas
+    level:    [150, 150]
+  16933463:
+    template: Atrophy
+    level:    [150, 150]
+  16933464:
+    template: Pillagers
+    level:    [150, 150]
+  16933465:
+    template: Reverence
+    level:    [150, 150]
+  16933466:
+    template: Ignominy
+    level:    [150, 150]
+  16933467:
+    template: Totemic
+    level:    [150, 150]
+  16933468:
+    template: Brioso
+    level:    [150, 150]
+  16933469:
+    template: Orion
+    level:    [150, 150]
+  16933470:
+    template: Wakido
+    level:    [150, 150]
+  16933471:
+    template: Hachiya
+    level:    [150, 150]
+  16933472:
+    template: Vishap
+    level:    [150, 150]
+  16933473:
+    template: Convokers
+    level:    [150, 150]
+  16933474:
+    template: Convokers_Avatar
+    level:    [150, 150]
+  16933475:
+    template: Assimilators
+    level:    [150, 150]
+  16933476:
+    template: Laksamanas
+    level:    [150, 150]
+  16933477:
+    template: Foire
+    level:    [150, 150]
+  16933478:
+    template: Maxixi
+    level:    [150, 150]
+  16933479:
+    template: Academics
+    level:    [150, 150]
+  16933480:
+    template: Geomancy
+    level:    [150, 150]
+  16933481:
+    template: Geomancys_Luopan
+    level:    [150, 150]
+  16933482:
+    template: Geomancys_Luopan
+    level:    [150, 150]
+  16933483:
+    template: Geomancys_Luopan
+    level:    [150, 150]
+  16933484:
+    template: Geomancys_Luopan
+    level:    [150, 150]
+  16933485:
+    template: Runeist
+    level:    [150, 150]
+  16933486:
+    template: Ischyros_Mantis
+    level:    [150, 150]
+  16933487:
+    template: Ischyros_Adamantoise
+    level:    [150, 150]
+  16933488:
+    template: Ischyros_Sandworm
+    level:    [150, 150]
+  16933489:
+    template: Tolimi_Dvergr
+    level:    [150, 150]
+  16933490:
+    template: Tolimi_Vampyr
+    level:    [150, 150]
+  16933491:
+    template: Tolimi_Wyrm
+    level:    [150, 150]
+  16933492:
+    template: Omega_Forerunner
+    level:    [150, 150]
+  16933493:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933494:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933495:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933496:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933497:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933498:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933499:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933500:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933501:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933502:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933503:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933504:
+    template: Omegas_Bit
+    level:    [150, 150]
+  16933505:
+    template: Apollyon_Hume_Shade
+    at:       [-14.915, -0.500, 168.562, 139]
+    level:    [150, 150]
+  16933506:
+    template: Apollyon_Elvaan_Shade
+    at:       [0.940, -0.500, 194.910, 224]
+    level:    [150, 150]
+  16933507:
+    template: Apollyon_Tarutaru_Shade
+    at:       [9.291, -0.500, 165.438, 33]
+    level:    [150, 150]
+  16933508:
+    template: Apollyon_Mithra_Shade
+    at:       [11.389, -0.500, 166.986, 231]
+    level:    [150, 150]
+  16933509:
+    template: Mithras_Korrigan
+    at:       [-0.347, -0.251, 163.335, 36]
+    level:    [150, 150]
+  16933510:
+    template: Apollyon_Galka_Shade
+    at:       [-4.230, -0.141, 165.687, 99]
+    level:    [150, 150]
+  16933511:
+    template: Galkas_Wyvern
+    at:       [12.224, -0.157, 176.654, 40]
+    level:    [150, 150]

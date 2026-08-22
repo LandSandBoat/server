@@ -1,0 +1,1117 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17957410:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: ROV
+
+  17957411:
+    script: NPC[223]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17957412:
+    script: NPC[224]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17957413:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: ROV
+
+  17957414:
+    script: NPC[226]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17957416:
+    script: NPC[228]
+    at:     [0.000, -0.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags:  129
+      animation_sub:  16
+      name_vis:       32
+    speed:           40
+    animation_speed: 40
+
+  17957417:
+    script: NPC[229]
+    at:     [0.000, -0.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17957418:
+    script: NPC[22a]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17957419:
+    script: NPC[229]
+    at:     [18.530, -0.320, 21.720]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17957420:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [-494.020, -0.340, 138.910]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957421:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [-64.730, 0.340, -349.350]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957422:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [33.310, 0.130, -49.770]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957423:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [432.830, -0.150, -453.500]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957424:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [-229.680, 0.660, 16.060]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957425:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [-393.960, 0.760, -135.930]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957426:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [-393.960, 0.760, -135.930]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957427:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [24.480, 0.660, -430.390]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957428:
+    script:       Grimslight
+    display_name: Grimslight
+    at:           [487.340, -0.160, -533.200]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957429:
+    script:       Grumblix
+    display_name: Grumblix
+    at:           [-345.995, 2.209, -188.519, 69]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  ROV
+
+  17957430:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-345.995, 2.209, -188.519, 69]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: ROV
+
+  17957431:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17957432:
+    script:       Iroha
+    display_name: Iroha
+    render:
+      look:
+        type:  standard
+        model: 2449
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  ROV
+
+  17957433:
+    script:       Lion
+    display_name: Lion
+    render:
+      look:
+        type:  standard
+        model: 60
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  ROV
+
+  17957434:
+    script:       Zeid
+    display_name: Zeid
+    render:
+      look:
+        type:  standard
+        model: 830
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+    content:  ROV
+
+  17957435:
+    script:       Undulating_Confluence
+    display_name: Undulating Confluence
+    at:           [-344.372, 1.608, -182.309, 180]
+    render:
+      look:
+        type:  standard
+        model: 2490
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957436:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17957437:
+    script:       qm
+    display_name: ???
+    at:           [-238.000, 0.000, 612.000, 126]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957438:
+    script:       qm
+    display_name: ???
+    at:           [-365.000, 0.000, 439.000, 21]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957439:
+    script:       qm
+    display_name: ???
+    at:           [35.000, 0.000, 126.000, 22]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957440:
+    script:       qm
+    display_name: ???
+    at:           [-1.400, 0.000, -163.000, 175]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957441:
+    script:       qm
+    display_name: ???
+    at:           [-360.000, 0.000, -440.000, 196]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957442:
+    script:       qm
+    display_name: ???
+    at:           [-6.700, 0.000, -443.500, 202]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957443:
+    script:       qm
+    display_name: ???
+    at:           [243.600, 0.000, -295.400]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957444:
+    script:       qm
+    display_name: ???
+    at:           [461.000, 0.000, -278.400, 98]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957445:
+    script:       qm
+    display_name: ???
+    at:           [519.000, 0.000, -479.500, 105]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957446:
+    script:       qm
+    display_name: ???
+    at:           [321.000, 0.000, -119.900, 93]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957447:
+    script:       qm
+    display_name: ???
+    at:           [596.700, 0.000, -163.800, 194]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957448:
+    script:       qm
+    display_name: ???
+    at:           [396.000, 0.000, -641.000, 223]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:    112
+      name_prefix:   2
+      moving:        1
+    status:  normal
+    content: ROV
+
+  17957449:
+    script:       Affi
+    display_name: Affi
+    at:           [-357.000, 0.110, -170.500]
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  4
+        head:  4100
+        body:  8196
+        hands: 12292
+        legs:  16388
+        feet:  20484
+        main:  24576
+        sub:   28672
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32784
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957450:
+    script:       Register_of_Deeds
+    display_name: Register of Deeds
+    at:           [-357.000, 0.160, -169.000, 144]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      moving: 9
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957451:
+    script:       Eschan_Portal_#1
+    display_name: 'Eschan Portal #1'
+    at:           [-342.000, -0.070, -172.000]
+    render:
+      look:
+        type:  standard
+        model: 2491
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32774
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957452:
+    script:       Eschan_Portal_#2
+    display_name: 'Eschan Portal #2'
+    at:           [-303.000, -0.030, 309.000]
+    render:
+      look:
+        type:  standard
+        model: 2491
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32774
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957453:
+    script:       Eschan_Portal_#3
+    display_name: 'Eschan Portal #3'
+    at:           [-261.000, 0.670, -15.000]
+    render:
+      look:
+        type:  standard
+        model: 2491
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32774
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957454:
+    script:       Eschan_Portal_#4
+    display_name: 'Eschan Portal #4'
+    at:           [-110.000, 0.120, -242.000]
+    render:
+      look:
+        type:  standard
+        model: 2491
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32774
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957455:
+    script:       Eschan_Portal_#5
+    display_name: 'Eschan Portal #5'
+    at:           [246.000, 0.270, -148.000]
+    render:
+      look:
+        type:  standard
+        model: 2491
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32794
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957456:
+    script:       Eschan_Portal_#6
+    display_name: 'Eschan Portal #6'
+    at:           [452.000, 1.390, -343.000]
+    render:
+      look:
+        type:  standard
+        model: 2491
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32795
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957457:
+    script:       Eschan_Portal_#7
+    display_name: 'Eschan Portal #7'
+    at:           [192.000, 0.200, -318.000]
+    render:
+      look:
+        type:  standard
+        model: 2491
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32794
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957458:
+    script:       Eschan_Portal_#8
+    display_name: 'Eschan Portal #8'
+    at:           [-135.000, 1.800, -453.000]
+    render:
+      look:
+        type:  standard
+        model: 2491
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32794
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957459:
+    script: NPC[253]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17957460:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17957461:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17957462:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17957463:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17957464:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17957465:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17957466:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17957467:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    content: ROV
+
+  17957468:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+    widescan: true
+    content:  ROV
+
+  17957469:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+    status:   normal
+    widescan: true
+    content:  ROV
+
+  17957470:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+    widescan: true
+    content:  ROV
+
+  17957471:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    widescan: true
+    content:  ROV
+
+  17957472:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 966
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+    widescan: true
+    content:  ROV
+
+  17957473:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+    widescan: true
+    content:  ROV
+
+  17957474:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957475:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957476:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957477:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957478:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957479:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957480:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957481:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957482:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957483:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957484:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957485:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957486:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957487:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957488:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957489:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957490:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    widescan: true
+    content:  ROV
+
+  17957491:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957492:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957493:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957494:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+    widescan: true
+    content:  ROV
+
+  17957495:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957496:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957497:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957498:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957499:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV
+
+  17957500:
+    script:       Emblazoned_Reliquary
+    display_name: Emblazoned Reliquary
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+    widescan: true
+    content:  ROV

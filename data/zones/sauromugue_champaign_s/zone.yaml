@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          252
+  night:        252
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z2q0:
+    from:  [519.887, -21.817, -507.899]
+    to:    meriphataud_mountains_s
+    at:    [-454.135, 28.409, 657.790, 1.570796]
+    scale: [1.000, 3.000]
+
+  z2q2:
+    from:  [-458.558, -6.960, 205.424]
+    to:    rolanberry_fields_s
+    at:    [363.430, 20.515, 473.826, 2.530727]
+    scale: [1.000, 20.000]
+
+  z2q4:
+    from:  [-104.001, -27.307, -427.826]
+    to:    garlaige_citadel_s
+    at:    [-300.000, -13.548, 157.000, 1.570796]
+    scale: [1.000, 4.000]
+
+  z2q6:
+    from:  [263.991, -3.402, -390.048]
+    to:    garlaige_citadel_s
+    at:    [100.000, -19.566, 197.000, 1.570796]
+    scale: [1.000, 4.000]

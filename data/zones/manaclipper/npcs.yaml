@@ -1,0 +1,256 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16789519:
+    script: NPC[f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16789520:
+    script: NPC[10]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16789521:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16789522:
+    script: NPC[12]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16789523:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16789525:
+    script: NPC[15]
+    at:     [0.000, 3.900, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16789526:
+    script: NPC[16]
+    at:     [0.000, 3.900, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16789527:
+    script: NPC[17]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16789528:
+    script: NPC[18]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16789529:
+    script: blank
+    at:     [0.000, -3.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+    status: normal
+
+  16789530:
+    script:       Gniyah_Mischatt
+    display_name: Gniyah Mischatt
+    at:           [0.033, -3.000, 2.725, 64]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  13
+        head:  4212
+        body:  8327
+        hands: 12288
+        legs:  16392
+        feet:  20488
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16789531:
+    script: NPC[1b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16789532:
+    script:       _030
+    display_name: Test Actor
+    at:           [0.000, -3.000, 0.000]
+    render:
+      look:
+        type: door
+      door_id:      808661087
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16789533:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  16789534:
+    script:       Khots_Chalahko
+    display_name: Khots Chalahko
+    at:           [0.019, -3.674, -18.782, 192]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  6
+        head:  4096
+        body:  8294
+        hands: 12390
+        legs:  16486
+        feet:  20582
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      animation:    sit
+      name_prefix:  32
+      moving:       8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16789535:
+    script: NPC[1f]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16789536:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16789537:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16789538:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16789539:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16789540:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16789541:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16789542:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16789543:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP

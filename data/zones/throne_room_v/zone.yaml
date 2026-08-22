@@ -1,0 +1,3 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [mazurka, tractor, pet, trust, los_player_block]

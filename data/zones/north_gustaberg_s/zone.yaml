@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          253
+  night:        253
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z2g0:
+    from:  [380.080, -3.085, 144.116]
+    to:    bastok_markets_s
+    at:    [-233.879, -2.000, 94.000, 1.570796]
+    scale: [1.000, 5.000]
+
+  z2g2:
+    from:  [-262.334, 32.738, 574.413]
+    to:    grauberg_s
+    at:    [-675.000, 41.209, -880.000]
+    scale: [2.000, 10.000]

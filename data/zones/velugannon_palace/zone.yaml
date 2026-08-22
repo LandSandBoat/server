@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          207
+  night:        207
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z4x0:
+    from:  [-99.991, -28.774, -396.020]
+    to:    ruaun_gardens
+    at:    [-90.952, -25.676, -431.084, 4.913556]
+    scale: [1.000, 3.000]
+
+  z4x2:
+    from:  [100.000, -28.774, -396.005]
+    to:    ruaun_gardens
+    at:    [90.945, -25.686, -431.105, 4.501867]
+    scale: [1.000, 3.000]
+
+  z4x4:
+    from:  [356.044, -28.774, -260.000]
+    to:    ruaun_gardens
+    at:    [356.155, -25.660, -240.876, 3.725255]
+    scale: [1.000, 3.000]
+
+  z4x6:
+    from:  [396.003, -28.774, 20.000]
+    to:    ruaun_gardens
+    at:    [429.720, -25.641, -14.436, 3.182568]
+    scale: [1.000, 3.000]
+
+  z4x8:
+    from:  [316.009, -28.774, 420.000]
+    to:    ruaun_gardens
+    at:    [339.137, -25.660, 264.275, 2.466777]
+    scale: [1.000, 3.000]
+
+  z4xa:
+    from:  [140.000, -28.774, 396.016]
+    to:    ruaun_gardens
+    at:    [146.516, -25.660, 404.193, 1.924088]
+    scale: [1.000, 3.000]
+
+  z4xc:
+    from:  [-140.000, -28.774, 395.992]
+    to:    ruaun_gardens
+    at:    [-146.537, -25.660, 404.204, 1.212974]
+    scale: [1.000, 3.000]
+
+  z4xe:
+    from:  [-315.995, -28.774, 420.000]
+    to:    ruaun_gardens
+    at:    [-339.163, -25.660, 264.267, 0.665605]
+    scale: [1.000, 3.000]
+
+  z4xg:
+    from:  [-396.015, -28.774, 20.000]
+    to:    ruaun_gardens
+    at:    [-430.705, -25.660, -14.479, 6.247036]
+    scale: [1.000, 3.000]
+
+  z4xi:
+    from:  [-355.970, -28.774, -260.000]
+    to:    ruaun_gardens
+    at:    [-356.137, -25.660, -240.902, 5.690311]
+    scale: [1.000, 3.000]

@@ -1,0 +1,360 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17018898:
+    script: NPC[12]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17018899:
+    script: NPC[13]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17018900:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17018901:
+    script: NPC[15]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17018902:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17018904:
+    script: NPC[18]
+    at:     [0.000, -2.600, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17018905:
+    script: NPC[19]
+    at:     [0.000, -2.600, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17018906:
+    script: NPC[1a]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17018907:
+    script: NPC[1b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17018908:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17018909:
+    script: NPC[1d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17018910:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17018911:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17018912:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17018913:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17018914:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17018915:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17018916:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17018917:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         TOAU
+
+  17018918:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      moving:          1
+
+  17018919:
+    script:       Shadeeu
+    display_name: Shadeeu
+    at:           [0.340, -12.232, -4.120, 192]
+    render:
+      look:
+        type:  standard
+        model: 223
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17018920:
+    script:       Map
+    display_name: Map
+    at:           [0.278, -14.707, -1.411]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17018921:
+    script:       _1n0
+    display_name: Cargo Ship Door
+    at:           [0.345, -8.694, -0.500]
+    render:
+      look:
+        type: door
+      door_id:      812527967
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: TOAU
+
+  17018922:
+    script:       _1n1
+    display_name: Cargo Ship Door
+    at:           [3.750, -12.720, -10.581]
+    render:
+      look:
+        type: door
+      door_id:      829305183
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: TOAU
+
+  17018923:
+    script:       _1n2
+    display_name: Cargo Ship Door
+    at:           [-3.075, -12.720, -10.579]
+    render:
+      look:
+        type: door
+      door_id:      846082399
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: TOAU
+
+  17018924:
+    script:       _1n3
+    display_name: Door
+    at:           [5.862, -3.649, -5.599]
+    render:
+      look:
+        type: door
+      door_id:      862859615
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: TOAU
+
+  17018925:
+    script:       _1n4
+    display_name: Door
+    at:           [-5.172, -3.650, -5.599]
+    render:
+      look:
+        type: door
+      door_id:      879636831
+      entity_flags: 4099
+      animation:    close_door
+      moving:       32769
+    status:  normal
+    content: TOAU
+
+  17018926:
+    script:       _1n5
+    display_name: Door
+    at:           [0.324, -3.650, 12.425]
+    render:
+      look:
+        type: door
+      door_id:      896414047
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17018927:
+    script:       _1n6
+    display_name: Weather
+    at:           [0.338, -9.788, 28.810]
+    render:
+      look:
+        type: door
+      door_id:      913191263
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: TOAU
+
+  17018928:
+    script:       Yahliq
+    display_name: Yahliq
+    at:           [4.986, -2.101, -12.026, 153]
+    render:
+      look:
+        type:  equipped
+        race:  7
+        face:  12
+        head:  4215
+        body:  8327
+        hands: 12288
+        legs:  16415
+        feet:  20501
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         7
+    status:   normal
+    widescan: true
+    content:  TOAU
+
+  17018929:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051

@@ -1,0 +1,465 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17330771:
+    script: NPC[253]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17330772:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17330773:
+    script: NPC[255]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17330774:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17330776:
+    script: NPC[258]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17330777:
+    script: NPC[259]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17330778:
+    script: NPC[25a]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17330779:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+
+  17330780:
+    script:       Somnial_Threshold
+    display_name: Somnial Threshold
+    at:           [560.000, -0.870, -290.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17330781:
+    script:       qm0
+    display_name: ???
+    at:           [-415.000, -44.000, 20.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330782:
+    script:       qm1
+    display_name: ???
+    at:           [575.396, -1.682, 18.723]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330783:
+    script:       qm2
+    display_name: ???
+    at:           [579.552, -9.769, 224.746]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330784:
+    script:       qm3
+    display_name: ???
+    at:           [343.392, -28.307, 337.138]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330785:
+    script:       qm4
+    display_name: ???
+    at:           [-107.596, -39.824, 35.880]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330786:
+    script:       qm5
+    display_name: ???
+    at:           [238.000, -20.738, -160.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330787:
+    script:       qm6
+    display_name: ???
+    at:           [232.000, -20.738, -170.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330788:
+    script:       qm7
+    display_name: ???
+    at:           [119.500, -28.769, -112.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330789:
+    script:       qm8
+    display_name: ???
+    at:           [119.000, -28.769, -124.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330790:
+    script:       qm9
+    display_name: ???
+    at:           [57.000, -28.511, -192.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330791:
+    script:       qm10
+    display_name: ???
+    at:           [65.000, -28.511, -201.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330792:
+    script:       qm11
+    display_name: ???
+    at:           [39.000, -28.714, -128.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330793:
+    script:       qm12
+    display_name: ???
+    at:           [39.500, -28.714, -140.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330794:
+    script:       qm13
+    display_name: ???
+    at:           [-3.000, -28.554, -96.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330795:
+    script:       qm14
+    display_name: ???
+    at:           [-7.500, -28.554, -106.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330796:
+    script:       qm15
+    display_name: ???
+    at:           [159.000, -21.048, -45.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330797:
+    script:       qm16
+    display_name: ???
+    at:           [150.500, -21.048, -37.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330798:
+    script:       qm17
+    display_name: ???
+    at:           [-294.000, -22.773, 145.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330799:
+    script:       qm18
+    display_name: ???
+    at:           [-254.500, -14.818, -147.500]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330800:
+    script:       qm19
+    display_name: ???
+    at:           [292.278, -9.245, -70.025]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330801:
+    script:       qm20
+    display_name: ???
+    at:           [157.202, -24.255, -247.340]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17330802:
+    script: NPC[272]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17330803:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17330804:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17330805:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17330806:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17330807:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17330808:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17330809:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17330810:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+
+  17330811:
+    script:       Twinkling_Presence
+    display_name: Twinkling Presence
+    at:           [319.842, 7.999, -201.005]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:      112
+      name_prefix:   130
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17330812:
+    script:       Twinkling_Presence
+    display_name: Twinkling Presence
+    at:           [240.702, -28.466, 68.323]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:      112
+      name_prefix:   130
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17330813:
+    script:       Twinkling_Presence
+    display_name: Twinkling Presence
+    at:           [-6.475, -24.124, -358.714]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:      112
+      name_prefix:   130
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17330814:
+    script:       Twinkling_Presence
+    display_name: Twinkling Presence
+    at:           [-121.155, -36.101, 126.019]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis:      112
+      name_prefix:   130
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17330815:
+    script:       Before_Castle_Zvahl
+    display_name: Before Castle Zvahl
+    at:           [-404.000, -43.003, 20.000]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags:    27
+      name_vis:       112
+      name_prefix:    162
+      moving:       32769
+    status:   normal
+    widescan: true

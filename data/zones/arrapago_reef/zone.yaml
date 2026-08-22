@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [escape, mazurka, tractor, pet, trust]
+music:
+  day:          150
+  night:        150
+  battle_solo:  115
+  battle_party: 139
+
+zonelines:
+
+  z1i0:
+    from:  [499.997, -20.717, -43.502]
+    to:    caedarva_mire
+    at:    [140.007, -13.500, -40.736, 1.570796]
+    scale: [1.500, 4.000]
+
+  z1i2:
+    from:  [603.978, -13.066, 380.000]
+    to:    caedarva_mire
+    at:    [477.713, -29.500, 139.990]
+    scale: [1.500, 4.000]
+
+  z1i4:
+    from:  [-420.000, -20.709, -83.543]
+    to:    caedarva_mire
+    at:    [-499.999, -1.500, 118.326, 1.570796]
+    scale: [1.500, 4.000]
+
+  z1i6:
+    from:  [-419.995, -12.918, -565.494]
+    to:    caedarva_mire
+    at:    [-719.993, 14.500, -20.020, 3.141593]
+    scale: [1.500, 4.000]
+
+  z1i8:
+    from:  [-420.008, -12.854, -276.433]
+    to:    caedarva_mire
+    at:    [-700.010, 6.500, 121.777, 4.712389]
+    scale: [1.500, 4.000]
+
+  z1ia:
+    from:  [-563.517, -12.610, 379.970]
+    to:    caedarva_mire
+    at:    [-640.759, -17.500, 339.955, 3.141593]
+    scale: [1.500, 4.000]
+
+  z1ic:
+    from:  [-180.006, -12.713, -563.570]
+    to:    talacca_cove
+    at:    [64.007, -9.281, -99.988, 1.570796]
+    scale: [1.500, 4.000]

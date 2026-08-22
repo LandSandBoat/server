@@ -1,0 +1,1577 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+spawns:
+  17993729:
+    script: Aurix
+  17993730:
+    script: Impish_Golem
+  17993731:
+    script: Impish_Statue
+  17993732:
+    script: Squadron_Berserker
+  17993733:
+    script: Squadron_Fistfighter
+  17993734:
+    script: Squadron_Vivifier
+  17993735:
+    script: Squadrons_Avatar
+  17993736:
+    script: Squadron_Arcanomancer
+  17993737:
+    script: Impish_Statue
+  17993738:
+    script: Squadron_Defiler
+  17993739:
+    script: Squadron_Vandal
+  17993740:
+    script: Squadron_Banneret
+  17993741:
+    script: Squadrons_Wyvern
+  17993742:
+    script: Squadron_Animist
+  17993743:
+    script: Squadrons_Crow
+  17993744:
+    script: Impish_Statue
+  17993745:
+    script: Squadron_Flautist
+  17993746:
+    script: Squadron_Operative
+  17993747:
+    script: Squadron_Buccaneer
+  17993748:
+    script: Squadron_Berserker
+  17993749:
+    script: Impish_Statue
+  17993750:
+    script: Squadron_Fistfighter
+  17993751:
+    script: Squadron_Vivifier
+  17993752:
+    script: Squadrons_Avatar
+  17993753:
+    script: Squadron_Arcanomancer
+  17993754:
+    script: Squadron_Defiler
+  17993755:
+    script: Impish_Statue
+  17993756:
+    script: Squadron_Vandal
+  17993757:
+    script: Squadron_Banneret
+  17993758:
+    script: Squadrons_Wyvern
+  17993759:
+    script: Squadron_Animist
+  17993760:
+    script: Squadrons_Crow
+  17993761:
+    script: Impish_Statue
+  17993762:
+    script: Squadron_Flautist
+  17993763:
+    script: Squadron_Operative
+  17993764:
+    script: Squadron_Buccaneer
+  17993765:
+    script: Impish_Statue
+  17993766:
+    script: Squadron_Vivifier
+  17993767:
+    script: Squadrons_Avatar
+  17993768:
+    script: Squadron_Arcanomancer
+  17993769:
+    script: Squadron_Defiler
+  17993770:
+    script: Impish_Statue
+  17993771:
+    script: Squadron_Vandal
+  17993772:
+    script: Squadron_Flautist
+  17993773:
+    script: Squadron_Operative
+  17993774:
+    script: Squadron_Buccaneer
+  17993775:
+    script: Impish_Statue
+  17993776:
+    script: Squadron_Animist
+  17993777:
+    script: Squadrons_Crow
+  17993778:
+    script: Squadron_Berserker
+  17993779:
+    script: Squadron_Fistfighter
+  17993780:
+    script: Squadron_Defiler
+  17993781:
+    script: Impish_Statue
+  17993782:
+    script: Squadron_Banneret
+  17993783:
+    script: Squadrons_Wyvern
+  17993784:
+    script: Squadron_Banneret
+  17993785:
+    script: Squadrons_Wyvern
+  17993786:
+    script: Impish_Statue
+  17993787:
+    script: Squadron_Berserker
+  17993788:
+    script: Squadron_Fistfighter
+  17993789:
+    script: Squadron_Arcanomancer
+  17993790:
+    script: Squadron_Defiler
+  17993791:
+    script: Squadron_Vandal
+  17993792:
+    script: Impish_Statue
+  17993793:
+    script: Squadron_Flautist
+  17993794:
+    script: Squadron_Operative
+  17993795:
+    script: Squadron_Buccaneer
+  17993796:
+    script: Squadron_Vivifier
+  17993797:
+    script: Squadrons_Avatar
+  17993798:
+    script: Squadron_Banneret
+  17993799:
+    script: Squadrons_Wyvern
+  17993800:
+    script: Impish_Statue
+  17993801:
+    script: Squadron_Vivifier
+  17993802:
+    script: Squadrons_Avatar
+  17993803:
+    script: Squadron_Vivifier
+  17993804:
+    script: Squadrons_Avatar
+  17993805:
+    script: Impish_Statue
+  17993806:
+    script: Squadron_Berserker
+  17993807:
+    script: Squadron_Fistfighter
+  17993808:
+    script: Squadron_Berserker
+  17993809:
+    script: Squadron_Fistfighter
+  17993810:
+    script: Impish_Statue
+  17993811:
+    script: Squadron_Arcanomancer
+  17993812:
+    script: Squadron_Defiler
+  17993813:
+    script: Squadron_Arcanomancer
+  17993814:
+    script: Squadron_Defiler
+  17993815:
+    script: Squadron_Operative
+  17993816:
+    script: Impish_Statue
+  17993817:
+    script: Squadron_Vandal
+  17993818:
+    script: Squadron_Buccaneer
+  17993819:
+    script: Squadron_Vandal
+  17993820:
+    script: Squadron_Buccaneer
+  17993821:
+    script: Squadron_Flautist
+  17993822:
+    script: Impish_Statue
+  17993823:
+    script: Squadron_Berserker
+  17993824:
+    script: Squadron_Fistfighter
+  17993825:
+    script: Squadron_Arcanomancer
+  17993826:
+    script: Squadron_Defiler
+  17993827:
+    script: Impish_Statue
+  17993828:
+    script: Squadron_Animist
+  17993829:
+    script: Squadrons_Crow
+  17993830:
+    script: Squadron_Animist
+  17993831:
+    script: Squadrons_Crow
+  17993832:
+    script: Impish_Statue
+  17993833:
+    script: Squadron_Berserker
+  17993834:
+    script: Squadron_Berserker
+  17993835:
+    script: Squadron_Berserker
+  17993836:
+    script: Impish_Statue
+  17993837:
+    script: Squadron_Fistfighter
+  17993838:
+    script: Squadron_Fistfighter
+  17993839:
+    script: Squadron_Fistfighter
+  17993840:
+    script: Impish_Statue
+  17993841:
+    script: Squadron_Arcanomancer
+  17993842:
+    script: Squadron_Arcanomancer
+  17993843:
+    script: Squadron_Arcanomancer
+  17993844:
+    script: Impish_Statue
+  17993845:
+    script: Squadron_Defiler
+  17993846:
+    script: Squadron_Defiler
+  17993847:
+    script: Squadron_Defiler
+  17993848:
+    script: Impish_Statue
+  17993849:
+    script: Squadron_Vandal
+  17993850:
+    script: Squadron_Vandal
+  17993851:
+    script: Squadron_Vandal
+  17993852:
+    script: Impish_Statue
+  17993853:
+    script: Squadron_Banneret
+  17993854:
+    script: Squadrons_Wyvern
+  17993855:
+    script: Squadron_Animist
+  17993856:
+    script: Squadrons_Crow
+  17993857:
+    script: Squadron_Flautist
+  17993858:
+    script: Squadron_Operative
+  17993859:
+    script: Squadron_Buccaneer
+  17993860:
+    script: Impish_Statue
+  17993861:
+    script: Squadron_Banneret
+  17993862:
+    script: Squadrons_Wyvern
+  17993863:
+    script: Squadron_Animist
+  17993864:
+    script: Squadrons_Crow
+  17993865:
+    script: Squadron_Flautist
+  17993866:
+    script: Squadron_Operative
+  17993867:
+    script: Squadron_Buccaneer
+  17993868:
+    script: Impish_Statue
+  17993869:
+    script: Squadron_Berserker
+  17993870:
+    script: Squadron_Fistfighter
+  17993871:
+    script: Squadron_Vandal
+  17993872:
+    script: Squadron_Flautist
+  17993873:
+    script: Impish_Statue
+  17993874:
+    script: Impish_Statue
+  17993875:
+    script: Squadron_Berserker
+  17993876:
+    script: Squadron_Berserker
+  17993877:
+    script: Impish_Statue
+  17993878:
+    script: Squadron_Fistfighter
+  17993879:
+    script: Squadron_Fistfighter
+  17993880:
+    script: Impish_Statue
+  17993881:
+    script: Squadron_Vivifier
+  17993882:
+    script: Squadrons_Avatar
+  17993883:
+    script: Squadron_Vivifier
+  17993884:
+    script: Squadrons_Avatar
+  17993885:
+    script: Impish_Statue
+  17993886:
+    script: Squadron_Arcanomancer
+  17993887:
+    script: Squadron_Arcanomancer
+  17993888:
+    script: Impish_Statue
+  17993889:
+    script: Impish_Statue
+  17993890:
+    script: Squadron_Defiler
+  17993891:
+    script: Squadron_Defiler
+  17993892:
+    script: Impish_Statue
+  17993893:
+    script: Squadron_Vandal
+  17993894:
+    script: Squadron_Vandal
+  17993895:
+    script: Impish_Statue
+  17993896:
+    script: Squadron_Banneret
+  17993897:
+    script: Squadrons_Wyvern
+  17993898:
+    script: Squadron_Banneret
+  17993899:
+    script: Squadrons_Wyvern
+  17993900:
+    script: Impish_Statue
+  17993901:
+    script: Squadron_Animist
+  17993902:
+    script: Squadrons_Crow
+  17993903:
+    script: Squadron_Animist
+  17993904:
+    script: Squadrons_Crow
+  17993905:
+    script: Impish_Statue
+  17993906:
+    script: Impish_Statue
+  17993907:
+    script: Squadron_Flautist
+  17993908:
+    script: Squadron_Flautist
+  17993909:
+    script: Impish_Statue
+  17993910:
+    script: Squadron_Operative
+  17993911:
+    script: Squadron_Operative
+  17993912:
+    script: Impish_Statue
+  17993913:
+    script: Squadron_Buccaneer
+  17993914:
+    script: Squadron_Buccaneer
+  17993915:
+    script: Impish_Statue
+  17993916:
+    script: Squadron_Berserker
+  17993917:
+    script: Squadron_Arcanomancer
+  17993918:
+    script: Impish_Statue
+  17993919:
+    script: Impish_Statue
+  17993920:
+    script: Squadron_Fistfighter
+  17993921:
+    script: Squadron_Vandal
+  17993922:
+    script: Impish_Statue
+  17993923:
+    script: Squadron_Defiler
+  17993924:
+    script: Squadron_Flautist
+  17993925:
+    script: Impish_Statue
+  17993926:
+    script: Squadron_Vivifier
+  17993927:
+    script: Squadrons_Avatar
+  17993928:
+    script: Squadron_Operative
+  17993929:
+    script: Impish_Statue
+  17993930:
+    script: Squadron_Banneret
+  17993931:
+    script: Squadrons_Wyvern
+  17993932:
+    script: Squadron_Buccaneer
+  17993933:
+    script: Impish_Statue
+  17993934:
+    script: Squadron_Berserker
+  17993935:
+    script: Squadron_Arcanomancer
+  17993936:
+    script: Squadron_Defiler
+  17993937:
+    script: Impish_Statue
+  17993938:
+    script: Squadron_Berserker
+  17993939:
+    script: Squadron_Vandal
+  17993940:
+    script: Squadron_Flautist
+  17993941:
+    script: Impish_Statue
+  17993942:
+    script: Squadron_Defiler
+  17993943:
+    script: Squadron_Flautist
+  17993944:
+    script: Squadron_Buccaneer
+  17993945:
+    script: Impish_Statue
+  17993946:
+    script: Squadron_Vivifier
+  17993947:
+    script: Squadrons_Avatar
+  17993948:
+    script: Squadron_Banneret
+  17993949:
+    script: Squadrons_Wyvern
+  17993950:
+    script: Squadron_Animist
+  17993951:
+    script: Squadrons_Crow
+  17993952:
+    script: Impish_Statue
+  17993953:
+    script: Squadron_Fistfighter
+  17993954:
+    script: Squadron_Arcanomancer
+  17993955:
+    script: Squadron_Buccaneer
+  17993956:
+    script: Impish_Statue
+  17993957:
+    script: Squadron_Berserker
+  17993958:
+    script: Squadron_Vandal
+  17993959:
+    script: Squadron_Flautist
+  17993960:
+    script: Impish_Statue
+  17993961:
+    script: Squadron_Defiler
+  17993962:
+    script: Squadron_Flautist
+  17993963:
+    script: Squadron_Buccaneer
+  17993964:
+    script: Impish_Statue
+  17993965:
+    script: Squadron_Vivifier
+  17993966:
+    script: Squadrons_Avatar
+  17993967:
+    script: Squadron_Banneret
+  17993968:
+    script: Squadrons_Wyvern
+  17993969:
+    script: Squadron_Animist
+  17993970:
+    script: Squadrons_Crow
+  17993971:
+    script: Impish_Statue
+  17993972:
+    script: Squadron_Fistfighter
+  17993973:
+    script: Squadron_Arcanomancer
+  17993974:
+    script: Squadron_Buccaneer
+  17993975:
+    script: Impish_Statue
+  17993976:
+    script: Impish_Statue
+  17993977:
+    script: Squadron_Berserker
+  17993978:
+    script: Squadron_Arcanomancer
+  17993979:
+    script: Squadron_Animist
+  17993980:
+    script: Squadrons_Crow
+  17993981:
+    script: Impish_Statue
+  17993982:
+    script: Squadron_Fistfighter
+  17993983:
+    script: Squadron_Defiler
+  17993984:
+    script: Squadron_Operative
+  17993985:
+    script: Impish_Statue
+  17993986:
+    script: Squadron_Berserker
+  17993987:
+    script: Squadron_Vivifier
+  17993988:
+    script: Squadrons_Avatar
+  17993989:
+    script: Squadron_Buccaneer
+  17993990:
+    script: Impish_Statue
+  17993991:
+    script: Squadron_Fistfighter
+  17993992:
+    script: Squadron_Vandal
+  17993993:
+    script: Squadron_Banneret
+  17993994:
+    script: Squadrons_Wyvern
+  17993995:
+    script: Impish_Statue
+  17993996:
+    script: Impish_Statue
+  17993997:
+    script: Squadron_Berserker
+  17993998:
+    script: Squadron_Arcanomancer
+  17993999:
+    script: Squadron_Animist
+  17994000:
+    script: Squadrons_Crow
+  17994001:
+    script: Impish_Statue
+  17994002:
+    script: Squadron_Fistfighter
+  17994003:
+    script: Squadron_Defiler
+  17994004:
+    script: Squadron_Operative
+  17994005:
+    script: Impish_Statue
+  17994006:
+    script: Squadron_Berserker
+  17994007:
+    script: Squadron_Vivifier
+  17994008:
+    script: Squadrons_Avatar
+  17994009:
+    script: Squadron_Buccaneer
+  17994010:
+    script: Impish_Statue
+  17994011:
+    script: Squadron_Fistfighter
+  17994012:
+    script: Squadron_Vandal
+  17994013:
+    script: Squadron_Banneret
+  17994014:
+    script: Squadrons_Wyvern
+  17994015:
+    script: Impish_Statue
+  17994016:
+    script: Squadron_Berserker
+  17994017:
+    script: Squadron_Fistfighter
+  17994018:
+    script: Squadron_Vivifier
+  17994019:
+    script: Squadrons_Avatar
+  17994020:
+    script: Impish_Statue
+  17994021:
+    script: Squadron_Arcanomancer
+  17994022:
+    script: Squadron_Defiler
+  17994023:
+    script: Squadron_Vandal
+  17994024:
+    script: Impish_Statue
+  17994025:
+    script: Squadron_Banneret
+  17994026:
+    script: Squadrons_Wyvern
+  17994027:
+    script: Squadron_Animist
+  17994028:
+    script: Squadrons_Crow
+  17994029:
+    script: Squadron_Flautist
+  17994030:
+    script: Impish_Statue
+  17994031:
+    script: Squadron_Operative
+  17994032:
+    script: Squadron_Buccaneer
+  17994033:
+    script: Squadron_Berserker
+  17994034:
+    script: Squadron_Fistfighter
+  17994035:
+    script: Impish_Statue
+  17994036:
+    script: Squadron_Vivifier
+  17994037:
+    script: Squadrons_Avatar
+  17994038:
+    script: Squadron_Arcanomancer
+  17994039:
+    script: Squadron_Defiler
+  17994040:
+    script: Squadron_Vandal
+  17994041:
+    script: Impish_Statue
+  17994042:
+    script: Squadron_Banneret
+  17994043:
+    script: Squadrons_Wyvern
+  17994044:
+    script: Squadron_Animist
+  17994045:
+    script: Squadrons_Crow
+  17994046:
+    script: Squadron_Flautist
+  17994047:
+    script: Squadron_Buccaneer
+  17994048:
+    script: Impish_Statue
+  17994049:
+    script: Berserker_Leader
+  17994050:
+    script: Impish_Statue
+  17994051:
+    script: Fistfighter_Leader
+  17994052:
+    script: Vivifier_Leader
+  17994053:
+    script: Leaders_Avatar
+  17994054:
+    script: Impish_Statue
+  17994055:
+    script: Arcanomancer_Leader
+  17994056:
+    script: Defiler_Leader
+  17994057:
+    script: Impish_Statue
+  17994058:
+    script: Vandal_Leader
+  17994059:
+    script: Banneret_Leader
+  17994060:
+    script: Leaders_Wyvern
+  17994061:
+    script: Impish_Statue
+  17994062:
+    script: Animist_Leader
+  17994063:
+    script: Leaders_Hippogryph
+  17994064:
+    script: Flautist_Leader
+  17994065:
+    script: Impish_Statue
+  17994066:
+    script: Operative_Leader
+  17994067:
+    script: Buccaneer_Leader
+  17994068:
+    script: Obstatrix
+  17994069:
+    script: Impish_Statue
+  17994070:
+    script: Regiment_Berserker
+  17994071:
+    script: Regiment_Fistfighter
+  17994072:
+    script: Regiment_Vivifier
+  17994073:
+    script: Regiments_Avatar
+  17994074:
+    script: Regiment_Arcanomancer
+  17994075:
+    script: Impish_Statue
+  17994076:
+    script: Regiment_Defiler
+  17994077:
+    script: Regiment_Vandal
+  17994078:
+    script: Regiment_Banneret
+  17994079:
+    script: Regiments_Wyvern
+  17994080:
+    script: Regiment_Flautist
+  17994081:
+    script: Impish_Statue
+  17994082:
+    script: Impish_Statue
+  17994083:
+    script: Regiment_Berserker
+  17994084:
+    script: Regiment_Fistfighter
+  17994085:
+    script: Regiment_Vandal
+  17994086:
+    script: Impish_Statue
+  17994087:
+    script: Regiment_Arcanomancer
+  17994088:
+    script: Regiment_Defiler
+  17994089:
+    script: Regiment_Buccaneer
+  17994090:
+    script: Impish_Statue
+  17994091:
+    script: Regiment_Berserker
+  17994092:
+    script: Regiment_Fistfighter
+  17994093:
+    script: Regiment_Vandal
+  17994094:
+    script: Impish_Statue
+  17994095:
+    script: Regiment_Arcanomancer
+  17994096:
+    script: Regiment_Defiler
+  17994097:
+    script: Regiment_Buccaneer
+  17994098:
+    script: Impish_Statue
+  17994099:
+    script: Impish_Statue
+  17994100:
+    script: Regiment_Berserker
+  17994101:
+    script: Regiment_Fistfighter
+  17994102:
+    script: Regiment_Vandal
+  17994103:
+    script: Impish_Statue
+  17994104:
+    script: Regiment_Arcanomancer
+  17994105:
+    script: Regiment_Defiler
+  17994106:
+    script: Regiment_Buccaneer
+  17994107:
+    script: Impish_Statue
+  17994108:
+    script: Regiment_Berserker
+  17994109:
+    script: Regiment_Fistfighter
+  17994110:
+    script: Regiment_Vandal
+  17994111:
+    script: Impish_Statue
+  17994112:
+    script: Regiment_Arcanomancer
+  17994113:
+    script: Regiment_Defiler
+  17994114:
+    script: Regiment_Buccaneer
+  17994115:
+    script: Impish_Statue
+  17994116:
+    script: Impish_Statue
+  17994117:
+    script: Regiment_Vivifier
+  17994118:
+    script: Regiments_Avatar
+  17994119:
+    script: Regiment_Banneret
+  17994120:
+    script: Regiments_Wyvern
+  17994121:
+    script: Regiment_Flautist
+  17994122:
+    script: Regiment_Operative
+  17994123:
+    script: Impish_Statue
+  17994124:
+    script: Regiment_Vivifier
+  17994125:
+    script: Regiments_Avatar
+  17994126:
+    script: Regiment_Banneret
+  17994127:
+    script: Regiments_Wyvern
+  17994128:
+    script: Regiment_Flautist
+  17994129:
+    script: Regiment_Operative
+  17994130:
+    script: Impish_Statue
+  17994131:
+    script: Regiment_Berserker
+  17994132:
+    script: Regiment_Berserker
+  17994133:
+    script: Regiment_Animist
+  17994134:
+    script: Regiments_Bats
+  17994135:
+    script: Regiment_Animist
+  17994136:
+    script: Regiments_Bats
+  17994137:
+    script: Regiment_Flautist
+  17994138:
+    script: Regiment_Flautist
+  17994139:
+    script: Impish_Statue
+  17994140:
+    script: Regiment_Berserker
+  17994141:
+    script: Regiment_Fistfighter
+  17994142:
+    script: Regiment_Arcanomancer
+  17994143:
+    script: Regiment_Defiler
+  17994144:
+    script: Impish_Statue
+  17994145:
+    script: Regiment_Berserker
+  17994146:
+    script: Regiment_Fistfighter
+  17994147:
+    script: Regiment_Arcanomancer
+  17994148:
+    script: Regiment_Defiler
+  17994149:
+    script: Impish_Statue
+  17994150:
+    script: Impish_Statue
+  17994151:
+    script: Regiment_Vivifier
+  17994152:
+    script: Regiments_Avatar
+  17994153:
+    script: Regiment_Vandal
+  17994154:
+    script: Regiment_Banneret
+  17994155:
+    script: Regiments_Wyvern
+  17994156:
+    script: Impish_Statue
+  17994157:
+    script: Regiment_Animist
+  17994158:
+    script: Regiments_Bats
+  17994159:
+    script: Regiment_Flautist
+  17994160:
+    script: Regiment_Operative
+  17994161:
+    script: Impish_Statue
+  17994162:
+    script: Regiment_Vivifier
+  17994163:
+    script: Regiments_Avatar
+  17994164:
+    script: Regiment_Vandal
+  17994165:
+    script: Regiment_Banneret
+  17994166:
+    script: Regiments_Wyvern
+  17994167:
+    script: Impish_Statue
+  17994168:
+    script: Regiment_Animist
+  17994169:
+    script: Regiments_Bats
+  17994170:
+    script: Regiment_Flautist
+  17994171:
+    script: Regiment_Operative
+  17994172:
+    script: Impish_Statue
+  17994173:
+    script: Regiment_Berserker
+  17994174:
+    script: Regiment_Fistfighter
+  17994175:
+    script: Regiment_Vandal
+  17994176:
+    script: Regiment_Operative
+  17994177:
+    script: Impish_Statue
+  17994178:
+    script: Regiment_Berserker
+  17994179:
+    script: Regiment_Berserker
+  17994180:
+    script: Regiment_Arcanomancer
+  17994181:
+    script: Regiment_Arcanomancer
+  17994182:
+    script: Impish_Statue
+  17994183:
+    script: Regiment_Fistfighter
+  17994184:
+    script: Regiment_Fistfighter
+  17994185:
+    script: Regiment_Defiler
+  17994186:
+    script: Regiment_Defiler
+  17994187:
+    script: Impish_Statue
+  17994188:
+    script: Regiment_Vivifier
+  17994189:
+    script: Regiments_Avatar
+  17994190:
+    script: Regiment_Vivifier
+  17994191:
+    script: Regiments_Avatar
+  17994192:
+    script: Regiment_Operative
+  17994193:
+    script: Regiment_Operative
+  17994194:
+    script: Impish_Statue
+  17994195:
+    script: Regiment_Vandal
+  17994196:
+    script: Regiment_Vandal
+  17994197:
+    script: Regiment_Flautist
+  17994198:
+    script: Regiment_Flautist
+  17994199:
+    script: Impish_Statue
+  17994200:
+    script: Regiment_Animist
+  17994201:
+    script: Regiments_Bats
+  17994202:
+    script: Regiment_Buccaneer
+  17994203:
+    script: Regiment_Buccaneer
+  17994204:
+    script: Impish_Statue
+  17994205:
+    script: Regiment_Banneret
+  17994206:
+    script: Regiments_Wyvern
+  17994207:
+    script: Regiment_Arcanomancer
+  17994208:
+    script: Regiment_Arcanomancer
+  17994209:
+    script: Impish_Statue
+  17994210:
+    script: Regiment_Vivifier
+  17994211:
+    script: Regiments_Avatar
+  17994212:
+    script: Regiment_Berserker
+  17994213:
+    script: Regiment_Berserker
+  17994214:
+    script: Impish_Statue
+  17994215:
+    script: Regiment_Operative
+  17994216:
+    script: Regiment_Defiler
+  17994217:
+    script: Regiment_Defiler
+  17994218:
+    script: Impish_Statue
+  17994219:
+    script: Regiment_Flautist
+  17994220:
+    script: Regiment_Fistfighter
+  17994221:
+    script: Regiment_Fistfighter
+  17994222:
+    script: Impish_Statue
+  17994223:
+    script: Regiment_Buccaneer
+  17994224:
+    script: Regiment_Operative
+  17994225:
+    script: Regiment_Operative
+  17994226:
+    script: Impish_Statue
+  17994227:
+    script: Regiment_Berserker
+  17994228:
+    script: Regiment_Fistfighter
+  17994229:
+    script: Regiment_Arcanomancer
+  17994230:
+    script: Regiment_Defiler
+  17994231:
+    script: Impish_Statue
+  17994232:
+    script: Regiment_Berserker
+  17994233:
+    script: Regiment_Fistfighter
+  17994234:
+    script: Regiment_Arcanomancer
+  17994235:
+    script: Regiment_Defiler
+  17994236:
+    script: Regiment_Vandal
+  17994237:
+    script: Regiment_Banneret
+  17994238:
+    script: Regiments_Wyvern
+  17994239:
+    script: Impish_Statue
+  17994240:
+    script: Regiment_Vivifier
+  17994241:
+    script: Regiments_Avatar
+  17994242:
+    script: Regiment_Operative
+  17994243:
+    script: Regiment_Buccaneer
+  17994244:
+    script: Regiment_Flautist
+  17994245:
+    script: Impish_Statue
+  17994246:
+    script: Regiment_Berserker
+  17994247:
+    script: Regiment_Vandal
+  17994248:
+    script: Regiment_Buccaneer
+  17994249:
+    script: Impish_Statue
+  17994250:
+    script: Regiment_Fistfighter
+  17994251:
+    script: Regiment_Arcanomancer
+  17994252:
+    script: Regiment_Vandal
+  17994253:
+    script: Impish_Statue
+  17994254:
+    script: Regiment_Flautist
+  17994255:
+    script: Regiment_Flautist
+  17994256:
+    script: Regiment_Buccaneer
+  17994257:
+    script: Regiment_Buccaneer
+  17994258:
+    script: Impish_Statue
+  17994259:
+    script: Regiment_Arcanomancer
+  17994260:
+    script: Regiment_Arcanomancer
+  17994261:
+    script: Regiment_Defiler
+  17994262:
+    script: Regiment_Defiler
+  17994263:
+    script: Impish_Statue
+  17994264:
+    script: Regiment_Vandal
+  17994265:
+    script: Regiment_Banneret
+  17994266:
+    script: Regiments_Wyvern
+  17994267:
+    script: Regiment_Flautist
+  17994268:
+    script: Regiment_Buccaneer
+  17994269:
+    script: Impish_Statue
+  17994270:
+    script: Regiment_Flautist
+  17994271:
+    script: Regiment_Operative
+  17994272:
+    script: Regiment_Buccaneer
+  17994273:
+    script: Impish_Statue
+  17994274:
+    script: Regiment_Berserker
+  17994275:
+    script: Regiment_Defiler
+  17994276:
+    script: Regiment_Banneret
+  17994277:
+    script: Regiments_Wyvern
+  17994278:
+    script: Impish_Statue
+  17994279:
+    script: Regiment_Berserker
+  17994280:
+    script: Regiment_Fistfighter
+  17994281:
+    script: Regiment_Vivifier
+  17994282:
+    script: Regiments_Avatar
+  17994283:
+    script: Regiment_Arcanomancer
+  17994284:
+    script: Regiment_Defiler
+  17994285:
+    script: Regiment_Vandal
+  17994286:
+    script: Impish_Statue
+  17994287:
+    script: Regiment_Berserker
+  17994288:
+    script: Regiment_Defiler
+  17994289:
+    script: Regiment_Buccaneer
+  17994290:
+    script: Impish_Statue
+  17994291:
+    script: Regiment_Fistfighter
+  17994292:
+    script: Regiment_Arcanomancer
+  17994293:
+    script: Regiment_Flautist
+  17994294:
+    script: Impish_Statue
+  17994295:
+    script: Regiment_Vandal
+  17994296:
+    script: Regiment_Operative
+  17994297:
+    script: Regiment_Animist
+  17994298:
+    script: Regiments_Bats
+  17994299:
+    script: Impish_Statue
+  17994300:
+    script: Regiment_Berserker
+  17994301:
+    script: Regiment_Fistfighter
+  17994302:
+    script: Regiment_Vivifier
+  17994303:
+    script: Regiments_Avatar
+  17994304:
+    script: Impish_Statue
+  17994305:
+    script: Regiment_Arcanomancer
+  17994306:
+    script: Regiment_Defiler
+  17994307:
+    script: Regiment_Vandal
+  17994308:
+    script: Impish_Statue
+  17994309:
+    script: Regiment_Flautist
+  17994310:
+    script: Regiment_Operative
+  17994311:
+    script: Regiment_Buccaneer
+  17994312:
+    script: Regiment_Vivifier
+  17994313:
+    script: Regiments_Avatar
+  17994314:
+    script: Impish_Statue
+  17994315:
+    script: Regiment_Berserker
+  17994316:
+    script: Regiment_Fistfighter
+  17994317:
+    script: Regiment_Vandal
+  17994318:
+    script: Regiment_Banneret
+  17994319:
+    script: Regiments_Wyvern
+  17994320:
+    script: Impish_Statue
+  17994321:
+    script: Regiment_Berserker
+  17994322:
+    script: Regiment_Fistfighter
+  17994323:
+    script: Regiment_Vivifier
+  17994324:
+    script: Regiments_Avatar
+  17994325:
+    script: Impish_Statue
+  17994326:
+    script: Regiment_Arcanomancer
+  17994327:
+    script: Regiment_Defiler
+  17994328:
+    script: Regiment_Vandal
+  17994329:
+    script: Impish_Statue
+  17994330:
+    script: Regiment_Banneret
+  17994331:
+    script: Regiments_Wyvern
+  17994332:
+    script: Regiment_Animist
+  17994333:
+    script: Regiments_Bats
+  17994334:
+    script: Regiment_Flautist
+  17994335:
+    script: Impish_Statue
+  17994336:
+    script: Regiment_Operative
+  17994337:
+    script: Regiment_Buccaneer
+  17994338:
+    script: Regiment_Berserker
+  17994339:
+    script: Impish_Statue
+  17994340:
+    script: Regiment_Berserker
+  17994341:
+    script: Regiment_Berserker
+  17994342:
+    script: Regiment_Fistfighter
+  17994343:
+    script: Regiment_Fistfighter
+  17994344:
+    script: Impish_Statue
+  17994345:
+    script: Regiment_Arcanomancer
+  17994346:
+    script: Regiment_Arcanomancer
+  17994347:
+    script: Regiment_Vandal
+  17994348:
+    script: Regiment_Vandal
+  17994349:
+    script: Impish_Statue
+  17994350:
+    script: Regiment_Defiler
+  17994351:
+    script: Regiment_Defiler
+  17994352:
+    script: Regiment_Operative
+  17994353:
+    script: Regiment_Operative
+  17994354:
+    script: Impish_Statue
+  17994355:
+    script: Regiment_Flautist
+  17994356:
+    script: Regiment_Flautist
+  17994357:
+    script: Regiment_Buccaneer
+  17994358:
+    script: Regiment_Buccaneer
+  17994359:
+    script: Impish_Statue
+  17994360:
+    script: Berserker_Commander
+  17994361:
+    script: Impish_Statue
+  17994362:
+    script: Fistfighter_Commander
+  17994363:
+    script: Impish_Statue
+  17994364:
+    script: Vivifier_Commander
+  17994365:
+    script: Commanders_Avatar
+  17994366:
+    script: Impish_Statue
+  17994367:
+    script: Arcanomancer_Commander
+  17994368:
+    script: Impish_Statue
+  17994369:
+    script: Defiler_Commander
+  17994370:
+    script: Impish_Statue
+  17994371:
+    script: Vandal_Commander
+  17994372:
+    script: Impish_Statue
+  17994373:
+    script: Banneret_Commander
+  17994374:
+    script: Commanders_Wyvern
+  17994375:
+    script: Impish_Statue
+  17994376:
+    script: Animist_Commander
+  17994377:
+    script: Commanders_Hippogryph
+  17994378:
+    script: Impish_Statue
+  17994379:
+    script: Flautist_Commander
+  17994380:
+    script: Impish_Statue
+  17994381:
+    script: Operative_Commander
+  17994382:
+    script: Impish_Statue
+  17994383:
+    script: Buccaneer_Commander
+  17994384:
+    script: Fire_Circle
+  17994385:
+    script: Disjoined_Mithra_qm
+  17994386:
+    script: Volte_Trainer
+  17994387:
+    script: Voltes_Cluster
+  17994388:
+    script: Volte_Beastmaster
+  17994389:
+    script: Voltes_Bomb
+  17994390:
+    script: Volte_Beastmaster
+  17994391:
+    script: Voltes_Bomb
+  17994392:
+    script: Volte_Summoner
+  17994393:
+    script: Voltes_Avatar
+  17994394:
+    script: Volte_Dragoon
+  17994395:
+    script: Voltes_Wyvern
+  17994396:
+    script: Volte_Dragoon
+  17994397:
+    script: Voltes_Wyvern
+  17994398:
+    script: Volte_Summoner
+  17994399:
+    script: Voltes_Avatar
+  17994400:
+    script: Ice_Circle
+  17994401:
+    script: Disjoined_Mithra_qm
+  17994402:
+    script: Volte_Warrior
+  17994403:
+    script: Volte_Warrior
+  17994404:
+    script: Volte_Black_Mage
+  17994405:
+    script: Volte_Ninja
+  17994406:
+    script: Volte_Ninja
+  17994407:
+    script: Volte_Red_Mage
+  17994408:
+    script: Air_Circle
+  17994409:
+    script: Disjoined_Mithra_qm
+  17994410:
+    script: Volte_Conductor
+  17994411:
+    script: Volte_Monk
+  17994412:
+    script: Volte_Monk
+  17994413:
+    script: Volte_White_Mage
+  17994414:
+    script: Volte_Thief
+  17994415:
+    script: Volte_Thief
+  17994416:
+    script: Volte_Bard
+  17994417:
+    script: Earth_Circle
+  17994418:
+    script: Disjoined_Mithra_qm
+  17994419:
+    script: Volte_Twirler
+  17994420:
+    script: Volte_Paladin
+  17994421:
+    script: Volte_Paladin
+  17994422:
+    script: Volte_Ranger
+  17994423:
+    script: Volte_Samurai
+  17994424:
+    script: Volte_Samurai
+  17994425:
+    script: Volte_Blue_Mage
+  17994426:
+    script: Thunder_Circle
+  17994427:
+    script: Disjoined_Mithra_qm
+  17994428:
+    script: Volte_Dark_Knight
+  17994429:
+    script: Volte_Dark_Knight
+  17994430:
+    script: Volte_Corsair
+  17994431:
+    script: Volte_Dancer
+  17994432:
+    script: Volte_Dancer
+  17994433:
+    script: Volte_Scholar
+  17994434:
+    script: Water_Circle
+  17994435:
+    script: Disjoined_Mithra_qm
+  17994436:
+    script: Volte_Duelist
+  17994437:
+    script: Volte_Paladin
+  17994438:
+    script: Volte_Ninja
+  17994439:
+    script: Volte_Geomancer
+  17994440:
+    script: Voltes_Luopan
+  17994441:
+    script: Volte_Rune_Fencer
+  17994442:
+    script: Volte_Rune_Fencer
+  17994443:
+    script: Volte_Geomancer
+  17994444:
+    script: Voltes_Luopan
+  17994445:
+    script: Light_Circle
+  17994446:
+    script: Disjoined_Mithra_qm
+  17994447:
+    script: Volte_Manipulator
+  17994448:
+    script: Voltes_Automaton
+  17994449:
+    script: Volte_Puppetmaster
+  17994450:
+    script: Voltes_Automaton
+  17994451:
+    script: Volte_Puppetmaster
+  17994452:
+    script: Voltes_Automaton
+  17994453:
+    script: Volte_Puppetmaster
+  17994454:
+    script: Voltes_Automaton
+  17994455:
+    script: Volte_Blue_Mage
+  17994456:
+    script: Volte_Blue_Mage
+  17994457:
+    script: Volte_Corsair
+  17994458:
+    script: Dark_Circle
+  17994459:
+    script: Disjoined_Mithra_qm
+  17994460:
+    script: Volte_Sailor
+  17994461:
+    script: Volte_White_Mage
+  17994462:
+    script: Volte_Black_Mage
+  17994463:
+    script: Volte_Red_Mage
+  17994464:
+    script: Volte_Scholar
+  17994465:
+    script: Volte_Bard
+  17994466:
+    script: Volte_Geomancer
+  17994467:
+    script: Voltes_Luopan
+  17994468:
+    script: Volte_Cleaver
+  17994469:
+    script: Volte_Fistfighter
+  17994470:
+    script: Volte_Priest
+  17994471:
+    script: Volte_Incanter
+  17994472:
+    script: Volte_Illusionist
+  17994473:
+    script: Volte_Vagabond
+  17994474:
+    script: Volte_Crusader
+  17994475:
+    script: Volte_Reaper
+  17994476:
+    script: Volte_Sniper
+  17994477:
+    script: Volte_Mononofu
+  17994478:
+    script: Volte_Shinobi
+  17994479:
+    script: Volte_Highwind
+  17994480:
+    script: Voltes_Wyvern
+  17994481:
+    script: Volte_Controller
+  17994482:
+    script: Voltes_Avatar
+  17994483:
+    script: Volte_Joiner
+  17994484:
+    script: Volte_Erudite
+  17994485:
+    script: Volte_Communer
+  17994486:
+    script: Voltes_Luopan
+  17994487:
+    script: Disjoined_Mithra
+  17994488:
+    script: Disjoineds_Odin
+  17994489:
+    script: Volte_Warrior
+  17994490:
+    script: Volte_Monk
+  17994491:
+    script: Volte_White_Mage
+  17994492:
+    script: Volte_Black_Mage
+  17994493:
+    script: Volte_Red_Mage
+  17994494:
+    script: Volte_Thief
+  17994495:
+    script: Volte_Paladin
+  17994496:
+    script: Volte_Dark_Knight
+  17994497:
+    script: Volte_Beastmaster
+  17994498:
+    script: Voltes_Bomb
+  17994499:
+    script: Volte_Bard
+  17994500:
+    script: Volte_Ranger
+  17994501:
+    script: Volte_Samurai
+  17994502:
+    script: Volte_Ninja
+  17994503:
+    script: Volte_Dragoon
+  17994504:
+    script: Voltes_Wyvern
+  17994505:
+    script: Volte_Summoner
+  17994506:
+    script: Voltes_Avatar
+  17994507:
+    script: Volte_Blue_Mage
+  17994508:
+    script: Volte_Corsair
+  17994509:
+    script: Volte_Puppetmaster
+  17994510:
+    script: Voltes_Automaton
+  17994511:
+    script: Volte_Dancer
+  17994512:
+    script: Volte_Scholar
+  17994513:
+    script: Volte_Geomancer
+  17994514:
+    script: Voltes_Luopan
+  17994515:
+    script: Volte_Rune_Fencer

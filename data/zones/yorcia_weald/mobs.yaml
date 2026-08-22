@@ -1,0 +1,2945 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Abashed_Heartwing:
+    id:            4811
+    species:       heartwing
+    spell_list_id: 21
+    skill_list_id: 343
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, war]
+      resists:
+        rank_element:
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2575
+        entity_flags: 1153
+        hitbox:          4
+      spawn:
+        respawn: 300
+
+  Arboreal_Bastion:
+    id:      4873
+    species: unclassified
+    type:    [notorious]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2806
+        entity_flags:  1153
+        animation_sub:    8
+        hitbox:          15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Bronzecap:
+    id:            4934
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Cheeky_Opo-opo:
+    id:            4930
+    species:       opo_opo
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags: 131
+        model_size:     1
+        hitbox:        18
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Corpse_Flower:
+    id:            4938
+    species:       rafflesia
+    skill_list_id: 207
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -1
+          earth:    3
+          thunder:  1
+          light:    2
+        rank_status:
+          silence:     -1
+          slow:         3
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2024
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Crabapple_Treant:
+    id:            4878
+    species:       treant
+    type:          [notorious]
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 395
+        entity_flags: 135
+        model_size:     1
+        hitbox:        37
+      spawn:
+        type: [scripted]
+
+  Droughted_Treant:
+    id:            4937
+    species:       treant
+    skill_list_id: 245
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 395
+        entity_flags: 131
+        model_size:     1
+        hitbox:        37
+      spawn:
+        respawn: 300
+
+  Fervid_Funguar:
+    id:            4875
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      spawn:
+        respawn: 300
+
+  Furfluff_Lapinion:
+    id:            4880
+    species:       rabbit
+    type:          [notorious]
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 1937
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+
+  Furibund_Rafflesia:
+    id:            4876
+    species:       rafflesia
+    type:          [notorious]
+    skill_list_id: 207
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          wind:    -1
+          earth:    3
+          thunder:  1
+          light:    2
+        rank_status:
+          silence:     -1
+          slow:         3
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2024
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Gnarled_Rampart:
+    id:      4877
+    species: unclassified
+    type:    [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2794
+        entity_flags:  133
+        animation_sub:  16
+        model_size:      2
+        hitbox:         40
+      spawn:
+        type: [scripted]
+
+  Grove_Wasp:
+    id:            4771
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1936
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Gully_Toad:
+    id:            4947
+    species:       blue_poroggo
+    type:          [fished]
+    skill_list_id: 196
+    attributes:
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 2239
+        entity_flags: 129
+      spawn:
+        type: [scripted]
+
+  Inquisitor_Mortuus:
+    id:            6924
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:   equipped
+          race:   3
+          face:   28
+          head:   4422
+          body:   8521
+          hands:  12384
+          legs:   16568
+          feet:   20537
+          main:   25189
+          sub:    28672
+          ranged: 32883
+        entity_flags: 133
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Irksome_Leafkin:
+    id:            4870
+    species:       leafkin
+    skill_list_id: 455
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    8
+          light:   11
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      2
+          slow:         4
+          poison:       8
+          light_sleep: 11
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2530
+        entity_flags:  1153
+        animation_sub:    8
+        hitbox:           6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Jovial_Ahriman:
+    id:            6925
+    species:       ahriman
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          light: -2
+          dark:   6
+        rank_status:
+          silence:     11
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags: 133
+        model_size:     2
+        hitbox:        27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Larkish_Opo-opo:
+    id:            4879
+    species:       opo_opo
+    type:          [notorious]
+    skill_list_id: 188
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -2
+          ice:   -3
+          wind:  -1
+          water: -2
+          dark:  -2
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -1
+          poison:     -2
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 416
+        entity_flags: 131
+        model_size:     1
+        hitbox:        18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Leaflick_Lapinion_YW:
+    id:            5357
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 1937
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         12
+      spawn:
+        respawn: 300
+
+  Loyal_Snapweed:
+    id:            4871
+    species:       snapweed
+    skill_list_id: 464
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:     4
+          earth:    2
+          thunder:  4
+          water:    3
+          light:    2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:         2
+          poison:       3
+          light_sleep:  2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2550
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Luckybug:
+    id:            4939
+    species:       ladybug
+    skill_list_id: 170
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [thf, thf]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:  4
+          dark: 4
+        rank_status:
+          paralyze:   4
+          bind:       4
+          dark_sleep: 4
+          blind:      4
+      render:
+        look:
+          type:  standard
+          model: 2019
+        entity_flags: 643
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Morseiu:
+    id:            6923
+    species:       snapweed
+    type:          [notorious]
+    skill_list_id: 464
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:     4
+          earth:    2
+          thunder:  4
+          water:    3
+          light:    2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:         2
+          poison:       3
+          light_sleep:  2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2550
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Nascent_Sapling:
+    id:            4940
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 900
+
+  Numbing_Blossom:
+    id:            5013
+    species:       unclassified
+    type:          [notorious]
+    skill_list_id: 341
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2776
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Rustled_Panopt:
+    id:            4769
+    species:       panopt
+    spell_list_id: 9
+    skill_list_id: 376
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          ice:     2
+          wind:    4
+          earth:   2
+          thunder: 1
+          water:   2
+          light:   3
+          dark:    5
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     4
+          slow:        2
+          poison:      2
+          light_sleep: 3
+          dark_sleep:  5
+          blind:       5
+      render:
+        look:
+          type:  standard
+          model: 517
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Saptrap:
+    id:            4948
+    species:       flytrap
+    skill_list_id: 114
+    attributes:
+      combat:
+        skill: polearm
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -3
+          ice:   -1
+          wind:   3
+          water:  3
+          light:  3
+          dark:  -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1345
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Shade-speckled_Spider:
+    id:            4944
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 312
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Shadowscourge_Umbril:
+    id:            4936
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  129
+        animation_sub:  21
+        name_prefix:     2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 180
+        type:    [at_night]
+      stats:
+        mp: 9999
+
+  Sloshmouth_Snapweed:
+    id:            4945
+    species:       snapweed
+    skill_list_id: 464
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:     4
+          earth:    2
+          thunder:  4
+          water:    3
+          light:    2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:         2
+          poison:       3
+          light_sleep:  2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2550
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Snapweed:
+    id:            4946
+    species:       snapweed
+    skill_list_id: 464
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:     4
+          earth:    2
+          thunder:  4
+          water:    3
+          light:    2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:         2
+          poison:       3
+          light_sleep:  2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2550
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:          8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Soiled_Funguar:
+    id:            4770
+    species:       funguar
+    type:          [notorious]
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2249
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      spawn:
+        type: [scripted]
+
+  Stolid_Byrgen:
+    id:            4941
+    species:       dark_elemental
+    spell_list_id: 21
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 2148
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         15
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Swollen_Chigoe:
+    id:            4933
+    species:       chigoe
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: club
+        delay: 12
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1747
+        entity_flags:  2689
+        animation_sub:    8
+        name_vis:        24
+        hitbox:           5
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Tenacious_Panopt:
+    id:            4872
+    species:       panopt
+    type:          [notorious]
+    spell_list_id: 9
+    skill_list_id: 376
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          ice:     2
+          wind:    4
+          earth:   2
+          thunder: 1
+          water:   2
+          light:   3
+          dark:    5
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     4
+          slow:        2
+          poison:      2
+          light_sleep: 3
+          dark_sleep:  5
+          blind:       5
+      render:
+        look:
+          type:  standard
+          model: 517
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Tight-lipped_Flytrap:
+    id:            4874
+    species:       flytrap
+    type:          [battlefield]
+    skill_list_id: 114
+    attributes:
+      combat:
+        skill: polearm
+        delay: 200
+      resists:
+        rank_element:
+          fire:  -3
+          ice:   -1
+          wind:   3
+          water:  3
+          light:  3
+          dark:  -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      3
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1345
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Twitherym:
+    id:            4935
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2535
+        entity_flags: 131
+        name_prefix:   64
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 900
+
+  Twitherym_Windstorm:
+    id:            4882
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2536
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Underwood_Eruca:
+    id:            4772
+    species:       eruca
+    type:          [notorious]
+    skill_list_id: 107
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -2
+          dark:    -1
+        rank_status:
+          paralyze:   -1
+          bind:       -1
+          silence:    -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 406
+        entity_flags:  1155
+        animation_sub:   12
+        model_size:       1
+        hitbox:          15
+      spawn:
+        respawn: 300
+
+  Uprooted_Sapling:
+    id:            4881
+    species:       sapling
+    type:          [notorious]
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Yumcax:
+    id:            4926
+    species:       yggdreant
+    skill_list_id: 465
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          ice:      6
+          wind:     2
+          earth:   11
+          thunder: 11
+          water:   10
+          light:    4
+          dark:     6
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:        11
+          poison:      10
+          light_sleep:  4
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 2510
+        entity_flags: 153
+        hitbox:        33
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 999
+
+spawns:
+  17854465:
+    template: Gully_Toad
+    at:       [1.000, 1.000, 1.000]
+  17854466:
+    template: Gully_Toad
+    at:       [1.000, 1.000, 1.000]
+  17854467:
+    template: Gully_Toad
+    at:       [1.000, 1.000, 1.000]
+  17854468:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17854469:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17854470:
+    template: Snapweed
+    at:       [256.890, 3.709, 222.669, 203]
+    level:    [107, 109]
+  17854471:
+    template: Snapweed
+    at:       [254.920, 3.714, 226.300, 133]
+    level:    [107, 109]
+  17854472:
+    template: Snapweed
+    at:       [262.860, 3.108, 221.039, 4]
+    level:    [107, 109]
+  17854473:
+    template: Snapweed
+    at:       [325.710, 0.079, 219.861, 64]
+    level:    [107, 109]
+  17854474:
+    template: Snapweed
+    at:       [302.500, -2.987, 219.292, 82]
+    level:    [107, 109]
+  17854475:
+    template: Numbing_Blossom
+    at:       [318.940, -0.500, 228.759, 108]
+    level:    [1, 1]
+  17854476:
+    template: Numbing_Blossom
+    at:       [322.660, -0.188, 214.606, 105]
+    level:    [1, 1]
+  17854477:
+    template: Numbing_Blossom
+    at:       [325.730, -0.451, 209.998, 49]
+    level:    [1, 1]
+  17854478:
+    template: Saptrap
+    at:       [348.510, -0.451, 247.199, 33]
+    level:    [107, 109]
+  17854479:
+    template: Saptrap
+    at:       [354.850, -0.397, 244.921, 155]
+    level:    [107, 109]
+  17854480:
+    template: Saptrap
+    at:       [350.900, -0.620, 242.320, 79]
+    level:    [107, 109]
+  17854481:
+    template: Corpse_Flower
+    at:       [373.800, -0.107, 269.832, 127]
+    level:    [107, 109]
+  17854482:
+    template: Corpse_Flower
+    at:       [373.760, -0.109, 269.619, 131]
+    level:    [107, 109]
+  17854483:
+    template: Corpse_Flower
+    at:       [384.530, -0.259, 278.139, 138]
+    level:    [107, 109]
+  17854484:
+    template: Snapweed
+    at:       [333.080, -1.011, 256.618, 38]
+    level:    [107, 109]
+  17854485:
+    template: Snapweed
+    at:       [333.230, -0.995, 256.263, 232]
+    level:    [107, 109]
+  17854486:
+    template: Snapweed
+    at:       [318.190, -0.693, 271.631, 25]
+    level:    [107, 109]
+  17854487:
+    template: Snapweed
+    at:       [325.990, -0.363, 271.843, 254]
+    level:    [107, 109]
+  17854488:
+    template: Saptrap
+    at:       [280.930, -0.032, 300.385, 104]
+    level:    [107, 109]
+  17854489:
+    template: Saptrap
+    at:       [288.870, -0.168, 293.050, 253]
+    level:    [107, 109]
+  17854490:
+    template: Corpse_Flower
+    at:       [293.170, -0.052, 292.524, 135]
+    level:    [107, 109]
+  17854491:
+    template: Corpse_Flower
+    at:       [281.410, -0.037, 300.588, 101]
+    level:    [107, 109]
+  17854492:
+    template: Snapweed
+    at:       [350.080, -0.578, 366.059, 51]
+    level:    [107, 109]
+  17854493:
+    template: Snapweed
+    at:       [335.340, -0.279, 357.682, 157]
+    level:    [107, 109]
+  17854494:
+    template: Snapweed
+    at:       [344.080, 0.365, 352.671, 7]
+    level:    [107, 109]
+  17854495:
+    template: Corpse_Flower
+    at:       [310.440, -2.148, 372.632, 186]
+    level:    [107, 109]
+  17854496:
+    template: Corpse_Flower
+    at:       [318.120, -0.549, 373.786, 190]
+    level:    [107, 109]
+  17854497:
+    template: Shadowscourge_Umbril
+    at:       [350.390, -0.460, 362.113, 222]
+    level:    [107, 109]
+  17854498:
+    template: Shadowscourge_Umbril
+    at:       [414.100, 0.386, 423.049, 27]
+    level:    [107, 109]
+  17854499:
+    template: Shadowscourge_Umbril
+    at:       [365.850, -0.569, 430.540, 77]
+    level:    [107, 109]
+  17854500:
+    template: Corpse_Flower
+    at:       [422.330, 0.347, 427.333, 54]
+    level:    [107, 109]
+  17854501:
+    template: Corpse_Flower
+    at:       [367.100, -0.398, 434.501, 117]
+    level:    [107, 109]
+  17854502:
+    template: Corpse_Flower
+    at:       [393.970, -0.314, 406.329, 161]
+    level:    [107, 109]
+  17854503:
+    template: Corpse_Flower
+    at:       [397.760, -0.323, 398.371, 216]
+    level:    [107, 109]
+  17854504:
+    template: Corpse_Flower
+    at:       [395.860, -0.291, 406.928, 110]
+    level:    [107, 109]
+  17854505:
+    template: Corpse_Flower
+    at:       [234.130, 1.093, 414.497, 160]
+    level:    [107, 109]
+  17854506:
+    template: Corpse_Flower
+    at:       [233.100, 1.495, 416.092, 54]
+    level:    [107, 109]
+  17854507:
+    template: Shadowscourge_Umbril
+    at:       [237.220, -0.219, 411.329, 15]
+    level:    [107, 109]
+  17854508:
+    template: Saptrap
+    at:       [257.020, 3.142, 425.351, 127]
+    level:    [107, 109]
+  17854509:
+    template: Saptrap
+    at:       [245.520, 0.812, 418.441, 36]
+    level:    [107, 109]
+  17854510:
+    template: Saptrap
+    at:       [252.790, 2.744, 423.002, 221]
+    level:    [107, 109]
+  17854511:
+    template: Twitherym
+    at:       [300.120, 3.518, 334.278, 91]
+    level:    [107, 109]
+  17854512:
+    template: Twitherym
+    at:       [304.930, 3.855, 344.570, 204]
+    level:    [107, 109]
+  17854513:
+    template: Twitherym
+    at:       [293.000, 2.161, 344.833, 189]
+    level:    [107, 109]
+  17854514:
+    template: Twitherym
+    at:       [187.600, 0.175, 308.734, 81]
+    level:    [107, 109]
+  17854515:
+    template: Twitherym
+    at:       [208.370, -0.481, 321.613, 253]
+    level:    [107, 109]
+  17854516:
+    template: Corpse_Flower
+    at:       [209.920, 0.091, 325.730, 215]
+    level:    [107, 109]
+  17854517:
+    template: Snapweed
+    at:       [210.610, 2.515, 259.649, 31]
+    level:    [107, 109]
+  17854518:
+    template: Snapweed
+    at:       [178.360, -0.495, 259.988, 33]
+    level:    [107, 109]
+  17854519:
+    template: Snapweed
+    at:       [210.570, 2.320, 258.472, 131]
+    level:    [107, 109]
+  17854520:
+    template: Snapweed
+    at:       [205.740, 0.888, 264.653, 200]
+    level:    [107, 109]
+  17854521:
+    template: Stolid_Byrgen
+    at:       [145.010, -0.314, 273.101, 199]
+    level:    [107, 109]
+  17854522:
+    template: Saptrap
+    at:       [144.920, -0.298, 273.381, 17]
+    level:    [107, 109]
+  17854523:
+    template: Saptrap
+    at:       [135.260, -0.361, 273.929, 137]
+    level:    [107, 109]
+  17854524:
+    template: Saptrap
+    at:       [204.450, 0.873, 258.158, 199]
+    level:    [107, 109]
+  17854525:
+    template: Saptrap
+    at:       [152.670, -0.593, 273.027, 175]
+    level:    [107, 109]
+  17854526:
+    template: Twitherym
+    at:       [203.410, -0.224, 206.914, 248]
+    level:    [107, 109]
+  17854527:
+    template: Twitherym
+    at:       [207.250, -0.597, 194.996, 225]
+    level:    [107, 109]
+  17854528:
+    template: Twitherym
+    at:       [195.710, -0.426, 200.326, 165]
+    level:    [107, 109]
+  17854529:
+    template: Twitherym
+    at:       [212.470, 0.064, 207.345, 205]
+    level:    [107, 109]
+  17854530:
+    template: Corpse_Flower
+    at:       [209.800, -0.476, 202.259, 245]
+    level:    [107, 109]
+  17854531:
+    template: Cheeky_Opo-opo
+    at:       [34.469, 1.204, 386.596, 67]
+    level:    [107, 109]
+  17854532:
+    template: Cheeky_Opo-opo
+    at:       [34.439, 1.332, 385.786, 186]
+    level:    [107, 109]
+  17854533:
+    template: Cheeky_Opo-opo
+    at:       [46.823, -0.209, 383.178, 224]
+    level:    [107, 109]
+  17854534:
+    template: Cheeky_Opo-opo
+    at:       [51.603, -0.582, 387.994, 224]
+    level:    [107, 109]
+  17854535:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [61.300, -3.033, 418.515, 231]
+    level:    [107, 109]
+  17854536:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [59.069, -3.068, 425.119, 161]
+    level:    [107, 109]
+  17854537:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [22.799, -2.895, 421.864, 76]
+    level:    [107, 109]
+  17854538:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [58.916, -3.098, 422.484, 121]
+    level:    [107, 109]
+  17854539:
+    template: Cheeky_Opo-opo
+    at:       [115.130, -0.107, 468.529, 1]
+    level:    [107, 109]
+  17854540:
+    template: Cheeky_Opo-opo
+    at:       [115.580, -0.544, 487.423, 73]
+    level:    [107, 109]
+  17854541:
+    template: Cheeky_Opo-opo
+    at:       [125.700, -0.004, 461.653, 161]
+    level:    [107, 109]
+  17854542:
+    template: Cheeky_Opo-opo
+    at:       [125.390, -0.009, 463.071, 80]
+    level:    [107, 109]
+  17854543:
+    template: Stolid_Byrgen
+    at:       [107.330, -0.104, 476.152, 61]
+    level:    [107, 109]
+  17854544:
+    template: Saptrap
+    at:       [128.240, -0.199, 457.548, 231]
+    level:    [107, 109]
+  17854545:
+    template: Saptrap
+    at:       [110.260, 0.123, 454.007, 126]
+    level:    [107, 109]
+  17854546:
+    template: Saptrap
+    at:       [114.050, 0.509, 462.015, 134]
+    level:    [107, 109]
+  17854547:
+    template: Saptrap
+    at:       [117.000, 0.301, 462.937, 47]
+    level:    [107, 109]
+  17854548:
+    template: Snapweed
+    at:       [-22.350, 1.488, 373.585, 219]
+    level:    [107, 109]
+  17854549:
+    template: Snapweed
+    at:       [-28.230, 1.244, 406.428, 179]
+    level:    [107, 109]
+  17854550:
+    template: Snapweed
+    at:       [-46.180, -1.152, 370.904, 26]
+    level:    [107, 109]
+  17854551:
+    template: Cheeky_Opo-opo
+    at:       [-20.730, 1.828, 346.290, 59]
+    level:    [107, 109]
+  17854552:
+    template: Cheeky_Opo-opo
+    at:       [-26.260, 3.079, 342.785, 66]
+    level:    [107, 109]
+  17854553:
+    template: Cheeky_Opo-opo
+    at:       [-21.320, 3.692, 335.915, 21]
+    level:    [107, 109]
+  17854554:
+    template: Cheeky_Opo-opo
+    at:       [-150.900, -0.259, 437.308, 33]
+    level:    [107, 109]
+  17854555:
+    template: Cheeky_Opo-opo
+    at:       [-133.400, -0.279, 449.097, 139]
+    level:    [107, 109]
+  17854556:
+    template: Cheeky_Opo-opo
+    at:       [-159.400, -0.143, 428.493, 207]
+    level:    [107, 109]
+  17854557:
+    template: Cheeky_Opo-opo
+    at:       [-134.100, 0.040, 426.438, 8]
+    level:    [107, 109]
+  17854558:
+    template: Saptrap
+    at:       [-105.100, -1.103, 353.781, 162]
+    level:    [107, 109]
+  17854559:
+    template: Saptrap
+    at:       [-101.900, 1.149, 366.152, 126]
+    level:    [107, 109]
+  17854560:
+    template: Cheeky_Opo-opo
+    at:       [-144.200, 3.793, 300.819, 14]
+    level:    [107, 109]
+  17854561:
+    template: Cheeky_Opo-opo
+    at:       [-140.200, 3.780, 293.503, 18]
+    level:    [107, 109]
+  17854562:
+    template: Cheeky_Opo-opo
+    at:       [-140.900, 3.467, 300.868, 3]
+    level:    [107, 109]
+  17854563:
+    template: Cheeky_Opo-opo
+    at:       [-41.490, -0.050, 259.555, 191]
+    level:    [107, 109]
+  17854564:
+    template: Cheeky_Opo-opo
+    at:       [-73.030, -0.286, 262.425, 130]
+    level:    [107, 109]
+  17854565:
+    template: Cheeky_Opo-opo
+    at:       [-73.660, -0.264, 262.570, 65]
+    level:    [107, 109]
+  17854566:
+    template: Cheeky_Opo-opo
+    at:       [-29.580, 0.131, 262.471, 105]
+    level:    [107, 109]
+  17854567:
+    template: Cheeky_Opo-opo
+    at:       [-82.240, -0.379, 270.555, 253]
+    level:    [107, 109]
+  17854568:
+    template: Cheeky_Opo-opo
+    at:       [-38.820, -0.123, 258.967, 218]
+    level:    [107, 109]
+  17854569:
+    template: Cheeky_Opo-opo
+    at:       [-26.240, 0.074, 254.651]
+    level:    [107, 109]
+  17854570:
+    template: Cheeky_Opo-opo
+    at:       [-86.640, 0.519, 270.466, 242]
+    level:    [107, 109]
+  17854571:
+    template: Stolid_Byrgen
+    at:       [-30.560, -0.128, 254.542]
+    level:    [107, 109]
+  17854572:
+    template: Snapweed
+    at:       [-10.990, -0.209, 247.320, 48]
+    level:    [107, 109]
+  17854573:
+    template: Snapweed
+    at:       [-10.790, -0.017, 237.720, 203]
+    level:    [107, 109]
+  17854574:
+    template: Snapweed
+    at:       [-5.855, 0.001, 234.550, 127]
+    level:    [107, 109]
+  17854575:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [24.659, -2.752, 305.533, 217]
+    level:    [107, 109]
+  17854576:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [17.222, 1.344, 326.049, 209]
+    level:    [107, 109]
+  17854577:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [21.363, -2.585, 306.875, 67]
+    level:    [107, 109]
+  17854578:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [13.654, -2.844, 305.226, 190]
+    level:    [107, 109]
+  17854579:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [22.275, -2.704, 305.936, 118]
+    level:    [107, 109]
+  17854580:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [-43.320, -0.367, 210.041, 31]
+    level:    [107, 109]
+  17854581:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [-26.210, -0.158, 210.233, 57]
+    level:    [107, 109]
+  17854582:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [-46.250, -0.097, 209.287, 194]
+    level:    [107, 109]
+  17854583:
+    template: Leaflick_Lapinion_YW
+    script:   Leaflick_Lapinion
+    at:       [-26.060, -1.100, 214.513, 192]
+    level:    [107, 109]
+  17854584:
+    template: Bronzecap
+    at:       [354.290, -0.532, 69.133, 135]
+    level:    [107, 109]
+  17854585:
+    template: Bronzecap
+    at:       [344.910, -0.379, 65.363, 6]
+    level:    [107, 109]
+  17854586:
+    template: Bronzecap
+    at:       [330.990, -1.587, 65.176, 172]
+    level:    [107, 109]
+  17854587:
+    template: Bronzecap
+    at:       [373.250, 2.314, 56.723, 117]
+    level:    [107, 109]
+  17854588:
+    template: Bronzecap
+    at:       [340.900, -0.972, 32.549, 193]
+    level:    [107, 109]
+  17854589:
+    template: Bronzecap
+    at:       [354.630, -0.321, 65.411, 151]
+    level:    [107, 109]
+  17854590:
+    template: Twitherym
+    at:       [305.750, -1.626, -31.621, 224]
+    level:    [107, 109]
+  17854591:
+    template: Twitherym
+    at:       [301.170, -3.109, -58.452, 60]
+    level:    [107, 109]
+  17854592:
+    template: Twitherym
+    at:       [295.130, -2.940, -21.809, 157]
+    level:    [107, 109]
+  17854593:
+    template: Twitherym
+    at:       [308.690, -0.763, -43.639, 252]
+    level:    [107, 109]
+  17854594:
+    template: Saptrap
+    at:       [378.430, -2.944, -13.682, 220]
+    level:    [107, 109]
+  17854595:
+    template: Saptrap
+    at:       [363.760, -0.616, -26.488, 197]
+    level:    [107, 109]
+  17854596:
+    template: Saptrap
+    at:       [358.520, -0.465, -27.833, 193]
+    level:    [107, 109]
+  17854597:
+    template: Saptrap
+    at:       [342.020, -2.214, -11.520, 151]
+    level:    [107, 109]
+  17854598:
+    template: Saptrap
+    at:       [372.140, -2.621, -19.745, 199]
+    level:    [107, 109]
+  17854599:
+    template: Bronzecap
+    at:       [370.450, 0.390, -105.160, 129]
+    level:    [107, 109]
+  17854600:
+    template: Bronzecap
+    at:       [373.050, 0.300, -108.180, 29]
+    level:    [107, 109]
+  17854601:
+    template: Bronzecap
+    at:       [367.640, 0.747, -96.125, 50]
+    level:    [107, 109]
+  17854602:
+    template: Shadowscourge_Umbril
+    at:       [380.880, 1.884, -106.300, 118]
+    level:    [107, 109]
+  17854603:
+    template: Snapweed
+    at:       [373.010, 0.984, -104.720, 47]
+    level:    [107, 109]
+  17854604:
+    template: Snapweed
+    at:       [369.340, 0.575, -90.387, 237]
+    level:    [107, 109]
+  17854605:
+    template: Snapweed
+    at:       [380.350, -3.150, -59.818, 138]
+    level:    [107, 109]
+  17854606:
+    template: Snapweed
+    at:       [372.790, 0.937, -105.080, 40]
+    level:    [107, 109]
+  17854607:
+    template: Snapweed
+    at:       [369.900, 0.407, -105.470, 124]
+    level:    [107, 109]
+  17854608:
+    template: Snapweed
+    at:       [377.610, 1.169, -85.843, 199]
+    level:    [107, 109]
+  17854609:
+    template: Bronzecap
+    at:       [434.090, -0.598, -82.115, 162]
+    level:    [107, 109]
+  17854610:
+    template: Bronzecap
+    at:       [445.610, -0.560, -118.260, 160]
+    level:    [107, 109]
+  17854611:
+    template: Bronzecap
+    at:       [441.780, -0.057, -123.240, 188]
+    level:    [107, 109]
+  17854612:
+    template: Shadowscourge_Umbril
+    at:       [429.820, -0.277, -94.223, 187]
+    level:    [107, 109]
+  17854613:
+    template: Shadowscourge_Umbril
+    at:       [429.860, -0.279, -94.143, 63]
+    level:    [107, 109]
+  17854614:
+    template: Shadowscourge_Umbril
+    at:       [439.950, 0.434, -98.929, 23]
+    level:    [107, 109]
+  17854615:
+    template: Swollen_Chigoe
+    at:       [217.990, 1.382, -86.800, 190]
+    level:    [115, 117]
+  17854616:
+    template: Swollen_Chigoe
+    at:       [221.080, -0.104, -74.652]
+    level:    [115, 117]
+  17854617:
+    template: Swollen_Chigoe
+    at:       [227.170, -0.014, -71.262, 160]
+    level:    [115, 117]
+  17854618:
+    template: Swollen_Chigoe
+    at:       [229.570, -0.437, -82.049, 189]
+    level:    [115, 117]
+  17854619:
+    template: Swollen_Chigoe
+    at:       [214.530, -0.101, -74.001, 76]
+    level:    [115, 117]
+  17854620:
+    template: Swollen_Chigoe
+    at:       [227.520, -0.108, -63.731, 217]
+    level:    [115, 117]
+  17854621:
+    template: Swollen_Chigoe
+    at:       [262.040, -2.279, -54.555, 210]
+    level:    [115, 117]
+  17854622:
+    template: Swollen_Chigoe
+    at:       [219.200, -0.904, -62.540, 121]
+    level:    [115, 117]
+  17854623:
+    template: Corpse_Flower
+    at:       [246.440, -0.926, -57.951, 62]
+    level:    [107, 109]
+  17854624:
+    template: Droughted_Treant
+    at:       [275.500, 0.219, -183.390, 184]
+    level:    [107, 109]
+  17854625:
+    template: Droughted_Treant
+    at:       [293.210, -2.591, -178.140, 224]
+    level:    [107, 109]
+  17854626:
+    template: Droughted_Treant
+    at:       [275.230, 0.230, -183.080, 194]
+    level:    [107, 109]
+  17854627:
+    template: Snapweed
+    at:       [338.960, -2.865, -179.490, 242]
+    level:    [107, 109]
+  17854628:
+    template: Snapweed
+    at:       [333.960, -1.881, -189.390, 68]
+    level:    [107, 109]
+  17854629:
+    template: Snapweed
+    at:       [345.650, 0.797, -213.410, 200]
+    level:    [107, 109]
+  17854630:
+    template: Snapweed
+    at:       [333.420, -1.526, -191.010, 200]
+    level:    [107, 109]
+  17854631:
+    template: Droughted_Treant
+    at:       [414.540, 0.484, -221.880, 118]
+    level:    [107, 109]
+  17854632:
+    template: Droughted_Treant
+    at:       [410.380, -0.150, -237.630, 120]
+    level:    [107, 109]
+  17854633:
+    template: Nascent_Sapling
+    at:       [403.160, -0.094, -228.200, 193]
+    level:    [107, 109]
+  17854634:
+    template: Nascent_Sapling
+    at:       [416.920, 0.444, -214.220, 252]
+    level:    [107, 109]
+  17854635:
+    template: Shadowscourge_Umbril
+    at:       [408.540, 0.413, -223.320, 245]
+    level:    [107, 109]
+  17854636:
+    template: Twitherym
+    at:       [337.390, -0.112, -278.190, 142]
+    level:    [107, 109]
+  17854637:
+    template: Twitherym
+    at:       [345.070, -2.523, -262.180, 206]
+    level:    [107, 109]
+  17854638:
+    template: Twitherym
+    at:       [334.170, -0.289, -281.060, 59]
+    level:    [107, 109]
+  17854639:
+    template: Twitherym
+    at:       [337.320, -2.825, -265.760, 210]
+    level:    [107, 109]
+  17854640:
+    template: Snapweed
+    at:       [314.410, -0.558, -320.600, 221]
+    level:    [107, 109]
+  17854641:
+    template: Snapweed
+    at:       [313.030, -0.583, -322.340, 196]
+    level:    [107, 109]
+  17854642:
+    template: Snapweed
+    at:       [328.880, -0.532, -318.380, 220]
+    level:    [107, 109]
+  17854643:
+    template: Snapweed
+    at:       [389.370, 0.032, -373.990, 43]
+    level:    [107, 109]
+  17854644:
+    template: Snapweed
+    at:       [403.870, -0.323, -370.040, 251]
+    level:    [107, 109]
+  17854645:
+    template: Snapweed
+    at:       [389.700, -0.379, -389.550, 70]
+    level:    [107, 109]
+  17854646:
+    template: Droughted_Treant
+    at:       [400.940, -0.145, -389.240, 9]
+    level:    [107, 109]
+  17854647:
+    template: Droughted_Treant
+    at:       [394.000, 0.022, -387.750, 36]
+    level:    [107, 109]
+  17854648:
+    template: Saptrap
+    at:       [273.620, -0.079, -289.750, 67]
+    level:    [107, 109]
+  17854649:
+    template: Saptrap
+    at:       [274.850, -0.155, -283.840, 71]
+    level:    [107, 109]
+  17854650:
+    template: Saptrap
+    at:       [310.160, -0.014, -295.470, 193]
+    level:    [107, 109]
+  17854651:
+    template: Saptrap
+    at:       [275.650, -0.787, -270.710, 200]
+    level:    [107, 109]
+  17854652:
+    template: Saptrap
+    at:       [281.370, -0.488, -281.200, 151]
+    level:    [107, 109]
+  17854653:
+    template: Droughted_Treant
+    at:       [218.380, -0.126, -229.580, 65]
+    level:    [107, 109]
+  17854654:
+    template: Droughted_Treant
+    at:       [213.940, -0.351, -238.960, 13]
+    level:    [107, 109]
+  17854655:
+    template: Droughted_Treant
+    at:       [215.600, -0.314, -291.150, 28]
+    level:    [107, 109]
+  17854656:
+    template: Stolid_Byrgen
+    at:       [227.140, -0.298, -229.820, 163]
+    level:    [107, 109]
+  17854657:
+    template: Nascent_Sapling
+    at:       [219.160, -0.172, -285.810, 165]
+    level:    [107, 109]
+  17854658:
+    template: Nascent_Sapling
+    at:       [217.690, -0.389, -257.370, 72]
+    level:    [107, 109]
+  17854659:
+    template: Nascent_Sapling
+    at:       [219.910, -0.153, -276.000, 231]
+    level:    [107, 109]
+  17854660:
+    template: Nascent_Sapling
+    at:       [230.130, -0.515, -282.510, 201]
+    level:    [107, 109]
+  17854661:
+    template: Nascent_Sapling
+    at:       [214.740, -0.335, -283.770, 234]
+    level:    [107, 109]
+  17854662:
+    template: Nascent_Sapling
+    at:       [213.850, -0.356, -290.700, 253]
+    level:    [107, 109]
+  17854663:
+    template: Snapweed
+    at:       [175.720, -0.204, -215.870, 54]
+    level:    [107, 109]
+  17854664:
+    template: Snapweed
+    at:       [181.010, 0.041, -193.690, 125]
+    level:    [107, 109]
+  17854665:
+    template: Nascent_Sapling
+    at:       [177.770, 0.014, -194.960, 144]
+    level:    [107, 109]
+  17854666:
+    template: Nascent_Sapling
+    at:       [188.920, -0.589, -209.260, 64]
+    level:    [107, 109]
+  17854667:
+    template: Numbing_Blossom
+    at:       [167.380, -0.409, -153.920, 121]
+    level:    [1, 1]
+  17854668:
+    template: Numbing_Blossom
+    at:       [169.290, -0.142, -166.690, 68]
+    level:    [1, 1]
+  17854669:
+    template: Numbing_Blossom
+    at:       [159.480, -0.497, -160.440, 51]
+    level:    [1, 1]
+  17854670:
+    template: Snapweed
+    at:       [21.923, -0.991, -153.510, 97]
+    level:    [107, 109]
+  17854671:
+    template: Snapweed
+    at:       [24.533, -2.999, -142.170, 253]
+    level:    [107, 109]
+  17854672:
+    template: Snapweed
+    at:       [20.416, -2.072, -149.860, 248]
+    level:    [107, 109]
+  17854673:
+    template: Snapweed
+    at:       [25.131, -0.272, -161.980, 58]
+    level:    [107, 109]
+  17854674:
+    template: Luckybug
+    at:       [-63.120, -1.203, -148.940, 27]
+    level:    [107, 109]
+  17854675:
+    template: Luckybug
+    at:       [-47.510, -0.064, -145.430, 34]
+    level:    [107, 109]
+  17854676:
+    template: Luckybug
+    at:       [-51.630, -0.444, -142.640, 1]
+    level:    [107, 109]
+  17854677:
+    template: Luckybug
+    at:       [-59.330, -0.467, -138.730, 253]
+    level:    [107, 109]
+  17854678:
+    template: Luckybug
+    at:       [-33.790, -1.029, -142.710, 156]
+    level:    [107, 109]
+  17854679:
+    template: Luckybug
+    at:       [-25.650, -2.720, -137.650, 99]
+    level:    [107, 109]
+  17854680:
+    template: Corpse_Flower
+    at:       [-65.350, -0.321, -126.880, 130]
+    level:    [107, 109]
+  17854681:
+    template: Corpse_Flower
+    at:       [-65.890, -0.323, -133.740, 62]
+    level:    [107, 109]
+  17854682:
+    template: Underwood_Eruca
+    at:       [58.819, -0.082, -79.722, 173]
+    level:    [107, 109]
+  17854683:
+    template: Underwood_Eruca
+    at:       [59.291, -0.070, -78.980, 136]
+    level:    [107, 109]
+  17854684:
+    template: Underwood_Eruca
+    at:       [58.351, 0.701, -109.300, 62]
+    level:    [107, 109]
+  17854685:
+    template: Underwood_Eruca
+    at:       [54.084, 0.462, -105.940, 134]
+    level:    [107, 109]
+  17854686:
+    template: Underwood_Eruca
+    at:       [70.206, 0.190, -101.200, 63]
+    level:    [107, 109]
+  17854687:
+    template: Shade-speckled_Spider
+    at:       [93.883, 2.089, -93.877, 62]
+    level:    [107, 109]
+  17854688:
+    template: Shade-speckled_Spider
+    at:       [101.650, 2.315, -89.709, 255]
+    level:    [107, 109]
+  17854689:
+    template: Shade-speckled_Spider
+    at:       [109.750, 1.944, -93.619, 29]
+    level:    [107, 109]
+  17854690:
+    template: Shade-speckled_Spider
+    at:       [94.835, 1.955, -98.488, 107]
+    level:    [107, 109]
+  17854691:
+    template: Shade-speckled_Spider
+    at:       [91.319, -0.497, -77.620, 133]
+    level:    [107, 109]
+  17854692:
+    template: Numbing_Blossom
+    at:       [38.099, -0.293, 25.667, 124]
+    level:    [1, 1]
+  17854693:
+    template: Numbing_Blossom
+    at:       [21.724, 0.103, 29.483, 5]
+    level:    [1, 1]
+  17854694:
+    template: Numbing_Blossom
+    at:       [37.610, -0.076, 21.672, 91]
+    level:    [1, 1]
+  17854695:
+    template: Shade-speckled_Spider
+    at:       [13.729, -0.312, 29.443, 189]
+    level:    [107, 109]
+  17854696:
+    template: Shade-speckled_Spider
+    at:       [26.165, -1.141, 14.770, 60]
+    level:    [107, 109]
+  17854697:
+    template: Shade-speckled_Spider
+    at:       [57.583, 0.397, 26.490, 93]
+    level:    [107, 109]
+  17854698:
+    template: Numbing_Blossom
+    at:       [28.645, 0.623, 69.136, 122]
+    level:    [1, 1]
+  17854699:
+    template: Numbing_Blossom
+    at:       [38.491, -0.270, 54.586, 79]
+    level:    [1, 1]
+  17854700:
+    template: Numbing_Blossom
+    at:       [29.569, 0.058, 46.292, 116]
+    level:    [1, 1]
+  17854701:
+    template: Underwood_Eruca
+    at:       [25.857, 0.605, 46.560, 97]
+    level:    [107, 109]
+  17854702:
+    template: Underwood_Eruca
+    at:       [37.641, -0.203, 54.700, 253]
+    level:    [107, 109]
+  17854703:
+    template: Numbing_Blossom
+    at:       [109.660, -0.718, 82.150, 80]
+    level:    [1, 1]
+  17854704:
+    template: Numbing_Blossom
+    at:       [129.310, -0.300, 29.934, 95]
+    level:    [1, 1]
+  17854705:
+    template: Numbing_Blossom
+    at:       [116.720, -0.472, 44.558, 75]
+    level:    [1, 1]
+  17854706:
+    template: Numbing_Blossom
+    at:       [114.930, -0.501, 84.901, 74]
+    level:    [1, 1]
+  17854707:
+    template: Numbing_Blossom
+    at:       [133.090, 0.009, 41.786, 55]
+    level:    [1, 1]
+  17854708:
+    template: Numbing_Blossom
+    at:       [155.120, -0.500, 29.216, 98]
+    level:    [1, 1]
+  17854709:
+    template: Numbing_Blossom
+    at:       [137.780, -0.224, 30.096, 18]
+    level:    [1, 1]
+  17854710:
+    template: Numbing_Blossom
+    at:       [137.590, -0.103, 33.592, 58]
+    level:    [1, 1]
+  17854711:
+    template: Numbing_Blossom
+    at:       [141.900, -0.133, 29.966, 35]
+    level:    [1, 1]
+  17854712:
+    template: Numbing_Blossom
+    at:       [164.110, -0.493, 36.403, 67]
+    level:    [1, 1]
+  17854713:
+    template: Shade-speckled_Spider
+    at:       [4.944, -0.317, 51.824, 183]
+    level:    [107, 109]
+  17854714:
+    template: Shade-speckled_Spider
+    at:       [-17.770, -2.987, 54.077, 63]
+    level:    [107, 109]
+  17854715:
+    template: Shade-speckled_Spider
+    at:       [-10.940, -2.157, 63.130, 3]
+    level:    [107, 109]
+  17854716:
+    template: Grove_Wasp
+    at:       [19.221, -0.337, 82.165, 141]
+    level:    [107, 109]
+  17854717:
+    template: Grove_Wasp
+    at:       [14.621, -2.242, 101.904, 115]
+    level:    [107, 109]
+  17854718:
+    template: Grove_Wasp
+    at:       [17.655, -1.998, 89.612, 250]
+    level:    [107, 109]
+  17854719:
+    template: Shade-speckled_Spider
+    at:       [-5.002, 0.575, 137.684, 192]
+    level:    [107, 109]
+  17854720:
+    template: Shade-speckled_Spider
+    at:       [2.629, 0.391, 138.339, 4]
+    level:    [107, 109]
+  17854721:
+    template: Shade-speckled_Spider
+    at:       [3.379, 0.519, 135.186, 55]
+    level:    [107, 109]
+  17854722:
+    template: Underwood_Eruca
+    at:       [-53.600, -0.370, 93.695, 32]
+    level:    [107, 109]
+  17854723:
+    template: Underwood_Eruca
+    at:       [-61.700, -0.345, 106.443, 64]
+    level:    [107, 109]
+  17854724:
+    template: Underwood_Eruca
+    at:       [-57.650, -0.043, 81.658, 199]
+    level:    [107, 109]
+  17854725:
+    template: Underwood_Eruca
+    at:       [-49.930, -0.735, 112.224, 147]
+    level:    [107, 109]
+  17854726:
+    template: Underwood_Eruca
+    at:       [-56.020, 2.303, 69.130, 95]
+    level:    [107, 109]
+  17854727:
+    template: Underwood_Eruca
+    at:       [-61.530, -0.137, 123.535, 26]
+    level:    [107, 109]
+  17854728:
+    template: Underwood_Eruca
+    at:       [-53.340, -0.342, 130.679, 129]
+    level:    [107, 109]
+  17854729:
+    template: Grove_Wasp
+    at:       [-21.880, -1.098, -32.851, 93]
+    level:    [107, 109]
+  17854730:
+    template: Grove_Wasp
+    at:       [-28.610, -1.687, -31.445, 163]
+    level:    [107, 109]
+  17854731:
+    template: Grove_Wasp
+    at:       [-14.990, -0.282, -41.721, 224]
+    level:    [107, 109]
+  17854732:
+    template: Grove_Wasp
+    at:       [-23.250, -1.921, -30.065, 223]
+    level:    [107, 109]
+  17854733:
+    template: Grove_Wasp
+    at:       [-6.855, 0.017, -61.450, 251]
+    level:    [107, 109]
+  17854734:
+    template: Grove_Wasp
+    at:       [-19.140, -0.574, -68.725, 27]
+    level:    [107, 109]
+  17854735:
+    template: Grove_Wasp
+    at:       [-11.370, -0.277, -61.139, 29]
+    level:    [107, 109]
+  17854736:
+    template: Grove_Wasp
+    at:       [-22.520, -2.009, -30.024, 125]
+    level:    [107, 109]
+  17854737:
+    template: Stolid_Byrgen
+    at:       [-14.750, 0.219, -54.658, 199]
+    level:    [107, 109]
+  17854738:
+    template: Snapweed
+    at:       [-75.320, 0.578, 22.949, 136]
+    level:    [107, 109]
+  17854739:
+    template: Snapweed
+    at:       [-83.850, -0.231, 13.739, 1]
+    level:    [107, 109]
+  17854740:
+    template: Snapweed
+    at:       [-77.420, 0.199, 24.923, 59]
+    level:    [107, 109]
+  17854741:
+    template: Grove_Wasp
+    at:       [-125.700, -0.093, -6.186, 138]
+    level:    [107, 109]
+  17854742:
+    template: Grove_Wasp
+    at:       [-125.500, -0.425, -2.602, 122]
+    level:    [107, 109]
+  17854743:
+    template: Grove_Wasp
+    at:       [-112.800, -0.263, 3.819, 196]
+    level:    [107, 109]
+  17854744:
+    template: Luckybug
+    at:       [-118.000, -0.488, -110.530, 66]
+    level:    [107, 109]
+  17854745:
+    template: Luckybug
+    at:       [-126.400, 1.306, -102.310, 22]
+    level:    [107, 109]
+  17854746:
+    template: Luckybug
+    at:       [-109.000, 1.776, -91.786, 148]
+    level:    [107, 109]
+  17854747:
+    template: Grove_Wasp
+    at:       [-117.500, 0.086, -103.250, 190]
+    level:    [107, 109]
+  17854748:
+    template: Grove_Wasp
+    at:       [-141.900, 0.064, -77.963, 57]
+    level:    [107, 109]
+  17854749:
+    template: Grove_Wasp
+    at:       [-146.600, 2.123, -102.810, 82]
+    level:    [107, 109]
+  17854750:
+    template: Corpse_Flower
+    at:       [-141.900, -0.104, -79.401, 207]
+    level:    [107, 109]
+  17854751:
+    template: Snapweed
+    at:       [-192.500, -0.259, -75.789, 8]
+    level:    [107, 109]
+  17854752:
+    template: Snapweed
+    at:       [-200.400, -0.560, -83.565, 165]
+    level:    [107, 109]
+  17854753:
+    template: Snapweed
+    at:       [-200.600, -0.654, -70.545, 156]
+    level:    [107, 109]
+  17854754:
+    template: Twitherym
+    at:       [-185.400, 1.951, -28.843, 165]
+    level:    [107, 109]
+  17854755:
+    template: Twitherym
+    at:       [-176.800, 0.863, -33.443, 16]
+    level:    [107, 109]
+  17854756:
+    template: Twitherym
+    at:       [-188.200, -0.437, -40.407, 147]
+    level:    [107, 109]
+  17854757:
+    template: Saptrap
+    at:       [-227.400, 0.190, -10.498, 14]
+    level:    [107, 109]
+  17854758:
+    template: Saptrap
+    at:       [-241.100, -0.476, -1.359, 126]
+    level:    [107, 109]
+  17854759:
+    template: Saptrap
+    at:       [-239.800, -0.545, 3.180, 2]
+    level:    [107, 109]
+  17854760:
+    template: Underwood_Eruca
+    at:       [-153.400, 0.601, 51.201, 124]
+    level:    [107, 109]
+  17854761:
+    template: Underwood_Eruca
+    at:       [-172.300, 0.854, 71.566, 187]
+    level:    [107, 109]
+  17854762:
+    template: Underwood_Eruca
+    at:       [-158.800, 0.698, 66.559, 16]
+    level:    [107, 109]
+  17854763:
+    template: Droughted_Treant
+    at:       [-229.700, 1.735, 58.710, 122]
+    level:    [107, 109]
+  17854764:
+    template: Droughted_Treant
+    at:       [-218.400, 2.554, 64.936, 250]
+    level:    [107, 109]
+  17854765:
+    template: Droughted_Treant
+    at:       [-199.500, -0.075, 61.058, 199]
+    level:    [107, 109]
+  17854766:
+    template: Nascent_Sapling
+    at:       [-187.000, -0.275, 87.867, 55]
+    level:    [107, 109]
+  17854767:
+    template: Nascent_Sapling
+    at:       [-191.600, 0.027, 98.231, 127]
+    level:    [107, 109]
+  17854768:
+    template: Nascent_Sapling
+    at:       [-196.800, -0.328, 90.262, 3]
+    level:    [107, 109]
+  17854769:
+    template: Nascent_Sapling
+    at:       [-226.600, 2.355, 90.565, 64]
+    level:    [107, 109]
+  17854770:
+    template: Shadowscourge_Umbril
+    at:       [-202.300, -0.145, 209.800, 196]
+    level:    [107, 109]
+  17854771:
+    template: Swollen_Chigoe
+    at:       [-250.800, -1.667, 139.832, 11]
+    level:    [115, 117]
+  17854772:
+    template: Swollen_Chigoe
+    at:       [-258.200, -2.966, 142.421, 76]
+    level:    [115, 117]
+  17854773:
+    template: Swollen_Chigoe
+    at:       [-268.400, -0.141, 161.994, 65]
+    level:    [115, 117]
+  17854774:
+    template: Snapweed
+    at:       [-305.400, 1.427, 206.089, 119]
+    level:    [107, 109]
+  17854775:
+    template: Snapweed
+    at:       [-302.700, 2.153, 209.425, 19]
+    level:    [107, 109]
+  17854776:
+    template: Snapweed
+    at:       [-305.400, 1.280, 205.585, 164]
+    level:    [107, 109]
+  17854777:
+    template: Swollen_Chigoe
+    at:       [419.130, 0.133, 22.005, 133]
+    level:    [115, 117]
+  17854778:
+    template: Swollen_Chigoe
+    at:       [425.930, 0.172, 9.571, 88]
+    level:    [115, 117]
+  17854779:
+    template: Swollen_Chigoe
+    at:       [429.890, 0.147, 17.053, 200]
+    level:    [115, 117]
+  17854780:
+    template: Swollen_Chigoe
+    at:       [336.500, 0.168, -58.694, 218]
+    level:    [115, 117]
+  17854781:
+    template: Swollen_Chigoe
+    at:       [342.850, 0.171, -52.708, 131]
+    level:    [115, 117]
+  17854782:
+    template: Nascent_Sapling
+    at:       [299.640, 0.179, -130.780, 146]
+    level:    [107, 109]
+  17854783:
+    template: Nascent_Sapling
+    at:       [344.130, 0.184, -131.100, 233]
+    level:    [107, 109]
+  17854784:
+    template: Nascent_Sapling
+    at:       [314.850, 0.129, -137.210, 149]
+    level:    [107, 109]
+  17854785:
+    template: Twitherym
+    at:       [53.658, 0.163, -14.392, 84]
+    level:    [107, 109]
+  17854786:
+    template: Twitherym
+    at:       [101.940, 0.155, -16.260, 152]
+    level:    [107, 109]
+  17854787:
+    template: Twitherym
+    at:       [62.403, 0.126, -22.760, 125]
+    level:    [107, 109]
+  17854788:
+    template: Shade-speckled_Spider
+    at:       [-23.460, 0.119, 98.458, 56]
+    level:    [107, 109]
+  17854789:
+    template: Shade-speckled_Spider
+    at:       [-22.820, 0.137, 95.820, 175]
+    level:    [107, 109]
+  17854790:
+    template: Shade-speckled_Spider
+    at:       [-58.530, 0.159, -17.083, 2]
+    level:    [107, 109]
+  17854791:
+    template: Shade-speckled_Spider
+    at:       [-86.560, -0.210, -18.757, 127]
+    level:    [107, 109]
+  17854792:
+    template: Shade-speckled_Spider
+    at:       [-58.720, 0.185, -67.783, 45]
+    level:    [107, 109]
+  17854793:
+    template: Shade-speckled_Spider
+    at:       [-74.730, 0.232, -60.234, 154]
+    level:    [107, 109]
+  17854794:
+    template: Abashed_Heartwing
+    at:       [-14.190, -2.415, -21.163, 114]
+    level:    [107, 109]
+  17854795:
+    template: Irksome_Leafkin
+    at:       [-79.830, -0.143, 421.188, 252]
+    level:    [107, 109]
+  17854796:
+    template: Irksome_Leafkin
+    at:       [-147.700, 0.227, 419.891, 44]
+    level:    [107, 109]
+  17854797:
+    template: Irksome_Leafkin
+    at:       [-124.000, -0.509, 432.877, 254]
+    level:    [107, 109]
+  17854798:
+    template: Arboreal_Bastion
+    at:       [400.000, -0.811, 490.000, 33]
+    level:    [107, 109]
+  17854799:
+    template: Loyal_Snapweed
+    at:       [400.110, -0.685, 487.378, 145]
+    level:    [107, 109]
+  17854800:
+    template: Loyal_Snapweed
+    at:       [391.970, -0.649, 478.542, 152]
+    level:    [107, 109]
+  17854801:
+    template: Tenacious_Panopt
+    at:       [396.070, -0.493, 478.144, 228]
+    level:    [107, 109]
+  17854802:
+    template: Tenacious_Panopt
+    at:       [390.570, -0.643, 477.178, 184]
+    level:    [107, 109]
+  17854803:
+    template: Arboreal_Bastion
+    at:       [80.000, -0.500, 480.000, 83]
+    level:    [107, 109]
+  17854804:
+    template: Tenacious_Panopt
+    at:       [77.445, -0.648, 488.658, 175]
+    level:    [107, 109]
+  17854805:
+    template: Tenacious_Panopt
+    at:       [88.962, -0.363, 484.683, 34]
+    level:    [107, 109]
+  17854806:
+    template: Tight-lipped_Flytrap
+    at:       [81.028, -0.754, 488.997, 192]
+    level:    [107, 109]
+  17854807:
+    template: Tight-lipped_Flytrap
+    at:       [80.360, -0.755, 489.404, 241]
+    level:    [107, 109]
+  17854808:
+    template: Arboreal_Bastion
+    at:       [490.000, -0.811, -82.000, 120]
+    level:    [107, 109]
+  17854809:
+    template: Tight-lipped_Flytrap
+    at:       [482.030, -0.481, -82.637, 244]
+    level:    [107, 109]
+  17854810:
+    template: Tight-lipped_Flytrap
+    at:       [487.020, -0.638, -82.283, 135]
+    level:    [107, 109]
+  17854811:
+    template: Fervid_Funguar
+    at:       [479.380, -0.363, -88.413, 109]
+    level:    [107, 109]
+  17854812:
+    template: Fervid_Funguar
+    at:       [474.380, -0.405, -74.694, 163]
+    level:    [107, 109]
+  17854813:
+    template: Arboreal_Bastion
+    at:       [350.000, -0.811, -400.000, 73]
+    level:    [107, 109]
+  17854814:
+    template: Fervid_Funguar
+    at:       [352.670, -0.722, -400.880, 180]
+    level:    [107, 109]
+  17854815:
+    template: Fervid_Funguar
+    at:       [367.760, -0.202, -393.040, 241]
+    level:    [107, 109]
+  17854816:
+    template: Furibund_Rafflesia
+    at:       [367.950, -0.167, -392.490, 242]
+    level:    [107, 109]
+  17854817:
+    template: Furibund_Rafflesia
+    at:       [355.300, -0.555, -394.380, 141]
+    level:    [107, 109]
+  17854818:
+    template: Arboreal_Bastion
+    at:       [-247.000, -0.683, 241.000, 40]
+    level:    [107, 109]
+  17854819:
+    template: Furibund_Rafflesia
+    at:       [-244.500, -0.363, 238.563, 102]
+    level:    [107, 109]
+  17854820:
+    template: Furibund_Rafflesia
+    at:       [-236.600, -0.449, 239.069, 100]
+    level:    [107, 109]
+  17854821:
+    template: Furibund_Rafflesia
+    at:       [-233.200, -0.555, 252.537, 238]
+    level:    [107, 109]
+  17854822:
+    template: Loyal_Snapweed
+    at:       [-231.900, -0.375, 248.343, 53]
+    level:    [107, 109]
+  17854823:
+    template: Loyal_Snapweed
+    at:       [-242.300, -0.691, 249.669, 219]
+    level:    [107, 109]
+  17854824:
+    template: Gnarled_Rampart
+    at:       [100.000, 0.001, 342.000, 50]
+    level:    [107, 109]
+  17854825:
+    template: Gnarled_Rampart
+    at:       [100.000, 0.001, 338.000, 80]
+    level:    [107, 109]
+  17854826:
+    template: Sloshmouth_Snapweed
+    at:       [109.510, 0.551, 338.619, 113]
+    level:    [107, 109]
+  17854827:
+    template: Rustled_Panopt
+    at:       [113.940, 0.183, 342.932, 204]
+    level:    [107, 109]
+  17854828:
+    template: Sloshmouth_Snapweed
+    at:       [83.678, 0.021, 341.108, 77]
+    level:    [107, 109]
+  17854829:
+    template: Rustled_Panopt
+    at:       [89.603, 0.448, 339.481, 55]
+    level:    [107, 109]
+  17854830:
+    template: Gnarled_Rampart
+    at:       [-102.000, 0.001, 180.000, 82]
+    level:    [107, 109]
+  17854831:
+    template: Gnarled_Rampart
+    at:       [-98.000, 0.001, 180.000, 88]
+    level:    [107, 109]
+  17854832:
+    template: Soiled_Funguar
+    at:       [-105.100, 0.013, 193.231, 72]
+    level:    [107, 109]
+  17854833:
+    template: Crabapple_Treant
+    at:       [-104.600, -0.108, 195.817, 182]
+    level:    [107, 109]
+  17854834:
+    template: Soiled_Funguar
+    at:       [-104.500, 0.650, 168.214, 72]
+    level:    [107, 109]
+  17854835:
+    template: Crabapple_Treant
+    at:       [-103.900, 0.670, 168.850, 74]
+    level:    [107, 109]
+  17854836:
+    template: Gnarled_Rampart
+    at:       [258.000, 0.001, -140.000, 38]
+    level:    [107, 109]
+  17854837:
+    template: Gnarled_Rampart
+    at:       [262.000, 0.001, -140.000, 47]
+    level:    [107, 109]
+  17854838:
+    template: Furfluff_Lapinion
+    at:       [259.160, 0.056, -126.160, 139]
+    level:    [107, 109]
+  17854839:
+    template: Larkish_Opo-opo
+    at:       [258.710, 0.161, -132.250, 98]
+    level:    [107, 109]
+  17854840:
+    template: Furfluff_Lapinion
+    at:       [257.710, 0.352, -154.500, 74]
+    level:    [107, 109]
+  17854841:
+    template: Larkish_Opo-opo
+    at:       [264.130, 0.241, -154.740, 36]
+    level:    [107, 109]
+  17854842:
+    template: Gnarled_Rampart
+    at:       [60.000, 0.001, -178.000, 103]
+    level:    [107, 109]
+  17854843:
+    template: Gnarled_Rampart
+    at:       [60.000, 0.001, -182.000, 126]
+    level:    [107, 109]
+  17854844:
+    template: Twitherym_Windstorm
+    at:       [72.968, 0.531, -180.750, 54]
+    level:    [107, 109]
+  17854845:
+    template: Uprooted_Sapling
+    at:       [65.960, 0.842, -181.190, 70]
+    level:    [107, 109]
+  17854846:
+    template: Twitherym_Windstorm
+    at:       [55.604, 0.392, -181.080, 55]
+    level:    [107, 109]
+  17854847:
+    template: Uprooted_Sapling
+    at:       [50.256, 0.339, -180.100, 93]
+    level:    [107, 109]
+  17854848:
+    template: Yumcax
+    at:       [-504.000, 1.000, -59.000, 49]
+    level:    [107, 115]
+  17854849:
+    script: Yumcaxs_Watchman
+  17854850:
+    script: Yumcaxs_Watchman
+  17854851:
+    script: Yumcaxs_Watchman
+  17854852:
+    script: Yumcaxs_Maw
+  17854853:
+    script: Yumcaxs_Maw
+  17854854:
+    script: Yumcaxs_Maw
+  17854855:
+    script: Yumcaxs_Watchman
+  17854856:
+    script: Yumcaxs_Watchman
+  17854857:
+    script: Yumcaxs_Watchman
+  17854858:
+    script: Yumcaxs_Watchman
+  17854859:
+    script: XagNar
+  17854860:
+    script: Laevvid
+  17854861:
+    template: Morseiu
+    at:       [-71.528, -0.492, 253.835, 219]
+  17854862:
+    script: Ircinraq
+  17854863:
+    script: Hyoscya
+  17854864:
+    template: Inquisitor_Mortuus
+    at:       [135.472, 0.193, -212.972, 202]
+    level:    [115, 115]
+  17854865:
+    template: Jovial_Ahriman
+    at:       [166.714, -0.458, 33.056, 160]

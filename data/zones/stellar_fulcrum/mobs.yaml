@@ -1,0 +1,1635 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ajido-Marujido:
+    id:            75
+    species:       tarutaru
+    type:          [battlefield]
+    spell_list_id: 134
+    skill_list_id: 481
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, rdm]
+      render:
+        look:
+          type:  standard
+          model: 775
+        entity_flags:  3
+        name_vis:      2
+        name_prefix:  40
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Aldo:
+    id:            6948
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 1045
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, nin]
+      render:
+        look:
+          type:  standard
+          model: 3034
+        entity_flags: 129
+        name_prefix:   32
+        hitbox:        15
+      spawn:
+        type: [scripted]
+
+  Ayame:
+    id:            305
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      render:
+        look:
+          type:  misc
+          model: 1093
+        entity_flags: 1563
+        name_prefix:    32
+        model_size:      1
+        hitbox:         17
+      spawn:
+        type: [scripted]
+
+  Counselor_Gadalar:
+    id:            806
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 21
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  misc
+          model: 1948
+        entity_flags: 155
+        name_prefix:   32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Counselor_Mihli:
+    id:            807
+    species:       mithra
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 151
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      render:
+        look:
+          type:  misc
+          model: 1951
+        entity_flags: 541
+        name_prefix:   32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Counselor_Najelith:
+    id:            808
+    species:       humes
+    type:          [notorious, battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      render:
+        look:
+          type:  misc
+          model: 1949
+        entity_flags: 537
+        name_prefix:   32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Counselor_Rughadjeen:
+    id:            809
+    species:       elvaan
+    type:          [notorious, battlefield]
+    spell_list_id: 4
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  misc
+          model: 1947
+        entity_flags: 157
+        name_prefix:   32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Counselor_Zazarg:
+    id:            810
+    species:       galks
+    type:          [notorious, battlefield]
+    skill_list_id: 147
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  misc
+          model: 1950
+        entity_flags: 157
+        name_prefix:   32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Curilla:
+    id:            862
+    species:       elvaan
+    type:          [battlefield]
+    spell_list_id: 4
+    skill_list_id: 145
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      render:
+        look:
+          type:  misc
+          model: 1094
+        entity_flags: 539
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Esoteric_Scrivening:
+    id:      6945
+    species: unclassified
+    type:    [notorious, battlefield]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2140
+        entity_flags:  1155
+        animation_sub:   12
+        model_size:       1
+        hitbox:          12
+      spawn:
+        type: [scripted]
+
+  Kamlanaut:
+    id:            2184
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 351
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    3
+          ice:     3
+          wind:    3
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 799
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13500
+
+  Kamlanaut_2:
+    id:            2184
+    display_name:  Kamlanaut
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 351
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    3
+          ice:     3
+          wind:    3
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   3
+          dark:    3
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 3
+          dark_sleep:  3
+          blind:       3
+      render:
+        look:
+          type:  standard
+          model: 799
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lion:
+    id:            6946
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 1124
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, thf]
+      render:
+        look:
+          type:  standard
+          model: 3081
+        entity_flags:  539
+        animation_sub:   8
+        name_prefix:    32
+        hitbox:         12
+      spawn:
+        type: [scripted]
+
+  Prishe:
+    id:            3199
+    species:       elvaan
+    type:          [battlefield]
+    spell_list_id: 129
+    skill_list_id: 476
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, whm]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     1
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1207
+        entity_flags: 25
+        name_vis:      2
+        name_prefix:  40
+        hitbox:       17
+      behaviors:
+        flags: [no_despawn, raisable]
+      spawn:
+        type: [scripted]
+
+  Seed_Crystal:
+    id:            3529
+    species:       belfrys
+    type:          [battlefield]
+    spell_list_id: 21
+    attributes:
+      combat:
+        delay: 0
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 2351
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Seed_Goblin:
+    id:      200
+    species: goblin
+    type:    [battlefield]
+    attributes:
+      render:
+        look:
+          type:  standard
+          model: 2353
+        entity_flags: 133
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Seed_Orc:
+    id:      201
+    species: orc
+    type:    [battlefield]
+    attributes:
+      render:
+        look:
+          type:  standard
+          model: 2354
+        entity_flags: 133
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Seed_Quadav:
+    id:      202
+    species: quadav
+    type:    [battlefield]
+    attributes:
+      render:
+        look:
+          type:  standard
+          model: 2355
+        entity_flags: 133
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Seed_Thrall:
+    id:            3534
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:   equipped
+          race:   7
+          face:   10
+          head:   4182
+          body:   8279
+          hands:  12375
+          legs:   16470
+          feet:   20675
+          main:   24916
+          sub:    28672
+          ranged: 32768
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Seed_Yagudo:
+    id:      203
+    species: yagudo
+    type:    [battlefield]
+    attributes:
+      render:
+        look:
+          type:  standard
+          model: 2356
+        entity_flags: 133
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Shantotto:
+    id:            3584
+    species:       tarutaru
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 153
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  misc
+          model: 1095
+        entity_flags:  3
+        model_size:    1
+        hitbox:       10
+      spawn:
+        type: [scripted]
+
+  Trion:
+    id:            4006
+    species:       elvaan
+    type:          [battlefield]
+    skill_list_id: 483
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, war]
+      render:
+        look:
+          type:  standard
+          model: 774
+        entity_flags:  3
+        name_prefix:  32
+        model_size:    1
+        hitbox:       20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Volker:
+    id:            4249
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 482
+    attributes:
+      combat:
+        skill: sword
+      render:
+        look:
+          type:  standard
+          model: 773
+        entity_flags:  3
+        name_prefix:  32
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        flags: [no_assist]
+      spawn:
+        type: [scripted]
+
+  Zeid:
+    id:            6947
+    species:       galks
+    type:          [battlefield]
+    spell_list_id: 318
+    skill_list_id: 1021
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 3010
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        27
+      spawn:
+        type: [scripted]
+
+spawns:
+  17510401:
+    template: Kamlanaut
+    at:       [0.000, 202.500, -360.000, 64]
+    level:    [75, 75]
+  17510402:
+    template: Kamlanaut
+    at:       [0.000, 2.500, 39.758, 64]
+    level:    [75, 75]
+  17510403:
+    template: Kamlanaut
+    at:       [0.000, -197.500, 440.484, 64]
+    level:    [75, 75]
+  17510405:
+    template: Trion
+    level:    [60, 60]
+  17510406:
+    template: Volker
+    level:    [60, 60]
+  17510407:
+    template: Ajido-Marujido
+    level:    [60, 60]
+  17510409:
+    template: Trion
+    level:    [60, 60]
+  17510410:
+    template: Volker
+    level:    [60, 60]
+  17510411:
+    template: Ajido-Marujido
+    level:    [60, 60]
+  17510413:
+    template: Trion
+    level:    [60, 60]
+  17510414:
+    template: Volker
+    level:    [60, 60]
+  17510415:
+    template: Ajido-Marujido
+    level:    [60, 60]
+  17510417:
+    template: Curilla
+    level:    [60, 60]
+  17510418:
+    template: Ayame
+    level:    [60, 60]
+  17510419:
+    template: Shantotto
+    level:    [60, 60]
+  17510420:
+    template: Prishe
+    level:    [60, 60]
+  17510423:
+    template: Curilla
+    level:    [60, 60]
+  17510424:
+    template: Ayame
+    level:    [60, 60]
+  17510425:
+    template: Shantotto
+    level:    [60, 60]
+  17510426:
+    template: Prishe
+    level:    [60, 60]
+  17510429:
+    template: Curilla
+    level:    [60, 60]
+  17510430:
+    template: Ayame
+    level:    [60, 60]
+  17510431:
+    template: Shantotto
+    level:    [60, 60]
+  17510432:
+    template: Prishe
+    level:    [60, 60]
+  17510435:
+    template: Counselor_Rughadjeen
+    level:    [60, 60]
+  17510436:
+    template: Counselor_Gadalar
+    level:    [60, 60]
+  17510437:
+    template: Counselor_Najelith
+    level:    [60, 60]
+  17510438:
+    template: Counselor_Zazarg
+    level:    [60, 60]
+  17510439:
+    template: Counselor_Mihli
+    level:    [60, 60]
+  17510441:
+    template: Counselor_Rughadjeen
+    level:    [60, 60]
+  17510442:
+    template: Counselor_Gadalar
+    level:    [60, 60]
+  17510443:
+    template: Counselor_Najelith
+    level:    [60, 60]
+  17510444:
+    template: Counselor_Zazarg
+    level:    [60, 60]
+  17510445:
+    template: Counselor_Mihli
+    level:    [60, 60]
+  17510447:
+    template: Counselor_Rughadjeen
+    level:    [60, 60]
+  17510448:
+    template: Counselor_Gadalar
+    level:    [60, 60]
+  17510449:
+    template: Counselor_Najelith
+    level:    [60, 60]
+  17510450:
+    template: Counselor_Zazarg
+    level:    [60, 60]
+  17510451:
+    template: Counselor_Mihli
+    level:    [60, 60]
+  17510452:
+    template: Seed_Crystal
+    at:       [0.001, 202.000, -367.000, 64]
+    level:    [77, 80]
+  17510453:
+    template: Seed_Thrall
+    at:       [0.000, 202.000, -367.000, 64]
+  17510454:
+    template: Seed_Thrall
+  17510455:
+    template: Seed_Thrall
+  17510456:
+    template: Seed_Thrall
+  17510457:
+    template: Seed_Thrall
+  17510458:
+    template: Seed_Thrall
+  17510459:
+    template: Seed_Crystal
+    level:    [77, 80]
+  17510460:
+    template: Seed_Thrall
+  17510461:
+    template: Seed_Thrall
+  17510462:
+    template: Seed_Thrall
+  17510463:
+    template: Seed_Thrall
+  17510464:
+    template: Seed_Thrall
+  17510465:
+    template: Seed_Thrall
+  17510466:
+    template: Seed_Crystal
+    level:    [77, 80]
+  17510467:
+    template: Seed_Thrall
+  17510468:
+    template: Seed_Thrall
+  17510469:
+    template: Seed_Thrall
+  17510470:
+    template: Seed_Thrall
+  17510471:
+    template: Seed_Thrall
+  17510472:
+    template: Seed_Thrall
+  17510473:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    at:       [0.000, 202.000, -362.000, 64]
+    level:    [99, 99]
+  17510474:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    at:       [0.000, 2.000, 38.000, 64]
+    level:    [99, 99]
+  17510475:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510476:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510477:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510478:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510479:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510480:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510481:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510482:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    at:       [-8.781, 202.399, -366.868, 73]
+    level:    [99, 99]
+  17510483:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510484:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510485:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    at:       [2.611, 202.000, -368.645, 150]
+    level:    [99, 99]
+  17510486:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510487:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510488:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510489:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510490:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510491:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510492:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510493:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510494:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510495:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510496:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510497:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510498:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510499:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510500:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510501:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510502:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510503:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510504:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510505:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510506:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510507:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510508:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510509:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510510:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510511:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510512:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510513:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510514:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510515:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    at:       [10.883, 202.499, -368.482, 1]
+    level:    [99, 99]
+  17510516:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510517:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510518:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510519:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510520:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510521:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510522:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510523:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510524:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510525:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510526:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510527:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510528:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510529:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510530:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    at:       [9.947, 202.499, -369.354, 249]
+    level:    [99, 99]
+  17510531:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510532:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510533:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510534:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510535:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510536:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510537:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510538:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510539:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510540:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510541:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510542:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510543:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510544:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510545:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510546:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510547:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510548:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510549:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510550:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510551:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510552:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510553:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510554:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510555:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510556:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510557:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510558:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510559:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510560:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    at:       [1.427, 202.000, -369.449, 166]
+    level:    [99, 99]
+  17510561:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510562:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510563:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510564:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510565:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510566:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510567:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510568:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510569:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510570:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510571:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510572:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510573:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510574:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510575:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    at:       [11.495, 202.499, -367.162, 18]
+    level:    [99, 99]
+  17510576:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510577:
+    template: Kamlanaut_2
+    script:   Kamlanaut
+    level:    [99, 99]
+  17510578:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510579:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510580:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510581:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510582:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510583:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510584:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510585:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510586:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510587:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510588:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510589:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510590:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510591:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510592:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510593:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510594:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510595:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510596:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510597:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510598:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510599:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510600:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510601:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510602:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510603:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510604:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510605:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510606:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510607:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510608:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510609:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510610:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510611:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510612:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510613:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510614:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510615:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510616:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510617:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510618:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510619:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510620:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510621:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510622:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510623:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510624:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510625:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510626:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510627:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510628:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510629:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510630:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510631:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510632:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510633:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510634:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510635:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510636:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510637:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510638:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510639:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510640:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510641:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510642:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510643:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510644:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510645:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510646:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510647:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510648:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510649:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510650:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510651:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510652:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510653:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510654:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510655:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510656:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510657:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510658:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510659:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510660:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510661:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510662:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510663:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510664:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510665:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510666:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510667:
+    template: Esoteric_Scrivening
+    at:       [1.000, 1.000, 1.000]
+    level:    [99, 99]
+  17510668:
+    template: Lion
+    at:       [-0.566, 202.498, -371.323, 68]
+  17510669:
+    template: Lion
+    at:       [-0.566, 2.498, 28.435, 68]
+  17510670:
+    template: Lion
+    at:       [-0.566, -197.502, 429.161, 68]
+  17510671:
+    template: Lion
+    at:       [-0.795, 202.495, -370.394, 60]
+  17510672:
+    template: Zeid
+    at:       [-1.054, 202.430, -366.196, 61]
+  17510673:
+    template: Aldo
+    at:       [-0.021, 202.445, -367.927, 72]
+  17510674:
+    template: Lion
+    at:       [-0.795, 2.495, 29.364, 60]
+  17510675:
+    template: Zeid
+    at:       [-1.054, 2.430, 33.562, 61]
+  17510676:
+    template: Aldo
+    at:       [-0.021, 2.445, 31.831, 72]
+  17510677:
+    template: Lion
+    at:       [-0.795, -197.505, 430.090, 60]
+  17510678:
+    template: Zeid
+    at:       [-1.054, -197.570, 434.288, 61]
+  17510679:
+    template: Aldo
+    at:       [-0.021, -197.555, 432.557, 72]
+  17510680:
+    template: Seed_Crystal
+    at:       [0.000, 202.000, -367.000, 64]
+    level:    [77, 80]
+  17510681:
+    template: Seed_Orc
+    at:       [1.511, 202.449, -375.416, 142]
+    level:    [150, 150]
+  17510682:
+    template: Seed_Quadav
+    at:       [-1.857, 202.100, -368.345, 11]
+    level:    [150, 150]
+  17510683:
+    template: Seed_Yagudo
+    at:       [2.055, 202.479, -374.182, 124]
+    level:    [150, 150]
+  17510684:
+    template: Seed_Goblin
+    at:       [1.741, 202.488, -372.882, 107]
+    level:    [150, 150]
+  17510685:
+    template: Seed_Crystal
+    at:       [0.000, 2.000, 33.000, 64]
+    level:    [77, 80]
+  17510686:
+    template: Seed_Orc
+    at:       [2.833, 2.000, 32.442, 96]
+    level:    [150, 150]
+  17510687:
+    template: Seed_Quadav
+    at:       [3.455, 2.000, 32.941, 77]
+    level:    [150, 150]
+  17510688:
+    template: Seed_Yagudo
+    at:       [1.122, 2.000, 32.219, 64]
+    level:    [150, 150]
+  17510689:
+    template: Seed_Goblin
+    at:       [4.548, 2.000, 32.924, 93]
+    level:    [150, 150]
+  17510690:
+    template: Seed_Crystal
+    at:       [0.000, -198.000, 433.000, 64]
+    level:    [77, 80]
+  17510691:
+    template: Seed_Orc
+    at:       [2.759, -197.872, 432.633, 99]
+    level:    [150, 150]
+  17510692:
+    template: Seed_Quadav
+    at:       [-1.483, -198.000, 432.768, 41]
+    level:    [150, 150]
+  17510693:
+    template: Seed_Yagudo
+    at:       [1.383, -198.000, 435.642, 75]
+    level:    [150, 150]
+  17510694:
+    template: Seed_Goblin
+    at:       [1.327, -197.549, 432.847, 83]
+    level:    [150, 150]

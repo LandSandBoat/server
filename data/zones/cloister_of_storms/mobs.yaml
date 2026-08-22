@@ -1,0 +1,540 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Lightning_Gremlin:
+    id:            2410
+    species:       evil_weapon
+    type:          [notorious, battlefield]
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 468
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+
+  Ramuh_Prime_ASA:
+    id:           7041
+    display_name: Ramuh_Prime
+    species:      ramuh
+    type:         [notorious, battlefield]
+    attributes:
+      combat:
+        skill: staff
+      jobs: [drk, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   -3
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        -3
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Ramuh_Prime_TBL:
+    id:            4643
+    display_name:  Ramuh_Prime
+    species:       ramuh
+    type:          [notorious, battlefield]
+    skill_list_id: 320
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   -3
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        -3
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Ramuh_Prime_TBL_2:
+    id:            4643
+    display_name:  Ramuh_Prime
+    species:       ramuh
+    type:          [notorious, battlefield]
+    skill_list_id: 320
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   -3
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        -3
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ramuh_Prime_TSTBL:
+    id:            7050
+    display_name:  Ramuh_Prime
+    species:       ramuh
+    type:          [notorious, battlefield]
+    skill_list_id: 1178
+    attributes:
+      combat:
+        skill: staff
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   -3
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        -3
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 700
+
+  Ramuh_Prime_WTB:
+    id:            3317
+    display_name:  Ramuh_Prime
+    species:       ramuh
+    type:          [notorious, battlefield]
+    skill_list_id: 2027
+    attributes:
+      combat:
+        skill: staff
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     4
+          earth:   -3
+          thunder: -3
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:        -3
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags:  3
+        model_size:    1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+  Thunder_Elemental_T:
+    id:            6141
+    display_name:  Thunder_Elemental
+    species:       thunder_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, silence, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 13
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+  Thunder_Gremlin:
+    id:            3914
+    species:       evil_weapon
+    type:          [notorious, battlefield]
+    spell_list_id: 3
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 467
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3400
+        mp: 3400
+
+spawns:
+  17604609:
+    template: Ramuh_Prime_TBL
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [60, 60]
+  17604610:
+    template: Ramuh_Prime_TBL
+    at:       [23.048, -19.001, 33.005, 105]
+    level:    [60, 60]
+  17604611:
+    template: Ramuh_Prime_TBL
+    at:       [-377.066, -79.002, 513.045, 105]
+    level:    [60, 60]
+  17604612:
+    template: Lightning_Gremlin
+    at:       [501.000, 41.805, -369.000, 105]
+    level:    [62, 62]
+  17604613:
+    template: Thunder_Gremlin
+    at:       [502.725, 41.725, -371.575, 100]
+    level:    [62, 62]
+  17604614:
+    template: Lightning_Gremlin
+    at:       [23.048, -19.001, 33.005, 105]
+    level:    [62, 62]
+  17604615:
+    template: Thunder_Gremlin
+    at:       [22.048, -19.001, 34.005, 100]
+    level:    [62, 62]
+  17604616:
+    template: Lightning_Gremlin
+    at:       [-377.066, -79.002, 513.045, 105]
+    level:    [62, 62]
+  17604617:
+    template: Thunder_Gremlin
+    at:       [-378.066, -79.002, 514.045, 100]
+    level:    [62, 62]
+  17604618:
+    template: Ramuh_Prime_TSTBL
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [20, 20]
+  17604619:
+    template: Ramuh_Prime_TSTBL
+    at:       [23.048, -19.001, 33.005, 105]
+    level:    [20, 20]
+  17604620:
+    template: Ramuh_Prime_TSTBL
+    at:       [-377.066, -79.002, 513.045, 105]
+    level:    [20, 20]
+  17604621:
+    template: Ramuh_Prime_WTB
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [85, 85]
+  17604622:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [507.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17604623:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [499.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17604624:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [503.000, 41.000, -371.000, 105]
+    level:    [75, 75]
+  17604625:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [503.000, 41.000, -363.000, 105]
+    level:    [75, 75]
+  17604626:
+    template: Ramuh_Prime_WTB
+    at:       [23.048, -19.001, 33.005, 105]
+    level:    [85, 85]
+  17604627:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [19.048, -19.001, 33.005, 105]
+    level:    [75, 75]
+  17604628:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [26.048, -19.001, 33.005, 105]
+    level:    [75, 75]
+  17604629:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [23.048, -19.001, 37.005, 105]
+    level:    [75, 75]
+  17604630:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [23.048, -19.001, 29.005, 105]
+    level:    [75, 75]
+  17604631:
+    template: Ramuh_Prime_WTB
+    at:       [-377.066, -79.002, 513.045, 105]
+    level:    [85, 85]
+  17604632:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [-381.066, -79.002, 513.045, 105]
+    level:    [75, 75]
+  17604633:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [-373.066, -79.002, 513.045, 105]
+    level:    [75, 75]
+  17604634:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [-377.066, -79.002, 517.045, 105]
+    level:    [75, 75]
+  17604635:
+    template: Thunder_Elemental_T
+    script:   Thunder_Elemental
+    at:       [-377.066, -79.002, 509.045, 105]
+    level:    [75, 75]
+  17604636:
+    template: Ramuh_Prime_ASA
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [40, 40]
+  17604637:
+    template: Ramuh_Prime_ASA
+    at:       [23.048, -19.001, 33.005, 105]
+    level:    [40, 40]
+  17604638:
+    template: Ramuh_Prime_ASA
+    at:       [-377.066, -79.002, 513.045, 105]
+    level:    [40, 40]
+  17604639:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604640:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604641:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604642:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604643:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604644:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604645:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604646:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604647:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604648:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604649:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604650:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604651:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604652:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]
+  17604653:
+    template: Ramuh_Prime_TBL_2
+    script:   Ramuh_Prime_HTBF
+    level:    [99, 99]

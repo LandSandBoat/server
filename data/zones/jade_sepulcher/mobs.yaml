@@ -1,0 +1,1460 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Blacktattoo_Vedool_Ja:
+    id:            430
+    species:       knight_ja
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1631
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Drakeweaver_Hageel_Ja:
+    id:            6690
+    species:       knight_ja
+    type:          [notorious]
+    skill_list_id: 780
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1781
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Fistweaver_Mufaal_Ja:
+    id:            6691
+    species:       blue_sahagin
+    type:          [notorious]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -3
+          water:    4
+        rank_status:
+          paralyze: -2
+          bind:     -2
+          silence:  -1
+          slow:     -1
+          poison:    4
+      render:
+        look:
+          type:  standard
+          model: 1299
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Glyphweaver_Sikool_Ja:
+    id:            6688
+    species:       sage
+    type:          [notorious]
+    spell_list_id: 28
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 3610
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gulool_Ja_Ja:
+    id:            7597
+    species:       two_headed
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 285
+    attributes:
+      combat:
+        skill:    sword
+        delay:    280
+        dmg_mult: 125
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    4
+          ice:     2
+          wind:    9
+          earth:   9
+          thunder: 4
+          water:   4
+          light:   4
+          dark:    4
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     9
+          slow:        9
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 1863
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Jasweem:
+    id:            2143
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  4
+          head:  4096
+          body:  8242
+          hands: 12338
+          legs:  16434
+          feet:  20530
+          main:  24576
+          sub:   28672
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      spawn:
+        type: [scripted]
+
+  Lancelord_Gaheel_Ja:
+    id:            2370
+    species:       knight
+    type:          [battlefield, event]
+    spell_list_id: 4
+    skill_list_id: 780
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1781
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Chamberlain:
+    id:            7598
+    species:       sage
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1626
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Flamerearer:
+    id:            6959
+    species:       knight_ja
+    type:          [battlefield]
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: polearm
+        delay: 280
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1616
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Isangoma:
+    id:            6955
+    species:       knight_ja
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Palatine:
+    id:            7599
+    species:       knight_ja
+    type:          [battlefield]
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1603
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Polemicist:
+    id:            6956
+    species:       knight_ja
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1631
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Profligate:
+    id:            6957
+    species:       knight_ja
+    type:          [battlefield]
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1607
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mamool_Ja_Unseen:
+    id:            6958
+    species:       knight_ja
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1619
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Mocking_Colibri:
+    id:            2712
+    species:       colibri
+    type:          [notorious, battlefield]
+    skill_list_id: 412
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     6
+          thunder: -1
+          water:   -1
+          dark:    -2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     6
+          poison:     -1
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 1720
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Phantom_Puk:
+    id:            3128
+    species:       puk
+    type:          [battlefield]
+    skill_list_id: 413
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:  -1
+          ice:   -2
+          wind:  11
+          earth: -1
+          water: -1
+          light: -1
+          dark:  -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     11
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1744
+        entity_flags: 135
+        model_size:     3
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 14000
+
+  Raubahn:
+    id:            3327
+    species:       humes
+    type:          [notorious, battlefield, event]
+    spell_list_id: 1
+    skill_list_id: 783
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blu, blu]
+      render:
+        look:
+          type:  misc
+          model: 1393
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2275
+        mp: 4000
+
+  Riftweaver_Pomaal_Ja:
+    id:            6689
+    species:       warrior
+    type:          [notorious]
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: sword
+      jobs: [blu, blu]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1604
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Scorched-snout_Wyvern:
+    id:            6960
+    species:       blue_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 1157
+        model_size:      2
+        hitbox:          8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Shadowhand_Kajeel_Ja:
+    id:            3567
+    species:       knight_ja
+    type:          [battlefield]
+    spell_list_id: 7
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_katana
+        delay: 280
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1609
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Tiyaash:
+    id:            3933
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 149
+    attributes:
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  3
+          head:  4096
+          body:  8199
+          hands: 12295
+          legs:  16391
+          feet:  20487
+          main:  24576
+          sub:   28672
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      spawn:
+        type: [scripted]
+
+  Wabjahl:
+    id:            4270
+    species:       humes
+    type:          [battlefield]
+    skill_list_id: 149
+    attributes:
+      combat:
+        delay: 0
+      render:
+        look:
+          type:  equipped
+          race:  1
+          face:  1
+          head:  4096
+          body:  8227
+          hands: 12323
+          legs:  16419
+          feet:  20515
+          main:  24576
+          sub:   28672
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      spawn:
+        type: [scripted]
+
+  Whitetattoo_Rahool_Ja:
+    id:            4332
+    species:       knight_ja
+    type:          [battlefield]
+    spell_list_id: 20
+    skill_list_id: 176
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          wind:     2
+          thunder: -1
+          dark:    -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  automaton
+          model: 1627
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17051649:
+    template: Mocking_Colibri
+    at:       [240.000, -32.000, 240.000, 156]
+    level:    [66, 66]
+  17051651:
+    template: Mocking_Colibri
+    at:       [0.000, 8.000, 0.000, 156]
+    level:    [66, 66]
+  17051653:
+    template: Mocking_Colibri
+    at:       [-240.000, 48.000, -240.000, 156]
+    level:    [66, 66]
+  17051655:
+    template: Phantom_Puk
+    at:       [240.000, -32.000, 240.000, 156]
+    level:    [76, 76]
+  17051656:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [240.000, -32.000, 240.000, 156]
+    level:    [76, 76]
+  17051657:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [240.000, -32.000, 240.000, 156]
+    level:    [76, 76]
+  17051658:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [240.000, -32.000, 240.000, 156]
+    level:    [76, 76]
+  17051659:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [240.000, -32.000, 240.000, 156]
+    level:    [76, 76]
+  17051661:
+    template: Phantom_Puk
+    at:       [0.000, 8.000, 0.000, 156]
+    level:    [76, 76]
+  17051662:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [0.000, 8.000, 0.000, 156]
+    level:    [76, 76]
+  17051663:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [0.000, 8.000, 0.000, 156]
+    level:    [76, 76]
+  17051664:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [0.000, 8.000, 0.000, 156]
+    level:    [76, 76]
+  17051665:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [0.000, 8.000, 0.000, 156]
+    level:    [76, 76]
+  17051667:
+    template: Phantom_Puk
+    at:       [-240.000, 48.000, -240.000, 156]
+    level:    [76, 76]
+  17051668:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [-240.000, 48.000, -240.000, 156]
+    level:    [76, 76]
+  17051669:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [-240.000, 48.000, -240.000, 156]
+    level:    [76, 76]
+  17051670:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [-240.000, 48.000, -240.000, 156]
+    level:    [76, 76]
+  17051671:
+    template: Phantom_Puk
+    script:   Phantom_Puk_Clone
+    at:       [-240.000, 48.000, -240.000, 156]
+    level:    [76, 76]
+  17051673:
+    template: Raubahn
+    at:       [240.000, -32.000, 240.000, 161]
+    level:    [70, 70]
+  17051674:
+    template: Raubahn
+    at:       [0.000, 8.000, 0.000, 161]
+    level:    [70, 70]
+  17051675:
+    template: Raubahn
+    at:       [-240.000, 48.000, -240.000, 161]
+    level:    [70, 70]
+  17051676:
+    template: Shadowhand_Kajeel_Ja
+    at:       [240.000, -31.500, 240.000, 161]
+    level:    [65, 65]
+  17051677:
+    template: Blacktattoo_Vedool_Ja
+    at:       [241.733, -31.500, 241.960, 161]
+    level:    [65, 65]
+  17051678:
+    template: Whitetattoo_Rahool_Ja
+    at:       [238.186, -31.368, 237.123, 161]
+    level:    [65, 65]
+  17051679:
+    template: Wabjahl
+    at:       [243.526, -31.269, 237.983, 161]
+    level:    [50, 50]
+  17051680:
+    template: Tiyaash
+    at:       [242.895, -31.240, 237.164, 161]
+    level:    [50, 50]
+  17051681:
+    template: Jasweem
+    at:       [242.492, -31.162, 236.115, 161]
+    level:    [50, 50]
+  17051682:
+    template: Shadowhand_Kajeel_Ja
+    at:       [0.000, 8.000, 0.000, 161]
+    level:    [65, 65]
+  17051683:
+    template: Blacktattoo_Vedool_Ja
+    at:       [1.733, 8.000, 1.960, 161]
+    level:    [65, 65]
+  17051684:
+    template: Whitetattoo_Rahool_Ja
+    at:       [-1.814, 8.000, -2.877, 161]
+    level:    [65, 65]
+  17051685:
+    template: Wabjahl
+    at:       [3.526, 7.769, -2.017, 161]
+    level:    [50, 50]
+  17051686:
+    template: Tiyaash
+    at:       [2.895, 7.740, -2.836, 161]
+    level:    [50, 50]
+  17051687:
+    template: Jasweem
+    at:       [2.492, 7.662, -3.885, 161]
+    level:    [50, 50]
+  17051688:
+    template: Shadowhand_Kajeel_Ja
+    at:       [-240.000, 48.000, -240.000, 161]
+    level:    [65, 65]
+  17051689:
+    template: Blacktattoo_Vedool_Ja
+    at:       [-238.267, 48.000, -238.040, 161]
+    level:    [65, 65]
+  17051690:
+    template: Whitetattoo_Rahool_Ja
+    at:       [-241.814, 48.000, -242.887, 161]
+    level:    [65, 65]
+  17051691:
+    template: Wabjahl
+    at:       [-236.474, 48.000, -242.017, 161]
+    level:    [50, 50]
+  17051692:
+    template: Tiyaash
+    at:       [-237.105, 48.000, -237.164, 161]
+    level:    [50, 50]
+  17051693:
+    template: Jasweem
+    at:       [-237.508, 48.000, -243.885, 161]
+    level:    [50, 50]
+  17051694:
+    template: Lancelord_Gaheel_Ja
+    at:       [238.707, -32.000, 240.117, 170]
+    level:    [80, 80]
+  17051695:
+    template: Lancelord_Gaheel_Ja
+    level:    [80, 80]
+  17051696:
+    template: Lancelord_Gaheel_Ja
+    level:    [80, 80]
+  17051697:
+    template: Lancelord_Gaheel_Ja
+    at:       [244.112, -31.694, 239.195, 175]
+    level:    [99, 99]
+  17051698:
+    template: Mamool_Ja_Isangoma
+    at:       [239.799, -32.000, 240.226, 187]
+    level:    [99, 99]
+  17051699:
+    template: Mamool_Ja_Polemicist
+    at:       [238.186, -31.868, 237.123, 159]
+    level:    [99, 99]
+  17051700:
+    template: Mamool_Ja_Profligate
+    at:       [236.533, -31.526, 234.075, 209]
+    level:    [99, 99]
+  17051701:
+    template: Mamool_Ja_Unseen
+    at:       [237.708, -31.580, 234.907, 191]
+    level:    [99, 99]
+  17051702:
+    template: Mamool_Ja_Flamerearer
+    at:       [234.013, -31.588, 237.776, 200]
+    level:    [99, 99]
+  17051703:
+    template: Scorched-snout_Wyvern
+    at:       [234.737, -31.545, 236.901, 233]
+    level:    [99, 99]
+  17051704:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051705:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051706:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051707:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051708:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051709:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051710:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051711:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051712:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051713:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051714:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051715:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051716:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051717:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051718:
+    template: Lancelord_Gaheel_Ja
+    at:       [240.000, -32.000, 240.000, 160]
+    level:    [99, 99]
+  17051719:
+    template: Mamool_Ja_Isangoma
+    at:       [241.733, -32.000, 241.960, 160]
+    level:    [99, 99]
+  17051720:
+    template: Mamool_Ja_Polemicist
+    at:       [238.186, -31.868, 237.123, 160]
+    level:    [99, 99]
+  17051721:
+    template: Mamool_Ja_Profligate
+    at:       [243.526, -31.768, 237.983, 160]
+    level:    [99, 99]
+  17051722:
+    template: Mamool_Ja_Unseen
+    at:       [242.895, -31.740, 237.164, 160]
+    level:    [99, 99]
+  17051723:
+    template: Mamool_Ja_Flamerearer
+    at:       [242.492, -31.662, 236.115, 160]
+    level:    [99, 99]
+  17051724:
+    template: Scorched-snout_Wyvern
+    at:       [236.265, -31.591, 236.993, 218]
+    level:    [99, 99]
+  17051725:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051726:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051727:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051728:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051729:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051730:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051731:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051732:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051733:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051734:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051735:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051736:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051737:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051738:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051739:
+    template: Lancelord_Gaheel_Ja
+    at:       [240.000, -32.000, 240.000, 160]
+    level:    [99, 99]
+  17051740:
+    template: Mamool_Ja_Isangoma
+    at:       [241.733, -32.000, 241.960, 160]
+    level:    [99, 99]
+  17051741:
+    template: Mamool_Ja_Polemicist
+    at:       [238.186, -31.868, 237.123, 160]
+    level:    [99, 99]
+  17051742:
+    template: Mamool_Ja_Profligate
+    at:       [243.526, -31.768, 237.983, 160]
+    level:    [99, 99]
+  17051743:
+    template: Mamool_Ja_Unseen
+    at:       [242.895, -31.740, 237.164, 160]
+    level:    [99, 99]
+  17051744:
+    template: Mamool_Ja_Flamerearer
+    at:       [242.492, -31.662, 236.115, 160]
+    level:    [99, 99]
+  17051745:
+    template: Scorched-snout_Wyvern
+    at:       [234.205, -31.351, 236.881, 153]
+    level:    [99, 99]
+  17051746:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051747:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051748:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051749:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051750:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051751:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051752:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051753:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051754:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051755:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051756:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051757:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051758:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051759:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051760:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051761:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051762:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051763:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051764:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051765:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051766:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051767:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051768:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051769:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051770:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051771:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051772:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051773:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051774:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051775:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051776:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051777:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051778:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051779:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051780:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051781:
+    template: Lancelord_Gaheel_Ja
+    at:       [239.598, -32.000, 240.571, 169]
+    level:    [99, 99]
+  17051782:
+    template: Mamool_Ja_Isangoma
+    at:       [241.164, -31.945, 242.366, 115]
+    level:    [99, 99]
+  17051783:
+    template: Mamool_Ja_Polemicist
+    at:       [238.186, -31.868, 237.123, 142]
+    level:    [99, 99]
+  17051784:
+    template: Mamool_Ja_Profligate
+    at:       [229.656, -31.300, 248.309, 30]
+    level:    [99, 99]
+  17051785:
+    template: Mamool_Ja_Unseen
+    at:       [236.865, -31.435, 248.320, 90]
+    level:    [99, 99]
+  17051786:
+    template: Mamool_Ja_Flamerearer
+    at:       [231.559, -31.336, 244.049, 88]
+    level:    [99, 99]
+  17051787:
+    template: Scorched-snout_Wyvern
+    at:       [230.879, -31.024, 248.342, 1]
+    level:    [99, 99]
+  17051788:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051789:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051790:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051791:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051792:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051793:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051794:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051795:
+    template: Lancelord_Gaheel_Ja
+    level:    [99, 99]
+  17051796:
+    template: Mamool_Ja_Isangoma
+    level:    [99, 99]
+  17051797:
+    template: Mamool_Ja_Polemicist
+    level:    [99, 99]
+  17051798:
+    template: Mamool_Ja_Profligate
+    level:    [99, 99]
+  17051799:
+    template: Mamool_Ja_Unseen
+    level:    [99, 99]
+  17051800:
+    template: Mamool_Ja_Flamerearer
+    level:    [99, 99]
+  17051801:
+    template: Scorched-snout_Wyvern
+    level:    [99, 99]
+  17051802:
+    template: Glyphweaver_Sikool_Ja
+    at:       [235.936, -31.500, 244.516, 74]
+    level:    [139, 139]
+  17051803:
+    template: Riftweaver_Pomaal_Ja
+    at:       [236.574, -31.775, 242.067, 225]
+    level:    [139, 139]
+  17051804:
+    template: Drakeweaver_Hageel_Ja
+    at:       [241.733, -32.000, 241.960, 157]
+    level:    [139, 139]
+  17051805:
+    template: Fistweaver_Mufaal_Ja
+    at:       [231.172, -30.882, 244.577, 23]
+    level:    [139, 139]
+  17051806:
+    template: Glyphweaver_Sikool_Ja
+    at:       [4.000, 8.000, 6.000, 7]
+    level:    [139, 139]
+  17051807:
+    template: Riftweaver_Pomaal_Ja
+    at:       [2.000, 8.000, 5.000, 5]
+    level:    [139, 139]
+  17051808:
+    template: Drakeweaver_Hageel_Ja
+    at:       [1.000, 8.000, 1.000, 161]
+    level:    [139, 139]
+  17051809:
+    template: Fistweaver_Mufaal_Ja
+    at:       [0.000, 8.000, 2.000, 190]
+    level:    [139, 139]
+  17051810:
+    template: Glyphweaver_Sikool_Ja
+    at:       [-244.064, 48.500, -235.484, 74]
+    level:    [139, 139]
+  17051811:
+    template: Riftweaver_Pomaal_Ja
+    at:       [-243.426, 48.225, -237.933, 225]
+    level:    [139, 139]
+  17051812:
+    template: Drakeweaver_Hageel_Ja
+    at:       [-238.267, 48.000, -238.040, 157]
+    level:    [139, 139]
+  17051813:
+    template: Fistweaver_Mufaal_Ja
+    at:       [-248.828, 49.118, -235.423, 23]
+    level:    [139, 139]
+  17051814:
+    template: Gulool_Ja_Ja
+    at:       [240.000, -32.000, 240.000, 159]
+    level:    [85, 85]
+  17051815:
+    template: Mamool_Ja_Chamberlain
+    at:       [241.680, -32.000, 241.214, 130]
+    level:    [85, 85]
+  17051816:
+    template: Mamool_Ja_Chamberlain
+    at:       [240.725, -32.000, 238.753, 164]
+    level:    [85, 85]
+  17051817:
+    template: Mamool_Ja_Palatine
+    at:       [238.559, -31.779, 237.779, 192]
+    level:    [85, 85]
+  17051818:
+    template: Mamool_Ja_Palatine
+    at:       [241.913, -31.767, 242.862, 111]
+    level:    [85, 85]
+  17051819:
+    template: Gulool_Ja_Ja
+    at:       [0.000, 8.000, 0.000, 159]
+    level:    [85, 85]
+  17051820:
+    template: Mamool_Ja_Chamberlain
+    at:       [1.680, 8.000, 1.214, 130]
+    level:    [85, 85]
+  17051821:
+    template: Mamool_Ja_Chamberlain
+    at:       [0.725, 8.000, -1.247, 164]
+    level:    [85, 85]
+  17051822:
+    template: Mamool_Ja_Palatine
+    at:       [-1.441, 8.221, -2.221, 192]
+    level:    [85, 85]
+  17051823:
+    template: Mamool_Ja_Palatine
+    at:       [1.913, 8.233, 2.862, 111]
+    level:    [85, 85]
+  17051824:
+    template: Gulool_Ja_Ja
+    at:       [-240.000, 48.000, -240.000, 159]
+    level:    [85, 85]
+  17051825:
+    template: Mamool_Ja_Chamberlain
+    at:       [-238.320, 48.000, -238.786, 130]
+    level:    [85, 85]
+  17051826:
+    template: Mamool_Ja_Chamberlain
+    at:       [-239.275, 48.000, -241.247, 164]
+    level:    [85, 85]
+  17051827:
+    template: Mamool_Ja_Palatine
+    at:       [-241.441, 48.221, -242.221, 192]
+    level:    [85, 85]
+  17051828:
+    template: Mamool_Ja_Palatine
+    at:       [-238.087, 48.233, -237.138, 111]
+    level:    [85, 85]

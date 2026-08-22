@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z5i0:
+    from:  [-370.004, -15.322, -180.822]
+    to:    tahrongi_canyon
+    at:    [481.394, 44.388, 515.493, 3.141593]
+    scale: [1.000, 4.000]
+
+  z5i2:
+    from:  [479.993, -33.642, -259.976]
+    to:    buburimu_peninsula
+    at:    [-356.219, -43.107, 314.873]
+    scale: [1.000, 3.000]
+
+  z5i4:
+    from:  [-140.331, -14.165, 164.240]
+    to:    attohwa_chasm
+    at:    [-163.496, 7.221, -260.872]
+    scale: [1.000, 4.000]

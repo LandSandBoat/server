@@ -1,0 +1,684 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16859154:
+    script: blank
+    at:     [-279.998, -1.000, 239.998]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          6
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859204:
+    script: blank
+    at:     [-80.000, -1.000, -40.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859211:
+    script: blank
+    at:     [-320.000, -1.000, -360.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      animation:    despawn
+      name_vis:     16
+      name_prefix:  2
+      moving:       7
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+
+  16859218:
+    script: blank
+    at:     [-40.000, -1.000, -320.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859225:
+    script: blank
+    at:     [80.000, -1.000, -240.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859295:
+    script: blank
+    at:     [-320.000, -1.000, -40.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          6
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859304:
+    script: blank
+    at:     [-240.000, -1.000, -40.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          6
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859313:
+    script: blank
+    at:     [-40.000, -1.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          6
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859375:
+    script: blank
+    at:     [200.000, -1.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859384:
+    script: blank
+    at:     [360.000, -1.000, -40.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859393:
+    script: blank
+    at:     [240.000, -1.000, -320.000]
+    render:
+      look:
+        type:  standard
+        model: 1099
+      entity_flags: 2179
+      name_vis:       16
+      name_prefix:     2
+      moving:          7
+    status:          normal
+    speed:           40
+    animation_speed: 40
+
+  16859473:
+    script: NPC[151]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16859474:
+    script: NPC[152]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16859475:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16859476:
+    script: NPC[154]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16859477:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16859479:
+    script: NPC[157]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16859480:
+    script: NPC[158]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16859481:
+    script: NPC[159]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16859482:
+    script: NPC[15a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16859483:
+    script:       _0k1
+    display_name: warp_01
+    at:           [-279.960, -0.400, 240.013]
+    render:
+      look:
+        type: door
+      door_id:      829108319
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859484:
+    script:       _0k2
+    display_name: warp_02
+    at:           [-319.969, -0.400, -39.997]
+    render:
+      look:
+        type: door
+      door_id:      845885535
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859485:
+    script:       _0k3
+    display_name: warp_03
+    at:           [-239.970, -0.400, -39.994]
+    render:
+      look:
+        type: door
+      door_id:      862662751
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859486:
+    script:       _0k4
+    display_name: warp_04
+    at:           [-80.003, -0.400, -40.002]
+    render:
+      look:
+        type: door
+      door_id:      879439967
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859487:
+    script:       _0k5
+    display_name: warp_05
+    at:           [-40.002, -0.399, 0.002]
+    render:
+      look:
+        type: door
+      door_id:      896217183
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859488:
+    script:       _0k6
+    display_name: warp_06
+    at:           [200.007, -0.399, -0.003]
+    render:
+      look:
+        type: door
+      door_id:      912994399
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859489:
+    script:       _0k7
+    display_name: warp_07
+    at:           [360.001, -0.399, -40.001]
+    render:
+      look:
+        type: door
+      door_id:      929771615
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859490:
+    script:       _0k8
+    display_name: warp_08
+    at:           [-320.002, -0.400, -359.995]
+    render:
+      look:
+        type: door
+      door_id:      946548831
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859491:
+    script:       _0k9
+    display_name: warp_09
+    at:           [-39.997, -0.400, -319.997]
+    render:
+      look:
+        type: door
+      door_id:      963326047
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859492:
+    script:       _0ka
+    display_name: warp_10
+    at:           [80.000, -0.400, -239.999]
+    render:
+      look:
+        type: door
+      door_id:      1634414687
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859493:
+    script:       _0kb
+    display_name: warp_11
+    at:           [240.003, -0.400, -319.994]
+    render:
+      look:
+        type: door
+      door_id:      1651191903
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status:  normal
+    content: COP
+
+  16859494:
+    script:       _0k0
+    display_name: Memory Flux
+    at:           [260.000, -2.500, 180.000]
+    render:
+      look:
+        type: door
+      door_id:   812331103
+      animation: close_door
+      moving:    1
+    status:  normal
+    content: COP
+
+  16859495:
+    script:       _0kc
+    display_name: Memory Flux
+    at:           [300.000, -2.500, -220.000]
+    render:
+      look:
+        type: door
+      door_id:   1667969119
+      animation: close_door
+      moving:    1
+    status:  normal
+    content: COP
+
+  16859496:
+    script:       _0kd
+    display_name: Memory Flux
+    at:           [-260.000, -2.500, -180.000]
+    render:
+      look:
+        type: door
+      door_id:   1684746335
+      animation: close_door
+      moving:    1
+    status:  normal
+    content: COP
+
+  16859497:
+    script:       kiokudama_a
+    display_name: kiokudama_a
+    at:           [299.920, -0.044, 179.982]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16859498:
+    script:       kiokudama_b
+    display_name: kiokudama_b
+    at:           [340.261, -0.053, -220.029]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16859499:
+    script:       kiokudama_c
+    display_name: kiokudama_c
+    at:           [-299.906, -0.045, -180.055]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32769
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16859500:
+    script:       qm_map
+    display_name: ???
+    at:           [-0.001, -2.327, 320.000]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32769
+    status:  normal
+    content: COP
+
+  16859501:
+    script: NPC[16d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16859502:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16859503:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16859504:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16859505:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16859506:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16859507:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16859508:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16859509:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+    content:         COP
+
+  16859510:
+    script:       Rendezvous_Point
+    display_name: Rendezvous Point
+    at:           [-99.496, 0.000, 184.042, 140]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16859511:
+    script:       qm
+    display_name: ???
+    at:           [-190.569, -2.877, 304.817, 239]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16859512:
+    script:       qm
+    display_name: ???
+    at:           [-179.576, -1.707, -177.962, 210]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16859513:
+    script:       qm
+    display_name: ???
+    at:           [-253.806, -0.050, 65.852, 248]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16859514:
+    script:       qm
+    display_name: ???
+    at:           [255.440, -0.820, -99.890, 131]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16859515:
+    script:       qm
+    display_name: ???
+    at:           [106.626, -1.798, 242.890, 242]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:  normal
+    content: COP
+
+  16859516:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32

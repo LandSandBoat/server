@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          109
+  night:        109
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z2s0:
+    from:  [-119.065, -65.707, 280.921]
+    to:    southern_san_doria
+    at:    [-110.465, -2.083, -54.469, 5.497787]
+    scale: [1.000, 5.000]
+
+  z2s2:
+    from:  [-157.666, -66.124, 379.960]
+    to:    northern_san_doria
+    at:    [-248.893, 4.640, 44.026]
+    scale: [1.000, 5.000]
+
+  z2s4:
+    from:  [-11.697, -53.643, 140.000]
+    to:    east_ronfaure
+    at:    [-16.472, -54.180, 140.003]
+    scale: [3.000, 10.000]
+
+  z2s6:
+    from:  [94.760, -29.531, -200.153]
+    to:    east_ronfaure
+    at:    [81.582, -29.242, -199.921]
+    scale: [3.000, 15.000]
+
+  z2s8:
+    from:  [-740.570, -68.478, 623.341]
+    to:    ghelsba_outpost
+    at:    [100.002, -2.062, -38.021, 4.712389]
+    scale: [1.000, 4.500]
+
+  z2sa:
+    from:  [-177.516, -68.461, 420.000]
+    to:    northern_san_doria
+    at:    [-234.393, -5.741, 106.009]
+    scale: [1.000, 4.000]
+
+  z2sc:
+    from:  [-560.415, -10.328, -613.176]
+    to:    la_theine_plateau
+    at:    [-559.978, -3.098, 680.592, 1.570796]
+    scale: [1.000, 10.000]
+
+  z2se:
+    from:  [-716.831, -42.252, 18.192]
+    to:    bostaunieux_oubliette
+    at:    [-379.994, -9.351, -237.249, 4.712389]
+    scale: [1.000, 4.000]

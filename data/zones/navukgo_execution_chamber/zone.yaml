@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  143
+  battle_party: 143
+
+zonelines:
+
+  z1s0:
+    from:  [-660.555, -13.736, -203.192]
+    to:    mount_zhayolm
+    at:    [-521.016, -6.191, 60.013, 3.141593]
+    scale: [1.500, 4.000]
+
+  z1s2:
+    from:  [-660.000, -24.483, 123.071]
+    to:    mount_zhayolm
+    at:    [-518.013, -16.514, 139.972, 3.141593]
+    scale: [1.500, 4.000]
+
+  z1s4:
+    from:  [378.162, -105.012, 440.268]
+    to:    mount_zhayolm
+    at:    [-518.013, -16.514, 139.972, 3.141593]
+    scale: [1.500, 4.000]
+
+  z1s6:
+    from:  [-21.948, -5.035, 40.038]
+    to:    mount_zhayolm
+    at:    [-518.013, -16.514, 139.972, 3.141593]
+    scale: [1.500, 4.000]
+
+  z1s8:
+    from:  [378.065, 95.015, -360.002]
+    to:    mount_zhayolm
+    at:    [-518.013, -16.514, 139.972, 3.141593]
+    scale: [1.500, 4.000]

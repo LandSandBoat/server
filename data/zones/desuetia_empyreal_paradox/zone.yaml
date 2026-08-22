@@ -1,0 +1,3 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [pet, trust]

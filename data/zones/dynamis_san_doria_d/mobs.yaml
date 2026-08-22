@@ -1,0 +1,1655 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+spawns:
+  17981441:
+    script: Aurix
+  17981442:
+    script: Corporal_Tombstone
+  17981443:
+    script: Squadron_Skullcrusher
+  17981444:
+    script: Squadron_Pugilist
+  17981445:
+    script: Squadron_Medic
+  17981446:
+    script: Squadrons_Avatar
+  17981447:
+    script: Corporal_Tombstone
+  17981448:
+    script: Squadron_Knight
+  17981449:
+    script: Squadrons_Wyvern
+  17981450:
+    script: Squadron_Fleetfoot
+  17981451:
+    script: Squadron_Evoker
+  17981452:
+    script: Corporal_Tombstone
+  17981453:
+    script: Squadron_Shinobi
+  17981454:
+    script: Squadron_Troubador
+  17981455:
+    script: Squadron_Tamer
+  17981456:
+    script: Squadrons_Rabbit
+  17981457:
+    script: Corporal_Tombstone
+  17981458:
+    script: Squadron_Pirate
+  17981459:
+    script: Squadron_Skullcrusher
+  17981460:
+    script: Squadron_Pugilist
+  17981461:
+    script: Squadron_Medic
+  17981462:
+    script: Squadrons_Avatar
+  17981463:
+    script: Corporal_Tombstone
+  17981464:
+    script: Squadron_Pirate
+  17981465:
+    script: Squadron_Skullcrusher
+  17981466:
+    script: Squadron_Pugilist
+  17981467:
+    script: Squadron_Medic
+  17981468:
+    script: Squadrons_Avatar
+  17981469:
+    script: Corporal_Tombstone
+  17981470:
+    script: Squadron_Knight
+  17981471:
+    script: Squadrons_Wyvern
+  17981472:
+    script: Squadron_Evoker
+  17981473:
+    script: Squadron_Knight
+  17981474:
+    script: Squadrons_Wyvern
+  17981475:
+    script: Squadron_Evoker
+  17981476:
+    script: Corporal_Tombstone
+  17981477:
+    script: Squadron_Pugilist
+  17981478:
+    script: Squadron_Medic
+  17981479:
+    script: Squadrons_Avatar
+  17981480:
+    script: Squadron_Knight
+  17981481:
+    script: Squadrons_Wyvern
+  17981482:
+    script: Squadron_Shinobi
+  17981483:
+    script: Squadron_Troubador
+  17981484:
+    script: Squadron_Tamer
+  17981485:
+    script: Squadrons_Rabbit
+  17981486:
+    script: Corporal_Tombstone
+  17981487:
+    script: Squadron_Pugilist
+  17981488:
+    script: Squadron_Medic
+  17981489:
+    script: Squadrons_Avatar
+  17981490:
+    script: Squadron_Knight
+  17981491:
+    script: Squadrons_Wyvern
+  17981492:
+    script: Squadron_Shinobi
+  17981493:
+    script: Squadron_Troubador
+  17981494:
+    script: Squadron_Tamer
+  17981495:
+    script: Squadrons_Rabbit
+  17981496:
+    script: Corporal_Tombstone
+  17981497:
+    script: Squadron_Skullcrusher
+  17981498:
+    script: Squadron_Fleetfoot
+  17981499:
+    script: Squadron_Evoker
+  17981500:
+    script: Squadron_Skullcrusher
+  17981501:
+    script: Squadron_Fleetfoot
+  17981502:
+    script: Squadron_Evoker
+  17981503:
+    script: Corporal_Tombstone
+  17981504:
+    script: Squadron_Troubador
+  17981505:
+    script: Squadron_Knight
+  17981506:
+    script: Squadrons_Wyvern
+  17981507:
+    script: Corporal_Tombstone
+  17981508:
+    script: Squadron_Enchanter
+  17981509:
+    script: Squadron_Tamer
+  17981510:
+    script: Squadrons_Rabbit
+  17981511:
+    script: Corporal_Tombstone
+  17981512:
+    script: Squadron_Evoker
+  17981513:
+    script: Squadron_Pirate
+  17981514:
+    script: Corporal_Tombstone
+  17981515:
+    script: Squadron_Medic
+  17981516:
+    script: Squadrons_Avatar
+  17981517:
+    script: Squadron_Pirate
+  17981518:
+    script: Corporal_Tombstone
+  17981519:
+    script: Squadron_Knight
+  17981520:
+    script: Squadrons_Wyvern
+  17981521:
+    script: Squadron_Knight
+  17981522:
+    script: Squadrons_Wyvern
+  17981523:
+    script: Squadron_Knight
+  17981524:
+    script: Squadrons_Wyvern
+  17981525:
+    script: Corporal_Tombstone
+  17981526:
+    script: Squadron_Medic
+  17981527:
+    script: Squadrons_Avatar
+  17981528:
+    script: Squadron_Medic
+  17981529:
+    script: Squadrons_Avatar
+  17981530:
+    script: Squadron_Medic
+  17981531:
+    script: Squadrons_Avatar
+  17981532:
+    script: Corporal_Tombstone
+  17981533:
+    script: Squadron_Fleetfoot
+  17981534:
+    script: Squadron_Fleetfoot
+  17981535:
+    script: Squadron_Fleetfoot
+  17981536:
+    script: Corporal_Tombstone
+  17981537:
+    script: Squadron_Shinobi
+  17981538:
+    script: Squadron_Shinobi
+  17981539:
+    script: Squadron_Shinobi
+  17981540:
+    script: Squadron_Pirate
+  17981541:
+    script: Squadron_Pirate
+  17981542:
+    script: Squadron_Pirate
+  17981543:
+    script: Corporal_Tombstone
+  17981544:
+    script: Squadron_Evoker
+  17981545:
+    script: Squadron_Evoker
+  17981546:
+    script: Squadron_Evoker
+  17981547:
+    script: Squadron_Tamer
+  17981548:
+    script: Squadrons_Rabbit
+  17981549:
+    script: Squadron_Tamer
+  17981550:
+    script: Squadrons_Rabbit
+  17981551:
+    script: Squadron_Tamer
+  17981552:
+    script: Squadrons_Rabbit
+  17981553:
+    script: Corporal_Tombstone
+  17981554:
+    script: Squadron_Pugilist
+  17981555:
+    script: Squadron_Pugilist
+  17981556:
+    script: Squadron_Pugilist
+  17981557:
+    script: Squadron_Evoker
+  17981558:
+    script: Squadron_Evoker
+  17981559:
+    script: Squadron_Evoker
+  17981560:
+    script: Corporal_Tombstone
+  17981561:
+    script: Squadron_Enchanter
+  17981562:
+    script: Squadron_Enchanter
+  17981563:
+    script: Squadron_Enchanter
+  17981564:
+    script: Squadron_Fleetfoot
+  17981565:
+    script: Squadron_Fleetfoot
+  17981566:
+    script: Squadron_Fleetfoot
+  17981567:
+    script: Corporal_Tombstone
+  17981568:
+    script: Squadron_Pugilist
+  17981569:
+    script: Squadron_Enchanter
+  17981570:
+    script: Squadron_Fleetfoot
+  17981571:
+    script: Squadron_Troubador
+  17981572:
+    script: Corporal_Tombstone
+  17981573:
+    script: Squadron_Tamer
+  17981574:
+    script: Squadrons_Rabbit
+  17981575:
+    script: Squadron_Tamer
+  17981576:
+    script: Squadrons_Rabbit
+  17981577:
+    script: Corporal_Tombstone
+  17981578:
+    script: Squadron_Medic
+  17981579:
+    script: Squadrons_Avatar
+  17981580:
+    script: Squadron_Skullcrusher
+  17981581:
+    script: Squadron_Pugilist
+  17981582:
+    script: Corporal_Tombstone
+  17981583:
+    script: Squadron_Knight
+  17981584:
+    script: Squadrons_Wyvern
+  17981585:
+    script: Squadron_Evoker
+  17981586:
+    script: Squadron_Enchanter
+  17981587:
+    script: Corporal_Tombstone
+  17981588:
+    script: Squadron_Troubador
+  17981589:
+    script: Squadron_Shinobi
+  17981590:
+    script: Squadron_Pirate
+  17981591:
+    script: Corporal_Tombstone
+  17981592:
+    script: Squadron_Knight
+  17981593:
+    script: Squadrons_Wyvern
+  17981594:
+    script: Squadron_Skullcrusher
+  17981595:
+    script: Squadron_Pugilist
+  17981596:
+    script: Squadron_Evoker
+  17981597:
+    script: Corporal_Tombstone
+  17981598:
+    script: Squadron_Knight
+  17981599:
+    script: Squadrons_Wyvern
+  17981600:
+    script: Squadron_Skullcrusher
+  17981601:
+    script: Squadron_Pugilist
+  17981602:
+    script: Squadron_Evoker
+  17981603:
+    script: Corporal_Tombstone
+  17981604:
+    script: Squadron_Tamer
+  17981605:
+    script: Squadrons_Rabbit
+  17981606:
+    script: Squadron_Troubador
+  17981607:
+    script: Squadron_Shinobi
+  17981608:
+    script: Squadron_Pirate
+  17981609:
+    script: Corporal_Tombstone
+  17981610:
+    script: Squadron_Fleetfoot
+  17981611:
+    script: Squadron_Tamer
+  17981612:
+    script: Squadrons_Rabbit
+  17981613:
+    script: Squadron_Medic
+  17981614:
+    script: Squadrons_Avatar
+  17981615:
+    script: Squadron_Troubador
+  17981616:
+    script: Squadron_Shinobi
+  17981617:
+    script: Squadron_Pirate
+  17981618:
+    script: Corporal_Tombstone
+  17981619:
+    script: Squadron_Skullcrusher
+  17981620:
+    script: Squadron_Pugilist
+  17981621:
+    script: Squadron_Enchanter
+  17981622:
+    script: Squadron_Fleetfoot
+  17981623:
+    script: Corporal_Tombstone
+  17981624:
+    script: Squadron_Knight
+  17981625:
+    script: Squadrons_Wyvern
+  17981626:
+    script: Squadron_Tamer
+  17981627:
+    script: Squadrons_Rabbit
+  17981628:
+    script: Squadron_Pirate
+  17981629:
+    script: Squadron_Pugilist
+  17981630:
+    script: Corporal_Tombstone
+  17981631:
+    script: Squadron_Skullcrusher
+  17981632:
+    script: Squadron_Pugilist
+  17981633:
+    script: Squadron_Evoker
+  17981634:
+    script: Squadron_Enchanter
+  17981635:
+    script: Corporal_Tombstone
+  17981636:
+    script: Squadron_Fleetfoot
+  17981637:
+    script: Squadron_Shinobi
+  17981638:
+    script: Squadron_Troubador
+  17981639:
+    script: Squadron_Pirate
+  17981640:
+    script: Corporal_Tombstone
+  17981641:
+    script: Squadron_Skullcrusher
+  17981642:
+    script: Squadron_Medic
+  17981643:
+    script: Squadrons_Avatar
+  17981644:
+    script: Corporal_Tombstone
+  17981645:
+    script: Squadron_Pugilist
+  17981646:
+    script: Squadron_Knight
+  17981647:
+    script: Squadrons_Wyvern
+  17981648:
+    script: Corporal_Tombstone
+  17981649:
+    script: Squadron_Fleetfoot
+  17981650:
+    script: Squadron_Tamer
+  17981651:
+    script: Squadrons_Rabbit
+  17981652:
+    script: Corporal_Tombstone
+  17981653:
+    script: Squadron_Shinobi
+  17981654:
+    script: Squadron_Pirate
+  17981655:
+    script: Squadron_Pirate
+  17981656:
+    script: Corporal_Tombstone
+  17981657:
+    script: Squadron_Knight
+  17981658:
+    script: Squadrons_Wyvern
+  17981659:
+    script: Squadron_Medic
+  17981660:
+    script: Squadrons_Avatar
+  17981661:
+    script: Squadron_Troubador
+  17981662:
+    script: Squadron_Evoker
+  17981663:
+    script: Corporal_Tombstone
+  17981664:
+    script: Squadron_Knight
+  17981665:
+    script: Squadrons_Wyvern
+  17981666:
+    script: Squadron_Medic
+  17981667:
+    script: Squadrons_Avatar
+  17981668:
+    script: Squadron_Troubador
+  17981669:
+    script: Squadron_Evoker
+  17981670:
+    script: Corporal_Tombstone
+  17981671:
+    script: Squadron_Fleetfoot
+  17981672:
+    script: Squadron_Fleetfoot
+  17981673:
+    script: Squadron_Fleetfoot
+  17981674:
+    script: Corporal_Tombstone
+  17981675:
+    script: Squadron_Skullcrusher
+  17981676:
+    script: Squadron_Pugilist
+  17981677:
+    script: Squadron_Enchanter
+  17981678:
+    script: Squadron_Medic
+  17981679:
+    script: Squadrons_Avatar
+  17981680:
+    script: Corporal_Tombstone
+  17981681:
+    script: Squadron_Fleetfoot
+  17981682:
+    script: Squadron_Knight
+  17981683:
+    script: Squadrons_Wyvern
+  17981684:
+    script: Squadron_Tamer
+  17981685:
+    script: Squadrons_Rabbit
+  17981686:
+    script: Squadron_Troubador
+  17981687:
+    script: Squadron_Shinobi
+  17981688:
+    script: Corporal_Tombstone
+  17981689:
+    script: Squadron_Pirate
+  17981690:
+    script: Squadron_Skullcrusher
+  17981691:
+    script: Squadron_Pugilist
+  17981692:
+    script: Squadron_Fleetfoot
+  17981693:
+    script: Squadron_Shinobi
+  17981694:
+    script: Corporal_Tombstone
+  17981695:
+    script: Squadron_Pirate
+  17981696:
+    script: Squadron_Medic
+  17981697:
+    script: Squadrons_Avatar
+  17981698:
+    script: Squadron_Evoker
+  17981699:
+    script: Squadron_Enchanter
+  17981700:
+    script: Squadron_Troubador
+  17981701:
+    script: Corporal_Tombstone
+  17981702:
+    script: Squadron_Knight
+  17981703:
+    script: Squadrons_Wyvern
+  17981704:
+    script: Squadron_Tamer
+  17981705:
+    script: Squadrons_Rabbit
+  17981706:
+    script: Squadron_Troubador
+  17981707:
+    script: Squadron_Troubador
+  17981708:
+    script: Corporal_Tombstone
+  17981709:
+    script: Squadron_Shinobi
+  17981710:
+    script: Squadron_Shinobi
+  17981711:
+    script: Corporal_Tombstone
+  17981712:
+    script: Squadron_Skullcrusher
+  17981713:
+    script: Squadron_Skullcrusher
+  17981714:
+    script: Squadron_Evoker
+  17981715:
+    script: Squadron_Evoker
+  17981716:
+    script: Corporal_Tombstone
+  17981717:
+    script: Squadron_Fleetfoot
+  17981718:
+    script: Squadron_Enchanter
+  17981719:
+    script: Squadron_Enchanter
+  17981720:
+    script: Corporal_Tombstone
+  17981721:
+    script: Squadron_Shinobi
+  17981722:
+    script: Squadron_Pirate
+  17981723:
+    script: Squadron_Pirate
+  17981724:
+    script: Corporal_Tombstone
+  17981725:
+    script: Squadron_Knight
+  17981726:
+    script: Squadrons_Wyvern
+  17981727:
+    script: Squadron_Knight
+  17981728:
+    script: Squadrons_Wyvern
+  17981729:
+    script: Squadron_Tamer
+  17981730:
+    script: Squadrons_Rabbit
+  17981731:
+    script: Squadron_Tamer
+  17981732:
+    script: Squadrons_Rabbit
+  17981733:
+    script: Corporal_Tombstone
+  17981734:
+    script: Squadron_Medic
+  17981735:
+    script: Squadrons_Avatar
+  17981736:
+    script: Squadron_Troubador
+  17981737:
+    script: Corporal_Tombstone
+  17981738:
+    script: Squadron_Skullcrusher
+  17981739:
+    script: Squadron_Pugilist
+  17981740:
+    script: Squadron_Fleetfoot
+  17981741:
+    script: Squadron_Shinobi
+  17981742:
+    script: Squadron_Skullcrusher
+  17981743:
+    script: Squadron_Pugilist
+  17981744:
+    script: Corporal_Tombstone
+  17981745:
+    script: Squadron_Evoker
+  17981746:
+    script: Squadron_Enchanter
+  17981747:
+    script: Squadron_Troubador
+  17981748:
+    script: Corporal_Tombstone
+  17981749:
+    script: Squadron_Pugilist
+  17981750:
+    script: Squadron_Medic
+  17981751:
+    script: Squadrons_Avatar
+  17981752:
+    script: Squadron_Enchanter
+  17981753:
+    script: Squadron_Fleetfoot
+  17981754:
+    script: Corporal_Tombstone
+  17981755:
+    script: Squadron_Evoker
+  17981756:
+    script: Squadron_Evoker
+  17981757:
+    script: Corporal_Tombstone
+  17981758:
+    script: Squadron_Knight
+  17981759:
+    script: Squadrons_Wyvern
+  17981760:
+    script: Squadron_Troubador
+  17981761:
+    script: Squadron_Shinobi
+  17981762:
+    script: Corporal_Tombstone
+  17981763:
+    script: Squadron_Pugilist
+  17981764:
+    script: Squadron_Fleetfoot
+  17981765:
+    script: Squadron_Shinobi
+  17981766:
+    script: Corporal_Tombstone
+  17981767:
+    script: Squadron_Enchanter
+  17981768:
+    script: Squadron_Troubador
+  17981769:
+    script: Squadron_Pirate
+  17981770:
+    script: Overseers_Tombstone
+  17981771:
+    script: Corporal_Tombstone
+  17981772:
+    script: Stalwart_Leader
+  17981773:
+    script: Leaders_Wyvern
+  17981774:
+    script: Warlock_Leader
+  17981775:
+    script: Corporal_Tombstone
+  17981776:
+    script: Canoneer_Leader
+  17981777:
+    script: Corporal_Tombstone
+  17981778:
+    script: Cutpurse_Leader
+  17981779:
+    script: Kagemusha_Leader
+  17981780:
+    script: Corporal_Tombstone
+  17981781:
+    script: Ravager_Leader
+  17981782:
+    script: Minstrel_Leader
+  17981783:
+    script: Corporal_Tombstone
+  17981784:
+    script: Mendicant_Leader
+  17981785:
+    script: Priest_Leader
+  17981786:
+    script: Leaders_Avatar
+  17981787:
+    script: Corporal_Tombstone
+  17981788:
+    script: Invoker_Leader
+  17981789:
+    script: Hunter_Leader
+  17981790:
+    script: Leaders_Manticore
+  17981791:
+    script: Corporal_Tombstone
+  17981792:
+    script: Regiment_Skullcrusher
+  17981793:
+    script: Regiment_Evoker
+  17981794:
+    script: Regiment_Evoker
+  17981795:
+    script: Corporal_Tombstone
+  17981796:
+    script: Regiment_Pugilist
+  17981797:
+    script: Regiment_Medic
+  17981798:
+    script: Regiments_Avatar
+  17981799:
+    script: Regiment_Fleetfoot
+  17981800:
+    script: Regiment_Knight
+  17981801:
+    script: Regiments_Wyvern
+  17981802:
+    script: Corporal_Tombstone
+  17981803:
+    script: Regiment_Pugilist
+  17981804:
+    script: Regiment_Medic
+  17981805:
+    script: Regiments_Avatar
+  17981806:
+    script: Regiment_Fleetfoot
+  17981807:
+    script: Regiment_Knight
+  17981808:
+    script: Regiments_Wyvern
+  17981809:
+    script: Corporal_Tombstone
+  17981810:
+    script: Regiment_Skullcrusher
+  17981811:
+    script: Regiment_Troubador
+  17981812:
+    script: Regiment_Pirate
+  17981813:
+    script: Regiment_Tamer
+  17981814:
+    script: Regiments_Coeurl
+  17981815:
+    script: Corporal_Tombstone
+  17981816:
+    script: Regiment_Skullcrusher
+  17981817:
+    script: Regiment_Fleetfoot
+  17981818:
+    script: Regiment_Troubador
+  17981819:
+    script: Regiment_Pirate
+  17981820:
+    script: Corporal_Tombstone
+  17981821:
+    script: Regiment_Skullcrusher
+  17981822:
+    script: Regiment_Fleetfoot
+  17981823:
+    script: Regiment_Troubador
+  17981824:
+    script: Regiment_Pirate
+  17981825:
+    script: Corporal_Tombstone
+  17981826:
+    script: Regiment_Pugilist
+  17981827:
+    script: Regiment_Medic
+  17981828:
+    script: Regiments_Avatar
+  17981829:
+    script: Regiment_Enchanter
+  17981830:
+    script: Regiment_Tamer
+  17981831:
+    script: Regiments_Coeurl
+  17981832:
+    script: Corporal_Tombstone
+  17981833:
+    script: Regiment_Pugilist
+  17981834:
+    script: Regiment_Medic
+  17981835:
+    script: Regiments_Avatar
+  17981836:
+    script: Regiment_Enchanter
+  17981837:
+    script: Regiment_Tamer
+  17981838:
+    script: Regiments_Coeurl
+  17981839:
+    script: Corporal_Tombstone
+  17981840:
+    script: Regiment_Enchanter
+  17981841:
+    script: Regiment_Pirate
+  17981842:
+    script: Regiment_Tamer
+  17981843:
+    script: Regiments_Coeurl
+  17981844:
+    script: Corporal_Tombstone
+  17981845:
+    script: Regiment_Enchanter
+  17981846:
+    script: Regiment_Pirate
+  17981847:
+    script: Regiment_Tamer
+  17981848:
+    script: Regiments_Coeurl
+  17981849:
+    script: Corporal_Tombstone
+  17981850:
+    script: Regiment_Skullcrusher
+  17981851:
+    script: Regiment_Pugilist
+  17981852:
+    script: Regiment_Medic
+  17981853:
+    script: Regiments_Avatar
+  17981854:
+    script: Regiment_Evoker
+  17981855:
+    script: Regiment_Fleetfoot
+  17981856:
+    script: Regiment_Knight
+  17981857:
+    script: Regiments_Wyvern
+  17981858:
+    script: Corporal_Tombstone
+  17981859:
+    script: Regiment_Skullcrusher
+  17981860:
+    script: Regiment_Enchanter
+  17981861:
+    script: Corporal_Tombstone
+  17981862:
+    script: Regiment_Pugilist
+  17981863:
+    script: Regiment_Evoker
+  17981864:
+    script: Corporal_Tombstone
+  17981865:
+    script: Regiment_Tamer
+  17981866:
+    script: Regiments_Coeurl
+  17981867:
+    script: Regiment_Troubador
+  17981868:
+    script: Corporal_Tombstone
+  17981869:
+    script: Regiment_Medic
+  17981870:
+    script: Regiments_Avatar
+  17981871:
+    script: Regiment_Fleetfoot
+  17981872:
+    script: Regiment_Knight
+  17981873:
+    script: Regiments_Wyvern
+  17981874:
+    script: Regiment_Shinobi
+  17981875:
+    script: Regiment_Pirate
+  17981876:
+    script: Corporal_Tombstone
+  17981877:
+    script: Regiment_Skullcrusher
+  17981878:
+    script: Regiment_Evoker
+  17981879:
+    script: Regiment_Skullcrusher
+  17981880:
+    script: Corporal_Tombstone
+  17981881:
+    script: Regiment_Fleetfoot
+  17981882:
+    script: Regiment_Troubador
+  17981883:
+    script: Regiment_Fleetfoot
+  17981884:
+    script: Corporal_Tombstone
+  17981885:
+    script: Regiment_Shinobi
+  17981886:
+    script: Regiment_Skullcrusher
+  17981887:
+    script: Regiment_Shinobi
+  17981888:
+    script: Corporal_Tombstone
+  17981889:
+    script: Regiment_Skullcrusher
+  17981890:
+    script: Regiment_Pugilist
+  17981891:
+    script: Regiment_Medic
+  17981892:
+    script: Regiments_Avatar
+  17981893:
+    script: Regiment_Evoker
+  17981894:
+    script: Regiment_Enchanter
+  17981895:
+    script: Regiment_Fleetfoot
+  17981896:
+    script: Corporal_Tombstone
+  17981897:
+    script: Regiment_Knight
+  17981898:
+    script: Regiments_Wyvern
+  17981899:
+    script: Regiment_Troubador
+  17981900:
+    script: Regiment_Shinobi
+  17981901:
+    script: Regiment_Pirate
+  17981902:
+    script: Corporal_Tombstone
+  17981903:
+    script: Regiment_Tamer
+  17981904:
+    script: Regiments_Coeurl
+  17981905:
+    script: Regiment_Skullcrusher
+  17981906:
+    script: Regiment_Enchanter
+  17981907:
+    script: Regiment_Fleetfoot
+  17981908:
+    script: Corporal_Tombstone
+  17981909:
+    script: Regiment_Medic
+  17981910:
+    script: Regiments_Avatar
+  17981911:
+    script: Regiment_Pugilist
+  17981912:
+    script: Regiment_Evoker
+  17981913:
+    script: Corporal_Tombstone
+  17981914:
+    script: Regiment_Skullcrusher
+  17981915:
+    script: Regiment_Pugilist
+  17981916:
+    script: Regiment_Fleetfoot
+  17981917:
+    script: Regiment_Shinobi
+  17981918:
+    script: Corporal_Tombstone
+  17981919:
+    script: Regiment_Evoker
+  17981920:
+    script: Regiment_Enchanter
+  17981921:
+    script: Corporal_Tombstone
+  17981922:
+    script: Regiment_Knight
+  17981923:
+    script: Regiments_Wyvern
+  17981924:
+    script: Regiment_Tamer
+  17981925:
+    script: Regiments_Coeurl
+  17981926:
+    script: Regiment_Pugilist
+  17981927:
+    script: Regiment_Fleetfoot
+  17981928:
+    script: Corporal_Tombstone
+  17981929:
+    script: Regiment_Skullcrusher
+  17981930:
+    script: Regiment_Evoker
+  17981931:
+    script: Corporal_Tombstone
+  17981932:
+    script: Regiment_Pugilist
+  17981933:
+    script: Regiment_Enchanter
+  17981934:
+    script: Corporal_Tombstone
+  17981935:
+    script: Regiment_Medic
+  17981936:
+    script: Regiments_Avatar
+  17981937:
+    script: Regiment_Fleetfoot
+  17981938:
+    script: Corporal_Tombstone
+  17981939:
+    script: Regiment_Shinobi
+  17981940:
+    script: Regiment_Pirate
+  17981941:
+    script: Regiment_Troubador
+  17981942:
+    script: Corporal_Tombstone
+  17981943:
+    script: Regiment_Knight
+  17981944:
+    script: Regiments_Wyvern
+  17981945:
+    script: Regiment_Tamer
+  17981946:
+    script: Regiments_Coeurl
+  17981947:
+    script: Regiment_Evoker
+  17981948:
+    script: Corporal_Tombstone
+  17981949:
+    script: Regiment_Medic
+  17981950:
+    script: Regiments_Avatar
+  17981951:
+    script: Regiment_Skullcrusher
+  17981952:
+    script: Regiment_Pugilist
+  17981953:
+    script: Corporal_Tombstone
+  17981954:
+    script: Regiment_Knight
+  17981955:
+    script: Regiments_Wyvern
+  17981956:
+    script: Regiment_Tamer
+  17981957:
+    script: Regiments_Coeurl
+  17981958:
+    script: Regiment_Enchanter
+  17981959:
+    script: Corporal_Tombstone
+  17981960:
+    script: Regiment_Skullcrusher
+  17981961:
+    script: Regiment_Pugilist
+  17981962:
+    script: Regiment_Fleetfoot
+  17981963:
+    script: Regiment_Shinobi
+  17981964:
+    script: Corporal_Tombstone
+  17981965:
+    script: Regiment_Evoker
+  17981966:
+    script: Regiment_Enchanter
+  17981967:
+    script: Regiment_Troubador
+  17981968:
+    script: Corporal_Tombstone
+  17981969:
+    script: Regiment_Medic
+  17981970:
+    script: Regiments_Avatar
+  17981971:
+    script: Regiment_Knight
+  17981972:
+    script: Regiments_Wyvern
+  17981973:
+    script: Regiment_Tamer
+  17981974:
+    script: Regiments_Coeurl
+  17981975:
+    script: Corporal_Tombstone
+  17981976:
+    script: Regiment_Skullcrusher
+  17981977:
+    script: Regiment_Pugilist
+  17981978:
+    script: Regiment_Medic
+  17981979:
+    script: Regiments_Avatar
+  17981980:
+    script: Regiment_Evoker
+  17981981:
+    script: Regiment_Enchanter
+  17981982:
+    script: Regiment_Fleetfoot
+  17981983:
+    script: Corporal_Tombstone
+  17981984:
+    script: Regiment_Knight
+  17981985:
+    script: Regiments_Wyvern
+  17981986:
+    script: Regiment_Troubador
+  17981987:
+    script: Regiment_Shinobi
+  17981988:
+    script: Regiment_Pirate
+  17981989:
+    script: Corporal_Tombstone
+  17981990:
+    script: Regiment_Tamer
+  17981991:
+    script: Regiments_Coeurl
+  17981992:
+    script: Regiment_Skullcrusher
+  17981993:
+    script: Regiment_Pugilist
+  17981994:
+    script: Regiment_Evoker
+  17981995:
+    script: Corporal_Tombstone
+  17981996:
+    script: Regiment_Knight
+  17981997:
+    script: Regiments_Wyvern
+  17981998:
+    script: Regiment_Enchanter
+  17981999:
+    script: Regiment_Pirate
+  17982000:
+    script: Corporal_Tombstone
+  17982001:
+    script: Regiment_Skullcrusher
+  17982002:
+    script: Regiment_Medic
+  17982003:
+    script: Regiments_Avatar
+  17982004:
+    script: Regiment_Evoker
+  17982005:
+    script: Regiment_Fleetfoot
+  17982006:
+    script: Regiment_Troubador
+  17982007:
+    script: Corporal_Tombstone
+  17982008:
+    script: Regiment_Pugilist
+  17982009:
+    script: Regiment_Evoker
+  17982010:
+    script: Regiment_Tamer
+  17982011:
+    script: Regiments_Coeurl
+  17982012:
+    script: Regiment_Shinobi
+  17982013:
+    script: Regiment_Pirate
+  17982014:
+    script: Corporal_Tombstone
+  17982015:
+    script: Regiment_Skullcrusher
+  17982016:
+    script: Regiment_Pugilist
+  17982017:
+    script: Corporal_Tombstone
+  17982018:
+    script: Regiment_Medic
+  17982019:
+    script: Regiments_Avatar
+  17982020:
+    script: Regiment_Evoker
+  17982021:
+    script: Regiment_Enchanter
+  17982022:
+    script: Corporal_Tombstone
+  17982023:
+    script: Regiment_Fleetfoot
+  17982024:
+    script: Regiment_Shinobi
+  17982025:
+    script: Corporal_Tombstone
+  17982026:
+    script: Regiment_Skullcrusher
+  17982027:
+    script: Regiment_Pugilist
+  17982028:
+    script: Regiment_Troubador
+  17982029:
+    script: Corporal_Tombstone
+  17982030:
+    script: Regiment_Medic
+  17982031:
+    script: Regiments_Avatar
+  17982032:
+    script: Regiment_Evoker
+  17982033:
+    script: Regiment_Knight
+  17982034:
+    script: Regiments_Wyvern
+  17982035:
+    script: Corporal_Tombstone
+  17982036:
+    script: Regiment_Tamer
+  17982037:
+    script: Regiments_Coeurl
+  17982038:
+    script: Regiment_Shinobi
+  17982039:
+    script: Corporal_Tombstone
+  17982040:
+    script: Regiment_Skullcrusher
+  17982041:
+    script: Regiment_Enchanter
+  17982042:
+    script: Corporal_Tombstone
+  17982043:
+    script: Regiment_Pugilist
+  17982044:
+    script: Regiment_Medic
+  17982045:
+    script: Regiments_Avatar
+  17982046:
+    script: Regiment_Knight
+  17982047:
+    script: Regiments_Wyvern
+  17982048:
+    script: Regiment_Tamer
+  17982049:
+    script: Regiments_Coeurl
+  17982050:
+    script: Regiment_Troubador
+  17982051:
+    script: Corporal_Tombstone
+  17982052:
+    script: Regiment_Skullcrusher
+  17982053:
+    script: Regiment_Evoker
+  17982054:
+    script: Regiment_Enchanter
+  17982055:
+    script: Regiment_Fleetfoot
+  17982056:
+    script: Corporal_Tombstone
+  17982057:
+    script: Regiment_Pugilist
+  17982058:
+    script: Regiment_Medic
+  17982059:
+    script: Regiments_Avatar
+  17982060:
+    script: Regiment_Knight
+  17982061:
+    script: Regiments_Wyvern
+  17982062:
+    script: Regiment_Tamer
+  17982063:
+    script: Regiments_Coeurl
+  17982064:
+    script: Regiment_Troubador
+  17982065:
+    script: Corporal_Tombstone
+  17982066:
+    script: Regiment_Skullcrusher
+  17982067:
+    script: Regiment_Pugilist
+  17982068:
+    script: Regiment_Evoker
+  17982069:
+    script: Regiment_Enchanter
+  17982070:
+    script: Regiment_Fleetfoot
+  17982071:
+    script: Regiment_Troubador
+  17982072:
+    script: Corporal_Tombstone
+  17982073:
+    script: Regiment_Medic
+  17982074:
+    script: Regiments_Avatar
+  17982075:
+    script: Regiment_Troubador
+  17982076:
+    script: Corporal_Tombstone
+  17982077:
+    script: Regiment_Knight
+  17982078:
+    script: Regiments_Wyvern
+  17982079:
+    script: Regiment_Shinobi
+  17982080:
+    script: Corporal_Tombstone
+  17982081:
+    script: Regiment_Tamer
+  17982082:
+    script: Regiments_Coeurl
+  17982083:
+    script: Regiment_Pirate
+  17982084:
+    script: Corporal_Tombstone
+  17982085:
+    script: Regiment_Tamer
+  17982086:
+    script: Regiments_Coeurl
+  17982087:
+    script: Regiment_Shinobi
+  17982088:
+    script: Corporal_Tombstone
+  17982089:
+    script: Regiment_Skullcrusher
+  17982090:
+    script: Regiment_Skullcrusher
+  17982091:
+    script: Regiment_Troubador
+  17982092:
+    script: Regiment_Evoker
+  17982093:
+    script: Corporal_Tombstone
+  17982094:
+    script: Regiment_Pugilist
+  17982095:
+    script: Regiment_Pugilist
+  17982096:
+    script: Regiment_Tamer
+  17982097:
+    script: Regiments_Coeurl
+  17982098:
+    script: Regiment_Enchanter
+  17982099:
+    script: Corporal_Tombstone
+  17982100:
+    script: Regiment_Fleetfoot
+  17982101:
+    script: Regiment_Fleetfoot
+  17982102:
+    script: Regiment_Knight
+  17982103:
+    script: Regiments_Wyvern
+  17982104:
+    script: Regiment_Pirate
+  17982105:
+    script: Corporal_Tombstone
+  17982106:
+    script: Regiment_Shinobi
+  17982107:
+    script: Regiment_Shinobi
+  17982108:
+    script: Regiment_Medic
+  17982109:
+    script: Regiments_Avatar
+  17982110:
+    script: Regiment_Medic
+  17982111:
+    script: Regiments_Avatar
+  17982112:
+    script: Halphas
+  17982113:
+    script: Corporal_Tombstone
+  17982114:
+    script: Ravager_Commander
+  17982115:
+    script: Corporal_Tombstone
+  17982116:
+    script: Mendicant_Commander
+  17982117:
+    script: Corporal_Tombstone
+  17982118:
+    script: Priest_Commander
+  17982119:
+    script: Commanders_Avatar
+  17982120:
+    script: Corporal_Tombstone
+  17982121:
+    script: Invoker_Commander
+  17982122:
+    script: Corporal_Tombstone
+  17982123:
+    script: Warlock_Commander
+  17982124:
+    script: Corporal_Tombstone
+  17982125:
+    script: Cutpurse_Commander
+  17982126:
+    script: Corporal_Tombstone
+  17982127:
+    script: Stalwart_Commander
+  17982128:
+    script: Commanders_Wyvern
+  17982129:
+    script: Corporal_Tombstone
+  17982130:
+    script: Hunter_Commander
+  17982131:
+    script: Commanders_Manticore
+  17982132:
+    script: Corporal_Tombstone
+  17982133:
+    script: Minstrel_Commander
+  17982134:
+    script: Corporal_Tombstone
+  17982135:
+    script: Kagemusha_Commander
+  17982136:
+    script: Corporal_Tombstone
+  17982137:
+    script: Canoneer_Commander
+  17982138:
+    script: Fire_Circle
+  17982139:
+    script: Disjoined_Elvaan_qm
+  17982140:
+    script: Volte_Illusionist
+  17982141:
+    script: Volte_Bard
+  17982142:
+    script: Volte_Ranger
+  17982143:
+    script: Volte_Samurai
+  17982144:
+    script: Volte_Scholar
+  17982145:
+    script: Volte_Summoner
+  17982146:
+    script: Voltes_Avatar
+  17982147:
+    script: Volte_Blue_Mage
+  17982148:
+    script: Ice_Circle
+  17982149:
+    script: Disjoined_Elvaan_qm
+  17982150:
+    script: Volte_Warrior
+  17982151:
+    script: Volte_Monk
+  17982152:
+    script: Volte_White_Mage
+  17982153:
+    script: Volte_Beastmaster
+  17982154:
+    script: Voltes_Bomb
+  17982155:
+    script: Volte_Ranger
+  17982156:
+    script: Volte_Samurai
+  17982157:
+    script: Air_Circle
+  17982158:
+    script: Disjoined_Elvaan_qm
+  17982159:
+    script: Volte_Crusader
+  17982160:
+    script: Volte_Corsair
+  17982161:
+    script: Volte_Puppetmaster
+  17982162:
+    script: Voltes_Automaton
+  17982163:
+    script: Volte_Dancer
+  17982164:
+    script: Volte_Geomancer
+  17982165:
+    script: Voltes_Luopan
+  17982166:
+    script: Volte_Rune_Fencer
+  17982167:
+    script: Volte_White_Mage
+  17982168:
+    script: Earth_Circle
+  17982169:
+    script: Disjoined_Elvaan_qm
+  17982170:
+    script: Volte_Paladin
+  17982171:
+    script: Volte_Dark_Knight
+  17982172:
+    script: Volte_Bard
+  17982173:
+    script: Volte_Summoner
+  17982174:
+    script: Voltes_Avatar
+  17982175:
+    script: Volte_Geomancer
+  17982176:
+    script: Voltes_Luopan
+  17982177:
+    script: Volte_Rune_Fencer
+  17982178:
+    script: Thunder_Circle
+  17982179:
+    script: Disjoined_Elvaan_qm
+  17982180:
+    script: Volte_Warrior
+  17982181:
+    script: Volte_Monk
+  17982182:
+    script: Volte_Thief
+  17982183:
+    script: Volte_Bard
+  17982184:
+    script: Volte_Summoner
+  17982185:
+    script: Voltes_Avatar
+  17982186:
+    script: Volte_Corsair
+  17982187:
+    script: Water_Circle
+  17982188:
+    script: Disjoined_Elvaan_qm
+  17982189:
+    script: Volte_Priest
+  17982190:
+    script: Volte_Warrior
+  17982191:
+    script: Volte_Monk
+  17982192:
+    script: Volte_Black_Mage
+  17982193:
+    script: Volte_Thief
+  17982194:
+    script: Volte_Dark_Knight
+  17982195:
+    script: Volte_Dragoon
+  17982196:
+    script: Voltes_Wyvern
+  17982197:
+    script: Light_Circle
+  17982198:
+    script: Disjoined_Elvaan_qm
+  17982199:
+    script: Volte_Erudite
+  17982200:
+    script: Volte_Black_Mage
+  17982201:
+    script: Volte_Dark_Knight
+  17982202:
+    script: Volte_Beastmaster
+  17982203:
+    script: Voltes_Bomb
+  17982204:
+    script: Volte_Ranger
+  17982205:
+    script: Volte_Samurai
+  17982206:
+    script: Volte_Ninja
+  17982207:
+    script: Dark_Circle
+  17982208:
+    script: Disjoined_Elvaan_qm
+  17982209:
+    script: Volte_Highwind
+  17982210:
+    script: Voltes_Wyvern
+  17982211:
+    script: Volte_Black_Mage
+  17982212:
+    script: Volte_Red_Mage
+  17982213:
+    script: Volte_Thief
+  17982214:
+    script: Volte_Ninja
+  17982215:
+    script: Volte_Corsair
+  17982216:
+    script: Volte_Dancer
+  17982217:
+    script: Volte_Cleaver
+  17982218:
+    script: Volte_Fistfighter
+  17982219:
+    script: Volte_Incanter
+  17982220:
+    script: Volte_Vagabond
+  17982221:
+    script: Volte_Reaper
+  17982222:
+    script: Volte_Trainer
+  17982223:
+    script: Voltes_Cluster
+  17982224:
+    script: Volte_Conductor
+  17982225:
+    script: Volte_Sniper
+  17982226:
+    script: Volte_Mononofu
+  17982227:
+    script: Volte_Shinobi
+  17982228:
+    script: Volte_Controller
+  17982229:
+    script: Voltes_Avatar
+  17982230:
+    script: Volte_Joiner
+  17982231:
+    script: Volte_Sailor
+  17982232:
+    script: Volte_Manipulator
+  17982233:
+    script: Voltes_Automaton
+  17982234:
+    script: Volte_Twirler
+  17982235:
+    script: Volte_Communer
+  17982236:
+    script: Voltes_Luopan
+  17982237:
+    script: Volte_Duelist
+  17982238:
+    script: Disjoined_Elvaan
+  17982239:
+    script: Disjoineds_Odin
+  17982240:
+    script: Volte_Warrior
+  17982241:
+    script: Volte_Monk
+  17982242:
+    script: Volte_White_Mage
+  17982243:
+    script: Volte_Black_Mage
+  17982244:
+    script: Volte_Red_Mage
+  17982245:
+    script: Volte_Thief
+  17982246:
+    script: Volte_Paladin
+  17982247:
+    script: Volte_Dark_Knight
+  17982248:
+    script: Volte_Beastmaster
+  17982249:
+    script: Voltes_Bomb
+  17982250:
+    script: Volte_Bard
+  17982251:
+    script: Volte_Ranger
+  17982252:
+    script: Volte_Samurai
+  17982253:
+    script: Volte_Ninja
+  17982254:
+    script: Volte_Dragoon
+  17982255:
+    script: Voltes_Wyvern
+  17982256:
+    script: Volte_Summoner
+  17982257:
+    script: Voltes_Avatar
+  17982258:
+    script: Volte_Blue_Mage
+  17982259:
+    script: Volte_Corsair
+  17982260:
+    script: Volte_Puppetmaster
+  17982261:
+    script: Voltes_Automaton
+  17982262:
+    script: Volte_Dancer
+  17982263:
+    script: Volte_Scholar
+  17982264:
+    script: Volte_Geomancer
+  17982265:
+    script: Voltes_Luopan
+  17982266:
+    script: Volte_Rune_Fencer

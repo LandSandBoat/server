@@ -38,6 +38,9 @@ namespace xi::items
 
 auto lookup(uint16 itemId) -> const CItem*;
 
+// Reverse of lookup(), for data that names items instead of numbering them. Names are not unique yet, so a shared one resolves to the lower id.
+auto lookupIdByName(std::string_view name) -> Maybe<uint16>;
+
 template <typename T>
 auto lookup(const uint16 itemId) -> const T*
 {
@@ -103,14 +106,14 @@ typedef std::vector<LootItem_t> LootList_t;
 
 struct LootContainer
 {
-    LootContainer(DropList_t* dropList);
+    LootContainer(const DropList_t* dropList);
     DropList_t drops;
 
     void ForEachGroup(FnRef<void(const DropGroup_t&)> func);
     void ForEachItem(FnRef<void(const DropItem_t&)> func);
 
 private:
-    DropList_t* dropList;
+    const DropList_t* dropList;
 };
 
 /************************************************************************

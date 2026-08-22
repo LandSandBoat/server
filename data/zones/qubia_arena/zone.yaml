@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  125
+  battle_party: 125
+
+zonelines:
+
+  z5q0:
+    from:  [-243.979, -27.156, 19.998]
+    to:    feiyin
+    at:    [242.074, -25.860, 60.014, 3.141593]
+    scale: [1.000, 3.000]
+
+  z5q2:
+    from:  [-65.027, -31.190, -80.020]
+    to:    feiyin
+    at:    [262.011, -30.115, -69.998, 3.141593]
+    scale: [1.000, 3.000]

@@ -1,0 +1,155 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17715208:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715216:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715217:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715218:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715219:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715220:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715221:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715222:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715223:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715224:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715225:
+    script:       Noetic_Ascension
+    display_name: Noetic Ascension
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715233:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715234:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715235:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715236:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715237:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715238:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715239:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17715240:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 50

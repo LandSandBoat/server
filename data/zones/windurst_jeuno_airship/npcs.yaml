@@ -1,0 +1,341 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17698817:
+    script:       Mauricio
+    display_name: Mauricio
+    at:           [0.000, 4.529, 21.950, 192]
+    render:
+      look:
+        type:  standard
+        model: 827
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:        15
+    status:   normal
+    widescan: true
+
+  17698818:
+    script:       Gabriele
+    display_name: Gabriele
+    at:           [0.000, -7.460, -12.977, 192]
+    render:
+      look:
+        type:  standard
+        model: 836
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17698819:
+    script:       SAILOR
+    display_name: SAILOR
+    at:           [0.000, -7.460, -12.977, 192]
+    render:
+      look:
+        type:  standard
+        model: 836
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    widescan: true
+
+  17698820:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-0.004, -7.391, 19.384, 197]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4113
+        body:  8211
+        hands: 12307
+        legs:  16483
+        feet:  20497
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17698821:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-0.121, -3.082, 0.110, 63]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4119
+        body:  8211
+        hands: 12393
+        legs:  16441
+        feet:  20537
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17698822:
+    script:       Passenger
+    display_name: Passenger
+    at:           [3.377, -6.480, -16.915, 226]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4128
+        body:  8211
+        hands: 12338
+        legs:  16407
+        feet:  20585
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17698823:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-2.676, 5.102, 21.175, 159]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4130
+        body:  8211
+        hands: 12306
+        legs:  16401
+        feet:  20483
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17698824:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-11.857, 1.062, -1.100, 237]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4132
+        body:  8211
+        hands: 12392
+        legs:  16399
+        feet:  20490
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17698825:
+    script:       Passenger
+    display_name: Passenger
+    at:           [3.424, -3.281, -14.713, 231]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4153
+        body:  8211
+        hands: 12312
+        legs:  16396
+        feet:  20503
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17698826:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-5.151, 1.062, -10.968, 154]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  10
+        head:  4192
+        body:  8211
+        hands: 12305
+        legs:  16389
+        feet:  20576
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17698827:
+    script:       Passenger
+    display_name: Passenger
+    at:           [-3.650, 4.261, 10.875, 189]
+    render:
+      look:
+        type:  equipped
+        race:  2
+        face:  11
+        head:  4203
+        body:  8211
+        hands: 12391
+        legs:  16387
+        feet:  20587
+        main:  24576
+        sub:   28672
+      moving: 1
+    widescan: true
+
+  17698828:
+    script: NPC[c]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17698829:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17698830:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17698831:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17698832:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17698833:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17698834:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17698835:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17698836:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17698837:
+    script:       Dilauriome
+    display_name: Dilauriome
+    at:           [-11.000, -3.081, -2.944, 128]
+    render:
+      look:
+        type:  standard
+        model: 139
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    widescan: true
+
+  17698838:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17698839:
+    script: NPC[17]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17698840:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    widescan: true
+
+  17698841:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50

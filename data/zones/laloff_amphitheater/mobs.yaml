@@ -1,0 +1,1929 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ark_Angel_EV:
+    id:            235
+    species:       elvaan
+    type:          [notorious, battlefield]
+    spell_list_id: 37
+    skill_list_id: 352
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [pld, whm]
+      render:
+        look:
+          type:  standard
+          model: 785
+        entity_flags: 1051
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp:  1000
+
+  Ark_Angel_EV_2:
+    id:            235
+    display_name:  Ark_Angel_EV
+    species:       elvaan
+    type:          [notorious, battlefield]
+    spell_list_id: 37
+    skill_list_id: 352
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [pld, whm]
+      render:
+        look:
+          type:  standard
+          model: 785
+        entity_flags: 1051
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_GK:
+    id:            236
+    species:       galks
+    type:          [notorious, battlefield]
+    skill_list_id: 353
+    attributes:
+      combat:
+        skill:    great_katana
+        dmg_mult: 125
+      jobs: [sam, drg]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   2
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       2
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 788
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+        mp:  1000
+
+  Ark_Angel_GK_2:
+    id:            236
+    display_name:  Ark_Angel_GK
+    species:       galks
+    type:          [notorious, battlefield]
+    skill_list_id: 353
+    attributes:
+      combat:
+        skill:    great_katana
+        dmg_mult: 125
+      jobs: [sam, drg]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    1
+          earth:   2
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       2
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 788
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_HM:
+    id:            237
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 38
+    skill_list_id: 354
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [war, nin]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 784
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11500
+        mp:  1000
+
+  Ark_Angel_HM_2:
+    id:            237
+    display_name:  Ark_Angel_HM
+    species:       humes
+    type:          [notorious, battlefield]
+    spell_list_id: 38
+    skill_list_id: 354
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [war, nin]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     1
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    1
+          slow:       1
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 784
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_MR:
+    id:            238
+    species:       mithra
+    type:          [notorious, battlefield]
+    skill_list_id: 355
+    attributes:
+      combat:
+        skill:    dagger
+        dmg_mult: 125
+      jobs: [bst, thf]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    2
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    2
+          slow:       1
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 786
+        entity_flags: 1051
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 11000
+        mp:  1000
+
+  Ark_Angel_MR_2:
+    id:            238
+    display_name:  Ark_Angel_MR
+    species:       mithra
+    type:          [notorious, battlefield]
+    skill_list_id: 355
+    attributes:
+      combat:
+        skill:    dagger
+        dmg_mult: 125
+      jobs: [bst, thf]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     1
+          wind:    2
+          earth:   1
+          thunder: 1
+          water:   1
+          dark:    2
+        rank_status:
+          paralyze:   1
+          bind:       1
+          silence:    2
+          slow:       1
+          poison:     1
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 786
+        entity_flags: 1051
+        name_prefix:    32
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angel_TT:
+    id:            242
+    species:       tarutaru
+    type:          [notorious, battlefield]
+    spell_list_id: 39
+    skill_list_id: 356
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [blm, drk]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     2
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   2
+          dark:    2
+        rank_status:
+          paralyze:   2
+          bind:       2
+          silence:    1
+          slow:       1
+          poison:     2
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 787
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        flags:          [standback]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp:  8500
+        mp: 10000
+
+  Ark_Angel_TT_2:
+    id:            242
+    display_name:  Ark_Angel_TT
+    species:       tarutaru
+    type:          [notorious, battlefield]
+    spell_list_id: 39
+    skill_list_id: 356
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [blm, drk]
+      resists:
+        rank_element:
+          fire:    1
+          ice:     2
+          wind:    1
+          earth:   1
+          thunder: 1
+          water:   2
+          dark:    2
+        rank_status:
+          paralyze:   2
+          bind:       2
+          silence:    1
+          slow:       1
+          poison:     2
+          dark_sleep: 2
+          blind:      2
+      render:
+        look:
+          type:  standard
+          model: 787
+        entity_flags: 1179
+        name_prefix:    32
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        flags:          [standback]
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Mandragora:
+    id:            239
+    species:       mandragora
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+
+  Ark_Angels_Mandragora_2:
+    id:            239
+    display_name:  Ark_Angels_Mandragora
+    species:       mandragora
+    type:          [notorious, battlefield]
+    spell_list_id: 2
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -3
+          ice:     -3
+          wind:    -3
+          thunder: -3
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -3
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 301
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:           8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Tiger:
+    id:            240
+    species:       tiger
+    type:          [notorious, battlefield]
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+
+  Ark_Angels_Tiger_2:
+    id:            240
+    display_name:  Ark_Angels_Tiger
+    species:       tiger
+    type:          [notorious, battlefield]
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          thunder: -3
+          water:   -2
+        rank_status:
+          poison: -2
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ark_Angels_Wyvern:
+    id:            241
+    species:       shadow_wyvern
+    type:          [notorious, battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drg, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 780
+        entity_flags: 1157
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2500
+
+  Ark_Angels_Wyvern_2:
+    id:            241
+    display_name:  Ark_Angels_Wyvern
+    species:       shadow_wyvern
+    type:          [notorious, battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [drg, war]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 780
+        entity_flags: 1157
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17514497:
+    template: Ark_Angel_HM
+    at:       [-13.833, -18.716, 13.796, 44]
+    level:    [75, 75]
+  17514498:
+    template: Ark_Angel_HM
+    at:       [-562.545, -242.667, 56.191, 44]
+    level:    [75, 75]
+  17514499:
+    template: Ark_Angel_HM
+    at:       [477.435, -317.667, 78.895, 44]
+    level:    [75, 75]
+  17514500:
+    template: Ark_Angel_MR
+    at:       [-13.833, -18.716, 13.796, 44]
+    level:    [75, 75]
+  17514501:
+    template: Ark_Angel_MR
+    at:       [-562.545, -242.667, 56.191, 44]
+    level:    [75, 75]
+  17514502:
+    template: Ark_Angel_MR
+    at:       [477.435, -317.667, 78.895, 44]
+    level:    [75, 75]
+  17514503:
+    template: Ark_Angels_Tiger
+    at:       [-15.587, -18.716, 15.345, 44]
+    level:    [70, 70]
+  17514504:
+    template: Ark_Angels_Tiger
+    at:       [-564.299, -242.667, 57.740, 44]
+    level:    [70, 70]
+  17514505:
+    template: Ark_Angels_Tiger
+    at:       [475.681, -317.667, 80.444, 44]
+    level:    [70, 70]
+  17514506:
+    template: Ark_Angels_Mandragora
+    at:       [-15.587, -18.716, 15.345]
+    level:    [70, 70]
+  17514507:
+    template: Ark_Angels_Mandragora
+    at:       [-564.299, -242.667, 57.740]
+    level:    [70, 70]
+  17514508:
+    template: Ark_Angels_Mandragora
+    at:       [475.681, -317.667, 80.444]
+    level:    [70, 70]
+  17514509:
+    template: Ark_Angel_EV
+    at:       [-13.833, -18.716, 13.796, 43]
+    level:    [75, 75]
+  17514510:
+    template: Ark_Angel_EV
+    at:       [-562.545, -242.667, 56.191, 43]
+    level:    [75, 75]
+  17514511:
+    template: Ark_Angel_EV
+    at:       [477.435, -317.667, 78.895, 43]
+    level:    [75, 75]
+  17514512:
+    template: Ark_Angel_TT
+    at:       [-13.833, -18.716, 13.796, 46]
+    level:    [75, 75]
+  17514513:
+    template: Ark_Angel_TT
+    at:       [-562.545, -242.667, 56.191, 46]
+    level:    [75, 75]
+  17514514:
+    template: Ark_Angel_TT
+    at:       [477.435, -317.667, 78.895, 46]
+    level:    [75, 75]
+  17514515:
+    template: Ark_Angel_GK
+    at:       [-13.833, -18.716, 13.796, 45]
+    level:    [75, 75]
+  17514516:
+    template: Ark_Angel_GK
+    at:       [-562.545, -242.667, 56.191, 45]
+    level:    [75, 75]
+  17514517:
+    template: Ark_Angel_GK
+    at:       [477.435, -317.667, 78.895, 45]
+    level:    [75, 75]
+  17514518:
+    template: Ark_Angels_Wyvern
+    at:       [-15.587, -18.716, 15.345, 45]
+    level:    [70, 70]
+  17514519:
+    template: Ark_Angels_Wyvern
+    at:       [-564.299, -242.667, 57.740, 45]
+    level:    [70, 70]
+  17514520:
+    template: Ark_Angels_Wyvern
+    at:       [475.681, -317.667, 80.444, 45]
+    level:    [70, 70]
+  17514521:
+    template: Ark_Angel_HM
+    at:       [-14.366, -18.000, 14.421, 38]
+    level:    [75, 75]
+  17514522:
+    template: Ark_Angel_MR
+    at:       [-15.649, -18.000, 12.672, 14]
+    level:    [75, 75]
+  17514523:
+    template: Ark_Angels_Tiger
+    at:       [-13.328, -18.000, 13.297, 150]
+    level:    [70, 70]
+  17514524:
+    template: Ark_Angels_Mandragora
+    at:       [-13.328, -18.000, 13.297, 150]
+    level:    [70, 70]
+  17514525:
+    template: Ark_Angel_EV
+    at:       [-16.197, -18.000, 15.147, 38]
+    level:    [75, 75]
+  17514526:
+    template: Ark_Angel_TT
+    at:       [-11.930, -18.000, 15.175, 38]
+    level:    [75, 75]
+  17514527:
+    template: Ark_Angel_GK
+    at:       [-13.428, -18.000, 16.236, 23]
+    level:    [75, 75]
+  17514528:
+    template: Ark_Angels_Wyvern
+    at:       [-14.813, -18.000, 16.530, 191]
+    level:    [70, 70]
+  17514529:
+    template: Ark_Angel_HM
+    at:       [-561.712, -241.951, 54.395, 38]
+    level:    [75, 75]
+  17514530:
+    template: Ark_Angel_MR
+    at:       [-562.995, -241.951, 52.646, 14]
+    level:    [75, 75]
+  17514531:
+    template: Ark_Angels_Tiger
+    at:       [-560.674, -241.951, 53.271, 150]
+    level:    [70, 70]
+  17514532:
+    template: Ark_Angels_Mandragora
+    at:       [-560.674, -241.951, 53.271, 150]
+    level:    [70, 70]
+  17514533:
+    template: Ark_Angel_EV
+    at:       [-563.543, -241.951, 55.121, 38]
+    level:    [75, 75]
+  17514534:
+    template: Ark_Angel_TT
+    at:       [-559.276, -241.951, 55.149, 38]
+    level:    [75, 75]
+  17514535:
+    template: Ark_Angel_GK
+    at:       [-560.774, -241.951, 56.210, 23]
+    level:    [75, 75]
+  17514536:
+    template: Ark_Angels_Wyvern
+    at:       [-562.159, -241.951, 56.504, 191]
+    level:    [70, 70]
+  17514537:
+    template: Ark_Angel_HM
+    at:       [478.268, -316.951, 77.099, 38]
+    level:    [75, 75]
+  17514538:
+    template: Ark_Angel_MR
+    at:       [476.985, -316.951, 75.350, 14]
+    level:    [75, 75]
+  17514539:
+    template: Ark_Angels_Tiger
+    at:       [479.306, -316.951, 75.975, 150]
+    level:    [70, 70]
+  17514540:
+    template: Ark_Angels_Mandragora
+    at:       [479.306, -316.951, 75.975, 150]
+    level:    [70, 70]
+  17514541:
+    template: Ark_Angel_EV
+    at:       [476.437, -316.951, 77.825, 38]
+    level:    [75, 75]
+  17514542:
+    template: Ark_Angel_TT
+    at:       [480.268, -316.951, 77.853, 38]
+    level:    [75, 75]
+  17514543:
+    template: Ark_Angel_GK
+    at:       [479.206, -316.951, 78.914, 23]
+    level:    [75, 75]
+  17514544:
+    template: Ark_Angels_Wyvern
+    at:       [477.812, -316.951, 79.208, 191]
+    level:    [70, 70]
+  17514545:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-7.509, -19.727, 1.150, 30]
+    level:    [99, 99]
+  17514546:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-556.221, -243.678, 43.545, 30]
+    level:    [99, 99]
+  17514547:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [483.759, -318.678, 66.249, 30]
+    level:    [99, 99]
+  17514548:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-14.025, -19.216, 14.314, 82]
+    level:    [99, 99]
+  17514549:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-562.737, -243.167, 56.709, 82]
+    level:    [99, 99]
+  17514550:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [477.243, -318.167, 79.413, 82]
+    level:    [99, 99]
+  17514551:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-13.111, -19.216, 13.337, 95]
+    level:    [99, 99]
+  17514552:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-561.823, -243.167, 55.732, 95]
+    level:    [99, 99]
+  17514553:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [478.157, -318.167, 78.436, 95]
+    level:    [99, 99]
+  17514554:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-13.236, -19.216, 15.361, 32]
+    level:    [99, 99]
+  17514555:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-561.948, -243.167, 57.756, 32]
+    level:    [99, 99]
+  17514556:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [478.032, -318.167, 80.460, 32]
+    level:    [99, 99]
+  17514557:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-12.898, -19.216, 8.066, 161]
+    level:    [99, 99]
+  17514558:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-561.610, -243.167, 50.461, 161]
+    level:    [99, 99]
+  17514559:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [478.370, -318.167, 73.165, 161]
+    level:    [99, 99]
+  17514560:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-13.855, -19.216, 2.229, 191]
+    level:    [99, 99]
+  17514561:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-562.567, -243.167, 44.624, 191]
+    level:    [99, 99]
+  17514562:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [477.413, -318.167, 67.328, 191]
+    level:    [99, 99]
+  17514563:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-4.059, -20.663, -0.715, 91]
+    level:    [99, 99]
+  17514564:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-552.771, -244.614, 41.680, 91]
+    level:    [99, 99]
+  17514565:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [487.209, -319.614, 64.384, 91]
+    level:    [99, 99]
+  17514566:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-4.338, -20.183, 1.812, 76]
+    level:    [99, 99]
+  17514567:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-553.050, -244.134, 44.207, 76]
+    level:    [99, 99]
+  17514568:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [486.930, -319.134, 66.911, 76]
+    level:    [99, 99]
+  17514569:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514570:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514571:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514572:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514573:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514574:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514575:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514576:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514577:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-557.125, -243.167, 56.215, 41]
+    level:    [99, 99]
+  17514578:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-555.596, -242.729, 55.071, 47]
+    level:    [99, 99]
+  17514579:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-553.857, -242.667, 53.179, 154]
+    level:    [99, 99]
+  17514580:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514581:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-553.361, -242.667, 53.973, 97]
+    level:    [99, 99]
+  17514582:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-562.429, -242.669, 68.147, 63]
+    level:    [99, 99]
+  17514583:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-554.154, -242.667, 54.979, 84]
+    level:    [99, 99]
+  17514584:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-553.642, -243.167, 54.450, 55]
+    level:    [99, 99]
+  17514585:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514586:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514587:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514588:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514589:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514590:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514591:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514592:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514593:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-12.274, -19.216, 4.537, 194]
+    level:    [99, 99]
+  17514594:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-562.737, -243.167, 56.709, 38]
+    level:    [99, 99]
+  17514595:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514596:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-16.476, -19.215, 14.592, 38]
+    level:    [99, 99]
+  17514597:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-561.131, -243.167, 51.096, 227]
+    level:    [99, 99]
+  17514598:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514599:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-12.903, -18.756, 15.082, 119]
+    level:    [99, 99]
+  17514600:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-564.673, -243.167, 58.893, 50]
+    level:    [99, 99]
+  17514601:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514602:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-15.202, -19.215, 14.842, 18]
+    level:    [99, 99]
+  17514603:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-559.315, -243.167, 50.290, 205]
+    level:    [99, 99]
+  17514604:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514605:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-9.086, -19.215, 11.449, 226]
+    level:    [99, 99]
+  17514606:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-563.846, -243.167, 47.054, 36]
+    level:    [99, 99]
+  17514607:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514608:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-3.795, -19.216, 19.756, 217]
+    level:    [99, 99]
+  17514609:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-562.429, -243.167, 68.147, 232]
+    level:    [99, 99]
+  17514610:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514611:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-28.619, -20.663, 5.550, 106]
+    level:    [99, 99]
+  17514612:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-562.781, -243.167, 55.932, 116]
+    level:    [99, 99]
+  17514613:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514614:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-27.478, -20.647, 4.470, 124]
+    level:    [99, 99]
+  17514615:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-562.128, -243.167, 53.039, 160]
+    level:    [99, 99]
+  17514616:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514617:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514618:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514619:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514620:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514621:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514622:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514623:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514624:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514625:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514626:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514627:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514628:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514629:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514630:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514631:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514632:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514633:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514634:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514635:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514636:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514637:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514638:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514639:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514640:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514641:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-12.008, -19.215, 9.308, 56]
+    level:    [99, 99]
+  17514642:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-561.837, -243.167, 49.268, 56]
+    level:    [99, 99]
+  17514643:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514644:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-14.366, -19.215, 14.421, 51]
+    level:    [99, 99]
+  17514645:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-561.852, -243.167, 56.512, 247]
+    level:    [99, 99]
+  17514646:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514647:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-13.357, -19.238, 11.291, 41]
+    level:    [99, 99]
+  17514648:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-561.365, -243.093, 55.873, 222]
+    level:    [99, 99]
+  17514649:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514650:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-0.937, -21.959, -6.954, 172]
+    level:    [99, 99]
+  17514651:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-565.881, -243.114, 51.627, 210]
+    level:    [99, 99]
+  17514652:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514653:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-9.277, -19.216, 4.977, 185]
+    level:    [99, 99]
+  17514654:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-557.225, -243.167, 46.951, 36]
+    level:    [99, 99]
+  17514655:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514656:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-24.051, -18.718, 19.781, 27]
+    level:    [99, 99]
+  17514657:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-572.666, -243.167, 62.304, 254]
+    level:    [99, 99]
+  17514658:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514659:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-11.441, -19.215, 13.615, 188]
+    level:    [99, 99]
+  17514660:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-562.737, -243.167, 56.709, 38]
+    level:    [99, 99]
+  17514661:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514662:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-11.758, -19.014, 13.034, 32]
+    level:    [99, 99]
+  17514663:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-561.699, -242.677, 57.698, 157]
+    level:    [99, 99]
+  17514664:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514665:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-14.366, -19.215, 14.421, 38]
+    level:    [99, 99]
+  17514666:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-16.187, -19.216, 12.769, 38]
+    level:    [99, 99]
+  17514667:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-6.655, -18.716, 6.762, 59]
+    level:    [99, 99]
+  17514668:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514669:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-16.197, -19.215, 15.147, 38]
+    level:    [99, 99]
+  17514670:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-11.930, -19.215, 15.175, 38]
+    level:    [99, 99]
+  17514671:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-14.038, -19.215, 16.409, 38]
+    level:    [99, 99]
+  17514672:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-9.704, -18.730, 2.926, 243]
+    level:    [99, 99]
+  17514673:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-564.342, -243.167, 54.974, 222]
+    level:    [99, 99]
+  17514674:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-563.228, -243.167, 54.264, 208]
+    level:    [99, 99]
+  17514675:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-562.343, -243.167, 55.305, 202]
+    level:    [99, 99]
+  17514676:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514677:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-564.721, -243.167, 56.265, 237]
+    level:    [99, 99]
+  17514678:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-562.429, -242.669, 68.147, 61]
+    level:    [99, 99]
+  17514679:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-560.032, -243.167, 53.032, 245]
+    level:    [99, 99]
+  17514680:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-562.458, -243.167, 52.645, 191]
+    level:    [99, 99]
+  17514681:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514682:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514683:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514684:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514685:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514686:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514687:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514688:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514689:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514690:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-541.518, -244.614, 58.912, 1]
+    level:    [99, 99]
+  17514691:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514692:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514693:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-564.382, -243.167, 65.226, 40]
+    level:    [99, 99]
+  17514694:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514695:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514696:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-561.943, -243.167, 58.257, 19]
+    level:    [99, 99]
+  17514697:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514698:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514699:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-565.526, -243.123, 64.082, 246]
+    level:    [99, 99]
+  17514700:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514701:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514702:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514703:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514704:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-3.795, -18.718, 19.756, 73]
+    level:    [99, 99]
+  17514705:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-552.392, -242.669, 50.409, 148]
+    level:    [99, 99]
+  17514706:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514707:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-14.778, -19.057, 18.918, 70]
+    level:    [99, 99]
+  17514708:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514709:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514710:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-15.642, -19.140, 20.657, 57]
+    level:    [99, 99]
+  17514711:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514712:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514713:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [18.665, -33.455, -44.725, 217]
+    level:    [99, 99]
+  17514714:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [22.373, -33.455, -45.993, 74]
+    level:    [99, 99]
+  17514715:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [20.504, -32.981, -46.150, 41]
+    level:    [99, 99]
+  17514716:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514717:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [21.094, -33.455, -45.757, 59]
+    level:    [99, 99]
+  17514718:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-24.051, -18.718, 19.781, 40]
+    level:    [99, 99]
+  17514719:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [22.463, -33.455, -47.366, 82]
+    level:    [99, 99]
+  17514720:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [22.379, -33.073, -46.616, 76]
+    level:    [99, 99]
+  17514721:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-532.504, -256.910, -53.322, 87]
+    level:    [99, 99]
+  17514722:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-532.202, -256.911, -52.656, 87]
+    level:    [99, 99]
+  17514723:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-532.721, -256.906, -53.215, 88]
+    level:    [99, 99]
+  17514724:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514725:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-533.875, -257.406, -54.655, 82]
+    level:    [99, 99]
+  17514726:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-560.513, -243.167, 57.730, 38]
+    level:    [99, 99]
+  17514727:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-532.392, -256.907, -51.689, 88]
+    level:    [99, 99]
+  17514728:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-529.041, -256.929, -45.443, 65]
+    level:    [99, 99]
+  17514729:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514730:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514731:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514732:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514733:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514734:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514735:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514736:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514737:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-8.197, -19.427, 26.233, 205]
+    level:    [99, 99]
+  17514738:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-563.603, -243.167, 62.092, 227]
+    level:    [99, 99]
+  17514739:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514740:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-14.366, -19.215, 14.421, 46]
+    level:    [99, 99]
+  17514741:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-547.058, -244.614, 46.395, 15]
+    level:    [99, 99]
+  17514742:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514743:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-13.017, -19.215, 14.527, 65]
+    level:    [99, 99]
+  17514744:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-547.782, -244.329, 46.980, 18]
+    level:    [99, 99]
+  17514745:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514746:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-13.351, -19.215, 14.049, 48]
+    level:    [99, 99]
+  17514747:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    at:       [-537.527, -256.233, 12.799, 27]
+    level:    [99, 99]
+  17514748:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514749:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-12.688, -19.216, 5.722, 189]
+    level:    [99, 99]
+  17514750:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-553.952, -243.167, 52.869, 2]
+    level:    [99, 99]
+  17514751:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514752:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-3.795, -18.718, 19.756, 111]
+    level:    [99, 99]
+  17514753:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-572.666, -243.167, 62.304, 246]
+    level:    [99, 99]
+  17514754:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514755:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-9.022, -19.216, 22.146, 189]
+    level:    [99, 99]
+  17514756:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-568.329, -243.167, 61.889, 145]
+    level:    [99, 99]
+  17514757:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514758:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-10.351, -19.216, 21.875, 206]
+    level:    [99, 99]
+  17514759:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-569.049, -243.167, 60.753, 163]
+    level:    [99, 99]
+  17514760:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]
+  17514761:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-14.276, -18.742, 13.771, 189]
+    level:    [99, 99]
+  17514762:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-16.187, -19.216, 12.769, 38]
+    level:    [99, 99]
+  17514763:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-17.678, -18.948, 11.010, 203]
+    level:    [99, 99]
+  17514764:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514765:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-14.971, -18.746, 12.852, 190]
+    level:    [99, 99]
+  17514766:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-11.930, -19.215, 15.175, 38]
+    level:    [99, 99]
+  17514767:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-10.894, -18.787, 18.872, 142]
+    level:    [99, 99]
+  17514768:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-9.122, -18.835, 17.871, 158]
+    level:    [99, 99]
+  17514769:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    at:       [-532.616, -257.406, -51.656, 217]
+    level:    [99, 99]
+  17514770:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    at:       [-525.131, -257.406, -33.318, 81]
+    level:    [99, 99]
+  17514771:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    at:       [-535.173, -257.152, -62.704, 133]
+    level:    [99, 99]
+  17514772:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514773:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    at:       [-526.037, -257.406, -34.303, 70]
+    level:    [99, 99]
+  17514774:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    at:       [-552.234, -243.167, 62.285, 120]
+    level:    [99, 99]
+  17514775:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    at:       [-526.728, -257.405, -42.107, 85]
+    level:    [99, 99]
+  17514776:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    at:       [-533.474, -256.954, -54.973, 213]
+    level:    [99, 99]
+  17514777:
+    template: Ark_Angel_HM_2
+    script:   Ark_Angel_HM
+    level:    [99, 99]
+  17514778:
+    template: Ark_Angel_MR_2
+    script:   Ark_Angel_MR
+    level:    [99, 99]
+  17514779:
+    template: Ark_Angels_Tiger_2
+    script:   Ark_Angels_Tiger
+    level:    [99, 99]
+  17514780:
+    template: Ark_Angels_Mandragora_2
+    script:   Ark_Angels_Mandragora
+    level:    [99, 99]
+  17514781:
+    template: Ark_Angel_EV_2
+    script:   Ark_Angel_EV
+    level:    [99, 99]
+  17514782:
+    template: Ark_Angel_TT_2
+    script:   Ark_Angel_TT
+    level:    [99, 99]
+  17514783:
+    template: Ark_Angel_GK_2
+    script:   Ark_Angel_GK
+    level:    [99, 99]
+  17514784:
+    template: Ark_Angels_Wyvern_2
+    script:   Ark_Angels_Wyvern
+    level:    [99, 99]

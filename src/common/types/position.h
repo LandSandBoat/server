@@ -23,6 +23,8 @@
 
 #include "common/cbasetypes.h"
 
+#include <numbers>
+
 struct position_t
 {
     float  x      = 0.0f;
@@ -49,3 +51,14 @@ struct position_t
     {
     }
 };
+
+// Rotations are stored in a uint8, so a full turn is 256 rather than 2 pi.
+inline auto rotationToRadian(uint8 rotation) -> float
+{
+    return static_cast<float>((rotation / 256.0f) * 2 * std::numbers::pi);
+}
+
+inline auto radianToRotation(float radian) -> uint8
+{
+    return static_cast<uint8>((radian / (2 * std::numbers::pi)) * 256);
+}

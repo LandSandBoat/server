@@ -29,7 +29,7 @@
 class CZoneInstance : public CZone
 {
 public:
-    CZoneInstance(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
+    CZoneInstance(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings);
     ~CZoneInstance() override;
 
     DISALLOW_COPY_AND_MOVE(CZoneInstance);

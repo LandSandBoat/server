@@ -49,6 +49,7 @@ target_link_libraries(xi_connect_lib
         ${SHARED_EXTERNAL_LIBS}
         ${CONNECT_ONLY_EXTERNAL_LIBS}
         project_options
+        xi_data_core
     PRIVATE
         project_warnings
 )

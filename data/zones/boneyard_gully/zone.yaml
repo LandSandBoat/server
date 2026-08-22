@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  220
+  battle_party: 220
+
+zonelines:
+
+  z080:
+    from:  [-713.016, 18.687, 458.011]
+    to:    attohwa_chasm
+    at:    [-194.487, -13.766, 338.704, 3.141593]
+    scale: [1.000, 4.000]
+
+  z082:
+    from:  [630.969, 15.539, -696.831]
+    to:    attohwa_chasm
+    at:    [-60.008, -25.908, 239.497, 1.570796]
+    scale: [1.000, 4.000]

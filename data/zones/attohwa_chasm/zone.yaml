@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 219
+
+zonelines:
+
+  z070:
+    from:  [-167.101, 5.012, -261.720]
+    to:    maze_of_shakhrami
+    at:    [-140.246, -12.738, 160.709, 1.570796]
+    scale: [1.000, 5.000]
+
+  z072:
+    from:  [-191.031, -16.408, 336.814]
+    to:    boneyard_gully
+    at:    [-709.508, 18.066, 456.241]
+    scale: [1.000, 4.000]
+
+  z074:
+    from:  [-59.999, -27.570, 242.986]
+    to:    boneyard_gully
+    at:    [627.536, 15.737, -695.364, 3.141593]
+    scale: [1.000, 4.000]

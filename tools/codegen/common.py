@@ -6,6 +6,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 ROOT: Path = Path(__file__).resolve().parents[2]
 ENUMS_DIR: Path = ROOT / "data" / "enums"
+ZONES_DIR: Path = ROOT / "data" / "zones"
 TEMPLATES_DIR: Path = Path(__file__).resolve().parent / "templates"
 
 ENV: Environment = Environment(

@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z540:
+    from:  [459.993, -4.880, -106.484]
+    to:    qufim_island
+    at:    [-286.271, -21.619, 320.084]
+    scale: [1.000, 4.000]

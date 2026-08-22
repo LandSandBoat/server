@@ -1,0 +1,111 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z5s0:
+    from:  [940.001, -20.088, -360.986]
+    to:    eastern_altepa_desert
+    at:    [420.002, 8.362, 191.739, 1.570796]
+    scale: [1.000, 4.000]
+
+  z5s2:
+    from:  [700.015, -28.008, -685.018]
+    to:    eastern_altepa_desert
+    at:    [19.980, 16.529, -321.526, 4.712389]
+    scale: [1.000, 4.000]
+
+  z5s4:
+    from:  [180.010, -12.268, -145.070]
+    to:    western_altepa_desert
+    at:    [179.988, 16.043, -281.511, 4.712389]
+    scale: [1.000, 4.000]
+
+  z5s6:
+    from:  [-740.003, -20.211, -518.989]
+    to:    western_altepa_desert
+    at:    [-740.000, -11.967, -761.537, 4.712389]
+    scale: [1.000, 4.000]
+
+  z5s8:
+    from:  [614.981, -12.028, -379.983]
+    to:    eastern_altepa_desert
+    at:    [126.597, 8.245, -20.012, 3.141593]
+    scale: [1.000, 4.000]
+
+  z5sa:
+    from:  [420.065, -10.161, -883.002]
+    to:    western_altepa_desert
+    at:    [-138.784, 8.934, -332.049, 1.570796]
+    scale: [1.000, 4.000]
+
+  z5sc:
+    from:  [-286.968, -10.436, -141.236]
+    to:    western_altepa_desert
+    at:    [-325.234, 8.777, -220.852]
+    scale: [1.000, 4.000]
+
+  z5se:
+    from:  [324.022, -10.514, 60.323]
+    to:    western_altepa_desert
+    at:    [220.071, 14.204, 13.230, 3.141593]
+    scale: [1.000, 4.000]
+
+  z5sg:
+    from:  [-59.992, -20.009, 259.977]
+    to:    western_altepa_desert
+    at:    [-20.001, 23.951, 201.725, 1.570796]
+    scale: [1.000, 4.000]
+
+  z5si:
+    from:  [-376.956, -1.988, -297.505]
+    to:    western_altepa_desert
+    at:    [-844.734, 8.842, -540.749]
+    scale: [1.000, 4.000]
+
+  z5sk:
+    from:  [-806.639, -1.941, -259.527]
+    to:    western_altepa_desert
+    at:    [-883.969, 8.776, -420.910]
+    scale: [1.000, 4.000]
+
+  z5sm:
+    from:  [-587.853, -2.493, 743.779]
+    to:    western_altepa_desert
+    at:    [-379.069, 14.444, 186.901, 3.141593]
+    scale: [1.000, 4.000]
+
+  z5so:
+    from:  [-344.133, -3.209, 488.583]
+    to:    western_altepa_desert
+    at:    [-492.920, 13.869, 101.989, 4.712389]
+    scale: [1.000, 4.000]
+
+  z5sq:
+    from:  [578.563, 6.198, -492.004]
+    to:    cloister_of_tremors
+    at:    [-580.383, -0.820, -563.956, 4.712389]
+    scale: [1.000, 4.000]
+
+  z5ss:
+    from:  [-980.393, 13.943, -278.256]
+    to:    chamber_of_oracles
+    at:    [-177.804, -2.765, -37.893, 4.712389]
+    scale: [1.000, 3.000]
+
+  z5su:
+    from:  [-900.079, 13.606, -240.896]
+    to:    chamber_of_oracles
+    at:    [185.914, -0.910, -96.413, 4.712389]
+    scale: [1.000, 3.000]
+
+  z5sw:
+    from:  [-384.968, -4.019, 860.009]
+    to:    western_altepa_desert
+    at:    [-283.003, 15.913, 299.964, 3.141593]
+    scale: [1.000, 4.000]

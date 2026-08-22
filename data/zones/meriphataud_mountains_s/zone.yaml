@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 215
+
+zonelines:
+
+  z2p0:
+    from:  [540.000, -20.909, -602.000]
+    to:    fort_karugo_narugo_s
+    at:    [820.000, 25.782, 117.991, 1.570796]
+    scale: [1.000, 4.000]
+
+  z2p2:
+    from:  [-614.879, -14.538, -419.435]
+    to:    fort_karugo_narugo_s
+    at:    [97.017, -27.936, 375.674, 3.926991]
+    scale: [1.000, 4.000]
+
+  z2p4:
+    from:  [-654.638, -22.264, 60.580]
+    to:    fort_karugo_narugo_s
+    at:    [137.112, -23.945, 575.659, 3.926991]
+    scale: [1.000, 4.000]
+
+  z2p6:
+    from:  [-653.456, -14.479, 217.250]
+    to:    fort_karugo_narugo_s
+    at:    [103.991, -15.999, 777.201, 2.356194]
+    scale: [1.000, 4.000]
+
+  z2p8:
+    from:  [-454.593, 23.968, 661.763]
+    to:    sauromugue_champaign_s
+    at:    [520.391, -15.885, -502.917, 4.712389]
+    scale: [1.000, 6.000]
+
+  z2pa:
+    from:  [756.268, -35.643, -40.040]
+    to:    castle_oztroja_s
+    at:    [-239.447, -1.813, -19.980]
+    scale: [1.000, 4.000]

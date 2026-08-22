@@ -1,0 +1,291 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Shinryu:
+    id:            3604
+    species:       shinryu
+    type:          [notorious]
+    skill_list_id: 475
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    3
+          ice:     3
+          wind:    3
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   6
+          dark:    6
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 6
+          dark_sleep:  6
+          blind:       6
+      render:
+        look:
+          type:  standard
+          model: 2367
+        entity_flags:  409
+        animation_sub:   5
+        hitbox:         75
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   twilight_belt
+        - chance: uncommon
+          item:   twilight_cape
+        - chance: rare
+          item:   twilight_torque
+        - chance: rare
+          one_of: [twilight_scythe, twilight_knife]
+        - chance: rare
+          one_of: [twilight_mail, twilight_cloak, twilight_helm]
+        - chance: very_common
+          one_of:
+            apkallu_egg:               4.5
+            chunk_of_adaman_ore:       4.5
+            pinch_of_djinn_ash:        4.5
+            slice_of_lynx_meat:        4.5
+            aluminum_ingot:            2.9
+            antlion_jaw:               2.9
+            helmet_mole:               2.9
+            queen_of_cups_card:        2.9
+            snoll_arm:                 2.9
+            cactuar_root:              2.5
+            cerberus_claw:             2.5
+            cermet_chunk:              2.5
+            chunk_of_kaolin:           2.5
+            darksteel_ingot:           2.5
+            demon_horn:                2.5
+            gold_beastcoin:            2.5
+            gold_ingot:                2.5
+            platinum_ingot:            2.5
+            pro-ether:                 2.5
+            pro-ether_+1:              2.5
+            scorpion_claw:             2.5
+            slab_of_granite:           2.5
+            slice_of_dragon_meat:      2.5
+            spool_of_gold_thread:      2.5
+            spool_of_rainbow_thread:   2.5
+            square_of_buffalo_leather: 2.5
+            square_of_rainbow_cloth:   2.5
+            square_of_raxa:            2.5
+            square_of_wool_cloth:      2.5
+            super_ether:               2.5
+            super_ether_+1:            2.5
+            trumpet_shell:             2.5
+            vial_of_dragon_blood:      2.5
+            wyvern_wing:               2.5
+            x-potion:                  2.5
+            x-potion_+1:               2.5
+        - chance: uncommon
+          one_of:
+            apkallu_egg:               4.5
+            chunk_of_adaman_ore:       4.5
+            pinch_of_djinn_ash:        4.5
+            slice_of_lynx_meat:        4.5
+            aluminum_ingot:            2.9
+            antlion_jaw:               2.9
+            helmet_mole:               2.9
+            queen_of_cups_card:        2.9
+            snoll_arm:                 2.9
+            cactuar_root:              2.5
+            cerberus_claw:             2.5
+            cermet_chunk:              2.5
+            chunk_of_kaolin:           2.5
+            darksteel_ingot:           2.5
+            demon_horn:                2.5
+            gold_beastcoin:            2.5
+            gold_ingot:                2.5
+            platinum_ingot:            2.5
+            pro-ether:                 2.5
+            pro-ether_+1:              2.5
+            scorpion_claw:             2.5
+            slab_of_granite:           2.5
+            slice_of_dragon_meat:      2.5
+            spool_of_gold_thread:      2.5
+            spool_of_rainbow_thread:   2.5
+            square_of_buffalo_leather: 2.5
+            square_of_rainbow_cloth:   2.5
+            square_of_raxa:            2.5
+            square_of_wool_cloth:      2.5
+            super_ether:               2.5
+            super_ether_+1:            2.5
+            trumpet_shell:             2.5
+            vial_of_dragon_blood:      2.5
+            wyvern_wing:               2.5
+            x-potion:                  2.5
+            x-potion_+1:               2.5
+
+  Shinryu_Star:
+    id:            3687
+    display_name:  Shinryu
+    species:       shinryu
+    type:          [notorious]
+    skill_list_id: 475
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        rank_element:
+          fire:    3
+          ice:     3
+          wind:    3
+          earth:   3
+          thunder: 3
+          water:   3
+          light:   6
+          dark:    6
+        rank_status:
+          paralyze:    3
+          bind:        3
+          silence:     3
+          slow:        3
+          poison:      3
+          light_sleep: 6
+          dark_sleep:  6
+          blind:       6
+      render:
+        look:
+          type:  standard
+          model: 2367
+        entity_flags:  409
+        animation_sub:   5
+        hitbox:         75
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   twilight_belt
+        - chance: uncommon
+          item:   twilight_cape
+        - chance: rare
+          item:   twilight_torque
+        - chance: rare
+          one_of: [twilight_scythe, twilight_knife]
+        - chance: rare
+          one_of: [twilight_mail, twilight_cloak, twilight_helm]
+        - chance: very_common
+          one_of:
+            apkallu_egg:               4.5
+            chunk_of_adaman_ore:       4.5
+            pinch_of_djinn_ash:        4.5
+            slice_of_lynx_meat:        4.5
+            aluminum_ingot:            2.9
+            antlion_jaw:               2.9
+            helmet_mole:               2.9
+            queen_of_cups_card:        2.9
+            snoll_arm:                 2.9
+            cactuar_root:              2.5
+            cerberus_claw:             2.5
+            cermet_chunk:              2.5
+            chunk_of_kaolin:           2.5
+            darksteel_ingot:           2.5
+            demon_horn:                2.5
+            gold_beastcoin:            2.5
+            gold_ingot:                2.5
+            platinum_ingot:            2.5
+            pro-ether:                 2.5
+            pro-ether_+1:              2.5
+            scorpion_claw:             2.5
+            slab_of_granite:           2.5
+            slice_of_dragon_meat:      2.5
+            spool_of_gold_thread:      2.5
+            spool_of_rainbow_thread:   2.5
+            square_of_buffalo_leather: 2.5
+            square_of_rainbow_cloth:   2.5
+            square_of_raxa:            2.5
+            square_of_wool_cloth:      2.5
+            super_ether:               2.5
+            super_ether_+1:            2.5
+            trumpet_shell:             2.5
+            vial_of_dragon_blood:      2.5
+            wyvern_wing:               2.5
+            x-potion:                  2.5
+            x-potion_+1:               2.5
+        - chance: uncommon
+          one_of:
+            apkallu_egg:               4.5
+            chunk_of_adaman_ore:       4.5
+            pinch_of_djinn_ash:        4.5
+            slice_of_lynx_meat:        4.5
+            aluminum_ingot:            2.9
+            antlion_jaw:               2.9
+            helmet_mole:               2.9
+            queen_of_cups_card:        2.9
+            snoll_arm:                 2.9
+            cactuar_root:              2.5
+            cerberus_claw:             2.5
+            cermet_chunk:              2.5
+            chunk_of_kaolin:           2.5
+            darksteel_ingot:           2.5
+            demon_horn:                2.5
+            gold_beastcoin:            2.5
+            gold_ingot:                2.5
+            platinum_ingot:            2.5
+            pro-ether:                 2.5
+            pro-ether_+1:              2.5
+            scorpion_claw:             2.5
+            slab_of_granite:           2.5
+            slice_of_dragon_meat:      2.5
+            spool_of_gold_thread:      2.5
+            spool_of_rainbow_thread:   2.5
+            square_of_buffalo_leather: 2.5
+            square_of_rainbow_cloth:   2.5
+            square_of_raxa:            2.5
+            square_of_wool_cloth:      2.5
+            super_ether:               2.5
+            super_ether_+1:            2.5
+            trumpet_shell:             2.5
+            vial_of_dragon_blood:      2.5
+            wyvern_wing:               2.5
+            x-potion:                  2.5
+            x-potion_+1:               2.5
+
+spawns:
+  17821697:
+    template: Shinryu
+    at:       [-477.491, -0.500, 515.330, 43]
+    level:    [90, 92]
+  17821698:
+    template: Shinryu
+    at:       [519.000, -500.000, 519.000, 249]
+    level:    [90, 92]
+  17821699:
+    template: Shinryu
+    at:       [-479.000, -1000.000, -471.000, 65]
+    level:    [90, 92]
+  17821700:
+    template: Shinryu_Star
+    script:   Shinryu
+    at:       [-477.341, -0.500, 510.673, 63]
+    level:    [139, 139]
+  17821701:
+    template: Shinryu_Star
+    script:   Shinryu
+    at:       [520.000, -500.500, 520.000, 64]
+    level:    [139, 139]
+  17821702:
+    template: Shinryu_Star
+    script:   Shinryu
+    at:       [-477.922, -1000.500, -484.836, 60]
+    level:    [139, 139]

@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z3j0:
+    from:  [361.024, 22.103, -60.001]
+    to:    qufim_island
+    at:    [-638.714, 16.865, 459.966]
+    scale: [1.000, 4.000]

@@ -1,0 +1,1460 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+spawns:
+  17858561:
+    script: Unblinking_Panopt
+  17858562:
+    script: Unblinking_Panopt
+  17858563:
+    script: Windblown_Treant
+  17858564:
+    script: Windblown_Treant
+  17858565:
+    script: Frothing_Snapweed
+  17858566:
+    script: Frothing_Snapweed
+  17858567:
+    script: Thorny_Rafflesia
+  17858568:
+    script: Thorny_Rafflesia
+  17858569:
+    script: Feverish_Ameretat
+  17858570:
+    script: Feverish_Ameretat
+  17858571:
+    script: Engorged_Belladonna
+  17858572:
+    script: Engorged_Belladonna
+  17858573:
+    script: Stumbling_Sapling
+  17858574:
+    script: Stumbling_Sapling
+  17858575:
+    script: Inflamed_Flytrap
+  17858576:
+    script: Flustered_Funguar
+  17858577:
+    script: Inflamed_Flytrap
+  17858578:
+    script: Flustered_Funguar
+  17858579:
+    script: Woodlot_Luckybug
+  17858580:
+    script: Mulcher_Beetle
+  17858581:
+    script: Woodlot_Luckybug
+  17858582:
+    script: Mulcher_Beetle
+  17858583:
+    script: Sly_Opo-opo
+  17858584:
+    script: Highhop_Lapinion
+  17858585:
+    script: Sly_Opo-opo
+  17858586:
+    script: Highhop_Lapinion
+  17858587:
+    script: Sunburnt_Twitherym
+  17858588:
+    script: Weald_Wasp
+  17858589:
+    script: Sunburnt_Twitherym
+  17858590:
+    script: Weald_Wasp
+  17858591:
+    script: Unblinking_Panopt
+  17858592:
+    script: Unblinking_Panopt
+  17858593:
+    script: Unblinking_Panopt
+  17858594:
+    script: Windblown_Treant
+  17858595:
+    script: Windblown_Treant
+  17858596:
+    script: Windblown_Treant
+  17858597:
+    script: Frothing_Snapweed
+  17858598:
+    script: Frothing_Snapweed
+  17858599:
+    script: Frothing_Snapweed
+  17858600:
+    script: Thorny_Rafflesia
+  17858601:
+    script: Thorny_Rafflesia
+  17858602:
+    script: Thorny_Rafflesia
+  17858603:
+    script: Feverish_Ameretat
+  17858604:
+    script: Feverish_Ameretat
+  17858605:
+    script: Feverish_Ameretat
+  17858606:
+    script: Engorged_Belladonna
+  17858607:
+    script: Engorged_Belladonna
+  17858608:
+    script: Engorged_Belladonna
+  17858609:
+    script: Stumbling_Sapling
+  17858610:
+    script: Stumbling_Sapling
+  17858611:
+    script: Stumbling_Sapling
+  17858612:
+    script: Inflamed_Flytrap
+  17858613:
+    script: Flustered_Funguar
+  17858614:
+    script: Inflamed_Flytrap
+  17858615:
+    script: Flustered_Funguar
+  17858616:
+    script: Inflamed_Flytrap
+  17858617:
+    script: Flustered_Funguar
+  17858618:
+    script: Woodlot_Luckybug
+  17858619:
+    script: Mulcher_Beetle
+  17858620:
+    script: Woodlot_Luckybug
+  17858621:
+    script: Mulcher_Beetle
+  17858622:
+    script: Woodlot_Luckybug
+  17858623:
+    script: Mulcher_Beetle
+  17858624:
+    script: Sly_Opo-opo
+  17858625:
+    script: Highhop_Lapinion
+  17858626:
+    script: Sly_Opo-opo
+  17858627:
+    script: Highhop_Lapinion
+  17858628:
+    script: Sly_Opo-opo
+  17858629:
+    script: Highhop_Lapinion
+  17858630:
+    script: Sunburnt_Twitherym
+  17858631:
+    script: Weald_Wasp
+  17858632:
+    script: Sunburnt_Twitherym
+  17858633:
+    script: Weald_Wasp
+  17858634:
+    script: Sunburnt_Twitherym
+  17858635:
+    script: Weald_Wasp
+  17858636:
+    script: Unblinking_Panopt
+  17858637:
+    script: Unblinking_Panopt
+  17858638:
+    script: Unblinking_Panopt
+  17858639:
+    script: Windblown_Treant
+  17858640:
+    script: Windblown_Treant
+  17858641:
+    script: Windblown_Treant
+  17858642:
+    script: Frothing_Snapweed
+  17858643:
+    script: Frothing_Snapweed
+  17858644:
+    script: Frothing_Snapweed
+  17858645:
+    script: Thorny_Rafflesia
+  17858646:
+    script: Thorny_Rafflesia
+  17858647:
+    script: Thorny_Rafflesia
+  17858648:
+    script: Feverish_Ameretat
+  17858649:
+    script: Feverish_Ameretat
+  17858650:
+    script: Feverish_Ameretat
+  17858651:
+    script: Engorged_Belladonna
+  17858652:
+    script: Engorged_Belladonna
+  17858653:
+    script: Engorged_Belladonna
+  17858654:
+    script: Stumbling_Sapling
+  17858655:
+    script: Stumbling_Sapling
+  17858656:
+    script: Stumbling_Sapling
+  17858657:
+    script: Inflamed_Flytrap
+  17858658:
+    script: Flustered_Funguar
+  17858659:
+    script: Inflamed_Flytrap
+  17858660:
+    script: Flustered_Funguar
+  17858661:
+    script: Inflamed_Flytrap
+  17858662:
+    script: Flustered_Funguar
+  17858663:
+    script: Woodlot_Luckybug
+  17858664:
+    script: Mulcher_Beetle
+  17858665:
+    script: Woodlot_Luckybug
+  17858666:
+    script: Mulcher_Beetle
+  17858667:
+    script: Woodlot_Luckybug
+  17858668:
+    script: Mulcher_Beetle
+  17858669:
+    script: Sly_Opo-opo
+  17858670:
+    script: Highhop_Lapinion
+  17858671:
+    script: Sly_Opo-opo
+  17858672:
+    script: Highhop_Lapinion
+  17858673:
+    script: Sly_Opo-opo
+  17858674:
+    script: Highhop_Lapinion
+  17858675:
+    script: Sunburnt_Twitherym
+  17858676:
+    script: Weald_Wasp
+  17858677:
+    script: Sunburnt_Twitherym
+  17858678:
+    script: Weald_Wasp
+  17858679:
+    script: Sunburnt_Twitherym
+  17858680:
+    script: Weald_Wasp
+  17858681:
+    script: Unblinking_Panopt
+  17858682:
+    script: Unblinking_Panopt
+  17858683:
+    script: Unblinking_Panopt
+  17858684:
+    script: Unblinking_Panopt
+  17858685:
+    script: Windblown_Treant
+  17858686:
+    script: Windblown_Treant
+  17858687:
+    script: Windblown_Treant
+  17858688:
+    script: Windblown_Treant
+  17858689:
+    script: Frothing_Snapweed
+  17858690:
+    script: Frothing_Snapweed
+  17858691:
+    script: Frothing_Snapweed
+  17858692:
+    script: Frothing_Snapweed
+  17858693:
+    script: Thorny_Rafflesia
+  17858694:
+    script: Thorny_Rafflesia
+  17858695:
+    script: Thorny_Rafflesia
+  17858696:
+    script: Thorny_Rafflesia
+  17858697:
+    script: Feverish_Ameretat
+  17858698:
+    script: Feverish_Ameretat
+  17858699:
+    script: Feverish_Ameretat
+  17858700:
+    script: Feverish_Ameretat
+  17858701:
+    script: Engorged_Belladonna
+  17858702:
+    script: Engorged_Belladonna
+  17858703:
+    script: Engorged_Belladonna
+  17858704:
+    script: Engorged_Belladonna
+  17858705:
+    script: Stumbling_Sapling
+  17858706:
+    script: Stumbling_Sapling
+  17858707:
+    script: Stumbling_Sapling
+  17858708:
+    script: Stumbling_Sapling
+  17858709:
+    script: Inflamed_Flytrap
+  17858710:
+    script: Flustered_Funguar
+  17858711:
+    script: Inflamed_Flytrap
+  17858712:
+    script: Flustered_Funguar
+  17858713:
+    script: Inflamed_Flytrap
+  17858714:
+    script: Flustered_Funguar
+  17858715:
+    script: Inflamed_Flytrap
+  17858716:
+    script: Flustered_Funguar
+  17858717:
+    script: Woodlot_Luckybug
+  17858718:
+    script: Mulcher_Beetle
+  17858719:
+    script: Woodlot_Luckybug
+  17858720:
+    script: Mulcher_Beetle
+  17858721:
+    script: Woodlot_Luckybug
+  17858722:
+    script: Mulcher_Beetle
+  17858723:
+    script: Woodlot_Luckybug
+  17858724:
+    script: Mulcher_Beetle
+  17858725:
+    script: Sly_Opo-opo
+  17858726:
+    script: Highhop_Lapinion
+  17858727:
+    script: Sly_Opo-opo
+  17858728:
+    script: Highhop_Lapinion
+  17858729:
+    script: Sly_Opo-opo
+  17858730:
+    script: Highhop_Lapinion
+  17858731:
+    script: Sly_Opo-opo
+  17858732:
+    script: Highhop_Lapinion
+  17858733:
+    script: Sunburnt_Twitherym
+  17858734:
+    script: Weald_Wasp
+  17858735:
+    script: Sunburnt_Twitherym
+  17858736:
+    script: Weald_Wasp
+  17858737:
+    script: Sunburnt_Twitherym
+  17858738:
+    script: Weald_Wasp
+  17858739:
+    script: Sunburnt_Twitherym
+  17858740:
+    script: Weald_Wasp
+  17858741:
+    script: Unblinking_Panopt
+  17858742:
+    script: Unblinking_Panopt
+  17858743:
+    script: Unblinking_Panopt
+  17858744:
+    script: Unblinking_Panopt
+  17858745:
+    script: Unblinking_Panopt
+  17858746:
+    script: Unblinking_Panopt
+  17858747:
+    script: Unblinking_Panopt
+  17858748:
+    script: Unblinking_Panopt
+  17858749:
+    script: Windblown_Treant
+  17858750:
+    script: Windblown_Treant
+  17858751:
+    script: Windblown_Treant
+  17858752:
+    script: Windblown_Treant
+  17858753:
+    script: Windblown_Treant
+  17858754:
+    script: Windblown_Treant
+  17858755:
+    script: Windblown_Treant
+  17858756:
+    script: Windblown_Treant
+  17858757:
+    script: Frothing_Snapweed
+  17858758:
+    script: Frothing_Snapweed
+  17858759:
+    script: Frothing_Snapweed
+  17858760:
+    script: Frothing_Snapweed
+  17858761:
+    script: Frothing_Snapweed
+  17858762:
+    script: Frothing_Snapweed
+  17858763:
+    script: Frothing_Snapweed
+  17858764:
+    script: Frothing_Snapweed
+  17858765:
+    script: Thorny_Rafflesia
+  17858766:
+    script: Thorny_Rafflesia
+  17858767:
+    script: Thorny_Rafflesia
+  17858768:
+    script: Thorny_Rafflesia
+  17858769:
+    script: Thorny_Rafflesia
+  17858770:
+    script: Thorny_Rafflesia
+  17858771:
+    script: Thorny_Rafflesia
+  17858772:
+    script: Thorny_Rafflesia
+  17858773:
+    script: Feverish_Ameretat
+  17858774:
+    script: Feverish_Ameretat
+  17858775:
+    script: Feverish_Ameretat
+  17858776:
+    script: Feverish_Ameretat
+  17858777:
+    script: Feverish_Ameretat
+  17858778:
+    script: Feverish_Ameretat
+  17858779:
+    script: Feverish_Ameretat
+  17858780:
+    script: Feverish_Ameretat
+  17858781:
+    script: Engorged_Belladonna
+  17858782:
+    script: Engorged_Belladonna
+  17858783:
+    script: Engorged_Belladonna
+  17858784:
+    script: Engorged_Belladonna
+  17858785:
+    script: Engorged_Belladonna
+  17858786:
+    script: Engorged_Belladonna
+  17858787:
+    script: Engorged_Belladonna
+  17858788:
+    script: Engorged_Belladonna
+  17858789:
+    script: Stumbling_Sapling
+  17858790:
+    script: Stumbling_Sapling
+  17858791:
+    script: Stumbling_Sapling
+  17858792:
+    script: Stumbling_Sapling
+  17858793:
+    script: Stumbling_Sapling
+  17858794:
+    script: Stumbling_Sapling
+  17858795:
+    script: Stumbling_Sapling
+  17858796:
+    script: Stumbling_Sapling
+  17858797:
+    script: Inflamed_Flytrap
+  17858798:
+    script: Flustered_Funguar
+  17858799:
+    script: Inflamed_Flytrap
+  17858800:
+    script: Flustered_Funguar
+  17858801:
+    script: Inflamed_Flytrap
+  17858802:
+    script: Flustered_Funguar
+  17858803:
+    script: Inflamed_Flytrap
+  17858804:
+    script: Flustered_Funguar
+  17858805:
+    script: Inflamed_Flytrap
+  17858806:
+    script: Flustered_Funguar
+  17858807:
+    script: Inflamed_Flytrap
+  17858808:
+    script: Flustered_Funguar
+  17858809:
+    script: Inflamed_Flytrap
+  17858810:
+    script: Flustered_Funguar
+  17858811:
+    script: Inflamed_Flytrap
+  17858812:
+    script: Flustered_Funguar
+  17858813:
+    script: Woodlot_Luckybug
+  17858814:
+    script: Mulcher_Beetle
+  17858815:
+    script: Woodlot_Luckybug
+  17858816:
+    script: Mulcher_Beetle
+  17858817:
+    script: Woodlot_Luckybug
+  17858818:
+    script: Mulcher_Beetle
+  17858819:
+    script: Woodlot_Luckybug
+  17858820:
+    script: Mulcher_Beetle
+  17858821:
+    script: Woodlot_Luckybug
+  17858822:
+    script: Mulcher_Beetle
+  17858823:
+    script: Woodlot_Luckybug
+  17858824:
+    script: Mulcher_Beetle
+  17858825:
+    script: Woodlot_Luckybug
+  17858826:
+    script: Mulcher_Beetle
+  17858827:
+    script: Woodlot_Luckybug
+  17858828:
+    script: Mulcher_Beetle
+  17858829:
+    script: Sly_Opo-opo
+  17858830:
+    script: Highhop_Lapinion
+  17858831:
+    script: Sly_Opo-opo
+  17858832:
+    script: Highhop_Lapinion
+  17858833:
+    script: Sly_Opo-opo
+  17858834:
+    script: Highhop_Lapinion
+  17858835:
+    script: Sly_Opo-opo
+  17858836:
+    script: Highhop_Lapinion
+  17858837:
+    script: Sly_Opo-opo
+  17858838:
+    script: Highhop_Lapinion
+  17858839:
+    script: Sly_Opo-opo
+  17858840:
+    script: Highhop_Lapinion
+  17858841:
+    script: Sly_Opo-opo
+  17858842:
+    script: Highhop_Lapinion
+  17858843:
+    script: Sly_Opo-opo
+  17858844:
+    script: Highhop_Lapinion
+  17858845:
+    script: Sunburnt_Twitherym
+  17858846:
+    script: Weald_Wasp
+  17858847:
+    script: Sunburnt_Twitherym
+  17858848:
+    script: Weald_Wasp
+  17858849:
+    script: Sunburnt_Twitherym
+  17858850:
+    script: Weald_Wasp
+  17858851:
+    script: Sunburnt_Twitherym
+  17858852:
+    script: Weald_Wasp
+  17858853:
+    script: Sunburnt_Twitherym
+  17858854:
+    script: Weald_Wasp
+  17858855:
+    script: Sunburnt_Twitherym
+  17858856:
+    script: Weald_Wasp
+  17858857:
+    script: Sunburnt_Twitherym
+  17858858:
+    script: Weald_Wasp
+  17858859:
+    script: Sunburnt_Twitherym
+  17858860:
+    script: Weald_Wasp
+  17858861:
+    script: Dithering_Heartwing
+  17858862:
+    script: Bestial_Den
+  17858863:
+    script: Bestial_Den
+  17858864:
+    script: Bestial_Den
+  17858865:
+    script: Bestial_Den
+  17858866:
+    script: Bestial_Den
+  17858867:
+    script: Bestial_Den
+  17858868:
+    script: Bestial_Den
+  17858869:
+    script: Cantonment
+  17858870:
+    script: Stockade
+  17858871:
+    script: Stockade
+  17858872:
+    script: Stockade
+  17858873:
+    script: Stockade
+  17858874:
+    script: Broxa
+  17858875:
+    script: Plaguevein_Bats
+  17858876:
+    script: Plaguevein_Bats
+  17858877:
+    script: Plaguevein_Bats
+  17858878:
+    script: Hakawai
+  17858879:
+    script: Ironbeak_Inguza
+  17858880:
+    script: Podarge
+  17858881:
+    script: Cailimh
+  17858882:
+    script: Yowling_Cockatrice
+  17858883:
+    script: Grisly_Bat
+  17858884:
+    script: Grisly_Bat
+  17858885:
+    script: Grisly_Bat
+  17858886:
+    script: Grisly_Bat
+  17858887:
+    script: Grisly_Bat
+  17858888:
+    script: Grisly_Bat
+  17858889:
+    script: Grisly_Bat
+  17858890:
+    script: Grisly_Bat
+  17858891:
+    script: Grisly_Bat
+  17858892:
+    script: Waddling_Apkallu
+  17858893:
+    script: Waddling_Apkallu
+  17858894:
+    script: Waddling_Apkallu
+  17858895:
+    script: Waddling_Apkallu
+  17858896:
+    script: Waddling_Apkallu
+  17858897:
+    script: Waddling_Apkallu
+  17858898:
+    script: Grisly_Bat
+  17858899:
+    script: Grisly_Bat
+  17858900:
+    script: Grisly_Bat
+  17858901:
+    script: Breathless_Hippogryph
+  17858902:
+    script: Darkscreecher
+  17858903:
+    script: Darkscreecher
+  17858904:
+    script: Darkscreecher
+  17858905:
+    script: Fleshprickler_Bats
+  17858906:
+    script: Fleshprickler_Bats
+  17858907:
+    script: Fleshprickler_Bats
+  17858908:
+    script: Darkscreecher
+  17858909:
+    script: Darkscreecher
+  17858910:
+    script: Darkscreecher
+  17858911:
+    script: Fleshprickler_Bats
+  17858912:
+    script: Fleshprickler_Bats
+  17858913:
+    script: Fleshprickler_Bats
+  17858914:
+    script: Darkscreecher
+  17858915:
+    script: Darkscreecher
+  17858916:
+    script: Darkscreecher
+  17858917:
+    script: Fleshprickler_Bats
+  17858918:
+    script: Fleshprickler_Bats
+  17858919:
+    script: Fleshprickler_Bats
+  17858920:
+    script: Anguished_Roc
+  17858921:
+    script: Yowling_Cockatrice
+  17858922:
+    script: Yowling_Cockatrice
+  17858923:
+    script: Yowling_Cockatrice
+  17858924:
+    script: Yowling_Cockatrice
+  17858925:
+    script: Breathless_Hippogryph
+  17858926:
+    script: Breathless_Hippogryph
+  17858927:
+    script: Breathless_Hippogryph
+  17858928:
+    script: Breathless_Hippogryph
+  17858929:
+    script: XagNar
+  17858930:
+    script: Laevvid
+  17858931:
+    script: Morseiu
+  17858932:
+    script: Ircinraq
+  17858933:
+    script: Hyoscya
+  17858934:
+    script: Wopket
+  17858935:
+    script: Budding_Rafflesia
+  17858936:
+    script: Turgid_Flytrap
+  17858937:
+    script: Turgid_Flytrap
+  17858938:
+    script: Turgid_Flytrap
+  17858939:
+    script: Pitchslathered_Sapling
+  17858940:
+    script: Pitchslathered_Sapling
+  17858941:
+    script: Turgid_Flytrap
+  17858942:
+    script: Turgid_Flytrap
+  17858943:
+    script: Pitchslathered_Sapling
+  17858944:
+    script: Pitchslathered_Sapling
+  17858945:
+    script: Pitchslathered_Sapling
+  17858946:
+    script: Turgid_Flytrap
+  17858947:
+    script: Turgid_Flytrap
+  17858948:
+    script: Pitchslathered_Sapling
+  17858949:
+    script: Pitchslathered_Sapling
+  17858950:
+    script: Turgid_Flytrap
+  17858951:
+    script: Turgid_Flytrap
+  17858952:
+    script: Pitchslathered_Sapling
+  17858953:
+    script: Pitchslathered_Sapling
+  17858954:
+    script: Masticating_Ameretat
+  17858955:
+    script: Mossmouthed_Funguar
+  17858956:
+    script: Mossmouthed_Funguar
+  17858957:
+    script: Mossmouthed_Funguar
+  17858958:
+    script: Mossmouthed_Funguar
+  17858959:
+    script: Sabotender_Viajero
+  17858960:
+    script: Sabotender_Viajero
+  17858961:
+    script: Sabotender_Viajero
+  17858962:
+    script: Sabotender_Viajero
+  17858963:
+    script: Mossmouthed_Funguar
+  17858964:
+    script: Mossmouthed_Funguar
+  17858965:
+    script: Mossmouthed_Funguar
+  17858966:
+    script: Sabotender_Viajero
+  17858967:
+    script: Sabotender_Viajero
+  17858968:
+    script: Mossmouthed_Funguar
+  17858969:
+    script: Mossmouthed_Funguar
+  17858970:
+    script: Sabotender_Viajero
+  17858971:
+    script: Sabotender_Viajero
+  17858972:
+    script: Sabotender_Viajero
+  17858973:
+    script: Perennial_Pachypodium
+  17858974:
+    script: Budding_Rafflesia
+  17858975:
+    script: Budding_Rafflesia
+  17858976:
+    script: Budding_Rafflesia
+  17858977:
+    script: Budding_Rafflesia
+  17858978:
+    script: Masticating_Ameretat
+  17858979:
+    script: Masticating_Ameretat
+  17858980:
+    script: Masticating_Ameretat
+  17858981:
+    script: Masticating_Ameretat
+  17858982:
+    script: Calydontis
+  17858983:
+    script: Azeman
+  17858984:
+    script: Sinaa
+  17858985:
+    script: Cherti
+  17858986:
+    script: Mirka
+  17858987:
+    script: Utkux
+  17858988:
+    script: Coppice_Manticore
+  17858989:
+    script: Conniving_Lucerewe
+  17858990:
+    script: Conniving_Lucerewe
+  17858991:
+    script: Conniving_Lucerewe
+  17858992:
+    script: Grassglut_Rabbit
+  17858993:
+    script: Grassglut_Rabbit
+  17858994:
+    script: Conniving_Lucerewe
+  17858995:
+    script: Conniving_Lucerewe
+  17858996:
+    script: Grassglut_Rabbit
+  17858997:
+    script: Grassglut_Rabbit
+  17858998:
+    script: Grassglut_Rabbit
+  17858999:
+    script: Conniving_Lucerewe
+  17859000:
+    script: Conniving_Lucerewe
+  17859001:
+    script: Conniving_Lucerewe
+  17859002:
+    script: Conniving_Lucerewe
+  17859003:
+    script: Grassglut_Rabbit
+  17859004:
+    script: Grassglut_Rabbit
+  17859005:
+    script: Grassglut_Rabbit
+  17859006:
+    script: Grassglut_Rabbit
+  17859007:
+    script: Rambunctious_Ram
+  17859008:
+    script: Machinating_Opo-opo
+  17859009:
+    script: Machinating_Opo-opo
+  17859010:
+    script: Machinating_Opo-opo
+  17859011:
+    script: Machinating_Opo-opo
+  17859012:
+    script: Machinating_Opo-opo
+  17859013:
+    script: Frothing_Tiger
+  17859014:
+    script: Frothing_Tiger
+  17859015:
+    script: Frothing_Tiger
+  17859016:
+    script: Frothing_Tiger
+  17859017:
+    script: Frothing_Tiger
+  17859018:
+    script: Machinating_Opo-opo
+  17859019:
+    script: Machinating_Opo-opo
+  17859020:
+    script: Frothing_Tiger
+  17859021:
+    script: Frothing_Tiger
+  17859022:
+    script: Machinating_Opo-opo
+  17859023:
+    script: Machinating_Opo-opo
+  17859024:
+    script: Frothing_Tiger
+  17859025:
+    script: Frothing_Tiger
+  17859026:
+    script: Humpheave_Marid
+  17859027:
+    script: Coppice_Manticore
+  17859028:
+    script: Coppice_Manticore
+  17859029:
+    script: Rambunctious_Ram
+  17859030:
+    script: Rambunctious_Ram
+  17859031:
+    script: Coppice_Manticore
+  17859032:
+    script: Coppice_Manticore
+  17859033:
+    script: Rambunctious_Ram
+  17859034:
+    script: Rambunctious_Ram
+  17859035:
+    script: Bygone_Geomancer
+  17859036:
+    script: Luopan
+  17859037:
+    script: Luopan
+  17859038:
+    script: Luopan
+  17859039:
+    script: Luopan
+  17859040:
+    script: Luopan
+  17859041:
+    script: Luopan
+  17859042:
+    script: Luopan
+  17859043:
+    script: Luopan
+  17859044:
+    script: Ashrakk
+    at:     [38.000, 0.299, -416.000, 96]
+  17859045:
+    script: Morimar
+    at:     [20.000, 0.532, -432.000, 224]
+  17859046:
+    script: Hell-spawned_Orthrus
+    at:     [29.732, 0.445, -420.089, 84]
+  17859047:
+    script: Headless_Torturer
+  17859048:
+    script: Ingrid
+  17859049:
+    script: Escalent
+  17859050:
+    script: Escalent
+  17859051:
+    script: Escalent
+  17859052:
+    script: Escalent
+  17859053:
+    script: Escalent
+  17859054:
+    script: Escalent
+  17859055:
+    script: Escalent
+  17859056:
+    script: Escalent
+  17859057:
+    script: Escalent
+  17859058:
+    script: Escalent
+  17859059:
+    script: Escalent
+  17859060:
+    script: Escalent
+  17859061:
+    script: Escalent
+  17859062:
+    script: Malicious_Acuex
+  17859063:
+    script: Malicious_Acuex
+  17859064:
+    script: Malicious_Acuex
+  17859065:
+    script: Malicious_Acuex
+  17859066:
+    script: Malicious_Acuex
+  17859067:
+    script: Malicious_Acuex
+  17859068:
+    script: Malicious_Acuex
+  17859069:
+    script: Malicious_Acuex
+  17859070:
+    script: Malicious_Acuex
+  17859071:
+    script: Malicious_Acuex
+  17859072:
+    script: Malicious_Craklaw
+  17859073:
+    script: Malicious_Craklaw
+  17859074:
+    script: Malicious_Craklaw
+  17859075:
+    script: Malicious_Craklaw
+  17859076:
+    script: Malicious_Craklaw
+  17859077:
+    script: Malicious_Craklaw
+  17859078:
+    script: Malicious_Craklaw
+  17859079:
+    script: Malicious_Craklaw
+  17859080:
+    script: Malicious_Craklaw
+  17859081:
+    script: Malicious_Craklaw
+  17859083:
+    script: Malicious_Tulfaire
+  17859084:
+    script: Malicious_Tulfaire
+  17859085:
+    script: Malicious_Tulfaire
+  17859086:
+    script: Malicious_Tulfaire
+  17859087:
+    script: Malicious_Tulfaire
+  17859088:
+    script: Malicious_Tulfaire
+  17859089:
+    script: Malicious_Tulfaire
+  17859090:
+    script: Malicious_Tulfaire
+  17859091:
+    script: Malicious_Tulfaire
+  17859092:
+    script: Malicious_Raaz
+  17859093:
+    script: Malicious_Raaz
+  17859094:
+    script: Malicious_Raaz
+  17859095:
+    script: Malicious_Raaz
+  17859096:
+    script: Malicious_Raaz
+  17859097:
+    script: Malicious_Raaz
+  17859098:
+    script: Malicious_Raaz
+  17859099:
+    script: Malicious_Raaz
+  17859100:
+    script: Malicious_Raaz
+  17859101:
+    script: Malicious_Raaz
+  17859102:
+    script: Malicious_Snapweed
+  17859103:
+    script: Malicious_Snapweed
+  17859104:
+    script: Malicious_Snapweed
+  17859105:
+    script: Malicious_Snapweed
+  17859106:
+    script: Malicious_Snapweed
+  17859107:
+    script: Malicious_Snapweed
+  17859108:
+    script: Malicious_Snapweed
+  17859109:
+    script: Malicious_Snapweed
+  17859110:
+    script: Malicious_Snapweed
+  17859111:
+    script: Malicious_Snapweed
+  17859112:
+    script: Malicious_Chapuli
+  17859113:
+    script: Malicious_Chapuli
+  17859114:
+    script: Malicious_Chapuli
+  17859115:
+    script: Malicious_Chapuli
+  17859116:
+    script: Malicious_Chapuli
+  17859117:
+    script: Malicious_Chapuli
+  17859118:
+    script: Malicious_Chapuli
+  17859119:
+    script: Malicious_Chapuli
+  17859120:
+    script: Malicious_Chapuli
+  17859121:
+    script: Malicious_Chapuli
+  17859122:
+    script: Malicious_Matamata
+  17859123:
+    script: Malicious_Matamata
+  17859124:
+    script: Malicious_Matamata
+  17859125:
+    script: Malicious_Matamata
+  17859126:
+    script: Malicious_Matamata
+  17859127:
+    script: Malicious_Matamata
+  17859128:
+    script: Malicious_Matamata
+  17859129:
+    script: Malicious_Matamata
+  17859130:
+    script: Malicious_Matamata
+  17859131:
+    script: Malicious_Matamata
+  17859132:
+    script: Malicious_Dullahan
+  17859133:
+    script: Malicious_Dullahan
+  17859134:
+    script: Malicious_Dullahan
+  17859135:
+    script: Malicious_Dullahan
+  17859136:
+    script: Malicious_Dullahan
+  17859137:
+    script: Malicious_Dullahan
+  17859138:
+    script: Malicious_Dullahan
+  17859139:
+    script: Malicious_Dullahan
+  17859140:
+    script: Malicious_Dullahan
+  17859141:
+    script: Malicious_Dullahan
+  17859142:
+    script: Malicious_Sirgallyx
+  17859143:
+    script: Malicious_Sirgallyx
+  17859144:
+    script: Malicious_Sirgallyx
+  17859145:
+    script: Malicious_Sirgallyx
+  17859146:
+    script: Malicious_Sirgallyx
+  17859147:
+    script: Malicious_Sirgallyx
+  17859148:
+    script: Malicious_Sirgallyx
+  17859149:
+    script: Malicious_Sirgallyx
+  17859150:
+    script: Malicious_Sirgallyx
+  17859151:
+    script: Malicious_Sirgallyx
+  17859152:
+    script: Valiant_Entozoon
+  17859153:
+    script: Valiant_Entozoon
+  17859154:
+    script: Valiant_Entozoon
+  17859155:
+    script: Valiant_Entozoon
+  17859156:
+    script: Valiant_Entozoon
+  17859157:
+    script: Valiant_Entozoon
+  17859158:
+    script: Valiant_Entozoon
+  17859159:
+    script: Valiant_Entozoon
+  17859160:
+    script: Valiant_Entozoon
+  17859161:
+    script: Valiant_Entozoon
+  17859162:
+    script: Valiant_Crab
+  17859163:
+    script: Valiant_Crab
+  17859164:
+    script: Valiant_Crab
+  17859165:
+    script: Valiant_Crab
+  17859166:
+    script: Valiant_Crab
+  17859167:
+    script: Valiant_Crab
+  17859168:
+    script: Valiant_Crab
+  17859169:
+    script: Valiant_Crab
+  17859170:
+    script: Valiant_Crab
+  17859171:
+    script: Valiant_Crab
+  17859172:
+    script: Valiant_Colibri
+  17859173:
+    script: Valiant_Colibri
+  17859174:
+    script: Valiant_Colibri
+  17859175:
+    script: Valiant_Colibri
+  17859176:
+    script: Valiant_Colibri
+  17859177:
+    script: Valiant_Colibri
+  17859178:
+    script: Valiant_Colibri
+  17859179:
+    script: Valiant_Colibri
+  17859180:
+    script: Valiant_Colibri
+  17859181:
+    script: Valiant_Colibri
+  17859182:
+    script: Valiant_Coeurl
+  17859183:
+    script: Valiant_Coeurl
+  17859184:
+    script: Valiant_Coeurl
+  17859185:
+    script: Valiant_Coeurl
+  17859186:
+    script: Valiant_Coeurl
+  17859187:
+    script: Valiant_Coeurl
+  17859188:
+    script: Valiant_Coeurl
+  17859189:
+    script: Valiant_Coeurl
+  17859190:
+    script: Valiant_Coeurl
+  17859191:
+    script: Valiant_Coeurl
+  17859192:
+    script: Valiant_Mandragora
+  17859193:
+    script: Valiant_Mandragora
+  17859194:
+    script: Valiant_Mandragora
+  17859195:
+    script: Valiant_Mandragora
+  17859196:
+    script: Valiant_Mandragora
+  17859197:
+    script: Valiant_Mandragora
+  17859198:
+    script: Valiant_Mandragora
+  17859199:
+    script: Valiant_Mandragora
+  17859200:
+    script: Valiant_Mandragora
+  17859201:
+    script: Valiant_Mandragora
+  17859202:
+    script: Valiant_Scorpion
+  17859203:
+    script: Valiant_Scorpion
+  17859204:
+    script: Valiant_Scorpion
+  17859205:
+    script: Valiant_Scorpion
+  17859206:
+    script: Valiant_Scorpion
+  17859207:
+    script: Valiant_Scorpion
+  17859208:
+    script: Valiant_Scorpion
+  17859209:
+    script: Valiant_Scorpion
+  17859210:
+    script: Valiant_Scorpion
+  17859211:
+    script: Valiant_Scorpion
+  17859212:
+    script: Valiant_Adamantoise
+  17859213:
+    script: Valiant_Adamantoise
+  17859214:
+    script: Valiant_Adamantoise
+  17859215:
+    script: Valiant_Adamantoise
+  17859216:
+    script: Valiant_Adamantoise
+  17859217:
+    script: Valiant_Adamantoise
+  17859218:
+    script: Valiant_Adamantoise
+  17859219:
+    script: Valiant_Adamantoise
+  17859220:
+    script: Valiant_Adamantoise
+  17859221:
+    script: Valiant_Adamantoise
+  17859222:
+    script: Valiant_Tome
+  17859223:
+    script: Valiant_Tome
+  17859224:
+    script: Valiant_Tome
+  17859225:
+    script: Valiant_Tome
+  17859226:
+    script: Valiant_Tome
+  17859227:
+    script: Valiant_Tome
+  17859228:
+    script: Valiant_Tome
+  17859229:
+    script: Valiant_Tome
+  17859230:
+    script: Valiant_Tome
+  17859231:
+    script: Valiant_Tome
+  17859232:
+    script: Valiant_Ajattara
+  17859233:
+    script: Valiant_Ajattara
+  17859234:
+    script: Valiant_Ajattara
+  17859235:
+    script: Valiant_Ajattara
+  17859236:
+    script: Valiant_Ajattara
+  17859237:
+    script: Valiant_Ajattara
+  17859238:
+    script: Valiant_Ajattara
+  17859239:
+    script: Valiant_Ajattara
+  17859240:
+    script: Valiant_Ajattara
+  17859241:
+    script: Valiant_Ajattara
+  17859242:
+    script: Valiant_Snoll
+  17859243:
+    script: Valiant_Snoll
+  17859244:
+    script: Valiant_Snoll
+  17859245:
+    script: Valiant_Snoll
+  17859246:
+    script: Valiant_Snoll
+  17859247:
+    script: Valiant_Snoll
+  17859248:
+    script: Valiant_Snoll
+  17859249:
+    script: Valiant_Snoll
+  17859250:
+    script: Valiant_Snoll
+  17859251:
+    script: Valiant_Snoll
+  17859252:
+    script: Valiant_Byakko
+  17859253:
+    script: Valiant_Suzaku
+  17859254:
+    script: Valiant_Seiryu
+  17859255:
+    script: Valiant_Kirin
+  17859256:
+    script: Valiant_Genbu
+  17859257:
+    script: Balamors_Adumbration
+  17859258:
+    script: Stronghold
+  17859259:
+    script: Marchland
+  17859260:
+    script: Lorissa
+  17859261:
+    script: Escalent
+  17859262:
+    script: Escalent
+  17859263:
+    script: Escalent
+  17859264:
+    script: Escalent
+  17859265:
+    script: Escalent
+  17859266:
+    script: Escalent
+  17859267:
+    script: Escalent
+  17859268:
+    script: Escalent
+  17859269:
+    script: Escalent
+  17859270:
+    script: Escalent
+  17859271:
+    script: Escalent
+  17859272:
+    script: Escalent
+  17859273:
+    script: Escalent
+  17859274:
+    script: Escalent
+  17859275:
+    script: Escalent
+  17859276:
+    script: Escalent
+  17859277:
+    script: Escalent
+  17859278:
+    script: Escalent
+  17859279:
+    script: Gramk-Droog
+  17859280:
+    script: Ymmr-Ulvid_Gloomlight
+  17859281:
+    script: Ignor-Mnt_Stealthslayer
+  17859282:
+    script: Durs-Vike_Deathspell
+  17859283:
+    script: Tryl-Wuj_Wingrip
+  17859284:
+    script: Tryl-Wujs_Peapuk
+  17859285:
+    script: Liij-Vok_Waxwane
+  17859286:
+    script: Ygnas
+  17859287:
+    script: Nashu
+  17859288:
+    script: Siren_Prime

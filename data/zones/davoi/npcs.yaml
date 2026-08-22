@@ -1,0 +1,1052 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17387973:
+    script: NPC[1c5]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17387974:
+    script: NPC[1c6]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17387975:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17387976:
+    script: NPC[1c8]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17387977:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17387979:
+    script: NPC[1cb]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17387980:
+    script: NPC[1cc]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17387981:
+    script: NPC[1cd]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      name_vis: 4
+
+  17387982:
+    script:       _457
+    display_name: Oak Door
+    at:           [51.514, -11.605, -132.924]
+    render:
+      look:
+        type: door
+      door_id:      926233695
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17387983:
+    script:       _458
+    display_name: Oak Door
+    at:           [52.938, -11.605, -138.813]
+    render:
+      look:
+        type: door
+      door_id:      943010911
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17387984:
+    script:       _459
+    display_name: Wall of Dark Arts
+    at:           [-22.924, -1.336, -69.892]
+    render:
+      look:
+        type: door
+      door_id:      959788127
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17387985:
+    script:       _45c
+    display_name: Wall of Banishing
+    at:           [173.862, -2.129, -221.534]
+    render:
+      look:
+        type: door
+      door_id:      1664431199
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17387986:
+    script:       _45d
+    display_name: Wall of Banishing
+    at:           [180.886, -2.026, -222.299]
+    render:
+      look:
+        type: door
+      door_id:   1681208415
+      animation: close_door
+      moving:    1
+    status: normal
+
+  17387987:
+    script:       _45e
+    display_name: Wall of Banishing
+    at:           [185.247, -2.038, -226.672]
+    render:
+      look:
+        type: door
+      door_id:      1697985631
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17387988:
+    script:       Sedal-Godjal
+    display_name: Sedal-Godjal
+    at:           [187.438, -3.445, -117.257, 145]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  4
+        head:  4096
+        body:  8202
+        hands: 12298
+        legs:  16394
+        feet:  20490
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17387989:
+    script: _45f
+    at:     [177.895, -4.848, -123.544]
+    render:
+      look:
+        type: door
+      door_id:      1714762847
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17387990:
+    script:       Bernal
+    display_name: Bernal
+    at:           [175.496, -2.663, -125.777, 45]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  4
+        head:  4123
+        body:  8219
+        hands: 12315
+        legs:  16411
+        feet:  20507
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+
+  17387991:
+    script:       Quemaricond
+    display_name: Quemaricond
+    at:           [-17.703, -0.551, -18.248, 7]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  3
+        head:  4123
+        body:  8219
+        hands: 12315
+        legs:  16411
+        feet:  20507
+        main:  24576
+        sub:   28672
+      entity_flags: 4194331
+      name_prefix:       32
+      moving:           185
+    status:   normal
+    speed:    40
+    widescan: true
+
+  17387992:
+    script:       _45g
+    display_name: Groaning Pond
+    at:           [105.681, 1.355, 59.079]
+    render:
+      look:
+        type: door
+      door_id:   1731540063
+      animation: close_door
+      moving:    1
+    status: normal
+
+  17387993:
+    script:       _45h
+    display_name: Howling Pond
+    at:           [22.151, 1.209, -254.755]
+    render:
+      look:
+        type: door
+      door_id:   1748317279
+      animation: close_door
+      moving:    1
+    status: normal
+
+  17387994:
+    script:       _45i
+    display_name: Wailing Pond
+    at:           [385.553, 1.519, -181.083]
+    render:
+      look:
+        type: door
+      door_id:   1765094495
+      animation: close_door
+      moving:    1
+    status: normal
+
+  17387995:
+    script:       _45j
+    display_name: Screaming Pond
+    at:           [-221.075, 0.768, -105.518]
+    render:
+      look:
+        type: door
+      door_id:   1781871711
+      animation: close_door
+      moving:    1
+    status: normal
+
+  17387996:
+    script: '@450'
+    at:     [24.305, -8.718, -146.155]
+    render:
+      look:
+        type: elevator
+      door_id:      808793152
+      entity_flags: 2051
+      animation:    elevator_down
+      moving:       1
+    status: normal
+
+  17387997:
+    script: _453
+    at:     [27.171, -4.457, -147.152]
+    render:
+      look:
+        type: door
+      door_id:      859124831
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17387998:
+    script: _45b
+    at:     [27.230, -1.520, -147.193]
+    render:
+      look:
+        type: door
+      door_id:      1647653983
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17387999:
+    script: _454
+    at:     [27.160, -11.387, -147.147]
+    render:
+      look:
+        type: door
+      door_id:      875902047
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17388000:
+    script: _45a
+    at:     [27.157, -9.018, -147.122]
+    render:
+      look:
+        type: door
+      door_id:      1630876767
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17388001:
+    script:       _450
+    display_name: bigwinch
+    at:           [24.641, -13.997, -146.132]
+    render:
+      look:
+        type: door
+      door_id:      808793183
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17388002:
+    script:       _451
+    display_name: Elevator Lever
+    at:           [27.588, -2.655, -149.319]
+    render:
+      look:
+        type: door
+      door_id:      825570399
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17388003:
+    script:       _452
+    display_name: Elevator Lever
+    at:           [28.568, -9.682, -145.602]
+    render:
+      look:
+        type: door
+      door_id:      842347615
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17388004:
+    script:       _455
+    display_name: winch1
+    at:           [27.438, -2.725, -149.740]
+    render:
+      look:
+        type: door
+      door_id:      892679263
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17388005:
+    script:       _456
+    display_name: winch2
+    at:           [28.687, -9.774, -145.192]
+    render:
+      look:
+        type: door
+      door_id:      909456479
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17388006:
+    script:       Zantaviat
+    display_name: Zantaviat
+    at:           [211.852, -0.457, -9.230, 51]
+    render:
+      look:
+        type:  standard
+        model: 804
+      entity_flags:  27
+      animation_sub:  2
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17388007:
+    script:       '!'
+    display_name: '!'
+    at:           [294.086, 0.032, -28.232, 163]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17388008:
+    script:       '!'
+    display_name: '!'
+    at:           [335.404, -0.200, -136.180, 169]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17388009:
+    script:       '!'
+    display_name: '!'
+    at:           [163.461, 0.223, -18.949, 203]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17388010:
+    script:       '!'
+    display_name: '!'
+    at:           [211.200, 2.195, -104.395, 144]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17388011:
+    script:       Disused_Well
+    display_name: Disused Well
+    at:           [-221.597, 2.799, -295.391, 226]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17388012:
+    script:       qm1
+    display_name: ???
+    at:           [-115.830, -0.427, -184.289, 89]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17388013:
+    script: NPC[1ed]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17388014:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17388015:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17388016:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17388017:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17388018:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17388019:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17388020:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17388021:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17388022:
+    script:       Jar
+    display_name: Jar
+    at:           [-95.613, 2.454, -50.845, 72]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 7
+    status:   normal
+    widescan: true
+
+  17388023:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17388024:
+    script:       Hide_Flap_1
+    display_name: Hide Flap
+    at:           [265.594, 4.065, -249.519]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 7
+    status:   normal
+    widescan: true
+
+  17388025:
+    script:       Hide_Flap_2
+    display_name: Hide Flap
+    at:           [-127.641, 4.250, 20.402]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 32769
+    status:   normal
+    widescan: true
+
+  17388026:
+    script:       Storage_Hole
+    display_name: Storage Hole
+    at:           [-21.260, 3.859, -197.125]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17388027:
+    script:       Village_Well
+    display_name: Village Well
+    at:           [-33.000, 4.000, -217.000, 229]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17388028:
+    script:       Treasure_Chest
+    display_name: Treasure Chest
+    render:
+      look:
+        type:  standard
+        model: 960
+      moving: 6
+    status: normal
+
+  17388029:
+    script:       Talking_Doll
+    display_name: Talking Doll
+    at:           [216.080, -0.105, -26.730, 10]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  3
+        head:  4096
+        body:  8224
+        hands: 12319
+        legs:  16415
+        feet:  20511
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17388030:
+    script:       Rochefogne
+    display_name: Rochefogne
+    at:           [219.376, 2.749, -60.398, 197]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  3
+        head:  4096
+        body:  8224
+        hands: 12319
+        legs:  16415
+        feet:  20511
+        main:  24763
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17388031:
+    script:       Vauderame
+    display_name: Vauderame
+    at:           [221.757, 2.517, -55.520, 185]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  8
+        head:  4096
+        body:  8241
+        hands: 12307
+        legs:  16458
+        feet:  20492
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17388032:
+    script:       qm2
+    display_name: ???
+    at:           [189.201, 1.255, -383.921, 174]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17388033:
+    script:       Dauperiat
+    display_name: Dauperiat
+    at:           [189.201, 1.255, -383.921, 174]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  14
+        head:  4096
+        body:  8195
+        hands: 12291
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17388034:
+    script:       Atarefaunet
+    display_name: Atarefaunet
+    at:           [52.157, -24.943, 33.211, 64]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  14
+        head:  4096
+        body:  8195
+        hands: 12291
+        legs:  16387
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17388035:
+    script:       Monban01
+    display_name: Monban01
+    at:           [75.400, -24.053, 20.000, 128]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  4
+        head:  4118
+        body:  8214
+        hands: 12310
+        legs:  16406
+        feet:  20502
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+
+  17388036:
+    script:       Lootblox
+    display_name: Lootblox
+    at:           [218.073, 0.018, -20.746, 155]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+      moving:       22
+    status:   normal
+    widescan: true
+
+  17388037:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [222.204, -0.344, -35.904, 140]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17388038:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [222.204, -0.344, -35.904, 140]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status: normal
+
+  17388039:
+    script:       GoalPoint
+    display_name: GoalPoint
+    at:           [-182.579, -0.171, -278.571, 39]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17388040:
+    script:       GoalPoint
+    display_name: GoalPoint
+    at:           [-222.336, -0.371, -32.531, 19]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17388041:
+    script:       GoalPoint
+    display_name: GoalPoint
+    at:           [219.046, 0.744, -48.848, 76]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17388042:
+    script:       GoalPoint
+    display_name: GoalPoint
+    at:           [180.407, 2.472, -19.764, 112]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    widescan: true
+
+  17388043:
+    script:       GoalPoint
+    display_name: GoalPoint
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17388044:
+    script:       GoalPoint
+    display_name: GoalPoint
+    render:
+      look:
+        type:  standard
+        model: 52
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17388045:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-182.579, -0.171, -278.571, 39]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17388046:
+    script:       Moogle
+    display_name: Moogle
+    at:           [-222.336, -0.371, -32.531, 19]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17388047:
+    script:       Moogle
+    display_name: Moogle
+    at:           [219.046, 0.744, -48.848, 76]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17388048:
+    script:       Moogle
+    display_name: Moogle
+    at:           [180.407, 2.472, -19.764, 112]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+      moving:          1
+    widescan: true
+
+  17388049:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17388050:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 2051
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17388051:
+    script:       Huge_Crystal
+    display_name: Huge Crystal
+    at:           [-222.007, -0.611, -96.839, 191]
+    render:
+      look:
+        type:  standard
+        model: 51
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17388052:
+    script:       Geomagnetic_Fount
+    display_name: Geomagnetic Fount
+    at:           [111.277, -5.014, -107.439]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17388053:
+    script:       Geomantic_Reservoir
+    display_name: Geomantic Reservoir
+    at:           [173.098, 3.643, -386.962]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 112
+      moving:     1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17388054:
+    script: NPC[216]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17388055:
+    script: NPC[217]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17388056:
+    script:       Survival_Guide
+    display_name: Survival Guide
+    at:           [223.000, -0.700, -10.000]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:  1
+      name_vis:      32
+      moving:        22
+    status:   normal
+    widescan: true
+    content:  SURVIVAL_GUIDE
+
+  17388057:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112

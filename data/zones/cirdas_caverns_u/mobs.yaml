@@ -1,0 +1,1766 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+spawns:
+  17887233:
+    script: Rufescent_Bat
+  17887234:
+    script: Rufescent_Bat
+  17887235:
+    script: Doline_Bats
+  17887236:
+    script: Doline_Bats
+  17887237:
+    script: Doline_Bats
+  17887238:
+    script: Doline_Bats
+  17887239:
+    script: Estavelle_Acuex
+  17887240:
+    script: Estavelle_Acuex
+  17887241:
+    script: Estavelle_Acuex
+  17887242:
+    script: Estavelle_Acuex
+  17887243:
+    script: Funguar_Abrupta
+  17887244:
+    script: Funguar_Abrupta
+  17887245:
+    script: Abrupta_Spawn
+  17887246:
+    script: Abrupta_Spawn
+  17887247:
+    script: Abrupta_Spawn
+  17887248:
+    script: Estavelle_Acuex
+  17887249:
+    script: Estavelle_Acuex
+  17887250:
+    script: Estavelle_Acuex
+  17887251:
+    script: Estavelle_Acuex
+  17887252:
+    script: Estavelle_Acuex
+  17887253:
+    script: Brumeblister_Obdella
+  17887254:
+    script: Brumeblister_Obdella
+  17887255:
+    script: Pustulous_Obdella
+  17887256:
+    script: Pustulous_Obdella
+  17887257:
+    script: Recalcitrant_Umbril
+  17887258:
+    script: Recalcitrant_Umbril
+  17887259:
+    script: Recalcitrant_Umbril
+  17887260:
+    script: Recalcitrant_Umbril
+  17887261:
+    script: Recalcitrant_Umbril
+  17887262:
+    script: Recalcitrant_Umbril
+  17887263:
+    script: Crustguzzler_Worm
+  17887264:
+    script: Crustguzzler_Worm
+  17887265:
+    script: Recalcitrant_Umbril
+  17887266:
+    script: Recalcitrant_Umbril
+  17887267:
+    script: Recalcitrant_Umbril
+  17887268:
+    script: Recalcitrant_Umbril
+  17887269:
+    script: Pustulous_Obdella
+  17887270:
+    script: Pustulous_Obdella
+  17887271:
+    script: Pustulous_Obdella
+  17887272:
+    script: Pustulous_Obdella
+  17887273:
+    script: Pungent_Fungus
+  17887274:
+    script: Pungent_Fungus
+  17887275:
+    script: Bloodcurdling_Acuex
+  17887276:
+    script: Bloodcurdling_Acuex
+  17887277:
+    script: Bloodcurdling_Acuex
+  17887278:
+    script: Abrupta_Spawn
+  17887279:
+    script: Abrupta_Spawn
+  17887280:
+    script: Abrupta_Spawn
+  17887281:
+    script: Abrupta_Spawn
+  17887282:
+    script: Abrupta_Spawn
+  17887283:
+    script: Sanguinary_Clot
+  17887284:
+    script: Doline_Bats
+  17887285:
+    script: Doline_Bats
+  17887286:
+    script: Doline_Bats
+  17887287:
+    script: Doline_Bats
+  17887288:
+    script: Alruna
+  17887289:
+    script: Alruna
+  17887290:
+    script: Shadeshawl_Obdella
+  17887291:
+    script: Shadeshawl_Obdella
+  17887292:
+    script: Shadeshawl_Obdella
+  17887293:
+    script: Nightmist_Umbril
+  17887294:
+    script: Nightmist_Umbril
+  17887295:
+    script: Nightmist_Umbril
+  17887296:
+    script: Nightmist_Umbril
+  17887297:
+    script: Nightmist_Umbril
+  17887298:
+    script: Emberblaze_Spider
+  17887299:
+    script: Sootscuttle_Spider
+  17887300:
+    script: Sootscuttle_Spider
+  17887301:
+    script: Sootscuttle_Spider
+  17887302:
+    script: Sootscuttle_Spider
+  17887303:
+    script: Sootscuttle_Spider
+  17887304:
+    script: Hornblende_Lizard
+  17887305:
+    script: Hornblende_Lizard
+  17887306:
+    script: Wrinkled_Toad
+  17887307:
+    script: Wrinkled_Toad
+  17887308:
+    script: Wrinkled_Toad
+  17887309:
+    script: Wrinkled_Toad
+  17887310:
+    script: Wrinkled_Toad
+  17887311:
+    script: Mistgorger_Lizard
+  17887312:
+    script: Mistgorger_Lizard
+  17887313:
+    script: Mistgorger_Lizard
+  17887314:
+    script: Flinthaze_Umbril
+  17887315:
+    script: Pungent_Fungus
+  17887316:
+    script: Pungent_Fungus
+  17887317:
+    script: Pungent_Fungus
+  17887318:
+    script: Pungent_Fungus
+  17887319:
+    script: Pungent_Fungus
+  17887320:
+    script: Pungent_Fungus
+  17887321:
+    script: Cinnabar_Spider
+  17887322:
+    script: Cinnabar_Spider
+  17887323:
+    script: Dappled_Spider
+  17887324:
+    script: Dappled_Spider
+  17887325:
+    script: Dappled_Spider
+  17887326:
+    script: Dappled_Spider
+  17887327:
+    script: Mistgorger_Lizard
+  17887328:
+    script: Mistgorger_Lizard
+  17887329:
+    script: Mistgorger_Lizard
+  17887330:
+    script: Mistgorger_Lizard
+  17887331:
+    script: Faultline_Acuex
+  17887332:
+    script: Cenote_Acuex
+  17887333:
+    script: Cenote_Acuex
+  17887334:
+    script: Cenote_Acuex
+  17887335:
+    script: Cenote_Acuex
+  17887336:
+    script: Cenote_Acuex
+  17887337:
+    script: Cenote_Acuex
+  17887338:
+    script: Cenote_Acuex
+  17887339:
+    script: Catacomb_Marolith
+  17887340:
+    script: Catacomb_Marolith
+  17887341:
+    script: Sepulchral_Lizard
+  17887342:
+    script: Sepulchral_Lizard
+  17887343:
+    script: Sepulchral_Lizard
+  17887344:
+    script: Sepulchral_Lizard
+  17887345:
+    script: Dappled_Spider
+  17887346:
+    script: Dappled_Spider
+  17887347:
+    script: Dappled_Spider
+  17887348:
+    script: Dappled_Spider
+  17887349:
+    script: Wartless_Toad
+  17887350:
+    script: Ulcerous_Acuex
+  17887351:
+    script: Ulcerous_Acuex
+  17887352:
+    script: Ulcerous_Acuex
+  17887353:
+    script: Ulcerous_Acuex
+  17887354:
+    script: Sepulchral_Lizard
+  17887355:
+    script: Sepulchral_Lizard
+  17887356:
+    script: Sepulchral_Lizard
+  17887357:
+    script: Sepulchral_Lizard
+  17887358:
+    script: Sepulchral_Lizard
+  17887359:
+    script: Unfettered_Twitherym
+  17887360:
+    script: Supernal_Chapuli
+  17887361:
+    script: Transcendent_Scorpion
+  17887362:
+    script: Mastop
+  17887363:
+    script: Taxet
+  17887364:
+    script: Muyingwa
+  17887365:
+    script: Fugacious_Eruca
+  17887366:
+    script: Fugacious_Eruca
+  17887367:
+    script: Fugacious_Eruca
+  17887368:
+    script: Fugacious_Eruca
+  17887369:
+    script: Fugacious_Beetle
+  17887370:
+    script: Fugacious_Beetle
+  17887371:
+    script: Fugacious_Beetle
+  17887372:
+    script: Fugacious_Diremite
+  17887373:
+    script: Fugacious_Diremite
+  17887374:
+    script: Fugacious_Diremite
+  17887375:
+    script: Fugacious_Eruca
+  17887376:
+    script: Fugacious_Eruca
+  17887377:
+    script: Fugacious_Eruca
+  17887378:
+    script: Fugacious_Eruca
+  17887379:
+    script: Fugacious_Beetle
+  17887380:
+    script: Fugacious_Beetle
+  17887381:
+    script: Fugacious_Beetle
+  17887382:
+    script: Fugacious_Luckybug
+  17887383:
+    script: Fugacious_Luckybug
+  17887384:
+    script: Fugacious_Luckybug
+  17887385:
+    script: Fugacious_Beetle
+  17887386:
+    script: Fugacious_Beetle
+  17887387:
+    script: Fugacious_Diremite
+  17887388:
+    script: Fugacious_Diremite
+  17887389:
+    script: Fugacious_Diremite
+  17887390:
+    script: Fugacious_Diremite
+  17887391:
+    script: Fugacious_Luckybug
+  17887392:
+    script: Fugacious_Luckybug
+  17887393:
+    script: Fugacious_Luckybug
+  17887394:
+    script: Fugacious_Luckybug
+  17887395:
+    script: Faded_Craklaw
+  17887396:
+    script: Aberrant_Uragnite
+  17887397:
+    script: Divagating_Jagil
+  17887398:
+    script: Nerrivik
+  17887399:
+    script: Krabakarpo
+  17887400:
+    script: Dakuwaqa
+  17887401:
+    script: Fugacious_Crab
+  17887402:
+    script: Fugacious_Crab
+  17887403:
+    script: Fugacious_Crab
+  17887404:
+    script: Fugacious_Crab
+  17887405:
+    script: Fugacious_Kraken
+  17887406:
+    script: Fugacious_Kraken
+  17887407:
+    script: Fugacious_Kraken
+  17887408:
+    script: Fugacious_Toad
+  17887409:
+    script: Fugacious_Toad
+  17887410:
+    script: Fugacious_Toad
+  17887411:
+    script: Fugacious_Crab
+  17887412:
+    script: Fugacious_Crab
+  17887413:
+    script: Fugacious_Crab
+  17887414:
+    script: Fugacious_Crab
+  17887415:
+    script: Fugacious_Kraken
+  17887416:
+    script: Fugacious_Kraken
+  17887417:
+    script: Fugacious_Kraken
+  17887418:
+    script: Fugacious_Crab
+  17887419:
+    script: Fugacious_Crab
+  17887420:
+    script: Fugacious_Crab
+  17887421:
+    script: Fugacious_Kraken
+  17887422:
+    script: Fugacious_Kraken
+  17887423:
+    script: Fugacious_Crab
+  17887424:
+    script: Fugacious_Crab
+  17887425:
+    script: Fugacious_Crab
+  17887426:
+    script: Fugacious_Crab
+  17887427:
+    script: Fugacious_Toad
+  17887428:
+    script: Fugacious_Toad
+  17887429:
+    script: Fugacious_Toad
+  17887430:
+    script: Fugacious_Toad
+  17887431:
+    script: Volatile_Matamata
+  17887432:
+    script: Perdurable_Raptor
+  17887433:
+    script: Shimmering_Tarichuk
+  17887434:
+    script: Tutewehiwehi
+  17887435:
+    script: Kurma
+  17887436:
+    script: Tojil
+  17887437:
+    script: Fugacious_Lizard
+  17887438:
+    script: Fugacious_Lizard
+  17887439:
+    script: Fugacious_Lizard
+  17887440:
+    script: Fugacious_Lizard
+  17887441:
+    script: Fugacious_Eft
+  17887442:
+    script: Fugacious_Eft
+  17887443:
+    script: Fugacious_Eft
+  17887444:
+    script: Fugacious_Bugard
+  17887445:
+    script: Fugacious_Bugard
+  17887446:
+    script: Fugacious_Bugard
+  17887447:
+    script: Fugacious_Lizard
+  17887448:
+    script: Fugacious_Lizard
+  17887449:
+    script: Fugacious_Lizard
+  17887450:
+    script: Fugacious_Lizard
+  17887451:
+    script: Fugacious_Eft
+  17887452:
+    script: Fugacious_Eft
+  17887453:
+    script: Fugacious_Eft
+  17887454:
+    script: Fugacious_Wivre
+  17887455:
+    script: Fugacious_Wivre
+  17887456:
+    script: Fugacious_Wivre
+  17887457:
+    script: Fugacious_Eft
+  17887458:
+    script: Fugacious_Eft
+  17887459:
+    script: Fugacious_Bugard
+  17887460:
+    script: Fugacious_Bugard
+  17887461:
+    script: Fugacious_Bugard
+  17887462:
+    script: Fugacious_Bugard
+  17887463:
+    script: Fugacious_Wivre
+  17887464:
+    script: Fugacious_Wivre
+  17887465:
+    script: Fugacious_Wivre
+  17887466:
+    script: Fugacious_Wivre
+  17887467:
+    script: Primogenial_Marolith
+    at:     [-116.000, 29.325, 220.000, 128]
+  17887468:
+    script: Ingrid
+    at:     [-120.000, 29.500, 220.000]
+  17887469:
+    script: Olaviaud
+    at:     [-113.000, 29.250, 223.000, 160]
+  17887470:
+    script: Pempoint
+    at:     [-112.949, 29.403, 219.000, 96]
+  17887471:
+    script: Gargouille_Drudge
+    at:     [-101.691, 31.148, 202.978, 158]
+  17887472:
+    script: Gargouille_Drudge
+  17887473:
+    script: Gargouille_Drudge
+  17887474:
+    script: Gargouille_Drudge
+  17887475:
+    script: Gargouille_Drudge
+    at:     [-96.817, 29.558, 215.146, 79]
+  17887476:
+    script: Gargouille_Drudge
+    at:     [-96.889, 29.455, 216.929, 39]
+  17887477:
+    script: Gargouille_Drudge
+    at:     [-102.005, 30.712, 207.989, 138]
+  17887478:
+    script: Gargouille_Drudge
+    at:     [-101.657, -101.657, 30.741, 139]
+  17887479:
+    script: Gargouille_Drudge
+    at:     [-100.176, 29.500, 220.059, 10]
+  17887480:
+    script: Gargouille_Drudge
+    at:     [-89.257, 29.190, 221.275, 150]
+  17887481:
+    script: Gargouille_Drudge
+    at:     [-90.970, 28.626, 225.087, 91]
+  17887482:
+    script: Gargouille_Drudge
+    at:     [-90.947, 28.256, 225.110, 43]
+  17887483:
+    script: Gargouille_Drudge
+  17887484:
+    script: Gargouille_Drudge
+  17887485:
+    script: Gargouille_Drudge
+  17887486:
+    script: Gargouille_Drudge
+  17887487:
+    script: Gargouille_Drudge
+  17887488:
+    script: Gargouille_Drudge
+  17887489:
+    script: Gargouille_Drudge
+  17887490:
+    script: Noble_Warrior
+    at:     [-179.000, 30.807, 440.000, 192]
+  17887491:
+    script: Darrcuiln
+    at:     [-181.000, 30.807, 439.000, 192]
+  17887492:
+    script: Arciela
+    at:     [-179.000, 30.619, 435.000, 192]
+  17887493:
+    script: Resolute_Leafkin
+    at:     [-185.000, 30.277, 437.000, 192]
+  17887494:
+    script: Resolute_Leafkin
+    at:     [-182.000, 30.799, 436.000, 192]
+  17887495:
+    script: Resolute_Leafkin
+    at:     [-175.000, 30.256, 438.500, 192]
+  17887496:
+    script: Pustulous_Umbril
+    at:     [-179.688, 19.934, 467.493, 41]
+  17887497:
+    script: Pustulous_Umbril
+    at:     [-178.115, 19.615, 465.433, 65]
+  17887498:
+    script: Pustulous_Umbril
+    at:     [-182.266, 19.482, 461.409, 65]
+  17887499:
+    script: Pustulous_Umbril
+  17887500:
+    script: Pustulous_Umbril
+  17887501:
+    script: Pustulous_Umbril
+  17887502:
+    script: Stormy_Autochthon
+  17887503:
+    script: Stormy_Autochthon
+  17887504:
+    script: Stormy_Autochthon
+  17887505:
+    script: Stormy_Autochthon
+  17887506:
+    script: Stormy_Autochthon
+  17887507:
+    script: Stormy_Autochthon
+  17887508:
+    script: Stormy_Autochthon
+  17887509:
+    script: Stormy_Autochthon
+  17887510:
+    script: Stormy_Autochthon
+  17887511:
+    script: Stormy_Autochthon
+  17887512:
+    script: Stormy_Autochthon
+  17887513:
+    script: Stormy_Autochthon
+  17887514:
+    script: Stormy_Autochthon
+  17887515:
+    script: Stormy_Autochthon
+  17887516:
+    script: Stormy_Autochthon
+  17887517:
+    script: Stormy_Autochthon
+  17887518:
+    script: Stormy_Autochthon
+  17887519:
+    script: Stormy_Autochthon
+  17887520:
+    script: Stormy_Autochthon
+  17887521:
+    script: Stormy_Autochthon
+  17887522:
+    script: Stormy_Autochthon
+  17887523:
+    script: Stormy_Autochthon
+  17887524:
+    script: Stormy_Autochthon
+  17887525:
+    script: Stormy_Autochthon
+  17887526:
+    script: Stormy_Autochthon
+  17887527:
+    script: Stormy_Autochthon
+  17887528:
+    script: Stormy_Autochthon
+  17887529:
+    script: Stormy_Autochthon
+  17887530:
+    script: Stormy_Autochthon
+  17887531:
+    script: Stormy_Autochthon
+  17887532:
+    script: Stormy_Autochthon
+  17887533:
+    script: Stormy_Autochthon
+  17887534:
+    script: Stormy_Autochthon
+  17887535:
+    script: Stormy_Autochthon
+  17887536:
+    script: Stormy_Autochthon
+  17887537:
+    script: Stormy_Autochthon
+  17887538:
+    script: Stormy_Autochthon
+  17887539:
+    script: Stormy_Autochthon
+  17887540:
+    script: Stormy_Autochthon
+  17887541:
+    script: Stormy_Autochthon
+  17887542:
+    script: Stormy_Autochthon
+  17887543:
+    script: Stormy_Autochthon
+  17887544:
+    script: Stormy_Autochthon
+  17887545:
+    script: Stormy_Autochthon
+  17887546:
+    script: Stormy_Autochthon
+  17887547:
+    script: Stormy_Autochthon
+  17887548:
+    script: Stormy_Autochthon
+  17887549:
+    script: Stormy_Autochthon
+  17887550:
+    script: Stormy_Autochthon
+  17887551:
+    script: Stormy_Autochthon
+  17887552:
+    script: Stormy_Autochthon
+  17887553:
+    script: Stormy_Autochthon
+  17887554:
+    script: Stormy_Autochthon
+  17887555:
+    script: Stormy_Autochthon
+  17887556:
+    script: Stormy_Autochthon
+  17887557:
+    script: Stormy_Autochthon
+  17887558:
+    script: Stormy_Autochthon
+  17887559:
+    script: Stormy_Autochthon
+  17887560:
+    script: Stormy_Autochthon
+  17887561:
+    script: Stormy_Autochthon
+  17887562:
+    script: Stormy_Autochthon
+  17887563:
+    script: Stormy_Autochthon
+  17887564:
+    script: Stormy_Autochthon
+  17887565:
+    script: Stormy_Autochthon
+  17887566:
+    script: Stormy_Autochthon
+  17887567:
+    script: Stormy_Autochthon
+  17887568:
+    script: Stormy_Autochthon
+  17887569:
+    script: Stormy_Autochthon
+  17887570:
+    script: Stormy_Autochthon
+  17887571:
+    script: Stormy_Autochthon
+  17887572:
+    script: Stormy_Autochthon
+  17887573:
+    script: Stormy_Autochthon
+  17887574:
+    script: Stormy_Autochthon
+  17887575:
+    script: Stormy_Autochthon
+  17887576:
+    script: Stormy_Autochthon
+  17887577:
+    script: Stormy_Autochthon
+  17887578:
+    script: Stormy_Autochthon
+  17887579:
+    script: Stormy_Autochthon
+  17887580:
+    script: Stormy_Autochthon
+  17887581:
+    script: Stormy_Autochthon
+  17887582:
+    script: Stormy_Autochthon
+  17887583:
+    script: Stormy_Autochthon
+  17887584:
+    script: Stormy_Autochthon
+  17887585:
+    script: Stormy_Autochthon
+  17887586:
+    script: Stormy_Autochthon
+  17887587:
+    script: Stormy_Autochthon
+  17887588:
+    script: Stormy_Autochthon
+  17887589:
+    script: Stormy_Autochthon
+  17887590:
+    script: Stormy_Autochthon
+  17887591:
+    script: Stormy_Autochthon
+  17887592:
+    script: Stormy_Autochthon
+  17887593:
+    script: Stormy_Autochthon
+  17887594:
+    script: Stormy_Autochthon
+  17887595:
+    script: Stormy_Autochthon
+  17887596:
+    script: Stormy_Autochthon
+  17887597:
+    script: Stormy_Autochthon
+  17887598:
+    script: Stormy_Autochthon
+  17887599:
+    script: Stormy_Autochthon
+  17887600:
+    script: Stormy_Autochthon
+  17887601:
+    script: Stormy_Autochthon
+  17887602:
+    script: Stormy_Autochthon
+  17887603:
+    script: Stormy_Autochthon
+  17887604:
+    script: Stormy_Autochthon
+  17887605:
+    script: Stormy_Autochthon
+  17887606:
+    script: Stormy_Autochthon
+  17887607:
+    script: Stormy_Autochthon
+  17887608:
+    script: Stormy_Autochthon
+  17887609:
+    script: Stormy_Autochthon
+  17887610:
+    script: Stormy_Autochthon
+  17887611:
+    script: Stormy_Autochthon
+  17887612:
+    script: Stormy_Autochthon
+  17887613:
+    script: Stormy_Autochthon
+  17887614:
+    script: Stormy_Autochthon
+  17887615:
+    script: Stormy_Autochthon
+  17887616:
+    script: Stormy_Autochthon
+  17887617:
+    script: Stormy_Autochthon
+  17887618:
+    script: Stormy_Autochthon
+  17887619:
+    script: Stormy_Autochthon
+  17887620:
+    script: Stormy_Autochthon
+  17887621:
+    script: Stormy_Autochthon
+  17887622:
+    script: Stormy_Autochthon
+  17887623:
+    script: Stormy_Autochthon
+  17887624:
+    script: Windrender
+  17887625:
+    script: Aconite_Sibilus
+  17887626:
+    script: Leering_Akoman
+  17887627:
+    script: Weedwomp_Lapinion
+  17887628:
+    script: Partizan_Wasp
+  17887629:
+    script: Harmonious_Heartwing
+  17887630:
+    script: Balamors_Adumbration
+  17887631:
+    script: Mistmaw_Tawhiri
+  17887632:
+    script: Mistmaw_Xelhua
+  17887633:
+    script: Mistmaw_Cacus
+  17887634:
+    script: Mistmaw_Aatxe
+  17887635:
+    script: Velkk_Shadesifter
+  17887636:
+    script: Velkk_Factotum
+  17887637:
+    script: Velkk_Skullgrinder
+  17887638:
+    script: Mudmange_Lapinion
+  17887639:
+    script: Mudmange_Lapinion
+  17887640:
+    script: Velkk_Prophet
+  17887641:
+    script: Velkk_Skullgrinder
+  17887642:
+    script: Velkk_Shadesifter
+  17887643:
+    script: Mudmange_Lapinion
+  17887644:
+    script: Mudmange_Lapinion
+  17887645:
+    script: Velkk_Skullgrinder
+  17887646:
+    script: Velkk_Skullgrinder
+  17887647:
+    script: Velkk_Skullgrinder
+  17887648:
+    script: Mudmange_Lapinion
+  17887649:
+    script: Mudmange_Lapinion
+  17887650:
+    script: Velkk_Shadesifter
+  17887651:
+    script: Velkk_Shadesifter
+  17887652:
+    script: Velkk_Shadesifter
+  17887653:
+    script: Velkk_Skullgrinder
+  17887654:
+    script: Velkk_Skullgrinder
+  17887655:
+    script: Velkk_Skullgrinder
+  17887656:
+    script: Velkk_Campaigner
+  17887657:
+    script: Velkk_Campaigner
+  17887658:
+    script: Mudmange_Lapinion
+  17887659:
+    script: Trunktusk_Razz
+  17887660:
+    script: Trunktusk_Razz
+  17887661:
+    script: Velkk_Factotum
+  17887662:
+    script: Velkk_Factotum
+  17887663:
+    script: Mudmange_Lapinion
+  17887664:
+    script: Trunktusk_Razz
+  17887665:
+    script: Trunktusk_Razz
+  17887666:
+    script: Velkk_Spellslinger
+  17887667:
+    script: Velkk_Spellslinger
+  17887668:
+    script: Mudmange_Lapinion
+  17887669:
+    script: Trunktusk_Razz
+  17887670:
+    script: Trunktusk_Razz
+  17887671:
+    script: Velkk_Campaigner
+  17887672:
+    script: Velkk_Campaigner
+  17887673:
+    script: Mudmange_Lapinion
+  17887674:
+    script: Trunktusk_Razz
+  17887675:
+    script: Trunktusk_Razz
+  17887676:
+    script: Velkk_Serpentslasher
+  17887677:
+    script: Velkks_Puk
+  17887678:
+    script: Velkk_Serpentslasher
+  17887679:
+    script: Velkks_Puk
+  17887680:
+    script: Mudmange_Lapinion
+  17887681:
+    script: Trunktusk_Razz
+  17887682:
+    script: Trunktusk_Razz
+  17887683:
+    script: Velkk_Spellslinger
+  17887684:
+    script: Velkk_Factotum
+  17887685:
+    script: Velkk_Campaigner
+  17887686:
+    script: Trunktusk_Razz
+  17887687:
+    script: Trunktusk_Razz
+  17887688:
+    script: Trunktusk_Razz
+  17887689:
+    script: Trunktusk_Razz
+  17887690:
+    script: Trunktusk_Razz
+  17887691:
+    script: Trunktusk_Razz
+  17887692:
+    script: Trunktusk_Razz
+  17887693:
+    script: Trunktusk_Razz
+  17887694:
+    script: Trunktusk_Razz
+  17887695:
+    script: Trunktusk_Razz
+  17887696:
+    script: Trunktusk_Razz
+  17887697:
+    script: Trunktusk_Razz
+  17887698:
+    script: Velkk_Serpentslasher
+  17887699:
+    script: Velkks_Puk
+  17887700:
+    script: Velkk_Spellslinger
+  17887701:
+    script: Velkk_Skullgrinder
+  17887702:
+    script: Velkk_Prophet
+  17887703:
+    script: Velkk_Spellslinger
+  17887704:
+    script: Velkk_Factotum
+  17887705:
+    script: Velkk_Campaigner
+  17887706:
+    script: Velkk_Shadesifter
+  17887707:
+    script: Velkk_Prophet
+  17887708:
+    script: Velkk_Spellslinger
+  17887709:
+    script: Velkk_Factotum
+  17887710:
+    script: Velkk_Skullgrinder
+  17887711:
+    script: Velkk_Prophet
+  17887712:
+    script: Velkk_Spellslinger
+  17887713:
+    script: Velkk_Campaigner
+  17887714:
+    script: Velkk_Shadesifter
+  17887715:
+    script: Velkk_Serpentslasher
+  17887716:
+    script: Velkks_Puk
+  17887717:
+    script: Adit_Crab
+  17887718:
+    script: Adit_Crab
+  17887719:
+    script: Velkk_Spellslinger
+  17887720:
+    script: Adit_Crab
+  17887721:
+    script: Adit_Crab
+  17887722:
+    script: Velkk_Factotum
+  17887723:
+    script: Bunkerback_Craklaw
+  17887724:
+    script: Bunkerback_Craklaw
+  17887725:
+    script: Bunkerback_Craklaw
+  17887726:
+    script: Velkk_Spellslinger
+  17887727:
+    script: Velkk_Factotum
+  17887728:
+    script: Velkk_Shadesifter
+  17887729:
+    script: Velkk_Spellslinger
+  17887730:
+    script: Velkk_Spellslinger
+  17887731:
+    script: Velkk_Spellslinger
+  17887732:
+    script: Velkk_Prophet
+  17887733:
+    script: Velkk_Prophet
+  17887734:
+    script: Velkk_Prophet
+  17887735:
+    script: Velkk_Skullgrinder
+  17887736:
+    script: Velkk_Skullgrinder
+  17887737:
+    script: Velkk_Skullgrinder
+  17887738:
+    script: Adit_Crab
+  17887739:
+    script: Adit_Crab
+  17887740:
+    script: Bunkerback_Craklaw
+  17887741:
+    script: Bunkerback_Craklaw
+  17887742:
+    script: Adit_Crab
+  17887743:
+    script: Adit_Crab
+  17887744:
+    script: Bunkerback_Craklaw
+  17887745:
+    script: Bunkerback_Craklaw
+  17887746:
+    script: Adit_Crab
+  17887747:
+    script: Adit_Crab
+  17887748:
+    script: Bunkerback_Craklaw
+  17887749:
+    script: Bunkerback_Craklaw
+  17887750:
+    script: Adit_Crab
+  17887751:
+    script: Adit_Crab
+  17887752:
+    script: Bunkerback_Craklaw
+  17887753:
+    script: Bunkerback_Craklaw
+  17887754:
+    script: Velkk_Shadesifter
+  17887755:
+    script: Velkk_Shadesifter
+  17887756:
+    script: Velkk_Shadesifter
+  17887757:
+    script: Adit_Crab
+  17887758:
+    script: Adit_Crab
+  17887759:
+    script: Bunkerback_Craklaw
+  17887760:
+    script: Bunkerback_Craklaw
+  17887761:
+    script: Adit_Crab
+  17887762:
+    script: Adit_Crab
+  17887763:
+    script: Bunkerback_Craklaw
+  17887764:
+    script: Bunkerback_Craklaw
+  17887765:
+    script: Adit_Crab
+  17887766:
+    script: Adit_Crab
+  17887767:
+    script: Bunkerback_Craklaw
+  17887768:
+    script: Bunkerback_Craklaw
+  17887769:
+    script: Adit_Crab
+  17887770:
+    script: Adit_Crab
+  17887771:
+    script: Bunkerback_Craklaw
+  17887772:
+    script: Bunkerback_Craklaw
+  17887773:
+    script: Velkk_Shadesifter
+  17887774:
+    script: Velkk_Shadesifter
+  17887775:
+    script: Velkk_Shadesifter
+  17887776:
+    script: Velkk_Shadesifter
+  17887777:
+    script: Velkk_Campaigner
+  17887778:
+    script: Velkk_Campaigner
+  17887779:
+    script: Velkk_Campaigner
+  17887780:
+    script: Bellicosiraptor
+  17887781:
+    script: Bellicosiraptor
+  17887782:
+    script: Bellicosiraptor
+  17887783:
+    script: Velkk_Spellslinger
+  17887784:
+    script: Velkk_Prophet
+  17887785:
+    script: Bellicosiraptor
+  17887786:
+    script: Bellicosiraptor
+  17887787:
+    script: Bellicosiraptor
+  17887788:
+    script: Velkk_Spellslinger
+  17887789:
+    script: Velkk_Prophet
+  17887790:
+    script: Velkk_Skullgrinder
+  17887791:
+    script: Velkk_Skullgrinder
+  17887792:
+    script: Velkk_Skullgrinder
+  17887793:
+    script: Velkk_Factotum
+  17887794:
+    script: Velkk_Factotum
+  17887795:
+    script: Velkk_Factotum
+  17887796:
+    script: Hulking_Matamata
+  17887797:
+    script: Hulking_Matamata
+  17887798:
+    script: Hulking_Matamata
+  17887799:
+    script: Velkk_Campaigner
+  17887800:
+    script: Velkk_Serpentslasher
+  17887801:
+    script: Velkks_Puk
+  17887802:
+    script: Hulking_Matamata
+  17887803:
+    script: Hulking_Matamata
+  17887804:
+    script: Hulking_Matamata
+  17887805:
+    script: Velkk_Campaigner
+  17887806:
+    script: Velkk_Serpentslasher
+  17887807:
+    script: Velkks_Puk
+  17887808:
+    script: Velkk_Campaigner
+  17887809:
+    script: Velkk_Campaigner
+  17887810:
+    script: Velkk_Campaigner
+  17887811:
+    script: Velkk_Factotum
+  17887812:
+    script: Velkk_Factotum
+  17887813:
+    script: Velkk_Factotum
+  17887814:
+    script: Bellicosiraptor
+  17887815:
+    script: Hulking_Matamata
+  17887816:
+    script: Velkk_Prophet
+  17887817:
+    script: Bellicosiraptor
+  17887818:
+    script: Hulking_Matamata
+  17887819:
+    script: Velkk_Prophet
+  17887820:
+    script: Velkk_Spellslinger
+  17887821:
+    script: Velkk_Spellslinger
+  17887822:
+    script: Velkk_Spellslinger
+  17887823:
+    script: Velkk_Spellslinger
+  17887824:
+    script: Velkk_Spellslinger
+  17887825:
+    script: Velkk_Spellslinger
+  17887826:
+    script: Velkk_Campaigner
+  17887827:
+    script: Velkk_Campaigner
+  17887828:
+    script: Velkk_Campaigner
+  17887829:
+    script: Bellicosiraptor
+  17887830:
+    script: Bellicosiraptor
+  17887831:
+    script: Hulking_Matamata
+  17887832:
+    script: Hulking_Matamata
+  17887833:
+    script: Velkk_Campaigner
+  17887834:
+    script: Velkk_Campaigner
+  17887835:
+    script: Velkk_Campaigner
+  17887836:
+    script: Bellicosiraptor
+  17887837:
+    script: Bellicosiraptor
+  17887838:
+    script: Hulking_Matamata
+  17887839:
+    script: Hulking_Matamata
+  17887840:
+    script: Velkk_Shadesifter
+  17887841:
+    script: Velkk_Skullgrinder
+  17887842:
+    script: Velkk_Spellslinger
+  17887843:
+    script: Wasptrap
+  17887844:
+    script: Wasptrap
+  17887845:
+    script: Burbling_Snapweed
+  17887846:
+    script: Burbling_Snapweed
+  17887847:
+    script: Velkk_Factotum
+  17887848:
+    script: Velkk_Prophet
+  17887849:
+    script: Wasptrap
+  17887850:
+    script: Wasptrap
+  17887851:
+    script: Burbling_Snapweed
+  17887852:
+    script: Burbling_Snapweed
+  17887853:
+    script: Velkk_Serpentslasher
+  17887854:
+    script: Velkks_Puk
+  17887855:
+    script: Velkk_Shadesifter
+  17887856:
+    script: Velkk_Prophet
+  17887857:
+    script: Velkk_Spellslinger
+  17887858:
+    script: Velkk_Factotum
+  17887859:
+    script: Velkk_Prophet
+  17887860:
+    script: Velkk_Spellslinger
+  17887861:
+    script: Velkk_Factotum
+  17887862:
+    script: Velkk_Campaigner
+  17887863:
+    script: Velkk_Shadesifter
+  17887864:
+    script: Velkk_Skullgrinder
+  17887865:
+    script: Velkk_Spellslinger
+  17887866:
+    script: Velkk_Factotum
+  17887867:
+    script: Velkk_Campaigner
+  17887868:
+    script: Velkk_Prophet
+  17887869:
+    script: Velkk_Campaigner
+  17887870:
+    script: Velkk_Skullgrinder
+  17887871:
+    script: Velkk_Campaigner
+  17887872:
+    script: Velkk_Campaigner
+  17887873:
+    script: Velkk_Campaigner
+  17887874:
+    script: Burbling_Snapweed
+  17887875:
+    script: Burbling_Snapweed
+  17887876:
+    script: Burbling_Snapweed
+  17887877:
+    script: Velkk_Campaigner
+  17887878:
+    script: Burbling_Snapweed
+  17887879:
+    script: Burbling_Snapweed
+  17887880:
+    script: Burbling_Snapweed
+  17887881:
+    script: Velkk_Campaigner
+  17887882:
+    script: Burbling_Snapweed
+  17887883:
+    script: Burbling_Snapweed
+  17887884:
+    script: Burbling_Snapweed
+  17887885:
+    script: Velkk_Campaigner
+  17887886:
+    script: Velkk_Shadesifter
+  17887887:
+    script: Velkk_Skullgrinder
+  17887888:
+    script: Velkk_Spellslinger
+  17887889:
+    script: Velkk_Factotum
+  17887890:
+    script: Velkk_Shadesifter
+  17887891:
+    script: Velkk_Skullgrinder
+  17887892:
+    script: Velkk_Prophet
+  17887893:
+    script: Velkk_Spellslinger
+  17887894:
+    script: Velkk_Factotum
+  17887895:
+    script: Velkk_Campaigner
+  17887896:
+    script: Velkk_Shadesifter
+  17887897:
+    script: Velkk_Skullgrinder
+  17887898:
+    script: Velkk_Skullgrinder
+  17887899:
+    script: Velkk_Skullgrinder
+  17887900:
+    script: Velkk_Prophet
+  17887901:
+    script: Velkk_Prophet
+  17887902:
+    script: Velkk_Prophet
+  17887903:
+    script: Garrulous_Colibri
+  17887904:
+    script: Garrulous_Colibri
+  17887905:
+    script: Garrulous_Colibri
+  17887906:
+    script: Velkk_Spellslinger
+  17887907:
+    script: Velkk_Spellslinger
+  17887908:
+    script: Ravenous_Tulfaire
+  17887909:
+    script: Ravenous_Tulfaire
+  17887910:
+    script: Ravenous_Tulfaire
+  17887911:
+    script: Velkk_Factotum
+  17887912:
+    script: Velkk_Factotum
+  17887913:
+    script: Ravenous_Tulfaire
+  17887914:
+    script: Ravenous_Tulfaire
+  17887915:
+    script: Ravenous_Tulfaire
+  17887916:
+    script: Velkk_Campaigner
+  17887917:
+    script: Velkk_Campaigner
+  17887918:
+    script: Garrulous_Colibri
+  17887919:
+    script: Garrulous_Colibri
+  17887920:
+    script: Garrulous_Colibri
+  17887921:
+    script: Velkk_Shadesifter
+  17887922:
+    script: Velkk_Shadesifter
+  17887923:
+    script: Velkk_Serpentslasher
+  17887924:
+    script: Velkks_Puk
+  17887925:
+    script: Velkk_Serpentslasher
+  17887926:
+    script: Velkks_Puk
+  17887927:
+    script: Velkk_Shadesifter
+  17887928:
+    script: Velkk_Shadesifter
+  17887929:
+    script: Velkk_Shadesifter
+  17887930:
+    script: Velkk_Spellslinger
+  17887931:
+    script: Velkk_Spellslinger
+  17887932:
+    script: Velkk_Spellslinger
+  17887933:
+    script: Velkk_Factotum
+  17887934:
+    script: Velkk_Factotum
+  17887935:
+    script: Velkk_Factotum
+  17887936:
+    script: Velkk_Skullgrinder
+  17887937:
+    script: Velkk_Prophet
+  17887938:
+    script: Velkk_Prophet
+  17887939:
+    script: Velkk_Spellslinger
+  17887940:
+    script: Velkk_Spellslinger
+  17887941:
+    script: Velkk_Factotum
+  17887942:
+    script: Stoneripper_Chapuli
+  17887943:
+    script: Stoneripper_Chapuli
+  17887944:
+    script: Velkk_Campaigner
+  17887945:
+    script: Velkk_Shadesifter
+  17887946:
+    script: Stoneripper_Chapuli
+  17887947:
+    script: Stoneripper_Chapuli
+  17887948:
+    script: Velkk_Serpentslasher
+  17887949:
+    script: Velkks_Puk
+  17887950:
+    script: Velkk_Skullgrinder
+  17887951:
+    script: Velkk_Factotum
+  17887952:
+    script: Velkk_Campaigner
+  17887953:
+    script: Velkk_Campaigner
+  17887954:
+    script: Velkk_Shadesifter
+  17887955:
+    script: Velkk_Shadesifter
+  17887956:
+    script: Velkk_Serpentslasher
+  17887957:
+    script: Velkks_Puk
+  17887958:
+    script: Prickly_Wasp
+  17887959:
+    script: Prickly_Wasp
+  17887960:
+    script: Prickly_Wasp
+  17887961:
+    script: Prickly_Wasp
+  17887962:
+    script: Velkk_Spellslinger
+  17887963:
+    script: Velkk_Factotum
+  17887964:
+    script: Velkk_Spellslinger
+  17887965:
+    script: Velkk_Spellslinger
+  17887966:
+    script: Velkk_Factotum
+  17887967:
+    script: Velkk_Factotum
+  17887968:
+    script: Velkk_Factotum
+  17887969:
+    script: Velkk_Prophet
+  17887970:
+    script: Velkk_Campaigner
+  17887971:
+    script: Velkk_Campaigner
+  17887972:
+    script: Velkk_Shadesifter
+  17887973:
+    script: Velkk_Shadesifter
+  17887974:
+    script: Prickly_Wasp
+  17887975:
+    script: Prickly_Wasp
+  17887976:
+    script: Stoneripper_Chapuli
+  17887977:
+    script: Stoneripper_Chapuli
+  17887978:
+    script: Prickly_Wasp
+  17887979:
+    script: Prickly_Wasp
+  17887980:
+    script: Stoneripper_Chapuli
+  17887981:
+    script: Stoneripper_Chapuli
+  17887982:
+    script: Velkk_Skullgrinder
+  17887983:
+    script: Velkk_Prophet
+  17887984:
+    script: Velkk_Spellslinger
+  17887985:
+    script: Velkk_Factotum
+  17887986:
+    script: Velkk_Campaigner
+  17887987:
+    script: Velkk_Serpentslasher
+  17887988:
+    script: Velkks_Puk
+  17887989:
+    script: Ymmr-Ulvid_Gloomlight
+  17887990:
+    script: Brawny_Adherent
+  17887991:
+    script: Steadfast_Adherent
+  17887992:
+    script: Occult_Adherent
+  17887993:
+    script: Furtive_Adherent
+  17887994:
+    script: Insidious_Adherent
+  17887995:
+    script: Fleet_Adherent
+  17887996:
+    script: Martial_Adherent
+  17887997:
+    script: Velkk_Prophet
+  17887998:
+    script: Velkk_Spellslinger
+  17887999:
+    script: Velkk_Factotum
+  17888000:
+    script: Velkk_Campaigner
+  17888001:
+    script: Velkk_Shadesifter
+  17888002:
+    script: Velkk_Serpentslasher
+  17888003:
+    script: Velkks_Puk
+  17888004:
+    script: Durs-Vike_Deathspell
+  17888005:
+    script: Steadfast_Adherent
+  17888006:
+    script: Occult_Adherent
+  17888007:
+    script: Hexbreaking_Adherent
+  17888008:
+    script: Furtive_Adherent
+  17888009:
+    script: Insidious_Adherent
+  17888010:
+    script: Honed_Adherent
+  17888011:
+    script: Martial_Adherent
+  17888012:
+    script: Velkk_Skullgrinder
+  17888013:
+    script: Velkk_Prophet
+  17888014:
+    script: Velkk_Factotum
+  17888015:
+    script: Velkk_Campaigner
+  17888016:
+    script: Velkk_Shadesifter
+  17888017:
+    script: Velkk_Serpentslasher
+  17888018:
+    script: Velkks_Puk
+  17888019:
+    script: Ignor-Mnt_Stealthslayer
+  17888020:
+    script: Brawny_Adherent
+  17888021:
+    script: Steadfast_Adherent
+  17888022:
+    script: Occult_Adherent
+  17888023:
+    script: Furtive_Adherent
+  17888024:
+    script: Insidious_Adherent
+  17888025:
+    script: Fleet_Adherent
+  17888026:
+    script: Martial_Adherent
+  17888027:
+    script: Velkk_Skullgrinder
+  17888028:
+    script: Velkk_Prophet
+  17888029:
+    script: Velkk_Spellslinger
+  17888030:
+    script: Velkk_Factotum
+  17888031:
+    script: Velkk_Campaigner
+  17888032:
+    script: Velkk_Shadesifter
+  17888033:
+    script: Tryl-Wuj_Wingrip
+  17888034:
+    script: Tryl-Wujs_Peapuk
+  17888035:
+    script: Tryl-Wujs_Peapuk
+  17888036:
+    script: Tryl-Wujs_Peapuk
+  17888037:
+    script: Tryl-Wujs_Peapuk
+  17888038:
+    script: Tryl-Wujs_Peapuk
+  17888039:
+    script: Tryl-Wujs_Peapuk
+  17888040:
+    script: Brawny_Adherent
+  17888041:
+    script: Steadfast_Adherent
+  17888042:
+    script: Occult_Adherent
+  17888043:
+    script: Furtive_Adherent
+  17888044:
+    script: Insidious_Adherent
+  17888045:
+    script: Fleet_Adherent
+  17888046:
+    script: Martial_Adherent
+  17888047:
+    script: Velkk_Skullgrinder
+  17888048:
+    script: Velkk_Spellslinger
+  17888049:
+    script: Velkk_Factotum
+  17888050:
+    script: Velkk_Campaigner
+  17888051:
+    script: Velkk_Shadesifter
+  17888052:
+    script: Velkk_Serpentslasher
+  17888053:
+    script: Velkks_Puk
+  17888054:
+    script: Liij-Vok_Waxwane
+  17888055:
+    script: Steadfast_Adherent
+  17888056:
+    script: Occult_Adherent
+  17888057:
+    script: Hexbreaking_Adherent
+  17888058:
+    script: Furtive_Adherent
+  17888059:
+    script: Insidious_Adherent
+  17888060:
+    script: Honed_Adherent
+  17888061:
+    script: Martial_Adherent
+  17888062:
+    script: Velkk_Skullgrinder
+  17888063:
+    script: Velkk_Prophet
+  17888064:
+    script: Velkk_Spellslinger
+  17888065:
+    script: Velkk_Factotum
+  17888066:
+    script: Velkk_Campaigner
+  17888067:
+    script: Velkk_Shadesifter
+  17888068:
+    script: Velkk_Serpentslasher
+  17888069:
+    script: Velkks_Puk
+  17888070:
+    script: Velkk_Skullgrinder
+  17888071:
+    script: Velkk_Prophet
+  17888072:
+    script: Velkk_Spellslinger
+  17888073:
+    script: Velkk_Factotum
+  17888074:
+    script: Velkk_Campaigner
+  17888075:
+    script: Velkk_Shadesifter
+  17888076:
+    script: Velkk_Serpentslasher
+  17888077:
+    script: Velkks_Puk
+  17888078:
+    script: Velkk_Skullgrinder
+  17888079:
+    script: Velkk_Prophet
+  17888080:
+    script: Velkk_Spellslinger
+  17888081:
+    script: Velkk_Factotum
+  17888082:
+    script: Velkk_Campaigner
+  17888083:
+    script: Velkk_Shadesifter
+  17888084:
+    script: Velkk_Serpentslasher
+  17888085:
+    script: Velkks_Puk
+  17888086:
+    script: Brash_Gramk-Droog
+  17888087:
+    script: Gramk-Droog
+  17888088:
+    script: Vanquisher_Gramk-Droog
+  17888089:
+    script: Brawny_Adherent
+  17888090:
+    script: Steadfast_Adherent
+  17888091:
+    script: Occult_Adherent
+  17888092:
+    script: Furtive_Adherent
+  17888093:
+    script: Insidious_Adherent
+  17888094:
+    script: Fleet_Adherent
+  17888095:
+    script: Martial_Adherent
+  17888096:
+    script: Dhokmak
+    at:     [-333.000, 29.413, 133.000, 32]
+  17888097:
+    script: Darrcuiln
+    at:     [-316.000, 29.505, 115.000, 160]
+  17888098:
+    script: Malignant_Acuex
+    at:     [-332.000, 29.703, 137.000, 32]
+  17888099:
+    script: Malignant_Acuex
+    at:     [-337.000, 29.617, 137.000, 32]
+  17888100:
+    script: Malignant_Acuex
+    at:     [-337.000, 29.493, 132.000, 32]

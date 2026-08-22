@@ -1,0 +1,3193 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aqrabuamelu:
+    id:            4705
+    species:       great_scorpion
+    type:          [notorious]
+    skill_list_id: 402
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aptant_of_ishis
+        - chance: uncommon
+          item:   aptant_of_pera
+    content: WOTG
+
+  Awd_Goggie:
+    id:            297
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 397
+        entity_flags:  3
+        model_size:    3
+        hitbox:       20
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4170
+    loot:
+      drops:
+        - chance: always
+          item:   bottle_of_rolanberry_854
+        - chance: always
+          item:   serving_of_royal_jelly
+        - chance: very_common
+          item:   spool_of_silk_thread
+        - chance: uncommon
+          item:   crawler_egg
+      steal: spool_of_silk_thread
+
+  Blazer_Beetle:
+    id:            447
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   insect_wing
+        - chance: very_common
+          item:   beetle_shell
+        - chance: very_common
+          item:   beetle_jaw
+        - chance: very_common
+          item:   beetle_shell
+        - chance: rare
+          item:   nest_chest_key
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+
+  Caveberry:
+    id:            661
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   lump_of_loam
+        - chance: very_common
+          item:   lump_of_loam
+        - chance: rare
+          item:   bag_of_fruit_seeds
+      steal: bag_of_fruit_seeds
+      despoil:
+        bag_of_vegetable_seeds: 0
+        treant_bulb:            0
+        bag_of_wildgrass_seeds: 0
+
+  Crawler_Hunter:
+    id:            832
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   scorpion_shell
+        - chance: always
+          item:   scorpion_claw
+        - chance: always
+          item:   scorpion_claw
+        - chance: rare
+          item:   nest_coffer_key
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Dancing_Jewel:
+    id:            6325
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   insect_wing
+      despoil:
+        insect_wing: 0
+    content: ABYSSEA
+
+  Death_Jacket_CN_RFS:
+    id:            6305
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   insect_wing
+        - chance: rare
+          item:   serving_of_royal_jelly
+        - chance: very_rare
+          item:   giant_stinger
+      steal: pot_of_honey
+      despoil:
+        beehive_chip:  0
+        giant_stinger: 0
+        pot_of_honey:  0
+
+  Demonic_Tiphia:
+    id:            979
+    species:       yellow_bee
+    type:          [notorious]
+    spell_list_id: 98
+    skill_list_id: 700
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags: 645
+        model_size:     2
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      mob_mods:
+        heal_chance:    60
+        hp_heal_chance: 60
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: common
+          item:   tiphia_sting
+        - chance: very_common
+          item:   serving_of_royal_jelly
+        - chance: very_common
+          item:   serving_of_royal_jelly
+        - chance: very_common
+          item:   serving_of_royal_jelly
+
+  Doom_Scorpion:
+    id:            1084
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   scorpion_claw
+        - chance: common
+          item:   scorpion_shell
+        - chance: uncommon
+          item:   chunk_of_derfland_humus
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Dragonfly_CN:
+    id:            1099
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   insect_wing
+        - chance: very_rare
+          item:   nest_chest_key
+      despoil:
+        insect_wing: 0
+
+  Dreadbug:
+    id:            1113
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5750
+    loot:
+      drops:
+        - chance: always
+          item:   giant_shell_bug
+        - chance: very_common
+          item:   giant_shell_bug
+        - chance: very_common
+          item:   giant_shell_bug
+        - chance: very_common
+          item:   giant_shell_bug
+
+  Drone_Crawler:
+    id:            1123
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2560
+    loot:
+      drops:
+        - chance: always
+          item:   rolanberry_874_c.e.
+        - chance: common
+          item:   spool_of_silk_thread
+        - chance: uncommon
+          item:   crawler_egg
+      steal: spool_of_silk_thread
+
+  Dynast_Beetle:
+    id:            5854
+    species:       beetle
+    type:          [notorious]
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, war]
+      resists:
+        immune_status: [gravity, bind, slow, light_sleep, dark_sleep]
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: common
+          item:   dasras_ring
+    content: WOTG
+
+  Exoray:
+    id:            1271
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   sleepshroom
+        - chance: common
+          item:   woozyshroom
+        - chance: rare
+          item:   nest_chest_key
+        - chance: rare
+          item:   danceshroom
+        - chance: common
+          item:   clump_of_exoray_mold
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: rare
+          item:   nest_chest_key
+        - chance: always
+          item:   fire_cluster
+        - chance: very_common
+          item:   bag_of_seeds
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Guardian_Crawler:
+    id:            1830
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags:  3
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2100
+    loot:
+      drops:
+        - chance: always
+          item:   rolanberry_881_c.e.
+        - chance: common
+          item:   spool_of_silk_thread
+        - chance: uncommon
+          item:   crawler_egg
+      steal: spool_of_silk_thread
+
+  Helm_Beetle_aggro:
+    id:            6075
+    display_name:  Helm_Beetle
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         14
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   insect_wing
+        - chance: very_common
+          item:   beetle_shell
+        - chance: very_common
+          item:   beetle_jaw
+        - chance: very_common
+          item:   beetle_shell
+        - chance: rare
+          item:   nest_coffer_key
+      despoil:
+        insect_wing:  0
+        beetle_shell: 0
+        beetle_jaw:   0
+
+  Hornfly:
+    id:            1990
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   insect_wing
+        - chance: rare
+          item:   nest_chest_key
+      despoil:
+        insect_wing: 0
+
+  Killer_Mushroom:
+    id:            2229
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   woozyshroom
+        - chance: uncommon
+          item:   danceshroom
+        - chance: rare
+          item:   king_truffle
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  King_Crawler:
+    id:            5839
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_silk_thread
+        - chance: rare
+          item:   spool_of_wyrdstrand
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+    content: ABYSSEA
+
+  Knight_Crawler_CN:
+    id:            6318
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   nest_coffer_key
+        - chance: uncommon
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Labyrinth_Lizard_CN:
+    id:            6720
+    display_name:  Labyrinth_Lizard
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 133
+        model_size:     2
+        hitbox:        18
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   nest_chest_key
+        - chance: very_common
+          item:   lizard_egg
+        - chance: common
+          item:   lizard_skin
+        - chance: very_common
+          item:   lizard_egg
+        - chance: always
+          item:   lizard_tail
+        - chance: very_common
+          item:   lizard_egg
+        - chance: common
+          item:   lizard_skin
+        - chance: common
+          item:   lizard_egg
+        - chance: common
+          item:   lizard_egg
+        - chance: uncommon
+          item:   lizard_skin
+        - chance: common
+          item:   lizard_egg
+        - chance: uncommon
+          item:   lizard_skin
+        - chance: uncommon
+          item:   lizard_skin
+      steal: lizard_egg
+      despoil:
+        lizard_skin: 0
+        lizard_tail: 0
+        lizard_egg:  0
+
+  Matron_Crawler:
+    id:            2586
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags:  3
+        model_size:    2
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3800
+    loot:
+      drops:
+        - chance: always
+          item:   rolanberry_864_c.e.
+        - chance: common
+          item:   spool_of_silk_thread
+        - chance: uncommon
+          item:   crawler_egg
+      steal: spool_of_silk_thread
+
+  Maze_Lizard:
+    id:            2598
+    species:       ash_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   lizard_egg
+        - chance: always
+          item:   lizard_tail
+        - chance: very_common
+          item:   lizard_egg
+        - chance: common
+          item:   lizard_skin
+        - chance: common
+          item:   lizard_egg
+        - chance: common
+          item:   lizard_egg
+        - chance: uncommon
+          item:   lizard_skin
+        - chance: uncommon
+          item:   lizard_skin
+      steal: lizard_egg
+      despoil:
+        lizard_skin: 0
+        lizard_tail: 0
+        lizard_egg:  0
+
+  Mellonia:
+    id:            4704
+    species:       gnat
+    type:          [notorious]
+    skill_list_id: 61
+    attributes:
+      combat:
+        skill: sword
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:  -1
+          wind:   3
+          light: -2
+          dark:   4
+        rank_status:
+          silence:      3
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 2013
+        entity_flags:  671
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      3
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   nest_coffer_key
+
+  Mushussu_CN:
+    id:            6332
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 133
+        model_size:     2
+        hitbox:        32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   scorpion_shell
+        - chance: always
+          item:   scorpion_claw
+        - chance: always
+          item:   scorpion_claw
+        - chance: rare
+          item:   nest_chest_key
+      despoil:
+        scorpion_shell: 0
+        scorpion_claw:  0
+
+  Nest_Beetle:
+    id:            2835
+    species:       beetle
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          ice:   -3
+          light: -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   insect_wing
+        - chance: common
+          item:   beetle_shell
+        - chance: common
+          item:   beetle_jaw
+        - chance: common
+          item:   beetle_shell
+      despoil:
+        beetle_shell: 0
+        beetle_jaw:   0
+
+  Olid_Funguar:
+    id:            6344
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         17
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   woozyshroom
+        - chance: uncommon
+          item:   danceshroom
+        - chance: very_rare
+          item:   king_truffle
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+    content: ABYSSEA
+
+  Puroboros:
+    id:            3232
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 3600
+    loot:
+      drops:
+        - chance: always
+          item:   pinch_of_bomb_ash
+        - chance: common
+          item:   bomb_arm
+        - chance: rare
+          item:   oracles_belt
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Queen_Crawler:
+    id:            3281
+    species:       crawler
+    type:          [notorious]
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags:  3
+        model_size:    2
+        hitbox:       17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3720
+    loot:
+      drops:
+        - chance: always
+          item:   rolanberry_864_c.e.
+        - chance: common
+          item:   spool_of_silk_thread
+        - chance: uncommon
+          item:   crawler_egg
+      steal: spool_of_silk_thread
+
+  Rumble_Crawler:
+    id:            7035
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   nest_chest_key
+        - chance: uncommon
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Soldier_Crawler:
+    id:            3697
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Soul_Stinger:
+    id:            3707
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags: 131
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   pot_of_honey
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   nest_chest_key
+        - chance: very_rare
+          item:   giant_stinger
+      steal: pot_of_honey
+      despoil:
+        beehive_chip:  0
+        giant_stinger: 0
+        pot_of_honey:  0
+
+  Vespo:
+    id:            3335
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         11
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   pot_of_honey
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   giant_stinger
+      steal: pot_of_honey
+      despoil:
+        beehive_chip:  0
+        giant_stinger: 0
+        pot_of_honey:  0
+    content: ABYSSEA
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: very_common
+          item:   bag_of_seeds
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: rare
+          item:   nest_chest_key
+
+  Water_Elemental_SA:
+    id:            5532
+    display_name:  Water_Elemental
+    species:       water_elemental
+    type:          [notorious]
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 12
+        entity_flags: 131
+        model_size:     1
+        hitbox:         3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Wespe_CN:
+    id:            4322
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   nest_chest_key
+        - chance: very_common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   pot_of_honey
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   giant_stinger
+      steal: pot_of_honey
+
+  Witch_Hazel:
+    id:            4354
+    species:       sapling
+    skill_list_id: 216
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          thunder: -2
+          dark:    -3
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:    -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 392
+        entity_flags: 645
+        model_size:     2
+        hitbox:        14
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   lump_of_loam
+        - chance: rare
+          item:   nest_chest_key
+      steal: bag_of_fruit_seeds
+      despoil:
+        bag_of_vegetable_seeds: 0
+        treant_bulb:            0
+        bag_of_wildgrass_seeds: 0
+
+  Worker_Crawler_CN:
+    id:            6316
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 129
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+spawns:
+  17584129:
+    template: Guardian_Crawler
+    at:       [126.335, -34.609, -75.373, 127]
+    level:    [45, 45]
+  17584130:
+    template: Guardian_Crawler
+    at:       [46.436, -2.602, 195.381, 127]
+    level:    [45, 45]
+  17584131:
+    template: Drone_Crawler
+    at:       [6.045, -2.703, 285.026]
+    level:    [50, 50]
+  17584132:
+    template: Drone_Crawler
+    at:       [-72.939, -2.606, 244.139]
+    level:    [50, 50]
+  17584133:
+    template: Queen_Crawler
+    at:       [-335.156, -3.607, -253.294]
+    level:    [64, 64]
+  17584134:
+    template: Matron_Crawler
+    at:       [-139.158, -33.689, 20.944]
+    level:    [64, 64]
+  17584135:
+    template: Awd_Goggie
+    at:       [-251.026, -1.867, 253.055]
+    level:    [68, 68]
+  17584136:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [299.000, -32.000, -28.000, 120]
+    level:    [40, 42]
+  17584137:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [332.950, -33.111, -18.821, 17]
+    level:    [40, 42]
+  17584138:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [315.000, -32.781, -17.000, 127]
+    level:    [40, 42]
+  17584139:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [259.954, -32.979, -53.917, 51]
+    level:    [40, 42]
+  17584140:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [258.524, -32.700, -44.000, 127]
+    level:    [40, 42]
+  17584141:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [251.000, -32.000, -17.000, 39]
+    level:    [40, 42]
+  17584142:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [260.274, -32.760, -35.165, 127]
+    level:    [40, 42]
+  17584143:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [189.705, -32.861, -18.955, 92]
+    level:    [40, 42]
+  17584144:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [173.000, -32.000, -20.000, 13]
+    level:    [40, 42]
+  17584145:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [139.119, -32.817, -23.193, 127]
+    level:    [40, 42]
+  17584146:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [161.210, -32.792, -20.387, 127]
+    level:    [40, 42]
+  17584147:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [174.830, -35.742, -99.401, 14]
+    level:    [40, 42]
+  17584148:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [179.216, -40.246, -82.177, 127]
+    level:    [40, 42]
+  17584149:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [177.000, -40.000, -62.000, 127]
+    level:    [40, 42]
+  17584150:
+    template: Death_Jacket_CN_RFS
+    script:   Death_Jacket
+    at:       [170.128, -34.525, -101.688, 127]
+    level:    [40, 42]
+  17584151:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [218.000, -32.787, -18.000, 127]
+    level:    [40, 42]
+  17584152:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [218.647, -32.709, -34.425, 62]
+    level:    [40, 42]
+  17584153:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [222.086, -34.680, -54.679, 66]
+    level:    [40, 42]
+  17584154:
+    template: Maze_Lizard
+    at:       [116.000, -32.000, -78.000, 127]
+    level:    [41, 43]
+  17584155:
+    template: Maze_Lizard
+    at:       [124.462, -32.974, -97.487, 6]
+    level:    [41, 43]
+  17584156:
+    template: Maze_Lizard
+    at:       [127.145, -32.544, -82.651, 127]
+    level:    [41, 43]
+  17584157:
+    template: Maze_Lizard
+    at:       [108.575, -33.041, -71.041, 127]
+    level:    [41, 43]
+  17584158:
+    template: Maze_Lizard
+    at:       [130.711, -33.303, -91.301, 127]
+    level:    [41, 43]
+  17584159:
+    template: Maze_Lizard
+    at:       [134.000, -32.000, -84.000, 127]
+    level:    [41, 43]
+  17584160:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [146.259, -32.760, -142.220, 13]
+    level:    [42, 44]
+  17584161:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [139.087, -32.681, -125.687, 127]
+    level:    [42, 44]
+  17584162:
+    template: Killer_Mushroom
+    at:       [197.441, -32.995, -148.612, 102]
+    level:    [45, 47]
+  17584163:
+    template: Killer_Mushroom
+    at:       [210.905, -33.536, -158.508, 92]
+    level:    [46, 47]
+  17584164:
+    template: Killer_Mushroom
+    at:       [186.000, -32.823, -166.000, 110]
+    level:    [45, 47]
+  17584165:
+    template: Killer_Mushroom
+    at:       [207.441, -33.176, -152.561, 127]
+    level:    [45, 47]
+  17584166:
+    template: Killer_Mushroom
+    at:       [194.000, -32.000, -174.000, 127]
+    level:    [45, 47]
+  17584167:
+    template: Killer_Mushroom
+    at:       [186.078, -33.235, -154.204, 127]
+    level:    [45, 47]
+  17584168:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [96.005, -32.826, -15.909, 65]
+    level:    [42, 44]
+  17584169:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [101.519, -32.723, -31.983, 57]
+    level:    [42, 44]
+  17584170:
+    template: Doom_Scorpion
+    at:       [107.701, -32.833, 37.645, 127]
+    level:    [45, 47]
+  17584171:
+    template: Doom_Scorpion
+    at:       [126.028, -33.118, 37.526, 27]
+    level:    [45, 47]
+  17584172:
+    template: Doom_Scorpion
+    at:       [118.567, -32.687, 38.869, 127]
+    level:    [45, 47]
+  17584173:
+    template: Doom_Scorpion
+    at:       [122.729, -33.011, 31.191, 116]
+    level:    [45, 47]
+  17584174:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [67.149, -32.987, -112.939, 127]
+    level:    [42, 44]
+  17584175:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [53.000, -32.000, -101.000, 127]
+    level:    [42, 44]
+  17584176:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [59.000, -33.000, -111.000, 43]
+    level:    [42, 44]
+  17584177:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [62.275, -32.967, -99.282, 127]
+    level:    [42, 44]
+  17584178:
+    template: Caveberry
+    at:       [-15.184, -33.270, -93.080, 127]
+    level:    [42, 44]
+  17584179:
+    template: Caveberry
+    at:       [9.940, -32.794, -59.989, 127]
+    level:    [42, 44]
+  17584180:
+    template: Caveberry
+    at:       [-2.401, -32.830, -59.663, 62]
+    level:    [42, 44]
+  17584181:
+    template: Caveberry
+    at:       [-15.334, -33.193, -65.919, 64]
+    level:    [42, 44]
+  17584182:
+    template: Caveberry
+    at:       [-51.904, -32.752, -105.202, 123]
+    level:    [42, 44]
+  17584183:
+    template: Caveberry
+    at:       [-24.774, -33.231, -94.508, 95]
+    level:    [42, 44]
+  17584184:
+    template: Caveberry
+    at:       [-34.189, -33.213, -104.244, 28]
+    level:    [42, 44]
+  17584185:
+    template: Caveberry
+    at:       [19.000, -32.000, -65.000, 127]
+    level:    [42, 44]
+  17584186:
+    template: Caveberry
+    at:       [17.402, -33.293, -74.679, 78]
+    level:    [42, 44]
+  17584187:
+    template: Caveberry
+    at:       [-30.553, -33.770, -105.858, 27]
+    level:    [42, 44]
+  17584188:
+    template: Nest_Beetle
+    at:       [-133.000, -32.000, -71.000, 8]
+    level:    [45, 47]
+  17584189:
+    template: Nest_Beetle
+    at:       [-119.760, -32.660, -78.171, 25]
+    level:    [45, 47]
+  17584190:
+    template: Nest_Beetle
+    at:       [-129.000, -32.873, -80.000, 127]
+    level:    [45, 47]
+  17584191:
+    template: Nest_Beetle
+    at:       [-127.537, -33.344, -95.039, 28]
+    level:    [45, 47]
+  17584192:
+    template: Nest_Beetle
+    at:       [-135.130, -33.594, -87.847, 123]
+    level:    [45, 47]
+  17584193:
+    template: Nest_Beetle
+    at:       [-113.791, -32.958, -90.640, 127]
+    level:    [45, 47]
+  17584194:
+    template: Nest_Beetle
+    at:       [-106.000, -33.000, -68.000, 127]
+    level:    [45, 47]
+  17584195:
+    template: Doom_Scorpion
+    at:       [-133.000, -34.000, 16.000, 89]
+    level:    [45, 47]
+  17584196:
+    template: Soldier_Crawler
+    at:       [-146.793, -33.588, 18.710, 127]
+    level:    [47, 49]
+  17584197:
+    template: Soldier_Crawler
+    at:       [-137.215, -32.906, 29.714, 71]
+    level:    [47, 49]
+  17584198:
+    template: Soldier_Crawler
+    at:       [-142.622, -33.100, 29.918, 127]
+    level:    [47, 49]
+  17584199:
+    template: Hornfly
+    at:       [99.000, -28.000, -216.000, 127]
+    level:    [51, 53]
+  17584200:
+    template: Hornfly
+    at:       [122.000, -23.000, -219.000, 127]
+    level:    [51, 53]
+  17584201:
+    template: Hornfly
+    at:       [99.000, -32.000, -196.000, 127]
+    level:    [51, 53]
+  17584202:
+    template: Hornfly
+    at:       [139.000, -15.000, -197.000, 127]
+    level:    [51, 53]
+  17584203:
+    template: Hornfly
+    at:       [141.000, -12.000, -183.000, 127]
+    level:    [51, 53]
+  17584204:
+    template: Exoray
+    at:       [62.000, -28.000, 13.000, 45]
+    level:    [51, 53]
+  17584205:
+    template: Hornfly
+    at:       [137.000, -20.000, -221.000, 127]
+    level:    [51, 53]
+  17584206:
+    template: Hornfly
+    at:       [123.000, -8.000, -178.000, 127]
+    level:    [51, 53]
+  17584207:
+    template: Exoray
+    at:       [38.000, -23.000, 19.000, 127]
+    level:    [51, 53]
+  17584208:
+    template: Hornfly
+    at:       [104.000, -4.000, -176.000, 127]
+    level:    [51, 53]
+  17584209:
+    template: Exoray
+    at:       [49.000, -0.500, 260.000, 127]
+    level:    [51, 53]
+  17584210:
+    template: Exoray
+    at:       [-73.000, -8.000, 89.000, 127]
+    level:    [51, 53]
+  17584211:
+    template: Exoray
+    at:       [-70.000, -9.000, 67.000, 127]
+    level:    [51, 53]
+  17584212:
+    template: Exoray
+    at:       [-85.000, -9.000, 76.000, 127]
+    level:    [51, 53]
+  17584213:
+    template: Exoray
+    at:       [-85.000, -9.000, 88.000, 127]
+    level:    [51, 53]
+  17584214:
+    template: King_Crawler
+    at:       [136.000, -0.524, -342.000, 127]
+    level:    [91, 92]
+  17584215:
+    template: King_Crawler
+    at:       [8.535, -1.172, -244.792, 68]
+    level:    [91, 93]
+  17584216:
+    template: King_Crawler
+    at:       [92.000, -0.888, -234.000, 36]
+    level:    [91, 93]
+  17584217:
+    template: King_Crawler
+    at:       [65.000, -1.000, -230.000, 101]
+    level:    [91, 93]
+  17584218:
+    template: King_Crawler
+    at:       [-20.212, -0.903, -251.212, 127]
+    level:    [91, 93]
+  17584219:
+    template: Vespo
+    at:       [37.349, -0.846, -253.101, 127]
+    level:    [92, 93]
+  17584220:
+    template: Vespo
+    at:       [7.475, -1.099, -230.214, 127]
+    level:    [92, 93]
+  17584221:
+    template: Dancing_Jewel
+    at:       [-11.289, -0.873, -245.309, 127]
+    level:    [94, 96]
+  17584222:
+    template: Dancing_Jewel
+    at:       [76.000, -1.000, -247.000, 127]
+    level:    [94, 96]
+  17584223:
+    template: Dancing_Jewel
+    at:       [40.000, -0.619, -240.000, 52]
+    level:    [94, 96]
+  17584224:
+    template: King_Crawler
+    at:       [120.178, -1.246, -309.546, 127]
+    level:    [91, 92]
+  17584225:
+    template: King_Crawler
+    at:       [104.000, -0.731, -266.000, 126]
+    level:    [91, 93]
+  17584226:
+    template: King_Crawler
+    at:       [130.000, -1.000, -274.000, 11]
+    level:    [91, 93]
+  17584227:
+    template: King_Crawler
+    at:       [134.838, -0.868, -305.053, 127]
+    level:    [92, 93]
+  17584228:
+    template: King_Crawler
+    at:       [107.999, -1.050, -302.328, 59]
+    level:    [91, 92]
+  17584229:
+    template: Vespo
+    at:       [121.000, -0.529, -276.000, 24]
+    level:    [92, 93]
+  17584230:
+    template: Vespo
+    at:       [101.133, -1.686, -300.981, 127]
+    level:    [92, 93]
+  17584231:
+    template: Vespo
+    at:       [116.000, -0.600, -392.000, 127]
+    level:    [92, 93]
+  17584232:
+    template: Dancing_Jewel
+    at:       [108.000, -1.000, -248.000, 127]
+    level:    [94, 96]
+  17584233:
+    template: Dancing_Jewel
+    at:       [122.128, -0.840, -363.310, 28]
+    level:    [94, 96]
+  17584234:
+    template: King_Crawler
+    at:       [108.000, -0.861, -352.000, 127]
+    level:    [91, 93]
+  17584235:
+    template: King_Crawler
+    at:       [106.116, -0.920, -385.524, 127]
+    level:    [91, 93]
+  17584236:
+    template: King_Crawler
+    at:       [-7.000, -1.000, -229.000, 82]
+    level:    [91, 92]
+  17584237:
+    template: Vespo
+    at:       [122.000, 0.500, -330.000, 127]
+    level:    [92, 93]
+  17584238:
+    template: Vespo
+    at:       [112.000, -0.630, -399.000, 27]
+    level:    [92, 93]
+  17584239:
+    template: Vespo
+    at:       [129.046, -1.844, -410.618, 127]
+    level:    [92, 93]
+  17584240:
+    template: Vespo
+    at:       [86.000, -0.600, -248.000, 127]
+    level:    [92, 93]
+  17584241:
+    template: Vespo
+    at:       [104.291, -0.901, -364.434, 127]
+    level:    [92, 93]
+  17584242:
+    template: Olid_Funguar
+    at:       [88.954, -0.810, -405.070, 46]
+    level:    [94, 95]
+  17584243:
+    template: Olid_Funguar
+    at:       [20.000, -1.000, -237.000, 127]
+    level:    [94, 95]
+  17584244:
+    template: King_Crawler
+    at:       [63.666, -0.673, -401.447, 110]
+    level:    [91, 93]
+  17584245:
+    template: King_Crawler
+    at:       [54.138, -0.797, -404.847, 51]
+    level:    [91, 93]
+  17584246:
+    template: Vespo
+    at:       [87.038, -0.708, -399.196, 116]
+    level:    [92, 93]
+  17584247:
+    template: Vespo
+    at:       [64.000, -1.517, -413.000, 127]
+    level:    [92, 93]
+  17584248:
+    template: Vespo
+    at:       [78.000, -1.288, -408.000, 88]
+    level:    [92, 93]
+  17584249:
+    template: Vespo
+    at:       [123.000, -1.000, -238.000, 84]
+    level:    [92, 93]
+  17584250:
+    template: Vespo
+    at:       [57.000, -1.000, -231.000, 127]
+    level:    [92, 93]
+  17584251:
+    template: Olid_Funguar
+    at:       [87.000, -1.000, -388.000, 43]
+    level:    [94, 95]
+  17584252:
+    template: Olid_Funguar
+    at:       [101.232, -1.735, -420.837, 251]
+    level:    [93, 94]
+  17584253:
+    template: Olid_Funguar
+    at:       [-3.300, -0.860, -396.107, 7]
+    level:    [93, 94]
+  17584254:
+    template: King_Crawler
+    at:       [32.884, -1.298, -411.971, 53]
+    level:    [91, 93]
+  17584255:
+    template: King_Crawler
+    at:       [-10.693, -0.801, -405.769, 120]
+    level:    [91, 92]
+  17584256:
+    template: King_Crawler
+    at:       [-44.000, -1.315, -388.000, 61]
+    level:    [91, 93]
+  17584257:
+    template: Dancing_Jewel
+    at:       [-26.121, -0.811, -407.428, 127]
+    level:    [94, 96]
+  17584258:
+    template: Dancing_Jewel
+    at:       [-0.050, -0.771, -405.180, 127]
+    level:    [94, 96]
+  17584259:
+    template: Dancing_Jewel
+    at:       [29.729, -0.647, -403.940, 10]
+    level:    [94, 96]
+  17584260:
+    template: Dancing_Jewel
+    at:       [8.000, -1.000, -393.000, 127]
+    level:    [94, 96]
+  17584261:
+    template: Dancing_Jewel
+    at:       [53.000, -1.000, -390.000, 127]
+    level:    [94, 96]
+  17584262:
+    template: Olid_Funguar
+    at:       [-36.987, -0.729, -409.968, 84]
+    level:    [94, 95]
+  17584263:
+    template: Olid_Funguar
+    at:       [-56.167, -0.903, -258.753, 127]
+    level:    [93, 94]
+  17584264:
+    template: King_Crawler
+    at:       [-42.050, -0.662, -289.721, 65]
+    level:    [91, 93]
+  17584265:
+    template: King_Crawler
+    at:       [-51.908, -1.085, -276.275, 127]
+    level:    [91, 92]
+  17584266:
+    template: Dancing_Jewel
+    at:       [-42.992, -0.655, -267.679, 52]
+    level:    [94, 96]
+  17584267:
+    template: Dancing_Jewel
+    at:       [-28.000, -1.298, -311.000, 127]
+    level:    [94, 96]
+  17584268:
+    template: Dancing_Jewel
+    at:       [-31.841, -1.447, -290.484, 89]
+    level:    [94, 96]
+  17584269:
+    template: Dancing_Jewel
+    at:       [-49.357, -0.736, -297.595, 14]
+    level:    [94, 96]
+  17584270:
+    template: Dancing_Jewel
+    at:       [24.000, -1.000, -249.000, 127]
+    level:    [94, 96]
+  17584271:
+    template: Olid_Funguar
+    at:       [-59.195, -2.186, -305.709, 92]
+    level:    [93, 95]
+  17584272:
+    template: Olid_Funguar
+    at:       [-24.000, -1.000, -227.000, 23]
+    level:    [94, 95]
+  17584273:
+    template: Olid_Funguar
+    at:       [-44.166, -0.783, -362.947, 127]
+    level:    [93, 95]
+  17584274:
+    template: Vespo
+    at:       [-37.923, -0.790, -371.677, 24]
+    level:    [92, 93]
+  17584275:
+    template: Vespo
+    at:       [-58.558, -2.078, -387.879, 127]
+    level:    [92, 93]
+  17584276:
+    template: Vespo
+    at:       [-52.019, -1.037, -323.884, 99]
+    level:    [92, 93]
+  17584277:
+    template: Dancing_Jewel
+    at:       [-56.000, -1.038, -363.000, 98]
+    level:    [94, 96]
+  17584278:
+    template: Dancing_Jewel
+    at:       [-27.520, -1.154, -354.861, 96]
+    level:    [94, 96]
+  17584279:
+    template: Olid_Funguar
+    at:       [-55.313, -0.482, -336.811, 55]
+    level:    [93, 95]
+  17584280:
+    template: Olid_Funguar
+    at:       [119.000, -1.000, -230.000, 23]
+    level:    [94, 95]
+  17584281:
+    template: Olid_Funguar
+    at:       [-22.901, -1.385, -380.582, 127]
+    level:    [93, 94]
+  17584282:
+    template: Olid_Funguar
+    at:       [27.000, -0.875, -321.000, 127]
+    level:    [93, 95]
+  17584283:
+    template: Olid_Funguar
+    at:       [30.176, -1.054, -302.696, 127]
+    level:    [93, 95]
+  17584284:
+    template: Vespo
+    at:       [-37.000, -1.000, -253.000, 127]
+    level:    [92, 93]
+  17584285:
+    template: Vespo
+    at:       [129.000, -1.000, -293.000, 127]
+    level:    [92, 93]
+  17584286:
+    template: Dancing_Jewel
+    at:       [112.000, -1.000, -329.000, 127]
+    level:    [94, 96]
+  17584287:
+    template: Dancing_Jewel
+    at:       [128.000, -1.000, -320.000, 2]
+    level:    [94, 96]
+  17584288:
+    template: Dancing_Jewel
+    at:       [-40.000, -1.000, -324.000, 6]
+    level:    [94, 96]
+  17584289:
+    template: Olid_Funguar
+    at:       [47.000, -1.000, -306.000, 10]
+    level:    [93, 95]
+  17584290:
+    template: Olid_Funguar
+    at:       [46.000, -1.000, -322.000, 127]
+    level:    [93, 94]
+  17584291:
+    template: Olid_Funguar
+    at:       [28.000, -1.000, -389.000, 23]
+    level:    [94, 95]
+  17584292:
+    template: Olid_Funguar
+    at:       [36.000, -1.000, -327.000, 127]
+    level:    [93, 94]
+  17584293:
+    template: Olid_Funguar
+    at:       [129.000, -1.000, -398.000, 127]
+    level:    [93, 95]
+  17584294:
+    template: Fire_Elemental
+    at:       [126.000, -32.000, 47.000, 20]
+    level:    [52, 54]
+  17584295:
+    template: Water_Elemental
+    at:       [-26.000, -1.000, 260.000, 127]
+    level:    [52, 54]
+  17584296:
+    template: Fire_Elemental
+    at:       [-133.000, -1.000, 220.000, 127]
+    level:    [52, 54]
+  17584297:
+    template: Water_Elemental
+    at:       [132.000, -1.000, -329.000, 127]
+    level:    [52, 54]
+  17584298:
+    template: Blazer_Beetle
+    at:       [9.000, -1.000, 276.000, 127]
+    level:    [52, 54]
+  17584299:
+    template: Blazer_Beetle
+    at:       [-5.000, -1.000, 281.000, 127]
+    level:    [52, 54]
+  17584300:
+    template: Blazer_Beetle
+    at:       [-12.000, -1.000, 250.000, 127]
+    level:    [52, 54]
+  17584301:
+    template: Fire_Elemental
+    at:       [-49.000, -1.000, -310.000, 127]
+    level:    [52, 54]
+  17584302:
+    template: Water_Elemental
+    at:       [59.000, -1.000, 99.000, 127]
+    level:    [52, 54]
+  17584303:
+    template: Blazer_Beetle
+    at:       [-30.000, -1.000, 292.000, 127]
+    level:    [52, 54]
+  17584304:
+    template: Blazer_Beetle
+    at:       [12.000, -1.000, 282.000, 127]
+    level:    [52, 54]
+  17584305:
+    template: Fire_Elemental
+    at:       [-93.000, -1.000, 239.000, 127]
+    level:    [52, 54]
+  17584306:
+    template: Water_Elemental
+    at:       [64.000, -1.000, -387.000, 127]
+    level:    [52, 54]
+  17584307:
+    template: Blazer_Beetle
+    at:       [10.000, -1.000, 268.000, 127]
+    level:    [52, 54]
+  17584308:
+    template: Blazer_Beetle
+    at:       [-10.000, -1.000, 288.000, 127]
+    level:    [52, 54]
+  17584309:
+    template: Blazer_Beetle
+    at:       [28.000, -1.000, 268.000, 109]
+    level:    [52, 54]
+  17584310:
+    template: Blazer_Beetle
+    at:       [-2.000, -1.000, 290.000, 104]
+    level:    [52, 54]
+  17584311:
+    template: Blazer_Beetle
+    at:       [-9.000, -1.000, 269.000, 91]
+    level:    [52, 54]
+  17584312:
+    template: Dynast_Beetle
+    at:       [-216.800, -0.931, -345.600, 60]
+    level:    [56, 56]
+  17584313:
+    template: Fire_Elemental
+    at:       [130.000, -1.000, -269.000, 127]
+    level:    [52, 54]
+  17584314:
+    template: Water_Elemental
+    at:       [-198.000, -1.000, -338.000, 127]
+    level:    [52, 54]
+  17584315:
+    template: Helm_Beetle_aggro
+    script:   Helm_Beetle
+    at:       [-223.000, -1.000, -309.000, 125]
+    level:    [59, 62]
+  17584316:
+    template: Helm_Beetle_aggro
+    script:   Helm_Beetle
+    at:       [-221.000, -1.000, -327.000, 127]
+    level:    [59, 62]
+  17584317:
+    template: Helm_Beetle_aggro
+    script:   Helm_Beetle
+    at:       [-208.000, -1.000, -343.000, 127]
+    level:    [59, 62]
+  17584318:
+    template: Helm_Beetle_aggro
+    script:   Helm_Beetle
+    at:       [-189.000, -1.000, -336.000, 51]
+    level:    [59, 62]
+  17584319:
+    template: Helm_Beetle_aggro
+    script:   Helm_Beetle
+    at:       [-179.000, -1.000, -356.000, 127]
+    level:    [59, 62]
+  17584320:
+    template: Helm_Beetle_aggro
+    script:   Helm_Beetle
+    at:       [-181.000, -1.000, -344.000, 47]
+    level:    [59, 62]
+  17584321:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-342.320, -0.700, -265.131, 81]
+    level:    [60, 63]
+  17584322:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-349.771, -0.670, -259.404, 172]
+    level:    [60, 63]
+  17584323:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-339.000, -1.000, -266.000, 127]
+    level:    [60, 63]
+  17584324:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [96.000, -32.000, -151.000, 19]
+    level:    [42, 44]
+  17584325:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [99.000, -32.000, -160.000, 55]
+    level:    [42, 44]
+  17584326:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [102.000, -35.000, -170.000, 127]
+    level:    [42, 44]
+  17584327:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [77.000, -32.000, -59.000, 127]
+    level:    [42, 44]
+  17584328:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [59.000, -37.000, -24.000, 127]
+    level:    [42, 44]
+  17584329:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [58.000, -32.000, -46.000, 127]
+    level:    [42, 44]
+  17584330:
+    template: Worker_Crawler_CN
+    script:   Worker_Crawler
+    at:       [61.000, -31.000, -37.000, 127]
+    level:    [42, 44]
+  17584331:
+    template: Puroboros
+    at:       [58.000, -0.500, 17.000, 92]
+    level:    [45, 45]
+  17584332:
+    template: Puroboros
+    at:       [60.000, -0.500, 26.000, 127]
+    level:    [45, 45]
+  17584333:
+    template: Doom_Scorpion
+    at:       [70.000, -1.000, 19.000, 7]
+    level:    [45, 47]
+  17584334:
+    template: Soldier_Crawler
+    at:       [-65.000, -1.000, 237.000, 127]
+    level:    [47, 49]
+  17584335:
+    template: Soldier_Crawler
+    at:       [-88.000, -1.000, 229.000, 127]
+    level:    [47, 49]
+  17584336:
+    template: Soldier_Crawler
+    at:       [-78.000, -1.000, 252.000, 127]
+    level:    [47, 49]
+  17584337:
+    template: Soldier_Crawler
+    at:       [-109.000, -1.000, 252.000, 127]
+    level:    [47, 49]
+  17584338:
+    template: Soldier_Crawler
+    at:       [-92.000, -1.000, 210.000, 127]
+    level:    [47, 49]
+  17584339:
+    template: Soldier_Crawler
+    at:       [-51.000, -1.000, 228.000, 82]
+    level:    [47, 49]
+  17584340:
+    template: Soldier_Crawler
+    at:       [-68.000, -1.000, 229.000, 127]
+    level:    [47, 49]
+  17584341:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [52.000, -1.000, 200.000, 127]
+    level:    [49, 51]
+  17584342:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [33.000, -1.000, 189.000, 127]
+    level:    [49, 51]
+  17584343:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [29.000, -1.000, 173.000, 32]
+    level:    [49, 51]
+  17584344:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [52.000, -1.000, 229.000, 127]
+    level:    [49, 51]
+  17584345:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [27.000, -1.000, 195.000, 125]
+    level:    [49, 51]
+  17584346:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [27.000, -1.000, 212.000, 127]
+    level:    [49, 51]
+  17584347:
+    template: Witch_Hazel
+    at:       [-22.000, -1.000, 340.000, 127]
+    level:    [50, 52]
+  17584348:
+    template: Witch_Hazel
+    at:       [19.000, -1.000, 255.000, 127]
+    level:    [50, 52]
+  17584349:
+    template: Witch_Hazel
+    at:       [21.000, -1.000, 244.000, 127]
+    level:    [50, 52]
+  17584350:
+    template: Witch_Hazel
+    at:       [19.000, -1.000, 230.000, 127]
+    level:    [50, 52]
+  17584351:
+    template: Witch_Hazel
+    at:       [22.000, -1.000, 222.000, 127]
+    level:    [50, 52]
+  17584352:
+    template: Witch_Hazel
+    at:       [-35.000, -1.000, 340.000, 127]
+    level:    [50, 52]
+  17584353:
+    template: Exoray
+    at:       [57.000, -1.000, 254.000, 127]
+    level:    [51, 53]
+  17584354:
+    template: Exoray
+    at:       [55.015, -0.440, 260.063, 130]
+    level:    [51, 53]
+  17584355:
+    template: Exoray
+    at:       [58.669, -0.567, 267.381, 196]
+    level:    [51, 53]
+  17584356:
+    template: Exoray
+    at:       [55.416, -0.660, 258.232, 207]
+    level:    [51, 53]
+  17584357:
+    template: Exoray
+    at:       [65.519, -0.346, 259.930, 251]
+    level:    [51, 53]
+  17584358:
+    template: Witch_Hazel
+    at:       [-19.000, -1.000, 308.000, 127]
+    level:    [50, 52]
+  17584359:
+    template: Witch_Hazel
+    at:       [-19.000, -1.000, 321.000, 127]
+    level:    [50, 52]
+  17584360:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [8.360, -0.164, 275.182, 144]
+    level:    [49, 51]
+  17584361:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [-1.567, -0.202, 285.606, 169]
+    level:    [49, 51]
+  17584362:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [-9.384, -0.193, 278.847, 118]
+    level:    [49, 51]
+  17584363:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [-7.740, -0.341, 268.844, 23]
+    level:    [49, 51]
+  17584364:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [3.246, -0.021, 265.584, 254]
+    level:    [49, 51]
+  17584365:
+    template: Labyrinth_Lizard_CN
+    script:   Labyrinth_Lizard
+    at:       [13.109, -0.150, 282.439, 167]
+    level:    [49, 51]
+  17584366:
+    template: Soul_Stinger
+    at:       [68.000, -0.500, 220.000, 23]
+    level:    [48, 50]
+  17584367:
+    template: Soul_Stinger
+    at:       [102.000, -0.500, 225.000, 127]
+    level:    [48, 50]
+  17584368:
+    template: Soul_Stinger
+    at:       [63.000, -0.500, 296.000, 127]
+    level:    [48, 50]
+  17584369:
+    template: Soul_Stinger
+    at:       [102.000, -0.500, 252.000, 31]
+    level:    [48, 50]
+  17584370:
+    template: Soul_Stinger
+    at:       [60.000, -0.500, 319.000, 127]
+    level:    [48, 50]
+  17584371:
+    template: Soul_Stinger
+    at:       [-78.000, -8.000, 180.000, 127]
+    level:    [48, 50]
+  17584372:
+    template: Soul_Stinger
+    at:       [-102.000, -13.000, 172.000, 127]
+    level:    [48, 50]
+  17584373:
+    template: Soul_Stinger
+    at:       [80.000, -0.500, 260.000, 127]
+    level:    [48, 50]
+  17584374:
+    template: Exoray
+    at:       [-80.323, -8.239, 84.817, 85]
+    level:    [51, 53]
+  17584375:
+    template: Exoray
+    at:       [-87.489, -8.805, 66.274, 154]
+    level:    [51, 53]
+  17584376:
+    template: Exoray
+    at:       [-64.000, -9.000, 78.000, 51]
+    level:    [51, 53]
+  17584377:
+    template: Mushussu_CN
+    script:   Mushussu
+    at:       [40.000, -1.000, 345.000, 49]
+    level:    [53, 55]
+  17584378:
+    template: Mushussu_CN
+    script:   Mushussu
+    at:       [-242.000, -1.000, -231.000, 127]
+    level:    [53, 55]
+  17584379:
+    template: Mushussu_CN
+    script:   Mushussu
+    at:       [43.000, -1.000, 372.000, 127]
+    level:    [53, 55]
+  17584380:
+    template: Mushussu_CN
+    script:   Mushussu
+    at:       [44.000, -1.000, 360.000, 52]
+    level:    [53, 55]
+  17584381:
+    template: Witch_Hazel
+    at:       [-61.000, -8.000, 142.000, 127]
+    level:    [50, 52]
+  17584382:
+    template: Witch_Hazel
+    at:       [-17.000, -8.000, 145.000, 127]
+    level:    [50, 52]
+  17584383:
+    template: Witch_Hazel
+    at:       [-20.000, -8.000, 133.000, 127]
+    level:    [50, 52]
+  17584384:
+    template: Witch_Hazel
+    at:       [-54.000, -2.000, 342.000, 127]
+    level:    [50, 52]
+  17584385:
+    template: Rumble_Crawler
+    at:       [-93.000, -1.000, -392.000, 127]
+    level:    [53, 55]
+  17584386:
+    template: Rumble_Crawler
+    at:       [-93.000, -1.000, -375.000, 127]
+    level:    [53, 55]
+  17584387:
+    template: Rumble_Crawler
+    at:       [-95.000, -1.000, -385.000, 127]
+    level:    [53, 55]
+  17584388:
+    template: Rumble_Crawler
+    at:       [-81.000, -1.000, -379.000, 127]
+    level:    [53, 55]
+  17584389:
+    template: Rumble_Crawler
+    at:       [-100.000, -1.000, -391.000, 127]
+    level:    [53, 55]
+  17584390:
+    template: Rumble_Crawler
+    at:       [-101.000, -1.000, -378.000, 127]
+    level:    [53, 55]
+  17584391:
+    template: Wespe_CN
+    script:   Wespe
+    at:       [-101.000, -1.000, 285.000, 127]
+    level:    [55, 57]
+  17584392:
+    template: Wespe_CN
+    script:   Wespe
+    at:       [-103.000, -1.000, 311.000, 127]
+    level:    [55, 57]
+  17584393:
+    template: Wespe_CN
+    script:   Wespe
+    at:       [-60.000, -7.000, 321.000, 127]
+    level:    [55, 57]
+  17584394:
+    template: Wespe_CN
+    script:   Wespe
+    level:    [55, 57]
+  17584395:
+    template: Wespe_CN
+    script:   Wespe
+    at:       [-89.000, -1.000, 301.000, 127]
+    level:    [55, 57]
+  17584396:
+    template: Wespe_CN
+    script:   Wespe
+    at:       [-75.000, -1.000, 299.000, 127]
+    level:    [55, 57]
+  17584397:
+    template: Wespe_CN
+    script:   Wespe
+    at:       [-57.000, -4.000, 304.000, 127]
+    level:    [55, 57]
+  17584398:
+    template: Demonic_Tiphia
+    at:       [-98.000, -0.637, 324.000, 127]
+    level:    [60, 60]
+  17584399:
+    template: Dragonfly_CN
+    script:   Dragonfly
+    at:       [-134.000, -1.000, 361.000, 127]
+    level:    [55, 58]
+  17584400:
+    template: Dragonfly_CN
+    script:   Dragonfly
+    at:       [-163.000, -1.000, 350.000, 127]
+    level:    [55, 58]
+  17584401:
+    template: Dragonfly_CN
+    script:   Dragonfly
+    at:       [-125.000, -1.000, 347.000, 102]
+    level:    [55, 58]
+  17584402:
+    template: Dragonfly_CN
+    script:   Dragonfly
+    at:       [-107.000, -1.000, 363.000, 127]
+    level:    [55, 58]
+  17584403:
+    template: Dragonfly_CN
+    script:   Dragonfly
+    at:       [-165.000, -1.000, 366.000, 127]
+    level:    [55, 58]
+  17584404:
+    template: Dragonfly_CN
+    script:   Dragonfly
+    at:       [-161.376, -0.771, 342.175, 11]
+    level:    [55, 58]
+  17584405:
+    template: Fire_Elemental
+    at:       [-124.924, -1.101, 372.236, 238]
+    level:    [52, 54]
+  17584406:
+    template: Water_Elemental
+    at:       [-119.745, -0.701, 351.712, 216]
+    level:    [52, 54]
+  17584407:
+    template: Crawler_Hunter
+    at:       [-132.149, -2.188, 212.748, 243]
+    level:    [60, 62]
+  17584408:
+    template: Crawler_Hunter
+    at:       [-187.836, -1.216, 225.221, 68]
+    level:    [60, 62]
+  17584409:
+    template: Crawler_Hunter
+    at:       [-206.625, -1.262, 205.726, 106]
+    level:    [60, 62]
+  17584410:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-204.559, -0.752, 226.286, 240]
+    level:    [60, 63]
+  17584411:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-198.699, -0.165, 253.088, 153]
+    level:    [60, 63]
+  17584412:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-185.014, -1.314, 234.199, 81]
+    level:    [60, 63]
+  17584413:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-186.685, -0.643, 217.529, 72]
+    level:    [60, 63]
+  17584414:
+    template: Fire_Elemental
+    at:       [-187.648, -1.198, 225.066, 27]
+    level:    [52, 54]
+  17584415:
+    template: Water_Elemental
+    at:       [-209.755, -0.860, 247.869, 68]
+    level:    [52, 54]
+  17584416:
+    template: Aqrabuamelu
+    at:       [-184.195, -1.719, 248.295, 33]
+    level:    [72, 75]
+  17584417:
+    template: Crawler_Hunter
+    at:       [-253.019, -1.339, 215.315, 23]
+    level:    [60, 62]
+  17584418:
+    template: Crawler_Hunter
+    at:       [-240.637, -0.772, 220.026, 204]
+    level:    [60, 62]
+  17584419:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-248.089, -0.930, 204.837, 12]
+    level:    [60, 63]
+  17584420:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-225.286, -1.167, 223.305, 153]
+    level:    [60, 63]
+  17584421:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-246.709, -0.514, 217.057, 104]
+    level:    [60, 63]
+  17584422:
+    template: Knight_Crawler_CN
+    script:   Knight_Crawler
+    at:       [-255.251, -1.511, 254.356, 182]
+    level:    [60, 63]
+  17584423:
+    template: Fire_Elemental
+    at:       [-230.998, -1.499, 217.899, 50]
+    level:    [52, 54]
+  17584424:
+    template: Water_Elemental
+    at:       [-241.676, -0.366, 193.061, 185]
+    level:    [52, 54]
+  17584425:
+    template: Dreadbug
+    at:       [-26.050, -10.932, 122.323, 253]
+    level:    [52, 52]
+  17584426:
+    template: Mimic
+    at:       [1.000, 1.000, 1.000]
+    level:    [55, 55]
+  17584427:
+    template: Water_Elemental_SA
+    script:   Water_Elemental
+    at:       [216.350, -0.535, -340.001]
+    level:    [75, 75]
+  17584428:
+    template: Mellonia
+    at:       [58.403, -0.829, 258.992, 110]
+    level:    [94, 95]
+  17584429:
+    template: Mellonia
+    level:    [94, 95]
+  17584430:
+    template: Mellonia
+    level:    [94, 95]
+
+slots:
+  - members:
+      17584301: {} # Fire_Elemental
+      17584305: {} # Fire_Elemental
+  - members:
+      17584302: {} # Water_Elemental
+      17584306: {} # Water_Elemental
+  - members:
+      17584409: {} # Crawler_Hunter
+      17584410: {} # Knight_Crawler
+  - members:
+      17584418: {} # Crawler_Hunter
+      17584419: {} # Knight_Crawler

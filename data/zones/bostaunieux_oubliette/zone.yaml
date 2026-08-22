@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z4n0:
+    from:  [99.973, -27.768, 75.035]
+    to:    chateau_doraguille
+    at:    [14.872, 8.918, 24.002]
+    scale: [1.000, 3.000]
+
+  z4n2:
+    from:  [-379.996, -11.723, -239.562]
+    to:    west_ronfaure
+    at:    [-712.746, -40.500, 18.408]
+    scale: [1.000, 3.000]

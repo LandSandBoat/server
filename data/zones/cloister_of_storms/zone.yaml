@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+
+zonelines:
+
+  z5m0:
+    from:  [514.061, -19.553, 539.258]
+    to:    the_boyahda_tree
+    at:    [93.262, -16.609, -220.303, 3.553284]
+    scale: [1.000, 3.000]
+
+  z5m2:
+    from:  [-527.022, 5.412, -500.806]
+    to:    the_boyahda_tree
+    at:    [4.992, 6.323, -340.571, 3.141593]
+    scale: [1.000, 3.000]

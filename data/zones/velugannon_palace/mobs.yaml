@@ -1,0 +1,2457 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+
+  Bisa:
+    id:            4718
+    species:       skeleton
+    type:          [notorious]
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Brigandish_Blade:
+    id:            531
+    species:       evil_weapon
+    type:          [notorious]
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  645
+        animation_sub:   8
+        model_size:      2
+        hitbox:         22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 14000
+        mp:  5000
+    loot:
+      drops:
+        - chance: always
+          item:   gem_of_the_south
+        - chance: common
+          item:   gem_of_the_south
+        - chance: very_common
+          item:   libation_abjuration
+      steal: buccaneers_knife
+
+  Caretaker:
+    id:            638
+    species:       doll
+    type:          [called]
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: rare
+          item:   doll_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+
+  Detector:
+    id:            1013
+    species:       spheroid
+    skill_list_id: 235
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          thunder: -3
+      render:
+        look:
+          type:  standard
+          model: 314
+        entity_flags: 131
+        model_size:     1
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      mob_mods:
+        exp_bonus: -100
+      spawn:
+        respawn: 300
+      stats:
+        hp: 500
+    loot:
+      drops:
+        - chance: rare
+          item:   velugannon_coffer_key
+
+  Dustbuster:
+    id:            1144
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 133
+        model_size:     2
+        hitbox:        43
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_rare
+          item:   velugannon_coffer_key
+        - chance: uncommon
+          item:   red_mages_testimony
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          one_of:
+            scroll_of_thunder_iii:  35
+            scroll_of_shell_iv:     20
+            scroll_of_thundaga_iii: 20
+            scroll_of_thunder_iv:   15
+            scroll_of_burst:        10
+      despoil:
+        magic_pot_shard: 0
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Enkidu:
+    id:            1234
+    species:       golem
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 4
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_mythril_ore
+        - chance: rare
+          item:   golem_shard
+      despoil:
+        chunk_of_mythril_ore: 0
+        golem_shard:          0
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Ice_Elemental:
+    id:            2043
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 437
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   velugannon_coffer_key
+
+  Mystic_Weapon:
+    id:            2792
+    species:       evil_weapon
+    spell_list_id: 42
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 482
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 1200
+    loot:
+      drops:
+        - chance: rare
+          item:   velugannon_coffer_key
+
+  Ornamental_Weapon:
+    id:            3056
+    species:       evil_weapon
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 477
+        entity_flags:  1667
+        animation_sub:    8
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 1200
+    loot:
+      drops:
+        - chance: rare
+          item:   velugannon_coffer_key
+
+  Steam_Cleaner:
+    id:            3763
+    species:       magic_pot
+    type:          [notorious]
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 135
+        model_size:     3
+        hitbox:        53
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+    loot:
+      drops:
+        - chance: always
+          item:   gem_of_the_east
+        - chance: common
+          item:   gem_of_the_east
+        - chance: common
+          item:   libation_abjuration
+        - chance: uncommon
+          item:   indra_katars
+        - chance: rare
+          item:   freyas_tear
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Trna:
+    id:            4717
+    species:       skeleton
+    type:          [notorious]
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 153
+        name_prefix:   32
+        hitbox:        10
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 5000
+
+  Uptala:
+    id:            4719
+    species:       naraka
+    type:          [notorious]
+    skill_list_id: 472
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          ice:     5
+          wind:    2
+          earth:   3
+          thunder: 2
+          water:   2
+          dark:    9
+        rank_status:
+          paralyze:   5
+          bind:       5
+          silence:    2
+          slow:       3
+          poison:     2
+          dark_sleep: 9
+          blind:      9
+      render:
+        look:
+          type:  standard
+          model: 2105
+        entity_flags: 1183
+        name_prefix:    32
+        model_size:      3
+        hitbox:         35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Zipacna:
+    id:            4504
+    species:       golem
+    type:          [notorious]
+    skill_list_id: 135
+    attributes:
+      combat:
+        skill: club
+        delay: 180
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 432
+        entity_flags: 129
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      mob_mods:
+        sight_range: 30
+      spawn:
+        respawn: 10800
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item:   gem_of_the_north
+        - chance: common
+          item:   gem_of_the_north
+        - chance: common
+          item:   oblation_abjuration
+        - chance: uncommon
+          item:   ushikirimaru
+
+spawns:
+  17502209:
+    template: Ornamental_Weapon
+    at:       [42.537, -0.344, -389.454, 3]
+    level:    [74, 76]
+  17502210:
+    template: Ornamental_Weapon
+    at:       [41.710, 0.081, -393.413, 127]
+    level:    [74, 76]
+  17502211:
+    template: Detector
+    at:       [69.119, -0.266, -419.014]
+    level:    [72, 74]
+  17502212:
+    template: Caretaker
+    at:       [69.119, -0.266, -419.014]
+    level:    [76, 79]
+  17502213:
+    template: Ornamental_Weapon
+    at:       [124.407, -0.129, -402.853, 71]
+    level:    [74, 76]
+  17502214:
+    template: Ornamental_Weapon
+    at:       [137.351, -0.460, -391.448, 127]
+    level:    [74, 76]
+  17502215:
+    template: Ornamental_Weapon
+    at:       [36.471, -0.500, -459.798, 127]
+    level:    [74, 76]
+  17502216:
+    template: Ornamental_Weapon
+    at:       [128.023, -1.147, -353.348, 28]
+    level:    [74, 76]
+  17502217:
+    template: Ornamental_Weapon
+    at:       [123.257, -0.564, -363.710, 127]
+    level:    [74, 76]
+  17502218:
+    template: Ornamental_Weapon
+    at:       [119.152, -0.101, -353.317, 55]
+    level:    [74, 76]
+  17502219:
+    template: Mystic_Weapon
+    at:       [-41.685, 0.087, -405.022, 16]
+    level:    [74, 77]
+  17502220:
+    template: Mystic_Weapon
+    at:       [-36.867, 0.237, -400.156, 127]
+    level:    [74, 77]
+  17502221:
+    template: Detector
+    at:       [-74.278, -0.266, -418.966, 127]
+    level:    [72, 74]
+  17502222:
+    template: Caretaker
+    at:       [-74.278, -0.266, -418.966, 127]
+    level:    [76, 79]
+  17502223:
+    template: Mystic_Weapon
+    at:       [-132.594, -0.234, -396.285, 127]
+    level:    [74, 77]
+  17502224:
+    template: Mystic_Weapon
+    at:       [-120.253, 0.075, -393.750, 109]
+    level:    [74, 77]
+  17502225:
+    template: Mystic_Weapon
+    at:       [-120.759, 0.075, -385.336, 214]
+    level:    [74, 77]
+  17502226:
+    template: Mystic_Weapon
+    at:       [-128.332, -0.441, -357.107, 127]
+    level:    [74, 77]
+  17502227:
+    template: Mystic_Weapon
+    at:       [-128.374, -0.208, -367.846, 127]
+    level:    [74, 77]
+  17502228:
+    template: Mystic_Weapon
+    at:       [-116.735, 0.212, -372.901, 71]
+    level:    [74, 77]
+  17502229:
+    template: Detector
+    at:       [28.824, -0.266, -341.224, 127]
+    level:    [72, 74]
+  17502230:
+    template: Caretaker
+    at:       [28.824, -0.266, -341.224, 127]
+    level:    [76, 79]
+  17502231:
+    template: Detector
+    at:       [-25.799, -0.396, -341.519, 127]
+    level:    [72, 74]
+  17502232:
+    template: Caretaker
+    at:       [-25.799, -0.396, -341.519, 127]
+    level:    [76, 79]
+  17502233:
+    template: Ornamental_Weapon
+    at:       [-11.579, -0.276, -322.093, 58]
+    level:    [74, 76]
+  17502234:
+    template: Ornamental_Weapon
+    at:       [-4.294, -0.144, -317.693, 127]
+    level:    [74, 76]
+  17502235:
+    template: Mystic_Weapon
+    at:       [11.855, -0.392, -302.641, 127]
+    level:    [74, 77]
+  17502236:
+    template: Mystic_Weapon
+    at:       [-3.286, 0.216, -297.932, 127]
+    level:    [74, 77]
+  17502237:
+    template: Ornamental_Weapon
+    at:       [-5.331, -0.920, -271.122, 127]
+    level:    [74, 76]
+  17502238:
+    template: Ornamental_Weapon
+    at:       [-5.544, 0.051, -281.384, 127]
+    level:    [74, 76]
+  17502239:
+    template: Air_Elemental
+    at:       [185.590, -0.170, -342.746, 127]
+    level:    [79, 80]
+  17502240:
+    template: Air_Elemental
+    at:       [189.879, -0.170, -340.323, 127]
+    level:    [79, 80]
+  17502241:
+    template: Detector
+    at:       [203.675, -0.599, -339.863, 127]
+    level:    [72, 74]
+  17502242:
+    template: Caretaker
+    at:       [203.675, -0.599, -339.863, 127]
+    level:    [76, 79]
+  17502243:
+    template: Detector
+    at:       [236.197, -0.326, -342.493]
+    level:    [72, 74]
+  17502244:
+    template: Caretaker
+    at:       [236.197, -0.326, -342.493]
+    level:    [76, 79]
+  17502245:
+    template: Detector
+    at:       [247.264, -0.326, -342.231, 1]
+    level:    [72, 74]
+  17502246:
+    template: Caretaker
+    at:       [247.264, -0.326, -342.231, 1]
+    level:    [76, 79]
+  17502247:
+    template: Detector
+    at:       [260.406, -0.326, -340.815, 27]
+    level:    [72, 74]
+  17502248:
+    template: Caretaker
+    at:       [177.184, -0.104, -340.986, 224]
+    level:    [76, 79]
+  17502249:
+    template: Detector
+    at:       [272.582, -0.587, -339.041, 128]
+    level:    [72, 74]
+  17502250:
+    template: Caretaker
+    at:       [178.923, -0.058, -342.456, 13]
+    level:    [76, 79]
+  17502251:
+    template: Air_Elemental
+    at:       [290.744, -0.173, -334.214, 127]
+    level:    [79, 80]
+  17502252:
+    template: Air_Elemental
+    at:       [287.963, -0.173, -345.248, 112]
+    level:    [79, 80]
+  17502253:
+    template: Ornamental_Weapon
+    at:       [288.132, -0.215, -263.491, 81]
+    level:    [74, 76]
+  17502254:
+    template: Ornamental_Weapon
+    at:       [268.175, -0.501, -283.575, 56]
+    level:    [74, 76]
+  17502255:
+    template: Ornamental_Weapon
+    at:       [293.889, -0.023, -274.420, 127]
+    level:    [74, 76]
+  17502256:
+    template: Ornamental_Weapon
+    at:       [306.872, -0.024, -287.891]
+    level:    [74, 76]
+  17502257:
+    template: Ornamental_Weapon
+    at:       [300.299, -0.077, -271.145, 94]
+    level:    [74, 76]
+  17502258:
+    template: Ornamental_Weapon
+    at:       [323.546, -0.016, -284.378, 127]
+    level:    [74, 76]
+  17502259:
+    template: Detector
+    at:       [339.179, -0.643, -218.295, 74]
+    level:    [72, 74]
+  17502260:
+    template: Caretaker
+    at:       [339.179, -0.643, -218.295, 74]
+    level:    [76, 79]
+  17502261:
+    template: Ornamental_Weapon
+    at:       [369.554, -0.756, -196.316, 127]
+    level:    [74, 76]
+  17502262:
+    template: Ornamental_Weapon
+    at:       [360.965, 0.019, -196.345, 120]
+    level:    [74, 76]
+  17502263:
+    template: Detector
+    at:       [394.259, -1.043, -181.513, 127]
+    level:    [72, 74]
+  17502264:
+    template: Caretaker
+    at:       [394.259, -1.043, -181.513, 127]
+    level:    [76, 79]
+  17502265:
+    template: Ornamental_Weapon
+    at:       [356.118, 5.451, -141.279, 127]
+    level:    [74, 76]
+  17502266:
+    template: Ornamental_Weapon
+    at:       [380.303, 12.086, -150.895, 55]
+    level:    [74, 76]
+  17502267:
+    template: Ornamental_Weapon
+    at:       [389.445, 15.668, -192.113, 189]
+    level:    [74, 76]
+  17502268:
+    template: Ornamental_Weapon
+    at:       [370.184, 15.631, -195.655, 36]
+    level:    [74, 76]
+  17502269:
+    template: Air_Elemental
+    at:       [413.273, 15.706, -174.443, 114]
+    level:    [79, 80]
+  17502270:
+    template: Air_Elemental
+    at:       [416.898, 15.726, -182.671, 106]
+    level:    [79, 80]
+  17502271:
+    template: Air_Elemental
+    at:       [347.902, 15.699, -185.487, 126]
+    level:    [79, 80]
+  17502272:
+    template: Air_Elemental
+    at:       [345.443, 15.830, -183.638, 127]
+    level:    [79, 80]
+  17502273:
+    template: Ornamental_Weapon
+    at:       [430.632, 15.702, -210.196, 137]
+    level:    [74, 76]
+  17502274:
+    template: Ornamental_Weapon
+    at:       [432.466, 15.733, -230.371, 127]
+    level:    [74, 76]
+  17502275:
+    template: Ornamental_Weapon
+    at:       [329.031, 15.830, -208.731, 2]
+    level:    [74, 76]
+  17502276:
+    template: Ornamental_Weapon
+    at:       [330.195, 15.783, -231.720, 127]
+    level:    [74, 76]
+  17502277:
+    template: Air_Elemental
+    at:       [424.461, 15.879, -261.608, 127]
+    level:    [79, 80]
+  17502278:
+    template: Air_Elemental
+    at:       [415.056, 15.842, -251.666, 127]
+    level:    [79, 80]
+  17502279:
+    template: Air_Elemental
+    at:       [344.223, 15.814, -266.342, 54]
+    level:    [79, 80]
+  17502280:
+    template: Air_Elemental
+    at:       [336.969, 15.814, -256.268, 127]
+    level:    [79, 80]
+  17502281:
+    template: Ornamental_Weapon
+    at:       [366.653, 15.753, -270.823, 121]
+    level:    [74, 76]
+  17502282:
+    template: Ornamental_Weapon
+    at:       [387.827, 15.531, -271.371, 32]
+    level:    [74, 76]
+  17502283:
+    template: Ornamental_Weapon
+    at:       [380.113, 15.673, -221.182, 127]
+    level:    [74, 76]
+  17502284:
+    template: Earth_Elemental
+    at:       [-176.570, -0.184, -332.456, 127]
+    level:    [79, 80]
+  17502285:
+    template: Earth_Elemental
+    at:       [-185.355, -0.184, -346.235, 61]
+    level:    [79, 80]
+  17502286:
+    template: Detector
+    at:       [-208.635, -0.511, -339.608, 127]
+    level:    [72, 74]
+  17502287:
+    template: Caretaker
+    at:       [-208.635, -0.511, -339.608, 127]
+    level:    [76, 79]
+  17502288:
+    template: Detector
+    at:       [-250.144, -0.342, -338.177, 127]
+    level:    [72, 74]
+  17502289:
+    template: Caretaker
+    at:       [-250.144, -0.342, -338.177, 127]
+    level:    [76, 79]
+  17502290:
+    template: Detector
+    level:    [72, 74]
+  17502291:
+    template: Caretaker
+    at:       [-341.360, 0.189, -155.627, 186]
+    level:    [76, 79]
+  17502292:
+    template: Detector
+    at:       [-255.870, -0.342, -340.011, 127]
+    level:    [72, 74]
+  17502293:
+    template: Caretaker
+    at:       [-255.870, -0.342, -340.011, 127]
+    level:    [76, 79]
+  17502294:
+    template: Detector
+    at:       [-277.193, -0.373, -340.823, 127]
+    level:    [72, 74]
+  17502295:
+    template: Caretaker
+    at:       [-277.193, -0.373, -340.823, 127]
+    level:    [76, 79]
+  17502296:
+    template: Earth_Elemental
+    at:       [-301.690, -0.226, -336.802, 127]
+    level:    [79, 80]
+  17502297:
+    template: Earth_Elemental
+    at:       [-309.394, -0.153, -339.831, 47]
+    level:    [79, 80]
+  17502298:
+    template: Mystic_Weapon
+    at:       [-320.948, -0.281, -288.151, 127]
+    level:    [74, 77]
+  17502299:
+    template: Mystic_Weapon
+    at:       [-311.421, -0.178, -288.808, 10]
+    level:    [74, 77]
+  17502300:
+    template: Mystic_Weapon
+    at:       [-320.776, 0.026, -282.093, 127]
+    level:    [74, 77]
+  17502301:
+    template: Mystic_Weapon
+    at:       [-283.637, -0.378, -294.782, 65]
+    level:    [74, 77]
+  17502302:
+    template: Mystic_Weapon
+    at:       [-281.203, 0.158, -278.934, 21]
+    level:    [74, 77]
+  17502303:
+    template: Mystic_Weapon
+    level:    [74, 77]
+  17502304:
+    template: Detector
+    at:       [-340.099, -0.677, -214.158, 37]
+    level:    [72, 74]
+  17502305:
+    template: Caretaker
+    at:       [-340.099, -0.677, -214.158, 37]
+    level:    [76, 79]
+  17502306:
+    template: Mystic_Weapon
+    at:       [-358.051, -1.113, -187.960, 127]
+    level:    [74, 77]
+  17502307:
+    template: Mystic_Weapon
+    at:       [-365.424, -0.197, -200.153, 127]
+    level:    [74, 77]
+  17502308:
+    template: Detector
+    at:       [-403.111, -0.909, -178.893]
+    level:    [72, 74]
+  17502309:
+    template: Caretaker
+    at:       [-403.111, -0.909, -178.893]
+    level:    [76, 79]
+  17502310:
+    template: Mystic_Weapon
+    at:       [-349.657, 4.761, -138.572, 127]
+    level:    [74, 77]
+  17502311:
+    template: Mystic_Weapon
+    at:       [-353.555, 6.000, -138.375, 126]
+    level:    [74, 77]
+  17502312:
+    template: Mystic_Weapon
+    level:    [74, 77]
+  17502313:
+    template: Mystic_Weapon
+    at:       [-390.256, 15.527, -187.640, 193]
+    level:    [74, 77]
+  17502314:
+    template: Earth_Elemental
+    at:       [-340.603, 15.717, -180.318, 127]
+    level:    [79, 80]
+  17502315:
+    template: Earth_Elemental
+    at:       [-336.353, 15.689, -175.438, 71]
+    level:    [79, 80]
+  17502316:
+    template: Earth_Elemental
+    at:       [-416.488, 15.764, -172.371, 127]
+    level:    [79, 80]
+  17502317:
+    template: Earth_Elemental
+    at:       [-430.444, 15.764, -180.525, 127]
+    level:    [79, 80]
+  17502318:
+    template: Mystic_Weapon
+    at:       [-329.478, 15.526, -231.967, 252]
+    level:    [74, 77]
+  17502319:
+    template: Mystic_Weapon
+    at:       [-328.778, 15.744, -206.591, 127]
+    level:    [74, 77]
+  17502320:
+    template: Earth_Elemental
+    at:       [-345.408, 15.767, -266.699, 58]
+    level:    [79, 80]
+  17502321:
+    template: Earth_Elemental
+    at:       [-327.835, 15.807, -266.510, 62]
+    level:    [79, 80]
+  17502322:
+    template: Mystic_Weapon
+    at:       [-387.387, 15.400, -272.610, 127]
+    level:    [74, 77]
+  17502323:
+    template: Mystic_Weapon
+    at:       [-373.630, 15.619, -271.502, 99]
+    level:    [74, 77]
+  17502324:
+    template: Earth_Elemental
+    at:       [-429.688, 15.700, -264.752, 72]
+    level:    [79, 80]
+  17502325:
+    template: Earth_Elemental
+    at:       [-423.536, 15.700, -267.947, 123]
+    level:    [79, 80]
+  17502326:
+    template: Mystic_Weapon
+    at:       [-427.832, 15.512, -230.994, 217]
+    level:    [74, 77]
+  17502327:
+    template: Mystic_Weapon
+    at:       [-431.277, 15.559, -213.840, 94]
+    level:    [74, 77]
+  17502328:
+    template: Mystic_Weapon
+    at:       [-393.255, 15.521, -224.116, 103]
+    level:    [74, 77]
+  17502329:
+    template: Detector
+    at:       [445.173, -0.319, -61.542, 127]
+    level:    [72, 74]
+  17502330:
+    template: Caretaker
+    at:       [445.173, -0.319, -61.542, 127]
+    level:    [76, 79]
+  17502331:
+    template: Dustbuster
+    at:       [402.272, -0.004, -45.580, 127]
+    level:    [75, 78]
+  17502332:
+    template: Dustbuster
+    at:       [399.513, 0.045, -36.566, 127]
+    level:    [75, 78]
+  17502333:
+    template: Dustbuster
+    at:       [392.457, 5.064, -100.816, 127]
+    level:    [75, 78]
+  17502334:
+    template: Dustbuster
+    at:       [397.871, 6.338, -100.498, 127]
+    level:    [75, 78]
+  17502335:
+    template: Detector
+    at:       [381.325, -1.060, -7.990, 127]
+    level:    [72, 74]
+  17502336:
+    template: Caretaker
+    at:       [381.325, -1.060, -7.990, 127]
+    level:    [76, 79]
+  17502337:
+    template: Dustbuster
+    at:       [376.597, 0.153, 36.155, 127]
+    level:    [75, 78]
+  17502338:
+    template: Dustbuster
+    at:       [379.585, -0.104, 47.871, 127]
+    level:    [75, 78]
+  17502339:
+    template: Dustbuster
+    at:       [390.132, 0.129, 39.485, 194]
+    level:    [75, 78]
+  17502340:
+    template: Dustbuster
+    at:       [390.349, 0.132, 40.231, 2]
+    level:    [75, 78]
+  17502341:
+    template: Dustbuster
+    at:       [393.384, -0.241, 50.630, 21]
+    level:    [75, 78]
+  17502342:
+    template: Dustbuster
+    at:       [398.027, -0.290, 30.814, 127]
+    level:    [75, 78]
+  17502343:
+    template: Detector
+    at:       [420.340, -0.793, 66.796, 127]
+    level:    [72, 74]
+  17502344:
+    template: Caretaker
+    at:       [420.340, -0.793, 66.796, 127]
+    level:    [76, 79]
+  17502345:
+    template: Thunder_Elemental
+    at:       [386.763, -0.105, 104.680, 127]
+    level:    [79, 80]
+  17502346:
+    template: Thunder_Elemental
+    at:       [379.492, -0.105, 101.150, 38]
+    level:    [79, 80]
+  17502347:
+    template: Detector
+    at:       [379.555, -0.497, 125.445, 192]
+    level:    [72, 74]
+  17502348:
+    template: Caretaker
+    at:       [378.653, -0.223, 202.218, 216]
+    level:    [76, 79]
+  17502349:
+    template: Detector
+    at:       [375.937, -0.195, 180.467, 127]
+    level:    [72, 74]
+  17502350:
+    template: Caretaker
+    at:       [375.937, -0.195, 180.467, 127]
+    level:    [76, 79]
+  17502351:
+    template: Detector
+    at:       [381.635, -0.195, 160.944, 38]
+    level:    [72, 74]
+  17502352:
+    template: Caretaker
+    at:       [381.635, -0.195, 160.944, 38]
+    level:    [76, 79]
+  17502353:
+    template: Detector
+    at:       [376.087, -0.195, 143.271, 127]
+    level:    [72, 74]
+  17502354:
+    template: Caretaker
+    at:       [376.087, -0.195, 143.271, 127]
+    level:    [76, 79]
+  17502355:
+    template: Detector
+    at:       [379.061, -0.491, 188.391, 249]
+    level:    [72, 74]
+  17502356:
+    template: Caretaker
+    at:       [378.843, -0.105, 94.661, 156]
+    level:    [76, 79]
+  17502357:
+    template: Thunder_Elemental
+    at:       [372.546, -0.078, 206.185, 126]
+    level:    [79, 80]
+  17502358:
+    template: Thunder_Elemental
+    at:       [380.078, -0.087, 227.002, 127]
+    level:    [79, 80]
+  17502359:
+    template: Detector
+    at:       [340.711, -0.212, 226.143, 127]
+    level:    [72, 74]
+  17502360:
+    template: Caretaker
+    at:       [340.711, -0.212, 226.143, 127]
+    level:    [76, 79]
+  17502361:
+    template: Dustbuster
+    at:       [309.472, -1.098, 279.829, 119]
+    level:    [75, 78]
+  17502362:
+    template: Dustbuster
+    at:       [334.307, 0.275, 283.795, 27]
+    level:    [75, 78]
+  17502363:
+    template: Dustbuster
+    at:       [314.612, -1.002, 289.072, 127]
+    level:    [75, 78]
+  17502364:
+    template: Dustbuster
+    at:       [357.574, -0.180, 268.929, 127]
+    level:    [75, 78]
+  17502365:
+    template: Dustbuster
+    at:       [373.462, -0.208, 280.389, 127]
+    level:    [75, 78]
+  17502366:
+    template: Dustbuster
+    at:       [359.540, 0.328, 281.436, 56]
+    level:    [75, 78]
+  17502367:
+    template: Detector
+    at:       [301.372, -0.212, 321.940, 127]
+    level:    [72, 74]
+  17502368:
+    template: Caretaker
+    at:       [301.372, -0.212, 321.940, 127]
+    level:    [76, 79]
+  17502369:
+    template: Dustbuster
+    at:       [314.240, -0.019, 356.705, 29]
+    level:    [75, 78]
+  17502370:
+    template: Dustbuster
+    at:       [325.406, -0.976, 364.426, 127]
+    level:    [75, 78]
+  17502371:
+    template: Detector
+    at:       [379.975, -0.212, 347.526, 127]
+    level:    [72, 74]
+  17502372:
+    template: Caretaker
+    at:       [379.975, -0.212, 347.526, 127]
+    level:    [76, 79]
+  17502373:
+    template: Detector
+    at:       [303.931, -0.433, 373.065, 41]
+    level:    [72, 74]
+  17502374:
+    template: Caretaker
+    at:       [303.931, -0.433, 373.065, 41]
+    level:    [76, 79]
+  17502375:
+    template: Dustbuster
+    at:       [326.598, 8.390, 421.499, 127]
+    level:    [75, 78]
+  17502376:
+    template: Dustbuster
+    at:       [331.104, 9.618, 421.260, 127]
+    level:    [75, 78]
+  17502377:
+    template: Dustbuster
+    at:       [429.895, 15.476, -46.051, 127]
+    level:    [75, 78]
+  17502378:
+    template: Dustbuster
+    at:       [443.961, 14.845, -35.704, 61]
+    level:    [75, 78]
+  17502379:
+    template: Dustbuster
+    at:       [468.143, 15.512, 10.201, 153]
+    level:    [75, 78]
+  17502380:
+    template: Dustbuster
+    at:       [379.093, 15.515, 16.759, 56]
+    level:    [75, 78]
+  17502381:
+    template: Dustbuster
+    at:       [465.418, 15.847, 63.408, 62]
+    level:    [75, 78]
+  17502382:
+    template: Dustbuster
+    at:       [451.966, 15.514, 49.318, 93]
+    level:    [75, 78]
+  17502383:
+    template: Dustbuster
+    at:       [367.510, 15.525, -32.970, 57]
+    level:    [75, 78]
+  17502384:
+    template: Dustbuster
+    at:       [367.138, 15.516, -6.536, 127]
+    level:    [75, 78]
+  17502385:
+    template: Dustbuster
+    at:       [388.575, 15.550, 34.140, 87]
+    level:    [75, 78]
+  17502386:
+    template: Dustbuster
+    at:       [401.337, 15.510, 50.821, 127]
+    level:    [75, 78]
+  17502387:
+    template: Dustbuster
+    at:       [318.550, 15.586, 370.266, 127]
+    level:    [75, 78]
+  17502388:
+    template: Dustbuster
+    at:       [320.598, 15.785, 354.153, 127]
+    level:    [75, 78]
+  17502389:
+    template: Dustbuster
+    at:       [329.615, 15.542, 284.499, 64]
+    level:    [75, 78]
+  17502390:
+    template: Dustbuster
+    at:       [353.494, 15.519, 287.615, 127]
+    level:    [75, 78]
+  17502391:
+    template: Dustbuster
+    at:       [417.671, 15.931, 304.006, 71]
+    level:    [75, 78]
+  17502392:
+    template: Dustbuster
+    at:       [417.877, 15.558, 312.055, 127]
+    level:    [75, 78]
+  17502393:
+    template: Dustbuster
+    at:       [394.784, 15.544, 329.041, 250]
+    level:    [75, 78]
+  17502394:
+    template: Dustbuster
+    at:       [390.896, 15.539, 347.179, 156]
+    level:    [75, 78]
+  17502395:
+    template: Dustbuster
+    at:       [390.174, 15.533, 370.923, 127]
+    level:    [75, 78]
+  17502396:
+    template: Dustbuster
+    at:       [392.756, 15.538, 382.645, 127]
+    level:    [75, 78]
+  17502397:
+    template: Detector
+    at:       [-357.142, -0.242, 339.289, 127]
+    level:    [72, 74]
+  17502398:
+    template: Caretaker
+    at:       [-357.142, -0.242, 339.289, 127]
+    level:    [76, 79]
+  17502399:
+    template: Dustbuster
+    at:       [-324.620, -0.525, 365.319, 104]
+    level:    [75, 78]
+  17502400:
+    template: Dustbuster
+    at:       [-318.547, 0.154, 366.086, 127]
+    level:    [75, 78]
+  17502401:
+    template: Dustbuster
+    at:       [-313.784, 5.753, 420.303]
+    level:    [75, 78]
+  17502402:
+    template: Dustbuster
+    at:       [-318.317, 6.821, 420.565, 1]
+    level:    [75, 78]
+  17502403:
+    template: Detector
+    at:       [-298.713, -0.185, 313.838, 63]
+    level:    [72, 74]
+  17502404:
+    template: Caretaker
+    at:       [-298.713, -0.185, 313.838, 63]
+    level:    [76, 79]
+  17502405:
+    template: Dustbuster
+    at:       [-369.987, -0.207, 287.915, 97]
+    level:    [75, 78]
+  17502406:
+    template: Dustbuster
+    at:       [-365.128, 0.015, 276.298, 127]
+    level:    [75, 78]
+  17502407:
+    template: Dustbuster
+    at:       [-346.285, 0.301, 284.420, 231]
+    level:    [75, 78]
+  17502408:
+    template: Dustbuster
+    at:       [-314.394, -0.199, 292.241, 127]
+    level:    [75, 78]
+  17502409:
+    template: Dustbuster
+    at:       [-307.834, -0.202, 276.816, 62]
+    level:    [75, 78]
+  17502410:
+    template: Dustbuster
+    at:       [-328.854, 0.376, 281.681, 127]
+    level:    [75, 78]
+  17502411:
+    template: Detector
+    at:       [-341.703, -0.185, 229.512, 127]
+    level:    [72, 74]
+  17502412:
+    template: Caretaker
+    at:       [-341.703, -0.185, 229.512, 127]
+    level:    [76, 79]
+  17502413:
+    template: Water_Elemental
+    at:       [-378.473, -0.088, 216.515, 36]
+    level:    [79, 80]
+  17502414:
+    template: Water_Elemental
+    at:       [-378.747, -0.088, 223.705, 127]
+    level:    [79, 80]
+  17502415:
+    template: Detector
+    at:       [-380.828, -0.436, 192.111, 63]
+    level:    [72, 74]
+  17502416:
+    template: Caretaker
+    at:       [-380.828, -0.436, 192.111, 63]
+    level:    [76, 79]
+  17502417:
+    template: Detector
+    at:       [-378.065, -0.130, 146.303, 64]
+    level:    [72, 74]
+  17502418:
+    template: Caretaker
+    at:       [-378.065, -0.130, 146.303, 64]
+    level:    [76, 79]
+  17502419:
+    template: Detector
+    at:       [-379.304, -0.130, 152.098, 12]
+    level:    [72, 74]
+  17502420:
+    template: Caretaker
+    at:       [-404.246, -0.070, 51.862, 222]
+    level:    [76, 79]
+  17502421:
+    template: Detector
+    at:       [-383.506, -0.130, 175.246, 74]
+    level:    [72, 74]
+  17502422:
+    template: Caretaker
+    at:       [-383.506, -0.130, 175.246, 74]
+    level:    [76, 79]
+  17502423:
+    template: Detector
+    at:       [-403.221, -0.008, 54.982, 20]
+    level:    [72, 74]
+  17502424:
+    template: Caretaker
+    at:       [-405.489, -0.004, 55.081, 12]
+    level:    [76, 79]
+  17502425:
+    template: Water_Elemental
+    at:       [-380.221, -0.359, 94.782, 3]
+    level:    [79, 80]
+  17502426:
+    template: Water_Elemental
+    at:       [-382.781, -0.359, 110.386, 25]
+    level:    [79, 80]
+  17502427:
+    template: Detector
+    at:       [-419.206, -0.130, 73.550, 127]
+    level:    [72, 74]
+  17502428:
+    template: Caretaker
+    at:       [-419.206, -0.130, 73.550, 127]
+    level:    [76, 79]
+  17502429:
+    template: Dustbuster
+    at:       [-406.623, -0.869, 31.416, 99]
+    level:    [75, 78]
+  17502430:
+    template: Dustbuster
+    at:       [-384.306, 0.380, 42.810, 127]
+    level:    [75, 78]
+  17502431:
+    template: Dustbuster
+    at:       [-405.462, 0.029, 41.707, 231]
+    level:    [75, 78]
+  17502432:
+    template: Dustbuster
+    at:       [-351.980, -1.007, 42.747, 19]
+    level:    [75, 78]
+  17502433:
+    template: Dustbuster
+    at:       [-355.011, -0.979, 42.716, 127]
+    level:    [75, 78]
+  17502434:
+    template: Dustbuster
+    at:       [-352.796, -0.118, 31.338, 42]
+    level:    [75, 78]
+  17502435:
+    template: Detector
+    at:       [-378.797, -0.516, -10.406, 65]
+    level:    [72, 74]
+  17502436:
+    template: Caretaker
+    at:       [-378.797, -0.516, -10.406, 65]
+    level:    [76, 79]
+  17502437:
+    template: Dustbuster
+    at:       [-400.669, 0.156, -32.973, 17]
+    level:    [75, 78]
+  17502438:
+    template: Dustbuster
+    at:       [-396.054, -0.258, -27.397, 127]
+    level:    [75, 78]
+  17502439:
+    template: Detector
+    at:       [-452.673, -0.486, -56.944, 127]
+    level:    [72, 74]
+  17502440:
+    template: Caretaker
+    at:       [-452.673, -0.486, -56.944, 127]
+    level:    [76, 79]
+  17502441:
+    template: Dustbuster
+    at:       [-398.118, 6.433, -98.574]
+    level:    [75, 78]
+  17502442:
+    template: Dustbuster
+    at:       [-404.476, 7.911, -98.537]
+    level:    [75, 78]
+  17502443:
+    template: Water_Elemental
+    at:       [-332.599, 15.695, 384.905, 47]
+    level:    [79, 80]
+  17502444:
+    template: Water_Elemental
+    at:       [-343.746, 16.073, 376.166, 127]
+    level:    [79, 80]
+  17502445:
+    template: Dustbuster
+    at:       [-349.080, 15.604, 322.485, 127]
+    level:    [75, 78]
+  17502446:
+    template: Dustbuster
+    at:       [-351.956, 15.067, 327.546, 127]
+    level:    [75, 78]
+  17502447:
+    template: Dustbuster
+    at:       [-412.200, 15.603, 308.544, 21]
+    level:    [75, 78]
+  17502448:
+    template: Dustbuster
+    at:       [-421.048, 14.710, 303.298, 99]
+    level:    [75, 78]
+  17502449:
+    template: Dustbuster
+    at:       [-289.138, 15.574, 350.815, 207]
+    level:    [75, 78]
+  17502450:
+    template: Dustbuster
+    at:       [-285.427, 15.615, 329.731, 34]
+    level:    [75, 78]
+  17502451:
+    template: Dustbuster
+    at:       [-402.475, 15.266, -31.287, 127]
+    level:    [75, 78]
+  17502452:
+    template: Dustbuster
+    at:       [-400.711, 15.090, -29.138, 127]
+    level:    [75, 78]
+  17502453:
+    template: Dustbuster
+    at:       [-369.279, 14.743, 12.246, 127]
+    level:    [75, 78]
+  17502454:
+    template: Dustbuster
+    at:       [-368.566, 14.688, 25.610, 91]
+    level:    [75, 78]
+  17502455:
+    template: Dustbuster
+    at:       [-444.323, 15.134, 27.575, 127]
+    level:    [75, 78]
+  17502456:
+    template: Dustbuster
+    at:       [-451.554, 15.132, 42.537, 127]
+    level:    [75, 78]
+  17502457:
+    template: Dustbuster
+    at:       [-471.738, 15.197, -9.730, 56]
+    level:    [75, 78]
+  17502458:
+    template: Dustbuster
+    at:       [-474.280, 15.161, -30.413, 118]
+    level:    [75, 78]
+  17502459:
+    template: Dustbuster
+    at:       [-454.622, 15.483, -68.087, 127]
+    level:    [75, 78]
+  17502460:
+    template: Dustbuster
+    at:       [-458.528, 15.503, -54.550, 61]
+    level:    [75, 78]
+  17502461:
+    template: Detector
+    at:       [-218.758, -0.268, 434.645, 64]
+    level:    [72, 74]
+  17502462:
+    template: Caretaker
+    at:       [-218.758, -0.268, 434.645, 64]
+    level:    [76, 79]
+  17502463:
+    template: Enkidu
+    at:       [-200.186, 0.047, 404.709]
+    level:    [77, 80]
+  17502464:
+    template: Enkidu
+    at:       [-202.305, -0.033, 395.910, 127]
+    level:    [77, 80]
+  17502465:
+    template: Enkidu
+    at:       [-258.695, 5.137, 392.743, 127]
+    level:    [77, 80]
+  17502466:
+    template: Enkidu
+    at:       [-258.651, 8.467, 407.019, 127]
+    level:    [77, 80]
+  17502467:
+    template: Detector
+    at:       [-171.230, -0.718, 380.852, 127]
+    level:    [72, 74]
+  17502468:
+    template: Caretaker
+    at:       [-171.230, -0.718, 380.852, 127]
+    level:    [76, 79]
+  17502469:
+    template: Enkidu
+    at:       [-137.028, -0.784, 408.836, 31]
+    level:    [77, 80]
+  17502470:
+    template: Enkidu
+    at:       [-123.063, 0.273, 407.635, 117]
+    level:    [77, 80]
+  17502471:
+    template: Enkidu
+    at:       [-118.598, 0.327, 410.288, 165]
+    level:    [77, 80]
+  17502472:
+    template: Enkidu
+    at:       [-108.488, -0.592, 427.106, 22]
+    level:    [77, 80]
+  17502473:
+    template: Enkidu
+    at:       [-128.554, 0.005, 427.920, 19]
+    level:    [77, 80]
+  17502474:
+    template: Enkidu
+    at:       [-108.323, -0.249, 442.471, 44]
+    level:    [77, 80]
+  17502475:
+    template: Detector
+    at:       [-62.668, -0.659, 453.614, 127]
+    level:    [72, 74]
+  17502476:
+    template: Caretaker
+    at:       [-62.668, -0.659, 453.614, 127]
+    level:    [76, 79]
+  17502477:
+    template: Ice_Elemental
+    at:       [-68.946, -0.082, 420.557, 125]
+    level:    [79, 80]
+  17502478:
+    template: Ice_Elemental
+    at:       [-60.791, -0.082, 425.105, 127]
+    level:    [79, 80]
+  17502479:
+    template: Detector
+    at:       [-23.158, -0.250, 417.508, 19]
+    level:    [72, 74]
+  17502480:
+    template: Caretaker
+    at:       [-23.158, -0.250, 417.508, 19]
+    level:    [76, 79]
+  17502481:
+    template: Detector
+    at:       [13.115, -0.326, 421.193, 127]
+    level:    [72, 74]
+  17502482:
+    template: Caretaker
+    at:       [13.115, -0.326, 421.193, 127]
+    level:    [76, 79]
+  17502483:
+    template: Detector
+    at:       [20.057, -0.326, 421.014, 127]
+    level:    [72, 74]
+  17502484:
+    template: Caretaker
+    at:       [20.057, -0.326, 421.014, 127]
+    level:    [76, 79]
+  17502485:
+    template: Detector
+    at:       [-16.124, -0.326, 416.174, 25]
+    level:    [72, 74]
+  17502486:
+    template: Caretaker
+    at:       [-16.124, -0.326, 416.174, 25]
+    level:    [76, 79]
+  17502487:
+    template: Detector
+    at:       [50.151, -0.119, 419.640, 127]
+    level:    [72, 74]
+  17502488:
+    template: Caretaker
+    at:       [50.151, -0.119, 419.640, 127]
+    level:    [76, 79]
+  17502489:
+    template: Fire_Elemental
+    at:       [68.145, -0.156, 419.087, 127]
+    level:    [79, 80]
+  17502490:
+    template: Fire_Elemental
+    at:       [64.604, -0.157, 420.568, 127]
+    level:    [79, 80]
+  17502491:
+    template: Detector
+    at:       [60.548, -0.173, 443.991, 71]
+    level:    [72, 74]
+  17502492:
+    template: Caretaker
+    at:       [60.548, -0.173, 443.991, 71]
+    level:    [76, 79]
+  17502493:
+    template: Enkidu
+    at:       [124.206, -1.045, 442.473, 127]
+    level:    [77, 80]
+  17502494:
+    template: Enkidu
+    at:       [117.646, 0.127, 442.201, 127]
+    level:    [77, 80]
+  17502495:
+    template: Enkidu
+    at:       [126.135, 0.355, 435.370, 127]
+    level:    [77, 80]
+  17502496:
+    template: Enkidu
+    at:       [118.235, -0.188, 390.142, 14]
+    level:    [77, 80]
+  17502497:
+    template: Enkidu
+    at:       [119.882, 0.125, 396.030, 127]
+    level:    [77, 80]
+  17502498:
+    template: Enkidu
+    at:       [121.377, -0.182, 390.296, 124]
+    level:    [77, 80]
+  17502499:
+    template: Detector
+    at:       [184.653, -0.173, 381.001, 127]
+    level:    [72, 74]
+  17502500:
+    template: Caretaker
+    at:       [184.653, -0.173, 381.001, 127]
+    level:    [76, 79]
+  17502501:
+    template: Enkidu
+    at:       [191.009, -0.109, 404.808, 127]
+    level:    [77, 80]
+  17502502:
+    template: Enkidu
+    at:       [192.766, -0.193, 392.565, 41]
+    level:    [77, 80]
+  17502503:
+    template: Detector
+    at:       [218.387, -0.173, 454.910, 127]
+    level:    [72, 74]
+  17502504:
+    template: Caretaker
+    at:       [218.387, -0.173, 454.910, 127]
+    level:    [76, 79]
+  17502505:
+    template: Enkidu
+    at:       [258.682, 10.597, 417.213, 127]
+    level:    [77, 80]
+  17502506:
+    template: Enkidu
+    at:       [259.177, 9.152, 410.501, 61]
+    level:    [77, 80]
+  17502507:
+    template: Ice_Elemental
+    at:       [-225.547, 15.752, 452.071, 61]
+    level:    [79, 80]
+  17502508:
+    template: Ice_Elemental
+    at:       [-218.523, 15.749, 464.014, 127]
+    level:    [79, 80]
+  17502509:
+    template: Ice_Elemental
+    at:       [-225.688, 15.746, 367.441, 126]
+    level:    [79, 80]
+  17502510:
+    template: Ice_Elemental
+    at:       [-218.462, 15.746, 371.749, 121]
+    level:    [79, 80]
+  17502511:
+    template: Enkidu
+    at:       [-191.647, 15.704, 474.627, 127]
+    level:    [77, 80]
+  17502512:
+    template: Enkidu
+    at:       [-171.344, 15.706, 474.755, 100]
+    level:    [77, 80]
+  17502513:
+    template: Enkidu
+    at:       [-187.580, 15.715, 368.112, 127]
+    level:    [77, 80]
+  17502514:
+    template: Enkidu
+    at:       [-171.304, 15.704, 364.809, 33]
+    level:    [77, 80]
+  17502515:
+    template: Enkidu
+    at:       [-108.683, 15.700, 439.900, 127]
+    level:    [77, 80]
+  17502516:
+    template: Enkidu
+    at:       [-113.502, 15.558, 428.442, 127]
+    level:    [77, 80]
+  17502517:
+    template: Enkidu
+    at:       [-121.906, 16.020, 445.475, 225]
+    level:    [77, 80]
+  17502518:
+    template: Enkidu
+    at:       [-115.316, 16.047, 396.926, 99]
+    level:    [77, 80]
+  17502519:
+    template: Enkidu
+    at:       [-125.799, 16.108, 403.270, 55]
+    level:    [77, 80]
+  17502520:
+    template: Enkidu
+    at:       [-120.728, 16.242, 404.489, 26]
+    level:    [77, 80]
+  17502521:
+    template: Enkidu
+    at:       [-173.117, 15.684, 422.770, 127]
+    level:    [77, 80]
+  17502522:
+    template: Fire_Elemental
+    at:       [225.701, 15.676, 411.091, 127]
+    level:    [79, 80]
+  17502523:
+    template: Fire_Elemental
+    at:       [217.230, 15.676, 422.294, 127]
+    level:    [79, 80]
+  17502524:
+    template: Enkidu
+    at:       [194.244, 15.711, 368.082, 33]
+    level:    [77, 80]
+  17502525:
+    template: Enkidu
+    at:       [171.232, 15.765, 367.796, 127]
+    level:    [77, 80]
+  17502526:
+    template: Enkidu
+    at:       [147.592, 15.711, 368.503, 96]
+    level:    [77, 80]
+  17502527:
+    template: Enkidu
+    at:       [130.281, 15.712, 364.918, 35]
+    level:    [77, 80]
+  17502528:
+    template: Enkidu
+    at:       [152.048, 15.770, 448.715, 110]
+    level:    [77, 80]
+  17502529:
+    template: Enkidu
+    at:       [160.410, 15.781, 431.159, 127]
+    level:    [77, 80]
+  17502530:
+    template: Enkidu
+    at:       [162.979, 15.695, 451.967, 127]
+    level:    [77, 80]
+  17502531:
+    template: Enkidu
+    at:       [134.874, 16.156, 444.734, 127]
+    level:    [77, 80]
+  17502532:
+    template: Enkidu
+    at:       [136.084, 16.264, 439.695, 52]
+    level:    [77, 80]
+  17502533:
+    template: Enkidu
+    at:       [134.490, 15.500, 461.072, 10]
+    level:    [77, 80]
+  17502534:
+    template: Enkidu
+    at:       [113.764, 15.711, 377.556, 60]
+    level:    [77, 80]
+  17502535:
+    template: Detector
+    at:       [406.299, 15.601, -260.033, 127]
+    level:    [72, 74]
+  17502536:
+    template: Caretaker
+    at:       [406.299, 15.601, -260.033, 127]
+    level:    [76, 79]
+  17502537:
+    template: Detector
+    at:       [388.640, 15.629, -180.003]
+    level:    [72, 74]
+  17502538:
+    template: Caretaker
+    at:       [388.640, 15.629, -180.003]
+    level:    [76, 79]
+  17502539:
+    template: Detector
+    at:       [-420.000, 15.573, -199.804, 63]
+    level:    [72, 74]
+  17502540:
+    template: Caretaker
+    at:       [-420.000, 15.573, -199.804, 63]
+    level:    [76, 79]
+  17502541:
+    template: Detector
+    at:       [-374.407, 15.549, -180.005]
+    level:    [72, 74]
+  17502542:
+    template: Caretaker
+    at:       [-374.407, 15.549, -180.005]
+    level:    [76, 79]
+  17502543:
+    template: Detector
+    at:       [427.791, 15.502, -22.908, 27]
+    level:    [72, 74]
+  17502544:
+    template: Caretaker
+    at:       [427.791, 15.502, -22.908, 27]
+    level:    [76, 79]
+  17502545:
+    template: Detector
+    at:       [408.816, 15.443, -20.126, 127]
+    level:    [72, 74]
+  17502546:
+    template: Caretaker
+    at:       [408.816, 15.443, -20.126, 127]
+    level:    [76, 79]
+  17502547:
+    template: Detector
+    at:       [-400.905, 15.396, -33.540, 127]
+    level:    [72, 74]
+  17502548:
+    template: Caretaker
+    at:       [-400.905, 15.396, -33.540, 127]
+    level:    [76, 79]
+  17502549:
+    template: Detector
+    at:       [-379.768, 15.152, 31.326, 63]
+    level:    [72, 74]
+  17502550:
+    template: Caretaker
+    at:       [-379.768, 15.152, 31.326, 63]
+    level:    [76, 79]
+  17502551:
+    template: Detector
+    at:       [348.057, 15.532, 300.066]
+    level:    [72, 74]
+  17502552:
+    template: Caretaker
+    at:       [348.057, 15.532, 300.066]
+    level:    [76, 79]
+  17502553:
+    template: Detector
+    at:       [300.637, 15.485, 309.815, 127]
+    level:    [72, 74]
+  17502554:
+    template: Caretaker
+    at:       [300.637, 15.485, 309.815, 127]
+    level:    [76, 79]
+  17502555:
+    template: Detector
+    at:       [-380.071, 15.569, 347.653, 64]
+    level:    [72, 74]
+  17502556:
+    template: Caretaker
+    at:       [-380.071, 15.569, 347.653, 64]
+    level:    [76, 79]
+  17502557:
+    template: Detector
+    at:       [-299.789, 15.615, 350.784, 63]
+    level:    [72, 74]
+  17502558:
+    template: Caretaker
+    at:       [-299.789, 15.615, 350.784, 63]
+    level:    [76, 79]
+  17502559:
+    template: Detector
+    at:       [220.013, 15.618, 429.744, 127]
+    level:    [72, 74]
+  17502560:
+    template: Caretaker
+    at:       [220.013, 15.618, 429.744, 127]
+    level:    [76, 79]
+  17502561:
+    template: Detector
+    at:       [139.828, 15.711, 415.097, 127]
+    level:    [72, 74]
+  17502562:
+    template: Caretaker
+    at:       [139.828, 15.711, 415.097, 127]
+    level:    [76, 79]
+  17502563:
+    template: Detector
+    at:       [-208.756, 15.524, 379.944]
+    level:    [72, 74]
+  17502564:
+    template: Caretaker
+    at:       [-208.756, 15.524, 379.944]
+    level:    [76, 79]
+  17502565:
+    template: Detector
+    at:       [-220.010, 15.587, 405.821, 127]
+    level:    [72, 74]
+  17502566:
+    template: Caretaker
+    at:       [-220.010, 15.587, 405.821, 127]
+    level:    [76, 79]
+  17502567:
+    template: Mimic
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 70]
+  17502568:
+    template: Brigandish_Blade
+    at:       [-1.000, -1.000, -283.000, 63]
+    level:    [82, 84]
+  17502569:
+    template: Steam_Cleaner
+    at:       [317.000, -1.000, 361.000, 65]
+    level:    [81, 83]
+  17502570:
+    template: Zipacna
+    at:       [-195.000, -0.500, 396.000, 1]
+    level:    [83, 85]
+  17502571:
+    template: Uptala
+    at:       [-115.352, 0.035, -388.774, 131]
+    level:    [95, 96]
+  17502572:
+    template: Bisa
+    at:       [-112.754, -0.113, -388.136, 236]
+    level:    [91, 92]
+  17502573:
+    template: Trna
+    at:       [-119.207, 0.487, -385.769, 107]
+    level:    [91, 92]
+  17502574:
+    template: Uptala
+    at:       [379.855, 0.075, 39.644, 115]
+    level:    [95, 96]
+  17502575:
+    template: Bisa
+    at:       [377.905, 0.475, 41.399, 81]
+    level:    [91, 92]
+  17502576:
+    template: Trna
+    at:       [376.933, 0.234, 41.674, 67]
+    level:    [91, 92]
+  17502577:
+    template: Uptala
+    at:       [-341.140, 0.023, 284.829, 65]
+    level:    [95, 96]
+  17502578:
+    template: Bisa
+    at:       [-341.602, 0.137, 287.794, 41]
+    level:    [91, 92]
+  17502579:
+    template: Trna
+    at:       [-341.085, 0.041, 286.685, 207]
+    level:    [91, 92]
+
+slots:
+  - members:
+      17502215: {} # Ornamental_Weapon
+      17502218: {} # Ornamental_Weapon
+  - members:
+      17502225: {} # Mystic_Weapon
+      17502228: {} # Mystic_Weapon
+  - members:
+      17502241: {} # Detector
+      17502247: {} # Detector
+  - members:
+      17502245: {} # Detector
+      17502249: {} # Detector
+  - members:
+      17502255: {} # Ornamental_Weapon
+      17502258: {} # Ornamental_Weapon
+  - members:
+      17502267: {} # Ornamental_Weapon
+      17502268: {} # Ornamental_Weapon
+  - members:
+      17502273: {} # Ornamental_Weapon
+      17502274: {} # Ornamental_Weapon
+  - members:
+      17502275: {} # Ornamental_Weapon
+      17502276: {} # Ornamental_Weapon
+  - members:
+      17502286: {} # Detector
+      17502290: {} # Detector
+  - members:
+      17502292: {} # Detector
+      17502294: {} # Detector
+  - members:
+      17502300: {} # Mystic_Weapon
+      17502303: {} # Mystic_Weapon
+  - members:
+      17502312: {} # Mystic_Weapon
+      17502313: {} # Mystic_Weapon
+  - members:
+      17502318: {} # Mystic_Weapon
+      17502322: {} # Mystic_Weapon
+  - members:
+      17502319: {} # Mystic_Weapon
+      17502323: {} # Mystic_Weapon
+  - members:
+      17502339: {} # Dustbuster
+      17502342: {} # Dustbuster
+  - members:
+      17502347: {} # Detector
+      17502351: {} # Detector
+  - members:
+      17502353: {} # Detector
+      17502355: {} # Detector
+  - members:
+      17502363: {} # Dustbuster
+      17502366: {} # Dustbuster
+  - members:
+      17502379: {} # Dustbuster
+      17502383: {} # Dustbuster
+  - members:
+      17502380: {} # Dustbuster
+      17502384: {} # Dustbuster
+  - members:
+      17502391: {} # Dustbuster
+      17502393: {} # Dustbuster
+  - members:
+      17502392: {} # Dustbuster
+      17502394: {} # Dustbuster
+  - members:
+      17502407: {} # Dustbuster
+      17502410: {} # Dustbuster
+  - members:
+      17502415: {} # Detector
+      17502419: {} # Detector
+  - members:
+      17502421: {} # Detector
+      17502423: {} # Detector
+  - members:
+      17502431: {} # Dustbuster
+      17502434: {} # Dustbuster
+  - members:
+      17502449: {} # Dustbuster
+      17502450: {} # Dustbuster
+  - members:
+      17502453: {} # Dustbuster
+      17502454: {} # Dustbuster
+  - members:
+      17502457: {} # Dustbuster
+      17502458: {} # Dustbuster
+  - members:
+      17502471: {} # Enkidu
+      17502474: {} # Enkidu
+  - members:
+      17502479: {} # Detector
+      17502483: {} # Detector
+  - members:
+      17502485: {} # Detector
+      17502487: {} # Detector
+  - members:
+      17502495: {} # Enkidu
+      17502498: {} # Enkidu
+  - members:
+      17502511: {} # Enkidu
+      17502512: {} # Enkidu
+  - members:
+      17502513: {} # Enkidu
+      17502514: {} # Enkidu
+  - members:
+      17502517: {} # Enkidu
+      17502520: {} # Enkidu
+  - members:
+      17502524: {} # Enkidu
+      17502526: {} # Enkidu
+  - members:
+      17502525: {} # Enkidu
+      17502527: {} # Enkidu
+  - members:
+      17502530: {} # Enkidu
+      17502533: {} # Enkidu

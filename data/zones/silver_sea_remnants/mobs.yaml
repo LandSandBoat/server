@@ -1,0 +1,4688 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Acrolith:
+    id:            39
+    species:       acrolith
+    type:          [event]
+    skill_list_id: 1
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  2
+          light:    6
+          dark:    11
+        rank_status:
+          paralyze:     3
+          bind:         3
+          silence:      3
+          slow:         3
+          light_sleep:  6
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1778
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Apkallu:
+    id:            197
+    species:       apkallu
+    skill_list_id: 27
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    5
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       5
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1723
+        entity_flags:  1153
+        animation_sub:    5
+        hitbox:           6
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Chariot:
+    id:            216
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1821
+        entity_flags: 1153
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Archaic_Gear:
+    id:            218
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Gear_2:
+    id:            218
+    display_name:  Archaic_Gear
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Gears:
+    id:            219
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Gears_2:
+    id:            219
+    display_name:  Archaic_Gears
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Rampart:
+    id:            221
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_alexandrite
+
+  Archaic_Rampart_2:
+    id:            221
+    display_name:  Archaic_Rampart
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ashu_Talif_Crew_cor:
+    id:            5728
+    display_name:  Ashu_Talif_Crew
+    species:       fomor
+    type:          [notorious, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1897
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ashu_Talif_Crew_mnk:
+    id:            5430
+    display_name:  Ashu_Talif_Crew
+    species:       fomor
+    type:          [notorious, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1900
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Ashu_Talif_Crew_rdm:
+    id:            5431
+    display_name:  Ashu_Talif_Crew
+    species:       fomor
+    type:          [notorious, battlefield]
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1899
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Ashu_Talif_Crew_rng:
+    id:            263
+    display_name:  Ashu_Talif_Crew
+    species:       fomor
+    type:          [notorious, battlefield]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1898
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Citadel_Chelonian:
+    id:            732
+    species:       adamantoise
+    type:          [notorious]
+    skill_list_id: 2
+    attributes:
+      combat:
+        skill: scythe
+        delay: 380
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:     4
+          earth:   11
+          thunder: 11
+          water:   11
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      4
+          slow:        11
+          poison:      11
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 401
+        entity_flags:  3
+        hitbox:       27
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: always
+          item:   nemains_crown
+        - chance: 3
+          item:   hikazu_hara-ate
+
+  Deadpan_Devilet:
+    id:            933
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1727
+        entity_flags:  133
+        animation_sub:   4
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Deinonychus:
+    id:            962
+    species:       raptor
+    skill_list_id: 210
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      resists:
+        rank_element:
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -3
+          light:   -2
+          dark:    -2
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -3
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 316
+        entity_flags: 129
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Dekka:
+    id:            963
+    species:       imp
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1727
+        entity_flags:  159
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   njords_ledelsens
+        - chance: 6
+          item:   cotton_coin_purse
+        - chance: rare
+          item:   enlils_crackows
+
+  Devilet:
+    id:            1017
+    species:       imp
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1727
+        entity_flags:  133
+        animation_sub:   4
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Don_Poroggo:
+    id:            1079
+    species:       red_poroggo
+    spell_list_id: 21
+    skill_list_id: 196
+    attributes:
+      combat:
+        skill: axe
+        delay: 150
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:      2
+          earth:    1
+          thunder: -1
+          water:    8
+          light:    6
+        rank_status:
+          paralyze:    2
+          bind:        2
+          slow:        1
+          poison:      8
+          light_sleep: 6
+      render:
+        look:
+          type:  standard
+          model: 1813
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   enyos_breastplate
+        - chance: always
+          item:   nemains_robe
+
+  Doom_Mage_SSR:
+    id:            6533
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Gakke:
+    id:            1448
+    species:       imp
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  157
+        animation_sub:   4
+        name_prefix:    32
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Garm:
+    id:            1471
+    species:       hound
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 129
+        hitbox:        21
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Guard_Skeleton_blm_SSR:
+    id:            6555
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Guard_Skeleton_war_SSR:
+    id:            6556
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags:  129
+        animation_sub:  16
+        hitbox:         10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Gyroscopic_Gear:
+    id:            1862
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 133
+        model_size:     2
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   anus_gages
+        - chance: uncommon
+          item:   cotton_coin_purse
+        - chance: 7
+          item:   freyas_gloves
+
+  Gyroscopic_Gears:
+    id:            1863
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags: 129
+        hitbox:         8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: always
+          item:   enyos_mask
+        - chance: 74
+          item:   piece_of_alexandrite
+        - chance: 3
+          item:   deimoss_cuisses
+
+  Hammerblow_Majanun:
+    id:            1887
+    species:       fomor
+    type:          [notorious]
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1900
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: 8
+          item:   hikazu_kabuto
+
+  Haunt_SSR:
+    id:            6507
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 129
+        hitbox:         6
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Heraldic_Imp:
+    id:            1933
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Imp:
+    id:            2065
+    species:       imp
+    spell_list_id: 21
+    skill_list_id: 165
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  1153
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Long-Armed_Chariot:
+    id:            2431
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      jobs: [war, bst]
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1825
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   linen_coin_purse
+        - chance: always
+          one_of: [bodbs_cuffs, freyrs_jerkin, eas_brais, freyrs_mask, tsukikazu_sune-ate, phoboss_gauntlets]
+        - chance: always
+          one_of: [bodbs_cuffs, freyrs_jerkin, eas_brais, freyrs_mask, tsukikazu_sune-ate, phoboss_gauntlets]
+
+  Long-Armed_Chariot_2:
+    id:            2431
+    display_name:  Long-Armed_Chariot
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      jobs: [war, bst]
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1825
+        entity_flags: 129
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Night_Eft:
+    id:            2878
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+        delay: 210
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1349
+        entity_flags:  3
+        hitbox:       10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Orobon_AR:
+    id:            6722
+    display_name:  Orobon
+    species:       orobon
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags:  3
+        hitbox:       17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Powderkeg_Yanadahn:
+    id:            3191
+    species:       fomor
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:  -2
+          ice:    4
+          light: -2
+          dark:   4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  misc
+          model: 1899
+        entity_flags:  3
+        model_size:    1
+        hitbox:       17
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: always
+          item:   hoshikazu_hakama
+        - chance: 4
+          item:   machas_slops
+
+  Psycheflayer:
+    id:            3215
+    species:       soulflayer
+    spell_list_id: 28
+    skill_list_id: 233
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:    2
+          water:  9
+          light: -1
+          dark:  11
+        rank_status:
+          paralyze:     2
+          bind:         2
+          poison:       9
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1775
+        entity_flags:  129
+        animation_sub:  12
+        hitbox:         15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Sand_Lizard:
+    id:            3456
+    species:       hill_lizard
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:   -3
+          wind:  -3
+          water: -2
+          light: -2
+          dark:  -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+spawns:
+  17088513:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [380.410, 15.500, -259.440]
+    level:    [73, 75]
+  17088514:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [469.150, 11.498, -327.440]
+    level:    [73, 75]
+  17088515:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [471.800, 11.500, -351.910]
+    level:    [73, 75]
+  17088516:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [496.550, 11.550, -352.470]
+    level:    [73, 75]
+  17088517:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [496.510, 11.550, -327.540]
+    level:    [73, 75]
+  17088518:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [469.270, 15.500, -250.880]
+    level:    [73, 75]
+  17088519:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [473.970, 15.500, -269.500]
+    level:    [73, 75]
+  17088520:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [416.040, 11.550, -352.830]
+    level:    [73, 75]
+  17088521:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [424.950, 11.550, -353.730]
+    level:    [73, 75]
+  17088522:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [408.150, 15.500, -408.260]
+    level:    [73, 75]
+  17088523:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [430.300, 15.500, -409.770]
+    level:    [73, 75]
+  17088524:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [476.370, 3.500, -470.490]
+    level:    [73, 75]
+  17088525:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [462.600, 3.500, -457.250]
+    level:    [73, 75]
+  17088526:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [401.590, 3.500, -530.450]
+    level:    [73, 75]
+  17088527:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [394.200, 3.500, -480.490]
+    level:    [73, 75]
+  17088528:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [402.430, 3.500, -530.870]
+    level:    [73, 75]
+  17088529:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [393.400, 3.500, -487.450]
+    level:    [73, 75]
+  17088530:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [392.940, 3.500, -519.190]
+    level:    [73, 75]
+  17088531:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [390.300, 3.500, -494.370]
+    level:    [73, 75]
+  17088532:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [409.790, 3.500, -476.440]
+    level:    [73, 75]
+  17088533:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [396.470, 3.550, -476.040]
+    level:    [73, 75]
+  17088534:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [300.000, 15.500, -260.000, 192]
+    level:    [73, 75]
+  17088535:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [180.000, 11.500, -331.000]
+    level:    [73, 75]
+  17088536:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [171.000, 11.500, -340.000]
+    level:    [73, 75]
+  17088537:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [189.000, 11.500, -340.000]
+    level:    [73, 75]
+  17088538:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [180.000, 11.500, -349.000]
+    level:    [73, 75]
+  17088539:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [220.000, 15.500, -251.000, 128]
+    level:    [73, 75]
+  17088540:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [211.000, 15.500, -260.000, 128]
+    level:    [73, 75]
+  17088541:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [229.000, 15.500, -260.000, 128]
+    level:    [73, 75]
+  17088542:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [220.000, 15.500, -269.000, 128]
+    level:    [73, 75]
+  17088543:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [260.000, 11.500, -331.000, 128]
+    level:    [73, 75]
+  17088544:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [251.000, 11.500, -340.000, 104]
+    level:    [73, 75]
+  17088545:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [269.000, 11.500, -340.000, 107]
+    level:    [73, 75]
+  17088546:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [260.000, 11.500, -349.000, 128]
+    level:    [73, 75]
+  17088547:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [260.000, 15.500, -411.000, 192]
+    level:    [73, 75]
+  17088548:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [251.000, 15.500, -420.000, 192]
+    level:    [73, 75]
+  17088549:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [269.000, 15.500, -420.000, 192]
+    level:    [73, 75]
+  17088550:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [260.000, 15.500, -429.000, 192]
+    level:    [73, 75]
+  17088551:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [289.000, 3.550, -501.000, 128]
+    level:    [73, 75]
+  17088552:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [289.000, 3.550, -499.000, 128]
+    level:    [73, 75]
+  17088553:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [288.000, 3.550, -503.000, 128]
+    level:    [73, 75]
+  17088554:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [288.000, 3.550, -497.000, 128]
+    level:    [73, 75]
+  17088555:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [287.000, 3.500, -506.000, 128]
+    level:    [73, 75]
+  17088556:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [287.000, 3.500, -495.000, 128]
+    level:    [73, 75]
+  17088557:
+    template: Hammerblow_Majanun
+    at:       [286.500, 3.550, -500.000, 128]
+    level:    [75, 75]
+  17088558:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [312.690, -0.449, -382.690]
+    level:    [76, 77]
+  17088559:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [324.390, -0.500, -399.240]
+    level:    [76, 77]
+  17088560:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [343.510, -0.449, -355.110]
+    level:    [76, 77]
+  17088561:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [364.470, -0.500, -401.170]
+    level:    [76, 77]
+  17088562:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [352.480, -1.000, -397.830]
+    level:    [76, 77]
+  17088563:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [322.500, -0.500, -408.960]
+    level:    [76, 77]
+  17088564:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [354.310, -1.000, -362.120]
+    level:    [76, 77]
+  17088565:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [357.360, -0.500, -409.660]
+    level:    [76, 77]
+  17088566:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [349.500, -0.500, -385.390]
+    level:    [76, 77]
+  17088567:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [337.670, -0.449, -385.660]
+    level:    [76, 77]
+  17088568:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [344.340, -0.500, -392.710]
+    level:    [76, 77]
+  17088569:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [358.570, -0.500, -387.610]
+    level:    [76, 77]
+  17088570:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [349.020, -0.500, -359.610]
+    level:    [76, 77]
+  17088571:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [330.410, -0.500, -378.190]
+    level:    [76, 77]
+  17088572:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [351.400, -1.000, -363.120]
+    level:    [76, 77]
+  17088573:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [346.990, -0.500, -412.810]
+    level:    [76, 77]
+  17088574:
+    template: Heraldic_Imp
+    at:       [247.750, 3.453, 302.454, 188]
+    level:    [73, 75]
+  17088575:
+    template: Heraldic_Imp
+    at:       [285.350, 4.030, 325.700]
+    level:    [73, 75]
+  17088576:
+    template: Heraldic_Imp
+    at:       [243.510, 3.915, 275.404, 45]
+    level:    [73, 75]
+  17088577:
+    template: Heraldic_Imp
+    at:       [293.600, 3.995, 285.760, 33]
+    level:    [73, 75]
+  17088578:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [270.970, 3.500, 332.838]
+    level:    [73, 75]
+  17088579:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [264.439, 3.549, 306.746]
+    level:    [73, 75]
+  17088580:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [240.910, 3.500, 306.391]
+    level:    [73, 75]
+  17088581:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [279.440, 3.499, 333.330]
+    level:    [73, 75]
+  17088582:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [272.022, 3.000, 308.375]
+    level:    [73, 75]
+  17088583:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [292.190, 3.500, 290.028]
+    level:    [73, 75]
+  17088584:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [276.596, 3.500, 304.422]
+    level:    [73, 75]
+  17088585:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [257.400, 3.499, 286.428]
+    level:    [73, 75]
+  17088586:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [228.370, 3.500, 306.601]
+    level:    [73, 75]
+  17088587:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [254.770, 3.500, 317.940]
+    level:    [73, 75]
+  17088588:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [271.716, 3.000, 288.407]
+    level:    [73, 75]
+  17088589:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [243.520, 3.000, 287.502]
+    level:    [73, 75]
+  17088590:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [257.850, 3.500, 291.082]
+    level:    [73, 75]
+  17088591:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [249.720, 3.000, 312.795]
+    level:    [73, 75]
+  17088592:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [270.571, 3.500, 280.703]
+    level:    [73, 75]
+  17088593:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [269.053, 3.500, 324.708]
+    level:    [73, 75]
+  17088594:
+    template: Deadpan_Devilet
+    at:       [259.750, -0.500, 509.194, 190]
+    level:    [79, 79]
+  17088595:
+    template: Dekka
+    at:       [260.480, -0.500, 562.206, 179]
+    level:    [79, 80]
+  17088596:
+    template: Gakke
+    at:       [260.000, -0.449, 513.500, 78]
+    level:    [79, 79]
+  17088597:
+    template: Devilet
+    at:       [398.429, 3.445, 298.407, 94]
+    level:    [79, 80]
+  17088598:
+    template: Devilet
+    at:       [426.308, 3.871, 269.726, 43]
+    level:    [79, 80]
+  17088599:
+    template: Devilet
+    at:       [428.911, 3.506, 317.286, 142]
+    level:    [79, 80]
+  17088600:
+    template: Devilet
+    at:       [388.051, 3.500, 326.132, 200]
+    level:    [79, 80]
+  17088601:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [446.675, 3.500, 312.403]
+    level:    [73, 75]
+  17088602:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [391.069, 3.500, 308.364, 71]
+    level:    [73, 75]
+  17088603:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [403.405, 3.500, 288.575, 45]
+    level:    [73, 75]
+  17088604:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [401.573, 3.509, 315.187, 59]
+    level:    [73, 75]
+  17088605:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [434.851, 3.500, 327.989, 240]
+    level:    [73, 75]
+  17088606:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [423.829, 3.505, 283.145, 207]
+    level:    [73, 75]
+  17088607:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [419.232, 3.500, 319.039, 242]
+    level:    [73, 75]
+  17088608:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [404.387, 3.486, 317.602, 215]
+    level:    [73, 75]
+  17088609:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [402.239, 3.499, 285.483, 59]
+    level:    [73, 75]
+  17088610:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [395.811, 3.500, 309.087, 17]
+    level:    [73, 75]
+  17088611:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [431.832, 3.358, 322.556, 163]
+    level:    [73, 75]
+  17088612:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [404.368, 3.494, 301.851, 121]
+    level:    [73, 75]
+  17088613:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [411.713, 3.500, 279.157, 15]
+    level:    [73, 75]
+  17088614:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [432.203, 3.483, 316.417, 182]
+    level:    [73, 75]
+  17088615:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [445.672, 3.500, 288.384, 97]
+    level:    [73, 75]
+  17088616:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [394.008, 3.666, 287.445, 8]
+    level:    [73, 75]
+  17088617:
+    template: Powderkeg_Yanadahn
+    at:       [437.360, 3.000, 311.552, 192]
+    level:    [80, 80]
+  17088618:
+    template: Heraldic_Imp
+    at:       [420.690, -0.449, 511.221]
+    level:    [73, 75]
+  17088619:
+    template: Heraldic_Imp
+    at:       [437.440, -1.000, 532.013, 193]
+    level:    [73, 75]
+  17088620:
+    template: Heraldic_Imp
+    at:       [400.270, -0.859, 542.460, 120]
+    level:    [73, 75]
+  17088621:
+    template: Heraldic_Imp
+    at:       [432.900, -0.910, 541.573]
+    level:    [73, 75]
+  17088622:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [404.110, -0.500, 514.609]
+    level:    [73, 75]
+  17088623:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [439.050, -0.500, 559.846]
+    level:    [73, 75]
+  17088624:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [419.700, -0.500, 547.763]
+    level:    [73, 75]
+  17088625:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [435.020, -0.500, 511.292]
+    level:    [73, 75]
+  17088626:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [409.470, -1.000, 530.473]
+    level:    [73, 75]
+  17088627:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [438.230, -0.639, 555.981]
+    level:    [73, 75]
+  17088628:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [426.960, -0.449, 540.218]
+    level:    [73, 75]
+  17088629:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [435.980, -1.000, 552.385]
+    level:    [73, 75]
+  17088630:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [401.660, -0.500, 536.495]
+    level:    [73, 75]
+  17088631:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [429.210, -0.500, 533.820]
+    level:    [73, 75]
+  17088632:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [386.120, -0.500, 573.278]
+    level:    [73, 75]
+  17088633:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [422.180, -0.449, 564.390]
+    level:    [73, 75]
+  17088634:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [436.820, -1.000, 551.703]
+    level:    [73, 75]
+  17088635:
+    template: Ashu_Talif_Crew_rdm
+    script:   Ashu_Talif_Crew
+    at:       [452.100, -0.500, 521.124]
+    level:    [73, 75]
+  17088636:
+    template: Ashu_Talif_Crew_rng
+    script:   Ashu_Talif_Crew
+    at:       [404.640, -0.500, 542.135]
+    level:    [73, 75]
+  17088637:
+    template: Ashu_Talif_Crew_cor
+    script:   Ashu_Talif_Crew
+    at:       [399.300, -0.500, 518.236]
+    level:    [73, 75]
+  17088638:
+    template: Archaic_Rampart
+    at:       [-366.500, -0.449, -513.500, 32]
+    level:    [80, 82]
+  17088639:
+    template: Haunt_SSR
+    script:   Haunt
+    at:       [-365.600, -0.296, -518.800, 79]
+    level:    [75, 76]
+  17088640:
+    template: Garm
+    level:    [75, 76]
+  17088641:
+    template: Guard_Skeleton_blm_SSR
+    script:   Guard_Skeleton
+    at:       [-363.400, -0.439, -520.000, 48]
+    level:    [75, 76]
+  17088642:
+    template: Archaic_Rampart
+    at:       [-313.500, -0.449, -513.500, 96]
+    level:    [80, 82]
+  17088643:
+    template: Haunt_SSR
+    script:   Haunt
+    at:       [-316.900, -0.537, -518.590, 222]
+    level:    [75, 76]
+  17088644:
+    template: Garm
+    at:       [-319.079, -0.045, -509.290, 138]
+    level:    [75, 76]
+  17088645:
+    template: Doom_Mage_SSR
+    script:   Doom_Mage
+    at:       [-318.700, -0.217, -512.130, 162]
+    level:    [75, 76]
+  17088646:
+    template: Archaic_Rampart
+    at:       [-313.500, -0.449, -566.500, 160]
+    level:    [80, 82]
+  17088647:
+    template: Haunt_SSR
+    script:   Haunt
+    at:       [-312.600, -0.256, -558.910, 125]
+    level:    [75, 76]
+  17088648:
+    template: Garm
+    at:       [-319.935, -0.503, -554.172, 127]
+    level:    [75, 76]
+  17088649:
+    template: Guard_Skeleton_blm_SSR
+    script:   Guard_Skeleton
+    at:       [-315.800, -0.449, -548.130, 94]
+    level:    [75, 76]
+  17088650:
+    template: Archaic_Rampart
+    at:       [-366.500, -0.449, -566.500, 224]
+    level:    [80, 82]
+  17088651:
+    template: Haunt_SSR
+    script:   Haunt
+    level:    [75, 76]
+  17088652:
+    template: Garm
+    at:       [-364.378, -0.449, -564.379, 224]
+    level:    [75, 76]
+  17088653:
+    template: Doom_Mage_SSR
+    script:   Doom_Mage
+    level:    [75, 76]
+  17088654:
+    template: Archaic_Gear
+    at:       [-327.000, -0.490, -538.190, 176]
+    level:    [80, 82]
+  17088655:
+    template: Archaic_Gear
+    at:       [-358.100, -0.912, -525.360]
+    level:    [80, 82]
+  17088656:
+    template: Archaic_Gears
+    at:       [-323.800, -0.500, -535.940, 120]
+    level:    [80, 82]
+  17088657:
+    template: Archaic_Gears
+    at:       [-337.100, -0.537, -524.780, 100]
+    level:    [80, 82]
+  17088658:
+    template: Devilet
+    at:       [-342.400, -0.104, -331.030]
+    level:    [79, 80]
+  17088659:
+    template: Archaic_Gear
+    at:       [-366.500, 0.050, -326.500, 163]
+    level:    [80, 82]
+  17088660:
+    template: Archaic_Gear
+    at:       [-341.500, -0.523, -311.930, 165]
+    level:    [80, 82]
+  17088661:
+    template: Archaic_Gear
+    at:       [-290.300, -0.039, -300.960, 239]
+    level:    [80, 82]
+  17088662:
+    template: Archaic_Gear
+    at:       [-340.000, 0.050, -306.500, 166]
+    level:    [80, 82]
+  17088663:
+    template: Archaic_Gear
+    at:       [-317.500, -0.009, -330.440, 116]
+    level:    [80, 82]
+  17088664:
+    template: Archaic_Gear
+    at:       [-334.100, -0.504, -305.860, 100]
+    level:    [80, 82]
+  17088665:
+    template: Archaic_Gear
+    at:       [-333.500, 0.050, -300.000, 110]
+    level:    [80, 82]
+  17088666:
+    template: Archaic_Gear
+    at:       [-343.100, -0.541, -298.550, 100]
+    level:    [80, 82]
+  17088667:
+    template: Gyroscopic_Gear
+    at:       [-354.690, -1.000, -317.750]
+    level:    [80, 82]
+  17088668:
+    template: Don_Poroggo
+    at:       [-340.000, -0.449, -326.500, 156]
+    level:    [82, 82]
+  17088669:
+    template: Archaic_Rampart
+    at:       [-486.500, -4.448, -353.500, 32]
+    level:    [80, 82]
+  17088670:
+    template: Haunt_SSR
+    script:   Haunt
+    at:       [-468.200, -4.151, -352.890, 222]
+    level:    [75, 76]
+  17088671:
+    template: Garm
+    at:       [-468.515, -4.539, -373.721, 239]
+    level:    [75, 76]
+  17088672:
+    template: Guard_Skeleton_war_SSR
+    script:   Guard_Skeleton
+    at:       [-479.700, -4.537, -360.940, 4]
+    level:    [75, 76]
+  17088673:
+    template: Archaic_Rampart
+    at:       [-433.500, -4.448, -353.500, 96]
+    level:    [80, 82]
+  17088674:
+    template: Haunt_SSR
+    script:   Haunt
+    at:       [-435.800, -4.436, -355.400, 163]
+    level:    [75, 76]
+  17088675:
+    template: Garm
+    at:       [-437.295, -4.539, -358.885, 215]
+    level:    [75, 76]
+  17088676:
+    template: Doom_Mage_SSR
+    script:   Doom_Mage
+    at:       [-436.000, -4.453, -355.880, 106]
+    level:    [75, 76]
+  17088677:
+    template: Archaic_Rampart
+    at:       [-433.500, -4.448, -406.500, 160]
+    level:    [80, 82]
+  17088678:
+    template: Haunt_SSR
+    script:   Haunt
+    at:       [-437.300, -4.467, -403.080, 154]
+    level:    [75, 76]
+  17088679:
+    template: Garm
+    level:    [75, 76]
+  17088680:
+    template: Guard_Skeleton_war_SSR
+    script:   Guard_Skeleton
+    at:       [-449.600, -4.539, -399.710, 112]
+    level:    [75, 76]
+  17088681:
+    template: Archaic_Rampart
+    at:       [-486.500, -4.448, -406.500, 224]
+    level:    [80, 82]
+  17088682:
+    template: Haunt_SSR
+    script:   Haunt
+    at:       [-482.400, -4.533, -402.940, 172]
+    level:    [75, 76]
+  17088683:
+    template: Garm
+    at:       [-484.585, -4.501, -405.245, 59]
+    level:    [75, 76]
+  17088684:
+    template: Doom_Mage_SSR
+    script:   Doom_Mage
+    at:       [-458.200, -4.539, -399.180, 122]
+    level:    [75, 76]
+  17088685:
+    template: Archaic_Gear
+    at:       [-448.100, -4.539, -399.190, 229]
+    level:    [80, 82]
+  17088686:
+    template: Archaic_Gear
+    at:       [-436.600, -4.539, -405.030, 163]
+    level:    [80, 82]
+  17088687:
+    template: Archaic_Gear
+    at:       [-472.700, -4.539, -373.240, 238]
+    level:    [80, 82]
+  17088688:
+    template: Archaic_Gear
+    at:       [-470.800, -4.539, -370.250, 234]
+    level:    [80, 82]
+  17088689:
+    template: Archaic_Gears
+    at:       [-443.000, -4.539, -410.320, 119]
+    level:    [80, 82]
+  17088690:
+    template: Archaic_Gears
+    at:       [-446.300, -4.532, -400.620, 164]
+    level:    [80, 82]
+  17088691:
+    template: Archaic_Gears
+    at:       [-476.700, -4.539, -362.800, 109]
+    level:    [80, 82]
+  17088692:
+    template: Archaic_Gears
+    at:       [-436.200, -4.452, -392.040, 169]
+    level:    [80, 82]
+  17088693:
+    template: Archaic_Rampart
+    at:       [-232.500, -4.500, -367.500, 32]
+    level:    [80, 82]
+  17088694:
+    template: Haunt_SSR
+    script:   Haunt
+    level:    [75, 76]
+  17088695:
+    template: Garm
+    level:    [75, 76]
+  17088696:
+    template: Guard_Skeleton_blm_SSR
+    script:   Guard_Skeleton
+    level:    [75, 76]
+  17088697:
+    template: Archaic_Rampart
+    at:       [-207.500, -5.000, -367.500, 96]
+    level:    [80, 82]
+  17088698:
+    template: Haunt_SSR
+    script:   Haunt
+    level:    [75, 76]
+  17088699:
+    template: Garm
+    level:    [75, 76]
+  17088700:
+    template: Doom_Mage_SSR
+    script:   Doom_Mage
+    level:    [75, 76]
+  17088701:
+    template: Archaic_Rampart
+    at:       [-207.500, -5.000, -392.500, 160]
+    level:    [80, 82]
+  17088702:
+    template: Haunt_SSR
+    script:   Haunt
+    level:    [75, 76]
+  17088703:
+    template: Garm
+    level:    [75, 76]
+  17088704:
+    template: Guard_Skeleton_blm_SSR
+    script:   Guard_Skeleton
+    level:    [75, 76]
+  17088705:
+    template: Archaic_Rampart
+    at:       [-232.500, -5.000, -392.500, 224]
+    level:    [80, 82]
+  17088706:
+    template: Haunt_SSR
+    script:   Haunt
+    level:    [75, 76]
+  17088707:
+    template: Garm
+    level:    [75, 76]
+  17088708:
+    template: Doom_Mage_SSR
+    script:   Doom_Mage
+    level:    [75, 76]
+  17088709:
+    template: Archaic_Gear
+    at:       [-220.600, -4.211, -404.210, 38]
+    level:    [80, 82]
+  17088710:
+    template: Archaic_Gear
+    at:       [-246.200, -4.315, -364.410, 43]
+    level:    [80, 82]
+  17088711:
+    template: Archaic_Gear
+    at:       [-222.700, -4.342, -359.030, 60]
+    level:    [80, 82]
+  17088712:
+    template: Archaic_Gear
+    at:       [-247.600, -4.178, -368.720, 106]
+    level:    [80, 82]
+  17088713:
+    template: Archaic_Gears
+    at:       [-249.200, -4.482, -352.120, 169]
+    level:    [80, 82]
+  17088714:
+    template: Archaic_Gears
+    at:       [-217.400, -4.414, -401.170, 156]
+    level:    [80, 82]
+  17088715:
+    template: Archaic_Gears
+    at:       [-218.000, -4.397, -401.380, 156]
+    level:    [80, 82]
+  17088716:
+    template: Archaic_Gears
+    at:       [-249.400, -4.078, -378.940, 77]
+    level:    [80, 82]
+  17088717:
+    template: Gyroscopic_Gears
+    at:       [-225.700, -4.500, -354.630, 91]
+    level:    [80, 82]
+  17088718:
+    template: Archaic_Gear
+    at:       [-372.300, -0.096, 208.766, 167]
+    level:    [80, 82]
+  17088719:
+    template: Archaic_Gear
+    at:       [-374.600, -0.050, 226.492, 10]
+    level:    [80, 82]
+  17088720:
+    template: Archaic_Gears
+    at:       [-379.400, -0.035, 225.830, 23]
+    level:    [80, 82]
+  17088721:
+    template: Archaic_Gears
+    at:       [-387.800, -0.063, 205.994, 127]
+    level:    [80, 82]
+  17088722:
+    template: Archaic_Gear
+    at:       [-378.000, -4.000, 139.811, 120]
+    level:    [80, 82]
+  17088723:
+    template: Archaic_Gear
+    at:       [-375.900, -4.004, 148.057, 239]
+    level:    [80, 82]
+  17088724:
+    template: Archaic_Gears
+    at:       [-371.100, -4.006, 129.179, 118]
+    level:    [80, 82]
+  17088725:
+    template: Archaic_Gears
+    at:       [-379.400, -4.000, 128.930, 13]
+    level:    [80, 82]
+  17088726:
+    template: Archaic_Chariot
+    at:       [-420.000, -4.448, 73.500, 192]
+    level:    [80, 82]
+  17088727:
+    template: Archaic_Rampart
+    at:       [-446.500, -4.448, 86.500]
+    level:    [80, 82]
+  17088728:
+    template: Night_Eft
+    level:    [73, 73]
+  17088729:
+    template: Sand_Lizard
+    level:    [73, 73]
+  17088730:
+    template: Deinonychus
+    level:    [73, 73]
+  17088731:
+    template: Archaic_Rampart
+    at:       [-393.500, -4.448, 86.500, 128]
+    level:    [80, 82]
+  17088732:
+    template: Night_Eft
+    level:    [73, 73]
+  17088733:
+    template: Sand_Lizard
+    level:    [73, 73]
+  17088734:
+    template: Deinonychus
+    level:    [73, 73]
+  17088735:
+    template: Archaic_Rampart
+    at:       [-393.500, -4.448, 73.500, 128]
+    level:    [80, 82]
+  17088736:
+    template: Night_Eft
+    level:    [73, 73]
+  17088737:
+    template: Sand_Lizard
+    level:    [73, 73]
+  17088738:
+    template: Deinonychus
+    level:    [73, 73]
+  17088739:
+    template: Archaic_Rampart
+    at:       [-446.500, -4.448, 73.500]
+    level:    [80, 82]
+  17088740:
+    template: Night_Eft
+    level:    [73, 73]
+  17088741:
+    template: Sand_Lizard
+    level:    [73, 73]
+  17088742:
+    template: Deinonychus
+    level:    [73, 73]
+  17088743:
+    template: Archaic_Gear
+    at:       [-462.300, -4.000, 30.092, 215]
+    level:    [80, 82]
+  17088744:
+    template: Archaic_Gear
+    at:       [-470.200, -4.005, 25.613, 10]
+    level:    [80, 82]
+  17088745:
+    template: Archaic_Gears
+    at:       [-457.700, -4.001, 21.039, 102]
+    level:    [80, 82]
+  17088746:
+    template: Archaic_Gears
+    at:       [-458.000, -4.005, 33.659, 129]
+    level:    [80, 82]
+  17088747:
+    template: Archaic_Gear
+    at:       [-375.500, -0.032, -24.986, 104]
+    level:    [80, 82]
+  17088748:
+    template: Archaic_Gear
+    at:       [-383.200, -0.035, -30.909, 115]
+    level:    [80, 82]
+  17088749:
+    template: Archaic_Gears
+    at:       [-374.900, -0.023, -22.761, 109]
+    level:    [80, 82]
+  17088750:
+    template: Archaic_Gears
+    at:       [-371.500, -0.017, -25.295, 137]
+    level:    [80, 82]
+  17088751:
+    template: Archaic_Gear
+    at:       [-301.300, -3.996, 171.804, 26]
+    level:    [80, 82]
+  17088752:
+    template: Archaic_Gear
+    at:       [-306.500, -3.698, 176.373, 66]
+    level:    [80, 82]
+  17088753:
+    template: Archaic_Gear
+    at:       [-300.700, -4.006, 170.552, 195]
+    level:    [80, 82]
+  17088754:
+    template: Archaic_Gear
+    at:       [-300.900, -4.011, 168.494, 195]
+    level:    [80, 82]
+  17088755:
+    template: Archaic_Gear
+    at:       [-261.200, -4.045, 50.473, 190]
+    level:    [80, 82]
+  17088756:
+    template: Archaic_Gear
+    at:       [-260.700, -4.067, 35.088, 194]
+    level:    [80, 82]
+  17088757:
+    template: Archaic_Gears
+    at:       [-237.300, -4.001, 71.442, 132]
+    level:    [80, 82]
+  17088758:
+    template: Archaic_Gears
+    at:       [-288.900, -4.015, 90.538, 234]
+    level:    [80, 82]
+  17088759:
+    template: Archaic_Gears
+    at:       [-269.100, -4.014, 73.704, 127]
+    level:    [80, 82]
+  17088760:
+    template: Archaic_Gears
+    at:       [-268.500, -4.018, 74.133, 248]
+    level:    [80, 82]
+  17088761:
+    template: Archaic_Gears
+    at:       [-229.000, -4.014, 78.818, 202]
+    level:    [80, 82]
+  17088762:
+    template: Archaic_Gears
+    at:       [-246.000, -4.015, 83.472, 10]
+    level:    [80, 82]
+  17088763:
+    template: Archaic_Gears
+    at:       [-253.400, -4.017, 84.732, 49]
+    level:    [80, 82]
+  17088764:
+    template: Archaic_Gears
+    at:       [-249.700, -4.015, 84.080, 3]
+    level:    [80, 82]
+  17088765:
+    template: Archaic_Gears
+    at:       [-239.200, -4.014, 89.861, 139]
+    level:    [80, 82]
+  17088766:
+    template: Archaic_Gears
+    at:       [-274.800, -4.025, 73.732, 221]
+    level:    [80, 82]
+  17088767:
+    template: Archaic_Chariot
+    at:       [-260.000, -4.448, 73.500, 192]
+    level:    [80, 82]
+  17088768:
+    template: Archaic_Rampart
+    at:       [-286.500, -4.448, 86.500]
+    level:    [80, 82]
+  17088769:
+    template: Night_Eft
+    level:    [73, 73]
+  17088770:
+    template: Sand_Lizard
+    level:    [73, 73]
+  17088771:
+    template: Deinonychus
+    level:    [73, 73]
+  17088772:
+    template: Archaic_Rampart
+    at:       [-233.500, -4.448, 86.500, 128]
+    level:    [80, 82]
+  17088773:
+    template: Night_Eft
+    level:    [73, 73]
+  17088774:
+    template: Sand_Lizard
+    level:    [73, 73]
+  17088775:
+    template: Deinonychus
+    level:    [73, 73]
+  17088776:
+    template: Archaic_Rampart
+    at:       [-233.500, -4.448, 73.500, 128]
+    level:    [80, 82]
+  17088777:
+    template: Night_Eft
+    at:       [-233.700, -4.448, 70.513, 67]
+    level:    [73, 73]
+  17088778:
+    template: Sand_Lizard
+    level:    [73, 73]
+  17088779:
+    template: Deinonychus
+    level:    [73, 73]
+  17088780:
+    template: Archaic_Rampart
+    at:       [-286.500, -4.448, 73.500]
+    level:    [80, 82]
+  17088781:
+    template: Night_Eft
+    at:       [-233.700, -4.448, 70.513, 67]
+    level:    [73, 73]
+  17088782:
+    template: Sand_Lizard
+    level:    [73, 73]
+  17088783:
+    template: Deinonychus
+    level:    [73, 73]
+  17088784:
+    template: Archaic_Rampart
+    at:       [-260.000, -4.448, 86.500, 192]
+    level:    [80, 82]
+  17088785:
+    template: Citadel_Chelonian
+    level:    [73, 73]
+  17088786:
+    template: Long-Armed_Chariot
+    at:       [-340.000, -4.448, 553.500, 192]
+    level:    [83, 85]
+  17088824:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088825:
+    script: Doomed
+    level:  [99, 99]
+  17088826:
+    script: Doomed
+    level:  [99, 99]
+  17088827:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088828:
+    script: Qiqirn
+    level:  [99, 99]
+  17088829:
+    script: Qiqirn
+    level:  [99, 99]
+  17088830:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088831:
+    script: Qiqirn
+    level:  [99, 99]
+  17088832:
+    script: Qiqirn
+    level:  [99, 99]
+  17088833:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088834:
+    script: Doomed
+    level:  [99, 99]
+  17088835:
+    script: Qiqirn
+    level:  [99, 99]
+  17088836:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088837:
+    script: Doomed
+    level:  [99, 99]
+  17088838:
+    script: Qiqirn
+    level:  [99, 99]
+  17088839:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088840:
+    script: Qiqirn
+    level:  [99, 99]
+  17088841:
+    script: Qiqirn
+    level:  [99, 99]
+  17088842:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088843:
+    script: Doomed
+    level:  [99, 99]
+  17088844:
+    script: Doomed
+    level:  [99, 99]
+  17088845:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088846:
+    script: Qiqirn
+    level:  [99, 99]
+  17088847:
+    script: Qiqirn
+    level:  [99, 99]
+  17088848:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088849:
+    template: Imp
+    level:    [99, 99]
+  17088850:
+    template: Imp
+    level:    [99, 99]
+  17088851:
+    template: Imp
+    level:    [99, 99]
+  17088852:
+    template: Imp
+    level:    [99, 99]
+  17088853:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088854:
+    template: Imp
+    level:    [99, 99]
+  17088855:
+    template: Imp
+    level:    [99, 99]
+  17088856:
+    template: Imp
+    level:    [99, 99]
+  17088857:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088858:
+    script: Voracious_Carrion
+    level:  [100, 100]
+  17088859:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088860:
+    script: Doomed
+    level:  [99, 99]
+  17088861:
+    script: Doomed
+    level:  [99, 99]
+  17088862:
+    script: Doomed
+    level:  [99, 99]
+  17088863:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088864:
+    template: Imp
+    level:    [99, 99]
+  17088865:
+    template: Imp
+    level:    [99, 99]
+  17088866:
+    template: Imp
+    level:    [99, 99]
+  17088867:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088868:
+    script: Doomed
+    level:  [99, 99]
+  17088869:
+    script: Doomed
+    level:  [99, 99]
+  17088870:
+    script: Doomed
+    level:  [99, 99]
+  17088871:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088872:
+    template: Imp
+    level:    [99, 99]
+  17088873:
+    template: Imp
+    level:    [99, 99]
+  17088874:
+    template: Imp
+    level:    [99, 99]
+  17088875:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [380.000, 15.500, -260.000, 192]
+    level:    [99, 99]
+  17088876:
+    template: Apkallu
+    at:       [376.270, 15.618, -255.877, 6]
+    level:    [99, 99]
+  17088877:
+    template: Apkallu
+    at:       [383.222, 15.594, -256.064, 111]
+    level:    [99, 99]
+  17088878:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [466.360, 12.000, -331.000, 128]
+    level:    [99, 99]
+  17088879:
+    script: Qiqirn
+    at:     [465.494, 11.618, -333.885, 214]
+    level:  [99, 99]
+  17088880:
+    script: Qiqirn
+    at:     [455.500, 11.500, -335.500, 192]
+    level:  [99, 99]
+  17088881:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [463.120, 12.000, -349.000]
+    level:    [99, 99]
+  17088882:
+    script: Qiqirn
+    at:     [464.500, 11.500, -344.500, 192]
+    level:  [99, 99]
+  17088883:
+    script: Qiqirn
+    at:     [455.500, 11.499, -344.500, 127]
+    level:  [99, 99]
+  17088884:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [499.740, 12.000, -335.500, 128]
+    level:    [99, 99]
+  17088885:
+    template: Apkallu
+    at:       [503.600, 11.538, -335.629, 122]
+    level:    [99, 99]
+  17088886:
+    script: Qiqirn
+    at:     [494.224, 11.562, -335.741, 120]
+    level:  [99, 99]
+  17088887:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [501.620, 12.000, -344.500, 128]
+    level:    [99, 99]
+  17088888:
+    template: Apkallu
+    at:       [503.607, 11.547, -344.669, 120]
+    level:    [99, 99]
+  17088889:
+    script: Qiqirn
+    at:     [495.500, 11.499, -344.500, 147]
+    level:  [99, 99]
+  17088890:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [460.000, 15.500, -251.000]
+    level:    [99, 99]
+  17088891:
+    script: Qiqirn
+    at:     [462.500, 15.500, -251.000]
+    level:  [99, 99]
+  17088892:
+    script: Qiqirn
+    at:     [465.000, 15.500, -251.000]
+    level:  [99, 99]
+  17088893:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [460.000, 15.500, -260.000]
+    level:    [99, 99]
+  17088894:
+    template: Apkallu
+    at:       [462.786, 15.511, -260.307, 33]
+    level:    [99, 99]
+  17088895:
+    template: Apkallu
+    at:       [465.419, 15.516, -259.997, 255]
+    level:    [99, 99]
+  17088896:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [460.000, 15.500, -269.000]
+    level:    [99, 99]
+  17088897:
+    script: Qiqirn
+    at:     [463.090, 15.522, -269.105, 7]
+    level:  [99, 99]
+  17088898:
+    script: Qiqirn
+    at:     [465.590, 15.529, -269.100, 6]
+    level:  [99, 99]
+  17088899:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [420.000, 11.500, -357.000, 192]
+    level:    [99, 99]
+  17088900:
+    template: Imp
+    at:       [412.753, 11.544, -349.593, 27]
+    level:    [99, 99]
+  17088901:
+    template: Imp
+    at:       [419.503, 11.618, -349.547, 10]
+    level:    [99, 99]
+  17088902:
+    template: Imp
+    at:       [421.825, 11.650, -350.961, 77]
+    level:    [99, 99]
+  17088903:
+    template: Imp
+    at:       [427.064, 11.652, -349.596, 104]
+    level:    [99, 99]
+  17088904:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [420.000, 15.500, -403.000, 192]
+    level:    [99, 99]
+  17088905:
+    template: Imp
+    at:       [420.000, 15.500, -396.000, 68]
+    level:    [99, 99]
+  17088906:
+    template: Imp
+    at:       [420.244, 15.747, -396.388, 76]
+    level:    [99, 99]
+  17088907:
+    template: Imp
+    at:       [419.779, 15.568, -393.191, 66]
+    level:    [99, 99]
+  17088908:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [420.000, 15.500, -420.000, 192]
+    level:    [99, 99]
+  17088909:
+    script: Apkallu_Avenger
+    at:     [418.804, 15.629, -417.142, 77]
+    level:  [100, 100]
+  17088910:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [393.500, 3.550, -473.500, 64]
+    level:    [99, 99]
+  17088911:
+    template: Apkallu
+    at:       [393.365, 3.686, -474.113, 188]
+    level:    [99, 99]
+  17088912:
+    template: Apkallu
+    at:       [392.736, 3.626, -476.333, 168]
+    level:    [99, 99]
+  17088913:
+    template: Apkallu
+    at:       [392.895, 3.602, -478.241, 173]
+    level:    [99, 99]
+  17088914:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [406.500, 3.550, -473.500, 64]
+    level:    [99, 99]
+  17088915:
+    template: Imp
+    at:       [406.500, 3.550, -475.500, 64]
+    level:    [99, 99]
+  17088916:
+    template: Imp
+    at:       [406.500, 3.499, -477.500, 64]
+    level:    [99, 99]
+  17088917:
+    template: Imp
+    at:       [406.500, 3.500, -479.500, 64]
+    level:    [99, 99]
+  17088918:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [393.500, 3.550, -526.500, 192]
+    level:    [99, 99]
+  17088919:
+    template: Apkallu
+    at:       [392.260, 3.614, -525.148, 108]
+    level:    [99, 99]
+  17088920:
+    template: Apkallu
+    at:       [393.509, 3.596, -523.896, 63]
+    level:    [99, 99]
+  17088921:
+    template: Apkallu
+    at:       [393.600, 3.574, -521.894, 61]
+    level:    [99, 99]
+  17088922:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [406.500, 3.550, -526.500, 192]
+    level:    [99, 99]
+  17088923:
+    template: Imp
+    at:       [406.500, 3.550, -524.500, 192]
+    level:    [99, 99]
+  17088924:
+    template: Imp
+    at:       [406.500, 3.500, -522.500, 192]
+    level:    [99, 99]
+  17088925:
+    template: Imp
+    at:       [406.500, 3.500, -520.500, 192]
+    level:    [99, 99]
+  17088926:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [340.000, 3.500, -515.500, 192]
+    level:    [99, 99]
+  17088927:
+    script: Seafarer_Piliproon
+    at:     [342.411, 3.550, -512.367, 42]
+    level:  [100, 100]
+  17088928:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [340.000, -0.449, -353.500, 64]
+    level:    [99, 99]
+  17088929:
+    template: Imp
+    at:       [340.889, -0.323, -356.331, 228]
+    level:    [99, 99]
+  17088930:
+    script: Qiqirn
+    at:     [342.500, -0.500, -357.000, 203]
+    level:  [99, 99]
+  17088931:
+    script: Qiqirn
+    at:     [339.310, -0.333, -356.166, 238]
+    level:  [99, 99]
+  17088932:
+    template: Imp
+    at:       [345.000, -0.500, -357.000, 167]
+    level:    [99, 99]
+  17088933:
+    template: Imp
+    at:       [338.168, -0.259, -356.625, 251]
+    level:    [99, 99]
+  17088934:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [309.040, -4.000, 460.000]
+    level:    [99, 99]
+  17088935:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088936:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088937:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088938:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088939:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088940:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088941:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [300.000, -4.000, 446.360, 192]
+    level:    [99, 99]
+  17088942:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088943:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088944:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088945:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088946:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088947:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088948:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [370.960, -4.000, 460.000, 128]
+    level:    [99, 99]
+  17088949:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [364.000, -4.500, 460.000, 127]
+    level:    [101, 101]
+  17088950:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [370.000, -4.500, 460.000, 127]
+    level:    [101, 101]
+  17088951:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [376.000, -4.450, 460.000, 127]
+    level:    [101, 101]
+  17088952:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088953:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088954:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088955:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [380.000, -4.000, 447.440, 192]
+    level:    [99, 99]
+  17088956:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [380.000, -4.500, 444.000, 175]
+    level:    [101, 101]
+  17088957:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [380.000, -4.500, 450.000, 167]
+    level:    [101, 101]
+  17088958:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [380.000, -4.450, 456.000, 149]
+    level:    [101, 101]
+  17088959:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088960:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088961:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088962:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [365.440, -4.000, 380.000, 128]
+    level:    [99, 99]
+  17088963:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088964:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088965:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088966:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [364.000, -4.500, 380.000, 128]
+    level:    [101, 101]
+  17088967:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [370.000, -4.500, 380.000, 206]
+    level:    [101, 101]
+  17088968:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [375.488, -4.433, 380.226, 198]
+    level:    [101, 101]
+  17088969:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [380.000, -4.000, 390.040, 192]
+    level:    [99, 99]
+  17088970:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [380.000, -4.500, 396.000, 192]
+    level:    [101, 101]
+  17088971:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [380.000, -4.500, 390.000, 192]
+    level:    [101, 101]
+  17088972:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [380.000, -4.450, 384.000, 192]
+    level:    [101, 101]
+  17088973:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088974:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088975:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088976:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [306.520, -4.000, 380.000, 128]
+    level:    [99, 99]
+  17088977:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088978:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088979:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088980:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088981:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088982:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088983:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [300.000, -4.000, 385.720, 64]
+    level:    [99, 99]
+  17088984:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088985:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088986:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088987:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088988:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088989:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088990:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [340.000, -4.500, 365.000, 192]
+    level:    [99, 99]
+  17088991:
+    script: Fomor_Windwalker
+    at:     [342.772, -4.449, 368.216, 222]
+    level:  [102, 102]
+  17088992:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088993:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088994:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088995:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088996:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17088997:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088998:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17088999:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089000:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089001:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089002:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089003:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089004:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089005:
+    script: Stoneplate_Ghalimad
+  17089006:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089007:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089008:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089009:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089010:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089011:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089012:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089013:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089014:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089015:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089016:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089017:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089018:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089019:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089020:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089021:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089022:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089023:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089024:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089025:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089026:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089027:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089028:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089029:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089030:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089031:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089032:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089033:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089034:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089035:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089036:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089037:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089038:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089039:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089040:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089041:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089042:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089043:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089044:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089045:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089046:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089047:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089048:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089049:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089050:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089051:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089052:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089053:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089054:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089055:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089056:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089057:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089058:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089059:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089060:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089061:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089062:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089063:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089064:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089065:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089066:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089067:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089068:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089069:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089070:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089071:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089072:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089073:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089074:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089075:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089076:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089077:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089078:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089079:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089080:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089081:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089082:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [443.000, -0.500, 420.000, 128]
+    level:    [99, 99]
+  17089083:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [438.000, -0.500, 420.000, 4]
+    level:    [101, 101]
+  17089084:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [436.000, -0.500, 420.000, 2]
+    level:    [101, 101]
+  17089085:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [434.000, -0.500, 420.000, 1]
+    level:    [101, 101]
+  17089086:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [437.000, -0.500, 460.000]
+    level:    [99, 99]
+  17089087:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089088:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089089:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089090:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [483.000, -0.500, 380.000, 128]
+    level:    [99, 99]
+  17089091:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [478.000, -0.500, 380.000]
+    level:    [101, 101]
+  17089092:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [476.000, -0.500, 380.000]
+    level:    [101, 101]
+  17089093:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    at:       [474.000, -0.500, 380.000]
+    level:    [101, 101]
+  17089094:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [476.000, -0.500, 420.000, 128]
+    level:    [99, 99]
+  17089095:
+    script: Quickdirk_Kahladijn
+  17089096:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [408.500, 3.000, 311.500, 32]
+    level:    [99, 99]
+  17089097:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089098:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089099:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089100:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089101:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [408.500, 3.000, 288.500, 224]
+    level:    [99, 99]
+  17089102:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089103:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089104:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089105:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089106:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [431.500, 3.000, 288.500, 160]
+    level:    [99, 99]
+  17089107:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089108:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089109:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089110:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089111:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [431.500, 3.000, 311.500, 96]
+    level:    [99, 99]
+  17089112:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089113:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089114:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089115:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089116:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [420.000, 4.000, 313.040, 64]
+    level:    [99, 99]
+  17089117:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089118:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089119:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089120:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089121:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089122:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089123:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089124:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089125:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089126:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089127:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089128:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089129:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089130:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089131:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089132:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089133:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089134:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089135:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089136:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089137:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089138:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089139:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089140:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089141:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089142:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089143:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089144:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089145:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089146:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089147:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089148:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089149:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089150:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089151:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089152:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089153:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089154:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089155:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089156:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089157:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089158:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089159:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089160:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089161:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089162:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089163:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089164:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089165:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089166:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089167:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089168:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089169:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089170:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089171:
+    template: Ashu_Talif_Crew_mnk
+    script:   Ashu_Talif_Crew
+    level:    [101, 101]
+  17089172:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089173:
+    template: Psycheflayer
+  17089174:
+    template: Psycheflayer
+  17089175:
+    template: Psycheflayer
+  17089176:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089177:
+    template: Psycheflayer
+  17089178:
+    template: Psycheflayer
+  17089179:
+    template: Psycheflayer
+  17089180:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089181:
+    template: Psycheflayer
+  17089182:
+    template: Psycheflayer
+  17089183:
+    template: Psycheflayer
+  17089184:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089185:
+    template: Psycheflayer
+  17089186:
+    template: Psycheflayer
+  17089187:
+    template: Psycheflayer
+  17089188:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089189:
+    script: Lunatic_Psycheflayer
+  17089190:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [-340.000, 0.000, -525.280, 64]
+    level:    [99, 99]
+  17089191:
+    template: Orobon_AR
+    script:   Orobon
+  17089192:
+    template: Orobon_AR
+    script:   Orobon
+  17089193:
+    template: Orobon_AR
+    script:   Orobon
+  17089194:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [-330.000, -0.500, -540.000, 192]
+    level:    [99, 99]
+  17089195:
+    template: Orobon_AR
+    script:   Orobon
+    at:       [-329.485, -0.501, -540.221, 16]
+  17089196:
+    template: Orobon_AR
+    script:   Orobon
+    at:       [-324.186, -0.504, -540.647, 27]
+  17089197:
+    template: Orobon_AR
+    script:   Orobon
+    at:       [-318.988, -0.429, -539.767, 246]
+  17089198:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [-340.000, 0.000, -554.720, 192]
+    level:    [99, 99]
+  17089199:
+    template: Orobon_AR
+    script:   Orobon
+  17089200:
+    template: Orobon_AR
+    script:   Orobon
+  17089201:
+    template: Orobon_AR
+    script:   Orobon
+  17089202:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [-356.840, 0.000, -540.000]
+    level:    [99, 99]
+  17089203:
+    template: Orobon_AR
+    script:   Orobon
+  17089204:
+    template: Orobon_AR
+    script:   Orobon
+  17089205:
+    template: Orobon_AR
+    script:   Orobon
+  17089206:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    at:       [-340.000, -0.500, -509.000, 64]
+    level:    [99, 99]
+  17089207:
+    script: Argent-eyed_Orobon
+  17089208:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089209:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089210:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089211:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089212:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089213:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089214:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089215:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089216:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089217:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089218:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089219:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089220:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089221:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089222:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089223:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089224:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089225:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089226:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089227:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089228:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089229:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089230:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089231:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089232:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089233:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089234:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089235:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089236:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089237:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089238:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089239:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089240:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089241:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089242:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089243:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089244:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089245:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089246:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089247:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089248:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089249:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089250:
+    template: Long-Armed_Chariot_2
+    script:   Long-Armed_Chariot
+  17089251:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089252:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089253:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089254:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089255:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089256:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089257:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089258:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089259:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089260:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089261:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089262:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089263:
+    template: Archaic_Chariot
+  17089264:
+    template: Archaic_Chariot
+  17089265:
+    template: Archaic_Chariot
+  17089266:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089267:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089268:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089269:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089270:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089271:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089272:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089273:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089274:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089275:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089276:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089277:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089278:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089279:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089280:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089281:
+    template: Acrolith
+  17089282:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089283:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089284:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089285:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089286:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089287:
+    template: Acrolith
+  17089288:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089289:
+    template: Archaic_Chariot
+  17089290:
+    template: Acrolith
+  17089291:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089292:
+    template: Archaic_Chariot
+  17089293:
+    template: Acrolith
+  17089294:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089295:
+    template: Archaic_Chariot
+  17089296:
+    template: Acrolith
+  17089297:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089298:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089299:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089300:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089301:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089302:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089303:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+  17089304:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089305:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089306:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089307:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089308:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089309:
+    template: Archaic_Chariot
+  17089310:
+    template: Archaic_Chariot
+  17089311:
+    template: Archaic_Chariot
+  17089312:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089313:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089314:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089315:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089316:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089317:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089318:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089319:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089320:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089321:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089322:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089323:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089324:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089325:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089326:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089327:
+    template: Acrolith
+  17089328:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089329:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089330:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089331:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089332:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+  17089333:
+    template: Acrolith
+  17089334:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089335:
+    template: Archaic_Chariot
+  17089336:
+    template: Acrolith
+  17089337:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089338:
+    template: Archaic_Chariot
+  17089339:
+    template: Acrolith
+  17089340:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089341:
+    template: Archaic_Chariot
+  17089342:
+    template: Acrolith
+  17089343:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089344:
+    template: Archaic_Rampart_2
+    script:   Archaic_Rampart
+    level:    [99, 99]
+  17089345:
+    script: Dvergr
+  17089346:
+    script: Bloodthirsty_Dweorg

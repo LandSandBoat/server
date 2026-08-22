@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z5b0:
+    from:  [0.228, -6.431, -0.011]
+    to:    south_gustaberg
+    at:    [-601.433, 35.204, -520.031]
+    scale: [1.000, 10.000]
+
+  z5b2:
+    from:  [7.124, -6.431, 619.315]
+    to:    north_gustaberg
+    at:    [-694.542, 93.097, 314.168, 5.497787]
+    scale: [1.000, 5.000]

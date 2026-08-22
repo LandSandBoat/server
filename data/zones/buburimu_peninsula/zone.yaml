@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 103
+
+zonelines:
+
+  z3a0:
+    from:  [-625.802, -50.081, 159.848]
+    to:    tahrongi_canyon
+    at:    [442.781, -1.641, -40.144, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3a2:
+    from:  [187.797, -6.095, -227.499]
+    to:    mhaura
+    at:    [0.003, -6.252, 117.971, 1.570796]
+    scale: [1.000, 5.000]
+
+  z3a4:
+    from:  [-360.092, -45.410, 315.477]
+    to:    maze_of_shakhrami
+    at:    [474.629, -31.203, -259.091, 3.574255]
+    scale: [1.000, 4.000]
+
+  z3a6:
+    from:  [444.135, 15.322, 201.022]
+    to:    labyrinth_of_onzozo
+    at:    [-58.808, -21.364, -286.654, 4.712389]
+    scale: [1.000, 3.000]
+
+  z3a8:
+    from:  [-279.987, 14.891, -324.019]
+    to:    bibiki_bay
+    at:    [669.917, -23.138, 911.655, 2.967060]
+    scale: [1.500, 4.000]

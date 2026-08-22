@@ -1,0 +1,2880 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aerns_Elemental:
+    id:            54
+    species:       dark_elemental
+    type:          [called]
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, rdm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Aerns_Euvhi:
+    id:            55
+    species:       euvhi
+    type:          [called]
+    skill_list_id: 109
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:    3
+          light:    3
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags:  1153
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Aerns_Wynav:
+    id:            56
+    species:       blue_wyvern
+    type:          [called]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 530
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Eoeuvhi:
+    id:            1240
+    species:       euvhi
+    skill_list_id: 109
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:    3
+          light:    3
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          item:   euvhi_organ
+        - chance: rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+
+  Eoeuvhi_closed:
+    id:            7093
+    display_name:  Eoeuvhi
+    species:       euvhi
+    skill_list_id: 109
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:    3
+          light:    3
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep:  3
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags:  1155
+        animation_sub:    5
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          item:   euvhi_organ
+        - chance: rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+
+  Eoghrah:
+    id:            1241
+    species:       bird_ghrah
+    skill_list_id: 122
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [war, blm]
+      render:
+        look:
+          type:  automaton
+          model: 1161
+        entity_flags: 1155
+        name_prefix:     2
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   luminion_chip
+        - chance: rare
+          item:   ghrah_m_chip
+        - chance: rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        luminion_chip: 0
+        ghrah_m_chip:  0
+
+  Eozdei:
+    id:            1242
+    species:       zdei
+    skill_list_id: 272
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 1157
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   luminion_chip
+
+  Eozdei_Left:
+    id:            7095
+    display_name:  Eozdei
+    species:       zdei
+    skill_list_id: 272
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 1157
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   luminion_chip
+
+  Indoor_aern_blm:
+    id:            6176
+    species:       aern
+    spell_list_id: 21
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1373
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+      stats:
+        mp: 9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_brd:
+    id:            6182
+    species:       aern
+    spell_list_id: 6
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      jobs: [brd, brd]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1373
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_bst:
+    id:            6181
+    species:       aern
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1374
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_drg:
+    id:            6186
+    species:       aern
+    skill_list_id: 440
+    attributes:
+      combat:
+        skill: polearm
+        delay: 360
+      jobs: [drg, drg]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1376
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_drk:
+    id:            6180
+    species:       aern
+    spell_list_id: 5
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1375
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+      stats:
+        mp: 9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_mnk:
+    id:            6174
+    species:       aern
+    skill_list_id: 3
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1367
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_nin:
+    id:            6185
+    species:       aern
+    spell_list_id: 7
+    skill_list_id: 3
+    attributes:
+      combat:
+        skill: katana
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1367
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_pld:
+    id:            6179
+    species:       aern
+    spell_list_id: 4
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1375
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+      stats:
+        mp: 9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_rdm:
+    id:            6177
+    species:       aern
+    spell_list_id: 3
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1375
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+      stats:
+        mp: 9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_rng:
+    id:            6183
+    species:       aern
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1374
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_sam:
+    id:            6184
+    species:       aern
+    skill_list_id: 440
+    attributes:
+      combat:
+        skill: polearm
+        delay: 360
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1376
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_smn:
+    id:            6187
+    species:       aern
+    skill_list_id: 439
+    attributes:
+      combat:
+        skill: staff
+        delay: 360
+      jobs: [smn, smn]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1377
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+      stats:
+        mp: 9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_thf:
+    id:            6178
+    species:       aern
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1373
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_war:
+    id:            6173
+    species:       aern
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1374
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Indoor_aern_whm:
+    id:            6175
+    species:       aern
+    spell_list_id: 20
+    skill_list_id: 439
+    attributes:
+      combat:
+        skill: staff
+        delay: 360
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1377
+        entity_flags:  1155
+        animation_sub:    5
+        hitbox:          10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 960
+      stats:
+        mp: 9999
+    loot:
+      drops:
+        - chance: uncommon
+          item:   aern_organ
+        - chance: rare
+          item:   high-quality_aern_organ
+        - chance: rare
+          item:   sample_of_luminian_tissue
+        - chance: very_rare
+          one_of: [fire_cluster, ice_cluster, wind_cluster, earth_cluster, lightning_cluster, water_cluster, light_cluster, dark_cluster]
+      despoil:
+        sample_of_luminian_tissue: 0
+        aern_organ:                0
+
+  Ixaern_mnk:
+    id:            4661
+    species:       aern
+    type:          [notorious]
+    skill_list_id: 3
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1367
+        entity_flags:  1157
+        animation_sub:    5
+        model_size:       2
+        hitbox:          13
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 13000
+
+  Ixghrah:
+    id:            2113
+    species:       bird_ghrah
+    type:          [notorious]
+    spell_list_id: 2
+    skill_list_id: 122
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      render:
+        look:
+          type:  automaton
+          model: 1169
+        entity_flags: 1157
+        name_prefix:     2
+        model_size:      2
+        hitbox:         13
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+
+  Jailer_of_Temperance:
+    id:            2136
+    species:       zdei
+    type:          [notorious]
+    skill_list_id: 272
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [sam, sam]
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 1158
+        entity_flags:  135
+        animation_sub:   4
+        model_size:      3
+        hitbox:         16
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 25000
+    loot:
+      drops:
+        - chance: always
+          item:   first_virtue
+        - chance: always
+          item:   temperance_axe
+        - chance: uncommon
+          item:   temperance_torque
+
+  Qnaern_rdm:
+    id:            3269
+    species:       aern
+    spell_list_id: 3
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1375
+        entity_flags:  131
+        animation_sub:   5
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+
+  Qnaern_whm:
+    id:            4651
+    species:       aern
+    spell_list_id: 20
+    skill_list_id: 439
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    6
+          dark:    -2
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1377
+        entity_flags:  131
+        animation_sub:   5
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+
+  Quasilumin:
+    id:      7057
+    species: aern
+    attributes:
+      jobs: [war, none]
+      render:
+        look:
+          type:  standard
+          model: 1045
+        entity_flags: 129
+        name_vis:       2
+        name_prefix:    8
+        hitbox:        12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1000
+
+spawns:
+  16916481:
+    template: Eoghrah
+    at:       [-464.896, -0.500, 700.304, 47]
+    level:    [75, 77]
+  16916482:
+    template: Eozdei
+    at:       [-460.000, -0.500, 740.000, 134]
+    level:    [77, 78]
+  16916483:
+    template: Eoghrah
+    at:       [-409.447, -0.500, 737.969, 107]
+    level:    [76, 76]
+  16916484:
+    template: Eoghrah
+    at:       [-420.608, -0.500, 733.981, 20]
+    level:    [76, 76]
+  16916485:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-380.000, -0.500, 740.000, 24]
+    level:    [77, 78]
+  16916486:
+    template: Eoghrah
+    at:       [-372.004, -0.500, 702.292, 40]
+    level:    [75, 75]
+  16916487:
+    template: Eozdei
+    at:       [-380.000, -0.500, 660.000, 228]
+    level:    [77, 78]
+  16916488:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-460.000, -0.500, 660.000, 164]
+    level:    [77, 78]
+  16916489:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-420.000, -1.500, 757.000, 64]
+    level:    [77, 78]
+  16916490:
+    template: Eoeuvhi
+    at:       [-388.000, -0.500, 700.000]
+    level:    [75, 77]
+  16916491:
+    template: Eoeuvhi
+    at:       [-394.000, -0.500, 700.000]
+    level:    [75, 77]
+  16916492:
+    template: Eoeuvhi
+    at:       [-452.000, -0.500, 700.000, 128]
+    level:    [75, 77]
+  16916493:
+    template: Eoeuvhi
+    at:       [-446.000, -0.500, 700.000, 128]
+    level:    [75, 77]
+  16916494:
+    template: Eoghrah
+    at:       [-420.570, -0.451, 619.681, 193]
+    level:    [75, 77]
+  16916495:
+    template: Eoghrah
+    at:       [-420.035, -0.500, 614.068, 60]
+    level:    [75, 77]
+  16916496:
+    template: Eoghrah
+    at:       [-420.553, -0.449, 608.870, 65]
+    level:    [75, 77]
+  16916497:
+    template: Eoghrah
+    at:       [-420.588, -0.449, 597.252, 62]
+    level:    [75, 77]
+  16916498:
+    template: Eoghrah
+    at:       [-92.738, -0.500, 505.613, 241]
+    level:    [75, 77]
+  16916499:
+    template: Eozdei
+    at:       [-60.000, -0.500, 500.000, 14]
+    level:    [77, 78]
+  16916500:
+    template: Eoghrah
+    at:       [-67.144, -0.500, 458.961, 127]
+    level:    [77, 77]
+  16916501:
+    template: Eoghrah
+    at:       [-68.695, -0.500, 459.823, 69]
+    level:    [77, 77]
+  16916502:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-60.000, -0.500, 420.000, 166]
+    level:    [77, 78]
+  16916503:
+    template: Eoghrah
+    at:       [-112.868, -0.500, 418.267, 170]
+    level:    [75, 77]
+  16916504:
+    template: Eozdei
+    at:       [-140.000, -0.500, 420.000, 120]
+    level:    [77, 78]
+  16916505:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-140.000, -0.500, 500.000, 140]
+    level:    [77, 78]
+  16916506:
+    template: Eoeuvhi
+    at:       [-100.000, -0.500, 492.000, 192]
+    level:    [75, 77]
+  16916507:
+    template: Eoeuvhi
+    at:       [-100.000, -0.500, 486.000, 192]
+    level:    [75, 77]
+  16916508:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-43.000, -1.500, 460.000, 128]
+    level:    [77, 78]
+  16916509:
+    template: Eoeuvhi
+    at:       [-100.000, -0.500, 428.000, 64]
+    level:    [75, 77]
+  16916510:
+    template: Eoeuvhi
+    at:       [-100.000, -0.500, 434.000, 64]
+    level:    [76, 76]
+  16916511:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [-122.476, -0.509, 460.098, 21]
+    level:    [74, 76]
+  16916512:
+    template: Eoghrah
+    at:       [-189.030, -0.455, 460.041, 124]
+    level:    [75, 77]
+  16916513:
+    template: Eoghrah
+    at:       [-189.997, -0.449, 460.108]
+    level:    [75, 77]
+  16916514:
+    template: Eoghrah
+    at:       [-216.827, -0.500, 100.793, 76]
+    level:    [75, 77]
+  16916515:
+    template: Eozdei
+    at:       [-220.000, -0.500, 60.000, 162]
+    level:    [77, 78]
+  16916516:
+    template: Eoghrah
+    at:       [-269.110, -0.500, 62.741, 233]
+    level:    [75, 77]
+  16916517:
+    template: Eoghrah
+    at:       [-260.403, -0.500, 76.380, 219]
+    level:    [75, 77]
+  16916518:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-300.000, -0.500, 60.000, 40]
+    level:    [77, 78]
+  16916519:
+    template: Eoghrah
+    at:       [-302.400, -0.500, 108.833, 210]
+    level:    [75, 77]
+  16916520:
+    template: Eozdei
+    at:       [-300.000, -0.500, 140.000, 8]
+    level:    [77, 78]
+  16916521:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-220.000, -0.500, 140.000, 24]
+    level:    [77, 78]
+  16916522:
+    template: Eoeuvhi
+    at:       [-261.713, -0.572, 125.384, 131]
+    level:    [74, 76]
+  16916523:
+    template: Eoeuvhi
+    at:       [-228.000, -0.500, 100.000]
+    level:    [75, 77]
+  16916524:
+    template: Eoeuvhi
+    at:       [-234.000, -0.500, 100.000]
+    level:    [75, 77]
+  16916525:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-260.000, -1.500, 43.000, 192]
+    level:    [77, 78]
+  16916526:
+    template: Eoeuvhi
+    at:       [-292.000, -0.500, 100.000, 128]
+    level:    [75, 76]
+  16916527:
+    template: Eoeuvhi
+    at:       [-286.000, -0.500, 100.000, 128]
+    level:    [75, 77]
+  16916528:
+    template: Eoghrah
+    at:       [-260.841, -0.478, 213.469, 49]
+    level:    [75, 77]
+  16916529:
+    template: Eoghrah
+    at:       [-260.523, -0.449, 229.414, 193]
+    level:    [75, 77]
+  16916530:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [-265.782, -0.500, 263.706, 206]
+    level:    [74, 76]
+  16916531:
+    template: Eoghrah
+    at:       [-535.709, -0.500, 109.521, 18]
+    level:    [75, 77]
+  16916532:
+    template: Eozdei
+    at:       [-540.000, -0.500, 60.000, 130]
+    level:    [77, 78]
+  16916533:
+    template: Eoghrah
+    at:       [-588.860, -0.500, 65.143, 141]
+    level:    [75, 77]
+  16916534:
+    template: Eoghrah
+    at:       [-573.669, -0.500, 62.727, 148]
+    level:    [75, 77]
+  16916535:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-620.000, -0.500, 60.000, 2]
+    level:    [77, 78]
+  16916536:
+    template: Eoghrah
+    at:       [-620.929, -0.500, 111.706, 232]
+    level:    [75, 77]
+  16916537:
+    template: Eozdei
+    at:       [-620.000, -0.500, 140.000, 184]
+    level:    [77, 78]
+  16916538:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-540.000, -0.500, 140.000, 72]
+    level:    [77, 78]
+  16916539:
+    template: Eoeuvhi
+    at:       [-548.000, -0.500, 100.000]
+    level:    [75, 77]
+  16916540:
+    template: Eoeuvhi
+    at:       [-554.000, -0.500, 100.000]
+    level:    [75, 77]
+  16916541:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-580.000, -1.500, 43.000, 192]
+    level:    [77, 78]
+  16916542:
+    template: Eoeuvhi
+    at:       [-612.000, -0.500, 100.000, 128]
+    level:    [75, 77]
+  16916543:
+    template: Eoeuvhi
+    at:       [-606.000, -0.500, 100.000, 128]
+    level:    [75, 77]
+  16916544:
+    template: Eoghrah
+    at:       [-577.663, -0.602, 183.823, 47]
+    level:    [75, 77]
+  16916545:
+    template: Eoghrah
+    at:       [-579.408, -0.453, 203.327, 192]
+    level:    [75, 77]
+  16916546:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [-575.405, -0.500, 264.087, 114]
+    level:    [74, 76]
+  16916547:
+    template: Eoghrah
+    at:       [-740.404, -0.500, 413.772, 21]
+    level:    [75, 75]
+  16916548:
+    template: Eozdei
+    at:       [-780.000, -0.500, 420.000, 102]
+    level:    [77, 78]
+  16916549:
+    template: Eoghrah
+    at:       [-772.504, -0.500, 470.076, 159]
+    level:    [75, 75]
+  16916550:
+    template: Eoghrah
+    at:       [-763.393, -0.500, 460.908, 27]
+    level:    [77, 77]
+  16916551:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-780.000, -0.500, 500.000, 132]
+    level:    [77, 78]
+  16916552:
+    template: Eoghrah
+    at:       [-740.135, -0.500, 516.776, 200]
+    level:    [77, 77]
+  16916553:
+    template: Eozdei
+    at:       [-700.000, -0.500, 500.000, 176]
+    level:    [77, 78]
+  16916554:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [-700.000, -0.500, 420.000, 160]
+    level:    [77, 78]
+  16916555:
+    template: Eoeuvhi
+    at:       [-740.000, -0.500, 492.000, 192]
+    level:    [75, 77]
+  16916556:
+    template: Eoeuvhi
+    at:       [-740.000, -0.500, 486.000, 192]
+    level:    [75, 77]
+  16916557:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [-712.685, -0.504, 460.449, 24]
+    level:    [74, 76]
+  16916558:
+    template: Eoeuvhi
+    at:       [-740.000, -0.500, 428.000, 64]
+    level:    [75, 77]
+  16916559:
+    template: Eoeuvhi
+    at:       [-740.000, -0.500, 434.000, 64]
+    level:    [75, 77]
+  16916560:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-797.000, -1.500, 460.000]
+    level:    [77, 78]
+  16916561:
+    template: Eoghrah
+    at:       [-657.978, -0.606, 458.174, 19]
+    level:    [75, 75]
+  16916562:
+    template: Eoghrah
+    at:       [-658.148, -0.621, 461.730, 253]
+    level:    [75, 75]
+  16916563:
+    template: Indoor_aern_war
+    script:   Eoaern
+    at:       [-383.234, -0.458, 539.467, 6]
+    level:    [79, 82]
+  16916564:
+    template: Indoor_aern_mnk
+    script:   Eoaern
+    at:       [-343.847, -0.497, 531.066, 125]
+    level:    [79, 82]
+  16916565:
+    template: Indoor_aern_mnk
+    script:   Eoaern
+    at:       [-382.680, -0.500, 539.058, 1]
+    level:    [79, 82]
+  16916566:
+    template: Indoor_aern_blm
+    script:   Eoaern
+    at:       [-389.510, -0.493, 538.910, 121]
+    level:    [79, 82]
+  16916567:
+    template: Indoor_aern_rdm
+    script:   Eoaern
+    at:       [-340.149, -0.365, 537.744, 70]
+    level:    [79, 82]
+  16916568:
+    template: Indoor_aern_smn
+    script:   Eoaern_SMN
+    at:       [-370.012, -0.499, 537.948, 192]
+    level:    [79, 82]
+  16916569:
+    template: Aerns_Elemental
+    at:       [1.000, 1.000, 1.000, 140]
+    level:    [63, 65]
+  16916570:
+    template: Eoeuvhi
+    at:       [-340.258, -0.500, 506.286, 229]
+    level:    [75, 77]
+  16916571:
+    template: Eoeuvhi
+    at:       [-299.782, -0.500, 506.397, 207]
+    level:    [74, 76]
+  16916572:
+    template: Eoghrah
+    at:       [-328.331, -0.500, 499.579, 255]
+    level:    [75, 77]
+  16916573:
+    template: Indoor_aern_thf
+    script:   Eoaern
+    at:       [-297.803, -0.468, 459.023, 253]
+    level:    [79, 82]
+  16916574:
+    template: Indoor_aern_pld
+    script:   Eoaern
+    at:       [-248.367, -0.500, 466.341, 111]
+    level:    [79, 82]
+  16916575:
+    template: Indoor_aern_rng
+    script:   Eoaern
+    at:       [-249.625, -0.499, 468.428, 253]
+    level:    [79, 82]
+  16916576:
+    template: Indoor_aern_rng
+    script:   Eoaern
+    at:       [-300.002, -0.497, 468.217, 130]
+    level:    [79, 82]
+  16916577:
+    template: Indoor_aern_nin
+    script:   Eoaern
+    at:       [-249.525, -0.499, 468.888]
+    level:    [79, 82]
+  16916578:
+    template: Indoor_aern_drg
+    script:   Eoaern_DRG
+    at:       [-291.808, -0.500, 461.187, 124]
+    level:    [79, 82]
+  16916579:
+    template: Aerns_Wynav
+    at:       [1.000, 1.000, 1.000, 5]
+    level:    [63, 65]
+  16916580:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-260.000, -1.500, 497.000, 64]
+    level:    [77, 78]
+  16916581:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-260.000, -1.500, 423.000, 192]
+    level:    [77, 78]
+  16916582:
+    template: Eoeuvhi
+    at:       [-335.414, -0.500, 424.875, 219]
+    level:    [74, 76]
+  16916583:
+    template: Eoghrah
+    at:       [-327.248, -0.500, 420.585, 128]
+    level:    [75, 77]
+  16916584:
+    template: Indoor_aern_whm
+    script:   Eoaern
+    at:       [-308.563, -0.499, 362.087, 68]
+    level:    [79, 82]
+  16916585:
+    template: Indoor_aern_pld
+    script:   Eoaern
+    at:       [-291.534, -0.499, 349.845, 194]
+    level:    [79, 82]
+  16916586:
+    template: Indoor_aern_bst
+    script:   Eoaern_BST
+    at:       [-299.223, -0.499, 350.652, 133]
+    level:    [79, 82]
+  16916587:
+    template: Indoor_aern_brd
+    script:   Eoaern
+    at:       [-291.569, -0.499, 384.940, 62]
+    level:    [79, 82]
+  16916588:
+    template: Indoor_aern_sam
+    script:   Eoaern
+    at:       [-292.726, -0.499, 373.359, 245]
+    level:    [79, 82]
+  16916589:
+    template: Indoor_aern_sam
+    script:   Eoaern
+    at:       [-291.102, -0.500, 378.787, 12]
+    level:    [79, 82]
+  16916590:
+    template: Aerns_Euvhi
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [63, 65]
+  16916591:
+    template: Eoeuvhi
+    at:       [-336.698, -0.500, 344.667, 241]
+    level:    [74, 76]
+  16916592:
+    template: Eoghrah
+    at:       [-340.742, -0.461, 293.093, 45]
+    level:    [75, 77]
+  16916593:
+    template: Indoor_aern_war
+    script:   Eoaern
+    at:       [-340.394, -0.454, 259.685, 128]
+    level:    [79, 82]
+  16916594:
+    template: Indoor_aern_pld
+    script:   Eoaern
+    at:       [-310.885, -0.499, 260.659, 64]
+    level:    [79, 82]
+  16916595:
+    template: Indoor_aern_brd
+    script:   Eoaern
+    at:       [-309.619, -0.499, 250.727, 128]
+    level:    [79, 82]
+  16916596:
+    template: Indoor_aern_nin
+    script:   Eoaern
+    at:       [-310.088, -0.500, 250.589, 142]
+    level:    [79, 82]
+  16916597:
+    template: Indoor_aern_nin
+    script:   Eoaern
+    at:       [-342.694, -0.500, 256.879, 149]
+    level:    [79, 82]
+  16916598:
+    template: Indoor_aern_drg
+    script:   Eoaern_DRG
+    at:       [-350.332, -0.497, 263.812, 184]
+    level:    [79, 82]
+  16916599:
+    template: Aerns_Wynav
+    at:       [1.000, 1.000, 1.000, 60]
+    level:    [63, 65]
+  16916600:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-300.000, -1.500, 297.000, 64]
+    level:    [77, 78]
+  16916601:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-300.000, -1.500, 223.000, 192]
+    level:    [77, 78]
+  16916602:
+    template: Indoor_aern_whm
+    script:   Eoaern
+    at:       [-488.767, -0.500, 258.466, 240]
+    level:    [79, 82]
+  16916603:
+    template: Indoor_aern_blm
+    script:   Eoaern
+    at:       [-509.441, -0.499, 261.035, 192]
+    level:    [79, 82]
+  16916604:
+    template: Indoor_aern_blm
+    script:   Eoaern
+    at:       [-529.327, -0.500, 258.072, 175]
+    level:    [79, 82]
+  16916605:
+    template: Indoor_aern_drk
+    script:   Eoaern
+    at:       [-548.928, -0.499, 252.828, 188]
+    level:    [79, 82]
+  16916606:
+    template: Indoor_aern_rng
+    script:   Eoaern
+    at:       [-508.258, -0.500, 250.904, 128]
+    level:    [79, 82]
+  16916607:
+    template: Indoor_aern_sam
+    script:   Eoaern
+    at:       [-539.247, -0.499, 250.953, 65]
+    level:    [79, 82]
+  16916608:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-540.000, -1.500, 297.000, 64]
+    level:    [77, 78]
+  16916609:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-540.000, -1.500, 223.000, 192]
+    level:    [77, 78]
+  16916610:
+    template: Eoghrah
+    at:       [-498.683, -0.514, 299.670, 45]
+    level:    [75, 77]
+  16916611:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [-503.357, -0.500, 335.582, 129]
+    level:    [75, 77]
+  16916612:
+    template: Indoor_aern_war
+    script:   Eoaern
+    at:       [-538.263, -0.499, 370.799, 122]
+    level:    [79, 82]
+  16916613:
+    template: Indoor_aern_whm
+    script:   Eoaern
+    at:       [-537.254, -0.460, 381.314, 127]
+    level:    [79, 82]
+  16916614:
+    template: Indoor_aern_whm
+    script:   Eoaern
+    at:       [-541.334, -0.500, 329.863, 184]
+    level:    [79, 82]
+  16916615:
+    template: Indoor_aern_thf
+    script:   Eoaern
+    at:       [-531.042, -0.499, 377.867, 64]
+    level:    [79, 82]
+  16916616:
+    template: Indoor_aern_drk
+    script:   Eoaern
+    at:       [-540.318, -0.500, 383.488, 53]
+    level:    [79, 82]
+  16916617:
+    template: Indoor_aern_smn
+    script:   Eoaern_SMN
+    at:       [-540.020, -0.479, 331.381, 70]
+    level:    [79, 82]
+  16916618:
+    template: Aerns_Elemental
+    at:       [1.000, 1.000, 1.000, 26]
+    level:    [63, 65]
+  16916619:
+    template: Eoeuvhi
+    at:       [-502.883, -0.500, 423.234, 158]
+    level:    [74, 76]
+  16916620:
+    template: Eoghrah
+    at:       [-500.176, -0.500, 413.819, 79]
+    level:    [75, 77]
+  16916621:
+    template: Indoor_aern_mnk
+    script:   Eoaern
+    at:       [-508.004, -0.499, 500.332, 39]
+    level:    [79, 82]
+  16916622:
+    template: Indoor_aern_rdm
+    script:   Eoaern
+    at:       [-530.014, -0.499, 453.750, 66]
+    level:    [79, 82]
+  16916623:
+    template: Indoor_aern_rdm
+    script:   Eoaern
+    at:       [-576.085, -0.478, 460.248, 112]
+    level:    [79, 82]
+  16916624:
+    template: Indoor_aern_thf
+    script:   Eoaern
+    at:       [-538.966, -0.496, 451.828, 2]
+    level:    [79, 82]
+  16916625:
+    template: Indoor_aern_bst
+    script:   Eoaern_BST
+    at:       [-591.723, -0.499, 467.255, 193]
+    level:    [79, 82]
+  16916626:
+    template: Indoor_aern_smn
+    script:   Eoaern_SMN
+    at:       [-581.420, -0.499, 468.596, 250]
+    level:    [79, 82]
+  16916627:
+    template: Aerns_Euvhi
+    at:       [1.000, 1.000, 1.000]
+    level:    [63, 65]
+  16916628:
+    template: Aerns_Elemental
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [63, 65]
+  16916629:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-580.000, -1.500, 497.000, 64]
+    level:    [77, 78]
+  16916630:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-580.000, -1.500, 423.000, 192]
+    level:    [77, 78]
+  16916631:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [-539.888, -0.500, 505.969, 177]
+    level:    [74, 76]
+  16916632:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [-501.346, -0.500, 499.084, 6]
+    level:    [75, 77]
+  16916633:
+    template: Eoghrah
+    at:       [-517.133, -0.500, 499.423, 128]
+    level:    [75, 77]
+  16916634:
+    template: Indoor_aern_mnk
+    script:   Eoaern
+    at:       [-498.722, -0.499, 530.437, 122]
+    level:    [79, 82]
+  16916635:
+    template: Indoor_aern_rdm
+    script:   Eoaern
+    at:       [-448.472, -0.500, 536.898, 31]
+    level:    [79, 82]
+  16916636:
+    template: Indoor_aern_brd
+    script:   Eoaern
+    at:       [-459.267, -0.460, 537.065, 198]
+    level:    [79, 82]
+  16916637:
+    template: Indoor_aern_brd
+    script:   Eoaern
+    at:       [-498.728, -0.459, 537.445, 190]
+    level:    [79, 82]
+  16916638:
+    template: Indoor_aern_rng
+    script:   Eoaern
+    at:       [-459.256, -0.499, 548.633, 127]
+    level:    [79, 82]
+  16916639:
+    template: Indoor_aern_drg
+    script:   Eoaern_DRG
+    at:       [-489.662, -0.500, 544.601, 235]
+    level:    [79, 82]
+  16916640:
+    template: Aerns_Wynav
+    at:       [1.000, 1.000, 1.000]
+    level:    [63, 65]
+  16916641:
+    template: Indoor_aern_blm
+    script:   Eoaern
+    at:       [-410.496, -0.499, 521.395, 59]
+    level:    [79, 82]
+  16916642:
+    template: Indoor_aern_pld
+    script:   Eoaern
+    at:       [-426.369, -0.499, 551.088, 254]
+    level:    [79, 82]
+  16916643:
+    template: Indoor_aern_pld
+    script:   Eoaern
+    at:       [-419.380, -0.494, 509.304, 198]
+    level:    [79, 82]
+  16916644:
+    template: Indoor_aern_bst
+    script:   Eoaern_BST
+    at:       [-428.307, -0.499, 501.476, 41]
+    level:    [79, 82]
+  16916645:
+    template: Indoor_aern_sam
+    script:   Eoaern
+    at:       [-419.181, -0.494, 509.555, 183]
+    level:    [79, 82]
+  16916646:
+    template: Indoor_aern_nin
+    script:   Eoaern
+    at:       [-411.737, -0.500, 548.483, 180]
+    level:    [79, 82]
+  16916647:
+    template: Aerns_Euvhi
+    at:       [1.000, 1.000, 1.000]
+    level:    [63, 65]
+  16916648:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-382.000, -1.000, 500.000, 128]
+    level:    [77, 78]
+  16916649:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [-457.000, -1.500, 500.000]
+    level:    [77, 78]
+  16916650:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [372.000, -0.500, 700.000, 30]
+    level:    [77, 78]
+  16916651:
+    template: Eoghrah
+    at:       [379.524, -0.500, 733.978, 55]
+    level:    [75, 77]
+  16916652:
+    template: Eoghrah
+    at:       [432.036, -0.500, 739.824, 215]
+    level:    [75, 77]
+  16916653:
+    template: Eoghrah
+    at:       [406.550, -0.500, 739.697, 169]
+    level:    [75, 77]
+  16916654:
+    template: Eoghrah
+    at:       [459.932, -0.500, 747.119, 151]
+    level:    [75, 77]
+  16916655:
+    template: Eozdei
+    at:       [468.000, -0.500, 700.000, 77]
+    level:    [77, 78]
+  16916656:
+    template: Eoghrah
+    at:       [458.610, -0.510, 659.204, 252]
+    level:    [75, 77]
+  16916657:
+    template: Eoghrah
+    at:       [380.359, -0.500, 659.756, 128]
+    level:    [75, 77]
+  16916658:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [420.000, -1.500, 757.000, 64]
+    level:    [77, 78]
+  16916659:
+    template: Eoeuvhi
+    at:       [452.000, -0.500, 700.000]
+    level:    [75, 77]
+  16916660:
+    template: Eoeuvhi
+    at:       [446.000, -0.500, 700.000]
+    level:    [75, 77]
+  16916661:
+    template: Eoeuvhi
+    at:       [419.791, -0.567, 674.679, 1]
+    level:    [74, 76]
+  16916662:
+    template: Eoeuvhi
+    at:       [388.000, -0.500, 700.000, 128]
+    level:    [75, 77]
+  16916663:
+    template: Eoeuvhi
+    at:       [394.000, -0.500, 700.000, 128]
+    level:    [74, 77]
+  16916664:
+    template: Eoghrah
+    at:       [421.482, -0.500, 617.502, 176]
+    level:    [75, 77]
+  16916665:
+    template: Eoghrah
+    at:       [419.717, -0.500, 578.876, 218]
+    level:    [75, 77]
+  16916666:
+    template: Eoghrah
+    at:       [421.870, -0.593, 623.242, 41]
+    level:    [75, 77]
+  16916667:
+    template: Eoghrah
+    at:       [420.301, -0.449, 608.952, 191]
+    level:    [75, 77]
+  16916668:
+    template: Eozdei
+    at:       [740.000, -0.500, 508.000, 166]
+    level:    [77, 78]
+  16916669:
+    template: Eoghrah
+    at:       [784.590, -0.500, 504.725, 15]
+    level:    [75, 77]
+  16916670:
+    template: Eoghrah
+    at:       [777.599, -0.500, 451.455, 172]
+    level:    [75, 77]
+  16916671:
+    template: Eoghrah
+    at:       [774.945, -0.500, 462.424, 84]
+    level:    [75, 77]
+  16916672:
+    template: Eoghrah
+    at:       [787.084, -0.500, 420.243, 13]
+    level:    [75, 77]
+  16916673:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [740.000, -0.500, 412.000, 72]
+    level:    [77, 78]
+  16916674:
+    template: Eoghrah
+    at:       [704.983, -0.500, 424.234, 214]
+    level:    [75, 77]
+  16916675:
+    template: Eoghrah
+    at:       [700.791, -0.500, 501.936, 59]
+    level:    [75, 77]
+  16916676:
+    template: Eoeuvhi
+    at:       [740.000, -0.500, 492.000, 192]
+    level:    [75, 77]
+  16916677:
+    template: Eoeuvhi
+    at:       [740.000, -0.500, 486.000, 192]
+    level:    [75, 77]
+  16916678:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [797.000, -1.500, 460.000, 128]
+    level:    [77, 78]
+  16916679:
+    template: Eoeuvhi
+    at:       [740.000, -0.500, 428.000, 64]
+    level:    [75, 77]
+  16916680:
+    template: Eoeuvhi
+    at:       [740.000, -0.500, 434.000, 64]
+    level:    [75, 77]
+  16916681:
+    template: Eoghrah
+    at:       [660.439, -0.470, 460.351, 145]
+    level:    [75, 77]
+  16916682:
+    template: Eoghrah
+    at:       [662.265, -0.622, 462.509, 253]
+    level:    [75, 77]
+  16916683:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [628.000, -0.500, 100.000, 87]
+    level:    [77, 78]
+  16916684:
+    template: Eoghrah
+    at:       [626.414, -0.500, 59.730, 212]
+    level:    [75, 77]
+  16916685:
+    template: Eoghrah
+    at:       [580.063, -0.500, 70.788, 188]
+    level:    [75, 77]
+  16916686:
+    template: Eoghrah
+    at:       [578.702, -0.500, 66.677, 190]
+    level:    [75, 77]
+  16916687:
+    template: Eoghrah
+    at:       [542.306, -0.500, 58.651, 242]
+    level:    [75, 77]
+  16916688:
+    template: Eozdei
+    at:       [532.000, -0.500, 100.000, 22]
+    level:    [77, 78]
+  16916689:
+    template: Eoghrah
+    at:       [540.234, -0.500, 139.709, 130]
+    level:    [75, 77]
+  16916690:
+    template: Eoghrah
+    at:       [623.375, -0.500, 144.458, 252]
+    level:    [75, 77]
+  16916691:
+    template: Eoeuvhi
+    at:       [579.608, -0.500, 122.900, 63]
+    level:    [75, 77]
+  16916692:
+    template: Eoeuvhi
+    at:       [612.000, -0.500, 100.000]
+    level:    [75, 77]
+  16916693:
+    template: Eoeuvhi
+    at:       [606.000, -0.500, 100.000]
+    level:    [75, 77]
+  16916694:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [580.000, -1.500, 43.000, 192]
+    level:    [77, 78]
+  16916695:
+    template: Eoeuvhi
+    at:       [548.000, -0.500, 100.000, 128]
+    level:    [75, 77]
+  16916696:
+    template: Eoeuvhi
+    at:       [554.000, -0.500, 100.000, 128]
+    level:    [76, 76]
+  16916697:
+    template: Eoghrah
+    at:       [579.892, -0.479, 178.813, 206]
+    level:    [75, 77]
+  16916698:
+    template: Eoghrah
+    at:       [579.942, -0.474, 212.925, 47]
+    level:    [75, 77]
+  16916699:
+    template: Eoeuvhi
+    at:       [581.940, -0.500, 259.208, 123]
+    level:    [75, 77]
+  16916700:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [308.000, -0.500, 100.000]
+    level:    [77, 78]
+  16916701:
+    template: Eoghrah
+    at:       [301.714, -0.500, 60.338, 91]
+    level:    [75, 77]
+  16916702:
+    template: Eoghrah
+    at:       [273.372, -0.500, 60.514, 36]
+    level:    [75, 77]
+  16916703:
+    template: Eoghrah
+    at:       [258.982, -0.500, 66.744, 125]
+    level:    [75, 77]
+  16916704:
+    template: Eoghrah
+    at:       [215.676, -0.500, 55.893, 47]
+    level:    [75, 77]
+  16916705:
+    template: Eozdei
+    at:       [212.000, -0.500, 100.000, 46]
+    level:    [77, 78]
+  16916706:
+    template: Eoghrah
+    at:       [222.494, -0.500, 138.092, 78]
+    level:    [75, 77]
+  16916707:
+    template: Eoghrah
+    at:       [305.698, -0.500, 136.316, 78]
+    level:    [75, 77]
+  16916708:
+    template: Eoeuvhi
+    at:       [292.000, -0.500, 100.000]
+    level:    [75, 77]
+  16916709:
+    template: Eoeuvhi
+    at:       [286.000, -0.500, 100.000]
+    level:    [75, 77]
+  16916710:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [260.000, -1.500, 43.000, 192]
+    level:    [77, 78]
+  16916711:
+    template: Eoeuvhi
+    at:       [228.000, -0.500, 100.000, 128]
+    level:    [75, 77]
+  16916712:
+    template: Eoeuvhi
+    at:       [234.000, -0.500, 100.000, 128]
+    level:    [75, 77]
+  16916713:
+    template: Eoghrah
+    at:       [261.798, -0.610, 223.038, 196]
+    level:    [75, 77]
+  16916714:
+    template: Eoghrah
+    at:       [259.777, -0.454, 197.921, 63]
+    level:    [75, 77]
+  16916715:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [260.468, -0.500, 261.787, 100]
+    level:    [76, 76]
+  16916716:
+    template: Eozdei_Left
+    script:   Eozdei
+    at:       [100.000, -0.500, 412.000, 86]
+    level:    [77, 78]
+  16916717:
+    template: Eoghrah
+    at:       [63.621, -0.500, 424.708, 225]
+    level:    [75, 77]
+  16916718:
+    template: Eoghrah
+    at:       [65.238, -0.500, 460.322, 248]
+    level:    [75, 77]
+  16916719:
+    template: Eoghrah
+    at:       [63.152, -0.500, 457.799, 51]
+    level:    [75, 77]
+  16916720:
+    template: Eoghrah
+    at:       [52.224, -0.499, 500.057, 84]
+    level:    [75, 77]
+  16916721:
+    template: Eozdei
+    at:       [100.000, -0.500, 508.000, 52]
+    level:    [77, 78]
+  16916722:
+    template: Eoghrah
+    at:       [140.025, -0.500, 500.494, 99]
+    level:    [75, 77]
+  16916723:
+    template: Eoghrah
+    at:       [132.633, -0.500, 419.672, 129]
+    level:    [75, 77]
+  16916724:
+    template: Eoeuvhi
+    at:       [100.000, -0.500, 492.000, 192]
+    level:    [75, 77]
+  16916725:
+    template: Eoeuvhi
+    at:       [100.000, -0.500, 486.000, 192]
+    level:    [75, 77]
+  16916726:
+    template: Eoeuvhi
+    at:       [100.000, -0.500, 428.000, 64]
+    level:    [75, 77]
+  16916727:
+    template: Eoeuvhi
+    at:       [100.000, -0.500, 434.000, 64]
+    level:    [75, 77]
+  16916728:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [43.000, -1.500, 460.000]
+    level:    [77, 78]
+  16916729:
+    template: Eoghrah
+    at:       [172.377, -0.450, 459.393]
+    level:    [75, 77]
+  16916730:
+    template: Eoghrah
+    at:       [170.664, -0.449, 459.484, 129]
+    level:    [75, 77]
+  16916731:
+    template: Indoor_aern_war
+    script:   Eoaern
+    at:       [490.638, -0.499, 546.405, 64]
+    level:    [79, 82]
+  16916732:
+    template: Indoor_aern_war
+    script:   Eoaern
+    at:       [462.885, -0.458, 539.306, 133]
+    level:    [79, 82]
+  16916733:
+    template: Indoor_aern_mnk
+    script:   Eoaern
+    at:       [499.818, -0.500, 548.533, 160]
+    level:    [79, 82]
+  16916734:
+    template: Indoor_aern_blm
+    script:   Eoaern
+    at:       [499.743, -0.499, 530.734, 1]
+    level:    [79, 82]
+  16916735:
+    template: Indoor_aern_rdm
+    script:   Eoaern
+    at:       [500.750, -0.499, 530.917, 66]
+    level:    [79, 82]
+  16916736:
+    template: Indoor_aern_smn
+    script:   Eoaern_SMN
+    at:       [460.869, -0.499, 531.022, 126]
+    level:    [79, 82]
+  16916737:
+    template: Aerns_Elemental
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [63, 65]
+  16916738:
+    template: Eoghrah
+    at:       [501.153, -0.500, 506.535, 64]
+    level:    [75, 77]
+  16916739:
+    template: Eoghrah
+    at:       [539.833, -0.500, 501.411, 25]
+    level:    [75, 77]
+  16916740:
+    template: Indoor_aern_thf
+    script:   Eoaern
+    at:       [570.814, -0.494, 462.675, 191]
+    level:    [79, 82]
+  16916741:
+    template: Indoor_aern_thf
+    script:   Eoaern
+    at:       [550.568, -0.499, 459.583, 191]
+    level:    [79, 82]
+  16916742:
+    template: Indoor_aern_pld
+    script:   Eoaern
+    at:       [580.540, -0.391, 460.124, 192]
+    level:    [79, 82]
+  16916743:
+    template: Indoor_aern_rng
+    script:   Eoaern
+    at:       [582.084, -0.500, 460.033, 154]
+    level:    [79, 82]
+  16916744:
+    template: Indoor_aern_nin
+    script:   Eoaern
+    at:       [560.553, -0.497, 452.235, 128]
+    level:    [79, 82]
+  16916745:
+    template: Indoor_aern_drg
+    script:   Eoaern_DRG
+    at:       [529.264, -0.500, 466.424, 78]
+    level:    [79, 82]
+  16916746:
+    template: Aerns_Wynav
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [63, 65]
+  16916747:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [540.000, -1.500, 423.000, 192]
+    level:    [77, 78]
+  16916748:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [587.891, -0.500, 416.780, 179]
+    level:    [74, 76]
+  16916749:
+    template: Eoeuvhi
+    at:       [577.011, -4.706, 372.591, 3]
+    level:    [76, 76]
+  16916750:
+    template: Eoeuvhi
+    at:       [578.917, -4.491, 372.569, 118]
+    level:    [74, 76]
+  16916751:
+    template: Eoghrah
+    at:       [538.783, -6.500, 385.433, 205]
+    level:    [75, 77]
+  16916752:
+    template: Eoeuvhi
+    at:       [533.019, -5.466, 331.868, 134]
+    level:    [75, 76]
+  16916753:
+    template: Eoeuvhi
+    at:       [537.637, -4.506, 330.942, 204]
+    level:    [74, 76]
+  16916754:
+    template: Eoghrah
+    at:       [543.829, -6.500, 383.752, 206]
+    level:    [75, 77]
+  16916755:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [498.250, -0.500, 338.360, 184]
+    level:    [74, 76]
+  16916756:
+    template: Indoor_aern_war
+    script:   Eoaern
+    at:       [529.444, -0.499, 267.461, 192]
+    level:    [79, 82]
+  16916757:
+    template: Indoor_aern_pld
+    script:   Eoaern
+    at:       [530.635, -0.499, 250.481, 127]
+    level:    [79, 82]
+  16916758:
+    template: Indoor_aern_brd
+    script:   Eoaern
+    at:       [495.953, -0.496, 250.946, 124]
+    level:    [79, 82]
+  16916759:
+    template: Indoor_aern_nin
+    script:   Eoaern
+    at:       [545.550, -0.477, 259.547, 120]
+    level:    [79, 82]
+  16916760:
+    template: Indoor_aern_drg
+    script:   Eoaern_DRG
+    at:       [541.136, -0.483, 285.037, 139]
+    level:    [79, 82]
+  16916761:
+    template: Indoor_aern_drg
+    script:   Eoaern_DRG
+    at:       [490.383, -0.499, 252.273, 186]
+    level:    [79, 82]
+  16916762:
+    template: Aerns_Wynav
+    at:       [541.948, -0.497, 286.731, 97]
+    level:    [63, 65]
+  16916763:
+    template: Aerns_Wynav
+    at:       [543.480, -0.473, 258.796, 253]
+    level:    [63, 65]
+  16916764:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [540.000, -1.500, 297.000, 64]
+    level:    [78, 78]
+  16916765:
+    template: Eoghrah
+    at:       [412.345, -0.499, 219.891, 153]
+    level:    [75, 77]
+  16916766:
+    template: Eoghrah
+    at:       [456.259, -0.500, 223.687, 175]
+    level:    [75, 77]
+  16916767:
+    template: Eoeuvhi
+    at:       [430.809, -0.500, 215.138, 230]
+    level:    [75, 76]
+  16916768:
+    template: Eoeuvhi
+    at:       [432.652, -6.500, 194.580, 189]
+    level:    [74, 76]
+  16916769:
+    template: Eoeuvhi
+    at:       [405.800, -6.500, 192.439, 102]
+    level:    [76, 76]
+  16916770:
+    template: Eoeuvhi
+    at:       [416.526, -6.500, 179.270, 135]
+    level:    [74, 74]
+  16916771:
+    template: Eoghrah
+    at:       [378.344, -0.500, 217.645, 235]
+    level:    [75, 77]
+  16916772:
+    template: Eoghrah
+    at:       [385.584, -0.500, 256.435, 78]
+    level:    [75, 77]
+  16916773:
+    template: Eoghrah
+    at:       [428.121, -0.500, 220.588, 121]
+    level:    [75, 77]
+  16916774:
+    template: Indoor_aern_whm
+    script:   Eoaern
+    at:       [289.672, -0.499, 253.307, 64]
+    level:    [79, 82]
+  16916775:
+    template: Indoor_aern_blm
+    script:   Eoaern
+    at:       [318.688, -0.500, 269.458, 131]
+    level:    [79, 82]
+  16916776:
+    template: Indoor_aern_drk
+    script:   Eoaern
+    at:       [349.837, -0.499, 267.741, 58]
+    level:    [79, 82]
+  16916777:
+    template: Indoor_aern_drk
+    script:   Eoaern
+    at:       [290.318, -0.499, 269.651, 2]
+    level:    [79, 82]
+  16916778:
+    template: Indoor_aern_rng
+    script:   Eoaern
+    at:       [348.201, -0.493, 261.415]
+    level:    [79, 82]
+  16916779:
+    template: Indoor_aern_sam
+    script:   Eoaern
+    at:       [301.069, -0.458, 261.364, 125]
+    level:    [79, 82]
+  16916780:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [300.000, -1.500, 297.000, 64]
+    level:    [77, 78]
+  16916781:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [339.684, -0.500, 333.782, 75]
+    level:    [74, 76]
+  16916782:
+    template: Eoeuvhi
+    at:       [299.636, -4.517, 333.182, 34]
+    level:    [74, 76]
+  16916783:
+    template: Eoeuvhi
+    at:       [301.820, -4.546, 327.434, 60]
+    level:    [74, 76]
+  16916784:
+    template: Eoghrah
+    at:       [295.779, -6.500, 377.032, 206]
+    level:    [75, 77]
+  16916785:
+    template: Eoeuvhi
+    at:       [270.735, -6.524, 375.991, 98]
+    level:    [74, 76]
+  16916786:
+    template: Eoeuvhi
+    at:       [271.380, -6.494, 382.586, 198]
+    level:    [74, 76]
+  16916787:
+    template: Eoghrah
+    at:       [303.386, -6.500, 384.009, 238]
+    level:    [75, 77]
+  16916788:
+    template: Eoeuvhi_closed
+    script:   Eoeuvhi
+    at:       [266.328, -0.500, 419.974, 29]
+    level:    [74, 76]
+  16916789:
+    template: Indoor_aern_war
+    script:   Eoaern
+    at:       [295.333, -0.499, 450.870, 4]
+    level:    [79, 82]
+  16916790:
+    template: Indoor_aern_whm
+    script:   Eoaern
+    at:       [261.539, -0.499, 450.329, 127]
+    level:    [79, 82]
+  16916791:
+    template: Indoor_aern_thf
+    script:   Eoaern
+    at:       [290.944, -0.499, 450.329, 127]
+    level:    [79, 82]
+  16916792:
+    template: Indoor_aern_drk
+    script:   Eoaern
+    at:       [270.021, -0.499, 460.279, 63]
+    level:    [79, 82]
+  16916793:
+    template: Indoor_aern_smn
+    script:   Eoaern_SMN
+    at:       [279.624, -0.500, 467.009, 139]
+    level:    [79, 82]
+  16916794:
+    template: Indoor_aern_smn
+    script:   Eoaern_SMN
+    at:       [251.763, -0.491, 458.438, 131]
+    level:    [79, 82]
+  16916795:
+    template: Aerns_Elemental
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [63, 65]
+  16916796:
+    template: Aerns_Elemental
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [63, 65]
+  16916797:
+    template: Eozdei
+    script:   Eozdei_Still
+    at:       [300.000, -1.500, 423.000, 192]
+    level:    [77, 78]
+  16916798:
+    template: Eoghrah
+    at:       [296.714, -0.500, 504.497, 129]
+    level:    [75, 77]
+  16916799:
+    template: Eoghrah
+    at:       [340.309, -0.500, 506.384, 207]
+    level:    [75, 77]
+  16916800:
+    template: Indoor_aern_mnk
+    script:   Eoaern
+    at:       [379.529, -0.458, 540.229, 4]
+    level:    [79, 82]
+  16916801:
+    template: Indoor_aern_mnk
+    script:   Eoaern
+    at:       [350.987, -0.499, 538.926, 191]
+    level:    [79, 82]
+  16916802:
+    template: Indoor_aern_rdm
+    script:   Eoaern
+    at:       [390.337, -0.492, 540.788, 4]
+    level:    [79, 82]
+  16916803:
+    template: Indoor_aern_brd
+    script:   Eoaern
+    at:       [391.620, -0.499, 539.042, 199]
+    level:    [79, 82]
+  16916804:
+    template: Indoor_aern_rng
+    script:   Eoaern
+    at:       [379.235, -0.456, 540.976, 254]
+    level:    [79, 82]
+  16916805:
+    template: Indoor_aern_drg
+    script:   Eoaern_DRG
+    at:       [342.150, -0.500, 541.155, 133]
+    level:    [79, 82]
+  16916806:
+    template: Aerns_Wynav
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [63, 65]
+  16916807:
+    template: Indoor_aern_blm
+    script:   Eoaern
+    at:       [419.965, -0.500, 529.653, 207]
+    level:    [79, 82]
+  16916808:
+    template: Indoor_aern_pld
+    script:   Eoaern
+    at:       [420.147, -0.469, 522.799, 191]
+    level:    [79, 82]
+  16916809:
+    template: Indoor_aern_bst
+    script:   Eoaern_BST
+    at:       [419.509, -0.500, 512.593, 213]
+    level:    [79, 82]
+  16916810:
+    template: Indoor_aern_sam
+    script:   Eoaern
+    at:       [425.709, -0.487, 500.401, 251]
+    level:    [79, 82]
+  16916811:
+    template: Indoor_aern_nin
+    script:   Eoaern
+    at:       [420.256, -0.479, 494.831, 185]
+    level:    [79, 82]
+  16916812:
+    template: Aerns_Euvhi
+    at:       [1.000, 1.000, 1.000]
+    level:    [63, 65]
+  16916813:
+    template: Ixghrah
+    at:       [420.035, 0.000, 402.044, 195]
+    level:    [76, 77]
+  16916814:
+    template: Jailer_of_Temperance
+    at:       [-262.373, -0.500, 49.059, 196]
+    level:    [85, 85]
+  16916815:
+    template: Ixaern_mnk
+    script:   Ixaern_MNK
+    at:       [381.299, -0.500, 540.041, 7]
+    level:    [83, 83]
+  16916816:
+    template: Qnaern_rdm
+    script:   Qnaern
+    at:       [382.567, -0.500, 542.164, 43]
+    level:    [80, 80]
+  16916817:
+    template: Qnaern_whm
+    script:   Qnaern
+    at:       [459.439, -0.423, 537.200, 144]
+    level:    [80, 80]

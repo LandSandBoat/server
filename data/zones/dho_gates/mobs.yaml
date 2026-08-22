@@ -1,0 +1,2681 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Apex_Bats:
+    id:            5389
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Apex_Crab:
+    id:            5390
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      spawn:
+        respawn: 300
+
+  Apex_Craklaw:
+    id:            6374
+    species:       craklaw
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Apex_Jagil:
+    id:            5393
+    species:       pugil
+    skill_list_id: 6
+    attributes:
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Blightdella:
+    id:            4919
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags:  129
+        animation_sub:   8
+        hitbox:          9
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Bloodspattered_Fly:
+    id:            5527
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 449
+        entity_flags: 133
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Crevice_Tarichuk:
+    id:            4904
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1350
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Dullahan_generic:
+    id:            5250
+    species:       dullahan
+    skill_list_id: 447
+    attributes:
+      combat:
+        skill: great_katana
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -2
+          ice:      6
+          wind:     2
+          earth:    3
+          thunder:  2
+          water:    3
+          light:   -2
+          dark:     9
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      2
+          slow:         3
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   9
+          blind:        9
+      render:
+        look:
+          type:  standard
+          model: 2605
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Duskprowlers:
+    id:            4982
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags: 641
+        name_prefix:   64
+        hitbox:        13
+      spawn:
+        respawn: 300
+
+  Dwende:
+    id:            6351
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 180
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Fetid_Umbril:
+    id:            6701
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  129
+        animation_sub:   5
+        name_prefix:     2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Firth_Umbril:
+    id:            4975
+    species:       umbril
+    skill_list_id: 468
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:  -2
+          light: -3
+          dark:  10
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 2565
+        entity_flags:  129
+        animation_sub:  13
+        name_prefix:     2
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+
+  Fleshrending_Obdella:
+    id:            6407
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1934
+        entity_flags: 129
+        hitbox:         9
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Irascible_Tarichuk:
+    id:            5639
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1350
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Knotted_Root_DG_WG:
+    id:           6711
+    display_name: Knotted_Root
+    species:      unclassified
+    type:         [event]
+    attributes:
+      combat:
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2794
+        entity_flags:  647
+        animation_sub:   8
+        model_size:      3
+        hitbox:         50
+      spawn:
+        type: [scripted]
+
+  Leafdancer_Twitherym:
+    id:            4979
+    species:       twitherym
+    skill_list_id: 338
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          ice:     -2
+          earth:    4
+          thunder: -2
+          water:   -2
+          light:    2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          slow:         4
+          poison:      -2
+          light_sleep:  2
+      render:
+        look:
+          type:  standard
+          model: 2536
+        entity_flags: 129
+        name_prefix:   64
+        hitbox:         6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 900
+      stats:
+        mp: 999
+
+  Midnight_Worm:
+    id:            6418
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Peevish_Acuex:
+    id:            6385
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Pungent_Fungus:
+    id:      5060
+    species: funguar
+    type:    [notorious]
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2775
+        entity_flags: 129
+        hitbox:         3
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Rancidclaw_Crab:
+    id:            6364
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Ripsaw_Jagil:
+    id:            4981
+    species:       pugil
+    skill_list_id: 709
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 349
+        entity_flags: 129
+        hitbox:        23
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Septic_Acuex:
+    id:            4917
+    species:       acuex
+    skill_list_id: 345
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  -3
+          earth:  3
+          water:  5
+          light: -2
+        rank_status:
+          slow:         3
+          poison:       5
+          light_sleep: -2
+      render:
+        look:
+          type:  standard
+          model: 2570
+        entity_flags:  129
+        animation_sub:   4
+        hitbox:          6
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Slinking_Slug:
+    id:            5526
+    species:       slug
+    skill_list_id: 231
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          thunder: -1
+          water:   11
+        rank_status:
+          paralyze: -1
+          bind:     -1
+          poison:   11
+      render:
+        look:
+          type:  standard
+          model: 2021
+        entity_flags: 129
+        hitbox:        15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Spinescent_Protuberance:
+    id:      4991
+    species: unclassified
+    attributes:
+      combat:
+        skill: scythe
+        delay: 32767
+      render:
+        look:
+          type:  standard
+          model: 2804
+        entity_flags: 129
+        hitbox:         4
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        respawn: 300
+
+  Spumous_Slug:
+    id:            4918
+    species:       slug
+    skill_list_id: 231
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          thunder: -1
+          water:   11
+        rank_status:
+          paralyze: -1
+          bind:     -1
+          poison:   11
+      render:
+        look:
+          type:  standard
+          model: 2021
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         15
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Surly_Craklaw:
+    id:            6373
+    species:       craklaw
+    type:          [notorious]
+    skill_list_id: 344
+    attributes:
+      combat:
+        skill: staff
+      jobs: [pld, pld]
+      resists:
+        dmg_physical:
+          slashing: -1000
+          piercing: -1000
+          blunt:    -1000
+          h2h:      -1000
+        rank_element:
+          fire:    -2
+          wind:     4
+          earth:    2
+          thunder: -2
+          water:    4
+        rank_status:
+          silence: 4
+          slow:    2
+          poison:  4
+      render:
+        look:
+          type:  standard
+          model: 2555
+        entity_flags: 131
+        model_size:     1
+        hitbox:        16
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+
+  Trogloptera:
+    id:            4901
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags: 643
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Twilight_Bat:
+    id:            4984
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:         11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Unyielding_Tarichuk:
+    id:            4980
+    species:       eft
+    skill_list_id: 98
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     2
+          earth:    2
+          thunder: -1
+          water:    2
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:      2
+          slow:         2
+          poison:       2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 1350
+        entity_flags: 1153
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+
+  Velkk_Archmagus:
+    id:            5523
+    species:       blue_velkk
+    spell_list_id: 21
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Velkk_Berserker:
+    id:            4983
+    species:       red_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Velkk_Cyclonicist:
+    id:            5522
+    species:       blue_velkk
+    spell_list_id: 20
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 9999
+
+  Velkk_Dreadnought:
+    id:            5525
+    species:       blue_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Velkk_Magus:
+    id:            4977
+    species:       blue_velkk
+    spell_list_id: 20
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+
+  Velkk_Manipulator:
+    id:            4903
+    species:       blue_velkk
+    spell_list_id: 21
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Velkk_Punisher:
+    id:            4900
+    species:       blue_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Velkk_Ravager:
+    id:            4902
+    species:       red_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Velkk_Reaver:
+    id:            4976
+    species:       red_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+
+  Velkk_Stormcaller:
+    id:            4978
+    species:       blue_velkk
+    spell_list_id: 21
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+      stats:
+        mp: 999
+
+  Velkk_Trampler:
+    id:            5524
+    species:       blue_velkk
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2520
+        entity_flags: 129
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+  Velkk_Vaticinator:
+    id:            4899
+    species:       red_velkk
+    spell_list_id: 20
+    skill_list_id: 342
+    attributes:
+      combat:
+        skill: katana
+        delay: 280
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          ice:     -2
+          thunder: -2
+          water:    4
+          dark:     2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          poison:      4
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 2525
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 20000
+        mp:  5000
+
+  Void_Worm:
+    id:            4985
+    species:       worm
+    roam:          [worm]
+    spell_list_id: 9
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 426
+        entity_flags: 129
+        hitbox:        11
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+
+spawns:
+  17891329:
+    script: Chumchomp_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17891330:
+    script: Chumchomp_Jagil
+    at:     [1.000, 1.000, 1.000]
+  17891331:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17891332:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17891333:
+    script: Crusty_Crab
+    at:     [1.000, 1.000, 1.000]
+  17891334:
+    template: Knotted_Root_DG_WG
+    script:   Knotted_Root
+    at:       [-58.000, -11.500, 80.000, 47]
+    level:    [105, 110]
+  17891335:
+    template: Knotted_Root_DG_WG
+    script:   Knotted_Root
+    at:       [-62.000, -11.500, 80.000, 52]
+    level:    [105, 110]
+  17891336:
+    template: Velkk_Punisher
+    at:       [-71.850, -10.550, 93.278, 147]
+    level:    [106, 106]
+  17891337:
+    template: Trogloptera
+    at:       [-64.190, -10.630, 86.120, 55]
+    level:    [106, 106]
+  17891338:
+    template: Velkk_Vaticinator
+    at:       [-58.050, -10.550, 77.244, 220]
+    level:    [106, 106]
+  17891339:
+    template: Trogloptera
+    at:       [-62.040, -10.490, 76.729, 183]
+    level:    [106, 106]
+  17891340:
+    template: Knotted_Root_DG_WG
+    script:   Knotted_Root
+    at:       [-160.000, -21.500, 302.000, 56]
+    level:    [105, 110]
+  17891341:
+    template: Knotted_Root_DG_WG
+    script:   Knotted_Root
+    at:       [-160.000, -21.500, 298.000, 19]
+    level:    [105, 110]
+  17891342:
+    template: Velkk_Ravager
+    at:       [-179.500, -20.370, 298.652, 115]
+    level:    [106, 106]
+  17891343:
+    template: Crevice_Tarichuk
+    at:       [-163.700, -20.470, 299.139, 53]
+    level:    [106, 106]
+  17891344:
+    template: Velkk_Manipulator
+    at:       [-156.500, -20.540, 302.148, 133]
+    level:    [106, 106]
+  17891345:
+    template: Crevice_Tarichuk
+    at:       [-154.800, -20.550, 301.657, 226]
+    level:    [106, 106]
+  17891346:
+    template: Leafdancer_Twitherym
+    at:       [-80.510, -10.260, 108.471, 32]
+    level:    [121, 123]
+  17891347:
+    template: Leafdancer_Twitherym
+    at:       [-82.020, -10.360, 115.014, 144]
+    level:    [121, 123]
+  17891348:
+    template: Leafdancer_Twitherym
+    at:       [-92.500, -10.620, 124.259, 181]
+    level:    [121, 123]
+  17891349:
+    template: Leafdancer_Twitherym
+    at:       [-45.040, -9.630, 110.031, 37]
+    level:    [121, 123]
+  17891350:
+    template: Ripsaw_Jagil
+    at:       [-48.860, -9.623, 113.323, 20]
+    level:    [121, 123]
+  17891351:
+    template: Ripsaw_Jagil
+    at:       [-38.240, -9.560, 118.385, 150]
+    level:    [121, 123]
+  17891352:
+    template: Ripsaw_Jagil
+    at:       [-83.650, -9.309, 111.913, 208]
+    level:    [121, 123]
+  17891353:
+    template: Velkk_Trampler
+    at:       [-196.300, -19.540, 146.438, 80]
+    level:    [121, 123]
+  17891354:
+    template: Velkk_Trampler
+    at:       [-204.300, -19.880, 121.646, 120]
+    level:    [121, 123]
+  17891355:
+    template: Velkk_Dreadnought
+    at:       [-203.800, -19.280, 142.718, 62]
+    level:    [121, 123]
+  17891356:
+    template: Velkk_Dreadnought
+    at:       [-195.800, -19.910, 161.716, 1]
+    level:    [121, 123]
+  17891357:
+    template: Ripsaw_Jagil
+    at:       [-198.400, -19.720, 111.319, 52]
+    level:    [121, 123]
+  17891358:
+    template: Ripsaw_Jagil
+    at:       [-191.100, -19.640, 155.634, 248]
+    level:    [121, 123]
+  17891359:
+    template: Ripsaw_Jagil
+    at:       [-193.700, -19.510, 148.195, 88]
+    level:    [121, 123]
+  17891360:
+    template: Ripsaw_Jagil
+    at:       [-196.900, -19.780, 133.339, 205]
+    level:    [121, 123]
+  17891361:
+    template: Velkk_Archmagus
+    at:       [-245.400, -20.060, 109.661, 5]
+    level:    [121, 123]
+  17891362:
+    template: Velkk_Archmagus
+    at:       [-236.700, -19.640, 134.832, 218]
+    level:    [121, 123]
+  17891363:
+    template: Velkk_Cyclonicist
+    at:       [-235.500, -19.870, 170.069, 190]
+    level:    [121, 123]
+  17891364:
+    template: Velkk_Cyclonicist
+    at:       [-233.600, -20.000, 116.071, 26]
+    level:    [121, 123]
+  17891365:
+    template: Unyielding_Tarichuk
+    at:       [-153.100, -19.710, 194.029, 173]
+    level:    [121, 123]
+  17891366:
+    template: Unyielding_Tarichuk
+    at:       [-159.700, -20.120, 202.119, 56]
+    level:    [121, 123]
+  17891367:
+    template: Spumous_Slug
+    at:       [-37.310, -19.630, 328.032, 26]
+    level:    [121, 123]
+  17891368:
+    template: Spumous_Slug
+    at:       [-59.080, -20.930, 302.510, 139]
+    level:    [121, 123]
+  17891369:
+    template: Spumous_Slug
+    at:       [-55.520, -20.210, 297.278, 78]
+    level:    [121, 123]
+  17891370:
+    template: Septic_Acuex
+    at:       [-35.730, -19.690, 279.048, 91]
+    level:    [121, 123]
+  17891371:
+    template: Septic_Acuex
+    at:       [-82.110, -19.610, 276.199, 128]
+    level:    [121, 123]
+  17891372:
+    template: Septic_Acuex
+    at:       [-46.310, -20.740, 281.164, 115]
+    level:    [121, 123]
+  17891373:
+    template: Firth_Umbril
+    at:       [19.507, -19.900, 257.394, 180]
+    level:    [121, 123]
+  17891374:
+    template: Firth_Umbril
+    at:       [23.150, -19.770, 261.140, 87]
+    level:    [121, 123]
+  17891375:
+    template: Blightdella
+    at:       [-84.880, -20.290, 410.701, 38]
+    level:    [121, 123]
+  17891376:
+    template: Blightdella
+    at:       [-90.900, -20.110, 404.928, 134]
+    level:    [121, 123]
+  17891377:
+    template: Pungent_Fungus
+    at:       [-73.980, -19.480, 405.440, 96]
+    level:    [1, 1]
+  17891378:
+    template: Pungent_Fungus
+    at:       [-68.990, -20.160, 388.058, 93]
+    level:    [1, 1]
+  17891379:
+    template: Leafdancer_Twitherym
+    at:       [-41.230, -20.000, 431.062, 176]
+    level:    [121, 123]
+  17891380:
+    template: Leafdancer_Twitherym
+    at:       [-40.900, -20.030, 431.411, 69]
+    level:    [121, 123]
+  17891381:
+    template: Leafdancer_Twitherym
+    at:       [-41.660, -20.130, 447.893, 214]
+    level:    [121, 123]
+  17891382:
+    template: Duskprowlers
+    at:       [-329.100, -29.880, 196.210, 236]
+    level:    [121, 123]
+  17891383:
+    template: Duskprowlers
+    at:       [-320.700, -30.840, 198.770, 64]
+    level:    [121, 123]
+  17891384:
+    template: Velkk_Reaver
+    at:       [-330.200, -30.200, 243.856, 183]
+    level:    [105, 110]
+  17891385:
+    template: Velkk_Reaver
+    at:       [-315.900, -29.510, 209.380, 128]
+    level:    [105, 110]
+  17891386:
+    template: Velkk_Reaver
+    at:       [-324.100, -29.620, 196.024, 150]
+    level:    [105, 110]
+  17891387:
+    template: Firth_Umbril
+    at:       [-287.400, -39.740, 316.059, 85]
+    level:    [121, 123]
+  17891388:
+    template: Firth_Umbril
+    at:       [-288.900, -40.280, 323.920, 78]
+    level:    [121, 123]
+  17891389:
+    template: Firth_Umbril
+    at:       [-279.900, -40.180, 318.743, 8]
+    level:    [121, 123]
+  17891390:
+    template: Velkk_Stormcaller
+    at:       [-412.200, -40.110, 178.363, 155]
+    level:    [105, 110]
+  17891391:
+    template: Velkk_Stormcaller
+    at:       [-416.300, -41.250, 185.552, 243]
+    level:    [105, 110]
+  17891392:
+    template: Velkk_Stormcaller
+    at:       [-410.000, -39.660, 175.945, 26]
+    level:    [105, 110]
+  17891393:
+    template: Unyielding_Tarichuk
+    at:       [-360.200, -29.440, 182.100, 82]
+    level:    [121, 123]
+  17891394:
+    template: Unyielding_Tarichuk
+    at:       [-362.800, -29.870, 178.085, 109]
+    level:    [121, 123]
+  17891395:
+    template: Velkk_Berserker
+    at:       [-402.700, -40.940, 269.593, 15]
+    level:    [105, 110]
+  17891396:
+    template: Velkk_Berserker
+    at:       [-407.800, -41.280, 268.829, 252]
+    level:    [105, 110]
+  17891397:
+    template: Velkk_Berserker
+    at:       [-398.100, -39.810, 270.156, 51]
+    level:    [105, 110]
+  17891398:
+    template: Velkk_Berserker
+    at:       [-435.600, -40.490, 279.665, 91]
+    level:    [105, 110]
+  17891399:
+    template: Spinescent_Protuberance
+    at:       [-391.700, -39.320, 270.716, 102]
+    level:    [1, 1]
+  17891400:
+    template: Velkk_Magus
+    at:       [-450.600, -40.420, 241.380, 150]
+    level:    [105, 110]
+  17891401:
+    template: Velkk_Magus
+    at:       [-449.500, -39.690, 247.744, 162]
+    level:    [105, 110]
+  17891402:
+    template: Velkk_Magus
+    at:       [-428.600, -40.740, 251.727, 94]
+    level:    [105, 110]
+  17891403:
+    template: Velkk_Magus
+    at:       [-400.200, -40.080, 251.548, 47]
+    level:    [105, 110]
+  17891404:
+    template: Spinescent_Protuberance
+    at:       [-452.300, -39.230, 255.337, 45]
+    level:    [1, 1]
+  17891405:
+    template: Velkk_Reaver
+    at:       [-526.600, -39.900, 163.429, 221]
+    level:    [105, 110]
+  17891406:
+    template: Velkk_Reaver
+    at:       [-488.000, -39.670, 166.145, 203]
+    level:    [105, 110]
+  17891407:
+    template: Velkk_Reaver
+    at:       [-486.800, -39.970, 162.733, 230]
+    level:    [105, 110]
+  17891408:
+    template: Velkk_Reaver
+    at:       [-478.400, -39.790, 164.658, 224]
+    level:    [105, 110]
+  17891409:
+    template: Spinescent_Protuberance
+    at:       [-498.000, -40.890, 163.214, 110]
+    level:    [1, 1]
+  17891410:
+    template: Velkk_Stormcaller
+    at:       [-530.600, -39.530, 129.190, 174]
+    level:    [105, 110]
+  17891411:
+    template: Velkk_Stormcaller
+    at:       [-518.200, -40.490, 129.923, 13]
+    level:    [105, 110]
+  17891412:
+    template: Velkk_Stormcaller
+    at:       [-501.300, -39.910, 119.435, 86]
+    level:    [105, 110]
+  17891413:
+    template: Velkk_Stormcaller
+    at:       [-487.400, -39.890, 138.680, 244]
+    level:    [105, 110]
+  17891414:
+    template: Spinescent_Protuberance
+    at:       [-463.800, -40.100, 128.972, 117]
+    level:    [1, 1]
+  17891415:
+    template: Unyielding_Tarichuk
+    at:       [-457.000, -39.630, 77.559, 59]
+    level:    [121, 123]
+  17891416:
+    template: Unyielding_Tarichuk
+    at:       [-457.100, -39.770, 75.029, 217]
+    level:    [121, 123]
+  17891417:
+    template: Velkk_Reaver
+    at:       [-368.700, -29.280, 109.273, 54]
+    level:    [105, 110]
+  17891418:
+    template: Velkk_Reaver
+    at:       [-335.700, -29.950, 116.245, 34]
+    level:    [105, 110]
+  17891419:
+    template: Velkk_Berserker
+    at:       [-328.100, -29.460, 127.533, 16]
+    level:    [105, 110]
+  17891420:
+    template: Velkk_Berserker
+    at:       [-370.100, -30.440, 117.435, 154]
+    level:    [105, 110]
+  17891421:
+    template: Velkk_Magus
+    at:       [-367.500, -29.390, 87.071, 173]
+    level:    [105, 110]
+  17891422:
+    template: Velkk_Magus
+    at:       [-337.300, -29.920, 69.108, 22]
+    level:    [105, 110]
+  17891423:
+    template: Velkk_Stormcaller
+    at:       [-336.600, -29.960, 70.026, 35]
+    level:    [105, 110]
+  17891424:
+    template: Velkk_Stormcaller
+    at:       [-358.300, -30.630, 94.731, 143]
+    level:    [105, 110]
+  17891425:
+    template: Spinescent_Protuberance
+    at:       [-180.200, -20.540, 173.401, 126]
+    level:    [1, 1]
+  17891426:
+    template: Spinescent_Protuberance
+    at:       [-177.300, -19.890, 185.203, 93]
+    level:    [1, 1]
+  17891427:
+    template: Pungent_Fungus
+    at:       [-122.400, -19.300, 418.286, 71]
+    level:    [1, 1]
+  17891428:
+    template: Pungent_Fungus
+    at:       [-119.200, -19.190, 418.026, 7]
+    level:    [1, 1]
+  17891429:
+    template: Blightdella
+    at:       [69.002, -3.947, 420.604, 122]
+    level:    [121, 123]
+  17891430:
+    template: Blightdella
+    at:       [72.995, -2.173, 422.209, 69]
+    level:    [121, 123]
+  17891431:
+    template: Spumous_Slug
+    at:       [19.684, -20.500, 474.979, 28]
+    level:    [121, 123]
+  17891432:
+    template: Spumous_Slug
+    at:       [17.120, -20.540, 473.455, 103]
+    level:    [121, 123]
+  17891433:
+    template: Pungent_Fungus
+    at:       [13.390, -20.010, 474.759, 27]
+    level:    [1, 1]
+  17891434:
+    template: Pungent_Fungus
+    at:       [12.005, -20.870, 464.596, 46]
+    level:    [1, 1]
+  17891435:
+    template: Void_Worm
+    at:       [-232.500, -20.930, 263.042, 129]
+    level:    [121, 123]
+  17891436:
+    template: Void_Worm
+    at:       [-228.300, -20.860, 261.397, 119]
+    level:    [121, 123]
+  17891437:
+    template: Spinescent_Protuberance
+    at:       [-261.600, -28.470, 246.427, 115]
+    level:    [1, 1]
+  17891438:
+    template: Spinescent_Protuberance
+    at:       [-259.300, -29.790, 243.386, 123]
+    level:    [1, 1]
+  17891439:
+    template: Spinescent_Protuberance
+    at:       [-327.800, -37.850, 301.585, 110]
+    level:    [1, 1]
+  17891440:
+    template: Spinescent_Protuberance
+    at:       [-332.200, -35.580, 297.579, 84]
+    level:    [1, 1]
+  17891441:
+    template: Twilight_Bat
+    at:       [-307.200, -40.900, 297.934, 132]
+    level:    [121, 123]
+  17891442:
+    template: Twilight_Bat
+    at:       [-303.400, -40.760, 299.324, 248]
+    level:    [121, 123]
+  17891443:
+    template: Leafdancer_Twitherym
+    at:       [-436.500, -40.490, 140.130, 230]
+    level:    [121, 123]
+  17891444:
+    template: Leafdancer_Twitherym
+    at:       [-441.300, -40.540, 140.005, 146]
+    level:    [121, 123]
+  17891445:
+    template: Slinking_Slug
+    at:       [278.970, -19.740, -246.850, 201]
+    level:    [121, 123]
+  17891446:
+    template: Slinking_Slug
+    at:       [273.040, -19.720, -240.460, 31]
+    level:    [121, 123]
+  17891447:
+    template: Bloodspattered_Fly
+    at:       [292.890, -19.340, -246.910, 152]
+    level:    [120, 123]
+  17891448:
+    template: Midnight_Worm
+    at:       [315.980, -20.230, -250.770, 25]
+    level:    [120, 123]
+  17891449:
+    template: Midnight_Worm
+    at:       [321.080, -19.780, -244.470, 26]
+    level:    [120, 123]
+  17891450:
+    template: Bloodspattered_Fly
+    at:       [342.180, -21.300, -217.560, 188]
+    level:    [120, 123]
+  17891451:
+    template: Midnight_Worm
+    at:       [343.360, -21.610, -216.470, 126]
+    level:    [120, 123]
+  17891452:
+    template: Midnight_Worm
+    at:       [369.330, -20.400, -219.250, 231]
+    level:    [120, 123]
+  17891453:
+    template: Bloodspattered_Fly
+    at:       [350.380, -21.550, -214.450, 107]
+    level:    [120, 123]
+  17891454:
+    template: Rancidclaw_Crab
+    at:       [444.070, -9.043, -287.750, 89]
+    level:    [120, 123]
+  17891455:
+    template: Rancidclaw_Crab
+    at:       [447.070, -9.085, -284.640, 119]
+    level:    [120, 123]
+  17891456:
+    template: Irascible_Tarichuk
+    at:       [434.040, -9.885, -276.090, 36]
+    level:    [120, 123]
+  17891457:
+    template: Irascible_Tarichuk
+    at:       [443.780, -10.160, -271.310, 158]
+    level:    [120, 123]
+  17891458:
+    template: Rancidclaw_Crab
+    at:       [443.680, -10.130, -271.720, 167]
+    level:    [120, 123]
+  17891459:
+    template: Rancidclaw_Crab
+    at:       [438.840, -9.826, -289.730, 101]
+    level:    [120, 123]
+  17891460:
+    template: Surly_Craklaw
+    at:       [478.930, -9.432, -259.940, 36]
+    level:    [123, 125]
+  17891461:
+    template: Surly_Craklaw
+    at:       [474.720, -12.390, -269.460, 127]
+    level:    [123, 125]
+  17891462:
+    template: Rancidclaw_Crab
+    at:       [413.450, -10.530, -302.040, 180]
+    level:    [120, 123]
+  17891463:
+    template: Midnight_Worm
+    at:       [395.760, -9.965, -296.730, 69]
+    level:    [120, 123]
+  17891464:
+    template: Midnight_Worm
+    at:       [406.760, -10.480, -295.730, 49]
+    level:    [120, 123]
+  17891465:
+    template: Midnight_Worm
+    at:       [394.890, -9.729, -297.370, 14]
+    level:    [120, 123]
+  17891466:
+    template: Bloodspattered_Fly
+    at:       [402.000, -19.800, -222.150, 1]
+    level:    [120, 123]
+  17891467:
+    template: Surly_Craklaw
+    at:       [192.810, -10.080, -305.630, 67]
+    level:    [123, 125]
+  17891468:
+    template: Surly_Craklaw
+    at:       [184.630, -9.421, -320.730, 201]
+    level:    [123, 125]
+  17891469:
+    template: Surly_Craklaw
+    at:       [179.350, -9.314, -305.850, 141]
+    level:    [123, 125]
+  17891470:
+    template: Slinking_Slug
+    at:       [238.220, -9.593, -336.000, 134]
+    level:    [121, 123]
+  17891471:
+    template: Slinking_Slug
+    at:       [247.030, -11.820, -346.900, 242]
+    level:    [121, 123]
+  17891472:
+    template: Slinking_Slug
+    at:       [249.710, -10.060, -336.100, 132]
+    level:    [121, 123]
+  17891473:
+    template: Slinking_Slug
+    at:       [253.990, -9.642, -336.870, 9]
+    level:    [121, 123]
+  17891474:
+    template: Slinking_Slug
+    at:       [253.980, -20.500, -257.550, 117]
+    level:    [121, 123]
+  17891475:
+    template: Slinking_Slug
+    at:       [257.960, -20.340, -256.720, 248]
+    level:    [121, 123]
+  17891476:
+    template: Irascible_Tarichuk
+    at:       [323.800, -9.975, -309.150, 165]
+    level:    [120, 123]
+  17891477:
+    template: Bloodspattered_Fly
+    at:       [284.500, -10.290, -321.150, 6]
+    level:    [120, 123]
+  17891478:
+    template: Irascible_Tarichuk
+    at:       [287.450, -9.647, -313.940, 53]
+    level:    [120, 123]
+  17891479:
+    template: Irascible_Tarichuk
+    at:       [298.430, -11.040, -339.200, 68]
+    level:    [120, 123]
+  17891480:
+    template: Bloodspattered_Fly
+    at:       [305.770, -10.070, -345.910, 134]
+    level:    [120, 123]
+  17891481:
+    template: Rancidclaw_Crab
+    at:       [309.990, -9.994, -368.870, 102]
+    level:    [120, 123]
+  17891482:
+    template: Irascible_Tarichuk
+    at:       [327.730, -9.690, -341.530, 72]
+    level:    [120, 123]
+  17891483:
+    template: Rancidclaw_Crab
+    at:       [324.610, -9.043, -366.500, 98]
+    level:    [120, 123]
+  17891484:
+    template: Rancidclaw_Crab
+    at:       [322.990, -9.067, -368.730, 202]
+    level:    [120, 123]
+  17891485:
+    template: Bloodspattered_Fly
+    at:       [329.890, -10.070, -354.800, 48]
+    level:    [120, 123]
+  17891486:
+    template: Irascible_Tarichuk
+    at:       [319.010, -9.659, -333.170, 155]
+    level:    [120, 123]
+  17891487:
+    template: Slinking_Slug
+    at:       [394.830, -1.705, -388.080, 142]
+    level:    [121, 123]
+  17891488:
+    template: Slinking_Slug
+    at:       [400.470, -1.873, -371.040, 255]
+    level:    [121, 123]
+  17891489:
+    template: Slinking_Slug
+    at:       [389.690, -0.713, -376.850, 150]
+    level:    [121, 123]
+  17891490:
+    template: Slinking_Slug
+    at:       [409.540, 0.040, -383.320, 108]
+    level:    [121, 123]
+  17891491:
+    template: Surly_Craklaw
+    at:       [446.990, -0.291, -410.980, 104]
+    level:    [123, 125]
+  17891492:
+    template: Slinking_Slug
+    at:       [350.310, -10.500, -347.650, 209]
+    level:    [121, 123]
+  17891493:
+    template: Slinking_Slug
+    at:       [350.530, -10.480, -347.860, 210]
+    level:    [121, 123]
+  17891494:
+    template: Slinking_Slug
+    at:       [347.320, -10.520, -354.360, 69]
+    level:    [121, 123]
+  17891495:
+    template: Fleshrending_Obdella
+    at:       [238.260, -0.018, -415.650, 139]
+    level:    [120, 123]
+  17891496:
+    template: Fleshrending_Obdella
+    at:       [240.270, 0.045, -426.600, 252]
+    level:    [120, 123]
+  17891497:
+    template: Peevish_Acuex
+    at:       [240.800, -1.863, -411.230, 127]
+    level:    [120, 123]
+  17891498:
+    template: Peevish_Acuex
+    at:       [219.690, -0.591, -422.350, 104]
+    level:    [120, 123]
+  17891499:
+    template: Midnight_Worm
+    at:       [268.930, -6.084, -384.390, 104]
+    level:    [120, 123]
+  17891500:
+    template: Midnight_Worm
+    at:       [261.080, -0.570, -406.590, 76]
+    level:    [120, 123]
+  17891501:
+    template: Rancidclaw_Crab
+    at:       [478.410, -0.229, -439.420, 112]
+    level:    [120, 123]
+  17891502:
+    template: Rancidclaw_Crab
+    at:       [484.880, 0.893, -447.900, 208]
+    level:    [120, 123]
+  17891503:
+    template: Rancidclaw_Crab
+    at:       [484.810, 0.892, -447.790, 209]
+    level:    [120, 123]
+  17891504:
+    script: Dreadpincer
+  17891505:
+    template: Dwende
+    at:       [542.080, 0.494, -420.740, 124]
+    level:    [125, 125]
+  17891506:
+    template: Bloodspattered_Fly
+    at:       [534.600, -1.649, -412.920, 219]
+    level:    [120, 123]
+  17891507:
+    template: Bloodspattered_Fly
+    at:       [550.610, -1.029, -421.960, 210]
+    level:    [120, 123]
+  17891508:
+    template: Surly_Craklaw
+    at:       [432.670, 0.340, -516.700, 92]
+    level:    [123, 125]
+  17891509:
+    template: Surly_Craklaw
+    at:       [450.170, 0.041, -522.660, 253]
+    level:    [123, 125]
+  17891510:
+    template: Peevish_Acuex
+    at:       [399.150, 0.253, -494.570, 175]
+    level:    [120, 123]
+  17891511:
+    template: Peevish_Acuex
+    at:       [398.180, 0.557, -497.270, 12]
+    level:    [120, 123]
+  17891512:
+    template: Peevish_Acuex
+    at:       [378.360, 0.002, -492.950, 152]
+    level:    [120, 123]
+  17891513:
+    template: Fleshrending_Obdella
+    at:       [401.970, -1.865, -490.290, 134]
+    level:    [120, 123]
+  17891514:
+    template: Fleshrending_Obdella
+    at:       [389.710, -1.804, -492.940, 131]
+    level:    [120, 123]
+  17891515:
+    template: Fleshrending_Obdella
+    at:       [392.840, -2.016, -508.340, 136]
+    level:    [120, 123]
+  17891516:
+    template: Peevish_Acuex
+    at:       [387.170, -1.751, -504.250, 55]
+    level:    [120, 123]
+  17891517:
+    template: Surly_Craklaw
+    at:       [454.780, -0.020, -416.180, 23]
+    level:    [123, 125]
+  17891518:
+    template: Bloodspattered_Fly
+    at:       [495.480, -0.790, -424.860, 106]
+    level:    [120, 123]
+  17891519:
+    template: Bloodspattered_Fly
+    at:       [515.750, -0.472, -421.260, 255]
+    level:    [120, 123]
+  17891520:
+    template: Fleshrending_Obdella
+    at:       [209.210, -0.711, -431.800, 36]
+    level:    [120, 123]
+  17891521:
+    template: Dwende
+    at:       [202.650, 0.144, -440.300, 250]
+    level:    [125, 125]
+  17891522:
+    template: Bloodspattered_Fly
+    at:       [180.710, -0.490, -460.570, 226]
+    level:    [120, 123]
+  17891523:
+    template: Dwende
+    at:       [181.000, 0.712, -481.260, 28]
+    level:    [125, 125]
+  17891524:
+    template: Bloodspattered_Fly
+    at:       [170.630, -1.980, -477.710, 216]
+    level:    [120, 123]
+  17891525:
+    template: Bloodspattered_Fly
+    at:       [184.120, 0.188, -464.330, 104]
+    level:    [120, 123]
+  17891526:
+    template: Fleshrending_Obdella
+    at:       [224.250, -0.324, -460.380, 130]
+    level:    [120, 123]
+  17891527:
+    template: Fleshrending_Obdella
+    at:       [219.440, -0.569, -458.280, 149]
+    level:    [120, 123]
+  17891528:
+    template: Fetid_Umbril
+    at:       [289.480, -0.333, -482.620, 166]
+    level:    [120, 123]
+  17891529:
+    template: Fetid_Umbril
+    at:       [291.890, 0.209, -485.350, 24]
+    level:    [120, 123]
+  17891530:
+    template: Dullahan_generic
+    script:   Plagueborn_Dullahan
+    at:       [315.820, 0.275, -503.970, 169]
+    level:    [120, 123]
+  17891531:
+    template: Fetid_Umbril
+    at:       [318.030, 0.455, -505.900, 28]
+    level:    [120, 123]
+  17891532:
+    template: Dullahan_generic
+    script:   Plagueborn_Dullahan
+    at:       [328.880, 0.193, -518.940, 5]
+    level:    [120, 123]
+  17891533:
+    template: Fetid_Umbril
+    at:       [331.990, -0.386, -497.370, 124]
+    level:    [120, 123]
+  17891534:
+    template: Dullahan_generic
+    script:   Plagueborn_Dullahan
+    at:       [351.910, 0.025, -470.050, 146]
+    level:    [120, 123]
+  17891535:
+    template: Fetid_Umbril
+    at:       [351.890, -0.009, -469.210, 129]
+    level:    [120, 123]
+  17891536:
+    template: Fetid_Umbril
+    at:       [330.060, -0.174, -473.590, 217]
+    level:    [120, 123]
+  17891537:
+    template: Dullahan_generic
+    script:   Plagueborn_Dullahan
+    at:       [316.790, -0.873, -477.830, 77]
+    level:    [120, 123]
+  17891538:
+    template: Dullahan_generic
+    script:   Plagueborn_Dullahan
+    at:       [300.870, 0.516, -478.260, 5]
+    level:    [120, 123]
+  17891539:
+    template: Fetid_Umbril
+    at:       [296.160, 0.441, -476.940, 88]
+    level:    [120, 123]
+  17891540:
+    template: Surly_Craklaw
+    at:       [325.780, -0.123, -445.810, 96]
+    level:    [123, 125]
+  17891541:
+    template: Surly_Craklaw
+    at:       [312.360, 0.493, -437.540, 143]
+    level:    [123, 125]
+  17891542:
+    template: Surly_Craklaw
+    at:       [310.670, 0.424, -442.230, 71]
+    level:    [123, 125]
+  17891543:
+    template: Apex_Jagil
+    at:       [-31.870, -9.951, 118.194, 93]
+    level:    [128, 130]
+  17891544:
+    template: Apex_Bats
+    at:       [-31.090, -9.928, 113.152, 232]
+    level:    [128, 130]
+  17891545:
+    template: Apex_Craklaw
+    at:       [-74.250, -10.650, 113.644, 53]
+    level:    [128, 130]
+  17891546:
+    template: Apex_Crab
+    at:       [-40.190, -9.571, 120.725, 33]
+    level:    [128, 130]
+  17891547:
+    template: Apex_Bats
+    at:       [-90.260, -0.145, 17.300, 63]
+    level:    [128, 130]
+  17891548:
+    template: Apex_Bats
+    at:       [-96.410, -1.050, 43.611, 196]
+    level:    [128, 130]
+  17891549:
+    template: Apex_Bats
+    at:       [-106.900, -0.788, 18.899, 53]
+    level:    [128, 130]
+  17891550:
+    template: Apex_Bats
+    at:       [-80.580, 0.461, 22.508, 77]
+    level:    [128, 130]
+  17891551:
+    template: Apex_Bats
+    at:       [-95.570, -0.057, 24.044, 142]
+    level:    [128, 130]
+  17891552:
+    template: Apex_Bats
+    at:       [-93.370, 0.626, 26.161, 31]
+    level:    [128, 130]
+  17891553:
+    template: Apex_Jagil
+    at:       [-75.270, 0.308, -35.250, 244]
+    level:    [128, 130]
+  17891554:
+    template: Apex_Jagil
+    at:       [-72.340, 0.455, -52.379, 135]
+    level:    [128, 130]
+  17891555:
+    template: Apex_Jagil
+    at:       [-92.590, -0.402, -62.402, 28]
+    level:    [128, 130]
+  17891556:
+    template: Apex_Jagil
+    at:       [-60.400, -0.296, -16.163, 207]
+    level:    [128, 130]
+  17891557:
+    template: Apex_Jagil
+    at:       [-65.300, -0.908, -23.924, 187]
+    level:    [128, 130]
+  17891558:
+    template: Apex_Crab
+    at:       [-81.530, 0.508, -61.780, 38]
+    level:    [128, 130]
+  17891559:
+    template: Apex_Crab
+    at:       [-68.940, 0.158, -58.560, 199]
+    level:    [128, 130]
+  17891560:
+    template: Apex_Crab
+    at:       [-65.840, -0.561, -22.584, 217]
+    level:    [128, 130]
+  17891561:
+    template: Apex_Crab
+    at:       [-99.900, -0.920, -59.521, 211]
+    level:    [128, 130]
+  17891562:
+    template: Apex_Crab
+    at:       [-69.650, 0.467, -60.909, 50]
+    level:    [128, 130]
+  17891563:
+    template: Apex_Jagil
+    at:       [-98.910, 0.122, -84.834, 73]
+    level:    [128, 130]
+  17891564:
+    template: Apex_Jagil
+    at:       [-113.600, 0.812, -87.325, 79]
+    level:    [128, 130]
+  17891565:
+    template: Apex_Jagil
+    at:       [-111.500, -0.142, -79.400, 72]
+    level:    [128, 130]
+  17891566:
+    template: Apex_Jagil
+    at:       [-116.100, -0.194, -76.021, 138]
+    level:    [128, 130]
+  17891567:
+    template: Apex_Jagil
+    at:       [-82.600, -0.266, -91.595, 233]
+    level:    [128, 130]
+  17891568:
+    template: Apex_Crab
+    at:       [-101.500, -0.247, -87.304, 12]
+    level:    [128, 130]
+  17891569:
+    template: Apex_Crab
+    at:       [-77.840, -0.029, -71.549, 233]
+    level:    [128, 130]
+  17891570:
+    template: Apex_Crab
+    at:       [-72.160, 0.469, -71.183, 244]
+    level:    [128, 130]
+  17891571:
+    template: Apex_Crab
+    at:       [-104.400, 0.592, -78.349, 152]
+    level:    [128, 130]
+  17891572:
+    template: Apex_Crab
+    at:       [-122.300, 0.105, -83.100, 139]
+    level:    [128, 130]
+  17891573:
+    template: Apex_Bats
+    at:       [16.674, -0.841, -72.820, 102]
+    level:    [128, 130]
+  17891574:
+    template: Apex_Bats
+    at:       [43.909, 0.291, -86.343, 228]
+    level:    [128, 130]
+  17891575:
+    template: Apex_Bats
+    at:       [26.853, 0.882, -75.010, 216]
+    level:    [128, 130]
+  17891576:
+    template: Apex_Bats
+    at:       [20.645, 0.502, -84.272, 29]
+    level:    [128, 130]
+  17891577:
+    template: Apex_Bats
+    at:       [26.253, 0.418, -79.786, 247]
+    level:    [128, 130]
+  17891578:
+    template: Apex_Crab
+    at:       [14.963, 0.205, -90.402, 5]
+    level:    [128, 130]
+  17891579:
+    template: Apex_Crab
+    at:       [27.367, 0.299, -78.015, 28]
+    level:    [128, 130]
+  17891580:
+    template: Apex_Crab
+    at:       [3.723, 0.574, -74.253, 214]
+    level:    [128, 130]
+  17891581:
+    template: Apex_Crab
+    at:       [7.321, -0.446, -79.320, 136]
+    level:    [128, 130]
+  17891582:
+    template: Apex_Crab
+    at:       [22.957, 0.192, -74.602, 205]
+    level:    [128, 130]
+  17891583:
+    template: Apex_Bats
+    at:       [25.624, -0.541, -96.573, 141]
+    level:    [128, 130]
+  17891584:
+    template: Apex_Bats
+    at:       [46.201, -0.476, -112.360, 39]
+    level:    [128, 130]
+  17891585:
+    template: Apex_Bats
+    at:       [48.067, 0.434, -123.690, 90]
+    level:    [128, 130]
+  17891586:
+    template: Apex_Bats
+    at:       [46.743, -0.847, -97.156, 205]
+    level:    [128, 130]
+  17891587:
+    template: Apex_Bats
+    at:       [37.105, 0.675, -101.760, 138]
+    level:    [128, 130]
+  17891588:
+    template: Apex_Crab
+    at:       [40.125, -0.157, -110.480, 52]
+    level:    [128, 130]
+  17891589:
+    template: Apex_Crab
+    at:       [51.166, -0.298, -117.300, 33]
+    level:    [128, 130]
+  17891590:
+    template: Apex_Crab
+    at:       [36.846, 0.482, -123.620, 152]
+    level:    [128, 130]
+  17891591:
+    template: Apex_Crab
+    at:       [39.537, 0.460, -122.310, 34]
+    level:    [128, 130]
+  17891592:
+    template: Apex_Crab
+    at:       [22.679, -0.691, -95.832, 181]
+    level:    [128, 130]
+  17891593:
+    template: Apex_Bats
+    at:       [-190.700, 0.266, -0.864, 45]
+    level:    [128, 130]
+  17891594:
+    template: Apex_Bats
+    at:       [-201.000, -0.126, 12.076, 244]
+    level:    [128, 130]
+  17891595:
+    template: Apex_Bats
+    at:       [-191.900, 0.244, -2.963, 243]
+    level:    [128, 130]
+  17891596:
+    template: Apex_Bats
+    at:       [-210.400, -0.014, -1.326, 155]
+    level:    [128, 130]
+  17891597:
+    template: Apex_Craklaw
+    at:       [-206.000, 0.401, -5.076, 114]
+    level:    [128, 130]
+  17891598:
+    template: Apex_Craklaw
+    at:       [-212.400, -0.740, -5.397, 94]
+    level:    [128, 130]
+  17891599:
+    template: Apex_Craklaw
+    at:       [-202.000, 0.195, -84.182, 114]
+    level:    [128, 130]
+  17891600:
+    template: Apex_Craklaw
+    at:       [-199.200, 0.405, -71.666, 200]
+    level:    [128, 130]
+  17891601:
+    template: Apex_Craklaw
+    at:       [-189.000, 0.549, -82.224, 180]
+    level:    [128, 130]
+  17891602:
+    template: Apex_Craklaw
+    at:       [-198.300, 0.078, -82.038, 45]
+    level:    [128, 130]
+  17891603:
+    template: Apex_Craklaw
+    at:       [-211.600, -0.112, -81.996, 168]
+    level:    [128, 130]
+  17891604:
+    template: Apex_Craklaw
+    at:       [-316.400, -0.898, -92.305, 82]
+    level:    [128, 130]
+  17891605:
+    template: Apex_Craklaw
+    at:       [-321.900, -0.723, -83.171, 25]
+    level:    [128, 130]
+  17891606:
+    template: Apex_Craklaw
+    at:       [-312.100, 0.096, -77.320, 42]
+    level:    [128, 130]
+  17891607:
+    template: Apex_Craklaw
+    at:       [-315.500, 0.304, -77.910, 156]
+    level:    [128, 130]
+  17891608:
+    template: Apex_Craklaw
+    at:       [-310.500, -0.787, -91.112, 60]
+    level:    [128, 130]
+  17891609:
+    template: Apex_Craklaw
+    at:       [-318.500, -0.944, -84.884, 146]
+    level:    [128, 130]
+  17891610:
+    template: Apex_Bats
+    at:       [-141.200, -0.192, 54.020, 96]
+    level:    [128, 130]
+  17891611:
+    template: Apex_Bats
+    at:       [-142.000, -0.156, 58.495, 24]
+    level:    [128, 130]
+  17891612:
+    template: Apex_Bats
+    at:       [-140.700, 0.093, 58.573, 40]
+    level:    [128, 130]
+  17891613:
+    template: Apex_Bats
+    at:       [-141.000, 0.205, 57.938, 13]
+    level:    [128, 130]
+  17891614:
+    template: Apex_Bats
+    at:       [-133.800, 0.149, 62.652, 95]
+    level:    [128, 130]
+  17891615:
+    template: Apex_Bats
+    at:       [-141.000, -0.342, 62.404, 220]
+    level:    [128, 130]
+  17891616:
+    template: Apex_Jagil
+    at:       [-184.200, 0.507, 55.084, 6]
+    level:    [128, 130]
+  17891617:
+    template: Apex_Jagil
+    at:       [-181.300, 0.113, 56.509, 92]
+    level:    [128, 130]
+  17891618:
+    template: Apex_Jagil
+    at:       [-175.900, -1.116, 57.674, 160]
+    level:    [128, 130]
+  17891619:
+    template: Apex_Jagil
+    at:       [-210.200, 0.430, 61.843, 88]
+    level:    [128, 130]
+  17891620:
+    template: Apex_Crab
+    at:       [-200.500, 0.611, 59.029, 225]
+    level:    [128, 130]
+  17891621:
+    template: Apex_Crab
+    at:       [-180.100, -0.542, 59.258, 237]
+    level:    [128, 130]
+  17891622:
+    template: Apex_Crab
+    at:       [-209.800, -0.052, 65.437, 186]
+    level:    [128, 130]
+  17891623:
+    template: Apex_Crab
+    at:       [-183.300, -0.294, 60.754, 159]
+    level:    [128, 130]
+  17891624:
+    template: Apex_Crab
+    at:       [-259.500, 0.527, 4.337, 64]
+    level:    [128, 130]
+  17891625:
+    template: Apex_Crab
+    at:       [-259.900, 0.336, 5.331, 155]
+    level:    [128, 130]
+  17891626:
+    template: Apex_Crab
+    at:       [-260.100, 0.588, 0.581, 27]
+    level:    [128, 130]
+  17891627:
+    template: Apex_Crab
+    at:       [-264.000, 0.376, 0.770, 167]
+    level:    [128, 130]
+  17891628:
+    template: Apex_Crab
+    at:       [-258.000, -0.338, 7.547, 209]
+    level:    [128, 130]

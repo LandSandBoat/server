@@ -1,0 +1,6353 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Ballistosporer:
+    id:            331
+    species:       funguar
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags:  3
+        model_size:    2
+        hitbox:       17
+      spawn:
+        type: [scripted]
+
+  Black_Bat:
+    id:            433
+    species:       bat
+    skill_list_id: 46
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 256
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+        - chance: very_rare
+          item:   vial_of_fiend_blood
+      despoil:
+        bat_wing: 0
+
+  Blobdingnag:
+    id:            7004
+    species:       clot
+    type:          [notorious]
+    skill_list_id: 1152
+    attributes:
+      combat:
+        skill: axe
+      jobs: [bst, bst]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 293
+      spawn:
+        respawn: 7200
+      stats:
+        hp: 39100
+    loot:
+      drops:
+        - chance: very_common
+          item:   baby_blobdingnag
+        - chance: very_common
+          item:   baby_blobdingnag
+        - chance: uncommon
+          item:   blobnag_ring
+        - chance: uncommon
+          item:   beguiling_collar
+        - chance: common
+          item:   muculent_ingot
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+    content: WOTG
+
+  Bloodpool_Vorax:
+    id:            460
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 800
+    loot:
+      drops:
+        - chance: very_common
+          item:   vial_of_fiend_blood
+        - chance: uncommon
+          item:   bloodbead_amulet
+        - chance: very_rare
+          item:   carbuncles_ruby
+
+  BoWho_Warmonger:
+    id:            519
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 201
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 651
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2750
+    loot:
+      drops:
+        - chance: very_common
+          item:   tortoise_shield
+      steal: mythril_beastcoin
+
+  Bog_Bunny:
+    id:            486
+    species:       rabbit
+    skill_list_id: 206
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -3
+          water:   -3
+          light:   -1
+          dark:    -3
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -3
+          light_sleep: -1
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 268
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   rabbit_hide
+        - chance: common
+          item:   slice_of_hare_meat
+      steal: slice_of_hare_meat
+      despoil:
+        rabbit_hide:        0
+        slice_of_hare_meat: 0
+
+  Bog_Dog:
+    id:            487
+    species:       hound
+    skill_list_id: 143
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          slashing: 1250
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 364
+        entity_flags: 131
+        model_size:     1
+        hitbox:        25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   wolf_hide
+        - chance: rare
+          item:   revival_tree_root
+      despoil:
+        wolf_hide:         0
+        revival_tree_root: 0
+
+  Bogy:
+    id:            485
+    species:       ghost
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -5000
+          h2h:      -5000
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:    -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:     5
+          bind:         5
+          silence:     -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        5
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 131
+        model_size:     1
+        hitbox:         8
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: very_common
+          item:   bloody_robe
+        - chance: uncommon
+          item:   revival_tree_root
+        - chance: rare
+          item:   luminicloth
+      steal: square_of_cotton_cloth
+      despoil:
+        square_of_cotton_cloth: 0
+
+  Brass_Quadav:
+    id:            525
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 652
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   shell_bug
+        - chance: uncommon
+          item:   seedspall_luna
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Brass_Quadav_2:
+    id:            525
+    display_name:  Brass_Quadav
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 652
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Brass_Quadav_3:
+    id:            525
+    display_name:  Brass_Quadav
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 652
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   shell_bug
+        - chance: uncommon
+          item:   seedspall_luna
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Carnivorous_Crawler:
+    id:            646
+    species:       crawler
+    skill_list_id: 79
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          thunder: -3
+          water:   -2
+          dark:    -3
+        rank_status:
+          paralyze:   -3
+          bind:       -3
+          silence:    -2
+          poison:     -2
+          dark_sleep: -3
+          blind:      -3
+      render:
+        look:
+          type:  standard
+          model: 396
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   spool_of_silk_thread
+      despoil:
+        piece_of_crawler_cocoon: 0
+        crawler_egg:             0
+
+  Cobalt_Quadav:
+    id:            753
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 657
+        entity_flags: 3
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Copper_Quadav:
+    id:            791
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 650
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seedspall_luna
+      steal: silver_beastcoin
+
+  Fox_Fire:
+    id:            1419
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags:  131
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [fog]
+    loot:
+      drops:
+        - chance: common
+          item:   pinch_of_bomb_ash
+        - chance: uncommon
+          item:   bomb_arm
+      despoil:
+        pinch_of_bomb_ash: 0
+
+  Gadfly:
+    id:            1445
+    species:       fly
+    skill_list_id: 113
+    attributes:
+      combat:
+        skill: polearm
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 448
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   insect_wing
+      despoil:
+        insect_wing: 0
+
+  Ghoul_war:
+    id:            1517
+    species:       skeleton
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 572
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   bone_chip
+        - chance: common
+          item:   magicked_skull
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+  Globster:
+    id:            7000
+    species:       slime
+    type:          [notorious]
+    skill_list_id: 228
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        immune_status: [bind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 292
+        hitbox: 20
+      spawn:
+        respawn: 300
+      stats:
+        hp: 5100
+    content: WOTG
+
+  Goblin_Ambusher:
+    id:            1635
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 486
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   block_of_animal_glue
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   beastcoin
+      steal: crossbow_bolt
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Butcher:
+    id:            1643
+    species:       armored_goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 495
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+        - chance: very_rare
+          item:   beastcoin
+      steal: beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Digger_far:
+    id:            6658
+    display_name:  Goblin_Digger
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 484
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+      steal: [pickaxe, beastcoin] # audit needed
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Gambler:
+    id:            1666
+    species:       goblin
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 494
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   bag_of_poison_flour
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Leecher:
+    id:            1683
+    species:       goblin
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 488
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: rare
+          item:   scroll_of_paralyze
+        - chance: very_rare
+          item:   scroll_of_barsleep
+        - chance: very_rare
+          item:   silver_beastcoin
+        - chance: very_rare
+          item:   scroll_of_silence
+        - chance: very_rare
+          item:   scroll_of_barpoison
+        - chance: very_rare
+          item:   scroll_of_protectra
+        - chance: very_rare
+          item:   scroll_of_sneak
+        - chance: super_rare
+          item:   scroll_of_invisible
+        - chance: super_rare
+          item:   scroll_of_deodorize
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Mugger:
+    id:            1690
+    species:       goblin
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 485
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor
+        - chance: very_rare
+          item:   silver_beastcoin
+      steal: silver_beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblin_Tinkerer:
+    id:            1738
+    species:       armored_goblin
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 491
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_helm
+        - chance: very_rare
+          item:   goblin_mail
+        - chance: very_rare
+          item:   beastcoin
+      steal: beastcoin
+      despoil:
+        loaf_of_goblin_bread:      0
+        chunk_of_goblin_chocolate: 0
+        bowl_of_goblin_stew:       0
+        goblin_mushpot:            0
+
+  Goblins_Bee:
+    id:            1722
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags: 643
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Goobbue:
+    id:            1756
+    species:       goobbue
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 320
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags: 131
+        model_size:     1
+        hitbox:        30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   treant_bulb
+        - chance: common
+          item:   clump_of_boyahda_moss
+        - chance: uncommon
+          item:   dahlia
+        - chance: rare
+          item:   bag_of_tree_cuttings
+      despoil:
+        clump_of_boyahda_moss: 0
+        bag_of_tree_cuttings:  0
+
+  Greater_Quadav:
+    id:            1808
+    species:       quadav
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 647
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seedspall_luna
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Ground_Guzzler:
+    id:            7001
+    species:       worm
+    type:          [notorious]
+    spell_list_id: 436
+    skill_list_id: 258
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 424
+        hitbox: 11
+      spawn:
+        respawn: 300
+      stats:
+        hp: 3000
+    content: WOTG
+
+  Heliodor_Quadav:
+    id:            1917
+    species:       quadav
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 666
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Hobgoblin_Beastmaster:
+    id:            1971
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [bst, bst]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 492
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Black_Mage:
+    id:            1972
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 507
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Dark_Knight:
+    id:            1974
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 509
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Ranger:
+    id:            1978
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 499
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Red_Mage:
+    id:            1979
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 504
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Thief:
+    id:            1980
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 485
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_Warrior:
+    id:            1983
+    species:       goblin
+    type:          [notorious]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 508
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Hobgoblin_White_Mage:
+    id:            1984
+    species:       goblin
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: staff
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 488
+        entity_flags:  3
+        model_size:    1
+        hitbox:       12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Jolly_Green:
+    id:            2155
+    species:       goobbue
+    type:          [notorious]
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 300
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        34
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 1030
+    loot:
+      drops:
+        - chance: always
+          item:   dahlia
+        - chance: common
+          item:   shamans_belt
+        - chance: uncommon
+          item:   clump_of_boyahda_moss
+        - chance: uncommon
+          item:   bag_of_tree_cuttings
+
+  Joyous_Green:
+    id:            6832
+    species:       goobbue
+    type:          [notorious]
+    skill_list_id: 136
+    attributes:
+      combat:
+        skill: staff
+        delay: 320
+      resists:
+        rank_element:
+          fire: -2
+          dark: -2
+        rank_status:
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 296
+        entity_flags: 133
+        name_prefix:   32
+        model_size:     2
+        hitbox:        34
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Lamprey_Lord:
+    id:            7002
+    species:       leech
+    type:          [notorious]
+    skill_list_id: 1151
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        model_size:  2
+        hitbox:     12
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 11000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   hirudinea_earring
+    content: WOTG
+
+  Land_Pugil:
+    id:            2373
+    species:       pugil
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   handful_of_pugil_scales
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Malboro:
+    id:            2493
+    species:       morbol
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags: 131
+        model_size:     1
+        hitbox:        32
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: very_common
+          item:   malboro_vine
+        - chance: rare
+          item:   dodge_headband
+      steal: malboro_vine
+
+  Marsh_Funguar:
+    id:            2579
+    species:       funguar
+    skill_list_id: 116
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -3
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   4
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 376
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   sleepshroom
+        - chance: uncommon
+          item:   woozyshroom
+      steal: sleepshroom
+      despoil:
+        woozyshroom:       0
+        sleepshroom:       0
+        danceshroom:       0
+        agaricus_mushroom: 0
+
+  Metaquadav_Black_Mage:
+    id:            2636
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 669
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Metaquadav_Dark_Knight:
+    id:            2637
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 5
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 655
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Metaquadav_Paladin:
+    id:            2638
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 656
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Metaquadav_Red_Mage:
+    id:            2639
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: club
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 670
+        model_size:  1
+        hitbox:     15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Metaquadav_Thief:
+    id:            2640
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 660
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Metaquadav_Warrior:
+    id:            2641
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 649
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Metaquadav_White_Mage:
+    id:            2642
+    species:       quadav
+    type:          [notorious]
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 668
+        entity_flags:  3
+        model_size:    1
+        hitbox:       15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Murk-veined_Baneberry:
+    id:            5312
+    species:       tonberry
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 243
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -3
+          wind:    -1
+          thunder: -2
+          water:    1
+          light:    4
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -1
+          poison:       1
+          light_sleep:  4
+      render:
+        look:
+          type:  standard
+          model: 2379
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        13
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 99999
+
+  NiZho_Bladebender:
+    id:            4832
+    species:       quadav
+    type:          [notorious]
+    skill_list_id: 201
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:       1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  standard
+          model: 648
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [lottery]
+    loot:
+      drops:
+        - chance: common
+          item:   muffle_earring
+    content: WOTG
+
+  Night_Bats_MM_PM:
+    id:            2815
+    display_name:  Night_Bats
+    species:       flock_bat
+    skill_list_id: 47
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -1
+          wind:    -3
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -3
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 260
+        entity_flags:  643
+        animation_sub:   8
+        name_prefix:    64
+        model_size:      1
+        hitbox:         16
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+        type:    [at_evening]
+    loot:
+      drops:
+        - chance: common
+          item:   bat_wing
+      despoil:
+        bat_wing: 0
+
+  Old_Quadav:
+    id:            2965
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 645
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seedspall_luna
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: silver_beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Old_Quadav_2:
+    id:            2965
+    display_name:  Old_Quadav
+    species:       quadav
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 645
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Onyx_Quadav:
+    id:            2986
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 664
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seedspall_luna
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Onyx_Quadav_2:
+    id:            2986
+    display_name:  Onyx_Quadav
+    species:       quadav
+    spell_list_id: 3
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 664
+        entity_flags: 1155
+        model_size:      1
+        hitbox:         15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seedspall_luna
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Sapphirine_Quadav:
+    id:            3464
+    species:       quadav
+    spell_list_id: 20
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 671
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   mannequin_legs
+        - chance: uncommon
+          item:   mannequin_feet
+
+  Septic_Boil:
+    id:            7005
+    species:       clot
+    type:          [notorious]
+    skill_list_id: 228
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -8750
+          h2h:      -8750
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -2
+          slow:        -1
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 294
+        model_size:  3
+        hitbox:     33
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+    content: WOTG
+
+  Shoggoth:
+    id:            7003
+    species:       hecteye
+    type:          [notorious]
+    spell_list_id: 437
+    skill_list_id: 139
+    attributes:
+      combat:
+        skill: staff
+      jobs: [rdm, rdm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 384
+        model_size:  2
+        hitbox:     13
+      spawn:
+        respawn: 3600
+      stats:
+        hp: 13000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   jinx_ampulla
+    content: WOTG
+
+  Snipper:
+    id:            5733
+    species:       crab
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Sprite:
+    id:            3745
+    species:       pixie
+    spell_list_id: 20
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags:  515
+        animation_sub:   8
+        model_size:      1
+        hitbox:          8
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   pinch_of_stygian_ash
+
+  Stag_Crab:
+    id:            3753
+    species:       crab
+    type:          [fished]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags: 131
+        model_size:     1
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_rock_salt
+        - chance: rare
+          item:   slice_of_land_crab_meat
+        - chance: very_rare
+          item:   crab_shell
+      steal: chunk_of_rock_salt
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+  Swamp_Leech:
+    id:            3819
+    species:       leech
+    type:          [fished]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Swamp_Pugil:
+    id:            3821
+    species:       pugil
+    type:          [fished]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    6
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags:  3
+        model_size:    1
+        hitbox:       27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      steal: handful_of_fish_scales
+      despoil:
+        handful_of_pugil_scales: 0
+        handful_of_fish_scales:  0
+
+  Thread_Leech:
+    id:            3901
+    species:       leech
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_beastman_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Thread_Leech_fished:
+    id:            5133
+    display_name:  Thread_Leech
+    species:       leech
+    type:          [fished]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 276
+        entity_flags: 643
+        model_size:     1
+        hitbox:        11
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_fiend_blood
+        - chance: very_rare
+          item:   vial_of_beastman_blood
+      despoil:
+        vial_of_fiend_blood:    0
+        vial_of_beastman_blood: 0
+        vial_of_bird_blood:     0
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Toxic_Tamlyn:
+    id:            6831
+    species:       morbol
+    type:          [notorious]
+    spell_list_id: 500
+    skill_list_id: 186
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [thf, drk]
+      resists:
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:    4
+          light:   -2
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 380
+        entity_flags:  667
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      1
+        hitbox:         32
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: very_common
+          item:   piece_of_mahogany_heartwood
+    content: WOTG
+
+  Veteran_Quadav:
+    id:            4226
+    species:       quadav
+    spell_list_id: 4
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 265
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:     2
+          thunder: -1
+          water:    2
+        rank_status:
+          poison: 2
+      render:
+        look:
+          type:  standard
+          model: 646
+        entity_flags: 131
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seedspall_luna
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      steal: beastcoin
+      despoil:
+        hard-boiled_egg:              0
+        serving_of_herb_crawler_eggs: 0
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [weather]
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+  Water_Wasp:
+    id:            4314
+    species:       yellow_bee
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         10
+      behaviors:
+        links: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   pot_of_honey
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   giant_stinger
+      steal: pot_of_honey
+      despoil:
+        beehive_chip:  0
+        giant_stinger: 0
+        pot_of_honey:  0
+
+  Yilbegan:
+    id:            6999
+    species:       zilant
+    type:          [notorious]
+    spell_list_id: 454
+    skill_list_id: 470
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, drk]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+        rank_element:
+          fire:     2
+          ice:      4
+          wind:     2
+          earth:    4
+          thunder:  2
+          water:    4
+          dark:    11
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     2
+          slow:        4
+          poison:      4
+          dark_sleep: 11
+          blind:      11
+      render:
+        look:
+          type:  standard
+          model: 2174
+        model_size:  3
+        hitbox:     55
+      spawn:
+        respawn: 86400
+      stats:
+        hp: 90000
+        mp:  5000
+    loot:
+      drops:
+        - chance: uncommon
+          item:   lucky_coin
+        - chance: rare
+          item:   zilant_ring
+        - chance: rare
+          item:   galdr_ring
+        - chance: uncommon
+          item:   agronas_leggings
+        - chance: common
+          item:   square_of_scarlet_kadife
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+        - chance: uncommon
+          one_of:
+            petrified_log:             10
+            mahogany_log:               8
+            coral_fragment:           5.5
+            ebony_log:                5.5
+            chunk_of_gold_ore:          5
+            chunk_of_mythril_ore:       5
+            demon_horn:                 5
+            gold_ingot:                 5
+            handful_of_wyvern_scales:   5
+            mythril_ingot:              5
+            platinum_ingot:             5
+            ram_horn:                   5
+            chunk_of_darksteel_ore:     3
+            chunk_of_platinum_ore:      3
+            darksteel_ingot:            3
+            reraiser:                   3
+            spool_of_gold_thread:     2.5
+            square_of_raxa:           2.5
+            vile_elixir:              2.5
+            ram_skin:                   2
+            hi-reraiser:                1
+            square_of_rainbow_cloth:    1
+            vile_elixir_+1:             1
+            chunk_of_dark_ore:        0.5
+            chunk_of_earth_ore:       0.5
+            chunk_of_fire_ore:        0.5
+            chunk_of_ice_ore:         0.5
+            chunk_of_light_ore:       0.5
+            chunk_of_lightning_ore:   0.5
+            chunk_of_water_ore:       0.5
+            chunk_of_wind_ore:        0.5
+            manticore_hide:           0.5
+            philosophers_stone:       0.5
+            phoenix_feather:          0.5
+            slab_of_granite:          0.5
+            wyvern_skin:              0.5
+    content: WOTG
+
+  Zombie_blm:
+    id:            6574
+    species:       skeleton
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          piercing: -5000
+          blunt:     2500
+          h2h:       1250
+        rank_element:
+          fire:    -3
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -3
+          dark:     4
+        rank_status:
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -3
+          dark_sleep:  11
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+        type:    [at_night]
+    loot:
+      drops:
+        - chance: common
+          item:   bone_chip
+      steal: bone_chip
+      despoil:
+        bone_chip: 0
+
+spawns:
+  17223681:
+    template: Swamp_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [13, 15]
+  17223682:
+    template: Stag_Crab
+    at:       [1.000, 1.000, 1.000]
+    level:    [14, 15]
+  17223683:
+    template: Swamp_Pugil
+    at:       [1.000, 1.000, 1.000]
+    level:    [19, 20]
+  17223684:
+    template: Thread_Leech_fished
+    script:   Thread_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [21, 22]
+  17223685:
+    template: Snipper
+    at:       [473.217, 24.418, 381.678, 44]
+    level:    [23, 23]
+  17223686:
+    template: Gadfly
+    at:       [-432.783, 24.499, -468.515, 7]
+    level:    [20, 21]
+  17223687:
+    template: Gadfly
+    at:       [-489.786, 24.382, -446.619, 51]
+    level:    [20, 21]
+  17223688:
+    template: Gadfly
+    at:       [-474.169, 24.455, -505.832, 127]
+    level:    [20, 21]
+  17223689:
+    template: Bog_Bunny
+    at:       [-391.433, 23.776, -457.910, 61]
+    level:    [15, 16]
+  17223690:
+    template: Bog_Bunny
+    at:       [-402.197, 24.290, -466.432, 127]
+    level:    [15, 16]
+  17223691:
+    template: Bog_Bunny
+    at:       [-431.000, 24.000, -415.000, 74]
+    level:    [15, 16]
+  17223692:
+    template: Bog_Bunny
+    at:       [-506.010, 25.080, -454.664, 108]
+    level:    [15, 16]
+  17223693:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-381.855, 24.044, -412.486, 191]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223694:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-402.081, 24.439, -402.341, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223695:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-408.054, 24.994, -447.957, 43]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223696:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-492.691, 23.890, -439.952, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223697:
+    template: Black_Bat
+    at:       [-413.467, 24.076, -460.910, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223698:
+    template: Black_Bat
+    at:       [-488.107, 25.012, -440.112, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223699:
+    template: Bog_Dog
+    level:    [17, 22]
+  17223700:
+    template: Gadfly
+    at:       [-396.202, 24.499, -356.742, 121]
+    level:    [20, 21]
+  17223701:
+    template: Gadfly
+    at:       [-430.770, 24.408, -349.902, 127]
+    level:    [20, 21]
+  17223702:
+    template: Bog_Bunny
+    at:       [-313.092, 24.471, -287.729, 125]
+    level:    [15, 16]
+  17223703:
+    template: Bog_Bunny
+    at:       [-461.045, 24.594, -306.542, 127]
+    level:    [15, 16]
+  17223704:
+    template: Snipper
+    at:       [-363.278, 24.482, -355.731, 112]
+    level:    [19, 20]
+  17223705:
+    template: Snipper
+    at:       [-418.000, 24.000, -224.000, 127]
+    level:    [19, 20]
+  17223706:
+    template: Snipper
+    at:       [-418.578, 24.500, -315.766, 70]
+    level:    [19, 20]
+  17223707:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-419.324, 24.164, -365.146, 206]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223708:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-319.887, 24.173, -302.109, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223709:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-344.000, 24.217, -303.000, 84]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223710:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-371.317, 24.824, -379.919, 5]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223711:
+    template: Black_Bat
+    at:       [-385.350, 24.484, -354.306, 35]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223712:
+    template: Black_Bat
+    at:       [-382.456, 24.523, -375.005, 57]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223713:
+    template: Thread_Leech
+    at:       [-419.476, 25.000, -240.085, 127]
+    level:    [21, 22]
+  17223714:
+    template: Thread_Leech
+    at:       [-412.730, 24.295, -240.147, 127]
+    level:    [21, 22]
+  17223715:
+    template: Thread_Leech
+    at:       [-387.735, 23.789, -239.694, 64]
+    level:    [21, 22]
+  17223716:
+    template: Land_Pugil
+    at:       [-436.454, 24.260, -263.289, 171]
+    level:    [19, 20]
+  17223717:
+    template: Land_Pugil
+    at:       [-390.541, 24.219, -245.252, 57]
+    level:    [19, 20]
+  17223718:
+    template: Land_Pugil
+    at:       [-440.000, 24.000, -225.000, 46]
+    level:    [19, 20]
+  17223719:
+    template: Snipper
+    at:       [-440.002, 24.269, -251.905, 10]
+    level:    [19, 20]
+  17223720:
+    template: Snipper
+    at:       [-398.823, 24.139, -241.384, 45]
+    level:    [19, 20]
+  17223721:
+    template: Snipper
+    at:       [-427.600, 24.283, -241.284, 127]
+    level:    [19, 20]
+  17223722:
+    template: Bogy
+    at:       [-416.031, 24.955, -259.330, 203]
+    level:    [25, 26]
+  17223723:
+    template: Water_Elemental
+    at:       [-388.841, 23.661, -231.705, 127]
+    level:    [27, 29]
+  17223724:
+    template: Gadfly
+    at:       [-239.897, 24.954, -298.754, 56]
+    level:    [20, 21]
+  17223725:
+    template: Gadfly
+    at:       [-250.355, 24.712, -285.601, 1]
+    level:    [20, 21]
+  17223726:
+    template: Gadfly
+    at:       [-286.149, 24.232, -246.315, 16]
+    level:    [20, 21]
+  17223727:
+    template: Bog_Bunny
+    at:       [-271.417, 24.915, -299.683, 127]
+    level:    [15, 16]
+  17223728:
+    template: Bog_Bunny
+    at:       [-247.410, 24.686, -286.485, 127]
+    level:    [15, 16]
+  17223729:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223730:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-288.245, 24.899, -241.318, 46]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223731:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-263.484, 23.764, -233.289, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223732:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-249.827, 24.075, -252.123, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223733:
+    template: Black_Bat
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223734:
+    template: Black_Bat
+    at:       [-213.028, 23.848, -237.543, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223735:
+    template: Bog_Dog
+    at:       [-234.051, 24.365, -243.181, 133]
+    level:    [17, 22]
+  17223736:
+    template: Goobbue
+    at:       [-259.698, 25.058, -240.661, 117]
+    level:    [24, 25]
+  17223737:
+    template: Goobbue
+    at:       [-469.842, 24.841, -499.118, 127]
+    level:    [24, 25]
+  17223738:
+    template: Malboro
+    at:       [-466.689, 24.499, -477.170, 127]
+    level:    [27, 28]
+  17223739:
+    template: Old_Quadav
+    at:       [-230.700, 24.491, -227.403, 127]
+    level:    [22, 23]
+  17223740:
+    template: Veteran_Quadav
+    at:       [-429.953, 24.500, -305.450, 127]
+    level:    [17, 18]
+  17223741:
+    template: Greater_Quadav
+    at:       [-374.670, 24.145, -304.256, 127]
+    level:    [17, 18]
+  17223742:
+    template: Copper_Quadav
+    at:       [-381.158, 24.804, -280.207, 127]
+    level:    [22, 23]
+  17223743:
+    template: Brass_Quadav
+    at:       [-357.558, 24.500, -281.098, 63]
+    level:    [22, 23]
+  17223744:
+    template: Onyx_Quadav
+    at:       [-398.976, 24.183, -341.508, 127]
+    level:    [17, 18]
+  17223745:
+    template: Ghoul_war
+    script:   Ghoul
+    at:       [-282.481, 24.407, -308.416, 9]
+    level:    [23, 24]
+  17223746:
+    template: Zombie_blm
+    script:   Zombie
+    at:       [-458.000, 24.000, -439.000, 127]
+    level:    [23, 24]
+  17223747:
+    template: Thunder_Elemental
+    at:       [-265.393, 23.856, -251.569, 32]
+    level:    [27, 29]
+  17223748:
+    template: Gadfly
+    at:       [-142.089, 25.139, -276.774, 61]
+    level:    [20, 21]
+  17223749:
+    template: Gadfly
+    at:       [-51.000, 24.000, -181.000, 45]
+    level:    [20, 21]
+  17223750:
+    template: Gadfly
+    at:       [-90.630, 24.449, -196.285, 127]
+    level:    [20, 21]
+  17223751:
+    template: Bog_Bunny
+    at:       [-148.697, 24.466, -274.172, 127]
+    level:    [15, 15]
+  17223752:
+    template: Bog_Bunny
+    at:       [-103.988, 25.089, -133.926, 127]
+    level:    [15, 16]
+  17223753:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-154.314, 24.826, -258.264, 242]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223754:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-199.818, 24.463, -291.725, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223755:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-153.537, 24.498, -249.705, 114]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223756:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-188.836, 24.258, -240.138, 108]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223757:
+    template: Black_Bat
+    at:       [-162.811, 24.133, -219.590, 246]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223758:
+    template: Black_Bat
+    at:       [-154.023, 24.499, -201.149, 30]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223759:
+    template: Carnivorous_Crawler
+    at:       [-210.127, 23.562, -269.801, 123]
+    level:    [22, 23]
+  17223760:
+    template: Carnivorous_Crawler
+    at:       [-209.181, 24.219, -290.013, 24]
+    level:    [22, 23]
+  17223761:
+    template: Gadfly
+    at:       [40.665, 24.477, -237.905, 107]
+    level:    [20, 21]
+  17223762:
+    template: Gadfly
+    at:       [-30.425, 24.500, -231.156, 127]
+    level:    [20, 21]
+  17223763:
+    template: Gadfly
+    at:       [11.097, 23.949, -339.143, 10]
+    level:    [20, 21]
+  17223764:
+    template: Bog_Bunny
+    at:       [24.874, 24.406, -339.193]
+    level:    [15, 16]
+  17223765:
+    template: Bog_Bunny
+    at:       [-58.020, 24.444, -197.354, 42]
+    level:    [15, 15]
+  17223766:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223767:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [26.785, 24.190, -294.350, 86]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223768:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [45.105, 24.495, -281.738, 69]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223769:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-5.660, 24.499, -285.510, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223770:
+    template: Black_Bat
+    at:       [27.578, 24.188, -294.534, 88]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223771:
+    template: Black_Bat
+    at:       [-44.261, 24.499, -160.930, 62]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223772:
+    template: Bog_Dog
+    level:    [17, 22]
+  17223773:
+    template: Water_Wasp
+    at:       [151.733, 24.500, -233.964, 127]
+    level:    [17, 18]
+  17223774:
+    template: Water_Wasp
+    at:       [223.522, 24.499, -247.088, 127]
+    level:    [17, 18]
+  17223775:
+    template: Water_Wasp
+    at:       [185.319, 24.201, -239.008, 34]
+    level:    [17, 18]
+  17223776:
+    template: Water_Wasp
+    at:       [254.320, 24.498, -241.242, 107]
+    level:    [17, 18]
+  17223777:
+    template: Gadfly
+    at:       [109.724, 23.853, -305.302, 78]
+    level:    [20, 21]
+  17223778:
+    template: Gadfly
+    at:       [147.186, 24.540, -230.533, 100]
+    level:    [20, 21]
+  17223779:
+    template: Bog_Bunny
+    at:       [174.210, 24.500, -238.652, 68]
+    level:    [15, 16]
+  17223780:
+    template: Bog_Bunny
+    at:       [125.415, 24.675, -222.683, 127]
+    level:    [15, 16]
+  17223781:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [259.260, 24.499, -226.845, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223782:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [91.915, 23.930, -295.095, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223783:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [106.000, 24.000, -268.000, 27]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223784:
+    template: Black_Bat
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223785:
+    template: Goobbue
+    at:       [36.888, 24.603, -246.089, 8]
+    level:    [24, 25]
+  17223786:
+    template: Goobbue
+    at:       [242.780, 24.472, -234.786, 49]
+    level:    [24, 25]
+  17223787:
+    template: Malboro
+    at:       [-179.516, 23.957, -224.629, 127]
+    level:    [27, 28]
+  17223788:
+    template: Old_Quadav
+    at:       [-151.227, 24.618, -293.790, 127]
+    level:    [22, 23]
+  17223789:
+    template: Veteran_Quadav
+    at:       [11.309, 23.904, -337.923, 22]
+    level:    [17, 18]
+  17223790:
+    template: Greater_Quadav
+    at:       [5.363, 24.491, -237.168, 127]
+    level:    [17, 18]
+  17223791:
+    template: Copper_Quadav
+    at:       [-101.870, 24.299, -146.963, 127]
+    level:    [22, 23]
+  17223792:
+    template: Brass_Quadav
+    at:       [43.302, 24.499, -327.626, 102]
+    level:    [22, 23]
+  17223793:
+    template: Onyx_Quadav
+    at:       [-13.632, 24.500, -291.379, 127]
+    level:    [17, 18]
+  17223794:
+    template: Ghoul_war
+    script:   Ghoul
+    at:       [-52.122, 24.499, -236.132, 78]
+    level:    [18, 19]
+  17223795:
+    template: Zombie_blm
+    script:   Zombie
+    at:       [269.040, 24.499, -245.784, 127]
+    level:    [23, 24]
+  17223796:
+    template: Thunder_Elemental
+    at:       [-150.561, 24.606, -286.158, 127]
+    level:    [27, 28]
+  17223797:
+    template: NiZho_Bladebender
+    at:       [11.309, 23.904, -337.923, 22]
+    level:    [43, 45]
+  17223798:
+    template: Thread_Leech
+    at:       [150.611, 24.683, -323.848, 75]
+    level:    [21, 22]
+  17223799:
+    template: Thread_Leech
+    at:       [246.603, 24.916, -280.466, 14]
+    level:    [21, 22]
+  17223800:
+    template: Thread_Leech
+    at:       [162.226, 24.043, -329.625, 127]
+    level:    [21, 22]
+  17223801:
+    template: Land_Pugil
+    at:       [186.353, 24.852, -290.747, 45]
+    level:    [19, 20]
+  17223802:
+    template: Land_Pugil
+    at:       [164.269, 24.133, -316.996, 79]
+    level:    [19, 20]
+  17223803:
+    template: Land_Pugil
+    at:       [136.000, 24.000, -383.000, 127]
+    level:    [19, 20]
+  17223804:
+    template: Snipper
+    at:       [241.754, 24.216, -287.939, 35]
+    level:    [19, 20]
+  17223805:
+    template: Snipper
+    at:       [188.921, 24.142, -299.927, 127]
+    level:    [19, 20]
+  17223806:
+    template: Snipper
+    at:       [137.000, 24.000, -402.000, 127]
+    level:    [19, 20]
+  17223807:
+    template: Bogy
+    at:       [118.394, 24.192, -402.939, 127]
+    level:    [25, 26]
+  17223808:
+    template: Water_Elemental
+    at:       [143.798, 23.889, -306.916, 102]
+    level:    [27, 28]
+  17223809:
+    template: Carnivorous_Crawler
+    at:       [215.935, 23.694, -296.831, 127]
+    level:    [22, 23]
+  17223810:
+    template: Carnivorous_Crawler
+    at:       [221.718, 24.778, -279.932, 117]
+    level:    [22, 23]
+  17223811:
+    template: Carnivorous_Crawler
+    at:       [215.010, 24.479, -286.251, 100]
+    level:    [22, 23]
+  17223812:
+    template: Gadfly
+    at:       [403.476, 24.499, -152.294, 101]
+    level:    [20, 21]
+  17223813:
+    template: Gadfly
+    at:       [290.853, 24.461, -143.963, 124]
+    level:    [20, 21]
+  17223814:
+    template: Gadfly
+    at:       [297.878, 24.719, -130.871, 127]
+    level:    [20, 21]
+  17223815:
+    template: Gadfly
+    at:       [369.026, 24.526, -157.784, 127]
+    level:    [20, 21]
+  17223816:
+    template: Bog_Bunny
+    at:       [457.891, 25.091, -118.520, 71]
+    level:    [15, 16]
+  17223817:
+    template: Bog_Bunny
+    at:       [395.051, 24.506, -104.520, 79]
+    level:    [15, 16]
+  17223818:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223819:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [303.346, 24.164, -144.139, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223820:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [341.315, 24.441, -152.445, 43]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223821:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [274.121, 25.097, -105.220, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223822:
+    template: Black_Bat
+    at:       [284.136, 24.786, -136.946, 61]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223823:
+    template: Black_Bat
+    at:       [349.737, 24.500, -216.798, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223824:
+    template: Bog_Dog
+    level:    [17, 22]
+  17223825:
+    template: Water_Wasp
+    at:       [379.571, 24.522, -45.914, 5]
+    level:    [17, 18]
+  17223826:
+    template: Water_Wasp
+    at:       [363.157, 24.343, 11.906, 127]
+    level:    [17, 18]
+  17223827:
+    template: Water_Wasp
+    at:       [391.958, 24.554, 10.252, 127]
+    level:    [17, 18]
+  17223828:
+    template: Water_Wasp
+    at:       [371.363, 24.161, 19.047, 127]
+    level:    [17, 18]
+  17223829:
+    template: Gadfly
+    at:       [378.079, 24.500, -30.273, 91]
+    level:    [20, 21]
+  17223830:
+    template: Gadfly
+    at:       [366.823, 24.828, -49.332, 46]
+    level:    [20, 21]
+  17223831:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [359.736, 25.029, 47.220, 10]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223832:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [409.956, 24.499, -51.639, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223833:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [381.992, 24.498, 15.329, 21]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223834:
+    template: Black_Bat
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223835:
+    template: Black_Bat
+    at:       [421.673, 24.125, -55.718, 19]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223836:
+    template: Carnivorous_Crawler
+    at:       [384.000, 25.000, -17.000, 127]
+    level:    [22, 23]
+  17223837:
+    template: Carnivorous_Crawler
+    at:       [340.000, 24.000, -14.000, 122]
+    level:    [22, 23]
+  17223838:
+    template: Carnivorous_Crawler
+    at:       [345.000, 24.000, -6.000]
+    level:    [22, 23]
+  17223839:
+    template: Goobbue
+    at:       [382.669, 24.497, 15.451, 127]
+    level:    [24, 25]
+  17223840:
+    template: Old_Quadav
+    at:       [413.822, 24.548, -90.777, 126]
+    level:    [22, 23]
+  17223841:
+    template: Veteran_Quadav
+    at:       [371.818, 24.789, 24.373, 127]
+    level:    [17, 18]
+  17223842:
+    template: Greater_Quadav
+    at:       [386.557, 24.110, 47.842, 127]
+    level:    [17, 18]
+  17223843:
+    template: Copper_Quadav
+    at:       [307.804, 24.490, -110.022, 127]
+    level:    [22, 23]
+  17223844:
+    template: Brass_Quadav
+    at:       [370.634, 24.531, -168.383, 51]
+    level:    [22, 23]
+  17223845:
+    template: Onyx_Quadav
+    at:       [358.280, 24.579, 21.642, 33]
+    level:    [17, 18]
+  17223846:
+    template: Ghoul_war
+    script:   Ghoul
+    at:       [366.736, 24.567, -27.233]
+    level:    [18, 19]
+  17223847:
+    template: Zombie_blm
+    script:   Zombie
+    at:       [325.435, 24.498, -105.109, 5]
+    level:    [18, 19]
+  17223848:
+    template: Thunder_Elemental
+    at:       [278.651, 24.501, -172.610, 25]
+    level:    [27, 28]
+  17223849:
+    template: Gadfly
+    at:       [277.656, 24.108, -15.135, 31]
+    level:    [20, 21]
+  17223850:
+    template: Gadfly
+    at:       [283.808, 24.038, 12.811]
+    level:    [20, 21]
+  17223851:
+    template: Bog_Bunny
+    at:       [270.166, 25.003, -19.442, 127]
+    level:    [15, 16]
+  17223852:
+    template: Bog_Bunny
+    at:       [279.816, 23.874, -51.326, 127]
+    level:    [15, 16]
+  17223853:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [314.160, 23.848, 7.772, 192]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223854:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223855:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [264.847, 25.000, -32.341, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223856:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [187.751, 24.499, -51.376, 81]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223857:
+    template: Black_Bat
+    at:       [287.031, 24.256, 2.031, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223858:
+    template: Black_Bat
+    at:       [248.850, 24.963, -22.105, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223859:
+    template: Gadfly
+    at:       [175.505, 24.981, 91.121, 113]
+    level:    [20, 21]
+  17223860:
+    template: Gadfly
+    at:       [182.841, 24.026, 29.175, 41]
+    level:    [20, 21]
+  17223861:
+    template: Gadfly
+    at:       [184.211, 24.106, 97.943, 64]
+    level:    [20, 21]
+  17223862:
+    template: Bog_Bunny
+    at:       [185.079, 24.301, -17.048, 127]
+    level:    [15, 16]
+  17223863:
+    template: Bog_Bunny
+    at:       [145.284, 24.461, 43.309, 62]
+    level:    [15, 16]
+  17223864:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [187.000, 24.000, 158.000, 113]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223865:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [169.043, 24.767, 77.959, 130]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223866:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [195.256, 24.120, 18.136, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223867:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [183.654, 24.718, 113.315, 12]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223868:
+    template: Black_Bat
+    at:       [169.780, 24.499, -10.876, 60]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223869:
+    template: Black_Bat
+    at:       [187.957, 24.286, 5.215, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223870:
+    template: Carnivorous_Crawler
+    at:       [188.888, 24.162, 66.968, 74]
+    level:    [22, 23]
+  17223871:
+    template: Carnivorous_Crawler
+    at:       [189.081, 24.048, 68.424, 18]
+    level:    [22, 23]
+  17223872:
+    template: Carnivorous_Crawler
+    at:       [185.285, 24.182, 77.643, 127]
+    level:    [22, 23]
+  17223873:
+    template: Gadfly
+    at:       [81.716, 24.459, 160.161, 115]
+    level:    [20, 21]
+  17223874:
+    template: Gadfly
+    at:       [108.630, 24.068, 169.298, 127]
+    level:    [20, 21]
+  17223875:
+    template: Gadfly
+    at:       [147.899, 23.974, 178.281, 2]
+    level:    [20, 21]
+  17223876:
+    template: Bog_Bunny
+    at:       [153.571, 24.771, 176.870, 18]
+    level:    [15, 16]
+  17223877:
+    template: Bog_Bunny
+    at:       [172.776, 24.285, 201.970, 30]
+    level:    [15, 16]
+  17223878:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [98.174, 24.948, 80.238, 122]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223879:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [148.825, 23.895, 177.814, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223880:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [52.188, 24.815, 100.874, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223881:
+    template: Black_Bat
+    at:       [111.000, 25.000, 118.000, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223882:
+    template: Black_Bat
+    at:       [132.618, 24.441, 202.334, 97]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223883:
+    template: Bog_Dog
+    at:       [160.748, 24.325, 148.884, 127]
+    level:    [17, 22]
+  17223884:
+    template: Carnivorous_Crawler
+    at:       [99.136, 24.062, 167.203, 27]
+    level:    [22, 23]
+  17223885:
+    template: Carnivorous_Crawler
+    at:       [116.638, 24.343, 169.582, 127]
+    level:    [22, 23]
+  17223886:
+    template: Carnivorous_Crawler
+    at:       [160.535, 23.962, 194.483, 127]
+    level:    [22, 23]
+  17223887:
+    template: Carnivorous_Crawler
+    at:       [163.460, 24.207, 190.428, 127]
+    level:    [22, 23]
+  17223888:
+    template: Goobbue
+    at:       [184.993, 24.499, -41.790, 127]
+    level:    [24, 25]
+  17223889:
+    template: Jolly_Green
+    at:       [276.084, 24.146, -1.695, 20]
+    level:    [27, 28]
+  17223890:
+    template: Malboro
+    at:       [243.284, 23.603, -51.946, 127]
+    level:    [27, 28]
+  17223891:
+    template: Goblin_Mugger
+    at:       [320.796, 24.427, 3.086, 127]
+    level:    [21, 22]
+  17223892:
+    template: Goblin_Ambusher
+    at:       [136.850, 24.278, 188.282, 50]
+    level:    [16, 17]
+  17223893:
+    template: Goblin_Leecher
+    at:       [318.712, 23.901, 11.798, 5]
+    level:    [21, 22]
+  17223894:
+    template: Goblin_Tinkerer
+    at:       [58.877, 24.471, 77.283, 127]
+    level:    [16, 17]
+  17223895:
+    template: Goblin_Gambler
+    at:       [183.835, 23.928, 186.367, 127]
+    level:    [21, 22]
+  17223896:
+    template: Goblin_Butcher
+    at:       [188.812, 24.500, -26.934, 127]
+    level:    [16, 17]
+  17223897:
+    template: Ghoul_war
+    script:   Ghoul
+    at:       [53.000, 25.000, 207.000, 127]
+    level:    [18, 19]
+  17223898:
+    template: Zombie_blm
+    script:   Zombie
+    at:       [203.000, 24.000, 184.000, 127]
+    level:    [18, 19]
+  17223899:
+    template: Bog_Dog
+    at:       [178.177, 24.846, 109.312, 127]
+    level:    [17, 22]
+  17223900:
+    template: Thunder_Elemental
+    at:       [248.224, 24.171, -34.989, 127]
+    level:    [27, 28]
+  17223901:
+    template: Thread_Leech
+    at:       [235.493, 23.654, 211.525, 127]
+    level:    [21, 22]
+  17223902:
+    template: Thread_Leech
+    at:       [249.886, 24.065, 95.393, 127]
+    level:    [21, 22]
+  17223903:
+    template: Thread_Leech
+    at:       [233.579, 24.038, 211.440, 127]
+    level:    [21, 22]
+  17223904:
+    template: Land_Pugil
+    at:       [206.769, 24.083, 136.136, 100]
+    level:    [19, 20]
+  17223905:
+    template: Land_Pugil
+    at:       [233.627, 24.253, 69.020, 28]
+    level:    [19, 20]
+  17223906:
+    template: Land_Pugil
+    at:       [192.873, 24.991, 113.494, 127]
+    level:    [19, 20]
+  17223907:
+    template: Snipper
+    at:       [217.156, 23.817, 108.515, 127]
+    level:    [19, 20]
+  17223908:
+    template: Snipper
+    at:       [220.727, 23.587, 209.029, 52]
+    level:    [19, 20]
+  17223909:
+    template: Snipper
+    at:       [250.429, 25.088, 73.174, 127]
+    level:    [19, 20]
+  17223910:
+    template: Bogy
+    at:       [239.193, 25.016, 72.731, 125]
+    level:    [25, 26]
+  17223911:
+    template: Water_Elemental
+    at:       [210.247, 24.083, 113.703, 127]
+    level:    [27, 28]
+  17223912:
+    template: Gadfly
+    at:       [30.789, 24.554, 244.656, 127]
+    level:    [20, 21]
+  17223913:
+    template: Gadfly
+    at:       [61.131, 24.140, 170.991, 127]
+    level:    [20, 21]
+  17223914:
+    template: Gadfly
+    at:       [58.062, 24.398, 304.195, 127]
+    level:    [20, 21]
+  17223915:
+    template: Bog_Bunny
+    at:       [21.140, 24.275, 184.926, 39]
+    level:    [15, 16]
+  17223916:
+    template: Bog_Bunny
+    at:       [49.265, 24.499, 282.042, 48]
+    level:    [15, 16]
+  17223917:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223918:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [30.300, 24.565, 176.038, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223919:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [26.929, 23.894, 160.385, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223920:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [67.441, 24.483, 216.773, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223921:
+    template: Black_Bat
+    at:       [24.641, 24.499, 195.546, 76]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223922:
+    template: Black_Bat
+    at:       [-2.559, 24.146, 299.582, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223923:
+    template: Gadfly
+    at:       [-40.794, 24.493, 306.079, 118]
+    level:    [20, 21]
+  17223924:
+    template: Gadfly
+    at:       [17.126, 24.500, 355.433, 19]
+    level:    [20, 21]
+  17223925:
+    template: Gadfly
+    at:       [-15.478, 24.272, 305.579, 87]
+    level:    [20, 21]
+  17223926:
+    template: Gadfly
+    at:       [-32.207, 24.491, 310.655, 44]
+    level:    [20, 21]
+  17223927:
+    template: Bog_Bunny
+    at:       [-13.817, 24.499, 348.948, 89]
+    level:    [15, 16]
+  17223928:
+    template: Bog_Bunny
+    at:       [33.446, 24.499, 371.721, 127]
+    level:    [15, 16]
+  17223929:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223930:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [46.891, 24.499, 351.707, 19]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223931:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [41.390, 24.496, 320.351, 62]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223932:
+    template: Black_Bat
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223933:
+    template: Black_Bat
+    at:       [-49.506, 24.757, 412.827, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223934:
+    template: Bog_Dog
+    level:    [17, 22]
+  17223935:
+    template: Carnivorous_Crawler
+    at:       [18.000, 24.000, 380.000, 52]
+    level:    [22, 23]
+  17223936:
+    template: Carnivorous_Crawler
+    at:       [17.000, 24.000, 370.000, 32]
+    level:    [22, 23]
+  17223937:
+    template: Gadfly
+    at:       [-96.612, 24.665, 427.704, 34]
+    level:    [20, 21]
+  17223938:
+    template: Gadfly
+    at:       [-175.140, 24.870, 362.336, 9]
+    level:    [20, 21]
+  17223939:
+    template: Gadfly
+    at:       [-163.990, 24.499, 452.572, 125]
+    level:    [20, 21]
+  17223940:
+    template: Bog_Bunny
+    at:       [-254.329, 25.031, 394.744, 127]
+    level:    [15, 15]
+  17223941:
+    template: Bog_Bunny
+    at:       [-191.078, 24.529, 332.128, 127]
+    level:    [15, 15]
+  17223942:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223943:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223944:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-253.848, 24.643, 455.241, 122]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223945:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [-116.867, 24.508, 411.196, 87]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223946:
+    template: Black_Bat
+    at:       [-260.127, 23.498, 410.234, 73]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223947:
+    template: Black_Bat
+    at:       [-112.944, 24.501, 403.775, 40]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223948:
+    template: Goobbue
+    at:       [-136.491, 24.500, 370.605, 127]
+    level:    [24, 25]
+  17223949:
+    template: Goobbue
+    at:       [10.028, 24.635, 373.820, 127]
+    level:    [24, 25]
+  17223950:
+    template: Malboro
+    at:       [-69.474, 24.503, 406.352, 31]
+    level:    [27, 28]
+  17223951:
+    template: Goblin_Mugger
+    at:       [-186.980, 24.470, 431.970, 127]
+    level:    [21, 22]
+  17223952:
+    template: Goblin_Ambusher
+    at:       [-219.603, 24.238, 418.661, 56]
+    level:    [16, 17]
+  17223953:
+    template: Goblin_Leecher
+    at:       [18.872, 24.500, 356.830, 99]
+    level:    [21, 22]
+  17223954:
+    template: Goblin_Tinkerer
+    at:       [19.141, 24.637, 259.927, 127]
+    level:    [16, 17]
+  17223955:
+    template: Goblin_Gambler
+    at:       [-157.846, 24.499, 452.966, 127]
+    level:    [21, 22]
+  17223956:
+    template: Goblin_Butcher
+    at:       [-39.421, 24.474, 411.138, 127]
+    level:    [16, 17]
+  17223957:
+    template: Ghoul_war
+    script:   Ghoul
+    at:       [36.721, 24.146, 299.012, 127]
+    level:    [18, 19]
+  17223958:
+    template: Zombie_blm
+    script:   Zombie
+    at:       [59.221, 24.155, 180.085, 127]
+    level:    [18, 19]
+  17223959:
+    template: Thunder_Elemental
+    at:       [-64.796, 24.495, 400.051, 127]
+    level:    [27, 28]
+  17223960:
+    template: Gadfly
+    at:       [-219.402, 24.519, -157.698, 9]
+    level:    [20, 21]
+  17223961:
+    template: Gadfly
+    at:       [-211.420, 24.781, -141.611, 127]
+    level:    [20, 21]
+  17223962:
+    template: Gadfly
+    at:       [-248.390, 24.406, -114.083, 127]
+    level:    [20, 21]
+  17223963:
+    template: Marsh_Funguar
+    at:       [-245.555, 24.537, -174.276, 19]
+    level:    [24, 25]
+  17223964:
+    template: Marsh_Funguar
+    at:       [-248.130, 24.902, -120.593, 8]
+    level:    [24, 25]
+  17223965:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223966:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223967:
+    template: Marsh_Funguar
+    at:       [-182.273, 25.162, -161.658, 127]
+    level:    [24, 25]
+  17223968:
+    template: Marsh_Funguar
+    at:       [-67.638, 24.499, -10.570, 47]
+    level:    [24, 25]
+  17223969:
+    template: Marsh_Funguar
+    at:       [-198.436, 24.521, -146.861, 25]
+    level:    [24, 25]
+  17223970:
+    template: Marsh_Funguar
+    at:       [-185.429, 25.052, -153.860, 10]
+    level:    [24, 25]
+  17223971:
+    template: Marsh_Funguar
+    at:       [-263.991, 25.050, -135.451, 101]
+    level:    [24, 25]
+  17223972:
+    template: Goblin_Mugger
+    at:       [-197.950, 24.638, -159.328, 58]
+    level:    [21, 22]
+  17223973:
+    template: Goblin_Ambusher
+    level:    [16, 17]
+  17223974:
+    template: Goblin_Leecher
+    at:       [-66.508, 24.547, 17.508, 122]
+    level:    [21, 22]
+  17223975:
+    template: Goblin_Tinkerer
+    at:       [-250.331, 24.503, -150.341, 76]
+    level:    [16, 17]
+  17223976:
+    template: Goblin_Gambler
+    at:       [-229.695, 24.500, -124.502, 48]
+    level:    [21, 22]
+  17223977:
+    template: Goblin_Butcher
+    at:       [-247.417, 24.472, -112.257, 81]
+    level:    [16, 17]
+  17223978:
+    template: Black_Bat
+    at:       [-105.449, 24.500, 10.602, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223979:
+    template: Black_Bat
+    at:       [-255.199, 24.501, -152.564, 126]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17223980:
+    template: Malboro
+    at:       [-127.950, 24.500, 12.544, 127]
+    level:    [27, 28]
+  17223981:
+    template: Fox_Fire
+    at:       [-119.592, 24.485, -51.208, 103]
+    level:    [24, 25]
+  17223982:
+    template: Toxic_Tamlyn
+    at:       [-79.520, 24.500, -12.540, 40]
+    level:    [44, 45]
+  17223983:
+    template: Marsh_Funguar
+    at:       [10.398, 24.500, 53.011, 54]
+    level:    [24, 25]
+  17223984:
+    template: Marsh_Funguar
+    at:       [9.259, 24.500, 61.267, 127]
+    level:    [24, 25]
+  17223985:
+    template: Marsh_Funguar
+    at:       [16.489, 24.500, 54.799, 27]
+    level:    [24, 25]
+  17223986:
+    template: Marsh_Funguar
+    at:       [-192.824, 24.500, 157.626, 127]
+    level:    [24, 25]
+  17223987:
+    template: Marsh_Funguar
+    at:       [-149.925, 24.500, 135.522, 127]
+    level:    [24, 25]
+  17223988:
+    template: Marsh_Funguar
+    at:       [-182.543, 24.502, 138.036, 124]
+    level:    [24, 25]
+  17223989:
+    template: Marsh_Funguar
+    at:       [-190.244, 24.539, 155.708, 127]
+    level:    [24, 25]
+  17223990:
+    template: Marsh_Funguar
+    at:       [-160.890, 23.886, 107.797, 11]
+    level:    [24, 25]
+  17223991:
+    template: Goblin_Mugger
+    at:       [-191.083, 24.500, 108.768, 127]
+    level:    [21, 22]
+  17223992:
+    template: Goblin_Ambusher
+    at:       [-121.671, 24.500, 135.889, 71]
+    level:    [16, 17]
+  17223993:
+    template: Goblin_Leecher
+    at:       [-199.019, 24.500, 124.269, 84]
+    level:    [21, 22]
+  17223994:
+    template: Goblin_Tinkerer
+    at:       [-120.999, 24.499, 143.024, 127]
+    level:    [16, 17]
+  17223995:
+    template: Goblin_Gambler
+    at:       [-192.704, 24.500, 108.181, 48]
+    level:    [21, 22]
+  17223996:
+    template: Goblin_Butcher
+    at:       [-158.622, 23.902, 107.891, 127]
+    level:    [16, 17]
+  17223997:
+    template: Black_Bat
+    at:       [-253.259, 24.911, 171.320, 14]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17223998:
+    template: Black_Bat
+    at:       [-147.766, 24.500, 136.073, 86]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17223999:
+    template: Water_Wasp
+    at:       [-191.491, 24.500, 139.160, 127]
+    level:    [17, 18]
+  17224000:
+    template: Water_Wasp
+    at:       [-183.372, 24.500, 139.000, 21]
+    level:    [17, 18]
+  17224001:
+    template: Water_Wasp
+    at:       [-176.508, 24.500, 122.060, 42]
+    level:    [17, 18]
+  17224002:
+    template: Water_Wasp
+    at:       [-182.746, 24.500, 131.046, 127]
+    level:    [17, 18]
+  17224003:
+    template: Fox_Fire
+    at:       [-199.601, 24.500, 109.454, 107]
+    level:    [24, 25]
+  17224004:
+    template: Malboro
+    at:       [-280.469, 24.493, 296.551, 11]
+    level:    [27, 28]
+  17224005:
+    template: Bogy
+    level:    [25, 26]
+  17224006:
+    template: Water_Wasp
+    at:       [-296.522, 24.502, 506.162, 127]
+    level:    [17, 18]
+  17224007:
+    template: Water_Wasp
+    at:       [-252.280, 24.843, 473.232, 127]
+    level:    [17, 18]
+  17224008:
+    template: Water_Wasp
+    at:       [-271.000, 25.000, 500.000, 13]
+    level:    [17, 18]
+  17224009:
+    template: Water_Wasp
+    at:       [-250.825, 24.501, 496.916, 40]
+    level:    [17, 18]
+  17224010:
+    template: Water_Wasp
+    at:       [-298.313, 24.500, 500.628, 127]
+    level:    [17, 18]
+  17224011:
+    template: Water_Wasp
+    at:       [-297.749, 24.500, 499.637, 127]
+    level:    [17, 18]
+  17224012:
+    template: Marsh_Funguar
+    at:       [-332.040, 24.585, 462.730, 127]
+    level:    [24, 25]
+  17224013:
+    template: Marsh_Funguar
+    at:       [-229.695, 24.500, 483.202, 44]
+    level:    [24, 25]
+  17224014:
+    template: Thread_Leech
+    at:       [-351.884, 24.014, 513.531, 127]
+    level:    [21, 22]
+  17224015:
+    template: Thread_Leech
+    at:       [-391.035, 24.001, 506.440, 127]
+    level:    [21, 22]
+  17224016:
+    template: Thread_Leech
+    at:       [-408.334, 23.810, 498.029, 127]
+    level:    [21, 22]
+  17224017:
+    template: Thread_Leech
+    at:       [-373.586, 24.978, 530.964, 120]
+    level:    [21, 22]
+  17224018:
+    template: Thread_Leech
+    at:       [-368.005, 24.120, 496.423, 127]
+    level:    [21, 22]
+  17224019:
+    template: Bloodpool_Vorax
+    at:       [-405.854, 24.113, 513.944, 30]
+    level:    [24, 25]
+  17224020:
+    template: Land_Pugil
+    at:       [-434.575, 24.121, 473.957, 127]
+    level:    [19, 20]
+  17224021:
+    template: Land_Pugil
+    at:       [-397.402, 24.138, 522.640, 127]
+    level:    [19, 20]
+  17224022:
+    template: Snipper
+    at:       [-397.329, 24.190, 489.712, 113]
+    level:    [19, 20]
+  17224023:
+    template: Snipper
+    at:       [-351.122, 24.027, 511.478, 127]
+    level:    [19, 20]
+  17224024:
+    template: Snipper
+    at:       [-361.592, 25.100, 536.449, 127]
+    level:    [19, 20]
+  17224025:
+    template: Bogy
+    at:       [-436.305, 23.717, 467.589, 35]
+    level:    [25, 26]
+  17224026:
+    template: Water_Elemental
+    at:       [-349.332, 24.048, 505.222, 127]
+    level:    [27, 28]
+  17224027:
+    template: Carnivorous_Crawler
+    at:       [-371.613, 24.317, 519.235, 39]
+    level:    [22, 23]
+  17224028:
+    template: Carnivorous_Crawler
+    at:       [-357.229, 24.147, 501.144, 127]
+    level:    [22, 23]
+  17224029:
+    template: Carnivorous_Crawler
+    at:       [-411.379, 23.849, 526.777, 82]
+    level:    [22, 23]
+  17224030:
+    template: Carnivorous_Crawler
+    at:       [-402.159, 24.212, 506.417, 104]
+    level:    [22, 23]
+  17224031:
+    template: Carnivorous_Crawler
+    at:       [-407.645, 24.149, 519.246, 50]
+    level:    [22, 23]
+  17224032:
+    template: Carnivorous_Crawler
+    at:       [-458.017, 23.676, 469.532, 127]
+    level:    [22, 23]
+  17224033:
+    template: Gadfly
+    at:       [174.142, 24.500, 307.704, 118]
+    level:    [20, 21]
+  17224034:
+    template: Gadfly
+    at:       [253.458, 24.498, 316.937, 65]
+    level:    [20, 21]
+  17224035:
+    template: Gadfly
+    at:       [186.336, 24.499, 405.170, 127]
+    level:    [20, 21]
+  17224036:
+    template: Bog_Bunny
+    at:       [224.508, 24.143, 354.278, 127]
+    level:    [15, 16]
+  17224037:
+    template: Bog_Bunny
+    at:       [192.308, 24.435, 410.099, 127]
+    level:    [15, 16]
+  17224038:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17224039:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [136.858, 24.491, 370.245, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17224040:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [115.019, 24.499, 393.647, 106]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17224041:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [119.595, 24.158, 381.071, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17224042:
+    template: Black_Bat
+    at:       [285.500, 24.499, 322.013, 122]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17224043:
+    template: Black_Bat
+    at:       [208.808, 24.499, 399.270, 112]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17224044:
+    template: Bog_Dog
+    level:    [17, 22]
+  17224045:
+    template: Gadfly
+    at:       [425.015, 25.090, 410.140, 93]
+    level:    [20, 21]
+  17224046:
+    template: Gadfly
+    at:       [313.615, 24.470, 407.377, 120]
+    level:    [20, 21]
+  17224047:
+    template: Gadfly
+    at:       [333.226, 24.272, 378.772, 64]
+    level:    [20, 21]
+  17224048:
+    template: Bog_Bunny
+    at:       [428.762, 24.343, 466.700, 127]
+    level:    [15, 16]
+  17224049:
+    template: Bog_Bunny
+    at:       [329.995, 24.469, 408.353, 111]
+    level:    [15, 16]
+  17224050:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [303.966, 24.493, 388.489, 87]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17224051:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [378.589, 24.084, 418.308, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17224052:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [420.333, 24.283, 423.218, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17224053:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [351.708, 24.495, 358.451, 21]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17224054:
+    template: Black_Bat
+    at:       [359.566, 24.499, 391.712, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17224055:
+    template: Black_Bat
+    at:       [299.902, 24.150, 360.323, 80]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17224056:
+    template: Gadfly
+    at:       [499.559, 24.509, 631.720, 127]
+    level:    [20, 21]
+  17224057:
+    template: Gadfly
+    at:       [570.094, 24.499, 455.267, 127]
+    level:    [20, 21]
+  17224058:
+    template: Gadfly
+    at:       [499.972, 24.149, 522.188, 127]
+    level:    [20, 21]
+  17224059:
+    template: Bog_Bunny
+    at:       [468.487, 24.499, 518.506, 127]
+    level:    [15, 16]
+  17224060:
+    template: Bog_Bunny
+    at:       [504.890, 24.657, 627.833, 27]
+    level:    [15, 16]
+  17224061:
+    template: Bog_Bunny
+    at:       [499.789, 24.186, 521.978, 127]
+    level:    [15, 16]
+  17224062:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [464.291, 24.740, 481.018, 101]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17224063:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [450.796, 24.539, 498.222, 96]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17224064:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [503.735, 24.500, 642.797, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17224065:
+    template: Night_Bats_MM_PM
+    script:   Night_Bats
+    at:       [536.164, 24.504, 434.735, 127]
+    level:    [15, 16]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    6
+  17224066:
+    template: Black_Bat
+    at:       [500.481, 24.502, 632.045, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 19
+          end:    5
+  17224067:
+    template: Black_Bat
+    at:       [518.210, 24.455, 483.500, 127]
+    level:    [17, 18]
+    attributes:
+      spawn:
+        window:
+          start: 18
+          end:    4
+  17224068:
+    template: Bog_Dog
+    at:       [483.629, 24.499, 554.905, 4]
+    level:    [17, 22]
+  17224069:
+    template: Carnivorous_Crawler
+    at:       [381.000, 24.000, -12.000, 99]
+    level:    [22, 23]
+  17224070:
+    template: Carnivorous_Crawler
+    at:       [111.000, 24.000, 158.000, 127]
+    level:    [22, 23]
+  17224071:
+    template: Goobbue
+    at:       [186.837, 24.499, 358.359, 121]
+    level:    [24, 25]
+  17224072:
+    template: Goobbue
+    at:       [407.000, 25.000, 447.000, 44]
+    level:    [24, 25]
+  17224073:
+    template: Malboro
+    at:       [143.202, 25.036, 322.889, 127]
+    level:    [27, 28]
+  17224074:
+    template: Goblin_Mugger
+    at:       [471.589, 24.541, 475.735, 61]
+    level:    [21, 22]
+  17224075:
+    template: Goblin_Ambusher
+    at:       [490.000, 25.000, 485.000, 127]
+    level:    [16, 17]
+  17224076:
+    template: Goblin_Leecher
+    at:       [381.054, 24.542, 454.263, 87]
+    level:    [21, 22]
+  17224077:
+    template: Goblin_Tinkerer
+    at:       [498.320, 24.095, 425.201, 88]
+    level:    [16, 17]
+  17224078:
+    template: Goblin_Gambler
+    at:       [199.749, 25.045, 408.697, 12]
+    level:    [21, 22]
+  17224079:
+    template: Goblin_Butcher
+    at:       [314.388, 24.396, 390.681, 127]
+    level:    [16, 17]
+  17224080:
+    template: Ghoul_war
+    script:   Ghoul
+    at:       [159.906, 24.499, 400.323, 39]
+    level:    [18, 19]
+  17224081:
+    template: Zombie_blm
+    script:   Zombie
+    at:       [271.116, 24.885, 406.670, 107]
+    level:    [18, 19]
+  17224082:
+    template: Thunder_Elemental
+    at:       [181.564, 24.499, 309.228, 127]
+    level:    [27, 29]
+  17224083:
+    template: Thread_Leech
+    at:       [462.670, 24.027, 378.554, 127]
+    level:    [21, 22]
+  17224084:
+    template: Thread_Leech
+    at:       [466.206, 25.060, 387.886, 127]
+    level:    [21, 22]
+  17224085:
+    template: Thread_Leech
+    at:       [463.225, 24.112, 395.225, 80]
+    level:    [21, 22]
+  17224086:
+    template: Land_Pugil
+    at:       [425.799, 24.209, 361.182, 127]
+    level:    [19, 20]
+  17224087:
+    template: Land_Pugil
+    at:       [433.978, 24.637, 363.261, 127]
+    level:    [19, 20]
+  17224088:
+    template: Snipper
+    at:       [490.000, 24.000, 379.000, 127]
+    level:    [19, 20]
+  17224089:
+    template: Snipper
+    at:       [435.000, 24.000, 344.000, 127]
+    level:    [19, 20]
+  17224090:
+    template: Bogy
+    at:       [436.522, 24.399, 367.572, 10]
+    level:    [25, 26]
+  17224091:
+    template: Water_Elemental
+    at:       [448.528, 23.973, 349.051, 16]
+    level:    [27, 28]
+  17224092:
+    template: Water_Wasp
+    at:       [533.367, 24.500, -278.730, 127]
+    level:    [17, 18]
+  17224093:
+    template: Water_Wasp
+    at:       [549.596, 24.368, -286.150, 127]
+    level:    [17, 18]
+  17224094:
+    template: Water_Wasp
+    at:       [523.714, 24.500, -146.966, 127]
+    level:    [17, 18]
+  17224095:
+    template: Marsh_Funguar
+    at:       [532.442, 24.500, -336.997, 65]
+    level:    [24, 25]
+  17224096:
+    template: Marsh_Funguar
+    at:       [549.040, 24.500, -238.262, 110]
+    level:    [24, 25]
+  17224097:
+    template: Marsh_Funguar
+    at:       [533.245, 24.500, -209.986, 84]
+    level:    [24, 25]
+  17224098:
+    template: Old_Quadav
+    at:       [572.792, 24.500, -262.081, 127]
+    level:    [22, 23]
+  17224099:
+    template: Veteran_Quadav
+    at:       [536.514, 24.520, -275.386, 127]
+    level:    [17, 18]
+  17224100:
+    template: Greater_Quadav
+    at:       [520.929, 24.500, -304.434, 122]
+    level:    [17, 18]
+  17224101:
+    template: Copper_Quadav
+    at:       [546.975, 24.656, -238.541, 127]
+    level:    [22, 23]
+  17224102:
+    template: Brass_Quadav
+    at:       [573.000, 24.000, -232.000, 127]
+    level:    [22, 23]
+  17224103:
+    template: Onyx_Quadav
+    at:       [517.762, 24.500, -332.798, 9]
+    level:    [17, 18]
+  17224104:
+    template: BoWho_Warmonger
+    at:       [467.436, 24.500, -342.082, 127]
+    level:    [36, 37]
+  17224105:
+    template: Brass_Quadav
+    at:       [468.047, 24.430, -344.965, 169]
+    level:    [22, 23]
+  17224106:
+    template: Onyx_Quadav
+    at:       [466.083, 24.500, -342.935, 191]
+    level:    [17, 18]
+  17224107:
+    template: Old_Quadav
+    at:       [557.060, 24.501, -273.559, 127]
+    level:    [22, 23]
+  17224108:
+    template: Veteran_Quadav
+    at:       [548.598, 24.500, -256.296, 115]
+    level:    [17, 18]
+  17224109:
+    template: Greater_Quadav
+    at:       [538.112, 24.483, -287.791, 17]
+    level:    [17, 18]
+  17224110:
+    template: Copper_Quadav
+    at:       [528.242, 24.561, -157.735, 127]
+    level:    [22, 23]
+  17224111:
+    template: Brass_Quadav
+    at:       [550.079, 24.500, -226.286, 127]
+    level:    [22, 23]
+  17224112:
+    template: Onyx_Quadav
+    at:       [457.000, 25.000, -301.000, 43]
+    level:    [17, 18]
+  17224113:
+    template: Water_Wasp
+    at:       [536.947, 24.648, 2.443, 108]
+    level:    [17, 18]
+  17224114:
+    template: Water_Wasp
+    at:       [560.827, 24.500, 22.657, 127]
+    level:    [17, 18]
+  17224115:
+    template: Water_Wasp
+    at:       [578.834, 23.989, -136.811, 105]
+    level:    [17, 18]
+  17224116:
+    template: Marsh_Funguar
+    at:       [563.147, 24.500, 22.760, 127]
+    level:    [24, 25]
+  17224117:
+    template: Marsh_Funguar
+    at:       [543.083, 24.587, -0.002, 43]
+    level:    [24, 25]
+  17224118:
+    template: Marsh_Funguar
+    at:       [541.141, 24.500, 26.280, 127]
+    level:    [24, 25]
+  17224119:
+    template: Old_Quadav
+    at:       [611.652, 24.854, 18.120, 115]
+    level:    [22, 23]
+  17224120:
+    template: Veteran_Quadav
+    at:       [553.525, 24.500, 23.033, 73]
+    level:    [17, 18]
+  17224121:
+    template: Greater_Quadav
+    at:       [607.192, 24.562, 13.641, 127]
+    level:    [17, 18]
+  17224122:
+    template: Copper_Quadav
+    at:       [541.667, 24.502, 18.268, 10]
+    level:    [22, 23]
+  17224123:
+    template: Brass_Quadav
+    at:       [541.180, 24.998, -50.831, 127]
+    level:    [22, 23]
+  17224124:
+    template: Onyx_Quadav
+    at:       [557.238, 24.902, -65.519, 16]
+    level:    [17, 18]
+  17224125:
+    template: Water_Wasp
+    at:       [560.510, 24.500, 16.992, 83]
+    level:    [17, 18]
+  17224126:
+    template: Water_Wasp
+    at:       [607.140, 24.508, 15.253, 36]
+    level:    [17, 18]
+  17224127:
+    template: Water_Wasp
+    at:       [641.491, 24.500, 96.578, 17]
+    level:    [17, 18]
+  17224128:
+    template: Water_Wasp
+    at:       [576.222, 24.911, -59.074, 42]
+    level:    [17, 18]
+  17224129:
+    template: Marsh_Funguar
+    at:       [613.858, 24.792, 249.610, 127]
+    level:    [24, 25]
+  17224130:
+    template: Marsh_Funguar
+    at:       [650.948, 25.000, 184.669, 13]
+    level:    [24, 25]
+  17224131:
+    template: Marsh_Funguar
+    at:       [578.406, 24.388, 185.970, 4]
+    level:    [24, 25]
+  17224132:
+    template: Marsh_Funguar
+    at:       [561.377, 24.817, 185.055, 57]
+    level:    [24, 25]
+  17224133:
+    template: Malboro
+    at:       [585.771, 24.663, 205.030, 123]
+    level:    [27, 28]
+  17224134:
+    template: Fox_Fire
+    at:       [622.112, 25.095, 229.125, 127]
+    level:    [24, 25]
+  17224135:
+    template: Goblin_Digger_far
+    script:   Goblin_Digger
+    at:       [107.818, 23.883, 44.235, 127]
+    level:    [18, 19]
+  17224136:
+    template: Hobgoblin_Warrior
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224137:
+    template: Hobgoblin_White_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224138:
+    template: Hobgoblin_Black_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224139:
+    template: Hobgoblin_Red_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224140:
+    template: Hobgoblin_Thief
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224141:
+    template: Hobgoblin_Dark_Knight
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224142:
+    template: Hobgoblin_Ranger
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224143:
+    template: Hobgoblin_Beastmaster
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224144:
+    template: Goblins_Bee
+    at:       [1.000, 1.000, 1.000]
+    level:    [28, 30]
+  17224145:
+    template: Metaquadav_Warrior
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224146:
+    template: Metaquadav_White_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224147:
+    template: Metaquadav_Black_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224148:
+    template: Metaquadav_Red_Mage
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224149:
+    template: Metaquadav_Thief
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224150:
+    template: Metaquadav_Paladin
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224151:
+    template: Metaquadav_Dark_Knight
+    at:       [1.000, 1.000, 1.000]
+    level:    [30, 33]
+  17224152:
+    template: Old_Quadav_2
+    script:   Old_Quadav
+    at:       [456.860, 24.503, 422.368, 180]
+    level:    [30, 35]
+  17224153:
+    template: Old_Quadav_2
+    script:   Old_Quadav
+    at:       [466.152, 25.001, 437.123, 175]
+    level:    [30, 35]
+  17224154:
+    template: Heliodor_Quadav
+    at:       [468.410, 24.991, 431.814, 170]
+    level:    [30, 35]
+  17224155:
+    template: Heliodor_Quadav
+    at:       [459.516, 24.593, 439.988, 185]
+    level:    [30, 35]
+  17224156:
+    template: Brass_Quadav_2
+    script:   Brass_Quadav
+    at:       [451.336, 24.565, 426.265, 165]
+    level:    [30, 35]
+  17224157:
+    template: Brass_Quadav_2
+    script:   Brass_Quadav
+    at:       [453.575, 25.005, 443.281, 180]
+    level:    [30, 35]
+  17224158:
+    template: Sapphirine_Quadav
+    at:       [475.540, 25.000, 442.846, 185]
+    level:    [30, 35]
+  17224159:
+    template: Sapphirine_Quadav
+    at:       [440.435, 24.984, 425.450, 175]
+    level:    [30, 35]
+  17224160:
+    template: Cobalt_Quadav
+    at:       [431.660, 25.000, 446.277, 155]
+    level:    [35, 35]
+  17224161:
+    template: Sprite
+    level:    [61, 63]
+  17224162:
+    template: Sprite
+    level:    [61, 63]
+  17224163:
+    template: Sprite
+    level:    [61, 63]
+  17224164:
+    template: Sprite
+    level:    [61, 63]
+  17224165:
+    template: Sprite
+    level:    [61, 63]
+  17224166:
+    template: Ballistosporer
+    level:    [1, 1]
+  17224167:
+    template: Yilbegan
+    at:       [1.000, 1.000, 1.000]
+    level:    [90, 92]
+  17224168:
+    template: Blobdingnag
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17224169:
+    template: Septic_Boil
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17224170:
+    template: Septic_Boil
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17224171:
+    template: Septic_Boil
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17224172:
+    template: Septic_Boil
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17224173:
+    template: Septic_Boil
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17224174:
+    template: Septic_Boil
+    at:       [1.000, 1.000, 1.000]
+    level:    [85, 85]
+  17224175:
+    template: Shoggoth
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17224176:
+    template: Lamprey_Lord
+    at:       [1.000, 1.000, 1.000]
+    level:    [82, 82]
+  17224177:
+    template: Ground_Guzzler
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17224178:
+    template: Ground_Guzzler
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17224179:
+    template: Ground_Guzzler
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17224180:
+    template: Ground_Guzzler
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17224181:
+    template: Globster
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17224182:
+    template: Globster
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17224183:
+    template: Globster
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17224184:
+    template: Globster
+    at:       [1.000, 1.000, 1.000]
+    level:    [80, 80]
+  17224185:
+    template: Murk-veined_Baneberry
+    at:       [-420.000, 23.812, -230.000, 240]
+    level:    [92, 94]
+  17224186:
+    template: Murk-veined_Baneberry
+    at:       [244.118, 24.413, 86.632, 179]
+    level:    [92, 94]
+  17224187:
+    template: Murk-veined_Baneberry
+    at:       [552.000, 23.899, 492.000, 107]
+    level:    [92, 94]
+  17224188:
+    template: Joyous_Green
+    at:       [283.802, 24.164, -50.524, 60]
+  17224189:
+    template: Joyous_Green
+    at:       [-25.709, 23.975, -154.570, 91]
+  17224190:
+    template: Joyous_Green
+    at:       [122.783, 24.500, 403.317, 58]
+  17224232:
+    script: Wayward_Worm
+  17224233:
+    script: Wayward_Worm
+  17224234:
+    script: Wayward_Worm
+  17224244:
+    script: Wayward_Worm
+  17224245:
+    script: Wayward_Worm
+  17224246:
+    script: Wayward_Worm
+  17224256:
+    script: Wayward_Worm
+  17224257:
+    script: Wayward_Worm
+  17224258:
+    script: Wayward_Worm
+  17224259:
+    script: Tatenashi_Armor
+  17224260:
+    script: Hizamaru_Armor
+  17224261:
+    script: Ubuginu_Armor
+  17224262:
+    script: Hachiryu_Armor
+  17224263:
+    script: Omodaka_Armor
+
+slots:
+  - members:
+      17223686: {} # Gadfly
+      17223693: {} # Night_Bats
+  - members:
+      17223687: {} # Gadfly
+      17223697: {} # Black_Bat
+  - members:
+      17223689: {} # Bog_Bunny
+      17223699: {} # Bog_Dog
+  - members:
+      17223700: {} # Gadfly
+      17223707: {} # Night_Bats
+  - members:
+      17223701: {} # Gadfly
+      17223711: {} # Black_Bat
+  - members:
+      17223713: {} # Thread_Leech
+      17223722: {} # Bogy
+  - members:
+      17223716: {} # Land_Pugil
+      17223719: {} # Snipper
+  - members:
+      17223724: {} # Gadfly
+      17223729: {} # Night_Bats
+  - members:
+      17223725: {} # Gadfly
+      17223733: {} # Black_Bat
+  - members:
+      17223727: {} # Bog_Bunny
+      17223735: {} # Bog_Dog
+  - members:
+      17223739: {} # Old_Quadav
+      17223745: {} # Ghoul
+  - members:
+      17223740: {} # Veteran_Quadav
+      17223789: {} # Veteran_Quadav
+  - members:
+      17223744: {} # Onyx_Quadav
+      17223746: {} # Zombie
+  - members:
+      17223748: {} # Gadfly
+      17223753: {} # Night_Bats
+  - members:
+      17223749: {} # Gadfly
+      17223757: {} # Black_Bat
+  - members:
+      17223761: {} # Gadfly
+      17223766: {} # Night_Bats
+  - members:
+      17223762: {} # Gadfly
+      17223770: {} # Black_Bat
+  - members:
+      17223764: {} # Bog_Bunny
+      17223772: {} # Bog_Dog
+  - members:
+      17223777: {} # Gadfly
+      17223781: {} # Night_Bats
+  - members:
+      17223788: {} # Old_Quadav
+      17223794: {} # Ghoul
+  - members:
+      17223793: {} # Onyx_Quadav
+      17223795: {} # Zombie
+  - members:
+      17223798: {} # Thread_Leech
+      17223807: {} # Bogy
+  - members:
+      17223801: {} # Land_Pugil
+      17223809: {} # Carnivorous_Crawler
+  - members:
+      17223812: {} # Gadfly
+      17223818: {} # Night_Bats
+  - members:
+      17223813: {} # Gadfly
+      17223822: {} # Black_Bat
+  - members:
+      17223816: {} # Bog_Bunny
+      17223824: {} # Bog_Dog
+  - members:
+      17223826: {} # Water_Wasp
+      17223836: {} # Carnivorous_Crawler
+  - members:
+      17223829: {} # Gadfly
+      17223831: {} # Night_Bats
+  - members:
+      17223830: {} # Gadfly
+      17223834: {} # Black_Bat
+  - members:
+      17223840: {} # Old_Quadav
+      17223846: {} # Ghoul
+  - members:
+      17223845: {} # Onyx_Quadav
+      17223847: {} # Zombie
+  - members:
+      17223849: {} # Gadfly
+      17223853: {} # Night_Bats
+  - members:
+      17223850: {} # Gadfly
+      17223854: {} # Night_Bats
+  - members:
+      17223859: {} # Gadfly
+      17223864: {} # Night_Bats
+  - members:
+      17223860: {} # Gadfly
+      17223870: {} # Carnivorous_Crawler
+  - members:
+      17223861: {} # Gadfly
+      17223865: {} # Night_Bats
+  - members:
+      17223873: {} # Gadfly
+      17223878: {} # Night_Bats
+  - members:
+      17223874: {} # Gadfly
+      17223881: {} # Black_Bat
+  - members:
+      17223876: {} # Bog_Bunny
+      17223883: {} # Bog_Dog
+  - members:
+      17223884: {} # Carnivorous_Crawler
+      17223886: {} # Carnivorous_Crawler
+  - members:
+      17223895: {} # Goblin_Gambler
+      17223898: {} # Zombie
+  - members:
+      17223896: {} # Goblin_Butcher
+      17223897: {} # Ghoul
+  - members:
+      17223901: {} # Thread_Leech
+      17223910: {} # Bogy
+  - members:
+      17223904: {} # Land_Pugil
+      17223907: {} # Snipper
+  - members:
+      17223912: {} # Gadfly
+      17223917: {} # Night_Bats
+  - members:
+      17223913: {} # Gadfly
+      17223921: {} # Black_Bat
+  - members:
+      17223923: {} # Gadfly
+      17223929: {} # Night_Bats
+  - members:
+      17223924: {} # Gadfly
+      17223932: {} # Black_Bat
+  - members:
+      17223925: {} # Gadfly
+      17223935: {} # Carnivorous_Crawler
+  - members:
+      17223937: {} # Gadfly
+      17223942: {} # Night_Bats
+  - members:
+      17223938: {} # Gadfly
+      17223943: {} # Night_Bats
+  - members:
+      17223955: {} # Goblin_Gambler
+      17223958: {} # Zombie
+  - members:
+      17223956: {} # Goblin_Butcher
+      17223957: {} # Ghoul
+  - members:
+      17223960: {} # Gadfly
+      17223965: {} # Night_Bats
+  - members:
+      17223961: {} # Gadfly
+      17223966: {} # Night_Bats
+  - members:
+      17223972: {} # Goblin_Mugger
+      17223973: {} # Goblin_Ambusher
+      17223991: {} # Goblin_Mugger
+      17223992: {} # Goblin_Ambusher
+  - members:
+      17223974: {} # Goblin_Leecher
+      17223975: {} # Goblin_Tinkerer
+      17223993: {} # Goblin_Leecher
+      17223994: {} # Goblin_Tinkerer
+  - members:
+      17223976: {} # Goblin_Gambler
+      17223977: {} # Goblin_Butcher
+      17223995: {} # Goblin_Gambler
+      17223996: {} # Goblin_Butcher
+  - members:
+      17224004: {} # Malboro
+      17224005: {} # Bogy
+  - members:
+      17224027: {} # Carnivorous_Crawler
+      17224029: {} # Carnivorous_Crawler
+      17224032: {} # Carnivorous_Crawler
+  - members:
+      17224033: {} # Gadfly
+      17224038: {} # Night_Bats
+  - members:
+      17224034: {} # Gadfly
+      17224042: {} # Black_Bat
+  - members:
+      17224036: {} # Bog_Bunny
+      17224044: {} # Bog_Dog
+  - members:
+      17224045: {} # Gadfly
+      17224050: {} # Night_Bats
+  - members:
+      17224046: {} # Gadfly
+      17224054: {} # Black_Bat
+  - members:
+      17224056: {} # Gadfly
+      17224062: {} # Night_Bats
+  - members:
+      17224057: {} # Gadfly
+      17224066: {} # Black_Bat
+  - members:
+      17224058: {} # Gadfly
+      17224069: {} # Carnivorous_Crawler
+  - members:
+      17224059: {} # Bog_Bunny
+      17224068: {} # Bog_Dog
+  - members:
+      17224078: {} # Goblin_Gambler
+      17224081: {} # Zombie
+  - members:
+      17224079: {} # Goblin_Butcher
+      17224080: {} # Ghoul
+  - members:
+      17224083: {} # Thread_Leech
+      17224090: {} # Bogy
+  - members:
+      17224086: {} # Land_Pugil
+      17224088: {} # Snipper
+  - members:
+      17224105: {} # Brass_Quadav
+      17224106: {} # Onyx_Quadav
+      17224107: {} # Old_Quadav
+      17224108: {} # Veteran_Quadav
+  - members:
+      17224109: {} # Greater_Quadav
+      17224110: {} # Copper_Quadav
+  - members:
+      17224111: {} # Brass_Quadav
+      17224112: {} # Onyx_Quadav
+  - members:
+      17224119: {} # Old_Quadav
+      17224120: {} # Veteran_Quadav
+  - members:
+      17224121: {} # Greater_Quadav
+      17224122: {} # Copper_Quadav
+  - members:
+      17224123: {} # Brass_Quadav
+      17224124: {} # Onyx_Quadav

@@ -1,0 +1,1468 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17191373:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191374:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191375:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191376:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191377:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191378:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191379:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191380:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191381:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191382:
+    script:       Chigoe
+    display_name: Chigoe
+    render:
+      look:
+        type:  standard
+        model: 1747
+      entity_flags: 27
+
+  17191474:
+    script:       Gleeful_Alicorn
+    display_name: Gleeful Alicorn
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17191475:
+    script:       Jubilant_Alicorn
+    display_name: Jubilant Alicorn
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17191476:
+    script:       Joyous_Alicorn
+    display_name: Joyous Alicorn
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17191477:
+    script:       Joyful_Alicorn
+    display_name: Joyful Alicorn
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17191478:
+    script: NPC[236]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17191479:
+    script: NPC[237]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17191480:
+    script: NPC[238]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17191481:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+
+  17191482:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 966
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+
+  17191483:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        7
+
+  17191484:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 966
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           6
+
+  17191485:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17191486:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17191487:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 966
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17191488:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17191489:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17191490:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 966
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17191491:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      entity_flags:  2051
+      animation_sub:    4
+      name_vis:        12
+      moving:           7
+
+  17191492:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17191493:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17191494:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17191495:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17191496:
+    script:       Treasure_Casket
+    display_name: Treasure Casket
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+
+  17191497:
+    script:       Treasure_Coffer
+    display_name: Treasure Coffer
+    render:
+      look:
+        type:  standard
+        model: 965
+      animation_sub: 4
+      name_vis:      4
+      moving:        1
+
+  17191498:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  17191499:
+    script: NPC[24b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17191500:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17191502:
+    script: NPC[24e]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17191503:
+    script: NPC[24f]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17191504:
+    script: NPC[250]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17191505:
+    script:       Andelain
+    display_name: Andelain
+    at:           [664.231, -11.849, -539.413, 132]
+    render:
+      look:
+        type:  standard
+        model: 130
+      entity_flags: 27
+      name_prefix:  32
+      moving:       15
+    status:   normal
+    widescan: true
+
+  17191506:
+    script:       Croteillard
+    display_name: Croteillard
+    at:           [87.426, -61.999, 266.709, 31]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  9
+        head:  4124
+        body:  8220
+        hands: 12316
+        legs:  16412
+        feet:  20508
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         7
+    status:   normal
+    widescan: true
+
+  17191507:
+    script:       Rayochindot
+    display_name: Rayochindot
+    at:           [93.159, -61.999, 272.601, 34]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  5
+        head:  4124
+        body:  8220
+        hands: 12316
+        legs:  16412
+        feet:  20508
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17191508:
+    script:       Cheval_River
+    display_name: Cheval River
+    at:           [220.792, -58.163, 427.406, 76]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191509:
+    script:       Signpost
+    display_name: Signpost
+    at:           [440.895, -46.317, 142.489, 54]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191510:
+    script:       Signpost
+    display_name: Signpost
+    at:           [257.640, -45.518, 213.706, 119]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191511:
+    script:       Signpost
+    display_name: Signpost
+    at:           [658.200, -45.813, 305.612, 168]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191512:
+    script:       Signpost
+    display_name: Signpost
+    at:           [465.228, -17.010, -173.377, 156]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191513:
+    script:       Signpost
+    display_name: Signpost
+    at:           [538.042, -6.007, -384.272, 107]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191514:
+    script:       Signpost
+    display_name: Signpost
+    at:           [279.099, -16.312, -257.531, 76]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191515:
+    script:       Signpost
+    display_name: Signpost
+    at:           [296.458, 4.016, -457.124, 179]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191516:
+    script:       Signpost
+    display_name: Signpost
+    at:           [231.059, -35.735, 62.684, 76]
+    render:
+      look:
+        type:  standard
+        model: 50
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191517:
+    script: NPC[25d]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17191518:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17191519:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17191520:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17191521:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17191522:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17191523:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17191524:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17191525:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    speed:           40
+    animation_speed: 40
+
+  17191526:
+    script:       Stone_Monument
+    display_name: Stone Monument
+    at:           [77.277, -2.894, -517.376]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17191527:
+    at: [0.000, 200.000, 0.000]
+    render:
+      look:
+        type: ship
+      door_id:   7
+      animation: animation_19
+
+  17191528:
+    script:       Cavernous_Maw
+    display_name: Cavernous Maw
+    at:           [321.899, -59.500, 509.089, 64]
+    render:
+      look:
+        type:  standard
+        model: 2323
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17191529:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17191530:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [310.263, -48.438, 113.875]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status: normal
+
+  17191531:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [389.626, -46.554, 65.317]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status: normal
+
+  17191532:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [410.655, -49.716, 162.230]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status: normal
+
+  17191533:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [429.540, -19.701, -133.543]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status: normal
+
+  17191534:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [531.251, -40.492, 62.020]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status: normal
+
+  17191535:
+    script:       Logging_Point
+    display_name: Logging Point
+    at:           [393.234, -19.030, -187.141]
+    render:
+      look:
+        type:  standard
+        model: 2423
+      moving: 32775
+    status: normal
+
+  17191536:
+    script:       EFFECTER
+    display_name: EFFECTER
+    at:           [-299.672, -77.910, 119.113, 92]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17191537:
+    script:       Carbuncle
+    display_name: Carbuncle
+    at:           [-299.672, -77.910, 119.113, 92]
+    render:
+      look:
+        type:  standard
+        model: 791
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17191538:
+    script:       Talking_Doll
+    display_name: Talking Doll
+    at:           [-252.162, -5.319, -307.011, 113]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:          cutscene_only
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+
+  17191539:
+    script:       Field_Manual
+    display_name: Field Manual
+    at:           [84.802, -59.906, 240.052, 162]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:    1
+    status:   normal
+    widescan: true
+    content:  FIELD_MANUALS
+
+  17191540:
+    script:       Field_Manual
+    display_name: Field Manual
+    at:           [283.348, -16.548, -255.910, 183]
+    render:
+      look:
+        type:  standard
+        model: 2290
+      name_vis: 32
+      moving:   21
+    status:   normal
+    widescan: true
+    content:  FIELD_MANUALS
+
+  17191541:
+    script:       Field_Parchment
+    display_name: Field Parchment
+    at:           [442.000, -0.500, -478.000, 224]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+    content:  FIELD_MANUALS
+
+  17191542:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [522.230, -30.000, -41.480]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17191543:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [237.740, -20.000, -160.000]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17191544:
+    script:       Ethereal_Junction
+    display_name: Ethereal Junction
+    at:           [565.270, -10.290, -378.180]
+    render:
+      look:
+        type:  standard
+        model: 2447
+      animation_sub:     5
+      name_vis:        116
+      moving:        32769
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17191545:
+    script:       Mogball-Local
+    display_name: Mogball-Local
+    render:
+      look:
+        type:  standard
+        model: 817
+      moving: 1
+    widescan: true
+
+  17191546:
+    script:       Mog-Tablet
+    display_name: Mog-Tablet
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17191547:
+    script:       Summoner
+    display_name: Summoner
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17191548:
+    script:       Summoner
+    display_name: Summoner
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+
+  17191549:
+    script:       Moogle
+    display_name: Moogle
+    at:           [126.495, -59.732, 258.462, 109]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+
+  17191550:
+    script:       qm1
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+
+  17191551:
+    script:       qm2
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+
+  17191552:
+    script:       qm3
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+
+  17191553:
+    script:       qm4
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+
+  17191554:
+    script:       qm5
+    display_name: ???
+    render:
+      look:
+        type:  standard
+        model: 52
+
+  17191555:
+    script: Fireworks
+    at:     [-37.637, -77.689, 207.254, 221]
+    render:
+      look:
+        type:  standard
+        model: 327
+      entity_flags:  2075
+      name_prefix:     32
+      moving:       32769
+
+  17191556:
+    script: NPC[284]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17191557:
+    script:       Moogle
+    display_name: Moogle
+    at:           [128.495, -59.732, 258.462, 109]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    widescan: true
+
+  17191558:
+    script:       Moogle
+    display_name: Moogle
+    at:           [463.978, -40.008, 39.453, 50]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    widescan: true
+
+  17191559:
+    script:       Moogle
+    display_name: Moogle
+    at:           [112.134, -59.902, 259.147, 144]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 1
+    widescan: true
+
+  17191560:
+    script:       qm6
+    display_name: ???
+    at:           [111.417, -59.900, 257.126, 144]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags:  27
+      name_vis:     112
+      name_prefix:   34
+      moving:         1
+
+  17191561:
+    script:       Magivore_Ternion
+    display_name: Magivore Ternion
+    at:           [111.417, -54.900, 257.126, 144]
+    render:
+      look:
+        type:  standard
+        model: 260
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17191562:
+    script:       Stampeding_Bison
+    display_name: Stampeding Bison
+    at:           [79.690, -59.999, 236.672, 37]
+    render:
+      look:
+        type:  equipped
+        race:  8
+        face:  0
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      entity_flags:  29
+      animation_sub:  1
+      name_prefix:   32
+      moving:         6
+    status:   normal
+    widescan: true
+    content:  WOTG
+
+  17191563:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [226.641, -21.264, -107.338, 139]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  0
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191564:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [229.378, -49.613, 114.451, 67]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  15
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191565:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [394.460, -49.707, 123.257, 188]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  3
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191566:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [424.279, -35.988, 17.916, 160]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  1
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191567:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [362.240, -19.864, -141.417, 252]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  5
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191568:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [324.820, -39.389, -9.339, 131]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  2
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191569:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [189.319, -37.739, -43.265, 158]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  7
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191570:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [161.936, -58.353, 150.517, 184]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  4
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191571:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [264.700, -49.142, 254.766, 47]
+    render:
+      look:
+        type:  equipped
+        race:  5
+        face:  12
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191572:
+    script:       Smile_Helper
+    display_name: Smile Helper
+    at:           [480.425, -49.557, 156.110, 82]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  7
+        head:  4152
+        body:  8297
+        hands: 12288
+        legs:  16487
+        feet:  20584
+        main:  24576
+        sub:   28672
+      animation_sub: 1
+      moving:        1
+    widescan: true
+
+  17191573:
+    script:       Debug
+    display_name: Debug
+    at:           [78.690, -59.999, 235.672, 37]
+    render:
+      look:
+        type:  equipped
+        race:  6
+        face:  14
+        head:  4236
+        body:  8332
+        hands: 12288
+        legs:  16394
+        feet:  20489
+        main:  24576
+        sub:   28672
+      entity_flags:  25
+      animation_sub:  1
+      name_prefix:   32
+      moving:        15
+    widescan: true
+
+  17191574:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:      112
+
+  17191575:
+    script:       Slabble
+    display_name: Slabble
+    at:           [99.000, -60.688, 245.000, 31]
+    render:
+      look:
+        type:  standard
+        model: 2431
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17191576:
+    script: blank
+    at:     [99.000, -59.854, 245.000, 23]
+    render:
+      look:
+        type:  standard
+        model: 2331
+      entity_flags: 2073
+      name_vis:       96
+      name_prefix:    32
+    status: cutscene_only
+
+  17191577:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [288.000, -61.000, 368.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17191578:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [183.000, -20.000, -315.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17191579:
+    script:       Planar_Rift
+    display_name: Planar Rift
+    at:           [434.000, -51.000, 315.000, 224]
+    render:
+      look:
+        type:  standard
+        model: 2415
+      animation_sub:   5
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    status:   normal
+    widescan: true
+    content:  VOIDWATCH
+
+  17191580:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [288.100, -61.000, 368.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17191581:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [183.100, -20.000, -315.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17191582:
+    script:       Riftworn_Pyxis
+    display_name: Riftworn Pyxis
+    at:           [434.100, -51.000, 315.000, 224]
+    render:
+      look:
+        type:  standard
+        model: 969
+      animation_sub:   4
+      name_vis:      100
+      name_prefix:     2
+      moving:          1
+    widescan: true
+    content:  VOIDWATCH
+
+  17191583:
+    script:       Geomantic_Reservoir
+    display_name: Geomantic Reservoir
+    at:           [380.236, -39.842, 58.366]
+    render:
+      look:
+        type:  standard
+        model: 2326
+      name_vis: 112
+      moving:     1
+    status:   normal
+    widescan: true
+    content:  SOA
+
+  17191584:
+    script: NPC[2a0]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17191585:
+    script: NPC[2a1]
+    render:
+      look:
+        type:  standard
+        model: 50

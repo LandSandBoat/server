@@ -1,0 +1,2586 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Aello:
+    id:            4720
+    species:       harpeia
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 471
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    1
+          wind:    9
+          earth:   5
+          thunder: 1
+          water:   1
+          light:   1
+          dark:    1
+        rank_status:
+          silence:     9
+          slow:        5
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 2106
+        entity_flags:  1695
+        animation_sub:    8
+        name_prefix:     32
+        model_size:       3
+        hitbox:          35
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Aellos_Handmaiden:
+    id:            4721
+    species:       pixie
+    type:          [notorious]
+    spell_list_id: 3
+    skill_list_id: 195
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [rdm, whm]
+      resists:
+        dmg_physical:
+          slashing: -6250
+          piercing: -6250
+          blunt:    -6250
+          h2h:      -6250
+        rank_element:
+          fire:     1
+          ice:      1
+          wind:    11
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    8
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     11
+          slow:         1
+          poison:       1
+          light_sleep:  8
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 2030
+        entity_flags:  1545
+        animation_sub:    8
+        name_prefix:     32
+        hitbox:           6
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        mp: 9999
+
+  Air_Elemental:
+    id:            71
+    species:       air_elemental
+    spell_list_id: 12
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          ice:   -3
+          wind:  11
+          earth: 11
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          silence:  11
+          slow:     11
+      render:
+        look:
+          type:  standard
+          model: 438
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+        - chance: common
+          item:   wind_cluster
+
+  Byakko:
+    id:            592
+    species:       legendary_tigers
+    type:          [notorious]
+    spell_list_id: 26
+    skill_list_id: 279
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [thf, whm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:   10
+          dark:    -2
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:       4
+          light_sleep: 10
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 309
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        36
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22000
+        mp: 22000
+    loot:
+      drops:
+        - chance: always
+          item:   seal_of_byakko
+        - chance: always
+          item:   zephyr
+        - chance: common
+          item:   seal_of_byakko
+        - chance: common
+          item:   byakkos_axe
+        - chance: uncommon
+          item:   divine_log
+        - chance: uncommon
+          item:   spool_of_malboro_fiber
+        - chance: uncommon
+          item:   behemoth_hide
+        - chance: uncommon
+          item:   behemoth_hide
+        - chance: common
+          item:   byakkos_haidate
+        - chance: very_rare
+          item:   damascus_ingot
+        - chance: very_rare
+          item:   piece_of_oxblood
+        - chance: always
+          one_of:
+            neptunal_abjuration_hands: 31
+            aquarian_abjuration_head:  23
+            dryadic_abjuration_legs:   23
+            earthen_abjuration_feet:   23
+        - chance: uncommon
+          one_of:
+            neptunal_abjuration_hands: 31
+            aquarian_abjuration_head:  23
+            dryadic_abjuration_legs:   23
+            earthen_abjuration_feet:   23
+
+  Dark_Elemental:
+    id:            913
+    species:       dark_elemental
+    spell_list_id: 18
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      resists:
+        immune_status: [blind, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 443
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+        - chance: common
+          item:   dark_cluster
+
+  Despot:
+    id:            1012
+    species:       gargoyles
+    type:          [notorious]
+    skill_list_id: 368
+    attributes:
+      combat:
+        skill: great_axe
+      resists:
+        immune_status: [slow]
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  133
+        animation_sub:   4
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [lottery]
+      stats:
+        hp: 13500
+    loot:
+      drops:
+        - chance: always
+          item:   gem_of_the_west
+        - chance: very_common
+          item:   oblation_abjuration
+        - chance: common
+          item:   gem_of_the_west
+        - chance: uncommon
+          item:   scarecrow_scythe
+
+  Earth_Elemental:
+    id:            1160
+    species:       earth_elemental
+    spell_list_id: 13
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, slow, elegy]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          wind:    -3
+          earth:   11
+          thunder: 11
+        rank_status:
+          silence: -3
+          slow:    11
+      render:
+        look:
+          type:  standard
+          model: 439
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+        - chance: common
+          item:   earth_cluster
+
+  Eraser:
+    id:            1249
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Fire_Elemental:
+    id:            1341
+    species:       fire_elemental
+    spell_list_id: 17
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [bind, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:  11
+          ice:   11
+          water: -3
+        rank_status:
+          paralyze: 11
+          bind:     11
+          poison:   -3
+      render:
+        look:
+          type:  standard
+          model: 436
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+        - chance: common
+          item:   fire_cluster
+
+  Flamingo:
+    id:            1360
+    species:       bird
+    skill_list_id: 55
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags: 131
+        model_size:     1
+        hitbox:        20
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: common
+          item:   bird_feather
+        - chance: uncommon
+          item:   bird_egg
+        - chance: rare
+          item:   ruaun_coffer_key
+      steal: bird_feather
+      despoil:
+        bird_feather: 0
+        bird_egg:     0
+
+  Genbu:
+    id:            1491
+    species:       legendary_adamantoise
+    type:          [notorious]
+    spell_list_id: 24
+    skill_list_id: 277
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    320
+        dmg_mult: 125
+      jobs: [pld, rdm]
+      resists:
+        rank_element:
+          fire:    10
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder: -2
+          water:   10
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:      10
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 407
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        36
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 19000
+        mp: 19000
+    loot:
+      drops:
+        - chance: always
+          item:   seal_of_genbu
+        - chance: always
+          item:   arctic_wind
+        - chance: common
+          item:   seal_of_genbu
+        - chance: common
+          item:   genbus_shield
+        - chance: common
+          item:   genbus_kabuto
+        - chance: very_rare
+          item:   vial_of_black_beetle_blood
+        - chance: common
+          item:   venomous_claw
+        - chance: uncommon
+          item:   adamantoise_shell
+        - chance: uncommon
+          item:   piece_of_oxblood
+        - chance: rare
+          item:   adaman_ingot
+        - chance: very_rare
+          item:   divine_log
+        - chance: always
+          one_of:
+            wyrmal_abjuration_feet:    31
+            aquarian_abjuration_hands: 23
+            aquarian_abjuration_head:  23
+            martial_abjuration_hands:  23
+        - chance: uncommon
+          one_of:
+            wyrmal_abjuration_feet:    31
+            aquarian_abjuration_hands: 23
+            aquarian_abjuration_head:  23
+            martial_abjuration_hands:  23
+
+  Groundskeeper_1827:
+    id:            1827
+    display_name:  Groundskeeper
+    species:       doll
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          item:   doll_shard
+        - chance: very_rare
+          item:   ruaun_coffer_key
+      despoil:
+        doll_shard: 0
+
+  Groundskeeper_5128:
+    id:            5128
+    display_name:  Groundskeeper
+    species:       gargoyles
+    type:          [event]
+    skill_list_id: 85
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:     2
+          ice:      2
+          wind:     2
+          earth:    2
+          thunder: -3
+          water:    2
+          light:    2
+          dark:     2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 304
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         30
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          item:   doll_shard
+        - chance: very_rare
+          item:   ruaun_coffer_key
+      despoil:
+        doll_shard: 0
+
+  Ice_Elemental:
+    id:            2043
+    species:       ice_elemental
+    spell_list_id: 14
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire: -3
+          ice:  11
+          wind: 11
+        rank_status:
+          paralyze: 11
+          bind:     11
+          silence:  11
+      render:
+        look:
+          type:  standard
+          model: 437
+        entity_flags:  1155
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+        - chance: common
+          item:   ice_cluster
+
+  Kirin_Strange_Happenings:
+    id:            7359
+    display_name:  Kirin
+    species:       legendary_manticore
+    type:          [notorious]
+    spell_list_id: 23
+    skill_list_id: 281
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    360
+        dmg_mult: 125
+      jobs: [smn, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:     4
+          ice:      4
+          wind:    -2
+          earth:   10
+          thunder: 10
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:     -2
+          slow:        10
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 403
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        true_detection: true
+      spawn:
+        respawn: 2700
+      stats:
+        hp: 3240000
+    content: TVR
+
+  Kirins_Avatar_Strange_Happenings:
+    id:            7360
+    display_name:  Kirins_Avatar
+    species:       carbuncle
+    type:          [called]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:     6
+          ice:      6
+          wind:     6
+          earth:    6
+          thunder:  6
+          water:    6
+          light:   11
+        rank_status:
+          paralyze:     6
+          bind:         6
+          silence:      6
+          slow:         6
+          poison:       6
+          light_sleep: 11
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     3
+        hitbox:         7
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+    content: TVR
+
+  Light_Elemental:
+    id:            2413
+    species:       light_elemental
+    spell_list_id: 19
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+      jobs: [whm, whm]
+      resists:
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
+      render:
+        look:
+          type:  standard
+          model: 442
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+        - chance: common
+          item:   light_cluster
+
+  Mimic:
+    id:            2664
+    species:       mimic
+    type:          [notorious]
+    skill_list_id: 183
+    attributes:
+      combat:
+        skill: scythe
+        delay: 170
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 259
+        entity_flags:  131
+        animation_sub:  13
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   ruaun_coffer_key
+
+  Seiryu:
+    id:            3540
+    species:       blue_wyvern
+    type:          [notorious]
+    spell_list_id: 25
+    skill_list_id: 278
+    attributes:
+      combat:
+        skill:    scythe
+        dmg_mult: 125
+      jobs: [war, rdm]
+      resists:
+        rank_element:
+          fire:     4
+          ice:     -2
+          wind:    10
+          earth:   10
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     10
+          slow:        10
+          poison:       4
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 399
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22000
+        mp: 22000
+    loot:
+      drops:
+        - chance: always
+          item:   seal_of_seiryu
+        - chance: common
+          item:   seal_of_seiryu
+        - chance: always
+          item:   east_wind
+        - chance: common
+          item:   seiryus_sword
+        - chance: common
+          item:   seiryus_kote
+        - chance: uncommon
+          item:   dragon_talon
+        - chance: uncommon
+          item:   vial_of_dragon_blood
+        - chance: uncommon
+          item:   slice_of_dragon_meat
+        - chance: very_rare
+          item:   square_of_damascene_cloth
+        - chance: very_rare
+          item:   spool_of_malboro_fiber
+        - chance: very_rare
+          item:   dragon_heart
+        - chance: always
+          one_of:
+            wyrmal_abjuration_hands:  31
+            aquarian_abjuration_legs: 23
+            dryadic_abjuration_head:  23
+            martial_abjuration_head:  23
+        - chance: uncommon
+          one_of:
+            wyrmal_abjuration_hands:  31
+            aquarian_abjuration_legs: 23
+            dryadic_abjuration_head:  23
+            martial_abjuration_head:  23
+
+  Sprinkler:
+    id:            3744
+    species:       magic_pot
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          blunt: 5000
+          h2h:   2500
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 133
+        model_size:     2
+        hitbox:        43
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: uncommon
+          item:   red_mages_testimony
+        - chance: common
+          item:   magic_pot_shard
+        - chance: uncommon
+          item:   vial_of_mercury
+        - chance: rare
+          item:   ruaun_coffer_key
+        - chance: rare
+          one_of:
+            scroll_of_thunder_iii:  35
+            scroll_of_shell_iv:     20
+            scroll_of_thundaga_iii: 20
+            scroll_of_thunder_iv:   15
+            scroll_of_burst:        10
+      despoil:
+        magic_pot_shard: 0
+
+  Suzaku:
+    id:            3816
+    species:       bird
+    type:          [notorious]
+    spell_list_id: 27
+    skill_list_id: 280
+    attributes:
+      combat:
+        skill:    sword
+        dmg_mult: 125
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:    10
+          ice:     10
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:   -2
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    10
+          bind:        10
+          silence:      4
+          slow:         4
+          poison:      -2
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 337
+        entity_flags: 159
+        name_prefix:   32
+        model_size:     3
+        hitbox:        44
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      mob_mods:
+        mp_base: 100
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+        mp: 25000
+    loot:
+      drops:
+        - chance: always
+          item:   seal_of_suzaku
+        - chance: common
+          item:   seal_of_suzaku
+        - chance: always
+          item:   antarctic_wind
+        - chance: common
+          item:   suzakus_sune-ate
+        - chance: common
+          item:   suzakus_scythe
+        - chance: uncommon
+          item:   square_of_damascene_cloth
+        - chance: rare
+          item:   orichalcum_ingot
+        - chance: rare
+          item:   square_of_shining_cloth
+        - chance: very_rare
+          item:   venomous_claw
+        - chance: uncommon
+          item:   vial_of_black_beetle_blood
+        - chance: common
+          item:   lock_of_sirens_hair
+        - chance: uncommon
+          item:   lock_of_sirens_hair
+        - chance: uncommon
+          item:   lock_of_sirens_hair
+        - chance: always
+          one_of:
+            neptunal_abjuration_feet: 31
+            aquarian_abjuration_legs: 23
+            dryadic_abjuration_hands: 23
+            earthen_abjuration_head:  23
+        - chance: uncommon
+          one_of:
+            neptunal_abjuration_feet: 31
+            aquarian_abjuration_legs: 23
+            dryadic_abjuration_hands: 23
+            earthen_abjuration_head:  23
+
+  Thunder_Elemental:
+    id:            3912
+    species:       thunder_elemental
+    spell_list_id: 16
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [stun, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          earth:   -3
+          thunder: 11
+          water:   11
+        rank_status:
+          slow:   -3
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 441
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+        - chance: common
+          item:   lightning_cluster
+
+  Water_Elemental:
+    id:            4309
+    species:       water_elemental
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 440
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
+      behaviors:
+        aggressive: true
+      spawn:
+        respawn: 300
+    loot:
+      drops:
+        - chance: always
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+        - chance: common
+          item:   water_cluster
+
+spawns:
+  17309697:
+    template: Sprinkler
+    at:       [-6.029, -40.520, -417.210]
+    level:    [73, 76]
+  17309698:
+    template: Sprinkler
+    at:       [6.836, -38.595, -444.973, 127]
+    level:    [73, 76]
+  17309699:
+    template: Sprinkler
+    at:       [-22.376, -40.700, -369.892, 69]
+    level:    [73, 76]
+  17309700:
+    template: Flamingo
+    at:       [-36.338, -40.700, -373.859, 127]
+    level:    [72, 74]
+  17309701:
+    template: Sprinkler
+    at:       [29.579, -40.700, -384.015, 127]
+    level:    [73, 76]
+  17309702:
+    template: Flamingo
+    at:       [39.319, -40.700, -372.761, 127]
+    level:    [72, 74]
+  17309703:
+    template: Sprinkler
+    at:       [1.211, -40.500, -369.100, 127]
+    level:    [73, 76]
+  17309704:
+    template: Flamingo
+    at:       [52.662, -40.587, -430.883, 127]
+    level:    [72, 74]
+  17309705:
+    template: Flamingo
+    at:       [28.409, -40.700, -436.958, 126]
+    level:    [72, 74]
+  17309706:
+    template: Flamingo
+    at:       [51.646, -40.677, -438.232, 66]
+    level:    [72, 74]
+  17309707:
+    template: Sprinkler
+    at:       [38.391, -33.876, -398.296, 127]
+    level:    [73, 76]
+  17309708:
+    template: Sprinkler
+    at:       [38.887, -33.149, -396.856, 74]
+    level:    [73, 76]
+  17309709:
+    template: Sprinkler
+    at:       [73.319, -24.548, -397.072, 127]
+    level:    [73, 76]
+  17309710:
+    template: Sprinkler
+    at:       [80.356, -24.509, -389.414, 127]
+    level:    [73, 76]
+  17309711:
+    template: Sprinkler
+    at:       [86.126, -24.521, -410.703, 90]
+    level:    [73, 76]
+  17309712:
+    template: Sprinkler
+    at:       [125.146, -24.631, -377.619, 31]
+    level:    [73, 76]
+  17309713:
+    template: Sprinkler
+    at:       [107.903, -24.500, -376.571, 127]
+    level:    [73, 76]
+  17309714:
+    template: Sprinkler
+    at:       [148.473, -24.500, -387.271, 11]
+    level:    [73, 76]
+  17309715:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [150.816, -30.958, -365.575, 75]
+    level:    [75, 78]
+  17309716:
+    template: Sprinkler
+    at:       [153.431, -30.500, -349.932, 127]
+    level:    [73, 76]
+  17309717:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [184.838, -40.527, -425.415, 55]
+    level:    [75, 78]
+  17309718:
+    template: Sprinkler
+    at:       [183.755, -40.509, -419.924, 127]
+    level:    [73, 76]
+  17309719:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [133.956, -38.644, -436.949, 127]
+    level:    [75, 78]
+  17309720:
+    template: Flamingo
+    at:       [-34.462, -40.700, -446.969, 127]
+    level:    [72, 74]
+  17309721:
+    template: Flamingo
+    at:       [-71.999, -40.327, -460.432, 127]
+    level:    [72, 74]
+  17309722:
+    template: Flamingo
+    at:       [-47.044, -40.686, -442.421, 9]
+    level:    [72, 74]
+  17309723:
+    template: Sprinkler
+    at:       [-68.525, -40.700, -453.791, 89]
+    level:    [73, 76]
+  17309724:
+    template: Sprinkler
+    at:       [-67.905, -40.700, -453.213, 85]
+    level:    [73, 76]
+  17309725:
+    template: Sprinkler
+    at:       [-81.144, -24.514, -401.483, 127]
+    level:    [73, 76]
+  17309726:
+    template: Sprinkler
+    at:       [-93.358, -24.655, -403.114, 127]
+    level:    [73, 76]
+  17309727:
+    template: Sprinkler
+    at:       [-73.869, -24.500, -411.920, 127]
+    level:    [73, 76]
+  17309728:
+    template: Sprinkler
+    at:       [-149.476, -24.500, -394.144, 123]
+    level:    [73, 76]
+  17309729:
+    template: Sprinkler
+    at:       [-136.428, -24.500, -385.401, 127]
+    level:    [73, 76]
+  17309730:
+    template: Sprinkler
+    at:       [-126.698, -24.500, -376.113, 4]
+    level:    [73, 76]
+  17309731:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-156.975, -30.506, -361.027, 105]
+    level:    [75, 78]
+  17309732:
+    template: Sprinkler
+    at:       [-148.491, -30.643, -357.841, 127]
+    level:    [73, 76]
+  17309733:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-178.052, -41.808, -410.882, 127]
+    level:    [75, 78]
+  17309734:
+    template: Sprinkler
+    at:       [-176.939, -40.500, -398.019, 127]
+    level:    [73, 76]
+  17309735:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-135.956, -38.500, -434.117, 13]
+    level:    [75, 78]
+  17309736:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-2.365, -41.178, -330.891, 57]
+    level:    [75, 78]
+  17309737:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-5.871, -40.499, -340.492, 127]
+    level:    [75, 78]
+  17309738:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-5.819, -41.700, -305.961, 127]
+    level:    [75, 78]
+  17309739:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-2.651, -42.919, -276.502, 31]
+    level:    [75, 78]
+  17309740:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [2.824, -44.100, -220.162, 95]
+    level:    [75, 78]
+  17309741:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-6.479, -44.100, -229.997, 105]
+    level:    [75, 78]
+  17309742:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [17.000, -43.000, -198.000, 127]
+    level:    [75, 78]
+  17309743:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [79.849, -41.332, -192.710, 9]
+    level:    [75, 78]
+  17309744:
+    template: Flamingo
+    at:       [49.014, -40.700, -178.040, 127]
+    level:    [72, 74]
+  17309745:
+    template: Flamingo
+    at:       [89.924, -40.953, -181.107, 127]
+    level:    [72, 74]
+  17309746:
+    template: Flamingo
+    at:       [89.199, -40.734, -168.118, 127]
+    level:    [72, 74]
+  17309747:
+    template: Flamingo
+    at:       [89.129, -40.700, -168.385, 127]
+    level:    [72, 74]
+  17309748:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [137.733, -40.523, -166.964, 9]
+    level:    [75, 78]
+  17309749:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [122.700, -40.500, -196.705, 104]
+    level:    [75, 78]
+  17309750:
+    template: Sprinkler
+    at:       [129.573, -40.700, -165.094, 20]
+    level:    [73, 76]
+  17309751:
+    template: Sprinkler
+    at:       [113.532, -34.464, -182.004, 127]
+    level:    [73, 76]
+  17309752:
+    template: Sprinkler
+    at:       [122.114, -34.500, -182.773, 93]
+    level:    [73, 76]
+  17309753:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-26.791, -44.099, -210.834, 5]
+    level:    [75, 78]
+  17309754:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-77.971, -40.500, -199.417, 127]
+    level:    [75, 78]
+  17309755:
+    template: Flamingo
+    at:       [-53.889, -40.700, -177.346, 103]
+    level:    [72, 74]
+  17309756:
+    template: Flamingo
+    at:       [-80.605, -40.700, -145.374, 127]
+    level:    [72, 74]
+  17309757:
+    template: Flamingo
+    at:       [-87.337, -40.779, -174.260, 127]
+    level:    [72, 74]
+  17309758:
+    template: Flamingo
+    at:       [-75.265, -40.700, -157.258, 53]
+    level:    [72, 74]
+  17309759:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-132.552, -40.657, -166.938, 127]
+    level:    [75, 78]
+  17309760:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-136.776, -40.538, -165.974, 123]
+    level:    [75, 78]
+  17309761:
+    template: Sprinkler
+    at:       [-137.061, -40.509, -164.804, 101]
+    level:    [73, 76]
+  17309762:
+    template: Sprinkler
+    at:       [-116.098, -34.529, -173.604, 99]
+    level:    [73, 76]
+  17309763:
+    template: Sprinkler
+    at:       [-117.778, -34.492, -179.441, 80]
+    level:    [73, 76]
+  17309764:
+    template: Sprinkler
+    at:       [414.833, -8.821, -130.428, 127]
+    level:    [73, 76]
+  17309765:
+    template: Sprinkler
+    at:       [405.710, -8.820, -128.088, 127]
+    level:    [73, 76]
+  17309766:
+    template: Sprinkler
+    at:       [425.679, -9.532, -132.246, 127]
+    level:    [73, 76]
+  17309767:
+    template: Sprinkler
+    at:       [406.276, -8.765, -123.852, 82]
+    level:    [73, 76]
+  17309768:
+    template: Sprinkler
+    at:       [431.756, -6.637, -134.847, 127]
+    level:    [73, 76]
+  17309769:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [388.175, -16.506, -120.654, 127]
+    level:    [75, 78]
+  17309770:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [378.727, -20.822, -77.727, 74]
+    level:    [75, 78]
+  17309771:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [348.326, -20.956, -166.877, 127]
+    level:    [75, 78]
+  17309772:
+    template: Sprinkler
+    at:       [386.749, -24.821, -24.749, 60]
+    level:    [73, 76]
+  17309773:
+    template: Sprinkler
+    at:       [393.305, -24.821, 10.974, 15]
+    level:    [73, 76]
+  17309774:
+    template: Fire_Elemental
+    at:       [387.362, -24.819, -6.978, 61]
+    level:    [78, 79]
+  17309775:
+    template: Sprinkler
+    at:       [390.743, -24.821, 51.081, 23]
+    level:    [73, 76]
+  17309776:
+    template: Fire_Elemental
+    at:       [413.404, -24.500, -13.880, 48]
+    level:    [78, 79]
+  17309777:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [372.741, -33.599, 36.147, 127]
+    level:    [75, 78]
+  17309778:
+    template: Flamingo
+    at:       [367.534, -40.689, -35.270, 87]
+    level:    [72, 74]
+  17309779:
+    template: Flamingo
+    at:       [368.299, -40.688, -23.202, 81]
+    level:    [72, 74]
+  17309780:
+    template: Fire_Elemental
+    at:       [371.498, -40.943, 0.714, 22]
+    level:    [78, 79]
+  17309781:
+    template: Flamingo
+    at:       [440.723, -40.501, -36.597, 90]
+    level:    [72, 74]
+  17309782:
+    template: Flamingo
+    at:       [425.791, -40.558, -18.407, 127]
+    level:    [72, 74]
+  17309783:
+    template: Fire_Elemental
+    at:       [442.413, -40.721, -51.373, 32]
+    level:    [78, 79]
+  17309784:
+    template: Flamingo
+    at:       [442.091, -40.500, 15.167, 127]
+    level:    [72, 74]
+  17309785:
+    template: Flamingo
+    at:       [467.655, -40.700, -3.120, 127]
+    level:    [72, 74]
+  17309786:
+    template: Sprinkler
+    at:       [431.175, -38.733, 56.355, 127]
+    level:    [73, 76]
+  17309787:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [401.366, -40.821, -37.737, 3]
+    level:    [75, 78]
+  17309788:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [384.427, -40.821, 9.103, 141]
+    level:    [75, 78]
+  17309789:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [430.679, -36.829, -138.825, 76]
+    level:    [75, 78]
+  17309790:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [438.498, -36.822, -112.133, 127]
+    level:    [75, 78]
+  17309791:
+    template: Sprinkler
+    at:       [334.859, -24.821, -199.472, 112]
+    level:    [73, 76]
+  17309792:
+    template: Sprinkler
+    at:       [315.616, -24.821, -239.507, 43]
+    level:    [73, 76]
+  17309793:
+    template: Water_Elemental
+    at:       [321.785, -24.821, -231.713, 55]
+    level:    [78, 79]
+  17309794:
+    template: Sprinkler
+    at:       [275.879, -24.821, -266.529, 100]
+    level:    [73, 76]
+  17309795:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [281.239, -33.453, -243.755, 127]
+    level:    [75, 78]
+  17309796:
+    template: Flamingo
+    at:       [311.019, -40.852, -211.550, 127]
+    level:    [72, 74]
+  17309797:
+    template: Flamingo
+    at:       [299.563, -40.823, -226.582, 127]
+    level:    [72, 74]
+  17309798:
+    template: Water_Elemental
+    at:       [379.887, -40.273, -255.479, 62]
+    level:    [78, 79]
+  17309799:
+    template: Flamingo
+    at:       [360.938, -40.700, -228.968, 127]
+    level:    [72, 74]
+  17309800:
+    template: Flamingo
+    at:       [375.978, -40.508, -238.908, 89]
+    level:    [72, 74]
+  17309801:
+    template: Water_Elemental
+    at:       [361.971, -40.699, -228.455, 109]
+    level:    [78, 79]
+  17309802:
+    template: Flamingo
+    at:       [355.414, -40.500, -276.875, 4]
+    level:    [72, 74]
+  17309803:
+    template: Flamingo
+    at:       [379.200, -40.659, -262.540, 127]
+    level:    [72, 74]
+  17309804:
+    template: Sprinkler
+    at:       [321.238, -38.505, -307.158, 33]
+    level:    [73, 76]
+  17309805:
+    template: Water_Elemental
+    at:       [315.736, -40.538, -295.533, 127]
+    level:    [78, 79]
+  17309806:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [312.723, -40.700, -198.724, 77]
+    level:    [75, 78]
+  17309807:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [313.080, -40.821, -240.384, 26]
+    level:    [75, 78]
+  17309808:
+    template: Sprinkler
+    at:       [223.460, -8.500, 308.425, 127]
+    level:    [73, 76]
+  17309809:
+    template: Sprinkler
+    at:       [246.409, -8.796, 346.921, 122]
+    level:    [73, 76]
+  17309810:
+    template: Sprinkler
+    at:       [210.608, -8.500, 320.700, 127]
+    level:    [73, 76]
+  17309811:
+    template: Sprinkler
+    at:       [258.993, -7.270, 363.191, 127]
+    level:    [73, 76]
+  17309812:
+    template: Sprinkler
+    at:       [265.165, -8.533, 347.218, 127]
+    level:    [73, 76]
+  17309813:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [242.065, -15.371, 327.388, 79]
+    level:    [75, 78]
+  17309814:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [272.554, -21.274, 274.922, 27]
+    level:    [75, 78]
+  17309815:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [215.327, -20.778, 320.338, 23]
+    level:    [75, 78]
+  17309816:
+    template: Sprinkler
+    at:       [137.933, -24.788, 362.249, 59]
+    level:    [73, 76]
+  17309817:
+    template: Sprinkler
+    at:       [134.660, -24.788, 365.247, 115]
+    level:    [73, 76]
+  17309818:
+    template: Sprinkler
+    at:       [76.085, -24.788, 389.087, 111]
+    level:    [73, 76]
+  17309819:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [92.426, -37.183, 359.140, 16]
+    level:    [75, 78]
+  17309820:
+    template: Flamingo
+    at:       [109.258, -40.812, 360.749, 55]
+    level:    [72, 74]
+  17309821:
+    template: Flamingo
+    at:       [150.076, -40.780, 346.343, 127]
+    level:    [72, 74]
+  17309822:
+    template: Air_Elemental
+    at:       [145.479, -40.616, 346.009, 124]
+    level:    [78, 79]
+  17309823:
+    template: Flamingo
+    at:       [177.992, -40.500, 413.997, 12]
+    level:    [72, 74]
+  17309824:
+    template: Flamingo
+    at:       [156.794, -40.700, 400.220, 78]
+    level:    [72, 74]
+  17309825:
+    template: Air_Elemental
+    at:       [164.918, -40.500, 411.401, 13]
+    level:    [78, 79]
+  17309826:
+    template: Flamingo
+    at:       [123.040, -40.504, 431.434, 100]
+    level:    [72, 74]
+  17309827:
+    template: Flamingo
+    at:       [113.634, -40.500, 412.345, 72]
+    level:    [72, 74]
+  17309828:
+    template: Air_Elemental
+    at:       [113.807, -40.500, 409.996, 127]
+    level:    [78, 79]
+  17309829:
+    template: Sprinkler
+    at:       [83.833, -39.585, 433.606, 5]
+    level:    [73, 76]
+  17309830:
+    template: Air_Elemental
+    at:       [75.463, -37.455, 436.208, 105]
+    level:    [78, 79]
+  17309831:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [156.962, -40.788, 365.583, 80]
+    level:    [75, 78]
+  17309832:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [110.704, -40.788, 373.575, 68]
+    level:    [75, 78]
+  17309833:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [236.360, -36.788, 385.311, 22]
+    level:    [75, 78]
+  17309834:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [271.009, -36.789, 361.494, 25]
+    level:    [75, 78]
+  17309835:
+    template: Sprinkler
+    at:       [299.560, -24.788, 259.091, 127]
+    level:    [73, 76]
+  17309836:
+    template: Sprinkler
+    at:       [307.299, -24.788, 240.409, 114]
+    level:    [73, 76]
+  17309837:
+    template: Thunder_Elemental
+    at:       [309.140, -24.788, 240.553, 1]
+    level:    [78, 79]
+  17309838:
+    template: Sprinkler
+    at:       [338.505, -24.788, 179.485, 72]
+    level:    [73, 76]
+  17309839:
+    template: Thunder_Elemental
+    at:       [324.818, -24.500, 256.824, 127]
+    level:    [78, 79]
+  17309840:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [310.129, -38.483, 201.693, 39]
+    level:    [75, 78]
+  17309841:
+    template: Flamingo
+    at:       [280.058, -40.706, 236.870, 72]
+    level:    [72, 74]
+  17309842:
+    template: Flamingo
+    at:       [287.588, -40.750, 237.783, 127]
+    level:    [72, 74]
+  17309843:
+    template: Thunder_Elemental
+    at:       [293.204, -40.707, 225.361, 45]
+    level:    [78, 79]
+  17309844:
+    template: Flamingo
+    at:       [320.381, -40.700, 272.889, 127]
+    level:    [72, 74]
+  17309845:
+    template: Flamingo
+    at:       [349.771, -40.500, 272.949, 54]
+    level:    [72, 74]
+  17309846:
+    template: Flamingo
+    at:       [375.105, -40.698, 265.360, 61]
+    level:    [72, 74]
+  17309847:
+    template: Flamingo
+    at:       [382.072, -40.676, 243.464, 127]
+    level:    [72, 74]
+  17309848:
+    template: Thunder_Elemental
+    at:       [352.386, -40.501, 229.934, 58]
+    level:    [78, 79]
+  17309849:
+    template: Sprinkler
+    at:       [382.601, -38.972, 205.933, 42]
+    level:    [73, 76]
+  17309850:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [327.964, -40.500, 224.733, 106]
+    level:    [75, 78]
+  17309851:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [305.223, -40.788, 266.461, 127]
+    level:    [75, 78]
+  17309852:
+    template: Sprinkler
+    at:       [-242.158, -8.698, 300.220, 31]
+    level:    [73, 76]
+  17309853:
+    template: Sprinkler
+    at:       [-254.657, -8.500, 323.154, 127]
+    level:    [73, 76]
+  17309854:
+    template: Sprinkler
+    at:       [-254.592, -8.500, 323.307, 127]
+    level:    [73, 76]
+  17309855:
+    template: Sprinkler
+    at:       [-253.747, -8.517, 356.390, 127]
+    level:    [73, 76]
+  17309856:
+    template: Sprinkler
+    at:       [-278.867, -2.901, 369.559, 15]
+    level:    [73, 76]
+  17309857:
+    template: Sprinkler
+    at:       [-285.612, -3.397, 378.543, 113]
+    level:    [73, 76]
+  17309858:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-201.363, -20.615, 330.414, 127]
+    level:    [75, 78]
+  17309859:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-236.787, -20.604, 306.549, 100]
+    level:    [75, 78]
+  17309860:
+    template: Sprinkler
+    at:       [-151.861, -24.614, 357.408, 127]
+    level:    [73, 76]
+  17309861:
+    template: Sprinkler
+    at:       [-127.210, -24.614, 375.455, 119]
+    level:    [73, 76]
+  17309862:
+    template: Light_Elemental
+    at:       [-153.145, -24.614, 362.243, 38]
+    level:    [78, 79]
+  17309863:
+    template: Sprinkler
+    at:       [-72.281, -24.614, 389.739, 127]
+    level:    [73, 76]
+  17309864:
+    template: Light_Elemental
+    at:       [-65.695, -24.613, 378.559, 86]
+    level:    [78, 79]
+  17309865:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-90.593, -36.328, 363.433, 110]
+    level:    [75, 78]
+  17309866:
+    template: Flamingo
+    at:       [-131.248, -40.584, 353.037, 37]
+    level:    [72, 74]
+  17309867:
+    template: Flamingo
+    at:       [-129.066, -40.634, 351.321, 127]
+    level:    [72, 74]
+  17309868:
+    template: Light_Elemental
+    at:       [-139.793, -40.500, 354.924, 254]
+    level:    [78, 79]
+  17309869:
+    template: Flamingo
+    at:       [-150.181, -40.684, 398.699, 127]
+    level:    [72, 74]
+  17309870:
+    template: Flamingo
+    at:       [-154.667, -40.699, 401.734, 127]
+    level:    [72, 74]
+  17309871:
+    template: Flamingo
+    at:       [-121.144, -40.536, 421.180, 127]
+    level:    [72, 74]
+  17309872:
+    template: Flamingo
+    at:       [-126.962, -40.545, 405.646, 127]
+    level:    [72, 74]
+  17309873:
+    template: Light_Elemental
+    at:       [-141.093, -40.500, 419.633, 127]
+    level:    [78, 79]
+  17309874:
+    template: Sprinkler
+    at:       [-103.941, -40.400, 432.741, 52]
+    level:    [73, 76]
+  17309875:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-116.255, -40.614, 387.386, 193]
+    level:    [75, 78]
+  17309876:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-157.776, -40.614, 364.483, 47]
+    level:    [75, 78]
+  17309877:
+    template: Sprinkler
+    at:       [-288.821, -24.614, 259.627, 23]
+    level:    [73, 76]
+  17309878:
+    template: Sprinkler
+    at:       [-293.673, -24.614, 254.018, 60]
+    level:    [73, 76]
+  17309879:
+    template: Dark_Elemental
+    at:       [-307.765, -24.614, 239.798, 65]
+    level:    [78, 79]
+  17309880:
+    template: Sprinkler
+    at:       [-333.475, -24.614, 174.739, 117]
+    level:    [73, 76]
+  17309881:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-321.384, -33.073, 189.602, 127]
+    level:    [75, 78]
+  17309882:
+    template: Dark_Elemental
+    at:       [-320.543, -33.346, 189.351, 127]
+    level:    [78, 79]
+  17309883:
+    template: Flamingo
+    at:       [-295.582, -40.504, 231.292, 96]
+    level:    [72, 74]
+  17309884:
+    template: Flamingo
+    at:       [-297.628, -40.527, 228.487, 127]
+    level:    [72, 74]
+  17309885:
+    template: Dark_Elemental
+    at:       [-288.618, -40.700, 226.036, 127]
+    level:    [78, 79]
+  17309886:
+    template: Flamingo
+    at:       [-344.347, -40.500, 274.288, 87]
+    level:    [72, 74]
+  17309887:
+    template: Flamingo
+    at:       [-329.129, -40.678, 290.630, 55]
+    level:    [72, 74]
+  17309888:
+    template: Flamingo
+    at:       [-373.659, -40.699, 267.948, 127]
+    level:    [72, 74]
+  17309889:
+    template: Flamingo
+    at:       [-388.159, -40.794, 248.688, 127]
+    level:    [72, 74]
+  17309890:
+    template: Dark_Elemental
+    at:       [-361.348, -40.503, 248.410, 16]
+    level:    [78, 79]
+  17309891:
+    template: Sprinkler
+    at:       [-383.438, -38.170, 207.222, 23]
+    level:    [73, 76]
+  17309892:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-333.248, -40.614, 230.699, 127]
+    level:    [75, 78]
+  17309893:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-289.932, -40.614, 255.529, 44]
+    level:    [75, 78]
+  17309894:
+    template: Sprinkler
+    at:       [-400.797, -8.500, -142.127, 25]
+    level:    [73, 76]
+  17309895:
+    template: Sprinkler
+    at:       [-443.435, -3.104, -148.316, 65]
+    level:    [73, 76]
+  17309896:
+    template: Sprinkler
+    at:       [-437.779, -3.366, -145.260, 127]
+    level:    [73, 76]
+  17309897:
+    template: Sprinkler
+    at:       [-442.725, -3.252, -148.318, 101]
+    level:    [73, 76]
+  17309898:
+    template: Sprinkler
+    at:       [-428.086, -7.212, -140.366, 81]
+    level:    [73, 76]
+  17309899:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-378.781, -19.978, -125.054, 127]
+    level:    [75, 78]
+  17309900:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-357.503, -20.500, -150.014, 127]
+    level:    [75, 78]
+  17309901:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-382.528, -20.500, -71.984, 127]
+    level:    [75, 78]
+  17309902:
+    template: Sprinkler
+    at:       [-389.341, -24.500, -17.148, 45]
+    level:    [73, 76]
+  17309903:
+    template: Sprinkler
+    at:       [-390.234, -24.500, -13.640, 127]
+    level:    [73, 76]
+  17309904:
+    template: Sprinkler
+    at:       [-398.692, -24.500, 42.320, 42]
+    level:    [73, 76]
+  17309905:
+    template: Ice_Elemental
+    at:       [-380.315, -24.500, 54.596]
+    level:    [78, 79]
+  17309906:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-372.963, -34.581, 27.891, 127]
+    level:    [75, 78]
+  17309907:
+    template: Flamingo
+    at:       [-374.006, -40.550, -27.294, 127]
+    level:    [72, 74]
+  17309908:
+    template: Flamingo
+    at:       [-373.235, -40.640, -17.251, 20]
+    level:    [72, 74]
+  17309909:
+    template: Ice_Elemental
+    at:       [-359.176, -40.386, -23.922, 20]
+    level:    [78, 79]
+  17309910:
+    template: Flamingo
+    at:       [-413.867, -40.700, -29.209, 45]
+    level:    [72, 74]
+  17309911:
+    template: Flamingo
+    at:       [-442.636, -40.505, -29.229, 31]
+    level:    [72, 74]
+  17309912:
+    template: Ice_Elemental
+    at:       [-437.306, -40.504, -45.074, 127]
+    level:    [78, 79]
+  17309913:
+    template: Flamingo
+    at:       [-432.335, -40.500, 21.527, 127]
+    level:    [72, 74]
+  17309914:
+    template: Flamingo
+    at:       [-433.142, -40.502, 22.057, 127]
+    level:    [72, 74]
+  17309915:
+    template: Sprinkler
+    at:       [-444.759, -40.926, 48.878, 127]
+    level:    [73, 76]
+  17309916:
+    template: Ice_Elemental
+    at:       [-444.724, -40.980, 49.570, 127]
+    level:    [78, 79]
+  17309917:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-372.704, -40.500, 8.931, 36]
+    level:    [75, 78]
+  17309918:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-385.561, -40.500, -35.943, 127]
+    level:    [75, 78]
+  17309919:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-433.323, -36.500, -117.454, 53]
+    level:    [75, 78]
+  17309920:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-418.959, -36.500, -161.169, 127]
+    level:    [75, 78]
+  17309921:
+    template: Sprinkler
+    at:       [-324.401, -24.500, -209.512, 32]
+    level:    [73, 76]
+  17309922:
+    template: Sprinkler
+    at:       [-329.962, -24.500, -223.322]
+    level:    [73, 76]
+  17309923:
+    template: Earth_Elemental
+    at:       [-313.870, -24.500, -237.380, 64]
+    level:    [78, 79]
+  17309924:
+    template: Sprinkler
+    at:       [-294.700, -24.500, -273.868, 100]
+    level:    [73, 76]
+  17309925:
+    template: Earth_Elemental
+    at:       [-301.878, -24.500, -265.890, 122]
+    level:    [78, 79]
+  17309926:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-286.523, -30.006, -254.421, 90]
+    level:    [75, 78]
+  17309927:
+    template: Flamingo
+    at:       [-314.255, -40.700, -206.124, 109]
+    level:    [72, 74]
+  17309928:
+    template: Flamingo
+    at:       [-314.100, -40.700, -200.779, 127]
+    level:    [72, 74]
+  17309929:
+    template: Earth_Elemental
+    at:       [-306.647, -40.700, -191.197, 127]
+    level:    [78, 79]
+  17309930:
+    template: Flamingo
+    at:       [-375.922, -40.699, -223.988, 127]
+    level:    [72, 74]
+  17309931:
+    template: Flamingo
+    at:       [-372.304, -40.533, -213.180, 127]
+    level:    [72, 74]
+  17309932:
+    template: Earth_Elemental
+    at:       [-380.167, -40.371, -232.371, 54]
+    level:    [78, 79]
+  17309933:
+    template: Flamingo
+    at:       [-337.976, -40.500, -271.406, 52]
+    level:    [72, 74]
+  17309934:
+    template: Flamingo
+    at:       [-354.500, -40.615, -287.377, 86]
+    level:    [72, 74]
+  17309935:
+    template: Sprinkler
+    at:       [-338.237, -39.983, -292.022, 127]
+    level:    [73, 76]
+  17309936:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-323.089, -40.500, -246.593, 101]
+    level:    [75, 78]
+  17309937:
+    template: Groundskeeper_1827
+    script:   Groundskeeper
+    at:       [-380.817, -40.521, -219.627, 116]
+    level:    [75, 78]
+  17309938:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [20.239, -41.729, -340.048, 127]
+    level:    [75, 78]
+  17309939:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [20.239, -42.929, -324.024, 127]
+    level:    [75, 78]
+  17309940:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [20.239, -42.929, -315.955, 127]
+    level:    [75, 78]
+  17309941:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [20.239, -42.929, -307.985, 127]
+    level:    [75, 78]
+  17309942:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [20.239, -44.129, -292.006, 127]
+    level:    [75, 78]
+  17309943:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [20.239, -44.129, -284.072, 127]
+    level:    [75, 78]
+  17309944:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [20.239, -44.129, -276.010, 127]
+    level:    [75, 78]
+  17309945:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [20.239, -45.329, -259.976, 127]
+    level:    [75, 78]
+  17309946:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-20.312, -41.729, -339.929]
+    level:    [75, 78]
+  17309947:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-20.239, -42.929, -324.024]
+    level:    [75, 78]
+  17309948:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-20.239, -42.929, -315.955]
+    level:    [75, 78]
+  17309949:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-20.239, -42.929, -307.985]
+    level:    [75, 78]
+  17309950:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-20.239, -44.129, -292.006]
+    level:    [75, 78]
+  17309951:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-20.239, -44.129, -284.072]
+    level:    [75, 78]
+  17309952:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-20.239, -44.129, -276.010]
+    level:    [75, 78]
+  17309953:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-20.239, -45.329, -259.976]
+    level:    [75, 78]
+  17309954:
+    template: Despot
+    at:       [-0.100, -42.000, -291.000, 114]
+    level:    [80, 82]
+  17309955:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [378.000, -25.489, 0.730, 2]
+    level:    [75, 78]
+  17309956:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [378.000, -25.489, -12.529, 2]
+    level:    [75, 78]
+  17309957:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [378.000, -25.489, -25.826, 2]
+    level:    [75, 78]
+  17309958:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [320.846, -25.489, -201.212, 23]
+    level:    [75, 78]
+  17309959:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [313.000, -25.489, -212.175, 23]
+    level:    [75, 78]
+  17309960:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [305.937, -25.489, -223.302, 23]
+    level:    [75, 78]
+  17309961:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [116.250, -25.489, 360.216, 200]
+    level:    [75, 78]
+  17309962:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [128.865, -25.489, 355.871, 200]
+    level:    [75, 78]
+  17309963:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [141.208, -25.489, 351.075, 200]
+    level:    [75, 78]
+  17309964:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [290.274, -25.489, 242.751, 225]
+    level:    [75, 78]
+  17309965:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [298.000, -25.489, 232.470, 225]
+    level:    [75, 78]
+  17309966:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [306.648, -25.489, 221.822, 225]
+    level:    [75, 78]
+  17309967:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-141.212, -25.489, 350.911, 172]
+    level:    [75, 78]
+  17309968:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-128.852, -25.489, 355.845, 172]
+    level:    [75, 78]
+  17309969:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-116.268, -25.489, 360.248, 172]
+    level:    [75, 78]
+  17309970:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-306.579, -25.489, 221.791, 152]
+    level:    [75, 78]
+  17309971:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-298.541, -25.489, 232.419, 152]
+    level:    [75, 78]
+  17309972:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-290.178, -25.489, 242.690, 152]
+    level:    [75, 78]
+  17309973:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-377.468, -25.489, -25.773, 123]
+    level:    [75, 78]
+  17309974:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-378.240, -25.489, -12.581, 127]
+    level:    [75, 78]
+  17309975:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-378.363, -25.489, 0.720, 126]
+    level:    [75, 78]
+  17309976:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-305.739, -25.489, -223.070, 102]
+    level:    [75, 78]
+  17309977:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-313.394, -25.489, -212.184, 107]
+    level:    [75, 78]
+  17309978:
+    template: Groundskeeper_5128
+    script:   Groundskeeper
+    at:       [-320.503, -25.489, -200.977, 105]
+    level:    [75, 78]
+  17309979:
+    template: Mimic
+    at:       [1.000, 1.000, 1.000]
+    level:    [70, 70]
+  17309980:
+    template: Genbu
+    at:       [261.868, -70.219, 526.413, 90]
+    level:    [88, 90]
+  17309981:
+    template: Seiryu
+    at:       [580.835, -70.220, -84.529, 134]
+    level:    [88, 90]
+  17309982:
+    template: Byakko
+    at:       [-419.403, -70.200, 410.956, 30]
+    level:    [88, 90]
+  17309983:
+    template: Suzaku
+    at:       [-520.836, -70.220, -271.516, 242]
+    level:    [88, 90]
+  17309984:
+    template: Eraser
+    at:       [-77.860, -40.700, -147.750, 54]
+    level:    [1, 1]
+  17309985:
+    template: Aello
+    at:       [375.583, -39.958, 230.956, 50]
+    level:    [110, 110]
+  17309986:
+    template: Aellos_Handmaiden
+    at:       [369.646, -39.983, 230.282, 11]
+    level:    [100, 100]
+  17309987:
+    template: Aellos_Handmaiden
+    at:       [368.999, -40.025, 229.792, 4]
+    level:    [100, 100]
+  17309988:
+    template: Aellos_Handmaiden
+    at:       [369.721, -40.212, 231.536, 23]
+    level:    [100, 100]
+  17309989:
+    template: Aello
+    at:       [-118.679, -40.700, 436.060, 31]
+    level:    [110, 110]
+  17309990:
+    template: Aellos_Handmaiden
+    at:       [-117.539, -40.593, 435.747, 236]
+    level:    [100, 100]
+  17309991:
+    template: Aellos_Handmaiden
+    at:       [-117.177, -40.700, 436.609, 248]
+    level:    [100, 100]
+  17309992:
+    template: Aellos_Handmaiden
+    at:       [-117.886, -40.700, 436.724, 252]
+    level:    [100, 100]
+  17309993:
+    template: Aello
+    at:       [91.504, -40.700, -456.042, 196]
+    level:    [110, 110]
+  17309994:
+    template: Aellos_Handmaiden
+    at:       [75.755, -40.700, -462.634, 106]
+    level:    [100, 100]
+  17309995:
+    template: Aellos_Handmaiden
+    at:       [75.716, -40.700, -463.924, 127]
+    level:    [100, 100]
+  17309996:
+    template: Aellos_Handmaiden
+    at:       [76.129, -40.700, -463.250, 117]
+    level:    [100, 100]
+  17309997:
+    template: Kirin_Strange_Happenings
+    script:   Kirin
+    at:       [-1.689, -40.000, -364.978]
+    level:    [119, 119]
+  17309998:
+    template: Kirins_Avatar_Strange_Happenings
+    script:   Kirins_Avatar
+    at:       [-0.716, -40.000, -365.949, 192]
+    level:    [119, 119]
+
+slots:
+  - members:
+      17309742: {} # Groundskeeper
+      17309753: {} # Groundskeeper
+  - members:
+      17309774: {} # Fire_Elemental
+      17309776: {} # Fire_Elemental
+  - members:
+      17309787: {} # Groundskeeper
+      17309788: {} # Groundskeeper
+  - members:
+      17309793: {} # Water_Elemental
+      17309798: {} # Water_Elemental
+  - members:
+      17309806: {} # Groundskeeper
+      17309807: {} # Groundskeeper
+  - members:
+      17309822: {} # Air_Elemental
+      17309825: {} # Air_Elemental
+  - members:
+      17309831: {} # Groundskeeper
+      17309832: {} # Groundskeeper
+  - members:
+      17309839: {} # Thunder_Elemental
+      17309843: {} # Thunder_Elemental
+  - members:
+      17309850: {} # Groundskeeper
+      17309851: {} # Groundskeeper
+  - members:
+      17309862: {} # Light_Elemental
+      17309868: {} # Light_Elemental
+  - members:
+      17309875: {} # Groundskeeper
+      17309876: {} # Groundskeeper
+  - members:
+      17309879: {} # Dark_Elemental
+      17309885: {} # Dark_Elemental
+  - members:
+      17309892: {} # Groundskeeper
+      17309893: {} # Groundskeeper
+  - members:
+      17309905: {} # Ice_Elemental
+      17309909: {} # Ice_Elemental
+  - members:
+      17309917: {} # Groundskeeper
+      17309918: {} # Groundskeeper
+  - members:
+      17309923: {} # Earth_Elemental
+      17309932: {} # Earth_Elemental
+  - members:
+      17309936: {} # Groundskeeper
+      17309937: {} # Groundskeeper

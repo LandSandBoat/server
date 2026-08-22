@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 192
+
+zonelines:
+
+  z4a0:
+    from:  [-60.006, -4.748, -42.501]
+    to:    the_boyahda_tree
+    at:    [-140.008, 3.787, 202.715, 1.570796]
+    scale: [1.000, 3.000]
+
+  z4a2:
+    from:  [121.480, -13.450, 139.987]
+    to:    the_sanctuary_of_zitah
+    at:    [179.953, 3.753, -180.016]
+    scale: [1.000, 3.000]

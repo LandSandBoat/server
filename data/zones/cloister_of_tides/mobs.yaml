@@ -1,0 +1,443 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Leviathan_Prime_ASA:
+    id:           7044
+    display_name: Leviathan_Prime
+    species:      leviathan
+    type:         [notorious, battlefield]
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drk, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: -3
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Leviathan_Prime_TBL:
+    id:            4646
+    display_name:  Leviathan_Prime
+    species:       leviathan
+    type:          [notorious, battlefield]
+    skill_list_id: 323
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: -3
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Leviathan_Prime_TBL_2:
+    id:            4646
+    display_name:  Leviathan_Prime
+    species:       leviathan
+    type:          [notorious, battlefield]
+    skill_list_id: 323
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [war, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    11
+          earth:   11
+          thunder: -3
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     11
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Leviathan_Prime_TSTBW:
+    id:            7054
+    display_name:  Leviathan_Prime
+    species:       leviathan
+    type:          [notorious, battlefield]
+    skill_list_id: 1182
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    11
+          ice:     11
+          wind:    -3
+          earth:   11
+          thunder: 11
+          water:   11
+          light:   11
+          dark:    11
+        rank_status:
+          paralyze:    11
+          bind:        11
+          silence:     -3
+          slow:        11
+          poison:      11
+          light_sleep: 11
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 700
+
+  Leviathan_Prime_WTB:
+    id:            2402
+    display_name:  Leviathan_Prime
+    species:       leviathan
+    type:          [notorious, battlefield]
+    skill_list_id: 2028
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drk, blm]
+      resists:
+        rank_element:
+          fire:    11
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder: -3
+          water:   -3
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:     4
+          bind:         4
+          silence:      4
+          slow:         4
+          poison:      -3
+          light_sleep:  4
+          dark_sleep:   4
+          blind:        4
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags:  3
+        model_size:    1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 25000
+
+  Water_Elemental_T:
+    id:            6142
+    display_name:  Water_Elemental
+    species:       water_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 15
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      resists:
+        immune_status: [silence, poison]
+        dmg_physical:
+          slashing: -7500
+          piercing: -7500
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    11
+          thunder: -3
+          water:   11
+        rank_status:
+          poison: 11
+      render:
+        look:
+          type:  standard
+          model: 12
+        entity_flags:  131
+        animation_sub:  16
+        model_size:      1
+        hitbox:          8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+
+spawns:
+  17641473:
+    template: Leviathan_Prime_TBL
+    script:   Leviathan_Prime_TBW
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [60, 60]
+  17641474:
+    template: Leviathan_Prime_TBL
+    script:   Leviathan_Prime_TBW
+    at:       [22.940, -18.991, 32.879, 105]
+    level:    [60, 60]
+  17641475:
+    template: Leviathan_Prime_TBL
+    script:   Leviathan_Prime_TBW
+    at:       [-377.046, -78.994, 512.925, 105]
+    level:    [60, 60]
+  17641476:
+    template: Leviathan_Prime_TSTBW
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [20, 20]
+  17641477:
+    template: Leviathan_Prime_TSTBW
+    at:       [22.940, -18.991, 32.879, 105]
+    level:    [20, 20]
+  17641478:
+    template: Leviathan_Prime_TSTBW
+    at:       [-377.046, -78.994, 512.925, 105]
+    level:    [20, 20]
+  17641479:
+    template: Leviathan_Prime_WTB
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [85, 85]
+  17641480:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [507.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17641481:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [499.000, 41.000, -367.000, 105]
+    level:    [75, 75]
+  17641482:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [503.000, 41.000, -371.000, 105]
+    level:    [75, 75]
+  17641483:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [503.000, 41.000, -363.000, 105]
+    level:    [75, 75]
+  17641484:
+    template: Leviathan_Prime_WTB
+    at:       [22.940, -18.991, 32.879, 105]
+    level:    [85, 85]
+  17641485:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [26.940, -18.991, 32.879, 105]
+    level:    [75, 75]
+  17641486:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [18.940, -18.991, 32.879, 105]
+    level:    [75, 75]
+  17641487:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [22.940, -18.991, 36.879, 105]
+    level:    [75, 75]
+  17641488:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [22.940, -18.991, 28.879, 105]
+    level:    [75, 75]
+  17641489:
+    template: Leviathan_Prime_WTB
+    at:       [-377.046, -78.994, 512.925, 105]
+    level:    [85, 85]
+  17641490:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [-381.046, -78.994, 512.925, 105]
+    level:    [75, 75]
+  17641491:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [-373.046, -78.994, 512.925, 105]
+    level:    [75, 75]
+  17641492:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [-377.046, -78.994, 516.925, 105]
+    level:    [75, 75]
+  17641493:
+    template: Water_Elemental_T
+    script:   Water_Elemental
+    at:       [-377.046, -78.994, 508.925, 105]
+    level:    [75, 75]
+  17641494:
+    template: Leviathan_Prime_ASA
+    at:       [503.000, 41.000, -367.000, 105]
+    level:    [40, 40]
+  17641495:
+    template: Leviathan_Prime_ASA
+    at:       [22.940, -18.991, 32.879, 105]
+    level:    [40, 40]
+  17641496:
+    template: Leviathan_Prime_ASA
+    at:       [-377.046, -78.994, 512.925, 105]
+    level:    [40, 40]
+  17641497:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641498:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641499:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641500:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641501:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641502:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641503:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641504:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641505:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641506:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641507:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641508:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641509:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641510:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]
+  17641511:
+    template: Leviathan_Prime_TBL_2
+    script:   Leviathan_Prime_HTBF
+    level:    [99, 99]

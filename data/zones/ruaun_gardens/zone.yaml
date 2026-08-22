@@ -1,0 +1,149 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [mazurka, tractor, pet, trust]
+music:
+  day:          210
+  night:        210
+  battle_solo:  101
+  battle_party: 191
+
+zonelines:
+
+  z3m0:
+    from:  [0.001, -50.351, -106.589]
+    to:    the_shrine_of_ruavitau
+    at:    [-40.005, -3.398, -232.000, 4.712389]
+    scale: [1.000, 3.000]
+
+  zlm0:
+    from:  [541.865, -45.956, 176.066]
+    to:    laloff_amphitheater
+    at:    [189.849, -176.455, 346.531, 5.961505]
+    scale: [1.000, 3.000]
+
+  z3m2:
+    from:  [-94.809, -34.736, -145.489]
+    to:    the_shrine_of_ruavitau
+    at:    [-119.993, -19.360, -192.009, 4.712389]
+    scale: [1.000, 3.000]
+
+  zlm2:
+    from:  [0.002, -45.956, 569.781]
+    to:    laloff_amphitheater
+    at:    [-605.070, -25.487, 436.136, 4.712389]
+    scale: [1.000, 3.000]
+
+  z3m4:
+    from:  [94.793, -34.736, -145.478]
+    to:    the_shrine_of_ruavitau
+    at:    [119.987, -19.344, -191.989, 4.712389]
+    scale: [1.000, 3.000]
+
+  zlm4:
+    from:  [-541.859, -45.956, 176.056]
+    to:    laloff_amphitheater
+    at:    [60.080, -227.125, 473.425, 3.453913]
+    scale: [1.000, 3.000]
+
+  z3m6:
+    from:  [-91.502, -26.530, -433.740]
+    to:    velugannon_palace
+    at:    [-100.010, -25.752, -399.468, 1.570796]
+    scale: [1.000, 4.000]
+
+  zlm6:
+    from:  [-334.886, -45.956, -460.949]
+    to:    laloff_amphitheater
+    at:    [-236.692, -140.109, 413.546, 2.197696]
+    scale: [1.000, 3.000]
+
+  z3m8:
+    from:  [91.486, -26.530, -433.753]
+    to:    velugannon_palace
+    at:    [99.981, -25.752, -399.453, 1.570796]
+    scale: [1.000, 4.000]
+
+  zlm8:
+    from:  [-1.099, -58.013, -641.502]
+    to:    hall_of_the_gods
+    at:    [0.005, -1.640, 362.018, 1.570796]
+    scale: [1.000, 3.000]
+
+  z3ma:
+    from:  [359.114, -26.530, -242.838]
+    to:    velugannon_palace
+    at:    [359.501, -25.752, -260.017]
+    scale: [1.000, 4.000]
+
+  z3mc:
+    from:  [317.283, -10.713, -103.073]
+    to:    the_shrine_of_ruavitau
+    at:    [351.996, -3.398, -160.002, 3.141593]
+    scale: [1.000, 3.000]
+
+  z3me:
+    from:  [433.233, -26.718, -14.592]
+    to:    velugannon_palace
+    at:    [399.460, -25.752, 19.983]
+    scale: [1.000, 4.000]
+
+  z3mg:
+    from:  [341.805, -26.741, 266.383]
+    to:    velugannon_palace
+    at:    [319.465, -25.752, 419.983]
+    scale: [1.000, 4.000]
+
+  z3mi:
+    from:  [193.716, -10.700, 266.626]
+    to:    the_shrine_of_ruavitau
+    at:    [239.998, -3.398, 352.002, 1.570796]
+    scale: [1.000, 3.000]
+
+  z3mk:
+    from:  [147.751, -26.728, 407.505]
+    to:    velugannon_palace
+    at:    [139.982, -25.752, 399.486, 4.712389]
+    scale: [1.000, 4.000]
+
+  z3mm:
+    from:  [-147.737, -26.762, 407.471]
+    to:    velugannon_palace
+    at:    [-140.018, -25.752, 399.461, 4.712389]
+    scale: [1.000, 4.000]
+
+  z3mo:
+    from:  [-195.491, -10.747, 269.073]
+    to:    the_shrine_of_ruavitau
+    at:    [-240.003, -3.398, 352.003, 1.570796]
+    scale: [1.000, 3.000]
+
+  z3mq:
+    from:  [-341.805, -26.762, 266.353]
+    to:    velugannon_palace
+    at:    [-320.485, -25.752, 419.998, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3ms:
+    from:  [-433.420, -26.762, -14.597]
+    to:    velugannon_palace
+    at:    [-400.505, -25.752, 19.998, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3mu:
+    from:  [-316.315, -10.756, -102.789]
+    to:    the_shrine_of_ruavitau
+    at:    [-351.995, -3.398, -159.991]
+    scale: [1.000, 3.000]
+
+  z3mw:
+    from:  [-358.998, -26.762, -242.817]
+    to:    velugannon_palace
+    at:    [-360.460, -25.752, -260.002, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3my:
+    from:  [334.888, -45.956, -460.958]
+    to:    laloff_amphitheater
+    at:    [527.721, -41.082, 559.469, 0.934538]
+    scale: [1.000, 3.000]

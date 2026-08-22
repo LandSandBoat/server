@@ -1,0 +1,1251 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Angler_Orobon:
+    id:            139
+    species:       orobon
+    type:          [battlefield]
+    skill_list_id: 415
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags: 1159
+        model_size:      3
+        hitbox:         27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12800
+
+  Arrapago_Leech:
+    id:            255
+    species:       leech
+    type:          [fished, battlefield]
+    skill_list_id: 172
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        dmg_physical:
+          blunt: -2500
+          h2h:   -2500
+        rank_element:
+          fire:  -2
+          ice:   -2
+          water:  4
+          light: -3
+          dark:   2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          poison:       4
+          light_sleep: -3
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 277
+        entity_flags: 1669
+        model_size:      2
+        hitbox:         12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Gessho:
+    id:            1506
+    species:       yagudo
+    type:          [notorious, battlefield, event]
+    spell_list_id: 7
+    skill_list_id: 777
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1083
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Gessho_2:
+    id:            1506
+    display_name:  Gessho
+    species:       yagudo
+    type:          [notorious, battlefield, event]
+    spell_list_id: 7
+    skill_list_id: 777
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 1083
+        entity_flags: 155
+        name_prefix:   32
+        model_size:     1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+
+  Giant_Orobon:
+    id:            1534
+    species:       orobon
+    type:          [fished, battlefield]
+    skill_list_id: 191
+    attributes:
+      combat:
+        skill: scythe
+        delay: 270
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    6
+          light:   -2
+          dark:     3
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:     -1
+          slow:        -1
+          poison:       6
+          light_sleep: -2
+          dark_sleep:   3
+          blind:        3
+      render:
+        look:
+          type:  standard
+          model: 1729
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7700
+    loot:
+      drops:
+        - chance: rare
+          item:   chunk_of_orobon_meat
+      despoil:
+        orobon_lure:          0
+        chunk_of_orobon_meat: 0
+
+  Imp_Bandsman:
+    id:            2071
+    species:       imp
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 414
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  1157
+        animation_sub:    4
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+
+  Imp_Bandsman_2:
+    id:            2071
+    display_name:  Imp_Bandsman
+    species:       imp
+    type:          [battlefield]
+    spell_list_id: 21
+    skill_list_id: 414
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:     2
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -2
+          dark:     6
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:      2
+          slow:        -1
+          poison:      -1
+          light_sleep: -2
+          dark_sleep:   6
+          blind:        6
+      render:
+        look:
+          type:  standard
+          model: 1726
+        entity_flags:  1157
+        animation_sub:    4
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1400
+
+  Lahama_fished:
+    id:            4813
+    display_name:  Lahama
+    species:       sea_monk
+    type:          [fished, battlefield]
+    skill_list_id: 218
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    4
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       4
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 353
+        entity_flags: 133
+        model_size:     2
+        hitbox:        20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Lamia_Exon_BLM:
+    id:            7592
+    display_name:  Lamia_Exon
+    species:       lamiae
+    type:          [battlefield]
+    spell_list_id: 28
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1654
+        entity_flags: 541
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Lamia_Exon_COR:
+    id:            7593
+    display_name:  Lamia_Exon
+    species:       lamiae
+    type:          [battlefield]
+    skill_list_id: 171
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, cor]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  automaton
+          model: 1656
+        entity_flags: 541
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Llamhigyn_Y_Dwr:
+    id:            2426
+    species:       doomed
+    type:          [fished, battlefield]
+    skill_list_id: 86
+    attributes:
+      combat:
+        skill: sword
+        delay: 270
+      resists:
+        dmg_physical:
+          slashing:  1250
+          blunt:    -1250
+          h2h:      -1250
+        rank_element:
+          fire:  -2
+          ice:    3
+          water:  2
+          light: -2
+          dark:   8
+        rank_status:
+          paralyze:     3
+          bind:         3
+          poison:       2
+          light_sleep: -2
+          dark_sleep:   8
+          blind:        8
+      render:
+        look:
+          type:  standard
+          model: 320
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         34
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   undead_skin
+      despoil:
+        undead_skin: 0
+
+  Medusa:
+    id:            7591
+    species:       medusa
+    type:          [battlefield]
+    skill_list_id: 725
+    attributes:
+      combat:
+        skill:    katana
+        dmg_mult: 125
+      jobs: [rng, rng]
+      resists:
+        immune_status: [gravity, poison, light_sleep, dark_sleep]
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:    -1
+          earth:   -1
+          thunder: -2
+          water:    3
+          light:   -2
+          dark:     2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -1
+          slow:        -1
+          poison:       3
+          light_sleep: -2
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1865
+        entity_flags:  541
+        animation_sub:   8
+        name_prefix:    32
+        model_size:      2
+        hitbox:         18
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Qultada:
+    id:            3292
+    species:       elvaan
+    type:          [battlefield]
+    skill_list_id: 146
+    attributes:
+      combat:
+        skill: sword
+      jobs: [cor, cor]
+      render:
+        look:
+          type:  misc
+          model: 1394
+        entity_flags:  3
+        name_prefix:  32
+        model_size:    1
+        hitbox:       17
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1925
+
+  Talacca_Clot:
+    id:            3840
+    species:       clot
+    type:          [fished, battlefield]
+    skill_list_id: 66
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -7500
+          h2h:      -7500
+        rank_element:
+          fire:    -3
+          ice:     -2
+          wind:    -2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 294
+        entity_flags: 3
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Valkeng:
+    id:            4123
+    species:       automaton
+    type:          [notorious, battlefield]
+    spell_list_id: 1
+    skill_list_id: 363
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+        entity_flags: 3
+        model_size:   1
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Valkeng_Large:
+    id:            7288
+    display_name:  Valkeng
+    species:       automaton
+    type:          [notorious, battlefield]
+    skill_list_id: 28
+    attributes:
+      combat:
+        skill: axe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+        entity_flags: 3
+        model_size:   2
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Wootzshell_fished:
+    id:            6370
+    species:       crab
+    type:          [fished, battlefield]
+    skill_list_id: 77
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:    -2
+          earth:   -2
+          thunder: -3
+          water:    2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:     -2
+          slow:        -2
+          poison:       2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 356
+        entity_flags:  133
+        animation_sub:   8
+        model_size:      2
+        hitbox:         16
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: common
+          item:   slice_of_land_crab_meat
+        - chance: uncommon
+          item:   crab_shell
+        - chance: rare
+          item:   sack_of_white_sand
+        - chance: very_rare
+          item:   high-quality_crab_shell
+      despoil:
+        slice_of_land_crab_meat: 0
+        crab_shell:              0
+
+spawns:
+  17010689:
+    template: Wootzshell_fished
+    script:   Wootzshell
+    at:       [1.000, 1.000, 1.000]
+    level:    [73, 74]
+  17010690:
+    template: Arrapago_Leech
+    at:       [1.000, 1.000, 1.000]
+    level:    [73, 74]
+  17010691:
+    template: Talacca_Clot
+    at:       [1.000, 1.000, 1.000]
+    level:    [75, 75]
+  17010692:
+    template: Lahama_fished
+    script:   Lahama
+    at:       [1.000, 1.000, 1.000]
+    level:    [77, 78]
+  17010693:
+    template: Llamhigyn_Y_Dwr
+    at:       [1.000, 1.000, 1.000]
+    level:    [77, 79]
+  17010694:
+    template: Giant_Orobon
+    at:       [1.000, 1.000, 1.000]
+    level:    [79, 80]
+  17010695:
+    template: Imp_Bandsman
+    at:       [-180.000, 39.500, 185.000, 65]
+    level:    [63, 64]
+  17010696:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [-180.000, 39.500, 185.000, 65]
+    level:    [60, 61]
+  17010697:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [-180.000, 39.500, 185.000, 65]
+    level:    [60, 61]
+  17010698:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [-180.000, 39.500, 185.000, 65]
+    level:    [60, 61]
+  17010699:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [-180.000, 39.500, 185.000, 65]
+    level:    [60, 61]
+  17010701:
+    template: Imp_Bandsman
+    at:       [20.000, -0.500, 185.000, 65]
+    level:    [63, 64]
+  17010702:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [20.000, -0.500, 185.000, 65]
+    level:    [60, 61]
+  17010703:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [20.000, -0.500, 185.000, 65]
+    level:    [60, 61]
+  17010704:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [20.000, -0.500, 185.000, 65]
+    level:    [60, 61]
+  17010705:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [20.000, -0.500, 185.000, 65]
+    level:    [60, 61]
+  17010707:
+    template: Imp_Bandsman
+    at:       [220.000, -40.500, 185.000, 65]
+    level:    [63, 64]
+  17010708:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [220.000, -40.500, 185.000, 65]
+    level:    [60, 61]
+  17010709:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [220.000, -40.500, 185.000, 65]
+    level:    [60, 61]
+  17010710:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [220.000, -40.500, 185.000, 65]
+    level:    [60, 61]
+  17010711:
+    template: Imp_Bandsman_2
+    script:   Imp_Bandsman_Add
+    at:       [220.000, -40.500, 185.000, 65]
+    level:    [60, 61]
+  17010713:
+    template: Angler_Orobon
+    at:       [-180.000, 39.500, 185.000, 65]
+    level:    [80, 80]
+  17010715:
+    template: Angler_Orobon
+    at:       [20.000, -0.500, 185.000, 65]
+    level:    [80, 80]
+  17010717:
+    template: Angler_Orobon
+    at:       [220.000, -40.500, 185.000, 65]
+    level:    [80, 80]
+  17010719:
+    template: Valkeng_Large
+    script:   Valkeng
+    at:       [-180.000, 39.500, 185.000, 65]
+    level:    [66, 66]
+  17010720:
+    template: Valkeng
+    at:       [20.000, -0.500, 185.000, 65]
+    level:    [66, 66]
+  17010721:
+    template: Valkeng
+    at:       [220.000, -40.500, 185.000, 65]
+    level:    [66, 66]
+  17010722:
+    template: Qultada
+    at:       [-180.000, 39.500, 185.000, 65]
+    level:    [70, 70]
+  17010723:
+    template: Qultada
+    at:       [20.000, -0.500, 185.000, 65]
+    level:    [70, 70]
+  17010724:
+    template: Qultada
+    at:       [220.000, -40.500, 185.000, 65]
+    level:    [70, 70]
+  17010725:
+    template: Gessho
+    at:       [-180.000, 39.080, 180.000, 64]
+    level:    [80, 80]
+  17010726:
+    template: Gessho_2
+    script:   Gessho
+    at:       [-179.799, 39.080, 177.347, 249]
+    level:    [70, 70]
+  17010727:
+    template: Gessho_2
+    script:   Gessho
+    at:       [-179.788, 39.080, 177.577, 11]
+    level:    [70, 70]
+  17010728:
+    template: Gessho_2
+    script:   Gessho
+    at:       [-179.771, 39.080, 177.626, 15]
+    level:    [70, 70]
+  17010729:
+    template: Gessho_2
+    script:   Gessho
+    at:       [-179.807, 39.080, 177.336, 248]
+    level:    [70, 70]
+  17010730:
+    template: Gessho_2
+    script:   Gessho
+    at:       [-179.768, 39.080, 177.640, 16]
+    level:    [70, 70]
+  17010731:
+    template: Gessho_2
+    script:   Gessho
+    at:       [-178.892, 39.057, 175.133, 212]
+    level:    [70, 70]
+  17010732:
+    template: Gessho
+    level:    [80, 80]
+  17010733:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010734:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010735:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010736:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010737:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010738:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010739:
+    template: Gessho
+    level:    [80, 80]
+  17010740:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010741:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010742:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010743:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010744:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010745:
+    template: Gessho_2
+    script:   Gessho
+    level:    [70, 70]
+  17010746:
+    template: Gessho
+  17010747:
+    template: Gessho
+  17010748:
+    template: Gessho
+  17010749:
+    template: Gessho
+  17010750:
+    template: Gessho
+  17010751:
+    template: Gessho
+  17010752:
+    template: Gessho
+  17010753:
+    template: Gessho
+  17010754:
+    template: Gessho
+  17010755:
+    template: Gessho
+  17010756:
+    template: Gessho
+  17010757:
+    template: Gessho
+  17010758:
+    template: Gessho
+  17010759:
+    template: Gessho
+  17010760:
+    template: Gessho
+  17010761:
+    template: Gessho
+  17010762:
+    template: Gessho
+  17010763:
+    template: Gessho
+  17010764:
+    template: Gessho
+  17010765:
+    template: Gessho
+  17010766:
+    template: Gessho
+  17010767:
+    template: Gessho
+    at:       [-179.738, 38.759, 162.520, 162]
+  17010768:
+    template: Gessho
+    at:       [-175.860, 39.195, 179.287, 245]
+  17010769:
+    template: Gessho
+    at:       [-181.349, 39.035, 175.650, 186]
+  17010770:
+    template: Gessho
+    at:       [-176.934, 39.077, 175.878, 195]
+  17010771:
+    template: Gessho
+    at:       [-177.555, 39.080, 177.027, 203]
+  17010772:
+    template: Gessho
+    at:       [-180.799, 39.018, 174.466, 186]
+  17010773:
+    template: Gessho
+    at:       [-181.821, 39.031, 176.905, 233]
+  17010774:
+    template: Gessho
+  17010775:
+    template: Gessho
+  17010776:
+    template: Gessho
+  17010777:
+    template: Gessho
+  17010778:
+    template: Gessho
+  17010779:
+    template: Gessho
+  17010780:
+    template: Gessho
+  17010781:
+    template: Gessho
+  17010782:
+    template: Gessho
+  17010783:
+    template: Gessho
+  17010784:
+    template: Gessho
+  17010785:
+    template: Gessho
+  17010786:
+    template: Gessho
+  17010787:
+    template: Gessho
+  17010788:
+    template: Gessho
+    at:       [-177.419, 38.986, 172.449, 44]
+  17010789:
+    template: Gessho
+    at:       [-179.057, 39.036, 174.341, 247]
+  17010790:
+    template: Gessho
+    at:       [-179.130, 38.981, 172.280, 209]
+  17010791:
+    template: Gessho
+    at:       [-179.779, 39.022, 173.817, 238]
+  17010792:
+    template: Gessho
+    at:       [-178.488, 39.006, 173.212, 203]
+  17010793:
+    template: Gessho
+    at:       [-179.045, 39.014, 173.537, 222]
+  17010794:
+    template: Gessho
+    at:       [-179.770, 38.988, 172.539, 220]
+  17010795:
+    template: Gessho
+  17010796:
+    template: Gessho
+  17010797:
+    template: Gessho
+  17010798:
+    template: Gessho
+  17010799:
+    template: Gessho
+  17010800:
+    template: Gessho
+  17010801:
+    template: Gessho
+  17010802:
+    template: Gessho
+  17010803:
+    template: Gessho
+  17010804:
+    template: Gessho
+  17010805:
+    template: Gessho
+  17010806:
+    template: Gessho
+  17010807:
+    template: Gessho
+  17010808:
+    template: Gessho
+  17010809:
+    template: Gessho
+    at:       [-174.258, 39.035, 175.184, 55]
+  17010810:
+    template: Gessho
+    at:       [-171.376, 38.900, 175.951, 251]
+  17010811:
+    template: Gessho
+    at:       [-169.725, 38.863, 173.699, 208]
+  17010812:
+    template: Gessho
+    at:       [-170.043, 38.865, 174.040, 215]
+  17010813:
+    template: Gessho
+    at:       [-170.157, 38.908, 175.415, 235]
+  17010814:
+    template: Gessho
+    at:       [-172.944, 38.962, 175.408, 248]
+  17010815:
+    template: Gessho
+    at:       [-169.057, 38.933, 175.462, 211]
+  17010816:
+    template: Gessho
+  17010817:
+    template: Gessho
+  17010818:
+    template: Gessho
+  17010819:
+    template: Gessho
+  17010820:
+    template: Gessho
+  17010821:
+    template: Gessho
+  17010822:
+    template: Gessho
+  17010823:
+    template: Gessho
+  17010824:
+    template: Gessho
+  17010825:
+    template: Gessho
+  17010826:
+    template: Gessho
+  17010827:
+    template: Gessho
+  17010828:
+    template: Gessho
+  17010829:
+    template: Gessho
+  17010830:
+    template: Gessho
+    at:       [-171.181, 35.866, 151.022, 25]
+  17010831:
+    template: Gessho
+    at:       [-169.619, 35.836, 151.840, 47]
+  17010832:
+    template: Gessho
+    at:       [-169.761, 35.847, 151.837, 45]
+  17010833:
+    template: Gessho
+    at:       [-169.045, 35.787, 151.798, 142]
+  17010834:
+    template: Gessho
+    at:       [-171.123, 35.622, 149.593, 11]
+  17010835:
+    template: Gessho
+    at:       [-169.742, 35.842, 151.779, 45]
+  17010836:
+    template: Gessho
+    at:       [-170.012, 35.874, 151.935, 43]
+  17010837:
+    template: Gessho
+  17010838:
+    template: Gessho
+  17010839:
+    template: Gessho
+  17010840:
+    template: Gessho
+  17010841:
+    template: Gessho
+  17010842:
+    template: Gessho
+  17010843:
+    template: Gessho
+  17010844:
+    template: Gessho
+  17010845:
+    template: Gessho
+  17010846:
+    template: Gessho
+  17010847:
+    template: Gessho
+  17010848:
+    template: Gessho
+  17010849:
+    template: Gessho
+  17010850:
+    template: Gessho
+  17010851:
+    template: Medusa
+    at:       [-180.489, 39.067, 180.174, 107]
+    level:    [85, 85]
+  17010852:
+    template: Lamia_Exon_BLM
+    at:       [-177.000, 39.146, 182.000, 108]
+    level:    [85, 85]
+  17010853:
+    template: Lamia_Exon_BLM
+    at:       [-183.000, 39.000, 182.000, 50]
+    level:    [85, 85]
+  17010854:
+    template: Lamia_Exon_COR
+    at:       [-178.602, 39.367, 180.268, 116]
+    level:    [85, 85]
+  17010855:
+    template: Lamia_Exon_COR
+    at:       [-181.890, 39.164, 182.834, 66]
+    level:    [85, 85]
+  17010856:
+    template: Medusa
+    at:       [19.511, -0.933, 180.174, 107]
+    level:    [85, 85]
+  17010857:
+    template: Lamia_Exon_BLM
+    at:       [23.000, -0.854, 182.000, 108]
+    level:    [85, 85]
+  17010858:
+    template: Lamia_Exon_BLM
+    at:       [17.000, -1.000, 182.000, 50]
+    level:    [85, 85]
+  17010859:
+    template: Lamia_Exon_COR
+    at:       [21.398, -0.633, 180.268, 116]
+    level:    [85, 85]
+  17010860:
+    template: Lamia_Exon_COR
+    at:       [18.110, -0.836, 182.834, 66]
+    level:    [85, 85]
+  17010861:
+    template: Medusa
+    at:       [219.511, -40.933, 180.174, 107]
+    level:    [85, 85]
+  17010862:
+    template: Lamia_Exon_BLM
+    at:       [223.000, -40.854, 182.000, 108]
+    level:    [85, 85]
+  17010863:
+    template: Lamia_Exon_BLM
+    at:       [217.000, -41.000, 182.000, 50]
+    level:    [85, 85]
+  17010864:
+    template: Lamia_Exon_COR
+    at:       [221.398, -40.633, 180.268, 116]
+    level:    [85, 85]
+  17010865:
+    template: Lamia_Exon_COR
+    at:       [218.110, -40.836, 182.834, 66]
+    level:    [85, 85]

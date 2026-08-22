@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  battle_solo:  115
+  battle_party: 102
+
+zonelines:
+
+  z5d0:
+    from:  [-74.082, -4.103, 659.997]
+    to:    la_theine_plateau
+    at:    [-272.118, 21.715, 98.859]
+    scale: [1.000, 5.000]
+
+  z5d2:
+    from:  [180.034, 28.075, 600.112]
+    to:    la_theine_plateau
+    at:    [-59.413, 28.699, 151.634, 4.712389]
+    scale: [1.000, 5.000]
+
+  z5d4:
+    from:  [-203.476, -31.924, -219.995]
+    to:    la_theine_plateau
+    at:    [60.020, 37.761, -316.183, 1.570796]
+    scale: [1.000, 5.000]

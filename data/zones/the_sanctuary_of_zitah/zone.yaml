@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          190
+  night:        190
+  battle_solo:  101
+  battle_party: 191
+
+zonelines:
+
+  z3d0:
+    from:  [-459.975, -0.849, -483.827]
+    to:    meriphataud_mountains
+    at:    [772.487, -19.504, 612.472, 2.103507]
+    scale: [1.000, 3.000]
+
+  z3d2:
+    from:  [543.198, 2.706, -581.175]
+    to:    the_boyahda_tree
+    at:    [397.158, 3.590, -59.985]
+    scale: [1.000, 3.000]
+
+  z3d4:
+    from:  [378.574, 2.738, -496.548]
+    to:    the_boyahda_tree
+    at:    [338.298, -5.135, 75.195, 4.712389]
+    scale: [1.000, 3.000]
+
+  z3d6:
+    from:  [177.189, 2.677, -181.773]
+    to:    dragons_aery
+    at:    [118.378, -11.935, 140.068, 3.141593]
+    scale: [1.000, 3.000]
+
+  z3d8:
+    from:  [-240.008, -3.052, 647.439]
+    to:    romaeve
+    at:    [-0.012, -9.889, -146.430, 4.712389]
+    scale: [1.000, 4.000]

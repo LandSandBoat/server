@@ -1,0 +1,4326 @@
+# yaml-language-server: $schema=../../schemas/mobs.schema.json
+
+templates:
+
+  Acrolith:
+    id:            39
+    species:       acrolith
+    type:          [event]
+    skill_list_id: 1
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      3
+          wind:     3
+          earth:    3
+          thunder:  2
+          light:    6
+          dark:    11
+        rank_status:
+          paralyze:     3
+          bind:         3
+          silence:      3
+          slow:         3
+          light_sleep:  6
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1778
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          20
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Chariot:
+    id:            216
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1821
+        entity_flags: 1153
+        hitbox:         25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15250
+    loot:
+      drops:
+        - chance: ultra_rare
+          item:   bhaflau_card
+        - chance: common
+          item:   piece_of_alexandrite
+        - chance: super_rare
+          item:   piece_of_alexandrite
+        - chance: rare
+          one_of: [opacus_cell, praecipitatio_cell]
+        - chance: super_rare
+          one_of: [anus_tiara, enyos_leggings, hoshikazu_tekko, nemains_sabots, njords_trousers]
+
+  Archaic_Gear:
+    id:            218
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Gear_2:
+    id:            218
+    display_name:  Archaic_Gear
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_alexandrite
+        - chance: super_rare
+          item:   piece_of_alexandrite
+        - chance: rare
+          item:   opacus_cell
+        - chance: rare
+          item:   praecipitatio_cell
+        - chance: very_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Archaic_Gear_3:
+    id:            218
+    display_name:  Archaic_Gear
+    species:       gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1819
+        entity_flags: 1153
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6700
+    loot:
+      drops:
+        - chance: ultra_rare
+          item:   bhaflau_card
+        - chance: common
+          item:   piece_of_alexandrite
+        - chance: super_rare
+          item:   piece_of_alexandrite
+        - chance: rare
+          one_of: [opacus_cell, praecipitatio_cell, mediocris_cell]
+        - chance: super_rare
+          one_of: [anus_tiara, enyos_leggings, hoshikazu_tekko, nemains_sabots, njords_trousers]
+
+  Archaic_Gears:
+    id:            219
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Archaic_Gears_2:
+    id:            219
+    display_name:  Archaic_Gears
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6700
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_alexandrite
+        - chance: super_rare
+          item:   piece_of_alexandrite
+        - chance: rare
+          item:   opacus_cell
+        - chance: rare
+          item:   praecipitatio_cell
+        - chance: very_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Archaic_Gears_3:
+    id:            219
+    display_name:  Archaic_Gears
+    species:       triple_gear
+    type:          [notorious]
+    skill_list_id: 120
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  4
+          water:   -1
+          light:    4
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  4
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1820
+        entity_flags:  1153
+        animation_sub:    4
+        name_prefix:     64
+        hitbox:           8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7500
+    loot:
+      drops:
+        - chance: uncommon
+          item:   piece_of_alexandrite
+        - chance: super_rare
+          item:   piece_of_alexandrite
+        - chance: rare
+          item:   opacus_cell
+        - chance: rare
+          item:   praecipitatio_cell
+        - chance: very_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Archaic_Rampart:
+    id:            221
+    species:       rampart
+    type:          [notorious]
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        entity_flags:  1153
+        animation_sub:    4
+        hitbox:          25
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Bifrons:
+    id:            412
+    species:       bomb
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 280
+        entity_flags: 133
+        model_size:     2
+        hitbox:        13
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3000
+    loot:
+      drops:
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Black_Pudding:
+    id:            437
+    species:       flan
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Black_Pudding_2:
+    id:            437
+    display_name:  Black_Pudding
+    species:       flan
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5400
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Carmine_Eruca:
+    id:            642
+    species:       eruca
+    skill_list_id: 107
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:     1
+          ice:     -1
+          wind:    -1
+          thunder: -1
+          water:   -2
+          dark:    -1
+        rank_status:
+          paralyze:   -1
+          bind:       -1
+          silence:    -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 406
+        entity_flags:  129
+        animation_sub:  13
+        hitbox:         12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3600
+    loot:
+      drops:
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Cerberus:
+    id:            680
+    species:       cerberus
+    type:          [notorious]
+    skill_list_id: 62
+    attributes:
+      combat:
+        skill:    scythe
+        delay:    200
+        dmg_mult: 175
+      resists:
+        immune_status: [gravity, light_sleep, dark_sleep]
+        rank_element:
+          fire:  11
+          light: 10
+          dark:  10
+        rank_status:
+          light_sleep: 10
+          dark_sleep:  10
+          blind:       10
+      render:
+        look:
+          type:  standard
+          model: 1793
+        entity_flags: 157
+        name_prefix:   32
+        model_size:     2
+        hitbox:        45
+      behaviors:
+        flags:          [no_turn]
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Chigoe:
+    id:            714
+    species:       chigoe
+    type:          [battlefield]
+    roam:          [stealth]
+    skill_list_id: 64
+    attributes:
+      combat:
+        skill: dagger
+        delay: 150
+      jobs: [thf, thf]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    2
+          thunder:  1
+          water:   -1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         2
+          poison:      -1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1747
+        entity_flags:  641
+        animation_sub:   8
+        hitbox:          5
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3200
+
+  Colibri:
+    id:            765
+    species:       colibri
+    skill_list_id: 72
+    attributes:
+      combat:
+        skill: dagger
+        delay: 220
+      jobs: [rdm, rdm]
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -1
+          ice:     -2
+          wind:     6
+          thunder: -1
+          water:   -1
+          dark:    -2
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     6
+          poison:     -1
+          dark_sleep: -2
+          blind:      -2
+      render:
+        look:
+          type:  standard
+          model: 1720
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+
+  Dahak:
+    id:            894
+    species:       dahak
+    skill_list_id: 2007
+    attributes:
+      combat:
+        skill: staff
+      resists:
+        rank_element:
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
+        rank_status:
+          paralyze:    2
+          bind:        2
+          silence:     2
+          slow:        2
+          poison:      2
+          light_sleep: 2
+          dark_sleep:  2
+          blind:       2
+      render:
+        look:
+          type:  standard
+          model: 421
+        entity_flags: 133
+        model_size:     2
+        hitbox:        39
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+
+  Demented_Jalaawa:
+    id:            967
+    species:       soulflayer
+    spell_list_id: 21
+    skill_list_id: 233
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      resists:
+        rank_element:
+          ice:    2
+          water:  9
+          light: -1
+          dark:  11
+        rank_status:
+          paralyze:     2
+          bind:         2
+          poison:       9
+          light_sleep: -1
+          dark_sleep:  11
+          blind:       11
+      render:
+        look:
+          type:  standard
+          model: 1775
+        model_size:  2
+        hitbox:     20
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8900
+    loot:
+      drops:
+        - chance: always
+          item:   anus_doublet
+
+  Empathic_Flan:
+    id:            1209
+    species:       flan
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9150
+    loot:
+      drops:
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Flux_Flan:
+    id:            1372
+    species:       flan
+    type:          [notorious]
+    spell_list_id: 21
+    skill_list_id: 112
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        dmg_physical:
+          slashing: -1250
+          blunt:    -2500
+          h2h:      -2500
+        rank_element:
+          fire:    -1
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder: -1
+          water:    3
+          light:   -1
+          dark:     2
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:       3
+          light_sleep: -1
+          dark_sleep:   2
+          blind:        2
+      render:
+        look:
+          type:  standard
+          model: 1799
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8900
+
+  Gate_Widow:
+    id:            1477
+    species:       spider
+    skill_list_id: 236
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -1
+          water:   -1
+        rank_status:
+          paralyze: -3
+          bind:     -3
+          poison:   -1
+      render:
+        look:
+          type:  standard
+          model: 313
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+    loot:
+      drops:
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: super_rare
+          item:   cotton_coin_purse
+        - chance: uncommon
+          item:   machas_cuffs
+        - chance: rare
+          item:   enlils_brayettes
+
+  Hunting_Wasp:
+    id:            2014
+    species:       yellow_bee
+    type:          [notorious]
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+        hitbox: 8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3200
+
+  Long-Bowed_Chariot:
+    id:            2433
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1823
+        model_size:  3
+        hitbox:     41
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Long-Bowed_Chariot_2:
+    id:            2433
+    display_name:  Long-Bowed_Chariot
+    species:       chariot
+    type:          [notorious]
+    skill_list_id: 63
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 320
+      resists:
+        rank_element:
+          ice:      1
+          wind:     1
+          earth:    1
+          thunder:  5
+          water:   -1
+          light:    6
+          dark:     1
+        rank_status:
+          paralyze:     1
+          bind:         1
+          silence:      1
+          slow:         1
+          poison:      -1
+          light_sleep:  6
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 1823
+        model_size:  3
+        hitbox:     41
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 45600
+    loot:
+      drops:
+        - chance: common
+          item:   linen_coin_purse
+        - chance: always
+          one_of: [tsukikazu_haidate, freyrs_ledelsens, phoboss_mask, eas_dastanas, phoboss_cuirass, bodbs_crown, bodbs_robe]
+        - chance: always
+          one_of: [tsukikazu_haidate, freyrs_ledelsens, phoboss_mask, eas_dastanas, phoboss_cuirass, bodbs_crown, bodbs_robe]
+
+  Mad_Bomber:
+    id:            2471
+    species:       bomb
+    type:          [notorious]
+    skill_list_id: 56
+    attributes:
+      combat:
+        skill: axe
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      4
+          wind:     4
+          earth:    4
+          thunder:  4
+          water:    4
+          light:    4
+          dark:     4
+        rank_status:
+          paralyze:    4
+          bind:        4
+          silence:     4
+          slow:        4
+          poison:      4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
+      render:
+        look:
+          type:  standard
+          model: 282
+        model_size:  1
+        hitbox:     12
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 19000
+
+  Peryton:
+    id:            3120
+    species:       roc
+    skill_list_id: 125
+    attributes:
+      combat:
+        skill: club
+      resists:
+        dmg_physical:
+          slashing: -2500
+          piercing:  2500
+          blunt:    -2500
+        rank_element:
+          fire:     1
+          ice:     -3
+          wind:     4
+          earth:    1
+          thunder:  1
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      4
+          slow:         1
+          poison:       1
+          light_sleep:  1
+          dark_sleep:   1
+          blind:        1
+      render:
+        look:
+          type:  standard
+          model: 336
+        entity_flags: 129
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: super_rare
+          item:   cotton_coin_purse
+        - chance: rare
+          item:   freyas_jerkin
+        - chance: rare
+          item:   enlils_brayettes
+
+  Reactionary_Rampart:
+    id:            3338
+    species:       rampart
+    skill_list_id: 209
+    attributes:
+      combat:
+        skill: scythe
+        delay: 320
+      resists:
+        rank_element:
+          fire:    -3
+          ice:      1
+          wind:     4
+          earth:    1
+          thunder:  3
+          water:    1
+          light:    1
+          dark:     1
+        rank_status:
+          paralyze:    1
+          bind:        1
+          silence:     4
+          slow:        1
+          poison:      1
+          light_sleep: 1
+          dark_sleep:  1
+          blind:       1
+      render:
+        look:
+          type:  standard
+          model: 1818
+        model_size:  2
+        hitbox:     30
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5955
+    loot:
+      drops:
+        - chance: uncommon
+          item:   bhaflau_card
+        - chance: uncommon
+          item:   piece_of_alexandrite
+        - chance: rare
+          item:   piece_of_alexandrite
+        - chance: 3
+          item:   piece_of_alexandrite
+
+  Skirmish_Pephredo:
+    id:            3651
+    species:       yellow_bee
+    type:          [notorious]
+    skill_list_id: 48
+    attributes:
+      combat:
+        skill: sword
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          wind:     2
+          earth:   -2
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          silence:      2
+          slow:        -2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 272
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5270
+    loot:
+      drops:
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: super_rare
+          item:   cotton_coin_purse
+        - chance: rare
+          item:   hikazu_sune-ate
+        - chance: rare
+          item:   freyas_mask
+
+  Sulfur_Scorpion:
+    id:            3808
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4400
+    loot:
+      drops:
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Sulfur_Scorpion_2:
+    id:            3808
+    display_name:  Sulfur_Scorpion
+    species:       scorpion
+    skill_list_id: 217
+    attributes:
+      combat:
+        skill: scythe
+        delay: 280
+      resists:
+        rank_element:
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -3
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -3
+      render:
+        look:
+          type:  standard
+          model: 284
+        entity_flags: 131
+        model_size:     1
+        hitbox:        27
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    loot:
+      drops:
+        - chance: very_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Tragopan:
+    id:            3984
+    species:       bird
+    skill_list_id: 2089
+    attributes:
+      combat:
+        skill: dagger
+      resists:
+        dmg_physical:
+          piercing: 2500
+        rank_element:
+          fire:    -2
+          ice:     -3
+          thunder: -2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -3
+          bind:        -3
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 445
+        entity_flags: 133
+        model_size:     2
+        hitbox:        22
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3940
+
+  Troll_Cameist:
+    id:            4010
+    species:       troll
+    spell_list_id: 3
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 230
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Troll_Cameist_2:
+    id:            4010
+    display_name:  Troll_Cameist
+    species:       troll
+    spell_list_id: 3
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 230
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Cameist_3:
+    id:            4010
+    display_name:  Troll_Cameist
+    species:       troll
+    spell_list_id: 3
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: great_sword
+        delay: 230
+      jobs: [rdm, rdm]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1708
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7400
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Engraver:
+    id:            4015
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [pup, pup]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1712
+        entity_flags:  131
+        animation_sub:   1
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Troll_Engraver_2:
+    id:            4015
+    display_name:  Troll_Engraver
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [pup, pup]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1712
+        entity_flags:  131
+        animation_sub:   1
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5900
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Engraver_3:
+    id:            4015
+    display_name:  Troll_Engraver
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [pup, pup]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1712
+        entity_flags:  131
+        animation_sub:   1
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 76000
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Gemologist:
+    id:            4017
+    species:       troll
+    spell_list_id: 4
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1689
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Troll_Gemologist_2:
+    id:            4017
+    display_name:  Troll_Gemologist
+    species:       troll
+    spell_list_id: 4
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1689
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4500
+    loot:
+      drops:
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Gemologist_3:
+    id:            4017
+    display_name:  Troll_Gemologist
+    species:       troll
+    spell_list_id: 4
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: dagger
+        delay: 280
+      jobs: [pld, pld]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1689
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7700
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Ironworker:
+    id:            4021
+    species:       troll
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1686
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4800
+    loot:
+      drops:
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Ironworker_2:
+    id:            4021
+    display_name:  Troll_Ironworker
+    species:       troll
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1686
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6250
+    loot:
+      drops:
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Ironworker_3:
+    id:            4021
+    display_name:  Troll_Ironworker
+    species:       troll
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1686
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6600
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Ironworker_4:
+    id:            4021
+    display_name:  Troll_Ironworker
+    species:       troll
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1686
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7800
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Lapidarist:
+    id:            4022
+    species:       troll
+    spell_list_id: 5
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1684
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Troll_Lapidarist_2:
+    id:            4022
+    display_name:  Troll_Lapidarist
+    species:       troll
+    spell_list_id: 5
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1684
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4800
+    loot:
+      drops:
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Lapidarist_3:
+    id:            4022
+    display_name:  Troll_Lapidarist
+    species:       troll
+    spell_list_id: 5
+    skill_list_id: 247
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [drk, drk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1684
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7900
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Smelter:
+    id:            4030
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: axe
+        delay: 230
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1707
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Troll_Smelter_2:
+    id:            4030
+    display_name:  Troll_Smelter
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: axe
+        delay: 230
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1707
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5500
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Smelter_3:
+    id:            4030
+    display_name:  Troll_Smelter
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: axe
+        delay: 230
+      jobs: [rng, rng]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1707
+        entity_flags: 131
+        model_size:     1
+        hitbox:        17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7300
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Stoneworker:
+    id:            4032
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1712
+        entity_flags:  131
+        animation_sub:   1
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+
+  Troll_Stoneworker_2:
+    id:            4032
+    display_name:  Troll_Stoneworker
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1712
+        entity_flags:  131
+        animation_sub:   1
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6600
+    loot:
+      drops:
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Troll_Stoneworker_3:
+    id:            4032
+    display_name:  Troll_Stoneworker
+    species:       troll
+    skill_list_id: 246
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      resists:
+        rank_element:
+          fire:   3
+          wind:  -1
+          water: -2
+          light: -1
+          dark:  -1
+        rank_status:
+          silence:     -1
+          poison:      -2
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1712
+        entity_flags:  131
+        animation_sub:   1
+        model_size:      1
+        hitbox:         17
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8650
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Trolls_Automaton:
+    id:            4035
+    species:       automaton
+    spell_list_id: 567
+    skill_list_id: 363
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+        entity_flags: 131
+        model_size:     2
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Trolls_Automaton_2:
+    id:            4035
+    display_name:  Trolls_Automaton
+    species:       automaton
+    spell_list_id: 567
+    skill_list_id: 363
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+        entity_flags: 131
+        model_size:     2
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4065
+
+  Trolls_Automaton_3:
+    id:            4035
+    display_name:  Trolls_Automaton
+    species:       automaton
+    spell_list_id: 567
+    skill_list_id: 363
+    attributes:
+      combat:
+        skill: club
+        delay: 320
+      jobs: [whm, whm]
+      resists:
+        rank_element:
+          fire:    -1
+          ice:     -1
+          wind:    -1
+          earth:   -1
+          thunder: -1
+          water:   -1
+          light:   -1
+          dark:    -1
+        rank_status:
+          paralyze:    -1
+          bind:        -1
+          silence:     -1
+          slow:        -1
+          poison:      -1
+          light_sleep: -1
+          dark_sleep:  -1
+          blind:       -1
+      render:
+        look:
+          type:  automaton
+          model: 1977
+        entity_flags: 131
+        model_size:     2
+        hitbox:         8
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4840
+
+  Wamouracampa:
+    id:            4281
+    species:       wamouracampa
+    skill_list_id: 254
+    attributes:
+      combat:
+        skill: scythe
+        delay: 265
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1802
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Wamouracampa_2:
+    id:            4281
+    display_name:  Wamouracampa
+    species:       wamouracampa
+    skill_list_id: 254
+    attributes:
+      combat:
+        skill: scythe
+        delay: 265
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1802
+        entity_flags:  131
+        animation_sub:   4
+        model_size:      1
+        hitbox:         12
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6150
+    loot:
+      drops:
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Wandering_Wamoura:
+    id:            4286
+    species:       wamoura
+    skill_list_id: 253
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1808
+        hitbox: 17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Wandering_Wamoura_2:
+    id:            4286
+    display_name:  Wandering_Wamoura
+    species:       wamoura
+    skill_list_id: 253
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1808
+        hitbox: 17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4100
+    loot:
+      drops:
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   opacus_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: uncommon
+          item:   praecipitatio_cell
+        - chance: super_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Wandering_Wamoura_3:
+    id:            4286
+    display_name:  Wandering_Wamoura
+    species:       wamoura
+    skill_list_id: 253
+    attributes:
+      combat:
+        skill: scythe
+      resists:
+        rank_element:
+          fire:  11
+          ice:   -2
+          wind:   2
+          earth: -1
+          water: -2
+          dark:  -1
+        rank_status:
+          paralyze:   -2
+          bind:       -2
+          silence:     2
+          slow:       -1
+          poison:     -2
+          dark_sleep: -1
+          blind:      -1
+      render:
+        look:
+          type:  standard
+          model: 1808
+        hitbox: 17
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9800
+    loot:
+      drops:
+        - chance: ultra_rare
+          one_of: [hoshikazu_tekko, enyos_leggings, nemains_sabots, njords_trousers, anus_tiara]
+
+  Zebra_Zachary:
+    id:            4497
+    species:       cockatrice
+    type:          [notorious]
+    skill_list_id: 70
+    attributes:
+      combat:
+        skill: club
+      resists:
+        rank_element:
+          fire:    -2
+          ice:     -2
+          wind:    -3
+          earth:    2
+          thunder:  2
+          water:   -2
+          light:   -2
+          dark:    -2
+        rank_status:
+          paralyze:    -2
+          bind:        -2
+          silence:     -3
+          slow:         2
+          poison:      -2
+          light_sleep: -2
+          dark_sleep:  -2
+          blind:       -2
+      render:
+        look:
+          type:  standard
+          model: 289
+      behaviors:
+        aggressive: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7450
+    loot:
+      drops:
+        - chance: always
+          item:   cotton_coin_purse
+        - chance: super_rare
+          item:   cotton_coin_purse
+        - chance: rare
+          item:   deimoss_gauntlets
+        - chance: rare
+          item:   freyas_mask
+
+spawns:
+  17084427:
+    template: Carmine_Eruca
+    at:       [388.150, 15.500, -460.580, 216]
+    level:    [70, 72]
+  17084428:
+    template: Carmine_Eruca
+    at:       [381.260, 15.607, -448.180, 142]
+    level:    [70, 72]
+  17084429:
+    template: Bifrons
+    at:       [376.170, 15.500, -452.210, 240]
+    level:    [70, 72]
+  17084430:
+    template: Carmine_Eruca
+    at:       [467.630, 11.619, -375.970, 46]
+    level:    [70, 72]
+  17084431:
+    template: Carmine_Eruca
+    at:       [466.910, 11.517, -377.180, 35]
+    level:    [70, 72]
+  17084432:
+    template: Carmine_Eruca
+    at:       [450.090, 11.500, -378.850, 115]
+    level:    [70, 72]
+  17084433:
+    template: Bifrons
+    at:       [464.070, 11.788, -370.750, 245]
+    level:    [70, 72]
+  17084434:
+    template: Carmine_Eruca
+    at:       [468.993, 4.000, -250.871, 180]
+    level:    [70, 72]
+  17084435:
+    template: Carmine_Eruca
+    at:       [450.990, 3.974, -248.580, 242]
+    level:    [70, 72]
+  17084436:
+    template: Carmine_Eruca
+    at:       [450.882, 4.000, -268.769, 245]
+    level:    [70, 72]
+  17084437:
+    template: Troll_Gemologist_2
+    script:   Troll_Gemologist
+    at:       [469.127, 4.000, -269.015, 150]
+    level:    [71, 73]
+  17084438:
+    template: Carmine_Eruca
+    at:       [388.950, 3.936, -206.760, 177]
+    level:    [70, 72]
+  17084439:
+    template: Carmine_Eruca
+    at:       [393.600, 3.953, -226.660, 182]
+    level:    [70, 72]
+  17084440:
+    template: Carmine_Eruca
+    at:       [392.280, 3.943, -209.540, 114]
+    level:    [70, 72]
+  17084441:
+    template: Carmine_Eruca
+    at:       [406.610, 3.944, -208.360, 162]
+    level:    [70, 72]
+  17084442:
+    template: Carmine_Eruca
+    at:       [399.320, 3.952, -223.470, 39]
+    level:    [70, 72]
+  17084443:
+    template: Carmine_Eruca
+    at:       [405.370, 3.936, -201.830, 243]
+    level:    [70, 72]
+  17084444:
+    template: Bifrons
+    at:       [395.800, 3.973, -218.160, 67]
+    level:    [70, 72]
+  17084445:
+    template: Bifrons
+    at:       [405.650, 3.914, -202.040, 134]
+    level:    [70, 72]
+  17084446:
+    template: Troll_Gemologist_2
+    script:   Troll_Gemologist
+    at:       [407.910, 3.949, -216.190, 51]
+    level:    [71, 73]
+  17084447:
+    template: Bifrons
+    at:       [426.660, 12.078, -418.610, 145]
+    level:    [70, 72]
+  17084448:
+    template: Bifrons
+    at:       [428.317, 12.000, -379.946, 165]
+    level:    [70, 72]
+  17084449:
+    template: Bifrons
+    at:       [459.930, 6.114, -300.720, 117]
+    level:    [70, 72]
+  17084450:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [309.560, 15.854, -449.390, 247]
+    level:    [70, 72]
+  17084451:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [299.790, 15.500, -452.070, 102]
+    level:    [70, 72]
+  17084452:
+    template: Bifrons
+    at:       [295.005, 16.000, -468.065, 56]
+    level:    [70, 72]
+  17084453:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [221.520, 11.348, -374.320, 231]
+    level:    [70, 72]
+  17084454:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [210.510, 11.553, -372.350, 185]
+    level:    [70, 72]
+  17084455:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [211.020, 11.817, -368.590, 169]
+    level:    [70, 72]
+  17084456:
+    template: Bifrons
+    at:       [259.286, 12.000, -377.717, 90]
+    level:    [70, 72]
+  17084457:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [211.196, 4.000, -268.985, 165]
+    level:    [70, 72]
+  17084458:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [211.057, 4.000, -251.163, 230]
+    level:    [70, 72]
+  17084459:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [224.920, 3.967, -246.890, 165]
+    level:    [70, 72]
+  17084460:
+    template: Troll_Lapidarist_2
+    script:   Troll_Lapidarist
+    at:       [229.055, 4.000, -269.199, 141]
+    level:    [71, 73]
+  17084461:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [284.650, 3.914, -209.680, 168]
+    level:    [70, 72]
+  17084462:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [276.400, 3.778, -213.390, 135]
+    level:    [70, 72]
+  17084463:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [272.180, 3.773, -204.750, 252]
+    level:    [70, 72]
+  17084464:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [268.420, 3.661, -205.510, 73]
+    level:    [70, 72]
+  17084465:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [274.190, 3.920, -201.080, 132]
+    level:    [70, 72]
+  17084466:
+    template: Wamouracampa_2
+    script:   Wamouracampa
+    at:       [274.630, 3.654, -226.290, 236]
+    level:    [70, 72]
+  17084467:
+    template: Bifrons
+    at:       [285.510, 3.913, -231.100, 116]
+    level:    [70, 72]
+  17084468:
+    template: Bifrons
+    at:       [272.480, 3.918, -218.480, 76]
+    level:    [70, 72]
+  17084469:
+    template: Troll_Lapidarist_2
+    script:   Troll_Lapidarist
+    at:       [286.598, 4.000, -224.343, 233]
+    level:    [71, 73]
+  17084470:
+    template: Bifrons
+    at:       [261.720, 14.291, -419.000, 133]
+    level:    [70, 72]
+  17084471:
+    template: Bifrons
+    at:       [212.654, 12.000, -389.131, 54]
+    level:    [70, 72]
+  17084472:
+    template: Bifrons
+    at:       [219.782, 8.000, -315.622, 194]
+    level:    [70, 72]
+  17084473:
+    template: Troll_Ironworker
+    at:       [338.210, -0.619, -332.980, 15]
+    level:    [71, 73]
+  17084474:
+    template: Troll_Ironworker
+    at:       [342.290, -0.500, -335.770, 166]
+    level:    [71, 73]
+  17084475:
+    template: Wandering_Wamoura_2
+    script:   Wandering_Wamoura
+    at:       [322.600, -0.597, -348.750, 176]
+    level:    [71, 72]
+  17084476:
+    template: Wandering_Wamoura_2
+    script:   Wandering_Wamoura
+    at:       [321.230, -0.500, -324.860, 114]
+    level:    [71, 72]
+  17084477:
+    template: Wandering_Wamoura_2
+    script:   Wandering_Wamoura
+    at:       [324.340, -0.500, -321.330, 22]
+    level:    [71, 72]
+  17084478:
+    template: Sulfur_Scorpion
+    at:       [340.270, -0.138, -308.330, 170]
+    level:    [71, 73]
+  17084479:
+    template: Sulfur_Scorpion
+    at:       [348.270, -0.500, -331.570, 32]
+    level:    [71, 73]
+  17084480:
+    template: Sulfur_Scorpion
+    at:       [348.720, -0.500, -320.770, 100]
+    level:    [71, 73]
+  17084481:
+    template: Mad_Bomber
+    at:       [229.197, 16.000, -460.000, 241]
+    level:    [73, 73]
+  17084482:
+    template: Empathic_Flan
+    at:       [340.000, -4.000, 300.000, 7]
+    level:    [73, 74]
+  17084483:
+    template: Empathic_Flan
+    at:       [380.000, -4.000, 260.000, 176]
+    level:    [73, 74]
+  17084484:
+    template: Empathic_Flan
+    at:       [340.000, -4.000, 220.000, 127]
+    level:    [73, 74]
+  17084485:
+    template: Empathic_Flan
+    at:       [300.000, -4.000, 260.000, 113]
+    level:    [73, 74]
+  17084486:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [489.733, -0.499, 299.221, 191]
+    level:    [74, 75]
+  17084487:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [497.607, -0.500, 290.592, 248]
+    level:    [74, 75]
+  17084488:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [508.812, -0.111, 310.127, 214]
+    level:    [74, 75]
+  17084489:
+    template: Troll_Smelter_2
+    script:   Troll_Smelter
+    at:       [490.092, -0.272, 298.825, 69]
+    level:    [75, 77]
+  17084490:
+    template: Troll_Smelter_2
+    script:   Troll_Smelter
+    at:       [494.129, -0.177, 295.666, 102]
+    level:    [75, 77]
+  17084491:
+    template: Troll_Ironworker_2
+    script:   Troll_Ironworker
+    at:       [491.335, -0.116, 291.834, 125]
+    level:    [75, 77]
+  17084492:
+    template: Troll_Ironworker_2
+    script:   Troll_Ironworker
+    at:       [488.515, -0.171, 309.114, 184]
+    level:    [75, 77]
+  17084493:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [409.258, -0.500, 219.550]
+    level:    [74, 75]
+  17084494:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [418.456, -0.500, 214.860, 184]
+    level:    [74, 75]
+  17084495:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [411.502, -0.500, 228.505]
+    level:    [74, 75]
+  17084496:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [429.680, -0.500, 216.352, 183]
+    level:    [74, 75]
+  17084497:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [414.190, -0.177, 209.602, 5]
+    level:    [74, 75]
+  17084498:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [407.631, -0.449, 218.831]
+    level:    [74, 75]
+  17084499:
+    template: Troll_Smelter_2
+    script:   Troll_Smelter
+    at:       [417.656, -0.500, 214.511, 191]
+    level:    [75, 77]
+  17084500:
+    template: Troll_Ironworker_2
+    script:   Troll_Ironworker
+    at:       [419.915, -0.500, 212.106, 179]
+    level:    [75, 77]
+  17084501:
+    template: Troll_Smelter_2
+    script:   Troll_Smelter
+    at:       [416.015, 4.012, 383.069, 212]
+    level:    [75, 77]
+  17084502:
+    template: Troll_Smelter_2
+    script:   Troll_Smelter
+    at:       [426.150, 3.851, 381.079, 145]
+    level:    [75, 77]
+  17084503:
+    template: Troll_Ironworker_3
+    script:   Troll_Stoneworker
+    at:       [433.558, 3.430, 377.252, 56]
+    level:    [75, 77]
+  17084504:
+    template: Troll_Cameist_2
+    script:   Troll_Cameist
+    at:       [429.600, 3.466, 384.214, 166]
+    level:    [75, 77]
+  17084505:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [427.948, 3.859, 380.533, 57]
+    level:    [74, 75]
+  17084506:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [439.266, 3.461, 369.102, 70]
+    level:    [74, 75]
+  17084507:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [434.282, 3.500, 350.330, 145]
+    level:    [74, 75]
+  17084508:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [446.873, 3.816, 356.422, 208]
+    level:    [74, 75]
+  17084509:
+    template: Troll_Ironworker_3
+    script:   Troll_Stoneworker
+    at:       [419.548, 3.952, 370.489, 181]
+    level:    [75, 77]
+  17084510:
+    template: Troll_Cameist_2
+    script:   Troll_Cameist
+    at:       [422.805, 4.012, 372.639, 237]
+    level:    [75, 77]
+  17084511:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [423.590, -0.485, 127.594, 45]
+    level:    [74, 75]
+  17084512:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [423.230, -0.500, 133.380, 88]
+    level:    [74, 75]
+  17084513:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [421.930, -0.500, 154.477, 4]
+    level:    [74, 75]
+  17084514:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [414.980, -0.500, 142.500, 94]
+    level:    [74, 75]
+  17084515:
+    template: Troll_Smelter_2
+    script:   Troll_Smelter
+    at:       [440.180, -0.492, 126.274, 93]
+    level:    [75, 77]
+  17084516:
+    template: Troll_Ironworker_3
+    script:   Troll_Stoneworker
+    at:       [439.440, -0.500, 156.761, 37]
+    level:    [75, 77]
+  17084517:
+    template: Troll_Cameist_2
+    script:   Troll_Cameist
+    at:       [431.930, -0.921, 152.725, 192]
+    level:    [75, 77]
+  17084518:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [432.180, -0.500, 145.520, 18]
+    level:    [74, 75]
+  17084519:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [407.220, -0.714, 120.955, 88]
+    level:    [74, 75]
+  17084520:
+    template: Sulfur_Scorpion_2
+    script:   Sulfur_Scorpion
+    at:       [399.540, -0.739, 128.253, 116]
+    level:    [74, 75]
+  17084521:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [178.840, -0.474, 294.101, 54]
+    level:    [74, 75]
+  17084522:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [181.848, -0.365, 312.326, 142]
+    level:    [74, 75]
+  17084523:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [171.300, -0.076, 291.626, 127]
+    level:    [74, 75]
+  17084524:
+    template: Troll_Engraver_2
+    script:   Troll_Engraver
+    at:       [170.917, -0.167, 311.498, 135]
+    level:    [75, 77]
+  17084525:
+    template: Trolls_Automaton_2
+    script:   Trolls_Automaton
+    at:       [170.917, -0.500, 311.498, 135]
+    level:    [70, 71]
+  17084526:
+    template: Troll_Engraver_2
+    script:   Troll_Engraver
+    at:       [185.285, -0.108, 290.365, 253]
+    level:    [75, 77]
+  17084527:
+    template: Trolls_Automaton_2
+    script:   Trolls_Automaton
+    at:       [167.606, -0.449, 303.664, 77]
+    level:    [70, 71]
+  17084528:
+    template: Troll_Ironworker_2
+    script:   Troll_Ironworker
+    at:       [183.221, -0.241, 303.615, 217]
+    level:    [75, 77]
+  17084529:
+    template: Troll_Ironworker_2
+    script:   Troll_Ironworker
+    at:       [179.591, -0.384, 296.482, 164]
+    level:    [75, 77]
+  17084530:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [249.022, -0.500, 229.764]
+    level:    [74, 75]
+  17084531:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [247.305, -0.500, 232.703]
+    level:    [74, 75]
+  17084532:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [263.539, -0.500, 212.340, 224]
+    level:    [74, 75]
+  17084533:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [268.163, -0.500, 223.044]
+    level:    [74, 75]
+  17084534:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [272.393, -0.449, 218.814]
+    level:    [74, 75]
+  17084535:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [259.120, -0.500, 232.087]
+    level:    [74, 75]
+  17084536:
+    template: Troll_Engraver_2
+    script:   Troll_Engraver
+    at:       [258.426, -0.500, 221.581]
+    level:    [75, 77]
+  17084537:
+    template: Trolls_Automaton_2
+    script:   Trolls_Automaton
+    at:       [239.770, -0.266, 219.251, 141]
+    level:    [70, 71]
+  17084538:
+    template: Troll_Ironworker_2
+    script:   Troll_Ironworker
+    at:       [249.553, -0.500, 230.294]
+    level:    [75, 77]
+  17084539:
+    template: Troll_Engraver_2
+    script:   Troll_Engraver
+    at:       [270.465, 3.499, 378.762, 184]
+    level:    [75, 77]
+  17084540:
+    template: Trolls_Automaton_2
+    script:   Trolls_Automaton
+    at:       [272.792, 3.499, 374.652, 177]
+    level:    [70, 71]
+  17084541:
+    template: Troll_Engraver_2
+    script:   Troll_Engraver
+    at:       [262.099, 3.500, 384.199, 24]
+    level:    [75, 77]
+  17084542:
+    template: Trolls_Automaton_2
+    script:   Trolls_Automaton
+    at:       [260.149, 3.513, 386.085, 26]
+    level:    [70, 71]
+  17084543:
+    template: Troll_Ironworker_3
+    script:   Troll_Stoneworker
+    at:       [249.978, 3.488, 383.689, 105]
+    level:    [75, 77]
+  17084544:
+    template: Troll_Cameist_2
+    script:   Troll_Cameist
+    at:       [254.358, 3.500, 382.203, 76]
+    level:    [75, 77]
+  17084545:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [246.197, 3.483, 401.592, 214]
+    level:    [74, 75]
+  17084546:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [242.859, 3.075, 364.055, 172]
+    level:    [74, 75]
+  17084547:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [241.081, 3.104, 388.377, 154]
+    level:    [74, 75]
+  17084548:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [246.570, 3.499, 360.489, 122]
+    level:    [74, 75]
+  17084549:
+    template: Troll_Ironworker_3
+    script:   Troll_Stoneworker
+    at:       [254.335, 3.499, 383.239, 93]
+    level:    [75, 77]
+  17084550:
+    template: Troll_Cameist_2
+    script:   Troll_Cameist
+    at:       [273.836, 3.496, 382.569, 211]
+    level:    [75, 77]
+  17084551:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [272.310, -0.499, 140.567, 28]
+    level:    [74, 75]
+  17084552:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [251.570, -0.500, 139.276, 191]
+    level:    [74, 75]
+  17084553:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [259.130, -0.791, 128.664, 111]
+    level:    [74, 75]
+  17084554:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [269.320, -0.500, 147.218, 155]
+    level:    [74, 75]
+  17084555:
+    template: Troll_Engraver_2
+    script:   Troll_Engraver
+    at:       [269.500, -0.537, 119.117, 116]
+    level:    [75, 77]
+  17084556:
+    template: Trolls_Automaton_2
+    script:   Trolls_Automaton
+    at:       [275.190, -0.574, 124.950, 159]
+    level:    [70, 71]
+  17084557:
+    template: Troll_Stoneworker_2
+    script:   Troll_Stoneworker
+    at:       [252.660, -0.533, 120.613, 155]
+    level:    [75, 77]
+  17084558:
+    template: Troll_Cameist_2
+    script:   Troll_Cameist
+    at:       [276.800, -0.499, 129.464, 81]
+    level:    [75, 77]
+  17084559:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [254.660, -0.760, 126.904, 166]
+    level:    [74, 75]
+  17084560:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [259.770, -0.500, 120.913, 93]
+    level:    [74, 75]
+  17084561:
+    template: Wandering_Wamoura_3
+    script:   Wandering_Wamoura
+    at:       [254.300, -0.483, 163.610, 124]
+    level:    [74, 75]
+  17084562:
+    template: Troll_Cameist_3
+    script:   Troll_Cameist
+    at:       [-222.613, -0.451, -315.168, 212]
+    level:    [77, 78]
+  17084563:
+    template: Troll_Gemologist_3
+    script:   Troll_Gemologist
+    at:       [-226.875, -0.505, -290.922, 196]
+    level:    [77, 78]
+  17084564:
+    template: Troll_Smelter_3
+    script:   Troll_Smelter
+    at:       [-217.705, -0.505, -294.690, 46]
+    level:    [77, 78]
+  17084565:
+    template: Troll_Lapidarist_3
+    script:   Troll_Lapidarist
+    at:       [-216.265, -0.543, -303.855, 68]
+    level:    [77, 78]
+  17084566:
+    template: Troll_Stoneworker_3
+    script:   Troll_Stoneworker
+    at:       [-264.562, -0.060, -264.199, 225]
+    level:    [77, 78]
+  17084567:
+    template: Troll_Stoneworker_3
+    script:   Troll_Stoneworker
+    at:       [-264.932, -0.243, -253.177, 89]
+    level:    [77, 78]
+  17084568:
+    template: Troll_Stoneworker_3
+    script:   Troll_Stoneworker
+    at:       [-252.161, -0.282, -259.687, 100]
+    level:    [77, 78]
+  17084569:
+    template: Troll_Gemologist_3
+    script:   Troll_Gemologist
+    at:       [-460.145, -0.215, -285.261, 203]
+    level:    [77, 78]
+  17084570:
+    template: Troll_Smelter_3
+    script:   Troll_Smelter
+    at:       [-462.790, -0.449, -311.673]
+    level:    [77, 78]
+  17084571:
+    template: Troll_Cameist_3
+    script:   Troll_Cameist
+    at:       [-466.815, -0.449, -315.698]
+    level:    [77, 78]
+  17084572:
+    template: Troll_Ironworker_4
+    script:   Troll_Ironworker
+    at:       [-455.773, -0.548, -297.452, 57]
+    level:    [77, 78]
+  17084573:
+    template: Troll_Engraver_3
+    script:   Troll_Engraver
+    at:       [-427.867, -0.129, -268.722, 71]
+    level:    [77, 78]
+  17084574:
+    template: Trolls_Automaton_3
+    script:   Trolls_Automaton
+    at:       [-422.700, -0.483, -258.260, 111]
+    level:    [77, 78]
+  17084575:
+    template: Troll_Engraver_3
+    script:   Troll_Engraver
+    at:       [-425.973, -0.112, -268.623, 95]
+    level:    [77, 78]
+  17084576:
+    template: Trolls_Automaton_3
+    script:   Trolls_Automaton
+    at:       [-419.700, -0.497, -266.500, 46]
+    level:    [77, 78]
+  17084577:
+    template: Troll_Engraver_3
+    script:   Troll_Engraver
+    at:       [-420.122, -0.407, -261.554, 230]
+    level:    [77, 78]
+  17084578:
+    template: Trolls_Automaton_3
+    script:   Trolls_Automaton
+    at:       [-423.400, -0.273, -253.960, 172]
+    level:    [77, 78]
+  17084579:
+    template: Troll_Stoneworker_3
+    script:   Troll_Stoneworker
+    at:       [-338.924, -0.478, -278.748, 213]
+    level:    [77, 78]
+  17084580:
+    template: Troll_Smelter_3
+    script:   Troll_Smelter
+    at:       [-359.364, -0.500, -245.938]
+    level:    [77, 78]
+  17084581:
+    template: Troll_Cameist_3
+    script:   Troll_Cameist
+    at:       [-326.245, -0.612, -253.684, 40]
+    level:    [77, 78]
+  17084582:
+    template: Troll_Ironworker_4
+    script:   Troll_Ironworker
+    at:       [-323.332, -0.500, -254.087, 100]
+    level:    [77, 78]
+  17084583:
+    template: Troll_Engraver_3
+    script:   Troll_Engraver
+    at:       [-345.479, -0.481, -280.660, 174]
+    level:    [77, 78]
+  17084584:
+    template: Trolls_Automaton_3
+    script:   Trolls_Automaton
+    at:       [-375.900, -0.444, -290.790, 130]
+    level:    [77, 78]
+  17084585:
+    template: Troll_Gemologist_3
+    script:   Troll_Gemologist
+    at:       [-319.327, -0.505, -264.616, 12]
+    level:    [77, 78]
+  17084586:
+    template: Troll_Lapidarist_3
+    script:   Troll_Lapidarist
+    at:       [-340.315, -0.314, -275.346, 156]
+    level:    [77, 78]
+  17084587:
+    template: Troll_Stoneworker_3
+    script:   Troll_Stoneworker
+    at:       [-346.941, -0.500, -277.045, 87]
+    level:    [77, 78]
+  17084588:
+    template: Troll_Engraver_3
+    script:   Troll_Engraver
+    at:       [-324.140, -0.500, -280.934, 116]
+    level:    [77, 78]
+  17084589:
+    template: Trolls_Automaton_3
+    script:   Trolls_Automaton
+    at:       [-329.400, -0.444, -255.500, 130]
+    level:    [77, 78]
+  17084590:
+    template: Troll_Gemologist_3
+    script:   Troll_Gemologist
+    at:       [-320.127, -0.500, -242.262, 41]
+    level:    [77, 78]
+  17084591:
+    template: Troll_Stoneworker_3
+    script:   Troll_Stoneworker
+    at:       [-320.995, -0.500, -267.388]
+    level:    [77, 78]
+  17084592:
+    template: Troll_Smelter_3
+    script:   Troll_Smelter
+    at:       [-323.761, -0.500, -281.846]
+    level:    [77, 78]
+  17084593:
+    template: Troll_Cameist_3
+    script:   Troll_Cameist
+    at:       [-355.927, -0.500, -238.486, 127]
+    level:    [77, 78]
+  17084594:
+    template: Troll_Ironworker_4
+    script:   Troll_Ironworker
+    at:       [-322.305, -1.000, -251.890]
+    level:    [77, 78]
+  17084595:
+    template: Troll_Engraver_3
+    script:   Troll_Engraver
+    at:       [-359.149, -0.500, -248.905, 192]
+    level:    [77, 78]
+  17084596:
+    template: Trolls_Automaton_3
+    script:   Trolls_Automaton
+    at:       [-354.900, -0.500, -244.000, 60]
+    level:    [77, 78]
+  17084597:
+    template: Troll_Gemologist_3
+    script:   Troll_Gemologist
+    at:       [-325.679, -0.587, -279.071, 12]
+    level:    [77, 78]
+  17084598:
+    template: Troll_Lapidarist_3
+    script:   Troll_Lapidarist
+    at:       [-315.696, -0.500, -250.907]
+    level:    [77, 78]
+  17084599:
+    template: Troll_Stoneworker_3
+    script:   Troll_Stoneworker
+    at:       [-327.223, -0.751, -281.294, 49]
+    level:    [77, 78]
+  17084600:
+    template: Troll_Engraver_3
+    script:   Troll_Engraver
+    at:       [-351.299, -0.500, -239.730, 249]
+    level:    [77, 78]
+  17084601:
+    template: Trolls_Automaton_3
+    script:   Trolls_Automaton
+    at:       [-315.300, -0.500, -256.000, 200]
+    level:    [77, 78]
+  17084602:
+    template: Troll_Gemologist_3
+    script:   Troll_Gemologist
+    at:       [-335.027, -0.500, -247.158, 54]
+    level:    [77, 78]
+  17084603:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-205.300, -0.225, -589.950, 194]
+    level:    [77, 78]
+  17084604:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-213.500, -0.082, -588.170, 178]
+    level:    [77, 78]
+  17084605:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-205.604, -0.068, -574.157, 189]
+    level:    [77, 78]
+  17084606:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-226.000, -0.020, -582.310, 211]
+    level:    [77, 78]
+  17084607:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-267.000, -0.500, -548.350, 228]
+    level:    [77, 78]
+  17084608:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-260.500, -0.407, -529.870, 241]
+    level:    [77, 78]
+  17084609:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-265.000, -0.123, -529.570, 133]
+    level:    [77, 78]
+  17084610:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-465.300, -0.070, -584.330, 246]
+    level:    [77, 78]
+  17084611:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-456.000, -0.119, -567.250, 51]
+    level:    [77, 78]
+  17084612:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-465.000, -0.138, -584.880, 51]
+    level:    [77, 78]
+  17084613:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-445.000, -0.230, -577.080, 105]
+    level:    [77, 78]
+  17084614:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-415.200, -0.485, -532.230, 26]
+    level:    [77, 78]
+  17084615:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-422.700, -0.314, -532.760, 37]
+    level:    [77, 78]
+  17084616:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-411.700, -0.107, -529.540, 142]
+    level:    [77, 78]
+  17084617:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-318.200, -0.068, -478.810, 200]
+    level:    [77, 78]
+  17084618:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-358.100, -0.499, -476.560, 232]
+    level:    [77, 78]
+  17084619:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-356.200, -0.493, -497.430, 169]
+    level:    [77, 78]
+  17084620:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-353.100, -0.493, -522.720, 131]
+    level:    [77, 78]
+  17084621:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-350.800, -0.499, -495.000, 60]
+    level:    [77, 78]
+  17084622:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-322.000, -0.499, -485.940, 67]
+    level:    [77, 78]
+  17084623:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-316.800, -0.500, -485.270]
+    level:    [77, 78]
+  17084624:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-321.800, -0.499, -521.400, 210]
+    level:    [77, 78]
+  17084625:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-351.600, -0.499, -517.770, 144]
+    level:    [77, 78]
+  17084626:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-356.000, -0.499, -480.230, 131]
+    level:    [77, 78]
+  17084627:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-356.700, -0.500, -475.110, 44]
+    level:    [77, 78]
+  17084628:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-348.300, -0.499, -504.400, 166]
+    level:    [77, 78]
+  17084629:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-355.100, -0.597, -482.710, 255]
+    level:    [77, 78]
+  17084630:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-329.300, -0.501, -518.900, 202]
+    level:    [77, 78]
+  17084631:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-328.300, -0.500, -480.050, 141]
+    level:    [77, 78]
+  17084632:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-322.900, -0.499, -490.670, 21]
+    level:    [77, 78]
+  17084633:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-351.600, -0.499, -505.970, 147]
+    level:    [77, 78]
+  17084634:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-320.600, -0.419, -485.010, 150]
+    level:    [77, 78]
+  17084635:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-321.500, -0.499, -517.690, 104]
+    level:    [77, 78]
+  17084636:
+    template: Black_Pudding_2
+    script:   Black_Pudding
+    at:       [-330.400, -0.499, -503.340, 100]
+    level:    [77, 78]
+  17084637:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-224.158, -4.500, -428.749, 128]
+    level:    [79, 81]
+  17084638:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-217.234, -4.170, -438.745, 64]
+    level:    [79, 81]
+  17084639:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-231.873, -4.498, -437.418, 245]
+    level:    [79, 81]
+  17084640:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-238.094, -4.215, -423.559, 188]
+    level:    [79, 81]
+  17084641:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-203.158, -4.500, -437.831, 99]
+    level:    [79, 81]
+  17084642:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-227.609, -4.499, -401.113, 15]
+    level:    [79, 81]
+  17084643:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-224.718, -4.500, -410.763, 102]
+    level:    [79, 81]
+  17084644:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-228.601, -4.499, -441.486, 6]
+    level:    [79, 81]
+  17084645:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-226.118, -4.500, -400.794, 114]
+    level:    [79, 81]
+  17084646:
+    template: Archaic_Gears_2
+    script:   Archaic_Gears
+    at:       [-452.001, -4.500, -423.971, 57]
+    level:    [79, 81]
+  17084647:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-441.245, -4.500, -402.908, 69]
+    level:    [79, 81]
+  17084648:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-481.089, -4.500, -427.330, 161]
+    level:    [79, 81]
+  17084649:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-480.882, -4.500, -402.800, 139]
+    level:    [79, 81]
+  17084650:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-443.175, -4.198, -419.373, 56]
+    level:    [79, 81]
+  17084651:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-439.715, -4.500, -404.829, 50]
+    level:    [79, 81]
+  17084652:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-453.631, -4.500, -397.390, 179]
+    level:    [79, 81]
+  17084653:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-458.264, -4.461, -431.467, 84]
+    level:    [79, 81]
+  17084654:
+    template: Archaic_Gear_2
+    script:   Archaic_Gear
+    at:       [-474.830, -4.499, -437.940, 117]
+    level:    [79, 81]
+  17084655:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-289.000, -0.039, -58.214, 195]
+    level:    [79, 81]
+  17084656:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-284.900, -0.008, -60.590, 217]
+    level:    [79, 81]
+  17084657:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-304.100, -0.037, -45.808, 111]
+    level:    [79, 81]
+  17084658:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-308.200, -4.296, 10.156, 14]
+    level:    [79, 81]
+  17084659:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-295.100, -4.225, 10.047, 113]
+    level:    [79, 81]
+  17084660:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-218.100, -4.494, 132.152, 88]
+    level:    [79, 81]
+  17084661:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-219.800, -4.494, 129.466, 152]
+    level:    [79, 81]
+  17084662:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-287.100, -0.016, 167.343, 68]
+    level:    [79, 81]
+  17084663:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-313.600, -0.083, 186.197, 188]
+    level:    [79, 81]
+  17084664:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-301.500, -0.004, 163.895, 130]
+    level:    [79, 81]
+  17084665:
+    template: Archaic_Chariot
+    at:       [-256.000, -3.997, 75.301, 195]
+    level:    [80, 81]
+  17084666:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-281.400, -3.992, 78.918, 16]
+    level:    [79, 81]
+  17084667:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-233.500, -4.028, 80.422, 43]
+    level:    [79, 81]
+  17084668:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-276.500, -3.996, 69.412, 49]
+    level:    [79, 81]
+  17084669:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-246.600, -4.000, 72.698, 163]
+    level:    [79, 81]
+  17084670:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-249.400, -3.999, 74.701, 6]
+    level:    [79, 81]
+  17084671:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-366.743, -0.023, -66.591, 233]
+    level:    [79, 81]
+  17084672:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-371.753, -0.061, -63.123, 102]
+    level:    [79, 81]
+  17084673:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-388.760, -0.096, -48.103, 157]
+    level:    [79, 81]
+  17084674:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-379.345, -4.476, 14.773, 52]
+    level:    [79, 81]
+  17084675:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-374.253, -4.281, 12.169, 7]
+    level:    [79, 81]
+  17084676:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-465.150, -4.333, 147.751, 89]
+    level:    [79, 81]
+  17084677:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-459.007, -4.405, 139.810, 248]
+    level:    [79, 81]
+  17084678:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-394.248, -0.127, 177.002, 55]
+    level:    [79, 81]
+  17084679:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-382.113, -0.147, 166.630, 162]
+    level:    [79, 81]
+  17084680:
+    template: Archaic_Gear_3
+    script:   Archaic_Gear
+    at:       [-381.841, -0.172, 193.960, 155]
+    level:    [79, 81]
+  17084681:
+    template: Archaic_Chariot
+    at:       [-421.688, -3.981, 85.915, 203]
+    level:    [80, 81]
+  17084682:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-405.164, -4.025, 91.341, 224]
+    level:    [79, 81]
+  17084683:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-405.020, -4.016, 72.256, 41]
+    level:    [79, 81]
+  17084684:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-414.027, -4.022, 86.875, 71]
+    level:    [79, 81]
+  17084685:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-402.202, -4.019, 70.502, 115]
+    level:    [79, 81]
+  17084686:
+    template: Archaic_Gears_3
+    script:   Archaic_Gears
+    at:       [-438.370, -4.012, 76.321, 2]
+    level:    [79, 81]
+  17084687:
+    template: Long-Bowed_Chariot_2
+    script:   Long-Bowed_Chariot
+    at:       [-340.000, -5.500, 468.000, 64]
+    level:    [83, 83]
+  17084692:
+    template: Reactionary_Rampart
+    at:       [-340.000, -0.500, -515.000, 64]
+    level:    [70, 70]
+  17084693:
+    template: Chigoe
+    at:       [-340.000, -0.500, -518.500, 64]
+    level:    [72, 73]
+  17084694:
+    template: Chigoe
+    at:       [-340.000, -0.500, -518.500, 64]
+    level:    [72, 73]
+  17084695:
+    template: Chigoe
+    at:       [-340.000, -0.500, -518.500, 64]
+    level:    [72, 73]
+  17084696:
+    template: Chigoe
+    at:       [-340.000, -0.500, -518.500, 64]
+    level:    [72, 73]
+  17084697:
+    template: Chigoe
+    at:       [-340.000, -0.500, -518.500, 64]
+    level:    [72, 73]
+  17084698:
+    template: Gate_Widow
+    at:       [-340.000, -0.500, -518.500, 64]
+    level:    [75, 75]
+  17084699:
+    template: Reactionary_Rampart
+    at:       [-340.000, -0.500, -245.000, 192]
+    level:    [70, 70]
+  17084700:
+    template: Hunting_Wasp
+    at:       [-340.000, -0.500, -242.000, 193]
+    level:    [72, 74]
+  17084701:
+    template: Hunting_Wasp
+    at:       [-340.000, -0.500, -242.000, 215]
+    level:    [72, 74]
+  17084702:
+    template: Hunting_Wasp
+    at:       [-340.000, -0.500, -242.000, 199]
+    level:    [72, 74]
+  17084703:
+    template: Hunting_Wasp
+    at:       [-340.000, -0.500, -242.000, 26]
+    level:    [72, 74]
+  17084704:
+    template: Hunting_Wasp
+    at:       [-340.000, -0.500, -242.000, 183]
+    level:    [72, 74]
+  17084705:
+    template: Skirmish_Pephredo
+    at:       [-340.000, -0.500, -242.000, 120]
+    level:    [74, 75]
+  17084706:
+    template: Reactionary_Rampart
+    at:       [260.000, -0.500, 125.000, 64]
+    level:    [70, 70]
+  17084707:
+    template: Colibri
+    at:       [260.000, -0.500, 125.000, 64]
+    level:    [74, 76]
+  17084708:
+    template: Colibri
+    at:       [260.000, -0.500, 125.000, 64]
+    level:    [74, 76]
+  17084709:
+    template: Colibri
+    at:       [260.000, -0.500, 125.000, 64]
+    level:    [74, 76]
+  17084710:
+    template: Colibri
+    at:       [260.000, -0.500, 125.000, 64]
+    level:    [74, 76]
+  17084711:
+    template: Colibri
+    at:       [260.000, -0.500, 125.000, 64]
+    level:    [74, 76]
+  17084712:
+    template: Zebra_Zachary
+    at:       [260.000, -0.500, 125.000, 64]
+    level:    [77, 77]
+  17084713:
+    template: Reactionary_Rampart
+    at:       [420.000, 0.000, 125.000, 64]
+    level:    [70, 70]
+  17084714:
+    template: Tragopan
+    at:       [420.000, 0.000, 122.000, 64]
+    level:    [75, 76]
+  17084715:
+    template: Tragopan
+    at:       [420.000, 0.000, 122.000, 64]
+    level:    [75, 76]
+  17084716:
+    template: Tragopan
+    at:       [420.000, 0.000, 122.000, 64]
+    level:    [75, 76]
+  17084717:
+    template: Tragopan
+    at:       [420.000, 0.000, 122.000, 64]
+    level:    [75, 76]
+  17084718:
+    template: Tragopan
+    at:       [420.000, 0.000, 122.000, 64]
+    level:    [75, 76]
+  17084719:
+    template: Peryton
+    at:       [420.000, 0.000, 122.000, 64]
+    level:    [77, 77]
+  17084720:
+    template: Flux_Flan
+    at:       [455.160, -0.497, 260.095, 123]
+    level:    [73, 75]
+  17084721:
+    template: Demented_Jalaawa
+    at:       [-340.000, -4.000, -391.500]
+    level:    [79, 79]
+  17084723:
+    script: Fly
+  17084724:
+    script: Fly
+  17084725:
+    template: Black_Pudding
+  17084726:
+    template: Black_Pudding
+  17084727:
+    script: Moblin_Armsman
+  17084728:
+    script: Moblin_Armsman
+  17084729:
+    script: Throat_Tearer_Tregotroq
+  17084730:
+    template: Wamouracampa
+  17084731:
+    template: Wamouracampa
+  17084732:
+    template: Wandering_Wamoura
+  17084733:
+    template: Wandering_Wamoura
+  17084734:
+    script: Moblin_Poniardman
+  17084735:
+    script: Moblin_Poniardman
+  17084736:
+    script: Silent_Smotherer_Silak
+  17084737:
+    template: Dahak
+  17084738:
+    script: Smouldering_Dahak
+  17084739:
+    template: Troll_Stoneworker
+  17084740:
+    template: Troll_Cameist
+  17084741:
+    template: Troll_Gemologist
+  17084742:
+    template: Troll_Smelter
+  17084743:
+    template: Troll_Lapidarist
+  17084744:
+    template: Troll_Lapidarist
+  17084745:
+    template: Troll_Lapidarist
+  17084746:
+    template: Troll_Engraver
+  17084747:
+    template: Trolls_Automaton
+  17084748:
+    template: Troll_Engraver
+  17084749:
+    template: Trolls_Automaton
+  17084750:
+    template: Troll_Engraver
+  17084751:
+    template: Trolls_Automaton
+  17084752:
+    script: Troll_Occultist
+  17084753:
+    script: Troll_Pugilist
+  17084754:
+    script: Troll_Spellbinder
+  17084755:
+    script: Troll_Guardian
+  17084756:
+    script: Troll_Huntsman
+  17084757:
+    template: Archaic_Gear
+  17084758:
+    template: Archaic_Gear
+  17084759:
+    template: Archaic_Gear
+  17084760:
+    template: Archaic_Gear
+  17084761:
+    template: Archaic_Gear
+  17084762:
+    template: Archaic_Gear
+  17084763:
+    template: Archaic_Gear
+  17084764:
+    template: Archaic_Gear
+  17084765:
+    template: Archaic_Gear
+  17084766:
+    template: Archaic_Gear
+  17084767:
+    template: Archaic_Gear
+  17084768:
+    template: Archaic_Gear
+  17084769:
+    template: Archaic_Gear
+  17084770:
+    template: Archaic_Gear
+  17084771:
+    template: Archaic_Gear
+  17084772:
+    template: Archaic_Gear
+  17084773:
+    template: Archaic_Gear
+  17084774:
+    template: Archaic_Gear
+  17084775:
+    template: Archaic_Gear
+  17084776:
+    template: Archaic_Gear
+  17084777:
+    template: Archaic_Gear
+  17084778:
+    template: Archaic_Gear
+  17084779:
+    template: Archaic_Gear
+  17084780:
+    template: Archaic_Gear
+  17084781:
+    template: Archaic_Gear
+  17084782:
+    template: Archaic_Gear
+  17084783:
+    template: Archaic_Gear
+  17084784:
+    template: Archaic_Gear
+  17084785:
+    template: Archaic_Gear
+  17084786:
+    template: Archaic_Gear
+  17084787:
+    template: Archaic_Gear
+  17084788:
+    template: Archaic_Gear
+  17084789:
+    template: Archaic_Gear
+  17084790:
+    template: Archaic_Gear
+  17084791:
+    template: Archaic_Gear
+  17084792:
+    template: Archaic_Gear
+  17084793:
+    template: Archaic_Gear
+  17084794:
+    template: Archaic_Gear
+  17084795:
+    template: Archaic_Gear
+  17084796:
+    template: Archaic_Gear
+  17084797:
+    template: Archaic_Gear
+  17084798:
+    template: Archaic_Gear
+  17084799:
+    template: Archaic_Gear
+  17084800:
+    template: Archaic_Gear
+  17084801:
+    template: Archaic_Rampart
+  17084802:
+    template: Archaic_Gears
+  17084803:
+    template: Archaic_Gears
+  17084804:
+    template: Archaic_Gears
+  17084805:
+    template: Archaic_Gears
+  17084806:
+    template: Archaic_Gears
+  17084807:
+    template: Archaic_Gears
+  17084808:
+    template: Archaic_Gears
+  17084809:
+    template: Archaic_Gears
+  17084810:
+    template: Archaic_Gears
+  17084811:
+    template: Archaic_Gears
+  17084812:
+    template: Archaic_Gears
+  17084813:
+    template: Archaic_Gears
+  17084814:
+    template: Archaic_Gears
+  17084815:
+    template: Archaic_Gears
+  17084816:
+    template: Archaic_Gear
+  17084817:
+    template: Archaic_Gear
+  17084818:
+    template: Archaic_Gear
+  17084819:
+    template: Archaic_Rampart
+  17084820:
+    template: Archaic_Gears
+  17084821:
+    template: Archaic_Gears
+  17084822:
+    template: Archaic_Gears
+  17084823:
+    template: Archaic_Gears
+  17084824:
+    template: Archaic_Gears
+  17084825:
+    template: Archaic_Gears
+  17084826:
+    template: Archaic_Gears
+  17084827:
+    template: Archaic_Gears
+  17084828:
+    template: Archaic_Gears
+  17084829:
+    template: Archaic_Gears
+  17084830:
+    template: Archaic_Gears
+  17084831:
+    template: Archaic_Gears
+  17084832:
+    template: Archaic_Gears
+  17084833:
+    template: Archaic_Gears
+  17084834:
+    template: Archaic_Gear
+  17084835:
+    template: Archaic_Gear
+  17084836:
+    template: Archaic_Gear
+  17084837:
+    template: Long-Bowed_Chariot
+  17084838:
+    template: Acrolith
+  17084839:
+    template: Acrolith
+  17084840:
+    template: Acrolith
+  17084841:
+    template: Archaic_Gears
+  17084842:
+    template: Archaic_Gears
+  17084843:
+    template: Archaic_Gears
+  17084844:
+    template: Long-Bowed_Chariot
+  17084845:
+    template: Acrolith
+  17084846:
+    template: Acrolith
+  17084847:
+    template: Acrolith
+  17084848:
+    template: Archaic_Gears
+  17084849:
+    template: Archaic_Gears
+  17084850:
+    template: Archaic_Gears
+  17084851:
+    template: Archaic_Rampart
+  17084852:
+    template: Archaic_Rampart
+  17084853:
+    template: Cerberus
+  17084854:
+    script: Orthrus_Seether

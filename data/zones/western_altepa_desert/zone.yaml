@@ -1,0 +1,107 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  day:          171
+  night:        171
+  battle_solo:  101
+  battle_party: 191
+
+zonelines:
+
+  z3h0:
+    from:  [378.677, 7.081, -12.103]
+    to:    eastern_altepa_desert
+    at:    [260.090, 6.013, 320.454, 1.570796]
+    scale: [1.000, 4.000]
+
+  z3h2:
+    from:  [680.278, 12.371, -100.201]
+    to:    korroloka_tunnel
+    at:    [-519.361, -31.872, 340.020]
+    scale: [1.000, 4.000]
+
+  z3h4:
+    from:  [420.284, 4.911, 363.912]
+    to:    rabao
+    at:    [-20.052, 6.074, -122.408, 4.712389]
+    scale: [1.000, 4.000]
+
+  z3h6:
+    from:  [-114.443, -2.575, -500.360]
+    to:    eastern_altepa_desert
+    at:    [-320.016, 25.995, -100.021]
+    scale: [1.000, 4.000]
+
+  z3h8:
+    from:  [-19.832, 12.931, 443.826]
+    to:    kuftal_tunnel
+    at:    [-20.008, -22.161, -242.030, 4.712389]
+    scale: [1.000, 4.000]
+
+  z3ha:
+    from:  [179.942, 14.684, -285.087]
+    to:    quicksand_caves
+    at:    [179.993, -9.754, -147.950, 1.570796]
+    scale: [1.000, 4.000]
+
+  z3hc:
+    from:  [-739.979, -13.356, -765.012]
+    to:    quicksand_caves
+    at:    [-740.014, -17.602, -521.835, 1.570796]
+    scale: [1.000, 4.000]
+
+  z3he:
+    from:  [-280.009, 14.345, 299.985]
+    to:    quicksand_caves
+    at:    [-381.571, -1.774, 859.998]
+    scale: [1.000, 4.000]
+
+  z3hg:
+    from:  [-138.758, 8.079, -328.026]
+    to:    quicksand_caves
+    at:    [419.981, -8.635, -879.744, 4.712389]
+    scale: [1.000, 4.000]
+
+  z3hi:
+    from:  [-329.071, 8.361, -221.287]
+    to:    quicksand_caves
+    at:    [-290.525, -8.762, -141.257, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3hk:
+    from:  [223.952, 14.189, 12.711]
+    to:    quicksand_caves
+    at:    [327.608, -8.805, 60.391]
+    scale: [1.000, 4.000]
+
+  z3hm:
+    from:  [-19.983, 22.144, 204.964]
+    to:    quicksand_caves
+    at:    [-59.994, -17.649, 263.474, 4.712389]
+    scale: [1.000, 8.000]
+
+  z3ho:
+    from:  [-848.505, 7.985, -541.019]
+    to:    quicksand_caves
+    at:    [-382.233, -0.653, -296.316, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3hq:
+    from:  [-888.021, 7.199, -421.232]
+    to:    quicksand_caves
+    at:    [-811.328, -0.758, -258.488, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3hs:
+    from:  [-375.969, 14.526, 186.971]
+    to:    quicksand_caves
+    at:    [-583.626, -0.883, 743.580]
+    scale: [1.000, 4.000]
+
+  z3hu:
+    from:  [-492.829, 13.822, 97.924]
+    to:    quicksand_caves
+    at:    [-341.118, -1.337, 484.062, 1.177814]
+    scale: [1.000, 4.000]

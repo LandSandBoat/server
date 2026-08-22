@@ -1,0 +1,2351 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17924097:
+    script: NPC[1]
+    render:
+      look:
+        type:  standard
+        model: 50
+    status: normal
+
+  17924098:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    widescan: true
+    content:  SOA
+
+  17924099:
+    script: NPC[3]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17924100:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    widescan: true
+
+  17924102:
+    script: NPC[6]
+    at:     [0.000, -0.223, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17924103:
+    script: NPC[7]
+    at:     [0.000, -0.223, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17924104:
+    script: NPC[8]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17924105:
+    script: _7s0
+    at:     [9.500, 0.000, 2.000]
+    render:
+      look:
+        type: door
+      door_id:      812857183
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924106:
+    script: _7s1
+    at:     [9.500, 0.000, -2.000]
+    render:
+      look:
+        type: door
+      door_id:      829634399
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924107:
+    script: _7s2
+    at:     [9.500, 0.000, 6.000]
+    render:
+      look:
+        type: door
+      door_id:      846411615
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924108:
+    script: _7s3
+    at:     [11.000, 0.000, 2.000]
+    render:
+      look:
+        type: door
+      door_id:      863188831
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924109:
+    script: _7s4
+    at:     [11.000, 0.000, -2.000]
+    render:
+      look:
+        type: door
+      door_id:      879966047
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924110:
+    script: _7s5
+    at:     [11.000, 0.000, 6.000]
+    render:
+      look:
+        type: door
+      door_id:      896743263
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924111:
+    script: _7s6
+    at:     [-15.953, -0.500, -2.971]
+    render:
+      look:
+        type: door
+      door_id:      913520479
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924112:
+    script: _7s7
+    at:     [-17.102, -0.500, 6.535]
+    render:
+      look:
+        type: door
+      door_id:      930297695
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924113:
+    script: _7s8
+    at:     [-12.262, -0.500, 1.787]
+    render:
+      look:
+        type: door
+      door_id:      947074911
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924114:
+    script: _7s9
+    at:     [10.919, -0.965, 17.002]
+    render:
+      look:
+        type: door
+      door_id:      963852127
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924115:
+    script: _7sa
+    at:     [6.193, -0.965, 21.114]
+    render:
+      look:
+        type: door
+      door_id:      1634940767
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924116:
+    script: _7sb
+    at:     [3.955, -0.965, 23.207]
+    render:
+      look:
+        type: door
+      door_id:      1651717983
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924117:
+    script: _7sc
+    at:     [-2.378, -0.418, 10.483]
+    render:
+      look:
+        type: door
+      door_id:      1668495199
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924118:
+    script: _7sd
+    at:     [-0.012, -0.418, 18.283]
+    render:
+      look:
+        type: door
+      door_id:      1685272415
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924119:
+    script: _7se
+    at:     [-9.717, -0.418, 14.468]
+    render:
+      look:
+        type: door
+      door_id:      1702049631
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924120:
+    script: _7sf
+    at:     [0.311, -4.240, 27.132]
+    render:
+      look:
+        type: door
+      door_id:      1718826847
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924121:
+    script: _7sg
+    at:     [3.199, -4.251, 28.410]
+    render:
+      look:
+        type: door
+      door_id:      1735604063
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924122:
+    script: _7sh
+    at:     [-15.211, 0.174, -5.082]
+    render:
+      look:
+        type: door
+      door_id:      1752381279
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924123:
+    script: _7si
+    at:     [-15.603, 0.233, -6.857]
+    render:
+      look:
+        type: door
+      door_id:      1769158495
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924124:
+    script: _7sj
+    at:     [-25.140, -0.001, -13.720]
+    render:
+      look:
+        type: door
+      door_id:      1785935711
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17924125:
+    script:       Green_Thumb_Moogle
+    display_name: Green Thumb Moogle
+    at:           [0.010, 0.010, 0.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 2361
+      entity_flags: 259
+      moving:        14
+    status:   normal
+    widescan: true
+
+  17924126:
+    script:       Mog_Dinghy
+    display_name: Mog Dinghy
+    at:           [-16.867, 1.499, -23.703, 128]
+    render:
+      look:
+        type:  standard
+        model: 2784
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+
+  17924127:
+    script:       Mog_Dinghy
+    display_name: Mog Dinghy
+    at:           [366.720, 0.300, -596.150, 128]
+    render:
+      look:
+        type:  standard
+        model: 2784
+      name_vis:    96
+      moving:   32775
+    status:   normal
+    widescan: true
+
+  17924128:
+    script:       Garden_Furrow
+    display_name: Garden Furrow
+    at:           [5.136, 0.100, 2.053]
+    render:
+      look:
+        type:  standard
+        model: 2792
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17924129:
+    script:       Garden_Furrow_#2
+    display_name: 'Garden Furrow #2'
+    at:           [5.136, 0.100, -2.037]
+    render:
+      look:
+        type:  standard
+        model: 2792
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17924130:
+    script:       Garden_Furrow_#3
+    display_name: 'Garden Furrow #3'
+    at:           [5.136, 0.100, 5.743]
+    render:
+      look:
+        type:  standard
+        model: 2792
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17924131:
+    script:       Arboreal_Grove
+    display_name: Arboreal Grove
+    at:           [-14.728, -1.500, 2.337]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  1027
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924132:
+    script:       Arboreal_Grove
+    display_name: Arboreal Grove
+    at:           [-13.316, 0.500, 0.870]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  1027
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924133:
+    script:       Arboreal_Grove_#2
+    display_name: 'Arboreal Grove #2'
+    at:           [-12.630, -1.500, -0.826]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  1027
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924134:
+    script:       Arboreal_Grove_#2
+    display_name: 'Arboreal Grove #2'
+    at:           [-12.018, 0.500, -2.712]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  1027
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924135:
+    script:       Arboreal_Grove_#3
+    display_name: 'Arboreal Grove #3'
+    at:           [-10.701, -1.500, 5.583]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  1027
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924136:
+    script:       Arboreal_Grove_#3
+    display_name: 'Arboreal Grove #3'
+    at:           [-9.887, 0.500, 6.448]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  1027
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924137:
+    script:       Arboreal_Grove_#4
+    display_name: 'Arboreal Grove #4'
+    at:           [-9.174, 0.500, 2.479]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  1027
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924138:
+    script:       Arboreal_Grove_#4
+    display_name: 'Arboreal Grove #4'
+    at:           [-10.610, 0.500, -0.122]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  1027
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924139:
+    script:       Mineral_Vein
+    display_name: Mineral Vein
+    at:           [10.102, -1.600, 17.677]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:   515
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924140:
+    script:       Mineral_Vein
+    display_name: Mineral Vein
+    at:           [10.102, -2.800, 17.677]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:   515
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924141:
+    script:       Mineral_Vein_#2
+    display_name: 'Mineral Vein #2'
+    at:           [9.478, -1.600, 19.845]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:   515
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924142:
+    script:       Mineral_Vein_#2
+    display_name: 'Mineral Vein #2'
+    at:           [9.478, -2.800, 19.845]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:   515
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924143:
+    script:       Mineral_Vein_#3
+    display_name: 'Mineral Vein #3'
+    at:           [6.670, -1.600, 21.910]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:   515
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924144:
+    script:       Mineral_Vein_#3
+    display_name: 'Mineral Vein #3'
+    at:           [7.160, -2.400, 22.440]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:   515
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924145:
+    script:       Mineral_Vein_#4
+    display_name: 'Mineral Vein #4'
+    at:           [5.560, -1.600, 22.800]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:   515
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924146:
+    script:       Mineral_Vein_#4
+    display_name: 'Mineral Vein #4'
+    at:           [5.970, -2.800, 23.350]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:   515
+      name_vis:        96
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924147:
+    script:       Pond_Dredger
+    display_name: Pond Dredger
+    at:           [-1.519, 1.000, 11.889]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17924148:
+    at: [19.474, 1.883, -30.474]
+    render:
+      look:
+        type: ship
+      door_id:      360
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32769
+    status: normal
+
+  17924149:
+    script:       Coastal_Fishing_Net
+    display_name: Coastal Fishing Net
+    at:           [19.474, 1.883, -30.474]
+    render:
+      look:
+        type:  standard
+        model: 52
+      name_vis:       96
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17924150:
+    script:       Flotsam
+    display_name: Flotsam
+    at:           [10.722, 1.500, -20.362]
+    render:
+      look:
+        type:  standard
+        model: 1382
+      name_vis:      112
+      name_prefix:     2
+      moving:      32769
+    status:   normal
+    widescan: true
+
+  17924151:
+    script:       Plant00
+    display_name: Plant00
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924152:
+    script:       Plant01
+    display_name: Plant01
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924153:
+    script:       Plant02
+    display_name: Plant02
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924154:
+    script:       Plant03
+    display_name: Plant03
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924155:
+    display_name: PlantFurn00
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924156:
+    display_name: PlantFurn01
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924157:
+    display_name: PlantFurn02
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924158:
+    display_name: PlantFurn03
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924159:
+    script:       Plant10
+    display_name: Plant10
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924160:
+    script:       Plant11
+    display_name: Plant11
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924161:
+    script:       Plant12
+    display_name: Plant12
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924162:
+    script:       Plant13
+    display_name: Plant13
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924163:
+    display_name: PlantFurn10
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924164:
+    display_name: PlantFurn11
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924165:
+    display_name: PlantFurn12
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924166:
+    display_name: PlantFurn13
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924167:
+    script:       Plant20
+    display_name: Plant20
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924168:
+    script:       Plant21
+    display_name: Plant21
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924169:
+    script:       Plant22
+    display_name: Plant22
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924170:
+    script:       Plant23
+    display_name: Plant23
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags:  2051
+      name_vis:        96
+      name_prefix:      2
+      moving:       32768
+    status:   normal
+    widescan: true
+
+  17924171:
+    display_name: PlantFurn20
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924172:
+    display_name: PlantFurn21
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924173:
+    display_name: PlantFurn22
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924174:
+    display_name: PlantFurn23
+    render:
+      look:
+        type: ship
+      door_id:      1
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     96
+      name_prefix:  2
+      moving:       32768
+    look_at:  1
+    widescan: true
+
+  17924175:
+    script:       Debug_Moogle
+    display_name: Debug Moogle
+    at:           [2.534, 0.105, 4.940]
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+
+  17924176:
+    script:       DIRECTOR
+    display_name: DIRECTOR
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17924177:
+    script: blank
+    at:     [-1.891, 0.238, 4.619, 54]
+    render:
+      look:
+        type:  standard
+        model: 2792
+      entity_flags: 27
+      name_prefix:  32
+    status: cutscene_only
+
+  17924178:
+    script:       KANI01
+    display_name: KANI01
+    at:           [0.455, 2.532, -31.248, 190]
+    render:
+      look:
+        type:  standard
+        model: 356
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17924179:
+    script:       KANI02
+    display_name: KANI02
+    at:           [1.630, 3.004, -33.527, 196]
+    render:
+      look:
+        type:  standard
+        model: 356
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17924180:
+    script:       KANI03
+    display_name: KANI03
+    at:           [-2.989, 2.944, -33.476, 199]
+    render:
+      look:
+        type:  standard
+        model: 356
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17924181:
+    script:       KANI04
+    display_name: KANI04
+    at:           [3.881, 3.391, -34.997, 184]
+    render:
+      look:
+        type:  standard
+        model: 356
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17924182:
+    script:       KANI05
+    display_name: KANI05
+    at:           [-6.036, 2.557, -30.100, 200]
+    render:
+      look:
+        type:  standard
+        model: 356
+      entity_flags:    27
+      name_prefix:     32
+      moving:       32768
+    status:   cutscene_only
+    widescan: true
+
+  17924183:
+    script:       Kuyin_Hathdenna
+    display_name: Kuyin Hathdenna
+    at:           [-5.474, 0.315, 9.302, 193]
+    render:
+      look:
+        type:  standard
+        model: 2727
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17924184:
+    script:       Susuroon
+    display_name: Susuroon
+    at:           [10.779, 0.101, 0.274, 142]
+    render:
+      look:
+        type:  standard
+        model: 2723
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:        21
+    status:   normal
+    widescan: true
+
+  17924185:
+    script:       Yeestog
+    display_name: Yeestog
+    at:           [12.547, -0.554, 16.057, 189]
+    render:
+      look:
+        type:  standard
+        model: 1972
+      entity_flags: 27
+      name_prefix:  32
+      moving:       14
+    status:   normal
+    widescan: true
+
+  17924186:
+    script:       Yeestog
+    display_name: Yeestog
+    at:           [12.547, -0.554, 16.057, 189]
+    render:
+      look:
+        type:  standard
+        model: 1972
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17924187:
+    script:       Chacharoon
+    display_name: Chacharoon
+    at:           [7.868, 0.864, -13.680, 142]
+    render:
+      look:
+        type:  standard
+        model: 2911
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17924188:
+    script:       DIRECTOR2
+    display_name: DIRECTOR2
+    render:
+      look:
+        type:  standard
+        model: 50
+    status:   cutscene_only
+    widescan: true
+
+  17924189:
+    script:       Monsieur_Kupont
+    display_name: Monsieur Kupont
+    at:           [10.301, 0.987, -15.005, 192]
+    render:
+      look:
+        type:  standard
+        model: 981
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17924190:
+    script:       Kupivolo
+    display_name: Kupivolo
+    at:           [10.784, -0.100, -14.329, 129]
+    render:
+      look:
+        type:  standard
+        model: 2364
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17924191:
+    script:       The_Great_Kupellion
+    display_name: The Great Kupellion
+    at:           [8.354, 0.858, -13.911, 246]
+    render:
+      look:
+        type:  standard
+        model: 2401
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17924192:
+    display_name: '01'
+    at:           [9.559, -0.229, 10.444, 225]
+    render:
+      look:
+        type: ship
+      door_id:   219
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924193:
+    display_name: '02'
+    at:           [8.262, -0.437, 12.452, 225]
+    render:
+      look:
+        type: ship
+      door_id:   219
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924194:
+    display_name: '03'
+    at:           [8.262, -0.437, 12.452, 225]
+    render:
+      look:
+        type: ship
+      door_id:   219
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924195:
+    display_name: '04'
+    at:           [8.262, -0.437, 12.452, 225]
+    render:
+      look:
+        type: ship
+      door_id:   219
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924196:
+    display_name: '1'
+    at:           [9.559, -0.229, 10.444, 225]
+    render:
+      look:
+        type: ship
+      door_id:   245
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924197:
+    display_name: '2'
+    at:           [8.262, -0.437, 12.452, 225]
+    render:
+      look:
+        type: ship
+      door_id:   231
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924198:
+    display_name: '3'
+    at:           [8.262, -0.437, 12.452, 225]
+    render:
+      look:
+        type: ship
+      door_id:   236
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924199:
+    display_name: '4'
+    at:           [8.262, -0.437, 12.452, 225]
+    render:
+      look:
+        type: ship
+      door_id:   234
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924200:
+    script:       Atelloune
+    display_name: Atelloune
+    at:           [-11.985, 1.500, -17.924, 31]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  11
+        head:  4215
+        body:  8293
+        hands: 12389
+        legs:  16485
+        feet:  20581
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+    status:   cutscene_only
+    widescan: true
+    content:  SOA
+
+  17924201:
+    display_name: DIRECTOR3
+    render:
+      look:
+        type: ship
+      door_id:   231
+      animation: animation_55
+    status:   cutscene_only
+    widescan: true
+
+  17924202:
+    script:       Kuyin_Hathdenna
+    display_name: Kuyin Hathdenna
+    at:           [8.475, 0.100, 3.528, 38]
+    render:
+      look:
+        type:  standard
+        model: 2725
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:         8
+    status:   normal
+    widescan: true
+
+  17924203:
+    script:       Susuroon
+    display_name: Susuroon
+    at:           [-6.702, 1.500, -20.971, 62]
+    render:
+      look:
+        type:  standard
+        model: 2722
+      entity_flags:  27
+      animation_sub:  3
+      name_prefix:   32
+      moving:         1
+    status:   normal
+    widescan: true
+
+  17924204:
+    script:       Yeestog
+    display_name: Yeestog
+    at:           [-9.862, 0.500, -1.966, 156]
+    render:
+      look:
+        type:  standard
+        model: 1972
+      entity_flags: 27
+      name_prefix:  32
+      moving:       21
+    status:   normal
+    widescan: true
+
+  17924205:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17924206:
+    script:       Crabauble
+    display_name: Crabauble
+    at:           [-2.032, 1.500, -19.851]
+    render:
+      look:
+        type:  standard
+        model: 2872
+      entity_flags: 25
+      name_vis:     96
+      name_prefix:  32
+      moving:        6
+    status:   normal
+    widescan: true
+
+  17924207:
+    script:       Ramblix
+    display_name: Ramblix
+    at:           [-15.420, 0.730, -10.520, 32]
+    render:
+      look:
+        type:  standard
+        model: 85
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17924208:
+    script:       Goblin_Footprint
+    display_name: Goblin Footprint
+    at:           [-15.420, 0.730, -10.520, 32]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 1
+    status:   normal
+    widescan: true
+
+  17924209:
+    script:       Crabauble
+    display_name: Crabauble
+    at:           [-6.293, 1.500, -19.795]
+    render:
+      look:
+        type:  standard
+        model: 2874
+      entity_flags: 25
+      name_vis:     96
+      name_prefix:  32
+      moving:        7
+    status:   normal
+    widescan: true
+
+  17924210:
+    script:       Garden_Strongbox
+    display_name: Garden Strongbox
+    at:           [-0.330, -0.640, 22.050, 64]
+    render:
+      look:
+        type:  standard
+        model: 960
+      name_vis: 96
+      moving:    1
+    status:   normal
+    widescan: true
+
+  17924211:
+    script:       Bulging_Crate
+    display_name: Bulging Crate
+    at:           [356.760, -2.870, -546.670]
+    render:
+      look:
+        type:  standard
+        model: 2331
+      name_vis: 96
+      moving:    1
+    status:   normal
+    widescan: true
+
+  17924212:
+    script: NPC[74]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17924213:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17924214:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17924215:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17924216:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17924217:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17924218:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17924219:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17924220:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+    content:         SOA
+
+  17924221:
+    script:       Porter_Moogle
+    display_name: Porter Moogle
+    at:           [-18.166, 0.743, -12.208, 61]
+    render:
+      look:
+        type:  standard
+        model: 82
+      moving: 14
+    status:   normal
+    widescan: true
+
+  17924222:
+    script: NPC[7e]
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17924223:
+    at: [12.968, -0.477, -11.451, 44]
+    render:
+      look:
+        type: ship
+      door_id:      3641
+      entity_flags: 2051
+      animation:    animation_55
+      name_vis:     104
+      name_prefix:  2
+      moving:       32775
+
+  17924224:
+    script: blank
+    at:     [350.655, -5.000, -560.549, 69]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    32
+      moving:         20
+    status: normal
+
+  17924225:
+    script: blank
+    at:     [359.000, -5.000, -583.764, 183]
+    render:
+      look:
+        type:  standard
+        model: 2960
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    32
+      moving:        179
+    status: normal
+
+  17924226:
+    script: blank
+    at:     [346.877, -5.000, -568.669, 174]
+    render:
+      look:
+        type:  standard
+        model: 2961
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    32
+      moving:        909
+    status: normal
+
+  17924227:
+    script: blank
+    at:     [349.230, -5.000, -569.659, 32]
+    render:
+      look:
+        type:  standard
+        model: 2962
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    32
+      moving:        111
+    status: normal
+
+  17924228:
+    script: blank
+    at:     [344.906, -5.000, -578.207, 63]
+    render:
+      look:
+        type:  standard
+        model: 2963
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    32
+      moving:        443
+    status: normal
+
+  17924229:
+    script:       qm1
+    display_name: ???
+    at:           [-1.000, 0.290, -1.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 971
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    32
+      moving:          1
+    status: normal
+
+  17924230:
+    script:       qm2
+    display_name: ???
+    at:           [-1.000, 0.290, -1.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 971
+      entity_flags: 2075
+      name_vis:      104
+      name_prefix:    32
+      moving:          1
+    status: normal
+
+  17924231:
+    script:       Chacharoon
+    display_name: Chacharoon
+    at:           [-10.496, 0.362, 9.656, 46]
+    render:
+      look:
+        type:  standard
+        model: 2911
+      entity_flags:  27
+      name_prefix:   32
+      moving:       131
+    status:   normal
+    widescan: true
+
+  17924232:
+    script:       Chacharoon
+    display_name: Chacharoon
+    at:           [355.490, -3.040, -547.760, 59]
+    render:
+      look:
+        type:  standard
+        model: 2911
+      entity_flags: 27
+      name_prefix:  32
+      moving:        7
+    status:   normal
+    widescan: true
+
+  17924233:
+    display_name: Breeding Monster
+    at:           [-12.623, 0.156, 12.170, 54]
+    render:
+      look:
+        type:  standard
+        model: 340
+      entity_flags:  27
+      animation_sub:  4
+      name_prefix:   32
+      moving:         6
+    status:   normal
+    widescan: true
+
+  17924234:
+    display_name: Breeding Monster01
+    at:           [352.767, -5.000, -572.685, 158]
+    render:
+      look:
+        type:  standard
+        model: 340
+      entity_flags:   27
+      animation_sub:   4
+      name_prefix:    32
+      moving:        177
+    status:   normal
+    widescan: true
+
+  17924235:
+    display_name: Breeding Monster02
+    at:           [357.844, -5.000, -583.950, 209]
+    render:
+      look:
+        type:  standard
+        model: 340
+      entity_flags:  27
+      animation_sub:  4
+      name_prefix:   32
+      moving:        89
+    status:   normal
+    widescan: true
+
+  17924236:
+    display_name: Breeding Monster03
+    at:           [356.531, -5.000, -572.705, 244]
+    render:
+      look:
+        type:  standard
+        model: 340
+      entity_flags:   27
+      animation_sub:   4
+      name_prefix:    32
+      moving:        472
+    status:   normal
+    widescan: true
+
+  17924237:
+    display_name: Breeding Monster00
+    at:           [354.738, -3.000, -574.773, 198]
+    render:
+      look:
+        type:  standard
+        model: 340
+      entity_flags:   27
+      animation_sub:   4
+      name_prefix:    32
+      moving:        556
+    status:   normal
+    widescan: true
+
+  17924238:
+    script:       Ephemeral_Moogle_Garden
+    display_name: Ephemeral Moogle
+    at:           [-23.420, 1.500, -21.850, 229]
+    render:
+      look:
+        type:  standard
+        model: 82
+      name_vis: 128
+      moving:     8
+    status:   normal
+    widescan: true
+
+  17924239:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 2365
+      entity_flags: 2075
+      name_vis:      112
+      name_prefix:    32
+
+  17924240:
+    script:       Mandragora_Assistant
+    display_name: Mandragora Assistant
+    at:           [13.994, -0.134, -11.123, 159]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:     1
+      name_vis:        32
+      name_prefix:      2
+      moving:       32769
+    status:   normal
+    widescan: true
+
+  17924241:
+    script: blank
+    at:     [13.994, 0.716, -11.123, 167]
+    render:
+      look:
+        type:  standard
+        model: 2331
+      entity_flags: 2073
+      name_vis:       96
+      name_prefix:    34
+    status: normal
+
+  17924242:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+    status: cutscene_only
+
+  17924243:
+    script: blank
+    render:
+      look:
+        type:  equipped
+        race:  1
+        face:  0
+        head:  4096
+        body:  8192
+        hands: 12288
+        legs:  16384
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 2075
+      name_prefix:    32
+    status: cutscene_only
+
+  17924244:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17924245:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17924246:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17924247:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17924248:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17924249:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17924250:
+    at: [-4.062, 1.500, -18.000, 64]
+    render:
+      look:
+        type: ship
+      door_id:      379
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924251:
+    at: [4.062, 1.500, -18.000, 192]
+    render:
+      look:
+        type: ship
+      door_id:      382
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924252:
+    at: [2.708, 1.500, -17.220]
+    render:
+      look:
+        type: ship
+      door_id:      391
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924253:
+    at: [1.354, 1.500, -18.000]
+    render:
+      look:
+        type: ship
+      door_id:      21
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924254:
+    at: [0.000, 1.500, -17.220]
+    render:
+      look:
+        type: ship
+      door_id:      391
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924255:
+    at: [-1.354, 1.500, -18.000]
+    render:
+      look:
+        type: ship
+      door_id:      21
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924256:
+    at: [-2.708, 1.500, -17.220]
+    render:
+      look:
+        type: ship
+      door_id:      391
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924257:
+    at: [-2.708, 1.500, -18.780]
+    render:
+      look:
+        type: ship
+      door_id:      392
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924258:
+    at: [0.000, 1.500, -18.780]
+    render:
+      look:
+        type: ship
+      door_id:      392
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924259:
+    at: [2.708, 1.500, -18.780]
+    render:
+      look:
+        type: ship
+      door_id:      392
+      entity_flags: 2051
+      animation:    animation_55
+      name_prefix:  2
+    status: cutscene_only
+
+  17924260:
+    script: blank
+    at:     [3.083, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924261:
+    script: blank
+    at:     [2.833, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924262:
+    script: blank
+    at:     [2.583, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924263:
+    script: blank
+    at:     [1.729, 1.000, -17.500, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924264:
+    script: blank
+    at:     [1.479, 1.000, -17.500, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924265:
+    script: blank
+    at:     [1.229, 1.000, -17.500, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924266:
+    script: blank
+    at:     [0.375, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924267:
+    script: blank
+    at:     [0.125, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924268:
+    script: blank
+    at:     [-0.125, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924269:
+    script: blank
+    at:     [-0.979, 1.000, -17.500, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924270:
+    script: blank
+    at:     [-1.229, 1.000, -17.500, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924271:
+    script: blank
+    at:     [-1.479, 1.000, -17.500, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924272:
+    script: blank
+    at:     [-2.333, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924273:
+    script: blank
+    at:     [-2.583, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924274:
+    script: blank
+    at:     [-2.833, 1.000, -16.720, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924275:
+    script: blank
+    at:     [-2.333, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924276:
+    script: blank
+    at:     [-2.583, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924277:
+    script: blank
+    at:     [-2.833, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924278:
+    script: blank
+    at:     [0.375, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924279:
+    script: blank
+    at:     [0.125, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924280:
+    script: blank
+    at:     [-0.125, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924281:
+    script: blank
+    at:     [3.083, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924282:
+    script: blank
+    at:     [2.833, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only
+
+  17924283:
+    script: blank
+    at:     [2.583, 1.000, -18.280, 192]
+    render:
+      look:
+        type:  standard
+        model: 2959
+      entity_flags:  2073
+      name_prefix:     34
+      moving:       32768
+    status: cutscene_only

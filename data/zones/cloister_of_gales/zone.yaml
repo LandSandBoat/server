@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+misc: [escape, mazurka, tractor, pet, trust, los_player_block]
+
+zonelines:
+
+  z5l0:
+    from:  [-403.028, -3.794, -420.001]
+    to:    cape_teriggan
+    at:    [-294.009, -12.278, 539.901, 3.141593]
+    scale: [1.000, 4.000]

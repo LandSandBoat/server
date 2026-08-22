@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [dungeon]
+misc: [escape, fellow, mazurka, tractor, pet, trust, los_player_block]
+music:
+  day:          221
+  night:        221
+  battle_solo:  115
+  battle_party: 218
+
+zonelines:
+
+  z0c0:
+    from:  [-264.792, 9.903, 180.392]
+    to:    oldton_movalpolos
+    at:    [70.956, 5.990, 139.843, 3.141593]
+    scale: [1.000, 4.000]
+
+  z0c2:
+    from:  [-219.790, 8.775, 40.947]
+    to:    oldton_movalpolos
+    at:    [140.447, 5.236, -8.471, 1.396263]
+    scale: [1.000, 4.000]
+
+  z0c4:
+    from:  [-144.604, 9.139, -19.511]
+    to:    oldton_movalpolos
+    at:    [244.542, 9.962, -60.040, 3.141593]
+    scale: [1.000, 4.000]
+
+  z0c6:
+    from:  [-198.923, 4.799, -60.046]
+    to:    oldton_movalpolos
+    at:    [195.901, 6.033, -140.140, 3.141593]
+    scale: [1.000, 4.000]
+
+  z0c8:
+    from:  [-259.934, 9.171, -120.907]
+    to:    oldton_movalpolos
+    at:    [99.852, 14.249, -155.918, 4.712389]
+    scale: [1.000, 4.000]
+
+  z0ca:
+    from:  [-359.771, 4.964, -179.999]
+    to:    oldton_movalpolos
+    at:    [-5.107, 5.531, -219.906, 3.141593]
+    scale: [1.000, 4.000]
+
+  z0cc:
+    from:  [454.912, 25.132, -19.355]
+    to:    mine_shaft_2716
+    at:    [-116.599, -122.103, -620.010]
+    scale: [1.000, 4.000]
+
+  z0ce:
+    from:  [218.126, 17.189, 187.428]
+    to:    mine_shaft_2716
+    at:    [-155.302, 178.261, 500.121]
+    scale: [1.000, 4.000]

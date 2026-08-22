@@ -1,0 +1,322 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  17354984:
+    script: NPC[e8]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17354985:
+    script: NPC[e9]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17354986:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    at:           [0.000, -0.500, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         SOA
+
+  17354987:
+    script: NPC[eb]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17354988:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  17354990:
+    script: NPC[ee]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  17354991:
+    script: NPC[ef]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  17354992:
+    script: NPC[f0]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  17354993:
+    script: '@3x0'
+    at:     [3.938, -43.026, 98.000]
+    render:
+      look:
+        type: elevator
+      door_id:      813183808
+      entity_flags: 2051
+      animation:    elevator_up
+      moving:       1
+    status: normal
+
+  17354994:
+    script: _3x3
+    at:     [0.944, -43.051, 98.010]
+    render:
+      look:
+        type: door
+      door_id:      863515487
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17354995:
+    script: _3x4
+    at:     [6.902, -55.284, 98.000]
+    render:
+      look:
+        type: door
+      door_id:      880292703
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17354996:
+    script: _3xb
+    at:     [0.861, -27.501, 97.998]
+    render:
+      look:
+        type: door
+      door_id:      1652044639
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17354997:
+    script: _3xa
+    at:     [6.912, -52.135, 97.998]
+    render:
+      look:
+        type: door
+      door_id:      1635267423
+      entity_flags: 6147
+      animation:    open_door
+      moving:       1
+    status: normal
+
+  17354998:
+    script:       _3x0
+    display_name: bigwinch
+    at:           [-5.652, -62.195, 98.256]
+    render:
+      look:
+        type: door
+      door_id:      813183839
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17354999:
+    script:       _3x1
+    display_name: Elevator Lever
+    at:           [-0.652, -28.996, 100.445]
+    render:
+      look:
+        type: door
+      door_id:      829961055
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17355000:
+    script:       _3x2
+    display_name: Elevator Lever
+    at:           [8.112, -52.665, 96.084]
+    render:
+      look:
+        type: door
+      door_id:      846738271
+      entity_flags: 4099
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17355001:
+    script:       _3x5
+    display_name: winch1
+    at:           [-0.462, -28.803, 100.887]
+    render:
+      look:
+        type: door
+      door_id:      897069919
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17355002:
+    script:       _3x6
+    display_name: winch2
+    at:           [7.939, -52.858, 95.638]
+    render:
+      look:
+        type: door
+      door_id:      913847135
+      entity_flags: 6147
+      animation:    close_door
+      moving:       1
+    status: normal
+
+  17355003:
+    script: NPC[fb]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  17355004:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17355005:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17355006:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17355007:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17355008:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17355009:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17355010:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17355011:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+    speed:           40
+    animation_speed: 40
+
+  17355012:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  17355013:
+    script:       Treasure_Chest
+    display_name: Treasure Chest
+    render:
+      look:
+        type:  standard
+        model: 960
+      moving: 7
+    status: normal
+
+  17355014:
+    script:       Survival_Guide
+    display_name: Survival Guide
+    at:           [-143.000, -20.000, 7.000, 96]
+    render:
+      look:
+        type:  standard
+        model: 2433
+      animation_sub:  1
+      name_vis:      32
+      moving:         7
+    status:   normal
+    widescan: true
+    content:  SURVIVAL_GUIDE

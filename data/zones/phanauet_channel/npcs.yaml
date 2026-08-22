@@ -1,0 +1,317 @@
+# yaml-language-server: $schema=../../schemas/npcs.schema.json
+
+npcs:
+
+  16781329:
+    script: NPC[11]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16781330:
+    script: NPC[12]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16781331:
+    script:       Achieve_Master
+    display_name: Achieve Master
+    render:
+      look:
+        type:  standard
+        model: 50
+    content: SOA
+
+  16781332:
+    script: NPC[14]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16781333:
+    script:       Unity_Master
+    display_name: Unity Master
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+      name_vis:       96
+    content: SOA
+
+  16781335:
+    script: NPC[17]
+    at:     [0.000, -2.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 1
+
+  16781336:
+    script: NPC[18]
+    at:     [0.000, -2.000, 0.000]
+    render:
+      look:
+        type:  standard
+        model: 2348
+      entity_flags: 129
+      name_vis:      32
+    speed:           40
+    animation_speed: 40
+
+  16781337:
+    script: NPC[19]
+    render:
+      look:
+        type:  standard
+        model: 50
+      name_vis: 4
+
+  16781338:
+    script: NPC[1a]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16781339:
+    script: NPC[1b]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16781340:
+    script:       Laiteconce
+    display_name: Laiteconce
+    at:           [4.066, -3.500, -10.450, 136]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  1
+        head:  4116
+        body:  8215
+        hands: 12288
+        legs:  16487
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        21
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16781341:
+    script:       Luquillaue
+    display_name: Luquillaue
+    at:           [4.066, -3.500, -10.450, 136]
+    render:
+      look:
+        type:  equipped
+        race:  4
+        face:  0
+        head:  4116
+        body:  8215
+        hands: 12288
+        legs:  16487
+        feet:  20483
+        main:  24576
+        sub:   28672
+      entity_flags:  27
+      animation_sub:  1
+      name_prefix:   32
+      moving:        14
+    widescan: true
+    content:  COP
+
+  16781342:
+    script:       FXTEST
+    display_name: FXTEST
+    at:           [9.857, -7.500, -4.979]
+    render:
+      look:
+        type:  standard
+        model: 52
+      moving: 32768
+    status:   cutscene_only
+    widescan: true
+    content:  COP
+
+  16781343:
+    script:       Riche
+    display_name: Riche
+    at:           [5.945, -2.750, 13.612, 194]
+    render:
+      look:
+        type:  standard
+        model: 1197
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16781344:
+    script:       Roi
+    display_name: Roi
+    at:           [-6.040, -2.750, 13.833, 193]
+    render:
+      look:
+        type:  standard
+        model: 1198
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+    content:  COP
+
+  16781345:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 50
+      entity_flags: 2051
+      moving:          1
+
+  16781346:
+    script:       Ineuteniace
+    display_name: Ineuteniace
+    at:           [11.701, -2.000, 1.360, 197]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  14
+        head:  4114
+        body:  8309
+        hands: 12390
+        legs:  16486
+        feet:  20480
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        8
+    status:   normal
+    widescan: true
+    content:  COP
+
+  16781347:
+    script:       Eunirange
+    display_name: Eunirange
+    at:           [4.397, -2.000, -2.976, 173]
+    render:
+      look:
+        type:  equipped
+        race:  3
+        face:  12
+        head:  4096
+        body:  8294
+        hands: 12390
+        legs:  16486
+        feet:  20582
+        main:  24576
+        sub:   28672
+      entity_flags: 27
+      name_prefix:  32
+      moving:        1
+    widescan: true
+    content:  COP
+
+  16781348:
+    script: NPC[24]
+    render:
+      look:
+        type:  standard
+        model: 50
+
+  16781349:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16781350:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16781351:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16781352:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16781353:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16781354:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16781355:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP
+
+  16781356:
+    script:       Moogle
+    display_name: Moogle
+    render:
+      look:
+        type:  standard
+        model: 82
+      entity_flags: 4194307
+    content: COP

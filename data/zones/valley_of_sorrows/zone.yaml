@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schemas/zone.schema.json
+
+type: [outdoors]
+misc: [fellow, mount, mazurka, tractor, pet, trust]
+music:
+  battle_solo:  101
+  battle_party: 191
+
+zonelines:
+
+  z3k0:
+    from:  [-239.077, -3.098, -19.953]
+    to:    cape_teriggan
+    at:    [315.644, -1.517, -60.633, 3.141593]
+    scale: [1.000, 4.000]
+
+  z3k2:
+    from:  [39.951, -3.102, -140.068]
+    to:    cape_teriggan
+    at:    [230.879, -2.668, -180.868, 3.141593]
+    scale: [1.000, 4.000]
