@@ -5,17 +5,11 @@
 ---@type TNpcEntity
 local entity = {}
 
+-- Legacy code, for reference use only. Remove assault sections as they are migrated to the new system and when none are left, delete this NPC script.
+--[[
 entity.onTrigger = function(player, npc)
     local qItem =
     {
-        [xi.assault.mission.EXCAVATION_DUTY] =
-        {
-            {
-                { itemId = xi.item.UNAPPRAISED_BOX,     weight = 300 },
-                { itemId = xi.item.UNAPPRAISED_EARRING, weight = 700 },
-            },
-        },
-
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             {
@@ -37,29 +31,6 @@ entity.onTrigger = function(player, npc)
 
     local regItem =
     {
-        [xi.assault.mission.EXCAVATION_DUTY] =
-        {
-            {
-                { itemId = xi.item.REMEDY, weight = 900 },
-                { itemId = 0,              weight = 100 },
-            },
-
-            {
-                { itemId = xi.item.REMEDY, weight = 200 },
-                { itemId = 0,              weight = 800 },
-            },
-
-            {
-                { itemId = xi.item.HI_POTION_P3, weight = 400 },
-                { itemId = 0,                    weight = 600 },
-            },
-
-            {
-                { itemId = xi.item.HI_POTION_P3, weight = 200 },
-                { itemId = 0,                    weight = 800 },
-            },
-        },
-
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             {
@@ -105,5 +76,6 @@ entity.onTrigger = function(player, npc)
     local area = player:getCurrentAssault()
     xi.appraisal.assaultChestTrigger(player, npc, qItem[area], regItem[area])
 end
+--]]
 
 return entity

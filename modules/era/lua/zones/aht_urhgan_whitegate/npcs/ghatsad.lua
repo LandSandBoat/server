@@ -1,10 +1,14 @@
 -----------------------------------
 -- Choosing an Automaton Frame
+-- Restores the original frame materials for Valoredge X-900 and Sharpshot Z-500.
 -- Restores the JST midnight waits for Ghatsad to finish new automaton frames and heads.
 -- Ghatsad stops work on a head each midnight until he is given the day's Imperial Coffee.
+-- The March 26, 2015 version update replaced Tigerfangs with Patas and a Repeating
+-- Crossbow with a Heavy Crossbow.
 -- The June 7, 2016 version update shortened the frame wait to one Vana'diel day.
 -- The September 11, 2017 version update changed the head waits to count Vana'diel days.
 -----------------------------------
+-- Source: https://forum.square-enix.com/ffxi/threads/46531-Mar-26-2015-(JST)-Version-Update
 -- Source: https://forum.square-enix.com/ffxi/threads/50760-Jun.-7-2016-(JST)-Version-Update
 -- Source: https://forum.square-enix.com/ffxi/threads/53127-September.-11-2017-(JST)-Version-Update
 -- Source: https://wiki.ffo.jp/html/13124.html
@@ -13,8 +17,27 @@ require('modules/module_utils')
 -----------------------------------
 local m = Module:new('era_choosing_an_automaton_frame', xi.pre(xi.expansion.ROV))
 
+local frameMaterialReplacements =
+{
+    [2] = { current = xi.item.PATAS,          original = xi.item.TIGERFANGS         },
+    [3] = { current = xi.item.HEAVY_CROSSBOW, original = xi.item.REPEATING_CROSSBOW },
+}
+
 -- Heads are built one work day at a time.
 -- A work day requires the day's coffee and completes when JST midnight passes.
+
+local function getOriginalFrameTrade(trade, replacement)
+    return
+    {
+        getItemQty = function(_, itemId)
+            return trade:getItemQty(itemId == replacement.current and replacement.original or itemId)
+        end,
+
+        getSlotCount = function()
+            return trade:getSlotCount()
+        end,
+    }
+end
 
 -- A fueled work day that reached midnight is complete.
 local function settleHeadWork(player)
@@ -38,6 +61,13 @@ end
 
 m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Ghatsad.onTrade', function(player, npc, trade)
     local attachmentStatus = player:getCharVar('PUP_AttachmentStatus')
+
+    local materialReplacement = frameMaterialReplacements[attachmentStatus]
+
+    if materialReplacement then
+        super(player, npc, getOriginalFrameTrade(trade, materialReplacement))
+        return
+    end
 
     -- The day's coffee gets Ghatsad back to work on a head.
     if attachmentStatus == 12 or attachmentStatus == 13 then

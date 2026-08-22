@@ -7,16 +7,16 @@ meta:
     table: xi.mobMod
 
 values:
-  none:                   0
-  gil_min:                1  # minimum gil drop -- spawn mod only
-  gil_max:                2  # maximum gil drop -- spawn mod only
-  mp_base:                3  # Give mob mp. Used for mobs that are not mages, wyverns, avatars
-  sight_range:            4  # sight range
-  sound_range:            5  # sound range
-  buff_chance:            6  # % chance to buff (combat only)
-  ga_chance:              7  # % chance to use -ga spell
-  heal_chance:            8  # % chance to use heal
-  hp_heal_chance:         9  # can cast cures below this HP %
+  none:                    0
+  gil_min:                 1 # minimum gil drop -- spawn mod only
+  gil_max:                 2 # maximum gil drop -- spawn mod only
+  mp_base:                 3 # Give mob mp. Used for mobs that are not mages, wyverns, avatars
+  sight_range:             4 # sight range
+  sound_range:             5 # sound range
+  buff_chance:             6 # % chance to buff (combat only)
+  ga_chance:               7 # % chance to use -ga spell
+  heal_chance:             8 # % chance to use heal
+  hp_heal_chance:          9 # can cast cures below this HP %
   sublink:                10 # Sub link group. Enables mobs from different families to link if they share a SUBLINK value.
   link_radius:            11 # link radius
   sees_through_illusion:  12 # Mob can see through the Illusion effect that grants effects similar to Sneak & Invisible without this mod and allows aggro (see Viscious Liquid in mamook)

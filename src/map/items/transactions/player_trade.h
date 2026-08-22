@@ -29,6 +29,8 @@
 #include "items/transaction.h"
 
 #include <array>
+#include <string>
+#include <vector>
 
 class CCharEntity;
 class CItem;
@@ -79,6 +81,17 @@ private:
         std::array<Slot, MaxSlots> slots{};
         bool                       accepted{};
     };
+
+    struct TradedItem
+    {
+        CCharEntity* sender{};
+        CCharEntity* receiver{};
+        uint16       itemId{};
+        uint32       qty{};
+    };
+
+    // everything saved on both sides, for auditing once the trade is successful
+    auto tradedItems(CCharEntity* initiator, CCharEntity* target) const -> std::vector<TradedItem>;
 
     auto sideOf(const CCharEntity* who) -> Side*;
     auto partnerOf(const CCharEntity* who) const -> CCharEntity*;

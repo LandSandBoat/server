@@ -26,6 +26,7 @@
 #include "entities/char_entity.h"
 #include "enums/item_lockflg.h"
 #include "items/exdata/mannequin.h"
+#include "items/item_flowerpot.h"
 #include "items/item_furnishing.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x01c_item_max.h"
@@ -98,6 +99,12 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
     PFurnishing->setRow(0);
     PFurnishing->setLevel(0);
     PFurnishing->setRotation(0);
+
+    // If this furniture is a flowerpot, destroy anything planted in it.
+    if (auto* PPotItem = dynamic_cast<CItemFlowerpot*>(PFurnishing))
+    {
+        PPotItem->cleanPot();
+    }
 
     // If this furniture is a mannequin, clear its appearance and unlock all items that were on it!
     if (PFurnishing->isMannequin())

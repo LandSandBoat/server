@@ -7,13 +7,13 @@ meta:
     table: xi.status
 
 values:
-  normal:        0
-  update:        1
-  disappear:     2
-  invisible:     3
-  status_4:      4
-  status_5:      5
-  cutscene_only: 6
-  status_7:      7
+  normal:         0
+  update:         1
+  disappear:      2
+  invisible:      3
+  status_4:       4
+  status_5:       5
+  cutscene_only:  6
+  status_7:       7
   status_18:     18
   shutdown:      20

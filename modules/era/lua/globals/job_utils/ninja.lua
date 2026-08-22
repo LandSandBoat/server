@@ -44,21 +44,9 @@ m:addOverrideByEra('xi.effects.sange.onEffectGain', {
 
 -- Mijin Gakure: Now applies weakness and normal HP gain on raise
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(07/20/2009)
-m:addOverrideByEra('xi.job_utils.ninja.useMijinGakure', {
-    [xi.expansion.WOTG] = function(player, target, ability, action)
-        local dmg        = math.floor(player:getHP() * 0.8)
-        local resist     = xi.combat.magicHitRate.calculateResistRate(player, target, { magicalElement = xi.element.NONE, actorStat = xi.mod.INT })
-        local tmdaFactor = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
-        local jpFactor   = 1 + player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03
-
-        dmg = math.floor(dmg * resist)
-        dmg = math.floor(dmg * tmdaFactor)
-        dmg = math.floor(dmg * jpFactor)
-        dmg = utils.handleStoneskin(target, dmg)
-
-        target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
-        player:setHP(0)
-
-        return dmg
+m:addOverrideByEra('xi.player.onPlayerDeath', {
+    [xi.expansion.WOTG] = function(player)
+        super(player)
+        player:setLocalVar('MijinGakure', 0)
     end,
 })

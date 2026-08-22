@@ -14,9 +14,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 30))
+    local effectTable =
+    {
+        [1] = { effectId = xi.effect.PETRIFICATION, power = 1, duration = 30 }, -- TODO: Capture power/duration.
+    }
 
-    return xi.effect.PETRIFICATION
+    return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
 end
 
 return mobskillObject

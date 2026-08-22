@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = target:getHP()
     params.numHits        = 1
-    params.fTP            = { 0.95, 0.95, 0.95 } -- TODO: Capture % of current HP this does.
+    params.fTP            = { 0.60, 0.60, 0.60 }
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.PIERCING
     params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS

@@ -34,16 +34,8 @@ zones[xi.zone.LEBROS_CAVERN] =
 
     mob =
     {
+        VOLCANIC_BOMB  = GetFirstID('Volcanic_Bomb'),
         WAMOURA_OFFSET = GetTableOfIDs('Ranch_Wamoura'),
-        [xi.assault.mission.EXCAVATION_DUTY] =
-        {
-            MOBS_START =
-            {
-                17035265, 17035266, 17035267, 17035268, 17035269, 17035270, 17035271, 17035272, 17035273,
-                17035274, 17035275, 17035276, 17035277, 17035278, 17035279, 17035280, 17035281,
-                BRITTLE_ROCK1 = 17035283, BRITTLE_ROCK2 = 17035285, BRITTLE_ROCK3 = 17035287, BRITTLE_ROCK4 = 17035289, BRITTLE_ROCK5 = 17035291,
-            },
-        },
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             MOBS_START =

@@ -8,16 +8,16 @@ meta:
 
 values:
   # Combat Skills
-  none:         0
-  hand_to_hand: 1
-  dagger:       2
-  sword:        3
-  great_sword:  4
-  axe:          5
-  great_axe:    6
-  scythe:       7
-  polearm:      8
-  katana:       9
+  none:          0
+  hand_to_hand:  1
+  dagger:        2
+  sword:         3
+  great_sword:   4
+  axe:           5
+  great_axe:     6
+  scythe:        7
+  polearm:       8
+  katana:        9
   great_katana: 10
   club:         11
   staff:        12

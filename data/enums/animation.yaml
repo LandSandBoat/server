@@ -7,15 +7,15 @@ meta:
     table: xi.animation
 
 values:
-  none:                   0
-  attack:                 1
-  despawn:                2
-  death:                  3
-  event:                  4
-  chocobo:                5
-  fishing:                6
-  open_door:              8
-  close_door:             9
+  none:                    0
+  attack:                  1
+  despawn:                 2
+  death:                   3
+  event:                   4
+  chocobo:                 5
+  fishing:                 6
+  open_door:               8
+  close_door:              9
   elevator_up:            10
   elevator_down:          11
   animation_18:           18

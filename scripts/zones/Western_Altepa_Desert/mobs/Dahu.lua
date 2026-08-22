@@ -29,16 +29,25 @@ entity.spawnPoints =
     { x =  -75.693, y =  0.144, z =  273.371 }
 }
 
-local validWeather =
-{
-    xi.weather.DUST_STORM,
-    xi.weather.SAND_STORM,
-    xi.weather.HOT_SPELL,
-    xi.weather.HEAT_WAVE,
-}
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+
+    mob:addListener('WEATHER_CHANGE', 'DAHU_WEATHER_CHANGE', function(mobArg, weather, element)
+        if not mobArg:isSpawned() then
+            return
+        end
+
+        if mobArg:isEngaged() then
+            return
+        end
+
+        if
+            element ~= xi.element.FIRE and
+            element ~= xi.element.EARTH
+        then
+            DespawnMob(mobArg:getID())
+        end
+    end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -62,10 +71,12 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
-entity.onMobRoam = function(mob)
-    local weather = mob:getWeather()
-
-    if not utils.contains(weather, validWeather) then
+entity.onMobDisengage = function(mob)
+    local weatherElement = xi.data.element.getWeatherElement(mob:getWeather())
+    if
+        weatherElement ~= xi.element.FIRE and
+        weatherElement ~= xi.element.EARTH
+    then
         DespawnMob(mob:getID())
     end
 end

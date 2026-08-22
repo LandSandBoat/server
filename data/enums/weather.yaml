@@ -7,16 +7,16 @@ meta:
     table: xi.weather
 
 values:
-  none:          0
-  sunshine:      1
-  clouds:        2
-  fog:           3
-  hot_spell:     4
-  heat_wave:     5
-  rain:          6
-  squall:        7
-  dust_storm:    8
-  sand_storm:    9
+  none:           0
+  sunshine:       1
+  clouds:         2
+  fog:            3
+  hot_spell:      4
+  heat_wave:      5
+  rain:           6
+  squall:         7
+  dust_storm:     8
+  sand_storm:     9
   wind:          10
   gales:         11
   snow:          12

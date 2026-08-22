@@ -21,7 +21,9 @@
 
 #include "player_trade.h"
 
+#include "common/earth_time.h"
 #include "common/logging.h"
+#include "common/settings.h"
 
 #include "entities/char_entity.h"
 #include "enums/item_flag.h"
@@ -51,6 +53,31 @@ auto withinTradeRange(const CCharEntity* initiator, const CCharEntity* target) -
 {
     return distance(initiator->loc.p, target->loc.p) <= TradeRange && initiator->m_moghouseID == target->m_moghouseID;
 }
+
+const auto auditTrade = [](CCharEntity* PChar, const CCharEntity* PTarget, const uint16 itemId, const uint32 quantity)
+{
+    // TODO: Don't pass around Scheduler& through PSession
+    if (!settings::get<bool>("map.AUDIT_PLAYER_TRADES") || !PChar->PSession || !PChar->PSession->scheduler)
+    {
+        return;
+    }
+
+    PChar->PSession->scheduler->postToWorkerThread(
+        [itemId,
+         quantity,
+         sender        = PChar->id,
+         sender_name   = PChar->getName(),
+         receiver      = PTarget->id,
+         receiver_name = PTarget->getName(),
+         date          = earth_time::timestamp()]()
+        {
+            const auto query = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            if (!db::preparedStmt(query, itemId, quantity, sender, sender_name, receiver, receiver_name, date))
+            {
+                ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemId, quantity, sender, receiver, date);
+            }
+        });
+};
 
 } // namespace
 
@@ -467,11 +494,49 @@ auto PlayerTradeTransaction::doCommit() -> bool
         return true;
     };
 
-    // a failure anywhere rolls the whole exchange back, so neither side ends up short
-    return deliverSide(this->sides_[0], target) &&
-           deliverSide(this->sides_[1], initiator) &&
-           consumeSide(this->sides_[0]) &&
-           consumeSide(this->sides_[1]);
+    // consumeSide wipes the slots, so we need a way to save what changed hands now and log it only once the trade is successful
+    const auto traded = this->tradedItems(initiator, target);
+
+    // is the trade successfully executed?
+    const auto exchanged = deliverSide(this->sides_[0], target) &&
+                           deliverSide(this->sides_[1], initiator) &&
+                           consumeSide(this->sides_[0]) &&
+                           consumeSide(this->sides_[1]);
+
+    // If anything is not successful, trade fails
+    if (!exchanged)
+    {
+        return false;
+    }
+
+    // Log every item if it was successful AFTER the trade has been completed
+    for (const auto& item : traded)
+    {
+        auditTrade(item.sender, item.receiver, item.itemId, item.qty);
+    }
+
+    return true;
+}
+
+auto PlayerTradeTransaction::tradedItems(CCharEntity* initiator, CCharEntity* target) const -> std::vector<TradedItem>
+{
+    std::vector<TradedItem> traded;
+
+    const auto collect = [&](const Side& side, CCharEntity* sender, CCharEntity* receiver)
+    {
+        for (const auto& slot : side.slots)
+        {
+            if (const CItem* PStaged = slot.staged.resolve())
+            {
+                traded.push_back({ .sender = sender, .receiver = receiver, .itemId = PStaged->getID(), .qty = slot.qty });
+            }
+        }
+    };
+
+    collect(this->sides_[0], initiator, target);
+    collect(this->sides_[1], target, initiator);
+
+    return traded;
 }
 
 void PlayerTradeTransaction::doRollback()

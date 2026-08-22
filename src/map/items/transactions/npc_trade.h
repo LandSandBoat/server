@@ -31,7 +31,10 @@
 
 #include <array>
 #include <memory>
+#include <string>
+#include <vector>
 
+class CBaseEntity;
 class CCharEntity;
 class CItem;
 
@@ -47,9 +50,9 @@ class CItem;
 class NpcTradeTransaction final : public Transaction
 {
 public:
-    static auto start(CCharEntity* player) -> std::unique_ptr<NpcTradeTransaction>;
+    static auto start(CCharEntity* player, const CBaseEntity* npc) -> std::unique_ptr<NpcTradeTransaction>;
 
-    NpcTradeTransaction(xi::Badge<NpcTradeTransaction>, CCharEntity* player);
+    NpcTradeTransaction(xi::Badge<NpcTradeTransaction>, CCharEntity* player, const CBaseEntity* npc);
     ~NpcTradeTransaction() override;
 
     DISALLOW_COPY_AND_MOVE(NpcTradeTransaction);
@@ -87,9 +90,20 @@ private:
     // resolves the offered stack, re-claiming it if the claim was released after onTrade
     auto resolve(Slot& slot) -> CItem*;
 
+    struct TradedItem
+    {
+        uint16 itemId{};
+        uint32 qty{};
+    };
+
+    // everything saved from the offer, for auditing once the trade is successful
+    auto tradedItems(bool confirmedOnly) const -> std::vector<TradedItem>;
+
     // takes quantity from the slot and clears it
     [[nodiscard]] auto consumeSlot(Slot& slot, uint32 quantity) -> bool;
 
     CCharEntity*                     player_{};
+    uint32                           npcId_{};
+    std::string                      npcName_;
     std::array<Slot, CONTAINER_SIZE> slots_{};
 };

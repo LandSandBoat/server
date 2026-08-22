@@ -865,7 +865,9 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
     Action->spikesParam   = std::max<int16>(PDefender->getMod(xi::Mod::SPIKES_DMG), 0);
 
     // Handle Retaliation
-    if (PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Retaliation) && PDefender->PAI->IsEngaged() &&
+    if (!PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::PerfectDodge) &&
+        PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Retaliation) &&
+        PDefender->PAI->IsEngaged() &&
         battleutils::GetHitRate(PDefender, PAttacker) / 2 > xirand::GetRandomNumber(100) && facing(PDefender->loc.p, PAttacker->loc.p, 64))
     {
         // Retaliation rate is based on player acc vs mob evasion. Missed retaliations do not even display in log.

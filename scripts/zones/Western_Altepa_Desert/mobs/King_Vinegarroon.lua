@@ -59,6 +59,14 @@ entity.spawnPoints =
     { x = -238.409, y =  0.703, z = -664.933 }
 }
 
+-- Table of single target skills KV will use after an AOE TP Move
+local skillTable =
+{
+    [1] = xi.mobSkill.DEATH_SCISSORS,
+    [2] = xi.mobSkill.CRITICAL_BITE,
+    [3] = xi.mobSkill.VENOM_STING_1,
+}
+
 local function mobRegen(mob)
     local hour = VanadielHour()
 
@@ -80,6 +88,20 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
 
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+
+    mob:addListener('WEATHER_CHANGE', 'KV_WEATHER_CHANGE', function(mobArg, weather, element)
+        if not mobArg:isSpawned() then
+            return
+        end
+
+        if mobArg:isEngaged() then
+            return
+        end
+
+        if xi.data.element.getWeatherElement(element) ~= xi.element.EARTH then
+            DespawnMob(mobArg:getID())
+        end
+    end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -92,14 +114,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobRoam = function(mob)
-    local weather = mob:getWeather()
-    if
-        weather ~= xi.weather.DUST_STORM and
-        weather ~= xi.weather.SAND_STORM
-    then
-        DespawnMob(mob:getID())
-    end
-
     mobRegen(mob)
 end
 
@@ -128,14 +142,6 @@ entity.onMobFight = function(mob, target)
     mobRegen(mob)
 end
 
--- Table of single target skills KV will use after an AOE TP Move
-local skillTable =
-{
-    [1] = xi.mobSkill.DEATH_SCISSORS,
-    [2] = xi.mobSkill.CRITICAL_BITE,
-    [3] = xi.mobSkill.VENOM_STING_1,
-}
-
 entity.onMobSkillTarget = function(target, mob, mobskill)
     if mobskill:isAoE() then
         -- Chance for draw in to be single target or alliance
@@ -160,6 +166,12 @@ entity.onMobSkillTarget = function(target, mob, mobskill)
 
         -- KV always does an AOE TP move followed by a single target TP move
         mob:useMobAbility(skillTable[math.randomInt(1, #skillTable)])
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    if xi.data.element.getWeatherElement(mob:getWeather()) ~= xi.element.EARTH then
+        DespawnMob(mob:getID())
     end
 end
 
