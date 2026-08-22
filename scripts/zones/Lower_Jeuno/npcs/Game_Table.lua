@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(10073)
+    -- TODO: Implement Venture Roll
 end
 
 return entity
