@@ -25,6 +25,20 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PLAGUE)
     mob:addImmunity(xi.immunity.SLOW)
+
+    mob:addListener('WEATHER_CHANGE', 'DOSETSU_TREE_WEATHER_CHANGE', function(mobArg, weather, element)
+        if not mobArg:isSpawned() then
+            return
+        end
+
+        if mobArg:isEngaged() then
+            return
+        end
+
+        if xi.data.element.getWeatherElement(element) ~= xi.element.THUNDER then
+            DespawnMob(mobArg:getID())
+        end
+    end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -43,11 +57,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDisengage = function(mob)
-    local weather = mob:getWeather()
-    if
-        weather ~= xi.weather.THUNDER and
-        weather ~= xi.weather.THUNDERSTORMS
-    then
+    if xi.data.element.getWeatherElement(mob:getWeather()) ~= xi.element.THUNDER then
         DespawnMob(mob:getID())
     end
 end
