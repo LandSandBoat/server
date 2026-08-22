@@ -1229,10 +1229,10 @@ auto SetupExperiencePoints() -> Maybe<ExperiencePointsTable>
         return std::nullopt;
     }
 
-    const sol::table baseTable = lua["xi"]["experiencePoints"]["baseTable"];
+    const sol::table baseTable = lua["xi"]["data"]["experiencePoints"]["baseTable"];
     if (!baseTable.valid())
     {
-        ShowError("xi.experiencePoints.baseTable is not valid; experience points will not be calculated!");
+        ShowError("xi.data.experiencePoints.baseTable is not valid; experience points will not be calculated!");
         return std::nullopt;
     }
 
@@ -1242,7 +1242,7 @@ auto SetupExperiencePoints() -> Maybe<ExperiencePointsTable>
         const sol::table row = baseTable[dLevel];
         if (!row.valid() || row.size() != 20)
         {
-            ShowError("xi.experiencePoints.baseTable is missing a valid row for level difference %d.", dLevel);
+            ShowError("xi.data.experiencePoints.baseTable is missing a valid row for level difference %d.", dLevel);
             return std::nullopt;
         }
 
