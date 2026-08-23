@@ -14,7 +14,6 @@ xi.helm.dataTable =
     {
         id           = 'HARVESTING',
         animation    = xi.emote.HARVESTING,
-        mod          = xi.mod.HARVESTING_RESULT,
         settingRate  = xi.settings.main.HARVESTING_RATE,
         message      = 'HARVESTING_IS_POSSIBLE_HERE',
         tool         = xi.item.SICKLE,
@@ -362,7 +361,6 @@ xi.helm.dataTable =
     {
         id           = 'EXCAVATION',
         animation    = xi.emote.EXCAVATION,
-        mod          = nil,
         settingRate  = xi.settings.main.EXCAVATION_RATE,
         message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = xi.item.PICKAXE,
@@ -541,7 +539,6 @@ xi.helm.dataTable =
     {
         id = 'LOGGING',
         animation    = xi.emote.LOGGING,
-        mod          = xi.mod.LOGGING_RESULT,
         settingRate  = xi.settings.main.LOGGING_RATE,
         message      = 'LOGGING_IS_POSSIBLE_HERE',
         tool         = xi.item.HATCHET,
@@ -1053,7 +1050,6 @@ xi.helm.dataTable =
     {
         id           = 'MINING',
         animation    = xi.emote.EXCAVATION,
-        mod          = xi.mod.MINING_RESULT,
         settingRate  = xi.settings.main.MINING_RATE,
         message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = xi.item.PICKAXE,

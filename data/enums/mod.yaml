@@ -889,9 +889,12 @@ values:
   clamming_improved_results:     509
   clamming_reduced_incidents:    510
   chocobo_riding_time:           511 # Increases chocobo riding time
-  harvesting_result:             513 # Improves harvesting results
-  logging_result:                514 # Improves logging results
-  mining_result:                 515 # Improves mining results
+  harvesting_result_nq:          513 # Improves harvesting results (effectively, count of nq gear equipped)
+  harvesting_result_hq:         1212 # Improves harvesting results (effectively, count of hq gear equipped)
+  logging_result_nq:             514 # Improves logging results (effectively, count of nq gear equipped)
+  logging_result_hq:            1213 # Improves logging results (effectively, count of hq gear equipped)
+  mining_result_nq:              515 # Improves mining results (effectively, count of nq gear equipped)
+  mining_result_hq:              300 # Improves mining results (effectively, count of hq gear equipped)
   egghelm:                       517
   shieldblockrate:               518 # Affects shield block rate, percent based
   dia_dot:                       313 # Increases the DoT damage of Dia
@@ -1272,4 +1275,4 @@ values:
 
   # The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
   # 570 through 825 used by WS DMG mods these are not spares.
-  # SPARE IDs: 300 and 1212 and onward
+  # SPARE IDs: 1214 and onward

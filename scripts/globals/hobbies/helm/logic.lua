@@ -36,13 +36,28 @@ local rocks =
 -- local functions
 -----------------------------------
 
-local function doesToolBreak(player, info)
+local breakMods =
+{
+    [xi.helmType.HARVESTING] = { xi.mod.HARVESTING_RESULT_NQ, xi.mod.HARVESTING_RESULT_HQ },
+    [xi.helmType.LOGGING]    = { xi.mod.LOGGING_RESULT_NQ, xi.mod.LOGGING_RESULT_HQ },
+    [xi.helmType.MINING]     = { xi.mod.MINING_RESULT_NQ, xi.mod.MINING_RESULT_HQ },
+    [xi.helmType.EXCAVATION] = nil,
+}
+
+---@param player CBaseEntity
+---@param info table
+---@param helmType xi.helmType
+---@return boolean
+local function doesToolBreak(player, info, helmType)
     local roll        = math.randomFloat(0, 100)
-    local mod         = info.mod
+    local mods        = breakMods[helmType]
     local breakChance = info.zone[player:getZoneID()].breakRate
 
-    if mod then
-        roll = roll + (player:getMod(mod) / 10)
+    if mods and mods[1] and mods[2] then
+        local nqMultiplier = 0.893 ^ math.max(player:getMod(mods[1]), 0)
+        local hqMultiplier = 0.843 ^ math.max(player:getMod(mods[2]), 0)
+
+        breakChance = breakChance * nqMultiplier * hqMultiplier
     end
 
     if roll < breakChance then
@@ -175,7 +190,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
 
         -- start event
         local itemID = pickItem(player, info)
-        local broke  = doesToolBreak(player, info) and 1 or 0
+        local broke  = doesToolBreak(player, info, helmType) and 1 or 0
         local full   = (player:getFreeSlotsCount() == 0) and 1 or 0
 
         -- Cutscene plays the emote in all zones but Adoulin.
