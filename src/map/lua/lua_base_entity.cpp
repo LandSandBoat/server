@@ -10074,6 +10074,24 @@ void CLuaBaseEntity::gainConquestInfluence(int32 points)
 }
 
 /************************************************************************
+ *  Function: addConquestMobKills()
+ *  Purpose : Adds mob kills to the player's current region
+ *  Example : player:addConquestMobKills(25)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::addConquestMobKills(int32 count)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    conquest::AddMobKills(count, zoneutils::GetCurrentRegion(m_PBaseEntity->getZone()));
+}
+
+/************************************************************************
  *  Function: getSeals()
  *  Purpose : Returns the current seal balance for a player
  *  Example : player:getSeals(type)
@@ -20886,6 +20904,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addCP", CLuaBaseEntity::addCP);
     SOL_REGISTER("delCP", CLuaBaseEntity::delCP);
     SOL_REGISTER("gainConquestInfluence", CLuaBaseEntity::gainConquestInfluence);
+    SOL_REGISTER("addConquestMobKills", CLuaBaseEntity::addConquestMobKills);
 
     SOL_REGISTER("getSeals", CLuaBaseEntity::getSeals);
     SOL_REGISTER("addSeals", CLuaBaseEntity::addSeals);
