@@ -255,6 +255,7 @@ templates:
   Elvaan_Automaton:
     id:            1206
     species:       elvaan
+    type:          [notorious, battlefield]
     spell_list_id: 1
     skill_list_id: 2
     attributes:
@@ -472,6 +473,7 @@ templates:
   Galkan_Automaton:
     id:            1452
     species:       galks
+    type:          [notorious, battlefield]
     spell_list_id: 4
     skill_list_id: 2
     attributes:
@@ -572,7 +574,7 @@ templates:
   Mithran_Automaton:
     id:            2680
     species:       mithra
-    type:          [battlefield]
+    type:          [notorious, battlefield]
     spell_list_id: 4
     skill_list_id: 2
     attributes:
@@ -810,7 +812,7 @@ templates:
   Tarutaru_Automaton:
     id:            3850
     species:       tarutaru
-    type:          [battlefield]
+    type:          [notorious, battlefield]
     spell_list_id: 2
     skill_list_id: 2
     attributes:
