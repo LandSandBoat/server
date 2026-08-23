@@ -166,6 +166,8 @@ xi.mobSkill =
     BERSERK_DHALMEL               =  286,
     HEALING_BREEZE                =  287,
 
+    WHISTLE_CALL                  =  293,
+
     ENTANGLE_DRAIN                =  299,
     HEAD_BUTT_1                   =  300,
     DREAM_FLOWER_1                =  301,
@@ -719,6 +721,7 @@ xi.mobSkill =
     OBLIVION_SMASH_2              = 1133,
     TERA_SLASH_1                  = 1134,
     TERA_SLASH_2                  = 1135,
+    PET_CHARM                     = 1142,
 
     EES_KINDRED                   = 1151,
 
