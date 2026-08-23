@@ -82,9 +82,16 @@ mission.sections =
             onZoneIn = function(player, prevZone)
                 if
                     prevZone == xi.zone.QUICKSAND_CAVES and
-                    player:getMissionStatus(mission.areaId) >= 1
+                    player:getMissionStatus(mission.areaId) == 1 and
+                    not player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_ALTEPA)
                 then
-                    return 3
+                    local cutsceneFlags = bit.bor(
+                        xi.cutsceneFlag.RESET_CAMERA,
+                        xi.cutsceneFlag.NO_PCS,
+                        xi.cutsceneFlag.NO_NPCS
+                    )
+
+                    return { 3, -1, cutsceneFlags }
                 end
             end,
 
@@ -105,6 +112,9 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 2 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.MOON_READING
                     then
+                        player:delKeyItem(xi.ki.ANCIENT_VERSE_OF_ROMAEVE)
+                        player:delKeyItem(xi.ki.ANCIENT_VERSE_OF_ALTEPA)
+                        player:delKeyItem(xi.ki.ANCIENT_VERSE_OF_UGGALEPIH)
                         player:setMissionStatus(mission.areaId, 3)
                     end
                 end,
@@ -176,7 +186,10 @@ mission.sections =
             ['QuHau_Spring'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) >= 1 then
+                    if
+                        player:getMissionStatus(mission.areaId) == 1 and
+                        not player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_ROMAEVE)
+                    then
                         return mission:progressEvent(4)
                     end
                 end,
@@ -195,7 +208,10 @@ mission.sections =
             ['qm_windy_9_2'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) >= 1 then
+                    if
+                        player:getMissionStatus(mission.areaId) == 1 and
+                        not player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_UGGALEPIH)
+                    then
                         return mission:progressEvent(68)
                     end
                 end,
@@ -286,12 +302,12 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Janshura_Rashura'] = mission:event(567):oncePerZone(),
+            ['Janshura-Rashura'] = mission:event(567):oncePerZone(),
         },
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Mokyoko']       = mission:event(837):oncePerZone(),
+            ['Mokyokyo']      = mission:event(837):oncePerZone(),
             ['Tosuka-Porika'] = mission:event(380):replaceDefault(),
         },
 

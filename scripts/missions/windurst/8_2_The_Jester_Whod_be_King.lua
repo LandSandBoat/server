@@ -118,7 +118,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 1 and
                         not player:hasKeyItem(xi.ki.RHINOSTERY_RING)
                     then
-                        return mission:progressEvent(22, 0, xi.ki.RHINOSTERY_RING)
+                        return mission:progressCutscene(22, 0, xi.ki.RHINOSTERY_RING)
                     end
                 end,
             },
@@ -167,7 +167,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 9 then
-                        return mission:progressEvent(75)
+                        return mission:progressCutscene(75)
                     end
                 end,
             },
