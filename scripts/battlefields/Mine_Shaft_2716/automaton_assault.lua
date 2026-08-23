@@ -83,9 +83,9 @@ local function buildAutomatonGroup(battlefield, initiatorRace)
     local mobIds = { {}, {}, {} }
     mobIds[area] = ids
 
+    -- Each automaton calls the next one at low HP.
     return {
         mobIds   = mobIds,
-        superlink = true,
         allDeath = utils.bind(content.handleAllMonstersDefeated, content),
     }
 end
