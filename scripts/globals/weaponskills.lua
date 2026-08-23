@@ -837,11 +837,14 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         ['wsID']            = wsID,
     }
 
+    local ammoUsed = 0
+
     if
         wsParams.skill == xi.skill.MARKSMANSHIP or
         wsParams.skill == xi.skill.ARCHERY
     then
         attack.slot = xi.slot.RANGED
+        ammoUsed    = useAmmo(attacker)
     end
 
     local dStat   = wsParams.dStat and wsParams.dStat or xi.mod.INT
@@ -905,6 +908,11 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
             calcParams.finalDmg = dmg
 
             dmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+
+            if ammoUsed > 0 then
+                attacker:removeAmmo(ammoUsed)
+            end
+
             return dmg
         end
 
@@ -927,6 +935,10 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     end
 
     dmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+
+    if ammoUsed > 0 then
+        attacker:removeAmmo(ammoUsed)
+    end
 
     return dmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
